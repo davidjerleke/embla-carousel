@@ -1,4 +1,4 @@
-import { VectorBounds } from '../components/vectorbounds'
+import { VectorBounds } from '../components/vectorBounds'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 import { Mover } from '../components/mover'
