@@ -1,0 +1,60 @@
+{
+  "name": "embla-carousel",
+  "version": "0.0.2",
+  "author": "David Cetinkaya",
+  "private": false,
+  "description": "Simple and sensible carousels for the web",
+  "keywords": [
+    "slider",
+    "carousel",
+    "lightweight"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidcetinkaya/embla-carousel"
+  },
+  "bugs": {
+    "url": "https://github.com/davidcetinkaya/embla-carousel/issues"
+  },
+  "homepage": "https://github.com/davidcetinkaya/embla-carousel#readme",
+  "files": [
+    "lib/**/*"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "start": "webpack-dev-server --config ./webpack/webpack.config.development",
+    "build:lib": "webpack -p --config ./webpack/webpack.config.production",
+    "build:sandbox": "webpack -p --config ./webpack/webpack.config.sandbox",
+    "build": "npm run build:lib && npm run build:sandbox",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "@types/jest": "^24.0.0",
+    "@types/jest-diff": "^20.0.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.5",
+    "clean-webpack-plugin": "^1.0.1",
+    "jest": "^24.0.0",
+    "prettier": "^1.16.4",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
+  }
+}

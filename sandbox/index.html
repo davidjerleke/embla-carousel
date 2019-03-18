@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Embla - Sandbox</title>
+    <meta
+      name="description"
+      content="Embla is a simple and sensible carousel plugin for the web, written in TypeScript"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script type="text/javascript" src="./index.js"></script>
+  </head>
+
+  <body>
+    <div class="slider">
+      <div class="slider__container">
+        <div class="slider__slide">
+          <div>
+            1
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            2
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            3
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            4
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            5
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            6
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+        <div class="slider__slide">
+          <div>
+            7
+            <a href="https://google.com">Google</a>
+          </div>
+        </div>
+      </div>
+      <ul class="slider__dots">
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+        <li class="slider__dot">
+          <div class="slider__dot__button" type="button"></div>
+        </li>
+      </ul>
+    </div>
+    <button class="slider__prev">Prev</button>
+    <button class="slider__next">Next</button>
+
+    <script type="text/javascript">
+      var sliderRoot = document.querySelector('.slider')
+      var sliderNextBtn = document.querySelector('.slider__next')
+      var sliderPrevBtn = document.querySelector('.slider__prev')
+      var sliderDots = document.querySelectorAll('.slider__dot')
+      var embla = EmblaCarousel(sliderRoot, {
+        loop: false,
+        speed: 10,
+        onInit: function(index) {
+          console.log('Mounted at index: ' + index)
+        },
+        onSettle: function(index) {
+          console.log('Reached target index: ' + index)
+        },
+        onSelect: function(index) {
+          console.log('Changed target to index: ' + index)
+        },
+      })
+
+      embla.addEvent(sliderNextBtn, 'click', embla.next, false)
+      embla.addEvent(sliderPrevBtn, 'click', embla.previous, false)
+
+      for (var i = 0; i < sliderDots.length; i += 1) {
+        ;(function() {
+          var index = i
+          embla.addEvent(sliderDots[index], 'click', function() {
+            embla.goTo(index)
+          })
+        })()
+      }
+    </script>
+  </body>
+</html>
