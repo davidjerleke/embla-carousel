@@ -118,7 +118,16 @@ Callback that runs when a new slide target has been selected.
 
 ## API
 
-Embla exposes a set of functions upon setup that can be used to control the slider externally:
+Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this...
+
+```javascript
+import EmblaCarousel from 'embla-carousel'
+const embla = EmblaCarousel(document.getElementById('embla'))
+
+embla.next()
+```
+
+...and the methods are:
 
 **`next()`**  
 Goes to next item. If loop is enabled and the carousel is on the last slide this method will do nothing.
@@ -127,7 +136,7 @@ Goes to next item. If loop is enabled and the carousel is on the last slide this
 Goes to previous item. If loop is enabled and the carousel is on the first slide this method will do nothing.
 
 **`goTo(index)`**  
-Goes to item with passed index. If loop is enabled the carousel will seek the closest way to passed index.
+Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
 
 **`changeOptions(options)`**  
 Reinitializes the carousel with passed options. This will do all calculations and setup the carousel from scratch.
