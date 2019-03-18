@@ -89,31 +89,31 @@ const embla = EmblaCarousel(node, {
 })
 ```
 
-**`align`** (string: 'start' | 'center' | 'end')
+**`align`** (string: 'start' | 'center' | 'end')  
 Align the slides relative to the carousel viewport.
 
-**`container`** (string: querySelectorString)
+**`container`** (string: querySelectorString)  
 The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
 
-**`draggable`** (boolean)
+**`draggable`** (boolean)  
 Allow mouse and touch interactions to move the carousel.
 
-**`loop`** (boolean)
+**`loop`** (boolean)  
 Determines if the carousel should loop when start or end is reached.
 
-**`mass`** (number)
+**`mass`** (number)  
 Simulates how heavy the carousel is. A higher number will add more wiggle effect.
 
-**`speed`** (number)
+**`speed`** (number)  
 Carousel speed when using buttons to navigate. A higher number will make transitions faster. Pointer events are not affected by this.
 
-**`startIndex`** (number)
+**`startIndex`** (number)  
 Zero based index of the starting slide when carousel mounts.
 
-**`onInit`** (function)
+**`onInit`** (function)  
 Callback that runs when the carousel has mounted.
 
-**`onSelect`** (function)
+**`onSelect`** (function)  
 Callback that runs when a new slide target has been selected.
 
 ## API
