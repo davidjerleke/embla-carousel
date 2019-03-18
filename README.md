@@ -65,7 +65,7 @@ Setup your HTML markup...
 
 ```javascript
 import EmblaCarousel from 'embla-carousel'
-const embla = EmblaCarousel(document.querySelector('.embla'))
+const embla = EmblaCarousel(document.getElementById('embla'))
 ```
 
 ...and you're good to go!
@@ -89,7 +89,7 @@ const embla = EmblaCarousel(node, {
 })
 ```
 
-**`align`** (string: 'start' | 'center' | 'end')  
+**`align`** (string: start | center | end)  
 Align the slides relative to the carousel viewport.
 
 **`container`** (string: querySelectorString)  
@@ -117,3 +117,27 @@ Callback that runs when the carousel has mounted.
 Callback that runs when a new slide target has been selected.
 
 ## API
+
+Embla exposes a set of functions upon setup that can be used to control the slider externally:
+
+**`next()`**  
+Goes to next item. If loop is enabled and the carousel is on the last slide this method will do nothing.
+
+**`previous()`**  
+Goes to previous item. If loop is enabled and the carousel is on the first slide this method will do nothing.
+
+**`goTo(index)`**  
+Goes to item with passed index. If loop is enabled the carousel will seek the closest way to passed index.
+
+**`changeOptions(options)`**  
+Reinitializes the carousel with passed options. This will do all calculations and setup the carousel from scratch.
+
+**`destroy()`**  
+Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
+
+**`addEvent(node, type, listener, options)`**  
+Works just like the native addEventListener but Embla will store this event for you. Embla will kill events added this way for you when `destroy` is invoked.
+
+## License
+
+[MIT license](http://opensource.org/licenses/MIT)
