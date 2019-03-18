@@ -95,16 +95,16 @@ Align the slides relative to the carousel viewport.
 **`container`** (string: querySelectorString)
 The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
 
-**`draggable`** (boolean)  
+**`draggable`** (boolean)
 Allow mouse and touch interactions to move the carousel.
 
-**`loop`** (boolean)  
+**`loop`** (boolean)
 Determines if the carousel should loop when start or end is reached.
 
-**`mass`** (number)  
+**`mass`** (number)
 Simulates how heavy the carousel is. A higher number will add more wiggle effect.
 
-**`speed`** (number)  
+**`speed`** (number)
 Carousel speed when using buttons to navigate. A higher number will make transitions faster. Pointer events are not affected by this.
 
 **`startIndex`** (number)
