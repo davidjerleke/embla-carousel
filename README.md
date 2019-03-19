@@ -2,6 +2,12 @@
 
 Embla is a lightweight and simple carousel plugin for the web with no dependencies. Embla's purpose is to provide a simple but yet extensible carousel that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
 
+- [Installation](#installation)
+- [Usage](#usage)
+- [Options](#options)
+- [API](#api)
+- [License](#license)
+
 ## Installation
 
 If you are using a module bundler...
