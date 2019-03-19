@@ -1,4 +1,4 @@
-# Embla Carousel
+# Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue)
 
 Embla is a lightweight carousel plugin for the web with no dependencies. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
 
@@ -101,10 +101,10 @@ Allow mouse and touch interactions to move the carousel.
 **`loop`** (boolean)  
 Determines if the carousel should loop when start or end is reached.
 
-**`mass`** (number)  
+**`mass`** (number: 1.5 - 3)  
 Simulates how heavy the carousel is. A higher number will add more wiggle effect.
 
-**`speed`** (number)  
+**`speed`** (number: 5 - 20)  
 Carousel speed when using buttons to navigate. A higher number will make transitions faster. Pointer events are not affected by this.
 
 **`startIndex`** (number)  
@@ -149,4 +149,4 @@ Works just like the native addEventListener but Embla will store this event for 
 
 ## License
 
-[MIT license](http://opensource.org/licenses/MIT)
+Embla is [MIT licensed](http://opensource.org/licenses/MIT).
