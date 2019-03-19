@@ -1,6 +1,6 @@
 # Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue)
 
-Embla is a lightweight carousel plugin for the web with no dependencies. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
+Embla is a lightweight and simple carousel plugin for the web with no dependencies. Embla's purpose is to provide a simple but yet extensible carousel that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
 
 ## Installation
 
@@ -149,4 +149,4 @@ Works just like the native addEventListener but Embla will store this event for 
 
 ## License
 
-Embla is [MIT licensed](http://opensource.org/licenses/MIT).
+Embla is [MIT licensed](./LICENSE).
