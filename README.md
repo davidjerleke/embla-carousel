@@ -141,10 +141,10 @@ embla.next()
 ...and the methods are:
 
 **`next()`**  
-Goes to next item. If loop is enabled and the carousel is on the last slide this method will do nothing.
+Goes to next item. If loop is disabled and the carousel is on the last slide this method will do nothing.
 
 **`previous()`**  
-Goes to previous item. If loop is enabled and the carousel is on the first slide this method will do nothing.
+Goes to previous item. If loop is disabled and the carousel is on the first slide this method will do nothing.
 
 **`goTo(index)`**  
 Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
