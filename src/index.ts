@@ -26,7 +26,7 @@ export function EmblaCarousel(
   const self = {} as EmblaCarousel
   const slider = {} as Engine
   const state = { active: false, lastWindowWidth: 0 }
-  const options = Object.assign(defaultOptions, userOptions)
+  const options = Object.assign({}, defaultOptions, userOptions)
   const elements = {} as Elements
   const internalEvents = EventStore()
   const externalEvents = EventStore()
@@ -133,12 +133,10 @@ export function EmblaCarousel(
   return Object.assign(self, {
     addEvent: externalEvents.add,
     changeOptions: reActivate,
-    container: elements.container,
     destroy,
     goTo,
     next,
     previous,
-    slides: elements.slides,
   })
 }
 

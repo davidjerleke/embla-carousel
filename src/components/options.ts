@@ -24,7 +24,7 @@ export interface UserOptions {
   startIndex?: number
 }
 
-export const defaultOptions = {
+export const defaultOptions = Object.freeze({
   align: 'center',
   container: '*',
   draggable: true,
@@ -34,4 +34,4 @@ export const defaultOptions = {
   onSelect: () => false,
   speed: 10,
   startIndex: 0,
-}
+})

@@ -14,112 +14,373 @@
       content="Embla is a simple and sensible carousel plugin for the web, written in TypeScript"
     />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="./index.js"></script>
   </head>
 
   <body>
-    <div class="slider">
-      <div class="slider__container">
-        <div class="slider__slide">
-          <div>
-            1
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            2
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            3
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            4
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            5
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            6
-            <a href="https://google.com">Google</a>
-          </div>
-        </div>
-        <div class="slider__slide">
-          <div>
-            7
-            <a href="https://google.com">Google</a>
-          </div>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="page-wrap">
+        <div class="header__inner">
+          <a class="header__logo" href=".">
+            <img
+              class="header__logo__img"
+              src="logo.svg"
+              alt="Embla Carousel"
+            />
+            <div class="header__logo__text">
+              Embla
+            </div>
+          </a>
+          <nav class="header__nav">
+            <a class="header__nav__link" href="#">Features</a>
+            <a
+              class="header__nav__link"
+              href="https://github.com/davidcetinkaya/embla-carousel"
+              target="_blank"
+            >
+              <span>Github</span>
+              <svg
+                class="header__nav__link__svg"
+                viewBox="0 0 100 100"
+              >
+                <path
+                  d="M18.8 85.1h56c2.2 0 4-1.8 4-4v-32h-8v28h-48v-48h28v-8h-32c-2.2 0-4 1.8-4 4v56c0 2.2 1.8 4 4 4z M45.7 48.7l5.6 5.6 25.9-25.8v8.7h8V14.9H62.8v8h8.7z"
+                />
+              </svg>
+            </a>
+          </nav>
         </div>
       </div>
-      <ul class="slider__dots">
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-        <li class="slider__dot">
-          <div class="slider__dot__button" type="button"></div>
-        </li>
-      </ul>
-    </div>
-    <button class="slider__prev">Prev</button>
-    <button class="slider__next">Next</button>
+    </header>
 
-    <script type="text/javascript">
-      var sliderRoot = document.querySelector('.slider')
-      var sliderNextBtn = document.querySelector('.slider__next')
-      var sliderPrevBtn = document.querySelector('.slider__prev')
-      var sliderDots = document.querySelectorAll('.slider__dot')
-      var embla = EmblaCarousel(sliderRoot, {
-        loop: false,
-        speed: 10,
-        onInit: function(index) {
-          console.log('Mounted at index: ' + index)
-        },
-        onSettle: function(index) {
-          console.log('Reached target index: ' + index)
-        },
-        onSelect: function(index) {
-          console.log('Changed target to index: ' + index)
-        },
-      })
+    <!-- MAIN -->
+    <main>
+      <!-- BANNER -->
+      <section class="banner">
+        <div class="banner__content">
+          <div class="page-wrap">
+            <div class="content-wrap">
+              <h1 class="banner__heading">Embla</h1>
+              <h2 class="banner__subheading">
+                Simple and sensible carousels for the web, written in
+                TypeScript
+              </h2>
+              <a href="#features" class="banner__button">Features</a>
+              <a
+                class="banner__link"
+                href="https://github.com/davidcetinkaya/embla-carousel"
+                target="_blank"
+              >
+                <span>View on GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="banner__decoration"></div>
+      </section>
 
-      embla.addEvent(sliderNextBtn, 'click', embla.next, false)
-      embla.addEvent(sliderPrevBtn, 'click', embla.previous, false)
+      <!-- NAV -->
+      <section class="page-wrap">
+        <nav class="content-wrap">
+          <h3>Features</h3>
+          <ul>
+            <li>
+              <a href="#">Default</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
 
-      for (var i = 0; i < sliderDots.length; i += 1) {
-        ;(function() {
-          var index = i
-          embla.addEvent(sliderDots[index], 'click', function() {
-            embla.goTo(index)
-          })
-        })()
+      <!-- ALIGN: LEFT -->
+      <section class="carousel-wrap">
+        <div class="embla">
+          <div class="embla__viewport">
+            <ul class="embla__container">
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+            </ul>
+          </div>
+          <button class="embla__nav embla__nav--prev" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="137.718 -1.001 366.563 643.999"
+            >
+              <path
+                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+              />
+            </svg>
+          </button>
+          <button class="embla__nav embla__nav--next" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="0 0 238.003 238.003"
+            >
+              <path
+                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+              />
+            </svg>
+          </button>
+          <ul class="embla__dots">
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ALIGN: CENTER -->
+      <section class="carousel-wrap">
+        <div class="embla">
+          <div class="embla__viewport">
+            <ul class="embla__container">
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+            </ul>
+          </div>
+          <button class="embla__nav embla__nav--prev" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="137.718 -1.001 366.563 643.999"
+            >
+              <path
+                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+              />
+            </svg>
+          </button>
+          <button class="embla__nav embla__nav--next" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="0 0 238.003 238.003"
+            >
+              <path
+                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+              />
+            </svg>
+          </button>
+          <ul class="embla__dots">
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ALIGN: END -->
+      <section class="carousel-wrap">
+        <div class="embla">
+          <div class="embla__viewport">
+            <ul class="embla__container">
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+              <li class="embla__slide">
+                <div class="embla__slide__inner"></div>
+              </li>
+            </ul>
+          </div>
+          <button class="embla__nav embla__nav--prev" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="137.718 -1.001 366.563 643.999"
+            >
+              <path
+                d="M428.36 12.5c16.67-16.67 43.76-16.67 60.42 0 16.67 16.67 16.67 43.76 0 60.42L241.7 320c148.25 148.24 230.61 230.6 247.08 247.08 16.67 16.66 16.67 43.75 0 60.42-16.67 16.66-43.76 16.67-60.42 0-27.72-27.71-249.45-249.37-277.16-277.08a42.308 42.308 0 0 1-12.48-30.34c0-11.1 4.1-22.05 12.48-30.42C206.63 234.23 400.64 40.21 428.36 12.5z"
+              />
+            </svg>
+          </button>
+          <button class="embla__nav embla__nav--next" type="button">
+            <svg
+              class="embla__nav__svg"
+              viewBox="0 0 238.003 238.003"
+            >
+              <path
+                d="M181.776 107.719L78.705 4.648c-6.198-6.198-16.273-6.198-22.47 0s-6.198 16.273 0 22.47l91.883 91.883-91.883 91.883c-6.198 6.198-6.198 16.273 0 22.47s16.273 6.198 22.47 0l103.071-103.039a15.741 15.741 0 0 0 4.64-11.283c0-4.13-1.526-8.199-4.64-11.313z"
+              />
+            </svg>
+          </button>
+          <ul class="embla__dots">
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+            <li class="embla__dot">
+              <button
+                class="embla__dot__button"
+                type="button"
+              ></button>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script type="text/javascript" src="index.js"></script>
+    <script>
+      function mergeObjects(targetObj, sourceObject) {
+        for (var key in sourceObject) {
+          if (sourceObject.hasOwnProperty(key)) {
+            targetObj[key] = sourceObject[key]
+          }
+        }
       }
+
+      function setupEmblaCarousel(wrap, options) {
+        var view = wrap.querySelector('.embla__viewport')
+        var nextBtn = wrap.querySelector('.embla__nav--next')
+        var prevBtn = wrap.querySelector('.embla__nav--prev')
+        var dots = wrap.querySelectorAll('.embla__dot__button')
+        var dotsArray = [].slice.call(dots)
+        var onSelect = function(dots) {
+          var dotWrap = wrap.querySelector('.embla__dots')
+          return function(index) {
+            dotWrap
+              .querySelector('.embla__dot--selected')
+              .classList.remove('embla__dot--selected')
+            dots[index].classList.add('embla__dot--selected')
+          }
+        }
+        var defaultOptions = {
+          onInit: function(index) {
+            dots[index].classList.add('embla__dot--selected')
+          },
+          onSelect: onSelect(dots),
+        }
+        var mergedOptions = {}
+        mergeObjects(mergedOptions, defaultOptions)
+        mergeObjects(mergedOptions, options)
+        var embla = EmblaCarousel(view, mergedOptions)
+
+        embla.addEvent(nextBtn, 'click', embla.next, false)
+        embla.addEvent(prevBtn, 'click', embla.previous, false)
+
+        dotsArray.forEach(function(d, i) {
+          embla.addEvent(d, 'click', function() {
+            embla.goTo(i)
+          })
+        })
+        return embla
+      }
+
+      var emblas = document.querySelectorAll('.embla')
+      var emblasArray = Array.prototype.slice.call(emblas)
+      var optionsArray = [
+        { align: 'start' },
+        { align: 'center', startIndex: 2 },
+        { align: 'end' },
+      ]
+
+      var emblaInstances = emblasArray.map(function(e, i) {
+        return setupEmblaCarousel(e, optionsArray[i])
+      })
     </script>
   </body>
 </html>
