@@ -143,8 +143,8 @@ export function Engine(
   const slider = {
     animation,
     bounds: VectorBounds({
-      location,
       limit,
+      location,
       mover,
       offset: 30,
     }),
