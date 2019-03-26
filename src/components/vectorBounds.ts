@@ -6,6 +6,7 @@ interface Params {
   limit: Limit
   location: Vector1D
   mover: Mover
+  offset: number
 }
 
 export interface VectorBounds {
@@ -14,14 +15,20 @@ export interface VectorBounds {
 
 export function VectorBounds(params: Params): VectorBounds {
   const self = {} as VectorBounds
-  const { limit, location, mover } = params
+  const { limit, offset, location, mover } = params
 
   function constrain(v: Vector1D): VectorBounds {
-    if (limit.reached.any(location.get())) {
+    const lowLocationWithOffset = location.get() + offset
+    const highLocationWithOffset = location.get() - offset
+    if (
+      limit.reached.low(lowLocationWithOffset) ||
+      limit.reached.high(highLocationWithOffset)
+    ) {
       const constraint = limit.constrain(v.get())
-      setTimeout(() => v.setNumber(constraint), 40)
+      v.setNumber(constraint)
       mover.useSpeed(10)
     }
+
     return self
   }
 

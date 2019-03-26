@@ -1,6 +1,6 @@
 # Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg)
 
-Embla is a lightweight and simple carousel plugin for the web with no dependencies. Embla's purpose is to provide a simple but yet extensible carousel that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
+Embla is a lightweight and simple carousel plugin for the web. Its purpose is to provide simple and extensible carousels that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
 
 - [Examples](#examples)
 - [Installation](#installation)
@@ -92,7 +92,6 @@ const embla = EmblaCarousel(node, {
   container: '*',
   draggable: true,
   loop: false,
-  mass: 1.5,
   speed: 10,
   startIndex: 0,
   onInit: () => false,
@@ -111,9 +110,6 @@ Allow mouse and touch interactions to move the carousel.
 
 **`loop`** (boolean)  
 Determines if the carousel should loop when start or end is reached.
-
-**`mass`** (number: 1.5 - 3)  
-Simulates how heavy the carousel is. A higher number will add more wiggle effect.
 
 **`speed`** (number: 5 - 20)  
 Carousel speed when using buttons to navigate. A higher number will make transitions faster. Pointer events are not affected by this.

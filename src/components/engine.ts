@@ -40,8 +40,7 @@ export function Engine(
   options: Options,
 ): Engine {
   // Options
-  const { align, startIndex, loop, speed, mass } = options
-  const massLimit = Limit({ low: 1.5, high: 3 })
+  const { align, startIndex, loop, speed } = options
   const speedLimit = Limit({ low: 5, high: 20 })
 
   // Index
@@ -107,7 +106,7 @@ export function Engine(
   const target = Vector1D(startLocation)
   const mover = Mover({
     location,
-    mass: massLimit.constrain(mass),
+    mass: 1.5,
     maxForce: chunkSize.getRoot * 2,
     speed: speedLimit.constrain(speed),
   })
@@ -143,7 +142,12 @@ export function Engine(
   // Slider
   const slider = {
     animation,
-    bounds: VectorBounds({ location, limit, mover }),
+    bounds: VectorBounds({
+      location,
+      limit,
+      mover,
+      offset: 30,
+    }),
     index,
     infinite: VectorLooper({
       limit,

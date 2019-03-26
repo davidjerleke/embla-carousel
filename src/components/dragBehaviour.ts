@@ -110,7 +110,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
       evt.preventDefault()
       const diff = pointer.move(evt)
       const pastLimit = limit.reached.any(location.get())
-      const resist = !loop && pastLimit ? 2 : 1
+      const resist = !loop && pastLimit ? 2.5 : 1
       location.addNumber(diff / resist)
     } else {
       const X = pointer.read(evt, 'x').get()
@@ -152,7 +152,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
     const diffDrag = Math.abs(dragStart.get() - location.get())
     const diffToTarget = Math.abs(target.get() - location.get())
-    const minDragDiff = 2
+    const minDragDiff = 5
     const minDiffToTarget = 1
 
     if (diffDrag > 1 && diffToTarget > minDiffToTarget) {

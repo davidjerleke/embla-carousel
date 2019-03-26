@@ -5,7 +5,6 @@ export interface Options {
   container: string
   draggable: boolean
   loop: boolean
-  mass: number
   onInit(index: number): void
   onSelect(index: number): void
   speed: number
@@ -17,7 +16,6 @@ export interface UserOptions {
   container?: string
   draggable?: boolean
   loop?: boolean
-  mass?: number
   onInit?(index: number): void
   onSelect?(index: number): void
   speed?: number
@@ -29,7 +27,6 @@ export const defaultOptions = Object.freeze({
   container: '*',
   draggable: true,
   loop: false,
-  mass: 1.5,
   onInit: () => false,
   onSelect: () => false,
   speed: 10,
