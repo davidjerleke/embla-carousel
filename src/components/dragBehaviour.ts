@@ -1,6 +1,7 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { Direction } from './direction'
+
 import { EventStore } from './eventStore'
 import { Limit } from './limit'
 import { Mover } from './mover'
@@ -19,6 +20,7 @@ interface Params {
   index: Counter
   limit: Limit
   loop: boolean
+  onSelect(): void
 }
 
 export interface DragBehaviour {
@@ -126,12 +128,10 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function up(): void {
-    const { travel, target, mover, index } = params
-    const force = pointer.up()
+    const { travel, target, mover, index, onSelect } = params
+    const force = pointer.up() * (!state.isMouse ? 2.5 : 1)
     const forceAbs = Math.abs(force)
-    const low = state.isMouse ? 11 : 18
-    const high = state.isMouse ? 15 : 20
-    const speedLimit = Limit({ low, high })
+    const speedLimit = Limit({ low: 11, high: 15 })
     const speed = speedLimit.constrain(forceAbs)
 
     state.isMouse = false
@@ -139,13 +139,16 @@ export function DragBehaviour(params: Params): DragBehaviour {
     interactionEvents.removeAll()
     element.classList.remove('is-dragging')
 
-    if (!loop && forceAbs < 10) {
-      const pastLowLimit = limit.reached.low(location.get())
-      const pastHighLimit = limit.reached.high(location.get())
-      if (
-        (pastHighLimit && index.get() === index.min) ||
-        (pastLowLimit && index.get() === index.max)
-      ) {
+    if (!loop) {
+      const targetLocation = location.get() + force
+      const pastLowLimit = limit.reached.low(targetLocation)
+      const pastHighLimit = limit.reached.high(targetLocation)
+
+      if (pastHighLimit || pastLowLimit) {
+        const nextIndex = pastHighLimit ? index.min : index.max
+        target.setNumber(targetLocation)
+        index.set(nextIndex)
+        onSelect()
         return
       }
     }

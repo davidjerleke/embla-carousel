@@ -2,12 +2,13 @@ const webpack = require('webpack')
 const config = require('./webpack.config.common.js')
 const path = require('path')
 
-const CONTENT_PATH = path.resolve(__dirname, '../sandbox')
+const DOCS_PATH = path.resolve(__dirname, '../docs')
+const ASSETS_PATH = path.resolve(DOCS_PATH, 'assets')
 
 config.mode = 'development'
 config.devtool = 'source-map'
 config.devServer = {
-  contentBase: CONTENT_PATH,
+  contentBase: [DOCS_PATH, ASSETS_PATH],
   watchContentBase: true,
   open: true,
 }

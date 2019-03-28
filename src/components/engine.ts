@@ -20,10 +20,6 @@ export interface Engine {
   animation: Animation
   bounds: VectorBounds
   index: Counter
-  nodes: {
-    container: HTMLElement
-    slides: HTMLElement[]
-  }
   pointer: DragBehaviour
   target: Vector1D
   translate: Translate
@@ -104,6 +100,7 @@ export function Engine(
   const startLocation = slidePositions[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
+  const onSelect = () => options.onSelect(slider.index.get())
   const mover = Mover({
     location,
     mass: 1.5,
@@ -120,9 +117,7 @@ export function Engine(
     }),
     index,
     moverTarget: target,
-    onTravel: () => {
-      options.onSelect(slider.index.get())
-    },
+    onSelect,
   })
 
   // Pointer
@@ -137,6 +132,7 @@ export function Engine(
     pointer: Pointer(chunkSize),
     target,
     travel,
+    onSelect,
   })
 
   // Slider
@@ -146,7 +142,7 @@ export function Engine(
       limit,
       location,
       mover,
-      offset: 50,
+      animation,
     }),
     index,
     infinite: VectorLooper({
@@ -156,7 +152,6 @@ export function Engine(
       vectors: [location, target, pointer.dragStartLocation],
     }),
     mover,
-    nodes: { container, slides },
     pointer,
     shifter: InfiniteShifter({
       alignSizes,

@@ -9,7 +9,7 @@ interface Params {
   moverTarget: Vector1D
   index: Counter
   findTarget: TargetFinder
-  onTravel(): void
+  onSelect(): void
 }
 
 export interface Traveller {
@@ -24,11 +24,11 @@ export function Traveller(params: Params): Traveller {
   const { index, findTarget, animation, moverTarget } = params
 
   function travelTo(next: Target): Traveller {
-    const { onTravel } = params
+    const { onSelect } = params
     animation.start()
     moverTarget.addNumber(next.distance)
     index.set(next.index)
-    onTravel()
+    onSelect()
     return self
   }
 
