@@ -1,0 +1,149 @@
+.embla {
+  position: relative;
+  margin-bottom: 2.7rem;
+  background-color: darken($color-prague, 1%);
+}
+
+.embla__viewport {
+  overflow: hidden;
+  position: relative;
+
+  &.draggable {
+    cursor: move;
+    cursor: grab;
+  }
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  margin-left: -0.8rem;
+
+  @media (min-width: $media-sm) {
+    display: flex;
+    margin-left: -1rem;
+  }
+}
+
+.embla__slide {
+  flex: 0 0 auto;
+  position: relative;
+  width: 80%;
+  padding-left: 0.8rem;
+  counter-increment: embla;
+
+  @media (min-width: $media-sm) {
+    padding-left: 1rem;
+  }
+}
+
+.embla__slide__inner {
+  background-color: $color-london;
+  position: relative;
+  border-radius: 0.5rem;
+  min-height: 170px;
+  padding-bottom: 45%;
+  font-size: 3rem;
+
+  @media (min-width: $media-sm) {
+    padding-bottom: 46%;
+    font-size: 4.2rem;
+  }
+  @media (min-width: $media-lg) {
+    padding-bottom: 50%;
+    font-size: 5rem;
+  }
+
+  &:before {
+    color: $color-lisbon;
+    font-weight: 300;
+    line-height: 1;
+    content: counter(embla);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.embla__nav {
+  background-color: transparent;
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  width: 3.5rem;
+  height: 3.5rem;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  display: none;
+
+  @media (min-width: $media-sm) {
+    display: flex;
+  }
+}
+
+.embla__nav__svg {
+  fill: $color-brand;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.embla__nav--prev {
+  left: 1.5rem;
+}
+
+.embla__nav--next {
+  right: 1.5rem;
+}
+
+.embla__dots {
+  position: absolute;
+  margin-top: 1rem;
+  margin-left: -1.5rem;
+  display: flex;
+  list-style: none;
+  padding-left: 0;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.embla__dot {
+  display: flex;
+  margin-left: 1.5rem;
+}
+
+.embla__dot__button {
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  border: 0;
+  display: flex;
+  align-items: center;
+
+  &:after {
+    background-color: #efefef;
+    width: 100%;
+    height: 0.4rem;
+    content: '';
+  }
+}
+
+.embla__dot--selected:after {
+  background-color: $color-brand;
+  opacity: 1;
+}

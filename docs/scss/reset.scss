@@ -1,4 +1,3 @@
-/* RESET */
 html {
   box-sizing: border-box;
   line-height: 1.15;
@@ -150,23 +149,4 @@ audio,
 video {
   height: auto;
   max-width: 100%;
-}
-
-/* BASE STYLES */
-html {
-  font-size: 62.5%;
-}
-
-body {
-  background-color: #fcfcfc;
-  color: #282c34;
-  line-height: 1.5;
-  font-size: 1.6rem;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-body:not(.user-is-tabbing) a,
-body:not(.user-is-tabbing) button {
-  outline: 0;
 }

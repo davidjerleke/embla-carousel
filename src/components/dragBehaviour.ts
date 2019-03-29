@@ -129,7 +129,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function up(): void {
     const { travel, target, mover, index, onSelect } = params
-    const force = pointer.up() * (!state.isMouse ? 2.5 : 1)
+    const force = pointer.up() * (state.isMouse ? 1 : 2.4)
     const forceAbs = Math.abs(force)
     const speedLimit = Limit({ low: 11, high: 15 })
     const speed = speedLimit.constrain(forceAbs)

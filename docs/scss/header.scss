@@ -1,0 +1,107 @@
+@mixin header-size($property) {
+  #{$property}: 4rem;
+
+  @media (min-width: $media-sm) {
+    #{$property}: 5rem;
+  }
+  @media (min-width: $media-lg) {
+    #{$property}: 6rem;
+  }
+}
+
+.header {
+  background-color: $color-oslo;
+  color: $color-lisbon;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+
+  @include header-size('height');
+}
+
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+}
+
+.header__logo__svg {
+  fill: $color-brand;
+  display: block;
+  height: 2.3rem;
+  width: auto;
+}
+
+.header__logo__text {
+  color: $color-brand;
+  font-weight: bold;
+  font-size: 2rem;
+  margin-left: 1rem;
+
+  @media (min-width: $media-sm) {
+    font-size: 2.2rem;
+  }
+}
+
+.header__nav {
+  height: 100%;
+  display: flex;
+  line-height: 1;
+  margin-right: -1rem;
+
+  @media (min-width: $media-sm) {
+    margin-right: -1.5rem;
+  }
+}
+
+.header__nav__link {
+  color: $color-lisbon;
+  display: flex;
+  text-decoration: none;
+  font-weight: 300;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-items: center;
+  font-size: 1.5rem;
+
+  &:focus {
+    background-color: $color-madrid;
+  }
+
+  @media (min-width: $media-xs) {
+    font-size: 1.6rem;
+  }
+  @media (min-width: $media-sm) {
+    margin-left: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: $media-lg) {
+    transition: color 0.2s;
+
+    &:hover {
+      color: $color-brand;
+    }
+  }
+}
+
+.header__nav__link__svg {
+  fill: $color-rome;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: 0.5rem;
+
+  @media (min-width: $media-sm) {
+    margin-left: 1rem;
+  }
+}

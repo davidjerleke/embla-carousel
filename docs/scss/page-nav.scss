@@ -1,0 +1,36 @@
+.page-nav {
+  @media (min-width: $media-sm) {
+    font-size: 1.7rem;
+  }
+  @media (min-width: $media-lg) {
+    font-size: 1.8rem;
+  }
+}
+
+.page-nav__heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+
+  @media (min-width: $media-sm) {
+    font-size: 4rem;
+  }
+  @media (min-width: $media-lg) {
+    font-size: 5rem;
+  }
+}
+
+.page-nav__description {
+  margin-bottom: 2rem;
+}
+
+.page-nav__list {
+  padding-left: 2rem;
+  list-style: disc;
+  margin-bottom: -1rem;
+}
+
+.page-nav__list__item {
+  padding-bottom: 1rem;
+}

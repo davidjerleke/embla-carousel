@@ -1,0 +1,16 @@
+.footer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  text-align: center;
+  line-height: 1.7;
+
+  @media (min-width: $media-sm) {
+    font-size: 1.7rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  @media (min-width: $media-lg) {
+    font-size: 1.8rem;
+  }
+}
