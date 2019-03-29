@@ -1,7 +1,7 @@
+import { Animation } from './animation'
 import { Limit } from './limit'
 import { Mover } from './mover'
 import { Vector1D } from './vector1d'
-import { Animation } from './animation'
 
 interface Params {
   limit: Limit
@@ -21,11 +21,11 @@ export function VectorBounds(params: Params): VectorBounds {
 
   function shouldConstrain(v: Vector1D): boolean {
     const l = location.get()
-    const isNotLowLimit = v.get() !== limit.low
-    const isNotHighLimit = v.get() !== limit.high
+    const isLowLimit = v.get() === limit.low
+    const isHighLimit = v.get() === limit.high
     return (
-      (limit.reached.low(l) && isNotLowLimit) ||
-      (limit.reached.high(l) && isNotHighLimit)
+      (limit.reached.low(l) && !isLowLimit) ||
+      (limit.reached.high(l) && !isHighLimit)
     )
   }
 

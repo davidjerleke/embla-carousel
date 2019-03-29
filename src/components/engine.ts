@@ -129,20 +129,20 @@ export function Engine(
     location,
     loop: options.loop,
     mover,
+    onSelect,
     pointer: Pointer(chunkSize),
     target,
     travel,
-    onSelect,
   })
 
   // Slider
   const slider = {
     animation,
     bounds: VectorBounds({
+      animation,
       limit,
       location,
       mover,
-      animation,
     }),
     index,
     infinite: VectorLooper({

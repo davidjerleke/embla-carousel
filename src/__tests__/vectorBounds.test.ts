@@ -1,3 +1,4 @@
+import { Animation } from '../components/animation'
 import { VectorBounds } from '../components/vectorBounds'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
@@ -6,8 +7,8 @@ import { Mover } from '../components/mover'
 let vectorBounds: VectorBounds
 let location: Vector1D
 let mover: Mover
+const animation = Animation(() => {})
 const limit = Limit({ low: 0, high: 10 })
-const offset = 5
 
 beforeEach(() => {
   location = Vector1D(0)
@@ -17,31 +18,43 @@ beforeEach(() => {
     maxForce: 100,
     speed: 10,
   })
-  vectorBounds = VectorBounds({ limit, location, mover, offset })
+  vectorBounds = VectorBounds({ limit, location, mover, animation })
 })
 
 describe('VectorBounds', () => {
-  test('Constrains given Vector to Bound low when location is less than low', () => {
+  test('Constrains given Vector to Bound low when location is less than low', done => {
     const vector = Vector1D(-20)
-    const locationPastLowLimitPlusOffset = limit.low - offset - 1
-    location.setNumber(locationPastLowLimitPlusOffset)
+    const locationPastLowLimit = limit.low - 1
+    location.setNumber(locationPastLowLimit)
     vectorBounds.constrain(vector)
-    expect(vector.get()).toBe(0)
+
+    setTimeout(() => {
+      expect(vector.get()).toBe(0)
+      done()
+    }, 50)
   })
 
-  test('Constrains given Vector to Bound high when location is greater than high', () => {
+  test('Constrains given Vector to Bound high when location is greater than high', done => {
     const vector = Vector1D(20)
-    const locationPastHighLimitPlusOffset = limit.high + offset + 1
-    location.setNumber(locationPastHighLimitPlusOffset)
+    const locationPastHighLimit = limit.high + 1
+    location.setNumber(locationPastHighLimit)
     vectorBounds.constrain(vector)
-    expect(vector.get()).toBe(10)
+
+    setTimeout(() => {
+      expect(vector.get()).toBe(10)
+      done()
+    }, 50)
   })
 
-  test('Does not change given Vector when location is within Bounds', () => {
+  test('Does not change given Vector when location is within Bounds', done => {
     const vector = Vector1D(20)
-    const locationWithinHighLimitPlusOffset = limit.high + offset
-    location.setNumber(locationWithinHighLimitPlusOffset)
+    const locationWithinHighLimit = limit.high
+    location.setNumber(locationWithinHighLimit)
     vectorBounds.constrain(vector)
-    expect(vector.get()).toBe(20)
+
+    setTimeout(() => {
+      expect(vector.get()).toBe(20)
+      done()
+    }, 50)
   })
 })
