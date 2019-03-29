@@ -1,6 +1,6 @@
 # Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg)
 
-CHeck out the demo [here](https://davidcetinkaya.github.io/embla-carousel).
+Check out the demo [here](https://davidcetinkaya.github.io/embla-carousel).
 
 Embla is a lightweight and simple carousel plugin for the web. Its purpose is to provide simple and extensible carousels that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
 
