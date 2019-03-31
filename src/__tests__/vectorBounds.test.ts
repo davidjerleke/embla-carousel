@@ -9,6 +9,7 @@ let location: Vector1D
 let mover: Mover
 const animation = Animation(() => {})
 const limit = Limit({ low: 0, high: 10 })
+const tolerance = 50
 
 beforeEach(() => {
   location = Vector1D(0)
@@ -18,7 +19,13 @@ beforeEach(() => {
     maxForce: 100,
     speed: 10,
   })
-  vectorBounds = VectorBounds({ limit, location, mover, animation })
+  vectorBounds = VectorBounds({
+    limit,
+    location,
+    mover,
+    animation,
+    tolerance,
+  })
 })
 
 describe('VectorBounds', () => {
@@ -31,7 +38,7 @@ describe('VectorBounds', () => {
     setTimeout(() => {
       expect(vector.get()).toBe(0)
       done()
-    }, 50)
+    }, tolerance)
   })
 
   test('Constrains given Vector to Bound high when location is greater than high', done => {
@@ -43,7 +50,7 @@ describe('VectorBounds', () => {
     setTimeout(() => {
       expect(vector.get()).toBe(10)
       done()
-    }, 50)
+    }, tolerance)
   })
 
   test('Does not change given Vector when location is within Bounds', done => {
@@ -55,6 +62,6 @@ describe('VectorBounds', () => {
     setTimeout(() => {
       expect(vector.get()).toBe(20)
       done()
-    }, 50)
+    }, tolerance)
   })
 })

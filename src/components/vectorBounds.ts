@@ -8,6 +8,7 @@ interface Params {
   location: Vector1D
   mover: Mover
   animation: Animation
+  tolerance: number
 }
 
 export interface VectorBounds {
@@ -16,7 +17,7 @@ export interface VectorBounds {
 
 export function VectorBounds(params: Params): VectorBounds {
   const self = {} as VectorBounds
-  const { limit, location, mover, animation } = params
+  const { limit, location, mover, animation, tolerance } = params
   const state = { timeout: 0 }
 
   function shouldConstrain(v: Vector1D): boolean {
@@ -37,7 +38,7 @@ export function VectorBounds(params: Params): VectorBounds {
         mover.useSpeed(10)
         animation.start()
         state.timeout = 0
-      }, 50)
+      }, tolerance)
     }
     return self
   }

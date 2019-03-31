@@ -143,6 +143,7 @@ export function Engine(
       limit,
       location,
       mover,
+      tolerance: 50,
     }),
     index,
     infinite: VectorLooper({

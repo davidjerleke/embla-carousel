@@ -1,3 +1,5 @@
+type Limits = { [key: string]: number }
+
 interface Params {
   low: number
   high: number
@@ -18,14 +20,8 @@ export interface Limit {
 export function Limit(params: Params): Limit {
   const self = {} as Limit
   const { low, high } = params
-  const constrainLimit = [0, low, high]
-  const loopLimit = [0, high, low]
-
-  function reachedWhich(n: number): number {
-    const lowIndex = reachedLow(n) && 1
-    const highIndex = reachedHigh(n) && 2
-    return lowIndex || highIndex || 0
-  }
+  const loopLimits: Limits = { high: low, low: high }
+  const constrainLimits: Limits = { low, high }
 
   function reachedLow(n: number): boolean {
     return n < low
@@ -39,14 +35,20 @@ export function Limit(params: Params): Limit {
     return reachedLow(n) || reachedHigh(n)
   }
 
+  function reachedWhich(n: number): string {
+    if (reachedLow(n)) return 'low'
+    if (reachedHigh(n)) return 'high'
+    return ''
+  }
+
   function loop(n: number): number {
     const which = reachedWhich(n)
-    return which ? loopLimit[which] : n
+    return which ? loopLimits[which] : n
   }
 
   function constrain(n: number): number {
     const which = reachedWhich(n)
-    return which ? constrainLimit[which] : n
+    return which ? constrainLimits[which] : n
   }
 
   return Object.assign(self, {
