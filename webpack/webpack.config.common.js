@@ -1,7 +1,7 @@
 const path = require('path')
 
 const SRC_PATH = path.resolve(__dirname, '../src')
-const OUT_PATH = path.resolve(__dirname, '../docs')
+const OUT_PATH = path.resolve(__dirname, '../docs/assets')
 
 module.exports = {
   entry: [path.resolve(SRC_PATH, 'index.ts')],
