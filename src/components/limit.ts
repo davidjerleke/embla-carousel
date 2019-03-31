@@ -38,9 +38,9 @@ export function Limit(params: Params): Limit {
   }
 
   function reachedWhich(n: number): string {
-    if (reachedLow(n)) return 'low'
-    if (reachedHigh(n)) return 'high'
-    return ''
+    const isLow = reachedLow(n) && 'low'
+    const isHigh = reachedHigh(n) && 'high'
+    return isLow || isHigh || ''
   }
 
   function loop(n: number): number {
