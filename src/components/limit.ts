@@ -1,4 +1,6 @@
-type Limits = { [key: string]: number }
+type Limits = {
+  [key: string]: number
+}
 
 interface Params {
   low: number
