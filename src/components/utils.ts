@@ -28,9 +28,5 @@ export function debounce(
 export function arrayFromCollection(
   nodeList: HTMLCollection,
 ): HTMLElement[] {
-  const array: HTMLElement[] = []
-  for (const node of nodeList) {
-    array.push(node as HTMLElement)
-  }
-  return array
+  return Array.prototype.slice.call(nodeList)
 }
