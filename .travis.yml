@@ -1,13 +1,12 @@
 language: node_js
 node_js:
-  - '8'
+  - '10'
 
-cache: yarn
-
-install: yarn
+install:
+  - npm install
 script:
-  - yarn lint
-  - yarn test
+  - npm run lint
+  - npm run test
 
 jobs:
   include:
