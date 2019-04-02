@@ -28,7 +28,7 @@ import EmblaCarousel from 'embla-carousel'
 const embla = EmblaCarousel(document.getElementById('embla'))
 ```
 
-...or inject the minified script [here](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/assets/index.js) into your website.
+...or inject the minified script [here](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/index.js) into your website.
 
 ```html
 <script src="embla.min.js"></script>
