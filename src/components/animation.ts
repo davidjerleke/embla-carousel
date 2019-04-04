@@ -13,10 +13,10 @@ export function Animation(callback: FrameRequestCallback): Animation {
   const kill = cancelAnimationFrame.bind(window)
   const state = { animationFrame: 0 }
 
-  function ifAnimation(active: boolean, func: Callback): IfAnimation {
+  function ifAnimation(active: boolean, cb: Callback): IfAnimation {
     return (): Animation => {
       if (active === !!state.animationFrame) {
-        func()
+        cb()
       }
       return self
     }

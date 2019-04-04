@@ -1,6 +1,7 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { Direction } from './direction'
+import { EventDispatcher } from './eventDispatcher'
 import { Target, TargetFinder } from './targetFinder'
 import { Vector1D } from './vector1d'
 
@@ -9,7 +10,7 @@ interface Params {
   moverTarget: Vector1D
   index: Counter
   findTarget: TargetFinder
-  onSelect(): void
+  events: EventDispatcher
 }
 
 export interface Traveller {
@@ -24,11 +25,11 @@ export function Traveller(params: Params): Traveller {
   const { index, findTarget, animation, moverTarget } = params
 
   function travelTo(next: Target): Traveller {
-    const { onSelect } = params
+    const { events } = params
     animation.start()
     moverTarget.addNumber(next.distance)
     index.set(next.index)
-    onSelect()
+    events.dispatch('select', index.get())
     return self
   }
 

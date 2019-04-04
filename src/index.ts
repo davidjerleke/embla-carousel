@@ -1,4 +1,5 @@
 import { Engine } from './components/engine'
+import { EventDispatcher } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
@@ -8,7 +9,7 @@ interface Elements {
   slides: HTMLElement[]
 }
 
-interface EmblaCarousel {
+type EmblaCarousel = {
   container: HTMLElement
   next(): void
   previous(): void
@@ -17,7 +18,7 @@ interface EmblaCarousel {
   reActivate(userOpt: UserOptions): void
   addEvent(): EventStore
   slides: HTMLElement[]
-}
+} & Pick<EventDispatcher, 'on' | 'off'>
 
 export function EmblaCarousel(
   sliderRoot: HTMLElement,
@@ -28,12 +29,12 @@ export function EmblaCarousel(
   const state = { active: false, lastWindowWidth: 0 }
   const options = Object.assign({}, defaultOptions, userOptions)
   const elements = {} as Elements
+  const eventDispatcher = EventDispatcher()
   const internalEvents = EventStore()
   const externalEvents = EventStore()
   const resize = debounce(onResize, 500)
 
   activate(options)
-  options.onInit(slider.index.get())
 
   function storeElements(): void {
     const root = sliderRoot
@@ -57,7 +58,13 @@ export function EmblaCarousel(
     if (elements.slides.length > 0) {
       const { container, slides } = elements
       const newOpt = Object.assign(options, userOpt)
-      const engine = Engine(sliderRoot, container, slides, newOpt)
+      const engine = Engine(
+        sliderRoot,
+        container,
+        slides,
+        newOpt,
+        eventDispatcher,
+      )
 
       Object.assign(slider, engine)
       internalEvents.add(window, 'resize', resize)
@@ -73,6 +80,12 @@ export function EmblaCarousel(
         slider.shifter.shiftAccordingTo(slider.mover.location)
       }
     }
+
+    // THis should not be triggered on resize
+    setTimeout(
+      () => eventDispatcher.dispatch('init', slider.index.get()),
+      0,
+    )
   }
 
   function reActivate(userOpt: UserOptions = {}): void {
@@ -87,7 +100,7 @@ export function EmblaCarousel(
 
   function deActivate(): void {
     const { container, slides } = elements
-    slider.pointer.destroy()
+    slider.pointer.removeAllEvents()
     slider.animation.stop()
     internalEvents.removeAll()
     container.style.transform = ''
@@ -98,6 +111,7 @@ export function EmblaCarousel(
     externalEvents.removeAll()
     state.active = false
     deActivate()
+    eventDispatcher.dispatch('destroy', 0)
   }
 
   function onResize(): void {
@@ -137,6 +151,8 @@ export function EmblaCarousel(
     goTo,
     next,
     previous,
+    on: eventDispatcher.on,
+    off: eventDispatcher.off,
   })
 }
 

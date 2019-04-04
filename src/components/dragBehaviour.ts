@@ -1,7 +1,7 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { Direction } from './direction'
-
+import { EventDispatcher } from './eventDispatcher'
 import { EventStore } from './eventStore'
 import { Limit } from './limit'
 import { Mover } from './mover'
@@ -20,7 +20,7 @@ interface Params {
   index: Counter
   limit: Limit
   loop: boolean
-  onSelect(): void
+  events: EventDispatcher
 }
 
 export interface DragBehaviour {
@@ -32,13 +32,13 @@ export interface DragBehaviour {
   move(evt: Event): void
   up(): void
   cancel(evt: Event): void
-  destroy(): void
+  removeAllEvents(): void
   activate(): void
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
   const self = {} as DragBehaviour
-  const { element, pointer, location, limit, loop } = params
+  const { element, pointer, location, limit, loop, events } = params
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const dragStart = Vector1D(0)
   const startX = Vector1D(0)
@@ -49,18 +49,6 @@ export function DragBehaviour(params: Params): DragBehaviour {
     isMouse: false,
     preventClick: false,
     preventScroll: false,
-  }
-
-  function activate(): void {
-    element.classList.add('draggable')
-    addActivationEvents()
-  }
-
-  function destroy(): void {
-    activationEvents.removeAll()
-    interactionEvents.removeAll()
-    element.classList.remove('draggable')
-    element.classList.remove('is-dragging')
   }
 
   function addActivationEvents(): void {
@@ -74,13 +62,18 @@ export function DragBehaviour(params: Params): DragBehaviour {
       .add(node, 'click', click)
   }
 
-  function addInteractionEvents(mouse: boolean): void {
-    const node = !mouse ? element : document
+  function addInteractionEvents(): void {
+    const node = !state.isMouse ? element : document
     interactionEvents
       .add(node, 'touchmove', move)
       .add(node, 'touchend', up)
       .add(node, 'mousemove', move)
       .add(node, 'mouseup', up)
+  }
+
+  function removeAllEvents(): void {
+    activationEvents.removeAll()
+    interactionEvents.removeAll()
   }
 
   function isFocusNode(node: Element): boolean {
@@ -96,8 +89,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
     dragStart.set(location)
     animation.start()
     state.preventClick = false
-    element.classList.add('is-dragging')
-    addInteractionEvents(state.isMouse)
+    addInteractionEvents()
+    events.dispatch('dragStart')
 
     if (!state.isMouse) {
       startX.set(pointer.read(evt, 'x'))
@@ -128,7 +121,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function up(): void {
-    const { travel, target, mover, index, onSelect } = params
+    const { travel, target, mover, index } = params
     const force = pointer.up() * (state.isMouse ? 1 : 2.4)
     const forceAbs = Math.abs(force)
     const speedLimit = Limit({ low: 11, high: 15 })
@@ -137,7 +130,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     state.isMouse = false
     state.preventScroll = false
     interactionEvents.removeAll()
-    element.classList.remove('is-dragging')
+    events.dispatch('dragEnd')
 
     if (!loop) {
       const targetLocation = location.get() + force
@@ -147,8 +140,10 @@ export function DragBehaviour(params: Params): DragBehaviour {
       if (pastHighLimit || pastLowLimit) {
         const nextIndex = pastHighLimit ? index.min : index.max
         target.setNumber(targetLocation)
-        index.set(nextIndex)
-        onSelect()
+        if (nextIndex !== index.get()) {
+          index.set(nextIndex)
+          events.dispatch('select', index.get())
+        }
         return
       }
     }
@@ -174,9 +169,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   return Object.assign(self, {
-    activate,
+    activate: addActivationEvents,
     cancel: up,
-    destroy,
+    removeAllEvents,
     direction: pointer.direction,
     down,
     dragStartLocation: dragStart,

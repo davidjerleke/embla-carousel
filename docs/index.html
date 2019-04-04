@@ -481,35 +481,37 @@
     </script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      function mergeObjects(targetObj, sourceObject) {
-        for (var key in sourceObject) {
-          if (sourceObject.hasOwnProperty(key)) {
-            targetObj[key] = sourceObject[key]
-          }
-        }
-      }
-
-      function setupEmblaCarousel(wrap, customOptions) {
+      function setupEmblaCarousel(wrap, options) {
         var view = wrap.querySelector('.embla__viewport')
         var nextBtn = wrap.querySelector('.embla__nav--next')
         var prevBtn = wrap.querySelector('.embla__nav--prev')
         var dotWrap = wrap.querySelector('.embla__dots')
         var dots = wrap.querySelectorAll('.embla__dot__button')
         var dotsArray = [].slice.call(dots)
-        var options = {
-          onInit: function(index) {
-            dots[index].classList.add('embla__dot--selected')
-          },
-          onSelect: function(index) {
-            dotWrap
-              .querySelector('.embla__dot--selected')
-              .classList.remove('embla__dot--selected')
-            dots[index].classList.add('embla__dot--selected')
-          },
+        var onInit = function(index) {
+          if (options.draggable !== false) {
+            view.classList.add('draggable')
+          }
+          dots[index].classList.add('embla__dot--selected')
         }
-        mergeObjects(options, customOptions)
+        var onSelect = function(index) {
+          dotWrap
+            .querySelector('.embla__dot--selected')
+            .classList.remove('embla__dot--selected')
+          dots[index].classList.add('embla__dot--selected')
+        }
+        var onDragStart = function() {
+          view.classList.add('is-dragging')
+        }
+        var onDragEnd = function() {
+          view.classList.remove('is-dragging')
+        }
         var embla = EmblaCarousel(view, options)
 
+        embla.on('init', onInit)
+        embla.on('select', onSelect)
+        embla.on('dragStart', onDragStart)
+        embla.on('dragEnd', onDragEnd)
         embla.addEvent(nextBtn, 'click', embla.next, false)
         embla.addEvent(prevBtn, 'click', embla.previous, false)
 
@@ -518,6 +520,7 @@
             embla.goTo(i)
           })
         })
+
         return embla
       }
 
@@ -543,15 +546,14 @@
         section.innerHTML = template.innerHTML
         carousel.appendChild(section)
       })
-
       var emblas = document.querySelectorAll('.embla')
       var emblasArray = [].slice.call(emblas)
       var emblaInstances = emblasArray.map(function(e, i) {
         return setupEmblaCarousel(e, optionsArray[i])
       })
-
       var body = document.body
       var userIsTabbing = false
+
       document.addEventListener('keyup', function(evt) {
         if (!userIsTabbing && evt.keyCode === 9) {
           body.classList.add('user-is-tabbing')

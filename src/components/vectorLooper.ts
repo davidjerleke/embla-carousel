@@ -16,15 +16,10 @@ export function VectorLooper(params: Params): VectorLooper {
   const self = {} as VectorLooper
   const { limit, location, span, vectors } = params
 
-  function limitFor(direction: number): (n: number) => boolean {
-    const { low, high } = limit.reached
-    return direction === -1 ? low : high
-  }
-
   function shouldLoop(direction: number): boolean {
-    const l = location.get()
-    const limitReached = limitFor(direction)
-    return direction !== 0 && limitReached(l)
+    const { low, high } = limit.reached
+    const limitReached = direction === -1 ? low : high
+    return direction !== 0 && limitReached(location.get())
   }
 
   function loop(direction: number): VectorLooper {

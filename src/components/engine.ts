@@ -3,6 +3,7 @@ import { Animation } from './animation'
 import { ChunkSize } from './chunkSize'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
+import { EventDispatcher } from './eventDispatcher'
 import { InfiniteShifter } from './infiniteShifter'
 import { Limit } from './limit'
 import { Mover } from './mover'
@@ -34,6 +35,7 @@ export function Engine(
   container: HTMLElement,
   slides: HTMLElement[],
   options: Options,
+  events: EventDispatcher,
 ): Engine {
   // Options
   const { align, startIndex, loop, speed } = options
@@ -100,7 +102,6 @@ export function Engine(
   const startLocation = slidePositions[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const onSelect = () => options.onSelect(slider.index.get())
   const mover = Mover({
     location,
     mass: 1.5,
@@ -109,6 +110,7 @@ export function Engine(
   })
   const travel = Traveller({
     animation,
+    events,
     findTarget: TargetFinder({
       diffDistances,
       index,
@@ -117,19 +119,18 @@ export function Engine(
     }),
     index,
     moverTarget: target,
-    onSelect,
   })
 
   // Pointer
   const pointer = DragBehaviour({
     animation,
     element: root,
+    events,
     index,
     limit,
     location,
     loop: options.loop,
     mover,
-    onSelect,
     pointer: Pointer(chunkSize),
     target,
     travel,
