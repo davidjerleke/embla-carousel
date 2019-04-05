@@ -1,5 +1,4 @@
-type Param = number
-type Callback = (param?: Param) => void
+type Callback = () => void
 type Event = 'init' | 'select' | 'dragStart' | 'dragEnd' | 'destroy'
 
 interface Subscribers {
@@ -11,7 +10,7 @@ interface Subscribers {
 }
 
 export interface EventDispatcher {
-  dispatch(type: Event, param?: Param): EventDispatcher
+  dispatch(type: Event): EventDispatcher
   on(type: Event, cb: Callback): EventDispatcher
   off(type: Event, cb: Callback): EventDispatcher
 }
@@ -26,9 +25,9 @@ export function EventDispatcher(): EventDispatcher {
     destroy: [],
   }
 
-  function dispatch(type: Event, param?: Param): EventDispatcher {
+  function dispatch(type: Event): EventDispatcher {
     const eventListeners = subscribers[type]
-    eventListeners.forEach(e => e(param))
+    eventListeners.forEach(e => e())
     return self
   }
 

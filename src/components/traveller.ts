@@ -29,7 +29,7 @@ export function Traveller(params: Params): Traveller {
     animation.start()
     moverTarget.addNumber(next.distance)
     index.set(next.index)
-    events.dispatch('select', index.get())
+    events.dispatch('select')
     return self
   }
 

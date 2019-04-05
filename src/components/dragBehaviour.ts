@@ -142,7 +142,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
         target.setNumber(targetLocation)
         if (nextIndex !== index.get()) {
           index.set(nextIndex)
-          events.dispatch('select', index.get())
+          events.dispatch('select')
         }
         return
       }
@@ -171,13 +171,13 @@ export function DragBehaviour(params: Params): DragBehaviour {
   return Object.assign(self, {
     activate: addActivationEvents,
     cancel: up,
-    removeAllEvents,
     direction: pointer.direction,
     down,
     dragStartLocation: dragStart,
     isDown: pointer.isDown,
     move,
     onClick: click,
+    removeAllEvents,
     up,
   })
 }

@@ -110,7 +110,7 @@
             </div>
           </a>
           <nav class="header__nav">
-            <a class="header__nav__link" href="#features">Features</a>
+            <a class="header__nav__link" href="#examples">Examples</a>
             <a
               class="header__nav__link"
               href="https://github.com/davidcetinkaya/embla-carousel"
@@ -143,7 +143,7 @@
                 Simple and sensible carousels for the web, written in
                 TypeScript
               </h2>
-              <a href="#features" class="banner__button">Features</a>
+              <a href="#examples" class="banner__button">Examples</a>
               <a
                 class="banner__link"
                 href="https://github.com/davidcetinkaya/embla-carousel"
@@ -158,16 +158,26 @@
       </section>
 
       <!-- NAV -->
-      <section class="page-wrap" id="features">
+      <section class="page-wrap" id="examples">
         <div class="content-wrap">
           <nav class="page-nav section">
-            <h3 class="page-nav__heading">Features</h3>
+            <h3 class="page-nav__heading">Examples</h3>
             <p class="page-nav__description">
               Embla is a lightweight and simple carousel plugin for
               the web. Its purpose is to provide simple and extensible
               carousels that feels natural to interact with. It's 100%
               open source and free to use on both personal and
               commercial projects.
+            </p>
+            <p class="page-nav__description">
+              For <strong>documentation</strong> and a full list of
+              features go to the
+              <a
+                class="styled-link"
+                href="https://github.com/davidcetinkaya/embla-carousel"
+                target="_blank"
+                >Github page</a
+              >. This is a demo page.
             </p>
             <ul class="page-nav__list">
               <li class="page-nav__list__item">
@@ -488,13 +498,18 @@
         var dotWrap = wrap.querySelector('.embla__dots')
         var dots = wrap.querySelectorAll('.embla__dot__button')
         var dotsArray = [].slice.call(dots)
-        var onInit = function(index) {
+        var embla = EmblaCarousel(view, options)
+
+        var onInit = function() {
+          console.log('init!')
+          var index = embla.selectedIndex()
           if (options.draggable !== false) {
             view.classList.add('draggable')
           }
           dots[index].classList.add('embla__dot--selected')
         }
-        var onSelect = function(index) {
+        var onSelect = function() {
+          var index = embla.selectedIndex()
           dotWrap
             .querySelector('.embla__dot--selected')
             .classList.remove('embla__dot--selected')
@@ -506,7 +521,6 @@
         var onDragEnd = function() {
           view.classList.remove('is-dragging')
         }
-        var embla = EmblaCarousel(view, options)
 
         embla.on('init', onInit)
         embla.on('select', onSelect)

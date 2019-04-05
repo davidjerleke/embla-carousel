@@ -18,6 +18,7 @@ type EmblaCarousel = {
   reActivate(userOpt: UserOptions): void
   addEvent(): EventStore
   slides: HTMLElement[]
+  selectedIndex(): number
 } & Pick<EventDispatcher, 'on' | 'off'>
 
 export function EmblaCarousel(
@@ -53,6 +54,7 @@ export function EmblaCarousel(
   }
 
   function activate(userOpt: UserOptions = {}): void {
+    const dispatchInit = !state.active
     storeElements()
 
     if (elements.slides.length > 0) {
@@ -79,13 +81,10 @@ export function EmblaCarousel(
       if (options.loop) {
         slider.shifter.shiftAccordingTo(slider.mover.location)
       }
+      if (dispatchInit) {
+        setTimeout(() => eventDispatcher.dispatch('init'), 0)
+      }
     }
-
-    // THis should not be triggered on resize
-    setTimeout(
-      () => eventDispatcher.dispatch('init', slider.index.get()),
-      0,
-    )
   }
 
   function reActivate(userOpt: UserOptions = {}): void {
@@ -111,7 +110,7 @@ export function EmblaCarousel(
     externalEvents.removeAll()
     state.active = false
     deActivate()
-    eventDispatcher.dispatch('destroy', 0)
+    eventDispatcher.dispatch('destroy')
   }
 
   function onResize(): void {
@@ -144,6 +143,10 @@ export function EmblaCarousel(
     slider.travel.toIndex(index)
   }
 
+  function selectedIndex(): number {
+    return slider.index.get()
+  }
+
   return Object.assign(self, {
     addEvent: externalEvents.add,
     changeOptions: reActivate,
@@ -153,6 +156,7 @@ export function EmblaCarousel(
     previous,
     on: eventDispatcher.on,
     off: eventDispatcher.off,
+    selectedIndex,
   })
 }
 
