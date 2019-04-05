@@ -153,9 +153,9 @@ export function EmblaCarousel(
     destroy,
     goTo,
     next,
-    previous,
-    on: eventDispatcher.on,
     off: eventDispatcher.off,
+    on: eventDispatcher.on,
+    previous,
     selectedIndex,
   })
 }

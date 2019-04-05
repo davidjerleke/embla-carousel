@@ -2,11 +2,11 @@ type Callback = () => void
 type Event = 'init' | 'select' | 'dragStart' | 'dragEnd' | 'destroy'
 
 interface Subscribers {
+  destroy: Callback[]
+  dragEnd: Callback[]
+  dragStart: Callback[]
   init: Callback[]
   select: Callback[]
-  dragStart: Callback[]
-  dragEnd: Callback[]
-  destroy: Callback[]
 }
 
 export interface EventDispatcher {
@@ -18,11 +18,11 @@ export interface EventDispatcher {
 export function EventDispatcher(): EventDispatcher {
   const self = {} as EventDispatcher
   const subscribers: Subscribers = {
+    destroy: [],
+    dragEnd: [],
+    dragStart: [],
     init: [],
     select: [],
-    dragStart: [],
-    dragEnd: [],
-    destroy: [],
   }
 
   function dispatch(type: Event): EventDispatcher {
@@ -45,7 +45,7 @@ export function EventDispatcher(): EventDispatcher {
 
   return Object.assign(self, {
     dispatch,
-    on,
     off,
+    on,
   })
 }
