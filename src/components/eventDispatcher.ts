@@ -10,9 +10,9 @@ interface Subscribers {
 }
 
 export interface EventDispatcher {
-  dispatch(type: Event): EventDispatcher
-  on(type: Event, cb: Callback): EventDispatcher
-  off(type: Event, cb: Callback): EventDispatcher
+  dispatch(evt: Event): EventDispatcher
+  on(evt: Event, cb: Callback): EventDispatcher
+  off(evt: Event, cb: Callback): EventDispatcher
 }
 
 export function EventDispatcher(): EventDispatcher {
@@ -25,21 +25,21 @@ export function EventDispatcher(): EventDispatcher {
     select: [],
   }
 
-  function dispatch(type: Event): EventDispatcher {
-    const eventListeners = subscribers[type]
+  function dispatch(evt: Event): EventDispatcher {
+    const eventListeners = subscribers[evt]
     eventListeners.forEach(e => e())
     return self
   }
 
-  function on(type: Event, cb: Callback): EventDispatcher {
-    const eventListeners = subscribers[type]
-    subscribers[type] = eventListeners.concat([cb])
+  function on(evt: Event, cb: Callback): EventDispatcher {
+    const eventListeners = subscribers[evt]
+    subscribers[evt] = eventListeners.concat([cb])
     return self
   }
 
-  function off(type: Event, cb: Callback): EventDispatcher {
-    const eventListeners = subscribers[type]
-    subscribers[type] = eventListeners.filter(e => e !== cb)
+  function off(evt: Event, cb: Callback): EventDispatcher {
+    const eventListeners = subscribers[evt]
+    subscribers[evt] = eventListeners.filter(e => e !== cb)
     return self
   }
 
