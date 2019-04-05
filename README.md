@@ -154,7 +154,7 @@ Subscribes to a custom Embla event by firing the passed callback. Below is a lis
 - **dragStart** - Triggers when carousel dragging begins.
 - **dragEnd** - Triggers when carousel dragging ends.
 
-**`off(event: string, callback: function)`**
+**`off(event: string, callback: function)`**  
 Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
 
 ## License
