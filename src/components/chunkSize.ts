@@ -1,6 +1,6 @@
-export interface ChunkSize {
+export type ChunkSize = {
   getRoot: number
-  measure(n: number): number
+  measure: (n: number) => number
 }
 
 export function ChunkSize(root: number): ChunkSize {

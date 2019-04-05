@@ -1,8 +1,8 @@
 import { Vector1D } from './vector1d'
 
-export interface Direction {
-  get(): number
-  set(v: Vector1D): Direction
+export type Direction = {
+  get: () => number
+  set: (v: Vector1D) => Direction
 }
 
 export function Direction(value: number): Direction {

@@ -9,7 +9,7 @@ import { Pointer } from './pointer'
 import { Traveller } from './traveller'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   element: HTMLElement
   target: Vector1D
   pointer: Pointer
@@ -23,17 +23,17 @@ interface Params {
   events: EventDispatcher
 }
 
-export interface DragBehaviour {
-  isDown(): boolean
-  onClick(evt: Event): void
-  dragStartLocation: Vector1D
+export type DragBehaviour = {
   direction: Direction
-  down(evt: Event): void
-  move(evt: Event): void
-  up(): void
-  cancel(evt: Event): void
-  removeAllEvents(): void
-  activate(): void
+  dragStartLocation: Vector1D
+  isDown: () => boolean
+  onClick: (evt: Event) => void
+  down: (evt: Event) => void
+  move: (evt: Event) => void
+  up: () => void
+  cancel: (evt: Event) => void
+  removeAllEvents: () => void
+  activate: () => void
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {

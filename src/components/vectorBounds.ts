@@ -3,7 +3,7 @@ import { Limit } from './limit'
 import { Mover } from './mover'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   limit: Limit
   location: Vector1D
   mover: Mover
@@ -11,8 +11,8 @@ interface Params {
   tolerance: number
 }
 
-export interface VectorBounds {
-  constrain(v: Vector1D): VectorBounds
+export type VectorBounds = {
+  constrain: (v: Vector1D) => VectorBounds
 }
 
 export function VectorBounds(params: Params): VectorBounds {

@@ -1,12 +1,12 @@
 import { Alignments } from './options'
 
-interface Params {
+type Params = {
   root: number
   align: Alignments
 }
 
-export interface AlignSize {
-  measure(n: number): number
+export type AlignSize = {
+  measure: (n: number) => number
 }
 
 export function AlignSize(params: Params): AlignSize {

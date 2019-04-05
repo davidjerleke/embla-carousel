@@ -1,16 +1,16 @@
-export interface Vector1D {
-  get(): number
-  set(v2: Vector1D): Vector1D
-  add(v2: Vector1D): Vector1D
-  subtract(v2: Vector1D): Vector1D
-  multiply(n: number): Vector1D
-  setNumber(n: number): Vector1D
-  addNumber(n: number): Vector1D
-  subtractNumber(n: number): Vector1D
-  divide(n: number): Vector1D
-  limit(n: number): Vector1D
-  magnitude(): number
-  normalize(): Vector1D
+export type Vector1D = {
+  get: () => number
+  set: (v2: Vector1D) => Vector1D
+  add: (v2: Vector1D) => Vector1D
+  subtract: (v2: Vector1D) => Vector1D
+  multiply: (n: number) => Vector1D
+  setNumber: (n: number) => Vector1D
+  addNumber: (n: number) => Vector1D
+  subtractNumber: (n: number) => Vector1D
+  divide: (n: number) => Vector1D
+  limit: (n: number) => Vector1D
+  magnitude: () => number
+  normalize: () => Vector1D
 }
 
 export function Vector1D(value: number): Vector1D {

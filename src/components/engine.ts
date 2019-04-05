@@ -17,7 +17,7 @@ import { Vector1D } from './vector1d'
 import { VectorBounds } from './vectorBounds'
 import { VectorLooper } from './vectorLooper'
 
-export interface Engine {
+export type Engine = {
   animation: Animation
   bounds: VectorBounds
   index: Counter

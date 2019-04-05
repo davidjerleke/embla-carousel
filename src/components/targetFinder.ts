@@ -4,21 +4,21 @@ import { Vector1D } from './vector1d'
 
 type IsFound = (current: Target) => boolean
 
-interface Params {
+type Params = {
   location: Vector1D
   index: Counter
   diffDistances: number[]
   loop: boolean
 }
 
-export interface Target {
+export type Target = {
   index: number
   distance: number
 }
 
-export interface TargetFinder {
-  byIndex(target: number, direction: number): Target
-  byDistance(from: number, distance: number): Target
+export type TargetFinder = {
+  byIndex: (target: number, direction: number) => Target
+  byDistance: (from: number, distance: number) => Target
 }
 
 export function TargetFinder(params: Params): TargetFinder {

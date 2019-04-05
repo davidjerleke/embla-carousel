@@ -1,6 +1,6 @@
 export type Alignments = 'start' | 'center' | 'end'
 
-export interface Options {
+export type Options = {
   align: Alignments
   container: string
   draggable: boolean
@@ -9,7 +9,7 @@ export interface Options {
   startIndex: number
 }
 
-export interface UserOptions {
+export type UserOptions = {
   align?: Alignments
   container?: string
   draggable?: boolean

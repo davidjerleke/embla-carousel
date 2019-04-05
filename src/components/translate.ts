@@ -2,10 +2,10 @@ import { Vector1D } from './vector1d'
 
 type Translates = 'x' | 'x3d'
 
-export interface Translate {
-  to(vector: Vector1D): Translate
-  useDefault(): Translate
-  use3d(): Translate
+export type Translate = {
+  to: (vector: Vector1D) => Translate
+  useDefault: () => Translate
+  use3d: () => Translate
 }
 
 export function Translate(node: HTMLElement): Translate {

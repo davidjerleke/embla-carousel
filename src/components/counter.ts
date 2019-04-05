@@ -1,18 +1,18 @@
 import { Limit } from './limit'
 
-interface Params {
+type Params = {
   start: number
   limit: Limit
   loop: boolean
 }
 
-export interface Counter {
+export type Counter = {
   min: number
   max: number
-  get(): number
-  set(n: number): Counter
-  add(n: number): Counter
-  clone(): Counter
+  get: () => number
+  set: (n: number) => Counter
+  add: (n: number) => Counter
+  clone: () => Counter
 }
 
 export function Counter(params: Params): Counter {

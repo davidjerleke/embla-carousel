@@ -1,10 +1,10 @@
 type Callback = () => void
 type IfAnimation = () => Animation
 
-export interface Animation {
-  start(): Animation
-  stop(): Animation
-  proceed(): Animation
+export type Animation = {
+  start: () => Animation
+  stop: () => Animation
+  proceed: () => Animation
 }
 
 export function Animation(callback: FrameRequestCallback): Animation {

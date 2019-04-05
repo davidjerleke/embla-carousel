@@ -1,7 +1,12 @@
-type Callback = () => void
-type Event = 'init' | 'select' | 'dragStart' | 'dragEnd' | 'destroy'
+export type Callback = () => void
+export type Event =
+  | 'init'
+  | 'select'
+  | 'dragStart'
+  | 'dragEnd'
+  | 'destroy'
 
-interface Subscribers {
+type Subscribers = {
   destroy: Callback[]
   dragEnd: Callback[]
   dragStart: Callback[]
@@ -9,10 +14,10 @@ interface Subscribers {
   select: Callback[]
 }
 
-export interface EventDispatcher {
-  dispatch(evt: Event): EventDispatcher
-  on(evt: Event, cb: Callback): EventDispatcher
-  off(evt: Event, cb: Callback): EventDispatcher
+export type EventDispatcher = {
+  dispatch: (evt: Event) => EventDispatcher
+  on: (evt: Event, cb: Callback) => EventDispatcher
+  off: (evt: Event, cb: Callback) => EventDispatcher
 }
 
 export function EventDispatcher(): EventDispatcher {

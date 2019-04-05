@@ -2,21 +2,21 @@ import { Direction } from './direction'
 import { map } from './utils'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   location: Vector1D
   speed: number
   mass: number
   maxForce: number
 }
 
-export interface Mover {
-  update(): Mover
-  seek(target: Vector1D): Mover
-  settle(target: Vector1D): boolean
-  useSpeed(newSpeed: number): Mover
-  useDefaultSpeed(): Mover
+export type Mover = {
   location: Vector1D
   direction: Direction
+  update: () => Mover
+  seek: (target: Vector1D) => Mover
+  settle: (target: Vector1D) => boolean
+  useSpeed: (newSpeed: number) => Mover
+  useDefaultSpeed: () => Mover
 }
 
 export function Mover(params: Params): Mover {

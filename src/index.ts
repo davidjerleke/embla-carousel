@@ -1,25 +1,31 @@
 import { Engine } from './components/engine'
-import { EventDispatcher } from './components/eventDispatcher'
+import {
+  Callback as EmblaCallback,
+  Event as EmblaEvent,
+  EventDispatcher,
+} from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
 
-interface Elements {
+type Elements = {
   container: HTMLElement
   slides: HTMLElement[]
 }
 
 type EmblaCarousel = {
   container: HTMLElement
-  next(): void
-  previous(): void
-  goTo(index: number): void
-  destroy(): void
-  reActivate(userOpt: UserOptions): void
-  addEvent(): EventStore
   slides: HTMLElement[]
-  selectedIndex(): number
-} & Pick<EventDispatcher, 'on' | 'off'>
+  next: () => void
+  previous: () => void
+  goTo: (index: number) => void
+  destroy: () => void
+  reActivate: (userOpt: UserOptions) => void
+  addEvent: () => EventStore
+  selectedIndex: () => number
+  on: (evt: EmblaEvent, cb: EmblaCallback) => void
+  off: (evt: EmblaEvent, cb: EmblaCallback) => void
+}
 
 export function EmblaCarousel(
   sliderRoot: HTMLElement,
@@ -27,9 +33,9 @@ export function EmblaCarousel(
 ): EmblaCarousel {
   const self = {} as EmblaCarousel
   const slider = {} as Engine
+  const elements = {} as Elements
   const state = { active: false, lastWindowWidth: 0 }
   const options = Object.assign({}, defaultOptions, userOptions)
-  const elements = {} as Elements
   const eventDispatcher = EventDispatcher()
   const internalEvents = EventStore()
   const resize = debounce(onResize, 500)

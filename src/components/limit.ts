@@ -2,20 +2,20 @@ type Limits = {
   [key: string]: number
 }
 
-interface Params {
+type Params = {
   low: number
   high: number
 }
 
-export interface Limit {
+export type Limit = {
   low: number
   high: number
-  loop(n: number): number
-  constrain(n: number): number
+  loop: (n: number) => number
+  constrain: (n: number) => number
   reached: {
-    low(n: number): boolean
-    high(n: number): boolean
-    any(n: number): boolean
+    low: (n: number) => boolean
+    high: (n: number) => boolean
+    any: (n: number) => boolean
   }
 }
 

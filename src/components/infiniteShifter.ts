@@ -2,21 +2,21 @@ import { ChunkSize } from './chunkSize'
 import { rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   items: HTMLElement[]
   chunkSize: ChunkSize
   itemSizes: number[]
   alignSizes: number[]
 }
 
-interface ShiftPoint {
-  findTarget(location: number): Vector1D
+type ShiftPoint = {
   location: Vector1D
   node: HTMLElement
+  findTarget: (location: number) => Vector1D
 }
 
-export interface InfiniteShifter {
-  shiftAccordingTo(parentLocation: Vector1D): void
+export type InfiniteShifter = {
+  shiftAccordingTo: (parentLocation: Vector1D) => void
 }
 
 export function InfiniteShifter(params: Params) {

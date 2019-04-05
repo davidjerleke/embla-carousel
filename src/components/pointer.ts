@@ -4,19 +4,19 @@ import { Vector1D } from './vector1d'
 
 type Axis = 'x' | 'y'
 
-interface State {
+type State = {
   isDown: boolean
   trackPoints: number[]
   trackTime: number
 }
 
-export interface Pointer {
+export type Pointer = {
   direction: Direction
-  isDown(): boolean
-  down(evt: Event): number
-  move(evt: Event): number
-  up(): number
-  read(evt: any, axis: Axis): Vector1D
+  isDown: () => boolean
+  down: (evt: Event) => number
+  move: (evt: Event) => number
+  up: () => number
+  read: (evt: any, axis: Axis) => Vector1D
 }
 
 export function Pointer(size: ChunkSize): Pointer {

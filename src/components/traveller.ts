@@ -5,7 +5,7 @@ import { EventDispatcher } from './eventDispatcher'
 import { Target, TargetFinder } from './targetFinder'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   animation: Animation
   moverTarget: Vector1D
   index: Counter
@@ -13,11 +13,11 @@ interface Params {
   events: EventDispatcher
 }
 
-export interface Traveller {
-  toNext(): Traveller
-  toPrevious(): Traveller
-  toIndex(target: number): Traveller
-  toDistance(from: number, distance: number): Traveller
+export type Traveller = {
+  toNext: () => Traveller
+  toPrevious: () => Traveller
+  toIndex: (target: number) => Traveller
+  toDistance: (from: number, distance: number) => Traveller
 }
 
 export function Traveller(params: Params): Traveller {

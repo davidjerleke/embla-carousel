@@ -1,15 +1,15 @@
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
-interface Params {
+type Params = {
   limit: Limit
   location: Vector1D
   span: number
   vectors: Vector1D[]
 }
 
-export interface VectorLooper {
-  loop(direction: number): VectorLooper
+export type VectorLooper = {
+  loop: (direction: number) => VectorLooper
 }
 
 export function VectorLooper(params: Params): VectorLooper {

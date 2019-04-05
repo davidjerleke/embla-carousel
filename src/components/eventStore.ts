@@ -1,18 +1,18 @@
 type EventHandler = (evt: Event) => void
 type EventOptions = AddEventListenerOptions | boolean
 
-interface State {
+type State = {
   listeners: Array<() => void>
 }
 
-export interface EventStore {
-  add(
+export type EventStore = {
+  add: (
     node: EventTarget,
     type: string,
     handler: EventHandler,
     options?: EventOptions,
-  ): EventStore
-  removeAll(): EventStore
+  ) => EventStore
+  removeAll: () => EventStore
 }
 
 export function EventStore(): EventStore {
