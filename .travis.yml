@@ -7,6 +7,7 @@ install:
 script:
   - npm run lint
   - npm run test
+  - echo 'Trigger Badge Refresh'
 
 jobs:
   include:
