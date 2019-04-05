@@ -85,7 +85,7 @@ const embla = EmblaCarousel(document.getElementById('embla'))
 
 ## Options
 
-Embla comes with a few optional settings that you can change by passing an object as the second argument. **`Default`** values are:
+Embla comes with a few optional settings that you can change by passing an object as the second argument. **Default** values are:
 
 ```javascript
 const node = document.getElementById('embla')
@@ -96,8 +96,6 @@ const embla = EmblaCarousel(node, {
   loop: false,
   speed: 10,
   startIndex: 0,
-  onInit: () => false,
-  onSelect: () => false,
 })
 ```
 
@@ -119,12 +117,6 @@ Carousel speed when using buttons to navigate. A higher number will make transit
 **`startIndex`** (number)  
 Zero based index of the starting slide when carousel mounts.
 
-**`onInit`** (function)  
-Callback that runs when the carousel has mounted.
-
-**`onSelect`** (function)  
-Callback that runs when a new slide target has been selected.
-
 ## API
 
 Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this...
@@ -144,17 +136,26 @@ Goes to next item. If loop is disabled and the carousel is on the last slide thi
 **`previous()`**  
 Goes to previous item. If loop is disabled and the carousel is on the first slide this method will do nothing.
 
-**`goTo(index)`**  
+**`goTo(index: number)`**
 Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
 
-**`changeOptions(options)`**  
-Reinitializes the carousel with passed options. This will do all calculations and setup the carousel from scratch.
+**`changeOptions(options: options)`**  
+Reinitializes the carousel with passed options. This will do all the calculations and setup the carousel from scratch.
 
 **`destroy()`**  
 Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
 
-**`addEvent(node, type, listener, options)`**  
-Works just like the native addEventListener but Embla will store this event for you. Embla will kill events added this way for you when `destroy` is invoked.
+**`on(event: string, callback: function)`**  
+Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
+
+- **init** - Triggers after the carousel has been initialized for the first time.
+- **destroy** - Triggers after the carousel has been destroyed.
+- **select** - Triggers when a new target slide has been selected.
+- **dragStart** - Triggers when carousel dragging begins.
+- **dragEnd** - Triggers when carousel dragging ends.
+
+**`off(event: string, callback: function)`**
+Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
 
 ## License
 

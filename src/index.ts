@@ -32,7 +32,6 @@ export function EmblaCarousel(
   const elements = {} as Elements
   const eventDispatcher = EventDispatcher()
   const internalEvents = EventStore()
-  const externalEvents = EventStore()
   const resize = debounce(onResize, 500)
 
   activate(options)
@@ -107,7 +106,6 @@ export function EmblaCarousel(
   }
 
   function destroy(): void {
-    externalEvents.removeAll()
     state.active = false
     deActivate()
     eventDispatcher.dispatch('destroy')
@@ -148,7 +146,6 @@ export function EmblaCarousel(
   }
 
   return Object.assign(self, {
-    addEvent: externalEvents.add,
     changeOptions: reActivate,
     destroy,
     goTo,

@@ -525,13 +525,17 @@
         embla.on('select', onSelect)
         embla.on('dragStart', onDragStart)
         embla.on('dragEnd', onDragEnd)
-        embla.addEvent(nextBtn, 'click', embla.next, false)
-        embla.addEvent(prevBtn, 'click', embla.previous, false)
+        nextBtn.addEventListener('click', embla.next, false)
+        prevBtn.addEventListener('click', embla.previous, false)
 
         dotsArray.forEach(function(d, i) {
-          embla.addEvent(d, 'click', function() {
-            embla.goTo(i)
-          })
+          d.addEventListener(
+            'click',
+            function() {
+              embla.goTo(i)
+            },
+            false,
+          )
         })
 
         return embla

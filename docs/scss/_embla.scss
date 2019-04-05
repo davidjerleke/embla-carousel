@@ -76,8 +76,8 @@
   top: 50%;
   transform: translateY(-50%);
   border: 0;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 5rem;
+  height: 5rem;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -96,11 +96,11 @@
 }
 
 .embla__nav--prev {
-  left: 1.5rem;
+  left: 0.7rem;
 }
 
 .embla__nav--next {
-  right: 1.5rem;
+  right: 0.7rem;
 }
 
 .embla__dots {
