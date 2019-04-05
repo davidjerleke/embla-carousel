@@ -27,6 +27,8 @@ export function Pointer(size: ChunkSize): Pointer {
   const lastDrag = Vector1D(0)
   const direction = Direction(0)
   const pointValue = Vector1D(0)
+  const trackInterval = 10
+  const trackLength = 4
   const state: State = {
     isDown: false,
     trackPoints: [],
@@ -53,7 +55,7 @@ export function Pointer(size: ChunkSize): Pointer {
     const time2 = new Date().getTime()
     const time1 = state.trackTime
 
-    if (time2 - time1 >= 10) {
+    if (time2 - time1 >= trackInterval) {
       state.trackPoints.push(point.get())
       state.trackTime = time2
     }
@@ -65,15 +67,14 @@ export function Pointer(size: ChunkSize): Pointer {
   }
 
   function up(): number {
+    const currentPoint = lastDrag.get()
     lastDrag.setNumber(
       state.trackPoints
-        .slice(-5)
-        .map(p => lastDrag.get() - p)
-        .sort((p1, p2) => {
-          const point1 = Math.abs(p1)
-          const point2 = Math.abs(p2)
-          return point1 < point2 ? 1 : -1
-        })[0] || 0,
+        .slice(-trackLength)
+        .map(point => currentPoint - point)
+        .sort((p1, p2) =>
+          Math.abs(p1) < Math.abs(p2) ? 1 : -1,
+        )[0] || 0,
     )
     state.isDown = false
     state.trackPoints = []
