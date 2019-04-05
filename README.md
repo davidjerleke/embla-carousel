@@ -1,4 +1,4 @@
-# Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg)
+# Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg) ![Travis (.org) branch](https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)
 
 Check out the demo [here](https://davidcetinkaya.github.io/embla-carousel).
 
