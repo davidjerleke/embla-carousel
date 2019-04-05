@@ -1,18 +1,17 @@
 language: node_js
-node_js:
-  - '10'
-
-install:
-  - npm install
-script:
-  - npm run lint
-  - npm run test
 
 jobs:
   include:
+    - stage: test
+      node_js: '10'
+      install:
+        - npm install
+      script:
+        - npm run lint
+        - npm run test
     - stage: npm release
       if: tag IS present
-      node_js: '8'
+      node_js: '10'
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
