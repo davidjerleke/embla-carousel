@@ -6,6 +6,7 @@ type Axis = 'x' | 'y'
 
 type State = {
   isDown: boolean
+  isMouse: boolean
   trackPoints: number[]
   trackTime: number
 }
@@ -28,21 +29,22 @@ export function Pointer(size: ChunkSize): Pointer {
   const direction = Direction(0)
   const pointValue = Vector1D(0)
   const trackInterval = 10
-  const trackLength = 4
   const state: State = {
     isDown: false,
+    isMouse: false,
     trackPoints: [],
     trackTime: new Date().getTime(),
   }
 
   function readPoint(evt: any, axis: Axis): Vector1D {
-    const isMouse = !!evt.type.match(/mouse/)
+    const { isMouse } = state
     const c = coords[axis]
     const value = isMouse ? evt[c] : evt.touches[0][c]
     return pointValue.setNumber(value)
   }
 
   function down(evt: Event): number {
+    state.isMouse = !!evt.type.match(/mouse/)
     const point = readPoint(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
@@ -68,6 +70,7 @@ export function Pointer(size: ChunkSize): Pointer {
 
   function up(): number {
     const currentPoint = lastDrag.get()
+    const trackLength = state.isMouse ? 5 : 4
     lastDrag.setNumber(
       state.trackPoints
         .slice(-trackLength)
