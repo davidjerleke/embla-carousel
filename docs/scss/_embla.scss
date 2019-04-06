@@ -32,9 +32,12 @@
   flex: 0 0 auto;
   position: relative;
   width: 80%;
-  padding-left: 0.8rem;
+  padding-left: 0.5rem;
   counter-increment: embla;
 
+  @media (min-width: $media-xs) {
+    padding-left: 0.8rem;
+  }
   @media (min-width: $media-sm) {
     padding-left: 1rem;
   }
