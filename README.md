@@ -130,6 +130,9 @@ embla.next()
 
 ...and the methods are:
 
+**`selectedIndex()`**  
+Gets the current selected slide index. First slide starts at index 0.
+
 **`next()`**  
 Goes to next item. If loop is disabled and the carousel is on the last slide this method will do nothing.
 
@@ -148,11 +151,11 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 **`on(event: string, callback: function)`**  
 Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
 
-- **init** - Triggers after the carousel has been initialized for the first time.
-- **destroy** - Triggers after the carousel has been destroyed.
-- **select** - Triggers when a new target slide has been selected.
-- **dragStart** - Triggers when carousel dragging begins.
-- **dragEnd** - Triggers when carousel dragging ends.
+- **`init`** - Triggers after the carousel has been initialized for the first time.
+- **`destroy`** - Triggers after the carousel has been destroyed.
+- **`select`** - Triggers when a new target slide has been selected.
+- **`dragStart`** - Triggers when carousel dragging begins.
+- **`dragEnd`** - Triggers when carousel dragging ends.
 
 **`off(event: string, callback: function)`**  
 Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
