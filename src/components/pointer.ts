@@ -29,7 +29,7 @@ export function Pointer(size: ChunkSize): Pointer {
   const direction = Direction(0)
   const pointValue = Vector1D(0)
   const trackInterval = 10
-  const state: State = {
+  const pointer: State = {
     isDown: false,
     isMouse: false,
     trackPoints: [],
@@ -37,29 +37,29 @@ export function Pointer(size: ChunkSize): Pointer {
   }
 
   function readPoint(evt: any, axis: Axis): Vector1D {
-    const { isMouse } = state
+    const { isMouse } = pointer
     const c = coords[axis]
     const value = isMouse ? evt[c] : evt.touches[0][c]
     return pointValue.setNumber(value)
   }
 
   function down(evt: Event): number {
-    state.isMouse = !!evt.type.match(/mouse/)
+    pointer.isMouse = !!evt.type.match(/mouse/)
     const point = readPoint(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
-    state.isDown = true
+    pointer.isDown = true
     return size.measure(startDrag.get())
   }
 
   function move(evt: Event): number {
     const point = readPoint(evt, 'x')
     const time2 = new Date().getTime()
-    const time1 = state.trackTime
+    const time1 = pointer.trackTime
 
     if (time2 - time1 >= trackInterval) {
-      state.trackPoints.push(point.get())
-      state.trackTime = time2
+      pointer.trackPoints.push(point.get())
+      pointer.trackTime = time2
     }
 
     diffDrag.set(point).subtract(lastDrag)
@@ -70,24 +70,24 @@ export function Pointer(size: ChunkSize): Pointer {
 
   function up(): number {
     const currentPoint = lastDrag.get()
-    const trackLength = state.isMouse ? 5 : 4
+    const trackLength = pointer.isMouse ? 5 : 4
     lastDrag.setNumber(
-      state.trackPoints
+      pointer.trackPoints
         .slice(-trackLength)
         .map(point => currentPoint - point)
         .sort((p1, p2) =>
           Math.abs(p1) < Math.abs(p2) ? 1 : -1,
         )[0] || 0,
     )
-    state.isDown = false
-    state.trackPoints = []
+    pointer.isDown = false
+    pointer.trackPoints = []
     return size.measure(lastDrag.get())
   }
 
   return Object.assign(self, {
     direction,
     down,
-    isDown: () => state.isDown,
+    isDown: () => pointer.isDown,
     move,
     read: readPoint,
     up,

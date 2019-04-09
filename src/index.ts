@@ -6,25 +6,25 @@ import {
 } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
-import { arrayFromCollection, debounce } from './components/utils'
+import { arrayFromCollection } from './components/utils'
 
 type Elements = {
+  root: HTMLElement
   container: HTMLElement
   slides: HTMLElement[]
 }
 
 type EmblaCarousel = {
-  container: HTMLElement
-  slides: HTMLElement[]
   next: () => void
   previous: () => void
   goTo: (index: number) => void
   destroy: () => void
-  reActivate: (userOpt: UserOptions) => void
-  addEvent: () => EventStore
-  selectedIndex: () => number
+  getContainer: () => HTMLElement
+  getSlides: () => HTMLElement[]
+  getSelectedIndex: () => number
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
+  resize: () => void
 }
 
 export function EmblaCarousel(
@@ -34,11 +34,10 @@ export function EmblaCarousel(
   const self = {} as EmblaCarousel
   const slider = {} as Engine
   const elements = {} as Elements
-  const state = { active: false, lastWindowWidth: 0 }
+  const state = { active: false }
   const options = Object.assign({}, defaultOptions, userOptions)
   const eventDispatcher = EventDispatcher()
-  const internalEvents = EventStore()
-  const resize = debounce(onResize, 500)
+  const eventStore = EventStore()
 
   activate(options)
 
@@ -52,9 +51,9 @@ export function EmblaCarousel(
     if (!container) {
       throw new Error('No valid container element found 😢')
     }
+    elements.root = root
     elements.container = container
     elements.slides = arrayFromCollection(container.children)
-    state.lastWindowWidth = window.innerWidth
     state.active = true
   }
 
@@ -63,10 +62,10 @@ export function EmblaCarousel(
     storeElements()
 
     if (elements.slides.length > 0) {
-      const { container, slides } = elements
+      const { root, container, slides } = elements
       const newOpt = Object.assign(options, userOpt)
       const engine = Engine(
-        sliderRoot,
+        root,
         container,
         slides,
         newOpt,
@@ -74,9 +73,8 @@ export function EmblaCarousel(
       )
 
       Object.assign(slider, engine)
-      internalEvents.add(window, 'resize', resize)
       slides.forEach((s, i) =>
-        internalEvents.add(s, 'focus', slideFocus(i), true),
+        eventStore.add(s, 'focus', slideFocus(i), true),
       )
       slider.translate.to(slider.mover.location)
 
@@ -106,7 +104,7 @@ export function EmblaCarousel(
     const { container, slides } = elements
     slider.pointer.removeAllEvents()
     slider.animation.stop()
-    internalEvents.removeAll()
+    eventStore.removeAll()
     container.style.transform = ''
     slides.forEach(s => (s.style.left = ''))
   }
@@ -115,14 +113,6 @@ export function EmblaCarousel(
     state.active = false
     deActivate()
     eventDispatcher.dispatch('destroy')
-  }
-
-  function onResize(): void {
-    const windowWidth = window.innerWidth
-    if (windowWidth !== state.lastWindowWidth) {
-      state.lastWindowWidth = windowWidth
-      reActivate()
-    }
   }
 
   function slideFocus(index: number): () => void {
@@ -147,19 +137,29 @@ export function EmblaCarousel(
     slider.travel.toIndex(index)
   }
 
-  function selectedIndex(): number {
+  function getSelectedIndex(): number {
     return slider.index.get()
   }
 
+  function getContainer(): HTMLElement {
+    return elements.container
+  }
+
+  function getSlides(): HTMLElement[] {
+    return elements.slides
+  }
+
   return Object.assign(self, {
-    changeOptions: reActivate,
     destroy,
+    getContainer,
+    getSelectedIndex,
+    getSlides,
     goTo,
     next,
     off: eventDispatcher.off,
     on: eventDispatcher.on,
     previous,
-    selectedIndex,
+    resize: reActivate,
   })
 }
 

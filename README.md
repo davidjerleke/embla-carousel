@@ -130,7 +130,13 @@ embla.next()
 
 ...and the methods are:
 
-**`selectedIndex()`**  
+**`getContainer()`**  
+Gets the current container element node.
+
+**`getSlides()`**  
+Gets the slides as an array of element nodes.
+
+**`getSelectedIndex()`**  
 Gets the current selected slide index. First slide starts at index 0.
 
 **`next()`**  
@@ -142,11 +148,8 @@ Goes to previous item. If loop is disabled and the carousel is on the first slid
 **`goTo(index: number)`**
 Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
 
-**`changeOptions(options: options)`**  
-Reinitializes the carousel with passed options. This will do all the calculations and setup the carousel from scratch.
-
-**`destroy()`**  
-Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
+**`resize(options: options)`**  
+Useful when you're planning to change slide widths for different breakpoints or similar. This will do all the calculations and reinitialize the carousel with passed options.
 
 **`on(event: string, callback: function)`**  
 Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
@@ -159,6 +162,9 @@ Subscribes to a custom Embla event by firing the passed callback. Below is a lis
 
 **`off(event: string, callback: function)`**  
 Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
+
+**`destroy()`**  
+Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
 
 ## License
 

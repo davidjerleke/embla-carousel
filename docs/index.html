@@ -501,14 +501,14 @@
         var embla = EmblaCarousel(view, options)
 
         var onInit = function() {
-          var index = embla.selectedIndex()
+          var index = embla.getSelectedIndex()
           if (options.draggable !== false) {
             view.classList.add('draggable')
           }
           dots[index].classList.add('embla__dot--selected')
         }
         var onSelect = function() {
-          var index = embla.selectedIndex()
+          var index = embla.getSelectedIndex()
           dotWrap
             .querySelector('.embla__dot--selected')
             .classList.remove('embla__dot--selected')
@@ -581,6 +581,22 @@
         body.classList.remove('user-is-tabbing')
         userIsTabbing = false
       })
+
+      function debounce(callback, time) {
+        const timeout = { id: 0 }
+        return function() {
+          window.clearTimeout(timeout.id)
+          timeout.id = window.setTimeout(callback, time)
+        }
+      }
+
+      var debouncedResize = debounce(function() {
+        emblaInstances.forEach(function(e) {
+          e.resize()
+        })
+      }, 500)
+
+      window.addEventListener('resize', debouncedResize)
     </script>
   </body>
 </html>

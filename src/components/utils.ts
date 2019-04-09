@@ -14,17 +14,6 @@ export function map(
   )
 }
 
-export function debounce(
-  callback: () => void,
-  time: number,
-): () => void {
-  const timeout = { id: 0 }
-  return (): void => {
-    window.clearTimeout(timeout.id)
-    timeout.id = window.setTimeout(callback, time) || 0
-  }
-}
-
 export function arrayFromCollection(
   nodeList: HTMLCollection,
 ): HTMLElement[] {
