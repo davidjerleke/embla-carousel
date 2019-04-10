@@ -96,6 +96,9 @@ const embla = EmblaCarousel(node, {
   loop: false,
   speed: 10,
   startIndex: 0,
+  selectedClass: 'is-selected',
+  draggableClass: 'is-draggable',
+  draggingClass: 'is-dragging',
 })
 ```
 
@@ -116,6 +119,15 @@ Carousel speed when using buttons to navigate. A higher number will make transit
 
 **`startIndex`** (number)  
 Zero based index of the starting slide when carousel mounts.
+
+**`selectedClass`** (string)  
+Classname that will be applied to the selected slide.
+
+**`draggableClass`** (string)  
+Classname that will be applied to the wrapper when the carousel mounts if draggable is set to true.
+
+**`draggingClass`** (string)  
+Classname that will be applied to the wrapper when a pointer is dragging the carousel.
 
 ## API
 
