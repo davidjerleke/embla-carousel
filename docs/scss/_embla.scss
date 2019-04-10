@@ -8,7 +8,7 @@
   overflow: hidden;
   position: relative;
 
-  &.draggable {
+  &.is-draggable {
     cursor: move;
     cursor: grab;
   }

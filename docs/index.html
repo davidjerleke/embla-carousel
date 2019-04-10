@@ -502,9 +502,6 @@
 
         var onInit = function() {
           var index = embla.getSelectedIndex()
-          if (options.draggable !== false) {
-            view.classList.add('draggable')
-          }
           dots[index].classList.add('embla__dot--selected')
         }
         var onSelect = function() {
@@ -514,17 +511,9 @@
             .classList.remove('embla__dot--selected')
           dots[index].classList.add('embla__dot--selected')
         }
-        var onDragStart = function() {
-          view.classList.add('is-dragging')
-        }
-        var onDragEnd = function() {
-          view.classList.remove('is-dragging')
-        }
 
         embla.on('init', onInit)
         embla.on('select', onSelect)
-        embla.on('dragStart', onDragStart)
-        embla.on('dragEnd', onDragEnd)
         nextBtn.addEventListener('click', embla.next, false)
         prevBtn.addEventListener('click', embla.previous, false)
 
