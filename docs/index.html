@@ -579,10 +579,17 @@
         }
       }
 
+      var lastWindowWidth = window.offsetWidth
+
       var debouncedResize = debounce(function() {
-        emblaInstances.forEach(function(e) {
-          e.resize()
-        })
+        var newWindowWidth = window.offsetWidth
+
+        if (newWindowWidth !== lastWindowWidth) {
+          emblaInstances.forEach(function(e) {
+            e.resize()
+          })
+          lastWindowWidth = newWindowWidth
+        }
       }, 500)
 
       window.addEventListener('resize', debouncedResize)
