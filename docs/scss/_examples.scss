@@ -7,20 +7,6 @@
   }
 }
 
-.examples__heading {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-
-  @media (min-width: $media-sm) {
-    font-size: 4rem;
-  }
-  @media (min-width: $media-lg) {
-    font-size: 5rem;
-  }
-}
-
 .examples__description:not(:last-child) {
   margin-bottom: 2rem;
 }
