@@ -21,6 +21,7 @@
 .embla__container {
   display: flex;
   margin-left: -0.8rem;
+  will-change: transform;
 
   @media (min-width: $media-sm) {
     display: flex;
@@ -44,6 +45,7 @@
 }
 
 .embla__slide__inner {
+  display: block;
   background-color: $color-london;
   position: relative;
   border-radius: 0.5rem;

@@ -11,7 +11,7 @@
     />
     <meta
       name="description"
-      content="Embla is a simple and sensible carousel plugin for the web, written in TypeScript."
+      content="Embla is an extensible low level carousel for the web, written in TypeScript."
     />
     <meta
       name="author"
@@ -19,7 +19,9 @@
     />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
-    <title>Embla - Simple & sensible carousels for the web</title>
+    <title>
+      Embla - An extensible low level carousel for the web
+    </title>
 
     <!-- FAVICONS -->
     <link
@@ -49,11 +51,11 @@
     <!-- OPEN GRAPH -->
     <meta
       property="og:site_name"
-      content="Embla - Simple & sensible carousels for the web"
+      content="Embla - An extensible low level carousel for the web"
     />
     <meta
       property="og:title"
-      content="Embla - Simple & sensible carousels for the web"
+      content="Embla - An extensible low level carousel for the web"
     />
     <meta
       property="og:url"
@@ -62,7 +64,7 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:description"
-      content="Embla is a simple and sensible carousel plugin for the web, written in TypeScript."
+      content="Embla is an extensible low level carousel for the web, written in TypeScript."
     />
     <meta
       property="og:image"
@@ -75,11 +77,11 @@
     <meta name="twitter:creator" content="@david_cetinkaya" />
     <meta
       name="twitter:title"
-      content="Embla - Simple & sensible carousels for the web"
+      content="Embla - An extensible low level carousel for the web"
     />
     <meta
       name="twitter:description"
-      content="Embla is a simple and sensible carousel plugin for the web, written in TypeScript."
+      content="Embla is an extensible low level carousel for the web, written in TypeScript."
     />
     <meta
       name="twitter:image"
@@ -140,8 +142,8 @@
             <div class="banner__content">
               <h1 class="banner__heading">Embla</h1>
               <h2 class="banner__subheading">
-                Simple and sensible carousels for the web, written in
-                TypeScript
+                An extensible low level carousel for the web, written
+                in TypeScript
               </h2>
               <a href="#examples" class="banner__button">Examples</a>
               <a
@@ -160,16 +162,15 @@
       <!-- NAV -->
       <section class="page-wrap" id="examples">
         <div class="content-wrap">
-          <nav class="page-nav section">
-            <h3 class="page-nav__heading">Examples</h3>
-            <p class="page-nav__description">
-              Embla is a lightweight and simple carousel plugin for
-              the web. Its purpose is to provide simple and extensible
-              carousels that feels natural to interact with. It's 100%
-              open source and free to use on both personal and
-              commercial projects.
+          <div class="examples section">
+            <h3 class="examples__heading">Demo</h3>
+            <p class="examples__description">
+              Embla is an extensible low level carousel for the web.
+              With physics-based animations it feels very natural to
+              interact with. It's 100% open source and free to use on
+              both personal and commercial projects.
             </p>
-            <p class="page-nav__description">
+            <p class="examples__description">
               For <strong>documentation</strong> and a full list of
               features go to the
               <a
@@ -179,211 +180,34 @@
                 >Github page</a
               >. This is a demo page.
             </p>
-            <ul class="page-nav__list">
-              <li class="page-nav__list__item">
-                <a class="styled-link" href="#loop">Loop</a>
-              </li>
-              <li class="page-nav__list__item">
-                <a class="styled-link" href="#align">Align</a>
-              </li>
-              <li class="page-nav__list__item">
-                <a class="styled-link" href="#speed">Speed</a>
-              </li>
-              <li class="page-nav__list__item">
-                <a class="styled-link" href="#draggable">Draggable</a>
-              </li>
-              <li class="page-nav__list__item">
-                <a class="styled-link" href="#startindex"
-                  >StartIndex</a
-                >
-              </li>
-            </ul>
-          </nav>
+          </div>
         </div>
       </section>
 
       <!-- LOOP -->
-      <section class="page-wrap" id="loop">
+      <section class="page-wrap">
         <div class="content-wrap">
-          <div class="feature section">
-            <h4 class="feature__heading">Loop</h4>
-            <p class="feature__description">
-              Determines if the carousel should loop when start or end
-              slide is reached. Default is <strong>false</strong>.
-            </p>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
+          <div class="section">
+            <div class="feature">
+              <span class="feature__bracket">
                 {
               </span>
-              <span class="feature__badge__key">loop:</span>
-              <span class="feature__badge__value">false</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">loop:</span>
-              <span class="feature__badge__value">true</span>
-              <span class="feature__badge__bracket">
+              <span class="feature__key">loop:</span>
+              <span class="feature__value">false</span>
+              <span class="feature__bracket">
                 }
               </span>
             </div>
             <div class="carousel"></div>
           </div>
-        </div>
-      </section>
-
-      <!-- ALIGN -->
-      <section class="page-wrap" id="align">
-        <div class="content-wrap">
-          <div class="feature section">
-            <h4 class="feature__heading">Align</h4>
-            <p class="feature__description">
-              Aligns the slides relative to the carousel viewport.
-              Available choices are start, center or end. Default is
-              <strong>center</strong>.
-            </p>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
+          <div class="section">
+            <div class="feature">
+              <span class="feature__bracket">
                 {
               </span>
-              <span class="feature__badge__key">align:</span>
-              <span class="feature__badge__value">'center'</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">align:</span>
-              <span class="feature__badge__value">'start'</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">align:</span>
-              <span class="feature__badge__value">'end'</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SPEED -->
-      <section class="page-wrap" id="speed">
-        <div class="content-wrap">
-          <div class="feature section">
-            <h4 class="feature__heading">Speed</h4>
-            <p class="feature__description">
-              Carousel speed when using buttons to navigate. A higher
-              number will make transitions faster. Pointer events are
-              not affected by this. Default is <strong>10</strong>.
-            </p>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">speed:</span>
-              <span class="feature__badge__value">10</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">speed:</span>
-              <span class="feature__badge__value">20</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- DRAGGABLE -->
-      <section class="page-wrap" id="draggable">
-        <div class="content-wrap">
-          <div class="feature section">
-            <h4 class="feature__heading">Draggable</h4>
-            <p class="feature__description">
-              Allow mouse and touch interactions to move the carousel.
-              In most cases this should be true for accessibility
-              reasons. Default is <strong>true</strong>.
-            </p>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">draggable:</span>
-              <span class="feature__badge__value">true</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">draggable:</span>
-              <span class="feature__badge__value">false</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- STARTINDEX -->
-      <section class="page-wrap" id="startindex">
-        <div class="content-wrap">
-          <div class="feature section">
-            <h4 class="feature__heading">Startindex</h4>
-            <p class="feature__description">
-              Start carousel at given index when it mounts. First
-              index starts at zero. Default is
-              <strong>0</strong>.
-            </p>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">startIndex:</span>
-              <span class="feature__badge__value">0</span>
-              <span class="feature__badge__bracket">
-                }
-              </span>
-            </div>
-            <div class="carousel"></div>
-            <div class="feature__badge">
-              <span class="feature__badge__bracket">
-                {
-              </span>
-              <span class="feature__badge__key">startIndex:</span>
-              <span class="feature__badge__value">2</span>
-              <span class="feature__badge__bracket">
+              <span class="feature__key">loop:</span>
+              <span class="feature__value">true</span>
+              <span class="feature__bracket">
                 }
               </span>
             </div>
@@ -530,19 +354,7 @@
         return embla
       }
 
-      var optionsArray = [
-        { loop: false },
-        { loop: true },
-        { align: 'center' },
-        { align: 'start' },
-        { align: 'end' },
-        { speed: 10 },
-        { speed: 20 },
-        { draggable: true },
-        { draggable: false },
-        { startIndex: 0 },
-        { startIndex: 2 },
-      ]
+      var optionsArray = [{ loop: false }, { loop: true }]
       var main = document.getElementById('main')
       var template = document.getElementById('embla-template')
       var carousels = document.querySelectorAll('.carousel')

@@ -9,6 +9,7 @@ type Params = {
   index: Counter
   diffDistances: number[]
   loop: boolean
+  slideSizes: number[]
 }
 
 export type Target = {
@@ -23,7 +24,7 @@ export type TargetFinder = {
 
 export function TargetFinder(params: Params): TargetFinder {
   const self = {} as TargetFinder
-  const { location, diffDistances, loop } = params
+  const { location, diffDistances, loop, slideSizes } = params
 
   function findTarget(found: IsFound, direction: number): Target {
     const counter = params.index.clone()
@@ -44,20 +45,20 @@ export function TargetFinder(params: Params): TargetFinder {
   }
 
   function indexFound(target: number): IsFound {
-    return (current: Target): boolean => {
-      return current.index === target
+    return ({ index }: Target): boolean => {
+      return index === target
     }
   }
 
   function distanceFound(target: number): IsFound {
-    return (current: Target): boolean => {
-      return current.distance >= target
+    return ({ index, distance }: Target): boolean => {
+      return distance + slideSizes[index] / 2 >= target
     }
   }
 
   function byIndex(target: number, direction: number): Target {
-    const { index } = params
-    const targetIndex = index.clone().set(target)
+    const index = params.index.clone()
+    const targetIndex = index.set(target)
     const isFound = indexFound(targetIndex.get())
 
     if (!loop || index.max <= 1) {
@@ -71,10 +72,14 @@ export function TargetFinder(params: Params): TargetFinder {
   }
 
   function byDistance(from: number, distance: number): Target {
-    const target = location.get() + distance
-    const diff = target - from
-    const direction = Direction(diff).get()
-    const isFound = distanceFound(Math.abs(diff))
+    const index = params.index.get()
+    const slideSize = slideSizes[index]
+    const desiredDiff = location.get() + distance - from
+    const direction = Direction(desiredDiff).get()
+    const minDiff = slideSize * direction
+    const diffBelowSlide = Math.abs(desiredDiff) < slideSize
+    const allowedDiff = diffBelowSlide ? minDiff : desiredDiff
+    const isFound = distanceFound(Math.abs(allowedDiff))
     return findTarget(isFound, direction)
   }
 

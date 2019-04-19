@@ -1,4 +1,4 @@
-.page-nav {
+.examples {
   @media (min-width: $media-sm) {
     font-size: 1.7rem;
   }
@@ -7,7 +7,7 @@
   }
 }
 
-.page-nav__heading {
+.examples__heading {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -21,16 +21,6 @@
   }
 }
 
-.page-nav__description {
+.examples__description:not(:last-child) {
   margin-bottom: 2rem;
-}
-
-.page-nav__list {
-  padding-left: 2rem;
-  list-style: disc;
-  margin-bottom: -1rem;
-}
-
-.page-nav__list__item {
-  padding-bottom: 1rem;
 }

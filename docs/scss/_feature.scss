@@ -1,28 +1,4 @@
-.feature__heading {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.2;
-
-  @media (min-width: $media-sm) {
-    font-size: 3rem;
-  }
-  @media (min-width: $media-lg) {
-    font-size: 4rem;
-  }
-}
-
-.feature__description {
-  @media (min-width: $media-sm) {
-    font-size: 1.7rem;
-  }
-  @media (min-width: $media-lg) {
-    font-size: 1.8rem;
-  }
-}
-
-.feature__badge {
-  padding-top: 4rem;
+.feature {
   border-radius: 0.5rem;
   margin-bottom: 2rem;
   font-weight: bold;
@@ -35,10 +11,10 @@
   }
 }
 
-.feature__badge__bracket {
+.feature__bracket {
   color: $color-riga;
 }
 
-.feature__badge__value {
+.feature__value {
   color: $color-brand;
 }

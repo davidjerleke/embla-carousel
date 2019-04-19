@@ -116,6 +116,7 @@ export function Engine(
       index,
       location,
       loop,
+      slideSizes,
     }),
     index,
     moverTarget: target,

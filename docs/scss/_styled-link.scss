@@ -1,12 +1,11 @@
 .styled-link {
-  color: $color-london;
-  background-color: lighten($color-brand, 40%);
+  color: $color-brand;
+  font-weight: bold;
   text-decoration: none;
-  border-bottom: 1px solid $color-brand;
 
   @media (min-width: $media-lg) {
     &:hover {
-      background-color: lighten($color-brand, 20%);
+      border-bottom: 1px solid $color-brand;
     }
   }
 }

@@ -122,15 +122,22 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function up(): void {
     const { travel, target, mover, index } = params
-    const force = pointer.up() * (state.isMouse ? 1 : 2.4)
-    const forceAbs = Math.abs(force)
-    const speedLimit = Limit({ low: 11, high: 15 })
-    const speed = speedLimit.constrain(forceAbs)
+    const force = pointer.up() * (state.isMouse ? 2 : 3)
+    const speed = state.isMouse ? 12 : 15
 
     state.isMouse = false
     state.preventScroll = false
     interactionEvents.removeAll()
     events.dispatch('dragEnd')
+
+    const diffToTarget = Math.abs(target.get() - location.get())
+    const minDiffToTarget = 1
+
+    if (diffToTarget <= minDiffToTarget) {
+      return
+    }
+
+    state.preventClick = true
 
     if (!loop) {
       const targetLocation = location.get() + force
@@ -140,6 +147,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
       if (pastHighLimit || pastLowLimit) {
         const nextIndex = pastHighLimit ? index.min : index.max
         target.setNumber(targetLocation)
+
         if (nextIndex !== index.get()) {
           index.set(nextIndex)
           events.dispatch('select')
@@ -148,18 +156,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
       }
     }
 
-    const diffDrag = Math.abs(dragStart.get() - location.get())
-    const diffToTarget = Math.abs(target.get() - location.get())
-    const minDragDiff = 5
-    const minDiffToTarget = 1
-
-    if (diffDrag > 1 && diffToTarget > minDiffToTarget) {
-      state.preventClick = true
-      if (diffDrag > minDragDiff) {
-        mover.useSpeed(speed)
-        travel.toDistance(dragStart.get(), force)
-      }
-    }
+    mover.useSpeed(speed)
+    travel.toDistance(dragStart.get(), force)
   }
 
   function click(evt: Event): void {

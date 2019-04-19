@@ -22,11 +22,11 @@ export function VectorBounds(params: Params): VectorBounds {
 
   function shouldConstrain(v: Vector1D): boolean {
     const l = location.get()
-    const isLowLimit = v.get() === limit.low
-    const isHighLimit = v.get() === limit.high
+    const alreadyLow = v.get() === limit.low
+    const alreadyHigh = v.get() === limit.high
     return (
-      (limit.reached.low(l) && !isLowLimit) ||
-      (limit.reached.high(l) && !isHighLimit)
+      (limit.reached.low(l) && !alreadyLow) ||
+      (limit.reached.high(l) && !alreadyHigh)
     )
   }
 

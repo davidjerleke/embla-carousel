@@ -71,6 +71,7 @@ export function Pointer(size: ChunkSize): Pointer {
   function up(): number {
     const currentPoint = lastDrag.get()
     const trackLength = pointer.isMouse ? 5 : 4
+
     lastDrag.setNumber(
       pointer.trackPoints
         .slice(-trackLength)
@@ -79,6 +80,7 @@ export function Pointer(size: ChunkSize): Pointer {
           Math.abs(p1) < Math.abs(p2) ? 1 : -1,
         )[0] || 0,
     )
+
     pointer.isDown = false
     pointer.trackPoints = []
     return size.measure(lastDrag.get())
