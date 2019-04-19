@@ -1,8 +1,8 @@
 # Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg) ![Travis (.org) branch](https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)
 
-> Simple and sensible carousels for the web, written in TypeScript.
+> An extensible low level carousel for the web, written in TypeScript.
 
-Embla is a lightweight and simple carousel plugin for the web. Its purpose is to provide simple and extensible carousels that feels natural to interact with. It's 100% open source and free to use on both personal and commercial projects. Use it with the module bundler of your choice or by manually injecting the script.
+Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. It doesn’t come with many options - just a few useful methods. Extend it with some very basic JavaScript and build awesome things! It's is 100% open source and free to use on both personal and commercial projects.
 
 - [Demo](#demo)
 - [Installation](#installation)
@@ -13,7 +13,7 @@ Embla is a lightweight and simple carousel plugin for the web. Its purpose is to
 
 ## Demo
 
-See the demo page [here](https://davidcetinkaya.github.io/embla-carousel).
+See the [demo page](https://davidcetinkaya.github.io/embla-carousel).
 
 ## Installation
 
@@ -28,7 +28,7 @@ import EmblaCarousel from 'embla-carousel'
 const embla = EmblaCarousel(document.getElementById('embla'))
 ```
 
-...or inject the minified script [here](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/index.js) into your website.
+...or manually inject [this script](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/index.js) into your website.
 
 ```html
 <script src="embla.min.js"></script>
