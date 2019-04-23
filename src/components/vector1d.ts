@@ -14,7 +14,6 @@ export type Vector1D = {
 }
 
 export function Vector1D(value: number): Vector1D {
-  const self = {} as Vector1D
   const state = { value }
 
   function get(): number {
@@ -80,7 +79,7 @@ export function Vector1D(value: number): Vector1D {
     return self
   }
 
-  return Object.assign(self, {
+  const self: Vector1D = {
     add,
     addNumber,
     divide,
@@ -93,5 +92,6 @@ export function Vector1D(value: number): Vector1D {
     setNumber,
     subtract,
     subtractNumber,
-  })
+  }
+  return Object.freeze(self)
 }

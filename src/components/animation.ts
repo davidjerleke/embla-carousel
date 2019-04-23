@@ -8,7 +8,6 @@ export type Animation = {
 }
 
 export function Animation(callback: FrameRequestCallback): Animation {
-  const self = {} as Animation
   const run = requestAnimationFrame.bind(window)
   const kill = cancelAnimationFrame.bind(window)
   const state = { animationFrame: 0 }
@@ -31,9 +30,10 @@ export function Animation(callback: FrameRequestCallback): Animation {
     state.animationFrame = 0
   }
 
-  return Object.assign(self, {
+  const self: Animation = {
     proceed: ifAnimation(true, start),
     start: ifAnimation(false, start),
     stop: ifAnimation(true, stop),
-  })
+  }
+  return Object.freeze(self)
 }

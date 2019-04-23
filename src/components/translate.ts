@@ -9,7 +9,6 @@ export type Translate = {
 }
 
 export function Translate(node: HTMLElement): Translate {
-  const self = {} as Translate
   const state = { translateType: 'x' as Translates }
   const translates = { x, x3d }
 
@@ -35,9 +34,10 @@ export function Translate(node: HTMLElement): Translate {
     return self
   }
 
-  return Object.assign(self, {
+  const self: Translate = {
     to,
     use3d: () => setType('x3d'),
     useDefault: () => setType('x'),
-  })
+  }
+  return Object.freeze(self)
 }

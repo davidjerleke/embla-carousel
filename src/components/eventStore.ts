@@ -17,7 +17,6 @@ export type EventStore = {
 }
 
 export function EventStore(): EventStore {
-  const self = {} as EventStore
   const event: State = { listeners: [] }
 
   function add(
@@ -38,8 +37,9 @@ export function EventStore(): EventStore {
     return self
   }
 
-  return Object.assign(self, {
+  const self: EventStore = {
     add,
     removeAll,
-  })
+  }
+  return Object.freeze(self)
 }

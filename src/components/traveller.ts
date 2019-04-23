@@ -21,7 +21,6 @@ export type Traveller = {
 }
 
 export function Traveller(params: Params): Traveller {
-  const self = {} as Traveller
   const { index, findTarget, animation, moverTarget } = params
 
   function travelTo(next: Target): Traveller {
@@ -67,10 +66,11 @@ export function Traveller(params: Params): Traveller {
     return self
   }
 
-  return Object.assign(self, {
+  const self: Traveller = {
     toDistance,
     toIndex,
     toNext,
     toPrevious,
-  })
+  }
+  return Object.freeze(self)
 }

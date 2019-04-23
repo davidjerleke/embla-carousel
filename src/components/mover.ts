@@ -20,7 +20,6 @@ export type Mover = {
 }
 
 export function Mover(params: Params): Mover {
-  const self = {} as Mover
   const { location, speed, mass, maxForce } = params
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
@@ -72,7 +71,7 @@ export function Mover(params: Params): Mover {
     return self
   }
 
-  return Object.assign(self, {
+  const self: Mover = {
     direction,
     location,
     seek,
@@ -80,5 +79,6 @@ export function Mover(params: Params): Mover {
     update,
     useDefaultSpeed: () => setSpeed(speed),
     useSpeed: setSpeed,
-  })
+  }
+  return Object.freeze(self)
 }

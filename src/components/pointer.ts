@@ -21,7 +21,6 @@ export type Pointer = {
 }
 
 export function Pointer(size: ChunkSize): Pointer {
-  const self = {} as Pointer
   const coords = { x: 'clientX', y: 'clientY' }
   const startDrag = Vector1D(0)
   const diffDrag = Vector1D(0)
@@ -36,7 +35,7 @@ export function Pointer(size: ChunkSize): Pointer {
     trackTime: new Date().getTime(),
   }
 
-  function readPoint(evt: any, axis: Axis): Vector1D {
+  function read(evt: any, axis: Axis): Vector1D {
     const { isMouse } = pointer
     const c = coords[axis]
     const value = isMouse ? evt[c] : evt.touches[0][c]
@@ -45,7 +44,7 @@ export function Pointer(size: ChunkSize): Pointer {
 
   function down(evt: Event): number {
     pointer.isMouse = !!evt.type.match(/mouse/)
-    const point = readPoint(evt, 'x')
+    const point = read(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
     pointer.isDown = true
@@ -53,7 +52,7 @@ export function Pointer(size: ChunkSize): Pointer {
   }
 
   function move(evt: Event): number {
-    const point = readPoint(evt, 'x')
+    const point = read(evt, 'x')
     const time2 = new Date().getTime()
     const time1 = pointer.trackTime
 
@@ -86,12 +85,13 @@ export function Pointer(size: ChunkSize): Pointer {
     return size.measure(lastDrag.get())
   }
 
-  return Object.assign(self, {
+  const self: Pointer = {
     direction,
     down,
     isDown: () => pointer.isDown,
     move,
-    read: readPoint,
+    read,
     up,
-  })
+  }
+  return Object.freeze(self)
 }

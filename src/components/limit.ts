@@ -20,7 +20,6 @@ export type Limit = {
 }
 
 export function Limit(params: Params): Limit {
-  const self = {} as Limit
   const { low, high } = params
   const loopLimits: Limits = { high: low, low: high }
   const constrainLimits: Limits = { low, high }
@@ -53,7 +52,7 @@ export function Limit(params: Params): Limit {
     return which ? constrainLimits[which] : n
   }
 
-  return Object.assign(self, {
+  const self: Limit = {
     constrain,
     high,
     loop,
@@ -63,5 +62,6 @@ export function Limit(params: Params): Limit {
       high: reachedHigh,
       low: reachedLow,
     },
-  })
+  }
+  return Object.freeze(self)
 }

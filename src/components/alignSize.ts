@@ -10,7 +10,6 @@ export type AlignSize = {
 }
 
 export function AlignSize(params: Params): AlignSize {
-  const self = {} as AlignSize
   const { root, align } = params
   const alignment = { start, center, end }
 
@@ -30,7 +29,8 @@ export function AlignSize(params: Params): AlignSize {
     return alignment[align](n)
   }
 
-  return Object.assign(self, {
+  const self: AlignSize = {
     measure,
-  })
+  }
+  return Object.freeze(self)
 }

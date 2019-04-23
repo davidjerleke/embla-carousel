@@ -1,3 +1,4 @@
+type Subscribers = { [key in Event]: Callback[] }
 export type Callback = () => void
 export type Event =
   | 'init'
@@ -6,14 +7,6 @@ export type Event =
   | 'dragEnd'
   | 'destroy'
 
-type Subscribers = {
-  destroy: Callback[]
-  dragEnd: Callback[]
-  dragStart: Callback[]
-  init: Callback[]
-  select: Callback[]
-}
-
 export type EventDispatcher = {
   dispatch: (evt: Event) => EventDispatcher
   on: (evt: Event, cb: Callback) => EventDispatcher
@@ -21,7 +14,6 @@ export type EventDispatcher = {
 }
 
 export function EventDispatcher(): EventDispatcher {
-  const self = {} as EventDispatcher
   const subscribers: Subscribers = {
     destroy: [],
     dragEnd: [],
@@ -48,9 +40,10 @@ export function EventDispatcher(): EventDispatcher {
     return self
   }
 
-  return Object.assign(self, {
+  const self: EventDispatcher = {
     dispatch,
     off,
     on,
-  })
+  }
+  return Object.freeze(self)
 }

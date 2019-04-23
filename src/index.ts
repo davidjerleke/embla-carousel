@@ -31,7 +31,6 @@ export function EmblaCarousel(
   sliderRoot: HTMLElement,
   userOptions: UserOptions = {},
 ): EmblaCarousel {
-  const self = {} as EmblaCarousel
   const slider = {} as Engine
   const elements = {} as Elements
   const state = { active: false }
@@ -164,7 +163,7 @@ export function EmblaCarousel(
     return elements.slides
   }
 
-  return Object.assign(self, {
+  const self: EmblaCarousel = {
     destroy,
     getContainer,
     getSelectedIndex,
@@ -175,7 +174,8 @@ export function EmblaCarousel(
     on: events.on,
     previous,
     resize: reActivate,
-  })
+  }
+  return Object.freeze(self)
 }
 
 export default EmblaCarousel

@@ -13,7 +13,6 @@ export type VectorLooper = {
 }
 
 export function VectorLooper(params: Params): VectorLooper {
-  const self = {} as VectorLooper
   const { limit, location, span, vectors } = params
 
   function shouldLoop(direction: number): boolean {
@@ -30,7 +29,8 @@ export function VectorLooper(params: Params): VectorLooper {
     return self
   }
 
-  return Object.assign(self, {
+  const self: VectorLooper = {
     loop,
-  })
+  }
+  return Object.freeze(self)
 }

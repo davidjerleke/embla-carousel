@@ -23,7 +23,6 @@ export type TargetFinder = {
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const self = {} as TargetFinder
   const { location, diffDistances, loop, slideSizes } = params
 
   function findTarget(found: IsFound, direction: number): Target {
@@ -83,8 +82,9 @@ export function TargetFinder(params: Params): TargetFinder {
     return findTarget(isFound, direction)
   }
 
-  return Object.assign(self, {
+  const self: TargetFinder = {
     byDistance,
     byIndex,
-  })
+  }
+  return Object.freeze(self)
 }

@@ -20,7 +20,6 @@ export type InfiniteShifter = {
 }
 
 export function InfiniteShifter(params: Params) {
-  const self = {} as InfiniteShifter
   const { items, chunkSize, itemSizes, alignSizes } = params
   const sizesPercent = items.map(rectWidth).map(chunkSize.measure)
   const contentSize = itemSizes.reduce((a, s) => a + s, 0)
@@ -121,7 +120,8 @@ export function InfiniteShifter(params: Params) {
     })
   }
 
-  return Object.assign(self, {
+  const self: InfiniteShifter = {
     shiftAccordingTo,
-  })
+  }
+  return Object.freeze(self)
 }

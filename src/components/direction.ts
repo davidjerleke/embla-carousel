@@ -6,7 +6,6 @@ export type Direction = {
 }
 
 export function Direction(value: number): Direction {
-  const self = {} as Direction
   const direction = Vector1D(normalize(value))
 
   function normalize(n: number): number {
@@ -21,8 +20,9 @@ export function Direction(value: number): Direction {
     return self
   }
 
-  return Object.assign(self, {
+  const self: Direction = {
     get: direction.get,
     set,
-  })
+  }
+  return Object.freeze(self)
 }

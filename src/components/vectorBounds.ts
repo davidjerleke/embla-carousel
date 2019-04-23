@@ -16,7 +16,6 @@ export type VectorBounds = {
 }
 
 export function VectorBounds(params: Params): VectorBounds {
-  const self = {} as VectorBounds
   const { limit, location, mover, animation, tolerance } = params
   const state = { timeout: 0 }
 
@@ -43,7 +42,8 @@ export function VectorBounds(params: Params): VectorBounds {
     return self
   }
 
-  return Object.assign(self, {
+  const self: VectorBounds = {
     constrain,
-  })
+  }
+  return Object.freeze(self)
 }
