@@ -66,16 +66,12 @@ export function Vector1D(value: number): Vector1D {
 
   function normalize(): Vector1D {
     const m = magnitude()
-    if (m !== 0) {
-      divide(m)
-    }
+    if (m !== 0) divide(m)
     return self
   }
 
   function limit(n: number): Vector1D {
-    if (magnitude() > n) {
-      normalize().multiply(n)
-    }
+    if (magnitude() > n) normalize().multiply(n)
     return self
   }
 

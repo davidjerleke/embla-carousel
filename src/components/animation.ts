@@ -1,5 +1,5 @@
 type Callback = () => void
-type IfAnimation = () => Animation
+type IfAnimating = () => Animation
 
 export type Animation = {
   start: () => Animation
@@ -12,11 +12,9 @@ export function Animation(callback: FrameRequestCallback): Animation {
   const kill = cancelAnimationFrame.bind(window)
   const state = { animationFrame: 0 }
 
-  function ifAnimation(active: boolean, cb: Callback): IfAnimation {
+  function ifAnimating(active: boolean, cb: Callback): IfAnimating {
     return (): Animation => {
-      if (active === !!state.animationFrame) {
-        cb()
-      }
+      if (active === !!state.animationFrame) cb()
       return self
     }
   }
@@ -31,9 +29,9 @@ export function Animation(callback: FrameRequestCallback): Animation {
   }
 
   const self: Animation = {
-    proceed: ifAnimation(true, start),
-    start: ifAnimation(false, start),
-    stop: ifAnimation(true, stop),
+    proceed: ifAnimating(true, start),
+    start: ifAnimating(false, start),
+    stop: ifAnimating(true, stop),
   }
   return Object.freeze(self)
 }

@@ -1,6 +1,7 @@
 import { Vector1D } from './vector1d'
 
 type Translates = 'x' | 'x3d'
+type State = { type: Translates }
 
 export type Translate = {
   to: (vector: Vector1D) => Translate
@@ -9,7 +10,7 @@ export type Translate = {
 }
 
 export function Translate(node: HTMLElement): Translate {
-  const state = { translateType: 'x' as Translates }
+  const translate: State = { type: 'x' }
   const translates = { x, x3d }
 
   function x(xValue: number): string {
@@ -21,14 +22,14 @@ export function Translate(node: HTMLElement): Translate {
   }
 
   function to(vector: Vector1D): Translate {
-    const t = state.translateType
+    const t = translate.type
     const v = vector.get()
     node.style.transform = translates[t](v)
     return self
   }
 
   function useType(type: Translates): Translate {
-    state.translateType = type
+    translate.type = type
     return self
   }
 
