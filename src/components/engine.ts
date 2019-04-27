@@ -119,7 +119,7 @@ export function Engine(
       slideSizes,
     }),
     index,
-    moverTarget: target,
+    target,
   })
 
   // Pointer

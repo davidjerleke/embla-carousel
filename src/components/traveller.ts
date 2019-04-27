@@ -7,7 +7,7 @@ import { Vector1D } from './vector1d'
 
 type Params = {
   animation: Animation
-  moverTarget: Vector1D
+  target: Vector1D
   index: Counter
   findTarget: TargetFinder
   events: EventDispatcher
@@ -21,12 +21,12 @@ export type Traveller = {
 }
 
 export function Traveller(params: Params): Traveller {
-  const { index, findTarget, animation, moverTarget } = params
+  const { index, findTarget, animation } = params
 
   function travelTo(next: Target): Traveller {
-    const { events } = params
+    const { events, target } = params
     animation.start()
-    moverTarget.addNumber(next.distance)
+    target.addNumber(next.distance)
     index.set(next.index)
     events.dispatch('select')
     return self
