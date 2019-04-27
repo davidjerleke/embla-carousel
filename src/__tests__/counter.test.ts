@@ -3,7 +3,7 @@ import { Limit } from '../components/limit'
 
 let loopCounter: Counter
 let limitCounter: Counter
-const limit = Limit({ low: 0, high: 5 })
+const limit = Limit({ min: 0, max: 5 })
 
 beforeEach(() => {
   loopCounter = Counter({ start: 2, limit, loop: true })
@@ -29,7 +29,7 @@ describe('Counter', () => {
       expect(loopCounter.min).toBe(0)
       expect(limitCounter.min).toBe(0)
     })
-    test('Exposes Counter high ', () => {
+    test('Exposes Counter max ', () => {
       expect(loopCounter.max).toBe(5)
       expect(limitCounter.max).toBe(5)
     })

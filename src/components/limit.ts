@@ -1,41 +1,41 @@
-type Limits = 'low' | 'high' | ''
+type Limits = 'min' | 'max' | ''
 
 type Params = {
-  low: number
-  high: number
+  min: number
+  max: number
 }
 
 export type Limit = {
-  low: number
-  high: number
+  min: number
+  max: number
   loop: (n: number) => number
   constrain: (n: number) => number
   reachedAny: (n: number) => boolean
-  reachedHigh: (n: number) => boolean
-  reachedLow: (n: number) => boolean
+  reachedMax: (n: number) => boolean
+  reachedMin: (n: number) => boolean
 }
 
 export function Limit(params: Params): Limit {
-  const { low, high } = params
-  const loopLimits = { high: low, low: high }
-  const constrainLimits = { low, high }
+  const { min, max } = params
+  const loopLimits = { max: min, min: max }
+  const constrainLimits = { min, max }
 
-  function reachedLow(n: number): boolean {
-    return n < low
+  function reachedMin(n: number): boolean {
+    return n < min
   }
 
-  function reachedHigh(n: number): boolean {
-    return n > high
+  function reachedMax(n: number): boolean {
+    return n > max
   }
 
   function reachedAny(n: number): boolean {
-    return reachedLow(n) || reachedHigh(n)
+    return reachedMin(n) || reachedMax(n)
   }
 
   function reachedWhich(n: number): Limits {
-    const isLow = reachedLow(n) && 'low'
-    const isHigh = reachedHigh(n) && 'high'
-    return isLow || isHigh || ''
+    const isMin = reachedMin(n) && 'min'
+    const isMax = reachedMax(n) && 'max'
+    return isMin || isMax || ''
   }
 
   function loop(n: number): number {
@@ -50,12 +50,12 @@ export function Limit(params: Params): Limit {
 
   const self: Limit = {
     constrain,
-    high,
     loop,
-    low,
+    max,
+    min,
     reachedAny,
-    reachedHigh,
-    reachedLow,
+    reachedMax,
+    reachedMin,
   }
   return Object.freeze(self)
 }

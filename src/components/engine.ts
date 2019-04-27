@@ -39,11 +39,11 @@ export function Engine(
 ): Engine {
   // Options
   const { align, startIndex, loop, speed } = options
-  const speedLimit = Limit({ low: 5, high: 20 })
+  const speedLimit = Limit({ min: 5, max: 20 })
 
   // Index
   const index = Counter({
-    limit: Limit({ low: 0, high: slides.length - 1 }),
+    limit: Limit({ min: 0, max: slides.length - 1 }),
     loop,
     start: startIndex,
   })
@@ -64,12 +64,12 @@ export function Engine(
     const distances = diffDistances.slice(0, i)
     return distances.reduce((a, d) => a - d, alignSizes[0])
   })
-  const highLimit = alignSizes[0]
-  const lowLimit =
+  const maxLimit = alignSizes[0]
+  const minLimit =
     -contentSize +
     alignSizes[0] +
     (loop ? chunkSize.measure(1) : slideSizes[index.max])
-  const limit = Limit({ high: highLimit, low: lowLimit })
+  const limit = Limit({ max: maxLimit, min: minLimit })
 
   // Draw
   const direction = (): number =>

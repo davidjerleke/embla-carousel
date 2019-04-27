@@ -5,10 +5,10 @@ import { Limit } from '../components/limit'
 let location: Vector1D
 let vectors: Vector1D[]
 let vectorLooper: VectorLooper
-const lowLimit = 0
-const highLimit = 10
+const minLimit = 0
+const maxLimit = 10
 const span = 10
-const limit = Limit({ low: lowLimit, high: highLimit })
+const limit = Limit({ min: minLimit, max: maxLimit })
 const vector_1_initial_value = 5
 const vector_2_initial_value = 10
 
@@ -27,17 +27,17 @@ beforeEach(() => {
 })
 
 describe('VectorLooper', () => {
-  test('Subtracts span size from given Vectors when location is greater than Limit high', () => {
+  test('Subtracts span size from given Vectors when location is greater than Limit max', () => {
     const direction = 1
-    location.setNumber(highLimit + 1)
+    location.setNumber(maxLimit + 1)
     vectorLooper.loop(direction)
     expect(vectors[0].get()).toBe(vector_1_initial_value - span)
     expect(vectors[1].get()).toBe(vector_2_initial_value - span)
   })
 
-  test('Adds span size to given Vectors when location is less than Limit low', () => {
+  test('Adds span size to given Vectors when location is less than Limit min', () => {
     const direction = -1
-    location.setNumber(lowLimit - 1)
+    location.setNumber(minLimit - 1)
     vectorLooper.loop(direction)
     expect(vectors[0].get()).toBe(vector_1_initial_value + span)
     expect(vectors[1].get()).toBe(vector_2_initial_value + span)

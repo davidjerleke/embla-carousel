@@ -16,8 +16,8 @@ export function VectorLooper(params: Params): VectorLooper {
   const { limit, location, span, vectors } = params
 
   function shouldLoop(direction: number): boolean {
-    const { reachedLow, reachedHigh } = limit
-    const reachedLimit = direction === -1 ? reachedLow : reachedHigh
+    const { reachedMin, reachedMax } = limit
+    const reachedLimit = direction === -1 ? reachedMin : reachedMax
     return direction !== 0 && reachedLimit(location.get())
   }
 

@@ -8,7 +8,7 @@ let vectorBounds: VectorBounds
 let location: Vector1D
 let mover: Mover
 const animation = Animation(() => {})
-const limit = Limit({ low: 0, high: 10 })
+const limit = Limit({ min: 0, max: 10 })
 const tolerance = 50
 
 beforeEach(() => {
@@ -29,10 +29,10 @@ beforeEach(() => {
 })
 
 describe('VectorBounds', () => {
-  test('Constrains given Vector to Bound low when location is less than low', done => {
+  test('Constrains given Vector to Bound min when location is less than min', done => {
     const vector = Vector1D(-20)
-    const locationPastLowLimit = limit.low - 1
-    location.setNumber(locationPastLowLimit)
+    const locationPastMinLimit = limit.min - 1
+    location.setNumber(locationPastMinLimit)
     vectorBounds.constrain(vector)
 
     setTimeout(() => {
@@ -41,10 +41,10 @@ describe('VectorBounds', () => {
     }, tolerance)
   })
 
-  test('Constrains given Vector to Bound high when location is greater than high', done => {
+  test('Constrains given Vector to Bound max when location is greater than max', done => {
     const vector = Vector1D(20)
-    const locationPastHighLimit = limit.high + 1
-    location.setNumber(locationPastHighLimit)
+    const locationPastMaxLimit = limit.max + 1
+    location.setNumber(locationPastMaxLimit)
     vectorBounds.constrain(vector)
 
     setTimeout(() => {
@@ -55,8 +55,8 @@ describe('VectorBounds', () => {
 
   test('Does not change given Vector when location is within Bounds', done => {
     const vector = Vector1D(20)
-    const locationWithinHighLimit = limit.high
-    location.setNumber(locationWithinHighLimit)
+    const locationWithinMaxLimit = limit.max
+    location.setNumber(locationWithinMaxLimit)
     vectorBounds.constrain(vector)
 
     setTimeout(() => {

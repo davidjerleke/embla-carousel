@@ -17,6 +17,7 @@ export type Counter = {
 
 export function Counter(params: Params): Counter {
   const { start, limit, loop } = params
+  const { min, max } = limit
   const type = loop ? 'loop' : 'constrain'
   const state = { value: withinLimit(start) }
 
@@ -51,8 +52,8 @@ export function Counter(params: Params): Counter {
     add,
     clone,
     get,
-    max: limit.high,
-    min: limit.low,
+    max,
+    min,
     set,
   }
   return Object.freeze(self)
