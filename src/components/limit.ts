@@ -1,6 +1,4 @@
-type Limits = {
-  [key: string]: number
-}
+type Limits = 'low' | 'high' | ''
 
 type Params = {
   low: number
@@ -12,17 +10,15 @@ export type Limit = {
   high: number
   loop: (n: number) => number
   constrain: (n: number) => number
-  reached: {
-    low: (n: number) => boolean
-    high: (n: number) => boolean
-    any: (n: number) => boolean
-  }
+  reachedAny: (n: number) => boolean
+  reachedHigh: (n: number) => boolean
+  reachedLow: (n: number) => boolean
 }
 
 export function Limit(params: Params): Limit {
   const { low, high } = params
-  const loopLimits: Limits = { high: low, low: high }
-  const constrainLimits: Limits = { low, high }
+  const loopLimits = { high: low, low: high }
+  const constrainLimits = { low, high }
 
   function reachedLow(n: number): boolean {
     return n < low
@@ -36,7 +32,7 @@ export function Limit(params: Params): Limit {
     return reachedLow(n) || reachedHigh(n)
   }
 
-  function reachedWhich(n: number): string {
+  function reachedWhich(n: number): Limits {
     const isLow = reachedLow(n) && 'low'
     const isHigh = reachedHigh(n) && 'high'
     return isLow || isHigh || ''
@@ -57,11 +53,9 @@ export function Limit(params: Params): Limit {
     high,
     loop,
     low,
-    reached: {
-      any: reachedAny,
-      high: reachedHigh,
-      low: reachedLow,
-    },
+    reachedAny,
+    reachedHigh,
+    reachedLow,
   }
   return Object.freeze(self)
 }

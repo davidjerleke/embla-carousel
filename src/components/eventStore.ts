@@ -1,10 +1,7 @@
 type EventRemover = () => void
 type EventHandler = (evt: Event) => void
 type EventOptions = AddEventListenerOptions | boolean
-
-type State = {
-  listeners: EventRemover[]
-}
+type State = { listeners: EventRemover[] }
 
 export type EventStore = {
   add: (

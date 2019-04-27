@@ -27,17 +27,15 @@ export function Translate(node: HTMLElement): Translate {
     return self
   }
 
-  function setType(type: Translates): Translate {
-    if (state.translateType !== type) {
-      state.translateType = type
-    }
+  function useType(type: Translates): Translate {
+    state.translateType = type
     return self
   }
 
   const self: Translate = {
     to,
-    use3d: () => setType('x3d'),
-    useDefault: () => setType('x'),
+    use3d: () => useType('x3d'),
+    useDefault: () => useType('x'),
   }
   return Object.freeze(self)
 }

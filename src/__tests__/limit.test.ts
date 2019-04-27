@@ -50,37 +50,37 @@ describe('Limit', () => {
 
   describe('Reached high', () => {
     test('Reached Limit high is true when given number is greater than Limit high', () => {
-      const reached = limit.reached.high(limitHigh + 1)
+      const reached = limit.reachedHigh(limitHigh + 1)
       expect(reached).toBe(true)
     })
     test('Reached Limit high is false when given number is within Limit', () => {
-      const reached = limit.reached.high(50)
+      const reached = limit.reachedHigh(50)
       expect(reached).toBe(false)
     })
   })
 
   describe('Reached low', () => {
     test('Reached Limit low is true when given number is less than Limit low', () => {
-      const reached = limit.reached.low(limitLow - 1)
+      const reached = limit.reachedLow(limitLow - 1)
       expect(reached).toBe(true)
     })
     test('Reached Limit low is false when given number is within Limit', () => {
-      const reached = limit.reached.low(50)
+      const reached = limit.reachedLow(50)
       expect(reached).toBe(false)
     })
   })
 
   describe('Reached any', () => {
     test('Reached Limit any is true when given number is greater or less than Limit', () => {
-      const reachedHigh = limit.reached.any(limitHigh + 1)
+      const reachedHigh = limit.reachedAny(limitHigh + 1)
       expect(reachedHigh).toBe(true)
-      const reachedLow = limit.reached.any(limitLow - 1)
+      const reachedLow = limit.reachedAny(limitLow - 1)
       expect(reachedLow).toBe(true)
     })
     test('Reached Limit any is false when given number is within Limit', () => {
-      const reachedHigh = limit.reached.any(40)
+      const reachedHigh = limit.reachedAny(40)
       expect(reachedHigh).toBe(false)
-      const reachedLow = limit.reached.any(20)
+      const reachedLow = limit.reachedAny(20)
       expect(reachedLow).toBe(false)
     })
   })

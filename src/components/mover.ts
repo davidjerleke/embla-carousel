@@ -64,10 +64,13 @@ export function Mover(params: Params): Mover {
     return hasSettled
   }
 
-  function setSpeed(newSpeed: number): Mover {
-    if (state.speed !== newSpeed) {
-      state.speed = newSpeed
-    }
+  function useSpeed(desired: number): Mover {
+    state.speed = desired
+    return self
+  }
+
+  function useDefaultSpeed(): Mover {
+    useSpeed(speed)
     return self
   }
 
@@ -77,8 +80,8 @@ export function Mover(params: Params): Mover {
     seek,
     settle,
     update,
-    useDefaultSpeed: () => setSpeed(speed),
-    useSpeed: setSpeed,
+    useDefaultSpeed,
+    useSpeed,
   }
   return Object.freeze(self)
 }

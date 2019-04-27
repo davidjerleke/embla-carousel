@@ -7,6 +7,7 @@ export type Direction = {
 
 export function Direction(value: number): Direction {
   const direction = Vector1D(normalize(value))
+  const get = direction.get
 
   function normalize(n: number): number {
     return n === 0 ? 0 : n / Math.abs(n)
@@ -14,14 +15,14 @@ export function Direction(value: number): Direction {
 
   function set(v: Vector1D): Direction {
     const d = normalize(v.get())
-    if (d && d !== direction.get()) {
+    if (d && d !== get()) {
       direction.setNumber(d)
     }
     return self
   }
 
   const self: Direction = {
-    get: direction.get,
+    get,
     set,
   }
   return Object.freeze(self)

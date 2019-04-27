@@ -104,7 +104,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     if (state.preventScroll || state.isMouse) {
       evt.preventDefault()
       const diff = pointer.move(evt)
-      const pastLimit = limit.reached.any(location.get())
+      const pastLimit = limit.reachedAny(location.get())
       const resist = !loop && pastLimit ? 2 : 1
       location.addNumber(diff / resist)
     } else {
@@ -141,8 +141,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
     if (!loop) {
       const targetLocation = location.get() + force
-      const pastLowLimit = limit.reached.low(targetLocation)
-      const pastHighLimit = limit.reached.high(targetLocation)
+      const pastLowLimit = limit.reachedLow(targetLocation)
+      const pastHighLimit = limit.reachedHigh(targetLocation)
 
       if (pastHighLimit || pastLowLimit) {
         const nextIndex = pastHighLimit ? index.min : index.max

@@ -24,8 +24,8 @@ export function VectorBounds(params: Params): VectorBounds {
     const alreadyLow = v.get() === limit.low
     const alreadyHigh = v.get() === limit.high
     return (
-      (limit.reached.low(l) && !alreadyLow) ||
-      (limit.reached.high(l) && !alreadyHigh)
+      (limit.reachedLow(l) && !alreadyLow) ||
+      (limit.reachedHigh(l) && !alreadyHigh)
     )
   }
 
