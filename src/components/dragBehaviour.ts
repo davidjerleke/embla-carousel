@@ -27,7 +27,6 @@ export type DragBehaviour = {
   direction: Direction
   dragStartLocation: Vector1D
   isDown: () => boolean
-  onClick: (evt: Event) => void
   down: (evt: Event) => void
   move: (evt: Event) => void
   up: () => void
@@ -37,8 +36,7 @@ export type DragBehaviour = {
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
-  const self = {} as DragBehaviour
-  const { element, pointer, location, limit, loop, events } = params
+  const { element, pointer, location, events } = params
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const dragStart = Vector1D(0)
   const startX = Vector1D(0)
@@ -46,6 +44,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
   const state = {
+    isDown: false,
     isMouse: false,
     preventClick: false,
     preventScroll: false,
@@ -87,8 +86,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
     state.isMouse = evt.type === 'mousedown'
     pointer.down(evt)
     dragStart.set(location)
-    animation.start()
     state.preventClick = false
+    state.isDown = true
+    animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')
 
@@ -102,11 +102,12 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function move(evt: Event): void {
     if (state.preventScroll || state.isMouse) {
-      evt.preventDefault()
+      const { limit, loop } = params
       const diff = pointer.move(evt)
       const reachedAnyLimit = limit.reachedAny(location.get())
       const resist = !loop && reachedAnyLimit ? 2 : 1
       location.addNumber(diff / resist)
+      evt.preventDefault()
     } else {
       const X = pointer.read(evt, 'x').get()
       const Y = pointer.read(evt, 'y').get()
@@ -114,68 +115,49 @@ export function DragBehaviour(params: Params): DragBehaviour {
       const diffY = Y - startY.get()
       state.preventScroll = Math.abs(diffX) > Math.abs(diffY)
 
-      if (!state.preventScroll) {
-        up()
-      }
+      if (!state.preventScroll) up()
     }
   }
 
   function up(): void {
-    const { travel, target, mover, index } = params
+    const { travel, target, mover } = params
     const force = pointer.up() * (state.isMouse ? 2 : 3)
     const speed = state.isMouse ? 12 : 15
 
     state.isMouse = false
     state.preventScroll = false
+    state.isDown = false
     interactionEvents.removeAll()
     events.dispatch('dragEnd')
 
     const diffToTarget = Math.abs(target.get() - location.get())
     const minDiffToTarget = 1
 
-    if (diffToTarget <= minDiffToTarget) {
-      return
-    }
+    if (diffToTarget <= minDiffToTarget) return
 
     state.preventClick = true
-
-    if (!loop) {
-      const targetLocation = location.get() + force
-      const reachedMinLimit = limit.reachedMin(targetLocation)
-      const reachedMaxLimit = limit.reachedMax(targetLocation)
-
-      if (reachedMaxLimit || reachedMinLimit) {
-        const nextIndex = reachedMaxLimit ? index.min : index.max
-        target.setNumber(targetLocation)
-
-        if (nextIndex !== index.get()) {
-          index.set(nextIndex)
-          events.dispatch('select')
-        }
-        return
-      }
-    }
-
     mover.useSpeed(speed)
     travel.toDistance(dragStart.get(), force)
   }
 
   function click(evt: Event): void {
-    if (state.preventClick) {
-      evt.preventDefault()
-    }
+    if (state.preventClick) evt.preventDefault()
   }
 
-  return Object.assign(self, {
+  function isDown(): boolean {
+    return state.isDown
+  }
+
+  const self: DragBehaviour = {
     activate: addActivationEvents,
     cancel: up,
     direction: pointer.direction,
     down,
     dragStartLocation: dragStart,
-    isDown: pointer.isDown,
+    isDown,
     move,
-    onClick: click,
     removeAllEvents,
     up,
-  })
+  }
+  return Object.freeze(self)
 }

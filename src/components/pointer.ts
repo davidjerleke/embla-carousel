@@ -5,7 +5,6 @@ import { Vector1D } from './vector1d'
 type Axis = 'x' | 'y'
 
 type State = {
-  isDown: boolean
   isMouse: boolean
   trackPoints: number[]
   trackTime: number
@@ -13,7 +12,6 @@ type State = {
 
 export type Pointer = {
   direction: Direction
-  isDown: () => boolean
   down: (evt: Event) => number
   move: (evt: Event) => number
   up: () => number
@@ -25,11 +23,10 @@ export function Pointer(size: ChunkSize): Pointer {
   const startDrag = Vector1D(0)
   const diffDrag = Vector1D(0)
   const lastDrag = Vector1D(0)
-  const direction = Direction(0)
   const pointValue = Vector1D(0)
+  const direction = Direction(0)
   const trackInterval = 10
   const pointer: State = {
-    isDown: false,
     isMouse: false,
     trackPoints: [],
     trackTime: new Date().getTime(),
@@ -47,7 +44,6 @@ export function Pointer(size: ChunkSize): Pointer {
     const point = read(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
-    pointer.isDown = true
     return size.measure(startDrag.get())
   }
 
@@ -80,7 +76,6 @@ export function Pointer(size: ChunkSize): Pointer {
         )[0] || 0,
     )
 
-    pointer.isDown = false
     pointer.trackPoints = []
     return size.measure(lastDrag.get())
   }
@@ -88,7 +83,6 @@ export function Pointer(size: ChunkSize): Pointer {
   const self: Pointer = {
     direction,
     down,
-    isDown: () => pointer.isDown,
     move,
     read,
     up,

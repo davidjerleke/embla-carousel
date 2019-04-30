@@ -25,20 +25,27 @@ export function Traveller(params: Params): Traveller {
 
   function travelTo(next: Target): Traveller {
     const { events, target } = params
-    animation.start()
-    target.addNumber(next.distance)
-    index.set(next.index)
-    events.dispatch('select')
+    const nextIndex = next.index
+    const distanceDiff = next.distance
+    const indexDiff = nextIndex !== index.get()
+
+    if (distanceDiff) {
+      animation.start()
+      target.addNumber(distanceDiff)
+    }
+    if (indexDiff) {
+      index.set(nextIndex)
+      events.dispatch('select')
+    }
+
     return self
   }
 
   function findIndex(target: Counter, direction: number): Traveller {
     const diff = index.get() - target.get()
-    if (diff) {
-      const d = direction || Direction(diff).get()
-      const next = findTarget.byIndex(target.get(), d)
-      travelTo(next)
-    }
+    const d = direction || Direction(diff).get()
+    const next = findTarget.byIndex(target.get(), d)
+    travelTo(next)
     return self
   }
 
