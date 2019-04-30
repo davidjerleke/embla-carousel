@@ -1,7 +1,7 @@
 import { Counter } from './counter'
 import { Direction } from './direction'
-import { Vector1D } from './vector1d'
 import { Limit } from './limit'
+import { Vector1D } from './vector1d'
 
 type IsFound = (current: Target) => boolean
 
@@ -69,7 +69,7 @@ export function TargetFinder(params: Params): TargetFinder {
     // TECH DEBT ---->
     // This finds distance offset from the closest slide position.
     // Works for both loop and not loop.
-    const { location, slidePositions } = params
+    const { slidePositions } = params
     let distanceToSlide = 0
     if (lastInteractionIsDrag) {
       const offset =
@@ -87,8 +87,8 @@ export function TargetFinder(params: Params): TargetFinder {
     if (!loop || index.max <= 1) {
       const t = findTarget(isFound, direction)
       return {
-        index: t.index,
         distance: t.distance + distanceToSlide,
+        index: t.index,
       }
     } else {
       const d1 = findTarget(isFound, -1).distance + distanceToSlide
@@ -151,14 +151,14 @@ export function TargetFinder(params: Params): TargetFinder {
     }
 
     type Boundary = { low: number; high: number }
-    let boundaries: Boundary[] = []
+    const boundaries: Boundary[] = []
     let startPos = slidePositions[0] + slideSizes[0] / 2
 
     for (let i = 0; i < slidePositions.length; i += 1) {
-      ;(function() {
+      ;(() => {
         boundaries.push({
-          low: startPos,
           high: startPos - slideSizes[i],
+          low: startPos,
         })
         startPos = startPos - slideSizes[i]
       })()
@@ -186,8 +186,8 @@ export function TargetFinder(params: Params): TargetFinder {
       direction,
     )
     return {
-      index: i,
       distance: location.get() + distance - from,
+      index: i,
     }
   }
   // <---- TECH DEBT
