@@ -3,8 +3,6 @@ import { Direction } from './direction'
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
-type IsFound = (current: Target) => boolean
-
 type Params = {
   location: Vector1D
   index: Counter
@@ -14,6 +12,7 @@ type Params = {
   slidePositions: number[]
   span: number
   limit: Limit
+  target: Vector1D
 }
 
 export type Target = {
@@ -28,114 +27,115 @@ export type TargetFinder = {
 
 export function TargetFinder(params: Params): TargetFinder {
   const { location, diffDistances, loop, slideSizes } = params
-  let lastInteractionIsDrag = false
 
-  function findTarget(found: IsFound, direction: number): Target {
+  console.log(params.slidePositions)
+
+  function findTarget(target: number, direction: number): number {
     const counter = params.index.clone()
     const indexDiff = direction === -1 ? 0 : -1
 
-    function accumulate(distance: number): Target {
+    function accumulate(distance: number): number {
       const index = counter.get()
       const nextIndex = counter.clone().add(indexDiff)
-      const nextDistance = diffDistances[nextIndex.get()]
-      const targetDistance = distance * direction
+      const distanceToNext = diffDistances[nextIndex.get()]
       counter.add(direction * -1)
 
-      return !found({ distance, index })
-        ? accumulate(distance + nextDistance)
-        : { index, distance: targetDistance }
+      return index === target
+        ? distance * direction
+        : accumulate(distance + distanceToNext)
     }
     return accumulate(0)
   }
 
-  function indexFound(target: number): IsFound {
-    return ({ index }: Target): boolean => {
-      return index === target
-    }
-  }
-
-  function distanceFound(target: number): IsFound {
-    return ({ index, distance }: Target): boolean => {
-      return distance + slideSizes[index] / 2 >= target
-    }
-  }
-
   function byIndex(target: number, direction: number): Target {
     const index = params.index.clone()
-    const currentIndex = index.get()
-    const targetIndex = index.set(target)
-    const isFound = indexFound(targetIndex.get())
-
-    // TECH DEBT ---->
-    // This finds distance offset from the closest slide position.
-    // Works for both loop and not loop.
-    const { slidePositions } = params
-    let distanceToSlide = 0
-    if (lastInteractionIsDrag) {
-      const offset =
-        loop &&
-        location.get() < slidePositions[slidePositions.length - 1] &&
-        currentIndex === 0
-          ? location.get() + params.span
-          : location.get()
-
-      distanceToSlide = slidePositions[currentIndex] - offset
-      lastInteractionIsDrag = false
-    }
-    // <---- TECH DEBT
 
     if (!loop || index.max <= 1) {
-      const t = findTarget(isFound, direction)
-      return {
-        distance: t.distance + distanceToSlide,
-        index: t.index,
-      }
+      const distance = findTarget(target, direction)
+
+      const t = getTargetByDistance(
+        location.get() + distance,
+        direction,
+      )
+      const offsetToSlide = findDistanceToSnapPoint(
+        t.distance,
+        target,
+      )
+      const test =
+        location.get() +
+        distance +
+        offsetToSlide -
+        params.target.get()
+
+      const d =
+        params.target.get() === params.slidePositions[target]
+          ? 0
+          : test
+
+      return { distance: d, index: target }
     } else {
-      const d1 = findTarget(isFound, -1).distance + distanceToSlide
-      const d2 = findTarget(isFound, 1).distance + distanceToSlide
+      // DO SAME HERE AS ABOVE
+      const d1 = findTarget(target, -1) //+ offsetToSlide
+      const d2 = findTarget(target, 1) //+ offsetToSlide
       const distance = Math.abs(d1) > Math.abs(d2) ? d2 : d1
       return { index: target, distance }
     }
   }
 
   function byDistance(from: number, distance: number): Target {
-    // TECH DEBT ---->
-    // Don't restrict to a specific slide position if drag will
-    // reach any end of the carousel.
     if (!loop) {
-      const targetLocation = location.get() + distance
-      const reachedMinLimit = params.limit.reachedMin(targetLocation)
-      const reachedMaxLimit = params.limit.reachedMax(targetLocation)
+      const { index, limit } = params
+      const target = location.get() + distance
+      const reachedAnyLimit = limit.reachedAny(target)
 
-      if (reachedMaxLimit || reachedMinLimit) {
-        const nextIndex = reachedMaxLimit
-          ? params.index.min
-          : params.index.max
+      if (reachedAnyLimit) {
+        const reachedMaxLimit = limit.reachedMax(target)
+        const nextIndex = reachedMaxLimit ? index.min : index.max
         const next = freeScroll(from, distance)
-        next.index = nextIndex
-        return next
+        return { index: nextIndex, distance: next.distance }
       }
     }
-    // <---- TECH DEBT
 
-    const index = params.index.get()
-    const slideSize = slideSizes[index]
-    const desiredDiff = location.get() + distance - from
-    const direction = Direction(desiredDiff).get()
-    const minDiff = slideSize * direction
-    const diffBelowSlide = Math.abs(desiredDiff) < slideSize
-    const allowedDiff = diffBelowSlide ? minDiff : desiredDiff
-    const isFound = distanceFound(Math.abs(allowedDiff))
-    return findTarget(isFound, direction)
+    console.log(distance)
+
+    const direction = Direction(distance).get()
+    const target = getTargetByDistance(
+      location.get() + distance,
+      direction,
+    )
+    const offsetToSlide = findDistanceToSnapPoint(
+      target.distance,
+      target.index,
+    )
+
+    const test =
+      location.get() + distance + offsetToSlide - params.target.get()
+
+    return {
+      distance: test,
+      index: target.index,
+    }
   }
 
   // TECH DEBT ---->
   // Not used yet. Upcoming freeScroll feature.
   // Finds index by any given carousel location.
-  function findTargetIndexByLocation(
+  function findDistanceToSnapPoint(location: number, index: number) {
+    const { slidePositions, span } = params
+    const lastIndex = params.index.max
+    const lastSlidePosition = slidePositions[lastIndex]
+    const offset =
+      loop && location < lastSlidePosition && index === 0
+        ? location + span
+        : location
+
+    return slidePositions[index] - offset
+  }
+
+  function getTargetByDistance(
     desiredTarget: number,
     direction: number,
-  ): number {
+  ): Target {
     const { slidePositions } = params
     let target = desiredTarget
 
@@ -173,21 +173,23 @@ export function TargetFinder(params: Params): TargetFinder {
       },
       0,
     )
-    return targetIndex
+    return {
+      index: targetIndex,
+      distance: target,
+    }
   }
 
   function freeScroll(from: number, distance: number): Target {
-    lastInteractionIsDrag = true
     const desiredDiff = location.get() + distance - from
     const direction = Direction(desiredDiff).get()
 
-    const i = findTargetIndexByLocation(
+    const i = getTargetByDistance(
       location.get() + distance,
       direction,
     )
     return {
       distance: location.get() + distance - from,
-      index: i,
+      index: i.index,
     }
   }
   // <---- TECH DEBT

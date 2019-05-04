@@ -58,9 +58,7 @@ export function Mover(params: Params): Mover {
     const diff = target.get() - location.get()
     const diffRounded = Math.round(diff * 100) / 100
     const hasSettled = !diffRounded
-    if (hasSettled) {
-      location.set(target)
-    }
+    if (hasSettled) location.set(target)
     return hasSettled
   }
 

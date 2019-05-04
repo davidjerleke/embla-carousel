@@ -14,49 +14,49 @@ export type Vector1D = {
 }
 
 export function Vector1D(value: number): Vector1D {
-  const state = { value }
+  const vector = { value }
 
   function get(): number {
-    return state.value
+    return vector.value
   }
 
   function set(v2: Vector1D): Vector1D {
-    state.value = v2.get()
+    vector.value = v2.get()
     return self
   }
 
   function add(v2: Vector1D): Vector1D {
-    state.value += v2.get()
+    vector.value += v2.get()
     return self
   }
 
   function subtract(v2: Vector1D): Vector1D {
-    state.value -= v2.get()
+    vector.value -= v2.get()
     return self
   }
 
   function multiply(n: number): Vector1D {
-    state.value *= n
+    vector.value *= n
     return self
   }
 
   function divide(n: number): Vector1D {
-    state.value /= n
+    vector.value /= n
     return self
   }
 
   function setNumber(n: number): Vector1D {
-    state.value = n
+    vector.value = n
     return self
   }
 
   function addNumber(n: number): Vector1D {
-    state.value += n
+    vector.value += n
     return self
   }
 
   function subtractNumber(n: number): Vector1D {
-    state.value -= n
+    vector.value -= n
     return self
   }
 

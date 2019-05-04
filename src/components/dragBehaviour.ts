@@ -30,13 +30,13 @@ export type DragBehaviour = {
   down: (evt: Event) => void
   move: (evt: Event) => void
   up: () => void
-  cancel: (evt: Event) => void
   removeAllEvents: () => void
   activate: () => void
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
   const { element, pointer, location, events } = params
+  const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const dragStart = Vector1D(0)
   const startX = Vector1D(0)
@@ -121,7 +121,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function up(): void {
     const { travel, target, mover } = params
-    const force = pointer.up() * (state.isMouse ? 2 : 3)
+    const force = pointer.up() * (state.isMouse ? 2 : 2.8)
     const speed = state.isMouse ? 12 : 15
 
     state.isMouse = false
@@ -134,6 +134,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const minDiffToTarget = 1
 
     if (diffToTarget <= minDiffToTarget) return
+    // if (Math.abs(force) < 1) return
+    // console.log(force)
 
     state.preventClick = true
     mover.useSpeed(speed)
@@ -150,8 +152,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   const self: DragBehaviour = {
     activate: addActivationEvents,
-    cancel: up,
-    direction: pointer.direction,
+    direction,
     down,
     dragStartLocation: dragStart,
     isDown,

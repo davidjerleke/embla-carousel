@@ -120,6 +120,7 @@ export function Engine(
       slidePositions,
       slideSizes,
       span: contentSize,
+      target,
     }),
     index,
     target,
