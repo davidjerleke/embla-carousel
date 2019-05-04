@@ -28,7 +28,7 @@ export type TargetFinder = {
 export function TargetFinder(params: Params): TargetFinder {
   const { location, diffDistances, loop, slideSizes } = params
 
-  console.log(params.slidePositions)
+  // console.log(params.slidePositions)
 
   function findTarget(target: number, direction: number): number {
     const counter = params.index.clone()
@@ -75,8 +75,8 @@ export function TargetFinder(params: Params): TargetFinder {
       return { distance: d, index: target }
     } else {
       // DO SAME HERE AS ABOVE
-      const d1 = findTarget(target, -1) //+ offsetToSlide
-      const d2 = findTarget(target, 1) //+ offsetToSlide
+      const d1 = findTarget(target, -1) // + offsetToSlide
+      const d2 = findTarget(target, 1) // + offsetToSlide
       const distance = Math.abs(d1) > Math.abs(d2) ? d2 : d1
       return { index: target, distance }
     }
@@ -96,38 +96,33 @@ export function TargetFinder(params: Params): TargetFinder {
       }
     }
 
-    console.log(distance)
-
     const direction = Direction(distance).get()
-    const target = getTargetByDistance(
+    const t = getTargetByDistance(
       location.get() + distance,
       direction,
     )
-    const offsetToSlide = findDistanceToSnapPoint(
-      target.distance,
-      target.index,
-    )
+    const offsetToSlide = findDistanceToSnapPoint(t.distance, t.index)
 
     const test =
       location.get() + distance + offsetToSlide - params.target.get()
 
     return {
       distance: test,
-      index: target.index,
+      index: t.index,
     }
   }
 
   // TECH DEBT ---->
   // Not used yet. Upcoming freeScroll feature.
   // Finds index by any given carousel location.
-  function findDistanceToSnapPoint(location: number, index: number) {
+  function findDistanceToSnapPoint(loc: number, index: number) {
     const { slidePositions, span } = params
     const lastIndex = params.index.max
     const lastSlidePosition = slidePositions[lastIndex]
     const offset =
-      loop && location < lastSlidePosition && index === 0
-        ? location + span
-        : location
+      loop && loc < lastSlidePosition && index === 0
+        ? loc + span
+        : loc
 
     return slidePositions[index] - offset
   }
@@ -174,8 +169,8 @@ export function TargetFinder(params: Params): TargetFinder {
       0,
     )
     return {
-      index: targetIndex,
       distance: target,
+      index: targetIndex,
     }
   }
 
