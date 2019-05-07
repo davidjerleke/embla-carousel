@@ -112,7 +112,6 @@ export function Engine(
     animation,
     events,
     findTarget: TargetFinder({
-      diffDistances,
       index,
       limit,
       location,

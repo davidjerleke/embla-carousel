@@ -1,6 +1,5 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
-import { Direction } from './direction'
 import { EventDispatcher } from './eventDispatcher'
 import { Target, TargetFinder } from './targetFinder'
 import { Vector1D } from './vector1d'
@@ -41,17 +40,15 @@ export function Traveller(params: Params): Traveller {
     return self
   }
 
-  function findIndex(target: Counter, direction: number): Traveller {
-    const diff = index.get() - target.get()
-    const d = direction || Direction(diff).get()
-    const next = findTarget.byIndex(target.get(), d)
+  function findIndex(target: Counter): Traveller {
+    const next = findTarget.byIndex(target.get())
     travelTo(next)
     return self
   }
 
   function toIndex(target: number): Traveller {
     const next = index.clone().set(target)
-    findIndex(next, 0)
+    findIndex(next)
     return self
   }
 
@@ -63,13 +60,13 @@ export function Traveller(params: Params): Traveller {
 
   function toNext(): Traveller {
     const next = index.clone().add(1)
-    findIndex(next, -1)
+    findIndex(next)
     return self
   }
 
   function toPrevious(): Traveller {
     const next = index.clone().add(-1)
-    findIndex(next, 1)
+    findIndex(next)
     return self
   }
 

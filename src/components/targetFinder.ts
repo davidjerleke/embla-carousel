@@ -6,7 +6,6 @@ import { Vector1D } from './vector1d'
 type Params = {
   location: Vector1D
   index: Counter
-  diffDistances: number[]
   loop: boolean
   slideSizes: number[]
   slidePositions: number[]
@@ -21,101 +20,68 @@ export type Target = {
 }
 
 export type TargetFinder = {
-  byIndex: (target: number, direction: number) => Target
+  byIndex: (target: number) => Target
   byDistance: (from: number, distance: number) => Target
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const { location, diffDistances, loop, slideSizes } = params
+  const { location, loop, slideSizes } = params
 
-  // console.log(params.slidePositions)
-
-  function findTarget(target: number, direction: number): number {
-    const counter = params.index.clone()
-    const indexDiff = direction === -1 ? 0 : -1
-
-    function accumulate(distance: number): number {
-      const index = counter.get()
-      const nextIndex = counter.clone().add(indexDiff)
-      const distanceToNext = diffDistances[nextIndex.get()]
-      counter.add(direction * -1)
-
-      return index === target
-        ? distance * direction
-        : accumulate(distance + distanceToNext)
-    }
-    return accumulate(0)
+  function shortestDistance(d1: number, d2: number): number {
+    return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
-  function byIndex(target: number, direction: number): Target {
-    const index = params.index.clone()
+  function byIndex(index: number): Target {
+    const { slidePositions, span } = params
+    const target = params.target.get()
+    const counter = params.index.clone()
+    const slidePosition = slidePositions[index]
 
-    if (!loop || index.max <= 1) {
-      const distance = findTarget(target, direction)
-
-      const t = getTargetByDistance(
-        location.get() + distance,
-        direction,
-      )
-      const offsetToSlide = findDistanceToSnapPoint(
-        t.distance,
-        target,
-      )
-      const test =
-        location.get() +
-        distance +
-        offsetToSlide -
-        params.target.get()
-
-      const d =
-        params.target.get() === params.slidePositions[target]
-          ? 0
-          : test
-
-      return { distance: d, index: target }
+    if (!loop || counter.max <= 1) {
+      const distance = slidePosition - target
+      return { distance, index }
     } else {
-      // DO SAME HERE AS ABOVE
-      const d1 = findTarget(target, -1) // + offsetToSlide
-      const d2 = findTarget(target, 1) // + offsetToSlide
-      const distance = Math.abs(d1) > Math.abs(d2) ? d2 : d1
-      return { index: target, distance }
+      const d1 = slidePosition - target
+      const d2 = span + slidePosition - target
+      const d3 = slidePosition - span - target
+      const distance = shortestDistance(shortestDistance(d1, d2), d3)
+      return { distance, index }
     }
   }
 
   function byDistance(from: number, distance: number): Target {
-    if (!loop) {
-      const { index, limit } = params
-      const target = location.get() + distance
-      const reachedAnyLimit = limit.reachedAny(target)
+    const targetDistance = location.get() + distance
 
-      if (reachedAnyLimit) {
-        const reachedMaxLimit = limit.reachedMax(target)
-        const nextIndex = reachedMaxLimit ? index.min : index.max
+    if (!loop) {
+      const { min, max } = params.index.clone()
+      const { reachedAny, reachedMax } = params.limit
+
+      if (reachedAny(targetDistance)) {
+        const reachedMaxLimit = reachedMax(targetDistance)
+        const index = reachedMaxLimit ? min : max
         const next = freeScroll(from, distance)
-        return { index: nextIndex, distance: next.distance }
+        return { distance: next.distance, index }
       }
     }
 
+    // FREE SCROLL FUNCTIONALITY
+    // const next = freeScroll(from, distance)
+    // return next
+
+    // CLEAN UP -------->
+    const targetVector = params.target.get()
     const direction = Direction(distance).get()
-    const t = getTargetByDistance(
-      location.get() + distance,
-      direction,
-    )
-    const offsetToSlide = findDistanceToSnapPoint(t.distance, t.index)
+    const t = getTargetByDistance(targetDistance, direction)
+    const offsetToSlide = getOffsetToSnapPoint(t.distance, t.index)
 
-    const test =
-      location.get() + distance + offsetToSlide - params.target.get()
+    const test = targetDistance + offsetToSlide - targetVector
 
-    return {
-      distance: test,
-      index: t.index,
-    }
+    return { distance: test, index: t.index }
+    // <-------- CLEAN UP
   }
 
-  // TECH DEBT ---->
-  // Not used yet. Upcoming freeScroll feature.
-  // Finds index by any given carousel location.
-  function findDistanceToSnapPoint(loc: number, index: number) {
+  // CLEAN UP -------->
+  function getOffsetToSnapPoint(loc: number, index: number) {
     const { slidePositions, span } = params
     const lastIndex = params.index.max
     const lastSlidePosition = slidePositions[lastIndex]
@@ -168,26 +134,24 @@ export function TargetFinder(params: Params): TargetFinder {
       },
       0,
     )
-    return {
-      distance: target,
-      index: targetIndex,
-    }
+
+    return { distance: target, index: targetIndex }
   }
 
   function freeScroll(from: number, distance: number): Target {
     const desiredDiff = location.get() + distance - from
     const direction = Direction(desiredDiff).get()
-
     const i = getTargetByDistance(
       location.get() + distance,
       direction,
     )
+
     return {
       distance: location.get() + distance - from,
       index: i.index,
     }
   }
-  // <---- TECH DEBT
+  // <-------- CLEAN UP
 
   const self: TargetFinder = {
     byDistance,

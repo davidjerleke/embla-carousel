@@ -134,8 +134,6 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const minDiffToTarget = 1
 
     if (diffToTarget <= minDiffToTarget) return
-    // if (Math.abs(force) < 1) return
-    // console.log(force)
 
     state.preventClick = true
     mover.useSpeed(speed)
