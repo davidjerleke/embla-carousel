@@ -57,8 +57,7 @@ export function TargetFinder(params: Params): TargetFinder {
       const { reachedAny, reachedMax } = params.limit
 
       if (reachedAny(targetDistance)) {
-        const reachedMaxLimit = reachedMax(targetDistance)
-        const index = reachedMaxLimit ? min : max
+        const index = reachedMax(targetDistance) ? min : max
         const next = freeScroll(from, distance)
         return { distance: next.distance, index }
       }
