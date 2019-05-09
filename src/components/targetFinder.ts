@@ -14,6 +14,11 @@ type Params = {
   target: Vector1D
 }
 
+type Boundary = {
+  start: number
+  end: number
+}
+
 export type Target = {
   index: number
   distance: number
@@ -25,14 +30,24 @@ export type TargetFinder = {
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const { location, loop, slideSizes } = params
+  const { location, loop, slideSizes, slidePositions, span } = params
+  const boundaries: Boundary[] = getSlideBoundaries()
 
   function shortestDistance(d1: number, d2: number): number {
     return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
+  function getSlideBoundaries(): Boundary[] {
+    const startAt = slidePositions[0] + slideSizes[0] / 2
+    return slideSizes.map((slideSize, i) => {
+      const sizes = slideSizes.slice(0, i)
+      const start = sizes.reduce((a, i) => a - i, startAt)
+      const end = start - slideSize
+      return { end, start }
+    })
+  }
+
   function byIndex(index: number): Target {
-    const { slidePositions, span } = params
     const target = params.target.get()
     const counter = params.index.clone()
     const slidePosition = slidePositions[index]
@@ -71,7 +86,7 @@ export function TargetFinder(params: Params): TargetFinder {
     const targetVector = params.target.get()
     const direction = Direction(distance).get()
     const t = getTargetByDistance(targetDistance, direction)
-    const offsetToSlide = getOffsetToSnapPoint(t.distance, t.index)
+    const offsetToSlide = getOffsetToSlide(t.distance, t.index)
 
     const test = targetDistance + offsetToSlide - targetVector
 
@@ -80,8 +95,7 @@ export function TargetFinder(params: Params): TargetFinder {
   }
 
   // CLEAN UP -------->
-  function getOffsetToSnapPoint(loc: number, index: number) {
-    const { slidePositions, span } = params
+  function getOffsetToSlide(loc: number, index: number): number {
     const lastIndex = params.index.max
     const lastSlidePosition = slidePositions[lastIndex]
     const offset =
@@ -96,59 +110,37 @@ export function TargetFinder(params: Params): TargetFinder {
     desiredTarget: number,
     direction: number,
   ): Target {
-    const { slidePositions } = params
-    let target = desiredTarget
+    let distance = desiredTarget
 
     if (direction === 1) {
-      while (params.limit.reachedMax(target)) {
-        target -= params.span
+      while (params.limit.reachedMax(distance)) {
+        distance -= span
       }
     }
     if (direction === -1) {
-      while (params.limit.reachedMin(target)) {
-        target += params.span
+      while (params.limit.reachedMin(distance)) {
+        distance += span
       }
     }
 
-    type Boundary = { low: number; high: number }
-    const boundaries: Boundary[] = []
-    let startPos = slidePositions[0] + slideSizes[0] / 2
-
-    for (let i = 0; i < slidePositions.length; i += 1) {
-      ;(() => {
-        boundaries.push({
-          high: startPos - slideSizes[i],
-          low: startPos,
-        })
-        startPos = startPos - slideSizes[i]
-      })()
-    }
-
-    const targetIndex = boundaries.reduce(
-      (result: number, boundary: Boundary, index: number) => {
-        if (result) return result
-        return target < boundary.low && target > boundary.high
-          ? index
-          : 0
+    const index = boundaries.reduce(
+      (foundIndex: number, boundary: Boundary, i: number) => {
+        if (foundIndex) return foundIndex
+        const { start, end } = boundary
+        return distance < start && distance > end ? i : 0
       },
       0,
     )
 
-    return { distance: target, index: targetIndex }
+    return { distance, index }
   }
 
-  function freeScroll(from: number, distance: number): Target {
-    const desiredDiff = location.get() + distance - from
-    const direction = Direction(desiredDiff).get()
-    const i = getTargetByDistance(
-      location.get() + distance,
-      direction,
-    )
-
-    return {
-      distance: location.get() + distance - from,
-      index: i.index,
-    }
+  function freeScroll(from: number, force: number): Target {
+    const targetDistance = location.get() + force
+    const distance = location.get() + force - from
+    const direction = Direction(distance).get()
+    const { index } = getTargetByDistance(targetDistance, direction)
+    return { distance, index }
   }
   // <-------- CLEAN UP
 
