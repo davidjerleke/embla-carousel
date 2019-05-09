@@ -39,8 +39,8 @@ export function TargetFinder(params: Params): TargetFinder {
 
   function getSlideBoundaries(): Boundary[] {
     const startAt = slidePositions[0] + slideSizes[0] / 2
-    return slideSizes.map((slideSize, i) => {
-      const sizes = slideSizes.slice(0, i)
+    return slideSizes.map((slideSize, index) => {
+      const sizes = slideSizes.slice(0, index)
       const start = sizes.reduce((a, i) => a - i, startAt)
       const end = start - slideSize
       return { end, start }
