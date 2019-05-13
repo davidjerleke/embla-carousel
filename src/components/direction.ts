@@ -15,9 +15,7 @@ export function Direction(value: number): Direction {
 
   function set(v: Vector1D): Direction {
     const d = normalize(v.get())
-    if (d && d !== get()) {
-      direction.setNumber(d)
-    }
+    if (d !== 0) direction.setNumber(d)
     return self
   }
 

@@ -14,6 +14,7 @@ type Params = {
   target: Vector1D
   pointer: Pointer
   location: Vector1D
+  locationAtDragStart: Vector1D
   animation: Animation
   travel: Traveller
   mover: Mover
@@ -25,20 +26,19 @@ type Params = {
 
 export type DragBehaviour = {
   direction: Direction
-  dragStartLocation: Vector1D
   isDown: () => boolean
   down: (evt: Event) => void
   move: (evt: Event) => void
   up: () => void
   removeAllEvents: () => void
-  activate: () => void
+  addActivationEvents: () => void
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
   const { element, pointer, location, events } = params
+  const { locationAtDragStart } = params
   const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
-  const dragStart = Vector1D(0)
   const startX = Vector1D(0)
   const startY = Vector1D(0)
   const activationEvents = EventStore()
@@ -85,7 +85,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const node = evt.target as Element
     state.isMouse = evt.type === 'mousedown'
     pointer.down(evt)
-    dragStart.set(location)
+    locationAtDragStart.set(location)
     state.preventClick = false
     state.isDown = true
     animation.start()
@@ -111,10 +111,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
     } else {
       const X = pointer.read(evt, 'x').get()
       const Y = pointer.read(evt, 'y').get()
-      const diffX = X - startX.get()
-      const diffY = Y - startY.get()
-      state.preventScroll = Math.abs(diffX) > Math.abs(diffY)
-
+      const diffX = Math.abs(X - startX.get())
+      const diffY = Math.abs(Y - startY.get())
+      state.preventScroll = diffX > diffY
       if (!state.preventScroll) up()
     }
   }
@@ -137,7 +136,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
     state.preventClick = true
     mover.useSpeed(speed)
-    travel.toDistance(dragStart.get(), force)
+    travel.toDistance(locationAtDragStart.get(), force)
   }
 
   function click(evt: Event): void {
@@ -149,10 +148,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   const self: DragBehaviour = {
-    activate: addActivationEvents,
+    addActivationEvents,
     direction,
     down,
-    dragStartLocation: dragStart,
     isDown,
     move,
     removeAllEvents,

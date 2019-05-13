@@ -93,6 +93,7 @@ const embla = EmblaCarousel(node, {
   align: 'center',
   container: '*',
   draggable: true,
+  dragFree: false,
   loop: false,
   speed: 10,
   startIndex: 0,
@@ -110,6 +111,9 @@ The selector to use for the container that holds the slides. Embla will use all 
 
 **`draggable`** (boolean)  
 Allow mouse and touch interactions to move the carousel.
+
+**`dragFree`** (boolean)  
+Determines if the carousel should snap to a slide position after mouse and touch interactions.
 
 **`loop`** (boolean)  
 Determines if the carousel should loop when start or end is reached.

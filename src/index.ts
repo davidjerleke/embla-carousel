@@ -75,7 +75,7 @@ export function EmblaCarousel(
         const draggable = options.draggableClass
         const dragging = options.draggingClass
         const className = root.classList
-        slider.pointer.activate()
+        slider.pointer.addActivationEvents()
         className.add(draggable)
         events.on('dragStart', () => className.add(dragging))
         events.on('dragEnd', () => className.remove(dragging))

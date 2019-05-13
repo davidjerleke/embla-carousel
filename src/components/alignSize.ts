@@ -1,4 +1,4 @@
-import { Alignments } from './options'
+export type Alignments = 'start' | 'center' | 'end'
 
 type Params = {
   root: number

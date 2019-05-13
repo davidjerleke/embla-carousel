@@ -38,7 +38,7 @@ export function Engine(
   events: EventDispatcher,
 ): Engine {
   // Options
-  const { align, startIndex, loop, speed } = options
+  const { align, startIndex, loop, speed, dragFree } = options
   const speedLimit = Limit({ min: 5, max: 20 })
 
   // Index
@@ -86,20 +86,21 @@ export function Engine(
 
       if (slider.mover.settle(target)) {
         slider.animation.stop()
-        slider.translate.useDefault()
+        slider.translate.useType('x')
       }
     }
     if (loop) {
       slider.infinite.loop(direction())
       slider.shifter.shiftAccordingTo(slider.mover.location)
     }
-    slider.translate.to(slider.mover.location).use3d()
+    slider.translate.to(slider.mover.location).useType('x3d')
     slider.animation.proceed()
   }
 
   // Shared
   const animation = Animation(update)
   const startLocation = slidePositions[index.get()]
+  const locationAtDragStart = Vector1D(startLocation)
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const mover = Mover({
@@ -112,6 +113,7 @@ export function Engine(
     animation,
     events,
     findTarget: TargetFinder({
+      dragFree,
       index,
       limit,
       location,
@@ -133,7 +135,8 @@ export function Engine(
     index,
     limit,
     location,
-    loop: options.loop,
+    locationAtDragStart,
+    loop,
     mover,
     pointer: Pointer(chunkSize),
     target,
@@ -155,7 +158,7 @@ export function Engine(
       limit,
       location,
       span: contentSize,
-      vectors: [location, target, pointer.dragStartLocation],
+      vectors: [location, target, locationAtDragStart],
     }),
     mover,
     pointer,

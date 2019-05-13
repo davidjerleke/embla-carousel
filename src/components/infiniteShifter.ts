@@ -53,7 +53,7 @@ export function InfiniteShifter(params: Params) {
     sizeOfGap: number,
     indexes: number[],
     from: number,
-  ) {
+  ): number {
     return indexes.reduce((a: number, i) => {
       const gapFilled = a + itemSizes[i]
       return gapFilled < sizeOfGap ? gapFilled : a

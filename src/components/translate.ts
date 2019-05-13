@@ -5,8 +5,7 @@ type State = { type: Translates }
 
 export type Translate = {
   to: (vector: Vector1D) => Translate
-  useDefault: () => Translate
-  use3d: () => Translate
+  useType: (type: Translates) => Translate
 }
 
 export function Translate(node: HTMLElement): Translate {
@@ -35,8 +34,7 @@ export function Translate(node: HTMLElement): Translate {
 
   const self: Translate = {
     to,
-    use3d: () => useType('x3d'),
-    useDefault: () => useType('x'),
+    useType,
   }
   return Object.freeze(self)
 }

@@ -1,8 +1,9 @@
-export type Alignments = 'start' | 'center' | 'end'
+import { Alignments } from './alignSize'
 
 export type Options = {
   align: Alignments
   containerSelector: string
+  dragFree: boolean
   draggable: boolean
   draggableClass: string
   draggingClass: string
@@ -15,6 +16,7 @@ export type Options = {
 export type UserOptions = {
   align?: Alignments
   containerSelector?: string
+  dragFree?: boolean
   draggable?: boolean
   draggableClass?: string
   draggingClass?: string
@@ -27,6 +29,7 @@ export type UserOptions = {
 export const defaultOptions = Object.freeze({
   align: 'center',
   containerSelector: '*',
+  dragFree: false,
   draggable: true,
   draggableClass: 'is-draggable',
   draggingClass: 'is-dragging',
