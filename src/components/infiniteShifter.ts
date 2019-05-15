@@ -23,7 +23,7 @@ export function InfiniteShifter(params: Params) {
   const { items, chunkSize, itemSizes, alignSizes } = params
   const sizesPercent = items.map(rectWidth).map(chunkSize.measure)
   const contentSize = itemSizes.reduce((a, s) => a + s, 0)
-  const viewSize = chunkSize.getRoot
+  const viewSize = chunkSize.root
   const distance = sizesPercent.reduce((a, s) => a + s, 0)
   const ascItems = Object.keys(items).map(Number)
   const descItems = ascItems.slice().reverse()

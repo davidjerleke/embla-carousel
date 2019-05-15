@@ -1,6 +1,6 @@
 export type ChunkSize = {
-  getRoot: number
   measure: (n: number) => number
+  root: number
 }
 
 export function ChunkSize(root: number): ChunkSize {
@@ -11,8 +11,8 @@ export function ChunkSize(root: number): ChunkSize {
   }
 
   const self: ChunkSize = {
-    getRoot: 100,
     measure,
+    root: 100,
   }
   return Object.freeze(self)
 }

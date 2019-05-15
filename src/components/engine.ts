@@ -51,7 +51,7 @@ export function Engine(
   // Measurements
   const rootSize = rectWidth(container)
   const chunkSize = ChunkSize(rootSize)
-  const alignSize = AlignSize({ align, root: chunkSize.getRoot })
+  const alignSize = AlignSize({ align, root: chunkSize.root })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
   const alignSizes = slideSizes.map(alignSize.measure)
   const contentSize = slideSizes.reduce((a, s) => a + s, 0)
@@ -64,12 +64,11 @@ export function Engine(
     const distances = diffDistances.slice(0, i)
     return distances.reduce((a, d) => a - d, alignSizes[0])
   })
-  const maxLimit = alignSizes[0]
-  const minLimit =
-    -contentSize +
-    alignSizes[0] +
-    (loop ? chunkSize.measure(1) : slideSizes[index.max])
-  const limit = Limit({ max: maxLimit, min: minLimit })
+  const lastSlideSize = slideSizes[index.max]
+  const endOffset = loop ? chunkSize.measure(1) : lastSlideSize
+  const max = alignSizes[0]
+  const min = max + -contentSize + endOffset
+  const limit = Limit({ max, min })
 
   // Draw
   const direction = (): number =>
@@ -103,10 +102,11 @@ export function Engine(
   const locationAtDragStart = Vector1D(startLocation)
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
+  const vectors = [locationAtDragStart, location, target]
   const mover = Mover({
     location,
     mass: 1.5,
-    maxForce: chunkSize.getRoot * 2,
+    maxForce: chunkSize.root * 2,
     speed: speedLimit.constrain(speed),
   })
   const travel = Traveller({
@@ -158,7 +158,7 @@ export function Engine(
       limit,
       location,
       span: contentSize,
-      vectors: [location, target, locationAtDragStart],
+      vectors,
     }),
     mover,
     pointer,

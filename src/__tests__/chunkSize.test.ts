@@ -10,7 +10,7 @@ beforeEach(() => {
 
 describe('ChunkSize', () => {
   test('Exposes correct root size', () => {
-    expect(chunkSize.getRoot).toBe(100)
+    expect(chunkSize.root).toBe(100)
   })
 
   test('Measures given number relative to root', () => {
