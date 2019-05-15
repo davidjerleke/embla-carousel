@@ -19,3 +19,14 @@ export function arrayFromCollection(
 ): HTMLElement[] {
   return Array.prototype.slice.call(nodeList)
 }
+
+export function debounce(
+  callback: () => void,
+  time: number,
+): () => void {
+  const timeout = { id: 0 }
+  return (): void => {
+    window.clearTimeout(timeout.id)
+    timeout.id = window.setTimeout(callback, time) || 0
+  }
+}

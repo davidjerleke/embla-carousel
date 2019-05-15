@@ -384,29 +384,6 @@
         body.classList.remove('user-is-tabbing')
         userIsTabbing = false
       })
-
-      function debounce(callback, time) {
-        const timeout = { id: 0 }
-        return function() {
-          window.clearTimeout(timeout.id)
-          timeout.id = window.setTimeout(callback, time)
-        }
-      }
-
-      var lastWindowWidth = window.offsetWidth
-
-      var debouncedResize = debounce(function() {
-        var newWindowWidth = window.offsetWidth
-
-        if (newWindowWidth !== lastWindowWidth) {
-          emblaInstances.forEach(function(e) {
-            e.resize()
-          })
-          lastWindowWidth = newWindowWidth
-        }
-      }, 500)
-
-      window.addEventListener('resize', debouncedResize)
     </script>
   </body>
 </html>

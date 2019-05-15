@@ -6,7 +6,7 @@ import {
 } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
-import { arrayFromCollection } from './components/utils'
+import { arrayFromCollection, debounce } from './components/utils'
 
 type Elements = {
   root: HTMLElement
@@ -24,7 +24,7 @@ type EmblaCarousel = {
   getSelectedIndex: () => number
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
-  resize: () => void
+  changeOptions: (options: UserOptions) => void
 }
 
 export function EmblaCarousel(
@@ -33,10 +33,13 @@ export function EmblaCarousel(
 ): EmblaCarousel {
   const slider = {} as Engine
   const elements = {} as Elements
-  const state = { active: false }
   const options = Object.assign({}, defaultOptions, userOptions)
+  const state = { active: false, lastWindowWidth: 0 }
   const events = EventDispatcher()
   const eventStore = EventStore()
+  const debouncedResize = debounce(resize, 500)
+  const changeOptions = reActivate
+  const { on, off } = events
 
   activate(options)
 
@@ -59,6 +62,7 @@ export function EmblaCarousel(
   function activate(userOpt: UserOptions = {}): void {
     const firstInit = !state.active
     storeElements()
+    state.lastWindowWidth = window.innerWidth
 
     if (elements.slides.length > 0) {
       const { root, container, slides } = elements
@@ -66,6 +70,7 @@ export function EmblaCarousel(
       const engine = Engine(root, container, slides, newOpt, events)
 
       Object.assign(slider, engine)
+      eventStore.add(window, 'resize', debouncedResize)
       slides.forEach((s, i) =>
         eventStore.add(s, 'focus', slideFocus(i), true),
       )
@@ -136,6 +141,14 @@ export function EmblaCarousel(
     events.dispatch('destroy')
   }
 
+  function resize(): void {
+    const windowWidth = window.innerWidth
+    if (windowWidth !== state.lastWindowWidth) {
+      state.lastWindowWidth = windowWidth
+      reActivate()
+    }
+  }
+
   function next(): void {
     slider.mover.useDefaultSpeed()
     slider.travel.toNext()
@@ -164,16 +177,16 @@ export function EmblaCarousel(
   }
 
   const self: EmblaCarousel = {
+    changeOptions,
     destroy,
     getContainer,
     getSelectedIndex,
     getSlides,
     goTo,
     next,
-    off: events.off,
-    on: events.on,
+    off,
+    on,
     previous,
-    resize: reActivate,
   }
   return Object.freeze(self)
 }

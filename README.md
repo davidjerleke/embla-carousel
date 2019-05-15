@@ -164,8 +164,8 @@ Goes to previous item. If loop is disabled and the carousel is on the first slid
 **`goTo(index: number)`**
 Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
 
-**`resize(options: options)`**  
-Useful when you're planning to change slide widths for different breakpoints or similar. This will do all the calculations and reinitialize the carousel with passed options.
+**`changeOptions(options: options)`**  
+Applies passed options by doing all the necessary calculations and reinitializing the carousel from scratch.
 
 **`on(event: string, callback: function)`**  
 Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
