@@ -55,14 +55,13 @@ export function Engine(
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
   const alignSizes = slideSizes.map(alignSize.measure)
   const contentSize = slideSizes.reduce((a, s) => a + s, 0)
-  const diffDistances = slideSizes.map((size, current) => {
-    const counter = index.clone()
-    const next = counter.set(current + 1).get()
-    return size + alignSizes[current] - alignSizes[next]
+  const diffSizes = slideSizes.map((size, i) => {
+    const next = index.clone().set(i + 1)
+    return size + alignSizes[i] - alignSizes[next.get()]
   })
   const slidePositions = slides.map((s, i) => {
-    const distances = diffDistances.slice(0, i)
-    return distances.reduce((a, d) => a - d, alignSizes[0])
+    const sizes = diffSizes.slice(0, i)
+    return sizes.reduce((a, d) => a - d, alignSizes[0])
   })
   const lastSlideSize = slideSizes[index.max]
   const endOffset = loop ? chunkSize.measure(1) : lastSlideSize
