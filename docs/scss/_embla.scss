@@ -2,6 +2,13 @@
   position: relative;
   margin-bottom: 2.7rem;
   background-color: darken($color-prague, 1%);
+  margin-right: -2rem;
+  margin-left: -2rem;
+
+  @media (min-width: $media-xs) {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
 
 .embla__viewport {
@@ -24,7 +31,6 @@
   will-change: transform;
 
   @media (min-width: $media-sm) {
-    display: flex;
     margin-left: -1rem;
   }
 }
