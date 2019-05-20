@@ -52,8 +52,8 @@ export function Engine(
   const indexMax = Math.ceil(slides.length / groupSlides) - 1
   const index = Counter({
     limit: Limit({
-      min: 0,
       max: indexMax,
+      min: 0,
     }),
     loop,
     start: startIndex,
@@ -127,12 +127,12 @@ export function Engine(
     findTarget: TargetFinder({
       diffSizes,
       dragFree,
+      groupPositions,
       groupSizes,
       index,
       limit,
       location,
       loop,
-      groupPositions,
       span: contentSize,
       target,
     }),
@@ -179,8 +179,8 @@ export function Engine(
       alignSizes,
       chunkSize,
       contentSize,
-      slides,
       slideSizes,
+      slides,
     }),
     target,
     translate: Translate(container),

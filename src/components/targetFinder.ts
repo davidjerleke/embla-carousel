@@ -96,12 +96,12 @@ export function TargetFinder(params: Params): TargetFinder {
       return { distance, index }
     } else {
       if (direction === -1) {
-        const distance = -params.diffSizes[counter.get()]
-        return { distance, index }
+        const d = -params.diffSizes[counter.get()]
+        return { distance: d, index }
       }
       if (direction === 1) {
-        const distance = params.diffSizes[counter.add(-1).get()]
-        return { distance, index }
+        const d = params.diffSizes[counter.add(-1).get()]
+        return { distance: d, index }
       }
       const d1 = slidePosition - target
       const d2 = span + slidePosition - target
