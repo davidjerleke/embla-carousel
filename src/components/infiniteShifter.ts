@@ -1,12 +1,12 @@
 import { ChunkSize } from './chunkSize'
-import { rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
-  items: HTMLElement[]
-  chunkSize: ChunkSize
-  itemSizes: number[]
   alignSizes: number[]
+  chunkSize: ChunkSize
+  contentSize: number
+  slides: HTMLElement[]
+  slideSizes: number[]
 }
 
 type ShiftPoint = {
@@ -20,12 +20,10 @@ export type InfiniteShifter = {
 }
 
 export function InfiniteShifter(params: Params) {
-  const { items, chunkSize, itemSizes, alignSizes } = params
-  const sizesPercent = items.map(rectWidth).map(chunkSize.measure)
-  const contentSize = itemSizes.reduce((a, s) => a + s, 0)
+  const { slides, chunkSize, slideSizes, alignSizes } = params
   const viewSize = chunkSize.root
-  const distance = sizesPercent.reduce((a, s) => a + s, 0)
-  const ascItems = Object.keys(items).map(Number)
+  const distance = params.contentSize
+  const ascItems = Object.keys(slides).map(Number)
   const descItems = ascItems.slice().reverse()
   const shiftPoints = startPoints().concat(endPoints())
 
@@ -34,7 +32,7 @@ export function InfiniteShifter(params: Params) {
     from: number,
   ): number {
     return indexes.reduce((a: number, i) => {
-      const size = itemSizes[i]
+      const size = slideSizes[i]
       return a - size
     }, from)
   }
@@ -55,7 +53,7 @@ export function InfiniteShifter(params: Params) {
     from: number,
   ): number {
     return indexes.reduce((a: number, i) => {
-      const gapFilled = a + itemSizes[i]
+      const gapFilled = a + slideSizes[i]
       return gapFilled < sizeOfGap ? gapFilled : a
     }, from)
   }
@@ -65,7 +63,7 @@ export function InfiniteShifter(params: Params) {
     from: number,
     direction: 0 | 1,
   ): number {
-    const slideCount = items.length - 1
+    const slideCount = slides.length - 1
     return subtractItemSizesOf(
       indexes.map(i => (i + direction) % slideCount),
       from,
@@ -80,11 +78,11 @@ export function InfiniteShifter(params: Params) {
     const ascIndexes = indexes.slice().sort((a, b) => a - b)
     return ascIndexes.map(
       (i, j): ShiftPoint => {
-        const node = items[i]
+        const node = slides[i]
         const initial = distance * (!direction ? 0 : -1)
         const offset = distance * (!direction ? 1 : 0)
-        const itemsInSpan = ascIndexes.slice(0, j)
-        const point = shiftPoint(itemsInSpan, from, direction)
+        const slidesInSpan = ascIndexes.slice(0, j)
+        const point = shiftPoint(slidesInSpan, from, direction)
         const location = Vector1D(-1)
         const findTarget = (loc: number): Vector1D => {
           const target = Vector1D(0)
@@ -106,7 +104,7 @@ export function InfiniteShifter(params: Params) {
   function endPoints(): ShiftPoint[] {
     const gap = viewSize - alignSizes[0] - 1
     const indexes = shiftItemsIn(gap, ascItems)
-    const start = shiftStart(contentSize, ascItems, -viewSize)
+    const start = shiftStart(distance, ascItems, -viewSize)
     return shiftPointsFor(indexes, -start, 0)
   }
 

@@ -36,19 +36,6 @@ export function Traveller(params: Params): Traveller {
       index.set(nextIndex)
       events.dispatch('select')
     }
-
-    return self
-  }
-
-  function findIndex(target: Counter): Traveller {
-    const next = findTarget.byIndex(target.get())
-    travelTo(next)
-    return self
-  }
-
-  function toIndex(target: number): Traveller {
-    const next = index.clone().set(target)
-    findIndex(next)
     return self
   }
 
@@ -58,15 +45,27 @@ export function Traveller(params: Params): Traveller {
     return self
   }
 
+  function findIndex(target: Counter, direction: number): Traveller {
+    const next = findTarget.byIndex(target.get(), direction)
+    travelTo(next)
+    return self
+  }
+
+  function toIndex(target: number): Traveller {
+    const next = index.clone().set(target)
+    findIndex(next, 0)
+    return self
+  }
+
   function toNext(): Traveller {
     const next = index.clone().add(1)
-    findIndex(next)
+    findIndex(next, -1)
     return self
   }
 
   function toPrevious(): Traveller {
     const next = index.clone().add(-1)
-    findIndex(next)
+    findIndex(next, 1)
     return self
   }
 

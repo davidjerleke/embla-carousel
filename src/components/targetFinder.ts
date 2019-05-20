@@ -4,12 +4,13 @@ import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
 type Params = {
+  diffSizes: number[]
   dragFree: boolean
   location: Vector1D
   index: Counter
   loop: boolean
-  slideSizes: number[]
-  slidePositions: number[]
+  groupSizes: number[]
+  groupPositions: number[]
   span: number
   limit: Limit
   target: Vector1D
@@ -26,20 +27,20 @@ export type Target = {
 }
 
 export type TargetFinder = {
-  byIndex: (target: number) => Target
+  byIndex: (target: number, direction: number) => Target
   byDistance: (from: number, distance: number) => Target
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const { location, loop, slidePositions, span } = params
+  const { location, loop, groupPositions, span } = params
   const slideBounds = getSlideBounds()
 
   function getSlideBounds(): Bound[] {
-    const { slideSizes } = params
-    const startAt = slidePositions[0] + slideSizes[0] / 2
+    const { groupSizes } = params
+    const startAt = groupPositions[0] + groupSizes[0] / 2
 
-    return slideSizes.map((size, index) => {
-      const sizes = slideSizes.slice(0, index)
+    return groupSizes.map((size, index) => {
+      const sizes = groupSizes.slice(0, index)
       const start = sizes.reduce((a, i) => a - i, startAt)
       const end = start - size
       return { end, start }
@@ -48,11 +49,11 @@ export function TargetFinder(params: Params): TargetFinder {
 
   function offsetToSlide(target: Target): number {
     const { distance, index } = target
-    const lastSlide = slidePositions[params.index.max]
+    const lastSlide = groupPositions[params.index.max]
     const pastLastSlide = distance < lastSlide
     const addOffset = loop && pastLastSlide && index === 0
     const offset = addOffset ? distance + span : distance
-    return slidePositions[index] - offset
+    return groupPositions[index] - offset
   }
 
   function findTarget(desired: number, direction: number): Target {
@@ -85,15 +86,23 @@ export function TargetFinder(params: Params): TargetFinder {
     return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
-  function byIndex(index: number): Target {
+  function byIndex(index: number, direction: number): Target {
     const target = params.target.get()
     const counter = params.index.clone()
-    const slidePosition = slidePositions[index]
+    const slidePosition = groupPositions[index]
 
-    if (!loop || counter.max <= 1) {
+    if (!loop) {
       const distance = slidePosition - target
       return { distance, index }
     } else {
+      if (direction === -1) {
+        const distance = -params.diffSizes[counter.get()]
+        return { distance, index }
+      }
+      if (direction === 1) {
+        const distance = params.diffSizes[counter.add(-1).get()]
+        return { distance, index }
+      }
       const d1 = slidePosition - target
       const d2 = span + slidePosition - target
       const d3 = slidePosition - span - target

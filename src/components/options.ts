@@ -7,23 +7,11 @@ export type Options = {
   draggable: boolean
   draggableClass: string
   draggingClass: string
+  groupSlides: number
   loop: boolean
   selectedClass: string
   speed: number
   startIndex: number
-}
-
-export type UserOptions = {
-  align?: Alignments
-  containerSelector?: string
-  dragFree?: boolean
-  draggable?: boolean
-  draggableClass?: string
-  draggingClass?: string
-  loop?: boolean
-  selectedClass?: string
-  speed?: number
-  startIndex?: number
 }
 
 export const defaultOptions = Object.freeze({
@@ -33,8 +21,11 @@ export const defaultOptions = Object.freeze({
   draggable: true,
   draggableClass: 'is-draggable',
   draggingClass: 'is-dragging',
+  groupSlides: 1,
   loop: false,
   selectedClass: 'is-selected',
   speed: 10,
   startIndex: 0,
 })
+
+export type UserOptions = Partial<Options>

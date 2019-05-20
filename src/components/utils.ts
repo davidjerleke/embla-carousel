@@ -30,3 +30,11 @@ export function debounce(
     timeout.id = window.setTimeout(callback, time) || 0
   }
 }
+
+export function groupedArray(array: any[], size: number): number[][] {
+  const groups = []
+  for (let i = 0; i < array.length; i += size) {
+    groups.push(array.slice(i, i + size))
+  }
+  return groups
+}

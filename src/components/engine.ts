@@ -12,7 +12,7 @@ import { Pointer } from './pointer'
 import { TargetFinder } from './targetFinder'
 import { Translate } from './translate'
 import { Traveller } from './traveller'
-import { rectWidth } from './utils'
+import { groupedArray, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 import { VectorBounds } from './vectorBounds'
 import { VectorLooper } from './vectorLooper'
@@ -38,12 +38,23 @@ export function Engine(
   events: EventDispatcher,
 ): Engine {
   // Options
-  const { align, startIndex, loop, speed, dragFree } = options
+  const {
+    align,
+    startIndex,
+    loop,
+    speed,
+    dragFree,
+    groupSlides,
+  } = options
   const speedLimit = Limit({ min: 5, max: 20 })
 
   // Index
+  const indexMax = Math.ceil(slides.length / groupSlides) - 1
   const index = Counter({
-    limit: Limit({ min: 0, max: slides.length - 1 }),
+    limit: Limit({
+      min: 0,
+      max: indexMax,
+    }),
     loop,
     start: startIndex,
   })
@@ -53,28 +64,30 @@ export function Engine(
   const chunkSize = ChunkSize(rootSize)
   const alignSize = AlignSize({ align, root: chunkSize.root })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
-  const alignSizes = slideSizes.map(alignSize.measure)
-  const contentSize = slideSizes.reduce((a, s) => a + s, 0)
-  const diffSizes = slideSizes.map((size, i) => {
+  const groupedSizes = groupedArray(slideSizes, groupSlides)
+  const groupSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
+  const alignSizes = groupSizes.map(alignSize.measure)
+  const contentSize = groupSizes.reduce((a, s) => a + s, 0)
+  const diffSizes = groupSizes.map((size, i) => {
     const next = index.clone().set(i + 1)
     return size + alignSizes[i] - alignSizes[next.get()]
   })
-  const slidePositions = slides.map((s, i) => {
+  const groupPositions = groupSizes.map((s, i) => {
     const sizes = diffSizes.slice(0, i)
     return sizes.reduce((a, d) => a - d, alignSizes[0])
   })
-  const lastSlideSize = slideSizes[index.max]
-  const endOffset = loop ? chunkSize.measure(1) : lastSlideSize
-  const max = alignSizes[0]
-  const min = max + -contentSize + endOffset
+  const loopSize = -contentSize + chunkSize.measure(1)
+  const max = groupPositions[0]
+  const min = loop ? max + loopSize : groupPositions[index.max]
   const limit = Limit({ max, min })
 
-  // Draw
+  // Direction
   const direction = (): number =>
     pointer.isDown()
       ? pointer.direction.get()
       : slider.mover.direction.get()
 
+  // Draw
   const update = (): void => {
     if (!pointer.isDown()) {
       if (!loop) {
@@ -97,7 +110,7 @@ export function Engine(
 
   // Shared
   const animation = Animation(update)
-  const startLocation = slidePositions[index.get()]
+  const startLocation = groupPositions[index.get()]
   const locationAtDragStart = Vector1D(startLocation)
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
@@ -112,13 +125,14 @@ export function Engine(
     animation,
     events,
     findTarget: TargetFinder({
+      diffSizes,
       dragFree,
+      groupSizes,
       index,
       limit,
       location,
       loop,
-      slidePositions,
-      slideSizes,
+      groupPositions,
       span: contentSize,
       target,
     }),
@@ -164,8 +178,9 @@ export function Engine(
     shifter: InfiniteShifter({
       alignSizes,
       chunkSize,
-      itemSizes: slideSizes,
-      items: slides,
+      contentSize,
+      slides,
+      slideSizes,
     }),
     target,
     translate: Translate(container),
