@@ -1,10 +1,10 @@
 import { Animation } from '../components/animation'
-import { VectorBounds } from '../components/vectorBounds'
+import { EdgeGuard } from '../components/edgeGuard'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 import { Mover } from '../components/mover'
 
-let vectorBounds: VectorBounds
+let edgeGuard: EdgeGuard
 let location: Vector1D
 let mover: Mover
 const animation = Animation(() => {})
@@ -19,7 +19,7 @@ beforeEach(() => {
     maxForce: 100,
     speed: 10,
   })
-  vectorBounds = VectorBounds({
+  edgeGuard = EdgeGuard({
     limit,
     location,
     mover,
@@ -28,12 +28,12 @@ beforeEach(() => {
   })
 })
 
-describe('VectorBounds', () => {
+describe('EdgeGuard', () => {
   test('Constrains given Vector to Bound min when location is less than min', done => {
     const vector = Vector1D(-20)
     const locationPastMinLimit = limit.min - 1
     location.setNumber(locationPastMinLimit)
-    vectorBounds.constrain(vector)
+    edgeGuard.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(0)
@@ -45,7 +45,7 @@ describe('VectorBounds', () => {
     const vector = Vector1D(20)
     const locationPastMaxLimit = limit.max + 1
     location.setNumber(locationPastMaxLimit)
-    vectorBounds.constrain(vector)
+    edgeGuard.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(10)
@@ -57,7 +57,7 @@ describe('VectorBounds', () => {
     const vector = Vector1D(20)
     const locationWithinMaxLimit = limit.max
     location.setNumber(locationWithinMaxLimit)
-    vectorBounds.constrain(vector)
+    edgeGuard.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(20)

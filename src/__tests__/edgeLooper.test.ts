@@ -1,10 +1,10 @@
-import { VectorLooper } from '../components/vectorLooper'
+import { EdgeLooper } from '../components/edgeLooper'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 
 let location: Vector1D
 let vectors: Vector1D[]
-let vectorLooper: VectorLooper
+let edgeLooper: EdgeLooper
 const minLimit = 0
 const maxLimit = 10
 const span = 10
@@ -18,7 +18,7 @@ beforeEach(() => {
     Vector1D(vector_1_initial_value),
     Vector1D(vector_2_initial_value),
   ]
-  vectorLooper = VectorLooper({
+  edgeLooper = EdgeLooper({
     limit,
     location,
     span,
@@ -26,11 +26,11 @@ beforeEach(() => {
   })
 })
 
-describe('VectorLooper', () => {
+describe('EdgeLooper', () => {
   test('Subtracts span size from given Vectors when location is greater than Limit max', () => {
     const direction = 1
     location.setNumber(maxLimit + 1)
-    vectorLooper.loop(direction)
+    edgeLooper.loop(direction)
     expect(vectors[0].get()).toBe(vector_1_initial_value - span)
     expect(vectors[1].get()).toBe(vector_2_initial_value - span)
   })
@@ -38,7 +38,7 @@ describe('VectorLooper', () => {
   test('Adds span size to given Vectors when location is less than Limit min', () => {
     const direction = -1
     location.setNumber(minLimit - 1)
-    vectorLooper.loop(direction)
+    edgeLooper.loop(direction)
     expect(vectors[0].get()).toBe(vector_1_initial_value + span)
     expect(vectors[1].get()).toBe(vector_2_initial_value + span)
   })

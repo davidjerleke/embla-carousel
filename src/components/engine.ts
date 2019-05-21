@@ -3,6 +3,8 @@ import { Animation } from './animation'
 import { ChunkSize } from './chunkSize'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
+import { EdgeGuard } from './edgeGuard'
+import { EdgeLooper } from './edgeLooper'
 import { EventDispatcher } from './eventDispatcher'
 import { InfiniteShifter } from './infiniteShifter'
 import { Limit } from './limit'
@@ -14,20 +16,18 @@ import { Translate } from './translate'
 import { Traveller } from './traveller'
 import { groupNumbers, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
-import { VectorBounds } from './vectorBounds'
-import { VectorLooper } from './vectorLooper'
 
 export type Engine = {
   animation: Animation
-  bounds: VectorBounds
+  edgeGuard: EdgeGuard
+  edgeLooper: EdgeLooper
   index: Counter
+  mover: Mover
   pointer: DragBehaviour
+  shifter: InfiniteShifter
   target: Vector1D
   translate: Translate
   travel: Traveller
-  infinite: VectorLooper
-  shifter: InfiniteShifter
-  mover: Mover
 }
 
 export function Engine(
@@ -91,7 +91,7 @@ export function Engine(
   const update = (): void => {
     if (!pointer.isDown()) {
       if (!loop) {
-        slider.bounds.constrain(target)
+        slider.edgeGuard.constrain(target)
       }
       slider.mover.seek(target).update()
 
@@ -101,7 +101,7 @@ export function Engine(
       }
     }
     if (loop) {
-      slider.infinite.loop(direction())
+      slider.edgeLooper.loop(direction())
       slider.shifter.shiftAccordingTo(slider.mover.location)
     }
     slider.translate.to(slider.mover.location).useType('x3d')
@@ -159,20 +159,20 @@ export function Engine(
   // Slider
   const slider = {
     animation,
-    bounds: VectorBounds({
+    edgeGuard: EdgeGuard({
       animation,
       limit,
       location,
       mover,
       tolerance: 50,
     }),
-    index,
-    infinite: VectorLooper({
+    edgeLooper: EdgeLooper({
       limit,
       location,
       span: contentSize,
       vectors,
     }),
+    index,
     mover,
     pointer,
     shifter: InfiniteShifter({

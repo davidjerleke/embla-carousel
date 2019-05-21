@@ -8,28 +8,27 @@ type Params = {
   vectors: Vector1D[]
 }
 
-export type VectorLooper = {
-  loop: (direction: number) => VectorLooper
+export type EdgeLooper = {
+  loop: (direction: number) => void
 }
 
-export function VectorLooper(params: Params): VectorLooper {
+export function EdgeLooper(params: Params): EdgeLooper {
   const { limit, location, span, vectors } = params
+  const { reachedMin, reachedMax } = limit
 
   function shouldLoop(direction: number): boolean {
-    const { reachedMin, reachedMax } = limit
     const reachedLimit = direction === -1 ? reachedMin : reachedMax
     return direction !== 0 && reachedLimit(location.get())
   }
 
-  function loop(direction: number): VectorLooper {
+  function loop(direction: number): void {
     if (shouldLoop(direction)) {
       const distance = span * (direction * -1)
       vectors.forEach(v => v.addNumber(distance))
     }
-    return self
   }
 
-  const self: VectorLooper = {
+  const self: EdgeLooper = {
     loop,
   }
   return Object.freeze(self)

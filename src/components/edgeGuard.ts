@@ -11,25 +11,23 @@ type Params = {
   tolerance: number
 }
 
-export type VectorBounds = {
-  constrain: (v: Vector1D) => VectorBounds
+export type EdgeGuard = {
+  constrain: (v: Vector1D) => void
 }
 
-export function VectorBounds(params: Params): VectorBounds {
+export function EdgeGuard(params: Params): EdgeGuard {
   const { limit, location, mover, animation, tolerance } = params
+  const { min, max, reachedMin, reachedMax } = limit
   const state = { timeout: 0 }
 
   function shouldConstrain(v: Vector1D): boolean {
     const l = location.get()
-    const alreadyMin = v.get() === limit.min
-    const alreadyMax = v.get() === limit.max
-    return (
-      (limit.reachedMin(l) && !alreadyMin) ||
-      (limit.reachedMax(l) && !alreadyMax)
-    )
+    const constrainMin = reachedMin(l) && v.get() !== min
+    const constrainMax = reachedMax(l) && v.get() !== max
+    return constrainMin || constrainMax
   }
 
-  function constrain(v: Vector1D): VectorBounds {
+  function constrain(v: Vector1D): void {
     if (!state.timeout && shouldConstrain(v)) {
       const constraint = limit.constrain(v.get())
       state.timeout = window.setTimeout(() => {
@@ -39,10 +37,9 @@ export function VectorBounds(params: Params): VectorBounds {
         state.timeout = 0
       }, tolerance)
     }
-    return self
   }
 
-  const self: VectorBounds = {
+  const self: EdgeGuard = {
     constrain,
   }
   return Object.freeze(self)
