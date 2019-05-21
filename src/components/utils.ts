@@ -31,7 +31,10 @@ export function debounce(
   }
 }
 
-export function groupedArray(array: any[], size: number): number[][] {
+export function groupNumbers(
+  array: number[],
+  size: number,
+): number[][] {
   const groups = []
   for (let i = 0; i < array.length; i += size) {
     groups.push(array.slice(i, i + size))

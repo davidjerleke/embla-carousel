@@ -6,7 +6,11 @@ import {
 } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
-import { arrayFromCollection, debounce } from './components/utils'
+import {
+  arrayFromCollection,
+  debounce,
+  groupNumbers,
+} from './components/utils'
 
 type Elements = {
   root: HTMLElement
@@ -97,14 +101,23 @@ export function EmblaCarousel(
 
   function addClassToSelected(nodes: HTMLElement[]): () => void {
     const className = options.selectedClass
-    nodes[slider.index.get()].classList.add(className)
+    const indexGroups = groupNumbers(
+      Object.keys(nodes).map(Number),
+      options.groupSlides,
+    )
+    indexGroups[slider.index.get()].forEach(i =>
+      nodes[i].classList.add(className),
+    )
 
     return (): void => {
       const selectedIndex = slider.index.get()
       nodes
         .filter(n => n.classList.contains(className))
         .forEach(n => n.classList.remove(className))
-      nodes[selectedIndex].classList.add(className)
+
+      indexGroups[selectedIndex].forEach(i =>
+        nodes[i].classList.add(className),
+      )
     }
   }
 

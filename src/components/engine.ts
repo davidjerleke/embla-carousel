@@ -12,7 +12,7 @@ import { Pointer } from './pointer'
 import { TargetFinder } from './targetFinder'
 import { Translate } from './translate'
 import { Traveller } from './traveller'
-import { groupedArray, rectWidth } from './utils'
+import { groupNumbers, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 import { VectorBounds } from './vectorBounds'
 import { VectorLooper } from './vectorLooper'
@@ -64,10 +64,10 @@ export function Engine(
   const chunkSize = ChunkSize(rootSize)
   const alignSize = AlignSize({ align, root: chunkSize.root })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
-  const groupedSizes = groupedArray(slideSizes, groupSlides)
+  const groupedSizes = groupNumbers(slideSizes, groupSlides)
   const groupSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
   const alignSizes = groupSizes.map(alignSize.measure)
-  const contentSize = groupSizes.reduce((a, s) => a + s, 0)
+  const contentSize = groupSizes.reduce((a, s) => a + s)
   const diffSizes = groupSizes.map((size, i) => {
     const next = index.clone().set(i + 1)
     return size + alignSizes[i] - alignSizes[next.get()]
