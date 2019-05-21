@@ -92,6 +92,7 @@ const node = document.getElementById('embla')
 const embla = EmblaCarousel(node, {
   align: 'center',
   container: '*',
+  groupSlides: 1,
   draggable: true,
   dragFree: false,
   loop: false,
@@ -108,6 +109,9 @@ Align the slides relative to the carousel viewport.
 
 **`container`** (string: querySelectorString)  
 The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
+
+**`groupSlides`** (number)  
+Groups slides together into groups of given size and makes each group act as a single slide.
 
 **`draggable`** (boolean)  
 Allow mouse and touch interactions to move the carousel.
