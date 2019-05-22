@@ -4,26 +4,27 @@ import { Vector1D } from './vector1d'
 type Params = {
   alignSizes: number[]
   chunkSize: ChunkSize
-  contentSize: number
-  slides: HTMLElement[]
+  location: Vector1D
   slideSizes: number[]
+  span: number
 }
 
 type ShiftPoint = {
+  point: number
   location: Vector1D
-  node: HTMLElement
+  index: number
   findTarget: (location: number) => Vector1D
 }
 
 export type InfiniteShifter = {
-  shiftAccordingTo: (parentLocation: Vector1D) => void
+  shiftInfinite: (slides: HTMLElement[]) => void
+  shiftPoints: ShiftPoint[]
 }
 
 export function InfiniteShifter(params: Params) {
-  const { slides, chunkSize, slideSizes, alignSizes } = params
+  const { span, chunkSize, slideSizes, alignSizes } = params
   const viewSize = chunkSize.root
-  const distance = params.contentSize
-  const ascItems = Object.keys(slides).map(Number)
+  const ascItems = Object.keys(slideSizes).map(Number)
   const descItems = ascItems.slice().reverse()
   const shiftPoints = startPoints().concat(endPoints())
 
@@ -63,7 +64,7 @@ export function InfiniteShifter(params: Params) {
     from: number,
     direction: 0 | 1,
   ): number {
-    const slideCount = slides.length - 1
+    const slideCount = ascItems.length - 1
     return subtractItemSizesOf(
       indexes.map(i => (i + direction) % slideCount),
       from,
@@ -78,9 +79,9 @@ export function InfiniteShifter(params: Params) {
     const ascIndexes = indexes.slice().sort((a, b) => a - b)
     return ascIndexes.map(
       (i, j): ShiftPoint => {
-        const node = slides[i]
-        const initial = distance * (!direction ? 0 : -1)
-        const offset = distance * (!direction ? 1 : 0)
+        const index = i
+        const initial = span * (!direction ? 0 : -1)
+        const offset = span * (!direction ? 1 : 0)
         const slidesInSpan = ascIndexes.slice(0, j)
         const point = shiftPoint(slidesInSpan, from, direction)
         const location = Vector1D(-1)
@@ -89,7 +90,7 @@ export function InfiniteShifter(params: Params) {
           const t = loc > point ? initial : offset
           return target.setNumber(t)
         }
-        return { findTarget, location, node }
+        return { point, findTarget, location, index }
       },
     )
   }
@@ -104,22 +105,25 @@ export function InfiniteShifter(params: Params) {
   function endPoints(): ShiftPoint[] {
     const gap = viewSize - alignSizes[0] - 1
     const indexes = shiftItemsIn(gap, ascItems)
-    const start = shiftStart(distance, ascItems, -viewSize)
+    const start = shiftStart(span, ascItems, -viewSize)
     return shiftPointsFor(indexes, -start, 0)
   }
 
-  function shiftAccordingTo(parentLocation: Vector1D): void {
+  function shiftInfinite(slides: HTMLElement[]): void {
+    const parentLocation = params.location
     shiftPoints.forEach(point => {
-      const { findTarget, location, node } = point
+      const { findTarget, location, index } = point
       const target = findTarget(parentLocation.get())
       if (target.get() !== location.get()) {
-        node.style.left = `${target.get()}%`
+        slides[index].style.left = `${target.get()}%`
+        location.set(target)
       }
     })
   }
 
   const self: InfiniteShifter = {
-    shiftAccordingTo,
+    shiftInfinite,
+    shiftPoints,
   }
   return Object.freeze(self)
 }

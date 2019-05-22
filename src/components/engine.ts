@@ -102,7 +102,7 @@ export function Engine(
     }
     if (loop) {
       slider.edgeLooper.loop(direction())
-      slider.shifter.shiftAccordingTo(slider.mover.location)
+      slider.shifter.shiftInfinite(slides)
     }
     slider.translate.to(slider.mover.location).useType('x3d')
     slider.animation.proceed()
@@ -178,9 +178,9 @@ export function Engine(
     shifter: InfiniteShifter({
       alignSizes,
       chunkSize,
-      contentSize,
+      location,
       slideSizes,
-      slides,
+      span: contentSize,
     }),
     target,
     translate: Translate(container),

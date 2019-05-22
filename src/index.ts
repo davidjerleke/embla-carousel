@@ -90,7 +90,7 @@ export function EmblaCarousel(
         events.on('dragEnd', () => className.remove(dragging))
       }
       if (options.loop) {
-        slider.shifter.shiftAccordingTo(slider.mover.location)
+        slider.shifter.shiftInfinite(slides)
       }
       if (firstInit) {
         events.on('select', addClassToSelected(slides))
