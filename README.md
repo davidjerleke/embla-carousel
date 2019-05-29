@@ -150,31 +150,37 @@ embla.next()
 
 ...and the methods are:
 
-**`getContainer()`**  
-Gets the current container element node.
+**`containerNode()`**  
+Returns the current container element node.
 
-**`getSlides()`**  
-Gets the slides as an array of element nodes.
+**`slideNodes()`**  
+Returns the slides as an array of element nodes.
 
-**`getSelectedIndex()`**  
-Gets the current selected slide index. First slide starts at index 0.
+**`selectedIndex()`**  
+Returns the current selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupCells` is set to `1` each slide has its own index. Zero-based.
+
+**`previousIndex()`**  
+Returns the previous selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupCells` is set to `1` each slide has its own index. Zero-based.
+
+**`groupedIndexes()`**  
+Returns an array of all slide indexes grouped into arrays according to the `groupSlides` option, i.e. if the total number of slides is `4` and `groupSlides` is set to `2`, it will return `[[0, 1], [2, 3]]`.
 
 **`next()`**  
-Goes to next item. If loop is disabled and the carousel is on the last slide this method will do nothing.
+Moves to next item. If `loop` option is set to `false` and the carousel is on the last slide this method will do nothing.
 
 **`previous()`**  
-Goes to previous item. If loop is disabled and the carousel is on the first slide this method will do nothing.
+Moves to previous item. If `loop` option is set to `false` and the carousel is on the first slide this method will do nothing.
 
 **`goTo(index: number)`**
-Goes to item that matches passed index. If loop is enabled the carousel will seek the closest way to passed index.
+Moves to item that matches passed index. If `loop` option is set to `true` the carousel will seek the closest way to the passed index.
 
 **`changeOptions(options: options)`**  
-Applies passed options by doing all the necessary calculations and reinitializing the carousel from scratch.
+Applies passed options by doing all the necessary calculations and reinitialising the carousel from scratch.
 
 **`on(event: string, callback: function)`**  
 Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
 
-- **`init`** - Triggers after the carousel has been initialized for the first time.
+- **`init`** - Triggers after the carousel has been initialised for the first time.
 - **`destroy`** - Triggers after the carousel has been destroyed.
 - **`select`** - Triggers when a new target slide has been selected.
 - **`dragStart`** - Triggers when carousel dragging begins.

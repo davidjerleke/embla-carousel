@@ -8,6 +8,7 @@ type Params = {
   animation: Animation
   target: Vector1D
   index: Counter
+  indexPrevious: Counter
   findTarget: TargetFinder
   events: EventDispatcher
 }
@@ -23,17 +24,17 @@ export function Traveller(params: Params): Traveller {
   const { index, findTarget, animation } = params
 
   function travelTo(next: Target): Traveller {
-    const { events, target } = params
-    const nextIndex = next.index
+    const { indexPrevious, events, target } = params
     const distanceDiff = next.distance
-    const indexDiff = nextIndex !== index.get()
+    const indexDiff = next.index !== index.get()
 
     if (distanceDiff) {
       animation.start()
       target.addNumber(distanceDiff)
     }
     if (indexDiff) {
-      index.set(nextIndex)
+      indexPrevious.set(index.get())
+      index.set(next.index)
       events.dispatch('select')
     }
     return self

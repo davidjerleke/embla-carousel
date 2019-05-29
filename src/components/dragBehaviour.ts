@@ -27,9 +27,6 @@ type Params = {
 export type DragBehaviour = {
   direction: Direction
   isDown: () => boolean
-  down: (evt: Event) => void
-  move: (evt: Event) => void
-  up: () => void
   removeAllEvents: () => void
   addActivationEvents: () => void
 }
@@ -150,11 +147,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
   const self: DragBehaviour = {
     addActivationEvents,
     direction,
-    down,
     isDown,
-    move,
     removeAllEvents,
-    up,
   }
   return Object.freeze(self)
 }

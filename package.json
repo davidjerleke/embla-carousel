@@ -3,7 +3,7 @@
   "version": "0.6.4",
   "author": "David Cetinkaya",
   "private": false,
-  "description": "Simple and sensible carousels for the web",
+  "description": "An extensible low level carousel for the web, written in TypeScript",
   "keywords": [
     "slider",
     "carousel",

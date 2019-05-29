@@ -325,13 +325,12 @@
         var dots = wrap.querySelectorAll('.embla__dot__button')
         var dotsArray = [].slice.call(dots)
         var embla = EmblaCarousel(view, options)
-
         var onInit = function() {
-          var index = embla.getSelectedIndex()
+          var index = embla.selectedIndex()
           dots[index].classList.add('embla__dot--selected')
         }
         var onSelect = function() {
-          var index = embla.getSelectedIndex()
+          var index = embla.selectedIndex()
           dotWrap
             .querySelector('.embla__dot--selected')
             .classList.remove('embla__dot--selected')

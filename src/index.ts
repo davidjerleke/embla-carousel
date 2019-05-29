@@ -6,11 +6,7 @@ import {
 } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
-import {
-  arrayFromCollection,
-  debounce,
-  groupNumbers,
-} from './components/utils'
+import { arrayFromCollection, debounce } from './components/utils'
 
 type Elements = {
   root: HTMLElement
@@ -18,14 +14,16 @@ type Elements = {
   slides: HTMLElement[]
 }
 
-type EmblaCarousel = {
+export type EmblaCarousel = {
   next: () => void
   previous: () => void
   goTo: (index: number) => void
   destroy: () => void
-  getContainer: () => HTMLElement
-  getSlides: () => HTMLElement[]
-  getSelectedIndex: () => number
+  containerNode: () => HTMLElement
+  slideNodes: () => HTMLElement[]
+  selectedIndex: () => number
+  previousIndex: () => number
+  groupedIndexes: () => number[][]
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   changeOptions: (options: UserOptions) => void
@@ -35,38 +33,37 @@ export function EmblaCarousel(
   sliderRoot: HTMLElement,
   userOptions: UserOptions = {},
 ): EmblaCarousel {
-  const slider = {} as Engine
-  const elements = {} as Elements
-  const options = Object.assign({}, defaultOptions, userOptions)
   const state = { active: false, lastWindowWidth: 0 }
+  const options = Object.assign({}, defaultOptions, userOptions)
   const events = EventDispatcher()
   const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
   const changeOptions = reActivate
+  const slider = {} as Engine
+  const elements = {} as Elements
   const { on, off } = events
 
   activate(options)
 
   function storeElements(): void {
-    const root = sliderRoot
-    if (!root) {
+    if (!sliderRoot) {
       throw new Error('No root element provided 😢')
     }
     const selector = options.containerSelector
-    const container = root.querySelector(selector) as HTMLElement
+    const container = sliderRoot.querySelector(selector)
     if (!container) {
       throw new Error('No valid container element found 😢')
     }
-    elements.root = root
-    elements.container = container
+    elements.root = sliderRoot
+    elements.container = container as HTMLElement
     elements.slides = arrayFromCollection(container.children)
     state.active = true
   }
 
   function activate(userOpt: UserOptions = {}): void {
     const firstInit = !state.active
-    storeElements()
     state.lastWindowWidth = window.innerWidth
+    storeElements()
 
     if (elements.slides.length > 0) {
       const { root, container, slides } = elements
@@ -75,57 +72,45 @@ export function EmblaCarousel(
 
       Object.assign(slider, engine)
       eventStore.add(window, 'resize', debouncedResize)
-      slides.forEach((s, i) =>
-        eventStore.add(s, 'focus', slideFocus(i), true),
-      )
+      slides.forEach(slideFocus)
       slider.translate.to(slider.mover.location)
 
       if (options.draggable) {
-        const draggable = options.draggableClass
         const dragging = options.draggingClass
-        const className = root.classList
         slider.pointer.addActivationEvents()
-        className.add(draggable)
-        events.on('dragStart', () => className.add(dragging))
-        events.on('dragEnd', () => className.remove(dragging))
+        root.classList.add(options.draggableClass)
+        events.on('dragStart', () => root.classList.add(dragging))
+        events.on('dragEnd', () => root.classList.remove(dragging))
       }
       if (options.loop) {
         slider.shifter.shiftInfinite(slides)
       }
       if (firstInit) {
-        events.on('select', addClassToSelected(slides))
+        events.on('select', toggleSelectedClass)
+        toggleSelectedClass()
         setTimeout(() => events.dispatch('init'), 0)
       }
     }
   }
 
-  function addClassToSelected(nodes: HTMLElement[]): () => void {
-    const className = options.selectedClass
-    const indexGroups = groupNumbers(
-      Object.keys(nodes).map(Number),
-      options.groupSlides,
-    )
-    indexGroups[slider.index.get()].forEach(i =>
-      nodes[i].classList.add(className),
-    )
-
-    return (): void => {
-      const selectedIndex = slider.index.get()
-      nodes
-        .filter(n => n.classList.contains(className))
-        .forEach(n => n.classList.remove(className))
-
-      indexGroups[selectedIndex].forEach(i =>
-        nodes[i].classList.add(className),
-      )
-    }
+  function toggleSelectedClass(): void {
+    const { slides } = elements
+    const { index, indexPrevious, indexGroups } = slider
+    const selected = options.selectedClass
+    const previousGroup = indexGroups[indexPrevious.get()]
+    const currentGroup = indexGroups[index.get()]
+    previousGroup.forEach(i => slides[i].classList.remove(selected))
+    currentGroup.forEach(i => slides[i].classList.add(selected))
   }
 
-  function slideFocus(index: number): () => void {
-    return (): void => {
+  function slideFocus(slide: HTMLElement, index: number): void {
+    const focus = (): void => {
       sliderRoot.scrollLeft = 0
-      goTo(index)
+      const groupIndex = Math.floor(index / options.groupSlides)
+      const selectedGroup = index ? groupIndex : index
+      goTo(selectedGroup)
     }
+    eventStore.add(slide, 'focus', focus, true)
   }
 
   function reActivate(userOpt: UserOptions = {}): void {
@@ -177,29 +162,39 @@ export function EmblaCarousel(
     slider.travel.toIndex(index)
   }
 
-  function getSelectedIndex(): number {
+  function selectedIndex(): number {
     return slider.index.get()
   }
 
-  function getContainer(): HTMLElement {
+  function previousIndex(): number {
+    return slider.indexPrevious.get()
+  }
+
+  function groupedIndexes(): number[][] {
+    return slider.indexGroups
+  }
+
+  function containerNode(): HTMLElement {
     return elements.container
   }
 
-  function getSlides(): HTMLElement[] {
+  function slideNodes(): HTMLElement[] {
     return elements.slides
   }
 
   const self: EmblaCarousel = {
     changeOptions,
+    containerNode,
     destroy,
-    getContainer,
-    getSelectedIndex,
-    getSlides,
     goTo,
+    groupedIndexes,
     next,
     off,
     on,
     previous,
+    previousIndex,
+    selectedIndex,
+    slideNodes,
   }
   return Object.freeze(self)
 }
@@ -208,3 +203,5 @@ export default EmblaCarousel
 
 // @ts-ignore
 module.exports = EmblaCarousel
+
+export { UserOptions }

@@ -22,6 +22,8 @@ export type Engine = {
   edgeGuard: EdgeGuard
   edgeLooper: EdgeLooper
   index: Counter
+  indexPrevious: Counter
+  indexGroups: number[][]
   mover: Mover
   pointer: DragBehaviour
   shifter: InfiniteShifter
@@ -46,18 +48,17 @@ export function Engine(
     dragFree,
     groupSlides,
   } = options
-  const speedLimit = Limit({ min: 5, max: 20 })
 
   // Index
   const indexMax = Math.ceil(slides.length / groupSlides) - 1
+  const indexes = Object.keys(slides).map(Number)
+  const indexGroups = groupNumbers(indexes, groupSlides)
   const index = Counter({
-    limit: Limit({
-      max: indexMax,
-      min: 0,
-    }),
+    limit: Limit({ max: indexMax, min: 0 }),
     loop,
     start: startIndex,
   })
+  const indexPrevious = index.clone()
 
   // Measurements
   const rootSize = rectWidth(container)
@@ -90,9 +91,8 @@ export function Engine(
   // Draw
   const update = (): void => {
     if (!pointer.isDown()) {
-      if (!loop) {
-        slider.edgeGuard.constrain(target)
-      }
+      if (!loop) slider.edgeGuard.constrain(target)
+
       slider.mover.seek(target).update()
 
       if (slider.mover.settle(target)) {
@@ -119,7 +119,7 @@ export function Engine(
     location,
     mass: 1.5,
     maxForce: chunkSize.root * 2,
-    speed: speedLimit.constrain(speed),
+    speed,
   })
   const travel = Traveller({
     animation,
@@ -137,6 +137,7 @@ export function Engine(
       target,
     }),
     index,
+    indexPrevious,
     target,
   })
 
@@ -157,7 +158,7 @@ export function Engine(
   })
 
   // Slider
-  const slider = {
+  const slider: Engine = {
     animation,
     edgeGuard: EdgeGuard({
       animation,
@@ -173,6 +174,8 @@ export function Engine(
       vectors,
     }),
     index,
+    indexGroups,
+    indexPrevious,
     mover,
     pointer,
     shifter: InfiniteShifter({
@@ -186,6 +189,5 @@ export function Engine(
     translate: Translate(container),
     travel,
   }
-
-  return slider
+  return Object.freeze(slider)
 }
