@@ -1,8 +1,12 @@
-# Embla Carousel &middot; ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg) ![Travis (.org) branch](https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)
+# Embla Carousel &middot; [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders)
+
+![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg) ![Travis (.org) branch](https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)
 
 > An extensible low level carousel for the web, written in TypeScript.
 
-Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. It doesn’t come with many options - just a few useful methods. Extend it with some very basic JavaScript and build awesome things! It's is 100% open source and free to use on both personal and commercial projects.
+Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics-based carousels. It's dependency free and 100% open source.
+
+## Table of contents
 
 - [Demo](#demo)
 - [Installation](#installation)
@@ -13,7 +17,7 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 
 ## Demo
 
-See the [demo page](https://davidcetinkaya.github.io/embla-carousel).
+See the [demo page](https://davidcetinkaya.github.io/embla-carousel) or try Embla Carousel on [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
 
 ## Installation
 

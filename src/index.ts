@@ -105,9 +105,9 @@ export function EmblaCarousel(
 
   function slideFocus(slide: HTMLElement, index: number): void {
     const focus = (): void => {
-      sliderRoot.scrollLeft = 0
       const groupIndex = Math.floor(index / options.groupSlides)
       const selectedGroup = index ? groupIndex : index
+      sliderRoot.scrollLeft = 0
       goTo(selectedGroup)
     }
     eventStore.add(slide, 'focus', focus, true)
