@@ -111,7 +111,7 @@ const embla = EmblaCarousel(node, {
 **`align`** (string: start | center | end)  
 Align the slides relative to the carousel viewport.
 
-**`container`** (string: querySelectorString)  
+**`containerSelector`** (string: querySelectorString)  
 The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
 
 **`groupSlides`** (number)  
