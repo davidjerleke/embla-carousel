@@ -95,7 +95,7 @@ Embla comes with a few optional settings that you can change by passing an objec
 const node = document.getElementById('embla')
 const embla = EmblaCarousel(node, {
   align: 'center',
-  container: '*',
+  containerSelector: '*',
   groupSlides: 1,
   draggable: true,
   dragFree: false,
