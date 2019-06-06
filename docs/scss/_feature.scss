@@ -12,17 +12,25 @@
   }
 }
 
+.feature__bracket {
+  font-weight: bold;
+  color: $color-riga;
+}
+
+.feature__value {
+  color: $color-brand;
+}
+
 .feature__link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   text-decoration: none;
   color: lighten($color-london, 5%);
 
-  &:hover {
-    color: $color-brand;
-  }
-
   @media (min-width: $media-lg) {
+    &:hover {
+      color: $color-brand;
+    }
     transition: color 0.2s;
   }
 }
@@ -38,13 +46,4 @@
     width: 2.1rem;
     height: 2.1rem;
   }
-}
-
-.feature__bracket {
-  font-weight: bold;
-  color: $color-riga;
-}
-
-.feature__value {
-  color: $color-brand;
 }

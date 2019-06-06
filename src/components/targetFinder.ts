@@ -33,9 +33,9 @@ export type TargetFinder = {
 
 export function TargetFinder(params: Params): TargetFinder {
   const { location, loop, groupPositions, span } = params
-  const slideBounds = getSlideBounds()
+  const groupBounds = calculateGroupBounds()
 
-  function getSlideBounds(): Bound[] {
+  function calculateGroupBounds(): Bound[] {
     const { groupSizes } = params
     const startAt = groupPositions[0] + groupSizes[0] / 2
 
@@ -47,38 +47,31 @@ export function TargetFinder(params: Params): TargetFinder {
     })
   }
 
-  function offsetToSlide(target: Target): number {
+  function offsetToGroupPosition(target: Target): number {
     const { distance, index } = target
-    const lastSlide = groupPositions[params.index.max]
-    const pastLastSlide = distance < lastSlide
-    const addOffset = loop && pastLastSlide && index === 0
+    const lastGroup = groupPositions[params.index.max]
+    const pastLastGroup = distance < lastGroup
+    const addOffset = loop && pastLastGroup && index === 0
     const offset = addOffset ? distance + span : distance
     return groupPositions[index] - offset
   }
 
-  function findTarget(desired: number, direction: number): Target {
+  function findTargetAt(targetDistance: number): Target {
     const { reachedMin, reachedMax } = params.limit
-    let distance = desired
-
-    if (direction === 1) {
-      while (reachedMax(distance)) distance -= span
-    }
-    if (direction === -1) {
-      while (reachedMin(distance)) distance += span
-    }
-
-    const index = slideBounds.reduce((a, b, i) => {
-      const { start, end } = b
-      return distance < start && distance > end ? i : a
-    }, 0)
+    let distance = targetDistance
+    while (reachedMax(distance)) distance -= span
+    while (reachedMin(distance)) distance += span
+    const index = groupBounds.reduce(
+      (a, b, i) => (distance < b.start && distance > b.end ? i : a),
+      0,
+    )
     return { distance, index }
   }
 
   function freeDistance(from: number, force: number): Target {
     const targetDistance = location.get() + force
     const distance = location.get() + force - from
-    const direction = Direction(distance).get()
-    const { index } = findTarget(targetDistance, direction)
+    const { index } = findTargetAt(targetDistance)
     return { distance, index }
   }
 
@@ -88,47 +81,50 @@ export function TargetFinder(params: Params): TargetFinder {
 
   function byIndex(index: number, direction: number): Target {
     const target = params.target.get()
-    const counter = params.index.clone()
-    const slidePosition = groupPositions[index]
+    const distanceToGroup = groupPositions[index] - target
 
     if (!loop) {
-      const distance = slidePosition - target
+      const distance = distanceToGroup
       return { distance, index }
     } else {
-      if (direction === -1) {
-        const d = -params.diffSizes[counter.get()]
-        return { distance: d, index }
+      const d1 = distanceToGroup
+      const d2 = span + distanceToGroup
+      const d3 = distanceToGroup - span
+
+      if (direction && params.index.max === 1) {
+        const shortest = minDistance(d1, direction === 1 ? d2 : d3)
+        const distance = Math.abs(shortest) * direction
+        return { distance, index }
+      } else {
+        const distance = minDistance(minDistance(d1, d2), d3)
+        return { distance, index }
       }
-      if (direction === 1) {
-        const d = params.diffSizes[counter.add(-1).get()]
-        return { distance: d, index }
-      }
-      const d1 = slidePosition - target
-      const d2 = span + slidePosition - target
-      const d3 = slidePosition - span - target
-      const distance = minDistance(minDistance(d1, d2), d3)
-      return { distance, index }
     }
   }
 
   function byDistance(from: number, force: number): Target {
-    const { dragFree } = params
-    const targetDistance = location.get() + force
+    const { target, dragFree } = params
+    const forceAbs = Math.abs(force)
+    const halfGroup = params.groupSizes[params.index.get()] / 2
+    const minForce =
+      !dragFree && forceAbs > 1 && forceAbs < halfGroup
+        ? halfGroup * Direction(force).get()
+        : force
+
+    const targetDistance = location.get() + minForce
     const { reachedAny, reachedMax } = params.limit
 
     if (!loop && reachedAny(targetDistance)) {
-      const { min, max } = params.index.clone()
+      const { min, max } = params.index
       const index = reachedMax(targetDistance) ? min : max
       const { distance } = freeDistance(from, force)
       return { distance, index }
     } else {
       if (dragFree) return freeDistance(from, force)
-      const targetVector = params.target.get()
-      const direction = Direction(force).get()
-      const target = findTarget(targetDistance, direction)
-      const offset = offsetToSlide(target)
-      const distance = targetDistance + offset - targetVector
-      const { index } = target
+      const targetGroup = findTargetAt(targetDistance)
+      const offset = offsetToGroupPosition(targetGroup)
+      const distance = targetDistance + offset - target.get()
+      const { index } = targetGroup
       return { distance, index }
     }
   }
