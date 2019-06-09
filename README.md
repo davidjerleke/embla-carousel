@@ -4,7 +4,7 @@
 
 > An extensible low level carousel for the web, written in TypeScript.
 
-Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics-based carousels. It's dependency free and 100% open source.
+Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It's dependency free and 100% open source.
 
 ## Table of contents
 
@@ -17,7 +17,7 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 
 ## Demo
 
-See the [demo page](https://davidcetinkaya.github.io/embla-carousel) or try Embla Carousel on [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
+Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
 
 ## Installation
 
@@ -29,16 +29,12 @@ yarn add embla-carousel
 
 ```javascript
 import EmblaCarousel from 'embla-carousel'
-const embla = EmblaCarousel(document.getElementById('embla'))
 ```
 
 ...or manually inject [this script](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/index.js) into your website.
 
 ```html
 <script src="embla.min.js"></script>
-<script>
-  const embla = EmblaCarousel(document.getElementById('embla'))
-</script>
 ```
 
 ## Usage
@@ -46,16 +42,16 @@ const embla = EmblaCarousel(document.getElementById('embla'))
 Setup your HTML markup...
 
 ```html
-<div class="embla" id="embla">
+<div class="embla">
   <div class="embla__container">
     <div class="embla__slide">
-      ...
+      Slide 1
     </div>
     <div class="embla__slide">
-      ...
+      Slide 2
     </div>
     <div class="embla__slide">
-      ...
+      Slide 3
     </div>
   </div>
 </div>
@@ -81,8 +77,9 @@ Setup your HTML markup...
 ...initialize the script and pass the element node...
 
 ```javascript
-import EmblaCarousel from 'embla-carousel'
-const embla = EmblaCarousel(document.getElementById('embla'))
+const emblaNode = document.querySelector('.embla')
+const options = { loop: true }
+const embla = EmblaCarousel(emblaNode, options)
 ```
 
 ...and you're good to go!
@@ -92,8 +89,7 @@ const embla = EmblaCarousel(document.getElementById('embla'))
 Embla comes with a few optional settings that you can change by passing an object as the second argument. **Default** values are:
 
 ```javascript
-const node = document.getElementById('embla')
-const embla = EmblaCarousel(node, {
+const embla = EmblaCarousel(emblaNode, {
   align: 'center',
   containerSelector: '*',
   groupSlides: 1,
@@ -146,9 +142,6 @@ Classname that will be applied to the wrapper when a pointer is dragging the car
 Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this...
 
 ```javascript
-import EmblaCarousel from 'embla-carousel'
-const embla = EmblaCarousel(document.getElementById('embla'))
-
 embla.next()
 ```
 
