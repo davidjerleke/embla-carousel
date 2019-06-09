@@ -106,8 +106,11 @@ export function TargetFinder(params: Params): TargetFinder {
     const { target, dragFree } = params
     const forceAbs = Math.abs(force)
     const halfGroup = params.groupSizes[params.index.get()] / 2
+    const dragForceThreshold = 5
     const minForce =
-      !dragFree && forceAbs > 1 && forceAbs < halfGroup
+      !dragFree &&
+      forceAbs > dragForceThreshold &&
+      forceAbs < halfGroup
         ? halfGroup * Direction(force).get()
         : force
 
