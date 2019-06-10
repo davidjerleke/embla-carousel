@@ -1,8 +1,8 @@
-<h1 align="center">
+<p align="center">
     <br>
-    <img width="300" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+    <img width="90" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
     <br>
-</h1>
+</p>
 
 # Embla Carousel &middot; [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders)
 
