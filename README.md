@@ -22,7 +22,7 @@ Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-car
 
 ## Implementations
 
-[<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" />](https://github.com/davidcetinkaya/embla-carousel) [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" />](https://github.com/davidcetinkaya/embla-carousel)
+[<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" />](https://github.com/davidcetinkaya/embla-carousel) [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
 ## Installation
 
