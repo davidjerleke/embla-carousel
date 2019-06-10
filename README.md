@@ -9,6 +9,7 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 ## Table of contents
 
 - [Demo](#demo)
+- [Implementations](#demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Options](#options)
@@ -18,6 +19,10 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 ## Demo
 
 Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
+
+## Implementations
+
+[<img src="https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" />](https://github.com/davidcetinkaya/embla-carousel)
 
 ## Installation
 
