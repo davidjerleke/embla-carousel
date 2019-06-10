@@ -1,6 +1,6 @@
 <p align="center">
     <br>
-    <img width="90" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+    [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" width="90" alt="Embla Carousel" />](https://davidcetinkaya.github.io/embla-carousel/)
     <br>
 </p>
 
