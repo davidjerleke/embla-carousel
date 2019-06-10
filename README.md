@@ -1,4 +1,5 @@
 <p align="center">
+  <br>
   <a href="https://davidcetinkaya.github.io/embla-carousel/" target="_blank">
     <img width="90" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
   </a>
