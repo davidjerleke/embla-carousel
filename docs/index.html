@@ -333,69 +333,28 @@
             />
           </svg>
         </button>
-        <ul class="embla__dots">
-          <li class="embla__dot">
-            <button
-              class="embla__dot__button"
-              type="button"
-            ></button>
-          </li>
-          <li class="embla__dot">
-            <button
-              class="embla__dot__button"
-              type="button"
-            ></button>
-          </li>
-          <li class="embla__dot">
-            <button
-              class="embla__dot__button"
-              type="button"
-            ></button>
-          </li>
-          <li class="embla__dot">
-            <button
-              class="embla__dot__button"
-              type="button"
-            ></button>
-          </li>
-          <li class="embla__dot">
-            <button
-              class="embla__dot__button"
-              type="button"
-            ></button>
-          </li>
-        </ul>
+        <ul class="embla__dots"></ul>
       </div>
     </script>
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
-      function setupEmblaCarousel(wrap, options) {
-        var view = wrap.querySelector('.embla__viewport')
-        var nextBtn = wrap.querySelector('.embla__nav--next')
-        var prevBtn = wrap.querySelector('.embla__nav--prev')
-        var dotWrap = wrap.querySelector('.embla__dots')
-        var dots = wrap.querySelectorAll('.embla__dot__button')
-        var dotsArray = [].slice.call(dots)
-        var embla = EmblaCarousel(view, options)
-        var onInit = function() {
-          var index = embla.selectedIndex()
-          dots[index].classList.add('embla__dot--selected')
-        }
-        var onSelect = function() {
-          var index = embla.selectedIndex()
-          dotWrap
-            .querySelector('.embla__dot--selected')
-            .classList.remove('embla__dot--selected')
-          dots[index].classList.add('embla__dot--selected')
-        }
+      function generateDotsBtns(dots, embla) {
+        var indexes = embla.groupedIndexes()
+        var dotsFrag = document.createDocumentFragment()
+        var dotsArray = indexes.map(function() {
+          return document.createElement('button')
+        })
+        dotsArray.forEach(function(dotNode) {
+          return dotsFrag.appendChild(dotNode)
+        })
+        dots.appendChild(dotsFrag)
+        return dotsArray
+      }
 
-        embla.on('init', onInit)
-        embla.on('select', onSelect)
-        nextBtn.addEventListener('click', embla.next, false)
-        prevBtn.addEventListener('click', embla.previous, false)
-
-        dotsArray.forEach(function(d, i) {
-          d.addEventListener(
+      function addDotBtnClickListeners(dotsArray, embla) {
+        return dotsArray.forEach(function(dotNode, i) {
+          dotNode.classList.add('embla__dot')
+          dotNode.addEventListener(
             'click',
             function() {
               embla.goTo(i)
@@ -403,7 +362,59 @@
             false,
           )
         })
+      }
 
+      function setSelectedDotBtn(dotsArray, embla) {
+        return function() {
+          var selected = embla.selectedIndex()
+          var previous = embla.previousIndex()
+          dotsArray[previous].classList.remove('is-selected')
+          dotsArray[selected].classList.add('is-selected')
+        }
+      }
+
+      function addPrevNextBtnClickListeners(prevBtn, nextBtn, embla) {
+        prevBtn.addEventListener('click', embla.previous, false)
+        nextBtn.addEventListener('click', embla.next, false)
+      }
+
+      function togglePrevAndNextBtns(prevBtn, nextBtn, embla) {
+        var min = 0
+        var max = embla.groupedIndexes().length - 1
+        return function() {
+          var selected = embla.selectedIndex()
+          var previous = embla.previousIndex()
+          if (previous === min) prevBtn.removeAttribute('disabled')
+          if (selected === min)
+            prevBtn.setAttribute('disabled', 'disabled')
+          if (previous === max) nextBtn.removeAttribute('disabled')
+          if (selected === max)
+            nextBtn.setAttribute('disabled', 'disabled')
+        }
+      }
+
+      function setupEmblaCarousel(wrap, options) {
+        var view = wrap.querySelector('.embla__viewport')
+        var nextBtn = wrap.querySelector('.embla__nav--next')
+        var prevBtn = wrap.querySelector('.embla__nav--prev')
+        var dotWrap = wrap.querySelector('.embla__dots')
+        var embla = EmblaCarousel(view, options)
+        var dots = generateDotsBtns(dotWrap, embla)
+        var dotsArray = [].slice.call(dots)
+        var selectDotBtn = setSelectedDotBtn(dotsArray, embla)
+        var disablePrevAndNextBtns = togglePrevAndNextBtns(
+          prevBtn,
+          nextBtn,
+          embla,
+        )
+        addDotBtnClickListeners(dotsArray, embla)
+        addPrevNextBtnClickListeners(prevBtn, nextBtn, embla)
+        embla.on('select', selectDotBtn)
+        embla.on('init', selectDotBtn)
+        if (!options.loop) {
+          embla.on('select', disablePrevAndNextBtns)
+          embla.on('init', disablePrevAndNextBtns)
+        }
         return embla
       }
 

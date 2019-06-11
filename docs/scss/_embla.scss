@@ -93,7 +93,6 @@
   height: 5rem;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   padding: 0;
   display: none;
 
@@ -102,8 +101,16 @@
   }
 }
 
-.embla__nav__svg {
+.embla__nav:not(:disabled) {
+  cursor: pointer;
   fill: $color-brand;
+}
+
+.embla__nav:disabled {
+  fill: #e9e9e9;
+}
+
+.embla__nav__svg {
   width: 3.5rem;
   height: 3.5rem;
 }
@@ -119,7 +126,6 @@
 .embla__dots {
   position: absolute;
   margin-top: 1rem;
-  margin-left: -1.5rem;
   display: flex;
   list-style: none;
   padding-left: 0;
@@ -130,17 +136,14 @@
 }
 
 .embla__dot {
-  display: flex;
-  margin-left: 1.5rem;
-}
-
-.embla__dot__button {
   background-color: transparent;
   cursor: pointer;
   position: relative;
   padding: 0;
   width: 3rem;
   height: 3rem;
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
   border: 0;
   display: flex;
   align-items: center;
@@ -151,9 +154,9 @@
     height: 0.4rem;
     content: '';
   }
-}
 
-.embla__dot--selected:after {
-  background-color: $color-brand;
-  opacity: 1;
+  &.is-selected:after {
+    background-color: #1bcacd;
+    opacity: 1;
+  }
 }
