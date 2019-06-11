@@ -166,10 +166,10 @@ Returns the current container element node.
 Returns the slides as an array of element nodes.
 
 **`selectedIndex()`**  
-Returns the current selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupCells` is set to `1` each slide has its own index. Zero-based.
+Returns the current selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupSlides` is set to `1` each slide has its own index. Zero-based.
 
 **`previousIndex()`**  
-Returns the previous selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupCells` is set to `1` each slide has its own index. Zero-based.
+Returns the previous selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupSlides` is set to `1` each slide has its own index. Zero-based.
 
 **`groupedIndexes()`**  
 Returns an array of all slide indexes grouped into arrays according to the `groupSlides` option, i.e. if the total number of slides is `4` and `groupSlides` is set to `2`, it will return `[[0, 1], [2, 3]]`.
