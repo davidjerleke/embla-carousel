@@ -1,5 +1,4 @@
 import { Counter } from './counter'
-import { Direction } from './direction'
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
@@ -47,7 +46,7 @@ export function TargetFinder(params: Params): TargetFinder {
     })
   }
 
-  function offsetToGroupPosition(target: Target): number {
+  function offsetToTargetGroup(target: Target): number {
     const { distance, index } = target
     const lastGroup = groupPositions[params.index.max]
     const pastLastGroup = distance < lastGroup
@@ -56,7 +55,7 @@ export function TargetFinder(params: Params): TargetFinder {
     return groupPositions[index] - offset
   }
 
-  function findTargetAt(targetDistance: number): Target {
+  function findTargetGroupAt(targetDistance: number): Target {
     const { reachedMin, reachedMax } = params.limit
     let distance = targetDistance
     while (reachedMax(distance)) distance -= span
@@ -65,13 +64,6 @@ export function TargetFinder(params: Params): TargetFinder {
       (a, b, i) => (distance < b.start && distance > b.end ? i : a),
       0,
     )
-    return { distance, index }
-  }
-
-  function freeDistance(from: number, force: number): Target {
-    const targetDistance = location.get() + force
-    const distance = location.get() + force - from
-    const { index } = findTargetAt(targetDistance)
     return { distance, index }
   }
 
@@ -103,32 +95,22 @@ export function TargetFinder(params: Params): TargetFinder {
   }
 
   function byDistance(from: number, force: number): Target {
-    const { target, dragFree } = params
-    const forceAbs = Math.abs(force)
-    const halfGroup = params.groupSizes[params.index.get()] / 2
-    const dragForceThreshold = 5
-    const minForce =
-      !dragFree &&
-      forceAbs > dragForceThreshold &&
-      forceAbs < halfGroup
-        ? halfGroup * Direction(force).get()
-        : force
+    const { target, dragFree, limit, index } = params
+    const { reachedAny, reachedMax } = limit
+    const targetDistance = location.get() + force
+    const freeDistance = targetDistance - from
+    const targetGroup = findTargetGroupAt(targetDistance)
+    const reachedEdge = !loop && reachedAny(targetDistance)
 
-    const targetDistance = location.get() + minForce
-    const { reachedAny, reachedMax } = params.limit
-
-    if (!loop && reachedAny(targetDistance)) {
-      const { min, max } = params.index
-      const index = reachedMax(targetDistance) ? min : max
-      const { distance } = freeDistance(from, force)
-      return { distance, index }
+    if (reachedEdge || dragFree) {
+      const { min, max } = index
+      const edgeIndex = reachedMax(targetDistance) ? min : max
+      const targetIndex = reachedEdge ? edgeIndex : targetGroup.index
+      return { distance: freeDistance, index: targetIndex }
     } else {
-      if (dragFree) return freeDistance(from, force)
-      const targetGroup = findTargetAt(targetDistance)
-      const offset = offsetToGroupPosition(targetGroup)
-      const distance = targetDistance + offset - target.get()
-      const { index } = targetGroup
-      return { distance, index }
+      const offset = offsetToTargetGroup(targetGroup)
+      const snapDistance = targetDistance + offset - target.get()
+      return { distance: snapDistance, index: targetGroup.index }
     }
   }
 

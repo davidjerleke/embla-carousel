@@ -134,7 +134,7 @@
     </header>
 
     <!-- MAIN -->
-    <main id="main">
+    <main>
       <!-- BANNER -->
       <section class="banner">
         <div class="page-wrap">
@@ -408,7 +408,6 @@
       }
 
       var optionsArray = [{ loop: false }, { loop: true }]
-      var main = document.getElementById('main')
       var template = document.getElementById('embla-template')
       var carousels = document.querySelectorAll('.carousel')
       var carouselsArray = [].slice.call(carousels)
@@ -422,17 +421,17 @@
       var emblaInstances = emblasArray.map(function(e, i) {
         return setupEmblaCarousel(e, optionsArray[i])
       })
-      var body = document.body
+      var bodyClass = document.body.classList
       var userIsTabbing = false
 
       document.addEventListener('keyup', function(evt) {
         if (!userIsTabbing && evt.keyCode === 9) {
-          body.classList.add('user-is-tabbing')
+          bodyClass.add('user-is-tabbing')
           userIsTabbing = true
         }
       })
       document.addEventListener('mousedown', function() {
-        body.classList.remove('user-is-tabbing')
+        bodyClass.remove('user-is-tabbing')
         userIsTabbing = false
       })
     </script>

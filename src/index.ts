@@ -61,7 +61,7 @@ export function EmblaCarousel(
   }
 
   function activate(userOpt: UserOptions = {}): void {
-    const firstInit = !state.active
+    const isFirstInit = !state.active
     state.lastWindowWidth = window.innerWidth
     storeElements()
 
@@ -69,28 +69,28 @@ export function EmblaCarousel(
       const { root, container, slides } = elements
       const newOpt = Object.assign(options, userOpt)
       const engine = Engine(root, container, slides, newOpt, events)
-
       Object.assign(slider, engine)
       eventStore.add(window, 'resize', debouncedResize)
-      slides.forEach(slideFocus)
+      slides.forEach(slideFocusEvent)
       slider.translate.to(slider.mover.location)
 
-      if (options.draggable) {
-        const dragging = options.draggingClass
-        slider.pointer.addActivationEvents()
-        root.classList.add(options.draggableClass)
-        events.on('dragStart', () => root.classList.add(dragging))
-        events.on('dragEnd', () => root.classList.remove(dragging))
-      }
-      if (options.loop) {
-        slider.shifter.shiftInfinite(slides)
-      }
-      if (firstInit) {
+      if (options.draggable) activateDragFeature()
+      if (options.loop) slider.shifter.shiftInfinite(slides)
+      if (isFirstInit) {
         events.on('select', toggleSelectedClass)
-        toggleSelectedClass()
+        events.on('init', toggleSelectedClass)
         setTimeout(() => events.dispatch('init'), 0)
       }
     }
+  }
+
+  function activateDragFeature(): void {
+    const root = elements.root.classList
+    const { draggingClass, draggableClass } = options
+    slider.pointer.addActivationEvents()
+    events.on('dragStart', () => root.add(draggingClass))
+    events.on('dragEnd', () => root.remove(draggingClass))
+    root.add(draggableClass)
   }
 
   function toggleSelectedClass(): void {
@@ -103,7 +103,7 @@ export function EmblaCarousel(
     currentGroup.forEach(i => slides[i].classList.add(selected))
   }
 
-  function slideFocus(slide: HTMLElement, index: number): void {
+  function slideFocusEvent(slide: HTMLElement, index: number): void {
     const focus = (): void => {
       const groupIndex = Math.floor(index / options.groupSlides)
       const selectedGroup = index ? groupIndex : index
@@ -200,8 +200,7 @@ export function EmblaCarousel(
 }
 
 export default EmblaCarousel
+export { UserOptions }
 
 // @ts-ignore
 module.exports = EmblaCarousel
-
-export { UserOptions }

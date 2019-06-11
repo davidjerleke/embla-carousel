@@ -144,8 +144,10 @@ export function Engine(
   // Pointer
   const pointer = DragBehaviour({
     animation,
+    dragFree,
     element: root,
     events,
+    groupSizes,
     index,
     limit,
     location,

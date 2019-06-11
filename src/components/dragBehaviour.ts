@@ -12,6 +12,8 @@ import { Vector1D } from './vector1d'
 type Params = {
   element: HTMLElement
   target: Vector1D
+  dragFree: boolean
+  groupSizes: number[]
   pointer: Pointer
   location: Vector1D
   locationAtDragStart: Vector1D
@@ -33,13 +35,18 @@ export type DragBehaviour = {
 
 export function DragBehaviour(params: Params): DragBehaviour {
   const { element, pointer, location, events } = params
-  const { locationAtDragStart } = params
+  const { locationAtDragStart, dragFree, animation } = params
   const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
   const startY = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
+  const snapForceBoost = { mouse: 2, touch: 2.8 }
+  const freeForceBoost = { mouse: 4, touch: 7 }
+  const snapSpeed = { mouse: 12, touch: 15 }
+  const freeSpeed = { mouse: 6, touch: 5 }
+  const dragForceThreshold = 5
   const state = {
     isDown: false,
     isMouse: false,
@@ -77,10 +84,33 @@ export function DragBehaviour(params: Params): DragBehaviour {
     return focusNodes.indexOf(name) > -1
   }
 
+  function movementSpeed(): number {
+    const speed = dragFree ? freeSpeed : snapSpeed
+    const type = state.isMouse ? 'mouse' : 'touch'
+    return speed[type]
+  }
+
+  function pointerForceBoost(): number {
+    const boost = dragFree ? freeForceBoost : snapForceBoost
+    const type = state.isMouse ? 'mouse' : 'touch'
+    return boost[type]
+  }
+
+  function minAllowedForce(force: number): number {
+    const { groupSizes, index } = params
+    const forceAbs = Math.abs(force)
+    const halfGroup = groupSizes[index.get()] / 2
+    const aboveThreshold = forceAbs > dragForceThreshold
+    const belowHalfGroup = forceAbs < halfGroup
+    const forceToNext = halfGroup * Direction(force).get()
+    return !dragFree && aboveThreshold && belowHalfGroup
+      ? forceToNext
+      : force
+  }
+
   function down(evt: Event): void {
-    const { animation } = params
     const node = evt.target as Element
-    state.isMouse = evt.type === 'mousedown'
+    state.isMouse = !!evt.type.match(/mouse/)
     pointer.down(evt)
     locationAtDragStart.set(location)
     state.preventClick = false
@@ -117,8 +147,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function up(): void {
     const { travel, target, mover } = params
-    const force = pointer.up() * (state.isMouse ? 2 : 2.8)
-    const speed = state.isMouse ? 12 : 15
+    const boostedForce = pointer.up() * pointerForceBoost()
+    const force = minAllowedForce(boostedForce)
+    const speed = movementSpeed()
 
     state.isMouse = false
     state.preventScroll = false
