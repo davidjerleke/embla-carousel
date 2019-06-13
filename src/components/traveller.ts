@@ -17,7 +17,7 @@ export type Traveller = {
   toNext: () => Traveller
   toPrevious: () => Traveller
   toIndex: (target: number) => Traveller
-  toDistance: (from: number, force: number) => Traveller
+  toDistance: (force: number) => Traveller
 }
 
 export function Traveller(params: Params): Traveller {
@@ -40,8 +40,8 @@ export function Traveller(params: Params): Traveller {
     return self
   }
 
-  function toDistance(from: number, force: number): Traveller {
-    const next = findTarget.byDistance(from, force)
+  function toDistance(force: number): Traveller {
+    const next = findTarget.byDistance(force)
     travelTo(next)
     return self
   }

@@ -96,7 +96,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     return boost[type]
   }
 
-  function minAllowedForce(force: number): number {
+  function allowedForce(force: number): number {
     const { groupSizes, index } = params
     const forceAbs = Math.abs(force)
     const halfGroup = groupSizes[index.get()] / 2
@@ -109,12 +109,16 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function down(evt: Event): void {
-    const node = evt.target as Element
-    state.isMouse = !!evt.type.match(/mouse/)
+    const { target, mover } = params
+    const { target: evtTarget, type } = evt
+
+    state.isMouse = !!type.match(/mouse/)
     pointer.down(evt)
     locationAtDragStart.set(location)
+    target.set(location)
     state.preventClick = false
     state.isDown = true
+    mover.useSpeed(50)
     animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')
@@ -122,18 +126,18 @@ export function DragBehaviour(params: Params): DragBehaviour {
     if (!state.isMouse) {
       startX.set(pointer.read(evt, 'x'))
       startY.set(pointer.read(evt, 'y'))
-    } else if (!isFocusNode(node)) {
+    } else if (!isFocusNode(evtTarget as Element)) {
       evt.preventDefault()
     }
   }
 
   function move(evt: Event): void {
     if (state.preventScroll || state.isMouse) {
-      const { limit, loop } = params
+      const { limit, loop, target } = params
       const diff = pointer.move(evt)
       const reachedAnyLimit = limit.reachedAny(location.get())
       const resist = !loop && reachedAnyLimit ? 2 : 1
-      location.addNumber(diff / resist)
+      target.addNumber(diff / resist)
       evt.preventDefault()
     } else {
       const X = pointer.read(evt, 'x').get()
@@ -148,23 +152,20 @@ export function DragBehaviour(params: Params): DragBehaviour {
   function up(): void {
     const { travel, target, mover } = params
     const boostedForce = pointer.up() * pointerForceBoost()
-    const force = minAllowedForce(boostedForce)
+    const force = allowedForce(boostedForce)
     const speed = movementSpeed()
+    const diffToTarget = Math.abs(target.get() - location.get())
+    const minDiffToTarget = 1
+    const isMoving = diffToTarget <= minDiffToTarget
 
+    if (isMoving) state.preventClick = true
     state.isMouse = false
     state.preventScroll = false
     state.isDown = false
     interactionEvents.removeAll()
-    events.dispatch('dragEnd')
-
-    const diffToTarget = Math.abs(target.get() - location.get())
-    const minDiffToTarget = 1
-
-    if (diffToTarget <= minDiffToTarget) return
-
-    state.preventClick = true
     mover.useSpeed(speed)
-    travel.toDistance(locationAtDragStart.get(), force)
+    events.dispatch('dragEnd')
+    travel.toDistance(force)
   }
 
   function click(evt: Event): void {

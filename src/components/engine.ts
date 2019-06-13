@@ -90,11 +90,9 @@ export function Engine(
 
   // Draw
   const update = (): void => {
+    slider.mover.seek(target).update()
     if (!pointer.isDown()) {
       if (!loop) slider.edgeGuard.constrain(target)
-
-      slider.mover.seek(target).update()
-
       if (slider.mover.settle(target)) {
         slider.animation.stop()
         slider.translate.useType('x')
@@ -131,7 +129,6 @@ export function Engine(
       groupSizes,
       index,
       limit,
-      location,
       loop,
       span: contentSize,
       target,

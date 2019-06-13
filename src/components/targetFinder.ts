@@ -5,7 +5,6 @@ import { Vector1D } from './vector1d'
 type Params = {
   diffSizes: number[]
   dragFree: boolean
-  location: Vector1D
   index: Counter
   loop: boolean
   groupSizes: number[]
@@ -27,11 +26,11 @@ export type Target = {
 
 export type TargetFinder = {
   byIndex: (target: number, direction: number) => Target
-  byDistance: (from: number, distance: number) => Target
+  byDistance: (force: number) => Target
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const { location, loop, groupPositions, span } = params
+  const { loop, groupPositions, span } = params
   const groupBounds = calculateGroupBounds()
 
   function calculateGroupBounds(): Bound[] {
@@ -94,11 +93,10 @@ export function TargetFinder(params: Params): TargetFinder {
     }
   }
 
-  function byDistance(from: number, force: number): Target {
+  function byDistance(force: number): Target {
     const { target, dragFree, limit, index } = params
     const { reachedAny, reachedMax } = limit
-    const targetDistance = location.get() + force
-    const freeDistance = targetDistance - from
+    const targetDistance = target.get() + force
     const targetGroup = findTargetGroupAt(targetDistance)
     const reachedEdge = !loop && reachedAny(targetDistance)
 
@@ -106,7 +104,7 @@ export function TargetFinder(params: Params): TargetFinder {
       const { min, max } = index
       const edgeIndex = reachedMax(targetDistance) ? min : max
       const targetIndex = reachedEdge ? edgeIndex : targetGroup.index
-      return { distance: freeDistance, index: targetIndex }
+      return { distance: force, index: targetIndex }
     } else {
       const offset = offsetToTargetGroup(targetGroup)
       const snapDistance = targetDistance + offset - target.get()
