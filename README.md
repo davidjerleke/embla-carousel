@@ -16,8 +16,8 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 ## Table of contents
 
 - [Demo](#demo)
-- [Features](#features)
 - [Implementations](#implementations)
+- [Features](#features)
 - [Installation](#installation)
 - [QuickStart](#quickstart)
 - [Options](#options)
