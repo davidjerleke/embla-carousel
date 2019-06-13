@@ -3,7 +3,11 @@
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
+  font-size: 1.4rem;
 
+  @media (min-width: $media-xs) {
+    font-size: 1.6rem;
+  }
   @media (min-width: $media-sm) {
     font-size: 1.7rem;
   }
