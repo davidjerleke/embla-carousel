@@ -109,10 +109,9 @@ export function Engine(
   // Shared
   const animation = Animation(update)
   const startLocation = groupPositions[index.get()]
-  const locationAtDragStart = Vector1D(startLocation)
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const vectors = [locationAtDragStart, location, target]
+  const vectors = [location, target]
   const mover = Mover({
     location,
     mass: 1.5,
@@ -148,7 +147,6 @@ export function Engine(
     index,
     limit,
     location,
-    locationAtDragStart,
     loop,
     mover,
     pointer: Pointer(chunkSize),

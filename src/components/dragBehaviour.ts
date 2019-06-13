@@ -16,7 +16,6 @@ type Params = {
   groupSizes: number[]
   pointer: Pointer
   location: Vector1D
-  locationAtDragStart: Vector1D
   animation: Animation
   travel: Traveller
   mover: Mover
@@ -35,7 +34,7 @@ export type DragBehaviour = {
 
 export function DragBehaviour(params: Params): DragBehaviour {
   const { element, pointer, location, events } = params
-  const { locationAtDragStart, dragFree, animation } = params
+  const { target, mover, dragFree, animation } = params
   const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
@@ -109,12 +108,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function down(evt: Event): void {
-    const { target, mover } = params
     const { target: evtTarget, type } = evt
-
     state.isMouse = !!type.match(/mouse/)
     pointer.down(evt)
-    locationAtDragStart.set(location)
     target.set(location)
     state.preventClick = false
     state.isDown = true
@@ -133,7 +129,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function move(evt: Event): void {
     if (state.preventScroll || state.isMouse) {
-      const { limit, loop, target } = params
+      const { limit, loop } = params
       const diff = pointer.move(evt)
       const reachedAnyLimit = limit.reachedAny(location.get())
       const resist = !loop && reachedAnyLimit ? 2 : 1
@@ -150,7 +146,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function up(): void {
-    const { travel, target, mover } = params
+    const { travel } = params
     const boostedForce = pointer.up() * pointerForceBoost()
     const force = allowedForce(boostedForce)
     const speed = movementSpeed()
