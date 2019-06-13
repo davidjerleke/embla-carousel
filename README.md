@@ -1,11 +1,11 @@
-<p align="center">
+<p>
   <br>
   <a href="https://davidcetinkaya.github.io/embla-carousel/" target="_blank">
     <img width="70" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
   </a>
 </p>
 
-# Embla Carousel &middot; [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders)
+# Embla Carousel [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders)
 
 ![GitHub](https://img.shields.io/github/license/davidcetinkaya/embla-carousel.svg?color=blue) ![npm](https://img.shields.io/npm/v/embla-carousel.svg) ![Travis (.org) branch](https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg) ![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)
 
@@ -13,7 +13,7 @@
 
 Embla's purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It's dependency free and 100% open source.
 
-## Table of contents
+## 🔎 Table of contents
 
 - [Demo](#demo)
 - [Implementations](#implementations)
@@ -23,15 +23,15 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 - [API](#api)
 - [License](#license)
 
-## Demo
+## 🔊 Demo
 
 Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
 
-## Implementations
+## 💻 Implementations
 
 [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
-## Installation
+## 🔌 Installation
 
 If you are using a module bundler...
 
@@ -49,7 +49,7 @@ import EmblaCarousel from 'embla-carousel'
 <script src="embla.min.js"></script>
 ```
 
-## Usage
+## 🕹️ Usage
 
 Setup your HTML markup...
 
@@ -96,7 +96,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ...and you're good to go!
 
-## Options
+## ⚙️ Options
 
 Embla comes with a few optional settings that you can change by passing an object as the second argument. **Default** values are:
 
@@ -149,7 +149,7 @@ Classname that will be applied to the wrapper when the carousel mounts if dragga
 **`draggingClass`** (string)  
 Classname that will be applied to the wrapper when a pointer is dragging the carousel.
 
-## API
+## 🛠️ API
 
 Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this...
 
@@ -201,6 +201,6 @@ Ends subscription to a custom Embla event by removing the passed callback. This 
 **`destroy()`**  
 Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
 
-## License
+## 🎉 License
 
 Embla is [MIT licensed](./LICENSE).
