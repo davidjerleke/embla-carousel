@@ -16,6 +16,7 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 ## Table of contents
 
 - [Demo](#demo)
+- [Features](#features)
 - [Implementations](#implementations)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -26,6 +27,16 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 ## Demo
 
 Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
+
+## Features
+
+- Responsive out of the box.
+- Choose any slide widths and change them at breakpoints.
+- Seamless loop effect with no slide change throttling.
+- Authentic cross device drag behaviour.
+- Extendable low-level API to control the carousel.
+- Percentage based hardware accelerated transitions.
+- Physics simulated animations.
 
 ## Implementations
 
@@ -49,7 +60,7 @@ import EmblaCarousel from 'embla-carousel'
 <script src="embla.min.js"></script>
 ```
 
-## Usage
+## Quickstart
 
 Setup your HTML markup...
 
