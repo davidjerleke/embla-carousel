@@ -19,7 +19,7 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 - [Features](#features)
 - [Implementations](#implementations)
 - [Installation](#installation)
-- [Usage](#usage)
+- [QuickStart](#quickstart)
 - [Options](#options)
 - [API](#api)
 - [License](#license)
@@ -28,19 +28,19 @@ Embla's purpose is to provide a low level carousel and allow developers to exten
 
 Try Embla Carousel on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
 
-## Features
-
-- Responsive out of the box.
-- Choose any slide widths and change them at breakpoints.
-- Seamless loop effect with no slide change throttling.
-- Authentic cross device drag behaviour.
-- Extendable low-level API to control the carousel.
-- Percentage based hardware accelerated transitions.
-- Physics simulated animations.
-
 ## Implementations
 
 [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
+
+## Features
+
+- Responsive out of the box.
+- Choose any slide widths for your slides in `%`.
+- Seamless loop effect with no pauses.
+- Authentic cross device drag behaviour.
+- Extensible low-level API to control the carousel.
+- `%` based hardware accelerated transitions.
+- Physics simulated animation.
 
 ## Installation
 
@@ -60,7 +60,7 @@ import EmblaCarousel from 'embla-carousel'
 <script src="embla.min.js"></script>
 ```
 
-## Quickstart
+## QuickStart
 
 Setup your HTML markup...
 
