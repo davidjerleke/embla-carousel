@@ -34,13 +34,15 @@
 
 Embla’s purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It’s dependency free and 100% open source.
 
+Try it here on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols).
+
 ## Features
 
-- **Responsive out of the box:** Choose any slide widths for your slides in `%`.
-- **Seamless loop effect:** No pauses or previous/next button throttling.
-- **Hardware accelerated:** Smooth physics simulated animations.
-- **Extensible API**: Comes with a low-level API to control the carousel.
-- **Realistic drag handling:** Authentic cross device drag behaviour.
+- **`Responsive out of the box:`** Choose any slide widths for your slides in `%`.
+- **`Seamless loop effect:`** No pauses or previous/next button throttling.
+- **`Hardware accelerated:`** Smooth physics simulated animations.
+- **`Extensible rich API`**: Comes with a low-level API to control the carousel.
+- **`Realistic drag handling:`** Authentic cross device drag behaviour.
 
 ## Installation
 
