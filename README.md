@@ -5,23 +5,23 @@
   <h1 align="center">Embla Carousel</h1>
 </p>
 <p align="center">
+  An extensible low level carousel for the web, written in TypeScript.
+</p>
+<p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
   <a href="https://travis-ci.org/davidcetinkaya/embla-carousel" target="_blank"><img src="https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg"></a>
   <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
 </p>
-  <p align="center">An extensible low level carousel for the web, written in TypeScript.
-    <br/>
-    <strong>
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank">« View Demo</a> &middot;
-    <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols" target="_blank">CodeSandbox »</a>
-    </strong>
-  </p>
+<p align="center">
+  <strong>
+    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank">« View Demo »</a>
+  </strong>
 </p>
 
 ## Table of contents
 
-- [What's Embla?](#whatsembla)
+- [What's Embla?](#whats-embla)
 - [Features](#features)
 - [Installation](#installation)
 - [QuickStart](#quickstart)
