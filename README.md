@@ -1,22 +1,22 @@
 <br />
 <p align="center">
-<a href="https://davidcetinkaya.github.io/embla-carousel"  target="_blank"><img width="90" height="90" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel"></a><h1 align="center">Embla Carousel</h1>
+  <a href="https://davidcetinkaya.github.io/embla-carousel"  target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+  </a>
+  <h1 align="center">Embla Carousel</h1>
+</p>
 <p align="center">
-<a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
-<a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
-<a href="https://travis-ci.org/davidcetinkaya/embla-carousel" target="_blank"><img src="https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg"></a>
-<a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
+  <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
+  <a href="https://travis-ci.org/davidcetinkaya/embla-carousel" target="_blank"><img src="https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg"></a>
+  <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
 </p>
   <p align="center">An extensible low level carousel for the web, written in TypeScript.
     <br/>
     <strong>
     <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank">« View Demo</a> &middot;
     <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols" target="_blank">CodeSandbox »</a>
+    </strong>
   </p>
-</p>
-
-  <p align="center">
-<a href="https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" target="_blank"></a>
 </p>
 
 ## Table of contents
