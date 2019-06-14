@@ -1,9 +1,11 @@
 <br />
 <p align="center">
-  <a href="https://davidcetinkaya.github.io/embla-carousel"  target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+  <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
   </a>
-  <h1 align="center">Embla Carousel</h1>
 </p>
+<strong>
+  <h1 align="center">Embla Carousel</h1>
+</strong>
 <p align="center">
   An extensible low level carousel for the web, written in TypeScript.
 </p>
