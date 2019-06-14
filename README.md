@@ -38,11 +38,11 @@ Try it here on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) 
 
 ## Features
 
-- **`Responsive out of the box:`** Choose any slide widths for your slides in `%`.
-- **`Seamless loop effect:`** No pauses or previous/next button throttling.
-- **`Hardware accelerated:`** Smooth physics simulated animations.
-- **`Extensible rich API:`** Comes with a low-level API to control the carousel.
-- **`Realistic drag handling:`** Authentic cross device drag behaviour.
+- **`Responsive out of the box`** - Choose any slide widths for your slides in `%`.
+- **`Seamless loop effect`** - No pauses or previous/next button throttling.
+- **`Hardware accelerated`** - Smooth physics simulated animations.
+- **`Extensible rich API`** - Comes with a low-level API to control the carousel.
+- **`Realistic drag handling`** - Authentic cross device drag behaviour.
 
 ## Installation
 
