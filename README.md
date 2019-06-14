@@ -28,7 +28,7 @@
 - [Options](#options)
 - [API](#api)
 - [Implementations](#implementations)
-- [Show Your Support](#show-your-support)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## What's Embla?
@@ -223,9 +223,9 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 
 [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
-## Show Your Support
+## Contributing
 
-If you like this project, please give it a **`star`** ⭐ or **`tweet`** [<img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social" />](https://twitter.com/intent/tweet?text=Build%20amazing%20JavaScript%20carousels%20with%20Embla%20Carousel&url=https://davidcetinkaya.github.io/embla-carousel&via=david_cetinkaya&hashtags=frontend,javascript,webdeveloper,developers,coders) about it to spread the word.
+If you like this project, you can show your support by giving it a **`star`** ⭐ or spreading the word about it on **`twitter`** or similar. Code related contribution guidelines are on their way...
 
 ## License
 
