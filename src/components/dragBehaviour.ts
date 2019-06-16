@@ -43,9 +43,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
   const interactionEvents = EventStore()
   const snapForceBoost = { mouse: 2, touch: 2.8 }
   const freeForceBoost = { mouse: 4, touch: 7 }
-  const snapSpeed = { mouse: 12, touch: 15 }
+  const snapSpeed = { mouse: 12, touch: 14 }
   const freeSpeed = { mouse: 6, touch: 5 }
-  const dragForceThreshold = 5
+  const dragForceThreshold = 4
   const state = {
     isDown: false,
     isMouse: false,
@@ -114,7 +114,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     target.set(location)
     state.preventClick = false
     state.isDown = true
-    mover.useSpeed(50)
+    mover.useSpeed(70)
     animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')

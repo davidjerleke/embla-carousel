@@ -24,6 +24,10 @@ export type EmblaCarousel = {
   selectedIndex: () => number
   previousIndex: () => number
   groupedIndexes: () => number[][]
+  hasNextIndex: () => boolean
+  hasPreviousIndex: () => boolean
+  isFirstIndex: () => boolean
+  isLastIndex: () => boolean
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   changeOptions: (options: UserOptions) => void
@@ -162,6 +166,14 @@ export function EmblaCarousel(
     slider.travel.toIndex(index)
   }
 
+  function containerNode(): HTMLElement {
+    return elements.container
+  }
+
+  function slideNodes(): HTMLElement[] {
+    return elements.slides
+  }
+
   function selectedIndex(): number {
     return slider.index.get()
   }
@@ -174,12 +186,20 @@ export function EmblaCarousel(
     return slider.indexGroups
   }
 
-  function containerNode(): HTMLElement {
-    return elements.container
+  function isFirstIndex(): boolean {
+    return selectedIndex() === slider.index.min
   }
 
-  function slideNodes(): HTMLElement[] {
-    return elements.slides
+  function isLastIndex(): boolean {
+    return selectedIndex() === slider.index.max
+  }
+
+  function hasPreviousIndex(): boolean {
+    return !options.loop && !isFirstIndex()
+  }
+
+  function hasNextIndex(): boolean {
+    return !options.loop && !isLastIndex()
   }
 
   const self: EmblaCarousel = {
@@ -188,6 +208,10 @@ export function EmblaCarousel(
     destroy,
     goTo,
     groupedIndexes,
+    hasNextIndex,
+    hasPreviousIndex,
+    isFirstIndex,
+    isLastIndex,
     next,
     off,
     on,

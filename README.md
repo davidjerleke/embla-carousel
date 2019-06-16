@@ -41,7 +41,7 @@ Try it here on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) 
 
 ## Features
 
-- **`Responsive out of the box`** - Choose any slide widths for your slides in `%`.
+- **`Responsive out of the box`** - Choose any `%`-based slide widths.
 - **`Seamless loop effect`** - No pauses or previous/next button throttling.
 - **`Hardware accelerated`** - Smooth physics simulated animations.
 - **`Extensible rich API`** - Comes with a low-level API to control the carousel.
@@ -164,7 +164,7 @@ Zero based index of the starting slide when carousel mounts.
 Classname that will be applied to the selected slide.
 
 **`draggableClass`** (string)  
-Classname that will be applied to the wrapper when the carousel mounts if draggable is set to true.
+Classname that will be applied to the wrapper when the carousel mounts if `draggable` is `true`.
 
 **`draggingClass`** (string)  
 Classname that will be applied to the wrapper when a pointer is dragging the carousel.
@@ -185,23 +185,35 @@ Returns the current container element node.
 **`slideNodes()`**  
 Returns the slides as an array of element nodes.
 
-**`selectedIndex()`**  
-Returns the current selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupSlides` is set to `1` each slide has its own index. Zero-based.
-
-**`previousIndex()`**  
-Returns the previous selected index. Each index contains multiple slides if `groupSlides` options is set to more than `1`. If `groupSlides` is set to `1` each slide has its own index. Zero-based.
-
-**`groupedIndexes()`**  
-Returns an array of all slide indexes grouped into arrays according to the `groupSlides` option, i.e. if the total number of slides is `4` and `groupSlides` is set to `2`, it will return `[[0, 1], [2, 3]]`.
-
 **`next()`**  
-Moves to next item. If `loop` option is set to `false` and the carousel is on the last slide this method will do nothing.
+Moves to next item. If `loop` option is `false` and the carousel is on the last slide this method will do nothing.
 
 **`previous()`**  
-Moves to previous item. If `loop` option is set to `false` and the carousel is on the first slide this method will do nothing.
+Moves to previous item. If `loop` option is `false` and the carousel is on the first slide this method will do nothing.
 
 **`goTo(index: number)`**  
-Moves to item that matches passed index. If `loop` option is set to `true` the carousel will seek the closest way to the passed index.
+Moves to item that matches passed index. If `loop` option is `true` the carousel will seek the closest way to the passed index.
+
+**`selectedIndex()`**  
+Returns the current selected index. Each index contains multiple slides if `groupSlides` options is more than `1`. If `groupSlides` is `1` each slide has its own index. Zero-based.
+
+**`previousIndex()`**  
+Returns the previous selected index. Each index contains multiple slides if `groupSlides` options is more than `1`. If `groupSlides` is `1` each slide has its own index. Zero-based.
+
+**`groupedIndexes()`**  
+Returns an array of all slide indexes grouped into arrays according to the `groupSlides` option, i.e. if the total number of slides is `4` and `groupSlides` is `2`, it will return `[[0, 1], [2, 3]]`.
+
+**`isFirstIndex()`**  
+Returns if selected index is first possible index. If `loop` option is `false`, it's not possible to slide to previous index from here.
+
+**`isLastIndex()`**  
+Returns if selected index is last possible index. If `loop` option is `false`, it's not possible to slide to next index from here.
+
+**`hasPreviousIndex()`**  
+Returns if it's possible to slide to previous index from here. Note that if `loop` option is `true` this will always return `true`.
+
+**`hasNextIndex()`**  
+Returns if it's possible to slide to next index from here. Note that if `loop` option is `true` this will always return `true`.
 
 **`changeOptions(options: options)`**  
 Applies passed options by doing all the necessary calculations and reinitialising the carousel from scratch.
@@ -227,7 +239,11 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 
 ## Contributing
 
-If you like this project, you can show your support by giving it a **`star`** ⭐ or spreading the word about it on **`twitter`** 📣 or similar. Code related contribution guidelines are on their way...
+Do you like this project and want to contribute to it? Fantastic! How do you want to contribute?
+
+- **`I want to show my love`**: Awesome! Give it a **`star`** ⭐.
+- **`I wan't people to know about it`**: Great! Spread the word about it on **`twitter`** or similar 📣.
+- **`I wan't to get my hands dirty`**: Code related contribution guidelines are on their way...
 
 ## License
 
