@@ -242,8 +242,8 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 Do you like this project and want to contribute to it? Fantastic! How do you want to contribute?
 
 - **`I want to show my love`**: Awesome! Give it a **`star`** ⭐.
-- **`I wan't people to know about it`**: Great! Spread the word about it on **`twitter`** or similar 📣.
-- **`I wan't to get my hands dirty`**: Code related contribution guidelines are on their way...
+- **`I want people to know about it`**: Great! Spread the word on **`twitter`** or similar 📣.
+- **`I want to get my hands dirty`**: Code contribution guidelines are on their way...
 
 ## License
 
