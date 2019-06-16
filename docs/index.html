@@ -422,16 +422,14 @@
       }
 
       function togglePrevAndNextBtns(prevBtn, nextBtn, embla) {
-        var min = 0
-        var max = embla.groupedIndexes().length - 1
         return function() {
-          var selected = embla.selectedIndex()
-          var previous = embla.previousIndex()
-          if (previous === min) prevBtn.removeAttribute('disabled')
-          if (selected === min)
+          if (embla.hasPreviousIndex())
+            prevBtn.removeAttribute('disabled')
+          if (embla.isFirstIndex())
             prevBtn.setAttribute('disabled', 'disabled')
-          if (previous === max) nextBtn.removeAttribute('disabled')
-          if (selected === max)
+          if (embla.hasNextIndex())
+            nextBtn.removeAttribute('disabled')
+          if (embla.isLastIndex())
             nextBtn.setAttribute('disabled', 'disabled')
         }
       }
