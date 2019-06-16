@@ -41,7 +41,7 @@ Try it here on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) 
 
 ## Features
 
-- **`Responsive out of the box`** - Choose any `%`-based slide widths.
+- **`Responsive out of the box`** - Choose any **%**-based slide widths.
 - **`Seamless loop effect`** - No pauses or previous/next button throttling.
 - **`Hardware accelerated`** - Smooth physics simulated animations.
 - **`Extensible rich API`** - Comes with a low-level API to control the carousel.
@@ -241,9 +241,9 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 
 Do you like this project and want to contribute to it? Fantastic! How do you want to contribute?
 
-- **`I want to show my love`**: Awesome! Give it a **`star`** ⭐.
-- **`I want people to know about it`**: Great! Spread the word on **`twitter`** or similar 📣.
-- **`I want to get my hands dirty`**: Code contribution guidelines are on their way...
+- **`I want to show my love`**: Awesome! Give it a **star** ⭐.
+- **`I want people to know about it`**: Great! Spread the word on **twitter** or similar 📣.
+- **`I want to get my hands dirty`**: Splendid! Read the [contribution guidelines](https://github.com/davidcetinkaya/embla-carousel/blob/master/.github/contributing.md) first 📋.
 
 ## License
 
