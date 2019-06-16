@@ -171,10 +171,24 @@ Classname that will be applied to the wrapper when a pointer is dragging the car
 
 ## API
 
-Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this...
+Embla exposes a set of methods upon setup that can be used to control the carousel externally. Usage looks like this:
 
 ```javascript
+embla.containerNode()
+embla.slideNodes()
 embla.next()
+embla.previous()
+embla.goTo(2)
+embla.selectedIndex()
+embla.previousIndex()
+embla.groupedIndexes()
+embla.isFirstIndex()
+embla.islastIndex()
+embla.hasPreviousIndex()
+embla.hasNextIndex()
+embla.changeOptions({ loop: true })
+embla.on('select', () => console.log('Selected a new index!'))
+embla.destroy()
 ```
 
 ...and the methods are:
