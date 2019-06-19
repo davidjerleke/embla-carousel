@@ -207,12 +207,6 @@ Returns the previous selected index. Each index contains multiple slides if `sli
 **`groupedIndexes()`**  
 Returns an array of all slide indexes grouped into arrays according to the `slidesToScroll` option, i.e. if the total number of slides is `4` and `slidesToScroll: 2`, it will return `[[0, 1], [2, 3]]`.
 
-**`isStartScroll()`**  
-Returns if the carousel is at its start position, meaning if selected index is first possible index. If `loop: false` it's not possible to scroll to previous from here.
-
-**`isEndScroll()`**  
-Returns if the carousel is at its start position, meaning if selected index is last possible index. If `loop: false`, it's not possible to scroll to next from here.
-
 **`canScrollPrevious()`**  
 Returns if it's possible to scroll to previous from here. Note that if `loop: true` this will always return `true`.
 
@@ -266,4 +260,4 @@ Do you like this project and want to contribute to it?
 ## License
 
 Embla is [MIT licensed](./LICENSE).  
-Copyright © 2019-present, David Cetinkaya
+Copyright © 2019-present, David Cetinkaya.
