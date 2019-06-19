@@ -24,21 +24,25 @@
 ## Table of contents
 
 - [What's Embla?](#whats-embla)
+- [Implementations](#implementations)
 - [Features](#features)
 - [Installation](#installation)
 - [QuickStart](#quickstart)
 - [Options](#options)
 - [API](#api)
 - [Browser Support](#browser-support)
-- [Implementations](#implementations)
 - [Contribution](#contribution)
 - [License](#license)
 
 ## What's Embla?
 
-Embla’s purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It’s dependency free and 100% open source.
+Embla’s purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some basic JavaScript and build awesome physics simulated carousels. It’s dependency free and 100% open source.
 
-> Try it here on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols) ✨.
+> Try it on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols) ✨.
+
+## Implementations
+
+[<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
 ## Features
 
@@ -178,7 +182,9 @@ Embla exposes a set of methods upon setup that can be used to control the carous
 embla.next()
 embla.goTo(2)
 embla.changeOptions({ loop: true })
-embla.on('select', () => console.log('Selected a new index!'))
+embla.on('select', () => {
+  console.log(`Selected index is now ${embla.selectedIndex()}!`)
+})
 ```
 
 ...and the methods are:
@@ -243,10 +249,6 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 - <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" alt="Embla Carousel Firefox support" /> &nbsp; **`Firefox`** - Latest 2 versions
 
 - <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel Safari support" /> &nbsp; **`Safari`** - Latest 2 versions
-
-## Implementations
-
-[<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
 ## Contribution
 
