@@ -78,6 +78,10 @@ export function EmblaCarousel(
       slides.forEach(slideFocusEvent)
       slider.translate.to(slider.mover.location)
 
+      if (options.loop && slides.length === 1) {
+        return activate({ loop: false })
+      }
+
       if (options.draggable) activateDragFeature()
       if (options.loop) slider.shifter.shiftInfinite(slides)
       if (isFirstInit) {
