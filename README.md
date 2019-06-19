@@ -240,18 +240,13 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 
 ## Browser Support
 
-<p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="left" alt="Embla Carousel Internet Explorer support" />IE 11
-</p>
-<p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="left" alt="Embla Carousel Chrome support" />Latest 2 versions
-</p>
-<p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="left" alt="Embla Carousel Firefox support" />Latest 2 versions
-</p>
-<p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="left" alt="Embla Carousel Safari support" />Latest 2 versions
-</p>
+- <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="left" alt="Embla Carousel Internet Explorer support" />IE 11
+
+- <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="left" alt="Embla Carousel Chrome support" />Latest 2 versions
+
+- <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="left" alt="Embla Carousel Firefox support" />Latest 2 versions
+
+- <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="left" alt="Embla Carousel Safari support" />Latest 2 versions
 
 ## Implementations
 
