@@ -256,7 +256,7 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 
 ## Contribution
 
-Thank you to all the people who already contributed to Embla Carousel 🙏!
+Thank you to all the people who already contributed to Embla Carousel 🙏!  
 Do you like this project and want to contribute to it?
 
 - **`I just want to support it`**: Thank you! Give it a **star** maybe ⭐?
@@ -265,4 +265,5 @@ Do you like this project and want to contribute to it?
 
 ## License
 
-Embla is [MIT licensed](./LICENSE). Copyright © 2019-present, David Cetinkaya
+Embla is [MIT licensed](./LICENSE).  
+Copyright © 2019-present, David Cetinkaya
