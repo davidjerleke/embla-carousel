@@ -24,10 +24,8 @@ export type EmblaCarousel = {
   selectedIndex: () => number
   previousIndex: () => number
   groupedIndexes: () => number[][]
-  hasNextIndex: () => boolean
-  hasPreviousIndex: () => boolean
-  isFirstIndex: () => boolean
-  isLastIndex: () => boolean
+  canScrollNext: () => boolean
+  canScrollPrevious: () => boolean
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   changeOptions: (options: UserOptions) => void
@@ -113,7 +111,7 @@ export function EmblaCarousel(
 
   function slideFocusEvent(slide: HTMLElement, index: number): void {
     const focus = (): void => {
-      const groupIndex = Math.floor(index / options.groupSlides)
+      const groupIndex = Math.floor(index / options.slidesToScroll)
       const selectedGroup = index ? groupIndex : index
       sliderRoot.scrollLeft = 0
       goTo(selectedGroup)
@@ -152,6 +150,7 @@ export function EmblaCarousel(
     if (windowWidth !== state.lastWindowWidth) {
       state.lastWindowWidth = windowWidth
       reActivate()
+      events.dispatch('resize')
     }
   }
 
@@ -190,32 +189,22 @@ export function EmblaCarousel(
     return slider.indexGroups
   }
 
-  function isFirstIndex(): boolean {
-    return selectedIndex() === slider.index.min
+  function canScrollPrevious(): boolean {
+    return !options.loop && selectedIndex() !== slider.index.min
   }
 
-  function isLastIndex(): boolean {
-    return selectedIndex() === slider.index.max
-  }
-
-  function hasPreviousIndex(): boolean {
-    return !options.loop && !isFirstIndex()
-  }
-
-  function hasNextIndex(): boolean {
-    return !options.loop && !isLastIndex()
+  function canScrollNext(): boolean {
+    return !options.loop && selectedIndex() !== slider.index.max
   }
 
   const self: EmblaCarousel = {
+    canScrollNext,
+    canScrollPrevious,
     changeOptions,
     containerNode,
     destroy,
     goTo,
     groupedIndexes,
-    hasNextIndex,
-    hasPreviousIndex,
-    isFirstIndex,
-    isLastIndex,
     next,
     off,
     on,

@@ -6,6 +6,7 @@ export type Event =
   | 'dragStart'
   | 'dragEnd'
   | 'destroy'
+  | 'resize'
 
 export type EventDispatcher = {
   dispatch: (evt: Event) => EventDispatcher
@@ -19,6 +20,7 @@ export function EventDispatcher(): EventDispatcher {
     dragEnd: [],
     dragStart: [],
     init: [],
+    resize: [],
     select: [],
   }
 

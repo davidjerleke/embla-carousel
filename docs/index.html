@@ -423,14 +423,18 @@
 
       function togglePrevAndNextBtns(prevBtn, nextBtn, embla) {
         return function() {
-          if (embla.hasPreviousIndex())
+          if (embla.canScrollPrevious()) {
             prevBtn.removeAttribute('disabled')
-          if (embla.isFirstIndex())
+          }
+          if (!embla.canScrollPrevious()) {
             prevBtn.setAttribute('disabled', 'disabled')
-          if (embla.hasNextIndex())
+          }
+          if (embla.canScrollNext()) {
             nextBtn.removeAttribute('disabled')
-          if (embla.isLastIndex())
+          }
+          if (!embla.canScrollNext()) {
             nextBtn.setAttribute('disabled', 'disabled')
+          }
         }
       }
 

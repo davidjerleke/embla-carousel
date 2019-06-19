@@ -46,13 +46,13 @@ export function Engine(
     loop,
     speed,
     dragFree,
-    groupSlides,
+    slidesToScroll,
   } = options
 
   // Index
-  const indexMax = Math.ceil(slides.length / groupSlides) - 1
+  const indexMax = Math.ceil(slides.length / slidesToScroll) - 1
   const indexes = Object.keys(slides).map(Number)
-  const indexGroups = groupNumbers(indexes, groupSlides)
+  const indexGroups = groupNumbers(indexes, slidesToScroll)
   const index = Counter({
     limit: Limit({ max: indexMax, min: 0 }),
     loop,
@@ -65,7 +65,7 @@ export function Engine(
   const chunkSize = ChunkSize(rootSize)
   const alignSize = AlignSize({ align, root: chunkSize.root })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
-  const groupedSizes = groupNumbers(slideSizes, groupSlides)
+  const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
   const groupSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
   const alignSizes = groupSizes.map(alignSize.measure)
   const contentSize = groupSizes.reduce((a, s) => a + s)

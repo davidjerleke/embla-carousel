@@ -7,9 +7,9 @@ export type Options = {
   draggable: boolean
   draggableClass: string
   draggingClass: string
-  groupSlides: number
   loop: boolean
   selectedClass: string
+  slidesToScroll: number
   speed: number
   startIndex: number
 }
@@ -21,9 +21,9 @@ export const defaultOptions = Object.freeze({
   draggable: true,
   draggableClass: 'is-draggable',
   draggingClass: 'is-dragging',
-  groupSlides: 1,
   loop: false,
   selectedClass: 'is-selected',
+  slidesToScroll: 1,
   speed: 10,
   startIndex: 0,
 })
