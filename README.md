@@ -183,7 +183,7 @@ embla.scrollNext()
 embla.scrollTo(2)
 embla.changeOptions({ loop: true })
 embla.on('select', () => {
-  console.log(`Selected scroll is now ${embla.selectedScroll()}!`)
+  console.log(`Selected snap index is ${embla.selectedScrollSnap()}!`)
 })
 ```
 
