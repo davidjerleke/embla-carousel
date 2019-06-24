@@ -111,10 +111,9 @@ export function Engine(
   const startLocation = groupPositions[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const vectors = [location, target]
   const mover = Mover({
     location,
-    mass: 1.5,
+    mass: 1,
     maxForce: chunkSize.root * 2,
     speed,
   })
@@ -168,7 +167,7 @@ export function Engine(
       limit,
       location,
       span: contentSize,
-      vectors,
+      vectors: [location, target],
     }),
     index,
     indexGroups,

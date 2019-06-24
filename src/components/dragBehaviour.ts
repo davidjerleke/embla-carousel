@@ -39,9 +39,10 @@ export function DragBehaviour(params: Params): DragBehaviour {
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
   const startY = Vector1D(0)
+  const dragStartLocation = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
-  const snapForceBoost = { mouse: 2, touch: 2.8 }
+  const snapForceBoost = { mouse: 2.5, touch: 3.5 }
   const freeForceBoost = { mouse: 4, touch: 7 }
   const snapSpeed = { mouse: 12, touch: 14 }
   const freeSpeed = { mouse: 6, touch: 5 }
@@ -108,22 +109,27 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function down(evt: Event): void {
-    const { target: evtTarget, type } = evt
-    state.isMouse = !!type.match(/mouse/)
+    const node = evt.target as Element
+    const diffToTarget = target.get() - location.get()
+    const isMoving = Math.abs(diffToTarget) >= 2
+
+    state.isMouse = !!evt.type.match(/mouse/)
     pointer.down(evt)
+    dragStartLocation.set(target)
     target.set(location)
-    state.preventClick = false
+    mover.useDefaultMass()
     state.isDown = true
-    mover.useSpeed(70)
+    mover.useSpeed(80).useDefaultMass()
     animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')
 
+    if (isMoving) evt.preventDefault()
+    if (!isMoving) state.preventClick = false
+    if (state.isMouse && !isFocusNode(node)) evt.preventDefault()
     if (!state.isMouse) {
       startX.set(pointer.read(evt, 'x'))
       startY.set(pointer.read(evt, 'y'))
-    } else if (!isFocusNode(evtTarget as Element)) {
-      evt.preventDefault()
     }
   }
 
@@ -141,7 +147,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
       const diffX = Math.abs(X - startX.get())
       const diffY = Math.abs(Y - startY.get())
       state.preventScroll = diffX > diffY
-      if (!state.preventScroll) up()
+      if (!state.preventScroll && !state.preventClick) up()
     }
   }
 
@@ -150,9 +156,8 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const boostedForce = pointer.up() * pointerForceBoost()
     const force = allowedForce(boostedForce)
     const speed = movementSpeed()
-    const diffToTarget = Math.abs(target.get() - location.get())
-    const minDiffToTarget = 1
-    const isMoving = diffToTarget <= minDiffToTarget
+    const diffToTarget = target.get() - dragStartLocation.get()
+    const isMoving = Math.abs(diffToTarget) >= 0.5
 
     if (isMoving) state.preventClick = true
     state.isMouse = false

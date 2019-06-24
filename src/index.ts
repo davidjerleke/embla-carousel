@@ -14,18 +14,23 @@ type Elements = {
   slides: HTMLElement[]
 }
 
+type ScrollSnap = {
+  slideNodes: HTMLElement[]
+  slideIndexes: number[]
+}
+
 export type EmblaCarousel = {
-  next: () => void
-  previous: () => void
-  goTo: (index: number) => void
+  scrollSnapList: () => ScrollSnap[]
+  scrollNext: () => void
+  scrollPrev: () => void
+  scrollTo: (index: number) => void
   destroy: () => void
   containerNode: () => HTMLElement
   slideNodes: () => HTMLElement[]
-  selectedIndex: () => number
-  previousIndex: () => number
-  groupedIndexes: () => number[][]
+  selectedScrollSnap: () => number
+  previousScrollSnap: () => number
   canScrollNext: () => boolean
-  canScrollPrevious: () => boolean
+  canScrollPrev: () => boolean
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   changeOptions: (options: UserOptions) => void
@@ -71,7 +76,7 @@ export function EmblaCarousel(
       const { root, container, slides } = elements
       const newOpt = Object.assign(options, userOpt)
       const engine = Engine(root, container, slides, newOpt, events)
-      Object.assign(slider, engine)
+      const newSlider = Object.assign(slider, engine)
       eventStore.add(window, 'resize', debouncedResize)
       slides.forEach(slideFocusEvent)
       slider.translate.to(slider.mover.location)
@@ -79,7 +84,6 @@ export function EmblaCarousel(
       if (options.loop && slides.length === 1) {
         return activate({ loop: false })
       }
-
       if (options.draggable) activateDragFeature()
       if (options.loop) slider.shifter.shiftInfinite(slides)
       if (isFirstInit) {
@@ -114,7 +118,7 @@ export function EmblaCarousel(
       const groupIndex = Math.floor(index / options.slidesToScroll)
       const selectedGroup = index ? groupIndex : index
       sliderRoot.scrollLeft = 0
-      goTo(selectedGroup)
+      scrollTo(selectedGroup)
     }
     eventStore.add(slide, 'focus', focus, true)
   }
@@ -154,19 +158,44 @@ export function EmblaCarousel(
     }
   }
 
-  function next(): void {
-    slider.mover.useDefaultSpeed()
+  function scrollSnapList(): ScrollSnap[] {
+    return slider.indexGroups.map(g => ({
+      slideIndexes: g,
+      slideNodes: g.map(i => elements.slides[i]),
+    }))
+  }
+
+  function canScrollPrev(): boolean {
+    const { index } = slider
+    return !options.loop && index.get() !== index.min
+  }
+
+  function canScrollNext(): boolean {
+    const { index } = slider
+    return !options.loop && index.get() !== index.max
+  }
+
+  function scrollNext(): void {
+    slider.mover.useDefaultMass().useDefaultSpeed()
     slider.travel.toNext()
   }
 
-  function previous(): void {
-    slider.mover.useDefaultSpeed()
+  function scrollPrev(): void {
+    slider.mover.useDefaultMass().useDefaultSpeed()
     slider.travel.toPrevious()
   }
 
-  function goTo(index: number): void {
-    slider.mover.useDefaultSpeed()
+  function scrollTo(index: number): void {
+    slider.mover.useDefaultMass().useDefaultSpeed()
     slider.travel.toIndex(index)
+  }
+
+  function selectedScrollSnap(): number {
+    return slider.index.get()
+  }
+
+  function previousScrollSnap(): number {
+    return slider.indexPrevious.get()
   }
 
   function containerNode(): HTMLElement {
@@ -177,40 +206,20 @@ export function EmblaCarousel(
     return elements.slides
   }
 
-  function selectedIndex(): number {
-    return slider.index.get()
-  }
-
-  function previousIndex(): number {
-    return slider.indexPrevious.get()
-  }
-
-  function groupedIndexes(): number[][] {
-    return slider.indexGroups
-  }
-
-  function canScrollPrevious(): boolean {
-    return !options.loop && selectedIndex() !== slider.index.min
-  }
-
-  function canScrollNext(): boolean {
-    return !options.loop && selectedIndex() !== slider.index.max
-  }
-
   const self: EmblaCarousel = {
     canScrollNext,
-    canScrollPrevious,
+    canScrollPrev,
     changeOptions,
     containerNode,
     destroy,
-    goTo,
-    groupedIndexes,
-    next,
     off,
     on,
-    previous,
-    previousIndex,
-    selectedIndex,
+    previousScrollSnap,
+    scrollNext,
+    scrollPrev,
+    scrollSnapList,
+    scrollTo,
+    selectedScrollSnap,
     slideNodes,
   }
   return Object.freeze(self)

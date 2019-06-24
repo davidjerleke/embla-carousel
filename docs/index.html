@@ -382,9 +382,9 @@
     <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript">
       function generateDotsBtns(dots, embla) {
-        var indexes = embla.groupedIndexes()
+        var scrollSnaps = embla.scrollSnapList()
         var dotsFrag = document.createDocumentFragment()
-        var dotsArray = indexes.map(function() {
+        var dotsArray = scrollSnaps.map(function() {
           return document.createElement('button')
         })
         dotsArray.forEach(function(dotNode) {
@@ -400,7 +400,7 @@
           dotNode.addEventListener(
             'click',
             function() {
-              embla.goTo(i)
+              embla.scrollTo(i)
             },
             false,
           )
@@ -409,30 +409,28 @@
 
       function setSelectedDotBtn(dotsArray, embla) {
         return function() {
-          var selected = embla.selectedIndex()
-          var previous = embla.previousIndex()
+          var selected = embla.selectedScrollSnap()
+          var previous = embla.previousScrollSnap()
           dotsArray[previous].classList.remove('is-selected')
           dotsArray[selected].classList.add('is-selected')
         }
       }
 
       function addPrevNextBtnClickListeners(prevBtn, nextBtn, embla) {
-        prevBtn.addEventListener('click', embla.previous, false)
-        nextBtn.addEventListener('click', embla.next, false)
+        prevBtn.addEventListener('click', embla.scrollPrev, false)
+        nextBtn.addEventListener('click', embla.scrollNext, false)
       }
 
       function togglePrevAndNextBtns(prevBtn, nextBtn, embla) {
         return function() {
-          if (embla.canScrollPrevious()) {
+          if (embla.canScrollPrev()) {
             prevBtn.removeAttribute('disabled')
-          }
-          if (!embla.canScrollPrevious()) {
+          } else {
             prevBtn.setAttribute('disabled', 'disabled')
           }
           if (embla.canScrollNext()) {
             nextBtn.removeAttribute('disabled')
-          }
-          if (!embla.canScrollNext()) {
+          } else {
             nextBtn.setAttribute('disabled', 'disabled')
           }
         }

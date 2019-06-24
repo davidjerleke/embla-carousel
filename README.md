@@ -141,14 +141,14 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-**`align`** (string: start | center | end)  
-Align the slides relative to the carousel viewport.
+**`align`** (string)  
+Align the slides relative to the carousel viewport. Possible values are **'start'**, **'center'** and **'end'**.
 
-**`containerSelector`** (string: querySelectorString)  
+**`containerSelector`** (string)  
 The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
 
 **`slidesToScroll`** (number)  
-Scrolls past given number of slides whether scroll is triggered by **next()**, **previous** or **goTo()** methods as well as drag interactions.
+Scrolls past given number of slides whether scroll is triggered by **scrollNext()**, **scrollPrev()** or **scrollTo()** methods as well as drag interactions.
 
 **`draggable`** (boolean)  
 Allow mouse and touch interactions to move the carousel.
@@ -159,7 +159,7 @@ Determines if the carousel should snap to a slide position after mouse and touch
 **`loop`** (boolean)  
 Determines if the carousel should loop when start or end is reached.
 
-**`speed`** (number: 5 - 20)  
+**`speed`** (number)  
 Carousel speed when using buttons to navigate. A higher number will make transitions faster. Pointer events are not affected by this.
 
 **`startIndex`** (number)  
@@ -179,11 +179,11 @@ Classname that will be applied to the wrapper when a pointer is dragging the car
 Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this:
 
 ```javascript
-embla.next()
-embla.goTo(2)
+embla.scrollNext()
+embla.scrollTo(2)
 embla.changeOptions({ loop: true })
 embla.on('select', () => {
-  console.log(`Selected index is now ${embla.selectedIndex()}!`)
+  console.log(`Selected scroll is now ${embla.selectedScroll()}!`)
 })
 ```
 
@@ -195,34 +195,34 @@ Returns the current container element node.
 **`slideNodes()`**  
 Returns the slides as an array of element nodes.
 
-**`next()`**  
-Moves to next item. If `loop: false` and the carousel is on the last slide this method will do nothing.
+**`scrollNext()`**  
+Scrolls to next snap point if possible. If `loop: false` and the carousel is on the last snap point this method will do nothing.
 
-**`previous()`**  
-Moves to previous item. If `loop: false` and the carousel is on the first slide this method will do nothing.
+**`scrollPrev()`**  
+Scrolls to previous snap point if possible. If `loop: false` and the carousel is on the first snap point this method will do nothing.
 
-**`goTo(index: number)`**  
-Moves to item that matches passed index. If `loop: true` the carousel will seek the closest way to the passed index.
+**`scrollTo(index)`**  
+Scrolls to the snap point that matches the passed index. If `loop: true` the carousel will seek the closest way to the target.
 
-**`selectedIndex()`**  
-Returns the current selected index. Each index contains multiple slides if `slidesToScroll > 1`. If `slidesToScroll: 1` each slide has its own index. Zero-based.
-
-**`previousIndex()`**  
-Returns the previous selected index. Each index contains multiple slides if `slidesToScroll: > 1`. If `slidesToScroll: 1` each slide has its own index. Zero-based.
-
-**`groupedIndexes()`**  
-Returns an array of all slide indexes grouped into arrays according to the `slidesToScroll` option, i.e. if the total number of slides is `4` and `slidesToScroll: 2`, it will return `[[0, 1], [2, 3]]`.
-
-**`canScrollPrevious()`**  
-Returns if it's possible to scroll to previous from here. Note that if `loop: true` this will always return `true`.
+**`canScrollPrev()`**  
+Returns if it's possible to scroll to a previous snap point. Note that if `loop: true` this will always return `true`.
 
 **`canScrollNext()`**  
-Returns if it's possible to scroll to next from here. Note that if `loop: true` this will always return `true`.
+Returns if it's possible to scroll to a next snap point. Note that if `loop: true` this will always return `true`.
 
-**`changeOptions(options: options)`**  
+**`selectedScrollSnap()`**  
+Returns the index of the selected snap point. Each snap point scrolls more than one slide if `slidesToScroll > 1`. Zero-based.
+
+**`previousScrollSnap()`**  
+Returns the index of the previous snap point. Each snap point scrolls more than one slide if `slidesToScroll > 1`. Zero-based.
+
+**`scrollSnapList()`**  
+Returns an array of all scroll snap points, each containing slide numbers and slide nodes. If total slide count is `4` and `slidesToScroll: 2`, it means that every scroll snap point contains `2` slides because any scroll triggered by **scrollNext()** or **scrollPrev()** will scroll `2` slides at a time.
+
+**`changeOptions(options)`**  
 Applies passed options by doing all the necessary calculations and reinitialising the carousel from scratch.
 
-**`on(event: string, callback: function)`**  
+**`on(event, callback)`**  
 Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
 
 - **`init`** - When the carousel has been initialised for the first time.
@@ -232,7 +232,7 @@ Subscribes to a custom Embla event by firing the passed callback. Below is a lis
 - **`dragStart`** - When carousel dragging begins.
 - **`dragEnd`** - When carousel dragging ends.
 
-**`off(event: string, callback: function)`**  
+**`off(event, callback)`**  
 Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
 
 **`destroy()`**  

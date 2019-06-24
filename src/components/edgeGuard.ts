@@ -32,7 +32,7 @@ export function EdgeGuard(params: Params): EdgeGuard {
       const constraint = limit.constrain(v.get())
       state.timeout = window.setTimeout(() => {
         v.setNumber(constraint)
-        mover.useSpeed(10)
+        mover.useSpeed(10).useMass(3)
         animation.start()
         state.timeout = 0
       }, tolerance)

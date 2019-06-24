@@ -17,6 +17,8 @@ export type Mover = {
   settle: (target: Vector1D) => boolean
   useSpeed: (newSpeed: number) => Mover
   useDefaultSpeed: () => Mover
+  useMass: (newMass: number) => Mover
+  useDefaultMass: () => Mover
 }
 
 export function Mover(params: Params): Mover {
@@ -25,7 +27,7 @@ export function Mover(params: Params): Mover {
   const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
   const direction = Direction(0)
-  const state = { speed }
+  const state = { speed, mass }
 
   function update(): Mover {
     velocity.add(acceleration)
@@ -35,7 +37,7 @@ export function Mover(params: Params): Mover {
   }
 
   function applyForce(force: Vector1D): Mover {
-    force.divide(mass)
+    force.divide(state.mass)
     acceleration.add(force)
     return self
   }
@@ -72,13 +74,25 @@ export function Mover(params: Params): Mover {
     return self
   }
 
+  function useMass(desired: number): Mover {
+    state.mass = desired
+    return self
+  }
+
+  function useDefaultMass(): Mover {
+    useMass(mass)
+    return self
+  }
+
   const self: Mover = {
     direction,
     location,
     seek,
     settle,
     update,
+    useDefaultMass,
     useDefaultSpeed,
+    useMass,
     useSpeed,
   }
   return Object.freeze(self)
