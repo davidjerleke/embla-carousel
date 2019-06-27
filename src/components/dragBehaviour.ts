@@ -114,11 +114,10 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const isMoving = Math.abs(diffToTarget) >= 2
 
     state.isMouse = !!evt.type.match(/mouse/)
+    state.isDown = true
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
-    mover.useDefaultMass()
-    state.isDown = true
     mover.useSpeed(80).useDefaultMass()
     animation.start()
     addInteractionEvents()
@@ -153,9 +152,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function up(): void {
     const { travel } = params
-    const boostedForce = pointer.up() * pointerForceBoost()
-    const force = allowedForce(boostedForce)
-    const speed = movementSpeed()
+    const force = pointer.up() * pointerForceBoost()
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
 
@@ -164,9 +161,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
     state.preventScroll = false
     state.isDown = false
     interactionEvents.removeAll()
-    mover.useSpeed(speed)
+    mover.useSpeed(movementSpeed())
+    travel.toDistance(allowedForce(force))
     events.dispatch('dragEnd')
-    travel.toDistance(force)
   }
 
   function click(evt: Event): void {
