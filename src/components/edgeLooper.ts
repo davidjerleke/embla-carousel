@@ -4,7 +4,7 @@ import { Vector1D } from './vector1d'
 type Params = {
   limit: Limit
   location: Vector1D
-  span: number
+  contentSize: number
   vectors: Vector1D[]
 }
 
@@ -13,7 +13,7 @@ export type EdgeLooper = {
 }
 
 export function EdgeLooper(params: Params): EdgeLooper {
-  const { limit, location, span, vectors } = params
+  const { limit, location, contentSize, vectors } = params
   const { reachedMin, reachedMax } = limit
 
   function shouldLoop(direction: number): boolean {
@@ -23,7 +23,7 @@ export function EdgeLooper(params: Params): EdgeLooper {
 
   function loop(direction: number): void {
     if (shouldLoop(direction)) {
-      const distance = span * (direction * -1)
+      const distance = contentSize * (direction * -1)
       vectors.forEach(v => v.addNumber(distance))
     }
   }

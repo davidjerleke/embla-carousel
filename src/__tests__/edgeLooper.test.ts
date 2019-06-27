@@ -7,7 +7,7 @@ let vectors: Vector1D[]
 let edgeLooper: EdgeLooper
 const minLimit = 0
 const maxLimit = 10
-const span = 10
+const contentSize = 10
 const limit = Limit({ min: minLimit, max: maxLimit })
 const vector_1_initial_value = 5
 const vector_2_initial_value = 10
@@ -21,25 +21,33 @@ beforeEach(() => {
   edgeLooper = EdgeLooper({
     limit,
     location,
-    span,
+    contentSize,
     vectors,
   })
 })
 
 describe('EdgeLooper', () => {
-  test('Subtracts span size from given Vectors when location is greater than Limit max', () => {
+  test('Subtracts content size from given Vectors when location is greater than Limit max', () => {
     const direction = 1
     location.setNumber(maxLimit + 1)
     edgeLooper.loop(direction)
-    expect(vectors[0].get()).toBe(vector_1_initial_value - span)
-    expect(vectors[1].get()).toBe(vector_2_initial_value - span)
+    expect(vectors[0].get()).toBe(
+      vector_1_initial_value - contentSize,
+    )
+    expect(vectors[1].get()).toBe(
+      vector_2_initial_value - contentSize,
+    )
   })
 
-  test('Adds span size to given Vectors when location is less than Limit min', () => {
+  test('Adds content size to given Vectors when location is less than Limit min', () => {
     const direction = -1
     location.setNumber(minLimit - 1)
     edgeLooper.loop(direction)
-    expect(vectors[0].get()).toBe(vector_1_initial_value + span)
-    expect(vectors[1].get()).toBe(vector_2_initial_value + span)
+    expect(vectors[0].get()).toBe(
+      vector_1_initial_value + contentSize,
+    )
+    expect(vectors[1].get()).toBe(
+      vector_2_initial_value + contentSize,
+    )
   })
 })

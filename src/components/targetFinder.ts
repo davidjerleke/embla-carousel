@@ -9,7 +9,7 @@ type Params = {
   loop: boolean
   groupSizes: number[]
   groupPositions: number[]
-  span: number
+  contentSize: number
   limit: Limit
   target: Vector1D
 }
@@ -30,7 +30,7 @@ export type TargetFinder = {
 }
 
 export function TargetFinder(params: Params): TargetFinder {
-  const { loop, groupPositions, span } = params
+  const { loop, groupPositions, contentSize } = params
   const groupBounds = calculateGroupBounds()
 
   function calculateGroupBounds(): Bound[] {
@@ -50,15 +50,15 @@ export function TargetFinder(params: Params): TargetFinder {
     const lastGroup = groupPositions[params.index.max]
     const pastLastGroup = distance < lastGroup
     const addOffset = loop && pastLastGroup && index === 0
-    const offset = addOffset ? distance + span : distance
+    const offset = addOffset ? distance + contentSize : distance
     return groupPositions[index] - offset
   }
 
   function findTargetGroupAt(targetDistance: number): Target {
     const { reachedMin, reachedMax } = params.limit
     let distance = targetDistance
-    while (reachedMax(distance)) distance -= span
-    while (reachedMin(distance)) distance += span
+    while (reachedMax(distance)) distance -= contentSize
+    while (reachedMin(distance)) distance += contentSize
     const index = groupBounds.reduce(
       (a, b, i) => (distance < b.start && distance > b.end ? i : a),
       0,
@@ -79,8 +79,8 @@ export function TargetFinder(params: Params): TargetFinder {
       return { distance, index }
     } else {
       const d1 = distanceToGroup
-      const d2 = span + distanceToGroup
-      const d3 = distanceToGroup - span
+      const d2 = contentSize + distanceToGroup
+      const d3 = distanceToGroup - contentSize
 
       if (direction && params.index.max === 1) {
         const shortest = minDistance(d1, direction === 1 ? d2 : d3)

@@ -6,11 +6,12 @@ import { Vector1D } from '../components/vector1d'
 const shifterParams = (align: Alignments) => {
   const location = Vector1D(0)
   const chunkSize = ChunkSize(950)
-  const alignSize = AlignSize({ align, root: chunkSize.root })
+  const viewSize = chunkSize.root
+  const alignSize = AlignSize({ align, viewSize })
   const slideSizes = [15, 30, 15, 15, 70, 15, 15, 15]
   const alignSizes = slideSizes.map(alignSize.measure)
-  const span = slideSizes.reduce((a, s) => a + s)
-  return { alignSizes, chunkSize, span, slideSizes, location }
+  const contentSize = slideSizes.reduce((a, s) => a + s)
+  return { alignSizes, viewSize, contentSize, slideSizes, location }
 }
 
 describe('InfiniteShifter', () => {

@@ -1,7 +1,7 @@
 export type Alignments = 'start' | 'center' | 'end'
 
 type Params = {
-  root: number
+  viewSize: number
   align: Alignments
 }
 
@@ -10,7 +10,7 @@ export type AlignSize = {
 }
 
 export function AlignSize(params: Params): AlignSize {
-  const { root, align } = params
+  const { viewSize, align } = params
   const alignment = { start, center, end }
 
   function start(n: number): number {
@@ -18,11 +18,11 @@ export function AlignSize(params: Params): AlignSize {
   }
 
   function center(n: number): number {
-    return (root - n) / 2
+    return (viewSize - n) / 2
   }
 
   function end(n: number): number {
-    return root - n
+    return viewSize - n
   }
 
   function measure(n: number): number {

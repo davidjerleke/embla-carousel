@@ -63,7 +63,8 @@ export function Engine(
   // Measurements
   const rootSize = rectWidth(container)
   const chunkSize = ChunkSize(rootSize)
-  const alignSize = AlignSize({ align, root: chunkSize.root })
+  const viewSize = chunkSize.root
+  const alignSize = AlignSize({ align, viewSize })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
   const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
   const groupSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
@@ -114,13 +115,14 @@ export function Engine(
   const mover = Mover({
     location,
     mass: 1,
-    maxForce: chunkSize.root * 2,
+    maxForce: viewSize * 2,
     speed,
   })
   const travel = Traveller({
     animation,
     events,
     findTarget: TargetFinder({
+      contentSize,
       diffSizes,
       dragFree,
       groupPositions,
@@ -128,7 +130,6 @@ export function Engine(
       index,
       limit,
       loop,
-      span: contentSize,
       target,
     }),
     index,
@@ -164,9 +165,9 @@ export function Engine(
       tolerance: 50,
     }),
     edgeLooper: EdgeLooper({
+      contentSize,
       limit,
       location,
-      span: contentSize,
       vectors: [location, target],
     }),
     index,
@@ -176,10 +177,10 @@ export function Engine(
     pointer,
     shifter: InfiniteShifter({
       alignSizes,
-      chunkSize,
+      contentSize,
       location,
       slideSizes,
-      span: contentSize,
+      viewSize,
     }),
     target,
     translate: Translate(container),
