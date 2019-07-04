@@ -1,4 +1,5 @@
 <br />
+<div align="center">
 <p align="center">
   <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
   </a>
@@ -9,6 +10,7 @@
 <p align="center">
   An extensible low level carousel for the web, written in TypeScript.
 </p>
+ <pre>« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</pre>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
@@ -16,10 +18,14 @@
   <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
 </p>
 <p align="center">
-  <strong>
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank">« View Demo »</a>
-  </strong>
+  <a href="https://github.com/davidcetinkaya/embla-carousel">
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="Embla Carousel JavaScript" />
+  </a>
+    <a href="https://github.com/davidcetinkaya/embla-carousel-react">
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="Embla Carousel React" />
+  </a>
 </p>
+</div>
 
 ## Table of contents
 
@@ -39,10 +45,6 @@
 Embla’s purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some basic JavaScript and build awesome physics simulated carousels. It’s dependency free and 100% open source.
 
 > Try it on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols) ✨.
-
-## Implementations
-
-[<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="60" alt="Embla Carousel JavaScript" />](https://github.com/davidcetinkaya/embla-carousel) &nbsp; &nbsp; [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="60" alt="Embla Carousel React" />](https://github.com/davidcetinkaya/embla-carousel-react)
 
 ## Features
 
