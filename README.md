@@ -22,12 +22,13 @@
 <p align="center">
   <a href="https://github.com/davidcetinkaya/embla-carousel">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="Embla Carousel JavaScript" />
-  </a> &nbsp; &nbsp;
+  </a> &nbsp;
     <a href="https://github.com/davidcetinkaya/embla-carousel-react">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="Embla Carousel React" />
   </a>
 </p>
 </div>
+<br>
 
 ## Features
 
