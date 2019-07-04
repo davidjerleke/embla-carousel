@@ -10,7 +10,9 @@
 <p align="center">
   An extensible low level carousel for the web, written in TypeScript.
 </p>
+  <strong>
  <pre>« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</pre>
+    <strong>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
@@ -20,31 +22,12 @@
 <p align="center">
   <a href="https://github.com/davidcetinkaya/embla-carousel">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="Embla Carousel JavaScript" />
-  </a>
+  </a> &nbsp;
     <a href="https://github.com/davidcetinkaya/embla-carousel-react">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="Embla Carousel React" />
   </a>
 </p>
 </div>
-
-## Table of contents
-
-- [What's Embla?](#whats-embla)
-- [Implementations](#implementations)
-- [Features](#features)
-- [Installation](#installation)
-- [QuickStart](#quickstart)
-- [Options](#options)
-- [API](#api)
-- [Browser Support](#browser-support)
-- [Contribution](#contribution)
-- [License](#license)
-
-## What's Embla?
-
-Embla’s purpose is to provide a low level carousel and allow developers to extend it by using its available methods. Extend it with some basic JavaScript and build awesome physics simulated carousels. It’s dependency free and 100% open source.
-
-> Try it on the [Demo Page](https://davidcetinkaya.github.io/embla-carousel) or [CodeSandbox](https://codesandbox.io/s/embla-carousel-loop-false-oyols) ✨.
 
 ## Features
 
