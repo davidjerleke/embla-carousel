@@ -12,7 +12,7 @@
 </p>
   <strong>
  <pre>« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</pre>
-    <strong>
+    </strong>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
   <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
@@ -22,7 +22,7 @@
 <p align="center">
   <a href="https://github.com/davidcetinkaya/embla-carousel">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="Embla Carousel JavaScript" />
-  </a> &nbsp;
+  </a> &nbsp; &nbsp;
     <a href="https://github.com/davidcetinkaya/embla-carousel-react">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="Embla Carousel React" />
   </a>
