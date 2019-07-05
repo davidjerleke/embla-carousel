@@ -30,14 +30,9 @@
 </p>
 </div>
 <br>
-
-## Features
-
-- **`Responsive out of the box`** - Choose any **%**-based slide widths.
-- **`Seamless loop effect`** - No pauses or previous/next button throttling.
-- **`Hardware accelerated`** - Smooth physics simulated animations.
-- **`Extensible rich API`** - Comes with a low-level API to control the carousel.
-- **`Realistic drag handling`** - Authentic cross device drag behaviour.
+<p align="center"><strong><code><a href="#options">OPTIONS</a></code></strong> — Explore options</p>
+<p align="center"><strong><code><a href="#api">API</a></code></strong> — Explore the API</p>
+<br>
 
 ## Installation
 
