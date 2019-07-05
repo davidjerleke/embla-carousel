@@ -11,9 +11,11 @@
   An extensible low level carousel for the web, written in TypeScript.
 </p>
 <p align="center">
-  <strong align="center">
- <pre align="center">« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</pre>
-    </strong>
+  
+ <pre align="center">
+ <strong align="center">« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</strong>
+ </pre>
+  
 <p>
 <p align="center">
   <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
