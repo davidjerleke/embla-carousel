@@ -10,7 +10,7 @@
 <p align="center">
   An extensible low level carousel for the web, written in TypeScript.
 </p>
-  <strong>
+  <strong align="center">
  <pre>« <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> »</pre>
     </strong>
 <p align="center">
@@ -39,9 +39,7 @@
 If you are using a module bundler...
 
 ```bash
-
 yarn add embla-carousel
-
 ```
 
 ```javascript
