@@ -112,6 +112,7 @@ const embla = EmblaCarousel(emblaNode, {
   align: 'center',
   containerSelector: '*',
   slidesToScroll: 1,
+  containScroll: false,
   draggable: true,
   dragFree: false,
   loop: false,
@@ -131,6 +132,9 @@ The selector to use for the container that holds the slides. Embla will use all 
 
 **`slidesToScroll`** (number)  
 Scrolls past given number of slides whether scroll is triggered by **scrollNext()**, **scrollPrev()** or **scrollTo()** methods as well as drag interactions.
+
+**`containScroll`** (boolean)  
+Contains slides to the carousel viewport to prevent excessive scrolling at the beginning or the end. This has no effect if `loop: true`.
 
 **`draggable`** (boolean)  
 Allow mouse and touch interactions to move the carousel.

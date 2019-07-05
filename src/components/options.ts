@@ -2,6 +2,7 @@ import { Alignments } from './alignSize'
 
 export type Options = {
   align: Alignments
+  containScroll: boolean
   containerSelector: string
   dragFree: boolean
   draggable: boolean
@@ -16,6 +17,7 @@ export type Options = {
 
 export const defaultOptions = Object.freeze({
   align: 'center',
+  containScroll: false,
   containerSelector: '*',
   dragFree: false,
   draggable: true,

@@ -13,12 +13,7 @@ const tolerance = 50
 
 beforeEach(() => {
   location = Vector1D(0)
-  mover = Mover({
-    location,
-    mass: 3,
-    maxForce: 100,
-    speed: 10,
-  })
+  mover = Mover({ location, mass: 1, speed: 10 })
   edgeGuard = EdgeGuard({
     limit,
     location,

@@ -55,9 +55,5 @@ describe('Vector1D', () => {
       vector1.normalize()
       expect(vector1.get()).toBe(1)
     })
-    test('Limits Vector value to given number', () => {
-      vector1.limit(5)
-      expect(vector1.get()).toBe(5)
-    })
   })
 })

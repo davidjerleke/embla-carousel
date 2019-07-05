@@ -9,9 +9,15 @@ const shifterParams = (align: Alignments) => {
   const viewSize = chunkSize.root
   const alignSize = AlignSize({ align, viewSize })
   const slideSizes = [15, 30, 15, 15, 70, 15, 15, 15]
-  const alignSizes = slideSizes.map(alignSize.measure)
+  const snapPositions = slideSizes.map(alignSize.measure)
   const contentSize = slideSizes.reduce((a, s) => a + s)
-  return { alignSizes, viewSize, contentSize, slideSizes, location }
+  return {
+    snapPositions,
+    viewSize,
+    contentSize,
+    slideSizes,
+    location,
+  }
 }
 
 describe('InfiniteShifter', () => {
@@ -30,7 +36,7 @@ describe('InfiniteShifter', () => {
     test('ShiftTargets are correct when given alignment is Start', () => {
       const params = shifterParams('start')
       const { shiftPoints } = InfiniteShifter(params)
-      const parentLocation = params.alignSizes[0]
+      const parentLocation = params.snapPositions[0]
       const shiftTargets = shiftPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
@@ -54,7 +60,7 @@ describe('InfiniteShifter', () => {
     test('ShiftTargets are correct when given alignment is Center', () => {
       const params = shifterParams('center')
       const { shiftPoints } = InfiniteShifter(params)
-      const parentLocation = params.alignSizes[0]
+      const parentLocation = params.snapPositions[0]
       const shiftTargets = shiftPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
@@ -77,7 +83,7 @@ describe('InfiniteShifter', () => {
     test('ShiftTargets are correct when given alignment is End', () => {
       const params = shifterParams('end')
       const { shiftPoints } = InfiniteShifter(params)
-      const parentLocation = params.alignSizes[0]
+      const parentLocation = params.snapPositions[0]
       const shiftTargets = shiftPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )

@@ -71,9 +71,7 @@ export function Pointer(size: ChunkSize): Pointer {
       pointer.trackPoints
         .slice(-trackLength)
         .map(point => currentPoint - point)
-        .sort((p1, p2) =>
-          Math.abs(p1) < Math.abs(p2) ? 1 : -1,
-        )[0] || 0,
+        .sort((p1, p2) => (Math.abs(p1) < Math.abs(p2) ? 1 : -1))[0] || 0,
     )
 
     pointer.trackPoints = []

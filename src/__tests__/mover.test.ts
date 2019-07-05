@@ -5,12 +5,7 @@ let mover: Mover
 let target: Vector1D
 
 beforeEach(() => {
-  mover = Mover({
-    location: Vector1D(0),
-    speed: 10,
-    mass: 2,
-    maxForce: 100,
-  })
+  mover = Mover({ location: Vector1D(0), speed: 10, mass: 1 })
   target = Vector1D(10)
 })
 

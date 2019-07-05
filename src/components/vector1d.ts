@@ -8,7 +8,6 @@ export type Vector1D = {
   addNumber: (n: number) => Vector1D
   subtractNumber: (n: number) => Vector1D
   divide: (n: number) => Vector1D
-  limit: (n: number) => Vector1D
   magnitude: () => number
   normalize: () => Vector1D
 }
@@ -70,17 +69,11 @@ export function Vector1D(value: number): Vector1D {
     return self
   }
 
-  function limit(n: number): Vector1D {
-    if (magnitude() > n) normalize().multiply(n)
-    return self
-  }
-
   const self: Vector1D = {
     add,
     addNumber,
     divide,
     get,
-    limit,
     magnitude,
     multiply,
     normalize,

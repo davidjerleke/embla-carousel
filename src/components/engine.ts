@@ -11,6 +11,7 @@ import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
+import { SnapPosition } from './snapPosition'
 import { TargetFinder } from './targetFinder'
 import { Translate } from './translate'
 import { Traveller } from './traveller'
@@ -47,40 +48,40 @@ export function Engine(
     speed,
     dragFree,
     slidesToScroll,
+    containScroll,
   } = options
 
   // Index
+  const indexMin = 0
   const indexMax = Math.ceil(slides.length / slidesToScroll) - 1
   const indexes = Object.keys(slides).map(Number)
   const indexGroups = groupNumbers(indexes, slidesToScroll)
-  const index = Counter({
-    limit: Limit({ max: indexMax, min: 0 }),
-    loop,
-    start: startIndex,
-  })
+  const indexSpan = Limit({ min: indexMin, max: indexMax })
+  const index = Counter({ limit: indexSpan, start: startIndex, loop })
   const indexPrevious = index.clone()
 
   // Measurements
-  const rootSize = rectWidth(container)
-  const chunkSize = ChunkSize(rootSize)
+  const containerSize = rectWidth(container)
+  const chunkSize = ChunkSize(containerSize)
   const viewSize = chunkSize.root
-  const alignSize = AlignSize({ align, viewSize })
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
   const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
-  const groupSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
-  const alignSizes = groupSizes.map(alignSize.measure)
-  const contentSize = groupSizes.reduce((a, s) => a + s)
-  const diffSizes = groupSizes.map((size, i) => {
-    const next = index.clone().set(i + 1)
-    return size + alignSizes[i] - alignSizes[next.get()]
+  const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
+  const contentSize = snapSizes.reduce((a, s) => a + s)
+  const alignSize = AlignSize({ align, viewSize })
+  const contain = !loop && containScroll
+  const snapPosition = SnapPosition({
+    alignSize,
+    contain,
+    contentSize,
+    index,
+    snapSizes,
+    viewSize,
   })
-  const groupPositions = groupSizes.map((s, i) => {
-    const sizes = diffSizes.slice(0, i)
-    return sizes.reduce((a, d) => a - d, alignSizes[0])
-  })
+  const snapPositions = snapSizes.map(snapPosition.measure)
   const loopSize = -contentSize + chunkSize.measure(1)
-  const max = groupPositions[0]
-  const min = loop ? max + loopSize : groupPositions[index.max]
+  const max = snapPositions[0]
+  const min = loop ? max + loopSize : snapPositions[index.max]
   const limit = Limit({ max, min })
 
   // Direction
@@ -109,27 +110,22 @@ export function Engine(
 
   // Shared
   const animation = Animation(update)
-  const startLocation = groupPositions[index.get()]
+  const startLocation = snapPositions[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const mover = Mover({
-    location,
-    mass: 1,
-    maxForce: viewSize * 2,
-    speed,
-  })
+  const mover = Mover({ location, speed, mass: 1 })
   const travel = Traveller({
     animation,
     events,
     findTarget: TargetFinder({
+      align,
       contentSize,
-      diffSizes,
       dragFree,
-      groupPositions,
-      groupSizes,
       index,
       limit,
       loop,
+      snapPositions,
+      snapSizes,
       target,
     }),
     index,
@@ -143,13 +139,13 @@ export function Engine(
     dragFree,
     element: root,
     events,
-    groupSizes,
     index,
     limit,
     location,
     loop,
     mover,
     pointer: Pointer(chunkSize),
+    snapSizes,
     target,
     travel,
   })
@@ -176,10 +172,10 @@ export function Engine(
     mover,
     pointer,
     shifter: InfiniteShifter({
-      alignSizes,
       contentSize,
       location,
       slideSizes,
+      snapPositions,
       viewSize,
     }),
     target,

@@ -6,7 +6,6 @@ type Params = {
   location: Vector1D
   speed: number
   mass: number
-  maxForce: number
 }
 
 export type Mover = {
@@ -22,7 +21,7 @@ export type Mover = {
 }
 
 export function Mover(params: Params): Mover {
-  const { location, speed, mass, maxForce } = params
+  const { location, speed, mass } = params
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
@@ -51,7 +50,6 @@ export function Mover(params: Params): Mover {
       .normalize()
       .multiply(m)
       .subtract(velocity)
-      .limit(maxForce)
     applyForce(attraction)
     return self
   }

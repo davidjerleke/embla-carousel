@@ -13,7 +13,7 @@ type Params = {
   element: HTMLElement
   target: Vector1D
   dragFree: boolean
-  groupSizes: number[]
+  snapSizes: number[]
   pointer: Pointer
   location: Vector1D
   animation: Animation
@@ -33,8 +33,8 @@ export type DragBehaviour = {
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
-  const { element, pointer, location, events } = params
   const { target, mover, dragFree, animation } = params
+  const { element, pointer, location, events, limit } = params
   const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
@@ -46,7 +46,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   const freeForceBoost = { mouse: 4, touch: 7 }
   const snapSpeed = { mouse: 12, touch: 14 }
   const freeSpeed = { mouse: 6, touch: 5 }
-  const dragForceThreshold = 4
+  const dragThreshold = 4
   const state = {
     isDown: false,
     isMouse: false,
@@ -96,16 +96,20 @@ export function DragBehaviour(params: Params): DragBehaviour {
     return boost[type]
   }
 
-  function allowedForce(force: number): number {
-    const { groupSizes, index } = params
+  function seekTargetBy(force: number): void {
+    const { travel, snapSizes, index } = params
     const forceAbs = Math.abs(force)
-    const halfGroup = groupSizes[index.get()] / 2
-    const aboveThreshold = forceAbs > dragForceThreshold
-    const belowHalfGroup = forceAbs < halfGroup
-    const forceToNext = halfGroup * Direction(force).get()
-    return !dragFree && aboveThreshold && belowHalfGroup
-      ? forceToNext
-      : force
+    const halfSnap = snapSizes[index.get()] / 2
+    const reachedLimit = limit.reachedAny(target.get() + force)
+    const seekNext = forceAbs > dragThreshold && forceAbs < halfSnap
+
+    if (!dragFree && !reachedLimit && seekNext) {
+      const indexDiff = Direction(force).get() * -1
+      const next = index.clone().add(indexDiff)
+      travel.toIndex(next.get())
+    } else {
+      travel.toDistance(force)
+    }
   }
 
   function down(evt: Event): void {
@@ -134,10 +138,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function move(evt: Event): void {
     if (state.preventScroll || state.isMouse) {
-      const { limit, loop } = params
       const diff = pointer.move(evt)
-      const reachedAnyLimit = limit.reachedAny(location.get())
-      const resist = !loop && reachedAnyLimit ? 2 : 1
+      const reachedLimit = limit.reachedAny(location.get())
+      const resist = !params.loop && reachedLimit ? 2 : 1
       target.addNumber(diff / resist)
       evt.preventDefault()
     } else {
@@ -151,7 +154,6 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function up(): void {
-    const { travel } = params
     const force = pointer.up() * pointerForceBoost()
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
@@ -162,7 +164,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     state.isDown = false
     interactionEvents.removeAll()
     mover.useSpeed(movementSpeed())
-    travel.toDistance(allowedForce(force))
+    seekTargetBy(force)
     events.dispatch('dragEnd')
   }
 
