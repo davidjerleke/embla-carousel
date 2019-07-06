@@ -112,7 +112,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ## Options
 
-Embla comes with a few optional settings that you can change by passing an object as the second argument. **Default** values are:
+Configure Embla options by passing an object as the second argument. **Default** options values are:
 
 ```javascript
 const embla = EmblaCarousel(emblaNode, {
@@ -146,7 +146,7 @@ A query selector for the container that holds the slides, where all immediate ch
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
 Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.  
-[`1`](#) · [`2`](#)
+[`1`](#) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
 
@@ -161,12 +161,12 @@ Allow mouse & touch interactions to scroll the carousel.
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
 Determines if the carousel should snap to a slide position after mouse & touch interactions.  
-[`true`](#) · [`false`](#)
+[`false`](#) · [`true`](https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc)
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
 Determines if the carousel should loop when start or end is reached.  
-[`false`](#) · [`true`](#)
+[`false`](https://codesandbox.io/s/embla-carousel-loop-false-oyols) · [`true`](https://codesandbox.io/s/embla-carousel-loop-true-3x6id)
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
