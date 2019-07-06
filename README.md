@@ -135,62 +135,62 @@ const embla = EmblaCarousel(emblaNode, {
 
 ##### `align` &nbsp; <sup>type: string<sup>
 
-Align the slides relative to the carousel viewport.
+Align the slides relative to the carousel viewport.  
 [`start`](#) · [`center`](#) · [`end`](#)
 
 ##### `containerSelector` &nbsp; <sup>type: string<sup>
 
-A query selector for the container that holds the slides, where all immediate children will be treated as slides.
+A query selector for the container that holds the slides, where all immediate children will be treated as slides.  
 [`*`](#) · [`.my-classname`](#)
 
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
-Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.
+Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.  
 [`1`](#) · [`2`](#)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
 
-Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.
+Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.  
 [`false`](#) · [`true`](#)
 
 ##### `draggable` &nbsp; <sup>type: boolean<sup>
 
-Allow mouse & touch interactions to scroll the carousel.
+Allow mouse & touch interactions to scroll the carousel.  
 [`true`](#) · [`false`](#)
 
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
-Determines if the carousel should snap to a slide position after mouse & touch interactions.
+Determines if the carousel should snap to a slide position after mouse & touch interactions.  
 [`true`](#) · [`false`](#)
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
-Determines if the carousel should loop when start or end is reached.
+Determines if the carousel should loop when start or end is reached.  
 [`false`](#) · [`true`](#)
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
-Carousel speed when using buttons to navigate. A higher number will make transitions faster.
+Carousel speed when using buttons to navigate. A higher number will make transitions faster.  
 [`10`](#) · [`15`](#)
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
 
-Zero based index of the starting slide when carousel mounts.
+Zero based index of the starting slide when carousel mounts.  
 [`0`](#) · [`3`](#)
 
 ##### `selectedClass` &nbsp; <sup>type: string<sup>
 
-Classname that will be applied to the selected slide.
+Classname that will be applied to the selected slide.  
 [`is-selected`](#) · [`my-class`](#)
 
 ##### `draggableClass` &nbsp; <sup>type: string<sup>
 
-Classname that will be applied to the wrapper when the carousel mounts if draggable.
+Classname that will be applied to the wrapper when the carousel mounts if draggable.  
 [`is-draggable`](#) · [`my-class`](#)
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
-Classname that will be applied to the wrapper when the carousel mounts if draggable.
+Classname that will be applied to the wrapper when the carousel mounts if draggable.  
 [`is-dragging`](#) · [`my-class`](#)
 
 ## API
