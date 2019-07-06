@@ -135,63 +135,63 @@ const embla = EmblaCarousel(emblaNode, {
 
 ##### `align` &nbsp; <sup>type: string<sup>
 
-- Align the slides relative to the carousel viewport.
-- 🚀 [`start`](#) **·** [`center`](#) **·** [`end`](#)
+Align the slides relative to the carousel viewport.
+[`start`](#) · [`center`](#) · [`end`](#)
 
 ##### `containerSelector` &nbsp; <sup>type: string<sup>
 
-- A query selector for the container that holds the slides, where all immediate children will be treated as slides.
-- 🚀 [`*`](#) **·** [`.my-classname`](#)
+A query selector for the container that holds the slides, where all immediate children will be treated as slides.
+[`*`](#) · [`.my-classname`](#)
 
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
-- Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.
-- 🚀 [`1`](#) **·** [`2`](#)
+Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.
+[`1`](#) · [`2`](#)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
 
-- Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.
-- 🚀 [`false`](#) **·** [`true`](#)
+Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.
+[`false`](#) · [`true`](#)
 
 ##### `draggable` &nbsp; <sup>type: boolean<sup>
 
-- Allow mouse & touch interactions to scroll the carousel.
-- 🚀 [`true`](#) **·** [`false`](#)
+Allow mouse & touch interactions to scroll the carousel.
+[`true`](#) · [`false`](#)
 
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
-- Determines if the carousel should snap to a slide position after mouse & touch interactions.
-- 🚀 [`true`](#) **·** [`false`](#)
+Determines if the carousel should snap to a slide position after mouse & touch interactions.
+[`true`](#) · [`false`](#)
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
-- Determines if the carousel should loop when start or end is reached.
-- 🚀 [`false`](#) **·** [`true`](#)
+Determines if the carousel should loop when start or end is reached.
+[`false`](#) · [`true`](#)
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
-- Carousel speed when using buttons to navigate. A higher number will make transitions faster.
-- 🚀 [`10`](#) **·** [`15`](#)
+Carousel speed when using buttons to navigate. A higher number will make transitions faster.
+[`10`](#) · [`15`](#)
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
 
-- Zero based index of the starting slide when carousel mounts.
-- 🚀 [`0`](#) **·** [`3`](#)
+Zero based index of the starting slide when carousel mounts.
+[`0`](#) · [`3`](#)
 
 ##### `selectedClass` &nbsp; <sup>type: string<sup>
 
-- Classname that will be applied to the selected slide.
-- 🚀 [`is-selected`](#) **·** [`my-class`](#)
+Classname that will be applied to the selected slide.
+[`is-selected`](#) · [`my-class`](#)
 
 ##### `draggableClass` &nbsp; <sup>type: string<sup>
 
-- Classname that will be applied to the wrapper when the carousel mounts if draggable.
-- 🚀 [`is-draggable`](#) **·** [`my-class`](#)
+Classname that will be applied to the wrapper when the carousel mounts if draggable.
+[`is-draggable`](#) · [`my-class`](#)
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
-- Classname that will be applied to the wrapper when the carousel mounts if draggable.
-- 🚀 [`is-dragging`](#) **·** [`my-class`](#)
+Classname that will be applied to the wrapper when the carousel mounts if draggable.
+[`is-dragging`](#) · [`my-class`](#)
 
 ## API
 
