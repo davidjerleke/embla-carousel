@@ -280,7 +280,12 @@ Do you like this project and want to contribute to it?
 - **`I want to spread the word`**: You're a star! Why not **twitter** or similar 📣?
 - **`I want to get my hands dirty`**: Awesome! Read the [contribution guidelines](https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md) first 📋.
 
-## License
+<br>
+<br>
 
-Embla is [MIT licensed](./LICENSE).  
-Copyright © 2019-present, David Cetinkaya.
+<h2 align="center">License</h2>
+
+<p align="center">
+  <sup>Copyright © 2019-present, David Cetinkaya.</sup><br>
+  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a>.
+</p>
