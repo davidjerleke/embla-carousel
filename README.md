@@ -131,12 +131,10 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-**`Align`** — `type: string`  
-Align the slides relative to the carousel viewport.
+#### `Align` — <sup>type: string<sup>
 
-- `start`
-- `center`
-- `end`
+- Align the slides relative to the carousel viewport.
+- Demos: [`start`](#) **·** [`center`](#) **·** [`end`](#)
 
 **`align`** (string)  
 Align the slides relative to the carousel viewport. Possible values are **'start'**, **'center'** and **'end'**.
