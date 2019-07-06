@@ -131,8 +131,6 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-### ⚠️ This section is under construction, some links may not work right now.
-
 ##### `align` &nbsp; <sup>type: string<sup>
 
 Align the slides relative to the carousel viewport.  
@@ -171,27 +169,27 @@ Determines if the carousel should loop when start or end is reached.
 ##### `speed` &nbsp; <sup>type: number<sup>
 
 Carousel speed when using buttons to navigate. A higher number will make transitions faster.  
-[`10`](#) · [`15`](#)
+[`10`](https://codesandbox.io/s/embla-carousel-speed-10-9v4gr) · [`15`](https://codesandbox.io/s/embla-carousel-speed-15-omw5i)
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
 
 Zero based index of the starting slide when carousel mounts.  
-[`0`](#) · [`3`](#)
+[`0`](https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn) · [`3`](https://codesandbox.io/s/embla-carousel-startindex-0-3ur20)
 
 ##### `selectedClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the selected slide.  
-[`is-selected`](#) · [`my-class`](#)
+[`is-selected`](https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts) · [`my-class`](https://codesandbox.io/s/embla-carousel-selectedclass-my-class-ioysh)
 
 ##### `draggableClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the wrapper when the carousel mounts if draggable.  
-[`is-draggable`](#) · [`my-class`](#)
+[`is-draggable`](https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggableclass-my-class-j7r68)
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the wrapper when the carousel mounts if draggable.  
-[`is-dragging`](#) · [`my-class`](#)
+[`is-dragging`](https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r)
 
 ## API
 
