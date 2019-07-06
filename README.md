@@ -29,13 +29,13 @@
 
 <p align="center">
   <strong>
-    « <code><a href="#options">OPTIONS</a></code>
+    « &nbsp;<code><a href="#options">OPTIONS</a></code>
   </strong>
   <strong>
     &nbsp; | &nbsp;
   </strong>
   <strong>
-    <code><a href="#api">THE API</a></code> »
+    <code><a href="#api">THE API</a></code>&nbsp; »
   </strong>
 </p>
 
@@ -55,25 +55,17 @@
 
 ## Installation
 
-If you are using a module bundler...
+NPM
 
-```bash
-yarn add embla-carousel
-```
+<pre>npm install <a href="https://www.npmjs.com/package/embla-carousel">embla-carousel</a></pre>
 
 ```javascript
 import EmblaCarousel from 'embla-carousel'
 ```
 
-...or manually inject [this script](https://raw.githubusercontent.com/davidcetinkaya/embla-carousel/master/docs/index.js) into your website.
-
-```html
-<script src="embla.min.js"></script>
-```
-
 ## QuickStart
 
-Setup your HTML markup...
+HTML
 
 ```html
 <div class="embla">
@@ -91,7 +83,7 @@ Setup your HTML markup...
 </div>
 ```
 
-...add some CSS...
+CSS
 
 ```css
 .embla {
@@ -110,15 +102,13 @@ Setup your HTML markup...
 }
 ```
 
-...initialize the script and pass the element node...
+JavaScript
 
 ```javascript
 const emblaNode = document.querySelector('.embla')
 const options = { loop: true }
 const embla = EmblaCarousel(emblaNode, options)
 ```
-
-...and you're good to go!
 
 ## Options
 
@@ -140,6 +130,12 @@ const embla = EmblaCarousel(emblaNode, {
   draggingClass: 'is-dragging',
 })
 ```
+
+- **`Align`** — `type: string`
+  -- Align the slides relative to the carousel viewport.
+  - `start` — [<img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/demo.svg" />](https://davidcetinkaya.github.io/embla-carousel)
+  - `center` —
+  - `end` —
 
 **`align`** (string)  
 Align the slides relative to the carousel viewport. Possible values are **'start'**, **'center'** and **'end'**.
