@@ -136,32 +136,32 @@ const embla = EmblaCarousel(emblaNode, {
 ##### `align` &nbsp; <sup>type: string<sup>
 
 Align the slides relative to the carousel viewport.  
-[`start`](#) · [`center`](#) · [`end`](#)
+[`start`](https://codesandbox.io/s/embla-carousel-align-start-5kfhw) · [`center`](https://codesandbox.io/s/embla-carousel-align-center-e8s0w) · [`end`](https://codesandbox.io/s/embla-carousel-align-end-h233r)
 
 ##### `containerSelector` &nbsp; <sup>type: string<sup>
 
 A query selector for the container that holds the slides, where all immediate children will be treated as slides.  
-[`*`](#) · [`.my-classname`](#)
+[`*`](https://codesandbox.io/s/embla-carousel-containerselector-yfxll) · [`.my-classname`](https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb)
 
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
 Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.  
-[`1`](#) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
+[`1`](https://codesandbox.io/s/embla-carousel-slidestoscroll-1-ry5y7) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
 
 Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.  
-[`false`](#) · [`true`](#)
+[`false`](https://codesandbox.io/s/embla-carousel-containscroll-false-jktsn) · [`true`](https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy)
 
 ##### `draggable` &nbsp; <sup>type: boolean<sup>
 
 Allow mouse & touch interactions to scroll the carousel.  
-[`true`](#) · [`false`](#)
+[`true`](https://codesandbox.io/s/embla-carousel-draggable-true-4prej) · [`false`](https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0)
 
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
 Determines if the carousel should snap to a slide position after mouse & touch interactions.  
-[`false`](#) · [`true`](https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc)
+[`false`](https://codesandbox.io/s/embla-carousel-dragfree-false-he5m1) · [`true`](https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc)
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
