@@ -112,7 +112,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ## Options
 
-Configure Embla options by passing an object as the second argument. **Default** options values are:
+Configure Embla by passing an options object as the second argument. **Default** options values are:
 
 ```javascript
 const embla = EmblaCarousel(emblaNode, {
