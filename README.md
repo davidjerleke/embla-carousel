@@ -188,7 +188,7 @@ Classname that will be applied to the wrapper when the carousel mounts if dragga
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
-Classname that will be applied to the wrapper when the carousel mounts if draggable.  
+Classname that will be applied to the wrapper when a pointer is dragging the carousel.  
 [`is-dragging`](https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r)
 
 ## API
