@@ -131,16 +131,17 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-#### `Align` — <sup>type: string<sup>
+### This section is under construction, some links may not work right now.
+
+#### `align` &nbsp; <sup>type: string<sup>
 
 - Align the slides relative to the carousel viewport.
-- Demos: [`start`](#) **·** [`center`](#) **·** [`end`](#)
+- **🚀 demo:** [`start`](#) **·** [`center`](#) **·** [`end`](#)
 
-**`align`** (string)  
-Align the slides relative to the carousel viewport. Possible values are **'start'**, **'center'** and **'end'**.
+#### `containerSelector` &nbsp; <sup>type: string<sup>
 
-**`containerSelector`** (string)  
-The selector to use for the container that holds the slides. Embla will use all immediate children of this node as slides.
+- A query selector for the container that holds the slides, where all immediate children will be treated as slides.
+- **🚀 demo:** [`*`](#) **·** [`.my-custom-class`](#)
 
 **`slidesToScroll`** (number)  
 Scrolls past given number of slides whether scroll is triggered by **scrollNext()**, **scrollPrev()** or **scrollTo()** methods as well as drag interactions.
