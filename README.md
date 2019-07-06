@@ -131,7 +131,7 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-### This section is under construction, some links may not work right now.
+### ⚠️ This section is under construction, some links may not work right now.
 
 #### `align` &nbsp; <sup>type: string<sup>
 
