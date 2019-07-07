@@ -138,62 +138,62 @@ const embla = EmblaCarousel(emblaNode, {
 ##### `align` &nbsp; <sup>type: string<sup>
 
 Align the slides relative to the carousel viewport.  
-⭐ **`demo`** - [`start`](https://codesandbox.io/s/embla-carousel-align-start-5kfhw) · [`center`](https://codesandbox.io/s/embla-carousel-align-center-e8s0w) · [`end`](https://codesandbox.io/s/embla-carousel-align-end-h233r)
+🔎 **`demo`** - [`start`](https://codesandbox.io/s/embla-carousel-align-start-5kfhw) · [`center`](https://codesandbox.io/s/embla-carousel-align-center-e8s0w) · [`end`](https://codesandbox.io/s/embla-carousel-align-end-h233r)
 
 ##### `containerSelector` &nbsp; <sup>type: string<sup>
 
 A query selector for the container that holds the slides, where all immediate children will be treated as slides.  
-⭐ **`demo`** - [`*`](https://codesandbox.io/s/embla-carousel-containerselector-yfxll) · [`.my-classname`](https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb)
+🔎 **`demo`** - [`*`](https://codesandbox.io/s/embla-carousel-containerselector-yfxll) · [`.my-classname`](https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb)
 
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
 Scrolls past given number of slides whether scroll is triggered by API methods or drag interactions.  
-⭐ **`demo`** - [`1`](https://codesandbox.io/s/embla-carousel-slidestoscroll-1-ry5y7) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
+🔎 **`demo`** - [`1`](https://codesandbox.io/s/embla-carousel-slidestoscroll-1-ry5y7) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
 
 Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.  
-⭐ **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-containscroll-false-jktsn) · [`true`](https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy)
+🔎 **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-containscroll-false-jktsn) · [`true`](https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy)
 
 ##### `draggable` &nbsp; <sup>type: boolean<sup>
 
 Allow mouse & touch interactions to scroll the carousel.  
-⭐ **`demo`** - [`true`](https://codesandbox.io/s/embla-carousel-draggable-true-4prej) · [`false`](https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0)
+🔎 **`demo`** - [`true`](https://codesandbox.io/s/embla-carousel-draggable-true-4prej) · [`false`](https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0)
 
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
 Determines if the carousel should snap to a slide position after mouse & touch interactions.  
-⭐ **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-dragfree-false-he5m1) · [`true`](https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc)
+🔎 **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-dragfree-false-he5m1) · [`true`](https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc)
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
 Determines if the carousel should loop when start or end is reached.  
-⭐ **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-loop-false-oyols) · [`true`](https://codesandbox.io/s/embla-carousel-loop-true-3x6id)
+🔎 **`demo`** - [`false`](https://codesandbox.io/s/embla-carousel-loop-false-oyols) · [`true`](https://codesandbox.io/s/embla-carousel-loop-true-3x6id)
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
 Carousel speed when using API methods to navigate. A higher number will make transitions faster.  
-⭐ **`demo`** - [`10`](https://codesandbox.io/s/embla-carousel-speed-10-9v4gr) · [`15`](https://codesandbox.io/s/embla-carousel-speed-15-omw5i)
+🔎 **`demo`** - [`10`](https://codesandbox.io/s/embla-carousel-speed-10-9v4gr) · [`15`](https://codesandbox.io/s/embla-carousel-speed-15-omw5i)
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
 
 Zero based index of the starting slide when carousel mounts.  
-⭐ **`demo`** - [`0`](https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn) · [`3`](https://codesandbox.io/s/embla-carousel-startindex-0-3ur20)
+🔎 **`demo`** - [`0`](https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn) · [`3`](https://codesandbox.io/s/embla-carousel-startindex-0-3ur20)
 
 ##### `selectedClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the selected slide.  
-⭐ **`demo`** - [`is-selected`](https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts) · [`my-class`](https://codesandbox.io/s/embla-carousel-selectedclass-my-class-ioysh)
+🔎 **`demo`** - [`is-selected`](https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts) · [`my-class`](https://codesandbox.io/s/embla-carousel-selectedclass-my-class-ioysh)
 
 ##### `draggableClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the wrapper when the carousel mounts if draggable.  
-⭐ **`demo`** - [`is-draggable`](https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggableclass-my-class-j7r68)
+🔎 **`demo`** - [`is-draggable`](https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggableclass-my-class-j7r68)
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
 Classname that will be applied to the wrapper when a pointer is dragging the carousel.  
-⭐ **`demo`** - [`is-dragging`](https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r)
+🔎 **`demo`** - [`is-dragging`](https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r) · [`my-class`](https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r)
 
 ## API
 
