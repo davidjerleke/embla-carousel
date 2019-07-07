@@ -147,7 +147,7 @@ A query selector for the container that holds the slides, where all immediate ch
 
 ##### `slidesToScroll` &nbsp; <sup>type: number<sup>
 
-Scrolls past given number of slides whether scroll is triggered by the API methods or drag interactions.  
+Scrolls past given number of slides whether scroll is triggered by API methods or drag interactions.  
 ⭐ **`demo`** - [`1`](https://codesandbox.io/s/embla-carousel-slidestoscroll-1-ry5y7) · [`2`](https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk)
 
 ##### `containScroll` &nbsp; <sup>type: boolean<sup>
@@ -172,7 +172,7 @@ Determines if the carousel should loop when start or end is reached.
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
-Carousel speed when using buttons to navigate. A higher number will make transitions faster.  
+Carousel speed when using API methods to navigate. A higher number will make transitions faster.  
 ⭐ **`demo`** - [`10`](https://codesandbox.io/s/embla-carousel-speed-10-9v4gr) · [`15`](https://codesandbox.io/s/embla-carousel-speed-15-omw5i)
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
