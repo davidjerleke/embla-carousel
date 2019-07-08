@@ -140,9 +140,9 @@ const embla = EmblaCarousel(emblaNode, {
 <p>Align the slides relative to the carousel viewport.</p>
 <sup>
   ✨ <strong>demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw">start</a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-align-center-e8s0w">center</a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-align-end-h233r">end</a>
+  <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw"><code>start</code></a> · 
+  <a href="https://codesandbox.io/s/embla-carousel-align-center-e8s0w"><code>center</code></a> · 
+  <a href="https://codesandbox.io/s/embla-carousel-align-end-h233r"><code>end</code></a>
 </sup>
 
 ##### `containerSelector` &nbsp; <sup>type: string<sup>
