@@ -20,7 +20,7 @@ export function SnapPosition(params: Params): SnapPosition {
   const alignSizes = snapSizes.map(alignSize.measure)
   const contentFillsUpView = contentSize >= viewSize
   const betweenDistances = distancesBetweenSnaps()
-  const bounds = scrollBounds()
+  const bounds = viewBounds()
 
   function distancesBetweenSnaps(): number[] {
     return snapSizes.map((size, i) => {
@@ -29,20 +29,20 @@ export function SnapPosition(params: Params): SnapPosition {
     })
   }
 
-  function snapPosition(index: number): number {
+  function snapPositionFor(index: number): number {
     const sizes = betweenDistances.slice(0, index)
     return sizes.reduce((a, d) => a - d, alignSizes[0])
   }
 
-  function scrollBounds(): Limit {
+  function viewBounds(): Limit {
     const indexMax = params.index.max
     const endGap = viewSize - snapSizes[indexMax]
     const gapMinusAlign = endGap - alignSizes[indexMax]
-    const min = snapPosition(indexMax) + gapMinusAlign
+    const min = snapPositionFor(indexMax) + gapMinusAlign
     return Limit({ min, max: 0 })
   }
 
-  function containScroll(position: number): number {
+  function containToView(position: number): number {
     if (contentFillsUpView) {
       const { min, max } = bounds
       if (position < min) return min
@@ -53,8 +53,8 @@ export function SnapPosition(params: Params): SnapPosition {
   }
 
   function measure(size: number, index: number): number {
-    const position = snapPosition(index)
-    return params.contain ? containScroll(position) : position
+    const position = snapPositionFor(index)
+    return params.contain ? containToView(position) : position
   }
 
   const self: SnapPosition = {
