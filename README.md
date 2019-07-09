@@ -246,7 +246,7 @@ const embla = EmblaCarousel(emblaNode, {
 
 ## API
 
-Embla exposes a set of methods upon setup that can be used to control the carousel externally. Example usage looks like this:
+Embla exposes API methods that can be used to control the carousel externally. Example usage:
 
 ```javascript
 embla.scrollNext()
@@ -257,43 +257,97 @@ embla.on('select', () => {
 })
 ```
 
-...and the methods are:
+##### `containerNode()`
 
-**`containerNode()`**  
-Returns the current container element node.
+<p>Returns the current container element node.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-containernode-fq9xw"><code>embla.containerNode()</code></a>
+</sup>
 
-**`slideNodes()`**  
-Returns the slides as an array of element nodes.
+##### `slideNodes()`
 
-**`scrollNext()`**  
-Scrolls to next snap point if possible. If `loop: false` and the carousel is on the last snap point this method will do nothing.
+<p>Returns the slides as an array of element nodes.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp"><code>embla.slideNodes()</code></a>
+</sup>
 
-**`scrollPrev()`**  
-Scrolls to previous snap point if possible. If `loop: false` and the carousel is on the first snap point this method will do nothing.
+##### `scrollNext()`
 
-**`scrollTo(index)`**  
-Scrolls to the snap point that matches the passed index. If `loop: true` the carousel will seek the closest way to the target.
+<p>Scrolls to next snap point if possible. If <code>loop: false</code> and the carousel is on the last snap point this method will do nothing.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm"><code>embla.scrollNext()</code></a>
+</sup>
 
-**`canScrollPrev()`**  
-Returns if it's possible to scroll to a previous snap point. Note that if `loop: true` this will always return `true`.
+##### `scrollPrev()`
 
-**`canScrollNext()`**  
-Returns if it's possible to scroll to a next snap point. Note that if `loop: true` this will always return `true`.
+<p>Scrolls to previous snap point if possible. If <code>loop: false</code> and the carousel is on the first snap point this method will do nothing.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm"><code>embla.scrollPrev()</code></a>
+</sup>
 
-**`selectedScrollSnap()`**  
-Returns the index of the selected snap point. Each snap point scrolls more than one slide if `slidesToScroll > 1`. Zero-based.
+##### `scrollTo(index)`
 
-**`previousScrollSnap()`**  
-Returns the index of the previous snap point. Each snap point scrolls more than one slide if `slidesToScroll > 1`. Zero-based.
+<p>Scrolls to the snap point that matches the passed index. If <code>loop: true</code> the carousel will seek the closest way to the target.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby"><code>embla.scrollTo()</code></a>
+</sup>
 
-**`scrollSnapList()`**  
-Returns an array of all scroll snap points, each containing slide numbers and slide nodes. If total slide count is `4` and `slidesToScroll: 2`, it means that every scroll snap point contains `2` slides because any scroll triggered by **scrollNext()** or **scrollPrev()** will scroll `2` slides at a time.
+##### `canScrollPrev()`
 
-**`changeOptions(options)`**  
-Applies passed options by doing all the necessary calculations and reinitialising the carousel from scratch.
+<p>Returns if it's possible to scroll to a previous snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z"><code>embla.canScrollPrev()</code></a>
+</sup>
 
-**`on(event, callback)`**  
-Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:
+##### `canScrollNext()`
+
+<p>Returns if it's possible to scroll to a next snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z"><code>embla.canScrollNext()</code></a>
+</sup>
+
+##### `selectedScrollSnap()`
+
+<p>Returns the index of the selected snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1"><code>embla.selectedScrollSnap()</code></a>
+</sup>
+
+##### `previousScrollSnap()`
+
+<p>Returns the index of the previous snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1"><code>embla.previousScrollSnap()</code></a>
+</sup>
+
+##### `scrollSnapList()`
+
+<p>Returns an array of all scroll snap points, each containing slide numbers and slide nodes.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk"><code>embla.scrollSnapList()</code></a>
+</sup>
+
+##### `changeOptions(options)`
+
+<p>Applies passed options by doing all the necessary calculations and initialising the carousel from scratch.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm"><code>embla.changeOptions()</code></a>
+</sup>
+
+##### `on(event, callback)`
+
+<p>Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:</p>
 
 - **`init`** - When the carousel has been initialised for the first time.
 - **`destroy`** - When the carousel has been destroyed.
@@ -302,11 +356,26 @@ Subscribes to a custom Embla event by firing the passed callback. Below is a lis
 - **`dragStart`** - When carousel dragging begins.
 - **`dragEnd`** - When carousel dragging ends.
 
-**`off(event, callback)`**  
-Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the **on** method.
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.on()</code></a>
+</sup>
 
-**`destroy()`**  
-Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.
+##### `off(event, callback)`
+
+<p>Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the <code>on</code> method.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.off()</code></a>
+</sup>
+
+##### `destroy()`
+
+<p>Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1"><code>embla.destroy()</code></a>
+</sup>
 
 ## Browser Support
 
@@ -325,8 +394,7 @@ Removes all styles applied to DOM nodes and kills all event listeners for this E
 Thank you to all the people who already contributed to Embla Carousel 🙏!  
 Do you like this project and want to contribute to it?
 
-- **`I just want to support it`**: Thank you! Give it a **star** maybe ⭐?
-- **`I want to spread the word`**: You're a star! Why not **twitter** or similar 📣?
+- **`I like it`**: Thank you! Give it a **star** maybe ⭐?
 - **`I want to get my hands dirty`**: Awesome! Read the [contribution guidelines](https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md) first 📋.
 
 <br>
