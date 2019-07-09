@@ -11,10 +11,10 @@ import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
+import { Scroller } from './scroller'
 import { SnapPosition } from './snapPosition'
 import { TargetFinder } from './targetFinder'
 import { Translate } from './translate'
-import { Traveller } from './traveller'
 import { groupNumbers, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 
@@ -30,7 +30,7 @@ export type Engine = {
   shifter: InfiniteShifter
   target: Vector1D
   translate: Translate
-  travel: Traveller
+  scroll: Scroller
 }
 
 export function Engine(
@@ -114,7 +114,7 @@ export function Engine(
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const mover = Mover({ location, speed, mass: 1 })
-  const travel = Traveller({
+  const scroll = Scroller({
     animation,
     events,
     findTarget: TargetFinder({
@@ -145,9 +145,9 @@ export function Engine(
     loop,
     mover,
     pointer: Pointer(chunkSize),
+    scroll,
     snapSizes,
     target,
-    travel,
   })
 
   // Slider
@@ -171,6 +171,7 @@ export function Engine(
     indexPrevious,
     mover,
     pointer,
+    scroll,
     shifter: InfiniteShifter({
       contentSize,
       location,
@@ -180,7 +181,6 @@ export function Engine(
     }),
     target,
     translate: Translate(container),
-    travel,
   }
   return Object.freeze(slider)
 }

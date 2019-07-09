@@ -177,17 +177,17 @@ export function EmblaCarousel(
 
   function scrollNext(): void {
     slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.travel.toNext()
+    slider.scroll.toNext()
   }
 
   function scrollPrev(): void {
     slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.travel.toPrevious()
+    slider.scroll.toPrevious()
   }
 
   function scrollTo(index: number): void {
     slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.travel.toIndex(index)
+    slider.scroll.toIndex(index)
   }
 
   function selectedScrollSnap(): number {

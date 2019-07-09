@@ -13,17 +13,17 @@ type Params = {
   events: EventDispatcher
 }
 
-export type Traveller = {
-  toNext: () => Traveller
-  toPrevious: () => Traveller
-  toIndex: (target: number) => Traveller
-  toDistance: (force: number) => Traveller
+export type Scroller = {
+  toNext: () => Scroller
+  toPrevious: () => Scroller
+  toIndex: (target: number) => Scroller
+  toDistance: (force: number) => Scroller
 }
 
-export function Traveller(params: Params): Traveller {
+export function Scroller(params: Params): Scroller {
   const { index, findTarget, animation } = params
 
-  function travelTo(next: Target): Traveller {
+  function scrollTo(next: Target): Scroller {
     const { indexPrevious, events, target } = params
     const distanceDiff = next.distance
     const indexDiff = next.index !== index.get()
@@ -40,37 +40,37 @@ export function Traveller(params: Params): Traveller {
     return self
   }
 
-  function toDistance(force: number): Traveller {
+  function toDistance(force: number): Scroller {
     const next = findTarget.byDistance(force)
-    travelTo(next)
+    scrollTo(next)
     return self
   }
 
-  function findIndex(target: Counter, direction: number): Traveller {
+  function findIndex(target: Counter, direction: number): Scroller {
     const next = findTarget.byIndex(target.get(), direction)
-    travelTo(next)
+    scrollTo(next)
     return self
   }
 
-  function toIndex(target: number): Traveller {
+  function toIndex(target: number): Scroller {
     const next = index.clone().set(target)
     findIndex(next, 0)
     return self
   }
 
-  function toNext(): Traveller {
+  function toNext(): Scroller {
     const next = index.clone().add(1)
     findIndex(next, -1)
     return self
   }
 
-  function toPrevious(): Traveller {
+  function toPrevious(): Scroller {
     const next = index.clone().add(-1)
     findIndex(next, 1)
     return self
   }
 
-  const self: Traveller = {
+  const self: Scroller = {
     toDistance,
     toIndex,
     toNext,
