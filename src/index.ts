@@ -40,7 +40,7 @@ export function EmblaCarousel(
   sliderRoot: HTMLElement,
   userOptions: UserOptions = {},
 ): EmblaCarousel {
-  const state = { active: false, lastWindowWidth: 0 }
+  const state = { active: false, windowWidth: 0 }
   const options = Object.assign({}, defaultOptions, userOptions)
   const events = EventDispatcher()
   const eventStore = EventStore()
@@ -69,7 +69,7 @@ export function EmblaCarousel(
 
   function activate(userOpt: UserOptions = {}): void {
     const isFirstInit = !state.active
-    state.lastWindowWidth = window.innerWidth
+    state.windowWidth = window.innerWidth
     storeElements()
 
     if (elements.slides.length > 0) {
@@ -150,9 +150,9 @@ export function EmblaCarousel(
   }
 
   function resize(): void {
-    const windowWidth = window.innerWidth
-    if (windowWidth !== state.lastWindowWidth) {
-      state.lastWindowWidth = windowWidth
+    const newWindowWidth = window.innerWidth
+    if (newWindowWidth !== state.windowWidth) {
+      state.windowWidth = newWindowWidth
       reActivate()
       events.dispatch('resize')
     }
