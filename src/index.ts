@@ -167,12 +167,12 @@ export function EmblaCarousel(
 
   function canScrollPrev(): boolean {
     const { index } = slider
-    return !options.loop && index.get() !== index.min
+    return options.loop || index.get() !== index.min
   }
 
   function canScrollNext(): boolean {
     const { index } = slider
-    return !options.loop && index.get() !== index.max
+    return options.loop || index.get() !== index.max
   }
 
   function scrollNext(): void {
