@@ -28,7 +28,6 @@
 .embla__container {
   display: flex;
   margin-left: -0.5rem;
-  will-change: transform;
 
   @media (min-width: $media-xs) {
     margin-left: -0.8rem;

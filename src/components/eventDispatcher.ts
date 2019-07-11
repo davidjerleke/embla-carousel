@@ -2,6 +2,7 @@ type Subscribers = { [key in Event]: Callback[] }
 export type Callback = () => void
 export type Event =
   | 'init'
+  | 'click'
   | 'select'
   | 'dragStart'
   | 'dragEnd'
@@ -16,6 +17,7 @@ export type EventDispatcher = {
 
 export function EventDispatcher(): EventDispatcher {
   const subscribers: Subscribers = {
+    click: [],
     destroy: [],
     dragEnd: [],
     dragStart: [],

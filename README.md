@@ -96,13 +96,12 @@ CSS
 
 .embla__container {
   display: flex;
-  will-change: transform;
 }
 
 .embla__slide {
-  position: relative;
   flex: 0 0 auto;
-  width: 100%;
+  position: relative; /* Necessary if loop: true */
+  width: 100%; /* Can be any width */
 }
 ```
 
@@ -352,6 +351,7 @@ embla.on('select', () => {
 - **`init`** - When the carousel has been initialised for the first time.
 - **`destroy`** - When the carousel has been destroyed.
 - **`select`** - When a new target slide has been selected.
+- **`click`** - When carousel is actually clicked and not dragged.
 - **`resize`** - When window size changes.
 - **`dragStart`** - When carousel dragging begins.
 - **`dragEnd`** - When carousel dragging ends.
