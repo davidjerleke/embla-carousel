@@ -11,7 +11,7 @@ type Params = {
 export type Mover = {
   location: Vector1D
   direction: Direction
-  update: () => Mover
+  update: () => void
   seek: (target: Vector1D) => Mover
   settle: (target: Vector1D) => boolean
   useSpeed: (newSpeed: number) => Mover
@@ -28,17 +28,15 @@ export function Mover(params: Params): Mover {
   const direction = Direction(0)
   const state = { speed, mass }
 
-  function update(): Mover {
+  function update(): void {
     velocity.add(acceleration)
     location.add(velocity)
     acceleration.multiply(0)
-    return self
   }
 
-  function applyForce(force: Vector1D): Mover {
+  function applyForce(force: Vector1D): void {
     force.divide(state.mass)
     acceleration.add(force)
-    return self
   }
 
   function seek(target: Vector1D): Mover {

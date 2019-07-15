@@ -1,10 +1,9 @@
 type Callback = () => void
-type IfAnimating = () => Animation
 
 export type Animation = {
-  start: () => Animation
-  stop: () => Animation
-  proceed: () => Animation
+  start: () => void
+  stop: () => void
+  proceed: () => void
 }
 
 export function Animation(callback: FrameRequestCallback): Animation {
@@ -12,10 +11,9 @@ export function Animation(callback: FrameRequestCallback): Animation {
   const kill = cancelAnimationFrame.bind(window)
   const state = { animationFrame: 0 }
 
-  function ifAnimating(active: boolean, cb: Callback): IfAnimating {
-    return (): Animation => {
+  function ifAnimating(active: boolean, cb: Callback): Callback {
+    return (): void => {
       if (active === !!state.animationFrame) cb()
-      return self
     }
   }
 

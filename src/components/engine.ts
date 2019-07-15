@@ -95,16 +95,13 @@ export function Engine(
     slider.mover.seek(target).update()
     if (!pointer.isDown()) {
       if (!loop) slider.edgeGuard.constrain(target)
-      if (slider.mover.settle(target)) {
-        slider.animation.stop()
-        slider.translate.useType('x')
-      }
+      if (slider.mover.settle(target)) slider.animation.stop()
     }
     if (loop) {
       slider.edgeLooper.loop(direction())
       slider.shifter.shiftInfinite(slides)
     }
-    slider.translate.to(slider.mover.location).useType('x3d')
+    slider.translate.to(slider.mover.location)
     slider.animation.proceed()
   }
 
