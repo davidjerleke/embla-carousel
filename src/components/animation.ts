@@ -8,7 +8,7 @@ export type Animation = {
 
 export function Animation(callback: FrameRequestCallback): Animation {
   const run = requestAnimationFrame.bind(window)
-  const kill = cancelAnimationFrame.bind(window)
+  const end = cancelAnimationFrame.bind(window)
   const state = { animationFrame: 0 }
 
   function ifAnimating(active: boolean, cb: Callback): Callback {
@@ -22,7 +22,7 @@ export function Animation(callback: FrameRequestCallback): Animation {
   }
 
   function stop(): void {
-    kill(state.animationFrame)
+    end(state.animationFrame)
     state.animationFrame = 0
   }
 
