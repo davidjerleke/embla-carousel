@@ -47,11 +47,11 @@
 
 <p align="center">
   <a href="https://github.com/davidcetinkaya/embla-carousel">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="Embla Carousel JavaScript" />
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="JavaScript" />
   </a>
   &nbsp;
   <a href="https://github.com/davidcetinkaya/embla-carousel-react">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="Embla Carousel React" />
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="React" />
   </a>
 </p>
 
@@ -351,7 +351,7 @@ embla.on('select', () => {
 - **`init`** - When the carousel has been initialised for the first time.
 - **`destroy`** - When the carousel has been destroyed.
 - **`select`** - When a new target slide has been selected.
-- **`click`** - When carousel is actually clicked and not dragged.
+- **`scroll`** - When carousel is scrolled.
 - **`resize`** - When window size changes.
 - **`dragStart`** - When carousel dragging begins.
 - **`dragEnd`** - When carousel dragging ends.
@@ -389,20 +389,17 @@ embla.on('select', () => {
 
 - <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel Safari support" /> &nbsp; **`Safari`** - Latest 2 versions
 
-## Contribution
-
-Thank you to all the people who already contributed to Embla Carousel 🙏!  
-Do you like this project and want to contribute to it?
-
-- **`I like it`**: Thank you! Give it a **star** maybe ⭐?
-- **`I want to get my hands dirty`**: Awesome! Read the [contribution guidelines](https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md) first 📋.
-
-<br>
 <br>
 
-<h2 align="center">License</h2>
+<h2 align="center">Open Source</h2>
 
 <p align="center">
   <sup>Copyright © 2019-present, David Cetinkaya.</sup><br>
-  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a>.
+  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖
+</p>
+
+<br>
+
+<p align="center">
+  📋 <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">contribution</a>
 </p>

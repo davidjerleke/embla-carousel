@@ -170,7 +170,6 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function click(evt: Event): void {
     if (state.preventClick) evt.preventDefault()
-    else events.dispatch('click')
   }
 
   function isDown(): boolean {

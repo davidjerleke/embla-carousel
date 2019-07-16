@@ -101,6 +101,9 @@ export function Engine(
       slider.edgeLooper.loop(direction())
       slider.shifter.shiftInfinite(slides)
     }
+    if (slider.mover.location.get() !== target.get()) {
+      events.dispatch('scroll')
+    }
     slider.translate.to(slider.mover.location)
     slider.animation.proceed()
   }
