@@ -26,21 +26,21 @@ export function Pointer(size: ChunkSize): Pointer {
   const pointValue = Vector1D(0)
   const direction = Direction(0)
   const trackInterval = 10
-  const pointer: State = {
+  const state: State = {
     isMouse: false,
     trackPoints: [],
     trackTime: new Date().getTime(),
   }
 
   function read(evt: any, axis: Axis): Vector1D {
-    const { isMouse } = pointer
+    const { isMouse } = state
     const c = coords[axis]
     const value = isMouse ? evt[c] : evt.touches[0][c]
     return pointValue.setNumber(value)
   }
 
   function down(evt: Event): number {
-    pointer.isMouse = !!evt.type.match(/mouse/)
+    state.isMouse = !!evt.type.match(/mouse/)
     const point = read(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
@@ -50,11 +50,11 @@ export function Pointer(size: ChunkSize): Pointer {
   function move(evt: Event): number {
     const point = read(evt, 'x')
     const time2 = new Date().getTime()
-    const time1 = pointer.trackTime
+    const time1 = state.trackTime
 
     if (time2 - time1 >= trackInterval) {
-      pointer.trackPoints.push(point.get())
-      pointer.trackTime = time2
+      state.trackPoints.push(point.get())
+      state.trackTime = time2
     }
 
     diffDrag.set(point).subtract(lastDrag)
@@ -65,10 +65,10 @@ export function Pointer(size: ChunkSize): Pointer {
 
   function up(): number {
     const currentPoint = lastDrag.get()
-    const trackLength = pointer.isMouse ? 5 : 4
+    const trackLength = state.isMouse ? 5 : 4
 
     lastDrag.setNumber(
-      pointer.trackPoints
+      state.trackPoints
         .slice(-trackLength)
         .map(point => currentPoint - point)
         .sort((p1, p2) =>
@@ -76,7 +76,7 @@ export function Pointer(size: ChunkSize): Pointer {
         )[0] || 0,
     )
 
-    pointer.trackPoints = []
+    state.trackPoints = []
     return size.measure(lastDrag.get())
   }
 

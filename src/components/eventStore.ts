@@ -14,7 +14,7 @@ export type EventStore = {
 }
 
 export function EventStore(): EventStore {
-  const event: State = { listeners: [] }
+  const state: State = { listeners: [] }
 
   function add(
     node: EventTarget,
@@ -23,14 +23,14 @@ export function EventStore(): EventStore {
     options: EventOptions = false,
   ): EventStore {
     node.addEventListener(type, handler, options)
-    event.listeners.push(() =>
+    state.listeners.push(() =>
       node.removeEventListener(type, handler, options),
     )
     return self
   }
 
   function removeAll(): EventStore {
-    event.listeners.filter(remove => remove())
+    state.listeners.filter(remove => remove())
     return self
   }
 
