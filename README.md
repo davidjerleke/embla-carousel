@@ -99,9 +99,8 @@ CSS
 }
 
 .embla__slide {
-  flex: 0 0 auto;
-  position: relative; /* Necessary if loop: true */
-  width: 100%; /* Can be any width */
+  position: relative; /* Needed if loop: true */
+  flex: 0 0 100%; /* Choose any width */
 }
 ```
 
