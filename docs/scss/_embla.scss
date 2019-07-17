@@ -12,8 +12,9 @@
 }
 
 .embla__viewport {
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
+  width: 100%;
 
   &.is-draggable {
     cursor: move;
@@ -38,9 +39,8 @@
 }
 
 .embla__slide {
-  flex: 0 0 auto;
+  flex: 0 0 80%;
   position: relative;
-  width: 80%;
   padding-left: 0.5rem;
   counter-increment: embla;
 
