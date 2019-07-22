@@ -14,3 +14,45 @@
     font-size: 1.8rem;
   }
 }
+
+.footer__icon-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-left: -1rem;
+
+  @media (min-width: $media-lg) {
+    padding-top: 3rem;
+    margin-left: -1.5rem;
+  }
+}
+
+.footer__icon-link {
+  font-size: 0;
+  margin-left: 1rem;
+
+  @media (min-width: $media-lg) {
+    margin-left: 1.5rem;
+  }
+}
+
+.footer__icon-javascript {
+  height: 4rem;
+  width: 4rem;
+
+  @media (min-width: $media-lg) {
+    height: 5rem;
+    width: 5rem;
+  }
+}
+
+.footer__icon-react {
+  height: 4rem;
+  width: 4.485rem;
+
+  @media (min-width: $media-lg) {
+    height: 5rem;
+    width: 5.6rem;
+  }
+}

@@ -1,8 +1,8 @@
 export type Vector1D = {
   get: () => number
-  set: (v2: Vector1D) => Vector1D
-  add: (v2: Vector1D) => Vector1D
-  subtract: (v2: Vector1D) => Vector1D
+  set: (v: Vector1D) => Vector1D
+  add: (v: Vector1D) => Vector1D
+  subtract: (v: Vector1D) => Vector1D
   multiply: (n: number) => Vector1D
   setNumber: (n: number) => Vector1D
   addNumber: (n: number) => Vector1D
@@ -19,18 +19,18 @@ export function Vector1D(value: number): Vector1D {
     return state.value
   }
 
-  function set(v2: Vector1D): Vector1D {
-    state.value = v2.get()
+  function set(v: Vector1D): Vector1D {
+    state.value = v.get()
     return self
   }
 
-  function add(v2: Vector1D): Vector1D {
-    state.value += v2.get()
+  function add(v: Vector1D): Vector1D {
+    state.value += v.get()
     return self
   }
 
-  function subtract(v2: Vector1D): Vector1D {
-    state.value -= v2.get()
+  function subtract(v: Vector1D): Vector1D {
+    state.value -= v.get()
     return self
   }
 
