@@ -6,13 +6,24 @@ export type Translate = {
 
 export function Translate(node: HTMLElement): Translate {
   const nodeStyle = node.style
+  const state = { value: 0 }
 
-  function x(xValue: number): string {
-    return `translate3d(${xValue}%,0px,0px)`
+  function roundToTwoDecimals(n: number): number {
+    return Math.round(n * 100) * 0.01
   }
 
-  function to(vector: Vector1D): void {
-    nodeStyle.transform = x(vector.get())
+  function translateX(n: number): string {
+    return `translate3d(${n}%,0px,0px)`
+  }
+
+  function to(v: Vector1D): void {
+    const target = roundToTwoDecimals(v.get())
+    if (state.value !== target) {
+      state.value = target
+      // @ts-ignore
+      getComputedStyle(node).transform
+      nodeStyle.transform = translateX(target)
+    }
   }
 
   const self: Translate = {
