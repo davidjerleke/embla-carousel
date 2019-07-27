@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "author": "David Cetinkaya",
   "private": false,
   "description": "An extensible low level carousel for the web, written in TypeScript",
