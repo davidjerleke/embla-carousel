@@ -20,7 +20,6 @@ export function Translate(node: HTMLElement): Translate {
     const target = roundToTwoDecimals(v.get())
     if (state.value !== target) {
       state.value = target
-      // @ts-ignore
       getComputedStyle(node).transform
       nodeStyle.transform = translateX(target)
     }
