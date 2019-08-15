@@ -22,37 +22,38 @@
     Extensible low level carousels for the web. Extend it with basic JavaScript and build awesome physics simulated carousels. Dependency free and 100% open source.
   </p>
 
+  <br>
+
   <p align="center">
     <strong>
       <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">TRY DEMO</a>&nbsp;</code>
     </strong>
   </p>
+
+  <br>
+
+  <p align="center">
+    <strong>
+      <a href="#options">options</a>
+      &nbsp; &middot; &nbsp;
+      <a href="#api">api</a>
+      &nbsp; &middot; &nbsp;
+      <a href="https://codesandbox.io/s/oyols">codesandbox</a>
+    </strong>
+  </p>
+
+  <br>
+
+  <p align="center">
+    <a href="https://github.com/davidcetinkaya/embla-carousel">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="JavaScript" />
+    </a>
+    &nbsp;
+    <a href="https://github.com/davidcetinkaya/embla-carousel-react">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="React" />
+    </a>
+  </p>
 </div>
-
-<br>
-
-<p align="center">
-  <strong>
-    <a href="#options">options</a>
-    &nbsp; &middot; &nbsp;
-    <a href="https://codesandbox.io/s/oyols">codesandbox</a>
-    &nbsp; &middot; &nbsp;
-    <a href="#api">api</a>
-  </strong>
-</p>
-
-<br>
-
-<p align="center">
-  <a href="https://github.com/davidcetinkaya/embla-carousel">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="JavaScript" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/davidcetinkaya/embla-carousel-react">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="React" />
-  </a>
-</p>
-
 <br>
 
 ## Installation
