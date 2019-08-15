@@ -53,10 +53,9 @@
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="45" alt="React" />
     </a>
   </p>
-</div>
 
-<br>
-<br>
+  <br>
+</div>
 
 ## Installation
 
