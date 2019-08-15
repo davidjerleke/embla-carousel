@@ -5,25 +5,27 @@
     </a>
   </p>
 
-  <strong>
-    <h1 align="center">Embla Carousel</h1>
-  </strong>
-
   <p align="center">
-    An extensible low level carousel for the web, written in TypeScript.
-  </p>
-
-  <p align="center">
-    <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+    <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-green.svg"></a>
     <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
     <a href="https://travis-ci.org/davidcetinkaya/embla-carousel" target="_blank"><img src="https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg"></a>
     <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
+    <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel?color=green&label=gzip%20size">
+    </a>
+  </p>
+
+  <strong>
+    <h2 align="center">Embla Carousel</h2>
+  </strong>
+
+  <p align="center">
+    An extensible low level carousel for the web. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It's dependency free and 100% open source.
   </p>
 
   <p align="center">
     <strong>
       <h4 align="center">
-        <code> &nbsp; <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO PAGE</a> &nbsp; </code>
+        <code> &nbsp; <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO</a> &nbsp; </code>
       </h4>
     </strong>
   </p>
@@ -33,13 +35,19 @@
 
 <p align="center">
   <strong>
-    « &nbsp;<code><a href="#options">OPTIONS</a></code>
+    <code><a href="#options">OPTIONS</a></code>
   </strong>
   <strong>
     &nbsp; | &nbsp;
   </strong>
   <strong>
-    <code><a href="#api">THE API</a></code>&nbsp; »
+    <code><a href="https://codesandbox.io/s/oyols">CODE SANDBOX</a></code>
+  </strong>
+  <strong>
+    &nbsp; | &nbsp;
+  </strong>
+  <strong>
+    <code><a href="#api">THE API</a></code>
   </strong>
 </p>
 
