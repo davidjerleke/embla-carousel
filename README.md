@@ -25,7 +25,7 @@
   <p align="center">
     <strong>
       <h4 align="center">
-        <code> &nbsp; <a href="https://davidcetinkaya.github.io/embla-carousel">DEMO</a> &nbsp; </code>
+        <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">DEMO</a>&nbsp;</code>
       </h4>
     </strong>
   </p>
