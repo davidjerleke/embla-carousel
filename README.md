@@ -24,9 +24,7 @@
 
   <p align="center">
     <strong>
-      <h4 align="center">
-        <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">DEMO</a>&nbsp;</code>
-      </h4>
+      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">TRY DEMO</a>&nbsp;</code>
     </strong>
   </p>
 </div>
@@ -35,15 +33,11 @@
 
 <p align="center">
   <strong>
-    <code><a href="#options">OPTIONS</a></code>
-  </strong>
-  &nbsp;
-  <strong>
-    <code><a href="https://codesandbox.io/s/oyols">CODE SANDBOX</a></code>
-  </strong>
-  &nbsp;
-  <strong>
-    <code><a href="#api">THE API</a></code>
+    <a href="#options">options</a>
+    &nbsp; &middot; &nbsp;
+    <a href="https://codesandbox.io/s/oyols">codesandbox</a>
+    &nbsp; &middot; &nbsp;
+    <a href="#api">api</a>
   </strong>
 </p>
 
