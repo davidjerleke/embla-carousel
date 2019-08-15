@@ -46,11 +46,11 @@
 
   <p align="center">
     <a href="https://github.com/davidcetinkaya/embla-carousel">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="50" alt="JavaScript" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="45" alt="JavaScript" />
     </a>
     &nbsp;
     <a href="https://github.com/davidcetinkaya/embla-carousel-react">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="50" alt="React" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="45" alt="React" />
     </a>
   </p>
 </div>
