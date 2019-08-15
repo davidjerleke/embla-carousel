@@ -10,7 +10,7 @@
     <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
     <a href="https://travis-ci.org/davidcetinkaya/embla-carousel" target="_blank"><img src="https://img.shields.io/travis/davidcetinkaya/embla-carousel/master.svg"></a>
     <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
-    <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel?color=green&label=gzip%20size">
+    <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel?color=%234c1&label=gzip%20size">
     </a>
   </p>
 
@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    An extensible low level carousel for the web. Extend it with some very basic JavaScript and build awesome physics simulated carousels. It's dependency free and 100% open source.
+    Extensible low level carousels for the web. Extend it with basic JavaScript and build awesome physics simulated carousels. Dependency free and 100% open source.
   </p>
 
   <p align="center">
