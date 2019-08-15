@@ -37,15 +37,11 @@
   <strong>
     <code><a href="#options">OPTIONS</a></code>
   </strong>
-  <strong>
-    &nbsp; | &nbsp;
-  </strong>
+  &nbsp;
   <strong>
     <code><a href="https://codesandbox.io/s/oyols">CODE SANDBOX</a></code>
   </strong>
-  <strong>
-    &nbsp; | &nbsp;
-  </strong>
+  &nbsp;
   <strong>
     <code><a href="#api">THE API</a></code>
   </strong>
