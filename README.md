@@ -62,10 +62,6 @@ NPM
 
 <pre>npm install <a href="https://www.npmjs.com/package/embla-carousel">embla-carousel</a></pre>
 
-```javascript
-import EmblaCarousel from 'embla-carousel'
-```
-
 ## QuickStart
 
 HTML
@@ -106,6 +102,8 @@ CSS
 JavaScript
 
 ```javascript
+import EmblaCarousel from 'embla-carousel'
+
 const emblaNode = document.querySelector('.embla')
 const options = { loop: true }
 const embla = EmblaCarousel(emblaNode, options)
