@@ -1,10 +1,10 @@
 import { Animation } from '../components/animation'
-import { EdgeGuard } from '../components/edgeGuard'
+import { ScrollBounds } from '../components/scrollBounds'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 import { Mover } from '../components/mover'
 
-let edgeGuard: EdgeGuard
+let scrollBounds: ScrollBounds
 let location: Vector1D
 let mover: Mover
 const animation = Animation(() => {})
@@ -14,7 +14,7 @@ const tolerance = 50
 beforeEach(() => {
   location = Vector1D(0)
   mover = Mover({ location, mass: 1, speed: 10 })
-  edgeGuard = EdgeGuard({
+  scrollBounds = ScrollBounds({
     limit,
     location,
     mover,
@@ -23,12 +23,12 @@ beforeEach(() => {
   })
 })
 
-describe('EdgeGuard', () => {
+describe('ScrollBounds', () => {
   test('Constrains given Vector to Bound min when location is less than min', done => {
     const vector = Vector1D(-20)
     const locationPastMinLimit = limit.min - 1
     location.setNumber(locationPastMinLimit)
-    edgeGuard.constrain(vector)
+    scrollBounds.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(0)
@@ -40,7 +40,7 @@ describe('EdgeGuard', () => {
     const vector = Vector1D(20)
     const locationPastMaxLimit = limit.max + 1
     location.setNumber(locationPastMaxLimit)
-    edgeGuard.constrain(vector)
+    scrollBounds.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(10)
@@ -52,7 +52,7 @@ describe('EdgeGuard', () => {
     const vector = Vector1D(20)
     const locationWithinMaxLimit = limit.max
     location.setNumber(locationWithinMaxLimit)
-    edgeGuard.constrain(vector)
+    scrollBounds.constrain(vector)
 
     setTimeout(() => {
       expect(vector.get()).toBe(20)

@@ -9,7 +9,7 @@ type Params = {
   index: Counter
   loop: boolean
   snapSizes: number[]
-  snapPositions: number[]
+  scrollSnaps: number[]
   contentSize: number
   limit: Limit
   target: Vector1D
@@ -25,13 +25,13 @@ export type Target = {
   index: number
 }
 
-export type TargetFinder = {
+export type ScrollTarget = {
   byIndex: (target: number, direction: number) => Target
   byDistance: (force: number) => Target
 }
 
-export function TargetFinder(params: Params): TargetFinder {
-  const { loop, limit, snapPositions, contentSize } = params
+export function ScrollTarget(params: Params): ScrollTarget {
+  const { loop, limit, scrollSnaps, contentSize } = params
   const { reachedMin, reachedMax, reachedAny } = limit
   const snapBounds = calculateSnapBounds()
 
@@ -41,18 +41,18 @@ export function TargetFinder(params: Params): TargetFinder {
 
     return snapSizes.reduce((bounds: Bound[], size, i) => {
       const next = counter.set(i).add(align === 'end' ? 1 : 0)
-      const end = snapPositions[i] - snapSizes[next.get()] / 2
-      const start = !i ? snapPositions[0] : bounds[i - 1].end
+      const end = scrollSnaps[i] - snapSizes[next.get()] / 2
+      const start = !i ? scrollSnaps[0] : bounds[i - 1].end
       return bounds.concat([{ start, end }])
     }, [])
   }
 
   function offsetToSnap(target: Target): number {
     const { distance, index } = target
-    const lastSnap = snapPositions[params.index.max]
+    const lastSnap = scrollSnaps[params.index.max]
     const addOffset = loop && distance < lastSnap && index === 0
     const offset = addOffset ? distance + contentSize : distance
-    return snapPositions[index] - offset
+    return scrollSnaps[index] - offset
   }
 
   function findTargetSnapAt(distance: number): Target {
@@ -70,7 +70,7 @@ export function TargetFinder(params: Params): TargetFinder {
 
   function byIndex(index: number, direction: number): Target {
     const targetVector = params.target.get()
-    const distanceToSnap = snapPositions[index] - targetVector
+    const distanceToSnap = scrollSnaps[index] - targetVector
     const target = { distance: distanceToSnap, index }
 
     if (loop) {
@@ -107,7 +107,7 @@ export function TargetFinder(params: Params): TargetFinder {
     }
   }
 
-  const self: TargetFinder = {
+  const self: ScrollTarget = {
     byDistance,
     byIndex,
   }

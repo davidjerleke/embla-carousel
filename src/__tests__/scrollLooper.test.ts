@@ -1,10 +1,10 @@
-import { EdgeLooper } from '../components/edgeLooper'
+import { ScrollLooper } from '../components/scrollLooper'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 
 let location: Vector1D
 let vectors: Vector1D[]
-let edgeLooper: EdgeLooper
+let scrollLooper: ScrollLooper
 const minLimit = 0
 const maxLimit = 10
 const contentSize = 10
@@ -18,7 +18,7 @@ beforeEach(() => {
     Vector1D(vector_1_initial_value),
     Vector1D(vector_2_initial_value),
   ]
-  edgeLooper = EdgeLooper({
+  scrollLooper = ScrollLooper({
     limit,
     location,
     contentSize,
@@ -26,11 +26,11 @@ beforeEach(() => {
   })
 })
 
-describe('EdgeLooper', () => {
+describe('ScrollLooper', () => {
   test('Subtracts content size from given Vectors when location is greater than Limit max', () => {
     const direction = 1
     location.setNumber(maxLimit + 1)
-    edgeLooper.loop(direction)
+    scrollLooper.loop(direction)
     expect(vectors[0].get()).toBe(
       vector_1_initial_value - contentSize,
     )
@@ -42,7 +42,7 @@ describe('EdgeLooper', () => {
   test('Adds content size to given Vectors when location is less than Limit min', () => {
     const direction = -1
     location.setNumber(minLimit - 1)
-    edgeLooper.loop(direction)
+    scrollLooper.loop(direction)
     expect(vectors[0].get()).toBe(
       vector_1_initial_value + contentSize,
     )

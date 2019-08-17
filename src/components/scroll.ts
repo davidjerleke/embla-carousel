@@ -1,7 +1,7 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { EventDispatcher } from './eventDispatcher'
-import { Target, TargetFinder } from './targetFinder'
+import { ScrollTarget, Target } from './scrollTarget'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -9,19 +9,19 @@ type Params = {
   target: Vector1D
   index: Counter
   indexPrevious: Counter
-  findTarget: TargetFinder
+  scrollTarget: ScrollTarget
   events: EventDispatcher
 }
 
-export type Scroller = {
+export type Scroll = {
   toNext: () => void
   toPrevious: () => void
   toIndex: (target: number) => void
   toDistance: (force: number) => void
 }
 
-export function Scroller(params: Params): Scroller {
-  const { index, findTarget, animation } = params
+export function Scroll(params: Params): Scroll {
+  const { index, scrollTarget, animation } = params
 
   function scrollTo(next: Target): void {
     const { indexPrevious, events, target } = params
@@ -39,13 +39,13 @@ export function Scroller(params: Params): Scroller {
     }
   }
 
-  function toDistance(force: number): void {
-    const next = findTarget.byDistance(force)
+  function findIndex(target: Counter, direction: number): void {
+    const next = scrollTarget.byIndex(target.get(), direction)
     scrollTo(next)
   }
 
-  function findIndex(target: Counter, direction: number): void {
-    const next = findTarget.byIndex(target.get(), direction)
+  function toDistance(force: number): void {
+    const next = scrollTarget.byDistance(force)
     scrollTo(next)
   }
 
@@ -64,7 +64,7 @@ export function Scroller(params: Params): Scroller {
     findIndex(next, 1)
   }
 
-  const self: Scroller = {
+  const self: Scroll = {
     toDistance,
     toIndex,
     toNext,

@@ -11,11 +11,11 @@ type Params = {
   contain: boolean
 }
 
-export type SnapPosition = {
+export type ScrollSnap = {
   measure: (snapSize: number, index: number) => number
 }
 
-export function SnapPosition(params: Params): SnapPosition {
+export function ScrollSnap(params: Params): ScrollSnap {
   const { alignSize, contentSize, snapSizes, viewSize } = params
   const alignSizes = snapSizes.map(alignSize.measure)
   const contentFillsUpView = contentSize >= viewSize
@@ -57,7 +57,7 @@ export function SnapPosition(params: Params): SnapPosition {
     return params.contain ? containToView(position) : position
   }
 
-  const self: SnapPosition = {
+  const self: ScrollSnap = {
     measure,
   }
   return Object.freeze(self)

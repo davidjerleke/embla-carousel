@@ -11,11 +11,11 @@ type Params = {
   tolerance: number
 }
 
-export type EdgeGuard = {
+export type ScrollBounds = {
   constrain: (v: Vector1D) => void
 }
 
-export function EdgeGuard(params: Params): EdgeGuard {
+export function ScrollBounds(params: Params): ScrollBounds {
   const { limit, location, mover, animation, tolerance } = params
   const { min, max, reachedMin, reachedMax } = limit
   const state = { timeout: 0 }
@@ -39,7 +39,7 @@ export function EdgeGuard(params: Params): EdgeGuard {
     }
   }
 
-  const self: EdgeGuard = {
+  const self: ScrollBounds = {
     constrain,
   }
   return Object.freeze(self)

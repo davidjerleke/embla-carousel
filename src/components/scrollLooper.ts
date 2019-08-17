@@ -8,11 +8,11 @@ type Params = {
   vectors: Vector1D[]
 }
 
-export type EdgeLooper = {
+export type ScrollLooper = {
   loop: (direction: number) => void
 }
 
-export function EdgeLooper(params: Params): EdgeLooper {
+export function ScrollLooper(params: Params): ScrollLooper {
   const { limit, location, contentSize, vectors } = params
   const { reachedMin, reachedMax } = limit
 
@@ -28,7 +28,7 @@ export function EdgeLooper(params: Params): EdgeLooper {
     }
   }
 
-  const self: EdgeLooper = {
+  const self: ScrollLooper = {
     loop,
   }
   return Object.freeze(self)

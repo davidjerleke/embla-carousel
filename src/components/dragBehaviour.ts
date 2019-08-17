@@ -6,7 +6,7 @@ import { EventStore } from './eventStore'
 import { Limit } from './limit'
 import { Mover } from './mover'
 import { Pointer } from './pointer'
-import { Scroller } from './scroller'
+import { Scroll } from './scroll'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -17,7 +17,7 @@ type Params = {
   pointer: Pointer
   location: Vector1D
   animation: Animation
-  scroll: Scroller
+  scroll: Scroll
   mover: Mover
   index: Counter
   limit: Limit
@@ -122,7 +122,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
-    mover.useSpeed(80).useDefaultMass()
+    mover.useDefaultMass().useSpeed(85)
     animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')

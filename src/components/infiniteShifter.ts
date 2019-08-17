@@ -1,7 +1,7 @@
 import { Vector1D } from './vector1d'
 
 type Params = {
-  snapPositions: number[]
+  scrollSnaps: number[]
   viewSize: number
   location: Vector1D
   slideSizes: number[]
@@ -21,7 +21,7 @@ export type InfiniteShifter = {
 }
 
 export function InfiniteShifter(params: Params) {
-  const { contentSize, viewSize, slideSizes, snapPositions } = params
+  const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = Object.keys(slideSizes).map(Number)
   const descItems = ascItems.slice().reverse()
   const shiftPoints = startPoints().concat(endPoints())
@@ -83,10 +83,10 @@ export function InfiniteShifter(params: Params) {
         const slidesInSpan = ascIndexes.slice(0, j)
         const point = shiftPoint(slidesInSpan, from, direction)
         const location = Vector1D(-1)
+        const target = Vector1D(0)
         const findTarget = (loc: number): Vector1D => {
-          const target = Vector1D(0)
           const t = loc > point ? initial : offset
-          return target.setNumber(t)
+          return target.setNumber(0).setNumber(t)
         }
         return { point, findTarget, location, index }
       },
@@ -94,14 +94,14 @@ export function InfiniteShifter(params: Params) {
   }
 
   function startPoints(): ShiftPoint[] {
-    const gap = snapPositions[0] - 1
+    const gap = scrollSnaps[0] - 1
     const indexes = shiftItemsIn(gap, descItems)
     const start = shiftStart(gap, indexes, 0)
     return shiftPointsFor(indexes, start, 1)
   }
 
   function endPoints(): ShiftPoint[] {
-    const gap = viewSize - snapPositions[0] - 1
+    const gap = viewSize - scrollSnaps[0] - 1
     const indexes = shiftItemsIn(gap, ascItems)
     const start = shiftStart(contentSize, ascItems, -viewSize)
     return shiftPointsFor(indexes, -start, 0)

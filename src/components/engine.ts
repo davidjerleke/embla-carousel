@@ -3,25 +3,25 @@ import { Animation } from './animation'
 import { ChunkSize } from './chunkSize'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
-import { EdgeGuard } from './edgeGuard'
-import { EdgeLooper } from './edgeLooper'
 import { EventDispatcher } from './eventDispatcher'
 import { InfiniteShifter } from './infiniteShifter'
 import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
-import { Scroller } from './scroller'
-import { SnapPosition } from './snapPosition'
-import { TargetFinder } from './targetFinder'
+import { Scroll } from './scroll'
+import { ScrollBounds } from './scrollBounds'
+import { ScrollLooper } from './scrollLooper'
+import { ScrollSnap } from './scrollSnap'
+import { ScrollTarget } from './scrollTarget'
 import { Translate } from './translate'
 import { groupNumbers, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Engine = {
   animation: Animation
-  edgeGuard: EdgeGuard
-  edgeLooper: EdgeLooper
+  scrollBounds: ScrollBounds
+  scrollLooper: ScrollLooper
   index: Counter
   indexPrevious: Counter
   indexGroups: number[][]
@@ -30,7 +30,7 @@ export type Engine = {
   shifter: InfiniteShifter
   target: Vector1D
   translate: Translate
-  scroll: Scroller
+  scroll: Scroll
 }
 
 export function Engine(
@@ -70,7 +70,7 @@ export function Engine(
   const contentSize = snapSizes.reduce((a, s) => a + s)
   const alignSize = AlignSize({ align, viewSize })
   const contain = !loop && containScroll
-  const snapPosition = SnapPosition({
+  const scrollSnap = ScrollSnap({
     alignSize,
     contain,
     contentSize,
@@ -78,10 +78,10 @@ export function Engine(
     snapSizes,
     viewSize,
   })
-  const snapPositions = snapSizes.map(snapPosition.measure)
+  const scrollSnaps = snapSizes.map(scrollSnap.measure)
   const loopSize = -contentSize + chunkSize.measure(1)
-  const max = snapPositions[0]
-  const min = loop ? max + loopSize : snapPositions[index.max]
+  const max = scrollSnaps[0]
+  const min = loop ? max + loopSize : scrollSnaps[index.max]
   const limit = Limit({ max, min })
 
   // Direction
@@ -94,11 +94,11 @@ export function Engine(
   const update = (): void => {
     slider.mover.seek(target).update()
     if (!pointer.isDown()) {
-      if (!loop) slider.edgeGuard.constrain(target)
+      if (!loop) slider.scrollBounds.constrain(target)
       if (slider.mover.settle(target)) slider.animation.stop()
     }
     if (loop) {
-      slider.edgeLooper.loop(direction())
+      slider.scrollLooper.loop(direction())
       slider.shifter.shiftInfinite(slides)
     }
     if (slider.mover.location.get() !== target.get()) {
@@ -110,26 +110,26 @@ export function Engine(
 
   // Shared
   const animation = Animation(update)
-  const startLocation = snapPositions[index.get()]
+  const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const mover = Mover({ location, speed, mass: 1 })
-  const scroll = Scroller({
+  const scroll = Scroll({
     animation,
     events,
-    findTarget: TargetFinder({
+    index,
+    indexPrevious,
+    scrollTarget: ScrollTarget({
       align,
       contentSize,
       dragFree,
       index,
       limit,
       loop,
-      snapPositions,
+      scrollSnaps,
       snapSizes,
       target,
     }),
-    index,
-    indexPrevious,
     target,
   })
 
@@ -153,30 +153,30 @@ export function Engine(
   // Slider
   const slider: Engine = {
     animation,
-    edgeGuard: EdgeGuard({
-      animation,
-      limit,
-      location,
-      mover,
-      tolerance: 50,
-    }),
-    edgeLooper: EdgeLooper({
-      contentSize,
-      limit,
-      location,
-      vectors: [location, target],
-    }),
     index,
     indexGroups,
     indexPrevious,
     mover,
     pointer,
     scroll,
+    scrollBounds: ScrollBounds({
+      animation,
+      limit,
+      location,
+      mover,
+      tolerance: 50,
+    }),
+    scrollLooper: ScrollLooper({
+      contentSize,
+      limit,
+      location,
+      vectors: [location, target],
+    }),
     shifter: InfiniteShifter({
       contentSize,
       location,
+      scrollSnaps,
       slideSizes,
-      snapPositions,
       viewSize,
     }),
     target,
