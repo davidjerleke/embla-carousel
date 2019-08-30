@@ -1,9 +1,9 @@
 import { AlignSize, Alignments } from '../components/alignSize'
 import { ChunkSize } from '../components/chunkSize'
-import { InfiniteShifter } from '../components/infiniteShifter'
+import { SlideLooper } from '../components/slideLooper'
 import { Vector1D } from '../components/vector1d'
 
-const shifterParams = (align: Alignments) => {
+const slideLooperParams = (align: Alignments) => {
   const location = Vector1D(0)
   const chunkSize = ChunkSize(950)
   const viewSize = chunkSize.root
@@ -20,12 +20,12 @@ const shifterParams = (align: Alignments) => {
   }
 }
 
-describe('InfiniteShifter', () => {
+describe('SlideLooper', () => {
   describe('Start Alignment', () => {
     test('ShiftPoints are correct when given alignment is Start', () => {
-      const params = shifterParams('start')
-      const { shiftPoints } = InfiniteShifter(params)
-      expect(shiftPoints).toMatchObject([
+      const params = slideLooperParams('start')
+      const { loopPoints } = SlideLooper(params)
+      expect(loopPoints).toMatchObject([
         { index: 0, point: -90 },
         { index: 1, point: -105 },
         { index: 2, point: -135 },
@@ -34,10 +34,10 @@ describe('InfiniteShifter', () => {
       ])
     })
     test('ShiftTargets are correct when given alignment is Start', () => {
-      const params = shifterParams('start')
-      const { shiftPoints } = InfiniteShifter(params)
+      const params = slideLooperParams('start')
+      const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = shiftPoints.map(({ findTarget }) =>
+      const shiftTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
       expect(shiftTargets).toEqual([0, 0, 0, 0, 0])
@@ -46,9 +46,9 @@ describe('InfiniteShifter', () => {
 
   describe('Center Alignment', () => {
     test('ShiftPoints are correct when given alignment is Center', () => {
-      const params = shifterParams('center')
-      const { shiftPoints } = InfiniteShifter(params)
-      expect(shiftPoints).toMatchObject([
+      const params = slideLooperParams('center')
+      const { loopPoints } = SlideLooper(params)
+      expect(loopPoints).toMatchObject([
         { index: 5, point: 30 },
         { index: 6, point: 15 },
         { index: 7, point: 0 },
@@ -58,10 +58,10 @@ describe('InfiniteShifter', () => {
       ])
     })
     test('ShiftTargets are correct when given alignment is Center', () => {
-      const params = shifterParams('center')
-      const { shiftPoints } = InfiniteShifter(params)
+      const params = slideLooperParams('center')
+      const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = shiftPoints.map(({ findTarget }) =>
+      const shiftTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
       expect(shiftTargets).toEqual([-190, -190, -190, 0, 0, 0])
@@ -70,9 +70,9 @@ describe('InfiniteShifter', () => {
 
   describe('End Alignment', () => {
     test('ShiftPoints are correct when given alignment is End', () => {
-      const params = shifterParams('end')
-      const { shiftPoints } = InfiniteShifter(params)
-      expect(shiftPoints).toMatchObject([
+      const params = slideLooperParams('end')
+      const { loopPoints } = SlideLooper(params)
+      expect(loopPoints).toMatchObject([
         { index: 4, point: 45 },
         { index: 5, point: 30 },
         { index: 6, point: 15 },
@@ -81,10 +81,10 @@ describe('InfiniteShifter', () => {
       ])
     })
     test('ShiftTargets are correct when given alignment is End', () => {
-      const params = shifterParams('end')
-      const { shiftPoints } = InfiniteShifter(params)
+      const params = slideLooperParams('end')
+      const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = shiftPoints.map(({ findTarget }) =>
+      const shiftTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
       expect(shiftTargets).toEqual([-190, -190, -190, -190, 0])

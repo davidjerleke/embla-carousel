@@ -85,7 +85,7 @@ export function EmblaCarousel(
         return activate({ loop: false })
       }
       if (options.draggable) activateDragFeature()
-      if (options.loop) slider.shifter.shiftInfinite(slides)
+      if (options.loop) slider.slideLooper.loop(slides)
       if (isFirstInit) {
         events.on('select', toggleSelectedClass)
         events.on('init', toggleSelectedClass)

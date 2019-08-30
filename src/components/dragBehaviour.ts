@@ -122,7 +122,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
-    mover.useDefaultMass().useSpeed(85)
+    mover.useDefaultMass().useSpeed(80)
     animation.start()
     addInteractionEvents()
     events.dispatch('dragStart')

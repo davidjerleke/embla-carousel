@@ -8,23 +8,23 @@ type Params = {
   contentSize: number
 }
 
-type ShiftPoint = {
+type LoopPoint = {
   point: number
   location: Vector1D
   index: number
   findTarget: (location: number) => Vector1D
 }
 
-export type InfiniteShifter = {
-  shiftInfinite: (slides: HTMLElement[]) => void
-  shiftPoints: ShiftPoint[]
+export type SlideLooper = {
+  loop: (slides: HTMLElement[]) => void
+  loopPoints: LoopPoint[]
 }
 
-export function InfiniteShifter(params: Params) {
+export function SlideLooper(params: Params) {
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = Object.keys(slideSizes).map(Number)
   const descItems = ascItems.slice().reverse()
-  const shiftPoints = startPoints().concat(endPoints())
+  const loopPoints = startPoints().concat(endPoints())
 
   function subtractItemSizesOf(
     indexes: number[],
@@ -36,7 +36,7 @@ export function InfiniteShifter(params: Params) {
     }, from)
   }
 
-  function shiftItemsIn(
+  function loopItemsIn(
     sizeOfGap: number,
     indexes: number[],
   ): number[] {
@@ -46,7 +46,7 @@ export function InfiniteShifter(params: Params) {
     }, [])
   }
 
-  function shiftStart(
+  function loopStart(
     sizeOfGap: number,
     indexes: number[],
     from: number,
@@ -57,7 +57,7 @@ export function InfiniteShifter(params: Params) {
     }, from)
   }
 
-  function shiftPoint(
+  function loopPoint(
     indexes: number[],
     from: number,
     direction: 0 | 1,
@@ -69,19 +69,19 @@ export function InfiniteShifter(params: Params) {
     )
   }
 
-  function shiftPointsFor(
+  function loopPointsFor(
     indexes: number[],
     from: number,
     direction: 0 | 1,
-  ): ShiftPoint[] {
+  ): LoopPoint[] {
     const ascIndexes = indexes.slice().sort((a, b) => a - b)
     return ascIndexes.map(
-      (i, j): ShiftPoint => {
+      (i, j): LoopPoint => {
         const index = i
         const initial = contentSize * (!direction ? 0 : -1)
         const offset = contentSize * (!direction ? 1 : 0)
         const slidesInSpan = ascIndexes.slice(0, j)
-        const point = shiftPoint(slidesInSpan, from, direction)
+        const point = loopPoint(slidesInSpan, from, direction)
         const location = Vector1D(-1)
         const target = Vector1D(0)
         const findTarget = (loc: number): Vector1D => {
@@ -93,24 +93,24 @@ export function InfiniteShifter(params: Params) {
     )
   }
 
-  function startPoints(): ShiftPoint[] {
+  function startPoints(): LoopPoint[] {
     const gap = scrollSnaps[0] - 1
-    const indexes = shiftItemsIn(gap, descItems)
-    const start = shiftStart(gap, indexes, 0)
-    return shiftPointsFor(indexes, start, 1)
+    const indexes = loopItemsIn(gap, descItems)
+    const start = loopStart(gap, indexes, 0)
+    return loopPointsFor(indexes, start, 1)
   }
 
-  function endPoints(): ShiftPoint[] {
+  function endPoints(): LoopPoint[] {
     const gap = viewSize - scrollSnaps[0] - 1
-    const indexes = shiftItemsIn(gap, ascItems)
-    const start = shiftStart(contentSize, ascItems, -viewSize)
-    return shiftPointsFor(indexes, -start, 0)
+    const indexes = loopItemsIn(gap, ascItems)
+    const start = loopStart(contentSize, ascItems, -viewSize)
+    return loopPointsFor(indexes, -start, 0)
   }
 
-  function shiftInfinite(slides: HTMLElement[]): void {
+  function loop(slides: HTMLElement[]): void {
     const parentLocation = params.location
-    shiftPoints.forEach(point => {
-      const { findTarget, location, index } = point
+    loopPoints.forEach(loopTarget => {
+      const { findTarget, location, index } = loopTarget
       const target = findTarget(parentLocation.get())
       if (target.get() !== location.get()) {
         slides[index].style.left = `${target.get()}%`
@@ -119,9 +119,9 @@ export function InfiniteShifter(params: Params) {
     })
   }
 
-  const self: InfiniteShifter = {
-    shiftInfinite,
-    shiftPoints,
+  const self: SlideLooper = {
+    loop,
+    loopPoints,
   }
   return Object.freeze(self)
 }

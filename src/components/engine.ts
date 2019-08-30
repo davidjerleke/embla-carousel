@@ -4,16 +4,17 @@ import { ChunkSize } from './chunkSize'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
 import { EventDispatcher } from './eventDispatcher'
-import { InfiniteShifter } from './infiniteShifter'
 import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
 import { Scroll } from './scroll'
 import { ScrollBounds } from './scrollBounds'
+import { ScrollContain } from './scrollContain'
 import { ScrollLooper } from './scrollLooper'
 import { ScrollSnap } from './scrollSnap'
 import { ScrollTarget } from './scrollTarget'
+import { SlideLooper } from './slideLooper'
 import { Translate } from './translate'
 import { groupNumbers, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
@@ -27,7 +28,7 @@ export type Engine = {
   indexGroups: number[][]
   mover: Mover
   pointer: DragBehaviour
-  shifter: InfiniteShifter
+  slideLooper: SlideLooper
   target: Vector1D
   translate: Translate
   scroll: Scroll
@@ -51,34 +52,40 @@ export function Engine(
     containScroll,
   } = options
 
-  // Index
-  const indexMin = 0
-  const indexMax = Math.ceil(slides.length / slidesToScroll) - 1
-  const indexes = Object.keys(slides).map(Number)
-  const indexGroups = groupNumbers(indexes, slidesToScroll)
-  const indexSpan = Limit({ min: indexMin, max: indexMax })
-  const index = Counter({ limit: indexSpan, start: startIndex, loop })
-  const indexPrevious = index.clone()
-
   // Measurements
   const containerSize = rectWidth(container)
   const chunkSize = ChunkSize(containerSize)
   const viewSize = chunkSize.root
+  const slideIndexes = Object.keys(slides).map(Number)
   const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
   const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
-  const contentSize = snapSizes.reduce((a, s) => a + s)
+  const contentSize = slideSizes.reduce((a, s) => a + s)
   const alignSize = AlignSize({ align, viewSize })
+  const snap = ScrollSnap({ snapSizes, alignSize, loop })
+  const defaultSnaps = snapSizes.map(snap.measure)
   const contain = !loop && containScroll
-  const scrollSnap = ScrollSnap({
+  const scrollContain = ScrollContain({
     alignSize,
-    contain,
     contentSize,
-    index,
-    snapSizes,
+    slideIndexes,
+    slidesToScroll,
     viewSize,
   })
-  const scrollSnaps = snapSizes.map(scrollSnap.measure)
+  const containedSnaps = scrollContain.snaps(defaultSnaps)
+  const scrollSnaps = contain ? containedSnaps : defaultSnaps
+
+  // Index
+  const defaultIndexes = groupNumbers(slideIndexes, slidesToScroll)
+  const containedIndexes = scrollContain.indexes(defaultSnaps)
+  const indexMin = 0
+  const indexMax = scrollSnaps.length - 1
+  const indexGroups = contain ? containedIndexes : defaultIndexes
+  const indexSpan = Limit({ min: indexMin, max: indexMax })
+  const index = Counter({ limit: indexSpan, start: startIndex, loop })
+  const indexPrevious = index.clone()
+
+  // ScrollLimit
   const loopSize = -contentSize + chunkSize.measure(1)
   const max = scrollSnaps[0]
   const min = loop ? max + loopSize : scrollSnaps[index.max]
@@ -88,24 +95,24 @@ export function Engine(
   const direction = (): number =>
     pointer.isDown()
       ? pointer.direction.get()
-      : slider.mover.direction.get()
+      : engine.mover.direction.get()
 
   // Draw
   const update = (): void => {
-    slider.mover.seek(target).update()
+    engine.mover.seek(target).update()
     if (!pointer.isDown()) {
-      if (!loop) slider.scrollBounds.constrain(target)
-      if (slider.mover.settle(target)) slider.animation.stop()
+      if (!loop) engine.scrollBounds.constrain(target)
+      if (engine.mover.settle(target)) engine.animation.stop()
     }
     if (loop) {
-      slider.scrollLooper.loop(direction())
-      slider.shifter.shiftInfinite(slides)
+      engine.scrollLooper.loop(direction())
+      engine.slideLooper.loop(slides)
     }
-    if (slider.mover.location.get() !== target.get()) {
+    if (engine.mover.location.get() !== target.get()) {
       events.dispatch('scroll')
     }
-    slider.translate.to(slider.mover.location)
-    slider.animation.proceed()
+    engine.translate.to(engine.mover.location)
+    engine.animation.proceed()
   }
 
   // Shared
@@ -151,7 +158,7 @@ export function Engine(
   })
 
   // Slider
-  const slider: Engine = {
+  const engine: Engine = {
     animation,
     index,
     indexGroups,
@@ -172,7 +179,7 @@ export function Engine(
       location,
       vectors: [location, target],
     }),
-    shifter: InfiniteShifter({
+    slideLooper: SlideLooper({
       contentSize,
       location,
       scrollSnaps,
@@ -182,5 +189,5 @@ export function Engine(
     target,
     translate: Translate(container),
   }
-  return Object.freeze(slider)
+  return Object.freeze(engine)
 }
