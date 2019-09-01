@@ -395,6 +395,14 @@ embla.on('select', () => {
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel Safari support" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
 </p>
 
+## Contributors
+
+<p>
+  <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=400&v=4" title="michaelrambeau" width="80" height="80" style="max-width:100%;"></a> 
+  &nbsp;
+  <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=400&v=4" title="ehellman" width="80" height="80" style="max-width:100%;"></a>
+</p>
+
 <br>
 
 <h2 align="center">Open Source</h2>
