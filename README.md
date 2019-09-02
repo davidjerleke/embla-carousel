@@ -401,7 +401,7 @@ embla.on('select', () => {
   <strong>
     <h2 align="center">Contributors</h2>
   </strong>
-  <p>
+  <p align="center">
     <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=400&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a> 
     <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=400&v=4" title="ehellman" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/afilp"><img src="https://avatars0.githubusercontent.com/u/7850073?s=400&v=4" title="afilp" width="66" height="66" style="max-width:100%;"></a>
