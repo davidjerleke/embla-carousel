@@ -63,8 +63,6 @@ export function Engine(
   const contentSize = slideSizes.reduce((a, s) => a + s)
   const alignSize = AlignSize({ align, viewSize })
   const snap = ScrollSnap({ snapSizes, alignSize, loop })
-  const defaultSnaps = snapSizes.map(snap.measure)
-  const contain = !loop && containScroll
   const scrollContain = ScrollContain({
     alignSize,
     contentSize,
@@ -72,6 +70,8 @@ export function Engine(
     slidesToScroll,
     viewSize,
   })
+  const contain = !loop && containScroll
+  const defaultSnaps = snapSizes.map(snap.measure)
   const containedSnaps = scrollContain.snaps(defaultSnaps)
   const scrollSnaps = contain ? containedSnaps : defaultSnaps
 
