@@ -22,7 +22,7 @@ const slideLooperParams = (align: Alignments) => {
 
 describe('SlideLooper', () => {
   describe('Start Alignment', () => {
-    test('ShiftPoints are correct when given alignment is Start', () => {
+    test('LoopPoints are correct when given alignment is Start', () => {
       const params = slideLooperParams('start')
       const { loopPoints } = SlideLooper(params)
       expect(loopPoints).toMatchObject([
@@ -33,19 +33,19 @@ describe('SlideLooper', () => {
         { index: 4, point: -165 },
       ])
     })
-    test('ShiftTargets are correct when given alignment is Start', () => {
+    test('LoopTargets are correct when given alignment is Start', () => {
       const params = slideLooperParams('start')
       const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = loopPoints.map(({ findTarget }) =>
+      const loopTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
-      expect(shiftTargets).toEqual([0, 0, 0, 0, 0])
+      expect(loopTargets).toEqual([0, 0, 0, 0, 0])
     })
   })
 
   describe('Center Alignment', () => {
-    test('ShiftPoints are correct when given alignment is Center', () => {
+    test('LoopPoints are correct when given alignment is Center', () => {
       const params = slideLooperParams('center')
       const { loopPoints } = SlideLooper(params)
       expect(loopPoints).toMatchObject([
@@ -57,19 +57,19 @@ describe('SlideLooper', () => {
         { index: 2, point: -135 },
       ])
     })
-    test('ShiftTargets are correct when given alignment is Center', () => {
+    test('LoopTargets are correct when given alignment is Center', () => {
       const params = slideLooperParams('center')
       const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = loopPoints.map(({ findTarget }) =>
+      const loopTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
-      expect(shiftTargets).toEqual([-190, -190, -190, 0, 0, 0])
+      expect(loopTargets).toEqual([-190, -190, -190, 0, 0, 0])
     })
   })
 
   describe('End Alignment', () => {
-    test('ShiftPoints are correct when given alignment is End', () => {
+    test('LoopPoints are correct when given alignment is End', () => {
       const params = slideLooperParams('end')
       const { loopPoints } = SlideLooper(params)
       expect(loopPoints).toMatchObject([
@@ -80,14 +80,14 @@ describe('SlideLooper', () => {
         { index: 0, point: -90 },
       ])
     })
-    test('ShiftTargets are correct when given alignment is End', () => {
+    test('LoopTargets are correct when given alignment is End', () => {
       const params = slideLooperParams('end')
       const { loopPoints } = SlideLooper(params)
       const parentLocation = params.scrollSnaps[0]
-      const shiftTargets = loopPoints.map(({ findTarget }) =>
+      const loopTargets = loopPoints.map(({ findTarget }) =>
         findTarget(parentLocation).get(),
       )
-      expect(shiftTargets).toEqual([-190, -190, -190, -190, 0])
+      expect(loopTargets).toEqual([-190, -190, -190, -190, 0])
     })
   })
 })
