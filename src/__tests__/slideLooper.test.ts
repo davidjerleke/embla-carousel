@@ -21,7 +21,7 @@ const slideLooperParams = (align: Alignments) => {
 }
 
 describe('SlideLooper', () => {
-  describe('Start Alignment', () => {
+  describe('Align Start', () => {
     test('LoopPoints are correct when given alignment is Start', () => {
       const params = slideLooperParams('start')
       const { loopPoints } = SlideLooper(params)
@@ -44,7 +44,7 @@ describe('SlideLooper', () => {
     })
   })
 
-  describe('Center Alignment', () => {
+  describe('Align Center', () => {
     test('LoopPoints are correct when given alignment is Center', () => {
       const params = slideLooperParams('center')
       const { loopPoints } = SlideLooper(params)
@@ -68,7 +68,7 @@ describe('SlideLooper', () => {
     })
   })
 
-  describe('End Alignment', () => {
+  describe('Align End', () => {
     test('LoopPoints are correct when given alignment is End', () => {
       const params = slideLooperParams('end')
       const { loopPoints } = SlideLooper(params)

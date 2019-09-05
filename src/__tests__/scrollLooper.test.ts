@@ -9,14 +9,14 @@ const minLimit = 0
 const maxLimit = 10
 const contentSize = 10
 const limit = Limit({ min: minLimit, max: maxLimit })
-const vector_1_initial_value = 5
-const vector_2_initial_value = 10
+const vectorOneInitialValue = 5
+const vectorTwoInitialValue = 10
 
 beforeEach(() => {
   location = Vector1D(0)
   vectors = [
-    Vector1D(vector_1_initial_value),
-    Vector1D(vector_2_initial_value),
+    Vector1D(vectorOneInitialValue),
+    Vector1D(vectorTwoInitialValue),
   ]
   scrollLooper = ScrollLooper({
     limit,
@@ -31,23 +31,15 @@ describe('ScrollLooper', () => {
     const direction = 1
     location.setNumber(maxLimit + 1)
     scrollLooper.loop(direction)
-    expect(vectors[0].get()).toBe(
-      vector_1_initial_value - contentSize,
-    )
-    expect(vectors[1].get()).toBe(
-      vector_2_initial_value - contentSize,
-    )
+    expect(vectors[0].get()).toBe(vectorOneInitialValue - contentSize)
+    expect(vectors[1].get()).toBe(vectorTwoInitialValue - contentSize)
   })
 
   test('Adds content size to given Vectors when location is less than Limit min', () => {
     const direction = -1
     location.setNumber(minLimit - 1)
     scrollLooper.loop(direction)
-    expect(vectors[0].get()).toBe(
-      vector_1_initial_value + contentSize,
-    )
-    expect(vectors[1].get()).toBe(
-      vector_2_initial_value + contentSize,
-    )
+    expect(vectors[0].get()).toBe(vectorOneInitialValue + contentSize)
+    expect(vectors[1].get()).toBe(vectorTwoInitialValue + contentSize)
   })
 })

@@ -11,6 +11,7 @@ import { Pointer } from './pointer'
 import { Scroll } from './scroll'
 import { ScrollBounds } from './scrollBounds'
 import { ScrollContain } from './scrollContain'
+import { ScrollLimit } from './scrollLimit'
 import { ScrollLooper } from './scrollLooper'
 import { ScrollSnap } from './scrollSnap'
 import { ScrollTarget } from './scrollTarget'
@@ -86,10 +87,8 @@ export function Engine(
   const indexPrevious = index.clone()
 
   // ScrollLimit
-  const loopSize = -contentSize + chunkSize.measure(1)
-  const max = scrollSnaps[0]
-  const min = loop ? max + loopSize : scrollSnaps[index.max]
-  const limit = Limit({ max, min })
+  const scrollLimit = ScrollLimit({ loop, chunkSize, contentSize })
+  const limit = scrollLimit.measure(scrollSnaps)
 
   // Direction
   const direction = (): number =>
