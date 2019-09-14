@@ -256,9 +256,8 @@ embla.on('select', () => {
 
 <p>Returns the current container element node.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-containernode-fq9xw">
       <code>embla.containerNode()</code>
     </a>
@@ -269,9 +268,8 @@ embla.on('select', () => {
 
 <p>Returns the slides as an array of element nodes.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
       <code>embla.slideNodes()</code>
     </a>
@@ -282,9 +280,8 @@ embla.on('select', () => {
 
 <p>Scrolls to next snap point if possible. If <code>loop: false</code> and the carousel is on the last snap point this method will do nothing.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
       <code>embla.scrollNext()</code>
     </a>
@@ -295,9 +292,8 @@ embla.on('select', () => {
 
 <p>Scrolls to previous snap point if possible. If <code>loop: false</code> and the carousel is on the first snap point this method will do nothing.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
       <code>embla.scrollPrev()</code>
     </a>
@@ -308,9 +304,8 @@ embla.on('select', () => {
 
 <p>Scrolls to the snap point that matches the passed index. If <code>loop: true</code> the carousel will seek the closest way to the target.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
       <code>embla.scrollTo()</code>
     </a>
@@ -321,9 +316,8 @@ embla.on('select', () => {
 
 <p>Returns if it's possible to scroll to a previous snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
       <code>embla.canScrollPrev()</code>
     </a>
@@ -334,9 +328,8 @@ embla.on('select', () => {
 
 <p>Returns if it's possible to scroll to a next snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
       <code>embla.canScrollNext()</code>
     </a>
@@ -347,9 +340,8 @@ embla.on('select', () => {
 
 <p>Returns the index of the selected snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
       <code>embla.selectedScrollSnap()</code>
     </a>
@@ -360,9 +352,8 @@ embla.on('select', () => {
 
 <p>Returns the index of the previous snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
       <code>embla.previousScrollSnap()</code>
     </a>
@@ -373,9 +364,8 @@ embla.on('select', () => {
 
 <p>Returns an array of all scroll snap points, each containing slide numbers and slide nodes.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk">
       <code>embla.scrollSnapList()</code>
     </a>
@@ -386,9 +376,8 @@ embla.on('select', () => {
 
 <p>Applies passed options by doing all the necessary calculations and initialising the carousel from scratch.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
       <code>embla.changeOptions()</code>
     </a>
@@ -408,9 +397,8 @@ embla.on('select', () => {
 - **`dragEnd`** - When carousel dragging ends.
 
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
       <code>embla.on()</code>
     </a>
@@ -421,9 +409,8 @@ embla.on('select', () => {
 
 <p>Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the <code>on</code> method.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
       <code>embla.off()</code>
     </a>
@@ -434,9 +421,8 @@ embla.on('select', () => {
 
 <p>Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.</p>
 <sup>
-  ✨
+  ✨<strong>Demo</strong> - 
   <strong>
-    Demo - 
     <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
       <code>embla.destroy()</code>
     </a>
