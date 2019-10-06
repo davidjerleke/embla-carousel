@@ -332,6 +332,14 @@ embla.on('select', () => {
   <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk"><code>embla.scrollSnapList()</code></a>
 </sup>
 
+##### `scrollProgress()`
+
+<p>Returns how far the carousel has scrolled from 0 at the first slide to 1 at the end.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5"><code>embla.scrollProgress()</code></a>
+</sup>
+
 ##### `changeOptions(options)`
 
 <p>Applies passed options by doing all the necessary calculations and initialising the carousel from scratch.</p>
@@ -412,6 +420,7 @@ embla.on('select', () => {
     <a href="https://github.com/SLMNBJ"><img src="https://avatars2.githubusercontent.com/u/30017004?s=122&v=4" title="SLMNBJ" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/readeral"><img src="https://avatars0.githubusercontent.com/u/15904136?s=122&v=4" title="readeral" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=122&v=4" title="gunnarx2" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=122&v=4" title="xiel" width="66" height="66" style="max-width:100%;"></a>
   </p>
 </div>
 
