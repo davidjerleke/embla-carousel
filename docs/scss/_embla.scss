@@ -155,7 +155,7 @@
   }
 
   &.is-selected:after {
-    background-color: #1bcacd;
+    background-color: $color-brand;
     opacity: 1;
   }
 }
