@@ -334,7 +334,7 @@ embla.on('select', () => {
 
 ##### `scrollProgress()`
 
-<p>Returns how far the carousel has scrolled from 0 at the first slide to 1 at the end.</p>
+<p>Returns how far the carousel has scrolled from <code>0</code> at the first slide to <code>1</code> at the end.</p>
 <sup>
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5"><code>embla.scrollProgress()</code></a>
