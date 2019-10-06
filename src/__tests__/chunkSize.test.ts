@@ -1,12 +1,8 @@
 import { ChunkSize } from '../components/chunkSize'
 
-let chunkSize: ChunkSize
 const root = 1000
 const itemSize = 25
-
-beforeEach(() => {
-  chunkSize = ChunkSize(root)
-})
+const chunkSize = ChunkSize(root)
 
 describe('ChunkSize', () => {
   test('Exposes correct root size', () => {

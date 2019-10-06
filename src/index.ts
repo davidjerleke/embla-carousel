@@ -20,20 +20,21 @@ type ScrollSnap = {
 }
 
 export type EmblaCarousel = {
-  scrollSnapList: () => ScrollSnap[]
-  scrollNext: () => void
-  scrollPrev: () => void
-  scrollTo: (index: number) => void
-  destroy: () => void
-  containerNode: () => HTMLElement
-  slideNodes: () => HTMLElement[]
-  selectedScrollSnap: () => number
-  previousScrollSnap: () => number
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
-  on: (evt: EmblaEvent, cb: EmblaCallback) => void
-  off: (evt: EmblaEvent, cb: EmblaCallback) => void
   changeOptions: (options: UserOptions) => void
+  containerNode: () => HTMLElement
+  destroy: () => void
+  off: (evt: EmblaEvent, cb: EmblaCallback) => void
+  on: (evt: EmblaEvent, cb: EmblaCallback) => void
+  previousScrollSnap: () => number
+  scrollNext: () => void
+  scrollPrev: () => void
+  scrollProgress: () => number
+  scrollSnapList: () => ScrollSnap[]
+  scrollTo: (index: number) => void
+  selectedScrollSnap: () => number
+  slideNodes: () => HTMLElement[]
 }
 
 export function EmblaCarousel(
@@ -198,6 +199,10 @@ export function EmblaCarousel(
     return slider.indexPrevious.get()
   }
 
+  function scrollProgress(): number {
+    return slider.scrollProgress.get()
+  }
+
   function containerNode(): HTMLElement {
     return elements.container
   }
@@ -217,6 +222,7 @@ export function EmblaCarousel(
     previousScrollSnap,
     scrollNext,
     scrollPrev,
+    scrollProgress,
     scrollSnapList,
     scrollTo,
     selectedScrollSnap,

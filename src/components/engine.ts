@@ -13,6 +13,7 @@ import { ScrollBounds } from './scrollBounds'
 import { ScrollContain } from './scrollContain'
 import { ScrollLimit } from './scrollLimit'
 import { ScrollLooper } from './scrollLooper'
+import { ScrollProgress } from './scrollProgress'
 import { ScrollSnap } from './scrollSnap'
 import { ScrollTarget } from './scrollTarget'
 import { SlideLooper } from './slideLooper'
@@ -24,6 +25,7 @@ export type Engine = {
   animation: Animation
   scrollBounds: ScrollBounds
   scrollLooper: ScrollLooper
+  scrollProgress: ScrollProgress
   index: Counter
   indexPrevious: Counter
   indexGroups: number[][]
@@ -177,6 +179,10 @@ export function Engine(
       limit,
       location,
       vectors: [location, target],
+    }),
+    scrollProgress: ScrollProgress({
+      limit,
+      location,
     }),
     slideLooper: SlideLooper({
       contentSize,
