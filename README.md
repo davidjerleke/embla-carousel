@@ -438,7 +438,7 @@ embla.on('select', () => {
 </p>
 
 <p align="center">
-  <a href="https://github.com/davidcetinkaya/embla-carousel">
+  <a href="https://www.browserstack.com">
     <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/browserstack-logo.svg" height="60" alt="JavaScript" />
     </a>
 </p>
