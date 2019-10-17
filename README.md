@@ -410,7 +410,7 @@ embla.on('select', () => {
     <h2 align="center">Contributors</h2>
   </strong>
   <p align="center">
-    Thank you to all contributors for making Embla Carousel awesome!
+    Thank you to all contributors for making Embla Carousel awesome! Contributions are welcome. Read the <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">contribution guidelines</a> before starting any significant work.
   </p>
   <p align="center">
     <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=122&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a> 
@@ -433,8 +433,12 @@ embla.on('select', () => {
   Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖
 </p>
 
-<br>
+<p align="center">
+  <strong>· · ·</strong>
+</p>
 
 <p align="center">
-  📋 <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">contribution</a>
+  <a href="https://github.com/davidcetinkaya/embla-carousel">
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/browserstack-logo.svg" height="60" alt="JavaScript" />
+    </a>
 </p>
