@@ -19,7 +19,7 @@ export function ScrollContain(params: Params): ScrollContain {
   const { alignSize, contentSize, viewSize } = params
   const { slideIndexes, slidesToScroll } = params
   const indexGroups = groupNumbers(slideIndexes, slidesToScroll)
-  const contentFillsUpView = contentSize >= viewSize
+  const contentExceedsView = contentSize > viewSize
   const bounds = Limit({ min: -contentSize + viewSize, max: 0 })
 
   function groupDuplicates(start: number, end: number): number[] {
@@ -45,7 +45,7 @@ export function ScrollContain(params: Params): ScrollContain {
   }
 
   function indexes(scrollSnaps: number[]): number[][] {
-    if (!contentFillsUpView) return [slideIndexes]
+    if (!contentExceedsView) return [slideIndexes]
     const { min, max } = findDuplicates(containToView(scrollSnaps))
     const start = groupDuplicates(0, min)
     const middle = indexGroups.slice(min, max)
@@ -54,7 +54,7 @@ export function ScrollContain(params: Params): ScrollContain {
   }
 
   function snaps(scrollSnaps: number[]): number[] {
-    if (!contentFillsUpView) return [alignSize.measure(contentSize)]
+    if (!contentExceedsView) return [alignSize.measure(contentSize)]
     const containedSnaps = containToView(scrollSnaps)
     const { min, max } = findDuplicates(containedSnaps)
     return containedSnaps.slice(min - 1, max + 1)
