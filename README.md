@@ -383,10 +383,17 @@ embla.on('select', () => {
 
 ## CodeSandbox
 
-- [**`Basic Setup`**](https://codesandbox.io/s/embla-carousel-loop-false-oyols) - With Previous, Next & Dot buttons.
-- [**`Autoplay`**](https://codesandbox.io/s/embla-carousel-autoplay-4yhr2) - Example of how to setup Autoplay.
+<p>Get started instantly with one of the CodeSandboxes below.</p>
+
+- [`Basic Setup`](https://codesandbox.io/s/embla-carousel-loop-false-oyols) - With Previous, Next & Dot buttons.
+- [`Autoplay`](https://codesandbox.io/s/embla-carousel-autoplay-4yhr2) - Example of how to setup Autoplay.
 
 ## Browser Support
+
+<p>
+  Embla has been tested in the browsers listed below. Special thanks goes to 
+  <a href="https://www.browserstack.com">BrowserStack</a>.
+</p>
 
 <p>
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> &nbsp; <strong>IE</strong> - 11
