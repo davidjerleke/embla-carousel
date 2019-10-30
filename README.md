@@ -385,6 +385,13 @@ embla.on('select', () => {
 
 <p>Get started instantly with one of the CodeSandboxes below.</p>
 
+<p>
+  <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols">
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> <code>Basic Setup</code> 
+    - With Previous, Next & Dot buttons.
+  </a>
+</p>
+
 - [`Basic Setup`](https://codesandbox.io/s/embla-carousel-loop-false-oyols) - With Previous, Next & Dot buttons.
 - [`Autoplay`](https://codesandbox.io/s/embla-carousel-autoplay-4yhr2) - Example of how to setup Autoplay.
 
