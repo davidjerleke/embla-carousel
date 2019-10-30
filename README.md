@@ -38,7 +38,7 @@
       &nbsp; &middot; &nbsp;
       <a href="#api">api</a>
       &nbsp; &middot; &nbsp;
-      <a href="https://codesandbox.io/s/oyols">codesandbox</a>
+      <a href="#codesandbox">codesandbox</a>
     </strong>
   </p>
 
@@ -380,6 +380,11 @@ embla.on('select', () => {
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1"><code>embla.destroy()</code></a>
 </sup>
+
+## CodeSandbox
+
+- [**`Basic Setup`**](https://codesandbox.io/s/embla-carousel-loop-false-oyols) - With Previous, Next & Dot buttons.
+- [**`Autoplay`**](https://codesandbox.io/s/embla-carousel-autoplay-4yhr2) - Example of how to setup Autoplay.
 
 ## Browser Support
 
