@@ -389,16 +389,16 @@ embla.on('select', () => {
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols">
     <code>Basic Setup</code>
-  </a>
-  &nbsp; - With Previous, Next & Dot buttons.
+  </a> 
+  - With Previous, Next & Dot buttons.
 </p>
 
 <p>
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-autoplay-4yhr2">
     <code>Autoplay</code>
-  </a>
-  &nbsp; - Example of how to setup Autoplay.
+  </a> 
+  - Example of how to setup Autoplay.
 </p>
 
 ## Browser Support
