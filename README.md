@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel Logo">
     </a>
   </p>
 
@@ -386,15 +386,17 @@ embla.on('select', () => {
 <p>Get started instantly with one of the CodeSandboxes below.</p>
 
 <p>
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> &nbsp; <code>Basic Setup</code> 
+    <code>Basic Setup</code>
   </a> 
   - With Previous, Next & Dot buttons.
 </p>
 
 <p>
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-autoplay-4yhr2">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> &nbsp; <code>Autoplay</code> 
+    <code>Autoplay</code>
   </a> 
   - Example of how to setup Autoplay.
 </p>
@@ -407,23 +409,23 @@ embla.on('select', () => {
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> &nbsp; <strong>IE</strong> - 11
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>IE</strong> - 11
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/edge-logo.svg" height="23" align="top" alt="Embla Carousel Internet Explorer support" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/edge-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="top" alt="Embla Carousel Chrome support" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" alt="Embla Carousel Firefox support" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel Safari support" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
 </p>
 
 <br>
@@ -463,6 +465,6 @@ embla.on('select', () => {
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/browserstack-logo.svg" height="60" alt="JavaScript" />
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/browserstack-logo.svg" height="60" alt="Embla Carousel BrowserStack" />
     </a>
 </p>
