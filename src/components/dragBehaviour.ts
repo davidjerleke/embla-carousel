@@ -26,10 +26,11 @@ type Params = {
 }
 
 export type DragBehaviour = {
+  addActivationEvents: () => void
+  clickAllowed: () => boolean
   direction: Direction
   isDown: () => boolean
   removeAllEvents: () => void
-  addActivationEvents: () => void
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
@@ -172,12 +173,17 @@ export function DragBehaviour(params: Params): DragBehaviour {
     if (state.preventClick) evt.preventDefault()
   }
 
+  function clickAllowed(): boolean {
+    return !state.preventClick
+  }
+
   function isDown(): boolean {
     return state.isDown
   }
 
   const self: DragBehaviour = {
     addActivationEvents,
+    clickAllowed,
     direction,
     isDown,
     removeAllEvents,

@@ -23,6 +23,7 @@ export type EmblaCarousel = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
   changeOptions: (options: UserOptions) => void
+  clickAllowed: () => boolean
   containerNode: () => HTMLElement
   destroy: () => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
@@ -203,6 +204,10 @@ export function EmblaCarousel(
     return slider.scrollProgress.get()
   }
 
+  function clickAllowed(): boolean {
+    return slider.pointer.clickAllowed()
+  }
+
   function containerNode(): HTMLElement {
     return elements.container
   }
@@ -215,6 +220,7 @@ export function EmblaCarousel(
     canScrollNext,
     canScrollPrev,
     changeOptions,
+    clickAllowed,
     containerNode,
     destroy,
     off,
