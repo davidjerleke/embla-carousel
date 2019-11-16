@@ -129,7 +129,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     events.dispatch('dragStart')
 
     if (isMoving) evt.preventDefault()
-    if (!isMoving) state.preventClick = false
+    if (!isMoving || state.isMouse) state.preventClick = false
     if (state.isMouse && !isFocusNode(node)) evt.preventDefault()
     if (!state.isMouse) {
       startX.set(pointer.read(evt, 'x'))
@@ -144,6 +144,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
       const resist = !params.loop && reachedLimit ? 2 : 1
       target.addNumber(diff / resist)
       evt.preventDefault()
+      if (!state.preventClick && diff) state.preventClick = true
     } else {
       const X = pointer.read(evt, 'x').get()
       const Y = pointer.read(evt, 'y').get()
@@ -159,7 +160,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
 
-    if (isMoving) state.preventClick = true
+    if (isMoving && !state.isMouse) state.preventClick = true
     state.isMouse = false
     state.preventScroll = false
     state.isDown = false
