@@ -342,7 +342,7 @@ embla.on('select', () => {
 
 ##### `clickAllowed()`
 
-<p>Returns if a click should be accepted. This method returns `false` if the carousel is dragged. On touch devices it also returns `false` when the carousel is scrolling.</p>
+<p>Returns if a click should be accepted. It returns <code>false</code> if the carousel is dragged. On touch devices it also returns <code>false</code> when the carousel is scrolling.</p>
 <sup>
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1"><code>embla.clickAllowed()</code></a>
