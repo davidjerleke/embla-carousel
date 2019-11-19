@@ -1,3 +1,4 @@
+import { roundToDecimals } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Translate = {
@@ -5,12 +6,9 @@ export type Translate = {
 }
 
 export function Translate(node: HTMLElement): Translate {
+  const roundToTwoDecimals = roundToDecimals(2)
   const nodeStyle = node.style
   const state = { value: 0 }
-
-  function roundToTwoDecimals(n: number): number {
-    return Math.round(n * 100) * 0.01
-  }
 
   function translateX(n: number): string {
     return `translate3d(${n}%,0px,0px)`

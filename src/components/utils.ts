@@ -41,3 +41,10 @@ export function groupNumbers(
   }
   return groups
 }
+
+export function roundToDecimals(
+  decimalPoints: number,
+): (n: number) => number {
+  const pow = Math.pow(10, decimalPoints)
+  return (n: number) => Math.round(n * pow) / pow
+}

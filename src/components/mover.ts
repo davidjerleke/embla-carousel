@@ -1,5 +1,5 @@
 import { Direction } from './direction'
-import { map } from './utils'
+import { map, roundToDecimals } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -21,6 +21,7 @@ export type Mover = {
 }
 
 export function Mover(params: Params): Mover {
+  const roundToTwoDecimals = roundToDecimals(2)
   const { location, speed, mass } = params
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
@@ -54,7 +55,7 @@ export function Mover(params: Params): Mover {
 
   function settle(target: Vector1D): boolean {
     const diff = target.get() - location.get()
-    const diffRounded = Math.round(diff * 100) / 100
+    const diffRounded = roundToTwoDecimals(diff)
     const hasSettled = !diffRounded
     if (hasSettled) location.set(target)
     return hasSettled
