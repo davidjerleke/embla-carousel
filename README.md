@@ -340,12 +340,28 @@ embla.on('select', () => {
   <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5"><code>embla.scrollProgress()</code></a>
 </sup>
 
+##### `clickAllowed()`
+
+<p>Returns if a click should be accepted. This method returns `false` if the carousel is dragged. On touch devices it also returns `false` when the carousel is scrolling.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1"><code>embla.clickAllowed()</code></a>
+</sup>
+
 ##### `changeOptions(options)`
 
 <p>Applies passed options by doing all the necessary calculations and initialising the carousel from scratch.</p>
 <sup>
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm"><code>embla.changeOptions()</code></a>
+</sup>
+
+##### `destroy()`
+
+<p>Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.</p>
+<sup>
+  ✨ <strong>Demo</strong> - 
+  <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1"><code>embla.destroy()</code></a>
 </sup>
 
 ##### `on(event, callback)`
@@ -371,14 +387,6 @@ embla.on('select', () => {
 <sup>
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.off()</code></a>
-</sup>
-
-##### `destroy()`
-
-<p>Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1"><code>embla.destroy()</code></a>
 </sup>
 
 ## CodeSandbox
