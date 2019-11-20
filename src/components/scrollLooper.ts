@@ -23,8 +23,8 @@ export function ScrollLooper(params: Params): ScrollLooper {
 
   function loop(direction: number): void {
     if (shouldLoop(direction)) {
-      const distance = contentSize * (direction * -1)
-      vectors.forEach(v => v.addNumber(distance))
+      const loopDistance = contentSize * (direction * -1)
+      vectors.forEach(v => v.addNumber(loopDistance))
     }
   }
 
