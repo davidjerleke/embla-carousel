@@ -17,7 +17,7 @@ export function ScrollSnap(params: Params): ScrollSnap {
   const limit = Limit({ min: 0, max: snapSizes.length - 1 })
   const counter = Counter({ limit, start: 0, loop })
   const alignSizes = snapSizes.map(alignSize.measure)
-  const betweenDistances = distancesBetweenScrollSnaps()
+  const distancesBetween = distancesBetweenScrollSnaps()
 
   function distancesBetweenScrollSnaps(): number[] {
     return snapSizes.map((size, index) => {
@@ -27,7 +27,7 @@ export function ScrollSnap(params: Params): ScrollSnap {
   }
 
   function measure(size: number, index: number): number {
-    const sizes = betweenDistances.slice(0, index)
+    const sizes = distancesBetween.slice(0, index)
     return sizes.reduce((a, d) => a - d, alignSizes[0])
   }
 
