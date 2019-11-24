@@ -8,7 +8,6 @@ import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
-import { Scroll } from './scroll'
 import { ScrollBounds } from './scrollBounds'
 import { ScrollContain } from './scrollContain'
 import { ScrollLimit } from './scrollLimit'
@@ -16,6 +15,7 @@ import { ScrollLooper } from './scrollLooper'
 import { ScrollProgress } from './scrollProgress'
 import { ScrollSnap } from './scrollSnap'
 import { ScrollTarget } from './scrollTarget'
+import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
 import { Translate } from './translate'
 import { groupNumbers, rectWidth } from './utils'
@@ -34,7 +34,7 @@ export type Engine = {
   slideLooper: SlideLooper
   target: Vector1D
   translate: Translate
-  scroll: Scroll
+  scrollTo: ScrollTo
 }
 
 export function Engine(
@@ -122,7 +122,7 @@ export function Engine(
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const mover = Mover({ location, speed, mass: 1 })
-  const scroll = Scroll({
+  const scrollTo = ScrollTo({
     animation,
     events,
     index,
@@ -153,7 +153,7 @@ export function Engine(
     loop,
     mover,
     pointer: Pointer(chunkSize),
-    scroll,
+    scrollTo,
     snapSizes,
     target,
   })
@@ -166,7 +166,6 @@ export function Engine(
     indexPrevious,
     mover,
     pointer,
-    scroll,
     scrollBounds: ScrollBounds({
       animation,
       limit,
@@ -184,6 +183,7 @@ export function Engine(
       limit,
       location,
     }),
+    scrollTo,
     slideLooper: SlideLooper({
       contentSize,
       location,

@@ -6,7 +6,7 @@ import { EventStore } from './eventStore'
 import { Limit } from './limit'
 import { Mover } from './mover'
 import { Pointer } from './pointer'
-import { Scroll } from './scroll'
+import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -17,7 +17,7 @@ type Params = {
   pointer: Pointer
   location: Vector1D
   animation: Animation
-  scroll: Scroll
+  scrollTo: ScrollTo
   mover: Mover
   index: Counter
   limit: Limit
@@ -98,7 +98,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function seekTargetBy(force: number): void {
-    const { scroll, snapSizes, index } = params
+    const { scrollTo, snapSizes, index } = params
     const forceAbs = Math.abs(force)
     const halfSnap = snapSizes[index.get()] / 2
     const reachedLimit = limit.reachedAny(target.get() + force)
@@ -107,9 +107,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
     if (!dragFree && !reachedLimit && seekNext) {
       const indexDiff = Direction(force).get() * -1
       const next = index.clone().add(indexDiff)
-      scroll.toIndex(next.get())
+      scrollTo.index(next.get())
     } else {
-      scroll.toDistance(force)
+      scrollTo.distance(force)
     }
   }
 
