@@ -61,8 +61,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
       .add(node, 'touchmove', () => undefined)
       .add(node, 'touchend', () => undefined)
       .add(node, 'touchstart', down)
-      .add(node, 'touchcancel', up)
       .add(node, 'mousedown', down)
+      .add(node, 'touchcancel', up)
+      .add(node, 'contextmenu', up)
       .add(node, 'click', click)
   }
 
@@ -119,12 +120,15 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const isMoving = Math.abs(diffToTarget) >= 2
 
     state.isMouse = !!evt.type.match(/mouse/)
+    if (state.isMouse && (evt as MouseEvent).button !== 0) return
+
     state.isDown = true
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
     mover.useDefaultMass().useSpeed(80)
     animation.start()
+
     addInteractionEvents()
     events.dispatch('dragStart')
 
