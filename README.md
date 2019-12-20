@@ -159,6 +159,12 @@ const embla = EmblaCarousel(emblaNode, {
       <code>end</code>
     </sup>
   </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>center</code>
+    </sup>
+  </div>
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw">
@@ -190,7 +196,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option allows for the use of a custom query selector to match the container that holds the slides, within the provided embla node. All immediate children of this container will be treated as slides.
+    This option allows for the use of a custom query selector to match the container that holds the slides. If no value is provided Embla will match any immediate html tag. All immediate children of this container will be treated as slides.
   </div>
   <br>
   <div>
@@ -203,6 +209,12 @@ const embla = EmblaCarousel(emblaNode, options)
     <sup>
       <strong>Allowed values: </strong>
       <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>*</code>
     </sup>
   </div>
   <br>
