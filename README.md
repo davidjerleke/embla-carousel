@@ -161,7 +161,10 @@ const embla = EmblaCarousel(emblaNode, {
   </div>
   <br>
   <p>
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw">
       <code>CodeSandbox</code>
     </a> 
