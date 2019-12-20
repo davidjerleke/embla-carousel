@@ -170,9 +170,9 @@ const embla = EmblaCarousel(emblaNode, {
     </a> 
   </div>
   <br>
-  <div>
+  <p>
     <strong>Usage</strong>
-  </div>
+  </p>
   
 ```javascript
 const options = { align: 'start' }
