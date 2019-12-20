@@ -130,7 +130,51 @@ const embla = EmblaCarousel(emblaNode, {
 })
 ```
 
-##### `align` &nbsp; <sup>type: string<sup>
+##### `align`
+
+<details>
+  <summary>
+    Align the slides relative to the carousel viewport.
+  </summary>
+  <hr>
+  <div>
+    Use this option to align the slides to the start or end edge of the carousel viewport. If no value is provided slides will  be centered by default. Note that slide alignment will be affected for slides at the start or end when used together with 
+    <a href="#containscroll--type-boolean">
+      <code>containScroll</code>
+    </a>
+    , that prevents excessive scrolling at the beginning or end.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>string</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>start</code>
+      <code>center</code>
+      <code>end</code>
+    </sup>
+  </div>
+  <br>
+  <p>
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" /> &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw">
+      <code>CodeSandbox</code>
+    </a> 
+  </p>
+  <h4>Usage</h4>
+  
+```javascript
+const options = { align: 'start' }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
 
 <p>Align the slides relative to the carousel viewport.</p>
 <sup>
