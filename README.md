@@ -309,13 +309,6 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>    
 </details>
 
-<p>Scrolls past given number of slides whether scroll is triggered by API methods or drag interactions.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1-ry5y7"><code>1</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk"><code>2</code></a>
-</sup>
-
 ##### `containScroll`
 
 <p>Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.</p>
