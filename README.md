@@ -184,12 +184,65 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ##### `containerSelector`
 
-<p>A query selector for the container that holds the slides, where all immediate children will be treated as slides.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-containerselector-yfxll"><code>*</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb"><code>.my-classname</code></a>
-</sup>
+<details>
+  <summary>
+    A query selector for the container that holds the slides.
+  </summary>
+  <hr>
+  <div>
+    This option allows for a custom query selector for the container that holds the slides, within the provided embla node. All immediate children of this container will be treated as slides.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>string</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { containerSelector: '.my-classname' }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+```html
+<div class="embla">
+  <div class="my-classname">
+    <div class="embla__slide">
+      Slide 1
+    </div>
+    <div class="embla__slide">
+      Slide 2
+    </div>
+    <div class="embla__slide">
+      Slide 3
+    </div>
+  </div>
+</div>
+```
+
+<hr>    
+</details>
 
 ##### `slidesToScroll`
 
