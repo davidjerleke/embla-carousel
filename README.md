@@ -259,6 +259,56 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ##### `slidesToScroll`
 
+<details>
+  <summary>
+    Scrolls past given number of slides.
+  </summary>
+  <hr>
+  <div>
+This option groups slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number. For example, if the option is set to `2`, every two slides will be treated as a single slide.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>1</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { slidesToScroll: 2 }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
 <p>Scrolls past given number of slides whether scroll is triggered by API methods or drag interactions.</p>
 <sup>
   ✨ <strong>Demo</strong> - 
