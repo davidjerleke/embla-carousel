@@ -190,7 +190,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option allows for a custom query selector for the container that holds the slides, within the provided embla node. All immediate children of this container will be treated as slides.
+    This option allows for the use of a custom query selector to match the container that holds the slides, within the provided embla node. All immediate children of this container will be treated as slides.
   </div>
   <br>
   <div>
@@ -221,6 +221,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </p>
   
 ```javascript
+const emblaNode = document.querySelector('.embla')
 const options = { containerSelector: '.my-classname' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
