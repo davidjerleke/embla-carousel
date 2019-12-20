@@ -265,7 +265,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-This option groups slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number. For example, if the option is set to `2`, every two slides will be treated as a single slide.
+This option groups slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number. For example, if the option is set to <code>2</code>, every two slides will be treated as a single slide.
   </div>
   <br>
   <div>
