@@ -139,10 +139,10 @@ const embla = EmblaCarousel(emblaNode, {
   <hr>
   <div>
     Use this option to align the slides to the start or end edge of the carousel viewport. If no value is provided slides will  be centered by default. Note that slide alignment will be affected for slides at the start or end when used together with 
-    <a href="#containscroll--type-boolean">
+    <a href="#containscroll">
       <code>containScroll</code>
-    </a>
-    , that prevents excessive scrolling at the beginning or end.
+    </a>, 
+    that prevents excessive scrolling at the beginning or end.
   </div>
   <br>
   <div>
@@ -176,15 +176,7 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>    
 </details>
 
-<p>Align the slides relative to the carousel viewport.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-align-start-5kfhw"><code>start</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-align-center-e8s0w"><code>center</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-align-end-h233r"><code>end</code></a>
-</sup>
-
-##### `containerSelector` &nbsp; <sup>type: string<sup>
+##### `containerSelector`
 
 <p>A query selector for the container that holds the slides, where all immediate children will be treated as slides.</p>
 <sup>
@@ -193,7 +185,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb"><code>.my-classname</code></a>
 </sup>
 
-##### `slidesToScroll` &nbsp; <sup>type: number<sup>
+##### `slidesToScroll`
 
 <p>Scrolls past given number of slides whether scroll is triggered by API methods or drag interactions.</p>
 <sup>
@@ -202,7 +194,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk"><code>2</code></a>
 </sup>
 
-##### `containScroll` &nbsp; <sup>type: boolean<sup>
+##### `containScroll`
 
 <p>Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.</p>
 <sup>
