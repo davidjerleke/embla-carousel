@@ -219,11 +219,11 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb">
+    <a href="https://codesandbox.io/s/embla-carousel-containerselector-ntlzb">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
     </a>
     &nbsp;
-    <a href="https://codesandbox.io/s/embla-carousel-containerselector-my-classname-ntlzb">
+    <a href="https://codesandbox.io/s/embla-carousel-containerselector-ntlzb">
       <code>CodeSandbox</code>
     </a> 
   </div>
@@ -234,13 +234,13 @@ const embla = EmblaCarousel(emblaNode, options)
   
 ```javascript
 const emblaNode = document.querySelector('.embla')
-const options = { containerSelector: '.my-classname' }
+const options = { containerSelector: '.my-container-selector' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
 ```html
 <div class="embla">
-  <div class="my-classname">
+  <div class="my-container-selector">
     ...slides
   </div>
 </div>
