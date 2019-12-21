@@ -241,15 +241,7 @@ const embla = EmblaCarousel(emblaNode, options)
 ```html
 <div class="embla">
   <div class="my-classname">
-    <div class="embla__slide">
-      Slide 1
-    </div>
-    <div class="embla__slide">
-      Slide 2
-    </div>
-    <div class="embla__slide">
-      Slide 3
-    </div>
+    ...slides
   </div>
 </div>
 ```
