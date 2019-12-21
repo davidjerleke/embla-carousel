@@ -138,7 +138,7 @@ const embla = EmblaCarousel(emblaNode, {
   </summary>
   <hr>
   <div>
-    Use this option to align the slides to the start or end edge of the carousel viewport. If no value is provided slides will  be centered by default. Note that slide alignment will be affected for slides at the start or end when used together with 
+    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be affected for slides at the start or end when used together with 
     <a href="#containscroll">
       <code>containScroll</code>
     </a>, 
