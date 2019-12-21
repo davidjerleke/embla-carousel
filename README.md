@@ -257,7 +257,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-This option groups slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number. For example, if the option is set to <code>2</code>, every two slides will be treated as a single slide.
+    This option groups slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number. For example, if the option is set to <code>2</code>, every two slides will be treated as a single slide.
   </div>
   <br>
   <div>
@@ -303,12 +303,56 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ##### `containScroll`
 
-<p>Contains slides to carousel viewport to prevent excessive scrolling at the beginning or end.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-containscroll-false-jktsn"><code>false</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy"><code>true</code></a>
-</sup>
+<details>
+  <summary>
+    Contains slides to the carousel viewport.
+  </summary>
+  <hr>
+  <div>
+    This option clears empty space that cause excessive scrolling at the beginning or the end. Note that this will override the chosen <a href="#align">alignment</a> for slides at the beginning or the end if necessary, in order to get rid of the empty space.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>true</code>
+      <code>false</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>false</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-containscroll-true-tunvy">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { containScroll: true }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
 
 ##### `draggable` &nbsp; <sup>type: boolean<sup>
 
