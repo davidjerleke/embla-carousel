@@ -298,28 +298,6 @@ const options = { slidesToScroll: 2 }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-```html
-<div class="embla">
-  <div class="embla__container">
-    <!-- Group 1 -->
-    <div class="embla__slide">
-      Slide 1
-    </div>
-    <div class="embla__slide">
-      Slide 2
-    </div>
-
-    <!-- Group 2 -->
-    <div class="embla__slide">
-      Slide 3
-    </div>
-    <div class="embla__slide">
-      Slide 4
-    </div>
-  </div>
-</div>
-```
-
 <hr>    
 </details>
 
