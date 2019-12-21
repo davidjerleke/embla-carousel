@@ -309,7 +309,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option clears empty space that cause excessive scrolling at the beginning or the end. Note that this will override the chosen <a href="#align">alignment</a> for slides at the beginning or the end if necessary, in order to get rid of the empty space.
+    This option clears empty space that causes excessive scrolling at the beginning or the end. Note that this will override the chosen <a href="#align">alignment</a> for slides at the beginning or the end if necessary, in order to get rid of the empty space.
   </div>
   <br>
   <div>
