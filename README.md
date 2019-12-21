@@ -280,11 +280,11 @@ This option groups slides together. Drag interactions, dot navigation, and previ
   </div>
   <br>
   <div>
-    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk">
+    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1g4rk">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
     </a>
     &nbsp;
-    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-2-1g4rk">
+    <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1g4rk">
       <code>CodeSandbox</code>
     </a> 
   </div>
