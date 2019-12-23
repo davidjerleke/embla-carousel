@@ -460,21 +460,72 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>    
 </details>
 
-##### `loop` &nbsp; <sup>type: boolean<sup>
+##### `loop`
 
-<p>Determines if the carousel should loop when start or end is reached.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols"><code>false</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-loop-true-3x6id"><code>true</code></a>
-</sup>
+<details>
+  <summary>
+    Enable infinite looping for the carousel.
+  </summary>
+  <hr>
+  <div>
+    This option enables infinite looping. Slides need <code>position: relative</code> in order for this to work. Note that if the carousel only has one slide it will fall back to <code>loop: false</code>. Also note that <a href="#containscroll">containScroll</a> will be ignored if loop is enabled because the empty space is already filled with looping slides.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>true</code>
+      <code>false</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>false</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-loop-3x6id">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-loop-3x6id">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { loop: true }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+```css
+.embla__slide {
+  /* Needed for loop to work */
+  position: relative;
+}
+```
+
+<hr>
+</details>
 
 ##### `speed` &nbsp; <sup>type: number<sup>
 
 <p>Carousel speed when using API methods to navigate. A higher number will make transitions faster.</p>
 <sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-speed-10-9v4gr"><code>10</code></a> · 
+  ✨ <strong>Demo</strong> -
+  <a href="https://codesandbox.io/s/embla-carousel-speed-10-9v4gr"><code>10</code></a> ·
   <a href="https://codesandbox.io/s/embla-carousel-speed-15-omw5i"><code>15</code></a>
 </sup>
 
@@ -482,8 +533,8 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p>Zero based index of the starting slide when carousel mounts.</p>
 <sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn"><code>0</code></a> · 
+  ✨ <strong>Demo</strong> -
+  <a href="https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn"><code>0</code></a> ·
   <a href="https://codesandbox.io/s/embla-carousel-startindex-0-3ur20"><code>3</code></a>
 </sup>
 
@@ -491,8 +542,8 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p>Classname that will be applied to the selected slide.</p>
 <sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts"><code>is-selected</code></a> · 
+  ✨ <strong>Demo</strong> -
+  <a href="https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts"><code>is-selected</code></a> ·
   <a href="https://codesandbox.io/s/embla-carousel-selectedclass-my-class-ioysh"><code>my-class</code></a>
 </sup>
 
@@ -500,8 +551,8 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p>Classname that will be applied to the wrapper when the carousel mounts if draggable.</p>
 <sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben"><code>is-draggable</code></a> · 
+  ✨ <strong>Demo</strong> -
+  <a href="https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben"><code>is-draggable</code></a> ·
   <a href="https://codesandbox.io/s/embla-carousel-draggableclass-my-class-j7r68"><code>my-class</code></a>
 </sup>
 
@@ -509,8 +560,8 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p>Classname that will be applied to the wrapper when a pointer is dragging the carousel.</p>
 <sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r"><code>is-dragging</code></a> · 
+  ✨ <strong>Demo</strong> -
+  <a href="https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r"><code>is-dragging</code></a> ·
   <a href="https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r"><code>my-class</code></a>
 </sup>
 
