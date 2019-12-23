@@ -358,11 +358,11 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Allow pointer interactions to scroll the carousel.
+    Allow drag interactions to scroll the carousel.
   </summary>
   <hr>
   <div>
-    This option is enables scrolling the carousel with mouse and touch interactions. They're are enabled by default. Use this option to turn this feature off if you have good reasons to limit the accessibility of the carousel.
+    This option enables for scrolling the carousel with mouse and touch interactions. They're are enabled by default. Use this option to turn this feature off if you have good reasons to limit the accessibility of the carousel.
   </div>
   <br>
   <div>
@@ -407,14 +407,58 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>    
 </details>
 
-##### `dragFree` &nbsp; <sup>type: boolean<sup>
+##### `dragFree`
 
-<p>Determines if the carousel should snap to a slide position after mouse & touch interactions.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-dragfree-false-he5m1"><code>false</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc"><code>true</code></a>
-</sup>
+<details>
+  <summary>
+    Enable momentum style scrolling.
+  </summary>
+  <hr>
+  <div>
+    This option enables momentum scrolling, where the carousel continues to scroll for a while after finishing the scroll gesture by releasing the mouse/touch input. The speed and duration of the continued scrolling is proportional to how vigorous the scroll gesture was.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>true</code>
+      <code>false</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>false</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { dragFree: true }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
 
 ##### `loop` &nbsp; <sup>type: boolean<sup>
 
