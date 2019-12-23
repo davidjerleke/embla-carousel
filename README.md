@@ -253,7 +253,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Scrolls past given number of slides.
+    Scroll past the given number of slides.
   </summary>
   <hr>
   <div>
@@ -305,7 +305,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Contains slides to the carousel viewport.
+    Contain slides to the carousel viewport.
   </summary>
   <hr>
   <div>
@@ -354,14 +354,58 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>    
 </details>
 
-##### `draggable` &nbsp; <sup>type: boolean<sup>
+##### `draggable`
 
-<p>Allow mouse & touch interactions to scroll the carousel.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-draggable-true-4prej"><code>true</code></a> · 
-  <a href="https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0"><code>false</code></a>
-</sup>
+<details>
+  <summary>
+    Allow pointer interactions to scroll the carousel.
+  </summary>
+  <hr>
+  <div>
+    This option is enables scrolling the carousel with mouse and touch interactions. They're are enabled by default. Use this option to turn this feature off if you have good reasons to limit the accessibility of the carousel.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>true</code>
+      <code>false</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>true</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-draggable-false-gj9j0">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { draggable: false }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
 
 ##### `dragFree` &nbsp; <sup>type: boolean<sup>
 
