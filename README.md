@@ -439,11 +439,11 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc">
+    <a href="https://codesandbox.io/s/embla-carousel-dragfree-bfqjc">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
     </a>
     &nbsp;
-    <a href="https://codesandbox.io/s/embla-carousel-dragfree-true-bfqjc">
+    <a href="https://codesandbox.io/s/embla-carousel-dragfree-bfqjc">
       <code>CodeSandbox</code>
     </a> 
   </div>
