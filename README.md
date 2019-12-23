@@ -411,7 +411,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Enable momentum based style scrolling.
+    Enable momentum scrolling for drag interactions.
   </summary>
   <hr>
   <div>
