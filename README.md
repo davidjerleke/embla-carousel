@@ -468,7 +468,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option enables infinite looping. Slides need <code>position: relative</code> in order for this to work. Note that if the carousel only has one slide it will fall back to <code>loop: false</code>. Also note that <a href="#containscroll">
+    This option enables infinite looping. Slides need relative positioning in order for this to work. If the carousel only has one slide it will fall back to non looping behaviour. Note that <a href="#containscroll">
       <code>containScroll</code>
     </a> will be ignored if loop is enabled because the empty space is already filled with looping slides.
   </div>
@@ -514,8 +514,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 ```css
 .embla__slide {
-  /* Needed for loop to work */
-  position: relative;
+  position: relative; /* Needed for loop to work */
 }
 ```
 
