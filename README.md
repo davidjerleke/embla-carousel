@@ -521,14 +521,66 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
-##### `speed` &nbsp; <sup>type: number<sup>
+##### `speed`
 
-<p>Carousel speed when using API methods to navigate. A higher number will make transitions faster.</p>
-<sup>
-  ✨ <strong>Demo</strong> -
-  <a href="https://codesandbox.io/s/embla-carousel-speed-10-9v4gr"><code>10</code></a> ·
-  <a href="https://codesandbox.io/s/embla-carousel-speed-15-omw5i"><code>15</code></a>
-</sup>
+<details>
+  <summary>
+    Set scroll speed for API navigation.
+  </summary>
+  <hr>
+  <div>
+    This option enables adjustment of the carousel scroll speed when scroll is triggered by any of the API methods 
+    <a href="#scrollnext">
+      <code>scrollNext</code>
+    </a>,
+    <a href="#scrollprev">
+      <code>scrollPrev</code>
+    </a> and
+    <a href="#scrollTo">
+      <code>scrollTo</code>
+    </a>. Drag interactions are not affected by this because the speed is in these cases determined by how vigorous the drag gesture was. 
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>10</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-speed-omw5i">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-speed-omw5i">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { speed: 15 }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>
+</details>
 
 ##### `startIndex` &nbsp; <sup>type: number<sup>
 
