@@ -525,7 +525,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Set scroll speed for API navigation.
+    Set scroll speed triggered by API navigation.
   </summary>
   <hr>
   <div>
