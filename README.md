@@ -590,10 +590,10 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows the selection of the initial scroll snap position. First scroll snap index starts with <code>0</code>. If slides are grouped with the
+    This options allows the selection of the initial scroll snap position. First scroll snap index starts at <code>0</code>. If slides are grouped with the
     <a href="#slidestoscroll">
       <code>slidesToScroll</code>
-    </a> option, slides will share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
+    </a> option, some slides will share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
   </div>
   <br>
   <div>
