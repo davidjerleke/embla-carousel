@@ -582,14 +582,60 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
-##### `startIndex` &nbsp; <sup>type: number<sup>
+##### `startIndex`
 
-<p>Zero based index of the starting slide when carousel mounts.</p>
-<sup>
-  ✨ <strong>Demo</strong> -
-  <a href="https://codesandbox.io/s/embla-carousel-startindex-0-zpxyn"><code>0</code></a> ·
-  <a href="https://codesandbox.io/s/embla-carousel-startindex-0-3ur20"><code>3</code></a>
-</sup>
+<details>
+  <summary>
+    Select index of the initial scroll snap.
+  </summary>
+  <hr>
+  <div>
+    This options allows the selection of the initial scroll snap position. First scroll snap index starts with <code>0</code>. If slides are grouped with the
+    <a href="#slidestoscroll">
+      <code>slidesToScroll</code>
+    </a> option, slides will share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>0</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-startindex-3ur20">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-startindex-3ur20">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { startIndex: 3 }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>
+</details>
 
 ##### `selectedClass` &nbsp; <sup>type: string<sup>
 
