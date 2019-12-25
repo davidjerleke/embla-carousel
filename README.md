@@ -590,10 +590,10 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows the selection of the initial scroll snap position. First scroll snap index starts at <code>0</code>. If slides are grouped with the
+    This options allows the selection of the initial scroll snap position. First scroll snap index starts at <code>0</code>. If slides are mapped to groups with the
     <a href="#slidestoscroll">
       <code>slidesToScroll</code>
-    </a> option, some slides will share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
+    </a> option, some slides share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
   </div>
   <br>
   <div>
@@ -637,14 +637,63 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
-##### `selectedClass` &nbsp; <sup>type: string<sup>
+##### `selectedClass`
 
-<p>Classname that will be applied to the selected slide.</p>
-<sup>
-  ✨ <strong>Demo</strong> -
-  <a href="https://codesandbox.io/s/embla-carousel-selectedclass-is-selected-1h2ts"><code>is-selected</code></a> ·
-  <a href="https://codesandbox.io/s/embla-carousel-selectedclass-my-class-ioysh"><code>my-class</code></a>
-</sup>
+<details>
+  <summary>
+    Choose classname applied to the selected slides.
+  </summary>
+  <hr>
+  <div>
+    This options allows for a custom classname that will be applied to the selected slide. In most cases, only one slide will be selected at a time. However, when
+    <a href="#slidestoscroll">
+      <code>slidesToScroll</code>
+    </a> is more than <code>1</code> and/or
+    <a href="#containScroll">
+      <code>containScroll</code>
+    </a> is active, slides are mapped to groups. This means that the selected class will be added to multiple slides at a time.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>string</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>is-selected</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-selectedclass-ioysh">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-selectedclass-ioysh">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { selectedClass: 'my-selected-class' }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>
+</details>
 
 ##### `draggableClass` &nbsp; <sup>type: string<sup>
 
