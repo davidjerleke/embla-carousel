@@ -749,7 +749,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </p>
   
 ```javascript
-const options = { draggableClass: 'my-draggable-class }
+const options = { draggableClass: 'my-draggable-class' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
