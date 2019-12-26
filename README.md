@@ -701,14 +701,60 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
-##### `draggableClass` &nbsp; <sup>type: string<sup>
+##### `draggableClass`
 
-<p>Classname that will be applied to the wrapper when the carousel mounts if draggable.</p>
-<sup>
-  ✨ <strong>Demo</strong> -
-  <a href="https://codesandbox.io/s/embla-carousel-draggableclass-is-draggable-3eben"><code>is-draggable</code></a> ·
-  <a href="https://codesandbox.io/s/embla-carousel-draggableclass-my-class-j7r68"><code>my-class</code></a>
-</sup>
+<details>
+  <summary>
+    Choose classname applied to the draggable container.
+  </summary>
+  <hr>
+  <div>
+    This options allows for a custom classname that will be applied to the carousel container if the carousel is
+    <a href="#draggable">
+      <code>draggable</code>
+    </a>. Use it to style the carousel accordingly. For example, you can show a grab cursor when a draggable carousel is hovered. If no value is provided it will fall back to <code>is-draggable</code>.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>string</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>is-draggable</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-draggableclass-j7r68">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-draggableclass-j7r68">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { draggableClass: 'my-draggable-class }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>
+</details>
 
 ##### `draggingClass` &nbsp; <sup>type: string<sup>
 
