@@ -298,6 +298,12 @@ const options = { slidesToScroll: 2 }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
+```css
+.embla__slide {
+  flex: 0 0 50%; /* Show 2 slides in viewport */
+}
+```
+
 <hr>    
 </details>
 
