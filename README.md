@@ -535,7 +535,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option enables adjustment of the carousel scroll speed when scroll is triggered by any of the API methods 
+    This option enables adjustment of the scroll speed when triggered by any of the API methods 
     <a href="#scrollnext">
       <code>scrollNext</code>
     </a>,
@@ -544,7 +544,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a> and
     <a href="#scrollTo">
       <code>scrollTo</code>
-    </a>. Drag interactions are not affected by this because the speed is in these cases determined by how vigorous the drag gesture was. 
+    </a>. Use a higher number for faster scrolling. Drag interactions are not affected by this because the speed is in these cases determined by how vigorous the drag gesture was. 
   </div>
   <br>
   <div>
