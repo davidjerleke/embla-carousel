@@ -544,7 +544,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a> and
     <a href="#scrollTo">
       <code>scrollTo</code>
-    </a>. Use a higher number for faster scrolling. Drag interactions are not affected by this because the speed is in these cases determined by how vigorous the drag gesture was. 
+    </a>. Use a higher number for faster scrolling. Drag interactions are not affected by this because the speed in these cases is determined by how vigorous the drag gesture was. 
   </div>
   <br>
   <div>
