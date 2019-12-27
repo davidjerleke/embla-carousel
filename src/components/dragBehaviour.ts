@@ -115,30 +115,29 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function down(evt: Event): void {
-    const node = evt.target as Element
+    const isMouse = evt.type === 'mousedown'
     const diffToTarget = target.get() - location.get()
     const isMoving = Math.abs(diffToTarget) >= 2
+    const clearPreventClick = isMouse || !isMoving
+    const isNotFocusNode = !isFocusNode(evt.target as Element)
+    const preventDefault = isMoving || (isMouse && isNotFocusNode)
 
-    state.isMouse = !!evt.type.match(/mouse/)
-    if (state.isMouse && (evt as MouseEvent).button !== 0) return
+    if (isMouse && (evt as MouseEvent).button !== 0) return
 
     state.isDown = true
+    state.isMouse = isMouse
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
     mover.useDefaultMass().useSpeed(80)
-    animation.start()
-
     addInteractionEvents()
+    animation.start()
+    startX.set(pointer.read(evt, 'x'))
+    startY.set(pointer.read(evt, 'y'))
     events.dispatch('dragStart')
 
-    if (isMoving) evt.preventDefault()
-    if (!isMoving || state.isMouse) state.preventClick = false
-    if (state.isMouse && !isFocusNode(node)) evt.preventDefault()
-    if (!state.isMouse) {
-      startX.set(pointer.read(evt, 'x'))
-      startY.set(pointer.read(evt, 'y'))
-    }
+    if (clearPreventClick) state.preventClick = false
+    if (preventDefault) evt.preventDefault()
   }
 
   function move(evt: Event): void {
@@ -163,8 +162,9 @@ export function DragBehaviour(params: Params): DragBehaviour {
     const force = pointer.up() * pointerForceBoost()
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
+    const preventClick = isMoving && !state.isMouse
 
-    if (isMoving && !state.isMouse) state.preventClick = true
+    if (preventClick) state.preventClick = true
     state.isMouse = false
     state.preventScroll = false
     state.isDown = false
