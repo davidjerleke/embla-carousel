@@ -753,10 +753,75 @@ const options = { draggableClass: 'my-draggable-class' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
+```css
+.my-draggable-class {
+  cursor: grab;
+}
+```
+
 <hr>
 </details>
 
-##### `draggingClass` &nbsp; <sup>type: string<sup>
+##### `draggingClass`
+
+<details>
+  <summary>
+    Choose classname applied to the container when dragging.
+  </summary>
+  <hr>
+  <div>
+    This options allows for a custom classname that will be applied to the carousel container on mousedown or touchstart, if the carousel is
+    <a href="#draggable">
+      <code>draggable</code>
+    </a>. Use it to style the carousel accordingly. For example, you can show a grabbing cursor when a pointer is down. If no value is provided it will fall back to <code>is-dragging</code>.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Type: </strong>
+      <code>string</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Allowed values: </strong>
+      <code>any</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Default value: </strong>
+      <code>is-dragging</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-draggingclass-7u90r">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-draggingclass-7u90r">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const options = { draggingClass: 'my-dragging-class' }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+```css
+.my-dragging-class {
+  cursor: grabbing;
+}
+```
+
+<hr>
+</details>
 
 <p>Classname that will be applied to the wrapper when a pointer is dragging the carousel.</p>
 <sup>
