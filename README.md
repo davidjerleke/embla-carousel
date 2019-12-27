@@ -95,7 +95,7 @@ CSS
 
 .embla__slide {
   position: relative; /* Needed if loop: true */
-  flex: 0 0 100%; /* Choose any width */
+  flex: 0 0 100%; /* Choose any slide width */
 }
 ```
 
@@ -132,7 +132,7 @@ const embla = EmblaCarousel(emblaNode, {
 
 ##### `align`
 
-<details>
+<details open>
   <summary>
     Align the slides relative to the carousel viewport.
   </summary>
