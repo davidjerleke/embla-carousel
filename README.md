@@ -823,13 +823,6 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
-<p>Classname that will be applied to the wrapper when a pointer is dragging the carousel.</p>
-<sup>
-  ✨ <strong>Demo</strong> -
-  <a href="https://codesandbox.io/s/embla-carousel-draggingclass-is-dragging-7u90r"><code>is-dragging</code></a> ·
-  <a href="https://codesandbox.io/s/embla-carousel-draggingclass-my-class-7u90r"><code>my-class</code></a>
-</sup>
-
 ## API
 
 Embla exposes API methods that can be used to control the carousel externally. Example usage:
