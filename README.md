@@ -78,6 +78,9 @@ HTML
     <div class="embla__slide">
       Slide 3
     </div>
+    <div class="embla__slide">
+      Slide 4
+    </div>
   </div>
 </div>
 ```
