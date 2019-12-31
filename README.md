@@ -885,7 +885,7 @@ const emblaContainer = embla.containerNode()
 <hr>    
 </details>
 
-##### `slideNodes()`
+##### `slideNodes`
 
 <details>
   <summary>
