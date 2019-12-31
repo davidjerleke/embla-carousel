@@ -182,10 +182,19 @@ const embla = EmblaCarousel(emblaNode, {
   <p>
     <strong>Usage</strong>
   </p>
+  <p>
+    Assuming the <a href="#quickstart">quickstart</a> template is in place, add the align property to the options object and pass it to Embla Carousel. Aligning slides only makes sense for slides smaller than 100% of the carousel viewport, so change the slide sizes to anything below 100%. The example below uses 80%.
+  </p>
   
 ```javascript
 const options = { align: 'start' }
 const embla = EmblaCarousel(emblaNode, options)
+```
+
+```css
+.embla__slide {
+  flex: 0 0 80%;
+}
 ```
 
 <hr>    
