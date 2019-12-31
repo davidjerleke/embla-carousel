@@ -847,7 +847,7 @@ embla.on('select', () => {
   </summary>
   <hr>
   <div>
-    This API method returns the container element node that holds the slides. If a custom selector is used by utilising the <a href="#containerselector"><code>containerSelector</code></a> option this will return the matching element, otherwise it will return the first immediate child of the Embla node passed to EmblaCarousel.
+    This API method returns the container node that holds the slides. If a custom selector is used by utilising the <a href="#containerselector"><code>containerSelector</code></a> option this will return the matching element, otherwise it will return the first immediate child of the Embla node passed to EmblaCarousel.
   </div>
   <br>
   <div>
@@ -887,11 +887,49 @@ const emblaContainer = embla.containerNode()
 
 ##### `slideNodes()`
 
-<p>Returns the slides as an array of element nodes.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp"><code>embla.slideNodes()</code></a>
-</sup>
+<details>
+  <summary>
+    Grab the slide nodes inside the container.
+  </summary>
+  <hr>
+  <div>
+    This API method returns an array with the slide nodes inside the carousel container. Use this handy method if you want to manipulate the slide nodes in some way. You can also grab the length of the array to get the slide count.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>Node.ELEMENT_NODE[]</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const emblaSlides = embla.slideNodes()
+```
+
+<hr>    
+</details>
 
 ##### `scrollNext()`
 
