@@ -141,7 +141,7 @@ const embla = EmblaCarousel(emblaNode, {
   </summary>
   <hr>
   <div>
-    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be affected for slides at the start or end when used together with 
+    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be overrided for slides at the start or end when used together with 
     <a href="#containscroll">
       <code>containScroll</code>
     </a>, 
@@ -182,19 +182,10 @@ const embla = EmblaCarousel(emblaNode, {
   <p>
     <strong>Usage</strong>
   </p>
-  <p>
-    Assuming the <a href="#quickstart">quickstart</a> template is in place, add the align property to the options object and pass it to Embla Carousel. Aligning slides only makes sense for slides smaller than 100% of the carousel viewport, so change the slide sizes to anything below 100%. The example below uses 80%.
-  </p>
   
 ```javascript
 const options = { align: 'start' }
 const embla = EmblaCarousel(emblaNode, options)
-```
-
-```css
-.embla__slide {
-  flex: 0 0 80%;
-}
 ```
 
 <hr>    
