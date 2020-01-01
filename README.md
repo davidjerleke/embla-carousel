@@ -1043,13 +1043,79 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
 <hr>    
 </details>
 
-##### `scrollTo(index)`
+##### `scrollTo`
 
-<p>Scrolls to the snap point that matches the passed index. If <code>loop: true</code> the carousel will seek the closest way to the target.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby"><code>embla.scrollTo()</code></a>
-</sup>
+<details>
+  <summary>
+    Scroll to a snap point by its unique index.
+  </summary>
+  <hr>
+  <div>
+    This API method scrolls to the snap point that matches the given index. When the
+    <a href="#loop">
+      <code>loop</code>
+    </a> option is enabled, the carousel will seek the closest way to the target. Useful for creating dot navigation together with the
+    <a href="#scrollsnaplist">
+      <code>scrollSnapList</code>
+    </a> method.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>index: number</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const dots = emblaNode.querySelector('.embla__dots')
+const dotButtons = [].slice.call(dots.querySelectorAll('.embla__dot'))
+dotButtons.forEach((dotButton, index) => {
+  const scrollToIndex = () => embla.scrollTo(index)
+  dotButton.addEventListener('click', scrollToIndex, false)
+})
+```
+
+```html
+<div class="embla__dots">
+  <button class="embla__dot" type="button">
+    Scroll To 1
+  </button>
+  <button class="embla__dot" type="button">
+    Scroll To 2
+  </button>
+  <button class="embla__dot" type="button">
+    Scroll To 3
+  </button>
+  <button class="embla__dot" type="button">
+    Scroll To 4
+  </button>
+</div>
+```
+
+<hr>    
+</details>
 
 ##### `canScrollPrev()`
 
