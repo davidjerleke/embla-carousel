@@ -141,21 +141,22 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function move(evt: Event): void {
-    if (state.preventScroll || state.isMouse) {
-      const diff = pointer.move(evt)
-      const reachedLimit = limit.reachedAny(location.get())
-      const resist = !params.loop && reachedLimit ? 2 : 1
-      target.addNumber(diff / resist)
-      evt.preventDefault()
-      if (!state.preventClick && diff) state.preventClick = true
-    } else {
+    if (!state.preventScroll && !state.isMouse) {
       const X = pointer.read(evt, 'x').get()
       const Y = pointer.read(evt, 'y').get()
       const diffX = Math.abs(X - startX.get())
       const diffY = Math.abs(Y - startY.get())
       state.preventScroll = diffX > diffY
-      if (!state.preventScroll && !state.preventClick) up()
+      if (!state.preventScroll && !state.preventClick) return up()
     }
+    const diff = pointer.move(evt)
+    const reachedLimit = limit.reachedAny(location.get())
+    const resist = !params.loop && reachedLimit ? 2 : 1
+    const preventClick = !state.preventClick && diff
+
+    if (preventClick) state.preventClick = true
+    target.addNumber(diff / resist)
+    evt.preventDefault()
   }
 
   function up(): void {

@@ -18,7 +18,7 @@
     <h2 align="center">Embla Carousel</h2>
   </strong>
 
-  <p align="center">
+  <p align="center" style="max-width: 700px;">
     Extensible low level carousels for the web. Extend it with basic JavaScript and build awesome physics simulated carousels. Dependency free and 100% open source.
   </p>
 
