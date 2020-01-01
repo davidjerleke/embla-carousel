@@ -1091,30 +1091,15 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
   
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
-const dots = emblaNode.querySelector('.embla__dots')
-const dotButtons = [].slice.call(dots.querySelectorAll('.embla__dot'))
+const rewindButton = emblaNode.querySelector('.embla__rewind')
 
-dotButtons.forEach((dotButton, index) => {
-  const scrollToIndex = () => embla.scrollTo(index)
-  dotButton.addEventListener('click', scrollToIndex, false)
-})
+rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
 ```
 
 ```html
-<div class="embla__dots">
-  <button class="embla__dot" type="button">
-    Scroll To 1
-  </button>
-  <button class="embla__dot" type="button">
-    Scroll To 2
-  </button>
-  <button class="embla__dot" type="button">
-    Scroll To 3
-  </button>
-  <button class="embla__dot" type="button">
-    Scroll To 4
-  </button>
-</div>
+<button class="embla__rewind" type="button">
+  Rewind
+</button>
 ```
 
 <hr>    
