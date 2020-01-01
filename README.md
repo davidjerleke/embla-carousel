@@ -975,7 +975,7 @@ const emblaSlides = embla.slideNodes()
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const nextButton = emblaNode.querySelector('.embla__next')
-nextButton.addEventListener('click', embla.scrollNext)
+nextButton.addEventListener('click', embla.scrollNext, false)
 ```
 
 ```html
@@ -987,13 +987,61 @@ nextButton.addEventListener('click', embla.scrollNext)
 <hr>    
 </details>
 
-##### `scrollPrev()`
+##### `scrollPrev`
 
-<p>Scrolls to previous snap point if possible. If <code>loop: false</code> and the carousel is on the first snap point this method will do nothing.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm"><code>embla.scrollPrev()</code></a>
-</sup>
+<details>
+  <summary>
+    Scroll to the previous snap point if possible.
+  </summary>
+  <hr>
+  <div>
+    This API method scrolls to the previous snap point if possible. If the
+    <a href="#loop">
+      <code>loop</code>
+    </a> option is disabled and the carousel is on the first snap point, this method will do nothing. When loop is enabled, it will always be able to scroll to the previous snap point. Useful for creating a scroll previous button for example.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const prevButton = emblaNode.querySelector('.embla__prev')
+prevButton.addEventListener('click', embla.scrollPrev, false)
+```
+
+```html
+<button class="embla__prev" type="button">
+  Scroll Previous
+</button>
+```
+
+<hr>    
+</details>
 
 ##### `scrollTo(index)`
 
