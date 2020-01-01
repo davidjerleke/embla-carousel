@@ -931,7 +931,7 @@ const emblaSlides = embla.slideNodes()
 <hr>    
 </details>
 
-##### `scrollNext()`
+##### `scrollNext`
 
 <details>
   <summary>
