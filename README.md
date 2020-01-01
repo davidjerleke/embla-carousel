@@ -1,5 +1,5 @@
 <br />
-<div align="center">
+<div align="center" style="max-width: 700px; margin-left:auto; margin-right:auto;">
   <p align="center">
     <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel Logo">
     </a>
@@ -18,7 +18,7 @@
     <h2 align="center">Embla Carousel</h2>
   </strong>
 
-  <p align="center" style="max-width: 700px;">
+  <p align="center">
     Extensible low level carousels for the web. Extend it with basic JavaScript and build awesome physics simulated carousels. Dependency free and 100% open source.
   </p>
 
