@@ -933,11 +933,59 @@ const emblaSlides = embla.slideNodes()
 
 ##### `scrollNext()`
 
-<p>Scrolls to next snap point if possible. If <code>loop: false</code> and the carousel is on the last snap point this method will do nothing.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm"><code>embla.scrollNext()</code></a>
-</sup>
+<details>
+  <summary>
+    Scroll to the next snap point if possible.
+  </summary>
+  <hr>
+  <div>
+    This API method scrolls to the next snap point if possible. If the
+    <a href="#loop">
+      <code>loop</code>
+    </a> option is disabled and the carousel is on the last snap point, this method will do nothing. When loop is enabled, it will always be able to scroll to the next snap point. Useful for creating a scroll next button for example.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const nextButton = emblaNode.querySelector('.embla__next')
+nextButton.addEventListener('click', embla.scrollNext)
+```
+
+```html
+<button class="embla__next" type="button">
+  Scroll Next
+</button>
+```
+
+<hr>    
+</details>
 
 ##### `scrollPrev()`
 
