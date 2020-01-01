@@ -1,5 +1,5 @@
 <br />
-<div align="center" style="max-width: 700px; margin-left:auto; margin-right:auto;">
+<div align="center">
   <p align="center">
     <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="80" height="80" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel Logo">
     </a>
