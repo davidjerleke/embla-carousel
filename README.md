@@ -975,6 +975,7 @@ const emblaSlides = embla.slideNodes()
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const nextButton = emblaNode.querySelector('.embla__next')
+
 nextButton.addEventListener('click', embla.scrollNext, false)
 ```
 
@@ -1031,6 +1032,7 @@ nextButton.addEventListener('click', embla.scrollNext, false)
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const prevButton = emblaNode.querySelector('.embla__prev')
+
 prevButton.addEventListener('click', embla.scrollPrev, false)
 ```
 
@@ -1091,6 +1093,7 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
 const embla = EmblaCarousel(emblaNode, options)
 const dots = emblaNode.querySelector('.embla__dots')
 const dotButtons = [].slice.call(dots.querySelectorAll('.embla__dot'))
+
 dotButtons.forEach((dotButton, index) => {
   const scrollToIndex = () => embla.scrollTo(index)
   dotButton.addEventListener('click', scrollToIndex, false)
