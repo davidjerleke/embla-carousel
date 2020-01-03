@@ -108,7 +108,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     if (!dragFree && !reachedLimit && seekNext) {
       const indexDiff = Direction(force).get() * -1
       const next = index.clone().add(indexDiff)
-      scrollTo.index(next.get())
+      scrollTo.index(next.get(), 0)
     } else {
       scrollTo.distance(force)
     }

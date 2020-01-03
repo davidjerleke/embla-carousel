@@ -167,6 +167,23 @@ export function EmblaCarousel(
     }))
   }
 
+  function scrollNext(): void {
+    const next = slider.index.clone().add(1)
+    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollTo.index(next.get(), -1)
+  }
+
+  function scrollPrev(): void {
+    const prev = slider.index.clone().add(-1)
+    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollTo.index(prev.get(), 1)
+  }
+
+  function scrollTo(index: number): void {
+    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollTo.index(index, 0)
+  }
+
   function canScrollPrev(): boolean {
     const { index } = slider
     return options.loop || index.get() !== index.min
@@ -175,21 +192,6 @@ export function EmblaCarousel(
   function canScrollNext(): boolean {
     const { index } = slider
     return options.loop || index.get() !== index.max
-  }
-
-  function scrollNext(): void {
-    slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.next()
-  }
-
-  function scrollPrev(): void {
-    slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.previous()
-  }
-
-  function scrollTo(index: number): void {
-    slider.mover.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.index(index)
   }
 
   function selectedScrollSnap(): number {

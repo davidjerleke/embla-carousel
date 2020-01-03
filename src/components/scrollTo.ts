@@ -14,10 +14,8 @@ type Params = {
 }
 
 export type ScrollTo = {
-  next: () => void
-  previous: () => void
-  index: (n: number) => void
   distance: (n: number) => void
+  index: (n: number, direction: number) => void
 }
 
 export function ScrollTo(params: Params): ScrollTo {
@@ -39,36 +37,20 @@ export function ScrollTo(params: Params): ScrollTo {
     }
   }
 
-  function findIndex(counter: Counter, direction: number): void {
-    const target = scrollTarget.byIndex(counter.get(), direction)
-    scrollTo(target)
-  }
-
   function distance(n: number): void {
     const target = scrollTarget.byDistance(n)
     scrollTo(target)
   }
 
-  function index(n: number): void {
-    const target = indexCurrent.clone().set(n)
-    findIndex(target, 0)
-  }
-
-  function next(): void {
-    const target = indexCurrent.clone().add(1)
-    findIndex(target, -1)
-  }
-
-  function previous(): void {
-    const target = indexCurrent.clone().add(-1)
-    findIndex(target, 1)
+  function index(n: number, direction: number): void {
+    const targetIndex = indexCurrent.clone().set(n)
+    const target = scrollTarget.byIndex(targetIndex.get(), direction)
+    scrollTo(target)
   }
 
   const self: ScrollTo = {
     distance,
     index,
-    next,
-    previous,
   }
   return Object.freeze(self)
 }
