@@ -3,7 +3,7 @@ language: node_js
 jobs:
   include:
     - stage: test
-      node_js: '10'
+      node_js: '12'
       install:
         - npm install
       script:
@@ -11,7 +11,7 @@ jobs:
         - npm run test
     - stage: npm release
       if: tag IS present
-      node_js: '10'
+      node_js: '12'
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
