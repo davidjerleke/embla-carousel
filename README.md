@@ -1246,7 +1246,7 @@ embla.on('select', toggleNextButtonEnabled);
     This API method returns the index of the current selected snap point. If the
     <a href="#slidestoscroll">
       <code>slidesToScroll</code>
-    </a> option is more than <code>1</code> some slides will be grouped together and share the same index. For example, when it's set to <code>2</code>, every two slides will share the same index. In this case,  <code>index 0</code> holds <code>slide 1 and 2</code> and <code>index 1</code> holds <code> slide 3 and 4</code>.
+    </a> option is more than <code>1</code> some slides will be grouped together and share the same index. For example, when it's set to <code>2</code>, every two slides will share the same index. In this case, slide <code>1</code> and <code>2</code> will share index <code>0</code> and slide <code>3</code> and <code>4</code> will share index <code>1</code> and so on.
   </div>
   <br>
   <div>
