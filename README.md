@@ -1105,21 +1105,135 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
 <hr>    
 </details>
 
-##### `canScrollPrev()`
+##### `canScrollPrev`
 
-<p>Returns if it's possible to scroll to a previous snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z"><code>embla.canScrollPrev()</code></a>
-</sup>
+<details>
+  <summary>
+    Check the possiblity to scroll to a previous snap point.
+  </summary>
+  <hr>
+  <div>
+    This API method returns a boolean that indicates if the carousel can scroll to a previous snap point from its current position. Note that if the
+    <a href="#loop">
+      <code>loop</code>
+    </a> option is enabled it will always return true. For example, it can be used to disable or enable a scroll to previous button.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const prevButton = emblaNode.querySelector('.embla__prev')
 
-##### `canScrollNext()`
+const togglePrevButtonEnabled = () => {
+  if (embla.canScrollPrev()) {
+    prevButton.removeAttribute('disabled')
+  } else {
+    prevButton.setAttribute('disabled', 'disabled')
+  }
+}
 
-<p>Returns if it's possible to scroll to a next snap point. If <code>loop: true</code> this will always return <code>true</code>.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z"><code>embla.canScrollNext()</code></a>
-</sup>
+embla.on('select', togglePrevButtonEnabled);
+```
+
+```html
+<button class="embla__prev" type="button">
+  Scroll Previous
+</button>
+```
+
+<hr>    
+</details>
+
+##### `canScrollNext`
+
+<details>
+  <summary>
+    Check the possiblity to scroll to a next snap point.
+  </summary>
+  <hr>
+  <div>
+    This API method returns a boolean that indicates if the carousel can scroll to a next snap point from its current position. Note that if the
+    <a href="#loop">
+      <code>loop</code>
+    </a> option is enabled it will always return true. For example, it can be used to disable or enable a scroll to next button.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const nextButton = emblaNode.querySelector('.embla__next')
+
+const toggleNextButtonEnabled = () => {
+  if (embla.canScrollNext()) {
+    nextButton.removeAttribute('disabled')
+  } else {
+    nextButton.setAttribute('disabled', 'disabled')
+  }
+}
+
+embla.on('select', toggleNextButtonEnabled);
+```
+
+```html
+<button class="embla__next" type="button">
+  Scroll Next
+</button>
+```
+
+<hr>    
+</details>
 
 ##### `selectedScrollSnap()`
 
