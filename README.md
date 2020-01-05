@@ -1235,21 +1235,103 @@ embla.on('select', toggleNextButtonEnabled);
 <hr>    
 </details>
 
-##### `selectedScrollSnap()`
+##### `selectedScrollSnap`
 
-<p>Returns the index of the selected snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1"><code>embla.selectedScrollSnap()</code></a>
-</sup>
+<details>
+  <summary>
+    Retrieve the index of the selected snap point.
+  </summary>
+  <hr>
+  <div>
+    This API method returns the index of the current selected snap point. If the
+    <a href="#slidestoscroll">
+      <code>slidesToScroll</code>
+    </a> option is more than <code>1</code> some slides will be grouped together and share the same index. For example, when it's set to <code>2</code>, every two slides will share the same index. In this case, slide <code>1</code> and <code>2</code> will share index <code>0</code> and slide <code>3</code> and <code>4</code> will share index <code>1</code> and so on.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const currentSnapIndex = embla.selectedScrollSnap()
+```
 
-##### `previousScrollSnap()`
+<hr>    
+</details>
 
-<p>Returns the index of the previous snap point. Each snap point scrolls more than one slide if <code>slidesToScroll > 1</code>. Zero-based.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1"><code>embla.previousScrollSnap()</code></a>
-</sup>
+##### `previousScrollSnap`
+
+<details>
+  <summary>
+    Retrieve the index of the previous snap point.
+  </summary>
+  <hr>
+  <div>
+    This API method returns the index of the previously selected snap point. If the
+    <a href="#slidestoscroll">
+      <code>slidesToScroll</code>
+    </a> option is more than <code>1</code> some slides will be grouped together and share the same index. For example, when it's set to <code>2</code>, every two slides will share the same index. In this case, slide <code>1</code> and <code>2</code> will share index <code>0</code> and slide <code>3</code> and <code>4</code> will share index <code>1</code> and so on.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="Embla Carousel CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const currentSnapIndex = embla.previousScrollSnap()
+```
+
+<hr>    
+</details>
 
 ##### `scrollSnapList()`
 
