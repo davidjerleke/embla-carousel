@@ -1327,7 +1327,7 @@ const currentSnapIndex = embla.selectedScrollSnap()
   
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
-const currentSnapIndex = embla.previousScrollSnap()
+const previousSnapIndex = embla.previousScrollSnap()
 ```
 
 <hr>    
