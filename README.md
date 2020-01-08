@@ -1378,8 +1378,8 @@ const previousSnapIndex = embla.previousScrollSnap()
 const embla = EmblaCarousel(emblaNode, options)
 const scrollSnaps = embla.scrollSnapList()
 
-const slidesInfirstScrollSnap = scrollSnaps[0].slideNodes;
-const indexesInfirstScrollSnap = scrollSnaps[0].slideIndexes;
+const slidesInFirstScrollSnap = scrollSnaps[0].slideNodes;
+const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
 ```
 
 <hr>    
