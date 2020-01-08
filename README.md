@@ -1343,7 +1343,7 @@ const previousSnapIndex = embla.previousScrollSnap()
   <div>
     This API method returns an array containing all the carousel snap points. Each snap point comes with its <code>slideNodes</code> and <code>slideIndexes</code>. For example, it's useful for getting the snap point count or creating a dot navigation together with the
     <a href="#scrollto">
-      <code>scrollto</code>
+      <code>scrollTo</code>
     </a> method.
   </div>
   <br>
