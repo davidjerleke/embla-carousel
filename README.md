@@ -1480,16 +1480,17 @@ embla.on('scroll', () => {
 const embla = EmblaCarousel(emblaNode, options)
 const emblaSlides = embla.slideNodes()
 
-const alertClickedSlideIndex = (index) => {
+const alertClickedSlide = (index) => {
   return () => {
     if (embla.clickAllowed()) {
-      alert(`Slide with index ${index} was clicked!`)
+      alert(`Slide with index ${index} was clicked.`)
     }
   }
 }
 
 emblaSlides.forEach((slide, index) => {
-  slide.addEventListener('click', alertClickedSlideIndex(index), false)
+  const alertClickedSlideIndex = alertClickedSlide(index)
+  slide.addEventListener('click', alertClickedSlideIndex, false)
 })
 ```
 
