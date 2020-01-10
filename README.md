@@ -1438,13 +1438,63 @@ embla.on('scroll', () => {
 <hr>    
 </details>
 
-##### `clickAllowed()`
+##### `clickAllowed`
 
-<p>Returns if a click should be accepted. It returns <code>false</code> if the carousel is dragged. On touch devices it also returns <code>false</code> when the carousel is scrolling.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1"><code>embla.clickAllowed()</code></a>
-</sup>
+<details>
+  <summary>
+    Check if interaction was a static click.
+  </summary>
+  <hr>
+  <div>
+    This API method returns if the user interaction was a click. For mouse events Embla will return <code>true</code> if a drag interaction in any direction didn't occur before the mouse was released. Touch events also require the carousel to not be in a scrolling state in order to accept the click.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>boolean</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+const emblaSlides = embla.slideNodes()
+
+const alertClickedSlideIndex = (index) => {
+  return () => {
+    if (embla.clickAllowed()) {
+      alert(`Slide with index ${index} was clicked!`)
+    }
+  }
+}
+
+emblaSlides.forEach((slide, index) => {
+  slide.addEventListener('click', alertClickedSlideIndex(index), false)
+})
+```
+
+<hr>    
+</details>
 
 ##### `changeOptions(options)`
 
