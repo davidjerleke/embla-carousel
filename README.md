@@ -195,7 +195,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    A query selector for the container that holds the slides.
+    Target the slide container with a query selector.
   </summary>
   <hr>
   <div>
@@ -318,7 +318,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option clears empty space that causes excessive scrolling at the beginning or the end. Note that this will override the chosen <a href="#align">alignment</a> for slides at the beginning or the end if necessary, in order to get rid of the empty space.
+    This option clears leading and trailing empty space that causes excessive scrolling. Note that this will override the chosen <a href="#align">alignment</a> for slides at the beginning or the end if necessary, in order to get rid of the empty space.
   </div>
   <br>
   <div>
@@ -843,7 +843,7 @@ embla.on('select', () => {
 
 <details>
   <summary>
-    Grab the container node that holds the slides.
+    Get the container node that holds the slides.
   </summary>
   <hr>
   <div>
@@ -889,7 +889,7 @@ const emblaContainer = embla.containerNode()
 
 <details>
   <summary>
-    Grab the slide nodes inside the container.
+    Get the slide nodes inside the container.
   </summary>
   <hr>
   <div>
@@ -1239,7 +1239,7 @@ embla.on('select', toggleNextButtonEnabled);
 
 <details>
   <summary>
-    Retrieve the index of the selected snap point.
+    Get the index of the selected snap point.
   </summary>
   <hr>
   <div>
@@ -1288,7 +1288,7 @@ const currentSnapIndex = embla.selectedScrollSnap()
 
 <details>
   <summary>
-    Retrieve the index of the previous snap point.
+    Get the index of the previous snap point.
   </summary>
   <hr>
   <div>
@@ -1337,7 +1337,7 @@ const previousSnapIndex = embla.previousScrollSnap()
 
 <details>
   <summary>
-    Retrieve an array of all scroll snap points.
+    Get an array of all scroll snap points.
   </summary>
   <hr>
   <div>
@@ -1385,13 +1385,58 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
 <hr>    
 </details>
 
-##### `scrollProgress()`
+##### `scrollProgress`
 
-<p>Returns how far the carousel has scrolled from <code>0</code> at the first slide to <code>1</code> at the end.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5"><code>embla.scrollProgress()</code></a>
-</sup>
+<details>
+  <summary>
+    Check how far the carousel has scrolled.
+  </summary>
+  <hr>
+  <div>
+    This API method returns how far the carousel has scrolled from <code>0</code> at the beginning to <code>1</code> at the end. For example, it's useful for creating a progress bar together with the
+    <a href="#scroll">
+      <code>scroll</code>
+    </a> event.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>number</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+
+embla.on('scroll', () => {
+  const scrollProgressPercentage = embla.scrollProgress() * 100
+  console.log(`The carousel has scrolled ${scrollProgressPercentage}%.`)
+})
+```
+
+<hr>    
+</details>
 
 ##### `clickAllowed()`
 
@@ -1470,23 +1515,23 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>IE</strong> - 11
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" alt="Internet Explorer 11" /> &nbsp; <strong>IE</strong> - 11
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/edge-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/edge-logo.svg" height="23" align="top" alt="Microsoft Edge" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="top" alt="Chrome" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" alt="Firefox" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Embla Carousel browser support" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" alt="Safari" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
 </p>
 
 <br>
