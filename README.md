@@ -236,7 +236,6 @@ const embla = EmblaCarousel(emblaNode, options)
   </p>
   
 ```javascript
-const emblaNode = document.querySelector('.embla')
 const options = { containerSelector: '.my-container-selector' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
@@ -599,7 +598,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows the selection of the initial scroll snap position. First scroll snap index starts at <code>0</code>. If slides are mapped to groups with the
+    This option allows the selection of the initial scroll snap position. First scroll snap index starts at <code>0</code>. If slides are mapped to groups with the
     <a href="#slidestoscroll">
       <code>slidesToScroll</code>
     </a> option, some slides share the same scroll snap index. For example, if it's set to <code>2</code> slide one and two will be at index 0, while slide three and four will be at index 1 and so on.
@@ -654,7 +653,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows for a custom classname that will be applied to the selected slide. In most cases, only one slide will be selected at a time. However, when
+    This option allows for a custom classname that will be applied to the selected slide. In most cases, only one slide will be selected at a time. However, when
     <a href="#slidestoscroll">
       <code>slidesToScroll</code>
     </a> is more than <code>1</code> and/or
@@ -712,7 +711,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows for a custom classname that will be applied to the carousel container if the carousel is
+    This option allows for a custom classname that will be applied to the carousel container if the carousel is
     <a href="#draggable">
       <code>draggable</code>
     </a>. Use it to style the carousel accordingly. For example, you can show a grab cursor when a draggable carousel is hovered. If no value is provided it will fall back to <code>is-draggable</code>.
@@ -773,7 +772,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This options allows for a custom classname that will be applied to the carousel container on mousedown or touchstart, if the carousel is
+    This option allows for a custom classname that will be applied to the carousel container on mousedown or touchstart, if the carousel is
     <a href="#draggable">
       <code>draggable</code>
     </a>. Use it to style the carousel accordingly. For example, you can show a grabbing cursor when a pointer is down. If no value is provided it will fall back to <code>is-dragging</code>.
@@ -1223,6 +1222,7 @@ const toggleNextButtonEnabled = () => {
   }
 }
 
+embla.on('init', toggleNextButtonEnabled);
 embla.on('select', toggleNextButtonEnabled);
 ```
 
@@ -1278,7 +1278,11 @@ embla.on('select', toggleNextButtonEnabled);
   
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
-const currentSnapIndex = embla.selectedScrollSnap()
+
+embla.on('select', () => {
+  const currentSnapIndex = embla.selectedScrollSnap()
+  alert(`Selected index has changed to ${currentSnapIndex}.`)
+})
 ```
 
 <hr>    
@@ -1327,7 +1331,11 @@ const currentSnapIndex = embla.selectedScrollSnap()
   
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
-const previousSnapIndex = embla.previousScrollSnap()
+
+embla.on('select', () => {
+  const previousSnapIndex = embla.previousScrollSnap()
+  alert(`Previously selected index was ${previousSnapIndex}.`)
+})
 ```
 
 <hr>    
@@ -1497,13 +1505,56 @@ emblaSlides.forEach((slide, index) => {
 <hr>    
 </details>
 
-##### `changeOptions(options)`
+##### `changeOptions`
 
-<p>Applies passed options by doing all the necessary calculations and initialising the carousel from scratch.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm"><code>embla.changeOptions()</code></a>
-</sup>
+<details>
+  <summary>
+    Change the carousel options after initialization.
+  </summary>
+  <hr>
+  <div>
+    This API method allows for changing the carousel options after it has been initialized. Useful for changing the carousel setup depending on different screen sizes. Note that this will stop the carousel if it's in motion when change options is called, and initialize the carousel from scratch.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>
+        options: 
+        <a href="#options">
+          EmblaOptions
+        </a>
+      </code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+embla.changeOptions({ loop: true })
+```
+
+<hr>    
+</details>
 
 ##### `destroy()`
 
