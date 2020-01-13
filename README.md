@@ -1157,6 +1157,7 @@ const togglePrevButtonEnabled = () => {
   }
 }
 
+embla.on('init', togglePrevButtonEnabled);
 embla.on('select', togglePrevButtonEnabled);
 ```
 
