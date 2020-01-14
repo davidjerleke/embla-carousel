@@ -36,16 +36,13 @@
     <strong>
       &nbsp;&nbsp;
       <a href="#options">options</a>
-      &nbsp;&nbsp;
-
+      &nbsp;&nbsp;  
       &nbsp;&nbsp;
       <a href="#api">api</a>
-      &nbsp;&nbsp;
-
+      &nbsp;&nbsp;  
       &nbsp;&nbsp;
       <a href="#events">events</a>
-      &nbsp;&nbsp;
-      
+      &nbsp;&nbsp;  
       &nbsp;&nbsp;
       <a href="#codesandbox">codesandbox</a>
       &nbsp;&nbsp;
