@@ -34,11 +34,18 @@
 
   <p align="center">
     <strong>
+      &nbsp;&nbsp;
       <a href="#options">options</a>
-      &nbsp; &middot; &nbsp;
+      &nbsp;&nbsp;
+      &nbsp;&nbsp;
       <a href="#api">api</a>
-      &nbsp; &middot; &nbsp;
+      &nbsp;&nbsp;
+      &nbsp;&nbsp;
+      <a href="#events">events</a>
+      &nbsp;&nbsp;
+      &nbsp;&nbsp;
       <a href="#codesandbox">codesandbox</a>
+      &nbsp;&nbsp;
     </strong>
   </p>
 
@@ -1627,6 +1634,10 @@ embla.destroy()
   ✨ <strong>Demo</strong> - 
   <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.off()</code></a>
 </sup>
+
+## Events
+
+...Under construction
 
 ## CodeSandbox
 
