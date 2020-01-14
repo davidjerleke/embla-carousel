@@ -1557,13 +1557,51 @@ embla.changeOptions({ loop: true })
 <hr>    
 </details>
 
-##### `destroy()`
+##### `destroy`
 
-<p>Removes all styles applied to DOM nodes and kills all event listeners for this Embla instance.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1"><code>embla.destroy()</code></a>
-</sup>
+<details>
+  <summary>
+    Destroy a carousel instance permanently. 
+  </summary>
+  <hr>
+  <div>
+    This API method is a one way operation and destroys a carousel instance. All applied styles to DOM nodes and any event listeners will be removed. Remember to remove any external event listeners if you've used the API to create prev/next and/or dot navigation for the carousel.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>none</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+embla.destroy()
+```
+
+<hr>    
+</details>
 
 ##### `on(event, callback)`
 
