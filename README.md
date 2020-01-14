@@ -34,18 +34,10 @@
 
   <p align="center">
     <strong>
-      &nbsp;&nbsp;
-      <a href="#options">options</a>
-      &nbsp;&nbsp;  
-      &nbsp;&nbsp;
-      <a href="#api">api</a>
-      &nbsp;&nbsp;  
-      &nbsp;&nbsp;
-      <a href="#events">events</a>
-      &nbsp;&nbsp;  
-      &nbsp;&nbsp;
-      <a href="#codesandbox">codesandbox</a>
-      &nbsp;&nbsp;
+      <a href="#options">&nbsp;options&nbsp;</a>
+      <a href="#api">&nbsp;api&nbsp;</a>
+      <a href="#events">&nbsp;events&nbsp;</a>
+      <a href="#codesandbox">&nbsp;codesandbox&nbsp;</a>
     </strong>
   </p>
 
