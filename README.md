@@ -39,7 +39,6 @@
       <a href="#api">api</a>
       &nbsp; &middot; &nbsp;
       <a href="#events">events</a>
-      &nbsp; &middot; &nbsp;
     </strong>
   </p>
 
