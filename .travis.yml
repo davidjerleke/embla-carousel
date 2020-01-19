@@ -14,6 +14,7 @@ jobs:
       if: tag IS present
       node_js: '12'
       deploy:
+        edge: true
         provider: npm
         email: '$NPM_EMAIL'
         api_key: '$NPM_TOKEN'
