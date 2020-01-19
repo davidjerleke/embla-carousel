@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "2.6.10",
+  "version": "2.6.11",
   "author": "David Cetinkaya",
   "private": false,
   "description": "Extensible low level carousels for the web",
