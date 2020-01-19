@@ -834,7 +834,7 @@ embla.scrollNext()
 embla.scrollTo(2)
 embla.changeOptions({ loop: true })
 embla.on('select', () => {
-  console.log(`Selected snap index is ${embla.selectedScrollSnap()}!`)
+  console.log(`Selected snap index is ${embla.selectedScrollSnap()}.`)
 })
 ```
 
@@ -1634,10 +1634,10 @@ Embla exposes custom events that can be hooked on to. Example usage:
 
 ```javascript
 embla.on('select', () => {
-  console.log(`Selected snap has changed to ${embla.selectedScrollSnap()}.`)
+  console.log(`Selected snap index is ${embla.selectedScrollSnap()}.`)
 })
 embla.on('scroll', () => {
-  console.log(`Current scroll progress is ${embla.scrollProgress()}.`)
+  console.log(`Scroll progress is ${embla.scrollProgress()}.`)
 })
 ```
 
