@@ -1630,6 +1630,17 @@ embla.destroy()
 
 ## Events
 
+Embla exposes custom events that can be hooked on to. Example usage:
+
+```javascript
+embla.on('select', () => {
+  console.log(`Selected snap has changed to ${embla.selectedScrollSnap()}.`)
+})
+embla.on('scroll', () => {
+  console.log(`Current scroll progress is ${embla.scrollProgress()}.`)
+})
+```
+
 ##### `init`
 
 <details>
