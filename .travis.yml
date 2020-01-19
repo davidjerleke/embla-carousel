@@ -1,3 +1,4 @@
+os: linux
 language: node_js
 
 jobs:
@@ -15,7 +16,6 @@ jobs:
       deploy:
         provider: npm
         email: '$NPM_EMAIL'
-        api_key: '$NPM_TOKEN'
-        skip_cleanup: true
+        api_token: '$NPM_TOKEN'
         on:
           tags: true
