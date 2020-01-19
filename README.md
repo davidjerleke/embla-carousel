@@ -1630,7 +1630,229 @@ embla.destroy()
 
 ## Events
 
-...Under construction
+##### `init`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `destroy`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `select`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `scroll`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `resize`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `dragStart`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
+
+##### `dragEnd`
+
+<details>
+  <summary>
+    Under construction...
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+<hr>    
+</details>
 
 ## CodeSandbox
 
