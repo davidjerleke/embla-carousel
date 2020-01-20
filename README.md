@@ -1603,22 +1603,72 @@ embla.destroy()
 <hr>    
 </details>
 
-##### `on(event, callback)`
+##### `on`
 
-<p>Subscribes to a custom Embla event by firing the passed callback. Below is a list of events you can subscribe to:</p>
+<details>
+  <summary>
+    Subscribe to an Embla specific event with a callback.
+  </summary>
+  <hr>
+  <div>
+    This API method enables the use of event listeners by attaching them to any of the Embla specific 
+    <a href="#events">
+      <code>
+        events
+      </code>
+    </a>. For example, it's useful for changing styles whenever a new target snap point has been selected, when the carousel is scrolling or when it has been initialized. By using it together with the 
+    <a href="#off">
+      <code>
+        off
+      </code>
+    </a> method, it's possible to remove these event listeners without destroying the carousel. However, when the
+    <a href="#off">
+      <code>
+        destroy
+      </code> method is invoked, any added event listeners will be destroyed.
+    </a>
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>event: <a href="#events">EmblaEvent</a></code>
+      <code>callback: function</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
 
-- **`init`** - When the carousel has been initialised for the first time.
-- **`destroy`** - When the carousel has been destroyed.
-- **`select`** - When a new target slide has been selected.
-- **`scroll`** - When carousel is scrolled.
-- **`resize`** - When window size changes.
-- **`dragStart`** - When carousel dragging begins.
-- **`dragEnd`** - When carousel dragging ends.
+const onInitCallback = () => {
+  console.log('The carousel has just been initialized.')
+}
 
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.on()</code></a>
-</sup>
+embla.on('init', onInitCallback)
+```
+
+<hr>    
+</details>
 
 ##### `off(event, callback)`
 
