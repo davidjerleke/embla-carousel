@@ -1664,13 +1664,68 @@ embla.on('init', onInitCallback)
 <hr>    
 </details>
 
-##### `off(event, callback)`
+##### `off`
 
-<p>Ends subscription to a custom Embla event by removing the passed callback. This works for all events listed on the <code>on</code> method.</p>
-<sup>
-  ✨ <strong>Demo</strong> - 
-  <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk"><code>embla.off()</code></a>
-</sup>
+
+<details>
+  <summary>
+    Unsubscribe from an Embla specific event.
+  </summary>
+  <hr>
+  <div>
+    This API method enables the removal of event listeners attached to Embla specific
+    <a href="#events">
+      <code>events</code>
+    </a>. It's useful for removing added event listeners without destroying the carousel. Note that you don't have to remove event listeners added using the 
+    <a href="#on">
+      <code>on</code>
+    </a> method when invoking
+    <a href="#destroy">
+      <code>destroy</code>
+    </a>, because it will destroy all added event listeners for you.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>event: <a href="#events">EmblaEvent</a></code>
+      <code>callback: function</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" alt="CodeSandbox" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
+      <code>CodeSandbox</code>
+    </a> 
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+  
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+
+const logIndexToConsole = () => {
+  console.log(`Selected index has changed to ${embla.selectedScrollSnap()}.`)
+}
+
+const addLogIndexListener = () => embla.on('select', logIndexToConsole);
+const removeLogIndexListener = () => embla.off('select', logIndexToConsole);
+```
+
+<hr>    
+</details>
 
 ## Events
 
