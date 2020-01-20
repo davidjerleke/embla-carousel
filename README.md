@@ -1618,7 +1618,7 @@ embla.destroy()
     <a href="#off">
       <code>off</code>
     </a> method to remove added event listeners without destroying the carousel. However, when the
-    <a href="#off">
+    <a href="#destroy">
       <code>destroy</code>
     </a> method is invoked, any added event listeners will be destroyed.
   </div>
