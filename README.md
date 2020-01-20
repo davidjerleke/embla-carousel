@@ -1614,10 +1614,10 @@ embla.destroy()
     This API method enables the use of event listeners by attaching them to any of the Embla specific 
     <a href="#events">
       <code>events</code>
-    </a>. For example, it's useful for changing styles whenever a new target snap point has been selected, when the carousel is scrolling or when it has been initialized. By using it together with the 
+    </a>. For example, it's useful for changing styles whenever a new target snap point has been selected or when the carousel is scrolling. Use it together with the 
     <a href="#off">
       <code>off</code>
-    </a> method, it's possible to remove these event listeners without destroying the carousel. However, when the
+    </a> method to remove added event listeners without destroying the carousel. However, when the
     <a href="#off">
       <code>destroy</code>
     </a> method is invoked, any added event listeners will be destroyed.
