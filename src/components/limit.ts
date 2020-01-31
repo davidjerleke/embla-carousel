@@ -17,7 +17,7 @@ export type Limit = {
 
 export function Limit(params: Params): Limit {
   const { min, max } = params
-  const loopLimits = { max: min, min: max }
+  const loopLimits = { min: max, max: min }
   const constrainLimits = { min, max }
 
   function reachedMin(n: number): boolean {
