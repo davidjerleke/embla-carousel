@@ -176,19 +176,19 @@ const embla = EmblaCarousel(emblaNode, {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-align-5kfhw">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { align: 'start' }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `containerSelector`
@@ -228,13 +228,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containerselector-ntlzb">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { containerSelector: '.my-container-selector' }
 const embla = EmblaCarousel(emblaNode, options)
@@ -248,7 +248,7 @@ const embla = EmblaCarousel(emblaNode, options)
 </div>
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `slidesToScroll`
@@ -288,13 +288,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1g4rk">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { slidesToScroll: 2 }
 const embla = EmblaCarousel(emblaNode, options)
@@ -306,7 +306,7 @@ const embla = EmblaCarousel(emblaNode, options)
 }
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `containScroll`
@@ -347,19 +347,19 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containscroll-tunvy">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { containScroll: true }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `draggable`
@@ -400,19 +400,19 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggable-gj9j0">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { draggable: false }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `dragFree`
@@ -453,19 +453,19 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-dragfree-bfqjc">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { dragFree: true }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `loop`
@@ -508,13 +508,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-loop-3x6id">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { loop: true }
 const embla = EmblaCarousel(emblaNode, options)
@@ -575,13 +575,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-speed-omw5i">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { speed: 15 }
 const embla = EmblaCarousel(emblaNode, options)
@@ -630,13 +630,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-startindex-3ur20">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { startIndex: 3 }
 const embla = EmblaCarousel(emblaNode, options)
@@ -688,13 +688,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedclass-ioysh">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { selectedClass: 'my-selected-class' }
 const embla = EmblaCarousel(emblaNode, options)
@@ -743,13 +743,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggableclass-j7r68">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { draggableClass: 'my-draggable-class' }
 const embla = EmblaCarousel(emblaNode, options)
@@ -804,13 +804,13 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggingclass-7u90r">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const options = { draggingClass: 'my-dragging-class' }
 const embla = EmblaCarousel(emblaNode, options)
@@ -869,19 +869,19 @@ embla.on('select', () => {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containernode-fq9xw">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const emblaContainer = embla.containerNode()
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `slideNodes`
@@ -915,19 +915,19 @@ const emblaContainer = embla.containerNode()
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const emblaSlides = embla.slideNodes()
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scrollNext`
@@ -964,13 +964,13 @@ const emblaSlides = embla.slideNodes()
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const nextButton = emblaNode.querySelector('.embla__next')
@@ -984,7 +984,7 @@ nextButton.addEventListener('click', embla.scrollNext, false)
 </button>
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scrollPrev`
@@ -1021,13 +1021,13 @@ nextButton.addEventListener('click', embla.scrollNext, false)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const prevButton = emblaNode.querySelector('.embla__prev')
@@ -1041,7 +1041,7 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
 </button>
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scrollTo`
@@ -1081,13 +1081,13 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const rewindButton = emblaNode.querySelector('.embla__rewind')
@@ -1101,7 +1101,56 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
 </button>
 ```
 
-<hr>    
+<hr>
+</details>
+
+##### `scrollBy`
+
+<details>
+  <summary>
+    Scroll the carousel by the given amount.
+  </summary>
+  <hr>
+  <div>
+    This API method allows users to manipulate the current
+    <a href="#scrollprogress">
+      <code>scrollProgress</code>
+    </a> by either adding to it or subtracting from it. For example, assuming that the carousel is positioned on the first snap point, `0.5` will scroll the carousel half of its scrollable length. Scroll to target is smooth.
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>progress: number</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="#scrollby">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+    </a>
+    &nbsp;
+    <a href="#scrollby">
+      <code>CodeSandbox (⚠️ Upcoming!)</code>
+    </a>
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+embla.scrollBy(0.5)
+```
+
+<hr>
 </details>
 
 ##### `canScrollPrev`
@@ -1138,13 +1187,13 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const prevButton = emblaNode.querySelector('.embla__prev')
@@ -1167,7 +1216,7 @@ embla.on('select', togglePrevButtonEnabled);
 </button>
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `canScrollNext`
@@ -1204,13 +1253,13 @@ embla.on('select', togglePrevButtonEnabled);
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const nextButton = emblaNode.querySelector('.embla__next')
@@ -1233,7 +1282,7 @@ embla.on('select', toggleNextButtonEnabled);
 </button>
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `selectedScrollSnap`
@@ -1270,13 +1319,13 @@ embla.on('select', toggleNextButtonEnabled);
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
@@ -1286,7 +1335,7 @@ embla.on('select', () => {
 })
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `previousScrollSnap`
@@ -1323,13 +1372,13 @@ embla.on('select', () => {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
@@ -1339,7 +1388,7 @@ embla.on('select', () => {
 })
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scrollSnapList`
@@ -1376,13 +1425,13 @@ embla.on('select', () => {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const scrollSnaps = embla.scrollSnapList()
@@ -1391,7 +1440,7 @@ const slidesInFirstScrollSnap = scrollSnaps[0].slideNodes;
 const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scrollProgress`
@@ -1428,13 +1477,13 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
@@ -1444,7 +1493,7 @@ embla.on('scroll', () => {
 })
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `clickAllowed`
@@ -1478,13 +1527,13 @@ embla.on('scroll', () => {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 const emblaSlides = embla.slideNodes()
@@ -1503,7 +1552,7 @@ emblaSlides.forEach((slide, index) => {
 })
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `changeOptions`
@@ -1542,19 +1591,19 @@ emblaSlides.forEach((slide, index) => {
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 embla.changeOptions({ loop: true })
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `destroy`
@@ -1588,19 +1637,19 @@ embla.changeOptions({ loop: true })
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 embla.destroy()
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `on`
@@ -1644,13 +1693,13 @@ embla.destroy()
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
@@ -1661,7 +1710,7 @@ const onInitCallback = () => {
 embla.on('init', onInitCallback)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `off`
@@ -1706,13 +1755,13 @@ embla.on('init', onInitCallback)
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
@@ -1724,7 +1773,7 @@ const addLogIndexListener = () => embla.on('select', logIndexToConsole);
 const removeLogIndexListener = () => embla.off('select', logIndexToConsole);
 ```
 
-<hr>    
+<hr>
 </details>
 
 ## Events
@@ -1758,18 +1807,18 @@ embla.on('scroll', () => {
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `destroy`
@@ -1790,18 +1839,18 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `select`
@@ -1822,18 +1871,18 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `scroll`
@@ -1848,24 +1897,29 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
+
+embla.on('scroll', () => {
+  const scrollProgressPercentage = embla.scrollProgress() * 100
+  console.log(`The carousel has scrolled ${scrollProgressPercentage}%.`)
+})
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `resize`
@@ -1886,18 +1940,18 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `dragStart`
@@ -1918,18 +1972,18 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ##### `dragEnd`
@@ -1950,18 +2004,18 @@ const embla = EmblaCarousel(emblaNode, options)
     &nbsp;
     <a href="#">
       <code>CodeSandbox</code>
-    </a> 
+    </a>
   </div>
   <br>
   <p>
     <strong>Usage</strong>
   </p>
-  
+
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-<hr>    
+<hr>
 </details>
 
 ## CodeSandbox
@@ -2020,7 +2074,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <p align="center">
     Thank you to all contributors for making Embla Carousel awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
-  <p align="center">
+<p align="center">
     <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=122&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a> 
     <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=122&v=4" title="ehellman" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/afilp"><img src="https://avatars0.githubusercontent.com/u/7850073?s=122&v=4" title="afilp" width="66" height="66" style="max-width:100%;"></a>
