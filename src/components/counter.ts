@@ -36,9 +36,9 @@ export function Counter(params: Params): Counter {
 
   function add(n: number): Counter {
     if (n !== 0) {
-      const one = n / Math.abs(n)
-      set(get() + one)
-      return add(n + one * -1)
+      const sign = n / Math.abs(n)
+      set(get() + sign)
+      return add(n + sign * -1)
     }
     return self
   }
