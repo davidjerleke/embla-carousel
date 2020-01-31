@@ -1115,7 +1115,7 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
     This API method allows users to manipulate the current
     <a href="#scrollprogress">
       <code>scrollProgress</code>
-    </a> by either adding to it or subtracting from it. For example, assuming that the carousel is positioned on the first snap point, `0.5` will scroll the carousel half of its scrollable length. Scroll to target is smooth.
+    </a> by either adding to it or subtracting from it. For example, assuming that the carousel is positioned on the first snap point, <code>0.5</code> will scroll the carousel half of its scrollable length. Scroll to target is smooth.
   </div>
   <br>
   <div>
@@ -1206,8 +1206,8 @@ const togglePrevButtonEnabled = () => {
   }
 }
 
-embla.on('init', togglePrevButtonEnabled);
-embla.on('select', togglePrevButtonEnabled);
+embla.on('init', togglePrevButtonEnabled)
+embla.on('select', togglePrevButtonEnabled)
 ```
 
 ```html
@@ -1272,8 +1272,8 @@ const toggleNextButtonEnabled = () => {
   }
 }
 
-embla.on('init', toggleNextButtonEnabled);
-embla.on('select', toggleNextButtonEnabled);
+embla.on('init', toggleNextButtonEnabled)
+embla.on('select', toggleNextButtonEnabled)
 ```
 
 ```html
@@ -1436,8 +1436,8 @@ embla.on('select', () => {
 const embla = EmblaCarousel(emblaNode, options)
 const scrollSnaps = embla.scrollSnapList()
 
-const slidesInFirstScrollSnap = scrollSnaps[0].slideNodes;
-const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
+const slidesInFirstScrollSnap = scrollSnaps[0].slideNodes
+const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes
 ```
 
 <hr>
@@ -1488,8 +1488,8 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes;
 const embla = EmblaCarousel(emblaNode, options)
 
 embla.on('scroll', () => {
-  const scrollProgressPercentage = embla.scrollProgress() * 100
-  console.log(`The carousel has scrolled ${scrollProgressPercentage}%.`)
+  const scrollPercentage = embla.scrollProgress() * 100
+  console.log(`The carousel has scrolled ${scrollPercentage}%.`)
 })
 ```
 
@@ -1538,7 +1538,7 @@ embla.on('scroll', () => {
 const embla = EmblaCarousel(emblaNode, options)
 const emblaSlides = embla.slideNodes()
 
-const alertClickedSlide = (index) => {
+const alertClickedSlide = index => {
   return () => {
     if (embla.clickAllowed()) {
       alert(`Slide with index ${index} was clicked.`)
@@ -1715,7 +1715,6 @@ embla.on('init', onInitCallback)
 
 ##### `off`
 
-
 <details>
   <summary>
     Unsubscribe from an Embla specific event.
@@ -1765,12 +1764,13 @@ embla.on('init', onInitCallback)
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
 
-const logIndexToConsole = () => {
-  console.log(`Selected index has changed to ${embla.selectedScrollSnap()}.`)
+const logIndex = () => {
+  const selectedIndex = embla.selectedScrollSnap()
+  console.log(`Selected index has changed to ${selectedIndex}.`)
 }
 
-const addLogIndexListener = () => embla.on('select', logIndexToConsole);
-const removeLogIndexListener = () => embla.off('select', logIndexToConsole);
+const addLogIndexListener = () => embla.on('select', logIndex)
+const removeLogIndexListener = () => embla.off('select', logIndex)
 ```
 
 <hr>
@@ -1914,8 +1914,8 @@ const embla = EmblaCarousel(emblaNode, options)
 const embla = EmblaCarousel(emblaNode, options)
 
 embla.on('scroll', () => {
-  const scrollProgressPercentage = embla.scrollProgress() * 100
-  console.log(`The carousel has scrolled ${scrollProgressPercentage}%.`)
+  const scrollPercentage = embla.scrollProgress() * 100
+  console.log(`The carousel has scrolled ${scrollPercentage}%.`)
 })
 ```
 
