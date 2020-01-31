@@ -3,7 +3,7 @@
   "version": "2.7.0",
   "author": "David Cetinkaya",
   "private": false,
-  "description": "Extensible low level carousels for the web",
+  "description": "Extensible bare bones carousels for the web",
   "keywords": [
     "slider",
     "carousel",

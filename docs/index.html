@@ -11,7 +11,7 @@
     />
     <meta
       name="description"
-      content="Embla - Extensible low level carousels for the web, written in TypeScript."
+      content="Embla - Extensible bare bones carousels for the web, written in TypeScript."
     />
     <meta
       name="author"
@@ -20,7 +20,7 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
     <title>
-      Embla - Extensible low level carousels for the web
+      Embla - Extensible bare bones carousels for the web
     </title>
 
     <!-- FAVICONS -->
@@ -51,11 +51,11 @@
     <!-- OPEN GRAPH -->
     <meta
       property="og:site_name"
-      content="Embla - Extensible low level carousels for the web"
+      content="Embla - Extensible bare bones carousels for the web"
     />
     <meta
       property="og:title"
-      content="Embla - Extensible low level carousels for the web"
+      content="Embla - Extensible bare bones carousels for the web"
     />
     <meta
       property="og:url"
@@ -64,7 +64,7 @@
     <meta property="og:type" content="website" />
     <meta
       property="og:description"
-      content="Embla is an extensible low level carousel for the web, written in TypeScript."
+      content="Embla is an extensible bare bones carousel library for the web, written in TypeScript."
     />
     <meta
       property="og:image"
@@ -77,11 +77,11 @@
     <meta name="twitter:creator" content="@david_cetinkaya" />
     <meta
       name="twitter:title"
-      content="Embla - Extensible low level carousels for the web"
+      content="Embla - Extensible bare bones carousels for the web"
     />
     <meta
       name="twitter:description"
-      content="Embla is an extensible low level carousel for the web, written in TypeScript."
+      content="Embla is an extensible bare bones carousel library for the web, written in TypeScript."
     />
     <meta
       name="twitter:image"
@@ -142,8 +142,8 @@
             <div class="banner__content">
               <h1 class="banner__heading">Embla</h1>
               <h2 class="banner__subheading">
-                Extensible low level carousels for the web, written in
-                TypeScript
+                Extensible bare bones carousels for the web, written
+                in TypeScript
               </h2>
               <a href="#examples" class="banner__button">Examples</a>
               <a
@@ -164,10 +164,10 @@
         <div class="content-wrap">
           <div class="examples section">
             <p class="examples__description">
-              Embla's purpose is to provide extensible low level
-              carousels for the web. Extend it with basic JavaScript
-              and build awesome physics simulated carousels.
-              Dependency free and 100% open source.
+              Embla is an extensible bare bones carousel library for
+              the web. Build awesome carousels by extending them with
+              your own CSS and JavaScript. Embla Carousel is
+              dependency free and 100% open source.
             </p>
             <p class="examples__description">
               For <strong>documentation</strong> and a full list of
@@ -177,7 +177,7 @@
                 href="https://github.com/davidcetinkaya/embla-carousel"
                 target="_blank"
                 >Github page</a
-              >. This is a demo page.
+              >.
             </p>
           </div>
         </div>
@@ -439,7 +439,7 @@
             function() {
               embla.scrollTo(i)
             },
-            false
+            false,
           )
         })
       }
@@ -485,7 +485,7 @@
         var disablePrevAndNextBtns = togglePrevAndNextBtns(
           prevBtn,
           nextBtn,
-          embla
+          embla,
         )
         addDotBtnClickListeners(dotsArray, embla)
         addPrevNextBtnClickListeners(prevBtn, nextBtn, embla)
