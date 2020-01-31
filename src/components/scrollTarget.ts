@@ -5,7 +5,6 @@ import { Vector1D } from './vector1d'
 
 type Params = {
   align: Alignments
-  dragFree: boolean
   index: Counter
   loop: boolean
   snapSizes: number[]
@@ -27,7 +26,7 @@ export type Target = {
 
 export type ScrollTarget = {
   byIndex: (target: number, direction: number) => Target
-  byDistance: (force: number) => Target
+  byDistance: (force: number, snap: boolean) => Target
 }
 
 export function ScrollTarget(params: Params): ScrollTarget {
@@ -59,7 +58,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
     while (reachedMax(distance)) distance -= contentSize
     while (reachedMin(distance)) distance += contentSize
     const foundIndex = snapBounds.reduce((a, b, i) => {
-      return distance < b.start && distance > b.end ? i : a
+      return distance <= b.start && distance > b.end ? i : a
     }, 0)
     return { distance, index: foundIndex }
   }
@@ -88,13 +87,13 @@ export function ScrollTarget(params: Params): ScrollTarget {
     return target
   }
 
-  function byDistance(force: number): Target {
-    const { target, dragFree, index } = params
+  function byDistance(force: number, snap: boolean): Target {
+    const { target, index } = params
     const distance = target.get() + force
     const targetSnap = findTargetSnapAt(distance)
     const reachedEdge = !loop && reachedAny(distance)
 
-    if (reachedEdge || dragFree) {
+    if (reachedEdge || !snap) {
       const { min, max } = index
       const edgeIndex = reachedMax(distance) ? min : max
       const targetIndex = reachedEdge ? edgeIndex : targetSnap.index

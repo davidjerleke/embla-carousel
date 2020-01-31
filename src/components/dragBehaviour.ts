@@ -110,7 +110,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
       const next = index.clone().add(indexDiff)
       scrollTo.index(next.get(), 0)
     } else {
-      scrollTo.distance(force)
+      scrollTo.distance(force, !dragFree)
     }
   }
 

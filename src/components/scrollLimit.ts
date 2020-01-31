@@ -1,8 +1,6 @@
-import { ChunkSize } from './chunkSize'
 import { Limit } from './limit'
 
 type Params = {
-  chunkSize: ChunkSize
   contentSize: number
   loop: boolean
 }
@@ -12,15 +10,14 @@ export type ScrollLimit = {
 }
 
 export function ScrollLimit(params: Params): ScrollLimit {
-  const { contentSize, chunkSize, loop } = params
-  const loopSize = -contentSize + chunkSize.measure(1)
+  const { contentSize, loop } = params
 
   function measure(scrollSnaps: number[]): Limit {
     const startSnap = scrollSnaps[0]
     const endSnap = scrollSnaps[scrollSnaps.length - 1]
+    const min = loop ? startSnap - contentSize : endSnap
     const max = startSnap
-    const min = loop ? max + loopSize : endSnap
-    return Limit({ max, min })
+    return Limit({ min, max })
   }
 
   const self: ScrollLimit = {

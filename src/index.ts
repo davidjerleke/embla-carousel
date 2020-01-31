@@ -29,6 +29,7 @@ export type EmblaCarousel = {
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   previousScrollSnap: () => number
+  scrollBy: (progress: number) => void
   scrollNext: () => void
   scrollPrev: () => void
   scrollProgress: () => number
@@ -179,6 +180,12 @@ export function EmblaCarousel(
     slider.scrollTo.index(prev.get(), 1)
   }
 
+  function scrollBy(progress: number): void {
+    const distance = slider.scrollBy.distance(progress)
+    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollTo.distance(distance, false)
+  }
+
   function scrollTo(index: number): void {
     slider.mover.useDefaultMass().useDefaultSpeed()
     slider.scrollTo.index(index, 0)
@@ -228,6 +235,7 @@ export function EmblaCarousel(
     off,
     on,
     previousScrollSnap,
+    scrollBy,
     scrollNext,
     scrollPrev,
     scrollProgress,

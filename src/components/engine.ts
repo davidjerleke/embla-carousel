@@ -9,6 +9,7 @@ import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
 import { ScrollBounds } from './scrollBounds'
+import { ScrollBy } from './scrollBy'
 import { ScrollContain } from './scrollContain'
 import { ScrollLimit } from './scrollLimit'
 import { ScrollLooper } from './scrollLooper'
@@ -35,6 +36,7 @@ export type Engine = {
   target: Vector1D
   translate: Translate
   scrollTo: ScrollTo
+  scrollBy: ScrollBy
 }
 
 export function Engine(
@@ -89,7 +91,7 @@ export function Engine(
   const indexPrevious = index.clone()
 
   // ScrollLimit
-  const scrollLimit = ScrollLimit({ loop, chunkSize, contentSize })
+  const scrollLimit = ScrollLimit({ loop, contentSize })
   const limit = scrollLimit.measure(scrollSnaps)
 
   // Direction
@@ -130,7 +132,6 @@ export function Engine(
     scrollTarget: ScrollTarget({
       align,
       contentSize,
-      dragFree,
       index,
       limit,
       loop,
@@ -173,7 +174,13 @@ export function Engine(
       mover,
       tolerance: 50,
     }),
+    scrollBy: ScrollBy({
+      limit,
+      location,
+      loop,
+    }),
     scrollLooper: ScrollLooper({
+      chunkSize,
       contentSize,
       limit,
       location,

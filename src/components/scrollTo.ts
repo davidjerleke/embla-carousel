@@ -14,7 +14,7 @@ type Params = {
 }
 
 export type ScrollTo = {
-  distance: (n: number) => void
+  distance: (n: number, snap: boolean) => void
   index: (n: number, direction: number) => void
 }
 
@@ -37,8 +37,8 @@ export function ScrollTo(params: Params): ScrollTo {
     }
   }
 
-  function distance(n: number): void {
-    const target = scrollTarget.byDistance(n)
+  function distance(n: number, snap: boolean): void {
+    const target = scrollTarget.byDistance(n, snap)
     scrollTo(target)
   }
 
