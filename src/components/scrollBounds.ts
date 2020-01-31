@@ -21,9 +21,8 @@ export function ScrollBounds(params: Params): ScrollBounds {
   const state = { timeout: 0 }
 
   function shouldConstrain(v: Vector1D): boolean {
-    const l = location.get()
-    const constrainMin = reachedMin(l) && v.get() !== min
-    const constrainMax = reachedMax(l) && v.get() !== max
+    const constrainMin = reachedMin(location.get()) && v.get() !== min
+    const constrainMax = reachedMax(location.get()) && v.get() !== max
     return constrainMin || constrainMax
   }
 
