@@ -176,8 +176,8 @@ export function Engine(
     }),
     scrollBy: ScrollBy({
       limit,
-      location,
       loop,
+      target,
     }),
     scrollLooper: ScrollLooper({
       chunkSize,

@@ -4,7 +4,7 @@ import { Vector1D } from './vector1d'
 type Params = {
   loop: boolean
   limit: Limit
-  location: Vector1D
+  target: Vector1D
 }
 
 export type ScrollBy = {
@@ -12,14 +12,14 @@ export type ScrollBy = {
 }
 
 export function ScrollBy(params: Params): ScrollBy {
-  const { loop, limit, location } = params
+  const { loop, limit, target } = params
   const { min, max, reachedMin, reachedMax } = limit
   const scrollLength = min - max
 
   function withinBounds(n: number): number {
-    const target = location.get() + n
-    if (reachedMax(target)) return max - location.get()
-    if (reachedMin(target)) return min - location.get()
+    const desired = target.get() + n
+    if (reachedMax(desired)) return max - target.get()
+    if (reachedMin(desired)) return min - target.get()
     return n
   }
 

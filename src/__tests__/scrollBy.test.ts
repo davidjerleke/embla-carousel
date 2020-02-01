@@ -14,9 +14,9 @@ const getScrollLimit = (loop: boolean): Limit => {
   return scrollLimit.measure(scrollSnaps)
 }
 
-const getScrollBy = (loop: boolean, location: Vector1D): ScrollBy => {
+const getScrollBy = (loop: boolean, target: Vector1D): ScrollBy => {
   const limit = getScrollLimit(loop)
-  return ScrollBy({ location, limit, loop })
+  return ScrollBy({ target, limit, loop })
 }
 
 describe('ScrollBy', () => {
