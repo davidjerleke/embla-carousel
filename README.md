@@ -1132,12 +1132,12 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
   </div>
   <br>
   <div>
-    <a href="#scrollby">
+    <a href="https://codesandbox.io/s/embla-carousel-scrollby-07cq5">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#scrollby">
-      <code>CodeSandbox (⚠️ Upcoming!)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollby-07cq5">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
