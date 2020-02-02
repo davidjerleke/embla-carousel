@@ -2024,7 +2024,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p>
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
-  <a href="https://codesandbox.io/s/embla-carousel-loop-false-oyols">
+  <a href="https://codesandbox.io/s/embla-carousel-basic-setup-oyols">
     <code>Basic Setup</code>
   </a> 
   - With Previous, Next & Dot buttons.
