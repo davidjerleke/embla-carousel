@@ -33,14 +33,13 @@ export function Pointer(size: ChunkSize): Pointer {
   }
 
   function read(evt: any, axis: Axis): Vector1D {
-    const { isMouse } = state
+    state.isMouse = !evt.touches
     const c = coords[axis]
-    const value = isMouse ? evt[c] : evt.touches[0][c]
+    const value = state.isMouse ? evt[c] : evt.touches[0][c]
     return pointValue.setNumber(value)
   }
 
   function down(evt: Event): number {
-    state.isMouse = !!evt.type.match(/mouse/)
     const point = read(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
