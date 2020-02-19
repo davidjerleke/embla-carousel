@@ -1704,7 +1704,7 @@ embla.destroy()
 const embla = EmblaCarousel(emblaNode, options)
 
 const onInitCallback = () => {
-  console.log('The carousel has just been initialized.')
+  console.log('The carousel is ready to rock.')
 }
 
 embla.on('init', onInitCallback)
@@ -1793,11 +1793,17 @@ embla.on('scroll', () => {
 
 <details>
   <summary>
-    Under construction...
+    Fire your callback when the carousel mounts.
   </summary>
   <hr>
   <div>
-    Under construction...
+    This event fires the given callback when the carousel has initialised and its
+    <a href="#api">
+      <code>API</code>
+    </a> is ready to use. Note that the init event only fires once upon the first initialisation and won't trigger when invoking 
+    <a href="#changeOptions">
+      <code>changeOptions</code>
+    </a> or similar.
   </div>
   <br>
   <div>
@@ -1806,7 +1812,7 @@ embla.on('scroll', () => {
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>
@@ -1816,6 +1822,12 @@ embla.on('scroll', () => {
 
 ```javascript
 const embla = EmblaCarousel(emblaNode, options)
+
+const onInitCallback = () => {
+  console.log('The carousel is ready to rock.')
+})
+
+embla.on('init', onInitCallback)
 ```
 
 <hr>
