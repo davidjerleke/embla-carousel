@@ -1,6 +1,5 @@
 import { AlignSize } from './alignSize'
 import { Animation } from './animation'
-import { ChunkSize } from './chunkSize'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
 import { EventDispatcher } from './eventDispatcher'
@@ -8,6 +7,7 @@ import { Limit } from './limit'
 import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
+import { PxToPercent } from './pxToPercent'
 import { ScrollBounds } from './scrollBounds'
 import { ScrollBy } from './scrollBy'
 import { ScrollContain } from './scrollContain'
@@ -59,10 +59,10 @@ export function Engine(
 
   // Measurements
   const containerSize = rectWidth(container)
-  const chunkSize = ChunkSize(containerSize)
-  const viewSize = chunkSize.root
+  const pxToPercent = PxToPercent(containerSize)
+  const viewSize = pxToPercent.totalPercent
   const slideIndexes = Object.keys(slides).map(Number)
-  const slideSizes = slides.map(rectWidth).map(chunkSize.measure)
+  const slideSizes = slides.map(rectWidth).map(pxToPercent.measure)
   const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
   const contentSize = slideSizes.reduce((a, s) => a + s)
@@ -153,7 +153,7 @@ export function Engine(
     location,
     loop,
     mover,
-    pointer: Pointer(chunkSize),
+    pointer: Pointer(pxToPercent),
     scrollTo,
     snapSizes,
     target,
@@ -180,10 +180,10 @@ export function Engine(
       target,
     }),
     scrollLooper: ScrollLooper({
-      chunkSize,
       contentSize,
       limit,
       location,
+      pxToPercent,
       vectors: [location, target],
     }),
     scrollProgress: ScrollProgress({

@@ -1,12 +1,12 @@
-import { ChunkSize } from './chunkSize'
 import { Limit } from './limit'
+import { PxToPercent } from './pxToPercent'
 import { Vector1D } from './vector1d'
 
 type Params = {
-  chunkSize: ChunkSize
   contentSize: number
   limit: Limit
   location: Vector1D
+  pxToPercent: PxToPercent
   vectors: Vector1D[]
 }
 
@@ -15,9 +15,10 @@ export type ScrollLooper = {
 }
 
 export function ScrollLooper(params: Params): ScrollLooper {
-  const { limit, location, chunkSize, contentSize, vectors } = params
-  const min = limit.min + chunkSize.measure(0.1)
-  const max = limit.max + chunkSize.measure(0.1)
+  const { contentSize, location, vectors } = params
+  const { limit, pxToPercent } = params
+  const min = limit.min + pxToPercent.measure(0.1)
+  const max = limit.max + pxToPercent.measure(0.1)
   const { reachedMin, reachedMax } = Limit({ min, max })
 
   function shouldLoop(direction: number): boolean {

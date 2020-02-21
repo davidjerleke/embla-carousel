@@ -1,5 +1,5 @@
-import { ChunkSize } from './chunkSize'
 import { Direction } from './direction'
+import { PxToPercent } from './pxToPercent'
 import { Vector1D } from './vector1d'
 
 type Axis = 'x' | 'y'
@@ -18,7 +18,7 @@ export type Pointer = {
   read: (evt: any, axis: Axis) => Vector1D
 }
 
-export function Pointer(size: ChunkSize): Pointer {
+export function Pointer(pxToPercent: PxToPercent): Pointer {
   const coords = { x: 'clientX', y: 'clientY' }
   const startDrag = Vector1D(0)
   const diffDrag = Vector1D(0)
@@ -43,7 +43,7 @@ export function Pointer(size: ChunkSize): Pointer {
     const point = read(evt, 'x')
     startDrag.set(point)
     lastDrag.set(point)
-    return size.measure(startDrag.get())
+    return pxToPercent.measure(startDrag.get())
   }
 
   function move(evt: Event): number {
@@ -59,7 +59,7 @@ export function Pointer(size: ChunkSize): Pointer {
     diffDrag.set(point).subtract(lastDrag)
     direction.set(diffDrag)
     lastDrag.set(point)
-    return size.measure(diffDrag.get())
+    return pxToPercent.measure(diffDrag.get())
   }
 
   function up(): number {
@@ -76,7 +76,7 @@ export function Pointer(size: ChunkSize): Pointer {
     )
 
     state.trackPoints = []
-    return size.measure(lastDrag.get())
+    return pxToPercent.measure(lastDrag.get())
   }
 
   const self: Pointer = {

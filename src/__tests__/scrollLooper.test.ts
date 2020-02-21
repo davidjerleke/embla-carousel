@@ -1,4 +1,4 @@
-import { ChunkSize } from '../components/chunkSize'
+import { PxToPercent } from '../components/pxToPercent'
 import { ScrollLooper } from '../components/scrollLooper'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
@@ -10,7 +10,7 @@ const minLimit = 0
 const maxLimit = 10
 const contentSize = 10
 const limit = Limit({ min: minLimit, max: maxLimit })
-const chunkSize = ChunkSize(1000)
+const pxToPercent = PxToPercent(1000)
 const vectorOneInitialValue = 5
 const vectorTwoInitialValue = 10
 
@@ -21,7 +21,7 @@ beforeEach(() => {
     Vector1D(vectorTwoInitialValue),
   ]
   scrollLooper = ScrollLooper({
-    chunkSize,
+    pxToPercent,
     limit,
     location,
     contentSize,
