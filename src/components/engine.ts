@@ -95,10 +95,11 @@ export function Engine(
   const limit = scrollLimit.measure(scrollSnaps)
 
   // Direction
-  const direction = (): number =>
-    pointer.isDown()
+  const direction = (): number => {
+    return pointer.isDown()
       ? pointer.direction.get()
       : engine.mover.direction.get()
+  }
 
   // Draw
   const update = (): void => {

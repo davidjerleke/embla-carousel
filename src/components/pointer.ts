@@ -65,16 +65,12 @@ export function Pointer(pxToPercent: PxToPercent): Pointer {
   function up(): number {
     const currentPoint = lastDrag.get()
     const trackLength = state.isMouse ? 5 : 4
+    const point = state.trackPoints
+      .slice(-trackLength)
+      .map(trackPoint => currentPoint - trackPoint)
+      .sort((p1, p2) => (Math.abs(p1) < Math.abs(p2) ? 1 : -1))[0]
 
-    lastDrag.setNumber(
-      state.trackPoints
-        .slice(-trackLength)
-        .map(point => currentPoint - point)
-        .sort((p1, p2) =>
-          Math.abs(p1) < Math.abs(p2) ? 1 : -1,
-        )[0] || 0,
-    )
-
+    lastDrag.setNumber(point || 0)
     state.trackPoints = []
     return pxToPercent.measure(lastDrag.get())
   }

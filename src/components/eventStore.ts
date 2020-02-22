@@ -1,6 +1,6 @@
 type EventRemover = () => void
-type EventHandler = (evt: Event) => void
-type EventOptions = AddEventListenerOptions | boolean
+type EventHandler = EventListener | EventListenerObject | null
+type EventOptions = boolean | EventListenerOptions | undefined
 type State = { listeners: EventRemover[] }
 
 export type EventStore = {
@@ -23,9 +23,9 @@ export function EventStore(): EventStore {
     options: EventOptions = false,
   ): EventStore {
     node.addEventListener(type, handler, options)
-    state.listeners.push(() =>
-      node.removeEventListener(type, handler, options),
-    )
+    state.listeners.push(() => {
+      return node.removeEventListener(type, handler, options)
+    })
     return self
   }
 
