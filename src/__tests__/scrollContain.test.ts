@@ -1,4 +1,4 @@
-import { AlignSize, Alignments } from '../components/alignSize'
+import { Alignment, Alignments } from '../components/alignment'
 import { ScrollContain } from '../components/scrollContain'
 import { ScrollSnap } from '../components/scrollSnap'
 
@@ -8,14 +8,14 @@ const equalsView = [50, 50]
 
 const contained = (align: Alignments, snapSizes: number[]) => {
   const viewSize = 100
-  const alignSize = AlignSize({ align, viewSize })
-  const scrollSnap = ScrollSnap({ snapSizes, alignSize, loop: false })
+  const alignment = Alignment({ align, viewSize })
+  const scrollSnap = ScrollSnap({ snapSizes, alignment, loop: false })
   const defaultSnaps = snapSizes.map(scrollSnap.measure)
   const scrollContain = ScrollContain({
     slideIndexes: Object.keys(snapSizes).map(Number),
     contentSize: snapSizes.reduce((a, s) => a + s, 0),
     slidesToScroll: 1,
-    alignSize,
+    alignment,
     viewSize,
   })
   return {

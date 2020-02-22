@@ -1,4 +1,4 @@
-import { AlignSize, Alignments } from '../components/alignSize'
+import { Alignment, Alignments } from '../components/alignment'
 import { PxToPercent } from '../components/pxToPercent'
 import { SlideLooper } from '../components/slideLooper'
 import { Vector1D } from '../components/vector1d'
@@ -7,9 +7,9 @@ const slideLooperParams = (align: Alignments) => {
   const location = Vector1D(0)
   const pxToPercent = PxToPercent(950)
   const viewSize = pxToPercent.totalPercent
-  const alignSize = AlignSize({ align, viewSize })
+  const alignment = Alignment({ align, viewSize })
   const slideSizes = [15, 30, 15, 15, 70, 15, 15, 15]
-  const scrollSnaps = slideSizes.map(alignSize.measure)
+  const scrollSnaps = slideSizes.map(alignment.measure)
   const contentSize = slideSizes.reduce((a, s) => a + s)
   return {
     scrollSnaps,

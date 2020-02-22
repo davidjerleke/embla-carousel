@@ -1,4 +1,4 @@
-import { Alignments } from './alignSize'
+import { Alignments } from './alignment'
 
 export type Options = {
   align: Alignments

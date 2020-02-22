@@ -1,4 +1,4 @@
-import { Alignments } from './alignSize'
+import { Alignments } from './alignment'
 import { Counter } from './counter'
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'

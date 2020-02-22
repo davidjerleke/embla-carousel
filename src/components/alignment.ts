@@ -5,11 +5,11 @@ type Params = {
   align: Alignments
 }
 
-export type AlignSize = {
+export type Alignment = {
   measure: (n: number) => number
 }
 
-export function AlignSize(params: Params): AlignSize {
+export function Alignment(params: Params): Alignment {
   const { viewSize, align } = params
   const alignment = { start, center, end }
 
@@ -29,7 +29,7 @@ export function AlignSize(params: Params): AlignSize {
     return alignment[align](n)
   }
 
-  const self: AlignSize = {
+  const self: Alignment = {
     measure,
   }
   return Object.freeze(self)

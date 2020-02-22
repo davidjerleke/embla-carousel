@@ -1,4 +1,4 @@
-import { AlignSize } from './alignSize'
+import { Alignment } from './alignment'
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
@@ -66,10 +66,10 @@ export function Engine(
   const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
   const contentSize = slideSizes.reduce((a, s) => a + s)
-  const alignSize = AlignSize({ align, viewSize })
-  const scrollSnap = ScrollSnap({ snapSizes, alignSize, loop })
+  const alignment = Alignment({ align, viewSize })
+  const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
   const scrollContain = ScrollContain({
-    alignSize,
+    alignment,
     contentSize,
     slideIndexes,
     slidesToScroll,

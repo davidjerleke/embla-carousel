@@ -1,8 +1,8 @@
-import { AlignSize, Alignments } from '../components/alignSize'
+import { Alignment, Alignments } from '../components/alignment'
 import { ScrollSnap } from '../components/scrollSnap'
 
 const scrollSnapParams = (align: Alignments) => ({
-  alignSize: AlignSize({ align, viewSize: 100 }),
+  alignment: Alignment({ align, viewSize: 100 }),
   loop: false,
   snapSizes: [80, 24, 61, 55, 76, 15],
 })

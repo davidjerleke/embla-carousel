@@ -1,10 +1,10 @@
-import { AlignSize } from './alignSize'
+import { Alignment } from './alignment'
 import { Counter } from './counter'
 import { Limit } from './limit'
 
 type Params = {
   snapSizes: number[]
-  alignSize: AlignSize
+  alignment: Alignment
   loop: boolean
 }
 
@@ -13,8 +13,8 @@ export type ScrollSnap = {
 }
 
 export function ScrollSnap(params: Params): ScrollSnap {
-  const { snapSizes, alignSize, loop } = params
-  const alignSizes = snapSizes.map(alignSize.measure)
+  const { snapSizes, alignment, loop } = params
+  const alignments = snapSizes.map(alignment.measure)
   const distancesBetween = distancesBetweenScrollSnaps()
 
   function distancesBetweenScrollSnaps(): number[] {
@@ -23,13 +23,13 @@ export function ScrollSnap(params: Params): ScrollSnap {
 
     return snapSizes.map((size, index) => {
       const next = counter.clone().set(index + 1)
-      return size + alignSizes[index] - alignSizes[next.get()]
+      return size + alignments[index] - alignments[next.get()]
     })
   }
 
   function measure(size: number, index: number): number {
     const sizes = distancesBetween.slice(0, index)
-    return sizes.reduce((a, d) => a - d, alignSizes[0])
+    return sizes.reduce((a, d) => a - d, alignments[0])
   }
 
   const self: ScrollSnap = {

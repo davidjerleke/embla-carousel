@@ -1,23 +1,23 @@
-import { AlignSize } from '../components/alignSize'
+import { Alignment } from '../components/alignment'
 
 const viewSize = 1000
 const itemSize = 100
 
-describe('AlignSize', () => {
+describe('Alignment', () => {
   test('Measures start alignment for given number correctly', () => {
-    const startAlign = AlignSize({ align: 'start', viewSize })
+    const startAlign = Alignment({ align: 'start', viewSize })
     const measure = startAlign.measure(itemSize)
     expect(measure).toBe(0)
   })
 
   test('Measures center alignment for given number correctly', () => {
-    const centerAlign = AlignSize({ align: 'center', viewSize })
+    const centerAlign = Alignment({ align: 'center', viewSize })
     const measure = centerAlign.measure(itemSize)
     expect(measure).toBe(450)
   })
 
   test('Measures end alignment for given number correctly', () => {
-    const endAlign = AlignSize({ align: 'end', viewSize })
+    const endAlign = Alignment({ align: 'end', viewSize })
     const measure = endAlign.measure(itemSize)
     expect(measure).toBe(900)
   })
