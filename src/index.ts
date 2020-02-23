@@ -82,7 +82,7 @@ export function EmblaCarousel(
       const newSlider = Object.assign(slider, engine)
       eventStore.add(window, 'resize', debouncedResize)
       slides.forEach(slideFocusEvent)
-      slider.translate.to(slider.mover.location)
+      slider.translate.to(slider.scrollBody.location)
 
       if (options.loop && slides.length === 1) {
         return activate({ loop: false })
@@ -170,24 +170,24 @@ export function EmblaCarousel(
 
   function scrollNext(): void {
     const next = slider.index.clone().add(1)
-    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollBody.useDefaultMass().useDefaultSpeed()
     slider.scrollTo.index(next.get(), -1)
   }
 
   function scrollPrev(): void {
     const prev = slider.index.clone().add(-1)
-    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollBody.useDefaultMass().useDefaultSpeed()
     slider.scrollTo.index(prev.get(), 1)
   }
 
   function scrollBy(progress: number): void {
     const distance = slider.scrollBy.distance(progress)
-    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollBody.useDefaultMass().useDefaultSpeed()
     slider.scrollTo.distance(distance, false)
   }
 
   function scrollTo(index: number): void {
-    slider.mover.useDefaultMass().useDefaultSpeed()
+    slider.scrollBody.useDefaultMass().useDefaultSpeed()
     slider.scrollTo.index(index, 0)
   }
 

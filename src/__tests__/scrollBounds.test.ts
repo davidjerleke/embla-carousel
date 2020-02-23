@@ -2,22 +2,22 @@ import { Animation } from '../components/animation'
 import { ScrollBounds } from '../components/scrollBounds'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
-import { Mover } from '../components/mover'
+import { ScrollBody } from '../components/scrollBody'
 
 let scrollBounds: ScrollBounds
 let location: Vector1D
-let mover: Mover
+let scrollBody: ScrollBody
 const animation = Animation(() => {})
 const limit = Limit({ min: 0, max: 10 })
 const tolerance = 50
 
 beforeEach(() => {
   location = Vector1D(0)
-  mover = Mover({ location, mass: 1, speed: 10 })
+  scrollBody = ScrollBody({ location, mass: 1, speed: 10 })
   scrollBounds = ScrollBounds({
     limit,
     location,
-    mover,
+    scrollBody,
     animation,
     tolerance,
   })

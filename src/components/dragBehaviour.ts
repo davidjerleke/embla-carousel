@@ -4,8 +4,8 @@ import { Direction } from './direction'
 import { EventDispatcher } from './eventDispatcher'
 import { EventStore } from './eventStore'
 import { Limit } from './limit'
-import { Mover } from './mover'
 import { Pointer } from './pointer'
+import { ScrollBody } from './scrollBody'
 import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
 
@@ -18,7 +18,7 @@ type Params = {
   location: Vector1D
   animation: Animation
   scrollTo: ScrollTo
-  mover: Mover
+  scrollBody: ScrollBody
   index: Counter
   limit: Limit
   loop: boolean
@@ -34,7 +34,7 @@ export type DragBehaviour = {
 }
 
 export function DragBehaviour(params: Params): DragBehaviour {
-  const { target, mover, dragFree, animation } = params
+  const { target, scrollBody, dragFree, animation } = params
   const { element, pointer, location, events, limit } = params
   const { direction } = pointer
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
@@ -129,7 +129,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     pointer.down(evt)
     dragStartLocation.set(target)
     target.set(location)
-    mover.useDefaultMass().useSpeed(80)
+    scrollBody.useDefaultMass().useSpeed(80)
     addInteractionEvents()
     animation.start()
     startX.set(pointer.read(evt, 'x'))
@@ -170,7 +170,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     state.preventScroll = false
     state.isDown = false
     interactionEvents.removeAll()
-    mover.useSpeed(movementSpeed())
+    scrollBody.useSpeed(movementSpeed())
     seekTargetBy(force)
     events.dispatch('dragEnd')
   }

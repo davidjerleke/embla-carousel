@@ -8,19 +8,19 @@ type Params = {
   mass: number
 }
 
-export type Mover = {
+export type ScrollBody = {
   location: Vector1D
   direction: Direction
   update: () => void
-  seek: (target: Vector1D) => Mover
+  seek: (target: Vector1D) => ScrollBody
   settle: (target: Vector1D) => boolean
-  useSpeed: (newSpeed: number) => Mover
-  useDefaultSpeed: () => Mover
-  useMass: (newMass: number) => Mover
-  useDefaultMass: () => Mover
+  useSpeed: (newSpeed: number) => ScrollBody
+  useDefaultSpeed: () => ScrollBody
+  useMass: (newMass: number) => ScrollBody
+  useDefaultMass: () => ScrollBody
 }
 
-export function Mover(params: Params): Mover {
+export function ScrollBody(params: Params): ScrollBody {
   const roundToTwoDecimals = roundToDecimals(2)
   const { location, speed, mass } = params
   const velocity = Vector1D(0)
@@ -40,7 +40,7 @@ export function Mover(params: Params): Mover {
     acceleration.add(force)
   }
 
-  function seek(target: Vector1D): Mover {
+  function seek(target: Vector1D): ScrollBody {
     attraction.set(target).subtract(location)
     const mag = attraction.magnitude()
     const m = map(mag, 0, 100, 0, state.speed)
@@ -61,27 +61,27 @@ export function Mover(params: Params): Mover {
     return hasSettled
   }
 
-  function useSpeed(desired: number): Mover {
+  function useSpeed(desired: number): ScrollBody {
     state.speed = desired
     return self
   }
 
-  function useDefaultSpeed(): Mover {
+  function useDefaultSpeed(): ScrollBody {
     useSpeed(speed)
     return self
   }
 
-  function useMass(desired: number): Mover {
+  function useMass(desired: number): ScrollBody {
     state.mass = desired
     return self
   }
 
-  function useDefaultMass(): Mover {
+  function useDefaultMass(): ScrollBody {
     useMass(mass)
     return self
   }
 
-  const self: Mover = {
+  const self: ScrollBody = {
     direction,
     location,
     seek,

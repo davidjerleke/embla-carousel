@@ -4,10 +4,10 @@ import { Counter } from './counter'
 import { DragBehaviour } from './dragBehaviour'
 import { EventDispatcher } from './eventDispatcher'
 import { Limit } from './limit'
-import { Mover } from './mover'
 import { Options } from './options'
 import { Pointer } from './pointer'
 import { PxToPercent } from './pxToPercent'
+import { ScrollBody } from './scrollBody'
 import { ScrollBounds } from './scrollBounds'
 import { ScrollBy } from './scrollBy'
 import { ScrollContain } from './scrollContain'
@@ -30,7 +30,7 @@ export type Engine = {
   index: Counter
   indexPrevious: Counter
   indexGroups: number[][]
-  mover: Mover
+  scrollBody: ScrollBody
   pointer: DragBehaviour
   slideLooper: SlideLooper
   target: Vector1D
@@ -98,24 +98,24 @@ export function Engine(
   const direction = (): number => {
     return pointer.isDown()
       ? pointer.direction.get()
-      : engine.mover.direction.get()
+      : engine.scrollBody.direction.get()
   }
 
   // Draw
   const update = (): void => {
-    engine.mover.seek(target).update()
+    engine.scrollBody.seek(target).update()
     if (!pointer.isDown()) {
       if (!loop) engine.scrollBounds.constrain(target)
-      if (engine.mover.settle(target)) engine.animation.stop()
+      if (engine.scrollBody.settle(target)) engine.animation.stop()
     }
     if (loop) {
       engine.scrollLooper.loop(direction())
       engine.slideLooper.loop(slides)
     }
-    if (engine.mover.location.get() !== target.get()) {
+    if (engine.scrollBody.location.get() !== target.get()) {
       events.dispatch('scroll')
     }
-    engine.translate.to(engine.mover.location)
+    engine.translate.to(engine.scrollBody.location)
     engine.animation.proceed()
   }
 
@@ -124,7 +124,7 @@ export function Engine(
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const mover = Mover({ location, speed, mass: 1 })
+  const scrollBody = ScrollBody({ location, speed, mass: 1 })
   const scrollTo = ScrollTo({
     animation,
     events,
@@ -153,8 +153,8 @@ export function Engine(
     limit,
     location,
     loop,
-    mover,
     pointer: Pointer(pxToPercent),
+    scrollBody,
     scrollTo,
     snapSizes,
     target,
@@ -166,13 +166,13 @@ export function Engine(
     index,
     indexGroups,
     indexPrevious,
-    mover,
     pointer,
+    scrollBody,
     scrollBounds: ScrollBounds({
       animation,
       limit,
       location,
-      mover,
+      scrollBody,
       tolerance: 50,
     }),
     scrollBy: ScrollBy({
