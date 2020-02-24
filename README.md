@@ -1793,7 +1793,7 @@ embla.on('scroll', () => {
 
 <details>
   <summary>
-    Fire your callback when the carousel mounts.
+    Fire a callback when the carousel mounts.
   </summary>
   <hr>
   <div>
@@ -1837,7 +1837,7 @@ embla.on('init', onInitCallback)
 
 <details>
   <summary>
-    Under construction...
+    Fire a callback when the carousel is destroyed.
   </summary>
   <hr>
   <div>
@@ -1869,7 +1869,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Under construction...
+    Fire a callback when selected scroll snap changes.
   </summary>
   <hr>
   <div>
@@ -1901,7 +1901,7 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <details>
   <summary>
-    Under construction...
+    Fire a callback when the carousel is scrolling.
   </summary>
   <hr>
   <div>
@@ -1938,7 +1938,7 @@ embla.on('scroll', () => {
 
 <details>
   <summary>
-    Under construction...
+    Fire a callback when the carousel has resized.
   </summary>
   <hr>
   <div>
