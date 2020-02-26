@@ -62,6 +62,8 @@ NPM
 
 <pre>npm install <a href="https://www.npmjs.com/package/embla-carousel">embla-carousel</a></pre>
 
+<br>
+
 ## QuickStart
 
 HTML
@@ -111,6 +113,8 @@ const emblaNode = document.querySelector('.embla')
 const options = { loop: true }
 const embla = EmblaCarousel(emblaNode, options)
 ```
+
+<br>
 
 ## Options
 
@@ -824,6 +828,8 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <hr>
 </details>
+
+<br>
 
 ## API
 
@@ -1776,6 +1782,8 @@ const removeLogIndexListener = () => embla.off('select', logIndex)
 <hr>
 </details>
 
+<br>
+
 ## Events
 
 Embla exposes custom events that can be hooked on to. Example usage:
@@ -2066,6 +2074,8 @@ const embla = EmblaCarousel(emblaNode, options)
 <hr>
 </details>
 
+<br>
+
 ## CodeSandbox
 
 <p>Get started instantly with one of the CodeSandboxes below.</p>
@@ -2085,6 +2095,8 @@ const embla = EmblaCarousel(emblaNode, options)
   </a> 
   - Example of how to setup Autoplay.
 </p>
+
+<br>
 
 ## Browser Support
 
