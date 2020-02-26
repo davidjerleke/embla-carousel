@@ -1,10 +1,10 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
 import { Direction } from './direction'
+import { DragTracker } from './dragTracker'
 import { EventDispatcher } from './eventDispatcher'
 import { EventStore } from './eventStore'
 import { Limit } from './limit'
-import { Pointer } from './pointer'
 import { ScrollBody } from './scrollBody'
 import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
@@ -14,7 +14,7 @@ type Params = {
   target: Vector1D
   dragFree: boolean
   snapSizes: number[]
-  pointer: Pointer
+  dragTracker: DragTracker
   location: Vector1D
   animation: Animation
   scrollTo: ScrollTo
@@ -25,18 +25,18 @@ type Params = {
   events: EventDispatcher
 }
 
-export type DragBehaviour = {
+export type DragHandler = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
   direction: Direction
-  isDown: () => boolean
+  pointerDown: () => boolean
   removeAllEvents: () => void
 }
 
-export function DragBehaviour(params: Params): DragBehaviour {
+export function DragHandler(params: Params): DragHandler {
   const { target, scrollBody, dragFree, animation } = params
-  const { element, pointer, location, events, limit } = params
-  const { direction } = pointer
+  const { element, dragTracker, location, events, limit } = params
+  const { direction } = dragTracker
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
   const startY = Vector1D(0)
@@ -92,7 +92,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
     return speed[type]
   }
 
-  function pointerForceBoost(): number {
+  function dragForceBoost(): number {
     const boost = dragFree ? freeForceBoost : snapForceBoost
     const type = state.isMouse ? 'mouse' : 'touch'
     return boost[type]
@@ -126,14 +126,14 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
     state.isDown = true
     state.isMouse = isMouse
-    pointer.down(evt)
+    dragTracker.pointerDown(evt)
     dragStartLocation.set(target)
     target.set(location)
     scrollBody.useDefaultMass().useSpeed(80)
     addInteractionEvents()
     animation.start()
-    startX.set(pointer.read(evt, 'x'))
-    startY.set(pointer.read(evt, 'y'))
+    startX.set(dragTracker.readPoint(evt, 'x'))
+    startY.set(dragTracker.readPoint(evt, 'y'))
     events.dispatch('dragStart')
 
     if (clearPreventClick) state.preventClick = false
@@ -142,14 +142,14 @@ export function DragBehaviour(params: Params): DragBehaviour {
 
   function move(evt: Event): void {
     if (!state.preventScroll && !state.isMouse) {
-      const X = pointer.read(evt, 'x').get()
-      const Y = pointer.read(evt, 'y').get()
+      const X = dragTracker.readPoint(evt, 'x').get()
+      const Y = dragTracker.readPoint(evt, 'y').get()
       const diffX = Math.abs(X - startX.get())
       const diffY = Math.abs(Y - startY.get())
       state.preventScroll = diffX > diffY
       if (!state.preventScroll && !state.preventClick) return up()
     }
-    const diff = pointer.move(evt)
+    const diff = dragTracker.pointerMove(evt)
     const reachedLimit = limit.reachedAny(location.get())
     const resist = !params.loop && reachedLimit ? 2 : 1
     const preventClick = !state.preventClick && diff
@@ -160,7 +160,7 @@ export function DragBehaviour(params: Params): DragBehaviour {
   }
 
   function up(): void {
-    const force = pointer.up() * pointerForceBoost()
+    const force = dragTracker.pointerUp() * dragForceBoost()
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
     const preventClick = isMoving && !state.isMouse
@@ -183,15 +183,15 @@ export function DragBehaviour(params: Params): DragBehaviour {
     return !state.preventClick
   }
 
-  function isDown(): boolean {
+  function pointerDown(): boolean {
     return state.isDown
   }
 
-  const self: DragBehaviour = {
+  const self: DragHandler = {
     addActivationEvents,
     clickAllowed,
     direction,
-    isDown,
+    pointerDown,
     removeAllEvents,
   }
   return Object.freeze(self)

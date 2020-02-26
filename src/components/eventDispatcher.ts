@@ -4,6 +4,7 @@ export type Event =
   | 'init'
   | 'scroll'
   | 'select'
+  | 'settle'
   | 'dragStart'
   | 'dragEnd'
   | 'destroy'
@@ -24,6 +25,7 @@ export function EventDispatcher(): EventDispatcher {
     resize: [],
     scroll: [],
     select: [],
+    settle: [],
   }
 
   function dispatch(evt: Event): EventDispatcher {

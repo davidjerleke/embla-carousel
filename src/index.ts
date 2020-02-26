@@ -100,7 +100,7 @@ export function EmblaCarousel(
   function activateDragFeature(): void {
     const root = elements.root.classList
     const { draggingClass, draggableClass } = options
-    slider.pointer.addActivationEvents()
+    slider.dragHandler.addActivationEvents()
     events.on('dragStart', () => root.add(draggingClass))
     events.on('dragEnd', () => root.remove(draggingClass))
     root.add(draggableClass)
@@ -138,7 +138,7 @@ export function EmblaCarousel(
 
   function deActivate(): void {
     const { root, container, slides } = elements
-    slider.pointer.removeAllEvents()
+    slider.dragHandler.removeAllEvents()
     slider.animation.stop()
     eventStore.removeAll()
     root.classList.remove(options.draggableClass)
@@ -214,7 +214,7 @@ export function EmblaCarousel(
   }
 
   function clickAllowed(): boolean {
-    return slider.pointer.clickAllowed()
+    return slider.dragHandler.clickAllowed()
   }
 
   function containerNode(): HTMLElement {

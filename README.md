@@ -1850,7 +1850,7 @@ embla.on('init', onInitCallback)
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>
@@ -1882,7 +1882,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>
@@ -1934,6 +1934,42 @@ embla.on('scroll', () => {
 <hr>
 </details>
 
+##### `settle`
+
+<details>
+  <summary>
+    Fire a callback when the carousel has settled.
+  </summary>
+  <hr>
+  <div>
+    Under construction...
+  </div>
+  <br>
+  <div>
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+    </a>
+    &nbsp;
+    <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
+      <code>CodeSandbox (upcoming)</code>
+    </a>
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+
+embla.on('settle', () => {
+  console.log(`The carousel has stopped scrolling.`)
+})
+```
+
+<hr>
+</details>
+
 ##### `resize`
 
 <details>
@@ -1951,7 +1987,7 @@ embla.on('scroll', () => {
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>
@@ -1983,7 +2019,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>
@@ -2015,7 +2051,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a>
     &nbsp;
     <a href="#">
-      <code>CodeSandbox</code>
+      <code>CodeSandbox (upcoming)</code>
     </a>
   </div>
   <br>

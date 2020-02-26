@@ -1,11 +1,11 @@
 import { Alignment } from './alignment'
 import { Animation } from './animation'
 import { Counter } from './counter'
-import { DragBehaviour } from './dragBehaviour'
+import { DragHandler } from './dragHandler'
+import { DragTracker } from './dragTracker'
 import { EventDispatcher } from './eventDispatcher'
 import { Limit } from './limit'
 import { Options } from './options'
-import { Pointer } from './pointer'
 import { PxToPercent } from './pxToPercent'
 import { ScrollBody } from './scrollBody'
 import { ScrollBounds } from './scrollBounds'
@@ -31,7 +31,7 @@ export type Engine = {
   indexPrevious: Counter
   indexGroups: number[][]
   scrollBody: ScrollBody
-  pointer: DragBehaviour
+  dragHandler: DragHandler
   slideLooper: SlideLooper
   target: Vector1D
   translate: Translate
@@ -96,15 +96,16 @@ export function Engine(
 
   // Direction
   const direction = (): number => {
-    return pointer.isDown()
-      ? pointer.direction.get()
+    return dragHandler.pointerDown()
+      ? dragHandler.direction.get()
       : engine.scrollBody.direction.get()
   }
 
   // Draw
   const update = (): void => {
     engine.scrollBody.seek(target).update()
-    if (!pointer.isDown()) {
+
+    if (!dragHandler.pointerDown()) {
       if (!loop) engine.scrollBounds.constrain(target)
       if (engine.scrollBody.settle(target)) engine.animation.stop()
     }
@@ -112,9 +113,9 @@ export function Engine(
       engine.scrollLooper.loop(direction())
       engine.slideLooper.loop(slides)
     }
-    if (engine.scrollBody.location.get() !== target.get()) {
-      events.dispatch('scroll')
-    }
+
+    const settled = engine.scrollBody.settle(target)
+    events.dispatch(settled ? 'settle' : 'scroll')
     engine.translate.to(engine.scrollBody.location)
     engine.animation.proceed()
   }
@@ -143,17 +144,17 @@ export function Engine(
     target,
   })
 
-  // Pointer
-  const pointer = DragBehaviour({
+  // DragHandler
+  const dragHandler = DragHandler({
     animation,
     dragFree,
+    dragTracker: DragTracker(pxToPercent),
     element: root,
     events,
     index,
     limit,
     location,
     loop,
-    pointer: Pointer(pxToPercent),
     scrollBody,
     scrollTo,
     snapSizes,
@@ -163,10 +164,10 @@ export function Engine(
   // Slider
   const engine: Engine = {
     animation,
+    dragHandler,
     index,
     indexGroups,
     indexPrevious,
-    pointer,
     scrollBody,
     scrollBounds: ScrollBounds({
       animation,
