@@ -139,7 +139,7 @@ const embla = EmblaCarousel(emblaNode, {
 
 ##### `align`
 
-<details open>
+<details>
   <summary>
     Align the slides relative to the carousel viewport.
   </summary>
