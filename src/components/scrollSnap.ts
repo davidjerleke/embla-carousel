@@ -22,8 +22,8 @@ export function ScrollSnap(params: Params): ScrollSnap {
     const counter = Counter({ limit, start: 0, loop })
 
     return snapSizes.map((size, index) => {
-      const next = counter.clone().set(index + 1)
-      return size + alignments[index] - alignments[next.get()]
+      const next = counter.set(index + 1).get()
+      return size + alignments[index] - alignments[next]
     })
   }
 
