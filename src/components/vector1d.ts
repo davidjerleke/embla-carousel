@@ -1,14 +1,10 @@
 export type Vector1D = {
   get: () => number
-  set: (v: Vector1D) => Vector1D
-  add: (v: Vector1D) => Vector1D
-  subtract: (v: Vector1D) => Vector1D
+  set: (v: Vector1D | number) => Vector1D
+  add: (v: Vector1D | number) => Vector1D
+  subtract: (v: Vector1D | number) => Vector1D
   multiply: (n: number) => Vector1D
-  setNumber: (n: number) => Vector1D
-  addNumber: (n: number) => Vector1D
-  subtractNumber: (n: number) => Vector1D
   divide: (n: number) => Vector1D
-  magnitude: () => number
   normalize: () => Vector1D
 }
 
@@ -19,18 +15,18 @@ export function Vector1D(value: number): Vector1D {
     return state.value
   }
 
-  function set(v: Vector1D): Vector1D {
-    state.value = v.get()
+  function set(n: Vector1D | number): Vector1D {
+    state.value = readNumber(n)
     return self
   }
 
-  function add(v: Vector1D): Vector1D {
-    state.value += v.get()
+  function add(n: Vector1D | number): Vector1D {
+    state.value += readNumber(n)
     return self
   }
 
-  function subtract(v: Vector1D): Vector1D {
-    state.value -= v.get()
+  function subtract(n: Vector1D | number): Vector1D {
+    state.value -= readNumber(n)
     return self
   }
 
@@ -44,43 +40,24 @@ export function Vector1D(value: number): Vector1D {
     return self
   }
 
-  function setNumber(n: number): Vector1D {
-    state.value = n
-    return self
-  }
-
-  function addNumber(n: number): Vector1D {
-    state.value += n
-    return self
-  }
-
-  function subtractNumber(n: number): Vector1D {
-    state.value -= n
-    return self
-  }
-
-  function magnitude(): number {
-    return get()
-  }
-
   function normalize(): Vector1D {
-    const m = magnitude()
-    if (m !== 0) divide(m)
+    const magnitude = get()
+    if (magnitude !== 0) divide(magnitude)
     return self
+  }
+
+  function readNumber(v: Vector1D | number): number {
+    return typeof v === 'number' ? v : v.get()
   }
 
   const self: Vector1D = {
     add,
-    addNumber,
     divide,
     get,
-    magnitude,
     multiply,
     normalize,
     set,
-    setNumber,
     subtract,
-    subtractNumber,
   }
   return Object.freeze(self)
 }

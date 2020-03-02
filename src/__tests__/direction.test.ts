@@ -23,12 +23,12 @@ describe('Direction', () => {
 
   describe('Set', () => {
     test('Sets Direction value to given positive Vector normalized to 1', () => {
-      vector.setNumber(10)
+      vector.set(10)
       direction.set(vector)
       expect(direction.get()).toBe(1)
     })
     test('Sets Direction value to given negative Vector normalized to -1', () => {
-      vector.setNumber(-10)
+      vector.set(-10)
       direction.set(vector)
       expect(direction.get()).toBe(-1)
     })

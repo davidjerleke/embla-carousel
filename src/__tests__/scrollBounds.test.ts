@@ -27,7 +27,7 @@ describe('ScrollBounds', () => {
   test('Constrains given Vector to Bound min when location is less than min', done => {
     const vector = Vector1D(-20)
     const locationPastMinLimit = limit.min - 1
-    location.setNumber(locationPastMinLimit)
+    location.set(locationPastMinLimit)
     scrollBounds.constrain(vector)
 
     setTimeout(() => {
@@ -39,7 +39,7 @@ describe('ScrollBounds', () => {
   test('Constrains given Vector to Bound max when location is greater than max', done => {
     const vector = Vector1D(20)
     const locationPastMaxLimit = limit.max + 1
-    location.setNumber(locationPastMaxLimit)
+    location.set(locationPastMaxLimit)
     scrollBounds.constrain(vector)
 
     setTimeout(() => {
@@ -51,7 +51,7 @@ describe('ScrollBounds', () => {
   test('Does not change given Vector when location is within Bounds', done => {
     const vector = Vector1D(20)
     const locationWithinMaxLimit = limit.max
-    location.setNumber(locationWithinMaxLimit)
+    location.set(locationWithinMaxLimit)
     scrollBounds.constrain(vector)
 
     setTimeout(() => {

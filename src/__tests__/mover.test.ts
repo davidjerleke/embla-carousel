@@ -24,7 +24,7 @@ describe('ScrollBody', () => {
       expect(scrollBody.direction.get()).toBe(1)
     })
     test('Has direction value of -1 when it seeks given negative target Vector', () => {
-      target.setNumber(-10)
+      target.set(-10)
       scrollBody.seek(target).update()
       expect(scrollBody.direction.get()).toBe(-1)
     })
@@ -32,11 +32,11 @@ describe('ScrollBody', () => {
 
   describe('Settle', () => {
     test('Settle is true when diff to given target Vector is <= 0.001', () => {
-      scrollBody.location.setNumber(9.999)
+      scrollBody.location.set(9.999)
       expect(scrollBody.settle(target)).toBe(true)
     })
     test('Settle is false when diff to given target Vector is > 0.001', () => {
-      scrollBody.location.setNumber(9.99)
+      scrollBody.location.set(9.99)
       expect(scrollBody.settle(target)).toBe(false)
     })
   })

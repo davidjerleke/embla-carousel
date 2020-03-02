@@ -42,8 +42,8 @@ export function ScrollBody(params: Params): ScrollBody {
 
   function seek(target: Vector1D): ScrollBody {
     attraction.set(target).subtract(location)
-    const mag = attraction.magnitude()
-    const m = map(mag, 0, 100, 0, state.speed)
+    const magnitude = attraction.get()
+    const m = map(magnitude, 0, 100, 0, state.speed)
     direction.set(attraction)
     attraction
       .normalize()

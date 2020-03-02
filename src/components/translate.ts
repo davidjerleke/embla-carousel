@@ -19,7 +19,7 @@ export function Translate(node: HTMLElement): Translate {
     if (translate.get() !== target) {
       getComputedStyle(node).transform
       node.style.transform = translateX(target)
-      translate.setNumber(target)
+      translate.set(target)
     }
   }
 

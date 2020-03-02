@@ -18,11 +18,8 @@ describe('Vector1D', () => {
       expect(vector1.get()).toBe(5)
     })
     test('Sets Vector value to given number', () => {
-      vector1.setNumber(5)
+      vector1.set(5)
       expect(vector1.get()).toBe(5)
-    })
-    test('Gets Vector magnitude', () => {
-      expect(vector1.magnitude()).toBe(10)
     })
   })
 
@@ -44,11 +41,11 @@ describe('Vector1D', () => {
       expect(vector1.get()).toBe(2)
     })
     test('Adds given number to Vector value', () => {
-      vector1.addNumber(5)
+      vector1.add(5)
       expect(vector1.get()).toBe(15)
     })
     test('Subtracts given number from Vector value', () => {
-      vector1.subtractNumber(5)
+      vector1.subtract(5)
       expect(vector1.get()).toBe(5)
     })
     test('Normalizes Vector value to 1', () => {

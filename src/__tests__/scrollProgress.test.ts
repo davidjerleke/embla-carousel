@@ -19,18 +19,18 @@ describe('ScrollProgress', () => {
   test('Calculates correct progress when loop is false', () => {
     const scrollProgress = getScrollProgress(false)
 
-    location.setNumber(startSnap)
+    location.set(startSnap)
     expect(scrollProgress.get()).toBe(-0)
-    location.setNumber(endSnap)
+    location.set(endSnap)
     expect(scrollProgress.get()).toBe(1)
   })
 
   test('Calculates correct progress when loop is true', () => {
     const scrollProgress = getScrollProgress(true)
 
-    location.setNumber(startSnap)
+    location.set(startSnap)
     expect(scrollProgress.get()).toBe(-0)
-    location.setNumber(endSnap)
+    location.set(endSnap)
     expect(scrollProgress.get()).toBe(0.72)
   })
 })

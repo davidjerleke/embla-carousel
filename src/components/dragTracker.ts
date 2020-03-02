@@ -36,7 +36,7 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
     state.isMouse = !evt.touches
     const c = coords[axis]
     const value = state.isMouse ? evt[c] : evt.touches[0][c]
-    return pointValue.setNumber(value)
+    return pointValue.set(value)
   }
 
   function pointerDown(evt: Event): number {
@@ -72,7 +72,7 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
         return Math.abs(p1) < Math.abs(p2) ? 1 : -1
       })[0]
 
-    lastDrag.setNumber(point || 0)
+    lastDrag.set(point || 0)
     state.trackPoints = []
     return pxToPercent.measure(lastDrag.get())
   }

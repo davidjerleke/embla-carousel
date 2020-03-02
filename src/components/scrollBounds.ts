@@ -30,7 +30,7 @@ export function ScrollBounds(params: Params): ScrollBounds {
     if (!state.timeout && shouldConstrain(v)) {
       const constraint = limit.constrain(v.get())
       state.timeout = window.setTimeout(() => {
-        v.setNumber(constraint)
+        v.set(constraint)
         scrollBody.useSpeed(10).useMass(3)
         animation.start()
         state.timeout = 0

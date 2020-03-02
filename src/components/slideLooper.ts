@@ -86,7 +86,7 @@ export function SlideLooper(params: Params) {
         const target = Vector1D(0)
         const findTarget = (loc: number): Vector1D => {
           const t = loc > point ? initial : offset
-          return target.setNumber(0).setNumber(t)
+          return target.set(0).set(t)
         }
         return { point, findTarget, location, index }
       },

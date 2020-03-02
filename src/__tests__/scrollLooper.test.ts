@@ -32,7 +32,7 @@ beforeEach(() => {
 describe('ScrollLooper', () => {
   test('Subtracts content size from given Vectors when location is greater than Limit max', () => {
     const direction = 1
-    location.setNumber(maxLimit + 1)
+    location.set(maxLimit + 1)
     scrollLooper.loop(direction)
     expect(vectors[0].get()).toBe(vectorOneInitialValue - contentSize)
     expect(vectors[1].get()).toBe(vectorTwoInitialValue - contentSize)
@@ -40,7 +40,7 @@ describe('ScrollLooper', () => {
 
   test('Adds content size to given Vectors when location is less than Limit min', () => {
     const direction = -1
-    location.setNumber(minLimit - 1)
+    location.set(minLimit - 1)
     scrollLooper.loop(direction)
     expect(vectors[0].get()).toBe(vectorOneInitialValue + contentSize)
     expect(vectors[1].get()).toBe(vectorTwoInitialValue + contentSize)

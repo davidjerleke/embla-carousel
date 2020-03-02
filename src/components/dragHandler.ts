@@ -155,7 +155,7 @@ export function DragHandler(params: Params): DragHandler {
     const preventClick = !state.preventClick && diff
 
     if (preventClick) state.preventClick = true
-    target.addNumber(diff / resist)
+    target.add(diff / resist)
     evt.preventDefault()
   }
 

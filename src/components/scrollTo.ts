@@ -28,7 +28,7 @@ export function ScrollTo(params: Params): ScrollTo {
 
     if (distanceDiff) {
       animation.start()
-      targetDistance.addNumber(distanceDiff)
+      targetDistance.add(distanceDiff)
     }
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())
