@@ -22,8 +22,9 @@ export function ScrollLooper(params: Params): ScrollLooper {
   const { reachedMin, reachedMax } = Limit({ min, max })
 
   function shouldLoop(direction: number): boolean {
-    const reachedLimit = direction === -1 ? reachedMin : reachedMax
-    return direction !== 0 && reachedLimit(location.get())
+    if (direction === 1) return reachedMax(location.get())
+    if (direction === -1) return reachedMin(location.get())
+    return false
   }
 
   function loop(direction: number): void {
