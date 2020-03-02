@@ -12,17 +12,17 @@ export type ScrollBody = {
   location: Vector1D
   direction: Direction
   update: () => void
-  seek: (target: Vector1D) => ScrollBody
-  settle: (target: Vector1D) => boolean
-  useSpeed: (newSpeed: number) => ScrollBody
+  seek: (v: Vector1D) => ScrollBody
+  settle: (v: Vector1D) => boolean
+  useSpeed: (n: number) => ScrollBody
   useDefaultSpeed: () => ScrollBody
-  useMass: (newMass: number) => ScrollBody
+  useMass: (n: number) => ScrollBody
   useDefaultMass: () => ScrollBody
 }
 
 export function ScrollBody(params: Params): ScrollBody {
-  const roundToTwoDecimals = roundToDecimals(2)
   const { location, speed, mass } = params
+  const roundToTwoDecimals = roundToDecimals(2)
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
@@ -35,13 +35,13 @@ export function ScrollBody(params: Params): ScrollBody {
     acceleration.multiply(0)
   }
 
-  function applyForce(force: Vector1D): void {
-    force.divide(state.mass)
-    acceleration.add(force)
+  function applyForce(v: Vector1D): void {
+    v.divide(state.mass)
+    acceleration.add(v)
   }
 
-  function seek(target: Vector1D): ScrollBody {
-    attraction.set(target).subtract(location)
+  function seek(v: Vector1D): ScrollBody {
+    attraction.set(v).subtract(location)
     const magnitude = attraction.get()
     const m = map(magnitude, 0, 100, 0, state.speed)
     direction.set(attraction)
@@ -53,16 +53,16 @@ export function ScrollBody(params: Params): ScrollBody {
     return self
   }
 
-  function settle(target: Vector1D): boolean {
-    const diff = target.get() - location.get()
+  function settle(v: Vector1D): boolean {
+    const diff = v.get() - location.get()
     const diffRounded = roundToTwoDecimals(diff)
     const hasSettled = !diffRounded
-    if (hasSettled) location.set(target)
+    if (hasSettled) location.set(v)
     return hasSettled
   }
 
-  function useSpeed(desired: number): ScrollBody {
-    state.speed = desired
+  function useSpeed(n: number): ScrollBody {
+    state.speed = n
     return self
   }
 
@@ -71,8 +71,8 @@ export function ScrollBody(params: Params): ScrollBody {
     return self
   }
 
-  function useMass(desired: number): ScrollBody {
-    state.mass = desired
+  function useMass(n: number): ScrollBody {
+    state.mass = n
     return self
   }
 

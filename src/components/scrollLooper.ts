@@ -28,10 +28,10 @@ export function ScrollLooper(params: Params): ScrollLooper {
   }
 
   function loop(direction: number): void {
-    if (shouldLoop(direction)) {
-      const loopDistance = contentSize * (direction * -1)
-      vectors.forEach(v => v.add(loopDistance))
-    }
+    if (!shouldLoop(direction)) return
+
+    const loopDistance = contentSize * (direction * -1)
+    vectors.forEach(v => v.add(loopDistance))
   }
 
   const self: ScrollLooper = {

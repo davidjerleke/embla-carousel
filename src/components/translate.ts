@@ -15,12 +15,11 @@ export function Translate(node: HTMLElement): Translate {
 
   function to(v: Vector1D): void {
     const target = roundToTwoDecimals(v.get())
+    if (translate.get() === target) return
 
-    if (translate.get() !== target) {
-      getComputedStyle(node).transform
-      node.style.transform = translateX(target)
-      translate.set(target)
-    }
+    getComputedStyle(node).transform
+    node.style.transform = translateX(target)
+    translate.set(target)
   }
 
   const self: Translate = {

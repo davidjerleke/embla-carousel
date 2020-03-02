@@ -21,21 +21,22 @@ export function ScrollBounds(params: Params): ScrollBounds {
   const state = { timeout: 0 }
 
   function shouldConstrain(v: Vector1D): boolean {
-    const constrainMin = reachedMin(location.get()) && v.get() !== min
-    const constrainMax = reachedMax(location.get()) && v.get() !== max
-    return constrainMin || constrainMax
+    if (state.timeout) return false
+    if (reachedMin(location.get())) return v.get() !== min
+    if (reachedMax(location.get())) return v.get() !== max
+    return false
   }
 
   function constrain(v: Vector1D): void {
-    if (!state.timeout && shouldConstrain(v)) {
+    if (!shouldConstrain(v)) return
+
+    state.timeout = window.setTimeout(() => {
       const constraint = limit.constrain(v.get())
-      state.timeout = window.setTimeout(() => {
-        v.set(constraint)
-        scrollBody.useSpeed(10).useMass(3)
-        animation.start()
-        state.timeout = 0
-      }, tolerance)
-    }
+      v.set(constraint)
+      scrollBody.useSpeed(10).useMass(3)
+      animation.start()
+      state.timeout = 0
+    }, tolerance)
   }
 
   const self: ScrollBounds = {
