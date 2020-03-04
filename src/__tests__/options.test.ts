@@ -1,7 +1,7 @@
 import { defaultOptions } from '../components/options'
 
 describe('Options', () => {
-  test('Default Options object is immutable', () => {
+  test('Is an immutable object', () => {
     expect(Object.isFrozen(defaultOptions)).toBe(true)
   })
 })

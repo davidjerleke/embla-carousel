@@ -2,9 +2,11 @@ import { Animation } from '../components/animation'
 
 let counter: number
 let animation: Animation
+
 const callback: FrameRequestCallback = (): void => {
   counter += 1
 }
+
 const mockRequestAnimationFrame = (callback: Function): number => {
   callback(1)
   return 1
@@ -19,26 +21,33 @@ beforeEach(() => {
 })
 
 describe('Animation', () => {
-  describe('Run Callback', () => {
-    test('Runs callback when Animation is started', () => {
+  describe('Runs callback', () => {
+    test('When animation start is invoked', () => {
       animation.start()
       expect(counter).toBe(1)
     })
-    test('Runs callback when Animation is proceeded', () => {
+
+    test('When animation proceeded is invoked after start', () => {
       animation.start()
       animation.proceed()
       expect(counter).toBe(2)
     })
   })
 
-  describe('Do not run Callback', () => {
-    test('Does not run callback when Animation proceed is invoked after stop', () => {
+  describe('Does not run callback', () => {
+    test('When animation proceed is invoked directly', () => {
+      animation.proceed()
+      expect(counter).toBe(0)
+    })
+
+    test('When animation proceed is invoked after stop', () => {
       animation.start()
       animation.stop()
       animation.proceed()
       expect(counter).toBe(1)
     })
-    test('Does not run callback when Animation start is invoked a second time', () => {
+
+    test('When animation start is invoked a second time', () => {
       animation.start()
       animation.start()
       expect(counter).toBe(1)

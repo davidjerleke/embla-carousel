@@ -1,16 +1,17 @@
 import { PxToPercent } from '../components/pxToPercent'
 
-const itemSize = 25
-const wiewInPx = 1000
-const pxToPercent = PxToPercent(wiewInPx)
+const viewInPx = 1000
+const itemInPx = 250
+const itemInPercent = (itemInPx / viewInPx) * 100
+const pxToPercent = PxToPercent(viewInPx)
 
 describe('PxToPercent', () => {
-  test('Exposes correct totalPercent', () => {
+  test('Exposes total percentage as 100', () => {
     expect(pxToPercent.totalPercent).toBe(100)
   })
 
   test('Converts given pixels to percentage of view', () => {
-    const measure = pxToPercent.measure(itemSize)
-    expect(measure).toBe(2.5)
+    const measure = pxToPercent.measure(itemInPx)
+    expect(measure).toBe(itemInPercent)
   })
 })
