@@ -8,12 +8,22 @@ let scrollBounds: ScrollBounds
 let location: Vector1D
 let scrollBody: ScrollBody
 const animation = Animation(() => {})
-const limit = Limit({ min: 0, max: 10 })
+const initialVectorValue = 20
 const tolerance = 50
+const minLimit = 0
+const maxLimit = 10
+const limit = Limit({
+  min: minLimit,
+  max: maxLimit,
+})
 
 beforeEach(() => {
   location = Vector1D(0)
-  scrollBody = ScrollBody({ location, mass: 1, speed: 10 })
+  scrollBody = ScrollBody({
+    location,
+    mass: 1,
+    speed: 10,
+  })
   scrollBounds = ScrollBounds({
     limit,
     location,
@@ -24,39 +34,43 @@ beforeEach(() => {
 })
 
 describe('ScrollBounds', () => {
-  test('Constrains given Vector to Bound min when location is less than min', done => {
-    const vector = Vector1D(-20)
-    const locationPastMinLimit = limit.min - 1
-    location.set(locationPastMinLimit)
-    scrollBounds.constrain(vector)
+  describe('Constrains', () => {
+    test('Vector to bound min when location < bound min', done => {
+      const vector = Vector1D(-initialVectorValue)
+      const locationPastMinLimit = limit.min - 1
+      location.set(locationPastMinLimit)
+      scrollBounds.constrain(vector)
 
-    setTimeout(() => {
-      expect(vector.get()).toBe(0)
-      done()
-    }, tolerance)
+      setTimeout(() => {
+        expect(vector.get()).toBe(minLimit)
+        done()
+      }, tolerance)
+    })
+
+    test('Vector to bound max when location > bound max', done => {
+      const vector = Vector1D(initialVectorValue)
+      const locationPastMaxLimit = limit.max + 1
+      location.set(locationPastMaxLimit)
+      scrollBounds.constrain(vector)
+
+      setTimeout(() => {
+        expect(vector.get()).toBe(maxLimit)
+        done()
+      }, tolerance)
+    })
   })
 
-  test('Constrains given Vector to Bound max when location is greater than max', done => {
-    const vector = Vector1D(20)
-    const locationPastMaxLimit = limit.max + 1
-    location.set(locationPastMaxLimit)
-    scrollBounds.constrain(vector)
+  describe('Does not constrain', () => {
+    test('Vector when location is within bound min and max', done => {
+      const vector = Vector1D(initialVectorValue)
+      const locationWithinMaxLimit = limit.max
+      location.set(locationWithinMaxLimit)
+      scrollBounds.constrain(vector)
 
-    setTimeout(() => {
-      expect(vector.get()).toBe(10)
-      done()
-    }, tolerance)
-  })
-
-  test('Does not change given Vector when location is within Bounds', done => {
-    const vector = Vector1D(20)
-    const locationWithinMaxLimit = limit.max
-    location.set(locationWithinMaxLimit)
-    scrollBounds.constrain(vector)
-
-    setTimeout(() => {
-      expect(vector.get()).toBe(20)
-      done()
-    }, tolerance)
+      setTimeout(() => {
+        expect(vector.get()).toBe(initialVectorValue)
+        done()
+      }, tolerance)
+    })
   })
 })
