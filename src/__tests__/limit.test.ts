@@ -1,87 +1,96 @@
 import { Limit } from '../components/limit'
 
-let limit: Limit
-const limitMin = 0
-const limitMax = 100
-
-beforeEach(() => {
-  limit = Limit({ min: limitMin, max: limitMax })
+const minLimit = -100
+const maxLimit = 100
+const lessThanMin = minLimit - 1
+const moreThanMax = maxLimit + 1
+const withinMinAndMax = minLimit + maxLimit
+const limit = Limit({
+  min: minLimit,
+  max: maxLimit,
 })
 
 describe('Limit', () => {
-  describe('Expose', () => {
-    test('Exposes Limit max ', () => {
-      expect(limit.max).toBe(limitMax)
+  describe('Exposes', () => {
+    test('Limit min ', () => {
+      expect(limit.min).toBe(minLimit)
     })
-    test('Exposes Limit min ', () => {
-      expect(limit.min).toBe(limitMin)
+
+    test('Limit max ', () => {
+      expect(limit.max).toBe(maxLimit)
     })
   })
 
-  describe('Loop', () => {
-    test('Loops to Limit min when given number is greater than Limit max', () => {
-      const number = limit.loop(limitMax + 1)
-      expect(number).toBe(limitMin)
+  describe('Loops', () => {
+    test('To limit max when given number < limit min', () => {
+      const number = limit.loop(lessThanMin)
+      expect(number).toBe(maxLimit)
     })
-    test('Loops to Limit max when given number is less than Limit min', () => {
-      const number = limit.loop(limitMin - 1)
-      expect(number).toBe(limitMax)
-    })
-    test('Does not loop when given number is within Limit', () => {
-      const number = limit.loop(50)
-      expect(number).toBe(50)
+
+    test('To limit min when given number > limit max', () => {
+      const number = limit.loop(moreThanMax)
+      expect(number).toBe(minLimit)
     })
   })
 
-  describe('Constrain', () => {
-    test('Constrains to Limit max when given number is greater than Limit max', () => {
-      const number = limit.constrain(limitMax + 1)
-      expect(number).toBe(limitMax)
-    })
-    test('Constrains to Limit min when given number is less than Limit min', () => {
-      const number = limit.constrain(limitMin - 1)
-      expect(number).toBe(limitMin)
-    })
-    test('Does not constrain when given number is within Limit', () => {
-      const number = limit.constrain(50)
-      expect(number).toBe(50)
+  describe('Does not loop', () => {
+    test('When given number is within limit', () => {
+      const number = limit.loop(withinMinAndMax)
+      expect(number).toBe(withinMinAndMax)
     })
   })
 
-  describe('Reached max', () => {
-    test('Reached Limit max is true when given number is greater than Limit max', () => {
-      const reached = limit.reachedMax(limitMax + 1)
+  describe('Constrains', () => {
+    test('To limit max when given number > limit max', () => {
+      const number = limit.constrain(moreThanMax)
+      expect(number).toBe(maxLimit)
+    })
+    test('To limit min when given number < limit min', () => {
+      const number = limit.constrain(lessThanMin)
+      expect(number).toBe(minLimit)
+    })
+  })
+
+  describe('Does not constrain', () => {
+    test('When given number is within limit', () => {
+      const number = limit.constrain(withinMinAndMax)
+      expect(number).toBe(withinMinAndMax)
+    })
+  })
+
+  describe('Reached limit', () => {
+    test('Min is true when given number < limit min', () => {
+      const reached = limit.reachedMin(lessThanMin)
       expect(reached).toBe(true)
     })
-    test('Reached Limit max is false when given number is within Limit', () => {
-      const reached = limit.reachedMax(50)
+
+    test('Min is false when given number is within limit', () => {
+      const reached = limit.reachedMin(withinMinAndMax)
       expect(reached).toBe(false)
     })
-  })
 
-  describe('Reached min', () => {
-    test('Reached Limit min is true when given number is less than Limit min', () => {
-      const reached = limit.reachedMin(limitMin - 1)
+    test('Max is true when given number > limit max', () => {
+      const reached = limit.reachedMax(moreThanMax)
       expect(reached).toBe(true)
     })
-    test('Reached Limit min is false when given number is within Limit', () => {
-      const reached = limit.reachedMin(50)
+
+    test('Max is false when given number is within limit', () => {
+      const reached = limit.reachedMax(withinMinAndMax)
       expect(reached).toBe(false)
     })
-  })
 
-  describe('Reached any', () => {
-    test('Reached Limit any is true when given number is greater or less than Limit', () => {
-      const reachedMax = limit.reachedAny(limitMax + 1)
-      expect(reachedMax).toBe(true)
-      const reachedMin = limit.reachedAny(limitMin - 1)
+    test('Any is true when given number > limit max or number < limit min', () => {
+      const reachedMin = limit.reachedAny(lessThanMin)
+      const reachedMax = limit.reachedAny(moreThanMax)
       expect(reachedMin).toBe(true)
+      expect(reachedMax).toBe(true)
     })
-    test('Reached Limit any is false when given number is within Limit', () => {
-      const reachedMax = limit.reachedAny(40)
-      expect(reachedMax).toBe(false)
-      const reachedMin = limit.reachedAny(20)
+
+    test('Any is false when given number is within limit', () => {
+      const reachedMin = limit.reachedAny(withinMinAndMax)
+      const reachedMax = limit.reachedAny(withinMinAndMax)
       expect(reachedMin).toBe(false)
+      expect(reachedMax).toBe(false)
     })
   })
 })

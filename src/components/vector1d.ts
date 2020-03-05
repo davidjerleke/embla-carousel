@@ -46,8 +46,8 @@ export function Vector1D(value: number): Vector1D {
     return self
   }
 
-  function readNumber(v: Vector1D | number): number {
-    return typeof v === 'number' ? v : v.get()
+  function readNumber(n: Vector1D | number): number {
+    return typeof n === 'number' ? n : n.get()
   }
 
   const self: Vector1D = {
