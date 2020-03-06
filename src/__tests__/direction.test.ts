@@ -6,50 +6,55 @@ const negativeDirection = -1
 const noDirection = 0
 
 describe('Direction', () => {
-  describe('Converts a number', () => {
-    test('That is positive to 1', () => {
+  describe('Sets its given initial value that is', () => {
+    test('Positive to 1', () => {
       const initialValue = 10
       const direction = Direction(initialValue).get()
       expect(direction).toBe(positiveDirection)
     })
 
-    test('That is negative to -1', () => {
+    test('Negative to -1', () => {
       const initialValue = -10
       const direction = Direction(initialValue).get()
       expect(direction).toBe(negativeDirection)
     })
 
-    test('That is -0 to 0', () => {
-      const initialValue = -0
-      const direction = Direction(initialValue).get()
+    test('0 to 0', () => {
+      const direction = Direction(noDirection).get()
       expect(direction).toBe(noDirection)
     })
 
-    test('That is 0 to 0', () => {
-      const initialValue = 0
-      const direction = Direction(initialValue).get()
+    test('-0 to 0', () => {
+      const direction = Direction(-noDirection).get()
       expect(direction).toBe(noDirection)
     })
   })
 
-  describe('Converts a vector', () => {
-    test('That is positive to 1', () => {
-      const direction = Direction(0)
+  describe('Sets direction to', () => {
+    test('1 when given vector is positive', () => {
+      const direction = Direction(noDirection)
       const vector = Vector1D(10)
       direction.set(vector)
       expect(direction.get()).toBe(positiveDirection)
     })
 
-    test('That is negative to -1', () => {
-      const direction = Direction(0)
+    test('-1 when given vector is negative', () => {
+      const direction = Direction(noDirection)
       const vector = Vector1D(-10)
       direction.set(vector)
       expect(direction.get()).toBe(negativeDirection)
     })
 
-    test('That is 0 to 0', () => {
-      const direction = Direction(1)
-      const vector = Vector1D(0)
+    test('Nothing new when given vector is 0', () => {
+      const direction = Direction(positiveDirection)
+      const vector = Vector1D(noDirection)
+      direction.set(vector)
+      expect(direction.get()).toBe(positiveDirection)
+    })
+
+    test('Nothing new when given vector is -0', () => {
+      const direction = Direction(positiveDirection)
+      const vector = Vector1D(-noDirection)
       direction.set(vector)
       expect(direction.get()).toBe(positiveDirection)
     })
