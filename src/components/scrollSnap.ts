@@ -9,7 +9,7 @@ type Params = {
 }
 
 export type ScrollSnap = {
-  measure: (snapSize: number, index: number) => number
+  measure: (index: number) => number
 }
 
 export function ScrollSnap(params: Params): ScrollSnap {
@@ -27,9 +27,9 @@ export function ScrollSnap(params: Params): ScrollSnap {
     })
   }
 
-  function measure(size: number, index: number): number {
+  function measure(index: number): number {
     const sizes = distancesBetween.slice(0, index)
-    return sizes.reduce((a, d) => a - d, alignments[0])
+    return sizes.reduce((a, s) => a - s, alignments[0])
   }
 
   const self: ScrollSnap = {

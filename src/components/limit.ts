@@ -33,9 +33,9 @@ export function Limit(params: Params): Limit {
   }
 
   function reachedWhich(n: number): Limits {
-    const isMin = reachedMin(n) && 'min'
-    const isMax = reachedMax(n) && 'max'
-    return isMin || isMax || ''
+    if (reachedMin(n)) return 'min'
+    if (reachedMax(n)) return 'max'
+    return ''
   }
 
   function loop(n: number): number {

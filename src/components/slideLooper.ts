@@ -1,3 +1,4 @@
+import { arrayKeys } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -22,7 +23,7 @@ export type SlideLooper = {
 
 export function SlideLooper(params: Params) {
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
-  const ascItems = Object.keys(slideSizes).map(Number)
+  const ascItems = arrayKeys(slideSizes)
   const descItems = ascItems.slice().reverse()
   const loopPoints = startPoints().concat(endPoints())
 

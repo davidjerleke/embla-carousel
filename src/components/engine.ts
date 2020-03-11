@@ -19,7 +19,7 @@ import { ScrollTarget } from './scrollTarget'
 import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
 import { Translate } from './translate'
-import { groupNumbers, rectWidth } from './utils'
+import { arrayKeys, groupArray, rectWidth } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Engine = {
@@ -61,10 +61,11 @@ export function Engine(
   const containerSize = rectWidth(container)
   const pxToPercent = PxToPercent(containerSize)
   const viewSize = pxToPercent.totalPercent
-  const slideIndexes = Object.keys(slides).map(Number)
+  const slideIndexes = arrayKeys(slides)
   const slideSizes = slides.map(rectWidth).map(pxToPercent.measure)
-  const groupedSizes = groupNumbers(slideSizes, slidesToScroll)
+  const groupedSizes = groupArray(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
+  const snapIndexes = arrayKeys(snapSizes)
   const contentSize = slideSizes.reduce((a, s) => a + s)
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
@@ -76,12 +77,12 @@ export function Engine(
     viewSize,
   })
   const contain = !loop && containScroll
-  const defaultSnaps = snapSizes.map(scrollSnap.measure)
+  const defaultSnaps = snapIndexes.map(scrollSnap.measure)
   const containedSnaps = scrollContain.snaps(defaultSnaps)
   const scrollSnaps = contain ? containedSnaps : defaultSnaps
 
   // Index
-  const defaultIndexes = groupNumbers(slideIndexes, slidesToScroll)
+  const defaultIndexes = groupArray(slideIndexes, slidesToScroll)
   const containedIndexes = scrollContain.indexes(defaultSnaps)
   const indexMin = 0
   const indexMax = scrollSnaps.length - 1

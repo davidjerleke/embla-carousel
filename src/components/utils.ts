@@ -31,10 +31,17 @@ export function debounce(
   }
 }
 
-export function groupNumbers(
-  array: number[],
+export function roundToDecimals(
+  decimalPoints: number,
+): (n: number) => number {
+  const pow = Math.pow(10, decimalPoints)
+  return (n: number) => Math.round(n * pow) / pow
+}
+
+export function groupArray<GenericType>(
+  array: GenericType[],
   size: number,
-): number[][] {
+): GenericType[][] {
   const groups = []
   for (let i = 0; i < array.length; i += size) {
     groups.push(array.slice(i, i + size))
@@ -42,9 +49,6 @@ export function groupNumbers(
   return groups
 }
 
-export function roundToDecimals(
-  decimalPoints: number,
-): (n: number) => number {
-  const pow = Math.pow(10, decimalPoints)
-  return (n: number) => Math.round(n * pow) / pow
+export function arrayKeys<GenericType>(array: GenericType): number[] {
+  return Object.keys(array).map(Number)
 }

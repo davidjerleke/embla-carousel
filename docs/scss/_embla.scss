@@ -41,8 +41,8 @@
 .embla__slide {
   flex: 0 0 80%;
   position: relative;
-  padding-left: 0.5rem;
   counter-increment: embla;
+  padding-left: 0.5rem;
 
   @media (min-width: $media-xs) {
     padding-left: 0.8rem;

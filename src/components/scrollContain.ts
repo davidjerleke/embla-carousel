@@ -1,6 +1,6 @@
 import { Alignment } from './alignment'
 import { Limit } from './limit'
-import { groupNumbers } from './utils'
+import { groupArray } from './utils'
 
 type Params = {
   slideIndexes: number[]
@@ -18,7 +18,7 @@ export type ScrollContain = {
 export function ScrollContain(params: Params): ScrollContain {
   const { alignment, contentSize, viewSize } = params
   const { slideIndexes, slidesToScroll } = params
-  const indexGroups = groupNumbers(slideIndexes, slidesToScroll)
+  const indexGroups = groupArray(slideIndexes, slidesToScroll)
   const contentExceedsView = contentSize > viewSize
   const bounds = Limit({ min: -contentSize + viewSize, max: 0 })
 
