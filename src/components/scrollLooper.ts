@@ -7,16 +7,14 @@ type Params = {
   limit: Limit
   location: Vector1D
   pxToPercent: PxToPercent
-  vectors: Vector1D[]
 }
 
 export type ScrollLooper = {
-  loop: (direction: number) => void
+  loop: (vectors: Vector1D[], direction: number) => void
 }
 
 export function ScrollLooper(params: Params): ScrollLooper {
-  const { contentSize, location, vectors } = params
-  const { limit, pxToPercent } = params
+  const { contentSize, location, limit, pxToPercent } = params
   const min = limit.min + pxToPercent.measure(0.1)
   const max = limit.max + pxToPercent.measure(0.1)
   const { reachedMin, reachedMax } = Limit({ min, max })
@@ -27,7 +25,7 @@ export function ScrollLooper(params: Params): ScrollLooper {
     return false
   }
 
-  function loop(direction: number): void {
+  function loop(vectors: Vector1D[], direction: number): void {
     if (!shouldLoop(direction)) return
 
     const loopDistance = contentSize * (direction * -1)

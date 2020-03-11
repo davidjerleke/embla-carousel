@@ -1,4 +1,3 @@
-import { Direction } from './direction'
 import { PxToPercent } from './pxToPercent'
 import { Vector1D } from './vector1d'
 
@@ -11,7 +10,6 @@ type State = {
 }
 
 export type DragTracker = {
-  direction: Direction
   pointerDown: (evt: Event) => number
   pointerMove: (evt: Event) => number
   pointerUp: () => number
@@ -24,7 +22,6 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
   const diffDrag = Vector1D(0)
   const lastDrag = Vector1D(0)
   const pointValue = Vector1D(0)
-  const direction = Direction(0)
   const trackInterval = 10
   const state: State = {
     isMouse: false,
@@ -57,7 +54,6 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
     }
 
     diffDrag.set(point).subtract(lastDrag)
-    direction.set(diffDrag)
     lastDrag.set(point)
     return pxToPercent.measure(diffDrag.get())
   }
@@ -78,7 +74,6 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
   }
 
   const self: DragTracker = {
-    direction,
     pointerDown,
     pointerMove,
     pointerUp,

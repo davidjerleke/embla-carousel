@@ -28,7 +28,6 @@ type Params = {
 export type DragHandler = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
-  direction: Direction
   pointerDown: () => boolean
   removeAllEvents: () => void
 }
@@ -36,7 +35,6 @@ export type DragHandler = {
 export function DragHandler(params: Params): DragHandler {
   const { target, scrollBody, dragFree, animation } = params
   const { element, dragTracker, location, events, limit } = params
-  const { direction } = dragTracker
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startX = Vector1D(0)
   const startY = Vector1D(0)
@@ -190,7 +188,6 @@ export function DragHandler(params: Params): DragHandler {
   const self: DragHandler = {
     addActivationEvents,
     clickAllowed,
-    direction,
     pointerDown,
     removeAllEvents,
   }

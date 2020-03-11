@@ -6,43 +6,68 @@ import { Limit } from '../components/limit'
 let location: Vector1D
 let vectors: Vector1D[]
 let scrollLooper: ScrollLooper
-const minLimit = 0
-const maxLimit = 10
-const contentSize = 10
-const limit = Limit({ min: minLimit, max: maxLimit })
-const pxToPercent = PxToPercent(1000)
-const vectorOneInitialValue = 5
-const vectorTwoInitialValue = 10
+
+const viewInPx = 1000
+const pxToPercent = PxToPercent(viewInPx)
+const loopJoint = pxToPercent.measure(0.1)
+const vectorInitialValue1 = 5
+const vectorInitialValue2 = 10
+const contentSize = 300
+const minLimit = -100
+const maxLimit = 100
+const limit = Limit({
+  min: minLimit,
+  max: maxLimit,
+})
 
 beforeEach(() => {
   location = Vector1D(0)
   vectors = [
-    Vector1D(vectorOneInitialValue),
-    Vector1D(vectorTwoInitialValue),
+    Vector1D(vectorInitialValue1),
+    Vector1D(vectorInitialValue2),
   ]
   scrollLooper = ScrollLooper({
     pxToPercent,
     limit,
     location,
     contentSize,
-    vectors,
   })
 })
 
 describe('ScrollLooper', () => {
-  test('Subtracts content size from given Vectors when location is greater than Limit max', () => {
-    const direction = 1
-    location.set(maxLimit + 1)
-    scrollLooper.loop(direction)
-    expect(vectors[0].get()).toBe(vectorOneInitialValue - contentSize)
-    expect(vectors[1].get()).toBe(vectorTwoInitialValue - contentSize)
+  describe('Loops vectors when direction is', () => {
+    test('1 and location > limit max', () => {
+      const direction = 1
+      location.set(maxLimit + loopJoint + 0.01)
+      scrollLooper.loop(vectors, direction)
+      expect(vectors[0].get()).toBe(vectorInitialValue1 - contentSize)
+      expect(vectors[1].get()).toBe(vectorInitialValue2 - contentSize)
+    })
+
+    test('-1 and location < limit min', () => {
+      const direction = -1
+      location.set(minLimit + loopJoint - 0.01)
+      scrollLooper.loop(vectors, direction)
+      expect(vectors[0].get()).toBe(vectorInitialValue1 + contentSize)
+      expect(vectors[1].get()).toBe(vectorInitialValue2 + contentSize)
+    })
   })
 
-  test('Adds content size to given Vectors when location is less than Limit min', () => {
-    const direction = -1
-    location.set(minLimit - 1)
-    scrollLooper.loop(direction)
-    expect(vectors[0].get()).toBe(vectorOneInitialValue + contentSize)
-    expect(vectors[1].get()).toBe(vectorTwoInitialValue + contentSize)
+  describe('Does not loop vectors when direction is', () => {
+    test('1 and location is within limit max', () => {
+      const direction = 1
+      location.set(maxLimit + loopJoint)
+      scrollLooper.loop(vectors, direction)
+      expect(vectors[0].get()).toBe(vectorInitialValue1)
+      expect(vectors[1].get()).toBe(vectorInitialValue2)
+    })
+
+    test('-1 and location is within limit min', () => {
+      const direction = -1
+      location.set(minLimit + loopJoint)
+      scrollLooper.loop(vectors, direction)
+      expect(vectors[0].get()).toBe(vectorInitialValue1)
+      expect(vectors[1].get()).toBe(vectorInitialValue2)
+    })
   })
 })

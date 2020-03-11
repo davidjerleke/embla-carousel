@@ -94,13 +94,6 @@ export function Engine(
   const scrollLimit = ScrollLimit({ loop, contentSize })
   const limit = scrollLimit.measure(scrollSnaps)
 
-  // Direction
-  const direction = (): number => {
-    return dragHandler.pointerDown()
-      ? dragHandler.direction.get()
-      : engine.scrollBody.direction.get()
-  }
-
   // Draw
   const update = (): void => {
     engine.scrollBody.seek(target).update()
@@ -110,7 +103,8 @@ export function Engine(
       if (engine.scrollBody.settle(target)) engine.animation.stop()
     }
     if (loop) {
-      engine.scrollLooper.loop(direction())
+      const direction = engine.scrollBody.direction.get()
+      engine.scrollLooper.loop(loopVectors, direction)
       engine.slideLooper.loop(slides)
     }
 
@@ -125,6 +119,7 @@ export function Engine(
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
+  const loopVectors = [location, target]
   const scrollBody = ScrollBody({ location, speed, mass: 1 })
   const scrollTo = ScrollTo({
     animation,
@@ -186,7 +181,6 @@ export function Engine(
       limit,
       location,
       pxToPercent,
-      vectors: [location, target],
     }),
     scrollProgress: ScrollProgress({
       limit,
