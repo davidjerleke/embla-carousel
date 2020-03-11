@@ -169,7 +169,6 @@ export function Engine(
       limit,
       location,
       scrollBody,
-      tolerance: 50,
     }),
     scrollBy: ScrollBy({
       limit,

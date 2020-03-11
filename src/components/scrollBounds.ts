@@ -8,7 +8,6 @@ type Params = {
   location: Vector1D
   scrollBody: ScrollBody
   animation: Animation
-  tolerance: number
 }
 
 export type ScrollBounds = {
@@ -16,9 +15,10 @@ export type ScrollBounds = {
 }
 
 export function ScrollBounds(params: Params): ScrollBounds {
-  const { limit, location, scrollBody, animation, tolerance } = params
+  const { limit, location, scrollBody, animation } = params
   const { min, max, reachedMin, reachedMax } = limit
   const state = { timeout: 0 }
+  const tolerance = 50
 
   function shouldConstrain(v: Vector1D): boolean {
     if (state.timeout) return false

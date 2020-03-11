@@ -7,14 +7,14 @@ import { ScrollBody } from '../components/scrollBody'
 let scrollBounds: ScrollBounds
 let location: Vector1D
 let scrollBody: ScrollBody
+
 const animation = Animation(() => {})
 const tolerance = 50
 const vectorValue = 20
 const minLimit = -10
 const maxLimit = 10
-const lessThanMinLimit = minLimit - 1
-const moreThanMaxLimit = maxLimit + 1
-const withinMinMaxLimit = minLimit + maxLimit
+const lessThanMinLimit = minLimit - 0.01
+const moreThanMaxLimit = maxLimit + 0.01
 const limit = Limit({
   min: minLimit,
   max: maxLimit,
@@ -32,13 +32,12 @@ beforeEach(() => {
     location,
     scrollBody,
     animation,
-    tolerance,
   })
 })
 
 describe('ScrollBounds', () => {
-  describe('Constrains', () => {
-    test('Vector to bound min when location < bound min', done => {
+  describe('Constrains vector to limit', () => {
+    test('Min when location < limit min', done => {
       const vector = Vector1D(-vectorValue)
       location.set(lessThanMinLimit)
       scrollBounds.constrain(vector)
@@ -49,7 +48,7 @@ describe('ScrollBounds', () => {
       }, tolerance)
     })
 
-    test('Vector to bound max when location > bound max', done => {
+    test('Max when location > limit max', done => {
       const vector = Vector1D(vectorValue)
       location.set(moreThanMaxLimit)
       scrollBounds.constrain(vector)
@@ -61,10 +60,21 @@ describe('ScrollBounds', () => {
     })
   })
 
-  describe('Does not constrain', () => {
-    test('Vector when location is within bound min and max', done => {
+  describe('Does not constrain vector when', () => {
+    test('Location is within limit min', done => {
       const vector = Vector1D(vectorValue)
-      location.set(withinMinMaxLimit)
+      location.set(minLimit)
+      scrollBounds.constrain(vector)
+
+      setTimeout(() => {
+        expect(vector.get()).toBe(vectorValue)
+        done()
+      }, tolerance)
+    })
+
+    test('Location is within limit max', done => {
+      const vector = Vector1D(vectorValue)
+      location.set(maxLimit)
       scrollBounds.constrain(vector)
 
       setTimeout(() => {
