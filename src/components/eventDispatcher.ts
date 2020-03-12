@@ -1,4 +1,4 @@
-type State = { [key in Event]: Callback[] }
+type Listeners = { [key in Event]: Callback[] }
 export type Callback = () => void
 export type Event =
   | 'init'
@@ -17,7 +17,7 @@ export type EventDispatcher = {
 }
 
 export function EventDispatcher(): EventDispatcher {
-  const state: State = {
+  const listeners: Listeners = {
     destroy: [],
     dragEnd: [],
     dragStart: [],
@@ -29,20 +29,17 @@ export function EventDispatcher(): EventDispatcher {
   }
 
   function dispatch(evt: Event): EventDispatcher {
-    const eventListeners = state[evt]
-    eventListeners.forEach(e => e())
+    listeners[evt].forEach(e => e())
     return self
   }
 
   function on(evt: Event, cb: Callback): EventDispatcher {
-    const eventListeners = state[evt]
-    state[evt] = eventListeners.concat([cb])
+    listeners[evt] = listeners[evt].concat([cb])
     return self
   }
 
   function off(evt: Event, cb: Callback): EventDispatcher {
-    const eventListeners = state[evt]
-    state[evt] = eventListeners.filter(e => e !== cb)
+    listeners[evt] = listeners[evt].filter(e => e !== cb)
     return self
   }
 
