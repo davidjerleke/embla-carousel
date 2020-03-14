@@ -3,12 +3,6 @@ import { Vector1D } from './vector1d'
 
 type Axis = 'x' | 'y'
 
-type State = {
-  isMouse: boolean
-  trackPoints: number[]
-  trackTime: number
-}
-
 export type DragTracker = {
   pointerDown: (evt: Event) => number
   pointerMove: (evt: Event) => number
@@ -23,16 +17,14 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
   const lastDrag = Vector1D(0)
   const pointValue = Vector1D(0)
   const trackInterval = 10
-  const state: State = {
-    isMouse: false,
-    trackPoints: [],
-    trackTime: new Date().getTime(),
-  }
+  let trackPoints: number[] = []
+  let trackTime = new Date().getTime()
+  let isMouse = false
 
   function readPoint(evt: any, axis: Axis): Vector1D {
-    state.isMouse = !evt.touches
+    isMouse = !evt.touches
     const c = coords[axis]
-    const value = state.isMouse ? evt[c] : evt.touches[0][c]
+    const value = isMouse ? evt[c] : evt.touches[0][c]
     return pointValue.set(value)
   }
 
@@ -46,11 +38,11 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
   function pointerMove(evt: Event): number {
     const point = readPoint(evt, 'x')
     const time2 = new Date().getTime()
-    const time1 = state.trackTime
+    const time1 = trackTime
 
     if (time2 - time1 >= trackInterval) {
-      state.trackPoints.push(point.get())
-      state.trackTime = time2
+      trackPoints.push(point.get())
+      trackTime = time2
     }
 
     diffDrag.set(point).subtract(lastDrag)
@@ -60,8 +52,8 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
 
   function pointerUp(): number {
     const currentPoint = lastDrag.get()
-    const trackLength = state.isMouse ? 5 : 4
-    const point = state.trackPoints
+    const trackLength = isMouse ? 5 : 4
+    const point = trackPoints
       .slice(-trackLength)
       .map(trackPoint => currentPoint - trackPoint)
       .sort((p1, p2) => {
@@ -69,7 +61,7 @@ export function DragTracker(pxToPercent: PxToPercent): DragTracker {
       })[0]
 
     lastDrag.set(point || 0)
-    state.trackPoints = []
+    trackPoints = []
     return pxToPercent.measure(lastDrag.get())
   }
 

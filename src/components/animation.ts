@@ -9,21 +9,21 @@ export type Animation = {
 export function Animation(callback: FrameRequestCallback): Animation {
   const run = requestAnimationFrame.bind(window)
   const end = cancelAnimationFrame.bind(window)
-  const state = { animationFrame: 0 }
+  let animationFrame = 0
 
   function ifAnimating(active: boolean, cb: Callback): Callback {
     return (): void => {
-      if (active === !!state.animationFrame) cb()
+      if (active === !!animationFrame) cb()
     }
   }
 
   function start(): void {
-    state.animationFrame = run(callback)
+    animationFrame = run(callback)
   }
 
   function stop(): void {
-    end(state.animationFrame)
-    state.animationFrame = 0
+    end(animationFrame)
+    animationFrame = 0
   }
 
   const self: Animation = {

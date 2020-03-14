@@ -9,40 +9,39 @@ export type Vector1D = {
 }
 
 export function Vector1D(value: number): Vector1D {
-  const state = { value }
+  let vector = value
 
   function get(): number {
-    return state.value
+    return vector
   }
 
   function set(n: Vector1D | number): Vector1D {
-    state.value = readNumber(n)
+    vector = readNumber(n)
     return self
   }
 
   function add(n: Vector1D | number): Vector1D {
-    state.value += readNumber(n)
+    vector += readNumber(n)
     return self
   }
 
   function subtract(n: Vector1D | number): Vector1D {
-    state.value -= readNumber(n)
+    vector -= readNumber(n)
     return self
   }
 
   function multiply(n: number): Vector1D {
-    state.value *= n
+    vector *= n
     return self
   }
 
   function divide(n: number): Vector1D {
-    state.value /= n
+    vector /= n
     return self
   }
 
   function normalize(): Vector1D {
-    const magnitude = get()
-    if (magnitude !== 0) divide(magnitude)
+    if (vector !== 0) divide(vector)
     return self
   }
 

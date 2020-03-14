@@ -19,14 +19,14 @@ export function Counter(params: Params): Counter {
   const { start, limit, loop } = params
   const { min, max } = limit
   const type = loop ? 'loop' : 'constrain'
-  const state = { value: withinLimit(start) }
+  let counter = withinLimit(start)
 
   function get(): number {
-    return state.value
+    return counter
   }
 
   function set(n: number): Counter {
-    state.value = withinLimit(n)
+    counter = withinLimit(n)
     return self
   }
 

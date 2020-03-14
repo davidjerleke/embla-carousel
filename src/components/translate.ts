@@ -7,7 +7,7 @@ export type Translate = {
 
 export function Translate(node: HTMLElement): Translate {
   const roundToTwoDecimals = roundToDecimals(2)
-  const translate = Vector1D(0)
+  let translate = 0
 
   function translateX(n: number): string {
     return `translate3d(${n}%,0px,0px)`
@@ -15,11 +15,11 @@ export function Translate(node: HTMLElement): Translate {
 
   function to(v: Vector1D): void {
     const target = roundToTwoDecimals(v.get())
-    if (translate.get() === target) return
+    if (translate === target) return
 
     getComputedStyle(node).transform
     node.style.transform = translateX(target)
-    translate.set(target)
+    translate = target
   }
 
   const self: Translate = {
