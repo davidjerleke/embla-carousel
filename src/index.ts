@@ -8,12 +8,6 @@ import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
 
-type Elements = {
-  root: HTMLElement
-  container: HTMLElement
-  slides: HTMLElement[]
-}
-
 type ScrollSnap = {
   slideNodes: HTMLElement[]
   slideIndexes: number[]
@@ -43,72 +37,73 @@ export function EmblaCarousel(
   sliderRoot: HTMLElement,
   userOptions: UserOptions = {},
 ): EmblaCarousel {
-  const state = { active: false, windowWidth: 0 }
-  const options = Object.assign({}, defaultOptions, userOptions)
   const events = EventDispatcher()
   const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
   const changeOptions = reActivate
-  const slider = {} as Engine
-  const elements = {} as Elements
   const { on, off } = events
+  let engine: Engine
+  let options = Object.assign({}, defaultOptions, userOptions)
+  let root: HTMLElement
+  let container: HTMLElement
+  let slides: HTMLElement[]
+  let activated = false
+  let windowWidth = 0
 
   activate(options)
 
   function storeElements(): void {
     if (!sliderRoot) {
-      throw new Error('No root element provided 😢')
+      throw new Error('Missing root element 😢')
     }
+
     const selector = options.containerSelector
-    const container = sliderRoot.querySelector(selector)
-    if (!container) {
-      throw new Error('No valid container element found 😢')
+    const sliderContainer = sliderRoot.querySelector(selector)
+
+    if (!sliderContainer) {
+      throw new Error('Missing container element 😢')
     }
-    elements.root = sliderRoot
-    elements.container = container as HTMLElement
-    elements.slides = arrayFromCollection(container.children)
-    state.active = true
+    root = sliderRoot
+    container = sliderContainer as HTMLElement
+    slides = arrayFromCollection(container.children)
+    activated = true
   }
 
-  function activate(userOpt: UserOptions = {}): void {
-    const isFirstInit = !state.active
-    state.windowWidth = window.innerWidth
+  function activate(partialOptions: UserOptions = {}): void {
+    const isFirstInit = !activated
+    windowWidth = window.innerWidth
     storeElements()
+    if (slides.length === 0) return
 
-    if (elements.slides.length > 0) {
-      const { root, container, slides } = elements
-      const newOpt = Object.assign(options, userOpt)
-      const engine = Engine(root, container, slides, newOpt, events)
-      const newSlider = Object.assign(slider, engine)
-      eventStore.add(window, 'resize', debouncedResize)
-      slides.forEach(slideFocusEvent)
-      slider.translate.to(slider.scrollBody.location)
+    options = Object.assign(options, partialOptions)
+    engine = Engine(root, container, slides, options, events)
+    eventStore.add(window, 'resize', debouncedResize)
+    slides.forEach(slideFocusEvent)
+    engine.translate.to(engine.scrollBody.location)
 
-      if (options.loop && slides.length === 1) {
-        return activate({ loop: false })
-      }
-      if (options.draggable) activateDragFeature()
-      if (options.loop) slider.slideLooper.loop(slides)
-      if (isFirstInit) {
-        events.on('select', toggleSelectedClass)
-        events.on('init', toggleSelectedClass)
-        setTimeout(() => events.dispatch('init'), 0)
-      }
+    if (options.loop && slides.length === 1) {
+      return activate({ loop: false })
+    }
+    if (options.draggable) activateDragFeature()
+    if (options.loop) engine.slideLooper.loop(slides)
+    if (isFirstInit) {
+      events.on('select', toggleSelectedClass)
+      events.on('init', toggleSelectedClass)
+      setTimeout(() => events.dispatch('init'), 0)
     }
   }
 
   function activateDragFeature(): void {
-    const root = elements.root.classList
+    const cl = root.classList
     const { draggingClass, draggableClass } = options
-    slider.dragHandler.addActivationEvents()
-    events.on('dragStart', () => root.add(draggingClass))
-    events.on('dragEnd', () => root.remove(draggingClass))
-    root.add(draggableClass)
+    engine.dragHandler.addActivationEvents()
+    events.on('dragStart', () => cl.add(draggingClass))
+    events.on('dragEnd', () => cl.remove(draggingClass))
+    cl.add(draggableClass)
   }
 
   function toggleSelectedClass(): void {
-    const { slides } = elements
-    const { index, indexPrevious, indexGroups } = slider
+    const { index, indexPrevious, indexGroups } = engine
     const selected = options.selectedClass
     const previousGroup = indexGroups[indexPrevious.get()]
     const currentGroup = indexGroups[index.get()]
@@ -126,20 +121,18 @@ export function EmblaCarousel(
     eventStore.add(slide, 'focus', focus, true)
   }
 
-  function reActivate(userOpt: UserOptions = {}): void {
-    if (state.active) {
-      const startIndex = slider.index.get()
-      const indexOpt = { startIndex }
-      const newOpt = Object.assign(indexOpt, userOpt)
-      deActivate()
-      activate(newOpt)
-    }
+  function reActivate(partialOptions: UserOptions = {}): void {
+    if (!activated) return
+
+    const startIndex = engine.index.get()
+    const newOptions = Object.assign({ startIndex }, partialOptions)
+    deActivate()
+    activate(newOptions)
   }
 
   function deActivate(): void {
-    const { root, container, slides } = elements
-    slider.dragHandler.removeAllEvents()
-    slider.animation.stop()
+    engine.dragHandler.removeAllEvents()
+    engine.animation.stop()
     eventStore.removeAll()
     root.classList.remove(options.draggableClass)
     container.style.transform = ''
@@ -147,82 +140,82 @@ export function EmblaCarousel(
   }
 
   function destroy(): void {
-    state.active = false
     deActivate()
+    activated = false
+    engine = {} as Engine
     events.dispatch('destroy')
   }
 
   function resize(): void {
-    const newWindowWidth = window.innerWidth
-    if (newWindowWidth !== state.windowWidth) {
-      state.windowWidth = newWindowWidth
-      reActivate()
-      events.dispatch('resize')
-    }
+    if (windowWidth === window.innerWidth) return
+
+    windowWidth = window.innerWidth
+    reActivate()
+    events.dispatch('resize')
   }
 
   function scrollSnapList(): ScrollSnap[] {
-    return slider.indexGroups.map(g => ({
+    return engine.indexGroups.map(g => ({
       slideIndexes: g,
-      slideNodes: g.map(i => elements.slides[i]),
+      slideNodes: g.map(i => slides[i]),
     }))
   }
 
   function scrollNext(): void {
-    const next = slider.index.clone().add(1)
-    slider.scrollBody.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.index(next.get(), -1)
+    const next = engine.index.clone().add(1)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.index(next.get(), -1)
   }
 
   function scrollPrev(): void {
-    const prev = slider.index.clone().add(-1)
-    slider.scrollBody.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.index(prev.get(), 1)
+    const prev = engine.index.clone().add(-1)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.index(prev.get(), 1)
   }
 
   function scrollBy(progress: number): void {
-    const distance = slider.scrollBy.distance(progress)
-    slider.scrollBody.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.distance(distance, false)
+    const distance = engine.scrollBy.distance(progress)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.distance(distance, false)
   }
 
   function scrollTo(index: number): void {
-    slider.scrollBody.useDefaultMass().useDefaultSpeed()
-    slider.scrollTo.index(index, 0)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.index(index, 0)
   }
 
   function canScrollPrev(): boolean {
-    const { index } = slider
+    const { index } = engine
     return options.loop || index.get() !== index.min
   }
 
   function canScrollNext(): boolean {
-    const { index } = slider
+    const { index } = engine
     return options.loop || index.get() !== index.max
   }
 
   function selectedScrollSnap(): number {
-    return slider.index.get()
+    return engine.index.get()
   }
 
   function previousScrollSnap(): number {
-    return slider.indexPrevious.get()
+    return engine.indexPrevious.get()
   }
 
   function scrollProgress(): number {
-    return slider.scrollProgress.get()
+    return engine.scrollProgress.get()
   }
 
   function clickAllowed(): boolean {
-    return slider.dragHandler.clickAllowed()
+    return engine.dragHandler.clickAllowed()
   }
 
   function containerNode(): HTMLElement {
-    return elements.container
+    return container
   }
 
   function slideNodes(): HTMLElement[] {
-    return elements.slides
+    return slides
   }
 
   const self: EmblaCarousel = {
