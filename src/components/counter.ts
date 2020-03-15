@@ -44,8 +44,7 @@ export function Counter(params: Params): Counter {
   }
 
   function clone(): Counter {
-    const s = get()
-    return Counter({ start: s, limit, loop })
+    return Counter({ start: get(), limit, loop })
   }
 
   const self: Counter = {

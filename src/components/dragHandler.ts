@@ -46,12 +46,10 @@ export function DragHandler(params: Params): DragHandler {
   const snapSpeed = { mouse: 12, touch: 14 }
   const freeSpeed = { mouse: 6, touch: 5 }
   const dragThreshold = 4
-  const state = {
-    isDown: false,
-    isMouse: false,
-    preventClick: false,
-    preventScroll: false,
-  }
+  let pointerIsDown = false
+  let preventScroll = false
+  let preventClick = false
+  let isMouse = false
 
   function addActivationEvents(): void {
     const node = element
@@ -66,7 +64,7 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function addInteractionEvents(): void {
-    const node = !state.isMouse ? element : document
+    const node = !isMouse ? element : document
     interactionEvents
       .add(node, 'touchmove', move)
       .add(node, 'touchend', up)
@@ -86,13 +84,13 @@ export function DragHandler(params: Params): DragHandler {
 
   function movementSpeed(): number {
     const speed = dragFree ? freeSpeed : snapSpeed
-    const type = state.isMouse ? 'mouse' : 'touch'
+    const type = isMouse ? 'mouse' : 'touch'
     return speed[type]
   }
 
   function dragForceBoost(): number {
     const boost = dragFree ? freeForceBoost : snapForceBoost
-    const type = state.isMouse ? 'mouse' : 'touch'
+    const type = isMouse ? 'mouse' : 'touch'
     return boost[type]
   }
 
@@ -113,7 +111,7 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function down(evt: Event): void {
-    const isMouse = evt.type === 'mousedown'
+    isMouse = evt.type === 'mousedown'
     const diffToTarget = target.get() - location.get()
     const isMoving = Math.abs(diffToTarget) >= 2
     const clearPreventClick = isMouse || !isMoving
@@ -122,8 +120,7 @@ export function DragHandler(params: Params): DragHandler {
 
     if (isMouse && (evt as MouseEvent).button !== 0) return
 
-    state.isDown = true
-    state.isMouse = isMouse
+    pointerIsDown = true
     dragTracker.pointerDown(evt)
     dragStartLocation.set(target)
     target.set(location)
@@ -134,25 +131,24 @@ export function DragHandler(params: Params): DragHandler {
     startY.set(dragTracker.readPoint(evt, 'y'))
     events.dispatch('dragStart')
 
-    if (clearPreventClick) state.preventClick = false
+    if (clearPreventClick) preventClick = false
     if (preventDefault) evt.preventDefault()
   }
 
   function move(evt: Event): void {
-    if (!state.preventScroll && !state.isMouse) {
+    if (!preventScroll && !isMouse) {
       const X = dragTracker.readPoint(evt, 'x').get()
       const Y = dragTracker.readPoint(evt, 'y').get()
       const diffX = Math.abs(X - startX.get())
       const diffY = Math.abs(Y - startY.get())
-      state.preventScroll = diffX > diffY
-      if (!state.preventScroll && !state.preventClick) return up()
+      preventScroll = diffX > diffY
+      if (!preventScroll && !preventClick) return up()
     }
     const diff = dragTracker.pointerMove(evt)
     const reachedLimit = limit.reachedAny(location.get())
     const resist = !params.loop && reachedLimit ? 2 : 1
-    const preventClick = !state.preventClick && diff
 
-    if (preventClick) state.preventClick = true
+    if (!preventClick && diff) preventClick = true
     target.add(diff / resist)
     evt.preventDefault()
   }
@@ -161,12 +157,11 @@ export function DragHandler(params: Params): DragHandler {
     const force = dragTracker.pointerUp() * dragForceBoost()
     const diffToTarget = target.get() - dragStartLocation.get()
     const isMoving = Math.abs(diffToTarget) >= 0.5
-    const preventClick = isMoving && !state.isMouse
 
-    if (preventClick) state.preventClick = true
-    state.isMouse = false
-    state.preventScroll = false
-    state.isDown = false
+    if (isMoving && !isMouse) preventClick = true
+    isMouse = false
+    preventScroll = false
+    pointerIsDown = false
     interactionEvents.removeAll()
     scrollBody.useSpeed(movementSpeed())
     seekTargetBy(force)
@@ -174,15 +169,15 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function click(evt: Event): void {
-    if (state.preventClick) evt.preventDefault()
+    if (preventClick) evt.preventDefault()
   }
 
   function clickAllowed(): boolean {
-    return !state.preventClick
+    return !preventClick
   }
 
   function pointerDown(): boolean {
-    return state.isDown
+    return pointerIsDown
   }
 
   const self: DragHandler = {
