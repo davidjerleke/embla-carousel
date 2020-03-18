@@ -145,10 +145,10 @@ const embla = EmblaCarousel(emblaNode, {
   </summary>
   <hr>
   <div>
-    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be overrided for slides at the start or end when used together with 
+    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be overrided for slides at the start or end when used together with
     <a href="#containscroll">
       <code>containScroll</code>
-    </a>, 
+    </a>,
     that prevents excessive scrolling at the beginning or end.
   </div>
   <br>
@@ -541,7 +541,7 @@ const embla = EmblaCarousel(emblaNode, options)
   </summary>
   <hr>
   <div>
-    This option enables adjustment of the scroll speed when triggered by any of the API methods 
+    This option enables adjustment of the scroll speed when triggered by any of the API methods
     <a href="#scrollnext">
       <code>scrollNext</code>
     </a>,
@@ -550,7 +550,7 @@ const embla = EmblaCarousel(emblaNode, options)
     </a> and
     <a href="#scrollTo">
       <code>scrollTo</code>
-    </a>. Use a higher number for faster scrolling. Drag interactions are not affected by this because the speed in these cases is determined by how vigorous the drag gesture was. 
+    </a>. Use a higher number for faster scrolling. Drag interactions are not affected by this because the speed in these cases is determined by how vigorous the drag gesture was.
   </div>
   <br>
   <div>
@@ -1576,7 +1576,7 @@ emblaSlides.forEach((slide, index) => {
     <sup>
       <strong>Parameters: </strong>
       <code>
-        options: 
+        options:
         <a href="#options">
           EmblaOptions
         </a>
@@ -1616,7 +1616,7 @@ embla.changeOptions({ loop: true })
 
 <details>
   <summary>
-    Destroy a carousel instance permanently. 
+    Destroy a carousel instance permanently.
   </summary>
   <hr>
   <div>
@@ -1666,10 +1666,10 @@ embla.destroy()
   </summary>
   <hr>
   <div>
-    This API method enables the use of event listeners by attaching them to any of the Embla specific 
+    This API method enables the use of event listeners by attaching them to any of the Embla specific
     <a href="#events">
       <code>events</code>
-    </a>. For example, it's useful for changing styles whenever a new target snap point has been selected or when the carousel is scrolling. Use it together with the 
+    </a>. For example, it's useful for changing styles whenever a new target snap point has been selected or when the carousel is scrolling. Use it together with the
     <a href="#off">
       <code>off</code>
     </a> method to remove added event listeners without destroying the carousel. However, when the
@@ -1730,7 +1730,7 @@ embla.on('init', onInitCallback)
     This API method enables the removal of event listeners attached to Embla specific
     <a href="#events">
       <code>events</code>
-    </a>. It's useful for removing added event listeners without destroying the carousel. Note that you don't have to remove event listeners added using the 
+    </a>. It's useful for removing added event listeners without destroying the carousel. Note that you don't have to remove event listeners added using the
     <a href="#on">
       <code>on</code>
     </a> method when invoking
@@ -1808,19 +1808,19 @@ embla.on('scroll', () => {
     This event fires the given callback when the carousel has initialised and its
     <a href="#api">
       <code>API</code>
-    </a> is ready to use. Note that the init event only fires once upon the first initialisation and won't trigger when invoking 
+    </a> is ready to use. Note that the init event only fires once upon the first initialisation and won't trigger when invoking
     <a href="#changeOptions">
       <code>changeOptions</code>
     </a> or similar.
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
-      <code>CodeSandbox (upcoming)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
@@ -1885,12 +1885,12 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
-      <code>CodeSandbox (upcoming)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
@@ -1990,12 +1990,12 @@ embla.on('settle', () => {
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
-      <code>CodeSandbox (upcoming)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
@@ -2022,12 +2022,12 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
-      <code>CodeSandbox (upcoming)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
@@ -2054,12 +2054,12 @@ const embla = EmblaCarousel(emblaNode, options)
   </div>
   <br>
   <div>
-    <a href="#">
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
-    <a href="#">
-      <code>CodeSandbox (upcoming)</code>
+    <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
+      <code>CodeSandbox</code>
     </a>
   </div>
   <br>
@@ -2084,7 +2084,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-basic-setup-oyols">
     <code>Basic Setup</code>
-  </a> 
+  </a>
   - With Previous, Next & Dot buttons.
 </p>
 
@@ -2092,7 +2092,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-autoplay-4yhr2">
     <code>Autoplay</code>
-  </a> 
+  </a>
   - Example of how to setup Autoplay.
 </p>
 
@@ -2101,7 +2101,7 @@ const embla = EmblaCarousel(emblaNode, options)
 ## Browser Support
 
 <p>
-  Embla has been tested in the browsers listed below. Special thanks goes to 
+  Embla has been tested in the browsers listed below. Special thanks goes to
   <a href="https://www.browserstack.com">BrowserStack</a>.
 </p>
 
@@ -2135,7 +2135,7 @@ const embla = EmblaCarousel(emblaNode, options)
     Thank you to all contributors for making Embla Carousel awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
 <p align="center">
-    <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=122&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a> 
+    <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=122&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=122&v=4" title="ehellman" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/afilp"><img src="https://avatars0.githubusercontent.com/u/7850073?s=122&v=4" title="afilp" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/mrksmts"><img src="https://avatars1.githubusercontent.com/u/437794?s=122&v=4" title="mrksmts" width="66" height="66" style="max-width:100%;"></a>
