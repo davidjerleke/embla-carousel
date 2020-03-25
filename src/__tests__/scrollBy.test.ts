@@ -6,8 +6,8 @@ import { Vector1D } from '../components/vector1d'
 const snapSizes = [80, 40, 30, 40, 60]
 const scrollSnaps = [10, -50, -85, -120, -170]
 const contentSize = snapSizes.reduce((a, s) => a + s, 0)
-const progressBelowScrollLength = 0.25
-const progressAboveScrollLength = 2
+const progressLessThanScrollLength = 0.25
+const progressMoreThanScrollLength = 2
 
 const getScrollLimit = (loop: boolean): Limit => {
   const scrollLimit = ScrollLimit({ contentSize, loop })
@@ -20,65 +20,69 @@ const getScrollBy = (loop: boolean, target: Vector1D): ScrollBy => {
 }
 
 describe('ScrollBy', () => {
-  describe('Loop False', () => {
+  describe('When loop is false, distance is', () => {
     const loop = false
     const scrollLimit = getScrollLimit(loop)
     const scrollLength = scrollLimit.min - scrollLimit.max
 
-    test('Distance adds to current scroll location', () => {
+    test('Added to current scroll location', () => {
       const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
-      const progress = -progressBelowScrollLength
+      const progress = -progressLessThanScrollLength
       const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
-    })
-    test('Distance subtracts from current scroll location', () => {
-      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
-      const progress = progressBelowScrollLength
-      const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
+      expect(scrollBy.progress(progress)).toBe(distance)
     })
 
-    test('Distance does not exceed the Limit min bound', () => {
-      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
-      const progress = progressAboveScrollLength
-      expect(scrollBy.distance(progress)).toBe(0)
-    })
-    test('Distance does not exceed the Limit max bound', () => {
+    test('Subtracted from current scroll location', () => {
       const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
-      const progress = -progressAboveScrollLength
-      expect(scrollBy.distance(progress)).toBe(0)
+      const progress = progressLessThanScrollLength
+      const distance = scrollLength * progress
+      expect(scrollBy.progress(progress)).toBe(distance)
+    })
+
+    test('Limited to limit min', () => {
+      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
+      const progress = progressMoreThanScrollLength
+      expect(scrollBy.progress(progress)).toBe(0)
+    })
+
+    test('Limited to limit max', () => {
+      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
+      const progress = -progressMoreThanScrollLength
+      expect(scrollBy.progress(progress)).toBe(0)
     })
   })
 
-  describe('Loop True', () => {
+  describe('When loop is true, distance is', () => {
     const loop = true
     const scrollLimit = getScrollLimit(loop)
     const scrollLength = scrollLimit.min - scrollLimit.max
 
-    test('Distance adds to current scroll location', () => {
+    test('Added to current scroll location', () => {
       const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
-      const progress = -progressBelowScrollLength
+      const progress = -progressLessThanScrollLength
       const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
-    })
-    test('Distance subtracts from current scroll location', () => {
-      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
-      const progress = progressBelowScrollLength
-      const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
+      expect(scrollBy.progress(progress)).toBe(distance)
     })
 
-    test('Distance is allowed to exceed the Limit min bound', () => {
+    test('Subtracted from current scroll location', () => {
       const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
-      const progress = progressAboveScrollLength
+      const progress = progressLessThanScrollLength
       const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
+      expect(scrollBy.progress(progress)).toBe(distance)
     })
-    test('Distance is allowed to exceed the Limit max bound', () => {
-      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
-      const progress = -progressAboveScrollLength
+
+    test('Allowed to exceed limit min', () => {
+      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.max))
+      const progress = progressMoreThanScrollLength
       const distance = scrollLength * progress
-      expect(scrollBy.distance(progress)).toBe(distance)
+      expect(scrollBy.progress(progress)).toBe(distance)
+    })
+
+    test('Allowed to exceed limit max', () => {
+      const scrollBy = getScrollBy(loop, Vector1D(scrollLimit.min))
+      const progress = -progressMoreThanScrollLength
+      const distance = scrollLength * progress
+      expect(scrollBy.progress(progress)).toBe(distance)
     })
   })
 })

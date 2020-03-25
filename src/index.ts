@@ -174,7 +174,7 @@ export function EmblaCarousel(
   }
 
   function scrollBy(progress: number): void {
-    const distance = engine.scrollBy.distance(progress)
+    const distance = engine.scrollBy.progress(progress)
     engine.scrollBody.useDefaultMass().useDefaultSpeed()
     engine.scrollTo.distance(distance, false)
   }

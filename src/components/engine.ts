@@ -134,7 +134,6 @@ export function Engine(
       limit,
       loop,
       scrollSnaps,
-      snapSizes,
       target,
     }),
     target,

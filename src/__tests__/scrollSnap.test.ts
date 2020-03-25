@@ -7,11 +7,8 @@ const snapSizes = [80, 24, 61, 55, 76, 15]
 const snapIndexes = arrayKeys(snapSizes)
 
 const getScrollSnap = (align: Alignments): ScrollSnap => {
-  return ScrollSnap({
-    alignment: Alignment({ align, viewSize }),
-    loop: false,
-    snapSizes,
-  })
+  const alignment = Alignment({ align, viewSize })
+  return ScrollSnap({ alignment, snapSizes, loop: false })
 }
 
 describe('ScrollSnap', () => {
