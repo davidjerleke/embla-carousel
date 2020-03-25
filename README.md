@@ -2135,6 +2135,7 @@ const embla = EmblaCarousel(emblaNode, options)
     Thank you to all contributors for making Embla Carousel awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
 <p align="center">
+    <a href="https://github.com/nikrowell"><img src="https://avatars2.githubusercontent.com/u/260039?s=122&v=4" title="nikrowell" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=122&v=4" title="michaelrambeau" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=122&v=4" title="ehellman" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/afilp"><img src="https://avatars0.githubusercontent.com/u/7850073?s=122&v=4" title="afilp" width="66" height="66" style="max-width:100%;"></a>
