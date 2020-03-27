@@ -145,7 +145,7 @@ const embla = EmblaCarousel(emblaNode, {
   </summary>
   <hr>
   <div>
-    This option aligns the slides to the start or end edge of the carousel viewport. Slides will be centered if no value is provided. Note that slide alignments will be overrided for slides at the start or end when used together with
+    This option aligns the slides relative to the carousel viewport. Instead of using one of the predefined alignments <code>start</code>, <code>center</code> and <code>end</code>, you can provide a number to align the slides. For example, if you pass <code>0.2</code>, slides will be aligned 20% from the viewport start edge. Note that slide alignments will be overrided for slides at the start and end when used together with 
     <a href="#containscroll">
       <code>containScroll</code>
     </a>,
@@ -155,7 +155,7 @@ const embla = EmblaCarousel(emblaNode, {
   <div>
     <sup>
       <strong>Type: </strong>
-      <code>string</code>
+      <code>string</code> | <code>number</code>
     </sup>
   </div>
   <div>
@@ -164,6 +164,7 @@ const embla = EmblaCarousel(emblaNode, {
       <code>start</code>
       <code>center</code>
       <code>end</code>
+      <code>number</code>
     </sup>
   </div>
   <div>
