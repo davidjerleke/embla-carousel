@@ -11,23 +11,23 @@ const limit = Limit({
 })
 
 describe('Limit', () => {
-  describe('Exposes', () => {
-    test('Limit min ', () => {
+  describe('Exposes limit', () => {
+    test('Min', () => {
       expect(limit.min).toBe(minLimit)
     })
 
-    test('Limit max ', () => {
+    test('Max', () => {
       expect(limit.max).toBe(maxLimit)
     })
   })
 
-  describe('Loops', () => {
-    test('To limit max when given number < limit min', () => {
+  describe('Loops to limit', () => {
+    test('Max when given number < limit min', () => {
       const number = limit.loop(lessThanMin)
       expect(number).toBe(maxLimit)
     })
 
-    test('To limit min when given number > limit max', () => {
+    test('Min when given number > limit max', () => {
       const number = limit.loop(moreThanMax)
       expect(number).toBe(minLimit)
     })
@@ -40,12 +40,12 @@ describe('Limit', () => {
     })
   })
 
-  describe('Constrains', () => {
-    test('To limit max when given number > limit max', () => {
+  describe('Constrains to limit ', () => {
+    test('Max when given number > limit max', () => {
       const number = limit.constrain(moreThanMax)
       expect(number).toBe(maxLimit)
     })
-    test('To limit min when given number < limit min', () => {
+    test('Min when given number < limit min', () => {
       const number = limit.constrain(lessThanMin)
       expect(number).toBe(minLimit)
     })

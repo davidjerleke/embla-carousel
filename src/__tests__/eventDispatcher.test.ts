@@ -13,16 +13,16 @@ beforeEach(() => {
 })
 
 describe('EventDispatcher', () => {
-  describe('Runs Callbacks', () => {
-    test('When they are added and related event is dispatched', () => {
+  describe('Runs callbacks when they are', () => {
+    test('Added and the related event is dispatched', () => {
       eventDispatcher.dispatch('init')
       expect(callback1).toHaveBeenCalledTimes(1)
       expect(callback2).toHaveBeenCalledTimes(1)
     })
   })
 
-  describe('Does not run Callbacks', () => {
-    test('When they are removed and related event is dispatched', () => {
+  describe('Does not run callbacks when they are', () => {
+    test('Removed and related event is dispatched', () => {
       eventDispatcher.off('init', callback1)
       eventDispatcher.off('init', callback2)
       eventDispatcher.dispatch('init')
@@ -30,7 +30,7 @@ describe('EventDispatcher', () => {
       expect(callback2).toHaveBeenCalledTimes(0)
     })
 
-    test('When they are added and an unrelated event is dispatched', () => {
+    test('Added and an unrelated event is dispatched', () => {
       eventDispatcher.dispatch('select')
       expect(callback1).toHaveBeenCalledTimes(0)
       expect(callback2).toHaveBeenCalledTimes(0)

@@ -21,33 +21,33 @@ beforeEach(() => {
 })
 
 describe('Animation', () => {
-  describe('Runs callback', () => {
-    test('When animation start is invoked', () => {
+  describe('Runs callback when', () => {
+    test('Start is invoked', () => {
       animation.start()
       expect(counter).toBe(1)
     })
 
-    test('When animation proceeded is invoked after start', () => {
+    test('Proceeded is invoked after start', () => {
       animation.start()
       animation.proceed()
       expect(counter).toBe(2)
     })
   })
 
-  describe('Does not run callback', () => {
-    test('When animation proceed is invoked directly', () => {
+  describe('Does not run callback when', () => {
+    test('Proceed is invoked directly', () => {
       animation.proceed()
       expect(counter).toBe(0)
     })
 
-    test('When animation proceed is invoked after stop', () => {
+    test('Proceed is invoked after stop', () => {
       animation.start()
       animation.stop()
       animation.proceed()
       expect(counter).toBe(1)
     })
 
-    test('When animation start is invoked a second time', () => {
+    test('Start is invoked twice in a row', () => {
       animation.start()
       animation.start()
       expect(counter).toBe(1)
