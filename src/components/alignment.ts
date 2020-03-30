@@ -11,7 +11,7 @@ export type Alignment = {
 
 export function Alignment(params: Params): Alignment {
   const { viewSize, align } = params
-  const alignment = { start, center, end, percent }
+  const alignment = { start, center, end }
 
   function start(): number {
     return 0
