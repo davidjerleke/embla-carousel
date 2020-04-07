@@ -45,14 +45,14 @@
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
+    "@babel/core": "^7.9.0",
     "@babel/plugin-transform-object-assign": "^7.8.3",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
     "@types/jest": "^24.9.1",
     "@types/jest-diff": "^20.0.0",
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.7.6",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^1.0.1",
     "jest": "^24.9.0",
     "node-sass": "^4.13.1",
@@ -63,7 +63,7 @@
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.8.3",
-    "webpack": "^4.42.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   }
