@@ -48,7 +48,7 @@
     "@babel/core": "^7.8.7",
     "@babel/plugin-transform-object-assign": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
-    "@types/jest": "^24.9.1",
+    "@types/jest": "^25.2.1",
     "@types/jest-diff": "^20.0.0",
     "autoprefixer": "^9.7.4",
     "awesome-typescript-loader": "^5.2.1",
