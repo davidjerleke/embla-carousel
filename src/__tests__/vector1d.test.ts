@@ -2,6 +2,7 @@ import { Vector1D } from '../components/vector1d'
 
 let vector1: Vector1D
 let vector2: Vector1D
+
 const initialVectorValue1 = 10
 const initialVectorValue2 = 5
 

@@ -3,7 +3,11 @@ import { Limit } from '../components/limit'
 
 let loopCounter: Counter
 let limitCounter: Counter
-const limit = Limit({ min: 0, max: 5 })
+
+const limit = Limit({
+  min: 0,
+  max: 5,
+})
 
 beforeEach(() => {
   loopCounter = Counter({ start: 2, limit, loop: true })

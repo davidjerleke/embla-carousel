@@ -4,7 +4,6 @@ import { ScrollSnap } from '../components/scrollSnap'
 import { arrayKeys } from '../components/utils'
 
 const viewSize = 100
-
 const exceedsView = [20, 24, 31, 25, 36, 15]
 const doesntExceedView = [15, 20, 15]
 const equalsView = [50, 50]
