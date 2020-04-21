@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "author": "David Cetinkaya",
   "private": false,
   "description": "Extensible bare bones carousels for the web",
