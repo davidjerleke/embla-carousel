@@ -4,7 +4,6 @@ import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
 type Params = {
-  align: Alignments
   index: Counter
   loop: boolean
   scrollSnaps: number[]
@@ -21,6 +20,7 @@ export type Target = {
 export type ScrollTarget = {
   byIndex: (target: number, direction: number) => Target
   byDistance: (force: number, snap: boolean) => Target
+  shortcut: (target: number, direction: number) => number
 }
 
 export function ScrollTarget(params: Params): ScrollTarget {
@@ -37,7 +37,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
 
     const ascDiffsToSnaps = scrollSnaps
       .map(scrollSnap => scrollSnap - target)
-      .map(diffToSnap => shortestWay(diffToSnap, 0))
+      .map(diffToSnap => shortcut(diffToSnap, 0))
       .map((diff, i) => ({ diff, index: i }))
       .sort((d1, d2) => Math.abs(d1.diff) - Math.abs(d2.diff))
 
@@ -45,7 +45,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
     return { index, distance: target }
   }
 
-  function shortestWay(target: number, direction: number): number {
+  function shortcut(target: number, direction: number): number {
     const t1 = target
     const t2 = target + contentSize
     const t3 = target - contentSize
@@ -67,7 +67,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
 
   function byIndex(index: number, direction: number): Target {
     const diffToSnap = scrollSnaps[index] - params.target.get()
-    const distance = shortestWay(diffToSnap, direction)
+    const distance = shortcut(diffToSnap, direction)
     return { index, distance }
   }
 
@@ -81,7 +81,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
     if (!snap || reachedBound) return { index, distance }
 
     const diffToSnap = scrollSnaps[index] - targetSnap.distance
-    const snapDistance = distance + shortestWay(diffToSnap, 0)
+    const snapDistance = distance + shortcut(diffToSnap, 0)
 
     return { index, distance: snapDistance }
   }
@@ -89,6 +89,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
   const self: ScrollTarget = {
     byDistance,
     byIndex,
+    shortcut,
   }
   return Object.freeze(self)
 }

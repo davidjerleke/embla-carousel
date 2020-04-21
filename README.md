@@ -1111,6 +1111,56 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
 <hr>
 </details>
 
+##### `scrollToProgress`
+
+<details>
+  <summary>
+    Scroll the carousel by to given location.
+  </summary>
+  <hr>
+  <div>
+    This API method allows users to manipulate the current
+    <a href="#scrollprogress">
+      <code>scrollProgress</code>
+    </a> from 0 to 1 by directly setting it. For example, assuming that the carousel is positioned on the first snap point, <code>0.5</code> will scroll the carousel half of its scrollable length. Scroll to target is smooth. The second parameter allows for snapping the carousel to the closest snap point based on the target scroll progress (note that this will alter the desired progress a bit in order to snap it).
+  </div>
+  <br>
+  <div>
+    <sup>
+      <strong>Parameters: </strong>
+      <code>progress: number</code>
+      <code>snap: boolean</code>
+    </sup>
+  </div>
+  <div>
+    <sup>
+      <strong>Return Type: </strong>
+      <code>undefined</code>
+    </sup>
+  </div>
+  <br>
+  <div>
+    <a href="#">
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+    </a>
+    &nbsp;
+    <a href="#">
+      <code>CodeSandbox (to be created)</code>
+    </a>
+  </div>
+  <br>
+  <p>
+    <strong>Usage</strong>
+  </p>
+
+```javascript
+const embla = EmblaCarousel(emblaNode, options)
+embla.scrollToProgress(0.5)
+```
+
+<hr>
+</details>
+
 ##### `scrollBy`
 
 <details>
@@ -1122,13 +1172,14 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
     This API method allows users to manipulate the current
     <a href="#scrollprogress">
       <code>scrollProgress</code>
-    </a> by either adding to it or subtracting from it. For example, assuming that the carousel is positioned on the first snap point, <code>0.5</code> will scroll the carousel half of its scrollable length. Scroll to target is smooth.
+    </a> from 0 to 1 by either adding to it or subtracting from it. For example, assuming that the carousel is positioned on the first snap point, <code>0.5</code> will scroll the carousel half of its scrollable length. Scroll to target is smooth. The second parameter allows for snapping the carousel to the closest snap point based on the target scroll progress (note that this will alter the desired progress a bit in order to snap it).
   </div>
   <br>
   <div>
     <sup>
       <strong>Parameters: </strong>
       <code>progress: number</code>
+      <code>snap: boolean</code>
     </sup>
   </div>
   <div>
@@ -1461,13 +1512,13 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes
     This API method returns how far the carousel has scrolled from <code>0</code> at the beginning to <code>1</code> at the end. For example, it's useful for creating a progress bar together with the
     <a href="#scroll">
       <code>scroll</code>
-    </a> event.
+    </a> event. When invoking <code>scrollProgress</code> without the target parameter, the carousel returns the scroll progress of its current location. However, if you want to grab the target scroll progress the target parameter has to be <code>true</code>.
   </div>
   <br>
   <div>
     <sup>
       <strong>Parameters: </strong>
-      <code>none</code>
+      <code>target: boolean</code>
     </sup>
   </div>
   <div>

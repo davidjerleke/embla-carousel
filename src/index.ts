@@ -23,12 +23,13 @@ export type EmblaCarousel = {
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   previousScrollSnap: () => number
-  scrollBy: (progress: number) => void
+  scrollBy: (progress: number, snap: boolean) => void
   scrollNext: () => void
   scrollPrev: () => void
-  scrollProgress: () => number
+  scrollProgress: (target?: boolean) => number
   scrollSnapList: () => ScrollSnap[]
   scrollTo: (index: number) => void
+  scrollToProgress: (progress: number, snap: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
 }
@@ -161,6 +162,30 @@ export function EmblaCarousel(
     }))
   }
 
+  function scrollBy(progress: number, snap: boolean): void {
+    const distance = engine.scrollProgress.add(progress)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.distance(distance, snap)
+  }
+
+  function scrollToProgress(progress: number, snap: boolean): void {
+    const desired = engine.scrollProgress.set(progress)
+    const distance = engine.scrollTarget.shortcut(desired, 0)
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.distance(distance, snap)
+  }
+
+  function scrollProgress(target: boolean = false): number {
+    const locationType = target ? 'target' : 'location'
+    const location = engine[locationType].get()
+    return engine.scrollProgress.get(location)
+  }
+
+  function scrollTo(index: number): void {
+    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollTo.index(index, 0)
+  }
+
   function scrollNext(): void {
     const next = engine.index.clone().add(1)
     engine.scrollBody.useDefaultMass().useDefaultSpeed()
@@ -171,17 +196,6 @@ export function EmblaCarousel(
     const prev = engine.index.clone().add(-1)
     engine.scrollBody.useDefaultMass().useDefaultSpeed()
     engine.scrollTo.index(prev.get(), 1)
-  }
-
-  function scrollBy(progress: number): void {
-    const distance = engine.scrollBy.progress(progress)
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.distance(distance, false)
-  }
-
-  function scrollTo(index: number): void {
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.index(index, 0)
   }
 
   function canScrollPrev(): boolean {
@@ -200,10 +214,6 @@ export function EmblaCarousel(
 
   function previousScrollSnap(): number {
     return engine.indexPrevious.get()
-  }
-
-  function scrollProgress(): number {
-    return engine.scrollProgress.get()
   }
 
   function clickAllowed(): boolean {
@@ -234,6 +244,7 @@ export function EmblaCarousel(
     scrollProgress,
     scrollSnapList,
     scrollTo,
+    scrollToProgress,
     selectedScrollSnap,
     slideNodes,
   }

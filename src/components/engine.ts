@@ -9,7 +9,6 @@ import { Options } from './options'
 import { PxToPercent } from './pxToPercent'
 import { ScrollBody } from './scrollBody'
 import { ScrollBounds } from './scrollBounds'
-import { ScrollBy } from './scrollBy'
 import { ScrollContain } from './scrollContain'
 import { ScrollLimit } from './scrollLimit'
 import { ScrollLooper } from './scrollLooper'
@@ -29,6 +28,7 @@ export type Engine = {
   scrollProgress: ScrollProgress
   index: Counter
   indexPrevious: Counter
+  location: Vector1D
   indexGroups: number[][]
   scrollBody: ScrollBody
   dragHandler: DragHandler
@@ -36,7 +36,7 @@ export type Engine = {
   target: Vector1D
   translate: Translate
   scrollTo: ScrollTo
-  scrollBy: ScrollBy
+  scrollTarget: ScrollTarget
 }
 
 export function Engine(
@@ -122,20 +122,20 @@ export function Engine(
   const target = Vector1D(startLocation)
   const loopVectors = [location, target]
   const scrollBody = ScrollBody({ location, speed, mass: 1 })
+  const scrollTarget = ScrollTarget({
+    contentSize,
+    index,
+    limit,
+    loop,
+    scrollSnaps,
+    target,
+  })
   const scrollTo = ScrollTo({
     animation,
     events,
     index,
     indexPrevious,
-    scrollTarget: ScrollTarget({
-      align,
-      contentSize,
-      index,
-      limit,
-      loop,
-      scrollSnaps,
-      target,
-    }),
+    scrollTarget,
     target,
   })
 
@@ -163,17 +163,13 @@ export function Engine(
     index,
     indexGroups,
     indexPrevious,
+    location,
     scrollBody,
     scrollBounds: ScrollBounds({
       animation,
       limit,
       location,
       scrollBody,
-    }),
-    scrollBy: ScrollBy({
-      limit,
-      loop,
-      target,
     }),
     scrollLooper: ScrollLooper({
       contentSize,
@@ -183,8 +179,10 @@ export function Engine(
     }),
     scrollProgress: ScrollProgress({
       limit,
-      location,
+      loop,
+      target,
     }),
+    scrollTarget,
     scrollTo,
     slideLooper: SlideLooper({
       contentSize,
