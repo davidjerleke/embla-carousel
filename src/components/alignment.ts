@@ -11,7 +11,7 @@ export type Alignment = {
 
 export function Alignment(params: Params): Alignment {
   const { viewSize, align } = params
-  const alignment = { start, center, end }
+  const predefined = { start, center, end }
 
   function start(): number {
     return 0
@@ -31,7 +31,7 @@ export function Alignment(params: Params): Alignment {
 
   function measure(n: number): number {
     if (typeof align === 'number') return percent()
-    return alignment[align](n)
+    return predefined[align](n)
   }
 
   const self: Alignment = {

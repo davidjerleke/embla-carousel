@@ -8,30 +8,25 @@ import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
 
-type ScrollSnap = {
-  slideNodes: HTMLElement[]
-  slideIndexes: number[]
-}
-
 export type EmblaCarousel = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
-  changeOptions: (options: UserOptions) => void
   clickAllowed: () => boolean
   containerNode: () => HTMLElement
+  dangerouslyGetEngine: () => Engine
   destroy: () => void
   off: (evt: EmblaEvent, cb: EmblaCallback) => void
   on: (evt: EmblaEvent, cb: EmblaCallback) => void
   previousScrollSnap: () => number
-  scrollBy: (progress: number, snap: boolean) => void
+  reInit: (options: UserOptions) => void
   scrollNext: () => void
   scrollPrev: () => void
-  scrollProgress: (target?: boolean) => number
-  scrollSnapList: () => ScrollSnap[]
+  scrollProgress: () => number
+  scrollSnapList: () => number[]
   scrollTo: (index: number) => void
-  scrollToProgress: (progress: number, snap: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
+  slidesInView: (target?: boolean) => number[]
 }
 
 export function EmblaCarousel(
@@ -41,8 +36,9 @@ export function EmblaCarousel(
   const events = EventDispatcher()
   const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
-  const changeOptions = reActivate
+  const reInit = reActivate
   const { on, off } = events
+
   let engine: Engine
   let options = Object.assign({}, defaultOptions, userOptions)
   let root: HTMLElement
@@ -89,6 +85,7 @@ export function EmblaCarousel(
     if (options.loop) engine.slideLooper.loop(slides)
     if (isFirstInit) {
       events.on('select', toggleSelectedClass)
+      events.on('dragEnd', toggleSelectedClass)
       events.on('init', toggleSelectedClass)
       setTimeout(() => events.dispatch('init'), 0)
     }
@@ -104,12 +101,12 @@ export function EmblaCarousel(
   }
 
   function toggleSelectedClass(): void {
-    const { index, indexPrevious, indexGroups } = engine
+    const indexes = engine.snapIndexes
     const selected = options.selectedClass
-    const previousGroup = indexGroups[indexPrevious.get()]
-    const currentGroup = indexGroups[index.get()]
-    previousGroup.forEach(i => slides[i].classList.remove(selected))
-    currentGroup.forEach(i => slides[i].classList.add(selected))
+    const inView = slidesInView(true)
+    const notInView = indexes.filter(i => inView.indexOf(i) === -1)
+    notInView.forEach(i => slides[i].classList.remove(selected))
+    inView.forEach(i => slides[i].classList.add(selected))
   }
 
   function slideFocusEvent(slide: HTMLElement, index: number): void {
@@ -155,30 +152,16 @@ export function EmblaCarousel(
     events.dispatch('resize')
   }
 
-  function scrollSnapList(): ScrollSnap[] {
-    return engine.indexGroups.map(g => ({
-      slideIndexes: g,
-      slideNodes: g.map(i => slides[i]),
-    }))
+  function slidesInView(target: boolean = false): number[] {
+    const constrain = engine.limit.constrain
+    const location = engine[target ? 'target' : 'location'].get()
+    const constraint = options.loop ? location : constrain(location)
+    return engine.slidesInView.check(constraint)
   }
 
-  function scrollBy(progress: number, snap: boolean): void {
-    const distance = engine.scrollProgress.add(progress)
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.distance(distance, snap)
-  }
-
-  function scrollToProgress(progress: number, snap: boolean): void {
-    const desired = engine.scrollProgress.set(progress)
-    const distance = engine.scrollTarget.shortcut(desired, 0)
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.distance(distance, snap)
-  }
-
-  function scrollProgress(target: boolean = false): number {
-    const locationType = target ? 'target' : 'location'
-    const location = engine[locationType].get()
-    return engine.scrollProgress.get(location)
+  function scrollSnapList(): number[] {
+    const getScrollProgress = engine.scrollProgress.get
+    return engine.scrollSnaps.map(getScrollProgress)
   }
 
   function scrollTo(index: number): void {
@@ -208,6 +191,11 @@ export function EmblaCarousel(
     return options.loop || index.get() !== index.max
   }
 
+  function scrollProgress(): number {
+    const location = engine.location.get()
+    return engine.scrollProgress.get(location)
+  }
+
   function selectedScrollSnap(): number {
     return engine.index.get()
   }
@@ -218,6 +206,10 @@ export function EmblaCarousel(
 
   function clickAllowed(): boolean {
     return engine.dragHandler.clickAllowed()
+  }
+
+  function dangerouslyGetEngine(): Engine {
+    return engine
   }
 
   function containerNode(): HTMLElement {
@@ -231,22 +223,22 @@ export function EmblaCarousel(
   const self: EmblaCarousel = {
     canScrollNext,
     canScrollPrev,
-    changeOptions,
     clickAllowed,
     containerNode,
+    dangerouslyGetEngine,
     destroy,
     off,
     on,
     previousScrollSnap,
-    scrollBy,
+    reInit,
     scrollNext,
     scrollPrev,
     scrollProgress,
     scrollSnapList,
     scrollTo,
-    scrollToProgress,
     selectedScrollSnap,
     slideNodes,
+    slidesInView,
   }
   return Object.freeze(self)
 }

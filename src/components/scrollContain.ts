@@ -1,31 +1,23 @@
 import { Alignment } from './alignment'
 import { Limit } from './limit'
-import { groupArray } from './utils'
+
+export type ScrollContains = '' | 'trimSnaps' | 'keepSnaps'
 
 type Params = {
-  slideIndexes: number[]
-  slidesToScroll: number
   contentSize: number
   viewSize: number
   alignment: Alignment
 }
 
 export type ScrollContain = {
-  indexes: (scrollSnaps: number[]) => number[][]
-  snaps: (scrollSnaps: number[]) => number[]
+  snaps: (scrollSnaps: number[], trim: boolean) => number[]
 }
 
 export function ScrollContain(params: Params): ScrollContain {
   const { alignment, contentSize, viewSize } = params
-  const { slideIndexes, slidesToScroll } = params
-  const indexGroups = groupArray(slideIndexes, slidesToScroll)
+  const scrollBounds = Limit({ min: -contentSize + viewSize, max: 0 })
+  const alignedWithinView = [alignment.measure(contentSize)]
   const contentExceedsView = contentSize > viewSize
-  const bounds = Limit({ min: -contentSize + viewSize, max: 0 })
-
-  function groupDuplicates(start: number, end: number): number[] {
-    const duplicates = indexGroups.slice(start, end)
-    return duplicates.reduce((a, g) => a.concat(g), [])
-  }
 
   function findDuplicates(scrollSnaps: number[]): Limit {
     const startSnap = scrollSnaps[0]
@@ -35,25 +27,16 @@ export function ScrollContain(params: Params): ScrollContain {
     return Limit({ min, max })
   }
 
-  function indexes(scrollSnaps: number[]): number[][] {
-    if (!contentExceedsView) return [slideIndexes]
-    const containedSnaps = scrollSnaps.map(bounds.constrain)
+  function snaps(scrollSnaps: number[], trim: boolean): number[] {
+    const containedSnaps = scrollSnaps.map(scrollBounds.constrain)
     const { min, max } = findDuplicates(containedSnaps)
-    const start = groupDuplicates(0, min)
-    const middle = indexGroups.slice(min, max)
-    const end = groupDuplicates(max, scrollSnaps.length)
-    return [start].concat(middle.concat([end]))
-  }
 
-  function snaps(scrollSnaps: number[]): number[] {
-    if (!contentExceedsView) return [alignment.measure(contentSize)]
-    const containedSnaps = scrollSnaps.map(bounds.constrain)
-    const { min, max } = findDuplicates(containedSnaps)
+    if (!contentExceedsView) return alignedWithinView
+    if (!trim) return containedSnaps
     return containedSnaps.slice(min - 1, max + 1)
   }
 
   const self: ScrollContain = {
-    indexes,
     snaps,
   }
   return Object.freeze(self)

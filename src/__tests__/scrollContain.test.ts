@@ -5,85 +5,93 @@ import { arrayKeys } from '../components/utils'
 
 const viewSize = 100
 const exceedsView = [20, 24, 31, 25, 36, 15]
-const doesntExceedView = [15, 20, 15]
+const doesNotExceedView = [20, 20]
 const equalsView = [50, 50]
 
-const contained = (align: Alignments, snapSizes: number[]) => {
+const getScrollSnaps = (
+  snapSizes: number[],
+  align: Alignments,
+): number[] => {
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ snapSizes, alignment, loop: false })
-  const snapIndexes = arrayKeys(snapSizes)
-  const defaultSnaps = snapIndexes.map(scrollSnap.measure)
-  const scrollContain = ScrollContain({
-    slideIndexes: arrayKeys(snapSizes),
-    contentSize: snapSizes.reduce((a, s) => a + s, 0),
-    slidesToScroll: 1,
-    alignment,
-    viewSize,
-  })
-  return {
-    snaps: scrollContain.snaps(defaultSnaps),
-    indexes: scrollContain.indexes(defaultSnaps),
-  }
+  return arrayKeys(snapSizes).map(scrollSnap.measure)
+}
+
+const getScrollContain = (
+  snapSizes: number[],
+  align: Alignments,
+): ScrollContain => {
+  const contentSize = snapSizes.reduce((a, s) => a + s, 0)
+  const alignment = Alignment({ align, viewSize })
+  return ScrollContain({ contentSize, alignment, viewSize })
 }
 
 describe('ScrollContain', () => {
-  describe('Calculates correct snaps & indexes when align is start and', () => {
-    test('Content exceeds view', () => {
-      const { snaps, indexes } = contained('start', exceedsView)
-      expect(snaps).toEqual([0, -20, -44, -51])
-      expect(indexes).toEqual([[0], [1], [2], [3, 4, 5]])
+  test('Trims duplicate snaps', () => {
+    const scrollSnaps = getScrollSnaps(exceedsView, 'start')
+    const contain = getScrollContain(exceedsView, 'start')
+    const containedSnaps = contain.snaps(scrollSnaps, true)
+    expect(containedSnaps).toEqual([0, -20, -44, -51])
+  })
+
+  test('Aligns to start when content equals view', () => {
+    const scrollSnaps = getScrollSnaps(equalsView, 'end')
+    const contain = getScrollContain(equalsView, 'end')
+    const containedSnaps = contain.snaps(scrollSnaps, false)
+    expect(containedSnaps).toEqual([0])
+  })
+
+  describe('Contains snaps correctly when align is start and content', () => {
+    const align = 'start'
+
+    test('Exceeds view', () => {
+      const scrollSnaps = getScrollSnaps(exceedsView, align)
+      const contain = getScrollContain(exceedsView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([0, -20, -44, -51, -51, -51])
     })
 
-    test('Content doesn`t exceed view', () => {
-      const { snaps, indexes } = contained('start', doesntExceedView)
-      expect(snaps).toEqual([0])
-      expect(indexes).toEqual([[0, 1, 2]])
-    })
-
-    test('Content equals view', () => {
-      const { snaps, indexes } = contained('start', equalsView)
-      expect(snaps).toEqual([0])
-      expect(indexes).toEqual([[0, 1]])
+    test('Doesn`t exceed view', () => {
+      const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
+      const contain = getScrollContain(doesNotExceedView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([0])
     })
   })
 
-  describe('Calculates correct snaps & indexes when align is center and', () => {
-    test('Content exceeds view', () => {
-      const { snaps, indexes } = contained('center', exceedsView)
-      expect(snaps).toEqual([0, -9.5, -37.5, -51])
-      expect(indexes).toEqual([[0, 1], [2], [3], [4, 5]])
+  describe('Contains snaps correctly when align is center and content', () => {
+    const align = 'center'
+
+    test('Exceeds view', () => {
+      const scrollSnaps = getScrollSnaps(exceedsView, align)
+      const contain = getScrollContain(exceedsView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([0, 0, -9.5, -37.5, -51, -51])
     })
 
-    test('Content doesn`t exceed view', () => {
-      const { snaps, indexes } = contained('center', doesntExceedView)
-      expect(snaps).toEqual([25])
-      expect(indexes).toEqual([[0, 1, 2]])
-    })
-
-    test('Content equals view', () => {
-      const { snaps, indexes } = contained('center', equalsView)
-      expect(snaps).toEqual([0])
-      expect(indexes).toEqual([[0, 1]])
+    test('Doesn`t exceed view', () => {
+      const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
+      const contain = getScrollContain(doesNotExceedView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([30])
     })
   })
 
-  describe('Calculates correct snaps & indexes when align is end and', () => {
-    test('Content exceeds view', () => {
-      const { snaps, indexes } = contained('end', exceedsView)
-      expect(snaps).toEqual([0, -36, -51])
-      expect(indexes).toEqual([[0, 1, 2, 3], [4], [5]])
+  describe('Contains snaps correctly when align is end and content', () => {
+    const align = 'end'
+
+    test('Exceeds view', () => {
+      const scrollSnaps = getScrollSnaps(exceedsView, align)
+      const contain = getScrollContain(exceedsView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([0, 0, 0, 0, -36, -51])
     })
 
-    test('Content doesn`t exceed view', () => {
-      const { snaps, indexes } = contained('end', doesntExceedView)
-      expect(snaps).toEqual([50])
-      expect(indexes).toEqual([[0, 1, 2]])
-    })
-
-    test('Content equals view', () => {
-      const { snaps, indexes } = contained('end', equalsView)
-      expect(snaps).toEqual([0])
-      expect(indexes).toEqual([[0, 1]])
+    test('Doesn`t exceed view', () => {
+      const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
+      const contain = getScrollContain(doesNotExceedView, align)
+      const containedSnaps = contain.snaps(scrollSnaps, false)
+      expect(containedSnaps).toEqual([60])
     })
   })
 })
