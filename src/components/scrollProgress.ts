@@ -9,12 +9,11 @@ export type ScrollProgress = {
 }
 
 export function ScrollProgress(params: Params): ScrollProgress {
-  const { min, max } = params.limit
-  const scrollLength = min - max
+  const { max, length: scrollLength } = params.limit
 
   function get(n: number): number {
     const currentLocation = n - max
-    return currentLocation / scrollLength
+    return currentLocation / -scrollLength
   }
 
   const self: ScrollProgress = {

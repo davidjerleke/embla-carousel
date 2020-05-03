@@ -1,4 +1,3 @@
-import { Limit } from './limit'
 import { arrayKeys } from './utils'
 
 type Params = {

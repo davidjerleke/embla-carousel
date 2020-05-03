@@ -1,4 +1,3 @@
-import { Alignments } from './alignment'
 import { Counter } from './counter'
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'
@@ -25,24 +24,22 @@ export type ScrollTarget = {
 
 export function ScrollTarget(params: Params): ScrollTarget {
   const { loop, limit, scrollSnaps, contentSize } = params
-  const { reachedMin, reachedMax, reachedAny } = limit
+  const { reachedMax, reachedAny, removeOffset } = limit
 
   function minDistance(d1: number, d2: number): number {
     return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
   function findTargetSnap(target: number): Target {
-    while (reachedMin(target)) target += contentSize
-    while (reachedMax(target)) target -= contentSize
-
+    const distance = removeOffset(target)
     const ascDiffsToSnaps = scrollSnaps
-      .map(scrollSnap => scrollSnap - target)
+      .map(scrollSnap => scrollSnap - distance)
       .map(diffToSnap => shortcut(diffToSnap, 0))
       .map((diff, i) => ({ diff, index: i }))
       .sort((d1, d2) => Math.abs(d1.diff) - Math.abs(d2.diff))
 
     const { index } = ascDiffsToSnaps[0]
-    return { index, distance: target }
+    return { index, distance }
   }
 
   function shortcut(target: number, direction: number): number {
