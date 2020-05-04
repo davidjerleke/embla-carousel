@@ -15,23 +15,23 @@ const alignment = (align: Alignments): Alignment => {
 }
 
 describe('Alignment', () => {
-  describe('Is correctly measured relative to view for', () => {
-    test('Start align', () => {
+  describe('Is correctly measured relative to view for align', () => {
+    test('Start', () => {
       const measurement = alignment('start').measure(itemSize)
       expect(measurement).toBe(startAlign)
     })
 
-    test('Center align', () => {
+    test('Center', () => {
       const measurement = alignment('center').measure(itemSize)
       expect(measurement).toBe(centerAlign)
     })
 
-    test('End align', () => {
+    test('End', () => {
       const measurement = alignment('end').measure(itemSize)
       expect(measurement).toBe(endAlign)
     })
 
-    test('Percent align', () => {
+    test('Percent', () => {
       const measurement = alignment(percentFraction).measure(itemSize)
       expect(measurement).toBe(percentAlign)
     })
