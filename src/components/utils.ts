@@ -1,7 +1,3 @@
-export function rectWidth(node: HTMLElement): number {
-  return node.getBoundingClientRect().width
-}
-
 export function map(
   value: number,
   iStart: number,

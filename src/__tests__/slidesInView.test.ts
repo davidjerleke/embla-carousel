@@ -1,4 +1,4 @@
-import { Alignment, Alignments } from '../components/alignment'
+import { Alignment, AlignmentOption } from '../components/alignment'
 import { SlidesInView } from '../components/slidesInView'
 
 const viewSize = 100
@@ -9,7 +9,7 @@ const contentSize = slideSizes.reduce((a, s) => a + s, 0)
 const noThreshold = 0
 const fullThreshold = 1
 
-const getAlignment = (align: Alignments): Alignment => {
+const getAlignment = (align: AlignmentOption): Alignment => {
   return Alignment({ align, viewSize })
 }
 

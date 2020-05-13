@@ -1,8 +1,8 @@
-export type Alignments = 'start' | 'center' | 'end' | number
+export type AlignmentOption = 'start' | 'center' | 'end' | number
 
 type Params = {
   viewSize: number
-  align: Alignments
+  align: AlignmentOption
 }
 
 export type Alignment = {

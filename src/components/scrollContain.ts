@@ -1,7 +1,7 @@
 import { Alignment } from './alignment'
 import { Limit } from './limit'
 
-export type ScrollContains = '' | 'trimSnaps' | 'keepSnaps'
+export type ScrollContainOption = '' | 'trimSnaps' | 'keepSnaps'
 
 type Params = {
   contentSize: number
@@ -10,7 +10,7 @@ type Params = {
 }
 
 export type ScrollContain = {
-  snaps: (scrollSnaps: number[], trim: boolean) => number[]
+  measure: (scrollSnaps: number[], trim: boolean) => number[]
 }
 
 export function ScrollContain(params: Params): ScrollContain {
@@ -27,7 +27,7 @@ export function ScrollContain(params: Params): ScrollContain {
     return Limit({ min, max })
   }
 
-  function snaps(scrollSnaps: number[], trim: boolean): number[] {
+  function measure(scrollSnaps: number[], trim: boolean): number[] {
     const containedSnaps = scrollSnaps.map(scrollBounds.constrain)
     const { min, max } = findDuplicates(containedSnaps)
 
@@ -37,7 +37,7 @@ export function ScrollContain(params: Params): ScrollContain {
   }
 
   const self: ScrollContain = {
-    snaps,
+    measure,
   }
   return Object.freeze(self)
 }

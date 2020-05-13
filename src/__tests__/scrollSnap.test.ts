@@ -1,4 +1,4 @@
-import { Alignment, Alignments } from '../components/alignment'
+import { Alignment, AlignmentOption } from '../components/alignment'
 import { ScrollSnap } from '../components/scrollSnap'
 import { arrayKeys } from '../components/utils'
 
@@ -6,7 +6,7 @@ const viewSize = 100
 const snapSizes = [80, 24, 61, 55, 76, 15]
 const snapIndexes = arrayKeys(snapSizes)
 
-const getScrollSnap = (align: Alignments): ScrollSnap => {
+const getScrollSnap = (align: AlignmentOption): ScrollSnap => {
   const alignment = Alignment({ align, viewSize })
   return ScrollSnap({ alignment, snapSizes, loop: false })
 }

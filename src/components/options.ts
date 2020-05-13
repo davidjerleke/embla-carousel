@@ -1,9 +1,11 @@
-import { Alignments } from './alignment'
-import { ScrollContains } from './scrollContain'
+import { AlignmentOption } from './alignment'
+import { AxisOption } from './axis'
+import { ScrollContainOption } from './scrollContain'
 
 export type Options = {
-  align: Alignments
-  containScroll: ScrollContains
+  align: AlignmentOption
+  axis: AxisOption
+  containScroll: ScrollContainOption
   containerSelector: string
   dragFree: boolean
   draggable: boolean
@@ -17,8 +19,9 @@ export type Options = {
   startIndex: number
 }
 
-export const defaultOptions: Options = Object.freeze({
+export const defaultOptions = Object.freeze<Options>({
   align: 'center',
+  axis: 'x',
   containScroll: '',
   containerSelector: '*',
   dragFree: false,

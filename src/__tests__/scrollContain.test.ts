@@ -1,4 +1,4 @@
-import { Alignment, Alignments } from '../components/alignment'
+import { Alignment, AlignmentOption } from '../components/alignment'
 import { ScrollContain } from '../components/scrollContain'
 import { ScrollSnap } from '../components/scrollSnap'
 import { arrayKeys } from '../components/utils'
@@ -10,7 +10,7 @@ const equalsView = [50, 50]
 
 const getScrollSnaps = (
   snapSizes: number[],
-  align: Alignments,
+  align: AlignmentOption,
 ): number[] => {
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ snapSizes, alignment, loop: false })
@@ -19,7 +19,7 @@ const getScrollSnaps = (
 
 const getScrollContain = (
   snapSizes: number[],
-  align: Alignments,
+  align: AlignmentOption,
 ): ScrollContain => {
   const contentSize = snapSizes.reduce((a, s) => a + s, 0)
   const alignment = Alignment({ align, viewSize })
@@ -30,14 +30,14 @@ describe('ScrollContain', () => {
   test('Trims duplicate snaps', () => {
     const scrollSnaps = getScrollSnaps(exceedsView, 'start')
     const contain = getScrollContain(exceedsView, 'start')
-    const containedSnaps = contain.snaps(scrollSnaps, true)
+    const containedSnaps = contain.measure(scrollSnaps, true)
     expect(containedSnaps).toEqual([0, -20, -44, -51])
   })
 
   test('Aligns to start when content equals view', () => {
     const scrollSnaps = getScrollSnaps(equalsView, 'end')
     const contain = getScrollContain(equalsView, 'end')
-    const containedSnaps = contain.snaps(scrollSnaps, false)
+    const containedSnaps = contain.measure(scrollSnaps, false)
     expect(containedSnaps).toEqual([0])
   })
 
@@ -47,14 +47,14 @@ describe('ScrollContain', () => {
     test('Exceeds view', () => {
       const scrollSnaps = getScrollSnaps(exceedsView, align)
       const contain = getScrollContain(exceedsView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([0, -20, -44, -51, -51, -51])
     })
 
     test('Doesn`t exceed view', () => {
       const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
       const contain = getScrollContain(doesNotExceedView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([0])
     })
   })
@@ -65,14 +65,14 @@ describe('ScrollContain', () => {
     test('Exceeds view', () => {
       const scrollSnaps = getScrollSnaps(exceedsView, align)
       const contain = getScrollContain(exceedsView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([0, 0, -9.5, -37.5, -51, -51])
     })
 
     test('Doesn`t exceed view', () => {
       const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
       const contain = getScrollContain(doesNotExceedView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([30])
     })
   })
@@ -83,14 +83,14 @@ describe('ScrollContain', () => {
     test('Exceeds view', () => {
       const scrollSnaps = getScrollSnaps(exceedsView, align)
       const contain = getScrollContain(exceedsView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([0, 0, 0, 0, -36, -51])
     })
 
     test('Doesn`t exceed view', () => {
       const scrollSnaps = getScrollSnaps(doesNotExceedView, align)
       const contain = getScrollContain(doesNotExceedView, align)
-      const containedSnaps = contain.snaps(scrollSnaps, false)
+      const containedSnaps = contain.measure(scrollSnaps, false)
       expect(containedSnaps).toEqual([60])
     })
   })

@@ -1,7 +1,9 @@
+import { Axis } from './axis'
 import { arrayKeys } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
+  axis: Axis
   scrollSnaps: number[]
   viewSize: number
   location: Vector1D
@@ -21,11 +23,13 @@ export type SlideLooper = {
   loopPoints: LoopPoint[]
 }
 
-export function SlideLooper(params: Params) {
+export function SlideLooper(params: Params): SlideLooper {
+  const { axis, location: containerLocation } = params
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = arrayKeys(slideSizes)
   const descItems = ascItems.slice().reverse()
   const loopPoints = startPoints().concat(endPoints())
+  const loopProp = axis.scroll === 'x' ? 'left' : 'top'
 
   function subtractItemSizesOf(
     indexes: number[],
@@ -109,12 +113,11 @@ export function SlideLooper(params: Params) {
   }
 
   function loop(slides: HTMLElement[]): void {
-    const parentLocation = params.location
     loopPoints.forEach(loopTarget => {
       const { findTarget, location, index } = loopTarget
-      const target = findTarget(parentLocation.get())
-      if (target.get() !== location.get()) {
-        slides[index].style.left = `${target.get()}%`
+      const target = findTarget(containerLocation.get()).get()
+      if (target !== location.get()) {
+        slides[index].style[loopProp] = `${target}%`
         location.set(target)
       }
     })
