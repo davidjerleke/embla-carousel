@@ -40,27 +40,22 @@ export function EmblaCarousel(
   const { on, off } = events
 
   let engine: Engine
+  let activated = false
   let options = Object.assign({}, defaultOptions, userOptions)
-  let root: HTMLElement
+  let containerSize = 0
   let container: HTMLElement
   let slides: HTMLElement[]
-  let activated = false
-  let windowWidth = 0
 
   activate(options)
 
   function storeElements(): void {
-    if (!sliderRoot) {
-      throw new Error('Missing root element 😢')
-    }
+    if (!sliderRoot) throw new Error('Missing root node 😢')
 
     const selector = options.containerSelector
     const sliderContainer = sliderRoot.querySelector(selector)
 
-    if (!sliderContainer) {
-      throw new Error('Missing container element 😢')
-    }
-    root = sliderRoot
+    if (!sliderContainer) throw new Error('Missing container node 😢')
+
     container = sliderContainer as HTMLElement
     slides = arrayFromCollection(container.children)
     activated = true
@@ -68,15 +63,15 @@ export function EmblaCarousel(
 
   function activate(partialOptions: UserOptions = {}): void {
     const isFirstInit = !activated
-    windowWidth = window.innerWidth
     storeElements()
     if (slides.length === 0) return
 
     options = Object.assign(options, partialOptions)
-    engine = Engine(root, container, slides, options, events)
+    engine = Engine(sliderRoot, container, slides, options, events)
+    containerSize = engine.axis.measure(container)
     eventStore.add(window, 'resize', debouncedResize)
-    slides.forEach(slideFocusEvent)
     engine.translate.to(engine.scrollBody.location)
+    slides.forEach(slideFocusEvent)
 
     if (options.loop && slides.length === 1) {
       return activate({ loop: false })
@@ -92,7 +87,7 @@ export function EmblaCarousel(
   }
 
   function activateDragFeature(): void {
-    const cl = root.classList
+    const cl = sliderRoot.classList
     const { draggingClass, draggableClass } = options
     engine.dragHandler.addActivationEvents()
     events.on('dragStart', () => cl.add(draggingClass))
@@ -126,15 +121,17 @@ export function EmblaCarousel(
     const newOptions = Object.assign({ startIndex }, partialOptions)
     deActivate()
     activate(newOptions)
+    events.dispatch('reInit')
+    console.log('reinit')
   }
 
   function deActivate(): void {
     engine.dragHandler.removeAllEvents()
     engine.animation.stop()
     eventStore.removeAll()
-    root.classList.remove(options.draggableClass)
-    container.style.transform = ''
-    slides.forEach(s => (s.style.left = ''))
+    sliderRoot.classList.remove(options.draggableClass)
+    engine.translate.clear()
+    engine.slideLooper.clear(slides)
   }
 
   function destroy(): void {
@@ -145,11 +142,9 @@ export function EmblaCarousel(
   }
 
   function resize(): void {
-    if (windowWidth === window.innerWidth) return
-
-    windowWidth = window.innerWidth
+    const newContainerSize = engine.axis.measure(container)
+    if (containerSize === newContainerSize) return
     reActivate()
-    events.dispatch('resize')
   }
 
   function slidesInView(target: boolean = false): number[] {

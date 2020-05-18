@@ -19,6 +19,7 @@ type LoopPoint = {
 }
 
 export type SlideLooper = {
+  clear: (slides: HTMLElement[]) => void
   loop: (slides: HTMLElement[]) => void
   loopPoints: LoopPoint[]
 }
@@ -27,9 +28,9 @@ export function SlideLooper(params: Params): SlideLooper {
   const { axis, location: containerLocation } = params
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = arrayKeys(slideSizes)
-  const descItems = ascItems.slice().reverse()
+  const descItems = arrayKeys(slideSizes).reverse()
   const loopPoints = startPoints().concat(endPoints())
-  const loopProp = axis.scroll === 'x' ? 'left' : 'top'
+  const loopStyle = axis.scroll === 'x' ? 'left' : 'top'
 
   function subtractItemSizesOf(
     indexes: number[],
@@ -117,13 +118,20 @@ export function SlideLooper(params: Params): SlideLooper {
       const { findTarget, location, index } = loopTarget
       const target = findTarget(containerLocation.get()).get()
       if (target !== location.get()) {
-        slides[index].style[loopProp] = `${target}%`
+        slides[index].style[loopStyle] = `${target}%`
         location.set(target)
       }
     })
   }
 
+  function clear(slides: HTMLElement[]): void {
+    loopPoints.forEach(({ index }) => {
+      slides[index].style[loopStyle] = ''
+    })
+  }
+
   const self: SlideLooper = {
+    clear,
     loop,
     loopPoints,
   }

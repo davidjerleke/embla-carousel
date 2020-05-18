@@ -5,9 +5,10 @@ const verticalAxis = 'y'
 const horizontalSize = 100
 const verticalSize = 50
 
-let mockHtmlElement = document.createElement('div')
-mockHtmlElement.getBoundingClientRect = jest.fn(() => {
-  return { width: horizontalSize, height: verticalSize } as DOMRect
+const mockHtmlElement = Object.assign(document.createElement('div'), {
+  getBoundingClientRect: jest.fn(() => {
+    return { width: horizontalSize, height: verticalSize } as DOMRect
+  }),
 })
 
 describe('Axis', () => {
