@@ -122,7 +122,6 @@ export function EmblaCarousel(
     deActivate()
     activate(newOptions)
     events.dispatch('reInit')
-    console.log('reinit')
   }
 
   function deActivate(): void {
