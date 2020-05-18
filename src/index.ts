@@ -143,8 +143,8 @@ export function EmblaCarousel(
   function resize(): void {
     const newContainerSize = engine.axis.measure(container)
     if (containerSize === newContainerSize) return
-    events.dispatch('resize')
     reActivate()
+    events.dispatch('resize')
   }
 
   function slidesInView(target: boolean = false): number[] {
