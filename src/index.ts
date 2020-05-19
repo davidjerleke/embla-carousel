@@ -122,6 +122,7 @@ export function EmblaCarousel(
     deActivate()
     activate(newOptions)
     events.dispatch('reInit')
+    console.log('reInit')
   }
 
   function deActivate(): void {
@@ -142,8 +143,7 @@ export function EmblaCarousel(
 
   function resize(): void {
     const newContainerSize = engine.axis.measure(container)
-    if (containerSize === newContainerSize) return
-    reActivate()
+    if (containerSize !== newContainerSize) reActivate()
     events.dispatch('resize')
   }
 
