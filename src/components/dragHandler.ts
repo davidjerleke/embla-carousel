@@ -132,7 +132,7 @@ export function DragHandler(params: Params): DragHandler {
     animation.start()
     startScroll.set(dragTracker.readPoint(evt, scrollAxis))
     startCross.set(dragTracker.readPoint(evt, crossAxis))
-    events.dispatch('dragStart')
+    events.dispatch('pointerDown')
 
     if (clearPreventClick) preventClick = false
     if (preventDefault) evt.preventDefault()
@@ -168,7 +168,7 @@ export function DragHandler(params: Params): DragHandler {
     interactionEvents.removeAll()
     scrollBody.useSpeed(movementSpeed())
     seekTargetBy(force)
-    events.dispatch('dragEnd')
+    events.dispatch('pointerUp')
   }
 
   function click(evt: Event): void {

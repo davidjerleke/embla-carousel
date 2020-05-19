@@ -80,7 +80,7 @@ export function EmblaCarousel(
     if (options.loop) engine.slideLooper.loop(slides)
     if (isFirstInit) {
       events.on('select', toggleSelectedClass)
-      events.on('dragEnd', toggleSelectedClass)
+      events.on('pointerUp', toggleSelectedClass)
       events.on('init', toggleSelectedClass)
       setTimeout(() => events.dispatch('init'), 0)
     }
@@ -90,8 +90,8 @@ export function EmblaCarousel(
     const cl = sliderRoot.classList
     const { draggingClass, draggableClass } = options
     engine.dragHandler.addActivationEvents()
-    events.on('dragStart', () => cl.add(draggingClass))
-    events.on('dragEnd', () => cl.remove(draggingClass))
+    events.on('pointerDown', () => cl.add(draggingClass))
+    events.on('pointerUp', () => cl.remove(draggingClass))
     cl.add(draggableClass)
   }
 
@@ -122,7 +122,6 @@ export function EmblaCarousel(
     deActivate()
     activate(newOptions)
     events.dispatch('reInit')
-    console.log('reInit')
   }
 
   function deActivate(): void {

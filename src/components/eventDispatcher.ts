@@ -2,11 +2,11 @@ type Listeners = { [key in Event]: Callback[] }
 export type Callback = () => void
 export type Event =
   | 'init'
+  | 'pointerDown'
+  | 'pointerUp'
   | 'scroll'
   | 'select'
   | 'settle'
-  | 'dragStart'
-  | 'dragEnd'
   | 'destroy'
   | 'reInit'
   | 'resize'
@@ -20,8 +20,8 @@ export type EventDispatcher = {
 export function EventDispatcher(): EventDispatcher {
   const listeners: Listeners = {
     destroy: [],
-    dragEnd: [],
-    dragStart: [],
+    pointerDown: [],
+    pointerUp: [],
     init: [],
     reInit: [],
     resize: [],
