@@ -1,6 +1,9 @@
-const config = require('./webpack.config.common.js')
+const merge = require('webpack-merge')
+const { CONFIG } = require('./webpack.config.common.js')
 
-config.mode = 'production'
-config.optimization = { minimize: true }
-
-module.exports = config
+module.exports = merge(CONFIG, {
+  mode: 'production',
+  optimization: {
+    minimize: true,
+  },
+})

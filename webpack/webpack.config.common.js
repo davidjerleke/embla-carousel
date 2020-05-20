@@ -1,12 +1,15 @@
 const path = require('path')
 
 const SRC_PATH = path.resolve(__dirname, '../src')
-const OUT_PATH = path.resolve(__dirname, '../docs')
+const LIB_PATH = path.resolve(__dirname, '../lib')
+const DOCS_PATH = path.resolve(__dirname, '../docs')
+const SCSS_PATH = path.resolve(DOCS_PATH, 'scss')
+const JS_PATH = DOCS_PATH
 
-module.exports = {
+const CONFIG = {
   entry: [path.resolve(SRC_PATH, 'index.ts')],
   output: {
-    path: OUT_PATH,
+    path: DOCS_PATH,
     filename: 'index.js',
     library: 'EmblaCarousel',
     libraryTarget: 'umd',
@@ -32,4 +35,13 @@ module.exports = {
     minimize: false,
   },
   plugins: [],
+}
+
+module.exports = {
+  CONFIG,
+  DOCS_PATH,
+  SRC_PATH,
+  LIB_PATH,
+  SCSS_PATH,
+  JS_PATH,
 }

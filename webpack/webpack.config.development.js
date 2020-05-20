@@ -1,17 +1,18 @@
 const webpack = require('webpack')
-const config = require('./webpack.config.common.js')
-const path = require('path')
+const merge = require('webpack-merge')
+const {
+  CONFIG,
+  JS_PATH,
+  SCSS_PATH,
+} = require('./webpack.config.common.js')
 
-const JS_PATH = path.resolve(__dirname, '../docs')
-const SCSS_PATH = path.resolve(__dirname, '../docs/scss')
-
-config.mode = 'development'
-config.devtool = 'source-map'
-config.devServer = {
-  contentBase: [JS_PATH, SCSS_PATH],
-  watchContentBase: true,
-  open: true,
-}
-config.plugins.push(new webpack.HotModuleReplacementPlugin())
-
-module.exports = config
+module.exports = merge(CONFIG, {
+  mode: 'development',
+  devtool: 'source-map',
+  devServer: {
+    contentBase: [JS_PATH, SCSS_PATH],
+    watchContentBase: true,
+    open: true,
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+})
