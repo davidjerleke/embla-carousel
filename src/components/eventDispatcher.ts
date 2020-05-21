@@ -1,6 +1,7 @@
-type Listeners = { [key in Event]: Callback[] }
-export type Callback = () => void
-export type Event =
+type Callback = () => void
+type Listeners = { [key in EmblaEvent]: Callback[] }
+
+export type EmblaEvent =
   | 'init'
   | 'pointerDown'
   | 'pointerUp'
@@ -12,9 +13,9 @@ export type Event =
   | 'resize'
 
 export type EventDispatcher = {
-  dispatch: (evt: Event) => EventDispatcher
-  on: (evt: Event, cb: Callback) => EventDispatcher
-  off: (evt: Event, cb: Callback) => EventDispatcher
+  dispatch: (evt: EmblaEvent) => EventDispatcher
+  on: (evt: EmblaEvent, cb: Callback) => EventDispatcher
+  off: (evt: EmblaEvent, cb: Callback) => EventDispatcher
 }
 
 export function EventDispatcher(): EventDispatcher {
@@ -30,17 +31,17 @@ export function EventDispatcher(): EventDispatcher {
     settle: [],
   }
 
-  function dispatch(evt: Event): EventDispatcher {
+  function dispatch(evt: EmblaEvent): EventDispatcher {
     listeners[evt].forEach(e => e())
     return self
   }
 
-  function on(evt: Event, cb: Callback): EventDispatcher {
+  function on(evt: EmblaEvent, cb: Callback): EventDispatcher {
     listeners[evt] = listeners[evt].concat([cb])
     return self
   }
 
-  function off(evt: Event, cb: Callback): EventDispatcher {
+  function off(evt: EmblaEvent, cb: Callback): EventDispatcher {
     listeners[evt] = listeners[evt].filter(e => e !== cb)
     return self
   }

@@ -1,9 +1,5 @@
 import { Engine } from './components/engine'
-import {
-  Callback as EmblaCallback,
-  Event as EmblaEvent,
-  EventDispatcher,
-} from './components/eventDispatcher'
+import { EventDispatcher } from './components/eventDispatcher'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, UserOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
@@ -15,8 +11,8 @@ export type EmblaCarousel = {
   containerNode: () => HTMLElement
   dangerouslyGetEngine: () => Engine
   destroy: () => void
-  off: (evt: EmblaEvent, cb: EmblaCallback) => void
-  on: (evt: EmblaEvent, cb: EmblaCallback) => void
+  off: EventDispatcher['off']
+  on: EventDispatcher['on']
   previousScrollSnap: () => number
   reInit: (options: UserOptions) => void
   scrollNext: () => void
