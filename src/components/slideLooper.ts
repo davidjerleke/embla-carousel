@@ -13,12 +13,13 @@ type Params = {
 
 type LoopPoint = {
   point: number
-  location: Vector1D
+  location: number
   index: number
-  findTarget: (location: number) => Vector1D
+  getTarget: (location: number) => number
 }
 
 export type SlideLooper = {
+  canLoop: () => boolean
   clear: (slides: HTMLElement[]) => void
   loop: (slides: HTMLElement[]) => void
   loopPoints: LoopPoint[]
@@ -32,7 +33,7 @@ export function SlideLooper(params: Params): SlideLooper {
   const loopPoints = startPoints().concat(endPoints())
   const loopStyle = axis.scroll === 'x' ? 'left' : 'top'
 
-  function subtractItemSizesOf(
+  function subtractItemSizes(
     indexes: number[],
     from: number,
   ): number {
@@ -47,7 +48,7 @@ export function SlideLooper(params: Params): SlideLooper {
     indexes: number[],
   ): number[] {
     return indexes.reduce((a: number[], i) => {
-      const gapLeft = subtractItemSizesOf(a, sizeOfGap)
+      const gapLeft = subtractItemSizes(a, sizeOfGap)
       return gapLeft > 0 ? a.concat([i]) : a
     }, [])
   }
@@ -63,13 +64,13 @@ export function SlideLooper(params: Params): SlideLooper {
     }, from)
   }
 
-  function loopPoint(
+  function loopPointFor(
     indexes: number[],
     from: number,
     direction: 0 | 1,
   ): number {
     const slideCount = ascItems.length - 1
-    return subtractItemSizesOf(
+    return subtractItemSizes(
       indexes.map(i => (i + direction) % slideCount),
       from,
     )
@@ -82,19 +83,14 @@ export function SlideLooper(params: Params): SlideLooper {
   ): LoopPoint[] {
     const ascIndexes = indexes.slice().sort((a, b) => a - b)
     return ascIndexes.map(
-      (i, j): LoopPoint => {
-        const index = i
+      (index, loopIndex): LoopPoint => {
         const initial = contentSize * (!direction ? 0 : -1)
         const offset = contentSize * (!direction ? 1 : 0)
-        const slidesInSpan = ascIndexes.slice(0, j)
-        const point = loopPoint(slidesInSpan, from, direction)
-        const location = Vector1D(-1)
-        const target = Vector1D(0)
-        const findTarget = (loc: number): Vector1D => {
-          const t = loc > point ? initial : offset
-          return target.set(0).set(t)
-        }
-        return { point, findTarget, location, index }
+        const slidesInSpan = ascIndexes.slice(0, loopIndex)
+        const point = loopPointFor(slidesInSpan, from, direction)
+        const getTarget = (location: number): number =>
+          location > point ? initial : offset
+        return { point, getTarget, index, location: -1 }
       },
     )
   }
@@ -113,13 +109,20 @@ export function SlideLooper(params: Params): SlideLooper {
     return loopPointsFor(indexes, -start, 0)
   }
 
+  function canLoop(): boolean {
+    return loopPoints.every(({ index }) => {
+      const otherIndexes = ascItems.filter(i => i !== index)
+      return subtractItemSizes(otherIndexes, viewSize) <= 0
+    })
+  }
+
   function loop(slides: HTMLElement[]): void {
-    loopPoints.forEach(loopTarget => {
-      const { findTarget, location, index } = loopTarget
-      const target = findTarget(containerLocation.get()).get()
-      if (target !== location.get()) {
+    loopPoints.forEach(loopPoint => {
+      const { getTarget, location, index } = loopPoint
+      const target = getTarget(containerLocation.get())
+      if (target !== location) {
         slides[index].style[loopStyle] = `${target}%`
-        location.set(target)
+        loopPoint.location = target
       }
     })
   }
@@ -131,6 +134,7 @@ export function SlideLooper(params: Params): SlideLooper {
   }
 
   const self: SlideLooper = {
+    canLoop,
     clear,
     loop,
     loopPoints,

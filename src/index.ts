@@ -64,16 +64,21 @@ export function EmblaCarousel(
 
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
+
     containerSize = engine.axis.measure(container)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.scrollBody.location)
     slides.forEach(slideFocusEvent)
 
-    if (options.loop && slides.length === 1) {
-      return activate({ loop: false })
+    if (options.draggable && slides.length > 1) activateDragFeature()
+    if (options.loop) {
+      if (!engine.slideLooper.canLoop()) {
+        activated = false
+        deActivate()
+        return activate({ loop: false })
+      }
+      engine.slideLooper.loop(slides)
     }
-    if (options.draggable) activateDragFeature()
-    if (options.loop) engine.slideLooper.loop(slides)
     if (isFirstInit) {
       events.on('select', toggleSelectedClass)
       events.on('pointerUp', toggleSelectedClass)
@@ -112,7 +117,6 @@ export function EmblaCarousel(
 
   function reActivate(partialOptions: UserOptions = {}): void {
     if (!activated) return
-
     const startIndex = engine.index.get()
     const newOptions = Object.assign({ startIndex }, partialOptions)
     deActivate()
@@ -130,6 +134,7 @@ export function EmblaCarousel(
   }
 
   function destroy(): void {
+    if (!activated) return
     deActivate()
     activated = false
     engine = {} as Engine
