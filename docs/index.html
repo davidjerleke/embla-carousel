@@ -491,10 +491,10 @@
         addPrevNextBtnClickListeners(prevBtn, nextBtn, embla)
         embla.on('select', selectDotBtn)
         embla.on('init', selectDotBtn)
-        if (!options.loop) {
-          embla.on('select', disablePrevAndNextBtns)
-          embla.on('init', disablePrevAndNextBtns)
-        }
+        embla.on('reInit', selectDotBtn)
+        embla.on('select', disablePrevAndNextBtns)
+        embla.on('init', disablePrevAndNextBtns)
+        embla.on('reInit', disablePrevAndNextBtns)
         return embla
       }
 

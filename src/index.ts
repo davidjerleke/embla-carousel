@@ -37,12 +37,12 @@ export function EmblaCarousel(
 
   let engine: Engine
   let activated = false
-  let options = Object.assign({}, defaultOptions, userOptions)
+  let options = Object.assign({}, defaultOptions)
   let containerSize = 0
   let container: HTMLElement
   let slides: HTMLElement[]
 
-  activate(options)
+  activate(userOptions)
 
   function storeElements(): void {
     if (!sliderRoot) throw new Error('Missing root node 😢')
@@ -54,36 +54,32 @@ export function EmblaCarousel(
 
     container = sliderContainer as HTMLElement
     slides = arrayFromCollection(container.children)
-    activated = true
   }
 
   function activate(partialOptions: UserOptions = {}): void {
-    const isFirstInit = !activated
     storeElements()
-    if (slides.length === 0) return
+    if (slides.length < 2) return
 
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
-
     containerSize = engine.axis.measure(container)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.scrollBody.location)
     slides.forEach(slideFocusEvent)
 
-    if (options.draggable && slides.length > 1) activateDragFeature()
+    if (options.draggable) activateDragFeature()
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
-        activated = false
-        deActivate()
-        return activate({ loop: false })
+        return reActivate({ loop: false })
       }
       engine.slideLooper.loop(slides)
     }
-    if (isFirstInit) {
+    if (!activated) {
       events.on('select', toggleSelectedClass)
       events.on('pointerUp', toggleSelectedClass)
       events.on('init', toggleSelectedClass)
       setTimeout(() => events.dispatch('init'), 0)
+      activated = true
     }
   }
 
@@ -116,7 +112,6 @@ export function EmblaCarousel(
   }
 
   function reActivate(partialOptions: UserOptions = {}): void {
-    if (!activated) return
     const startIndex = engine.index.get()
     const newOptions = Object.assign({ startIndex }, partialOptions)
     deActivate()
