@@ -97,6 +97,12 @@ describe('Limit', () => {
       const number = limit.removeOffset(withinMinAndMax)
       expect(number).toBe(withinMinAndMax)
     })
+
+    test('When limit min equals limit max', () => {
+      const equalLimit = Limit({ min: maxLimit, max: maxLimit })
+      const number = equalLimit.removeOffset(moreThanMax)
+      expect(number).toBe(moreThanMax)
+    })
   })
 
   describe('Reached limit', () => {

@@ -42,6 +42,7 @@ export function Limit(params: Params): Limit {
   }
 
   function removeOffset(n: number): number {
+    if (min === max) return n
     while (reachedMin(n)) n += length
     while (reachedMax(n)) n -= length
     return n

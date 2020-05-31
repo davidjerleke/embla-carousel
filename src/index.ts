@@ -58,7 +58,6 @@ export function EmblaCarousel(
 
   function activate(partialOptions: UserOptions = {}): void {
     storeElements()
-    if (slides.length < 2) return
 
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)

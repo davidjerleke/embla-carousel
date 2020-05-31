@@ -75,7 +75,7 @@ export function Engine(
   const groupedSizes = groupArray(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
   const snapIndexes = arrayKeys(snapSizes)
-  const contentSize = slideSizes.reduce((a, s) => a + s)
+  const contentSize = slideSizes.reduce((a, s) => a + s, 0)
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
   const defaultSnaps = snapIndexes.map(scrollSnap.measure)
