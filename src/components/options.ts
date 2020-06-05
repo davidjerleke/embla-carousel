@@ -36,4 +36,4 @@ export const defaultOptions = Object.freeze<Options>({
   startIndex: 0,
 })
 
-export type UserOptions = Partial<Options>
+export type EmblaOptions = Partial<Options>

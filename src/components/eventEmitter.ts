@@ -12,13 +12,13 @@ export type EmblaEvent =
   | 'reInit'
   | 'resize'
 
-export type EventDispatcher = {
-  dispatch: (evt: EmblaEvent) => EventDispatcher
-  on: (evt: EmblaEvent, cb: Callback) => EventDispatcher
-  off: (evt: EmblaEvent, cb: Callback) => EventDispatcher
+export type EventEmitter = {
+  emit: (evt: EmblaEvent) => EventEmitter
+  on: (evt: EmblaEvent, cb: Callback) => EventEmitter
+  off: (evt: EmblaEvent, cb: Callback) => EventEmitter
 }
 
-export function EventDispatcher(): EventDispatcher {
+export function EventEmitter(): EventEmitter {
   const listeners: Listeners = {
     destroy: [],
     pointerDown: [],
@@ -31,23 +31,23 @@ export function EventDispatcher(): EventDispatcher {
     settle: [],
   }
 
-  function dispatch(evt: EmblaEvent): EventDispatcher {
+  function emit(evt: EmblaEvent): EventEmitter {
     listeners[evt].forEach(e => e())
     return self
   }
 
-  function on(evt: EmblaEvent, cb: Callback): EventDispatcher {
+  function on(evt: EmblaEvent, cb: Callback): EventEmitter {
     listeners[evt] = listeners[evt].concat([cb])
     return self
   }
 
-  function off(evt: EmblaEvent, cb: Callback): EventDispatcher {
+  function off(evt: EmblaEvent, cb: Callback): EventEmitter {
     listeners[evt] = listeners[evt].filter(e => e !== cb)
     return self
   }
 
-  const self: EventDispatcher = {
-    dispatch,
+  const self: EventEmitter = {
+    emit,
     off,
     on,
   }

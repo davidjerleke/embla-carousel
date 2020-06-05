@@ -1,6 +1,6 @@
 import { Animation } from './animation'
 import { Counter } from './counter'
-import { EventDispatcher } from './eventDispatcher'
+import { EventEmitter } from './eventEmitter'
 import { ScrollTarget, Target } from './scrollTarget'
 import { Vector1D } from './vector1d'
 
@@ -10,7 +10,7 @@ type Params = {
   index: Counter
   indexPrevious: Counter
   scrollTarget: ScrollTarget
-  events: EventDispatcher
+  events: EventEmitter
 }
 
 export type ScrollTo = {
@@ -33,7 +33,7 @@ export function ScrollTo(params: Params): ScrollTo {
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())
       indexCurrent.set(target.index)
-      events.dispatch('select')
+      events.emit('select')
     }
   }
 

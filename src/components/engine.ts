@@ -4,7 +4,7 @@ import { Axis } from './axis'
 import { Counter } from './counter'
 import { DragHandler } from './dragHandler'
 import { DragTracker } from './dragTracker'
-import { EventDispatcher } from './eventDispatcher'
+import { EventEmitter } from './eventEmitter'
 import { Limit } from './limit'
 import { Options } from './options'
 import { PxToPercent } from './pxToPercent'
@@ -52,7 +52,7 @@ export function Engine(
   container: HTMLElement,
   slides: HTMLElement[],
   options: Options,
-  events: EventDispatcher,
+  events: EventEmitter,
 ): Engine {
   // Options
   const {
@@ -97,10 +97,14 @@ export function Engine(
   // Draw
   const update = (): void => {
     engine.scrollBody.seek(target).update()
+    const settled = engine.scrollBody.settle(target)
 
     if (!dragHandler.pointerDown()) {
       if (!loop) engine.scrollBounds.constrain(target)
-      if (engine.scrollBody.settle(target)) engine.animation.stop()
+      if (settled) {
+        engine.animation.stop()
+        events.emit('settle')
+      }
     }
     if (loop) {
       const direction = engine.scrollBody.direction.get()
@@ -108,8 +112,7 @@ export function Engine(
       engine.slideLooper.loop(slides)
     }
 
-    const settled = engine.scrollBody.settle(target)
-    events.dispatch(settled ? 'settle' : 'scroll')
+    if (!settled) events.emit('scroll')
     engine.translate.to(engine.scrollBody.location)
     engine.animation.proceed()
   }

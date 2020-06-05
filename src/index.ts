@@ -1,7 +1,7 @@
 import { Engine } from './components/engine'
-import { EventDispatcher } from './components/eventDispatcher'
+import { EventEmitter, EmblaEvent } from './components/eventEmitter'
 import { EventStore } from './components/eventStore'
-import { defaultOptions, UserOptions } from './components/options'
+import { defaultOptions, EmblaOptions } from './components/options'
 import { arrayFromCollection, debounce } from './components/utils'
 
 export type EmblaCarousel = {
@@ -11,10 +11,10 @@ export type EmblaCarousel = {
   containerNode: () => HTMLElement
   dangerouslyGetEngine: () => Engine
   destroy: () => void
-  off: EventDispatcher['off']
-  on: EventDispatcher['on']
+  off: EventEmitter['off']
+  on: EventEmitter['on']
   previousScrollSnap: () => number
-  reInit: (options: UserOptions) => void
+  reInit: (options: EmblaOptions) => void
   scrollNext: () => void
   scrollPrev: () => void
   scrollProgress: () => number
@@ -27,9 +27,9 @@ export type EmblaCarousel = {
 
 export function EmblaCarousel(
   sliderRoot: HTMLElement,
-  userOptions: UserOptions = {},
+  userOptions: EmblaOptions = {},
 ): EmblaCarousel {
-  const events = EventDispatcher()
+  const events = EventEmitter()
   const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
   const reInit = reActivate
@@ -56,7 +56,7 @@ export function EmblaCarousel(
     slides = arrayFromCollection(container.children)
   }
 
-  function activate(partialOptions: UserOptions = {}): void {
+  function activate(partialOptions: EmblaOptions = {}): void {
     storeElements()
 
     options = Object.assign(options, partialOptions)
@@ -77,7 +77,7 @@ export function EmblaCarousel(
       events.on('select', toggleSelectedClass)
       events.on('pointerUp', toggleSelectedClass)
       events.on('init', toggleSelectedClass)
-      setTimeout(() => events.dispatch('init'), 0)
+      setTimeout(() => events.emit('init'), 0)
       activated = true
     }
   }
@@ -110,12 +110,12 @@ export function EmblaCarousel(
     eventStore.add(slide, 'focus', focus, true)
   }
 
-  function reActivate(partialOptions: UserOptions = {}): void {
+  function reActivate(partialOptions: EmblaOptions = {}): void {
     const startIndex = engine.index.get()
     const newOptions = Object.assign({ startIndex }, partialOptions)
     deActivate()
     activate(newOptions)
-    events.dispatch('reInit')
+    events.emit('reInit')
   }
 
   function deActivate(): void {
@@ -132,13 +132,13 @@ export function EmblaCarousel(
     deActivate()
     activated = false
     engine = {} as Engine
-    events.dispatch('destroy')
+    events.emit('destroy')
   }
 
   function resize(): void {
     const newContainerSize = engine.axis.measure(container)
     if (containerSize !== newContainerSize) reActivate()
-    events.dispatch('resize')
+    events.emit('resize')
   }
 
   function slidesInView(target: boolean = false): number[] {
@@ -232,7 +232,7 @@ export function EmblaCarousel(
 }
 
 export default EmblaCarousel
-export { UserOptions }
+export { EmblaOptions, EmblaEvent }
 
 // @ts-ignore
 module.exports = EmblaCarousel
