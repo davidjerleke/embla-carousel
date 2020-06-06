@@ -58,40 +58,48 @@ export function EmblaCarousel(
 
   function activate(partialOptions: EmblaOptions = {}): void {
     storeElements()
-
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
+    const { scrollBody, translate, dragHandler, slideLooper } = engine
+    const { loop, draggable, selectedClass } = options
+
     containerSize = engine.axis.measure(container)
     eventStore.add(window, 'resize', debouncedResize)
-    engine.translate.to(engine.scrollBody.location)
+    translate.to(scrollBody.location)
     slides.forEach(slideFocusEvent)
+    dragHandler.addActivationEvents()
 
-    if (options.draggable) activateDragFeature()
-    if (options.loop) {
-      if (!engine.slideLooper.canLoop()) {
-        return reActivate({ loop: false })
-      }
-      engine.slideLooper.loop(slides)
+    if (loop) {
+      if (!slideLooper.canLoop()) return reActivate({ loop: false })
+      slideLooper.loop(slides)
+    }
+    if (draggable) {
+      toggleDraggableClasses()
+    } else {
+      events.on('pointerDown', dragHandler.removeInteractionEvents)
     }
     if (!activated) {
-      events.on('select', toggleSelectedClass)
-      events.on('pointerUp', toggleSelectedClass)
-      events.on('init', toggleSelectedClass)
+      if (selectedClass) {
+        events.on('select', toggleSelectedClasses)
+        events.on('pointerUp', toggleSelectedClasses)
+        events.on('init', toggleSelectedClasses)
+      }
       setTimeout(() => events.emit('init'), 0)
       activated = true
     }
   }
 
-  function activateDragFeature(): void {
-    const cl = sliderRoot.classList
-    const { draggingClass, draggableClass } = options
-    engine.dragHandler.addActivationEvents()
-    events.on('pointerDown', () => cl.add(draggingClass))
-    events.on('pointerUp', () => cl.remove(draggingClass))
-    cl.add(draggableClass)
+  function toggleDraggableClasses(): void {
+    const root = sliderRoot.classList
+    const { draggableClass, draggingClass } = options
+    if (draggableClass) root.add(draggableClass)
+    if (draggingClass) {
+      events.on('pointerDown', () => root.add(draggingClass))
+      events.on('pointerUp', () => root.remove(draggingClass))
+    }
   }
 
-  function toggleSelectedClass(): void {
+  function toggleSelectedClasses(): void {
     const indexes = engine.snapIndexes
     const selected = options.selectedClass
     const inView = slidesInView(true)
@@ -119,7 +127,8 @@ export function EmblaCarousel(
   }
 
   function deActivate(): void {
-    engine.dragHandler.removeAllEvents()
+    engine.dragHandler.removeActivationEvents()
+    engine.dragHandler.removeInteractionEvents()
     engine.animation.stop()
     eventStore.removeAll()
     sliderRoot.classList.remove(options.draggableClass)

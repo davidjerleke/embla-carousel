@@ -31,7 +31,8 @@ export type DragHandler = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
   pointerDown: () => boolean
-  removeAllEvents: () => void
+  removeActivationEvents: EventStore['removeAll']
+  removeInteractionEvents: EventStore['removeAll']
 }
 
 export function DragHandler(params: Params): DragHandler {
@@ -41,9 +42,11 @@ export function DragHandler(params: Params): DragHandler {
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startScroll = Vector1D(0)
   const startCross = Vector1D(0)
-  const dragStartLocation = Vector1D(0)
+  const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
+  const removeActivationEvents = activationEvents.removeAll
+  const removeInteractionEvents = interactionEvents.removeAll
   const snapForceBoost = { mouse: 2.5, touch: 3.5 }
   const freeForceBoost = { mouse: 4, touch: 7 }
   const snapSpeed = { mouse: 12, touch: 14 }
@@ -73,11 +76,6 @@ export function DragHandler(params: Params): DragHandler {
       .add(node, 'touchend', up)
       .add(node, 'mousemove', move)
       .add(node, 'mouseup', up)
-  }
-
-  function removeAllEvents(): void {
-    activationEvents.removeAll()
-    interactionEvents.removeAll()
   }
 
   function isFocusNode(node: Element): boolean {
@@ -117,14 +115,14 @@ export function DragHandler(params: Params): DragHandler {
     isMouse = evt.type === 'mousedown'
     if (isMouse && (evt as MouseEvent).button !== 0) return
 
-    const isMoving = delta(target, location) >= 2
+    const isMoving = delta(target.get(), location.get()) >= 2
     const clearPreventClick = isMouse || !isMoving
     const isNotFocusNode = !isFocusNode(evt.target as Element)
     const preventDefault = isMoving || (isMouse && isNotFocusNode)
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
-    dragStartLocation.set(target)
+    dragStartPoint.set(target)
     target.set(location)
     scrollBody.useDefaultMass().useSpeed(80)
     addInteractionEvents()
@@ -138,10 +136,10 @@ export function DragHandler(params: Params): DragHandler {
 
   function move(evt: Event): void {
     if (!preventScroll && !isMouse) {
-      const moveScroll = dragTracker.readPoint(evt, scrollAxis)
-      const moveCross = dragTracker.readPoint(evt, crossAxis)
-      const diffScroll = delta(moveScroll, startScroll)
-      const diffCross = delta(moveCross, startCross)
+      const moveScroll = dragTracker.readPoint(evt, scrollAxis).get()
+      const moveCross = dragTracker.readPoint(evt, crossAxis).get()
+      const diffScroll = delta(moveScroll, startScroll.get())
+      const diffCross = delta(moveCross, startCross.get())
       preventScroll = diffScroll > diffCross
       if (!preventScroll && !preventClick) return up()
     }
@@ -157,7 +155,7 @@ export function DragHandler(params: Params): DragHandler {
 
   function up(): void {
     const force = dragTracker.pointerUp() * dragForceBoost()
-    const isMoving = delta(target, dragStartLocation) >= 0.5
+    const isMoving = delta(target.get(), dragStartPoint.get()) >= 0.5
 
     if (isMoving && !isMouse) preventClick = true
     isMouse = false
@@ -169,8 +167,8 @@ export function DragHandler(params: Params): DragHandler {
     events.emit('pointerUp')
   }
 
-  function delta(point2: Vector1D, point1: Vector1D): number {
-    return Math.abs(point2.get() - point1.get())
+  function delta(pointB: number, pointA: number): number {
+    return Math.abs(pointB - pointA)
   }
 
   function click(evt: Event): void {
@@ -189,7 +187,8 @@ export function DragHandler(params: Params): DragHandler {
     addActivationEvents,
     clickAllowed,
     pointerDown,
-    removeAllEvents,
+    removeActivationEvents,
+    removeInteractionEvents,
   }
   return Object.freeze(self)
 }
