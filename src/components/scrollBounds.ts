@@ -12,16 +12,18 @@ type Params = {
 
 export type ScrollBounds = {
   constrain: (v: Vector1D) => void
+  toggleActive: (active: boolean) => void
 }
 
 export function ScrollBounds(params: Params): ScrollBounds {
   const { limit, location, scrollBody, animation } = params
   const { min, max, reachedMin, reachedMax } = limit
   const tolerance = 50
+  let disabled = false
   let timeout = 0
 
   function shouldConstrain(v: Vector1D): boolean {
-    if (timeout) return false
+    if (disabled || timeout) return false
     if (reachedMin(location.get())) return v.get() !== min
     if (reachedMax(location.get())) return v.get() !== max
     return false
@@ -39,8 +41,13 @@ export function ScrollBounds(params: Params): ScrollBounds {
     }, tolerance)
   }
 
+  function toggleActive(active: boolean): void {
+    disabled = !active
+  }
+
   const self: ScrollBounds = {
     constrain,
+    toggleActive,
   }
   return Object.freeze(self)
 }
