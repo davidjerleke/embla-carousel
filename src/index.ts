@@ -23,6 +23,7 @@ export type EmblaCarousel = {
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: (target?: boolean) => number[]
+  slidesNotInView: (target?: boolean) => number[]
 }
 
 export function EmblaCarousel(
@@ -100,10 +101,9 @@ export function EmblaCarousel(
   }
 
   function toggleSelectedClasses(): void {
-    const indexes = engine.snapIndexes
     const selected = options.selectedClass
     const inView = slidesInView(true)
-    const notInView = indexes.filter(i => inView.indexOf(i) === -1)
+    const notInView = slidesNotInView(true)
     notInView.forEach(i => slides[i].classList.remove(selected))
     inView.forEach(i => slides[i].classList.add(selected))
   }
@@ -154,6 +154,11 @@ export function EmblaCarousel(
     const location = engine[target ? 'target' : 'location'].get()
     const type = options.loop ? 'removeOffset' : 'constrain'
     return engine.slidesInView.check(engine.limit[type](location))
+  }
+
+  function slidesNotInView(target: boolean = false): number[] {
+    const inView = slidesInView(target)
+    return engine.snapIndexes.filter(i => inView.indexOf(i) === -1)
   }
 
   function scrollSnapList(): number[] {
@@ -236,6 +241,7 @@ export function EmblaCarousel(
     selectedScrollSnap,
     slideNodes,
     slidesInView,
+    slidesNotInView,
   }
   return Object.freeze(self)
 }
