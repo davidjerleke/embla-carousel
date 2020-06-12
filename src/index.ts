@@ -97,8 +97,8 @@ export function EmblaCarousel(
         addClass(sliderRoot, draggableClass)
       }
       if (draggingClass) {
-        events.on('pointerDown', toggleDraggableClass)
-        events.on('pointerUp', toggleDraggableClass)
+        events.on('pointerDown', toggleDraggingClass)
+        events.on('pointerUp', toggleDraggingClass)
       }
     } else {
       events.on('pointerDown', dragHandler.removeInteractionEvents)
@@ -114,7 +114,7 @@ export function EmblaCarousel(
     }
   }
 
-  function toggleDraggableClass(evt: EmblaEvent): void {
+  function toggleDraggingClass(evt: EmblaEvent): void {
     const { draggingClass } = options
     if (evt === 'pointerDown') addClass(sliderRoot, draggingClass)
     else removeClass(sliderRoot, draggingClass)
@@ -158,8 +158,8 @@ export function EmblaCarousel(
     slides.forEach(s => removeClass(s, selectedClass))
     events.off('select', toggleSelectedClass)
     events.off('pointerUp', toggleSelectedClass)
-    events.off('pointerDown', toggleDraggableClass)
-    events.off('pointerUp', toggleDraggableClass)
+    events.off('pointerDown', toggleDraggingClass)
+    events.off('pointerUp', toggleDraggingClass)
   }
 
   function destroy(): void {
