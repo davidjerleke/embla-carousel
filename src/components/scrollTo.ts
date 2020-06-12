@@ -52,5 +52,5 @@ export function ScrollTo(params: Params): ScrollTo {
     distance,
     index,
   }
-  return Object.freeze(self)
+  return self
 }

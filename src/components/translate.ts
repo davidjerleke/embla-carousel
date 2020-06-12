@@ -46,5 +46,5 @@ export function Translate(params: Params): Translate {
     clear,
     to,
   }
-  return Object.freeze(self)
+  return self
 }

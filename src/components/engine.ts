@@ -214,5 +214,5 @@ export function Engine(
       container,
     }),
   }
-  return Object.freeze(engine)
+  return engine
 }

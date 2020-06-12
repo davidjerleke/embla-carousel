@@ -39,5 +39,5 @@ export function ScrollContain(params: Params): ScrollContain {
   const self: ScrollContain = {
     measure,
   }
-  return Object.freeze(self)
+  return self
 }

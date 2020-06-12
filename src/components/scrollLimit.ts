@@ -23,5 +23,5 @@ export function ScrollLimit(params: Params): ScrollLimit {
   const self: ScrollLimit = {
     measure,
   }
-  return Object.freeze(self)
+  return self
 }

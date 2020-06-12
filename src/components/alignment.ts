@@ -37,5 +37,5 @@ export function Alignment(params: Params): Alignment {
   const self: Alignment = {
     measure,
   }
-  return Object.freeze(self)
+  return self
 }

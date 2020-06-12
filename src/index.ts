@@ -2,7 +2,12 @@ import { Engine } from './components/engine'
 import { EventEmitter, EmblaEvent } from './components/eventEmitter'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, EmblaOptions } from './components/options'
-import { arrayFromCollection, debounce } from './components/utils'
+import {
+  addClass,
+  arrayFromCollection,
+  debounce,
+  removeClass,
+} from './components/utils'
 
 export type EmblaCarousel = {
   canScrollNext: () => boolean
@@ -61,10 +66,23 @@ export function EmblaCarousel(
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
-    const { scrollBody, translate, dragHandler, slideLooper } = engine
-    const { loop, draggable, selectedClass } = options
 
-    containerSize = engine.axis.measure(container)
+    const {
+      axis,
+      scrollBody,
+      translate,
+      dragHandler,
+      slideLooper,
+    } = engine
+    const {
+      loop,
+      draggable,
+      draggableClass,
+      selectedClass,
+      draggingClass,
+    } = options
+
+    containerSize = axis.measure(container)
     eventStore.add(window, 'resize', debouncedResize)
     translate.to(scrollBody.location)
     slides.forEach(slideFocusEvent)
@@ -75,37 +93,39 @@ export function EmblaCarousel(
       slideLooper.loop(slides)
     }
     if (draggable) {
-      toggleDraggableClasses()
+      if (draggableClass) {
+        addClass(sliderRoot, draggableClass)
+      }
+      if (draggingClass) {
+        events.on('pointerDown', toggleDraggableClass)
+        events.on('pointerUp', toggleDraggableClass)
+      }
     } else {
       events.on('pointerDown', dragHandler.removeInteractionEvents)
     }
+    if (selectedClass) {
+      toggleSelectedClass()
+      events.on('select', toggleSelectedClass)
+      events.on('pointerUp', toggleSelectedClass)
+    }
     if (!activated) {
-      if (selectedClass) {
-        events.on('select', toggleSelectedClasses)
-        events.on('pointerUp', toggleSelectedClasses)
-        events.on('init', toggleSelectedClasses)
-      }
       setTimeout(() => events.emit('init'), 0)
       activated = true
     }
   }
 
-  function toggleDraggableClasses(): void {
-    const root = sliderRoot.classList
-    const { draggableClass, draggingClass } = options
-    if (draggableClass) root.add(draggableClass)
-    if (draggingClass) {
-      events.on('pointerDown', () => root.add(draggingClass))
-      events.on('pointerUp', () => root.remove(draggingClass))
-    }
+  function toggleDraggableClass(evt: EmblaEvent): void {
+    const { draggingClass } = options
+    if (evt === 'pointerDown') addClass(sliderRoot, draggingClass)
+    else removeClass(sliderRoot, draggingClass)
   }
 
-  function toggleSelectedClasses(): void {
-    const selected = options.selectedClass
+  function toggleSelectedClass(): void {
+    const { selectedClass } = options
     const inView = slidesInView(true)
     const notInView = slidesNotInView(true)
-    notInView.forEach(i => slides[i].classList.remove(selected))
-    inView.forEach(i => slides[i].classList.add(selected))
+    notInView.forEach(i => removeClass(slides[i], selectedClass))
+    inView.forEach(i => addClass(slides[i], selectedClass))
   }
 
   function slideFocusEvent(slide: HTMLElement, index: number): void {
@@ -127,13 +147,19 @@ export function EmblaCarousel(
   }
 
   function deActivate(): void {
+    const { selectedClass, draggableClass } = options
     engine.dragHandler.removeActivationEvents()
     engine.dragHandler.removeInteractionEvents()
     engine.animation.stop()
     eventStore.removeAll()
-    sliderRoot.classList.remove(options.draggableClass)
     engine.translate.clear()
     engine.slideLooper.clear(slides)
+    removeClass(sliderRoot, draggableClass)
+    slides.forEach(s => removeClass(s, selectedClass))
+    events.off('select', toggleSelectedClass)
+    events.off('pointerUp', toggleSelectedClass)
+    events.off('pointerDown', toggleDraggableClass)
+    events.off('pointerUp', toggleDraggableClass)
   }
 
   function destroy(): void {
@@ -243,7 +269,7 @@ export function EmblaCarousel(
     slidesInView,
     slidesNotInView,
   }
-  return Object.freeze(self)
+  return self
 }
 
 export default EmblaCarousel

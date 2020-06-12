@@ -48,3 +48,16 @@ export function groupArray<GenericType>(
 export function arrayKeys<GenericType>(array: GenericType): number[] {
   return Object.keys(array).map(Number)
 }
+
+export function removeClass(
+  node: HTMLElement,
+  className: string,
+): void {
+  const cl = node.classList
+  if (cl.contains(className)) cl.remove(className)
+}
+
+export function addClass(node: HTMLElement, className: string): void {
+  const cl = node.classList
+  if (!cl.contains(className)) cl.add(className)
+}

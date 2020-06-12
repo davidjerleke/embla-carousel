@@ -58,5 +58,5 @@ export function Vector1D(value: number): Vector1D {
     set,
     subtract,
   }
-  return Object.freeze(self)
+  return self
 }

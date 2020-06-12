@@ -55,5 +55,5 @@ export function Counter(params: Params): Counter {
     min,
     set,
   }
-  return Object.freeze(self)
+  return self
 }

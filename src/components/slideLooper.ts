@@ -139,5 +139,5 @@ export function SlideLooper(params: Params): SlideLooper {
     loop,
     loopPoints,
   }
-  return Object.freeze(self)
+  return self
 }

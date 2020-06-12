@@ -23,5 +23,5 @@ export function Direction(value: number): Direction {
     get,
     set,
   }
-  return Object.freeze(self)
+  return self
 }

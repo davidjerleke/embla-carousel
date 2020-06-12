@@ -35,5 +35,5 @@ export function ScrollSnap(params: Params): ScrollSnap {
   const self: ScrollSnap = {
     measure,
   }
-  return Object.freeze(self)
+  return self
 }

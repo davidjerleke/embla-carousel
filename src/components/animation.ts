@@ -31,5 +31,5 @@ export function Animation(callback: FrameRequestCallback): Animation {
     start: ifAnimating(false, start),
     stop: ifAnimating(true, stop),
   }
-  return Object.freeze(self)
+  return self
 }

@@ -38,5 +38,5 @@ export function EventStore(): EventStore {
     add,
     removeAll,
   }
-  return Object.freeze(self)
+  return self
 }

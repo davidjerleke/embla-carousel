@@ -19,7 +19,7 @@ export type Options = {
   startIndex: number
 }
 
-export const defaultOptions = Object.freeze<Options>({
+export const defaultOptions: Options = {
   align: 'center',
   axis: 'x',
   containScroll: '',
@@ -34,6 +34,6 @@ export const defaultOptions = Object.freeze<Options>({
   slidesToScroll: 1,
   speed: 10,
   startIndex: 0,
-})
+}
 
 export type EmblaOptions = Partial<Options>

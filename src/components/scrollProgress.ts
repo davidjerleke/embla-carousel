@@ -19,5 +19,5 @@ export function ScrollProgress(params: Params): ScrollProgress {
   const self: ScrollProgress = {
     get,
   }
-  return Object.freeze(self)
+  return self
 }

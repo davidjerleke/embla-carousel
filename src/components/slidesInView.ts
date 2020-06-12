@@ -55,5 +55,5 @@ export function SlidesInView(params: Params): SlidesInView {
   const self: SlidesInView = {
     check,
   }
-  return Object.freeze(self)
+  return self
 }

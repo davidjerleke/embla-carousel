@@ -190,5 +190,5 @@ export function DragHandler(params: Params): DragHandler {
     removeActivationEvents,
     removeInteractionEvents,
   }
-  return Object.freeze(self)
+  return self
 }

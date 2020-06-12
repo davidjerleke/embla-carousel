@@ -92,5 +92,5 @@ export function ScrollBody(params: Params): ScrollBody {
     useMass,
     useSpeed,
   }
-  return Object.freeze(self)
+  return self
 }

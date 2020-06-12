@@ -77,5 +77,5 @@ export function DragTracker(params: Params): DragTracker {
     pointerUp,
     readPoint,
   }
-  return Object.freeze(self)
+  return self
 }

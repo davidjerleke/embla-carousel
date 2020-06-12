@@ -69,5 +69,5 @@ export function Limit(params: Params): Limit {
     reachedMin,
     removeOffset,
   }
-  return Object.freeze(self)
+  return self
 }

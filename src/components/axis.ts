@@ -20,5 +20,5 @@ export function Axis(axis: AxisOption): Axis {
     measure,
     scroll,
   }
-  return Object.freeze(self)
+  return self
 }

@@ -49,5 +49,5 @@ export function ScrollBounds(params: Params): ScrollBounds {
     constrain,
     toggleActive,
   }
-  return Object.freeze(self)
+  return self
 }

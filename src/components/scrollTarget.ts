@@ -88,5 +88,5 @@ export function ScrollTarget(params: Params): ScrollTarget {
     byIndex,
     shortcut,
   }
-  return Object.freeze(self)
+  return self
 }

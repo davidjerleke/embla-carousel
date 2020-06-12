@@ -35,5 +35,5 @@ export function ScrollLooper(params: Params): ScrollLooper {
   const self: ScrollLooper = {
     loop,
   }
-  return Object.freeze(self)
+  return self
 }

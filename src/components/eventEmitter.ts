@@ -1,4 +1,4 @@
-type Callback = () => void
+type Callback = (evt: EmblaEvent) => void
 type Listeners = { [key in EmblaEvent]: Callback[] }
 
 export type EmblaEvent =
@@ -32,7 +32,7 @@ export function EventEmitter(): EventEmitter {
   }
 
   function emit(evt: EmblaEvent): EventEmitter {
-    listeners[evt].forEach(e => e())
+    listeners[evt].forEach(e => e(evt))
     return self
   }
 
@@ -51,5 +51,5 @@ export function EventEmitter(): EventEmitter {
     off,
     on,
   }
-  return Object.freeze(self)
+  return self
 }
