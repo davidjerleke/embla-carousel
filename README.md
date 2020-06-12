@@ -1,3 +1,5 @@
+### Version 3 is here! Please read the [migration guide here](https://github.com/davidcetinkaya/embla-carousel/releases/tag/v3.0.0). It may take some time to update the documentation so bare with me. Cheers!
+
 <br />
 <div align="center">
   <p align="center">
