@@ -10,6 +10,7 @@ type Params = {
 export type Translate = {
   clear: () => void
   to: (vector: Vector1D) => void
+  toggleActive: (active: boolean) => void
 }
 
 export function Translate(params: Params): Translate {
@@ -18,6 +19,7 @@ export function Translate(params: Params): Translate {
   const translateAxis = translates[axis.scroll]
   const roundToTwoDecimals = roundToDecimals(2)
   const containerStyle = container.style
+  let disabled = false
   let location = 0
 
   function x(n: number): string {
@@ -29,15 +31,21 @@ export function Translate(params: Params): Translate {
   }
 
   function to(v: Vector1D): void {
+    if (disabled) return
     const target = roundToTwoDecimals(v.get())
-    if (location === target) return
 
-    getComputedStyle(container).transform
-    containerStyle.transform = translateAxis(target)
-    location = target
+    if (location !== target) {
+      getComputedStyle(container).transform
+      containerStyle.transform = translateAxis(target)
+      location = target
+    }
   }
 
-  function clear() {
+  function toggleActive(active: boolean): void {
+    disabled = !active
+  }
+
+  function clear(): void {
     containerStyle.transform = ''
     location = 0
   }
@@ -45,6 +53,7 @@ export function Translate(params: Params): Translate {
   const self: Translate = {
     clear,
     to,
+    toggleActive,
   }
   return self
 }

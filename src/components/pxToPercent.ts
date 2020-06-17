@@ -14,5 +14,5 @@ export function PxToPercent(viewInPx: number): PxToPercent {
     measure,
     totalPercent,
   }
-  return self
+  return Object.freeze(self)
 }

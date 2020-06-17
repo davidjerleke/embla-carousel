@@ -71,8 +71,7 @@ export function ScrollTarget(params: Params): ScrollTarget {
   function byDistance(distance: number, snap: boolean): Target {
     const target = params.target.get() + distance
     const targetSnap = findTargetSnap(target)
-    const targetIndex = findTargetIndex(target, targetSnap.index)
-    const index = snap && !distance ? params.index.get() : targetIndex
+    const index = findTargetIndex(target, targetSnap.index)
     const reachedBound = !loop && reachedAny(target)
 
     if (!snap || reachedBound) return { index, distance }
