@@ -158,7 +158,7 @@ export function Engine(
     loop,
     scrollBody,
     scrollTo,
-    snapSizes,
+    scrollTarget,
     target,
   })
 

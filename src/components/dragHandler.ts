@@ -7,6 +7,7 @@ import { Axis } from './axis'
 import { EventStore } from './eventStore'
 import { Limit } from './limit'
 import { ScrollBody } from './scrollBody'
+import { ScrollTarget } from './scrollTarget'
 import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
 
@@ -15,12 +16,12 @@ type Params = {
   element: HTMLElement
   target: Vector1D
   dragFree: boolean
-  snapSizes: number[]
   dragTracker: DragTracker
   location: Vector1D
   animation: Animation
   scrollTo: ScrollTo
   scrollBody: ScrollBody
+  scrollTarget: ScrollTarget
   index: Counter
   limit: Limit
   loop: boolean
@@ -96,11 +97,11 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function seekTargetBy(force: number): void {
-    const { scrollTo, snapSizes, index } = params
-    const forceAbs = Math.abs(force)
-    const halfSnap = snapSizes[index.get()] / 2
+    const { scrollTo, scrollTarget, index } = params
     const reachedLimit = limit.reachedAny(target.get() + force)
-    const seekNext = forceAbs > dragThreshold && forceAbs < halfSnap
+    const currentLocation = scrollTarget.byDistance(0, false)
+    const targetChanged = currentLocation.index !== index.get()
+    const seekNext = !targetChanged && Math.abs(force) > dragThreshold
 
     if (!dragFree && !reachedLimit && seekNext) {
       const indexDiff = Direction(force).get() * -1
