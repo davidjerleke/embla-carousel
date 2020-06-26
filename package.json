@@ -14,7 +14,7 @@
     "react"
   ],
   "license": "MIT",
-  "main": "lib/embla-carousel.js",
+  "main": "lib/index.esm.js",
   "jsnext:main": "lib/index.esm.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
