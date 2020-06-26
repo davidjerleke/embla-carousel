@@ -3,7 +3,6 @@ import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import localTypescript from 'typescript'
-import packageJson from './package.json'
 
 const DEFAULT_FORMAT = 'esm'
 
@@ -54,7 +53,7 @@ export default [
         format: 'umd',
         name: 'EmblaCarousel',
         strict: true,
-        file: packageJson.main,
+        file: 'lib/embla-carousel.js',
         sourcemap: true,
       },
     ],
