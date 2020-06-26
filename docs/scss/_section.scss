@@ -1,5 +1,0 @@
-.section {
-  @include header-size('padding-top');
-  @include header-size('padding-bottom');
-  border-bottom: 1px solid lighten($color-riga, 4%);
-}

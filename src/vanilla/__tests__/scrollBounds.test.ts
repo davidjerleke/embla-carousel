@@ -9,7 +9,7 @@ let location: Vector1D
 let vector: Vector1D
 let scrollBody: ScrollBody
 
-const animation = Animation(() => {})
+const animation = Animation(() => 1)
 const tolerance = 50
 const vectorValue = 20
 const minLimit = -10

@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="70" height="70" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://davidcetinkaya.github.io/embla-carousel-docs" target="_blank"><img width="70" height="70" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
@@ -28,7 +28,7 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">TRY DEMO</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel-docs">TRY DEMO</a>&nbsp;</code>
     </strong>
   </p>
 
@@ -48,11 +48,11 @@
 
   <p align="center">
     <a href="https://github.com/davidcetinkaya/embla-carousel">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/javascript-logo.svg" height="45" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/javascript-logo.svg" height="45" />
     </a>
     &nbsp;
     <a href="https://github.com/davidcetinkaya/embla-carousel-react">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/react-logo.svg" height="45" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/react-logo.svg" height="45" />
     </a>
   </p>
 </div>
@@ -178,7 +178,7 @@ const embla = EmblaCarousel(emblaNode, {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-align-5kfhw">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-align-5kfhw">
@@ -230,7 +230,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-containerselector-ntlzb">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containerselector-ntlzb">
@@ -290,7 +290,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1g4rk">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-slidestoscroll-1g4rk">
@@ -349,7 +349,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-containscroll-tunvy">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containscroll-tunvy">
@@ -402,7 +402,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-draggable-gj9j0">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggable-gj9j0">
@@ -455,7 +455,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-dragfree-bfqjc">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-dragfree-bfqjc">
@@ -510,7 +510,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-loop-3x6id">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-loop-3x6id">
@@ -577,7 +577,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-speed-omw5i">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-speed-omw5i">
@@ -632,7 +632,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-startindex-3ur20">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-startindex-3ur20">
@@ -690,7 +690,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-selectedclass-ioysh">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedclass-ioysh">
@@ -745,7 +745,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-draggableclass-j7r68">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggableclass-j7r68">
@@ -806,7 +806,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-draggingclass-7u90r">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-draggingclass-7u90r">
@@ -873,7 +873,7 @@ embla.on('select', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-containernode-fq9xw">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-containernode-fq9xw">
@@ -919,7 +919,7 @@ const emblaContainer = embla.containerNode()
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-slidenodes-dsesp">
@@ -968,7 +968,7 @@ const emblaSlides = embla.slideNodes()
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
@@ -1025,7 +1025,7 @@ nextButton.addEventListener('click', embla.scrollNext, false)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollnext-scrollprev-hutpm">
@@ -1085,7 +1085,7 @@ prevButton.addEventListener('click', embla.scrollPrev, false)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollto-3igby">
@@ -1143,7 +1143,7 @@ rewindButton.addEventListener('click', () => embla.scrollTo(0), false)
   <br>
   <div>
     <a href="#">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="#">
@@ -1193,7 +1193,7 @@ embla.scrollToProgress(0.5)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollby-07cq5">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollby-07cq5">
@@ -1242,7 +1242,7 @@ embla.scrollBy(0.5)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
@@ -1308,7 +1308,7 @@ embla.on('select', togglePrevButtonEnabled)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-canscrollprev-canscrollnext-4wt5z">
@@ -1374,7 +1374,7 @@ embla.on('select', toggleNextButtonEnabled)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
@@ -1427,7 +1427,7 @@ embla.on('select', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-selectedscrollsnap-previousscrollsnap-04ux1">
@@ -1480,7 +1480,7 @@ embla.on('select', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollsnaplist-9bnsk">
@@ -1532,7 +1532,7 @@ const indexesInFirstScrollSnap = scrollSnaps[0].slideIndexes
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
@@ -1582,7 +1582,7 @@ embla.on('scroll', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-clickallowed-woxr1">
@@ -1646,7 +1646,7 @@ emblaSlides.forEach((slide, index) => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-changeoptions-mybvm">
@@ -1692,7 +1692,7 @@ embla.changeOptions({ loop: true })
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-destroy-t4ly1">
@@ -1748,7 +1748,7 @@ embla.destroy()
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
@@ -1809,7 +1809,7 @@ embla.on('init', onInitCallback)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-on-off-pjgmk">
@@ -1870,7 +1870,7 @@ embla.on('scroll', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
@@ -1908,7 +1908,7 @@ embla.on('init', onInitCallback)
   <br>
   <div>
     <a href="#">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="#">
@@ -1940,7 +1940,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
@@ -1972,7 +1972,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
@@ -2009,7 +2009,7 @@ embla.on('scroll', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-scrollprogress-cghc5">
@@ -2045,7 +2045,7 @@ embla.on('settle', () => {
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
@@ -2077,7 +2077,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
@@ -2109,7 +2109,7 @@ const embla = EmblaCarousel(emblaNode, options)
   <br>
   <div>
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" />
+      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" />
     </a>
     &nbsp;
     <a href="https://codesandbox.io/s/embla-carousel-events-z4ses">
@@ -2135,7 +2135,7 @@ const embla = EmblaCarousel(emblaNode, options)
 <p>Get started instantly with one of the CodeSandboxes below.</p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-basic-setup-oyols">
     <code>Basic Setup</code>
   </a>
@@ -2143,7 +2143,7 @@ const embla = EmblaCarousel(emblaNode, options)
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/codesandbox-logo.svg" height="23" align="top" /> &nbsp;
   <a href="https://codesandbox.io/s/embla-carousel-autoplay-4yhr2">
     <code>Autoplay</code>
   </a>
@@ -2160,23 +2160,23 @@ const embla = EmblaCarousel(emblaNode, options)
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/ie-logo.svg" height="23" align="top" /> &nbsp; <strong>IE</strong> - 11
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/ie-logo.svg" height="23" align="top" /> &nbsp; <strong>IE</strong> - 11
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/edge-logo.svg" height="23" align="top" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/edge-logo.svg" height="23" align="top" /> &nbsp; <strong>Edge</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/chrome-logo.svg" height="23" align="top" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/chrome-logo.svg" height="23" align="top" /> &nbsp; <strong>Chrome</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/firefox-logo.svg" height="23" align="top" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/firefox-logo.svg" height="23" align="top" /> &nbsp; <strong>Firefox</strong> - Latest 2 versions
 </p>
 
 <p>
-  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/safari-logo.svg" height="23" align="top" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
+  <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/safari-logo.svg" height="23" align="top" /> &nbsp; <strong>Safari</strong> - Latest 2 versions
 </p>
 
 <br>
@@ -2218,6 +2218,6 @@ const embla = EmblaCarousel(emblaNode, options)
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/docs/assets/browserstack-logo.svg" height="60" />
+    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/browserstack-logo.svg" height="60" />
     </a>
 </p>

@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "module": "commonjs",
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
     "declaration": true,
-    "outDir": "./lib",
+    "importHelpers": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "declarationDir": "lib",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "include": ["src/index.ts"],
+  "exclude": ["node_modules", "**/*.test*"]
 }
