@@ -4,7 +4,7 @@ import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import localTypescript from 'typescript'
 
-const DEFAULT_FORMAT = 'esm'
+const DEFAULT_FORMAT = 'cjs'
 
 const babelConfig = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],

@@ -14,9 +14,9 @@
     "react"
   ],
   "license": "MIT",
-  "main": "lib/index.esm.js",
-  "jsnext:main": "lib/index.esm.js",
-  "module": "lib/index.esm.js",
+  "main": "lib/index.cjs.js",
+  "jsnext:main": "lib/index.cjs.js",
+  "module": "lib/index.cjs.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
