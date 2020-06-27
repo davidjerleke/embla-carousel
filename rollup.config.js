@@ -17,18 +17,41 @@ const typescriptConfig = {
   useTsconfigDeclarationDir: true,
 }
 const resolveConfig = {
-  customResolveOptions: {
-    moduleDirectory: 'react',
-  },
+  // jsnext: true,
+  // main: true,
+  // browser: true,
+  // customResolveOptions: {
+  //   moduleDirectory: 'react',
+  // },
 }
 
 export default [
+  // {
+  //   external: ['react'],
+  //   input: 'src/index.ts',
+  //   output: [
+  //     {
+  //       format: 'iife',
+  //       name: 'EmblaCarousel',
+  //       strict: true,
+  //       file: 'lib/index.js',
+  //       sourcemap: true,
+  //     },
+  //   ],
+  //   plugins: [
+  //     resolve(resolveConfig),
+  //     commonjs(),
+  //     typescript(typescriptConfig),
+  //     babel(babelConfig),
+  //     // terser(),
+  //   ],
+  // },
   {
     external: ['react'],
     input: {
-      [`index.${DEFAULT_FORMAT}`]: 'src/index.ts',
-      [`embla-carousel.${DEFAULT_FORMAT}`]: 'src/vanilla/index.ts',
-      [`react.${DEFAULT_FORMAT}`]: 'src/react/index.ts',
+      [`index`]: 'src/index.ts',
+      [`embla-carousel`]: 'src/vanilla/index.ts',
+      [`react`]: 'src/react/index.ts',
     },
     output: [
       {
@@ -47,13 +70,36 @@ export default [
     ],
   },
   {
+    external: ['react'],
+    input: {
+      [`index`]: 'src/index.ts',
+      [`embla-carousel`]: 'src/vanilla/index.ts',
+      [`react`]: 'src/react/index.ts',
+    },
+    output: [
+      {
+        format: 'esm',
+        name: 'EmblaCarousel',
+        strict: true,
+        sourcemap: true,
+        dir: 'lib/es',
+        globals: { react: 'React' },
+      },
+    ],
+    plugins: [
+      resolve(resolveConfig),
+      typescript(typescriptConfig),
+      babel(babelConfig),
+    ],
+  },
+  {
     input: 'src/vanilla/index.ts',
     output: [
       {
         format: 'umd',
         name: 'EmblaCarousel',
         strict: true,
-        file: 'lib/embla-carousel.js',
+        file: 'lib/embla-carousel.browser.js',
         sourcemap: true,
       },
     ],
