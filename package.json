@@ -17,16 +17,6 @@
   "main": "./lib/index.js",
   "module": "./lib/es/index.js",
   "types": "./lib/index.d.ts",
-  "exports": {
-    ".": {
-      "node": {
-        "require": "./lib/index.js",
-        "import": "./lib/es/index.js"
-      },
-      "default": "./lib/embla-carousel.browser.js"
-    },
-    "./lib/": "./lib/"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidcetinkaya/embla-carousel"

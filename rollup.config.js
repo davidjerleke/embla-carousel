@@ -4,8 +4,6 @@ import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import localTypescript from 'typescript'
 
-const DEFAULT_FORMAT = 'cjs'
-
 const babelConfig = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
   exclude: 'node_modules/**',
@@ -16,55 +14,28 @@ const typescriptConfig = {
   declaration: true,
   useTsconfigDeclarationDir: true,
 }
-const resolveConfig = {
-  // jsnext: true,
-  // main: true,
-  // browser: true,
-  // customResolveOptions: {
-  //   moduleDirectory: 'react',
-  // },
-}
 
 export default [
-  // {
-  //   external: ['react'],
-  //   input: 'src/index.ts',
-  //   output: [
-  //     {
-  //       format: 'iife',
-  //       name: 'EmblaCarousel',
-  //       strict: true,
-  //       file: 'lib/index.js',
-  //       sourcemap: true,
-  //     },
-  //   ],
-  //   plugins: [
-  //     resolve(resolveConfig),
-  //     commonjs(),
-  //     typescript(typescriptConfig),
-  //     babel(babelConfig),
-  //     // terser(),
-  //   ],
-  // },
   {
     external: ['react'],
     input: {
-      [`index`]: 'src/index.ts',
-      [`embla-carousel`]: 'src/vanilla/index.ts',
-      [`react`]: 'src/react/index.ts',
+      index: 'src/index.ts',
+      'embla-carousel': 'src/vanilla/index.ts',
+      'embla-carousel-react': 'src/react/index.ts',
     },
     output: [
       {
-        format: DEFAULT_FORMAT,
+        format: 'cjs',
         name: 'EmblaCarousel',
         strict: true,
         sourcemap: true,
         dir: 'lib',
         globals: { react: 'React' },
+        exports: 'named',
       },
     ],
     plugins: [
-      resolve(resolveConfig),
+      resolve(),
       typescript(typescriptConfig),
       babel(babelConfig),
     ],
@@ -72,9 +43,9 @@ export default [
   {
     external: ['react'],
     input: {
-      [`index`]: 'src/index.ts',
-      [`embla-carousel`]: 'src/vanilla/index.ts',
-      [`react`]: 'src/react/index.ts',
+      index: 'src/index.ts',
+      'embla-carousel': 'src/vanilla/index.ts',
+      'embla-carousel-react': 'src/react/index.ts',
     },
     output: [
       {
@@ -84,10 +55,11 @@ export default [
         sourcemap: true,
         dir: 'lib/es',
         globals: { react: 'React' },
+        exports: 'named',
       },
     ],
     plugins: [
-      resolve(resolveConfig),
+      resolve(),
       typescript(typescriptConfig),
       babel(babelConfig),
     ],
@@ -99,7 +71,7 @@ export default [
         format: 'umd',
         name: 'EmblaCarousel',
         strict: true,
-        file: 'lib/embla-carousel.browser.js',
+        file: 'lib/browser/embla-carousel.js',
         sourcemap: true,
       },
     ],

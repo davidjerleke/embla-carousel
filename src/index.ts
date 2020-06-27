@@ -1,4 +1,2 @@
-import EmblaCarousel from './vanilla'
-import { useEmblaCarousel } from './react'
-
-export { EmblaCarousel, useEmblaCarousel }
+export { default } from './vanilla'
+export { useEmblaCarousel } from './react'
