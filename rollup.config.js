@@ -17,21 +17,15 @@ const typescriptConfig = {
 
 export default [
   {
-    external: ['react'],
-    input: {
-      index: 'src/index.ts',
-      'embla-carousel': 'src/vanilla/index.ts',
-      'embla-carousel-react': 'src/react/index.ts',
-    },
+    input: 'src/vanilla/index.ts',
     output: [
       {
+        file: './lib/embla-carousel.js',
         format: 'cjs',
-        name: 'EmblaCarousel',
-        strict: true,
-        sourcemap: true,
-        dir: 'lib',
-        globals: { react: 'React' },
-        exports: 'named',
+      },
+      {
+        file: './lib/es/embla-carousel.js',
+        format: 'esm',
       },
     ],
     plugins: [
@@ -42,20 +36,17 @@ export default [
   },
   {
     external: ['react'],
-    input: {
-      index: 'src/index.ts',
-      'embla-carousel': 'src/vanilla/index.ts',
-      'embla-carousel-react': 'src/react/index.ts',
-    },
+    input: 'src/react/index.ts',
     output: [
       {
-        format: 'esm',
-        name: 'EmblaCarousel',
-        strict: true,
-        sourcemap: true,
-        dir: 'lib/es',
+        file: './lib/embla-carousel-react.js',
+        format: 'cjs',
         globals: { react: 'React' },
-        exports: 'named',
+      },
+      {
+        file: './lib/es/embla-carousel-react.js',
+        format: 'esm',
+        globals: { react: 'React' },
       },
     ],
     plugins: [
