@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "private": false,
   "author": "David Cetinkaya <david.o.cetinkaya@gmail.com>",
   "description": "Extensible bare bones carousels for the web",
