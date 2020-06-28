@@ -3,7 +3,6 @@ import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 import localTypescript from 'typescript'
-import copy from 'rollup-plugin-copy'
 
 const babelConfig = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -14,19 +13,6 @@ const typescriptConfig = {
   typescript: localTypescript,
   declaration: true,
   useTsconfigDeclarationDir: true,
-}
-const copyConfig = {
-  targets: [
-    {
-      src: 'src/index.js',
-      dest: 'lib',
-    },
-    {
-      src: 'src/index.esm.js',
-      dest: 'lib/esm',
-      rename: (_, extension) => `index.${extension}`,
-    },
-  ],
 }
 
 export default [
@@ -48,7 +34,6 @@ export default [
       resolve(),
       typescript(typescriptConfig),
       babel(babelConfig),
-      copy(copyConfig),
     ],
   },
   {

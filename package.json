@@ -14,8 +14,8 @@
     "react"
   ],
   "license": "MIT",
-  "main": "./lib/index.js",
-  "module": "./lib/esm/index.js",
+  "main": "./lib/embla-carousel.js",
+  "module": "./lib/esm/embla-carousel.js",
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -64,7 +64,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "rollup": "^2.18.0",
-    "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-typescript2": "^0.27.1",
     "ts-jest": "^23.10.5",
