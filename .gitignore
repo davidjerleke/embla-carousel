@@ -1,3 +1,10 @@
+# production
+/*.js
+/*.map
+index.d.ts
+vanilla
+react
+
 # dependencies
 node_modules
 .pnp
@@ -5,9 +12,6 @@ node_modules
 
 # testing
 coverage
-
-# production
-lib
 
 # misc
 .DS_Store

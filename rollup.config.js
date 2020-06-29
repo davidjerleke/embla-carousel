@@ -20,12 +20,13 @@ export default [
     input: 'src/vanilla/index.ts',
     output: [
       {
-        file: './lib/embla-carousel.js',
+        file: 'embla-carousel.js',
         format: 'cjs',
+        strict: true,
         sourcemap: true,
       },
       {
-        file: './lib/esm/embla-carousel.js',
+        file: 'embla-carousel.esm.js',
         format: 'esm',
         sourcemap: true,
       },
@@ -41,16 +42,15 @@ export default [
     input: 'src/react/index.ts',
     output: [
       {
-        file: './lib/embla-carousel-react.js',
+        file: 'react.js',
         format: 'cjs',
         strict: true,
         globals: { react: 'React' },
         sourcemap: true,
       },
       {
-        file: './lib/esm/embla-carousel-react.js',
+        file: 'react.esm.js',
         format: 'esm',
-        strict: true,
         globals: { react: 'React' },
         sourcemap: true,
       },
@@ -68,7 +68,7 @@ export default [
         format: 'umd',
         name: 'EmblaCarousel',
         strict: true,
-        file: 'lib/browser/embla-carousel.js',
+        file: 'embla-carousel.umd.js',
         sourcemap: true,
       },
     ],
