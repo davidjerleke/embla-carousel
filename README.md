@@ -59,6 +59,22 @@
 
 <div align="center">
   <strong>
+    <h2 align="center">Extenstions</h2>
+  </strong>
+  <p align="center">
+    Support for wheel gestures by <a href="https://github.com/xiel">@xiel</a>.
+  </p>
+    <p align="center">
+    <strong>
+      <code>&nbsp;<a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a>&nbsp;</code>
+    </strong>
+  </p>
+</div>
+
+<br>
+
+<div align="center">
+  <strong>
     <h2 align="center">Contributors</h2>
   </strong>
   <p align="center">
