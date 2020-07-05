@@ -45,11 +45,11 @@
   <br>
 
   <p align="center">
-    <a href="https://github.com/davidcetinkaya/embla-carousel">
+    <a href="https://davidcetinkaya.github.io/embla-carousel/#module-usage">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/javascript-logo.svg" height="45" />
     </a>
     &nbsp;
-    <a href="https://github.com/davidcetinkaya/embla-carousel-react">
+    <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">
       <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/react-logo.svg" height="45" />
     </a>
   </p>
