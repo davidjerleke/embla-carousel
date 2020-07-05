@@ -54,13 +54,6 @@
     </a>
   </p>
 </div>
-<br />
-
-## Installation
-
-NPM
-
-<pre>npm install <a href="https://www.npmjs.com/package/embla-carousel">embla-carousel</a></pre>
 
 <br>
 
