@@ -1,5 +1,3 @@
-### Version 3 is here! Please read the [migration guide here](https://github.com/davidcetinkaya/embla-carousel/releases/tag/v3.0.0). It may take some time to update the documentation so bare with me. Cheers!
-
 <br />
 <div align="center">
   <p align="center">
@@ -28,19 +26,19 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel">TRY DEMO</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/#installation">Installation</a>&nbsp;</code>
     </strong>
   </p>
 
-  <br>
+  <p align="center">
+    <strong>
+      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/api">API Reference</a>&nbsp;</code>
+    </strong>
+  </p>
 
   <p align="center">
     <strong>
-      <a href="#options">options</a>
-      &nbsp; &middot; &nbsp;
-      <a href="#api">api</a>
-      &nbsp; &middot; &nbsp;
-      <a href="#events">events</a>
+      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/examples">Examples</a>&nbsp;</code>
     </strong>
   </p>
 
