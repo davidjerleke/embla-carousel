@@ -48,11 +48,16 @@ export function DragHandler(params: Params): DragHandler {
   const interactionEvents = EventStore()
   const removeActivationEvents = activationEvents.removeAll
   const removeInteractionEvents = interactionEvents.removeAll
-  const snapForceBoost = { mouse: 2.5, touch: 3.5 }
+  const snapForceBoost = { mouse: 2.5, touch: 4 }
   const freeForceBoost = { mouse: 4, touch: 7 }
   const snapSpeed = { mouse: 12, touch: 14 }
-  const freeSpeed = { mouse: 6, touch: 5 }
+  const freeSpeed = { mouse: 5, touch: 5 }
   const dragThreshold = 4
+  const edgeLimit = Limit({
+    min: limit.min - 70,
+    max: limit.max + 70,
+  })
+
   let pointerIsDown = false
   let preventScroll = false
   let preventClick = false
@@ -84,16 +89,38 @@ export function DragHandler(params: Params): DragHandler {
     return focusNodes.indexOf(name) > -1
   }
 
-  function movementSpeed(): number {
+  function baseSpeed(): number {
     const speed = dragFree ? freeSpeed : snapSpeed
     const type = isMouse ? 'mouse' : 'touch'
     return speed[type]
   }
 
-  function dragForceBoost(): number {
+  function forceBoost(): number {
     const boost = dragFree ? freeForceBoost : snapForceBoost
     const type = isMouse ? 'mouse' : 'touch'
     return boost[type]
+  }
+
+  function speedFactor(forceB: number, forceA: number): number {
+    const diff = delta(Math.abs(forceB), Math.abs(forceA))
+    if (Math.abs(forceB) <= Math.abs(forceA)) return 0
+    if (forceB === 0 || forceA === 0) return 0
+    return Math.abs(diff / forceB)
+  }
+
+  function allowedForce(force: number): number {
+    const destination = force + location.get()
+
+    if (!params.loop && edgeLimit.reachedAny(destination)) {
+      const edge = edgeLimit.reachedMax(destination) ? 'max' : 'min'
+      const distanceFromEdge = edgeLimit[edge] - target.get()
+      const factor = speedFactor(force, distanceFromEdge)
+      scrollBody.useSpeed(baseSpeed() + baseSpeed() * factor)
+      return factor === 0 ? force : distanceFromEdge
+    }
+
+    scrollBody.useSpeed(baseSpeed())
+    return force
   }
 
   function seekTargetBy(force: number): void {
@@ -155,16 +182,15 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function up(): void {
-    const force = dragTracker.pointerUp() * dragForceBoost()
+    const force = dragTracker.pointerUp() * forceBoost()
     const isMoving = delta(target.get(), dragStartPoint.get()) >= 0.5
 
     if (isMoving && !isMouse) preventClick = true
-    isMouse = false
     preventScroll = false
     pointerIsDown = false
     interactionEvents.removeAll()
-    scrollBody.useSpeed(movementSpeed())
-    seekTargetBy(force)
+    seekTargetBy(allowedForce(force))
+    isMouse = false
     events.emit('pointerUp')
   }
 
