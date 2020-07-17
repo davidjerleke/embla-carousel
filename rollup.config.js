@@ -37,7 +37,7 @@ export default [
         name: 'EmblaCarousel',
         file: `${packageJson.name}.umd.js`,
         strict: true,
-        sourcemap: true,
+        sourcemap: false,
         plugins: [terser()],
       },
     ],
