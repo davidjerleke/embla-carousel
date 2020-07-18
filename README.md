@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="70" height="70" src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="70" height="70" src="https://davidcetinkaya.github.io/embla-carousel/build/img/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
