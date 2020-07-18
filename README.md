@@ -46,11 +46,11 @@
 
   <p align="center">
     <a href="https://davidcetinkaya.github.io/embla-carousel/#module-usage">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/javascript-logo.svg" height="45" />
+      <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/javascript-logo.svg" height="45" />
     </a>
     &nbsp;
     <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">
-      <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/react-logo.svg" height="45" />
+      <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/react-logo.svg" height="45" />
     </a>
   </p>
 </div>
@@ -94,6 +94,6 @@
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://rawgit.com/davidcetinkaya/embla-carousel/master/assets/browserstack-logo.svg" height="60" />
+    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" height="50" />
     </a>
 </p>
