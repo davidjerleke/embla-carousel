@@ -2,7 +2,7 @@
   "name": "Embla Carousel Docs",
   "short_name": "Embla Carousel",
   "lang": "en",
-  "start_url": "/",
+  "start_url": "/embla-carousel",
   "icons": [
     {
       "src": "icons/icon-48x48.png",
