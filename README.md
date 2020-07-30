@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    Embla Carousel is a bare bones carousel library with great fluid motion and awesome touch/swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
+    Embla Carousel is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
   </p>
 
   <br>
