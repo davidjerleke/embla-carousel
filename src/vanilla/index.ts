@@ -19,7 +19,7 @@ export type EmblaCarousel = {
   off: EventEmitter['off']
   on: EventEmitter['on']
   previousScrollSnap: () => number
-  reInit: (options: EmblaOptions) => void
+  reInit: (options?: EmblaOptions) => void
   scrollNext: () => void
   scrollPrev: () => void
   scrollProgress: () => number
@@ -92,7 +92,7 @@ function EmblaCarousel(
       if (!slideLooper.canLoop()) return reActivate({ loop: false })
       slideLooper.loop(slides)
     }
-    if (draggable) {
+    if (draggable && slides.length) {
       if (draggableClass) {
         addClass(sliderRoot, draggableClass)
       }
@@ -139,7 +139,7 @@ function EmblaCarousel(
   }
 
   function reActivate(partialOptions: EmblaOptions = {}): void {
-    const startIndex = engine.index.get()
+    const startIndex = selectedScrollSnap()
     const newOptions = Object.assign({ startIndex }, partialOptions)
     deActivate()
     activate(newOptions)
@@ -147,15 +147,14 @@ function EmblaCarousel(
   }
 
   function deActivate(): void {
-    const { selectedClass, draggableClass } = options
     engine.dragHandler.removeActivationEvents()
     engine.dragHandler.removeInteractionEvents()
     engine.animation.stop()
     eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear(slides)
-    removeClass(sliderRoot, draggableClass)
-    slides.forEach(s => removeClass(s, selectedClass))
+    removeClass(sliderRoot, options.draggableClass)
+    slides.forEach(s => removeClass(s, options.selectedClass))
     events.off('select', toggleSelectedClass)
     events.off('pointerUp', toggleSelectedClass)
     events.off('pointerDown', toggleDraggingClass)
@@ -187,11 +186,6 @@ function EmblaCarousel(
     return engine.snapIndexes.filter(i => inView.indexOf(i) === -1)
   }
 
-  function scrollSnapList(): number[] {
-    const getScrollProgress = engine.scrollProgress.get
-    return engine.scrollSnaps.map(getScrollProgress)
-  }
-
   function scrollTo(index: number): void {
     engine.scrollBody.useDefaultMass().useDefaultSpeed()
     engine.scrollTo.index(index, 0)
@@ -209,19 +203,22 @@ function EmblaCarousel(
     engine.scrollTo.index(prev.get(), 1)
   }
 
-  function canScrollPrev(): boolean {
-    const { index } = engine
-    return options.loop || index.get() !== index.min
+  function canScrollNext(): boolean {
+    const next = engine.index.clone().add(1)
+    return next.get() !== selectedScrollSnap()
   }
 
-  function canScrollNext(): boolean {
-    const { index } = engine
-    return options.loop || index.get() !== index.max
+  function canScrollPrev(): boolean {
+    const prev = engine.index.clone().add(-1)
+    return prev.get() !== selectedScrollSnap()
+  }
+
+  function scrollSnapList(): number[] {
+    return engine.scrollSnaps.map(engine.scrollProgress.get)
   }
 
   function scrollProgress(): number {
-    const location = engine.location.get()
-    return engine.scrollProgress.get(location)
+    return engine.scrollProgress.get(engine.location.get())
   }
 
   function selectedScrollSnap(): number {

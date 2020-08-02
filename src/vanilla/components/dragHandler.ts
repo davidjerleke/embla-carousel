@@ -48,8 +48,8 @@ export function DragHandler(params: Params): DragHandler {
   const interactionEvents = EventStore()
   const removeActivationEvents = activationEvents.removeAll
   const removeInteractionEvents = interactionEvents.removeAll
-  const snapForceBoost = { mouse: 2.5, touch: 4 }
-  const freeForceBoost = { mouse: 5, touch: 8 }
+  const snapForceBoost = { mouse: 2.5, touch: 3.5 }
+  const freeForceBoost = { mouse: 5, touch: 7 }
   const baseSpeed = dragFree ? 5 : 12
   const dragThreshold = 4
   const edgeLimit = Limit({

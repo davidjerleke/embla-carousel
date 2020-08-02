@@ -23,8 +23,10 @@ export function DragTracker(params: Params): DragTracker {
   const lastDrag = Vector1D(0)
   const pointValue = Vector1D(0)
   const trackInterval = 10
+  const trackLength = 5
+  const trackTime = 100
   let trackPoints: number[] = []
-  let trackTime = new Date().getTime()
+  let lastTime = new Date().getTime()
   let isMouse = false
 
   function readPoint(evt: any, type: AxisOption): Vector1D {
@@ -43,12 +45,11 @@ export function DragTracker(params: Params): DragTracker {
 
   function pointerMove(evt: Event): number {
     const point = readPoint(evt, scrollAxis)
-    const time2 = new Date().getTime()
-    const time1 = trackTime
+    const nowTime = new Date().getTime()
 
-    if (time2 - time1 >= trackInterval) {
+    if (nowTime - lastTime >= trackInterval) {
       trackPoints.push(point.get())
-      trackTime = time2
+      lastTime = nowTime
     }
 
     diffDrag.set(point).subtract(lastDrag)
@@ -57,16 +58,15 @@ export function DragTracker(params: Params): DragTracker {
   }
 
   function pointerUp(): number {
+    const nowTime = new Date().getTime()
+    const endTime = nowTime - lastTime
     const currentPoint = lastDrag.get()
-    const trackLength = isMouse ? 5 : 4
-    const point = trackPoints
+    const force = trackPoints
       .slice(-trackLength)
       .map(trackPoint => currentPoint - trackPoint)
-      .sort((p1, p2) => {
-        return Math.abs(p1) < Math.abs(p2) ? 1 : -1
-      })[0]
+      .sort((p1, p2) => (Math.abs(p1) < Math.abs(p2) ? 1 : -1))[0]
 
-    lastDrag.set(point || 0)
+    lastDrag.set(endTime > trackTime || !force ? 0 : force)
     trackPoints = []
     return pxToPercent.measure(lastDrag.get())
   }

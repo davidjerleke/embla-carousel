@@ -86,7 +86,8 @@ export function Engine(
   const scrollSnaps = shouldContain ? containedSnaps : defaultSnaps
 
   // Index
-  const indexSpan = Limit({ min: 0, max: scrollSnaps.length - 1 })
+  const indexMax = Math.max(0, scrollSnaps.length - 1)
+  const indexSpan = Limit({ min: 0, max: indexMax })
   const index = Counter({ limit: indexSpan, start: startIndex, loop })
   const indexPrevious = index.clone()
 
