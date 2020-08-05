@@ -50,7 +50,7 @@
     <h2 align="center">Platforms</h2>
   </strong>
   <p align="center">
-    Embla Carousel works with the following tools/libraries. Can't find your favorite library among these? Make a <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">contribution</a>.
+    Embla Carousel works with the following tools/libraries.
   </p>
   <p align="center">
     <a href="https://davidcetinkaya.github.io/embla-carousel/#module-usage">
