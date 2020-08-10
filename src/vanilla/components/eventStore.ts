@@ -13,7 +13,7 @@ export type EventStore = {
 }
 
 export function EventStore(): EventStore {
-  const listeners: EventRemover[] = []
+  let listeners: EventRemover[] = []
 
   function add(
     node: EventTarget,
@@ -29,8 +29,7 @@ export function EventStore(): EventStore {
   }
 
   function removeAll(): EventStore {
-    listeners.filter(remove => remove())
-    listeners.length = 0
+    listeners = listeners.filter(remove => remove())
     return self
   }
 
