@@ -84,8 +84,6 @@
     <a href="https://github.com/mrksmts"><img src="https://avatars1.githubusercontent.com/u/437794?s=122&v=4" title="mrksmts" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/SLMNBJ"><img src="https://avatars2.githubusercontent.com/u/30017004?s=122&v=4" title="SLMNBJ" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/readeral"><img src="https://avatars0.githubusercontent.com/u/15904136?s=122&v=4" title="readeral" width="66" height="66" style="max-width:100%;"></a>
-    <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=122&v=4" title="gunnarx2" width="66" height="66" style="max-width:100%;"></a>
-    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=122&v=4" title="xiel" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/niubsta"><img src="https://avatars0.githubusercontent.com/u/270320?s=122&v=4" title="niubsta" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/allen-garvey"><img src="https://avatars1.githubusercontent.com/u/9314727?s=400&v=4" title="allen-garvey" width="66" height="66" style="max-width:100%;"></a>
   </p>
@@ -99,6 +97,10 @@
   </strong>
   <p align="center">
     Massive thanks to <a href="https://github.com/gunnarx2">gunnarx2</a> for creating the <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">useEmblaCarousel </a> hook and to <a href="https://github.com/xiel">xiel</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
+  </p>
+  <p align="center">
+    <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=122&v=4" title="gunnarx2" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=122&v=4" title="xiel" width="66" height="66" style="max-width:100%;"></a>
   </p>
 </div>
 
