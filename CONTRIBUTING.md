@@ -1,41 +1,10 @@
-## Contributing ✨
+## Contributing
 
-Thank you for considering contributing to Embla Carousel, contributions are welcome!
+Thank you for considering contributing to Embla Carousel, contributions are welcome! When contributing, your code will be used as part of an open source product if merged. By submitting a Pull Request, **you are giving your permission** for your code to be integrated into Embla Carousel as part of an open source product.
 
-- [Code style](#code-style)
-- [New features](#new-features)
 - [Bug reports](#bug-reports)
-
-### Code style
-
-All code contributions should follow the current `code style`. Embla Carousel is written with `function factories` that expose an object containing a set of public methods. Note that the public method object should be flat and frozen. Below is an example:
-
-```typescript
-// Declare parameter types
-type Params = {
-  parameter: number
-}
-
-// Declare public method types
-export type FunctionFactory = {
-  publicMethod: () => number
-}
-
-// Declare a function factory
-export function FunctionFactory(params: Params): FunctionFactory {
-  const { parameter } = params
-  const privateVariable = 10
-
-  function publicMethod() {
-    return parameter + privateVariable
-  }
-
-  const self: FunctionFactory = {
-    publicMethod,
-  }
-  return Object.freeze(self)
-}
-```
+- [New features](#new-features)
+- [Code style](#code-style)
 
 ### New features
 
@@ -55,4 +24,39 @@ All bug reports require a reduced test case. Providing a test case is the best w
 - **`Do not:`** Provide a link to a production site. That's not a test case.
 - **`Create a Pull Request:`** If you want to solve the bug, please make sure the branch name follows this pattern `bug/branchname-goes-here`.
 
-Your code will be used as part of an open source product if merged. By submitting a Pull Request, **you are giving your consent** for your code to be integrated into Embla Carousel as part of an open source product.
+### Code style
+
+All code contributions should follow the current `code style`. Embla Carousel is written with `function factories` that expose an object containing a set of public methods. Note that the public method object should be flat. Below is an example:
+
+```typescript
+// Declare parameter types
+type Params = {
+  parameter: number
+}
+
+// Declare public method types
+export type FunctionFactory = {
+  publicMethod: () => number
+}
+
+// Declare a function factory
+export function FunctionFactory(params: Params): FunctionFactory {
+  const { parameter } = params
+  const privateVariable = 10
+  const anotherPrivateVariable = 20
+
+  function publicMethod() {
+    return parameter + privateVariable
+  }
+
+  function anotherPublicMethod() {
+    return parameter + anotherPrivateVariable
+  }
+
+  const self: FunctionFactory = {
+    publicMethod,
+    anotherPublicMethod,
+  }
+  return self
+}
+```
