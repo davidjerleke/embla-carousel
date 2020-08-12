@@ -6,15 +6,6 @@ Thank you for considering contributing to Embla Carousel, contributions are welc
 - [New features](#new-features)
 - [Code style](#code-style)
 
-### New features
-
-For any new features it's important to follow this checklist:
-
-- **`Discuss:`** Open an issue before starting any significant work. Let's discuss to see how the proposed feature fits within Embla Carousels's vision.
-- **`Prettier:`** Make sure your editor adheres to prettier configuration files.
-- **`Code style:`** Follow the current code style as described [here](#code-style).
-- **`Create a Pull Request:`** Please make sure the branch name follows this pattern `feature/branchname-goes-here`.
-
 ### Bug reports
 
 All bug reports require a reduced test case. Providing a test case is the best way to get any issue addressed. It helps us all to understand the problem. Without this, your issue **may be closed**. Please follow this checklist:
@@ -23,6 +14,15 @@ All bug reports require a reduced test case. Providing a test case is the best w
 - **`Demonstrate:`** Make sure the test case clearly demonstrates the issue.
 - **`Do not:`** Provide a link to a production site. That's not a test case.
 - **`Create a Pull Request:`** If you want to solve the bug, please make sure the branch name follows this pattern `bug/branchname-goes-here`.
+
+### New features
+
+For any new features it's important to follow this checklist:
+
+- **`Discuss:`** Open an issue before starting any significant work. Let's discuss to see how the proposed feature fits within Embla Carousels's vision.
+- **`Prettier:`** Make sure your editor adheres to prettier configuration files.
+- **`Code style:`** Follow the current code style as described [here](#code-style).
+- **`Create a Pull Request:`** Please make sure the branch name follows this pattern `feature/branchname-goes-here`.
 
 ### Code style
 
