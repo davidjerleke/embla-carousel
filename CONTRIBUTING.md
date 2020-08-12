@@ -45,11 +45,11 @@ export function FunctionFactory(params: Params): FunctionFactory {
   const privateVariable = 10
   const anotherPrivateVariable = 20
 
-  function publicMethod() {
+  function publicMethod(): number {
     return parameter + privateVariable
   }
 
-  function anotherPublicMethod() {
+  function anotherPublicMethod(): number {
     return parameter + anotherPrivateVariable
   }
 
