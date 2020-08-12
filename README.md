@@ -98,7 +98,7 @@
     <h2 align="center">Special Thanks</h2>
   </strong>
   <p align="center">
-    Massive thanks to <a href="https://github.com/gunnarx2">Tobias Lindström</a> for creating the <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">useEmblaCarousel hook</a> and to <a href="https://github.com/xiel">Felix Leupold</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
+    Massive thanks to <a href="https://github.com/gunnarx2">Tobias Lindström</a> for creating the <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">useEmblaCarousel </a> hook and to <a href="https://github.com/xiel">Felix Leupold</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
   </p>
 </div>
 
