@@ -34,9 +34,6 @@
     "react*",
     "index.d.ts"
   ],
-  "engines": {
-    "node": ">= 12"
-  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c --watch",
