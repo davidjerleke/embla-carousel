@@ -85,7 +85,8 @@
     <a href="https://github.com/SLMNBJ"><img src="https://avatars2.githubusercontent.com/u/30017004?s=122&v=4" title="SLMNBJ" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/readeral"><img src="https://avatars0.githubusercontent.com/u/15904136?s=122&v=4" title="readeral" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/niubsta"><img src="https://avatars0.githubusercontent.com/u/270320?s=122&v=4" title="niubsta" width="66" height="66" style="max-width:100%;"></a>
-    <a href="https://github.com/allen-garvey"><img src="https://avatars1.githubusercontent.com/u/9314727?s=400&v=4" title="allen-garvey" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/allen-garvey"><img src="https://avatars1.githubusercontent.com/u/9314727?s=122s&v=4" title="allen-garvey" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/sedlukha"><img src="https://avatars3.githubusercontent.com/u/14075940?s=122&v=4" title="sedlukha" width="66" height="66" style="max-width:100%;"></a>
   </p>
 </div>
 
