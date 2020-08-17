@@ -7,8 +7,6 @@ export type Animation = {
 }
 
 export function Animation(callback: FrameRequestCallback): Animation {
-  const run = requestAnimationFrame.bind(window)
-  const end = cancelAnimationFrame.bind(window)
   let animationFrame = 0
 
   function ifAnimating(active: boolean, cb: Callback): Callback {
@@ -18,11 +16,11 @@ export function Animation(callback: FrameRequestCallback): Animation {
   }
 
   function start(): void {
-    animationFrame = run(callback)
+    animationFrame = window.requestAnimationFrame(callback)
   }
 
   function stop(): void {
-    end(animationFrame)
+    window.cancelAnimationFrame(animationFrame)
     animationFrame = 0
   }
 
