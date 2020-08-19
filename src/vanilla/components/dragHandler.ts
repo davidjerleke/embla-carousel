@@ -144,6 +144,7 @@ export function DragHandler(params: Params): DragHandler {
 
   function move(evt: Event): void {
     if (!preventScroll && !isMouse) {
+      if (!evt.cancelable) return up()
       const moveScroll = dragTracker.readPoint(evt, scrollAxis).get()
       const moveCross = dragTracker.readPoint(evt, crossAxis).get()
       const diffScroll = delta(moveScroll, startScroll.get())
