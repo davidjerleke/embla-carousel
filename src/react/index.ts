@@ -12,8 +12,6 @@ import {
   useState,
 } from 'react'
 
-const canUseDOM = !!(typeof window !== 'undefined' && window.document)
-
 type PropType = {
   htmlTagName?: string
   children?: ReactNode
@@ -25,6 +23,7 @@ function useEmblaCarousel(
 ): [FC<PropType>, EmblaCarouselType?] {
   const [embla, setEmbla] = useState<EmblaCarouselType>()
   const container = createRef<HTMLElement>()
+  const canUseDOM = !!(typeof window !== 'undefined' && window.document)
 
   useEffect(() => {
     if (canUseDOM && container?.current) {
