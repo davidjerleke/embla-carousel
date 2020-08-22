@@ -12,7 +12,11 @@ import {
   useState,
 } from 'react'
 
-const canUseDOM = !!(typeof window !== 'undefined' && window.document)
+function canUseDOM(): boolean {
+  return !!(
+    typeof window !== 'undefined' && window.document?.createElement
+  )
+}
 
 type PropType = {
   htmlTagName?: string
@@ -27,7 +31,7 @@ function useEmblaCarousel(
   const container = createRef<HTMLElement>()
 
   useEffect(() => {
-    if (canUseDOM && container?.current) {
+    if (canUseDOM() && container?.current) {
       setEmbla(EmblaCarousel(container.current, options))
     }
   }, [container, options])

@@ -20,6 +20,7 @@
   "unpkg": "embla-carousel.umd.js",
   "module": "embla-carousel.esm.js",
   "types": "index.d.ts",
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidcetinkaya/embla-carousel"
