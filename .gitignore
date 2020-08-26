@@ -1,12 +1,12 @@
 # production
 /*.js
 /*.map
-index.d.ts
-vanilla
-react
+/index.d.ts
+/vanilla
+/react
 
 # dependencies
-node_modules
+node_modules/
 .pnp
 .pnp.js
 

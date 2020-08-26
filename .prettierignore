@@ -1,5 +1,22 @@
-node_modules
+# production
+/*.js
+/*.map
+/index.d.ts
+/vanilla
+/react
+
+# dependencies
+node_modules/
+
+# testing
+coverage
+
+# docs
+docs
+
+# misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 package-lock.json
 yarn.lock
-lib
-coverage
