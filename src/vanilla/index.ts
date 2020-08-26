@@ -165,7 +165,6 @@ function EmblaCarousel(
     if (!activated) return
     deActivate()
     activated = false
-    engine = {} as Engine
     events.emit('destroy')
   }
 
@@ -186,21 +185,19 @@ function EmblaCarousel(
     return engine.snapIndexes.filter(i => inView.indexOf(i) === -1)
   }
 
-  function scrollTo(index: number): void {
+  function scrollTo(index: number, direction?: number): void {
     engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.index(index, 0)
+    if (activated) engine.scrollTo.index(index, direction || 0)
   }
 
   function scrollNext(): void {
     const next = engine.index.clone().add(1)
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.index(next.get(), -1)
+    scrollTo(next.get(), -1)
   }
 
   function scrollPrev(): void {
     const prev = engine.index.clone().add(-1)
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
-    engine.scrollTo.index(prev.get(), 1)
+    scrollTo(prev.get(), 1)
   }
 
   function canScrollNext(): boolean {

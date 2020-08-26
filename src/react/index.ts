@@ -1,61 +1,41 @@
-import EmblaCarousel, {
-  EmblaCarousel as EmblaCarouselType,
-} from '../vanilla'
+import { useRef, useEffect, useState, useMemo } from 'react'
+import Carousel, { EmblaCarousel } from '../vanilla'
 import { EmblaOptions } from '../vanilla/components/options'
-import {
-  createElement,
-  createRef,
-  FC,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
+import { areEqualShallow, canUseDOM } from './utils'
 
-function canUseDOM(): boolean {
-  return !!(
-    typeof window !== 'undefined' && window.document?.createElement
-  )
-}
+type ViewportRef = <ViewportElement extends HTMLElement>(
+  instance: ViewportElement | null,
+) => void
 
-type PropType = {
-  htmlTagName?: string
-  children?: ReactNode
-  className?: string
-}
+export type UseEmblaCarousel = [
+  ViewportRef,
+  EmblaCarousel | undefined,
+]
 
 function useEmblaCarousel(
-  options?: EmblaOptions,
-): [FC<PropType>, EmblaCarouselType?] {
-  const [embla, setEmbla] = useState<EmblaCarouselType>()
-  const container = createRef<HTMLElement>()
-
-  useEffect(() => {
-    if (canUseDOM() && container?.current) {
-      setEmbla(EmblaCarousel(container.current, options))
+  options: EmblaOptions = {},
+): UseEmblaCarousel {
+  const [embla, setEmbla] = useState<EmblaCarousel>()
+  const [viewport, setViewport] = useState<HTMLElement>()
+  const storedOptions = useRef<EmblaOptions>(options)
+  const activeOptions = useMemo<EmblaOptions>(() => {
+    if (!areEqualShallow(storedOptions.current, options)) {
+      storedOptions.current = options
     }
-  }, [container, options])
+    return storedOptions.current
+  }, [storedOptions, options])
 
   useEffect(() => {
-    return () => embla?.destroy()
-  }, [])
+    if (canUseDOM() && viewport) {
+      const newEmbla = Carousel(viewport, activeOptions)
+      setEmbla(newEmbla)
+      return () => newEmbla.destroy()
+    } else {
+      setEmbla(undefined)
+    }
+  }, [viewport, activeOptions, setEmbla])
 
-  const Carousel: FC<PropType> = useCallback(
-    ({ htmlTagName = 'div', className, children }) => {
-      return createElement(
-        htmlTagName,
-        {
-          className,
-          ref: container,
-          style: { overflow: 'hidden' },
-        },
-        children,
-      )
-    },
-    [],
-  )
-
-  return [Carousel, embla]
+  return [setViewport as ViewportRef, embla]
 }
 
 export { useEmblaCarousel }
