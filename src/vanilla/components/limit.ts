@@ -1,5 +1,3 @@
-type Limits = 'min' | 'max' | ''
-
 type Params = {
   min: number
   max: number
@@ -19,8 +17,6 @@ export type Limit = {
 
 export function Limit(params: Params): Limit {
   const { min, max } = params
-  const loopLimits = { min: max, max: min }
-  const constrainLimits = { min, max }
   const length = Math.abs(min - max)
 
   function reachedMin(n: number): boolean {
@@ -35,12 +31,6 @@ export function Limit(params: Params): Limit {
     return reachedMin(n) || reachedMax(n)
   }
 
-  function reachedWhich(n: number): Limits {
-    if (reachedMin(n)) return 'min'
-    if (reachedMax(n)) return 'max'
-    return ''
-  }
-
   function removeOffset(n: number): number {
     if (min === max) return n
     while (reachedMin(n)) n += length
@@ -49,13 +39,13 @@ export function Limit(params: Params): Limit {
   }
 
   function loop(n: number): number {
-    const which = reachedWhich(n)
-    return which ? loopLimits[which] : n
+    if (!reachedAny(n)) return n
+    return reachedMin(n) ? max : min
   }
 
   function constrain(n: number): number {
-    const which = reachedWhich(n)
-    return which ? constrainLimits[which] : n
+    if (!reachedAny(n)) return n
+    return reachedMin(n) ? min : max
   }
 
   const self: Limit = {
