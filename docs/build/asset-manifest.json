@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "./build/static/js/main.bc303992.chunk.js",
-    "main.js.map": "./build/static/js/main.bc303992.chunk.js.map",
-    "runtime-main.js": "./build/static/js/runtime-main.d7796133.js",
-    "runtime-main.js.map": "./build/static/js/runtime-main.d7796133.js.map",
-    "static/js/2.d805bdbb.chunk.js": "./build/static/js/2.d805bdbb.chunk.js",
-    "static/js/2.d805bdbb.chunk.js.map": "./build/static/js/2.d805bdbb.chunk.js.map",
-    "static/js/3.920b6cce.chunk.js": "./build/static/js/3.920b6cce.chunk.js",
-    "static/js/3.920b6cce.chunk.js.map": "./build/static/js/3.920b6cce.chunk.js.map",
+    "main.js": "./build/static/js/main.a10ef845.chunk.js",
+    "main.js.map": "./build/static/js/main.a10ef845.chunk.js.map",
+    "runtime-main.js": "./build/static/js/runtime-main.3dc6fea5.js",
+    "runtime-main.js.map": "./build/static/js/runtime-main.3dc6fea5.js.map",
+    "static/js/2.a555dbef.chunk.js": "./build/static/js/2.a555dbef.chunk.js",
+    "static/js/2.a555dbef.chunk.js.map": "./build/static/js/2.a555dbef.chunk.js.map",
+    "static/js/3.d167777c.chunk.js": "./build/static/js/3.d167777c.chunk.js",
+    "static/js/3.d167777c.chunk.js.map": "./build/static/js/3.d167777c.chunk.js.map",
     "index.html": "./build/index.html",
-    "precache-manifest.12067d8ef648b92be620cd6bd0a238d3.js": "./build/precache-manifest.12067d8ef648b92be620cd6bd0a238d3.js",
+    "precache-manifest.b586a454fd9814a3b3740beeb3cca5af.js": "./build/precache-manifest.b586a454fd9814a3b3740beeb3cca5af.js",
     "service-worker.js": "./build/service-worker.js",
-    "static/js/2.d805bdbb.chunk.js.LICENSE.txt": "./build/static/js/2.d805bdbb.chunk.js.LICENSE.txt",
+    "static/js/2.a555dbef.chunk.js.LICENSE.txt": "./build/static/js/2.a555dbef.chunk.js.LICENSE.txt",
     "static/media/media-1.jpeg": "./build/static/media/media-1.3ae2d68b.jpeg",
     "static/media/media-2.jpeg": "./build/static/media/media-2.b8406e4f.jpeg",
     "static/media/media-3.jpeg": "./build/static/media/media-3.5a957bad.jpeg",
@@ -19,8 +19,8 @@
     "static/media/media-5.jpeg": "./build/static/media/media-5.8920f961.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d7796133.js",
-    "static/js/2.d805bdbb.chunk.js",
-    "static/js/main.bc303992.chunk.js"
+    "static/js/runtime-main.3dc6fea5.js",
+    "static/js/2.a555dbef.chunk.js",
+    "static/js/main.a10ef845.chunk.js"
   ]
 }
