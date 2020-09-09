@@ -33,7 +33,7 @@ export type EmblaCarousel = {
 
 function EmblaCarousel(
   sliderRoot: HTMLElement,
-  userOptions: EmblaOptions = {},
+  userOptions?: EmblaOptions,
 ): EmblaCarousel {
   const events = EventEmitter()
   const eventStore = EventStore()
@@ -62,7 +62,7 @@ function EmblaCarousel(
     slides = arrayFromCollection(container.children)
   }
 
-  function activate(partialOptions: EmblaOptions = {}): void {
+  function activate(partialOptions?: EmblaOptions): void {
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
@@ -89,7 +89,10 @@ function EmblaCarousel(
     dragHandler.addActivationEvents()
 
     if (loop) {
-      if (!slideLooper.canLoop()) return reActivate({ loop: false })
+      if (!slideLooper.canLoop()) {
+        deActivate()
+        return activate({ loop: false })
+      }
       slideLooper.loop(slides)
     }
     if (draggable && slides.length) {
@@ -138,14 +141,6 @@ function EmblaCarousel(
     eventStore.add(slide, 'focus', focus, true)
   }
 
-  function reActivate(partialOptions: EmblaOptions = {}): void {
-    const startIndex = selectedScrollSnap()
-    const newOptions = Object.assign({ startIndex }, partialOptions)
-    deActivate()
-    activate(newOptions)
-    events.emit('reInit')
-  }
-
   function deActivate(): void {
     engine.dragHandler.removeActivationEvents()
     engine.dragHandler.removeInteractionEvents()
@@ -161,6 +156,15 @@ function EmblaCarousel(
     events.off('pointerUp', toggleDraggingClass)
   }
 
+  function reActivate(partialOptions?: EmblaOptions): void {
+    if (!activated) return
+    const startIndex = selectedScrollSnap()
+    const newOptions = Object.assign({ startIndex }, partialOptions)
+    deActivate()
+    activate(newOptions)
+    events.emit('reInit')
+  }
+
   function destroy(): void {
     if (!activated) return
     deActivate()
@@ -169,18 +173,19 @@ function EmblaCarousel(
   }
 
   function resize(): void {
+    if (!activated) return
     const newRootElementSize = engine.axis.measure(sliderRoot)
     if (rootElementSize !== newRootElementSize) reActivate()
     events.emit('resize')
   }
 
-  function slidesInView(target = false): number[] {
+  function slidesInView(target?: boolean): number[] {
     const location = engine[target ? 'target' : 'location'].get()
     const type = options.loop ? 'removeOffset' : 'constrain'
     return engine.slidesInView.check(engine.limit[type](location))
   }
 
-  function slidesNotInView(target = false): number[] {
+  function slidesNotInView(target?: boolean): number[] {
     const inView = slidesInView(target)
     return engine.snapIndexes.filter(i => inView.indexOf(i) === -1)
   }
