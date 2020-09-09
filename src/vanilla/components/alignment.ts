@@ -18,7 +18,7 @@ export function Alignment(params: Params): Alignment {
   }
 
   function center(n: number): number {
-    return (viewSize - n) / 2
+    return end(n) / 2
   }
 
   function end(n: number): number {
