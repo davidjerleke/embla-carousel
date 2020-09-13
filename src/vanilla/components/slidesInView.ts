@@ -21,7 +21,8 @@ export type SlidesInView = {
 export function SlidesInView(params: Params): SlidesInView {
   const { contentSize, slideSizes, viewSize } = params
   const { inViewThreshold, loop } = params
-  const thresholds = slideSizes.map(s => s * inViewThreshold)
+  const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
+  const thresholds = slideSizes.map(s => s * threshold)
   const scrollSnaps = arrayKeys(slideSizes).map(scrollSnap)
   const pointsToCheck = concatSlidePoints()
 

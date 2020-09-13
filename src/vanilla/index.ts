@@ -66,50 +66,36 @@ function EmblaCarousel(
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
-
-    const {
-      axis,
-      scrollBody,
-      translate,
-      dragHandler,
-      slideLooper,
-    } = engine
-    const {
-      loop,
-      draggable,
-      draggableClass,
-      selectedClass,
-      draggingClass,
-    } = options
-
-    rootElementSize = axis.measure(sliderRoot)
+    rootElementSize = engine.axis.measure(sliderRoot)
     eventStore.add(window, 'resize', debouncedResize)
-    translate.to(scrollBody.location)
-    slides.forEach(slideFocusEvent)
-    dragHandler.addActivationEvents()
+    engine.translate.to(engine.scrollBody.location)
 
-    if (loop) {
-      if (!slideLooper.canLoop()) {
+    if (options.loop) {
+      if (!engine.slideLooper.canLoop()) {
         deActivate()
         return activate({ loop: false })
       }
-      slideLooper.loop(slides)
+      engine.slideLooper.loop(slides)
     }
-    if (draggable && slides.length) {
-      if (draggableClass) {
-        addClass(sliderRoot, draggableClass)
+    if (options.draggable && slides.length) {
+      engine.dragHandler.addActivationEvents()
+      if (options.draggableClass) {
+        addClass(sliderRoot, options.draggableClass)
       }
-      if (draggingClass) {
-        events.on('pointerDown', toggleDraggingClass)
-        events.on('pointerUp', toggleDraggingClass)
+      if (options.draggingClass) {
+        events
+          .on('pointerDown', toggleDraggingClass)
+          .on('pointerUp', toggleDraggingClass)
       }
-    } else {
-      events.on('pointerDown', dragHandler.removeInteractionEvents)
     }
-    if (selectedClass) {
+    if (slides.length) {
+      engine.slideFocus.addActivationEvents(slides)
+    }
+    if (options.selectedClass) {
       toggleSelectedClass()
-      events.on('select', toggleSelectedClass)
-      events.on('pointerUp', toggleSelectedClass)
+      events
+        .on('select', toggleSelectedClass)
+        .on('pointerUp', toggleSelectedClass)
     }
     if (!activated) {
       setTimeout(() => events.emit('init'), 0)
@@ -131,19 +117,9 @@ function EmblaCarousel(
     inView.forEach(i => addClass(slides[i], selectedClass))
   }
 
-  function slideFocusEvent(slide: HTMLElement, index: number): void {
-    const focus = (): void => {
-      const groupIndex = Math.floor(index / options.slidesToScroll)
-      const selectedGroup = index ? groupIndex : index
-      sliderRoot.scrollLeft = 0
-      scrollTo(selectedGroup)
-    }
-    eventStore.add(slide, 'focus', focus, true)
-  }
-
   function deActivate(): void {
-    engine.dragHandler.removeActivationEvents()
-    engine.dragHandler.removeInteractionEvents()
+    engine.dragHandler.removeAllEvents()
+    engine.slideFocus.removeAllEvents()
     engine.animation.stop()
     eventStore.removeAll()
     engine.translate.clear()
@@ -187,7 +163,7 @@ function EmblaCarousel(
 
   function slidesNotInView(target?: boolean): number[] {
     const inView = slidesInView(target)
-    return engine.snapIndexes.filter(i => inView.indexOf(i) === -1)
+    return engine.slideIndexes.filter(i => inView.indexOf(i) === -1)
   }
 
   function scrollTo(index: number, direction?: number): void {

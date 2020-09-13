@@ -18,6 +18,7 @@ import { ScrollSnap } from './scrollSnap'
 import { ScrollTarget } from './scrollTarget'
 import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
+import { SlideFocus } from './slideFocus'
 import { SlidesInView } from './slidesInView'
 import { Translate } from './translate'
 import { arrayKeys, groupArray } from './utils'
@@ -37,6 +38,7 @@ export type Engine = {
   pxToPercent: PxToPercent
   scrollBody: ScrollBody
   dragHandler: DragHandler
+  slideFocus: SlideFocus
   slideLooper: SlideLooper
   slidesInView: SlidesInView
   target: Vector1D
@@ -44,7 +46,7 @@ export type Engine = {
   scrollTo: ScrollTo
   scrollTarget: ScrollTarget
   scrollSnaps: number[]
-  snapIndexes: number[]
+  slideIndexes: number[]
 }
 
 export function Engine(
@@ -72,13 +74,13 @@ export function Engine(
   const pxToPercent = PxToPercent(axis.measure(container))
   const viewSize = pxToPercent.totalPercent
   const slideSizes = slides.map(axis.measure).map(pxToPercent.measure)
+  const slideIndexes = arrayKeys(slideSizes)
   const groupedSizes = groupArray(slideSizes, slidesToScroll)
   const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
-  const snapIndexes = arrayKeys(snapSizes)
   const contentSize = slideSizes.reduce((a, s) => a + s, 0)
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
-  const defaultSnaps = snapIndexes.map(scrollSnap.measure)
+  const defaultSnaps = arrayKeys(snapSizes).map(scrollSnap.measure)
   const contain = ScrollContain({ alignment, contentSize, viewSize })
   const shouldContain = !loop && containScroll !== ''
   const trimSnaps = containScroll === 'trimSnaps'
@@ -124,7 +126,11 @@ export function Engine(
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const loopVectors = [location, target]
-  const scrollBody = ScrollBody({ location, speed, mass: 1 })
+  const scrollBody = ScrollBody({
+    location,
+    speed,
+    mass: 1,
+  })
   const scrollTarget = ScrollTarget({
     contentSize,
     index,
@@ -193,6 +199,11 @@ export function Engine(
     scrollSnaps,
     scrollTarget,
     scrollTo,
+    slideFocus: SlideFocus({
+      root,
+      scrollTo,
+      slidesToScroll,
+    }),
     slideLooper: SlideLooper({
       axis,
       contentSize,
@@ -208,7 +219,7 @@ export function Engine(
       slideSizes,
       viewSize,
     }),
-    snapIndexes,
+    slideIndexes,
     target,
     translate: Translate({
       axis,

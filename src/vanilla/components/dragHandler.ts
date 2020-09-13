@@ -32,8 +32,7 @@ export type DragHandler = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
   pointerDown: () => boolean
-  removeActivationEvents: EventStore['removeAll']
-  removeInteractionEvents: EventStore['removeAll']
+  removeAllEvents: () => void
 }
 
 export function DragHandler(params: Params): DragHandler {
@@ -46,8 +45,6 @@ export function DragHandler(params: Params): DragHandler {
   const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
-  const removeActivationEvents = activationEvents.removeAll
-  const removeInteractionEvents = interactionEvents.removeAll
   const snapForceBoost = { mouse: 2.5, touch: 3.5 }
   const freeForceBoost = { mouse: 5, touch: 7 }
   const baseSpeed = dragFree ? 5 : 12
@@ -81,6 +78,11 @@ export function DragHandler(params: Params): DragHandler {
       .add(node, 'touchend', up)
       .add(node, 'mousemove', move)
       .add(node, 'mouseup', up)
+  }
+
+  function removeAllEvents(): void {
+    activationEvents.removeAll()
+    interactionEvents.removeAll()
   }
 
   function isFocusNode(node: Element): boolean {
@@ -199,8 +201,7 @@ export function DragHandler(params: Params): DragHandler {
     addActivationEvents,
     clickAllowed,
     pointerDown,
-    removeActivationEvents,
-    removeInteractionEvents,
+    removeAllEvents,
   }
   return self
 }
