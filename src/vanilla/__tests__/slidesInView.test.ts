@@ -2,7 +2,7 @@ import { Alignment, AlignmentOption } from '../components/alignment'
 import { SlidesInView } from '../components/slidesInView'
 
 const viewSize = 100
-const slideSizes = [30, 40, 30, 40, 60, 30, 50]
+const slideSizes = [30, 40, 29.99, 40, 60, 30, 50]
 const firstSlide = slideSizes[0]
 const contentSize = slideSizes.reduce((a, s) => a + s, 0)
 
@@ -77,7 +77,7 @@ describe('SlidesInView', () => {
 
       test('Start', () => {
         const indexesInView = slidesInView.check(startAlign)
-        expect(indexesInView).toEqual([1])
+        expect(indexesInView).toEqual([0, 1, 2])
       })
 
       test('Center', () => {
@@ -87,7 +87,7 @@ describe('SlidesInView', () => {
 
       test('End', () => {
         const indexesInView = slidesInView.check(endAlign)
-        expect(indexesInView).toEqual([])
+        expect(indexesInView).toEqual([0])
       })
     })
 
@@ -96,7 +96,7 @@ describe('SlidesInView', () => {
 
       test('Start', () => {
         const indexesInView = slidesInView.check(startAlign)
-        expect(indexesInView).toEqual([1])
+        expect(indexesInView).toEqual([0, 1, 2])
       })
 
       test('Center', () => {
@@ -106,7 +106,7 @@ describe('SlidesInView', () => {
 
       test('End', () => {
         const indexesInView = slidesInView.check(endAlign)
-        expect(indexesInView).toEqual([6])
+        expect(indexesInView).toEqual([0, 6])
       })
     })
   })
