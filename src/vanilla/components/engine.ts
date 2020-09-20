@@ -147,6 +147,13 @@ export function Engine(
     scrollTarget,
     target,
   })
+  const slidesInView = SlidesInView({
+    contentSize,
+    inViewThreshold,
+    loop,
+    slideSizes,
+    viewSize,
+  })
 
   // DragHandler
   const dragHandler = DragHandler({
@@ -210,15 +217,10 @@ export function Engine(
       location,
       scrollSnaps,
       slideSizes,
+      slidesInView,
       viewSize,
     }),
-    slidesInView: SlidesInView({
-      contentSize,
-      inViewThreshold,
-      loop,
-      slideSizes,
-      viewSize,
-    }),
+    slidesInView,
     slideIndexes,
     target,
     translate: Translate({

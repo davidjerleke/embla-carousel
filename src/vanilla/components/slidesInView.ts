@@ -8,7 +8,7 @@ type Params = {
   inViewThreshold: number
 }
 
-type SlidePoint = {
+type SlideBound = {
   start: number
   end: number
   index: number
@@ -16,27 +16,35 @@ type SlidePoint = {
 
 export type SlidesInView = {
   check: (location: number) => number[]
+  findSlideBounds: (
+    offset: number,
+    threshold?: number,
+  ) => SlideBound[]
 }
 
 export function SlidesInView(params: Params): SlidesInView {
   const { contentSize, slideSizes, viewSize } = params
   const { inViewThreshold, loop } = params
   const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
-  const thresholds = slideSizes.map(s => s * threshold)
   const scrollSnaps = arrayKeys(slideSizes).map(scrollSnap)
-  const pointsToCheck = concatSlidePoints()
+  const offsets = loop ? [0, contentSize, -contentSize] : [0]
+  const slideBounds = offsets.reduce(
+    (a: SlideBound[], loopOffset) => {
+      return a.concat(findSlideBounds(loopOffset, threshold))
+    },
+    [],
+  )
 
   function scrollSnap(index: number): number {
     const span = slideSizes.slice(0, index)
     return span.reduce((a, s) => a - s, 0)
   }
 
-  function concatSlidePoints(): SlidePoint[] {
-    const offsets = loop ? [0, contentSize, -contentSize] : [0]
-    return offsets.map(slidePoints).reduce((a, b) => a.concat(b), [])
-  }
-
-  function slidePoints(offset: number): SlidePoint[] {
+  function findSlideBounds(
+    offset: number,
+    threshold?: number,
+  ): SlideBound[] {
+    const thresholds = slideSizes.map(s => s * (threshold || 0))
     return scrollSnaps.map((snap, index) => ({
       start: snap - slideSizes[index] + thresholds[index] + offset,
       end: snap + viewSize - thresholds[index] + offset,
@@ -45,8 +53,8 @@ export function SlidesInView(params: Params): SlidesInView {
   }
 
   function check(location: number): number[] {
-    return pointsToCheck.reduce((list: number[], point) => {
-      const { index, start, end } = point
+    return slideBounds.reduce((list: number[], slideBound) => {
+      const { index, start, end } = slideBound
       const inList = list.indexOf(index) !== -1
       const inView = start < location && end > location
       return !inList && inView ? list.concat([index]) : list
@@ -55,6 +63,7 @@ export function SlidesInView(params: Params): SlidesInView {
 
   const self: SlidesInView = {
     check,
+    findSlideBounds,
   }
   return self
 }

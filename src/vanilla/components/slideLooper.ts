@@ -1,5 +1,6 @@
 import { Axis } from './axis'
 import { arrayKeys } from './utils'
+import { SlidesInView } from './slidesInView'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -9,13 +10,14 @@ type Params = {
   location: Vector1D
   slideSizes: number[]
   contentSize: number
+  slidesInView: SlidesInView
 }
 
 type LoopPoint = {
   point: number
   location: number
   index: number
-  getTarget: (location: number) => number
+  getTarget: () => number
 }
 
 export type SlideLooper = {
@@ -26,100 +28,68 @@ export type SlideLooper = {
 }
 
 export function SlideLooper(params: Params): SlideLooper {
-  const { axis, location: containerLocation } = params
+  const { axis, location: scrollLocation, slidesInView } = params
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = arrayKeys(slideSizes)
   const descItems = arrayKeys(slideSizes).reverse()
   const loopPoints = startPoints().concat(endPoints())
   const loopStyle = axis.scroll === 'x' ? 'left' : 'top'
 
-  function subtractItemSizes(
-    indexes: number[],
-    from: number,
-  ): number {
+  function removeSlideSizes(indexes: number[], from: number): number {
     return indexes.reduce((a: number, i) => {
-      const size = slideSizes[i]
-      return a - size
+      return a - slideSizes[i]
     }, from)
   }
 
-  function loopItemsIn(
-    sizeOfGap: number,
-    indexes: number[],
-  ): number[] {
+  function slidesInGap(indexes: number[], gap: number): number[] {
     return indexes.reduce((a: number[], i) => {
-      const gapLeft = subtractItemSizes(a, sizeOfGap)
-      return gapLeft > 0 ? a.concat([i]) : a
+      const remainingGap = removeSlideSizes(a, gap)
+      return remainingGap > 0 ? a.concat([i]) : a
     }, [])
   }
 
-  function loopStart(
-    sizeOfGap: number,
+  function findLoopPoints(
     indexes: number[],
-    from: number,
-  ): number {
-    return indexes.reduce((a: number, i) => {
-      const gapFilled = a + slideSizes[i]
-      return gapFilled < sizeOfGap ? gapFilled : a
-    }, from)
-  }
-
-  function loopPointFor(
-    indexes: number[],
-    from: number,
-    direction: 0 | 1,
-  ): number {
-    const slideCount = ascItems.length - 1
-    return subtractItemSizes(
-      indexes.map(i => (i + direction) % slideCount),
-      from,
-    )
-  }
-
-  function loopPointsFor(
-    indexes: number[],
-    from: number,
-    direction: 0 | 1,
+    edge: 'start' | 'end',
   ): LoopPoint[] {
-    const ascIndexes = indexes.slice().sort((a, b) => a - b)
-    return ascIndexes.map(
-      (index, loopIndex): LoopPoint => {
-        const initial = contentSize * (!direction ? 0 : -1)
-        const offset = contentSize * (!direction ? 1 : 0)
-        const slidesInSpan = ascIndexes.slice(0, loopIndex)
-        const point = loopPointFor(slidesInSpan, from, direction)
-        const getTarget = (location: number): number =>
-          location > point ? initial : offset
-        return { point, getTarget, index, location: -1 }
-      },
-    )
+    const isStartEdge = edge === 'start'
+    const offset = isStartEdge ? -contentSize : contentSize
+    const slideBounds = slidesInView.findSlideBounds(offset)
+
+    return indexes.map(index => {
+      const initial = isStartEdge ? 0 : -contentSize
+      const altered = isStartEdge ? contentSize : 0
+      const bounds = slideBounds.filter(b => b.index === index)[0]
+      const point = bounds[isStartEdge ? 'end' : 'start']
+      const getTarget = (): number =>
+        scrollLocation.get() > point ? initial : altered
+      return { point, getTarget, index, location: -1 }
+    })
   }
 
   function startPoints(): LoopPoint[] {
     const gap = scrollSnaps[0] - 1
-    const indexes = loopItemsIn(gap, descItems)
-    const start = loopStart(gap, indexes, 0)
-    return loopPointsFor(indexes, start, 1)
+    const indexes = slidesInGap(descItems, gap)
+    return findLoopPoints(indexes, 'end')
   }
 
   function endPoints(): LoopPoint[] {
     const gap = viewSize - scrollSnaps[0] - 1
-    const indexes = loopItemsIn(gap, ascItems)
-    const start = loopStart(contentSize, ascItems, -viewSize)
-    return loopPointsFor(indexes, -start, 0)
+    const indexes = slidesInGap(ascItems, gap)
+    return findLoopPoints(indexes, 'start')
   }
 
   function canLoop(): boolean {
     return loopPoints.every(({ index }) => {
       const otherIndexes = ascItems.filter(i => i !== index)
-      return subtractItemSizes(otherIndexes, viewSize) <= 0
+      return removeSlideSizes(otherIndexes, viewSize) <= 0
     })
   }
 
   function loop(slides: HTMLElement[]): void {
     loopPoints.forEach(loopPoint => {
       const { getTarget, location, index } = loopPoint
-      const target = getTarget(containerLocation.get())
+      const target = getTarget()
       if (target !== location) {
         slides[index].style[loopStyle] = `${target}%`
         loopPoint.location = target
