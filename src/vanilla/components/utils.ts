@@ -5,21 +5,14 @@ export function map(
   oStart: number,
   oStop: number,
 ): number {
-  return (
-    oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
-  )
+  return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
 }
 
-export function arrayFromCollection(
-  nodeList: HTMLCollection,
-): HTMLElement[] {
+export function arrayFromCollection(nodeList: HTMLCollection): HTMLElement[] {
   return Array.prototype.slice.call(nodeList)
 }
 
-export function debounce(
-  callback: () => void,
-  time: number,
-): () => void {
+export function debounce(callback: () => void, time: number): () => void {
   const timeout = { id: 0 }
   return (): void => {
     window.clearTimeout(timeout.id)
@@ -27,9 +20,7 @@ export function debounce(
   }
 }
 
-export function roundToDecimals(
-  decimalPoints: number,
-): (n: number) => number {
+export function roundToDecimals(decimalPoints: number): (n: number) => number {
   const pow = Math.pow(10, decimalPoints)
   return (n: number) => Math.round(n * pow) / pow
 }
@@ -49,10 +40,7 @@ export function arrayKeys<GenericType>(array: GenericType): number[] {
   return Object.keys(array).map(Number)
 }
 
-export function removeClass(
-  node: HTMLElement,
-  className: string,
-): void {
+export function removeClass(node: HTMLElement, className: string): void {
   const cl = node.classList
   if (cl.contains(className)) cl.remove(className)
 }

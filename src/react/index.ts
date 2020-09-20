@@ -7,14 +7,9 @@ type ViewportRef = <ViewportElement extends HTMLElement>(
   instance: ViewportElement | null,
 ) => void
 
-export type UseEmblaCarousel = [
-  ViewportRef,
-  EmblaCarousel | undefined,
-]
+export type UseEmblaCarousel = [ViewportRef, EmblaCarousel | undefined]
 
-function useEmblaCarousel(
-  options: EmblaOptions = {},
-): UseEmblaCarousel {
+function useEmblaCarousel(options: EmblaOptions = {}): UseEmblaCarousel {
   const [embla, setEmbla] = useState<EmblaCarousel>()
   const [viewport, setViewport] = useState<HTMLElement>()
   const storedOptions = useRef<EmblaOptions>(options)

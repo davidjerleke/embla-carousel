@@ -7,9 +7,7 @@ const callback: FrameRequestCallback = (): void => {
   counter += 1
 }
 
-const mockRequestAnimationFrame = (
-  callback: FrameRequestCallback,
-): number => {
+const mockRequestAnimationFrame = (callback: FrameRequestCallback): number => {
   callback(1)
   return 1
 }

@@ -16,10 +16,7 @@ type SlideBound = {
 
 export type SlidesInView = {
   check: (location: number) => number[]
-  findSlideBounds: (
-    offset: number,
-    threshold?: number,
-  ) => SlideBound[]
+  findSlideBounds: (offset: number, threshold?: number) => SlideBound[]
 }
 
 export function SlidesInView(params: Params): SlidesInView {
@@ -28,22 +25,16 @@ export function SlidesInView(params: Params): SlidesInView {
   const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
   const scrollSnaps = arrayKeys(slideSizes).map(scrollSnap)
   const offsets = loop ? [0, contentSize, -contentSize] : [0]
-  const slideBounds = offsets.reduce(
-    (a: SlideBound[], loopOffset) => {
-      return a.concat(findSlideBounds(loopOffset, threshold))
-    },
-    [],
-  )
+  const slideBounds = offsets.reduce((a: SlideBound[], loopOffset) => {
+    return a.concat(findSlideBounds(loopOffset, threshold))
+  }, [])
 
   function scrollSnap(index: number): number {
     const span = slideSizes.slice(0, index)
     return span.reduce((a, s) => a - s, 0)
   }
 
-  function findSlideBounds(
-    offset: number,
-    threshold?: number,
-  ): SlideBound[] {
+  function findSlideBounds(offset: number, threshold?: number): SlideBound[] {
     const thresholds = slideSizes.map(s => s * (threshold || 0))
     return scrollSnaps.map((snap, index) => ({
       start: snap - slideSizes[index] + thresholds[index] + offset,

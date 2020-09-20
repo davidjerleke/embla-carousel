@@ -60,17 +60,13 @@ describe('SlideLooper', () => {
 
     test('End gap is covered with slides', () => {
       location.set(params.scrollSnaps[0])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([0, 0, 0, 0])
     })
 
     test('Start gap is covered with slides', () => {
       location.set(params.scrollSnaps[params.scrollSnaps.length - 1])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([225, 225, 225, 0])
     })
   })
@@ -91,17 +87,13 @@ describe('SlideLooper', () => {
 
     test('End gap is covered with slides', () => {
       location.set(params.scrollSnaps[0])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([-225, 0, 0, 0])
     })
 
     test('Start gap is covered with slides', () => {
       location.set(params.scrollSnaps[params.scrollSnaps.length - 1])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([0, 225, 225, 0])
     })
   })
@@ -122,17 +114,13 @@ describe('SlideLooper', () => {
 
     test('End gap is covered with slides', () => {
       location.set(params.scrollSnaps[0])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([-225, -225, -225, 0])
     })
 
     test('Start gap is covered with slides', () => {
       location.set(params.scrollSnaps[params.scrollSnaps.length - 1])
-      const loopTargets = loopPoints.map(({ getTarget }) =>
-        getTarget(),
-      )
+      const loopTargets = loopPoints.map(({ getTarget }) => getTarget())
       expect(loopTargets).toEqual([0, 0, 0, 225])
     })
   })

@@ -24,10 +24,7 @@ const limit = Limit({
 
 beforeEach(() => {
   location = Vector1D(0)
-  vectors = [
-    Vector1D(vectorInitialValue1),
-    Vector1D(vectorInitialValue2),
-  ]
+  vectors = [Vector1D(vectorInitialValue1), Vector1D(vectorInitialValue2)]
   scrollLooper = ScrollLooper({
     pxToPercent,
     limit,

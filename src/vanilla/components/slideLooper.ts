@@ -20,6 +20,8 @@ type LoopPoint = {
   getTarget: () => number
 }
 
+type LoopEdge = 'start' | 'end'
+
 export type SlideLooper = {
   canLoop: () => boolean
   clear: (slides: HTMLElement[]) => void
@@ -48,10 +50,7 @@ export function SlideLooper(params: Params): SlideLooper {
     }, [])
   }
 
-  function findLoopPoints(
-    indexes: number[],
-    edge: 'start' | 'end',
-  ): LoopPoint[] {
+  function findLoopPoints(indexes: number[], edge: LoopEdge): LoopPoint[] {
     const isStartEdge = edge === 'start'
     const offset = isStartEdge ? -contentSize : contentSize
     const slideBounds = slidesInView.findSlideBounds(offset)
