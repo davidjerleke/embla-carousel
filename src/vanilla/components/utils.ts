@@ -47,5 +47,5 @@ export function removeClass(node: HTMLElement, className: string): void {
 
 export function addClass(node: HTMLElement, className: string): void {
   const cl = node.classList
-  if (!cl.contains(className)) cl.add(className)
+  if (className && !cl.contains(className)) cl.add(className)
 }
