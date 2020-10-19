@@ -9,25 +9,25 @@ type Params = {
 }
 
 export type ScrollBody = {
-  location: Vector1D
   direction: Direction
-  update: () => void
   seek: (v: Vector1D) => ScrollBody
   settle: (v: Vector1D) => boolean
-  useSpeed: (n: number) => ScrollBody
-  useDefaultSpeed: () => ScrollBody
+  update: () => void
+  useBaseMass: () => ScrollBody
+  useBaseSpeed: () => ScrollBody
   useMass: (n: number) => ScrollBody
-  useDefaultMass: () => ScrollBody
+  useSpeed: (n: number) => ScrollBody
 }
 
 export function ScrollBody(params: Params): ScrollBody {
-  const { location, speed, mass } = params
+  const { location, speed: baseSpeed, mass: baseMass } = params
   const roundToTwoDecimals = roundToDecimals(2)
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
   const direction = Direction(0)
-  const state = { speed, mass }
+  let speed = baseSpeed
+  let mass = baseMass
 
   function update(): void {
     velocity.add(acceleration)
@@ -36,14 +36,14 @@ export function ScrollBody(params: Params): ScrollBody {
   }
 
   function applyForce(v: Vector1D): void {
-    v.divide(state.mass)
+    v.divide(mass)
     acceleration.add(v)
   }
 
   function seek(v: Vector1D): ScrollBody {
     attraction.set(v).subtract(location)
     const magnitude = attraction.get()
-    const m = map(magnitude, 0, 100, 0, state.speed)
+    const m = map(magnitude, 0, 100, 0, speed)
     direction.set(attraction)
     attraction
       .normalize()
@@ -62,33 +62,30 @@ export function ScrollBody(params: Params): ScrollBody {
   }
 
   function useSpeed(n: number): ScrollBody {
-    state.speed = n
-    return self
-  }
-
-  function useDefaultSpeed(): ScrollBody {
-    useSpeed(speed)
+    speed = n
     return self
   }
 
   function useMass(n: number): ScrollBody {
-    state.mass = n
+    mass = n
     return self
   }
 
-  function useDefaultMass(): ScrollBody {
-    useMass(mass)
-    return self
+  function useBaseSpeed(): ScrollBody {
+    return useSpeed(baseSpeed)
+  }
+
+  function useBaseMass(): ScrollBody {
+    return useMass(baseMass)
   }
 
   const self: ScrollBody = {
     direction,
-    location,
     seek,
     settle,
     update,
-    useDefaultMass,
-    useDefaultSpeed,
+    useBaseMass,
+    useBaseSpeed,
     useMass,
     useSpeed,
   }

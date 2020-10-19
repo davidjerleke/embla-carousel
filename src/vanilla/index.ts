@@ -68,7 +68,7 @@ function EmblaCarousel(
     engine = Engine(sliderRoot, container, slides, options, events)
     rootElementSize = engine.axis.measure(sliderRoot)
     eventStore.add(window, 'resize', debouncedResize)
-    engine.translate.to(engine.scrollBody.location)
+    engine.translate.to(engine.location)
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -167,7 +167,7 @@ function EmblaCarousel(
   }
 
   function scrollTo(index: number, direction?: number): void {
-    engine.scrollBody.useDefaultMass().useDefaultSpeed()
+    engine.scrollBody.useBaseMass().useBaseSpeed()
     if (activated) engine.scrollTo.index(index, direction || 0)
   }
 

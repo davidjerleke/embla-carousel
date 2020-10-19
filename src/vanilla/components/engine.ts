@@ -116,7 +116,7 @@ export function Engine(
     }
 
     if (!settled) events.emit('scroll')
-    engine.translate.to(engine.scrollBody.location)
+    engine.translate.to(location)
     engine.animation.proceed()
   }
 

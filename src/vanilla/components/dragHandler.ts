@@ -134,7 +134,7 @@ export function DragHandler(params: Params): DragHandler {
     dragTracker.pointerDown(evt)
     dragStartPoint.set(target)
     target.set(location)
-    scrollBody.useDefaultMass().useSpeed(80)
+    scrollBody.useBaseMass().useSpeed(80)
     addInteractionEvents()
     startScroll.set(dragTracker.readPoint(evt, scrollAxis))
     startCross.set(dragTracker.readPoint(evt, crossAxis))
