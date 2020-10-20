@@ -39,7 +39,7 @@
     "build": "rollup -c",
     "start": "rollup -c --watch",
     "test": "jest --config jestconfig.json",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src/** --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm-run-all test lint",

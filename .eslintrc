@@ -10,6 +10,8 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-debugger": 2,
+    "no-console": 2
   }
 }
