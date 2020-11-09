@@ -1,27 +1,18 @@
-import { Vector1D } from './vector1d'
+export type DirectionOption = 'ltr' | 'rtl'
 
 export type Direction = {
-  get: () => number
-  set: (v: Vector1D) => Direction
+  applyTo: (n: number) => number
 }
 
-export function Direction(value: number): Direction {
-  const direction = Vector1D(normalize(value))
-  const { get } = direction
+export function Direction(direction: DirectionOption): Direction {
+  const sign = direction === 'rtl' ? -1 : 1
 
-  function normalize(n: number): number {
-    return n === 0 ? 0 : n / Math.abs(n)
-  }
-
-  function set(v: Vector1D): Direction {
-    const d = normalize(v.get())
-    if (d !== 0) direction.set(d)
-    return self
+  function applyTo(n: number): number {
+    return n * sign
   }
 
   const self: Direction = {
-    get,
-    set,
+    applyTo,
   }
   return self
 }

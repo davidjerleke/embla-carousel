@@ -1,5 +1,6 @@
 import { AlignmentOption } from './alignment'
 import { AxisOption } from './axis'
+import { DirectionOption } from './direction'
 import { ScrollContainOption } from './scrollContain'
 
 export type Options = {
@@ -7,6 +8,7 @@ export type Options = {
   axis: AxisOption
   containScroll: ScrollContainOption
   containerSelector: string
+  direction: DirectionOption
   dragFree: boolean
   draggable: boolean
   draggableClass: string
@@ -24,6 +26,7 @@ export const defaultOptions: Options = {
   axis: 'x',
   containScroll: '',
   containerSelector: '*',
+  direction: 'ltr',
   dragFree: false,
   draggable: true,
   draggableClass: 'is-draggable',
