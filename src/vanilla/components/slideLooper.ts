@@ -1,10 +1,12 @@
 import { Axis } from './axis'
 import { arrayKeys } from './utils'
+import { Direction } from './direction'
 import { SlidesInView } from './slidesInView'
 import { Vector1D } from './vector1d'
 
 type Params = {
   axis: Axis
+  direction: Direction
   scrollSnaps: number[]
   viewSize: number
   location: Vector1D
@@ -30,7 +32,7 @@ export type SlideLooper = {
 }
 
 export function SlideLooper(params: Params): SlideLooper {
-  const { axis, location: scrollLocation, slidesInView } = params
+  const { axis, location: scrollLocation, slidesInView, direction } = params
   const { contentSize, viewSize, slideSizes, scrollSnaps } = params
   const ascItems = arrayKeys(slideSizes)
   const descItems = arrayKeys(slideSizes).reverse()
@@ -90,7 +92,7 @@ export function SlideLooper(params: Params): SlideLooper {
       const { getTarget, location, index } = loopPoint
       const target = getTarget()
       if (target !== location) {
-        slides[index].style[loopStyle] = `${target}%`
+        slides[index].style[loopStyle] = `${direction.applyTo(target)}%`
         loopPoint.location = target
       }
     })

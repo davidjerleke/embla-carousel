@@ -17,28 +17,35 @@ export type ScrollBounds = {
 
 export function ScrollBounds(params: Params): ScrollBounds {
   const { limit, location, scrollBody, animation } = params
-  const { min, max, reachedMin, reachedMax } = limit
-  const tolerance = 50
+  const { min, max } = limit
+  const tolerance = 70
+  const edgeLimit = Limit({
+    min: min - tolerance,
+    max: max + tolerance,
+  })
+
   let disabled = false
   let timeout = 0
 
-  function shouldConstrain(v: Vector1D): boolean {
-    if (disabled || timeout) return false
-    if (reachedMin(location.get())) return v.get() !== min
-    if (reachedMax(location.get())) return v.get() !== max
-    return false
+  function shouldConstrain(target: Vector1D): boolean {
+    if (disabled) return false
+    if (!limit.reachedAny(location.get())) return false
+    if (target.get() === min || target.get() === max) return false
+    return true
   }
 
-  function constrain(v: Vector1D): void {
-    if (!shouldConstrain(v)) return
+  function constrain(target: Vector1D): void {
+    if (!shouldConstrain(target)) return
+    target.set(edgeLimit.constrain(target.get()))
 
-    timeout = window.setTimeout(() => {
-      const constraint = limit.constrain(v.get())
-      v.set(constraint)
-      scrollBody.useSpeed(10).useMass(3)
-      animation.start()
-      timeout = 0
-    }, tolerance)
+    if (!timeout) {
+      timeout = window.setTimeout(() => {
+        target.set(limit.constrain(target.get()))
+        scrollBody.useSpeed(10).useMass(3)
+        animation.start()
+        timeout = 0
+      }, tolerance)
+    }
   }
 
   function toggleActive(active: boolean): void {

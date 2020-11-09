@@ -10,10 +10,12 @@ import { ScrollBody } from './scrollBody'
 import { ScrollTarget } from './scrollTarget'
 import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
+import { deltaAbs, factorAbs, mathSign } from './utils'
 
 type Params = {
   axis: Axis
-  element: HTMLElement
+  direction: Direction
+  root: HTMLElement
   target: Vector1D
   dragFree: boolean
   dragTracker: DragTracker
@@ -36,8 +38,8 @@ export type DragHandler = {
 }
 
 export function DragHandler(params: Params): DragHandler {
-  const { target, scrollBody, dragFree, animation, axis } = params
-  const { element, dragTracker, location, events, limit } = params
+  const { target, scrollBody, dragFree, animation, axis, scrollTo } = params
+  const { root, dragTracker, location, events, limit, direction } = params
   const { scroll: scrollAxis, cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startScroll = Vector1D(0)
@@ -49,10 +51,6 @@ export function DragHandler(params: Params): DragHandler {
   const freeForceBoost = { mouse: 5, touch: 7 }
   const baseSpeed = dragFree ? 5 : 12
   const dragThreshold = 4
-  const edgeLimit = Limit({
-    min: limit.min - 70,
-    max: limit.max + 70,
-  })
 
   let pointerIsDown = false
   let preventScroll = false
@@ -60,7 +58,7 @@ export function DragHandler(params: Params): DragHandler {
   let isMouse = false
 
   function addActivationEvents(): void {
-    const node = element
+    const node = root
     activationEvents
       .add(node, 'touchmove', () => undefined)
       .add(node, 'touchend', () => undefined)
@@ -72,7 +70,7 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function addInteractionEvents(): void {
-    const node = !isMouse ? element : document
+    const node = !isMouse ? root : document
     interactionEvents
       .add(node, 'touchmove', move)
       .add(node, 'touchend', up)
@@ -96,13 +94,6 @@ export function DragHandler(params: Params): DragHandler {
     return boost[type]
   }
 
-  function speedFactor(forceB: number, forceA: number): number {
-    const diff = delta(Math.abs(forceB), Math.abs(forceA))
-    if (Math.abs(forceB) <= Math.abs(forceA)) return 0
-    if (forceB === 0 || forceA === 0) return 0
-    return Math.abs(diff / forceB)
-  }
-
   function allowedForce(force: number): number {
     const { scrollTarget, index } = params
     const currentLocation = scrollTarget.byDistance(0, false)
@@ -111,12 +102,8 @@ export function DragHandler(params: Params): DragHandler {
     const destination = force + location.get()
 
     if (seekNext && !dragFree && !limit.reachedAny(destination)) {
-      const next = index.clone().add(Direction(force).get() * -1)
+      const next = index.clone().add(mathSign(force) * -1)
       return scrollTarget.byIndex(next.get(), 0).distance
-    }
-    if (!params.loop && edgeLimit.reachedAny(destination)) {
-      const edge = edgeLimit.reachedMax(destination) ? 'max' : 'min'
-      return edgeLimit[edge] - target.get()
     }
     return scrollTarget.byDistance(force, !dragFree).distance
   }
@@ -125,7 +112,7 @@ export function DragHandler(params: Params): DragHandler {
     isMouse = evt.type === 'mousedown'
     if (isMouse && (evt as MouseEvent).button !== 0) return
 
-    const isMoving = delta(target.get(), location.get()) >= 2
+    const isMoving = deltaAbs(target.get(), location.get()) >= 2
     const clearPreventClick = isMouse || !isMoving
     const isNotFocusNode = !isFocusNode(evt.target as Element)
     const preventDefault = isMoving || (isMouse && isNotFocusNode)
@@ -149,40 +136,35 @@ export function DragHandler(params: Params): DragHandler {
       if (!evt.cancelable) return up()
       const moveScroll = dragTracker.readPoint(evt, scrollAxis).get()
       const moveCross = dragTracker.readPoint(evt, crossAxis).get()
-      const diffScroll = delta(moveScroll, startScroll.get())
-      const diffCross = delta(moveCross, startCross.get())
+      const diffScroll = deltaAbs(moveScroll, startScroll.get())
+      const diffCross = deltaAbs(moveCross, startCross.get())
       preventScroll = diffScroll > diffCross
       if (!preventScroll && !preventClick) return up()
     }
     const diff = dragTracker.pointerMove(evt)
     const reachedLimit = limit.reachedAny(location.get())
-    const resist = !params.loop && reachedLimit ? 2 : 1
+    const resist = !params.loop && reachedLimit ? 4 : 1
 
     if (!preventClick && diff) preventClick = true
     animation.start()
-    target.add(diff / resist)
+    target.add(direction.applyTo(diff / resist))
     evt.preventDefault()
   }
 
   function up(): void {
-    const { scrollTo } = params
     const rawForce = dragTracker.pointerUp() * forceBoost()
-    const force = allowedForce(rawForce)
-    const factor = speedFactor(rawForce, force)
-    const isMoving = delta(target.get(), dragStartPoint.get()) >= 0.5
+    const force = allowedForce(direction.applyTo(rawForce))
+    const speedFactor = factorAbs(rawForce, force)
+    const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
 
     if (isMoving && !isMouse) preventClick = true
     preventScroll = false
     pointerIsDown = false
     interactionEvents.removeAll()
-    scrollBody.useSpeed(baseSpeed + baseSpeed * factor)
+    scrollBody.useSpeed(baseSpeed + baseSpeed * speedFactor)
     scrollTo.distance(force, !dragFree)
     isMouse = false
     events.emit('pointerUp')
-  }
-
-  function delta(pointB: number, pointA: number): number {
-    return Math.abs(pointB - pointA)
   }
 
   function click(evt: Event): void {
