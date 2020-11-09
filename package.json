@@ -43,7 +43,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "prepare": "npm run build",
     "prepublishOnly": "npm-run-all test lint",
-    "preversion": "npm run lint",
+    "preversion": "npm-run-all test lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
