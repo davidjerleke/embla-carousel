@@ -4,70 +4,60 @@ import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 import { ScrollBody } from '../components/scrollBody'
 
-let scrollBounds: ScrollBounds
-let location: Vector1D
-let vector: Vector1D
-let scrollBody: ScrollBody
-
+const tolerance = 70
+const initialTarget = 20
+const limit = Limit({ min: -10, max: 10 })
+const lessThanMinLimit = limit.min - 0.01
+const moreThanMaxLimit = limit.max + 0.01
+const location = Vector1D(0)
+const target = Vector1D(initialTarget)
 const animation = Animation(() => 1)
-const tolerance = 50
-const vectorValue = 20
-const minLimit = -10
-const maxLimit = 10
-const lessThanMinLimit = minLimit - 0.01
-const moreThanMaxLimit = maxLimit + 0.01
-const limit = Limit({
-  min: minLimit,
-  max: maxLimit,
+const scrollBody = ScrollBody({
+  location,
+  mass: 1,
+  speed: 10,
+})
+const scrollBounds = ScrollBounds({
+  animation,
+  limit,
+  location,
+  scrollBody,
 })
 
 beforeEach(() => {
-  vector = Vector1D(vectorValue)
-  location = Vector1D(0)
-  scrollBody = ScrollBody({
-    location,
-    mass: 1,
-    speed: 10,
-  })
-  scrollBounds = ScrollBounds({
-    limit,
-    location,
-    scrollBody,
-    animation,
-  })
+  target.set(initialTarget)
 })
 
 describe('ScrollBounds', () => {
   describe('Constrains vector to limit', () => {
     test('Min when location < limit min', done => {
-      vector.multiply(-1)
       location.set(lessThanMinLimit)
-      scrollBounds.constrain(vector)
+      scrollBounds.constrain(target.multiply(-1))
 
       setTimeout(() => {
-        expect(vector.get()).toBe(minLimit)
+        expect(target.get()).toBe(limit.min)
         done()
       }, tolerance)
     })
 
     test('Max when location > limit max', done => {
       location.set(moreThanMaxLimit)
-      scrollBounds.constrain(vector)
+      scrollBounds.constrain(target)
 
       setTimeout(() => {
-        expect(vector.get()).toBe(maxLimit)
+        expect(target.get()).toBe(limit.max)
         done()
       }, tolerance)
     })
 
-    test('Toggled inactive and then active', done => {
+    test('Toggled active', done => {
       location.set(moreThanMaxLimit)
       scrollBounds.toggleActive(false)
       scrollBounds.toggleActive(true)
-      scrollBounds.constrain(vector)
+      scrollBounds.constrain(target)
 
       setTimeout(() => {
-        expect(vector.get()).toBe(maxLimit)
+        expect(target.get()).toBe(limit.max)
         done()
       }, tolerance)
     })
@@ -75,32 +65,33 @@ describe('ScrollBounds', () => {
 
   describe('Does not constrain vector when', () => {
     test('Location is within limit min', done => {
-      location.set(minLimit)
-      scrollBounds.constrain(vector)
+      location.set(limit.min)
+      scrollBounds.constrain(target)
 
       setTimeout(() => {
-        expect(vector.get()).toBe(vectorValue)
+        expect(target.get()).toBe(initialTarget)
         done()
       }, tolerance)
     })
 
     test('Location is within limit max', done => {
-      location.set(maxLimit)
-      scrollBounds.constrain(vector)
+      location.set(limit.max)
+      scrollBounds.constrain(target)
 
       setTimeout(() => {
-        expect(vector.get()).toBe(vectorValue)
+        expect(target.get()).toBe(initialTarget)
         done()
       }, tolerance)
     })
 
     test('Toggled inactive', done => {
       location.set(moreThanMaxLimit)
+      scrollBounds.toggleActive(true)
       scrollBounds.toggleActive(false)
-      scrollBounds.constrain(vector)
+      scrollBounds.constrain(target)
 
       setTimeout(() => {
-        expect(vector.get()).toBe(vectorValue)
+        expect(target.get()).toBe(initialTarget)
         done()
       }, tolerance)
     })

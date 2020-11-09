@@ -3,34 +3,26 @@ import { ScrollLooper } from '../components/scrollLooper'
 import { Vector1D } from '../components/vector1d'
 import { Limit } from '../components/limit'
 
-let location: Vector1D
-let vectors: Vector1D[]
-let scrollLooper: ScrollLooper
-
-const viewInPx = 1000
-const pxToPercent = PxToPercent(viewInPx)
+const pxToPercent = PxToPercent(1000)
 const loopJoint = pxToPercent.measure(0.1)
+const limit = Limit({ min: -100, max: 100 })
+const maxLimitWithLoopJoint = limit.max + loopJoint
+const minLimitWithLoopJoint = limit.min + loopJoint
+const contentSize = limit.length
+const location = Vector1D(0)
 const vectorInitialValue1 = 5
 const vectorInitialValue2 = 10
-const contentSize = 300
-const minLimit = -100
-const maxLimit = 100
-const maxLimitWithLoopJoint = maxLimit + loopJoint
-const minLimitWithLoopJoint = minLimit + loopJoint
-const limit = Limit({
-  min: minLimit,
-  max: maxLimit,
+const vectors = [Vector1D(vectorInitialValue1), Vector1D(vectorInitialValue2)]
+const scrollLooper = ScrollLooper({
+  contentSize,
+  limit,
+  location,
+  pxToPercent,
 })
 
 beforeEach(() => {
-  location = Vector1D(0)
-  vectors = [Vector1D(vectorInitialValue1), Vector1D(vectorInitialValue2)]
-  scrollLooper = ScrollLooper({
-    pxToPercent,
-    limit,
-    location,
-    contentSize,
-  })
+  vectors[0].set(vectorInitialValue1)
+  vectors[1].set(vectorInitialValue2)
 })
 
 describe('ScrollLooper', () => {
