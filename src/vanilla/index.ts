@@ -2,12 +2,7 @@ import { Engine } from './components/engine'
 import { EventEmitter, EmblaEvent } from './components/eventEmitter'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, EmblaOptions } from './components/options'
-import {
-  addClass,
-  arrayFromCollection,
-  debounce,
-  removeClass,
-} from './components/utils'
+import { addClass, debounce, removeClass } from './components/utils'
 
 export type EmblaCarousel = {
   canScrollNext: () => boolean
@@ -59,7 +54,7 @@ function EmblaCarousel(
     if (!sliderContainer) throw new Error('Missing container node 😢')
 
     container = sliderContainer as HTMLElement
-    slides = arrayFromCollection(container.children)
+    slides = Array.prototype.slice.call(container.children)
   }
 
   function activate(partialOptions?: EmblaOptions): void {

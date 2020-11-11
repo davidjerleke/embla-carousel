@@ -1,5 +1,6 @@
 import { Axis } from '../components/axis'
 import { Alignment, AlignmentOption } from '../components/alignment'
+import { Direction } from '../components/direction'
 import { PxToPercent } from '../components/pxToPercent'
 import { ScrollSnap } from '../components/scrollSnap'
 import { SlideLooper } from '../components/slideLooper'
@@ -8,6 +9,7 @@ import { Vector1D } from '../components/vector1d'
 import { arrayKeys } from '../components/utils'
 
 const axis = Axis('x')
+const direction = Direction('ltr')
 const pxToPercent = PxToPercent(950)
 const viewSize = pxToPercent.totalPercent
 const defaultSlideSizes = [20, 30, 30, 35, 50, 20, 40]
@@ -34,6 +36,7 @@ const slideLooperParams = (
   })
   return {
     axis,
+    direction,
     scrollSnaps,
     viewSize,
     contentSize,

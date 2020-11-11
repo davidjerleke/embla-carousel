@@ -1,10 +1,12 @@
 import { Axis } from './axis'
+import { Direction } from './direction'
 import { roundToDecimals } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
   axis: Axis
   container: HTMLElement
+  direction: Direction
 }
 
 export type Translate = {
@@ -14,11 +16,11 @@ export type Translate = {
 }
 
 export function Translate(params: Params): Translate {
-  const { axis, container } = params
-  const translates = { x, y }
-  const translateAxis = translates[axis.scroll]
-  const roundToTwoDecimals = roundToDecimals(2)
+  const { axis, container, direction } = params
   const containerStyle = container.style
+  const translate = axis.scroll === 'x' ? x : y
+  const roundToTwoDecimals = roundToDecimals(2)
+
   let disabled = false
   let location = 0
 
@@ -31,14 +33,12 @@ export function Translate(params: Params): Translate {
   }
 
   function to(v: Vector1D): void {
-    if (disabled) return
     const target = roundToTwoDecimals(v.get())
+    if (disabled || location === target) return
 
-    if (location !== target) {
-      getComputedStyle(container).transform
-      containerStyle.transform = translateAxis(target)
-      location = target
-    }
+    getComputedStyle(container).transform
+    containerStyle.transform = translate(direction.applyTo(target))
+    location = target
   }
 
   function toggleActive(active: boolean): void {

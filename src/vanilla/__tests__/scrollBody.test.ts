@@ -1,48 +1,55 @@
 import { ScrollBody } from '../components/scrollBody'
 import { Vector1D } from '../components/vector1d'
+import { mathSign } from '../components/utils'
 
-let location: Vector1D
-let target: Vector1D
-let scrollBody: ScrollBody
+const targetPositive = Vector1D(10)
+const targetNegative = Vector1D(-10)
+const initialLocation = 0
+const location = Vector1D(initialLocation)
+const scrollBody = ScrollBody({
+  location,
+  speed: 10,
+  mass: 1,
+})
 
 beforeEach(() => {
-  location = Vector1D(0)
-  target = Vector1D(10)
-  scrollBody = ScrollBody({
-    location,
-    speed: 10,
-    mass: 1,
-  })
+  location.set(initialLocation)
 })
 
 describe('ScrollBody', () => {
-  describe('Seek', () => {
-    test('Seeks given target Vector', () => {
-      scrollBody.seek(target).update()
-      expect(location.get()).toBeGreaterThan(0)
+  describe('Seeks target in a', () => {
+    test('Positive direction when target is positive', () => {
+      scrollBody.seek(targetPositive).update()
+      expect(location.get()).toBeGreaterThan(initialLocation)
     })
 
-    test('Has direction value of 1 when it seeks given positive target Vector', () => {
-      scrollBody.seek(target).update()
-      expect(scrollBody.direction.get()).toBe(1)
-    })
-
-    test('Has direction value of -1 when it seeks given negative target Vector', () => {
-      target.set(-10)
-      scrollBody.seek(target).update()
-      expect(scrollBody.direction.get()).toBe(-1)
+    test('Negative direction when target is negative', () => {
+      scrollBody.seek(targetNegative).update()
+      expect(location.get()).toBeLessThan(initialLocation)
     })
   })
 
-  describe('Settle', () => {
-    test('Is true when diff to given target Vector is <= 0.001', () => {
-      location.set(9.999)
-      expect(scrollBody.settle(target)).toBe(true)
+  describe('Direction is', () => {
+    test('1 when it seeks a positive target', () => {
+      scrollBody.seek(targetPositive).update()
+      expect(scrollBody.direction()).toBe(mathSign(targetPositive.get()))
     })
 
-    test('Is false when diff to given target Vector is > 0.001', () => {
+    test('-1 when it seeks a negative target', () => {
+      scrollBody.seek(targetNegative).update()
+      expect(scrollBody.direction()).toBe(mathSign(targetNegative.get()))
+    })
+  })
+
+  describe('Settle is', () => {
+    test('True when diff to given target is <= 0.001', () => {
+      location.set(9.999)
+      expect(scrollBody.settle(targetPositive)).toBe(true)
+    })
+
+    test('False when diff to given target is > 0.001', () => {
       location.set(9.99)
-      expect(scrollBody.settle(target)).toBe(false)
+      expect(scrollBody.settle(targetPositive)).toBe(false)
     })
   })
 })

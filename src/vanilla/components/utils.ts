@@ -8,21 +8,32 @@ export function map(
   return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
 }
 
-export function arrayFromCollection(nodeList: HTMLCollection): HTMLElement[] {
-  return Array.prototype.slice.call(nodeList)
+export function mathSign(n: number): number {
+  return !n ? 0 : n / Math.abs(n)
 }
 
-export function debounce(callback: () => void, time: number): () => void {
-  const timeout = { id: 0 }
-  return (): void => {
-    window.clearTimeout(timeout.id)
-    timeout.id = window.setTimeout(callback, time) || 0
-  }
+export function deltaAbs(valueB: number, valueA: number): number {
+  return Math.abs(valueB - valueA)
+}
+
+export function factorAbs(valueB: number, valueA: number): number {
+  if (valueB === 0 || valueA === 0) return 0
+  if (Math.abs(valueB) <= Math.abs(valueA)) return 0
+  const diff = deltaAbs(Math.abs(valueB), Math.abs(valueA))
+  return Math.abs(diff / valueB)
 }
 
 export function roundToDecimals(decimalPoints: number): (n: number) => number {
   const pow = Math.pow(10, decimalPoints)
-  return (n: number) => Math.round(n * pow) / pow
+  return (n: number): number => Math.round(n * pow) / pow
+}
+
+export function debounce(callback: () => void, time: number): () => void {
+  let timeout = 0
+  return (): void => {
+    window.clearTimeout(timeout)
+    timeout = window.setTimeout(callback, time) || 0
+  }
 }
 
 export function groupArray<GenericType>(

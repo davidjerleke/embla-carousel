@@ -1,5 +1,4 @@
-import { Direction } from './direction'
-import { map, roundToDecimals } from './utils'
+import { map, roundToDecimals, mathSign } from './utils'
 import { Vector1D } from './vector1d'
 
 type Params = {
@@ -9,7 +8,7 @@ type Params = {
 }
 
 export type ScrollBody = {
-  direction: Direction
+  direction: () => number
   seek: (v: Vector1D) => ScrollBody
   settle: (v: Vector1D) => boolean
   update: () => void
@@ -25,7 +24,8 @@ export function ScrollBody(params: Params): ScrollBody {
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
-  const direction = Direction(0)
+
+  let attractionDirection = 0
   let speed = baseSpeed
   let mass = baseMass
 
@@ -44,7 +44,7 @@ export function ScrollBody(params: Params): ScrollBody {
     attraction.set(v).subtract(location)
     const magnitude = attraction.get()
     const m = map(magnitude, 0, 100, 0, speed)
-    direction.set(attraction)
+    attractionDirection = mathSign(attraction.get())
     attraction
       .normalize()
       .multiply(m)
@@ -59,6 +59,10 @@ export function ScrollBody(params: Params): ScrollBody {
     const hasSettled = !diffRounded
     if (hasSettled) location.set(v)
     return hasSettled
+  }
+
+  function direction(): number {
+    return attractionDirection
   }
 
   function useSpeed(n: number): ScrollBody {

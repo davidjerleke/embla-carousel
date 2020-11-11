@@ -2,6 +2,7 @@ import { Alignment } from './alignment'
 import { Animation } from './animation'
 import { Axis } from './axis'
 import { Counter } from './counter'
+import { Direction } from './direction'
 import { DragHandler } from './dragHandler'
 import { DragTracker } from './dragTracker'
 import { EventEmitter } from './eventEmitter'
@@ -26,6 +27,7 @@ import { Vector1D } from './vector1d'
 
 export type Engine = {
   axis: Axis
+  direction: Direction
   animation: Animation
   scrollBounds: ScrollBounds
   scrollLooper: ScrollLooper
@@ -60,6 +62,7 @@ export function Engine(
   const {
     align,
     axis: scrollAxis,
+    direction: contentDirection,
     startIndex,
     inViewThreshold,
     loop,
@@ -86,6 +89,9 @@ export function Engine(
   const trimSnaps = containScroll === 'trimSnaps'
   const containedSnaps = contain.measure(defaultSnaps, trimSnaps)
   const scrollSnaps = shouldContain ? containedSnaps : defaultSnaps
+  const scrollLimit = ScrollLimit({ loop, contentSize })
+  const limit = scrollLimit.measure(scrollSnaps)
+  const direction = Direction(contentDirection)
 
   // Index
   const indexMax = Math.max(0, scrollSnaps.length - 1)
@@ -93,16 +99,12 @@ export function Engine(
   const index = Counter({ limit: indexSpan, start: startIndex, loop })
   const indexPrevious = index.clone()
 
-  // ScrollLimit
-  const scrollLimit = ScrollLimit({ loop, contentSize })
-  const limit = scrollLimit.measure(scrollSnaps)
-
   // Draw
   const update = (): void => {
     engine.scrollBody.seek(target).update()
     const settled = engine.scrollBody.settle(target)
 
-    if (!dragHandler.pointerDown()) {
+    if (!engine.dragHandler.pointerDown()) {
       if (!loop) engine.scrollBounds.constrain(target)
       if (settled) {
         engine.animation.stop()
@@ -110,8 +112,7 @@ export function Engine(
       }
     }
     if (loop) {
-      const direction = engine.scrollBody.direction.get()
-      engine.scrollLooper.loop(loopVectors, direction)
+      engine.scrollLooper.loop(loopVectors, engine.scrollBody.direction())
       engine.slideLooper.loop(slides)
     }
 
@@ -159,12 +160,13 @@ export function Engine(
   const dragHandler = DragHandler({
     animation,
     axis,
+    direction,
     dragFree,
     dragTracker: DragTracker({
       axis,
       pxToPercent,
     }),
-    element: root,
+    root,
     events,
     index,
     limit,
@@ -180,6 +182,7 @@ export function Engine(
   const engine: Engine = {
     animation,
     axis,
+    direction,
     dragHandler,
     pxToPercent,
     index,
@@ -214,6 +217,7 @@ export function Engine(
     slideLooper: SlideLooper({
       axis,
       contentSize,
+      direction,
       location,
       scrollSnaps,
       slideSizes,
@@ -226,6 +230,7 @@ export function Engine(
     translate: Translate({
       axis,
       container,
+      direction,
     }),
   }
   return engine
