@@ -90,6 +90,9 @@
     <a href="https://github.com/sedlukha"><img src="https://avatars3.githubusercontent.com/u/14075940?s=122&v=4" title="sedlukha" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/wopian"><img src="https://avatars3.githubusercontent.com/u/3440094?s=122&v=4" title="wopian" width="66" height="66" style="max-width:100%;"></a>
     <a href="https://github.com/msallent"><img src="https://avatars3.githubusercontent.com/u/8879212?s=122&v=4" title="msallent" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/omarkhatibco"><img src="https://avatars1.githubusercontent.com/u/9054278?s=122&v=4" title="msallent" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/ppromerojr"><img src="https://avatars1.githubusercontent.com/u/15343254?s=122&v=4" title="wopian" width="66" height="66" style="max-width:100%;"></a>
+
   </p>
 </div>
 
