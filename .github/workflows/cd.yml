@@ -1,32 +1,41 @@
-name: Continuous deployment (NPM)
+name: Continuous Deployment
 
 on:
   release:
     types: [created]
 
 jobs:
-  build-and-deploy:
-    name: Build and deploy NPM package
+  publish:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: Configure node for npmjs.org as registry
-        uses: actions/setup-node@v1
+      - name: Checkout 🛎️
+      - uses: actions/checkout@v2
+
+      - name: Setup node for npmjs.org as registry
+      - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Publish package on npmjs.org
-        run: yarn publish --access public
+
+      - name: Install 🔧
+        run: npm install
+
+      - name: NPM PKG Publish 🎉
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Configure node for github.com as registry
-        uses: actions/setup-node@v1
+
+      - name: Setup node for github.com as registry
+      - uses: actions/setup-node@v1
         with:
+          node-version: '12.x'
           registry-url: 'https://npm.pkg.github.com'
-      - name: Publish package on github.com
-        run: yarn publish --access public
+
+      - name: Install 🔧
+        run: npm install
+
+      - name: Github PKG Publish 🎉
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
