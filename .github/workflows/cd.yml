@@ -10,10 +10,10 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup node for npmjs.org as registry
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
@@ -27,7 +27,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Setup node for github.com as registry
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: '12.x'
           registry-url: 'https://npm.pkg.github.com'
