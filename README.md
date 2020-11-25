@@ -107,8 +107,8 @@
     Massive thanks to <a href="https://github.com/gunnarx2">gunnarx2</a> for creating the <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">useEmblaCarousel </a> hook and to <a href="https://github.com/xiel">xiel</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
   </p>
   <p align="center">
-    <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=122&v=4" title="gunnarx2" width="66" height="66" style="max-width:100%;"></a>
-    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=122&v=4" title="xiel" width="66" height="66" style="max-width:100%;"></a>
+    <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=90&v=4" title="gunnarx2" width="45" height="45" style="max-width:100%;"></a>
+    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=90&v=4" title="xiel" width="45" height="45" style="max-width:100%;"></a>
   </p>
 </div>
 
