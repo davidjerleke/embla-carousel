@@ -26,7 +26,6 @@ type Params = {
   scrollTarget: ScrollTarget
   index: Counter
   limit: Limit
-  loop: boolean
   events: EventEmitter
 }
 
@@ -142,12 +141,9 @@ export function DragHandler(params: Params): DragHandler {
       if (!preventScroll && !preventClick) return up()
     }
     const diff = dragTracker.pointerMove(evt)
-    const reachedLimit = limit.reachedAny(location.get())
-    const resist = !params.loop && reachedLimit ? 4 : 1
-
     if (!preventClick && diff) preventClick = true
     animation.start()
-    target.add(direction.applyTo(diff / resist))
+    target.add(direction.applyTo(diff))
     evt.preventDefault()
   }
 

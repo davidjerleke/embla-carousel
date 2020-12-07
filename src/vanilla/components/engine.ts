@@ -101,22 +101,24 @@ export function Engine(
 
   // Draw
   const update = (): void => {
+    if (!loop) {
+      engine.scrollBounds.constrain(target, engine.dragHandler.pointerDown())
+    }
     engine.scrollBody.seek(target).update()
     const settled = engine.scrollBody.settle(target)
 
-    if (!engine.dragHandler.pointerDown()) {
-      if (!loop) engine.scrollBounds.constrain(target)
-      if (settled) {
-        engine.animation.stop()
-        events.emit('settle')
-      }
+    if (settled && !engine.dragHandler.pointerDown()) {
+      engine.animation.stop()
+      events.emit('settle')
+    }
+    if (!settled) {
+      events.emit('scroll')
     }
     if (loop) {
       engine.scrollLooper.loop(loopVectors, engine.scrollBody.direction())
       engine.slideLooper.loop(slides)
     }
 
-    if (!settled) events.emit('scroll')
     engine.translate.to(location)
     engine.animation.proceed()
   }
@@ -171,7 +173,6 @@ export function Engine(
     index,
     limit,
     location,
-    loop,
     scrollBody,
     scrollTo,
     scrollTarget,
@@ -192,7 +193,6 @@ export function Engine(
     options,
     scrollBody,
     scrollBounds: ScrollBounds({
-      animation,
       limit,
       location,
       scrollBody,
