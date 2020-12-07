@@ -1,18 +1,17 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel" target="_blank"><img width="70" height="70" src="https://davidcetinkaya.github.io/embla-carousel/build/img/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://davidcetinkaya.github.io/embla-carousel"><img width="70" height="70" src="https://davidcetinkaya.github.io/embla-carousel/build/img/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
   <p align="center">
-    <a href="https://opensource.org/licenses/MIT" target="_blank"><img src="https://img.shields.io/badge/license-MIT-green.svg"></a>
-    <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
-    <a href="https://github.com/davidcetinkaya/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22" target="_blank"><img src="https://img.shields.io/github/workflow/status/davidcetinkaya/embla-carousel/Continuous%20Integration"></a>
-    <a href="https://prettier.io" target="_blank"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
-    <a href="https://www.npmjs.com/package/embla-carousel" target="_blank"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel?color=%234c1&label=gzip%20size">
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-green.svg"></a>
+    <a href="https://www.npmjs.com/package/embla-carousel"><img src="https://img.shields.io/npm/v/embla-carousel.svg"></a>
+    <a href="https://github.com/davidcetinkaya/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22"><img src="https://img.shields.io/github/workflow/status/davidcetinkaya/embla-carousel/Continuous%20Integration"></a>
+    <a href="https://prettier.io"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat"></a>
+    <a href="https://bundlephobia.com/result?p=embla-carousel@latest"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel?color=%234c1&label=gzip%20size">
     </a>
-
   </p>
 
   <strong>
@@ -91,9 +90,9 @@
     <a href="https://github.com/sedlukha"><img src="https://avatars3.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/wopian"><img src="https://avatars3.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/msallent"><img src="https://avatars3.githubusercontent.com/u/8879212?s=120&v=4" title="msallent" width="60" height="60" style="max-width:100%;"></a>
-    <a href="https://github.com/omarkhatibco"><img src="https://avatars1.githubusercontent.com/u/9054278?s=120&v=4" title="msallent" width="60" height="60" style="max-width:100%;"></a>
-    <a href="https://github.com/ppromerojr"><img src="https://avatars1.githubusercontent.com/u/15343254?s=120&v=4" title="wopian" width="60" height="60" style="max-width:100%;"></a>
-    <a href="https://github.com/openscript"><img src="https://avatars3.githubusercontent.com/u/1105080?s=120&v=4" title="wopian" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/omarkhatibco"><img src="https://avatars1.githubusercontent.com/u/9054278?s=120&v=4" title="omarkhatibco" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/ppromerojr"><img src="https://avatars1.githubusercontent.com/u/15343254?s=120&v=4" title="ppromerojr" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/openscript"><img src="https://avatars3.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="60" height="60" style="max-width:100%;"></a>
 
   </p>
 </div>
@@ -128,6 +127,6 @@
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" height="50" />
+    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="170" height="50" />
     </a>
 </p>
