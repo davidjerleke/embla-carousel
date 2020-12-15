@@ -118,7 +118,7 @@
 
 <p align="center">
   <sup>Copyright © 2019-present, David Cetinkaya.</sup><br>
-  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖
+  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.
 </p>
 
 <p align="center">
@@ -126,7 +126,11 @@
 </p>
 
 <p align="center">
+  Thanks <a href="https://www.browserstack.com">BrowserStack</a>.
+</p>
+
+<p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="170" height="50" />
+    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="45" />
     </a>
 </p>
