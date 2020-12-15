@@ -131,6 +131,6 @@
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="45" />
+    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="45" height="45" />
     </a>
 </p>
