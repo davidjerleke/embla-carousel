@@ -74,7 +74,7 @@
     <h2 align="center">Contributors</h2>
   </strong>
   <p align="center">
-    Thank you to all contributors for making <a href="https://davidcetinkaya.github.io/embla-carousel">Embla Carousel</a> awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
+    Thank you to all contributors for making <a href="https://davidcetinkaya.github.io/embla-carousel">Embla Carousel</a> awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.github/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
   <p align="center">
     <a href="https://github.com/nikrowell"><img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="60" height="60" style="max-width:100%;"></a>
