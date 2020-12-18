@@ -1,5 +1,5 @@
 type Callback = (evt: EmblaEvent) => void
-type Listeners = { [key in EmblaEvent]: Callback[] }
+type Listeners = Partial<{ [key in EmblaEvent]: Callback[] }>
 
 export type EmblaEvent =
   | 'init'
@@ -19,30 +19,25 @@ export type EventEmitter = {
 }
 
 export function EventEmitter(): EventEmitter {
-  const listeners: Listeners = {
-    destroy: [],
-    pointerDown: [],
-    pointerUp: [],
-    init: [],
-    reInit: [],
-    resize: [],
-    scroll: [],
-    select: [],
-    settle: [],
+  const listeners: Listeners = {}
+
+  function getListeners(evt: EmblaEvent): Callback[] {
+    const eventListeners = listeners[evt]
+    return eventListeners || []
   }
 
   function emit(evt: EmblaEvent): EventEmitter {
-    listeners[evt].forEach(e => e(evt))
+    getListeners(evt).forEach(e => e(evt))
     return self
   }
 
   function on(evt: EmblaEvent, cb: Callback): EventEmitter {
-    listeners[evt] = listeners[evt].concat([cb])
+    listeners[evt] = getListeners(evt).concat([cb])
     return self
   }
 
   function off(evt: EmblaEvent, cb: Callback): EventEmitter {
-    listeners[evt] = listeners[evt].filter(e => e !== cb)
+    listeners[evt] = getListeners(evt).filter(e => e !== cb)
     return self
   }
 
