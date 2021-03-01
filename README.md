@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel"><img width="70" height="70" src="https://davidcetinkaya.github.io/embla-carousel/build/img/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://www.embla-carousel.com/"><img width="70" height="70" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
@@ -19,26 +19,26 @@
   </strong>
 
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
+    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
   </p>
 
   <br>
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/#installation">Installation</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/">Installation</a>&nbsp;</code>
     </strong>
   </p>
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/api">API Reference</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/api/">API Reference</a>&nbsp;</code>
     </strong>
   </p>
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://davidcetinkaya.github.io/embla-carousel/examples#basic">Examples</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/basic/">Examples</a>&nbsp;</code>
     </strong>
   </p>
 </div>
@@ -50,19 +50,19 @@
     <h2 align="center">Platforms</h2>
   </strong>
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel">Embla Carousel</a> is ready to use with the following tools/libraries.
+    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with the following tools/libraries.
   </p>
   <p align="center">
-    <a href="https://davidcetinkaya.github.io/embla-carousel/#module-usage">
-      <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/javascript-logo.svg" width="45" height="45" />
+    <a href="https://www.embla-carousel.com/get-started/module/">
+      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="45" height="45" />
     </a>
     &nbsp;
-    <a href="https://davidcetinkaya.github.io/embla-carousel/#module-usage">
-      <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/typescript-logo.svg" width="45" height="45" />
+    <a href="https://www.embla-carousel.com/get-started/module/">
+      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="45" height="45" />
     </a>
     &nbsp;
-    <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">
-      <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/react-logo.svg" width="45" height="45" />
+    <a href="https://www.embla-carousel.com/get-started/react/">
+      <img src="https://www.embla-carousel.com/react-logo.svg" width="45" height="45" />
     </a>
   </p>
 </div>
@@ -74,7 +74,7 @@
     <h2 align="center">Contributors</h2>
   </strong>
   <p align="center">
-    Thank you to all contributors for making <a href="https://davidcetinkaya.github.io/embla-carousel">Embla Carousel</a> awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.github/CONTRIBUTING.md">Contributions</a> are welcome.
+    Thank you to all contributors for making <a href="https://www.embla-carousel.com/">Embla Carousel</a> awesome! <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.github/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
   <p align="center">
     <a href="https://github.com/nikrowell"><img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="60" height="60" style="max-width:100%;"></a>
@@ -104,7 +104,7 @@
     <h2 align="center">Special Thanks</h2>
   </strong>
   <p align="center">
-    Massive thanks to <a href="https://github.com/gunnarx2">gunnarx2</a> for creating the <a href="https://davidcetinkaya.github.io/embla-carousel/#react-usage">useEmblaCarousel </a> hook and to <a href="https://github.com/xiel">xiel</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
+    Massive thanks to <a href="https://github.com/gunnarx2">gunnarx2</a> for creating the <a href="https://www.embla-carousel.com/get-started/react/">useEmblaCarousel </a> hook and to <a href="https://github.com/xiel">xiel</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> package.
   </p>
   <p align="center">
     <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=120&v=4" title="gunnarx2" width="60" height="60" style="max-width:100%;"></a>
@@ -131,6 +131,6 @@
 
 <p align="center">
   <a href="https://www.browserstack.com">
-    <img src="https://davidcetinkaya.github.io/embla-carousel/build/img/browserstack-logo.svg" width="45" height="45" />
+    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
     </a>
 </p>
