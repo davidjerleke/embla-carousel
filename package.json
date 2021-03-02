@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "4.1.4",
+  "version": "4.1.5",
   "private": false,
   "author": "David Cetinkaya <david.o.cetinkaya@gmail.com>",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
