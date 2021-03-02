@@ -26,7 +26,7 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/">Installation</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
     </strong>
   </p>
 
