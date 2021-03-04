@@ -52,11 +52,13 @@ export function arrayKeys<GenericType>(array: GenericType): number[] {
 }
 
 export function removeClass(node: HTMLElement, className: string): void {
-  const cl = node.classList
-  if (className && cl.contains(className)) cl.remove(className)
+  const cl = node.getAttribute('class')
+  if (className && cl && cl.indexOf(className) > -1)
+    node.setAttribute('class', cl.replace(className, ''))
 }
 
 export function addClass(node: HTMLElement, className: string): void {
-  const cl = node.classList
-  if (className && !cl.contains(className)) cl.add(className)
+  const cl = node.getAttribute('class')
+  if (className && cl && cl.indexOf(className) === -1)
+    node.setAttribute('class', cl + ' ' + className)
 }
