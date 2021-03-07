@@ -1,16 +1,14 @@
 import { Axis } from './axis'
 import { arrayKeys } from './utils'
-import { Direction } from './direction'
 import { SlidesInView } from './slidesInView'
 import { Vector1D } from './vector1d'
 
 type Params = {
   axis: Axis
-  direction: Direction
   scrollSnaps: number[]
   viewSize: number
   location: Vector1D
-  slideSizes: number[]
+  slideSizesWithGaps: number[]
   contentSize: number
   slidesInView: SlidesInView
 }
@@ -32,16 +30,16 @@ export type SlideLooper = {
 }
 
 export function SlideLooper(params: Params): SlideLooper {
-  const { axis, location: scrollLocation, slidesInView, direction } = params
-  const { contentSize, viewSize, slideSizes, scrollSnaps } = params
-  const ascItems = arrayKeys(slideSizes)
-  const descItems = arrayKeys(slideSizes).reverse()
+  const { axis, location: scrollLocation, slidesInView } = params
+  const { contentSize, viewSize, slideSizesWithGaps, scrollSnaps } = params
+  const ascItems = arrayKeys(slideSizesWithGaps)
+  const descItems = arrayKeys(slideSizesWithGaps).reverse()
   const loopPoints = startPoints().concat(endPoints())
   const loopStyle = axis.scroll === 'x' ? 'left' : 'top'
 
   function removeSlideSizes(indexes: number[], from: number): number {
     return indexes.reduce((a: number, i) => {
-      return a - slideSizes[i]
+      return a - slideSizesWithGaps[i]
     }, from)
   }
 
@@ -92,7 +90,7 @@ export function SlideLooper(params: Params): SlideLooper {
       const { getTarget, location, index } = loopPoint
       const target = getTarget()
       if (target !== location) {
-        slides[index].style[loopStyle] = `${direction.applyTo(target)}%`
+        slides[index].style[axis.startEdge] = `${target}%`
         loopPoint.location = target
       }
     })
@@ -100,7 +98,7 @@ export function SlideLooper(params: Params): SlideLooper {
 
   function clear(slides: HTMLElement[]): void {
     loopPoints.forEach(({ index }) => {
-      slides[index].style[loopStyle] = ''
+      slides[index].style[axis.startEdge] = ''
     })
   }
 

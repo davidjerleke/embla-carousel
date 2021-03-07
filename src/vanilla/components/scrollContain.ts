@@ -7,6 +7,7 @@ type Params = {
   contentSize: number
   viewSize: number
   alignment: Alignment
+  rawSnaps: number[]
 }
 
 export type ScrollContain = {
@@ -14,8 +15,8 @@ export type ScrollContain = {
 }
 
 export function ScrollContain(params: Params): ScrollContain {
-  const { alignment, contentSize, viewSize } = params
-  const scrollBounds = Limit({ min: -contentSize + viewSize, max: 0 })
+  const { alignment, contentSize, viewSize, rawSnaps } = params
+  const scrollBounds = Limit({ min: -contentSize + viewSize, max: rawSnaps[0] })
   const alignedWithinView = [alignment.measure(contentSize)]
   const contentExceedsView = contentSize > viewSize
 

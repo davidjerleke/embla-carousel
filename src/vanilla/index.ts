@@ -39,7 +39,7 @@ function EmblaCarousel(
   let engine: Engine
   let activated = false
   let options = Object.assign({}, defaultOptions)
-  let rootElementSize = 0
+  // let rootElementSize = 0
   let container: HTMLElement
   let slides: HTMLElement[]
 
@@ -61,7 +61,7 @@ function EmblaCarousel(
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
-    rootElementSize = engine.axis.measure(sliderRoot)
+    // rootElementSize = engine.axis.measure(sliderRoot)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
 
@@ -145,8 +145,9 @@ function EmblaCarousel(
 
   function resize(): void {
     if (!activated) return
-    const newRootElementSize = engine.axis.measure(sliderRoot)
-    if (rootElementSize !== newRootElementSize) reActivate()
+    // const newRootElementSize = engine.axis.measure(sliderRoot)
+    // if (rootElementSize !== newRootElementSize)
+    reActivate()
     events.emit('resize')
   }
 

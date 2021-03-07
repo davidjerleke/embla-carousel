@@ -21,6 +21,7 @@ import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
 import { SlideFocus } from './slideFocus'
 import { SlidesInView } from './slidesInView'
+import { SlideSize } from './slideSize'
 import { Translate } from './translate'
 import { arrayKeys, groupArray } from './utils'
 import { Vector1D } from './vector1d'
@@ -73,27 +74,51 @@ export function Engine(
   } = options
 
   // Measurements
-  const axis = Axis(scrollAxis)
-  const pxToPercent = PxToPercent(axis.measure(container))
+  const direction = Direction(contentDirection)
+  const axis = Axis({ axis: scrollAxis, contentDirection })
+  const containerRect = container.getBoundingClientRect()
+  const slideRects = slides.map(slide => slide.getBoundingClientRect())
+  const pxToPercent = PxToPercent(axis.measureSize(containerRect))
+  const slideSize = SlideSize({ axis, pxToPercent, loop })
+  const slideSizes = slideSize.sizesWithoutGaps(slideRects)
+  const slideSizesWithGaps = slideSize.sizesWithGaps(slideRects, slides)
   const viewSize = pxToPercent.totalPercent
-  const slideSizes = slides.map(axis.measure).map(pxToPercent.measure)
-  const slideIndexes = arrayKeys(slideSizes)
-  const groupedSizes = groupArray(slideSizes, slidesToScroll)
-  const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
-  const contentSize = slideSizes.reduce((a, s) => a + s, 0)
+
+  const rawSnaps = slideRects.map(slideRect => {
+    const position = pxToPercent.measure(
+      containerRect[axis.startEdge] - slideRect[axis.startEdge],
+    )
+    return direction.applyTo(position)
+  })
+
+  const groupedSnaps = groupArray(rawSnaps, slidesToScroll)
+
+  const groupedSlideRects = groupArray(slideRects, slidesToScroll)
+  const snapSizes = groupedSlideRects
+    .map(rects => {
+      return pxToPercent.measure(
+        rects[rects.length - 1][axis.endEdge] - rects[0][axis.startEdge],
+      )
+    })
+    .map(Math.abs)
+
+  const contentSize =
+    rawSnaps[rawSnaps.length - 1] * -1 +
+    slideSizesWithGaps[slideSizesWithGaps.length - 1]
+
   const alignment = Alignment({ align, viewSize })
-  const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
+  const scrollSnap = ScrollSnap({ alignment, snapSizes, groupedSnaps })
   const defaultSnaps = arrayKeys(snapSizes).map(scrollSnap.measure)
-  const contain = ScrollContain({ alignment, contentSize, viewSize })
+  const contain = ScrollContain({ alignment, contentSize, viewSize, rawSnaps })
   const shouldContain = !loop && containScroll !== ''
   const trimSnaps = containScroll === 'trimSnaps'
   const containedSnaps = contain.measure(defaultSnaps, trimSnaps)
   const scrollSnaps = shouldContain ? containedSnaps : defaultSnaps
   const scrollLimit = ScrollLimit({ loop, contentSize })
   const limit = scrollLimit.measure(scrollSnaps)
-  const direction = Direction(contentDirection)
 
-  // Index
+  // Indexes
+  const slideIndexes = arrayKeys(slides)
   const indexMax = Math.max(0, scrollSnaps.length - 1)
   const indexSpan = Limit({ min: 0, max: indexMax })
   const index = Counter({ limit: indexSpan, start: startIndex, loop })
@@ -154,8 +179,9 @@ export function Engine(
     contentSize,
     inViewThreshold,
     loop,
-    slideSizes,
     viewSize,
+    rawSnaps,
+    slideSizes,
   })
 
   // DragHandler
@@ -217,10 +243,9 @@ export function Engine(
     slideLooper: SlideLooper({
       axis,
       contentSize,
-      direction,
       location,
       scrollSnaps,
-      slideSizes,
+      slideSizesWithGaps,
       slidesInView,
       viewSize,
     }),
