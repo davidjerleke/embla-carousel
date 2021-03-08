@@ -21,9 +21,9 @@ import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
 import { SlideFocus } from './slideFocus'
 import { SlidesInView } from './slidesInView'
-import { SlideSize } from './slideSize'
+import { SlideSizes } from './slideSizes'
 import { Translate } from './translate'
-import { arrayKeys, arrayLast, groupArray, lastIndex } from './utils'
+import { arrayKeys, arrayLast, lastIndex } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Engine = {
@@ -74,63 +74,61 @@ export function Engine(
   } = options
 
   // Measurements
-  const direction = Direction(contentDirection)
-  const axis = Axis({ axis: scrollAxis, contentDirection })
   const containerRect = container.getBoundingClientRect()
   const slideRects = slides.map(slide => slide.getBoundingClientRect())
+  const direction = Direction(contentDirection)
+  const axis = Axis({
+    axis: scrollAxis,
+    contentDirection,
+  })
   const pxToPercent = PxToPercent(axis.measureSize(containerRect))
-  const slideSize = SlideSize({ axis, pxToPercent, loop })
-  const slideSizes = slideSize.measureWithoutGaps(slideRects)
-  const slideSizesWithGaps = slideSize.measureWithGaps(slideRects, slides)
   const viewSize = pxToPercent.totalPercent
-
-  // MOVE TO SCROLLSNAP COMPONENT ---->
-  const rawSnaps = slideRects
-    .map(slideRect => {
-      const position = containerRect[axis.startEdge] - slideRect[axis.startEdge]
-      return -Math.abs(position)
-      // return direction.applyTo(position)
-    })
-    .map(pxToPercent.measure)
-
-  console.log(
-    rawSnaps,
-    slideRects.map(slideRect => {
-      const position = pxToPercent.measure(
-        containerRect[axis.startEdge] - slideRect[axis.startEdge],
-      )
-      return Math.abs(position)
-    }),
-    'rawSnaps',
-  )
-
-  const groupedSnaps = groupArray(rawSnaps, slidesToScroll)
-
-  const groupedSlideRects = groupArray(slideRects, slidesToScroll)
-  const snapSizes = groupedSlideRects
-    .map(rects => arrayLast(rects)[axis.endEdge] - rects[0][axis.startEdge])
-    .map(pxToPercent.measure)
-    .map(Math.abs)
-
-  // <--- MOVE TO SCROLLSNAP COMPONENT
-
-  const contentSize = arrayLast(rawSnaps) * -1 + arrayLast(slideSizesWithGaps)
-  const alignment = Alignment({ align, viewSize })
-  const scrollSnap = ScrollSnap({ alignment, snapSizes, groupedSnaps })
-  const defaultSnaps = arrayKeys(snapSizes).map(scrollSnap.measure)
-  const contain = ScrollContain({ alignment, contentSize, viewSize, rawSnaps })
-  const shouldContain = !loop && containScroll !== ''
-  const trimSnaps = containScroll === 'trimSnaps'
-  const containedSnaps = contain.measure(defaultSnaps, trimSnaps)
-  const scrollSnaps = shouldContain ? containedSnaps : defaultSnaps
-  const scrollLimit = ScrollLimit({ loop, contentSize })
-  const limit = scrollLimit.measure(scrollSnaps)
+  const alignment = Alignment({
+    align,
+    viewSize,
+  })
+  const { slideSizes, slideSizesWithGaps } = SlideSizes({
+    axis,
+    pxToPercent,
+    loop,
+    slides,
+    slideRects,
+  })
+  const { snaps, snapsAligned } = ScrollSnap({
+    alignment,
+    axis,
+    pxToPercent,
+    containerRect,
+    slideRects,
+    slidesToScroll,
+  })
+  const contentSize = arrayLast(snaps) * -1 + arrayLast(slideSizesWithGaps)
+  const { snapsContained } = ScrollContain({
+    contentSize,
+    viewSize,
+    snaps,
+    snapsAligned,
+    containScroll,
+  })
+  const contain = !loop && containScroll !== ''
+  const scrollSnaps = contain ? snapsContained : snapsAligned
+  const { limit } = ScrollLimit({
+    loop,
+    contentSize,
+    scrollSnaps,
+  })
 
   // Indexes
-  const slideIndexes = arrayKeys(slides)
-  const indexSpan = Limit({ min: 0, max: lastIndex(scrollSnaps) })
-  const index = Counter({ limit: indexSpan, start: startIndex, loop })
+  const index = Counter({
+    loop,
+    start: startIndex,
+    limit: Limit({
+      min: 0,
+      max: lastIndex(scrollSnaps),
+    }),
+  })
   const indexPrevious = index.clone()
+  const slideIndexes = arrayKeys(slides)
 
   // Draw
   const update = (): void => {
@@ -188,7 +186,7 @@ export function Engine(
     inViewThreshold,
     loop,
     viewSize,
-    rawSnaps,
+    snaps,
     slideSizes,
   })
 

@@ -35,7 +35,6 @@ export function SlideLooper(params: Params): SlideLooper {
   const ascItems = arrayKeys(slideSizesWithGaps)
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
   const loopPoints = startPoints().concat(endPoints())
-  const loopStyle = axis.scroll === 'x' ? 'left' : 'top'
 
   function removeSlideSizes(indexes: number[], from: number): number {
     return indexes.reduce((a: number, i) => {

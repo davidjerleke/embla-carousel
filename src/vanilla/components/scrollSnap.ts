@@ -1,26 +1,52 @@
 import { Alignment } from './alignment'
+import { Axis } from './axis'
+import { PxToPercent } from './pxToPercent'
+import { arrayLast, groupArray } from './utils'
 
 type Params = {
-  snapSizes: number[]
   alignment: Alignment
-  groupedSnaps: number[][]
+  axis: Axis
+  pxToPercent: PxToPercent
+  containerRect: DOMRect
+  slideRects: DOMRect[]
+  slidesToScroll: number
 }
 
 export type ScrollSnap = {
-  measure: (index: number) => number
+  snaps: number[]
+  snapsAligned: number[]
 }
 
 export function ScrollSnap(params: Params): ScrollSnap {
-  const { snapSizes, alignment, groupedSnaps } = params
-  const snaps = groupedSnaps.map(group => group[0])
-  const alignments = snapSizes.map(alignment.measure)
+  const { containerRect, slideRects, slidesToScroll } = params
+  const { alignment, axis, pxToPercent } = params
+  const { startEdge, endEdge } = axis
+  const snaps = measureUnaligned()
+  const snapsAligned = measureAligned()
 
-  function measure(index: number): number {
-    return snaps[index] + alignments[index]
+  function measureSizes(): number[] {
+    return groupArray(slideRects, slidesToScroll)
+      .map(rects => arrayLast(rects)[endEdge] - rects[0][startEdge])
+      .map(pxToPercent.measure)
+      .map(Math.abs)
+  }
+
+  function measureUnaligned(): number[] {
+    return slideRects
+      .map(rect => containerRect[startEdge] - rect[startEdge])
+      .map(pxToPercent.measure)
+      .map(snap => -Math.abs(snap))
+  }
+
+  function measureAligned(): number[] {
+    const groupedSnaps = groupArray(snaps, slidesToScroll).map(g => g[0])
+    const alignments = measureSizes().map(alignment.measure)
+    return groupedSnaps.map((snap, index) => snap + alignments[index])
   }
 
   const self: ScrollSnap = {
-    measure,
+    snaps,
+    snapsAligned,
   }
   return self
 }
