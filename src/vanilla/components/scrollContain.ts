@@ -1,5 +1,6 @@
 import { Alignment } from './alignment'
 import { Limit } from './limit'
+import { arrayLast } from './utils'
 
 export type ScrollContainOption = '' | 'trimSnaps' | 'keepSnaps'
 
@@ -22,7 +23,7 @@ export function ScrollContain(params: Params): ScrollContain {
 
   function findDuplicates(scrollSnaps: number[]): Limit {
     const startSnap = scrollSnaps[0]
-    const endSnap = scrollSnaps[scrollSnaps.length - 1]
+    const endSnap = arrayLast(scrollSnaps)
     const min = scrollSnaps.lastIndexOf(startSnap) + 1
     const max = scrollSnaps.indexOf(endSnap)
     return Limit({ min, max })

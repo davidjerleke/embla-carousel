@@ -48,8 +48,7 @@ function EmblaCarousel(
   function storeElements(): void {
     if (!sliderRoot) throw new Error('Missing root node 😢')
 
-    const selector = options.containerSelector
-    const sliderContainer = sliderRoot.querySelector(selector)
+    const sliderContainer = sliderRoot.querySelector('*')
 
     if (!sliderContainer) throw new Error('Missing container node 😢')
 

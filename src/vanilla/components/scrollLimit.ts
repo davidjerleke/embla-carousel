@@ -1,4 +1,5 @@
 import { Limit } from './limit'
+import { arrayLast } from './utils'
 
 type Params = {
   contentSize: number
@@ -14,7 +15,7 @@ export function ScrollLimit(params: Params): ScrollLimit {
 
   function measure(scrollSnaps: number[]): Limit {
     const startSnap = scrollSnaps[0]
-    const endSnap = scrollSnaps[scrollSnaps.length - 1]
+    const endSnap = arrayLast(scrollSnaps)
     const min = loop ? startSnap - contentSize : endSnap
     const max = startSnap
     return Limit({ min, max })

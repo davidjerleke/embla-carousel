@@ -23,7 +23,7 @@ import { SlideFocus } from './slideFocus'
 import { SlidesInView } from './slidesInView'
 import { SlideSize } from './slideSize'
 import { Translate } from './translate'
-import { arrayKeys, groupArray } from './utils'
+import { arrayKeys, arrayLast, groupArray, lastIndex } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Engine = {
@@ -84,28 +84,37 @@ export function Engine(
   const slideSizesWithGaps = slideSize.measureWithGaps(slideRects, slides)
   const viewSize = pxToPercent.totalPercent
 
-  const rawSnaps = slideRects.map(slideRect => {
-    const position = pxToPercent.measure(
-      containerRect[axis.startEdge] - slideRect[axis.startEdge],
-    )
-    return direction.applyTo(position)
-  })
+  // MOVE TO SCROLLSNAP COMPONENT ---->
+  const rawSnaps = slideRects
+    .map(slideRect => {
+      const position = containerRect[axis.startEdge] - slideRect[axis.startEdge]
+      return -Math.abs(position)
+      // return direction.applyTo(position)
+    })
+    .map(pxToPercent.measure)
+
+  console.log(
+    rawSnaps,
+    slideRects.map(slideRect => {
+      const position = pxToPercent.measure(
+        containerRect[axis.startEdge] - slideRect[axis.startEdge],
+      )
+      return Math.abs(position)
+    }),
+    'rawSnaps',
+  )
 
   const groupedSnaps = groupArray(rawSnaps, slidesToScroll)
 
   const groupedSlideRects = groupArray(slideRects, slidesToScroll)
   const snapSizes = groupedSlideRects
-    .map(rects => {
-      return pxToPercent.measure(
-        rects[rects.length - 1][axis.endEdge] - rects[0][axis.startEdge],
-      )
-    })
+    .map(rects => arrayLast(rects)[axis.endEdge] - rects[0][axis.startEdge])
+    .map(pxToPercent.measure)
     .map(Math.abs)
 
-  const contentSize =
-    rawSnaps[rawSnaps.length - 1] * -1 +
-    slideSizesWithGaps[slideSizesWithGaps.length - 1]
+  // <--- MOVE TO SCROLLSNAP COMPONENT
 
+  const contentSize = arrayLast(rawSnaps) * -1 + arrayLast(slideSizesWithGaps)
   const alignment = Alignment({ align, viewSize })
   const scrollSnap = ScrollSnap({ alignment, snapSizes, groupedSnaps })
   const defaultSnaps = arrayKeys(snapSizes).map(scrollSnap.measure)
@@ -119,8 +128,7 @@ export function Engine(
 
   // Indexes
   const slideIndexes = arrayKeys(slides)
-  const indexMax = Math.max(0, scrollSnaps.length - 1)
-  const indexSpan = Limit({ min: 0, max: indexMax })
+  const indexSpan = Limit({ min: 0, max: lastIndex(scrollSnaps) })
   const index = Counter({ limit: indexSpan, start: startIndex, loop })
   const indexPrevious = index.clone()
 

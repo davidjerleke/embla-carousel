@@ -47,8 +47,16 @@ export function groupArray<GenericType>(
   return groups
 }
 
-export function arrayKeys<GenericType>(array: GenericType): number[] {
+export function arrayKeys<GenericType>(array: GenericType[]): number[] {
   return Object.keys(array).map(Number)
+}
+
+export function arrayLast<GenericType>(array: GenericType[]): GenericType {
+  return array[lastIndex(array)]
+}
+
+export function lastIndex<GenericType>(array: GenericType[]): number {
+  return Math.max(0, array.length - 1)
 }
 
 export function removeClass(node: HTMLElement, className: string): void {
