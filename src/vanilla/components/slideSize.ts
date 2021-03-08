@@ -8,20 +8,20 @@ type Params = {
 }
 
 export type SlideSize = {
-  sizesWithoutGaps: (rects: DOMRect[]) => number[]
-  sizesWithGaps: (rects: DOMRect[], slides: HTMLElement[]) => number[]
+  measureWithoutGaps: (rects: DOMRect[]) => number[]
+  measureWithGaps: (rects: DOMRect[], slides: HTMLElement[]) => number[]
 }
 
 export function SlideSize(params: Params): SlideSize {
   const { axis, pxToPercent, loop } = params
   const { measureSize, startEdge, endEdge } = axis
 
-  function sizesWithoutGaps(rects: DOMRect[]): number[] {
+  function measureWithoutGaps(rects: DOMRect[]): number[] {
     const sizesInPx = rects.map(measureSize)
     return sizesInPx.map(pxToPercent.measure)
   }
 
-  function sizesWithGaps(rects: DOMRect[], slides: HTMLElement[]): number[] {
+  function measureWithGaps(rects: DOMRect[], slides: HTMLElement[]): number[] {
     // const sizesInPx = rects.map(measureSize)
     // use pxToPercent only once, change sizesWithoutGaps(rects)[index] --> sizesInPx[index]
     return rects
@@ -31,9 +31,9 @@ export function SlideSize(params: Params): SlideSize {
             rects[index + 1][startEdge] - slideRect[startEdge],
           )
         }
-        if (!loop) return sizesWithoutGaps(rects)[index]
+        if (!loop) return measureWithoutGaps(rects)[index]
         return (
-          sizesWithoutGaps(rects)[index] +
+          measureWithoutGaps(rects)[index] +
           pxToPercent.measure(
             parseFloat(
               window
@@ -47,8 +47,8 @@ export function SlideSize(params: Params): SlideSize {
   }
 
   const self: SlideSize = {
-    sizesWithoutGaps,
-    sizesWithGaps,
+    measureWithoutGaps,
+    measureWithGaps,
   }
   return self
 }

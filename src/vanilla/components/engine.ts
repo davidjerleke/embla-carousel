@@ -80,8 +80,8 @@ export function Engine(
   const slideRects = slides.map(slide => slide.getBoundingClientRect())
   const pxToPercent = PxToPercent(axis.measureSize(containerRect))
   const slideSize = SlideSize({ axis, pxToPercent, loop })
-  const slideSizes = slideSize.sizesWithoutGaps(slideRects)
-  const slideSizesWithGaps = slideSize.sizesWithGaps(slideRects, slides)
+  const slideSizes = slideSize.measureWithoutGaps(slideRects)
+  const slideSizesWithGaps = slideSize.measureWithGaps(slideRects, slides)
   const viewSize = pxToPercent.totalPercent
 
   const rawSnaps = slideRects.map(slideRect => {
