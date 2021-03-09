@@ -13,11 +13,11 @@ const limit = Limit({
 
 describe('Limit', () => {
   describe('Exposes', () => {
-    test('Limit Min', () => {
+    test('Limit MIN', () => {
       expect(limit.min).toBe(minLimit)
     })
 
-    test('Limit Max', () => {
+    test('Limit MAX', () => {
       expect(limit.max).toBe(maxLimit)
     })
 
@@ -27,12 +27,12 @@ describe('Limit', () => {
   })
 
   describe('Loops to limit', () => {
-    test('Max when given number < limit min', () => {
+    test('MAX when given number < limit MIN', () => {
       const number = limit.loop(lessThanMin)
       expect(number).toBe(maxLimit)
     })
 
-    test('Min when given number > limit max', () => {
+    test('MIN when given number > limit MAX', () => {
       const number = limit.loop(moreThanMax)
       expect(number).toBe(minLimit)
     })
@@ -46,12 +46,12 @@ describe('Limit', () => {
   })
 
   describe('Constrains to limit', () => {
-    test('Max when given number > limit max', () => {
+    test('MAX when given number > limit MAX', () => {
       const number = limit.constrain(moreThanMax)
       expect(number).toBe(maxLimit)
     })
 
-    test('Min when given number < limit min', () => {
+    test('MIN when given number < limit MIN', () => {
       const number = limit.constrain(lessThanMin)
       expect(number).toBe(minLimit)
     })
@@ -65,17 +65,17 @@ describe('Limit', () => {
   })
 
   describe('Removes offset', () => {
-    test('When given number > limit max', () => {
+    test('When given number > limit MAX', () => {
       const number = limit.removeOffset(moreThanMax)
       expect(number).toBe(moreThanMax - length)
     })
 
-    test('When given number < limit min', () => {
+    test('When given number < limit MIN', () => {
       const number = limit.removeOffset(lessThanMin)
       expect(number).toBe(lessThanMin + length)
     })
 
-    test('Until given number is < limit max', () => {
+    test('Until given number is < limit MAX', () => {
       const offsetfactor = 5
       const removeFactor = Math.ceil(offsetfactor / 2)
       const moreThanMaxOffset = moreThanMax * offsetfactor
@@ -83,7 +83,7 @@ describe('Limit', () => {
       expect(number).toBe(moreThanMaxOffset - length * removeFactor)
     })
 
-    test('Until given number is > limit min', () => {
+    test('Until given number is > limit MIN', () => {
       const offsetfactor = 5
       const removeFactor = Math.ceil(offsetfactor / 2)
       const lessThanMinOffset = lessThanMin * offsetfactor
@@ -98,7 +98,7 @@ describe('Limit', () => {
       expect(number).toBe(withinMinAndMax)
     })
 
-    test('When limit min equals limit max', () => {
+    test('When limit MIN equals limit MAX', () => {
       const equalLimit = Limit({ min: maxLimit, max: maxLimit })
       const number = equalLimit.removeOffset(moreThanMax)
       expect(number).toBe(moreThanMax)
@@ -106,34 +106,34 @@ describe('Limit', () => {
   })
 
   describe('Reached limit', () => {
-    test('Min is true when given number < limit min', () => {
+    test('MIN is true when given number < limit MAX', () => {
       const reached = limit.reachedMin(lessThanMin)
       expect(reached).toBe(true)
     })
 
-    test('Min is false when given number is within limit', () => {
+    test('MIN is false when given number is within limit', () => {
       const reached = limit.reachedMin(withinMinAndMax)
       expect(reached).toBe(false)
     })
 
-    test('Max is true when given number > limit max', () => {
+    test('MAX is true when given number > limit MAX', () => {
       const reached = limit.reachedMax(moreThanMax)
       expect(reached).toBe(true)
     })
 
-    test('Max is false when given number is within limit', () => {
+    test('MAX is false when given number is within limit', () => {
       const reached = limit.reachedMax(withinMinAndMax)
       expect(reached).toBe(false)
     })
 
-    test('Any is true when given number > limit max or number < limit min', () => {
+    test('ANY is true when given number > limit MAX or number < limit MIN', () => {
       const reachedMin = limit.reachedAny(lessThanMin)
       const reachedMax = limit.reachedAny(moreThanMax)
       expect(reachedMin).toBe(true)
       expect(reachedMax).toBe(true)
     })
 
-    test('Any is false when given number is within limit', () => {
+    test('ANY is false when given number is within limit', () => {
       const reachedMin = limit.reachedAny(withinMinAndMax)
       const reachedMax = limit.reachedAny(withinMinAndMax)
       expect(reachedMin).toBe(false)

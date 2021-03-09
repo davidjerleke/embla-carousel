@@ -16,11 +16,12 @@ beforeEach(() => {
 
 describe('Counter', () => {
   describe('Get & Set', () => {
-    test('Gets Counter value', () => {
+    test('Gets the value it has been initialized to', () => {
       expect(loopCounter.get()).toBe(2)
       expect(limitCounter.get()).toBe(2)
     })
-    test('Sets Counter value to given number', () => {
+
+    test('Sets its value to the given number', () => {
       loopCounter.set(4)
       limitCounter.set(4)
       expect(loopCounter.get()).toBe(4)
@@ -28,49 +29,54 @@ describe('Counter', () => {
     })
   })
 
-  describe('Expose', () => {
-    test('Exposes Counter min ', () => {
+  describe('Exposes', () => {
+    test('Counter MIN ', () => {
       expect(loopCounter.min).toBe(0)
       expect(limitCounter.min).toBe(0)
     })
-    test('Exposes Counter max ', () => {
+
+    test('Counter MAX ', () => {
       expect(loopCounter.max).toBe(5)
       expect(limitCounter.max).toBe(5)
     })
   })
 
-  describe('Clone', () => {
-    test('Returns a copy of current Counter', () => {
+  describe('Clones', () => {
+    test('Current counter', () => {
       const loopCounterClone = loopCounter.clone()
       const limitCounterClone = limitCounter.clone()
       expect(loopCounterClone).not.toBe(loopCounter)
       expect(limitCounterClone).not.toBe(limitCounter)
     })
 
-    test('Returns a copy of current Counter with last count value', () => {
+    test('Current counter while preserving its current value', () => {
       const counterClone = loopCounter.clone()
       expect(counterClone.get()).toBe(2)
     })
   })
 
-  describe('Initialize', () => {
-    test('Initializes Counter value to given number within limit', () => {
+  describe('Initializes', () => {
+    test('Counter value to given number within limit', () => {
       expect(loopCounter.get()).toBe(2)
       expect(limitCounter.get()).toBe(2)
     })
-    test('Initializes loop Counter value to min if given number is greater than max', () => {
+
+    test('Loop counter value to min if given number is greater than max', () => {
       const loopCounter = Counter({ start: 10, limit, loop: true })
       expect(loopCounter.get()).toBe(0)
     })
-    test('Initializes loop Counter value to max if given number is less than min', () => {
+
+    test('Loop counter value to max if given number is less than min', () => {
       const loopCounter = Counter({ start: -10, limit, loop: true })
       expect(loopCounter.get()).toBe(5)
     })
-    test('Initializes limit Counter value to max if given number is greater than max', () => {
+
+    test('Limit counter value to max if given number is greater than max', () => {
       const limitCounter = Counter({ start: 10, limit, loop: false })
       expect(limitCounter.get()).toBe(5)
     })
-    test('Initializes limit Counter value to min if given number is less than min', () => {
+
+    test('Limit Counter value to min if given number is less than min', () => {
       const limitCounter = Counter({ start: -10, limit, loop: false })
       expect(limitCounter.get()).toBe(0)
     })
@@ -83,24 +89,29 @@ describe('Counter', () => {
       expect(loopCounter.get()).toBe(4)
       expect(limitCounter.get()).toBe(4)
     })
+
     test('Subtracts given negative number from value', () => {
       loopCounter.add(-2)
       limitCounter.add(-2)
       expect(loopCounter.get()).toBe(0)
       expect(limitCounter.get()).toBe(0)
     })
+
     test('Loops loop Counter if given positive number + current value is greater than max', () => {
       loopCounter.add(5)
       expect(loopCounter.get()).toBe(1)
     })
+
     test('Loops loop Counter if given negative number - current value is less than min', () => {
       loopCounter.add(-5)
       expect(loopCounter.get()).toBe(3)
     })
+
     test('Stops limit Counter at max if given positive number + current value is greater than max', () => {
       limitCounter.add(12)
       expect(limitCounter.get()).toBe(5)
     })
+
     test('Stops limit Counter at min if given negative number + current value is less than min', () => {
       limitCounter.add(-12)
       expect(limitCounter.get()).toBe(0)

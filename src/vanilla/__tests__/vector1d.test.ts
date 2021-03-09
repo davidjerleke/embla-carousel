@@ -21,11 +21,6 @@ describe('Vector1D', () => {
       vector1.set(vector2)
       expect(vector1.get()).toBe(initialVectorValue2)
     })
-
-    test('Sets its value to the given number', () => {
-      vector1.set(initialVectorValue2)
-      expect(vector1.get()).toBe(initialVectorValue2)
-    })
   })
 
   describe('Operations', () => {
