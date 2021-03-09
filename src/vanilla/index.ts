@@ -39,7 +39,7 @@ function EmblaCarousel(
   let engine: Engine
   let activated = false
   let options = Object.assign({}, defaultOptions)
-  // let rootElementSize = 0
+  let rootNodeSize = 0
   let container: HTMLElement
   let slides: HTMLElement[]
 
@@ -49,7 +49,6 @@ function EmblaCarousel(
     if (!sliderRoot) throw new Error('Missing root node 😢')
 
     const sliderContainer = sliderRoot.querySelector('*')
-
     if (!sliderContainer) throw new Error('Missing container node 😢')
 
     container = sliderContainer as HTMLElement
@@ -60,9 +59,9 @@ function EmblaCarousel(
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
-    // rootElementSize = engine.axis.measure(sliderRoot)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
+    rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -144,9 +143,10 @@ function EmblaCarousel(
 
   function resize(): void {
     if (!activated) return
-    // const newRootElementSize = engine.axis.measure(sliderRoot)
-    // if (rootElementSize !== newRootElementSize)
-    reActivate()
+    const newRootNodeSize = engine.axis.measureSize(
+      sliderRoot.getBoundingClientRect(),
+    )
+    if (rootNodeSize !== newRootNodeSize) reActivate()
     events.emit('resize')
   }
 
@@ -208,6 +208,10 @@ function EmblaCarousel(
 
   function dangerouslyGetEngine(): Engine {
     return engine
+  }
+
+  function rootNode(): HTMLElement {
+    return sliderRoot
   }
 
   function containerNode(): HTMLElement {
