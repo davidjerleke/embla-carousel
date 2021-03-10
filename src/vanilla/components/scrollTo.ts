@@ -4,31 +4,26 @@ import { EventEmitter } from './eventEmitter'
 import { ScrollTarget, Target } from './scrollTarget'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  animation: Animation
-  target: Vector1D
-  index: Counter
-  indexPrevious: Counter
-  scrollTarget: ScrollTarget
-  events: EventEmitter
-}
-
 export type ScrollTo = {
   distance: (n: number, snap: boolean) => void
   index: (n: number, direction: number) => void
 }
 
-export function ScrollTo(params: Params): ScrollTo {
-  const { index: indexCurrent, scrollTarget, animation } = params
-  const { indexPrevious, events, target: targetDistance } = params
-
+export function ScrollTo(
+  animation: Animation,
+  indexCurrent: Counter,
+  indexPrevious: Counter,
+  scrollTarget: ScrollTarget,
+  targetVector: Vector1D,
+  events: EventEmitter,
+): ScrollTo {
   function scrollTo(target: Target): void {
     const distanceDiff = target.distance
     const indexDiff = target.index !== indexCurrent.get()
 
     if (distanceDiff) {
       animation.start()
-      targetDistance.add(distanceDiff)
+      targetVector.add(distanceDiff)
     }
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())

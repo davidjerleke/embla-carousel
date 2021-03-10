@@ -1,12 +1,6 @@
 import { Limit } from './limit'
 import { mathSign } from './utils'
 
-type Params = {
-  start: number
-  limit: Limit
-  loop: boolean
-}
-
 export type Counter = {
   min: number
   max: number
@@ -16,8 +10,7 @@ export type Counter = {
   clone: () => Counter
 }
 
-export function Counter(params: Params): Counter {
-  const { start, limit, loop } = params
+export function Counter(limit: Limit, loop: boolean, start: number): Counter {
   const { min, max } = limit
   const type = loop ? 'loop' : 'constrain'
   const withinLimit = limit[type]
@@ -42,7 +35,7 @@ export function Counter(params: Params): Counter {
   }
 
   function clone(): Counter {
-    return Counter({ start: get(), limit, loop })
+    return Counter(limit, loop, get())
   }
 
   const self: Counter = {

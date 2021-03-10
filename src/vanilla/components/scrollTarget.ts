@@ -2,15 +2,6 @@ import { Counter } from './counter'
 import { Limit } from './limit'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  index: Counter
-  loop: boolean
-  scrollSnaps: number[]
-  contentSize: number
-  limit: Limit
-  target: Vector1D
-}
-
 export type Target = {
   distance: number
   index: number
@@ -22,8 +13,14 @@ export type ScrollTarget = {
   shortcut: (target: number, direction: number) => number
 }
 
-export function ScrollTarget(params: Params): ScrollTarget {
-  const { loop, limit, scrollSnaps, contentSize } = params
+export function ScrollTarget(
+  indexCurrent: Counter,
+  loop: boolean,
+  scrollSnaps: number[],
+  contentSize: number,
+  limit: Limit,
+  targetVector: Vector1D,
+): ScrollTarget {
   const { reachedMax, reachedAny, removeOffset } = limit
 
   function minDistance(d1: number, d2: number): number {
@@ -58,18 +55,18 @@ export function ScrollTarget(params: Params): ScrollTarget {
     const reachedBound = !loop && reachedAny(target)
     if (!reachedBound) return index
 
-    const { min, max } = params.index
+    const { min, max } = indexCurrent
     return reachedMax(target) ? min : max
   }
 
   function byIndex(index: number, direction: number): Target {
-    const diffToSnap = scrollSnaps[index] - params.target.get()
+    const diffToSnap = scrollSnaps[index] - targetVector.get()
     const distance = shortcut(diffToSnap, direction)
     return { index, distance }
   }
 
   function byDistance(distance: number, snap: boolean): Target {
-    const target = params.target.get() + distance
+    const target = targetVector.get() + distance
     const targetSnap = findTargetSnap(target)
     const index = findTargetIndex(target, targetSnap.index)
     const reachedBound = !loop && reachedAny(target)

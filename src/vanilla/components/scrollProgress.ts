@@ -1,15 +1,11 @@
 import { Limit } from './limit'
 
-type Params = {
-  limit: Limit
-}
-
 export type ScrollProgress = {
   get: (n: number) => number
 }
 
-export function ScrollProgress(params: Params): ScrollProgress {
-  const { max, length: scrollLength } = params.limit
+export function ScrollProgress(limit: Limit): ScrollProgress {
+  const { max, length: scrollLength } = limit
 
   function get(n: number): number {
     const currentLocation = n - max

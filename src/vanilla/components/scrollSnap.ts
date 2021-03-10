@@ -3,23 +3,19 @@ import { Axis } from './axis'
 import { PxToPercent } from './pxToPercent'
 import { arrayLast, groupArray } from './utils'
 
-type Params = {
-  alignment: Alignment
-  axis: Axis
-  pxToPercent: PxToPercent
-  containerRect: DOMRect
-  slideRects: DOMRect[]
-  slidesToScroll: number
-}
-
 export type ScrollSnap = {
   snaps: number[]
   snapsAligned: number[]
 }
 
-export function ScrollSnap(params: Params): ScrollSnap {
-  const { containerRect, slideRects, slidesToScroll } = params
-  const { alignment, axis, pxToPercent } = params
+export function ScrollSnap(
+  axis: Axis,
+  alignment: Alignment,
+  pxToPercent: PxToPercent,
+  containerRect: DOMRect,
+  slideRects: DOMRect[],
+  slidesToScroll: number,
+): ScrollSnap {
   const { startEdge, endEdge } = axis
   const snaps = measureUnaligned()
   const snapsAligned = measureAligned()

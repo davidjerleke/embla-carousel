@@ -11,7 +11,7 @@ const percentFraction = 0.2
 const percentAlign = viewSize * percentFraction
 
 const getAlignment = (align: AlignmentOption): Alignment =>
-  Alignment({ align, viewSize })
+  Alignment(align, viewSize)
 
 describe('Alignment', () => {
   describe('Is correctly measured relative to view for align', () => {

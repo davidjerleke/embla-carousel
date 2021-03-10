@@ -3,15 +3,7 @@ import { arrayKeys } from './utils'
 import { SlidesInView } from './slidesInView'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  axis: Axis
-  scrollSnaps: number[]
-  viewSize: number
-  location: Vector1D
-  slideSizesWithGaps: number[]
-  contentSize: number
-  slidesInView: SlidesInView
-}
+type LoopEdge = 'start' | 'end'
 
 type LoopPoint = {
   point: number
@@ -20,8 +12,6 @@ type LoopPoint = {
   getTarget: () => number
 }
 
-type LoopEdge = 'start' | 'end'
-
 export type SlideLooper = {
   canLoop: () => boolean
   clear: (slides: HTMLElement[]) => void
@@ -29,9 +19,15 @@ export type SlideLooper = {
   loopPoints: LoopPoint[]
 }
 
-export function SlideLooper(params: Params): SlideLooper {
-  const { axis, location: scrollLocation, slidesInView } = params
-  const { contentSize, viewSize, slideSizesWithGaps, scrollSnaps } = params
+export function SlideLooper(
+  axis: Axis,
+  viewSize: number,
+  contentSize: number,
+  slideSizesWithGaps: number[],
+  scrollSnaps: number[],
+  slidesInView: SlidesInView,
+  scrollLocation: Vector1D,
+): SlideLooper {
   const ascItems = arrayKeys(slideSizesWithGaps)
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
   const loopPoints = startPoints().concat(endPoints())

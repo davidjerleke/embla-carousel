@@ -3,20 +3,17 @@ import { Direction } from './direction'
 import { roundToDecimals } from './utils'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  axis: Axis
-  container: HTMLElement
-  direction: Direction
-}
-
 export type Translate = {
   clear: () => void
   to: (vector: Vector1D) => void
   toggleActive: (active: boolean) => void
 }
 
-export function Translate(params: Params): Translate {
-  const { axis, container, direction } = params
+export function Translate(
+  axis: Axis,
+  direction: Direction,
+  container: HTMLElement,
+): Translate {
   const containerStyle = container.style
   const translate = axis.scroll === 'x' ? x : y
   const roundToTwoDecimals = roundToDecimals(2)

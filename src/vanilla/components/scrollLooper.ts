@@ -2,22 +2,19 @@ import { Limit } from './limit'
 import { PxToPercent } from './pxToPercent'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  contentSize: number
-  limit: Limit
-  location: Vector1D
-  pxToPercent: PxToPercent
-}
-
 export type ScrollLooper = {
   loop: (vectors: Vector1D[], direction: number) => void
 }
 
-export function ScrollLooper(params: Params): ScrollLooper {
-  const { contentSize, location, limit, pxToPercent } = params
+export function ScrollLooper(
+  contentSize: number,
+  pxToPercent: PxToPercent,
+  limit: Limit,
+  location: Vector1D,
+): ScrollLooper {
   const min = limit.min + pxToPercent.measure(0.1)
   const max = limit.max + pxToPercent.measure(0.1)
-  const { reachedMin, reachedMax } = Limit({ min, max })
+  const { reachedMin, reachedMax } = Limit(min, max)
 
   function shouldLoop(direction: number): boolean {
     if (direction === 1) return reachedMax(location.get())

@@ -1,12 +1,6 @@
 import { map, roundToDecimals, mathSign } from './utils'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  location: Vector1D
-  speed: number
-  mass: number
-}
-
 export type ScrollBody = {
   direction: () => number
   seek: (v: Vector1D) => ScrollBody
@@ -18,8 +12,11 @@ export type ScrollBody = {
   useSpeed: (n: number) => ScrollBody
 }
 
-export function ScrollBody(params: Params): ScrollBody {
-  const { location, speed: baseSpeed, mass: baseMass } = params
+export function ScrollBody(
+  location: Vector1D,
+  baseSpeed: number,
+  baseMass: number,
+): ScrollBody {
   const roundToTwoDecimals = roundToDecimals(2)
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)

@@ -2,11 +2,6 @@ import { Axis, AxisOption } from './axis'
 import { PxToPercent } from './pxToPercent'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  axis: Axis
-  pxToPercent: PxToPercent
-}
-
 export type DragTracker = {
   pointerDown: (evt: Event) => number
   pointerMove: (evt: Event) => number
@@ -14,8 +9,7 @@ export type DragTracker = {
   readPoint: (evt: any, axis: AxisOption) => Vector1D
 }
 
-export function DragTracker(params: Params): DragTracker {
-  const { axis, pxToPercent } = params
+export function DragTracker(axis: Axis, pxToPercent: PxToPercent): DragTracker {
   const { scroll: scrollAxis } = axis
   const coords = { x: 'clientX', y: 'clientY' }
   const startDrag = Vector1D(0)

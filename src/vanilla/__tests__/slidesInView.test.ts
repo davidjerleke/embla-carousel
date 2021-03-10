@@ -14,20 +14,20 @@ const noThreshold = 0
 const fullThreshold = 1
 
 const getAlignment = (align: AlignmentOption): Alignment =>
-  Alignment({ align, viewSize })
+  Alignment(align, viewSize)
 
 const getSlidesInView = (
   loop: boolean,
   inViewThreshold: number,
 ): SlidesInView => {
-  return SlidesInView({
+  return SlidesInView(
+    viewSize,
     contentSize,
     slideSizes,
-    viewSize,
-    inViewThreshold,
-    loop,
     snaps,
-  })
+    loop,
+    inViewThreshold,
+  )
 }
 
 describe('SlidesInView', () => {

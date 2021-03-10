@@ -3,11 +3,6 @@ import { DirectionOption } from './direction'
 export type AxisOption = 'x' | 'y'
 type AxisEdge = 'top' | 'right' | 'bottom' | 'left'
 
-type Params = {
-  axis: AxisOption
-  contentDirection: DirectionOption
-}
-
 export type Axis = {
   scroll: AxisOption
   cross: AxisOption
@@ -16,8 +11,10 @@ export type Axis = {
   measureSize: (rect: DOMRect) => number
 }
 
-export function Axis(params: Params): Axis {
-  const { axis, contentDirection } = params
+export function Axis(
+  axis: AxisOption,
+  contentDirection: DirectionOption,
+): Axis {
   const scroll = axis === 'y' ? 'y' : 'x'
   const cross = axis === 'y' ? 'x' : 'y'
   const startEdge = getStartEdge()

@@ -5,7 +5,7 @@ import { Limit } from '../components/limit'
 
 const pxToPercent = PxToPercent(1000)
 const loopJoint = pxToPercent.measure(0.1)
-const limit = Limit({ min: -100, max: 100 })
+const limit = Limit(-100, 100)
 const maxLimitWithLoopJoint = limit.max + loopJoint
 const minLimitWithLoopJoint = limit.min + loopJoint
 const contentSize = limit.length
@@ -13,12 +13,7 @@ const location = Vector1D(0)
 const vectorInitialValue1 = 5
 const vectorInitialValue2 = 10
 const vectors = [Vector1D(vectorInitialValue1), Vector1D(vectorInitialValue2)]
-const scrollLooper = ScrollLooper({
-  contentSize,
-  limit,
-  location,
-  pxToPercent,
-})
+const scrollLooper = ScrollLooper(contentSize, pxToPercent, limit, location)
 
 beforeEach(() => {
   vectors[0].set(vectorInitialValue1)

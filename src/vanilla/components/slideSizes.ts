@@ -2,21 +2,18 @@ import { Axis } from './axis'
 import { PxToPercent } from './pxToPercent'
 import { arrayLast, lastIndex } from './utils'
 
-type Params = {
-  axis: Axis
-  pxToPercent: PxToPercent
-  loop: boolean
-  slides: HTMLElement[]
-  slideRects: DOMRect[]
-}
-
 export type SlideSizes = {
   slideSizes: number[]
   slideSizesWithGaps: number[]
 }
 
-export function SlideSizes(params: Params): SlideSizes {
-  const { axis, pxToPercent, loop, slides, slideRects } = params
+export function SlideSizes(
+  axis: Axis,
+  pxToPercent: PxToPercent,
+  slides: HTMLElement[],
+  slideRects: DOMRect[],
+  loop: boolean,
+): SlideSizes {
   const { measureSize, startEdge, endEdge } = axis
   const sizesInPx = slideRects.map(measureSize)
   const slideSizes = sizesInPx.map(pxToPercent.measure)

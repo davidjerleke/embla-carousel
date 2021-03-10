@@ -2,19 +2,16 @@ import { Limit } from './limit'
 import { ScrollBody } from './scrollBody'
 import { Vector1D } from './vector1d'
 
-type Params = {
-  limit: Limit
-  location: Vector1D
-  scrollBody: ScrollBody
-}
-
 export type ScrollBounds = {
   constrain: (v: Vector1D, pointerDown: boolean) => void
   toggleActive: (active: boolean) => void
 }
 
-export function ScrollBounds(params: Params): ScrollBounds {
-  const { limit, location, scrollBody } = params
+export function ScrollBounds(
+  limit: Limit,
+  location: Vector1D,
+  scrollBody: ScrollBody,
+): ScrollBounds {
   const pullBackThreshold = 10
   let disabled = false
 

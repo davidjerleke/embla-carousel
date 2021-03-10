@@ -77,56 +77,40 @@ export function Engine(
   const containerRect = container.getBoundingClientRect()
   const slideRects = slides.map(slide => slide.getBoundingClientRect())
   const direction = Direction(contentDirection)
-  const axis = Axis({
-    axis: scrollAxis,
-    contentDirection,
-  })
+  const axis = Axis(scrollAxis, contentDirection)
   const pxToPercent = PxToPercent(axis.measureSize(containerRect))
   const viewSize = pxToPercent.totalPercent
-  const alignment = Alignment({
-    align,
-    viewSize,
-  })
-  const { slideSizes, slideSizesWithGaps } = SlideSizes({
+  const alignment = Alignment(align, viewSize)
+  const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
     pxToPercent,
-    loop,
     slides,
     slideRects,
-  })
-  const { snaps, snapsAligned } = ScrollSnap({
-    alignment,
+    loop,
+  )
+  const { snaps, snapsAligned } = ScrollSnap(
     axis,
+    alignment,
     pxToPercent,
     containerRect,
     slideRects,
     slidesToScroll,
-  })
+  )
   const contentSize = arrayLast(snaps) * -1 + arrayLast(slideSizesWithGaps)
-  const { snapsContained } = ScrollContain({
-    contentSize,
+  const { snapsContained } = ScrollContain(
     viewSize,
+    contentSize,
     snaps,
     snapsAligned,
     containScroll,
-  })
+  )
+
   const contain = !loop && containScroll !== ''
   const scrollSnaps = contain ? snapsContained : snapsAligned
-  const { limit } = ScrollLimit({
-    loop,
-    contentSize,
-    scrollSnaps,
-  })
+  const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
-  const index = Counter({
-    loop,
-    start: startIndex,
-    limit: Limit({
-      min: 0,
-      max: lastIndex(scrollSnaps),
-    }),
-  })
+  const index = Counter(Limit(0, lastIndex(scrollSnaps)), loop, startIndex)
   const indexPrevious = index.clone()
   const slideIndexes = arrayKeys(slides)
 
@@ -160,56 +144,49 @@ export function Engine(
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const loopVectors = [location, target]
-  const scrollBody = ScrollBody({
-    location,
-    speed,
-    mass: 1,
-  })
-  const scrollTarget = ScrollTarget({
-    contentSize,
+  const scrollBody = ScrollBody(location, speed, 1)
+  const scrollTarget = ScrollTarget(
     index,
-    limit,
     loop,
     scrollSnaps,
+    contentSize,
+    limit,
     target,
-  })
-  const scrollTo = ScrollTo({
+  )
+  const scrollTo = ScrollTo(
     animation,
-    events,
     index,
     indexPrevious,
     scrollTarget,
     target,
-  })
-  const slidesInView = SlidesInView({
-    contentSize,
-    inViewThreshold,
-    loop,
+    events,
+  )
+  const slidesInView = SlidesInView(
     viewSize,
-    snaps,
+    contentSize,
     slideSizes,
-  })
+    snaps,
+    loop,
+    inViewThreshold,
+  )
 
   // DragHandler
-  const dragHandler = DragHandler({
-    animation,
+  const dragHandler = DragHandler(
     axis,
     direction,
-    dragFree,
-    dragTracker: DragTracker({
-      axis,
-      pxToPercent,
-    }),
     root,
-    events,
+    target,
+    dragFree,
+    DragTracker(axis, pxToPercent),
+    location,
+    animation,
+    scrollTo,
+    scrollBody,
+    scrollTarget,
     index,
     limit,
-    location,
-    scrollBody,
-    scrollTo,
-    scrollTarget,
-    target,
-  })
+    events,
+  )
 
   // Slider
   const engine: Engine = {
@@ -224,45 +201,26 @@ export function Engine(
     location,
     options,
     scrollBody,
-    scrollBounds: ScrollBounds({
-      limit,
-      location,
-      scrollBody,
-    }),
-    scrollLooper: ScrollLooper({
-      contentSize,
-      limit,
-      location,
-      pxToPercent,
-    }),
-    scrollProgress: ScrollProgress({
-      limit,
-    }),
+    scrollBounds: ScrollBounds(limit, location, scrollBody),
+    scrollLooper: ScrollLooper(contentSize, pxToPercent, limit, location),
+    scrollProgress: ScrollProgress(limit),
     scrollSnaps,
     scrollTarget,
     scrollTo,
-    slideFocus: SlideFocus({
-      root,
-      scrollTo,
-      slidesToScroll,
-    }),
-    slideLooper: SlideLooper({
+    slideFocus: SlideFocus(root, scrollTo, slidesToScroll),
+    slideLooper: SlideLooper(
       axis,
-      contentSize,
-      location,
-      scrollSnaps,
-      slideSizesWithGaps,
-      slidesInView,
       viewSize,
-    }),
+      contentSize,
+      slideSizesWithGaps,
+      scrollSnaps,
+      slidesInView,
+      location,
+    ),
     slidesInView,
     slideIndexes,
     target,
-    translate: Translate({
-      axis,
-      container,
-      direction,
-    }),
+    translate: Translate(axis, direction, container),
   }
   return engine
 }

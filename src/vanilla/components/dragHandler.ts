@@ -12,23 +12,6 @@ import { ScrollTo } from './scrollTo'
 import { Vector1D } from './vector1d'
 import { deltaAbs, factorAbs, mathSign } from './utils'
 
-type Params = {
-  axis: Axis
-  direction: Direction
-  root: HTMLElement
-  target: Vector1D
-  dragFree: boolean
-  dragTracker: DragTracker
-  location: Vector1D
-  animation: Animation
-  scrollTo: ScrollTo
-  scrollBody: ScrollBody
-  scrollTarget: ScrollTarget
-  index: Counter
-  limit: Limit
-  events: EventEmitter
-}
-
 export type DragHandler = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
@@ -36,9 +19,22 @@ export type DragHandler = {
   removeAllEvents: () => void
 }
 
-export function DragHandler(params: Params): DragHandler {
-  const { target, scrollBody, dragFree, animation, axis, scrollTo } = params
-  const { root, dragTracker, location, events, limit, direction } = params
+export function DragHandler(
+  axis: Axis,
+  direction: Direction,
+  rootNode: HTMLElement,
+  target: Vector1D,
+  dragFree: boolean,
+  dragTracker: DragTracker,
+  location: Vector1D,
+  animation: Animation,
+  scrollTo: ScrollTo,
+  scrollBody: ScrollBody,
+  scrollTarget: ScrollTarget,
+  index: Counter,
+  limit: Limit,
+  events: EventEmitter,
+): DragHandler {
   const { scroll: scrollAxis, cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startScroll = Vector1D(0)
@@ -57,7 +53,7 @@ export function DragHandler(params: Params): DragHandler {
   let isMouse = false
 
   function addActivationEvents(): void {
-    const node = root
+    const node = rootNode
     activationEvents
       .add(node, 'touchmove', () => undefined)
       .add(node, 'touchend', () => undefined)
@@ -69,7 +65,7 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function addInteractionEvents(): void {
-    const node = !isMouse ? root : document
+    const node = !isMouse ? rootNode : document
     interactionEvents
       .add(node, 'touchmove', move)
       .add(node, 'touchend', up)
@@ -94,7 +90,6 @@ export function DragHandler(params: Params): DragHandler {
   }
 
   function allowedForce(force: number): number {
-    const { scrollTarget, index } = params
     const currentLocation = scrollTarget.byDistance(0, false)
     const targetChanged = currentLocation.index !== index.get()
     const seekNext = !targetChanged && Math.abs(force) > dragThreshold

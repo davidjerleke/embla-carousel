@@ -6,15 +6,15 @@ import { ScrollBody } from '../components/scrollBody'
 const pointerIsDown = true
 const pointerIsNotDown = false
 const pullBackThreshold = 10
-const limit = Limit({ min: -10, max: 10 })
+const limit = Limit(-10, 10)
 const lessThanMinLimit = limit.min - 0.01
 const moreThanMaxLimit = limit.max + 0.01
 const moreThanMinLimit = limit.min + 0.01
 const lessThanMaxLimit = limit.max - 0.01
 const location = Vector1D(0)
 const target = Vector1D(0)
-const scrollBody = ScrollBody({ location, mass: 1, speed: 10 })
-const scrollBounds = ScrollBounds({ location, limit, scrollBody })
+const scrollBody = ScrollBody(location, 10, 1)
+const scrollBounds = ScrollBounds(limit, location, scrollBody)
 
 afterEach(() => scrollBounds.toggleActive(true))
 

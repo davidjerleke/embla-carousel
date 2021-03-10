@@ -6,10 +6,7 @@ const length = Math.abs(minLimit - maxLimit)
 const lessThanMin = minLimit - 0.01
 const moreThanMax = maxLimit + 0.01
 const withinMinAndMax = minLimit + maxLimit
-const limit = Limit({
-  min: minLimit,
-  max: maxLimit,
-})
+const limit = Limit(minLimit, maxLimit)
 
 describe('Limit', () => {
   describe('Exposes', () => {
@@ -99,7 +96,7 @@ describe('Limit', () => {
     })
 
     test('When limit MIN equals limit MAX', () => {
-      const equalLimit = Limit({ min: maxLimit, max: maxLimit })
+      const equalLimit = Limit(maxLimit, maxLimit)
       const number = equalLimit.removeOffset(moreThanMax)
       expect(number).toBe(moreThanMax)
     })

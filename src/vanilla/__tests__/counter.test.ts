@@ -4,14 +4,11 @@ import { Limit } from '../components/limit'
 let loopCounter: Counter
 let limitCounter: Counter
 
-const limit = Limit({
-  min: 0,
-  max: 5,
-})
+const limit = Limit(0, 5)
 
 beforeEach(() => {
-  loopCounter = Counter({ start: 2, limit, loop: true })
-  limitCounter = Counter({ start: 2, limit, loop: false })
+  loopCounter = Counter(limit, true, 2)
+  limitCounter = Counter(limit, false, 2)
 })
 
 describe('Counter', () => {
@@ -62,22 +59,22 @@ describe('Counter', () => {
     })
 
     test('Loop counter value to min if given number is greater than max', () => {
-      const loopCounter = Counter({ start: 10, limit, loop: true })
+      const loopCounter = Counter(limit, true, 10)
       expect(loopCounter.get()).toBe(0)
     })
 
     test('Loop counter value to max if given number is less than min', () => {
-      const loopCounter = Counter({ start: -10, limit, loop: true })
+      const loopCounter = Counter(limit, true, -10)
       expect(loopCounter.get()).toBe(5)
     })
 
     test('Limit counter value to max if given number is greater than max', () => {
-      const limitCounter = Counter({ start: 10, limit, loop: false })
+      const limitCounter = Counter(limit, false, 10)
       expect(limitCounter.get()).toBe(5)
     })
 
     test('Limit Counter value to min if given number is less than min', () => {
-      const limitCounter = Counter({ start: -10, limit, loop: false })
+      const limitCounter = Counter(limit, false, -10)
       expect(limitCounter.get()).toBe(0)
     })
   })

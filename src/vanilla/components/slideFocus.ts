@@ -1,19 +1,16 @@
 import { EventStore } from './eventStore'
 import { ScrollTo } from './scrollTo'
 
-type Params = {
-  root: HTMLElement
-  scrollTo: ScrollTo
-  slidesToScroll: number
-}
-
 export type SlideFocus = {
   addActivationEvents: (slides: HTMLElement[]) => void
   removeAllEvents: EventStore['removeAll']
 }
 
-export function SlideFocus(params: Params): SlideFocus {
-  const { scrollTo, slidesToScroll, root } = params
+export function SlideFocus(
+  rootNode: HTMLElement,
+  scrollTo: ScrollTo,
+  slidesToScroll: number,
+): SlideFocus {
   const eventStore = EventStore()
   const removeAllEvents = eventStore.removeAll
   let lastTabPressTime = 0
@@ -29,7 +26,7 @@ export function SlideFocus(params: Params): SlideFocus {
       const diffTime = nowTime - lastTabPressTime
       if (diffTime > 10) return
 
-      root.scrollLeft = 0
+      rootNode.scrollLeft = 0
       const selectedIndex = Math.floor(index / slidesToScroll)
       scrollTo.index(selectedIndex, 0)
     }

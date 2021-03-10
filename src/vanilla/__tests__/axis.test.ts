@@ -13,7 +13,7 @@ const mockRect = {
 } as DOMRect
 
 const getAxis = (axis: AxisOption, contentDirection: DirectionOption): Axis =>
-  Axis({ axis, contentDirection })
+  Axis(axis, contentDirection)
 
 describe('Axis', () => {
   describe('When axis is X and direction is LTR, it', () => {

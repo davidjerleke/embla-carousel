@@ -1,12 +1,3 @@
-type Params = {
-  contentSize: number
-  slideSizes: number[]
-  viewSize: number
-  loop: boolean
-  inViewThreshold: number
-  snaps: number[]
-}
-
 type SlideBound = {
   start: number
   end: number
@@ -18,9 +9,14 @@ export type SlidesInView = {
   findSlideBounds: (offset: number, threshold?: number) => SlideBound[]
 }
 
-export function SlidesInView(params: Params): SlidesInView {
-  const { viewSize, contentSize, slideSizes, snaps } = params
-  const { inViewThreshold, loop } = params
+export function SlidesInView(
+  viewSize: number,
+  contentSize: number,
+  slideSizes: number[],
+  snaps: number[],
+  loop: boolean,
+  inViewThreshold: number,
+): SlidesInView {
   const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
   const offsets = loop ? [0, contentSize, -contentSize] : [0]
   const slideBounds = offsets.reduce((a: SlideBound[], offset) => {

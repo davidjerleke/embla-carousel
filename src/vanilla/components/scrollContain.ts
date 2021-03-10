@@ -3,21 +3,18 @@ import { arrayLast } from './utils'
 
 export type ScrollContainOption = '' | 'trimSnaps' | 'keepSnaps'
 
-type Params = {
-  contentSize: number
-  viewSize: number
-  containScroll: ScrollContainOption
-  snaps: number[]
-  snapsAligned: number[]
-}
-
 export type ScrollContain = {
   snapsContained: number[]
 }
 
-export function ScrollContain(params: Params): ScrollContain {
-  const { contentSize, viewSize, snaps, snapsAligned, containScroll } = params
-  const scrollBounds = Limit({ min: -contentSize + viewSize, max: snaps[0] })
+export function ScrollContain(
+  viewSize: number,
+  contentSize: number,
+  snaps: number[],
+  snapsAligned: number[],
+  containScroll: ScrollContainOption,
+): ScrollContain {
+  const scrollBounds = Limit(-contentSize + viewSize, snaps[0])
   const snapsBounded = snapsAligned.map(scrollBounds.constrain)
   const snapsContained = measureContained()
 
@@ -26,7 +23,7 @@ export function ScrollContain(params: Params): ScrollContain {
     const endSnap = arrayLast(snapsBounded)
     const min = snapsBounded.lastIndexOf(startSnap)
     const max = snapsBounded.indexOf(endSnap) + 1
-    return Limit({ min, max })
+    return Limit(min, max)
   }
 
   function measureContained(): number[] {

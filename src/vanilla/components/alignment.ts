@@ -1,16 +1,10 @@
 export type AlignmentOption = 'start' | 'center' | 'end' | number
 
-type Params = {
-  viewSize: number
-  align: AlignmentOption
-}
-
 export type Alignment = {
   measure: (n: number) => number
 }
 
-export function Alignment(params: Params): Alignment {
-  const { viewSize, align } = params
+export function Alignment(align: AlignmentOption, viewSize: number): Alignment {
   const predefined = { start, center, end }
 
   function start(): number {

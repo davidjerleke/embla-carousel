@@ -6,11 +6,7 @@ const targetPositive = Vector1D(10)
 const targetNegative = Vector1D(-10)
 const initialLocation = 0
 const location = Vector1D(initialLocation)
-const scrollBody = ScrollBody({
-  location,
-  speed: 10,
-  mass: 1,
-})
+const scrollBody = ScrollBody(location, 10, 1)
 
 beforeEach(() => {
   location.set(initialLocation)

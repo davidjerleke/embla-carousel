@@ -1,8 +1,3 @@
-type Params = {
-  min: number
-  max: number
-}
-
 export type Limit = {
   min: number
   max: number
@@ -15,8 +10,7 @@ export type Limit = {
   removeOffset: (n: number) => number
 }
 
-export function Limit(params: Params): Limit {
-  const { min, max } = params
+export function Limit(min: number, max: number): Limit {
   const length = Math.abs(min - max)
 
   function reachedMin(n: number): boolean {
