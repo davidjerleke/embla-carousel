@@ -77,7 +77,7 @@ function EmblaCarousel(
       }
       engine.slideLooper.loop(slides)
     }
-    if (options.draggable && slides.length) {
+    if (options.draggable && container.offsetParent && slides.length) {
       engine.dragHandler.addActivationEvents()
       if (options.draggableClass) {
         addClass(sliderRoot, options.draggableClass)

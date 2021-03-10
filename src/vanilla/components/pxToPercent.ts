@@ -7,6 +7,7 @@ export function PxToPercent(viewInPx: number): PxToPercentType {
   const totalPercent = 100
 
   function measure(n: number): number {
+    if (viewInPx === 0) return 0
     return (n / viewInPx) * totalPercent
   }
 
