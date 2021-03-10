@@ -15,6 +15,7 @@ export type EmblaCarousel = {
   on: EventEmitter['on']
   previousScrollSnap: () => number
   reInit: (options?: EmblaOptions) => void
+  rootNode: () => HTMLElement
   scrollNext: () => void
   scrollPrev: () => void
   scrollProgress: () => number
@@ -233,6 +234,7 @@ function EmblaCarousel(
     on,
     previousScrollSnap,
     reInit,
+    rootNode,
     scrollNext,
     scrollPrev,
     scrollProgress,
