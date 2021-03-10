@@ -1,8 +1,8 @@
-import { EventEmitter } from '../components/eventEmitter'
+import { EventEmitter, EventEmitterType } from '../components/eventEmitter'
 
 let callback1: () => void
 let callback2: () => void
-let eventEmitter: EventEmitter
+let eventEmitter: EventEmitterType
 
 describe('EventEmitter', () => {
   beforeEach(() => {

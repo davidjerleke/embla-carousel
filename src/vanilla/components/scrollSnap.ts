@@ -1,21 +1,21 @@
-import { Alignment } from './alignment'
-import { Axis } from './axis'
-import { PxToPercent } from './pxToPercent'
+import { AlignmentType } from './alignment'
+import { AxisType } from './axis'
+import { PxToPercentType } from './pxToPercent'
 import { arrayLast, groupArray } from './utils'
 
-export type ScrollSnap = {
+export type ScrollSnapType = {
   snaps: number[]
   snapsAligned: number[]
 }
 
 export function ScrollSnap(
-  axis: Axis,
-  alignment: Alignment,
-  pxToPercent: PxToPercent,
+  axis: AxisType,
+  alignment: AlignmentType,
+  pxToPercent: PxToPercentType,
   containerRect: DOMRect,
   slideRects: DOMRect[],
   slidesToScroll: number,
-): ScrollSnap {
+): ScrollSnapType {
   const { startEdge, endEdge } = axis
   const snaps = measureUnaligned()
   const snapsAligned = measureAligned()
@@ -40,7 +40,7 @@ export function ScrollSnap(
     return groupedSnaps.map((snap, index) => snap + alignments[index])
   }
 
-  const self: ScrollSnap = {
+  const self: ScrollSnapType = {
     snaps,
     snapsAligned,
   }

@@ -1,20 +1,24 @@
 import { Engine } from './components/engine'
-import { EventEmitter, EmblaEvent } from './components/eventEmitter'
 import { EventStore } from './components/eventStore'
-import { defaultOptions, EmblaOptions } from './components/options'
+import { defaultOptions, EmblaOptionsType } from './components/options'
 import { addClass, debounce, removeClass } from './components/utils'
+import {
+  EventEmitter,
+  EmblaEventType,
+  EventEmitterType,
+} from './components/eventEmitter'
 
-export type EmblaCarousel = {
+export type EmblaCarouselType = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
   clickAllowed: () => boolean
   containerNode: () => HTMLElement
   dangerouslyGetEngine: () => Engine
   destroy: () => void
-  off: EventEmitter['off']
-  on: EventEmitter['on']
+  off: EventEmitterType['off']
+  on: EventEmitterType['on']
   previousScrollSnap: () => number
-  reInit: (options?: EmblaOptions) => void
+  reInit: (options?: EmblaOptionsType) => void
   rootNode: () => HTMLElement
   scrollNext: () => void
   scrollPrev: () => void
@@ -29,8 +33,8 @@ export type EmblaCarousel = {
 
 function EmblaCarousel(
   sliderRoot: HTMLElement,
-  userOptions?: EmblaOptions,
-): EmblaCarousel {
+  userOptions?: EmblaOptionsType,
+): EmblaCarouselType {
   const events = EventEmitter()
   const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
@@ -56,7 +60,7 @@ function EmblaCarousel(
     slides = Array.prototype.slice.call(container.children)
   }
 
-  function activate(partialOptions?: EmblaOptions): void {
+  function activate(partialOptions?: EmblaOptionsType): void {
     storeElements()
     options = Object.assign(options, partialOptions)
     engine = Engine(sliderRoot, container, slides, options, events)
@@ -97,7 +101,7 @@ function EmblaCarousel(
     }
   }
 
-  function toggleDraggingClass(evt: EmblaEvent): void {
+  function toggleDraggingClass(evt: EmblaEventType): void {
     const { draggingClass } = options
     if (evt === 'pointerDown') addClass(sliderRoot, draggingClass)
     else removeClass(sliderRoot, draggingClass)
@@ -126,7 +130,7 @@ function EmblaCarousel(
     events.off('pointerUp', toggleDraggingClass)
   }
 
-  function reActivate(partialOptions?: EmblaOptions): void {
+  function reActivate(partialOptions?: EmblaOptionsType): void {
     if (!activated) return
     const startIndex = selectedScrollSnap()
     const newOptions = Object.assign({ startIndex }, partialOptions)
@@ -223,7 +227,7 @@ function EmblaCarousel(
     return slides
   }
 
-  const self: EmblaCarousel = {
+  const self: EmblaCarouselType = {
     canScrollNext,
     canScrollPrev,
     clickAllowed,

@@ -1,22 +1,22 @@
 import { map, roundToDecimals, mathSign } from './utils'
-import { Vector1D } from './vector1d'
+import { Vector1D, Vector1DType } from './vector1d'
 
-export type ScrollBody = {
+export type ScrollBodyType = {
   direction: () => number
-  seek: (v: Vector1D) => ScrollBody
-  settle: (v: Vector1D) => boolean
+  seek: (v: Vector1DType) => ScrollBodyType
+  settle: (v: Vector1DType) => boolean
   update: () => void
-  useBaseMass: () => ScrollBody
-  useBaseSpeed: () => ScrollBody
-  useMass: (n: number) => ScrollBody
-  useSpeed: (n: number) => ScrollBody
+  useBaseMass: () => ScrollBodyType
+  useBaseSpeed: () => ScrollBodyType
+  useMass: (n: number) => ScrollBodyType
+  useSpeed: (n: number) => ScrollBodyType
 }
 
 export function ScrollBody(
-  location: Vector1D,
+  location: Vector1DType,
   baseSpeed: number,
   baseMass: number,
-): ScrollBody {
+): ScrollBodyType {
   const roundToTwoDecimals = roundToDecimals(2)
   const velocity = Vector1D(0)
   const acceleration = Vector1D(0)
@@ -32,12 +32,12 @@ export function ScrollBody(
     acceleration.multiply(0)
   }
 
-  function applyForce(v: Vector1D): void {
+  function applyForce(v: Vector1DType): void {
     v.divide(mass)
     acceleration.add(v)
   }
 
-  function seek(v: Vector1D): ScrollBody {
+  function seek(v: Vector1DType): ScrollBodyType {
     attraction.set(v).subtract(location)
     const magnitude = attraction.get()
     const m = map(magnitude, 0, 100, 0, speed)
@@ -50,7 +50,7 @@ export function ScrollBody(
     return self
   }
 
-  function settle(v: Vector1D): boolean {
+  function settle(v: Vector1DType): boolean {
     const diff = v.get() - location.get()
     const diffRounded = roundToTwoDecimals(diff)
     const hasSettled = !diffRounded
@@ -62,25 +62,25 @@ export function ScrollBody(
     return attractionDirection
   }
 
-  function useSpeed(n: number): ScrollBody {
+  function useBaseSpeed(): ScrollBodyType {
+    return useSpeed(baseSpeed)
+  }
+
+  function useBaseMass(): ScrollBodyType {
+    return useMass(baseMass)
+  }
+
+  function useSpeed(n: number): ScrollBodyType {
     speed = n
     return self
   }
 
-  function useMass(n: number): ScrollBody {
+  function useMass(n: number): ScrollBodyType {
     mass = n
     return self
   }
 
-  function useBaseSpeed(): ScrollBody {
-    return useSpeed(baseSpeed)
-  }
-
-  function useBaseMass(): ScrollBody {
-    return useMass(baseMass)
-  }
-
-  const self: ScrollBody = {
+  const self: ScrollBodyType = {
     direction,
     seek,
     settle,

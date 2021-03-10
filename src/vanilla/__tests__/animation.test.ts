@@ -1,7 +1,7 @@
-import { Animation } from '../components/animation'
+import { Animation, AnimationType } from '../components/animation'
 
 let counter: number
-let animation: Animation
+let animation: AnimationType
 
 const callback: FrameRequestCallback = (): void => {
   counter += 1

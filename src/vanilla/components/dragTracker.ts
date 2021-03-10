@@ -1,15 +1,18 @@
-import { Axis, AxisOption } from './axis'
-import { PxToPercent } from './pxToPercent'
-import { Vector1D } from './vector1d'
+import { AxisOptionType, AxisType } from './axis'
+import { PxToPercentType } from './pxToPercent'
+import { Vector1D, Vector1DType } from './vector1d'
 
-export type DragTracker = {
+export type DragTrackerType = {
   pointerDown: (evt: Event) => number
   pointerMove: (evt: Event) => number
   pointerUp: () => number
-  readPoint: (evt: any, axis: AxisOption) => Vector1D
+  readPoint: (evt: any, axis: AxisOptionType) => Vector1DType
 }
 
-export function DragTracker(axis: Axis, pxToPercent: PxToPercent): DragTracker {
+export function DragTracker(
+  axis: AxisType,
+  pxToPercent: PxToPercentType,
+): DragTrackerType {
   const { scroll: scrollAxis } = axis
   const coords = { x: 'clientX', y: 'clientY' }
   const startDrag = Vector1D(0)
@@ -23,7 +26,7 @@ export function DragTracker(axis: Axis, pxToPercent: PxToPercent): DragTracker {
   let lastMoveTime = new Date().getTime()
   let isMouse = false
 
-  function readPoint(evt: any, type: AxisOption): Vector1D {
+  function readPoint(evt: any, type: AxisOptionType): Vector1DType {
     isMouse = !evt.touches
     const c = coords[type]
     const value = isMouse ? evt[c] : evt.touches[0][c]
@@ -68,7 +71,7 @@ export function DragTracker(axis: Axis, pxToPercent: PxToPercent): DragTracker {
     return pxToPercent.measure(lastDrag.get())
   }
 
-  const self: DragTracker = {
+  const self: DragTrackerType = {
     pointerDown,
     pointerMove,
     pointerUp,

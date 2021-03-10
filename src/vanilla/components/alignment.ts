@@ -1,10 +1,13 @@
-export type AlignmentOption = 'start' | 'center' | 'end' | number
+export type AlignmentOptionType = 'start' | 'center' | 'end' | number
 
-export type Alignment = {
+export type AlignmentType = {
   measure: (n: number) => number
 }
 
-export function Alignment(align: AlignmentOption, viewSize: number): Alignment {
+export function Alignment(
+  align: AlignmentOptionType,
+  viewSize: number,
+): AlignmentType {
   const predefined = { start, center, end }
 
   function start(): number {
@@ -28,7 +31,7 @@ export function Alignment(align: AlignmentOption, viewSize: number): Alignment {
     return predefined[align](n)
   }
 
-  const self: Alignment = {
+  const self: AlignmentType = {
     measure,
   }
   return self

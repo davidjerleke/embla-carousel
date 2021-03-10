@@ -1,4 +1,4 @@
-export type Limit = {
+export type LimitType = {
   min: number
   max: number
   length: number
@@ -10,7 +10,7 @@ export type Limit = {
   removeOffset: (n: number) => number
 }
 
-export function Limit(min: number, max: number): Limit {
+export function Limit(min: number, max: number): LimitType {
   const length = Math.abs(min - max)
 
   function reachedMin(n: number): boolean {
@@ -42,7 +42,7 @@ export function Limit(min: number, max: number): Limit {
     return reachedMin(n) ? min : max
   }
 
-  const self: Limit = {
+  const self: LimitType = {
     constrain,
     length,
     loop,

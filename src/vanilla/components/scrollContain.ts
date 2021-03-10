@@ -1,9 +1,9 @@
-import { Limit } from './limit'
+import { Limit, LimitType } from './limit'
 import { arrayLast } from './utils'
 
-export type ScrollContainOption = '' | 'trimSnaps' | 'keepSnaps'
+export type ScrollContainOptionType = '' | 'trimSnaps' | 'keepSnaps'
 
-export type ScrollContain = {
+export type ScrollContainType = {
   snapsContained: number[]
 }
 
@@ -12,13 +12,13 @@ export function ScrollContain(
   contentSize: number,
   snaps: number[],
   snapsAligned: number[],
-  containScroll: ScrollContainOption,
-): ScrollContain {
+  containScroll: ScrollContainOptionType,
+): ScrollContainType {
   const scrollBounds = Limit(-contentSize + viewSize, snaps[0])
   const snapsBounded = snapsAligned.map(scrollBounds.constrain)
   const snapsContained = measureContained()
 
-  function findDuplicates(): Limit {
+  function findDuplicates(): LimitType {
     const startSnap = snapsBounded[0]
     const endSnap = arrayLast(snapsBounded)
     const min = snapsBounded.lastIndexOf(startSnap)
@@ -33,7 +33,7 @@ export function ScrollContain(
     return snapsBounded.slice(min, max)
   }
 
-  const self: ScrollContain = {
+  const self: ScrollContainType = {
     snapsContained,
   }
   return self

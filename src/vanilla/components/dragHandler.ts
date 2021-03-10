@@ -1,18 +1,18 @@
-import { Animation } from './animation'
-import { Counter } from './counter'
-import { Direction } from './direction'
-import { DragTracker } from './dragTracker'
-import { EventEmitter } from './eventEmitter'
-import { Axis } from './axis'
+import { AnimationType } from './animation'
+import { CounterType } from './counter'
+import { DirectionType } from './direction'
+import { DragTrackerType } from './dragTracker'
+import { EventEmitterType } from './eventEmitter'
+import { AxisType } from './axis'
 import { EventStore } from './eventStore'
-import { Limit } from './limit'
-import { ScrollBody } from './scrollBody'
-import { ScrollTarget } from './scrollTarget'
-import { ScrollTo } from './scrollTo'
-import { Vector1D } from './vector1d'
+import { LimitType } from './limit'
+import { ScrollBodyType } from './scrollBody'
+import { ScrollTargetType } from './scrollTarget'
+import { ScrollToType } from './scrollTo'
+import { Vector1D, Vector1DType } from './vector1d'
 import { deltaAbs, factorAbs, mathSign } from './utils'
 
-export type DragHandler = {
+export type DragHandlerType = {
   addActivationEvents: () => void
   clickAllowed: () => boolean
   pointerDown: () => boolean
@@ -20,21 +20,21 @@ export type DragHandler = {
 }
 
 export function DragHandler(
-  axis: Axis,
-  direction: Direction,
+  axis: AxisType,
+  direction: DirectionType,
   rootNode: HTMLElement,
-  target: Vector1D,
+  target: Vector1DType,
   dragFree: boolean,
-  dragTracker: DragTracker,
-  location: Vector1D,
-  animation: Animation,
-  scrollTo: ScrollTo,
-  scrollBody: ScrollBody,
-  scrollTarget: ScrollTarget,
-  index: Counter,
-  limit: Limit,
-  events: EventEmitter,
-): DragHandler {
+  dragTracker: DragTrackerType,
+  location: Vector1DType,
+  animation: AnimationType,
+  scrollTo: ScrollToType,
+  scrollBody: ScrollBodyType,
+  scrollTarget: ScrollTargetType,
+  index: CounterType,
+  limit: LimitType,
+  events: EventEmitterType,
+): DragHandlerType {
   const { scroll: scrollAxis, cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const startScroll = Vector1D(0)
@@ -170,7 +170,7 @@ export function DragHandler(
     return pointerIsDown
   }
 
-  const self: DragHandler = {
+  const self: DragHandlerType = {
     addActivationEvents,
     clickAllowed,
     pointerDown,

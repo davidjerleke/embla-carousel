@@ -1,7 +1,7 @@
-import { Vector1D } from '../components/vector1d'
+import { Vector1D, Vector1DType } from '../components/vector1d'
 
-let vector1: Vector1D
-let vector2: Vector1D
+let vector1: Vector1DType
+let vector2: Vector1DType
 
 const initialVectorValue1 = 10
 const initialVectorValue2 = 5

@@ -1,13 +1,13 @@
-import { AlignmentOption } from './alignment'
-import { AxisOption } from './axis'
-import { DirectionOption } from './direction'
-import { ScrollContainOption } from './scrollContain'
+import { AlignmentOptionType } from './alignment'
+import { AxisOptionType } from './axis'
+import { DirectionOptionType } from './direction'
+import { ScrollContainOptionType } from './scrollContain'
 
-export type Options = {
-  align: AlignmentOption
-  axis: AxisOption
-  containScroll: ScrollContainOption
-  direction: DirectionOption
+export type OptionsType = {
+  align: AlignmentOptionType
+  axis: AxisOptionType
+  containScroll: ScrollContainOptionType
+  direction: DirectionOptionType
   dragFree: boolean
   draggable: boolean
   draggableClass: string
@@ -20,7 +20,7 @@ export type Options = {
   startIndex: number
 }
 
-export const defaultOptions: Options = {
+export const defaultOptions: OptionsType = {
   align: 'center',
   axis: 'x',
   containScroll: '',
@@ -37,4 +37,4 @@ export const defaultOptions: Options = {
   startIndex: 0,
 }
 
-export type EmblaOptions = Partial<Options>
+export type EmblaOptionsType = Partial<OptionsType>

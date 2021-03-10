@@ -1,33 +1,33 @@
-import { Counter } from './counter'
-import { Limit } from './limit'
-import { Vector1D } from './vector1d'
+import { CounterType } from './counter'
+import { LimitType } from './limit'
+import { Vector1DType } from './vector1d'
 
-export type Target = {
+export type TargetType = {
   distance: number
   index: number
 }
 
-export type ScrollTarget = {
-  byIndex: (target: number, direction: number) => Target
-  byDistance: (force: number, snap: boolean) => Target
+export type ScrollTargetType = {
+  byIndex: (target: number, direction: number) => TargetType
+  byDistance: (force: number, snap: boolean) => TargetType
   shortcut: (target: number, direction: number) => number
 }
 
 export function ScrollTarget(
-  indexCurrent: Counter,
+  indexCurrent: CounterType,
   loop: boolean,
   scrollSnaps: number[],
   contentSize: number,
-  limit: Limit,
-  targetVector: Vector1D,
-): ScrollTarget {
+  limit: LimitType,
+  targetVector: Vector1DType,
+): ScrollTargetType {
   const { reachedMax, reachedAny, removeOffset } = limit
 
   function minDistance(d1: number, d2: number): number {
     return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
-  function findTargetSnap(target: number): Target {
+  function findTargetSnap(target: number): TargetType {
     const distance = removeOffset(target)
     const ascDiffsToSnaps = scrollSnaps
       .map(scrollSnap => scrollSnap - distance)
@@ -59,13 +59,13 @@ export function ScrollTarget(
     return reachedMax(target) ? min : max
   }
 
-  function byIndex(index: number, direction: number): Target {
+  function byIndex(index: number, direction: number): TargetType {
     const diffToSnap = scrollSnaps[index] - targetVector.get()
     const distance = shortcut(diffToSnap, direction)
     return { index, distance }
   }
 
-  function byDistance(distance: number, snap: boolean): Target {
+  function byDistance(distance: number, snap: boolean): TargetType {
     const target = targetVector.get() + distance
     const targetSnap = findTargetSnap(target)
     const index = findTargetIndex(target, targetSnap.index)
@@ -79,7 +79,7 @@ export function ScrollTarget(
     return { index, distance: snapDistance }
   }
 
-  const self: ScrollTarget = {
+  const self: ScrollTargetType = {
     byDistance,
     byIndex,
     shortcut,

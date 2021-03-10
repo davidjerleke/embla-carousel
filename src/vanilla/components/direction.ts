@@ -1,17 +1,17 @@
-export type DirectionOption = 'ltr' | 'rtl'
+export type DirectionOptionType = 'ltr' | 'rtl'
 
-export type Direction = {
+export type DirectionType = {
   applyTo: (n: number) => number
 }
 
-export function Direction(direction: DirectionOption): Direction {
+export function Direction(direction: DirectionOptionType): DirectionType {
   const sign = direction === 'rtl' ? -1 : 1
 
   function applyTo(n: number): number {
     return n * sign
   }
 
-  const self: Direction = {
+  const self: DirectionType = {
     applyTo,
   }
   return self

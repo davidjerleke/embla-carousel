@@ -1,8 +1,8 @@
-import { Counter } from '../components/counter'
+import { Counter, CounterType } from '../components/counter'
 import { Limit } from '../components/limit'
 
-let loopCounter: Counter
-let limitCounter: Counter
+let loopCounter: CounterType
+let limitCounter: CounterType
 
 const limit = Limit(0, 5)
 

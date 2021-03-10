@@ -1,4 +1,8 @@
-import { Alignment, AlignmentOption } from '../components/alignment'
+import {
+  Alignment,
+  AlignmentOptionType,
+  AlignmentType,
+} from '../components/alignment'
 
 const viewSize = 100
 const itemSize = 50
@@ -10,7 +14,7 @@ const endAlign = 50
 const percentFraction = 0.2
 const percentAlign = viewSize * percentFraction
 
-const getAlignment = (align: AlignmentOption): Alignment =>
+const getAlignment = (align: AlignmentOptionType): AlignmentType =>
   Alignment(align, viewSize)
 
 describe('Alignment', () => {

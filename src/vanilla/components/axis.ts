@@ -1,20 +1,20 @@
-import { DirectionOption } from './direction'
+import { DirectionOptionType } from './direction'
 
-export type AxisOption = 'x' | 'y'
-type AxisEdge = 'top' | 'right' | 'bottom' | 'left'
+export type AxisOptionType = 'x' | 'y'
+type AxisEdgeType = 'top' | 'right' | 'bottom' | 'left'
 
-export type Axis = {
-  scroll: AxisOption
-  cross: AxisOption
-  startEdge: AxisEdge
-  endEdge: AxisEdge
+export type AxisType = {
+  scroll: AxisOptionType
+  cross: AxisOptionType
+  startEdge: AxisEdgeType
+  endEdge: AxisEdgeType
   measureSize: (rect: DOMRect) => number
 }
 
 export function Axis(
-  axis: AxisOption,
-  contentDirection: DirectionOption,
-): Axis {
+  axis: AxisOptionType,
+  contentDirection: DirectionOptionType,
+): AxisType {
   const scroll = axis === 'y' ? 'y' : 'x'
   const cross = axis === 'y' ? 'x' : 'y'
   const startEdge = getStartEdge()
@@ -25,17 +25,17 @@ export function Axis(
     return scroll === 'x' ? width : height
   }
 
-  function getStartEdge(): AxisEdge {
+  function getStartEdge(): AxisEdgeType {
     if (scroll === 'y') return 'top'
     return contentDirection === 'rtl' ? 'right' : 'left'
   }
 
-  function getEndEdge(): AxisEdge {
+  function getEndEdge(): AxisEdgeType {
     if (scroll === 'y') return 'bottom'
     return contentDirection === 'rtl' ? 'left' : 'right'
   }
 
-  const self: Axis = {
+  const self: AxisType = {
     scroll,
     cross,
     startEdge,

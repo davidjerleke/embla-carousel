@@ -1,10 +1,10 @@
-import { Limit } from './limit'
+import { LimitType } from './limit'
 
-export type ScrollProgress = {
+export type ScrollProgressType = {
   get: (n: number) => number
 }
 
-export function ScrollProgress(limit: Limit): ScrollProgress {
+export function ScrollProgress(limit: LimitType): ScrollProgressType {
   const { max, length: scrollLength } = limit
 
   function get(n: number): number {
@@ -12,7 +12,7 @@ export function ScrollProgress(limit: Limit): ScrollProgress {
     return currentLocation / -scrollLength
   }
 
-  const self: ScrollProgress = {
+  const self: ScrollProgressType = {
     get,
   }
   return self

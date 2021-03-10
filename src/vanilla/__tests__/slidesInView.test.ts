@@ -1,6 +1,10 @@
-import { Alignment, AlignmentOption } from '../components/alignment'
-import { SlidesInView } from '../components/slidesInView'
+import { SlidesInView, SlidesInViewType } from '../components/slidesInView'
 import { arrayKeys } from '../components/utils'
+import {
+  Alignment,
+  AlignmentOptionType,
+  AlignmentType,
+} from '../components/alignment'
 
 const viewSize = 100
 const slideSizes = [30, 40, 25, 40, 60, 30, 50]
@@ -13,13 +17,13 @@ const snaps = arrayKeys(slideSizes).map(index => {
 const noThreshold = 0
 const fullThreshold = 1
 
-const getAlignment = (align: AlignmentOption): Alignment =>
+const getAlignment = (align: AlignmentOptionType): AlignmentType =>
   Alignment(align, viewSize)
 
 const getSlidesInView = (
   loop: boolean,
   inViewThreshold: number,
-): SlidesInView => {
+): SlidesInViewType => {
   return SlidesInView(
     viewSize,
     contentSize,

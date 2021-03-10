@@ -1,5 +1,5 @@
-import { Axis, AxisOption } from '../components/axis'
-import { DirectionOption } from '../components/direction'
+import { Axis, AxisOptionType, AxisType } from '../components/axis'
+import { DirectionOptionType } from '../components/direction'
 
 const horizontalAxis = 'x'
 const verticalAxis = 'y'
@@ -12,8 +12,10 @@ const mockRect = {
   height: verticalSize,
 } as DOMRect
 
-const getAxis = (axis: AxisOption, contentDirection: DirectionOption): Axis =>
-  Axis(axis, contentDirection)
+const getAxis = (
+  axis: AxisOptionType,
+  contentDirection: DirectionOptionType,
+): AxisType => Axis(axis, contentDirection)
 
 describe('Axis', () => {
   describe('When axis is X and direction is LTR, it', () => {

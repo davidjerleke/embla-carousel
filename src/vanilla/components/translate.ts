@@ -1,19 +1,19 @@
-import { Axis } from './axis'
-import { Direction } from './direction'
+import { AxisType } from './axis'
+import { DirectionType } from './direction'
 import { roundToDecimals } from './utils'
-import { Vector1D } from './vector1d'
+import { Vector1DType } from './vector1d'
 
-export type Translate = {
+export type TranslateType = {
   clear: () => void
-  to: (vector: Vector1D) => void
+  to: (vector: Vector1DType) => void
   toggleActive: (active: boolean) => void
 }
 
 export function Translate(
-  axis: Axis,
-  direction: Direction,
+  axis: AxisType,
+  direction: DirectionType,
   container: HTMLElement,
-): Translate {
+): TranslateType {
   const containerStyle = container.style
   const translate = axis.scroll === 'x' ? x : y
   const roundToTwoDecimals = roundToDecimals(2)
@@ -29,7 +29,7 @@ export function Translate(
     return `translate3d(0px,${n}%,0px)`
   }
 
-  function to(v: Vector1D): void {
+  function to(v: Vector1DType): void {
     const target = roundToTwoDecimals(v.get())
     if (disabled || location === target) return
 
@@ -47,7 +47,7 @@ export function Translate(
     location = 0
   }
 
-  const self: Translate = {
+  const self: TranslateType = {
     clear,
     to,
     toggleActive,

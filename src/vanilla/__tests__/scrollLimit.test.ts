@@ -1,11 +1,11 @@
-import { Limit } from '../components/limit'
+import { LimitType } from '../components/limit'
 import { ScrollLimit } from '../components/scrollLimit'
 
 const snapSizes = [80, 40, 30, 40, 60]
 const scrollSnaps = [10, -50, -85, -120, -170]
 const contentSize = snapSizes.reduce((a, s) => a + s, 0)
 
-const getScrollLimit = (loop: boolean): Limit => {
+const getScrollLimit = (loop: boolean): LimitType => {
   return ScrollLimit(contentSize, scrollSnaps, loop).limit
 }
 

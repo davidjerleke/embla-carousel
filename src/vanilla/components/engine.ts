@@ -1,53 +1,53 @@
 import { Alignment } from './alignment'
-import { Animation } from './animation'
-import { Axis } from './axis'
-import { Counter } from './counter'
-import { Direction } from './direction'
-import { DragHandler } from './dragHandler'
+import { Animation, AnimationType } from './animation'
+import { Axis, AxisType } from './axis'
+import { Counter, CounterType } from './counter'
+import { Direction, DirectionType } from './direction'
+import { DragHandler, DragHandlerType } from './dragHandler'
 import { DragTracker } from './dragTracker'
-import { EventEmitter } from './eventEmitter'
-import { Limit } from './limit'
-import { Options } from './options'
-import { PxToPercent } from './pxToPercent'
-import { ScrollBody } from './scrollBody'
-import { ScrollBounds } from './scrollBounds'
+import { EventEmitterType } from './eventEmitter'
+import { Limit, LimitType } from './limit'
+import { OptionsType } from './options'
+import { PxToPercent, PxToPercentType } from './pxToPercent'
+import { ScrollBody, ScrollBodyType } from './scrollBody'
+import { ScrollBounds, ScrollBoundsType } from './scrollBounds'
 import { ScrollContain } from './scrollContain'
 import { ScrollLimit } from './scrollLimit'
-import { ScrollLooper } from './scrollLooper'
-import { ScrollProgress } from './scrollProgress'
+import { ScrollLooper, ScrollLooperType } from './scrollLooper'
+import { ScrollProgress, ScrollProgressType } from './scrollProgress'
 import { ScrollSnap } from './scrollSnap'
-import { ScrollTarget } from './scrollTarget'
-import { ScrollTo } from './scrollTo'
-import { SlideLooper } from './slideLooper'
-import { SlideFocus } from './slideFocus'
-import { SlidesInView } from './slidesInView'
+import { ScrollTarget, ScrollTargetType } from './scrollTarget'
+import { ScrollTo, ScrollToType } from './scrollTo'
+import { SlideLooper, SlideLooperType } from './slideLooper'
+import { SlideFocus, SlideFocusType } from './slideFocus'
+import { SlidesInView, SlidesInViewType } from './slidesInView'
 import { SlideSizes } from './slideSizes'
-import { Translate } from './translate'
+import { Translate, TranslateType } from './translate'
 import { arrayKeys, arrayLast, lastIndex } from './utils'
-import { Vector1D } from './vector1d'
+import { Vector1D, Vector1DType } from './vector1d'
 
 export type Engine = {
-  axis: Axis
-  direction: Direction
-  animation: Animation
-  scrollBounds: ScrollBounds
-  scrollLooper: ScrollLooper
-  scrollProgress: ScrollProgress
-  index: Counter
-  indexPrevious: Counter
-  limit: Limit
-  location: Vector1D
-  options: Options
-  pxToPercent: PxToPercent
-  scrollBody: ScrollBody
-  dragHandler: DragHandler
-  slideFocus: SlideFocus
-  slideLooper: SlideLooper
-  slidesInView: SlidesInView
-  target: Vector1D
-  translate: Translate
-  scrollTo: ScrollTo
-  scrollTarget: ScrollTarget
+  axis: AxisType
+  direction: DirectionType
+  animation: AnimationType
+  scrollBounds: ScrollBoundsType
+  scrollLooper: ScrollLooperType
+  scrollProgress: ScrollProgressType
+  index: CounterType
+  indexPrevious: CounterType
+  limit: LimitType
+  location: Vector1DType
+  options: OptionsType
+  pxToPercent: PxToPercentType
+  scrollBody: ScrollBodyType
+  dragHandler: DragHandlerType
+  slideFocus: SlideFocusType
+  slideLooper: SlideLooperType
+  slidesInView: SlidesInViewType
+  target: Vector1DType
+  translate: TranslateType
+  scrollTo: ScrollToType
+  scrollTarget: ScrollTargetType
   scrollSnaps: number[]
   slideIndexes: number[]
 }
@@ -56,8 +56,8 @@ export function Engine(
   root: HTMLElement,
   container: HTMLElement,
   slides: HTMLElement[],
-  options: Options,
-  events: EventEmitter,
+  options: OptionsType,
+  events: EventEmitterType,
 ): Engine {
   // Options
   const {

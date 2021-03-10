@@ -1,19 +1,24 @@
 import { useRef, useEffect, useState, useMemo } from 'react'
-import Carousel, { EmblaCarousel } from '../vanilla'
-import { EmblaOptions } from '../vanilla/components/options'
+import EmblaCarousel, { EmblaCarouselType } from '../vanilla'
+import { EmblaOptionsType } from '../vanilla/components/options'
 import { areEqualShallow, canUseDOM } from './utils'
 
-type ViewportRef = <ViewportElement extends HTMLElement>(
+type ViewportRefType = <ViewportElement extends HTMLElement>(
   instance: ViewportElement | null,
 ) => void
 
-export type UseEmblaCarousel = [ViewportRef, EmblaCarousel | undefined]
+export type UseEmblaCarouselType = [
+  ViewportRefType,
+  EmblaCarouselType | undefined,
+]
 
-function useEmblaCarousel(options: EmblaOptions = {}): UseEmblaCarousel {
-  const [embla, setEmbla] = useState<EmblaCarousel>()
+function useEmblaCarousel(
+  options: EmblaOptionsType = {},
+): UseEmblaCarouselType {
+  const [embla, setEmbla] = useState<EmblaCarouselType>()
   const [viewport, setViewport] = useState<HTMLElement>()
-  const storedOptions = useRef<EmblaOptions>(options)
-  const activeOptions = useMemo<EmblaOptions>(() => {
+  const storedOptions = useRef<EmblaOptionsType>(options)
+  const activeOptions = useMemo<EmblaOptionsType>(() => {
     if (!areEqualShallow(storedOptions.current, options)) {
       storedOptions.current = options
     }
@@ -22,7 +27,7 @@ function useEmblaCarousel(options: EmblaOptions = {}): UseEmblaCarousel {
 
   useEffect(() => {
     if (canUseDOM() && viewport) {
-      const newEmbla = Carousel(viewport, activeOptions)
+      const newEmbla = EmblaCarousel(viewport, activeOptions)
       setEmbla(newEmbla)
       return () => newEmbla.destroy()
     } else {
@@ -30,7 +35,7 @@ function useEmblaCarousel(options: EmblaOptions = {}): UseEmblaCarousel {
     }
   }, [viewport, activeOptions, setEmbla])
 
-  return [setViewport as ViewportRef, embla]
+  return [setViewport as ViewportRefType, embla]
 }
 
 export { useEmblaCarousel }

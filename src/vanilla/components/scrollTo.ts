@@ -1,23 +1,23 @@
-import { Animation } from './animation'
-import { Counter } from './counter'
-import { EventEmitter } from './eventEmitter'
-import { ScrollTarget, Target } from './scrollTarget'
-import { Vector1D } from './vector1d'
+import { AnimationType } from './animation'
+import { CounterType } from './counter'
+import { EventEmitterType } from './eventEmitter'
+import { ScrollTargetType, TargetType } from './scrollTarget'
+import { Vector1DType } from './vector1d'
 
-export type ScrollTo = {
+export type ScrollToType = {
   distance: (n: number, snap: boolean) => void
   index: (n: number, direction: number) => void
 }
 
 export function ScrollTo(
-  animation: Animation,
-  indexCurrent: Counter,
-  indexPrevious: Counter,
-  scrollTarget: ScrollTarget,
-  targetVector: Vector1D,
-  events: EventEmitter,
-): ScrollTo {
-  function scrollTo(target: Target): void {
+  animation: AnimationType,
+  indexCurrent: CounterType,
+  indexPrevious: CounterType,
+  scrollTarget: ScrollTargetType,
+  targetVector: Vector1DType,
+  events: EventEmitterType,
+): ScrollToType {
+  function scrollTo(target: TargetType): void {
     const distanceDiff = target.distance
     const indexDiff = target.index !== indexCurrent.get()
 
@@ -43,7 +43,7 @@ export function ScrollTo(
     scrollTo(target)
   }
 
-  const self: ScrollTo = {
+  const self: ScrollToType = {
     distance,
     index,
   }

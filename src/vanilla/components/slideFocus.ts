@@ -1,16 +1,16 @@
-import { EventStore } from './eventStore'
-import { ScrollTo } from './scrollTo'
+import { EventStore, EventStoreType } from './eventStore'
+import { ScrollToType } from './scrollTo'
 
-export type SlideFocus = {
+export type SlideFocusType = {
   addActivationEvents: (slides: HTMLElement[]) => void
-  removeAllEvents: EventStore['removeAll']
+  removeAllEvents: EventStoreType['removeAll']
 }
 
 export function SlideFocus(
   rootNode: HTMLElement,
-  scrollTo: ScrollTo,
+  scrollTo: ScrollToType,
   slidesToScroll: number,
-): SlideFocus {
+): SlideFocusType {
   const eventStore = EventStore()
   const removeAllEvents = eventStore.removeAll
   let lastTabPressTime = 0
@@ -38,7 +38,7 @@ export function SlideFocus(
     slides.forEach(addFocusEvent)
   }
 
-  const self: SlideFocus = {
+  const self: SlideFocusType = {
     addActivationEvents,
     removeAllEvents,
   }
