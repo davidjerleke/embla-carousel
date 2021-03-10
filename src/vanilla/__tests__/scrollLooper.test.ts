@@ -27,7 +27,7 @@ beforeEach(() => {
 
 describe('ScrollLooper', () => {
   describe('Loops vectors when direction is', () => {
-    test('1 and location > limit max', () => {
+    test('1 and location > limit MAX', () => {
       const direction = 1
       location.set(maxLimitWithLoopJoint + 0.01)
       scrollLooper.loop(vectors, direction)
@@ -35,7 +35,7 @@ describe('ScrollLooper', () => {
       expect(vectors[1].get()).toBe(vectorInitialValue2 - contentSize)
     })
 
-    test('-1 and location < limit min', () => {
+    test('-1 and location < limit MIN', () => {
       const direction = -1
       location.set(minLimitWithLoopJoint - 0.01)
       scrollLooper.loop(vectors, direction)
@@ -45,7 +45,7 @@ describe('ScrollLooper', () => {
   })
 
   describe('Does not loop vectors when direction is', () => {
-    test('1 and location is within limit max', () => {
+    test('1 and location is within limit MAX', () => {
       const direction = 1
       location.set(maxLimitWithLoopJoint)
       scrollLooper.loop(vectors, direction)
@@ -53,7 +53,7 @@ describe('ScrollLooper', () => {
       expect(vectors[1].get()).toBe(vectorInitialValue2)
     })
 
-    test('-1 and location is within limit min', () => {
+    test('-1 and location is within limit MIN', () => {
       const direction = -1
       location.set(minLimitWithLoopJoint)
       scrollLooper.loop(vectors, direction)

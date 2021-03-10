@@ -1,11 +1,10 @@
-import { arrayKeys } from './utils'
-
 type Params = {
   contentSize: number
   slideSizes: number[]
   viewSize: number
   loop: boolean
   inViewThreshold: number
+  snaps: number[]
 }
 
 type SlideBound = {
@@ -20,23 +19,17 @@ export type SlidesInView = {
 }
 
 export function SlidesInView(params: Params): SlidesInView {
-  const { contentSize, slideSizes, viewSize } = params
+  const { viewSize, contentSize, slideSizes, snaps } = params
   const { inViewThreshold, loop } = params
   const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
-  const scrollSnaps = arrayKeys(slideSizes).map(scrollSnap)
   const offsets = loop ? [0, contentSize, -contentSize] : [0]
-  const slideBounds = offsets.reduce((a: SlideBound[], loopOffset) => {
-    return a.concat(findSlideBounds(loopOffset, threshold))
+  const slideBounds = offsets.reduce((a: SlideBound[], offset) => {
+    return a.concat(findSlideBounds(offset, threshold))
   }, [])
-
-  function scrollSnap(index: number): number {
-    const span = slideSizes.slice(0, index)
-    return span.reduce((a, s) => a - s, 0)
-  }
 
   function findSlideBounds(offset: number, threshold?: number): SlideBound[] {
     const thresholds = slideSizes.map(s => s * (threshold || 0))
-    return scrollSnaps.map((snap, index) => ({
+    return snaps.map((snap, index) => ({
       start: snap - slideSizes[index] + thresholds[index] + offset,
       end: snap + viewSize - thresholds[index] + offset,
       index,

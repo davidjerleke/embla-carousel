@@ -21,8 +21,9 @@ import { ScrollTo } from './scrollTo'
 import { SlideLooper } from './slideLooper'
 import { SlideFocus } from './slideFocus'
 import { SlidesInView } from './slidesInView'
+import { SlideSizes } from './slideSizes'
 import { Translate } from './translate'
-import { arrayKeys, groupArray } from './utils'
+import { arrayKeys, arrayLast, lastIndex } from './utils'
 import { Vector1D } from './vector1d'
 
 export type Engine = {
@@ -73,31 +74,61 @@ export function Engine(
   } = options
 
   // Measurements
-  const axis = Axis(scrollAxis)
-  const pxToPercent = PxToPercent(axis.measure(container))
-  const viewSize = pxToPercent.totalPercent
-  const slideSizes = slides.map(axis.measure).map(pxToPercent.measure)
-  const slideIndexes = arrayKeys(slideSizes)
-  const groupedSizes = groupArray(slideSizes, slidesToScroll)
-  const snapSizes = groupedSizes.map(g => g.reduce((a, s) => a + s))
-  const contentSize = slideSizes.reduce((a, s) => a + s, 0)
-  const alignment = Alignment({ align, viewSize })
-  const scrollSnap = ScrollSnap({ snapSizes, alignment, loop })
-  const defaultSnaps = arrayKeys(snapSizes).map(scrollSnap.measure)
-  const contain = ScrollContain({ alignment, contentSize, viewSize })
-  const shouldContain = !loop && containScroll !== ''
-  const trimSnaps = containScroll === 'trimSnaps'
-  const containedSnaps = contain.measure(defaultSnaps, trimSnaps)
-  const scrollSnaps = shouldContain ? containedSnaps : defaultSnaps
-  const scrollLimit = ScrollLimit({ loop, contentSize })
-  const limit = scrollLimit.measure(scrollSnaps)
+  const containerRect = container.getBoundingClientRect()
+  const slideRects = slides.map(slide => slide.getBoundingClientRect())
   const direction = Direction(contentDirection)
+  const axis = Axis({
+    axis: scrollAxis,
+    contentDirection,
+  })
+  const pxToPercent = PxToPercent(axis.measureSize(containerRect))
+  const viewSize = pxToPercent.totalPercent
+  const alignment = Alignment({
+    align,
+    viewSize,
+  })
+  const { slideSizes, slideSizesWithGaps } = SlideSizes({
+    axis,
+    pxToPercent,
+    loop,
+    slides,
+    slideRects,
+  })
+  const { snaps, snapsAligned } = ScrollSnap({
+    alignment,
+    axis,
+    pxToPercent,
+    containerRect,
+    slideRects,
+    slidesToScroll,
+  })
+  const contentSize = arrayLast(snaps) * -1 + arrayLast(slideSizesWithGaps)
+  const { snapsContained } = ScrollContain({
+    contentSize,
+    viewSize,
+    snaps,
+    snapsAligned,
+    containScroll,
+  })
+  const contain = !loop && containScroll !== ''
+  const scrollSnaps = contain ? snapsContained : snapsAligned
+  const { limit } = ScrollLimit({
+    loop,
+    contentSize,
+    scrollSnaps,
+  })
 
-  // Index
-  const indexMax = Math.max(0, scrollSnaps.length - 1)
-  const indexSpan = Limit({ min: 0, max: indexMax })
-  const index = Counter({ limit: indexSpan, start: startIndex, loop })
+  // Indexes
+  const index = Counter({
+    loop,
+    start: startIndex,
+    limit: Limit({
+      min: 0,
+      max: lastIndex(scrollSnaps),
+    }),
+  })
   const indexPrevious = index.clone()
+  const slideIndexes = arrayKeys(slides)
 
   // Draw
   const update = (): void => {
@@ -154,8 +185,9 @@ export function Engine(
     contentSize,
     inViewThreshold,
     loop,
-    slideSizes,
     viewSize,
+    snaps,
+    slideSizes,
   })
 
   // DragHandler
@@ -217,10 +249,9 @@ export function Engine(
     slideLooper: SlideLooper({
       axis,
       contentSize,
-      direction,
       location,
       scrollSnaps,
-      slideSizes,
+      slideSizesWithGaps,
       slidesInView,
       viewSize,
     }),

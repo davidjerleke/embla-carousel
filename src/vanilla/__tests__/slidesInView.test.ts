@@ -1,17 +1,20 @@
 import { Alignment, AlignmentOption } from '../components/alignment'
 import { SlidesInView } from '../components/slidesInView'
+import { arrayKeys } from '../components/utils'
 
 const viewSize = 100
-const slideSizes = [30, 40, 29.99, 40, 60, 30, 50]
+const slideSizes = [30, 40, 25, 40, 60, 30, 50]
 const firstSlide = slideSizes[0]
 const contentSize = slideSizes.reduce((a, s) => a + s, 0)
+const snaps = arrayKeys(slideSizes).map(index => {
+  return slideSizes.slice(0, index).reduce((total, size) => total - size, 0)
+})
 
 const noThreshold = 0
 const fullThreshold = 1
 
-const getAlignment = (align: AlignmentOption): Alignment => {
-  return Alignment({ align, viewSize })
-}
+const getAlignment = (align: AlignmentOption): Alignment =>
+  Alignment({ align, viewSize })
 
 const getSlidesInView = (
   loop: boolean,
@@ -23,6 +26,7 @@ const getSlidesInView = (
     viewSize,
     inViewThreshold,
     loop,
+    snaps,
   })
 }
 
@@ -31,13 +35,13 @@ describe('SlidesInView', () => {
   const centerAlign = getAlignment('center').measure(firstSlide)
   const endAlign = getAlignment('end').measure(firstSlide)
 
-  describe('Finds slides in view with no threshold when', () => {
+  describe('Finds slides in view with NO THRESHOLD when', () => {
     describe('Loop is false, and align is', () => {
       const slidesInView = getSlidesInView(false, noThreshold)
 
       test('Start', () => {
         const indexesInView = slidesInView.check(startAlign)
-        expect(indexesInView).toEqual([0, 1, 2])
+        expect(indexesInView).toEqual([0, 1, 2, 3])
       })
 
       test('Center', () => {
@@ -56,7 +60,7 @@ describe('SlidesInView', () => {
 
       test('Start', () => {
         const indexesInView = slidesInView.check(startAlign)
-        expect(indexesInView).toEqual([0, 1, 2])
+        expect(indexesInView).toEqual([0, 1, 2, 3])
       })
 
       test('Center', () => {
@@ -71,7 +75,7 @@ describe('SlidesInView', () => {
     })
   })
 
-  describe('Finds slides in view with full threshold when', () => {
+  describe('Finds slides in view with FULL THRESHOLD when', () => {
     describe('Loop is false, and align is', () => {
       const slidesInView = getSlidesInView(false, fullThreshold)
 

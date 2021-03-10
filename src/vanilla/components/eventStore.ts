@@ -5,7 +5,7 @@ type EventOptions = boolean | AddEventListenerOptions | undefined
 export type EventStore = {
   add: (
     node: EventTarget,
-    type: string,
+    type: keyof WindowEventMap,
     handler: EventHandler,
     options?: EventOptions,
   ) => EventStore

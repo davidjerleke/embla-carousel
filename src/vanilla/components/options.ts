@@ -7,7 +7,6 @@ export type Options = {
   align: AlignmentOption
   axis: AxisOption
   containScroll: ScrollContainOption
-  containerSelector: string
   direction: DirectionOption
   dragFree: boolean
   draggable: boolean
@@ -25,7 +24,6 @@ export const defaultOptions: Options = {
   align: 'center',
   axis: 'x',
   containScroll: '',
-  containerSelector: '*',
   direction: 'ltr',
   dragFree: false,
   draggable: true,
