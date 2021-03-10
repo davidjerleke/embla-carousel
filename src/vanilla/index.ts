@@ -66,8 +66,10 @@ function EmblaCarousel(
     engine = Engine(sliderRoot, container, slides, options, events)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
-    rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
 
+    if (options.autoResize) {
+      rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
+    }
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
         deActivate()
@@ -148,10 +150,10 @@ function EmblaCarousel(
 
   function resize(): void {
     if (!activated) return
-    const newRootNodeSize = engine.axis.measureSize(
-      sliderRoot.getBoundingClientRect(),
-    )
-    if (rootNodeSize !== newRootNodeSize) reActivate()
+    if (options.autoResize) {
+      const size = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
+      if (rootNodeSize !== size) reActivate()
+    }
     events.emit('resize')
   }
 
