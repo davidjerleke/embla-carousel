@@ -5,6 +5,7 @@ import { ScrollContainOptionType } from './scrollContain'
 
 export type OptionsType = {
   align: AlignmentOptionType
+  autoResize: boolean
   axis: AxisOptionType
   containScroll: ScrollContainOptionType
   direction: DirectionOptionType
@@ -22,6 +23,7 @@ export type OptionsType = {
 
 export const defaultOptions: OptionsType = {
   align: 'center',
+  autoResize: true,
   axis: 'x',
   containScroll: '',
   direction: 'ltr',
