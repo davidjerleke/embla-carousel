@@ -39,12 +39,11 @@ export function ScrollBody(
 
   function seek(v: Vector1DType): ScrollBodyType {
     attraction.set(v).subtract(location)
-    const magnitude = attraction.get()
-    const m = map(magnitude, 0, 100, 0, speed)
+    const magnitude = map(attraction.get(), 0, 100, 0, speed)
     attractionDirection = mathSign(attraction.get())
     attraction
       .normalize()
-      .multiply(m)
+      .multiply(magnitude)
       .subtract(velocity)
     applyForce(attraction)
     return self
@@ -52,8 +51,7 @@ export function ScrollBody(
 
   function settle(v: Vector1DType): boolean {
     const diff = v.get() - location.get()
-    const diffRounded = roundToTwoDecimals(diff)
-    const hasSettled = !diffRounded
+    const hasSettled = !roundToTwoDecimals(diff)
     if (hasSettled) location.set(v)
     return hasSettled
   }
