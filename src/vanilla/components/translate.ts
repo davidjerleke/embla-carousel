@@ -1,6 +1,5 @@
 import { AxisType } from './axis'
 import { DirectionType } from './direction'
-import { roundToDecimals } from './utils'
 import { Vector1DType } from './vector1d'
 
 export type TranslateType = {
@@ -16,10 +15,7 @@ export function Translate(
 ): TranslateType {
   const containerStyle = container.style
   const translate = axis.scroll === 'x' ? x : y
-  const roundToTwoDecimals = roundToDecimals(2)
-
   let disabled = false
-  let location = 0
 
   function x(n: number): string {
     return `translate3d(${n}%,0px,0px)`
@@ -29,13 +25,9 @@ export function Translate(
     return `translate3d(0px,${n}%,0px)`
   }
 
-  function to(v: Vector1DType): void {
-    const target = roundToTwoDecimals(v.get())
-    if (disabled || location === target) return
-
-    getComputedStyle(container).transform
-    containerStyle.transform = translate(direction.applyTo(target))
-    location = target
+  function to(target: Vector1DType): void {
+    if (disabled) return
+    containerStyle.transform = translate(direction.applyTo(target.get()))
   }
 
   function toggleActive(active: boolean): void {
@@ -44,7 +36,6 @@ export function Translate(
 
   function clear(): void {
     containerStyle.transform = ''
-    location = 0
   }
 
   const self: TranslateType = {
