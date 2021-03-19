@@ -75,7 +75,7 @@ export function Engine(
 
   // Measurements
   const containerRect = container.getBoundingClientRect()
-  const slideRects = slides.map(slide => slide.getBoundingClientRect())
+  const slideRects = slides.map((slide) => slide.getBoundingClientRect())
   const direction = Direction(contentDirection)
   const axis = Axis(scrollAxis, contentDirection)
   const pxToPercent = PxToPercent(axis.measureSize(containerRect))

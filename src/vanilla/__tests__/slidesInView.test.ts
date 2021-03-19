@@ -10,7 +10,7 @@ const viewSize = 100
 const slideSizes = [30, 40, 25, 40, 60, 30, 50]
 const firstSlide = slideSizes[0]
 const contentSize = slideSizes.reduce((a, s) => a + s, 0)
-const snaps = arrayKeys(slideSizes).map(index => {
+const snaps = arrayKeys(slideSizes).map((index) => {
   return slideSizes.slice(0, index).reduce((total, size) => total - size, 0)
 })
 

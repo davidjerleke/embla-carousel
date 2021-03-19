@@ -8,9 +8,7 @@ describe('EventEmitter', () => {
   beforeEach(() => {
     callback1 = jest.fn()
     callback2 = jest.fn()
-    eventEmitter = EventEmitter()
-      .on('init', callback1)
-      .on('init', callback2)
+    eventEmitter = EventEmitter().on('init', callback1).on('init', callback2)
   })
 
   describe('Runs all callbacks when they are', () => {

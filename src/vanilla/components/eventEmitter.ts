@@ -27,7 +27,7 @@ export function EventEmitter(): EventEmitterType {
   }
 
   function emit(evt: EmblaEventType): EventEmitterType {
-    getListeners(evt).forEach(e => e(evt))
+    getListeners(evt).forEach((e) => e(evt))
     return self
   }
 
@@ -37,7 +37,7 @@ export function EventEmitter(): EventEmitterType {
   }
 
   function off(evt: EmblaEventType, cb: CallbackType): EventEmitterType {
-    listeners[evt] = getListeners(evt).filter(e => e !== cb)
+    listeners[evt] = getListeners(evt).filter((e) => e !== cb)
     return self
   }
 

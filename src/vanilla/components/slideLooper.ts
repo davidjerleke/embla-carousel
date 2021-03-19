@@ -53,10 +53,10 @@ export function SlideLooper(
     const offset = isStartEdge ? -contentSize : contentSize
     const slideBounds = slidesInView.findSlideBounds(offset)
 
-    return indexes.map(index => {
+    return indexes.map((index) => {
       const initial = isStartEdge ? 0 : -contentSize
       const altered = isStartEdge ? contentSize : 0
-      const bounds = slideBounds.filter(b => b.index === index)[0]
+      const bounds = slideBounds.filter((b) => b.index === index)[0]
       const point = bounds[isStartEdge ? 'end' : 'start']
       const getTarget = (): number =>
         scrollLocation.get() > point ? initial : altered
@@ -78,13 +78,13 @@ export function SlideLooper(
 
   function canLoop(): boolean {
     return loopPoints.every(({ index }) => {
-      const otherIndexes = ascItems.filter(i => i !== index)
+      const otherIndexes = ascItems.filter((i) => i !== index)
       return removeSlideSizes(otherIndexes, viewSize) <= 0
     })
   }
 
   function loop(slides: HTMLElement[]): void {
-    loopPoints.forEach(loopPoint => {
+    loopPoints.forEach((loopPoint) => {
       const { getTarget, location, index } = loopPoint
       const target = getTarget()
       if (target !== location) {

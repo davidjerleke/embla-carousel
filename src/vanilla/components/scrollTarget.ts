@@ -30,8 +30,8 @@ export function ScrollTarget(
   function findTargetSnap(target: number): TargetType {
     const distance = removeOffset(target)
     const ascDiffsToSnaps = scrollSnaps
-      .map(scrollSnap => scrollSnap - distance)
-      .map(diffToSnap => shortcut(diffToSnap, 0))
+      .map((scrollSnap) => scrollSnap - distance)
+      .map((diffToSnap) => shortcut(diffToSnap, 0))
       .map((diff, i) => ({ diff, index: i }))
       .sort((d1, d2) => Math.abs(d1.diff) - Math.abs(d2.diff))
 

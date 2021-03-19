@@ -12,8 +12,10 @@ export function areEqualShallow(
 ): boolean {
   return (
     Object.keys(objectA).length === Object.keys(objectB).length &&
-    Object.keys(objectA).every(objectKey => {
-      if (!objectB.hasOwnProperty(objectKey)) return false
+    Object.keys(objectA).every((objectKey) => {
+      if (!Object.prototype.hasOwnProperty.call(objectB, objectKey)) {
+        return false
+      }
       return objectA[objectKey] === objectB[objectKey]
     })
   )

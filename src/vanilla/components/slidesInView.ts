@@ -27,7 +27,7 @@ export function SlidesInView(
     offset: number,
     threshold?: number,
   ): SlideBoundType[] {
-    const thresholds = slideSizes.map(s => s * (threshold || 0))
+    const thresholds = slideSizes.map((s) => s * (threshold || 0))
     return snaps.map((snap, index) => ({
       start: snap - slideSizes[index] + thresholds[index] + offset,
       end: snap + viewSize - thresholds[index] + offset,

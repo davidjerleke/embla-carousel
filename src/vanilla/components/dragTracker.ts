@@ -63,7 +63,7 @@ export function DragTracker(
 
     const force = trackPoints
       .slice(-trackLength)
-      .map(trackPoint => currentPoint - trackPoint)
+      .map((trackPoint) => currentPoint - trackPoint)
       .sort((p1, p2) => (Math.abs(p1) < Math.abs(p2) ? 1 : -1))[0]
 
     lastDrag.set(diffTime > trackTime || !force ? 0 : force)

@@ -41,10 +41,7 @@ export function ScrollBody(
     attraction.set(v).subtract(location)
     const magnitude = map(attraction.get(), 0, 100, 0, speed)
     attractionDirection = mathSign(attraction.get())
-    attraction
-      .normalize()
-      .multiply(magnitude)
-      .subtract(velocity)
+    attraction.normalize().multiply(magnitude).subtract(velocity)
     applyForce(attraction)
     return self
   }

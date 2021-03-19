@@ -113,8 +113,8 @@ function EmblaCarousel(
     const { selectedClass } = options
     const inView = slidesInView(true)
     const notInView = slidesNotInView(true)
-    notInView.forEach(i => removeClass(slides[i], selectedClass))
-    inView.forEach(i => addClass(slides[i], selectedClass))
+    notInView.forEach((i) => removeClass(slides[i], selectedClass))
+    inView.forEach((i) => addClass(slides[i], selectedClass))
   }
 
   function deActivate(): void {
@@ -125,7 +125,7 @@ function EmblaCarousel(
     engine.translate.clear()
     engine.slideLooper.clear(slides)
     removeClass(sliderRoot, options.draggableClass)
-    slides.forEach(s => removeClass(s, options.selectedClass))
+    slides.forEach((s) => removeClass(s, options.selectedClass))
     events.off('select', toggleSelectedClass)
     events.off('pointerUp', toggleSelectedClass)
     events.off('pointerDown', toggleDraggingClass)
@@ -165,7 +165,7 @@ function EmblaCarousel(
 
   function slidesNotInView(target?: boolean): number[] {
     const inView = slidesInView(target)
-    return engine.slideIndexes.filter(i => inView.indexOf(i) === -1)
+    return engine.slideIndexes.filter((i) => inView.indexOf(i) === -1)
   }
 
   function scrollTo(index: number, direction?: number): void {

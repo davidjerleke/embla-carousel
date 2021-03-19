@@ -29,7 +29,7 @@ export function EventStore(): EventStoreType {
   }
 
   function removeAll(): EventStoreType {
-    listeners = listeners.filter(remove => remove())
+    listeners = listeners.filter((remove) => remove())
     return self
   }
 

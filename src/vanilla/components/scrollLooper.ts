@@ -26,7 +26,7 @@ export function ScrollLooper(
     if (!shouldLoop(direction)) return
 
     const loopDistance = contentSize * (direction * -1)
-    vectors.forEach(v => v.add(loopDistance))
+    vectors.forEach((v) => v.add(loopDistance))
   }
 
   const self: ScrollLooperType = {

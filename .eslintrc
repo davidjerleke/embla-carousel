@@ -1,17 +1,19 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 2018,
     "sourceType": "module"
   },
   "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "prettier/@typescript-eslint"
   ],
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off",
     "no-debugger": 2,
-    "no-console": 2
+    "no-console": 2,
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
