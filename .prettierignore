@@ -1,9 +1,10 @@
 # production
-/*.js
 /*.map
 /index.d.ts
 /vanilla
 /react
+/embla-carousel*
+/react*
 
 # dependencies
 node_modules/
