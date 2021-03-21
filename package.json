@@ -38,6 +38,7 @@
   "scripts": {
     "test": "jest --config jestconfig.json",
     "lint": "npm-run-all prettier:report eslint:report",
+    "format": "npm-run-all prettier:fix eslint:fix",
     "build": "rollup -c",
     "start": "rollup -c --watch",
     "start:vanilla": "rollup -c --watch --environment BUILD:development,PACKAGE:vanilla",
