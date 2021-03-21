@@ -1,6 +1,7 @@
 import { Engine } from './components/engine'
 import { EventStore } from './components/eventStore'
 import { defaultOptions, EmblaOptionsType } from './components/options'
+import { OptionsPseudo, OptionsPseudoType } from './components/optionsPseudo'
 import { addClass, debounce, removeClass } from './components/utils'
 import {
   EventEmitter,
@@ -44,13 +45,14 @@ function EmblaCarousel(
   let engine: Engine
   let activated = false
   let options = Object.assign({}, defaultOptions)
+  let optionsPseudo: OptionsPseudoType
   let rootNodeSize = 0
   let container: HTMLElement
   let slides: HTMLElement[]
 
   activate(userOptions)
 
-  function storeElements(): void {
+  function setupElements(): void {
     if (!sliderRoot) throw new Error('Missing root node 😢')
 
     const sliderContainer = sliderRoot.querySelector('*')
@@ -58,18 +60,17 @@ function EmblaCarousel(
 
     container = sliderContainer as HTMLElement
     slides = Array.prototype.slice.call(container.children)
+    optionsPseudo = OptionsPseudo(sliderRoot)
   }
 
   function activate(partialOptions?: EmblaOptionsType): void {
-    storeElements()
-    options = Object.assign(options, partialOptions)
+    setupElements()
+    options = Object.assign(options, partialOptions, optionsPseudo.get())
     engine = Engine(sliderRoot, container, slides, options, events)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
+    rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
 
-    if (options.autoResize) {
-      rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
-    }
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
         deActivate()
@@ -113,8 +114,8 @@ function EmblaCarousel(
     const { selectedClass } = options
     const inView = slidesInView(true)
     const notInView = slidesNotInView(true)
-    notInView.forEach((i) => removeClass(slides[i], selectedClass))
-    inView.forEach((i) => addClass(slides[i], selectedClass))
+    notInView.forEach((index) => removeClass(slides[index], selectedClass))
+    inView.forEach((index) => addClass(slides[index], selectedClass))
   }
 
   function deActivate(): void {
@@ -125,7 +126,7 @@ function EmblaCarousel(
     engine.translate.clear()
     engine.slideLooper.clear(slides)
     removeClass(sliderRoot, options.draggableClass)
-    slides.forEach((s) => removeClass(s, options.selectedClass))
+    slides.forEach((slide) => removeClass(slide, options.selectedClass))
     events.off('select', toggleSelectedClass)
     events.off('pointerUp', toggleSelectedClass)
     events.off('pointerDown', toggleDraggingClass)
@@ -150,10 +151,8 @@ function EmblaCarousel(
 
   function resize(): void {
     if (!activated) return
-    if (options.autoResize) {
-      const size = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
-      if (rootNodeSize !== size) reActivate()
-    }
+    const size = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
+    if (rootNodeSize !== size) reActivate()
     events.emit('resize')
   }
 
@@ -165,7 +164,7 @@ function EmblaCarousel(
 
   function slidesNotInView(target?: boolean): number[] {
     const inView = slidesInView(target)
-    return engine.slideIndexes.filter((i) => inView.indexOf(i) === -1)
+    return engine.slideIndexes.filter((index) => inView.indexOf(index) === -1)
   }
 
   function scrollTo(index: number, direction?: number): void {
