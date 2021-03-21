@@ -10,7 +10,7 @@ export function OptionsPseudo(node: HTMLElement): OptionsPseudoType {
   function get(): EmblaOptionsType {
     try {
       return JSON.parse(psuedoString.slice(1, -1).replace(/\\/g, ''))
-    } catch (error) {}
+    } catch (error) {} // eslint-disable-line no-empty
     return {}
   }
 
