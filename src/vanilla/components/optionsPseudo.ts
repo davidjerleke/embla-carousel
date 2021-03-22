@@ -5,11 +5,11 @@ export type OptionsPseudoType = {
 }
 
 export function OptionsPseudo(node: HTMLElement): OptionsPseudoType {
-  const psuedoString = window.getComputedStyle(node, ':before').content
+  const pseudoString = window.getComputedStyle(node, ':before').content
 
   function get(): EmblaOptionsType {
     try {
-      return JSON.parse(psuedoString.slice(1, -1).replace(/\\/g, ''))
+      return JSON.parse(pseudoString.slice(1, -1).replace(/\\/g, ''))
     } catch (error) {} // eslint-disable-line no-empty
     return {}
   }
