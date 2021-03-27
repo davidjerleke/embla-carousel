@@ -26,10 +26,8 @@ export function Limit(min: number, max: number): LimitType {
   }
 
   function removeOffset(n: number): number {
-    if (min === max) return n
-    while (reachedMin(n)) n += length
-    while (reachedMax(n)) n -= length
-    return n
+    if (!length) return n
+    return n - length * Math.ceil((n - max) / length)
   }
 
   function loop(n: number): number {
