@@ -44,7 +44,8 @@ function EmblaCarousel(
 
   let engine: Engine
   let activated = false
-  let options = Object.assign({}, defaultOptions)
+  let optionsBase = Object.assign({}, defaultOptions)
+  let options = Object.assign({}, optionsBase)
   let optionsPseudo: OptionsPseudoType
   let rootNodeSize = 0
   let container: HTMLElement
@@ -54,7 +55,6 @@ function EmblaCarousel(
 
   function setupElements(): void {
     if (!sliderRoot) throw new Error('Missing root node 😢')
-
     const sliderContainer = sliderRoot.querySelector('*')
     if (!sliderContainer) throw new Error('Missing container node 😢')
 
@@ -65,7 +65,8 @@ function EmblaCarousel(
 
   function activate(partialOptions?: EmblaOptionsType): void {
     setupElements()
-    options = Object.assign(options, partialOptions, optionsPseudo.get())
+    optionsBase = Object.assign({}, optionsBase, partialOptions)
+    options = Object.assign({}, optionsBase, optionsPseudo.get())
     engine = Engine(sliderRoot, container, slides, options, events)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
@@ -127,10 +128,11 @@ function EmblaCarousel(
     engine.slideLooper.clear(slides)
     removeClass(sliderRoot, options.draggableClass)
     slides.forEach((slide) => removeClass(slide, options.selectedClass))
-    events.off('select', toggleSelectedClass)
-    events.off('pointerUp', toggleSelectedClass)
-    events.off('pointerDown', toggleDraggingClass)
-    events.off('pointerUp', toggleDraggingClass)
+    events
+      .off('select', toggleSelectedClass)
+      .off('pointerUp', toggleSelectedClass)
+      .off('pointerDown', toggleDraggingClass)
+      .off('pointerUp', toggleDraggingClass)
   }
 
   function reActivate(partialOptions?: EmblaOptionsType): void {
