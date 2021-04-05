@@ -146,7 +146,6 @@ export function Engine(
   const loopVectors = [location, target]
   const scrollBody = ScrollBody(location, speed, 1)
   const scrollTarget = ScrollTarget(
-    index,
     loop,
     scrollSnaps,
     contentSize,
