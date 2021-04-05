@@ -1,4 +1,3 @@
-import { CounterType } from './counter'
 import { LimitType } from './limit'
 import { Vector1DType } from './vector1d'
 
@@ -14,21 +13,20 @@ export type ScrollTargetType = {
 }
 
 export function ScrollTarget(
-  indexCurrent: CounterType,
   loop: boolean,
   scrollSnaps: number[],
   contentSize: number,
   limit: LimitType,
   targetVector: Vector1DType,
 ): ScrollTargetType {
-  const { reachedMax, reachedAny, removeOffset } = limit
+  const { reachedAny, removeOffset, constrain } = limit
 
   function minDistance(d1: number, d2: number): number {
     return Math.abs(d1) < Math.abs(d2) ? d1 : d2
   }
 
   function findTargetSnap(target: number): TargetType {
-    const distance = removeOffset(target)
+    const distance = loop ? removeOffset(target) : constrain(target)
     const ascDiffsToSnaps = scrollSnaps
       .map((scrollSnap) => scrollSnap - distance)
       .map((diffToSnap) => shortcut(diffToSnap, 0))
@@ -51,14 +49,6 @@ export function ScrollTarget(
     return Math.abs(shortest) * direction
   }
 
-  function findTargetIndex(target: number, index: number): number {
-    const reachedBound = !loop && reachedAny(target)
-    if (!reachedBound) return index
-
-    const { min, max } = indexCurrent
-    return reachedMax(target) ? min : max
-  }
-
   function byIndex(index: number, direction: number): TargetType {
     const diffToSnap = scrollSnaps[index] - targetVector.get()
     const distance = shortcut(diffToSnap, direction)
@@ -67,13 +57,12 @@ export function ScrollTarget(
 
   function byDistance(distance: number, snap: boolean): TargetType {
     const target = targetVector.get() + distance
-    const targetSnap = findTargetSnap(target)
-    const index = findTargetIndex(target, targetSnap.index)
+    const { index, distance: targetSnapDistance } = findTargetSnap(target)
     const reachedBound = !loop && reachedAny(target)
 
     if (!snap || reachedBound) return { index, distance }
 
-    const diffToSnap = scrollSnaps[index] - targetSnap.distance
+    const diffToSnap = scrollSnaps[index] - targetSnapDistance
     const snapDistance = distance + shortcut(diffToSnap, 0)
 
     return { index, distance: snapDistance }
