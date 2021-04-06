@@ -6,7 +6,7 @@ import { Direction, DirectionType } from './direction'
 import { DragHandler, DragHandlerType } from './dragHandler'
 import { DragTracker } from './dragTracker'
 import { EventEmitterType } from './eventEmitter'
-import { Limit, LimitType } from './limit'
+import { LimitType } from './limit'
 import { OptionsType } from './options'
 import { PxToPercent, PxToPercentType } from './pxToPercent'
 import { ScrollBody, ScrollBodyType } from './scrollBody'
@@ -110,7 +110,7 @@ export function Engine(
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
-  const index = Counter(Limit(0, lastIndex(scrollSnaps)), loop, startIndex)
+  const index = Counter(lastIndex(scrollSnaps), startIndex, loop)
   const indexPrevious = index.clone()
   const slideIndexes = arrayKeys(slides)
 

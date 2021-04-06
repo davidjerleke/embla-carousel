@@ -1,9 +1,6 @@
-import { LimitType } from './limit'
-import { mathSign } from './utils'
+import { Limit } from './limit'
 
 export type CounterType = {
-  min: number
-  max: number
   get: () => number
   set: (n: number) => CounterType
   add: (n: number) => CounterType
@@ -11,14 +8,17 @@ export type CounterType = {
 }
 
 export function Counter(
-  limit: LimitType,
-  loop: boolean,
+  max: number,
   start: number,
+  loop: boolean,
 ): CounterType {
-  const { min, max } = limit
-  const type = loop ? 'loop' : 'constrain'
-  const withinLimit = limit[type]
+  const { constrain } = Limit(0, max)
+  const loopEnd = max + 1
   let counter = withinLimit(start)
+
+  function withinLimit(n: number): number {
+    return !loop ? constrain(n) : Math.abs((loopEnd + n) % loopEnd)
+  }
 
   function get(): number {
     return counter
@@ -30,24 +30,17 @@ export function Counter(
   }
 
   function add(n: number): CounterType {
-    if (n !== 0) {
-      const sign = mathSign(n)
-      set(get() + sign)
-      return add(n + sign * -1)
-    }
-    return self
+    return set(get() + n)
   }
 
   function clone(): CounterType {
-    return Counter(limit, loop, get())
+    return Counter(max, get(), loop)
   }
 
   const self: CounterType = {
     add,
     clone,
     get,
-    max,
-    min,
     set,
   }
   return self
