@@ -1,117 +1,141 @@
 import { Counter, CounterType } from '../components/counter'
-import { Limit } from '../components/limit'
 
 let loopCounter: CounterType
 let limitCounter: CounterType
-
-const limit = Limit(0, 5)
-
-beforeEach(() => {
-  loopCounter = Counter(limit, true, 2)
-  limitCounter = Counter(limit, false, 2)
-})
+const min = 0
+const max = 5
+const start = 2
 
 describe('Counter', () => {
-  describe('Get & Set', () => {
-    test('Gets the value it has been initialized to', () => {
-      expect(loopCounter.get()).toBe(2)
-      expect(limitCounter.get()).toBe(2)
+  describe('Limit counter', () => {
+    beforeEach(() => {
+      limitCounter = Counter(max, start, false)
     })
 
-    test('Sets its value to the given number', () => {
-      loopCounter.set(4)
-      limitCounter.set(4)
-      expect(loopCounter.get()).toBe(4)
-      expect(limitCounter.get()).toBe(4)
+    describe('Initializes the counter value to', () => {
+      test('The given number when it is within limit', () => {
+        expect(limitCounter.get()).toBe(start)
+      })
+
+      test('MAX if given number is greater than MAX', () => {
+        const limitCounter = Counter(max, max + 1, false)
+        expect(limitCounter.get()).toBe(max)
+      })
+
+      test('MIN if given number is less than MIN', () => {
+        const limitCounter = Counter(max, min - 1, false)
+        expect(limitCounter.get()).toBe(min)
+      })
+    })
+
+    describe('Sets the counter value to', () => {
+      test('The given number when it is within limit', () => {
+        expect(limitCounter.set(4).get()).toBe(4)
+      })
+
+      test('MAX if given number is greater than MAX', () => {
+        expect(limitCounter.set(10).get()).toBe(max)
+      })
+
+      test('MIN if given number is less than MIN', () => {
+        expect(limitCounter.set(-10).get()).toBe(min)
+      })
+    })
+
+    describe('Given number is', () => {
+      test('Added if it is positive', () => {
+        expect(limitCounter.add(3).get()).toBe(max)
+      })
+
+      test('Subtracted if it is negative', () => {
+        expect(limitCounter.add(-2).get()).toBe(min)
+      })
+    })
+
+    describe('Counter constrains its value to', () => {
+      test('MAX if given number + current value is greater than MAX', () => {
+        expect(limitCounter.add(12).get()).toBe(max)
+      })
+
+      test('MIN if given number + current value is less than MIN', () => {
+        expect(limitCounter.add(-12).get()).toBe(min)
+      })
+    })
+
+    describe('Clones the current counter', () => {
+      test('Into a new instance', () => {
+        expect(limitCounter.clone()).not.toBe(limitCounter)
+      })
+
+      test('And preserves its current value', () => {
+        expect(limitCounter.clone().get()).toBe(start)
+      })
     })
   })
 
-  describe('Exposes', () => {
-    test('Counter MIN ', () => {
-      expect(loopCounter.min).toBe(0)
-      expect(limitCounter.min).toBe(0)
+  describe('Loop counter', () => {
+    beforeEach(() => {
+      loopCounter = Counter(max, start, true)
     })
 
-    test('Counter MAX ', () => {
-      expect(loopCounter.max).toBe(5)
-      expect(limitCounter.max).toBe(5)
-    })
-  })
+    describe('Initializes the counter value to', () => {
+      test('The given number when it is within limit', () => {
+        expect(loopCounter.get()).toBe(start)
+      })
 
-  describe('Clones', () => {
-    test('Current counter', () => {
-      const loopCounterClone = loopCounter.clone()
-      const limitCounterClone = limitCounter.clone()
-      expect(loopCounterClone).not.toBe(loopCounter)
-      expect(limitCounterClone).not.toBe(limitCounter)
-    })
+      test('The corresponding number without the positive offset', () => {
+        const loopCounter = Counter(max, max + 1, true)
+        expect(loopCounter.get()).toBe(min)
+      })
 
-    test('Current counter while preserving its current value', () => {
-      const counterClone = loopCounter.clone()
-      expect(counterClone.get()).toBe(2)
-    })
-  })
-
-  describe('Initializes', () => {
-    test('Counter value to given number within limit', () => {
-      expect(loopCounter.get()).toBe(2)
-      expect(limitCounter.get()).toBe(2)
+      test('The corresponding number without the negative offset', () => {
+        const loopCounter = Counter(max, min - 1, true)
+        expect(loopCounter.get()).toBe(max)
+      })
     })
 
-    test('Loop counter value to min if given number is greater than max', () => {
-      const loopCounter = Counter(limit, true, 10)
-      expect(loopCounter.get()).toBe(0)
+    describe('Sets the counter value to', () => {
+      test('The given number when it is within limit', () => {
+        expect(loopCounter.set(4).get()).toBe(4)
+      })
+
+      test('The corresponding number without the positive offset', () => {
+        expect(loopCounter.set(max + 1).get()).toBe(min)
+      })
+
+      test('The corresponding number without the negative offset', () => {
+        expect(loopCounter.set(min - 1).get()).toBe(max)
+      })
     })
 
-    test('Loop counter value to max if given number is less than min', () => {
-      const loopCounter = Counter(limit, true, -10)
-      expect(loopCounter.get()).toBe(5)
+    describe('Given number is', () => {
+      test('Added if it is positive', () => {
+        expect(loopCounter.add(3).get()).toBe(max)
+      })
+
+      test('Subtracted if it is negative', () => {
+        expect(loopCounter.add(-2).get()).toBe(min)
+      })
     })
 
-    test('Limit counter value to max if given number is greater than max', () => {
-      const limitCounter = Counter(limit, false, 10)
-      expect(limitCounter.get()).toBe(5)
+    describe('The corresponding number without the offset', () => {
+      test('If given number + current value is greater than MAX', () => {
+        expect(loopCounter.add(4).get()).toBe(min)
+      })
+
+      test('If given number + current value is less than MIN', () => {
+        expect(loopCounter.add(-3).get()).toBe(max)
+      })
     })
 
-    test('Limit Counter value to min if given number is less than min', () => {
-      const limitCounter = Counter(limit, false, -10)
-      expect(limitCounter.get()).toBe(0)
-    })
-  })
+    describe('Clones the current counter', () => {
+      test('Into a new instance', () => {
+        expect(loopCounter.clone()).not.toBe(loopCounter)
+      })
 
-  describe('Count', () => {
-    test('Adds given positive number to value', () => {
-      loopCounter.add(2)
-      limitCounter.add(2)
-      expect(loopCounter.get()).toBe(4)
-      expect(limitCounter.get()).toBe(4)
-    })
-
-    test('Subtracts given negative number from value', () => {
-      loopCounter.add(-2)
-      limitCounter.add(-2)
-      expect(loopCounter.get()).toBe(0)
-      expect(limitCounter.get()).toBe(0)
-    })
-
-    test('Loops loop Counter if given positive number + current value is greater than max', () => {
-      loopCounter.add(5)
-      expect(loopCounter.get()).toBe(1)
-    })
-
-    test('Loops loop Counter if given negative number - current value is less than min', () => {
-      loopCounter.add(-5)
-      expect(loopCounter.get()).toBe(3)
-    })
-
-    test('Stops limit Counter at max if given positive number + current value is greater than max', () => {
-      limitCounter.add(12)
-      expect(limitCounter.get()).toBe(5)
-    })
-
-    test('Stops limit Counter at min if given negative number + current value is less than min', () => {
-      limitCounter.add(-12)
-      expect(limitCounter.get()).toBe(0)
+      test('And preserves its current value', () => {
+        expect(loopCounter.clone().get()).toBe(start)
+      })
     })
   })
 })
