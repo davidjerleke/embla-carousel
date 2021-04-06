@@ -23,25 +23,6 @@ describe('Limit', () => {
     })
   })
 
-  describe('Loops to limit', () => {
-    test('MAX when given number < limit MIN', () => {
-      const number = limit.loop(lessThanMin)
-      expect(number).toBe(maxLimit)
-    })
-
-    test('MIN when given number > limit MAX', () => {
-      const number = limit.loop(moreThanMax)
-      expect(number).toBe(minLimit)
-    })
-  })
-
-  describe('Does not loop', () => {
-    test('When given number is within limit', () => {
-      const number = limit.loop(withinMinAndMax)
-      expect(number).toBe(withinMinAndMax)
-    })
-  })
-
   describe('Constrains to limit', () => {
     test('MAX when given number > limit MAX', () => {
       const number = limit.constrain(moreThanMax)

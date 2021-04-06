@@ -2,7 +2,6 @@ export type LimitType = {
   min: number
   max: number
   length: number
-  loop: (n: number) => number
   constrain: (n: number) => number
   reachedAny: (n: number) => boolean
   reachedMax: (n: number) => boolean
@@ -25,25 +24,19 @@ export function Limit(min: number, max: number): LimitType {
     return reachedMin(n) || reachedMax(n)
   }
 
-  function removeOffset(n: number): number {
-    if (!length) return n
-    return n - length * Math.ceil((n - max) / length)
-  }
-
-  function loop(n: number): number {
-    if (!reachedAny(n)) return n
-    return reachedMin(n) ? max : min
-  }
-
   function constrain(n: number): number {
     if (!reachedAny(n)) return n
     return reachedMin(n) ? min : max
   }
 
+  function removeOffset(n: number): number {
+    if (!length) return n
+    return n - length * Math.ceil((n - max) / length)
+  }
+
   const self: LimitType = {
     constrain,
     length,
-    loop,
     max,
     min,
     reachedAny,
