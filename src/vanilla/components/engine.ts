@@ -116,9 +116,7 @@ export function Engine(
 
   // Draw
   const update = (): void => {
-    if (!loop) {
-      engine.scrollBounds.constrain(target, engine.dragHandler.pointerDown())
-    }
+    if (!loop) engine.scrollBounds.constrain(engine.dragHandler.pointerDown())
     engine.scrollBody.seek(target).update()
     const settled = engine.scrollBody.settle(target)
 
@@ -130,8 +128,8 @@ export function Engine(
       events.emit('scroll')
     }
     if (loop) {
-      engine.scrollLooper.loop(loopVectors, engine.scrollBody.direction())
-      engine.slideLooper.loop(slides)
+      engine.scrollLooper.loop(engine.scrollBody.direction())
+      engine.slideLooper.loop()
     }
 
     engine.translate.to(location)
@@ -143,7 +141,6 @@ export function Engine(
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const loopVectors = [location, target]
   const scrollBody = ScrollBody(location, speed, 1)
   const scrollTarget = ScrollTarget(
     loop,
@@ -200,8 +197,11 @@ export function Engine(
     location,
     options,
     scrollBody,
-    scrollBounds: ScrollBounds(limit, location, scrollBody),
-    scrollLooper: ScrollLooper(contentSize, pxToPercent, limit, location),
+    scrollBounds: ScrollBounds(limit, location, target, scrollBody),
+    scrollLooper: ScrollLooper(contentSize, pxToPercent, limit, location, [
+      location,
+      target,
+    ]),
     scrollProgress: ScrollProgress(limit),
     scrollSnaps,
     scrollTarget,
@@ -215,6 +215,7 @@ export function Engine(
       scrollSnaps,
       slidesInView,
       location,
+      slides,
     ),
     slidesInView,
     slideIndexes,

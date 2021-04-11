@@ -3,7 +3,7 @@ import { arrayKeys } from './utils'
 import { SlidesInViewType } from './slidesInView'
 import { Vector1DType } from './vector1d'
 
-type LoopEdgeType = 'start' | 'end'
+type EdgeType = 'start' | 'end'
 
 type LoopPointType = {
   point: number
@@ -14,8 +14,8 @@ type LoopPointType = {
 
 export type SlideLooperType = {
   canLoop: () => boolean
-  clear: (slides: HTMLElement[]) => void
-  loop: (slides: HTMLElement[]) => void
+  clear: () => void
+  loop: () => void
   loopPoints: LoopPointType[]
 }
 
@@ -27,6 +27,7 @@ export function SlideLooper(
   scrollSnaps: number[],
   slidesInView: SlidesInViewType,
   scrollLocation: Vector1DType,
+  slides: HTMLElement[],
 ): SlideLooperType {
   const ascItems = arrayKeys(slideSizesWithGaps)
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
@@ -45,10 +46,7 @@ export function SlideLooper(
     }, [])
   }
 
-  function findLoopPoints(
-    indexes: number[],
-    edge: LoopEdgeType,
-  ): LoopPointType[] {
+  function findLoopPoints(indexes: number[], edge: EdgeType): LoopPointType[] {
     const isStartEdge = edge === 'start'
     const offset = isStartEdge ? -contentSize : contentSize
     const slideBounds = slidesInView.findSlideBounds(offset)
@@ -83,7 +81,7 @@ export function SlideLooper(
     })
   }
 
-  function loop(slides: HTMLElement[]): void {
+  function loop(): void {
     loopPoints.forEach((loopPoint) => {
       const { getTarget, location, index } = loopPoint
       const target = getTarget()
@@ -94,7 +92,7 @@ export function SlideLooper(
     })
   }
 
-  function clear(slides: HTMLElement[]): void {
+  function clear(): void {
     loopPoints.forEach(({ index }) => {
       slides[index].style[axis.startEdge] = ''
     })
