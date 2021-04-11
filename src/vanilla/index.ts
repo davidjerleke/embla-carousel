@@ -21,11 +21,11 @@ export type EmblaCarouselType = {
   previousScrollSnap: () => number
   reInit: (options?: EmblaOptionsType) => void
   rootNode: () => HTMLElement
-  scrollNext: () => void
-  scrollPrev: () => void
+  scrollNext: (jump?: boolean) => void
+  scrollPrev: (jump?: boolean) => void
   scrollProgress: () => number
   scrollSnapList: () => number[]
-  scrollTo: (index: number) => void
+  scrollTo: (index: number, jump?: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: (target?: boolean) => number[]
@@ -77,7 +77,7 @@ function EmblaCarousel(
         deActivate()
         return activate({ loop: false })
       }
-      engine.slideLooper.loop(slides)
+      engine.slideLooper.loop()
     }
     if (options.draggable && container.offsetParent && slides.length) {
       engine.dragHandler.addActivationEvents()
@@ -125,7 +125,7 @@ function EmblaCarousel(
     engine.animation.stop()
     eventStore.removeAll()
     engine.translate.clear()
-    engine.slideLooper.clear(slides)
+    engine.slideLooper.clear()
     removeClass(sliderRoot, options.draggableClass)
     slides.forEach((slide) => removeClass(slide, options.selectedClass))
     events
@@ -169,19 +169,19 @@ function EmblaCarousel(
     return engine.slideIndexes.filter((index) => inView.indexOf(index) === -1)
   }
 
-  function scrollTo(index: number, direction?: number): void {
-    engine.scrollBody.useBaseMass().useBaseSpeed()
+  function scrollTo(index: number, jump?: boolean, direction?: number): void {
+    engine.scrollBody.useBaseMass().useSpeed(jump ? 100 : options.speed)
     if (activated) engine.scrollTo.index(index, direction || 0)
   }
 
-  function scrollNext(): void {
+  function scrollNext(jump?: boolean): void {
     const next = engine.index.clone().add(1)
-    scrollTo(next.get(), -1)
+    scrollTo(next.get(), jump, -1)
   }
 
-  function scrollPrev(): void {
+  function scrollPrev(jump?: boolean): void {
     const prev = engine.index.clone().add(-1)
-    scrollTo(prev.get(), 1)
+    scrollTo(prev.get(), jump, 1)
   }
 
   function canScrollNext(): boolean {

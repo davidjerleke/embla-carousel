@@ -3,7 +3,7 @@ import { PxToPercentType } from './pxToPercent'
 import { Vector1DType } from './vector1d'
 
 export type ScrollLooperType = {
-  loop: (vectors: Vector1DType[], direction: number) => void
+  loop: (direction: number) => void
 }
 
 export function ScrollLooper(
@@ -11,6 +11,7 @@ export function ScrollLooper(
   pxToPercent: PxToPercentType,
   limit: LimitType,
   location: Vector1DType,
+  vectors: Vector1DType[],
 ): ScrollLooperType {
   const min = limit.min + pxToPercent.measure(0.1)
   const max = limit.max + pxToPercent.measure(0.1)
@@ -22,7 +23,7 @@ export function ScrollLooper(
     return false
   }
 
-  function loop(vectors: Vector1DType[], direction: number): void {
+  function loop(direction: number): void {
     if (!shouldLoop(direction)) return
 
     const loopDistance = contentSize * (direction * -1)
