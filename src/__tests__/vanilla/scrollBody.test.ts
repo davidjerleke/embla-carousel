@@ -1,6 +1,6 @@
-import { ScrollBody } from '../components/scrollBody'
-import { Vector1D } from '../components/vector1d'
-import { mathSign } from '../components/utils'
+import { ScrollBody } from '../../vanilla/scrollBody'
+import { Vector1D } from '../../vanilla/vector1d'
+import { mathSign } from '../../vanilla/utils'
 
 const targetPositive = Vector1D(10)
 const targetNegative = Vector1D(-10)

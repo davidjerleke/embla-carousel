@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useMemo } from 'react'
 import EmblaCarousel, { EmblaCarouselType } from '../vanilla'
-import { EmblaOptionsType } from '../vanilla/components/options'
+import { EmblaOptionsType } from '../vanilla/options'
 import { areEqualShallow, canUseDOM } from './utils'
 
 type ViewportRefType = <ViewportElement extends HTMLElement>(

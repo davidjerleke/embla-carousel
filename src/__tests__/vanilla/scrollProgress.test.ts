@@ -1,5 +1,5 @@
-import { ScrollLimit } from '../components/scrollLimit'
-import { ScrollProgress } from '../components/scrollProgress'
+import { ScrollLimit } from '../../vanilla/scrollLimit'
+import { ScrollProgress } from '../../vanilla/scrollProgress'
 
 const snapSizes = [80, 80, 80, 80, 80]
 const scrollSnaps = [0, -80, -160, -240, -320]

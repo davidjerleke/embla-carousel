@@ -1,4 +1,4 @@
-import { PxToPercent } from '../components/pxToPercent'
+import { PxToPercent } from '../../vanilla/pxToPercent'
 
 const viewInPx = 1000
 const itemInPx = 250

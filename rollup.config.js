@@ -11,9 +11,8 @@ const CONFIG_BABEL = {
   babelHelpers: 'bundled',
 }
 const CONFIG_TYPESCRIPT = {
+  tsconfig: 'tsconfig.json',
   typescript: localTypescript,
-  declaration: true,
-  useTsconfigDeclarationDir: true,
 }
 
 const PACKAGE_VANILLA = (process.env.BUILD !== 'development' ||

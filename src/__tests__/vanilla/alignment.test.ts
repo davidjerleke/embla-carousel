@@ -2,7 +2,7 @@ import {
   Alignment,
   AlignmentOptionType,
   AlignmentType,
-} from '../components/alignment'
+} from '../../vanilla/alignment'
 
 const viewSize = 100
 const itemSize = 50

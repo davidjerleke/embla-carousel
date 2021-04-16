@@ -1,4 +1,4 @@
-import { Animation, AnimationType } from '../components/animation'
+import { Animation, AnimationType } from '../../vanilla/animation'
 
 let counter: number
 let animation: AnimationType
@@ -35,7 +35,7 @@ describe('Animation', () => {
   })
 
   describe('Does not run callback when', () => {
-    test('Proceed is invoked directly', () => {
+    test('Proceed is invoked before start', () => {
       animation.proceed()
       expect(counter).toBe(0)
     })

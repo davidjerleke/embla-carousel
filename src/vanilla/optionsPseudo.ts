@@ -5,7 +5,7 @@ export type OptionsPseudoType = {
 }
 
 export function OptionsPseudo(node: HTMLElement): OptionsPseudoType {
-  const pseudoString = window.getComputedStyle(node, ':before').content
+  const pseudoString = getComputedStyle(node, ':before').content
 
   function get(): EmblaOptionsType {
     try {

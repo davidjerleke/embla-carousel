@@ -1,10 +1,10 @@
-import { SlidesInView, SlidesInViewType } from '../components/slidesInView'
-import { arrayKeys } from '../components/utils'
+import { SlidesInView, SlidesInViewType } from '../../vanilla/slidesInView'
+import { arrayKeys } from '../../vanilla/utils'
 import {
   Alignment,
   AlignmentOptionType,
   AlignmentType,
-} from '../components/alignment'
+} from '../../vanilla/alignment'
 
 const viewSize = 100
 const slideSizes = [30, 40, 25, 40, 60, 30, 50]

@@ -1,4 +1,4 @@
-import { Counter, CounterType } from '../components/counter'
+import { Counter, CounterType } from '../../vanilla/counter'
 
 let loopCounter: CounterType
 let limitCounter: CounterType

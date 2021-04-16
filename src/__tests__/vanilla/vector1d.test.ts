@@ -1,4 +1,4 @@
-import { Vector1D, Vector1DType } from '../components/vector1d'
+import { Vector1D, Vector1DType } from '../../vanilla/vector1d'
 
 let vector1: Vector1DType
 let vector2: Vector1DType

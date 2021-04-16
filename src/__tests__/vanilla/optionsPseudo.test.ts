@@ -1,4 +1,4 @@
-import { OptionsPseudo } from '../components/optionsPseudo'
+import { OptionsPseudo } from '../../vanilla/optionsPseudo'
 
 const invalidPseudoJson = `'Invalid JSON here'`
 const validPseudoJson = `'{ "draggable": false }'`

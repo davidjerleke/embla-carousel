@@ -1,7 +1,7 @@
-import { PxToPercent } from '../components/pxToPercent'
-import { ScrollLooper } from '../components/scrollLooper'
-import { Vector1D } from '../components/vector1d'
-import { Limit } from '../components/limit'
+import { PxToPercent } from '../../vanilla/pxToPercent'
+import { ScrollLooper } from '../../vanilla/scrollLooper'
+import { Vector1D } from '../../vanilla/vector1d'
+import { Limit } from '../../vanilla/limit'
 
 const pxToPercent = PxToPercent(1000)
 const loopJoint = pxToPercent.measure(0.1)

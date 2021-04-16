@@ -1,5 +1,5 @@
-import { LimitType } from '../components/limit'
-import { ScrollLimit } from '../components/scrollLimit'
+import { LimitType } from '../../vanilla/limit'
+import { ScrollLimit } from '../../vanilla/scrollLimit'
 
 const snapSizes = [80, 40, 30, 40, 60]
 const scrollSnaps = [10, -50, -85, -120, -170]

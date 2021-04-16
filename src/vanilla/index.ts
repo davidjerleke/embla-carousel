@@ -1,13 +1,9 @@
-import { Engine } from './components/engine'
-import { EventStore } from './components/eventStore'
-import { defaultOptions, EmblaOptionsType } from './components/options'
-import { OptionsPseudo, OptionsPseudoType } from './components/optionsPseudo'
-import { addClass, debounce, removeClass } from './components/utils'
-import {
-  EventEmitter,
-  EmblaEventType,
-  EventEmitterType,
-} from './components/eventEmitter'
+import { Engine } from './engine'
+import { EventStore } from './eventStore'
+import { EventEmitter, EmblaEventType, EventEmitterType } from './eventEmitter'
+import { defaultOptions, EmblaOptionsType } from './options'
+import { OptionsPseudo, OptionsPseudoType } from './optionsPseudo'
+import { addClass, debounce, removeClass } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean

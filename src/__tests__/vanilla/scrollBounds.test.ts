@@ -1,7 +1,7 @@
-import { ScrollBounds } from '../components/scrollBounds'
-import { Vector1D } from '../components/vector1d'
-import { Limit } from '../components/limit'
-import { ScrollBody } from '../components/scrollBody'
+import { ScrollBounds } from '../../vanilla/scrollBounds'
+import { Vector1D } from '../../vanilla/vector1d'
+import { Limit } from '../../vanilla/limit'
+import { ScrollBody } from '../../vanilla/scrollBody'
 
 const pointerIsDown = true
 const pointerIsNotDown = false

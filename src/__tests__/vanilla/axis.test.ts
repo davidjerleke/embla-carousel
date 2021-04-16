@@ -1,5 +1,5 @@
-import { Axis, AxisOptionType, AxisType } from '../components/axis'
-import { DirectionOptionType } from '../components/direction'
+import { Axis, AxisOptionType, AxisType } from '../../vanilla/axis'
+import { DirectionOptionType } from '../../vanilla/direction'
 
 const horizontalAxis = 'x'
 const verticalAxis = 'y'

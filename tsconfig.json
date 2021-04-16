@@ -2,18 +2,14 @@
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
-    "declaration": true,
-    "importHelpers": true,
-    "sourceMap": true,
-    "rootDir": "src",
-    "outDir": "./",
-    "declarationDir": "./",
-    "strict": true,
+    "jsx": "react",
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
+    "sourceMap": true,
+    "strict": true,
+    "declaration": true,
+    "declarationDir": "./",
+    "moduleResolution": "node"
   },
   "include": ["src/index.ts"],
-  "exclude": ["node_modules", "**/*.test*"]
+  "exclude": ["node_modules", "**/*.test.ts"]
 }

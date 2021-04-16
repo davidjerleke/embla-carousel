@@ -1,4 +1,4 @@
-import { Direction } from '../components/direction'
+import { Direction } from '../../vanilla/direction'
 
 const positiveNumber = 100
 const negativeNumber = -100

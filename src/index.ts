@@ -1,5 +1,5 @@
-export { EmblaOptionsType } from './vanilla/components/options'
-export { EmblaEventType } from './vanilla/components/eventEmitter'
+export { EmblaOptionsType } from './vanilla/options'
+export { EmblaEventType } from './vanilla/eventEmitter'
 export { EmblaCarouselType } from './vanilla'
 export { UseEmblaCarouselType } from './react'
 

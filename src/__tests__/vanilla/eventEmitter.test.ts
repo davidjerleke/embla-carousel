@@ -1,4 +1,4 @@
-import { EventEmitter, EventEmitterType } from '../components/eventEmitter'
+import { EventEmitter, EventEmitterType } from '../../vanilla/eventEmitter'
 
 let callback1: () => void
 let callback2: () => void

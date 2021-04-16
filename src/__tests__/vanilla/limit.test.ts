@@ -1,4 +1,4 @@
-import { Limit } from '../components/limit'
+import { Limit } from '../../vanilla/limit'
 
 const minLimit = -100
 const maxLimit = 100
