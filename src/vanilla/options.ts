@@ -14,6 +14,7 @@ export type OptionsType = {
   draggingClass: string
   inViewThreshold: number
   loop: boolean
+  skipSnaps: boolean
   selectedClass: string
   slidesToScroll: number
   speed: number
@@ -31,6 +32,7 @@ export const defaultOptions: OptionsType = {
   draggingClass: 'is-dragging',
   inViewThreshold: 0,
   loop: false,
+  skipSnaps: true,
   selectedClass: 'is-selected',
   slidesToScroll: 1,
   speed: 10,

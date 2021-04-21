@@ -25,7 +25,7 @@ export function ScrollBounds(
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const friction = pointerDown ? 0.7 : 0.4
+    const friction = pointerDown ? 0.7 : 0.45
     const diffToTarget = target.get() - location.get()
 
     target.subtract(diffToTarget * friction)

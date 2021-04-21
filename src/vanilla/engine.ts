@@ -70,6 +70,7 @@ export function Engine(
     speed,
     dragFree,
     slidesToScroll,
+    skipSnaps,
     containScroll,
   } = options
 
@@ -96,7 +97,7 @@ export function Engine(
     slideRects,
     slidesToScroll,
   )
-  const contentSize = arrayLast(snaps) * -1 + arrayLast(slideSizesWithGaps)
+  const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained } = ScrollContain(
     viewSize,
     contentSize,
@@ -180,8 +181,9 @@ export function Engine(
     scrollBody,
     scrollTarget,
     index,
-    limit,
     events,
+    loop,
+    skipSnaps,
   )
 
   // Slider

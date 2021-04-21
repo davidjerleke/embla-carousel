@@ -5,6 +5,8 @@ export type CounterType = {
   set: (n: number) => CounterType
   add: (n: number) => CounterType
   clone: () => CounterType
+  min: number
+  max: number
 }
 
 export function Counter(
@@ -12,7 +14,7 @@ export function Counter(
   start: number,
   loop: boolean,
 ): CounterType {
-  const { constrain } = Limit(0, max)
+  const { min, constrain } = Limit(0, max)
   const loopEnd = max + 1
   let counter = withinLimit(start)
 
@@ -42,6 +44,8 @@ export function Counter(
     clone,
     get,
     set,
+    min,
+    max,
   }
   return self
 }
