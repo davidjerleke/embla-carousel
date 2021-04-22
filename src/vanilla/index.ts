@@ -172,12 +172,12 @@ function EmblaCarousel(
 
   function scrollNext(jump?: boolean): void {
     const next = engine.index.clone().add(1)
-    scrollTo(next.get(), jump, -1)
+    scrollTo(next.get(), jump === true, -1)
   }
 
   function scrollPrev(jump?: boolean): void {
     const prev = engine.index.clone().add(-1)
-    scrollTo(prev.get(), jump, 1)
+    scrollTo(prev.get(), jump === true, 1)
   }
 
   function canScrollNext(): boolean {
