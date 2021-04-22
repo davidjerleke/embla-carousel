@@ -5,7 +5,6 @@ import { DragTrackerType } from './dragTracker'
 import { EventEmitterType } from './eventEmitter'
 import { AxisType } from './axis'
 import { EventStore } from './eventStore'
-import { LimitType } from './limit'
 import { ScrollBodyType } from './scrollBody'
 import { ScrollTargetType } from './scrollTarget'
 import { ScrollToType } from './scrollTo'
@@ -32,8 +31,9 @@ export function DragHandler(
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
   index: CounterType,
-  limit: LimitType,
   events: EventEmitterType,
+  loop: boolean,
+  skipSnaps: boolean,
 ): DragHandlerType {
   const { scroll: scrollAxis, cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
@@ -44,8 +44,9 @@ export function DragHandler(
   const interactionEvents = EventStore()
   const snapForceBoost = { mouse: 2.5, touch: 3.5 }
   const freeForceBoost = { mouse: 5, touch: 7 }
-  const baseSpeed = dragFree ? 5 : 12
-  const dragThreshold = 4
+  const baseSpeed = dragFree ? 5 : 20
+  const baseMass = 1
+  const dragThreshold = 20
 
   let pointerIsDown = false
   let preventScroll = false
@@ -89,17 +90,16 @@ export function DragHandler(
     return boost[type]
   }
 
-  function allowedForce(force: number): number {
-    const currentLocation = scrollTarget.byDistance(0, false)
-    const targetChanged = currentLocation.index !== index.get()
-    const seekNext = !targetChanged && Math.abs(force) > dragThreshold
-    const destination = force + location.get()
+  function allowedForce(force: number, targetChanged: boolean): number {
+    const next = index.clone().add(mathSign(force) * -1)
+    const isEdge = next.get() === index.min || next.get() === index.max
+    const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
-    if (seekNext && !dragFree && !limit.reachedAny(destination)) {
-      const next = index.clone().add(mathSign(force) * -1)
-      return scrollTarget.byIndex(next.get(), 0).distance
-    }
-    return scrollTarget.byDistance(force, !dragFree).distance
+    if (dragFree || Math.abs(force) < dragThreshold) return baseForce
+    if (!loop && isEdge) return baseForce * 0.6
+    if (skipSnaps && targetChanged) return baseForce * 0.5
+
+    return scrollTarget.byIndex(next.get(), 0).distance
   }
 
   function down(evt: Event): void {
@@ -143,16 +143,22 @@ export function DragHandler(
   }
 
   function up(): void {
+    const currentLocation = scrollTarget.byDistance(0, false)
+    const targetChanged = currentLocation.index !== index.get()
     const rawForce = dragTracker.pointerUp() * forceBoost()
-    const force = allowedForce(direction.applyTo(rawForce))
-    const speedFactor = factorAbs(rawForce, force)
+    const force = allowedForce(direction.applyTo(rawForce), targetChanged)
+    const forceFactor = factorAbs(rawForce, force)
     const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
+    const isVigorous = targetChanged && forceFactor > 0.75
+    const isBelowThreshold = Math.abs(rawForce) < dragThreshold
+    const speed = isVigorous ? 12 : baseSpeed
+    const mass = isVigorous ? baseMass + 2.5 * forceFactor : baseMass
 
     if (isMoving && !isMouse) preventClick = true
     preventScroll = false
     pointerIsDown = false
     interactionEvents.removeAll()
-    scrollBody.useSpeed(baseSpeed + baseSpeed * speedFactor)
+    scrollBody.useSpeed(isBelowThreshold ? 9 : speed).useMass(mass)
     scrollTo.distance(force, !dragFree)
     isMouse = false
     events.emit('pointerUp')
