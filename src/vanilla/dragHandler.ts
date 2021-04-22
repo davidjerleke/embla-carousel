@@ -151,7 +151,6 @@ export function DragHandler(
     const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
     const isVigorous = targetChanged && forceFactor > 0.75
     const isBelowThreshold = Math.abs(rawForce) < dragThreshold
-
     const speed = isVigorous ? 12 : baseSpeed
     const mass = isVigorous ? baseMass + 2.5 * forceFactor : baseMass
 
