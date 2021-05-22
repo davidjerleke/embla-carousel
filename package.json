@@ -1,26 +1,9 @@
 {
-  "name": "embla-carousel",
+  "name": "embla-carousel-monorepo",
   "version": "4.5.1",
-  "private": false,
-  "author": "David Cetinkaya <david.o.cetinkaya@gmail.com>",
+  "private": true,
+  "author": "David Cetinkaya",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
-  "keywords": [
-    "slider",
-    "carousel",
-    "slideshow",
-    "gallery",
-    "lightweight",
-    "touch",
-    "javascript",
-    "typescript",
-    "react"
-  ],
-  "license": "MIT",
-  "main": "embla-carousel.umd.js",
-  "unpkg": "embla-carousel.umd.js",
-  "module": "embla-carousel.esm.js",
-  "types": "index.d.ts",
-  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidcetinkaya/embla-carousel"
@@ -29,52 +12,47 @@
     "url": "https://github.com/davidcetinkaya/embla-carousel/issues"
   },
   "homepage": "https://www.embla-carousel.com",
-  "files": [
-    "embla-carousel*",
-    "vanilla*",
-    "react*",
-    "index.d.ts"
+  "license": "MIT",
+  "workspaces": [
+    "packages/embla-carousel",
+    "packages/embla-carousel-docs"
   ],
   "scripts": {
-    "test": "jest --config jestconfig.json",
     "lint": "npm-run-all prettier:report eslint:report",
     "format": "npm-run-all prettier:fix eslint:fix",
-    "build": "rollup -c",
-    "start": "rollup -c --watch",
-    "start:vanilla": "rollup -c --watch --environment BUILD:development,PACKAGE:vanilla",
-    "start:react": "rollup -c --watch --environment BUILD:development,PACKAGE:react",
+    "test": "yarn workspace embla-carousel run test",
+    "start": "npm-run-all --parallel start:lib start:docs",
+    "build": "npm-run-all build:lib build:docs",
     "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
     "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
-    "eslint:report": "eslint 'src/**/*.{js,tsx,ts}'",
-    "eslint:fix": "eslint 'src/**/*.{js,tsx,ts}' --fix",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm-run-all test lint",
-    "preversion": "npm-run-all test lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "eslint:report": "yarn workspaces run eslint:report",
+    "eslint:fix": "yarn workspaces run eslint:fix",
+    "start:lib": "yarn workspace embla-carousel run start:react",
+    "start:docs": "yarn workspace embla-carousel-docs run start",
+    "build:lib": "yarn workspace embla-carousel run build",
+    "build:docs": "yarn workspace embla-carousel-docs run predeploy",
+    "version:patch": "yarn version --patch --no-git-tag-version",
+    "version:minor": "yarn version --minor --no-git-tag-version",
+    "version:major": "yarn version --major --no-git-tag-version",
+    "version:embla-carousel": "yarn workspace embla-carousel version --new-version $npm_package_version --no-git-tag-version",
+    "version:embla-carousel-docs": "yarn workspace embla-carousel-docs version --new-version $npm_package_version --no-git-tag-version",
+    "version:link-docs": "yarn workspace embla-carousel-docs upgrade embla-carousel",
+    "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
+    "version:push": "git add -A && git push && git push --tags",
+    "preversion": "npm-run-all lint test format build",
+    "version": "npm-run-all version:embla-carousel version:embla-carousel-docs version:link-docs",
+    "postversion": "npm-run-all version:create version:push",
+    "prepare": "yarn build"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.15",
-    "@babel/plugin-transform-object-assign": "^7.12.13",
-    "@babel/preset-env": "^7.13.15",
-    "@babel/preset-typescript": "^7.13.0",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
-    "@types/jest": "^26.0.22",
-    "@types/react": "^17.0.3",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "jest": "^26.6.3",
+    "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "rollup": "^2.45.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
-    "ts-jest": "^26.5.5",
-    "typescript": "^4.2.4"
+    "prettier": "^2.2.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all lint test",
+      "pre-push": "yarn format"
+    }
   }
 }

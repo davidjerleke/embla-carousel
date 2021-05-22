@@ -19,13 +19,13 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install 🔧
-        run: npm install
+        run: yarn install
 
       - name: Build 🏗️
-        run: npm run build --if-present
+        run: yarn build
 
       - name: Lint 🧐
-        run: npm run lint
+        run: yarn lint
 
       - name: Test 🚨
-        run: npm test
+        run: yarn test

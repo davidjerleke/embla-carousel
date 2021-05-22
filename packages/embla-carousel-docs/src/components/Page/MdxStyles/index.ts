@@ -1,0 +1,1 @@
+export { MdxStyles } from './MdxStyles'

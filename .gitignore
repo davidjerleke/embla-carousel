@@ -1,12 +1,18 @@
 # production
-/*.js
-/*.map
-/index.d.ts
-/vanilla
-/react
+packages/embla-carousel/index.d.ts
+packages/embla-carousel/embla-carousel-vanilla
+packages/embla-carousel/embla-carousel-react
+packages/embla-carousel/embla-carousel.*
+packages/embla-carousel/react.*
+public
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # dependencies
-node_modules/
+node_modules
 .pnp
 .pnp.js
 
@@ -14,12 +20,8 @@ node_modules/
 coverage
 
 # misc
+.cache
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# dotenv
+.env*
