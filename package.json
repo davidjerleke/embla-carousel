@@ -22,7 +22,7 @@
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspace embla-carousel run test",
     "start": "npm-run-all --parallel start:lib start:docs",
-    "build": "npm-run-all build:lib build:docs",
+    "build": "yarn build:lib",
     "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
     "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
     "eslint:report": "yarn workspaces run eslint:report",
@@ -39,10 +39,10 @@
     "version:link-docs": "yarn workspace embla-carousel-docs upgrade embla-carousel",
     "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
     "version:push": "git add -A && git push && git push --tags",
-    "preversion": "npm-run-all lint test format build",
+    "preversion": "npm-run-all lint test format build:lib",
     "version": "npm-run-all version:embla-carousel version:embla-carousel-docs version:link-docs",
     "postversion": "npm-run-all version:create version:push",
-    "prepare": "yarn build"
+    "prepare": "yarn build:lib"
   },
   "devDependencies": {
     "husky": "^4.3.8",
