@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    The <strong>documentation website</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>. Recommended <strong>node version<strong> is defined in <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.nvmrc">.nvmrc</a>.
+    The <strong>documentation website</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>. Recommended <strong>node version</strong> is defined in <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.nvmrc">.nvmrc</a>.
   </p>
 
   <br>
