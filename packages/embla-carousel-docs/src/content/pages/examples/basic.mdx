@@ -1,0 +1,172 @@
+---
+title: Basic
+description: Browse Embla Carousel setups that demonstrates its core features.
+order: 0
+date: 2021-02-21
+---
+
+import { CarouselLinks, CarouselBasic } from 'components/Embla'
+
+# Basic
+
+Basic carousel setups that require minimal effort to get started with.
+
+### Default
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-default-vanilla-gqh0n`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-default-react-88p7h`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="basic"
+  options={{ skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Loop
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-loop-vanilla-3dedy`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-loop-react-brro5`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="loop"
+  options={{ loop: true, skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Right To Left
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-righttoleft-vanilla-9g163`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-righttoleft-react-if2xc`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="right-to-left"
+  options={{ direction: 'rtl', skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Slides To Scroll
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-slidestoscroll-vanilla-dposi`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-slidestoscroll-react-tolb8`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="slides-to-scroll"
+  options={{ slidesToScroll: 2, containScroll: 'trimSnaps', skipSnaps: false }}
+  slideSizes={[50, 50, 50, 50, 50, 50]}
+/>
+
+### Drag Free
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-dragfree-vanilla-y1rnu`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-dragfree-react-brito`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="drag-free"
+  options={{ dragFree: true, containScroll: 'trimSnaps' }}
+  slideSizes={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
+/>
+
+### Align
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-align-vanilla-88fm6`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-align-react-utwqt`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="align"
+  options={{ skipSnaps: false }}
+  slideSizes={[80, 80, 80, 80, 80]}
+/>
+
+### Variable Widths
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-variablewidths-vanilla-6y66l`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-variablewidths-react-wik90`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="variable-widths"
+  slideSizes={[60, 40, 30, 90, 35, 55, 85, 46, 30]}
+  options={{ containScroll: 'keepSnaps', dragFree: true }}
+/>
+
+### Y-axis
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-y-axis-vanilla-e4wrb`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-y-axis-react-ry2ym`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="y-axis"
+  slideSizes={[100, 100, 100, 100, 100]}
+  options={{ axis: 'y', skipSnaps: false }}
+/>

@@ -1,0 +1,151 @@
+---
+title: Inspiration
+description: Browse Embla Carousel setups that extends the carousel beyond its core features.
+order: 2
+date: 2021-02-21
+---
+
+import {
+  CarouselLinks,
+  CarouselProgress,
+  CarouselParallax,
+  CarouselAutoplay,
+  CarouselLazyload,
+  CarouselInfiniteScroll,
+  CarouselWheel,
+} from 'components/Embla'
+
+# Inspiration
+
+Extend Embla Carousel easily with its extensible [API](/api/).
+
+### Progress
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-progress-vanilla-v5gsq`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-progress-react-f3e09`,
+    },
+  ]}
+/>
+<CarouselProgress
+  id="progress"
+  options={{ dragFree: true }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Parallax
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-parallax-vanilla-uk1c6`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-parallax-react-ep71f`,
+    },
+  ]}
+/>
+<CarouselParallax
+  id="parallax"
+  options={{ inViewThreshold: 0, dragFree: true }}
+  slideSizes={[80, 80, 80, 80, 80]}
+/>
+
+### Autoplay
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-autoplay-vanilla-e5ihq`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-autoplay-react-2gl44`,
+    },
+  ]}
+/>
+<CarouselAutoplay
+  id="autoplay"
+  options={{ skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Lazy Load
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-lazyload-vanilla-tiw0w`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-lazyload-react-z7xiq`,
+    },
+  ]}
+/>
+<CarouselLazyload
+  id="lazyload"
+  options={{ inViewThreshold: 0, skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Infinite Scroll
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-infinite-scroll-vanilla-q4388`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-infinite-scroll-react-z1gxc`,
+    },
+  ]}
+/>
+<CarouselInfiniteScroll
+  id="infinite-scroll"
+  options={{ inViewThreshold: 0, dragFree: true, containScroll: 'keepSnaps' }}
+/>
+
+### IOS Picker Default
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-ios-picker-default-vanilla-4ypkc`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-ios-picker-default-react-fotej`,
+    },
+  ]}
+/>
+<CarouselWheel id="ios-picker-default" />
+
+### IOS Picker Loop
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-ios-picker-loop-vanilla-ltt1z`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-ios-picker-loop-react-6mdkp`,
+    },
+  ]}
+/>
+<CarouselWheel id="ios-picker-loop" loop={true} />

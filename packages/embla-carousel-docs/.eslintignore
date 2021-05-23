@@ -1,0 +1,8 @@
+docs
+public
+static
+.cache
+package.json
+package-lock.json
+yarn.lock
+node_modules

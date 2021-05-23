@@ -1,0 +1,54 @@
+---
+title: Navigation
+description: Browse Embla Carousel setups with different types of navigation.
+order: 1
+date: 2021-02-21
+---
+
+import { CarouselLinks, CarouselBasic, CarouselThumb } from 'components/Embla'
+
+# Navigation
+
+Add navigation to your carousels by utilizing the Embla Carousel [API](/api/).
+
+### Arrows & Dots
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-arrows-dots-vanilla-twh0h`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-arrows-dots-react-z5fbs`,
+    },
+  ]}
+/>
+<CarouselBasic
+  id="arrows-and-dots"
+  options={{ skipSnaps: false }}
+  showDotButtons={true}
+  showArrowButtons={true}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Thumbnails
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-thumbnails-vanilla-6edhx`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-thumbnails-react-hj33c`,
+    },
+  ]}
+/>
+<CarouselThumb
+  id="thumbnails"
+  options={{ skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100, 100, 100, 100, 100, 100]}
+/>

@@ -19,9 +19,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install 🔧
-        run: npm install
+        run: yarn install
 
       - name: NPM PKG Publish 🎉
-        run: npm publish
+        run: yarn workspace embla-carousel publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
