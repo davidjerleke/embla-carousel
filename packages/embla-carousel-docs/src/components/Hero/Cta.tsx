@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { breakpoints } from 'consts'
-import { hiddenAtBreakpointStyles } from 'utils'
+import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
 import { ContentLink, CtaLink } from 'components/Link'
+import { hiddenAtBreakpointStyles } from 'utils'
+import { breakpoints } from 'consts'
 
 const MAX_WIDTH = '60rem'
 
@@ -30,7 +31,7 @@ const P = styled.p`
 
 export const Cta = () => {
   return (
-    <CtaWrapper>
+    <CtaWrapper id={SKIP_TO_CONTENT_ID}>
       <P $hidden="maxSm">
         Build awesome carousels by extending Embla Carousel with your own CSS
         and JavaScript. Check out the{' '}

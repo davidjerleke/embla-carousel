@@ -4,6 +4,7 @@ import { Seo } from 'components/Seo'
 import maskable from 'assets/images/maskable.png'
 import { useSiteMetadata } from 'hooks'
 import { Mdx, EditPage, Pagination, Breadcrumbs } from 'components/Page'
+import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
 import { RouteType } from 'components/Routes'
 import { removeProtocol } from 'utils'
 
@@ -89,7 +90,7 @@ const Page = (props: PropType) => {
         </script>
       </Seo>
       <Breadcrumbs id={id} />
-      <article>
+      <article id={SKIP_TO_CONTENT_ID}>
         <Mdx body={body} />
       </article>
       <EditPage pageUrl={filePath} />

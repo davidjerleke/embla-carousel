@@ -5,6 +5,7 @@ const siteMetadata = {
   author: packageJson.author,
   siteUrl: packageJson.homepage,
   description: packageJson.description,
+  version: packageJson.version,
 }
 
 module.exports = {

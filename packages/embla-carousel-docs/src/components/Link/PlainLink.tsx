@@ -4,18 +4,18 @@ import { GatsbyLinkProps, Link } from 'gatsby'
 import { tabAccessStyles } from 'components/TabAccess'
 import { useTabAccess } from 'hooks'
 
-const linkStyles = css<{ $isTabbing: boolean }>`
+export const plainLinkStyles = css<{ $isTabbing: boolean }>`
   ${tabAccessStyles};
   -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
   text-decoration: none;
 `
 
 const InternalLink = styled(Link)`
-  ${linkStyles};
+  ${plainLinkStyles};
 `
 
 const ExternalLink = styled.a`
-  ${linkStyles};
+  ${plainLinkStyles};
 `
 
 export type PropType = PropsWithChildren<{

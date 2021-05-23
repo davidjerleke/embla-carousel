@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import { RoutesProvider } from 'components/Routes'
 import { ThemeProvider } from 'components/Theme'
 import { NavigationProvider } from 'components/Navigation'
-import { TabAccessProvider } from 'components/TabAccess'
+import { SkipToContent, TabAccessProvider } from 'components/TabAccess'
 import { Search, SearchProvider } from 'components/Search'
 import { GlobalStyles } from 'components/Layout/GlobalStyles'
 import { PageTemplateType, PAGE_TEMPLATES } from 'consts'
@@ -30,6 +30,7 @@ export const Layout = (props: PropType) => {
                 <>{children}</>
               ) : (
                 <>
+                  <SkipToContent />
                   <Header />
                   <Grid layout={layout}>{children}</Grid>
                   <Footer />

@@ -8,6 +8,7 @@ const query = graphql`
         description
         author
         siteUrl
+        version
       }
     }
   }
@@ -20,6 +21,7 @@ type SiteMetadataType = {
       description: string
       author: string
       siteUrl: string
+      version: string
     }
   }
 }
