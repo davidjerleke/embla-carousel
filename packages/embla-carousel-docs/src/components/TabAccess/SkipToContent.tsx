@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { ctaButtonStyles } from 'components/Button'
 import { plainLinkStyles } from 'components/Link'
-import { useTabAccess } from 'hooks'
 import { isBrowser } from 'utils'
 import { LAYERS } from 'consts'
 
@@ -27,7 +26,6 @@ const SkipToContentLink = styled.a`
 
 export const SkipToContent = () => {
   const [contentElement, setContentElement] = useState<HTMLElement | null>(null)
-  const isTabbing = useTabAccess()
 
   const onClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
@@ -48,9 +46,9 @@ export const SkipToContent = () => {
 
   return (
     <SkipToContentLink
-      $isTabbing={isTabbing}
       href={`#${SKIP_TO_CONTENT_ID}`}
       onClick={onClick}
+      $isTabbing
     >
       Skip to content
     </SkipToContentLink>
