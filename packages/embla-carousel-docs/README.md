@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    The documentation website for <a href="https://www.embla-carousel.com/">Embla Carousel</a>.
+    The <strong>documentation website</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>. Recommended **node version** is defined in <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/.nvmrc">.nvmrc</a>.
   </p>
 
   <br>
@@ -42,25 +42,6 @@
     </strong>
   </p>
 </div>
-
-<br>
-
-## Usage
-
-Recommended **node version** is defined in [.nvmrc](https://github.com/davidcetinkaya/embla-carousel/blob/master/.nvmrc).
-
-- `yarn install` - Install packages
-- `yarn start` - Start Gatsby development server on port _8000_
-- `yarn develop` - Start Gatsby development server on port _8000_
-- `yarn build` - Build Gatsby project to the public folder
-- `yarn serve` - Serve Gatsby public folder on port _9000_
-- `yarn clean` - Clean up Gatsby project
-- `yarn eslint:report` - Report any [ESLint](https://eslint.org/) issues
-- `yarn eslint:fix` - Fix any [ESLint](https://eslint.org/) issues
-- `yarn predeploy:clean` - Clean up deployment folder
-- `yarn predeploy:build` - Clean up and re-build Gatsby project
-- `yarn predeploy:copy` - Copy Gatsby project build to deployment folder
-- `yarn predeploy` - Run all predeploy commands
 
 <br>
 
