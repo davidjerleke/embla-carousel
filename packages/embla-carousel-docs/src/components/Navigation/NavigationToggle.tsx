@@ -14,7 +14,6 @@ const Wrapper = styled(PlainButton)`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   padding: 0;
   margin-left: calc((${BUTTON_SIZE} - ${BURGER_SIZE}) / 2 * -1);
   margin-right: calc((${BUTTON_SIZE} - ${BURGER_SIZE}) / 2 * -1);
