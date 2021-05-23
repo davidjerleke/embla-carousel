@@ -61,3 +61,26 @@ Recommended **node version** is defined in [.nvmrc](https://github.com/davidceti
 - `yarn predeploy:build` - Clean up and re-build Gatsby project
 - `yarn predeploy:copy` - Copy Gatsby project build to deployment folder
 - `yarn predeploy` - Run all predeploy commands
+
+<br>
+
+<h2 align="center">Open Source</h2>
+
+<p align="center">
+  <sup>Copyright © 2019-present, David Cetinkaya.</sup><br>
+  Embla is <a href="https://github.com/davidcetinkaya/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.
+</p>
+
+<p align="center">
+  <strong>· · ·</strong>
+</p>
+
+<p align="center">
+  Thanks <a href="https://www.browserstack.com">BrowserStack</a>.
+</p>
+
+<p align="center">
+  <a href="https://www.browserstack.com">
+    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
+    </a>
+</p>
