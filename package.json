@@ -22,7 +22,7 @@
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspace embla-carousel run test",
     "start": "npm-run-all --parallel start:lib start:docs",
-    "build": "yarn build:lib",
+    "build": "npm-run-all build:lib build:docs",
     "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
     "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
     "eslint:report": "yarn workspaces run eslint:report",

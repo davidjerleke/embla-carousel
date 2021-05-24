@@ -9,12 +9,9 @@ import {
   Viewport,
   Slide,
   SlideNumber,
+  SlideInner,
+  SlideImg,
 } from './carouselBasicStyles'
-import {
-  ParallaxSlideInner,
-  ParallaxSlideLayer,
-  ParallaxSlideImg,
-} from './carouselParallaxStyles'
 
 type PropType = {
   id: string
@@ -22,7 +19,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const PARALLAX_FACTOR = 1.2
+const SCALE_FACTOR = 0.3
 
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes } = props
@@ -50,7 +47,7 @@ const Carousel = (props: PropType) => {
           }
         })
       }
-      return diffToTarget * (-1 / PARALLAX_FACTOR) * 100
+      return 1 - Math.abs(diffToTarget * (1 / SCALE_FACTOR))
     })
     setSlideStyles(styles)
   }, [emblaApi, setSlideStyles])
@@ -75,16 +72,14 @@ const Carousel = (props: PropType) => {
                 aria-label={`${index + 1} of ${slideSizes.length}`}
                 role="group"
               >
-                <SlideNumber>
-                  <span>{index + 1}</span>
-                </SlideNumber>
-                <ParallaxSlideInner>
-                  <ParallaxSlideLayer
-                    style={{ transform: `translateX(${slideStyles[index]}%)` }}
-                  >
-                    <ParallaxSlideImg src={src} alt={alt} />
-                  </ParallaxSlideLayer>
-                </ParallaxSlideInner>
+                <SlideInner
+                  style={{ transform: `scale(${slideStyles[index]})` }}
+                >
+                  <SlideNumber>
+                    <span>{index + 1}</span>
+                  </SlideNumber>
+                  <SlideImg src={src} alt={alt} />
+                </SlideInner>
               </Slide>
             )
           })}
@@ -94,7 +89,7 @@ const Carousel = (props: PropType) => {
   )
 }
 
-export const CarouselParallax = (props: PropType) => {
+export const CarouselScale = (props: PropType) => {
   const [inViewRef, inView] = useInView({ triggerOnce: true })
 
   return (

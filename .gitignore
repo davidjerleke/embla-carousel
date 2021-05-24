@@ -1,8 +1,9 @@
 # production
 packages/embla-carousel/index.d.ts
+packages/embla-carousel/embla-carousel.*
 packages/embla-carousel/embla-carousel-vanilla
 packages/embla-carousel/embla-carousel-react
-packages/embla-carousel/embla-carousel.*
+packages/embla-carousel/react
 packages/embla-carousel/react.*
 public
 

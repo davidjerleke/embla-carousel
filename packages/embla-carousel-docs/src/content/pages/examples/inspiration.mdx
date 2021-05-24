@@ -10,6 +10,7 @@ import {
   CarouselProgress,
   CarouselParallax,
   CarouselAutoplay,
+  CarouselScale,
   CarouselLazyload,
   CarouselInfiniteScroll,
   CarouselWheel,
@@ -76,6 +77,26 @@ Extend Embla Carousel easily with its extensible [API](/api/).
 <CarouselAutoplay
   id="autoplay"
   options={{ skipSnaps: false }}
+  slideSizes={[100, 100, 100, 100, 100]}
+/>
+
+### Scale
+
+<CarouselLinks
+  links={[
+    {
+      label: 'Vanilla',
+      to: `https://codesandbox.io/s/embla-carousel-scale-vanilla-gc3b0`,
+    },
+    {
+      label: 'React',
+      to: `https://codesandbox.io/s/embla-carousel-scale-react-j2ulk`,
+    },
+  ]}
+/>
+<CarouselScale
+  id="scale"
+  options={{ loop: true, skipSnaps: false }}
   slideSizes={[100, 100, 100, 100, 100]}
 />
 
