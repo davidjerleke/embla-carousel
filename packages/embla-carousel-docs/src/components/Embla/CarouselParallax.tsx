@@ -22,7 +22,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const PARALLAX_FACTOR = 5
+const PARALLAX_FACTOR = 1.2
 
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes } = props
