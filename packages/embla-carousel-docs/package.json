@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-docs",
-  "version": "4.5.2",
+  "version": "4.5.3",
   "private": false,
   "author": "David Cetinkaya",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -30,7 +30,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
     "babel-plugin-styled-components": "^1.12.0",
-    "embla-carousel": "4.5.2",
+    "embla-carousel": "4.5.3",
     "focus-trap-react": "^8.4.2",
     "gatsby": "^2.32.11",
     "gatsby-plugin-layout": "^1.10.0",

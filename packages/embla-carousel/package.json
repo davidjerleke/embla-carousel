@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "4.5.2",
+  "version": "4.5.3",
   "private": false,
   "author": "David Cetinkaya",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -66,8 +66,8 @@
     "rollup": "^2.45.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.30.0",
-    "ts-jest": "^26.5.5",
     "shx": "^0.3.3",
+    "ts-jest": "^26.5.5",
     "typescript": "^4.2.4"
   }
 }
