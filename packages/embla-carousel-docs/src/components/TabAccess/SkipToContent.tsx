@@ -1,27 +1,35 @@
 import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
-import { ctaButtonStyles } from 'components/Button'
 import { plainLinkStyles } from 'components/Link'
-import { isBrowser } from 'utils'
+import { gradientTextStyles, isBrowser } from 'utils'
 import { LAYERS } from 'consts'
 
 export const SKIP_TO_CONTENT_ID = 'main-content'
 
-const SkipToContentLink = styled.a`
+const Wrapper = styled.a`
   ${plainLinkStyles};
-  ${ctaButtonStyles};
   z-index: ${LAYERS.SEARCH + 1};
-  top: 0.5rem;
-  left: 0.5rem;
+  background-color: var(--background-site);
+  top: 1rem;
+  left: 1rem;
   position: absolute;
   transform: translateX(-1000rem);
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
 
   &:focus,
   &:active {
     position: fixed;
     transform: translateX(0);
   }
+`
+
+const LinkText = styled.span`
+  ${gradientTextStyles};
+  z-index: ${LAYERS.STEP};
+  position: relative;
 `
 
 export const SkipToContent = () => {
@@ -45,12 +53,8 @@ export const SkipToContent = () => {
   if (!contentElement) return null
 
   return (
-    <SkipToContentLink
-      href={`#${SKIP_TO_CONTENT_ID}`}
-      onClick={onClick}
-      $isTabbing
-    >
-      Skip to content
-    </SkipToContentLink>
+    <Wrapper href={`#${SKIP_TO_CONTENT_ID}`} onClick={onClick} $isTabbing>
+      <LinkText>Skip to content</LinkText>
+    </Wrapper>
   )
 }
