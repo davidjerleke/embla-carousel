@@ -3,6 +3,7 @@ import { useEmblaCarousel } from 'embla-carousel/react'
 import { EmblaOptionsType } from 'embla-carousel'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
+import { numberWithinRange } from 'utils'
 import {
   Wrapper,
   Container,
@@ -19,7 +20,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const SCALE_FACTOR = 0.3
+const SCALE_FACTOR = 3
 
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes } = props
@@ -47,7 +48,8 @@ const Carousel = (props: PropType) => {
           }
         })
       }
-      return 1 - Math.abs(diffToTarget * (1 / SCALE_FACTOR))
+      const scale = 1 - Math.abs(diffToTarget * SCALE_FACTOR)
+      return numberWithinRange(scale, 0, 1)
     })
     setSlideStyles(styles)
   }, [emblaApi, setSlideStyles])
@@ -55,6 +57,7 @@ const Carousel = (props: PropType) => {
   useEffect(() => {
     if (!emblaApi) return
     emblaApi.on('scroll', updateSlideStyles)
+    emblaApi.on('resize', updateSlideStyles)
     updateSlideStyles()
   }, [emblaApi, updateSlideStyles])
 

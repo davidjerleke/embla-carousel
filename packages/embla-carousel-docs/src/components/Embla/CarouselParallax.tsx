@@ -22,7 +22,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const PARALLAX_FACTOR = 1.2
+const PARALLAX_FACTOR = 5
 
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes } = props
@@ -58,6 +58,7 @@ const Carousel = (props: PropType) => {
   useEffect(() => {
     if (!emblaApi) return
     emblaApi.on('scroll', updateSlideStyles)
+    emblaApi.on('resize', updateSlideStyles)
     updateSlideStyles()
   }, [emblaApi, updateSlideStyles])
 

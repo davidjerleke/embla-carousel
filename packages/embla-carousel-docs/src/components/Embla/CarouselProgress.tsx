@@ -3,6 +3,7 @@ import { useEmblaCarousel } from 'embla-carousel/react'
 import { EmblaOptionsType } from 'embla-carousel'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
+import { numberWithinRange } from 'utils'
 import {
   Wrapper,
   Container,
@@ -32,7 +33,7 @@ const Carousel = (props: PropType) => {
 
   useEffect(() => {
     emblaApi?.on('scroll', () => {
-      const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
+      const progress = numberWithinRange(emblaApi.scrollProgress(), 0, 1)
       setScrollProgress(progress)
     })
   }, [emblaApi])
