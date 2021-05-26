@@ -25,7 +25,7 @@ type PropType = { pageUrl: string }
 
 export const EditPage = (props: PropType) => {
   const { pageUrl } = props
-  const url = `${URLS.DOCUMENTATION_REPOSITORY}/tree/master/${pageUrl}`
+  const url = `${URLS.GITHUB_DOCUMENTATION}/${pageUrl}`
 
   return (
     <Wrapper to={url}>

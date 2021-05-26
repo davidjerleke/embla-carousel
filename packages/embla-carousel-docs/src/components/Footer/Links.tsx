@@ -52,7 +52,7 @@ export const Links = (props: PropType) => {
         </Link>
       </li>
       <li>
-        <Link to={URLS.LIBRARY_REPOSITORY}>
+        <Link to={URLS.GITHUB_ROOT}>
           <GithubSvg aria-hidden="true" focusable="false" />
           <span>GitHub</span>
         </Link>
