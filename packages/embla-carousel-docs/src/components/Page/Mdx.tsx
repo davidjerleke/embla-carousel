@@ -2,7 +2,7 @@ import React from 'react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { MdxStyles } from './MdxStyles'
-import { Div, Link, Pre } from './MdxComponents'
+import { Div, Link, Pre, GradientText, PageChildLinks } from './MdxComponents'
 
 type PropType = { body: string }
 
@@ -16,6 +16,8 @@ export const Mdx = (props: PropType) => {
           a: Link,
           pre: Pre,
           div: Div,
+          GradientText,
+          PageChildLinks,
         }}
       >
         <MDXRenderer>{body}</MDXRenderer>

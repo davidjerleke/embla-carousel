@@ -1,17 +1,6 @@
 import { RouteType, MdxAllRoutesType } from 'components/Routes'
+import { addRouteChildren } from './addRouteChildren'
 import { createFlatRoutes } from './createFlatRoutes'
-import { isRoutePartiallyActive } from 'utils'
-
-const addRouteChildren = (
-  parent: RouteType,
-  routes: RouteType[],
-): RouteType => {
-  parent.children = routes
-    .filter(({ slug }) => isRoutePartiallyActive(parent, slug))
-    .filter(({ level }) => level - 1 === parent.level)
-  parent.children.forEach((child) => addRouteChildren(child, routes))
-  return parent
-}
 
 export const createHierarchicalRoutes = (
   data: MdxAllRoutesType,

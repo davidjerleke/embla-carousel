@@ -3,12 +3,14 @@ import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'
 import { codeStyles } from './code'
+import { hrStyles } from './hr'
 
 export const MdxStyles = styled.div`
   ${blockquoteStyles};
   ${listStyles};
   ${codeStyles};
   ${headingStyles};
+  ${hrStyles};
 
   color: var(--text-body);
 
