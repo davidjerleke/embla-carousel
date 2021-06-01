@@ -5,7 +5,7 @@ order: 1
 date: 2021-03-13
 ---
 
-# <GradientText>Practical</GradientText> Guides
+# Practical Guides
 
 Here is a list of practical step-by-step guides to help you achieve a specific goal. These guides demonstrate how to **customize your carousels** for different use cases and teach you more about how Embla Carousel works.
 

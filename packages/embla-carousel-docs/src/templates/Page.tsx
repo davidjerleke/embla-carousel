@@ -3,10 +3,11 @@ import { graphql } from 'gatsby'
 import { Seo } from 'components/Seo'
 import maskable from 'assets/images/maskable.png'
 import { useSiteMetadata } from 'hooks'
-import { Mdx, EditPage, Pagination, Breadcrumbs } from 'components/Page'
+import { EditPage, Pagination, Breadcrumbs } from 'components/Page'
 import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
 import { RouteType } from 'components/Routes'
 import { removeProtocol } from 'utils'
+import { Mdx } from 'components/Mdx'
 
 export const query = graphql`
   query PageQuery($id: String) {

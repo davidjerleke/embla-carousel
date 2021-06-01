@@ -1,5 +1,5 @@
 import React from 'react'
-import { Mdx } from 'components/Page'
+import { Mdx } from 'components/Mdx'
 import { graphql } from 'gatsby'
 import { Frame } from 'components/SiteLayout'
 import styled from 'styled-components'

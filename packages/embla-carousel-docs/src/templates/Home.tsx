@@ -5,7 +5,7 @@ import { graphql } from 'gatsby'
 import { useSiteMetadata } from 'hooks'
 import { Hero } from 'components/Hero'
 import { Seo } from 'components/Seo'
-import { Mdx } from 'components/Page'
+import { Mdx } from 'components/Mdx'
 import { removeProtocol } from 'utils'
 
 const MAX_WIDTH = '68.2rem'
