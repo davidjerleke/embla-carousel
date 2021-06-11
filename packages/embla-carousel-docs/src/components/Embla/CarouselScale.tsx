@@ -4,12 +4,12 @@ import { EmblaOptionsType } from 'embla-carousel'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
 import { numberWithinRange } from 'utils'
+import { SlideNumber } from './carouselScaleStyles'
 import {
   Wrapper,
   Container,
   Viewport,
   Slide,
-  SlideNumber,
   SlideInner,
   SlideImg,
 } from './carouselBasicStyles'
