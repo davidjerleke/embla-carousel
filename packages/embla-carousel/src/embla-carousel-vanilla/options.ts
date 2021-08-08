@@ -10,6 +10,7 @@ export type OptionsType = {
   direction: DirectionOptionType
   dragFree: boolean
   draggable: boolean
+  dragBreakAtFirstLastIndex: boolean,
   draggableClass: string
   draggingClass: string
   inViewThreshold: number
@@ -28,6 +29,7 @@ export const defaultOptions: OptionsType = {
   direction: 'ltr',
   dragFree: false,
   draggable: true,
+  dragBreakAtFirstLastIndex: false,
   draggableClass: 'is-draggable',
   draggingClass: 'is-dragging',
   inViewThreshold: 0,

@@ -69,6 +69,7 @@ export function Engine(
     loop,
     speed,
     dragFree,
+    dragBreakAtFirstLastIndex,
     slidesToScroll,
     skipSnaps,
     containScroll,
@@ -222,7 +223,7 @@ export function Engine(
     slidesInView,
     slideIndexes,
     target,
-    translate: Translate(axis, direction, container),
+    translate: Translate(axis, direction, container, dragBreakAtFirstLastIndex, limit),
   }
   return engine
 }
