@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { frameCollapseStyles } from 'components/SiteLayout'
-import { EmblaOptionsType } from 'embla-carousel'
+import { EmblaOptionsType } from 'embla-carousel-react'
 import { breakpoints, LAYERS, supportsStyles } from 'consts'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'

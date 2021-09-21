@@ -2,12 +2,11 @@
   "compilerOptions": {
     "module": "esnext",
     "lib": ["dom", "esnext"],
-    "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
     "strict": true,
     "declaration": true,
-    "declarationDir": "./",
+    "declarationDir": ".",
     "moduleResolution": "node"
   },
   "include": ["src/index.ts"],

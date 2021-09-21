@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import { useEmblaCarousel } from 'embla-carousel/react'
+import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
 import { Slide, SlideInner, SlideImg, SlideNumber } from './carouselBasicStyles'

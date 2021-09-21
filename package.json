@@ -15,6 +15,7 @@
   "license": "MIT",
   "workspaces": [
     "packages/embla-carousel",
+    "packages/embla-carousel-react",
     "packages/embla-carousel-docs"
   ],
   "scripts": {
@@ -22,27 +23,20 @@
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspace embla-carousel run test",
     "start": "npm-run-all --parallel start:lib start:docs",
-    "build": "yarn build:lib",
     "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
     "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
-    "eslint:report": "yarn workspaces run eslint:report",
-    "eslint:fix": "yarn workspaces run eslint:fix",
+    "eslint:report": "yarn workspaces foreach --verbose run eslint:report",
+    "eslint:fix": "yarn workspaces foreach --verbose run eslint:fix",
     "start:lib": "yarn workspace embla-carousel run start:react",
     "start:docs": "yarn workspace embla-carousel-docs run start",
-    "build:lib": "yarn workspace embla-carousel run build",
+    "build:libs": "yarn workspaces foreach --verbose --exclude 'embla-carousel-docs' run build",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
-    "version:patch": "yarn version --patch --no-git-tag-version",
-    "version:minor": "yarn version --minor --no-git-tag-version",
-    "version:major": "yarn version --major --no-git-tag-version",
-    "version:embla-carousel": "yarn workspace embla-carousel version --new-version $npm_package_version --no-git-tag-version",
-    "version:embla-carousel-docs": "yarn workspace embla-carousel-docs version --new-version $npm_package_version --no-git-tag-version",
-    "version:link-docs": "yarn workspace embla-carousel-docs upgrade embla-carousel",
-    "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
+    "version:patch": "yarn workspaces foreach version patch",
+    "version:minor": "yarn workspaces foreach version minor",
+    "version:major": "yarn workspaces foreach version major",
+    "version:commit": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
     "version:push": "git add -A && git push && git push --tags",
-    "preversion": "npm-run-all lint test format build:lib",
-    "version": "npm-run-all version:embla-carousel version:embla-carousel-docs version:link-docs",
-    "postversion": "npm-run-all version:create version:push",
-    "prepare": "yarn build:lib"
+    "preversion": "npm-run-all lint test format build"
   },
   "devDependencies": {
     "husky": "^4.3.8",

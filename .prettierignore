@@ -1,13 +1,18 @@
 # production
-packages/embla-carousel/index.d.ts
-packages/embla-carousel/embla-carousel.*
-packages/embla-carousel/embla-carousel-vanilla
-packages/embla-carousel/embla-carousel-react
-packages/embla-carousel/react
-packages/embla-carousel/react.*
+packages/embla-carousel*/index.d.ts
+packages/embla-carousel*/embla-carousel*
+packages/embla-carousel*/components
 public
 static
 docs
+
+# yarn
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
 
 # logs
 npm-debug.log*

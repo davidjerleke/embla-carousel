@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
-import { useEmblaCarousel } from 'embla-carousel/react'
-import { EmblaCarouselType } from 'embla-carousel'
+import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import {
   WheelWrapper,
   Wheel,

@@ -1,7 +1,5 @@
-export { EmblaOptionsType } from './embla-carousel-vanilla/options'
-export { EmblaEventType } from './embla-carousel-vanilla/eventEmitter'
-export { EmblaCarouselType } from './embla-carousel-vanilla'
-export { UseEmblaCarouselType } from './embla-carousel-react'
+export { EmblaOptionsType } from './components/options'
+export { EmblaEventType } from './components/eventEmitter'
+export { EmblaCarouselType } from './components'
 
-export { default } from './embla-carousel-vanilla'
-export { useEmblaCarousel } from './embla-carousel-react'
+export { default } from './components'
