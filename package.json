@@ -22,12 +22,12 @@
     "lint": "npm-run-all prettier:report eslint:report",
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspace embla-carousel run test",
-    "start": "npm-run-all --parallel start:lib start:docs",
+    "start": "npm-run-all --parallel start:libs start:docs",
     "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
     "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
     "eslint:report": "yarn workspaces foreach --verbose run eslint:report",
     "eslint:fix": "yarn workspaces foreach --verbose run eslint:fix",
-    "start:lib": "yarn workspace embla-carousel run start:react",
+    "start:libs": "yarn workspace embla-carousel-react run start",
     "start:docs": "yarn workspace embla-carousel-docs run start",
     "build:libs": "yarn workspaces foreach --verbose --exclude 'embla-carousel-docs' run build",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
@@ -36,7 +36,8 @@
     "version:major": "yarn workspaces foreach version major",
     "version:commit": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
     "version:push": "git add -A && git push && git push --tags",
-    "preversion": "npm-run-all lint test format build"
+    "preversion": "npm-run-all lint test format build",
+    "version": "echo \"HEJ\" && exit 1"
   },
   "devDependencies": {
     "husky": "^4.3.8",
