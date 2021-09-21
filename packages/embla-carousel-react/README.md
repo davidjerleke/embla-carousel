@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    The <strong>documentation website</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>.
+    The <strong>React version</strong> of <a href="https://www.embla-carousel.com/">Embla Carousel</a>.
   </p>
 
   <br>
