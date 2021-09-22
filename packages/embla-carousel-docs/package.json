@@ -18,12 +18,13 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "test": "echo \"Info: no tests specified\" && exit 0",
     "predeploy:clean": "shx rm -r ../../docs",
     "predeploy:build": "npm-run-all clean build",
     "predeploy:copy": "shx cp -r ./public ../../docs",
     "predeploy": "npm-run-all predeploy:clean predeploy:build predeploy:copy",
-    "eslint:report": "eslint 'src/**/*.{js,tsx,ts}'",
-    "eslint:fix": "eslint 'src/**/*.{js,tsx,ts}' --fix"
+    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
+    "eslint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",

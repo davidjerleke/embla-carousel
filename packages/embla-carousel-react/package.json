@@ -33,11 +33,11 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "jest --config jest.config.js",
+    "test": "echo \"Info: no tests specified\" && exit 0",
     "build": "rollup -c",
     "start": "rollup -c --watch",
-    "eslint:report": "eslint 'src/**/*.{js,tsx,ts}'",
-    "eslint:fix": "eslint 'src/**/*.{js,tsx,ts}' --fix"
+    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
+    "eslint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
