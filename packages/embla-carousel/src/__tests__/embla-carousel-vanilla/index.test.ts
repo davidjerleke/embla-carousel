@@ -83,5 +83,26 @@ describe('EmblaCarousel', () => {
         expect(carouselNode.carousel?.slideNodes().length).toBe(3)
       })
     })
+
+    test('It uses newly assigned slots on reInit', () => {
+      const carouselNode = document.createElement(
+        'embla-carousel-component',
+      ) as EmblaCarouselComponent
+      for (let i = 0; i < 3; i += 1) {
+        const slide = document.createElement('div')
+        slide.setAttribute('slot', 'slide')
+        carouselNode.appendChild(slide)
+      }
+      document.body.appendChild(carouselNode)
+      carouselNode.innerHTML = ''
+      const newSlide = document.createElement('div')
+      newSlide.setAttribute('slot', 'slide')
+      carouselNode.appendChild(newSlide)
+      // wait until componenet got attached
+      return Promise.resolve().then(() => {
+        carouselNode.carousel?.reInit()
+        expect(carouselNode.carousel?.slideNodes().length).toBe(1)
+      })
+    })
   })
 })
