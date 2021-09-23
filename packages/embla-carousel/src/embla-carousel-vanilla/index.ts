@@ -51,11 +51,18 @@ function EmblaCarousel(
 
   function setupElements(): void {
     if (!sliderRoot) throw new Error('Missing root node 😢')
-    const sliderContainer = sliderRoot.querySelector('*')
+    const sliderContainer = sliderRoot.querySelector<
+      HTMLElement | HTMLSlotElement
+    >('*')
     if (!sliderContainer) throw new Error('Missing container node 😢')
 
     container = sliderContainer as HTMLElement
-    slides = Array.prototype.slice.call(container.children)
+    if (sliderContainer instanceof HTMLSlotElement) {
+      slides = Array.prototype.slice.call(sliderContainer.assignedElements())
+    } else {
+      slides = Array.prototype.slice.call(container.children)
+    }
+
     optionsPseudo = OptionsPseudo(sliderRoot)
   }
 
