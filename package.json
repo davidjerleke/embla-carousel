@@ -23,7 +23,7 @@
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run test",
     "start": "yarn workspaces foreach -vpi --exclude \"{embla-carousel-monorepo,embla-carousel}\" run start",
-    "build": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-docs}\" run build",
+    "build": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo}\" run build",
     "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:report",
     "eslint:fix": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:fix",
     "prettier:report": "prettier \"**/*.{js,tsx,ts,scss,json}\" --check",
