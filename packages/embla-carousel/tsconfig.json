@@ -6,7 +6,7 @@
     "sourceMap": true,
     "strict": true,
     "declaration": true,
-    "declarationDir": ".",
+    "declarationDir": "./",
     "moduleResolution": "node"
   },
   "include": ["src/index.ts"],

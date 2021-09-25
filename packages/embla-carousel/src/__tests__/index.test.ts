@@ -1,4 +1,4 @@
-import { EmblaOptionsType } from '../components/options'
+import { EmblaOptionsType } from '../components/Options'
 import EmblaCarousel, { EmblaCarouselType } from '../components/index'
 
 const initializeEmbla = (

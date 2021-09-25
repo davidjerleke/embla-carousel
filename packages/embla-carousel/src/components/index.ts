@@ -1,8 +1,8 @@
-import { Engine } from './engine'
-import { EventStore } from './eventStore'
-import { EventEmitter, EmblaEventType, EventEmitterType } from './eventEmitter'
-import { defaultOptions, EmblaOptionsType } from './options'
-import { OptionsPseudo, OptionsPseudoType } from './optionsPseudo'
+import { Engine } from './Engine'
+import { EventStore } from './EventStore'
+import { EventEmitter, EmblaEventType, EventEmitterType } from './EventEmitter'
+import { defaultOptions, EmblaOptionsType } from './Options'
+import { OptionsPseudo, OptionsPseudoType } from './OptionsPseudo'
 import { addClass, debounce, removeClass } from './utils'
 
 export type EmblaCarouselType = {
