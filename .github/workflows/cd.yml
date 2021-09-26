@@ -21,6 +21,9 @@ jobs:
       - name: Install 🔧
         run: yarn install
 
+      - name: Build 🏗️
+        run: yarn build
+
       - name: NPM PKG Publish 🎉
         run: yarn workspaces foreach -t --exclude '{embla-carousel-monorepo,embla-carousel-docs}' npm publish
         env:
