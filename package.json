@@ -15,34 +15,25 @@
   "license": "MIT",
   "workspaces": [
     "packages/embla-carousel",
+    "packages/embla-carousel-react",
     "packages/embla-carousel-docs"
   ],
   "scripts": {
     "lint": "npm-run-all prettier:report eslint:report",
     "format": "npm-run-all prettier:fix eslint:fix",
-    "test": "yarn workspace embla-carousel run test",
-    "start": "npm-run-all --parallel start:lib start:docs",
-    "build": "yarn build:lib",
-    "prettier:report": "prettier '**/*.{js,tsx,ts,scss,json}' --check",
-    "prettier:fix": "prettier '**/*.{js,tsx,ts,scss,json}' --write",
-    "eslint:report": "yarn workspaces run eslint:report",
-    "eslint:fix": "yarn workspaces run eslint:fix",
-    "start:lib": "yarn workspace embla-carousel run start:react",
-    "start:docs": "yarn workspace embla-carousel-docs run start",
-    "build:lib": "yarn workspace embla-carousel run build",
+    "test": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run test",
+    "start": "yarn workspaces foreach -vpi --exclude \"{embla-carousel-monorepo,embla-carousel}\" run start",
+    "build": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo}\" run build",
+    "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:report",
+    "eslint:fix": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:fix",
+    "prettier:report": "prettier \"**/*.{js,tsx,ts,scss,json}\" --check",
+    "prettier:fix": "prettier \"**/*.{js,tsx,ts,scss,json}\" --write",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
-    "version:patch": "yarn version --patch --no-git-tag-version",
-    "version:minor": "yarn version --minor --no-git-tag-version",
-    "version:major": "yarn version --major --no-git-tag-version",
-    "version:embla-carousel": "yarn workspace embla-carousel version --new-version $npm_package_version --no-git-tag-version",
-    "version:embla-carousel-docs": "yarn workspace embla-carousel-docs version --new-version $npm_package_version --no-git-tag-version",
-    "version:link-docs": "yarn workspace embla-carousel-docs upgrade embla-carousel",
+    "version:patch": "yarn workspaces foreach version patch && yarn version:push",
+    "version:minor": "yarn workspaces foreach version minor && yarn version:push",
+    "version:major": "yarn workspaces foreach version major && yarn version:push",
     "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
-    "version:push": "git add -A && git push && git push --tags",
-    "preversion": "npm-run-all lint test format build:lib",
-    "version": "npm-run-all version:embla-carousel version:embla-carousel-docs version:link-docs",
-    "postversion": "npm-run-all version:create version:push",
-    "prepare": "yarn build:lib"
+    "version:push": "yarn version:create && git add -A && git push && git push --tags"
   },
   "devDependencies": {
     "husky": "^4.3.8",
@@ -51,8 +42,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all lint test",
-      "pre-push": "yarn format"
+      "pre-push": "npm-run-all lint test format build"
     }
   }
 }

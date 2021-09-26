@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useEmblaCarousel } from 'embla-carousel/react'
-import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
 import { useInterval } from 'hooks'

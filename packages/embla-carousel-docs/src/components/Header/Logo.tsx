@@ -24,7 +24,7 @@ const Wrapper = styled(PlainLink)`
   }
 `
 
-const LogoWrapper = styled.div`
+const HeaderLogo = styled(SiteLogo)`
   ${createSquareSizeStyles('2.8rem')};
   display: flex;
   margin-right: 0.8rem;
@@ -48,9 +48,7 @@ export const Logo = () => {
       onClick={closeNavigation}
       to="/"
     >
-      <LogoWrapper>
-        <SiteLogo />
-      </LogoWrapper>
+      <HeaderLogo />
       <span>{title}</span>
     </Wrapper>
   )

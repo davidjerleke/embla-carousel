@@ -7,38 +7,36 @@ import { EmblaLightIcon, EmblaDarkIcon } from 'assets/icons'
 import { useSiteMetadata, useTheme } from 'hooks'
 import { LAYERS, THEME_KEYS } from 'consts'
 
-const logoStyles = css`
-  width: 100%;
-  height: 100%;
-`
-
 const Wrapper = styled.div`
-  ${logoStyles};
-  position: relative;
   width: 100%;
-  height: 100%;
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+    width: 100%;
+  }
 `
 
-const svgStyles = css`
+const imageStyles = css`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-`
-
-const LogoImage = styled.img`
-  ${logoStyles};
-  position: relative;
   z-index: ${LAYERS.STEP};
 `
 
+const LogoImage = styled.img`
+  ${imageStyles};
+`
+
 export const LogoLightIcon = styled(EmblaLightIcon)`
-  ${svgStyles};
+  ${imageStyles};
 `
 
 export const LogoDarkIcon = styled(EmblaDarkIcon)`
-  ${svgStyles};
+  ${imageStyles};
 `
 
 const LOGO_IMAGES = {
