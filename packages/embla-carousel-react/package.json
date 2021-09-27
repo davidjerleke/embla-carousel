@@ -30,6 +30,7 @@
   "sideEffects": false,
   "files": [
     "embla-carousel-react*",
+    "components",
     "index.d.ts"
   ],
   "scripts": {
