@@ -96,7 +96,7 @@ Modifying the minimal [component setup](/get-started/react/#the-component-struct
 
 ```jsx{7-9,11-13,24,27}
 import React, { useCallback } from 'react'
-import { useEmblaCarousel } from 'embla-carousel-react'
+import useEmblaCarousel from 'embla-carousel-react'
 
 export const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel()

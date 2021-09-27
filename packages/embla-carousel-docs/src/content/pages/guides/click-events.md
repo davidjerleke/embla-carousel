@@ -36,7 +36,7 @@ Adding click events to your slides with React is straightforward. We'll create a
 
 ```jsx{9, 21}
 import React, { useCallback } from 'react'
-import { useEmblaCarousel } from 'embla-carousel-react'
+import useEmblaCarousel from 'embla-carousel-react'
 
 export const EmblaCarousel = ({ slides }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel()

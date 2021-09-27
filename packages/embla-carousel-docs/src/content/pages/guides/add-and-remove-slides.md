@@ -38,7 +38,7 @@ React users can make use of the `useEffect` hook to pick up changes in slides. A
 
 ```jsx{9}
 import React, { useEffect } from 'react'
-import { useEmblaCarousel } from 'embla-carousel-react'
+import useEmblaCarousel from 'embla-carousel-react'
 
 export const EmblaCarousel = ({ slides }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel()
