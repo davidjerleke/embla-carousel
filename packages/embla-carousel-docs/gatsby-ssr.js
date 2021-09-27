@@ -7,12 +7,14 @@ import {
   LOCALSTORAGE_KEYS,
   THEME_KEYS,
   THEME_PREFIX,
+  URLS,
 } from 'consts'
 
 export const onRenderBody = ({
   setHtmlAttributes,
   setHeadComponents,
   setPreBodyComponents,
+  setPostBodyComponents,
 }) => {
   const { siteUrl } = config.siteMetadata
   const htmlAttributes = { className: `${THEME_PREFIX}${THEME_KEYS.LIGHT}` }
@@ -88,5 +90,13 @@ export const onRenderBody = ({
     <noscript key="noscript">
       This app only works with JavaScript enabled.
     </noscript>,
+  ])
+
+  setPostBodyComponents([
+    <script
+      key="algolia-docsearch"
+      src={URLS.ALGOLIA_DOCSEARCH}
+      async={true}
+    />,
   ])
 }

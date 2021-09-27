@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback } from 'react'
 import FocusTrap from 'focus-trap-react'
 import styled, { css } from 'styled-components'
 import { useEventListener, useSearch } from 'hooks'
-import { breakpoints, LAYERS, URLS } from 'consts'
+import { breakpoints, LAYERS } from 'consts'
 import { Input } from './Input'
-import { isBrowser } from 'utils'
 
 export const SEARCH_ID = 'site_search'
 const DIALOG_MAX_WIDTH = '56rem'
@@ -45,7 +44,6 @@ const SearchDialog = styled.div`
 `
 
 export const Search = () => {
-  const [scriptLoaded, setScriptLoaded] = useState(false)
   const { isOpen, closeSearch } = useSearch()
 
   const onKeyUp = useCallback(
@@ -60,15 +58,6 @@ export const Search = () => {
     listener: onKeyUp,
   })
 
-  useEffect(() => {
-    if (!isBrowser) return
-    const script = document.createElement('script')
-    script.src = URLS.ALGOLIA_DOCSEARCH
-    script.async = true
-    document.body.appendChild(script)
-    script.addEventListener('load', () => setScriptLoaded(true))
-  }, [])
-
   return (
     <FocusTrap active={isOpen}>
       <Wrapper
@@ -79,7 +68,9 @@ export const Search = () => {
         aria-label="Search Dialog"
       >
         <Overlay onPointerUp={closeSearch} />
-        <SearchDialog>{scriptLoaded && <Input />}</SearchDialog>
+        <SearchDialog>
+          <Input />
+        </SearchDialog>
       </Wrapper>
     </FocusTrap>
   )
