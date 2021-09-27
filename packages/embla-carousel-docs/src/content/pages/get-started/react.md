@@ -10,7 +10,7 @@ date: 2021-02-21
 Start by installing the Embla Carousel **npm package** and add it to your dependencies.
 
 ```shell
-npm install embla-carousel --save
+npm install embla-carousel-react --save
 ```
 
 ### The component structure
@@ -19,7 +19,7 @@ Embla Carousel provides the handy `useEmblaCarousel` hook for seamless integrati
 
 ```jsx
 import React from 'react'
-import { useEmblaCarousel } from 'embla-carousel/react'
+import { useEmblaCarousel } from 'embla-carousel-react'
 
 export const EmblaCarousel = () => {
   const [emblaRef] = useEmblaCarousel()
@@ -59,7 +59,7 @@ The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) ob
 
 ```jsx{5, 7-11}
 import React, { useEffect } from 'react'
-import { useEmblaCarousel } from 'embla-carousel/react'
+import { useEmblaCarousel } from 'embla-carousel-react'
 
 export const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
