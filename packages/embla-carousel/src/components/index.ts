@@ -79,9 +79,6 @@ function EmblaCarousel(
     if (options.draggable && container.offsetParent && slides.length) {
       engine.dragHandler.addActivationEvents()
     }
-    if (slides.length) {
-      engine.slideFocus.addActivationEvents(slides)
-    }
     if (!activated) {
       setTimeout(() => events.emit('init'), 0)
       activated = true
@@ -90,7 +87,6 @@ function EmblaCarousel(
 
   function deActivate(): void {
     engine.dragHandler.removeAllEvents()
-    engine.slideFocus.removeAllEvents()
     engine.animation.stop()
     eventStore.removeAll()
     engine.translate.clear()
