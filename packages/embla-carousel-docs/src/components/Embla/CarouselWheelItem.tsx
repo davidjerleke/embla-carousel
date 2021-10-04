@@ -97,9 +97,6 @@ export const CarouselWheelItem = (props: PropType) => {
     loop,
     axis: 'y',
     dragFree: true,
-    draggableClass: '',
-    draggingClass: '',
-    selectedClass: '',
     inViewThreshold: 0.5,
   })
   const [wheelReady, setWheelReady] = useState(false)

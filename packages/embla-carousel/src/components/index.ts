@@ -1,9 +1,9 @@
 import { Engine } from './Engine'
 import { EventStore } from './EventStore'
-import { EventEmitter, EmblaEventType, EventEmitterType } from './EventEmitter'
+import { EventEmitter, EventEmitterType } from './EventEmitter'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsPseudo, OptionsPseudoType } from './OptionsPseudo'
-import { addClass, debounce, removeClass } from './utils'
+import { debounce } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -69,6 +69,7 @@ function EmblaCarousel(
     rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
 
     if (options.loop) {
+      // Investigate if this can be done without a re-init?
       if (!engine.slideLooper.canLoop()) {
         deActivate()
         return activate({ loop: false })
@@ -77,42 +78,14 @@ function EmblaCarousel(
     }
     if (options.draggable && container.offsetParent && slides.length) {
       engine.dragHandler.addActivationEvents()
-      if (options.draggableClass) {
-        addClass(sliderRoot, options.draggableClass)
-      }
-      if (options.draggingClass) {
-        events
-          .on('pointerDown', toggleDraggingClass)
-          .on('pointerUp', toggleDraggingClass)
-      }
     }
     if (slides.length) {
       engine.slideFocus.addActivationEvents(slides)
-    }
-    if (options.selectedClass) {
-      toggleSelectedClass()
-      events
-        .on('select', toggleSelectedClass)
-        .on('pointerUp', toggleSelectedClass)
     }
     if (!activated) {
       setTimeout(() => events.emit('init'), 0)
       activated = true
     }
-  }
-
-  function toggleDraggingClass(evt: EmblaEventType): void {
-    const { draggingClass } = options
-    if (evt === 'pointerDown') addClass(sliderRoot, draggingClass)
-    else removeClass(sliderRoot, draggingClass)
-  }
-
-  function toggleSelectedClass(): void {
-    const { selectedClass } = options
-    const inView = slidesInView(true)
-    const notInView = slidesNotInView(true)
-    notInView.forEach((index) => removeClass(slides[index], selectedClass))
-    inView.forEach((index) => addClass(slides[index], selectedClass))
   }
 
   function deActivate(): void {
@@ -122,13 +95,6 @@ function EmblaCarousel(
     eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
-    removeClass(sliderRoot, options.draggableClass)
-    slides.forEach((slide) => removeClass(slide, options.selectedClass))
-    events
-      .off('select', toggleSelectedClass)
-      .off('pointerUp', toggleSelectedClass)
-      .off('pointerDown', toggleDraggingClass)
-      .off('pointerUp', toggleDraggingClass)
   }
 
   function reActivate(partialOptions?: EmblaOptionsType): void {
