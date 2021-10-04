@@ -27,7 +27,7 @@ export const defaultOptions: OptionsType = {
   draggable: true,
   inViewThreshold: 0,
   loop: false,
-  skipSnaps: true,
+  skipSnaps: false,
   slidesToScroll: 1,
   speed: 10,
   startIndex: 0,
