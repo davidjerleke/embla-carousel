@@ -3,8 +3,8 @@ import { Vector1D, Vector1DType } from './Vector1d'
 
 export type ScrollBodyType = {
   direction: () => number
-  seek: (v: Vector1DType) => ScrollBodyType
-  settle: (v: Vector1DType) => boolean
+  seek: (target: Vector1DType) => ScrollBodyType
+  settle: (target: Vector1DType) => boolean
   update: () => void
   useBaseMass: () => ScrollBodyType
   useBaseSpeed: () => ScrollBodyType
@@ -32,13 +32,13 @@ export function ScrollBody(
     acceleration.multiply(0)
   }
 
-  function applyForce(v: Vector1DType): void {
-    v.divide(mass)
-    acceleration.add(v)
+  function applyForce(force: Vector1DType): void {
+    force.divide(mass)
+    acceleration.add(force)
   }
 
-  function seek(v: Vector1DType): ScrollBodyType {
-    attraction.set(v).subtract(location)
+  function seek(target: Vector1DType): ScrollBodyType {
+    attraction.set(target).subtract(location)
     const magnitude = map(attraction.get(), 0, 100, 0, speed)
     attractionDirection = mathSign(attraction.get())
     attraction.normalize().multiply(magnitude).subtract(velocity)
@@ -46,10 +46,10 @@ export function ScrollBody(
     return self
   }
 
-  function settle(v: Vector1DType): boolean {
-    const diff = v.get() - location.get()
+  function settle(target: Vector1DType): boolean {
+    const diff = target.get() - location.get()
     const hasSettled = !roundToTwoDecimals(diff)
-    if (hasSettled) location.set(v)
+    if (hasSettled) location.set(target)
     return hasSettled
   }
 
