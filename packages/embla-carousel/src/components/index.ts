@@ -5,6 +5,12 @@ import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsPseudo, OptionsPseudoType } from './OptionsPseudo'
 import { debounce } from './utils'
 
+export type EmblaNodesType = {
+  root: HTMLElement
+  container?: HTMLElement
+  slides?: HTMLElement[]
+}
+
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
@@ -29,7 +35,7 @@ export type EmblaCarouselType = {
 }
 
 function EmblaCarousel(
-  sliderRoot: HTMLElement,
+  nodes: HTMLElement | EmblaNodesType,
   userOptions?: EmblaOptionsType,
 ): EmblaCarouselType {
   const events = EventEmitter()
@@ -43,33 +49,33 @@ function EmblaCarousel(
   let optionsBase = Object.assign({}, defaultOptions)
   let options = Object.assign({}, optionsBase)
   let optionsPseudo: OptionsPseudoType
-  let rootNodeSize = 0
+  let rootSize = 0
+  let root: HTMLElement
   let container: HTMLElement
   let slides: HTMLElement[]
 
   activate(userOptions)
 
   function setupElements(): void {
-    if (!sliderRoot) throw new Error('Missing root node 😢')
-    const sliderContainer = sliderRoot.querySelector('*')
-    if (!sliderContainer) throw new Error('Missing container node 😢')
+    const providedContainer = 'container' in nodes && nodes.container
+    const providedSlides = 'slides' in nodes && nodes.slides
 
-    container = sliderContainer as HTMLElement
-    slides = Array.prototype.slice.call(container.children)
-    optionsPseudo = OptionsPseudo(sliderRoot)
+    root = 'root' in nodes ? nodes.root : nodes
+    container = providedContainer || <HTMLElement>root.children[0]
+    slides = providedSlides || [].slice.call(container.children)
+    optionsPseudo = OptionsPseudo(root)
   }
 
   function activate(partialOptions?: EmblaOptionsType): void {
     setupElements()
     optionsBase = Object.assign({}, optionsBase, partialOptions)
     options = Object.assign({}, optionsBase, optionsPseudo.get())
-    engine = Engine(sliderRoot, container, slides, options, events)
+    engine = Engine(root, container, slides, options, events)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
-    rootNodeSize = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
+    rootSize = engine.axis.measureSize(root.getBoundingClientRect())
 
     if (options.loop) {
-      // Investigate if this can be done without a re-init?
       if (!engine.slideLooper.canLoop()) {
         deActivate()
         return activate({ loop: false })
@@ -111,8 +117,8 @@ function EmblaCarousel(
 
   function resize(): void {
     if (!activated) return
-    const size = engine.axis.measureSize(sliderRoot.getBoundingClientRect())
-    if (rootNodeSize !== size) reActivate()
+    const size = engine.axis.measureSize(root.getBoundingClientRect())
+    if (rootSize !== size) reActivate()
     events.emit('resize')
   }
 
@@ -177,7 +183,7 @@ function EmblaCarousel(
   }
 
   function rootNode(): HTMLElement {
-    return sliderRoot
+    return root
   }
 
   function containerNode(): HTMLElement {
