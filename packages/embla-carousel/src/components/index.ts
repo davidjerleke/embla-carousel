@@ -11,6 +11,13 @@ export type EmblaNodesType = {
   slides?: HTMLElement[]
 }
 
+export type EmblaPluginType = {
+  name: string
+  options: { [key: string]: any }
+  init: (embla: EmblaCarouselType) => void
+  destroy: () => void
+}
+
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
@@ -34,9 +41,10 @@ export type EmblaCarouselType = {
   slidesNotInView: (target?: boolean) => number[]
 }
 
-function EmblaCarousel(
+function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
   nodes: HTMLElement | EmblaNodesType,
   userOptions?: EmblaOptionsType,
+  userPlugins?: EmblaPluginsType[],
 ): EmblaCarouselType {
   const events = EventEmitter()
   const eventStore = EventStore()
@@ -49,12 +57,13 @@ function EmblaCarousel(
   let optionsBase = Object.assign({}, defaultOptions)
   let options = Object.assign({}, optionsBase)
   let optionsPseudo: OptionsPseudoType
+  let plugins: EmblaPluginsType[]
   let rootSize = 0
   let root: HTMLElement
   let container: HTMLElement
   let slides: HTMLElement[]
 
-  activate(userOptions)
+  activate(userOptions, userPlugins)
 
   function setupElements(): void {
     const providedContainer = 'container' in nodes && nodes.container
@@ -66,19 +75,24 @@ function EmblaCarousel(
     optionsPseudo = OptionsPseudo(root)
   }
 
-  function activate(partialOptions?: EmblaOptionsType): void {
+  function activate(
+    withOptions?: EmblaOptionsType,
+    withPlugins?: EmblaPluginsType[],
+  ): void {
     setupElements()
-    optionsBase = Object.assign({}, optionsBase, partialOptions)
+    optionsBase = Object.assign({}, optionsBase, withOptions)
     options = Object.assign({}, optionsBase, optionsPseudo.get())
+    plugins = Object.assign([], withPlugins)
     engine = Engine(root, container, slides, options, events)
     eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
     rootSize = engine.axis.measureSize(root.getBoundingClientRect())
+    plugins.forEach((plugin) => plugin.init(self))
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
         deActivate()
-        return activate({ loop: false })
+        return activate({ loop: false }, withPlugins)
       }
       engine.slideLooper.loop()
     }
@@ -91,21 +105,25 @@ function EmblaCarousel(
     }
   }
 
+  function reActivate(
+    withOptions?: EmblaOptionsType,
+    withPlugins?: EmblaPluginsType[],
+  ): void {
+    if (!activated) return
+    const startIndex = selectedScrollSnap()
+    const newOptions = Object.assign({ startIndex }, withOptions)
+    deActivate()
+    activate(newOptions, withPlugins || plugins)
+    events.emit('reInit')
+  }
+
   function deActivate(): void {
     engine.dragHandler.removeAllEvents()
     engine.animation.stop()
     eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
-  }
-
-  function reActivate(partialOptions?: EmblaOptionsType): void {
-    if (!activated) return
-    const startIndex = selectedScrollSnap()
-    const newOptions = Object.assign({ startIndex }, partialOptions)
-    deActivate()
-    activate(newOptions)
-    events.emit('reInit')
+    plugins.forEach((plugin) => plugin.destroy())
   }
 
   function destroy(): void {
