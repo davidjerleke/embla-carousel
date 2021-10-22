@@ -111,7 +111,7 @@ export const EmblaCarousel = () => {
 
   return (
     <div className="embla">
-      <div class="embla__viewport" ref={emblaRef}>
+      <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           <div className="embla__slide">Slide 1</div>
           <div className="embla__slide">Slide 2</div>
