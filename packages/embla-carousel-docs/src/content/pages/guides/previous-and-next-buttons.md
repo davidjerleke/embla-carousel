@@ -118,10 +118,10 @@ export const EmblaCarousel = () => {
           <div className="embla__slide">Slide 3</div>
         </div>
       </div>
-      <button class="embla__prev" onClick={scrollPrev}>
+      <button className="embla__prev" onClick={scrollPrev}>
         Prev
       </button>
-      <button class="embla__next" onClick={scrollNext}>
+      <button className="embla__next" onClick={scrollNext}>
         Next
       </button>
     </div>
