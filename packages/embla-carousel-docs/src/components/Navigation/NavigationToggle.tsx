@@ -68,7 +68,7 @@ export const NavigationToggle = () => {
       onClick={toggleNavigation}
       aria-expanded={isOpen}
       aria-label={`${toggleAction} Main Navigation Menu`}
-      $hidden="minSm"
+      $hidden="desktop"
     >
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />

@@ -17,6 +17,8 @@ export enum BREAKPOINTS {
 }
 
 export const breakpoints = {
+  compact: createMediaQuery(BREAKPOINTS.MD, 'max'),
+  desktop: createMediaQuery(BREAKPOINTS.MD, 'min'),
   minXxs: createMediaQuery(BREAKPOINTS.XXS, 'min'),
   minXs: createMediaQuery(BREAKPOINTS.XS, 'min'),
   minSm: createMediaQuery(BREAKPOINTS.SM, 'min'),

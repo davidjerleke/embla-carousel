@@ -39,7 +39,7 @@ export const Actions = () => {
 
   return (
     <Wrapper>
-      <Item $hidden="maxSm">
+      <Item $hidden="compact">
         <nav aria-label="Quick Navigation Menu">
           <Wrapper>
             {routes.map((route) => (
@@ -53,7 +53,7 @@ export const Actions = () => {
       <Item>
         <SearchToggle />
       </Item>
-      <Item $hidden="maxSm">
+      <Item $hidden="compact">
         <ThemeToggle />
       </Item>
     </Wrapper>

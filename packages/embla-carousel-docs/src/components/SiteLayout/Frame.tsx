@@ -13,10 +13,7 @@ const Wrapper = styled.div`
   max-width: ${FRAME_MAX_WIDTH};
   width: 100%;
 
-  ${breakpoints.minSm} {
-    width: 95%;
-  }
-  ${breakpoints.minMd} {
+  ${breakpoints.desktop} {
     width: 90%;
   }
 `
