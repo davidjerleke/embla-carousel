@@ -6379,6 +6379,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"embla-carousel-autoplay@5.0.1, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
+  dependencies:
+    "@babel/core": ^7.13.15
+    "@babel/preset-env": ^7.13.15
+    "@babel/preset-typescript": ^7.13.0
+    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-node-resolve": ^11.2.1
+    "@types/jest": ^26.0.22
+    "@typescript-eslint/eslint-plugin": ^4.22.0
+    "@typescript-eslint/parser": ^4.22.0
+    eslint: ^7.24.0
+    eslint-config-prettier: ^8.2.0
+    eslint-plugin-prettier: ^3.4.0
+    jest: ^26.6.3
+    prettier: ^2.2.1
+    rollup: ^2.45.2
+    rollup-plugin-terser: ^7.0.2
+    rollup-plugin-typescript2: ^0.30.0
+    ts-jest: ^26.5.5
+    typescript: ^4.2.4
+  peerDependencies:
+    embla-carousel: 5.0.1
+  languageName: unknown
+  linkType: soft
+
 "embla-carousel-docs@workspace:packages/embla-carousel-docs":
   version: 0.0.0-use.local
   resolution: "embla-carousel-docs@workspace:packages/embla-carousel-docs"
@@ -6395,6 +6422,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
     babel-plugin-styled-components: ^1.12.0
+    embla-carousel-autoplay: 5.0.1
     embla-carousel-react: 5.0.1
     eslint: ^7.24.0
     eslint-config-prettier: ^8.2.0
@@ -6472,7 +6500,6 @@ __metadata:
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:
     "@babel/core": ^7.13.15
-    "@babel/plugin-transform-object-assign": ^7.12.13
     "@babel/preset-env": ^7.13.15
     "@babel/preset-typescript": ^7.13.0
     "@rollup/plugin-babel": ^5.3.0

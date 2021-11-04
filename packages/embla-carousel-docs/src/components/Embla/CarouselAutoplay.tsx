@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
-import { useInterval } from 'hooks'
 import {
   Wrapper,
   Container,
@@ -23,30 +23,23 @@ type PropType = {
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes, inView = false } = props
   const carouselId = `${id}-carousel-items`
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const autoplayRef = useRef(Autoplay({ stopOnInteraction: true }))
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplayRef.current])
   const [userTouched, setUserTouched] = useState(false)
   const ariaLive = !userTouched && inView ? 'off' : 'polite'
-  const autoplay = useCallback(() => {
-    if (emblaApi?.canScrollNext()) {
-      emblaApi?.scrollNext()
-    } else {
-      emblaApi?.scrollTo(0)
-    }
-  }, [emblaApi])
-  const { play, stop } = useInterval(autoplay, 4000)
 
   useEffect(() => {
     if (!inView) {
-      stop()
+      autoplayRef.current.stop()
     } else if (!userTouched) {
-      play()
+      autoplayRef.current.play()
     }
-  }, [inView, stop])
+  }, [inView])
 
   const onUserTouch = useCallback(() => {
-    stop()
+    autoplayRef.current.stop()
     setUserTouched(true)
-  }, [stop, setUserTouched])
+  }, [setUserTouched])
 
   useEffect(() => {
     emblaApi?.on('pointerDown', onUserTouch)
