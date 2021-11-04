@@ -6,6 +6,7 @@ import { Direction, DirectionType } from './Direction'
 import { DragHandler, DragHandlerType } from './DragHandler'
 import { DragTracker } from './DragTracker'
 import { EventEmitterType } from './EventEmitter'
+import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
 import { PxToPercent, PxToPercentType } from './PxToPercent'
@@ -40,6 +41,7 @@ export type Engine = {
   pxToPercent: PxToPercentType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
+  eventStore: EventStoreType
   slideLooper: SlideLooperType
   slidesInView: SlidesInViewType
   target: Vector1DType
@@ -190,6 +192,7 @@ export function Engine(
     axis,
     direction,
     dragHandler,
+    eventStore: EventStore(),
     pxToPercent,
     index,
     indexPrevious,

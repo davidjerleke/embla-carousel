@@ -32,7 +32,7 @@ const Carousel = (props: PropType) => {
   const updateSlideStyles = useCallback(() => {
     if (!emblaApi) return
 
-    const engine = emblaApi.dangerouslyGetEngine()
+    const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
 
     const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {

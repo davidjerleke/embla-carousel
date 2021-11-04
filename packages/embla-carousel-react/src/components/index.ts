@@ -6,12 +6,12 @@ import EmblaCarousel, {
   EmblaPluginType,
 } from 'embla-carousel'
 
-type ViewportRefType = <ViewportElement extends HTMLElement>(
+type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
   instance: ViewportElement | null,
 ) => void
 
 export type UseEmblaCarouselType = [
-  ViewportRefType,
+  EmblaViewportRefType,
   EmblaCarouselType | undefined,
 ]
 
@@ -48,7 +48,7 @@ function useEmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     }
   }, [viewport, activeOptions, activePlugins, setEmbla])
 
-  return [<ViewportRefType>setViewport, embla]
+  return [<EmblaViewportRefType>setViewport, embla]
 }
 
 export default useEmblaCarousel

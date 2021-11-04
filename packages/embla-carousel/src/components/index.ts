@@ -1,5 +1,4 @@
 import { Engine } from './Engine'
-import { EventStore } from './EventStore'
 import { EventEmitter, EventEmitterType } from './EventEmitter'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsPseudo, OptionsPseudoType } from './OptionsPseudo'
@@ -11,9 +10,15 @@ export type EmblaNodesType = {
   slides?: HTMLElement[]
 }
 
-export type EmblaPluginType = {
+type EmblaPluginOptionsType = {
+  [key: string]: unknown
+}
+
+export type EmblaPluginType<
+  OptionsType extends EmblaPluginOptionsType = EmblaPluginOptionsType,
+> = {
   name: string
-  options: { [key: string]: any }
+  options: OptionsType
   init: (embla: EmblaCarouselType) => void
   destroy: () => void
 }
@@ -23,7 +28,7 @@ export type EmblaCarouselType = {
   canScrollPrev: () => boolean
   clickAllowed: () => boolean
   containerNode: () => HTMLElement
-  dangerouslyGetEngine: () => Engine
+  internalEngine: () => Engine
   destroy: () => void
   off: EventEmitterType['off']
   on: EventEmitterType['on']
@@ -47,7 +52,6 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
   userPlugins?: EmblaPluginsType[],
 ): EmblaCarouselType {
   const events = EventEmitter()
-  const eventStore = EventStore()
   const debouncedResize = debounce(resize, 500)
   const reInit = reActivate
   const { on, off } = events
@@ -62,8 +66,6 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
   let root: HTMLElement
   let container: HTMLElement
   let slides: HTMLElement[]
-
-  activate(userOptions, userPlugins)
 
   function setupElements(): void {
     const providedContainer = 'container' in nodes && nodes.container
@@ -84,7 +86,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     options = Object.assign({}, optionsBase, optionsPseudo.get())
     plugins = Object.assign([], withPlugins)
     engine = Engine(root, container, slides, options, events)
-    eventStore.add(window, 'resize', debouncedResize)
+    engine.eventStore.add(window, 'resize', debouncedResize)
     engine.translate.to(engine.location)
     rootSize = engine.axis.measureSize(root.getBoundingClientRect())
     plugins.forEach((plugin) => plugin.init(self))
@@ -120,7 +122,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
   function deActivate(): void {
     engine.dragHandler.removeAllEvents()
     engine.animation.stop()
-    eventStore.removeAll()
+    engine.eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
     plugins.forEach((plugin) => plugin.destroy())
@@ -196,7 +198,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     return engine.dragHandler.clickAllowed()
   }
 
-  function dangerouslyGetEngine(): Engine {
+  function internalEngine(): Engine {
     return engine
   }
 
@@ -217,7 +219,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     canScrollPrev,
     clickAllowed,
     containerNode,
-    dangerouslyGetEngine,
+    internalEngine,
     destroy,
     off,
     on,
@@ -234,6 +236,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     slidesInView,
     slidesNotInView,
   }
+  activate(userOptions, userPlugins)
   return self
 }
 

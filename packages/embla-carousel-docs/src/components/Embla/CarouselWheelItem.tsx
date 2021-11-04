@@ -128,11 +128,11 @@ export const CarouselWheelItem = (props: PropType) => {
     if (embla) {
       rootElementSize.current = getRootElementSize()
       setWheelReady(true)
-      embla.dangerouslyGetEngine().translate.toggleActive(false)
+      embla.internalEngine().translate.toggleActive(false)
       setRotation()
 
       embla.on('pointerUp', () => {
-        const { scrollTo, target, location } = embla.dangerouslyGetEngine()
+        const { scrollTo, target, location } = embla.internalEngine()
         const distanceToTarget = target.get() - location.get()
         scrollTo.distance(distanceToTarget * 0.1, true)
       })
@@ -149,7 +149,7 @@ export const CarouselWheelItem = (props: PropType) => {
         setWheelReady(false)
         setWheelReady(() => {
           embla.reInit()
-          embla.dangerouslyGetEngine().translate.toggleActive(false)
+          embla.internalEngine().translate.toggleActive(false)
           setRotation()
           return true
         })
