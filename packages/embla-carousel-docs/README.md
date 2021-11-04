@@ -15,7 +15,7 @@
   </p>
 
   <strong>
-    <h2 align="center">Embla Carousel</h2>
+    <h2 align="center">Embla Carousel Docs</h2>
   </strong>
 
   <p align="center">
