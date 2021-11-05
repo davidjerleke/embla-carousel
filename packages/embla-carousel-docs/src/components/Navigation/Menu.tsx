@@ -12,15 +12,15 @@ import { SubMenu } from './SubMenu'
 
 const MAX_WIDTH = '37.5rem'
 const HEADING_HEIGHT = '4.8rem'
-const MAX_HEIGHT_SM_DOWN = `calc(100vh - ${HEADER_HEIGHT})`
-const MAX_HEIGHT_SM_UP = `calc(100vh - 9rem - ${HEADING_HEIGHT})`
+const MAX_HEIGHT_COMPACT = `calc(100vh - ${HEADER_HEIGHT})`
+const MAX_HEIGHT_DESKTOP = `calc(100vh - 9rem - ${HEADING_HEIGHT})`
 
 const Wrapper = styled.div`
   background-color: var(--background-site);
   position: relative;
   height: 100%;
 
-  ${breakpoints.maxSm} {
+  ${breakpoints.compact} {
     z-index: ${LAYERS.STEP};
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
@@ -32,10 +32,10 @@ const ScrollArea = styled.ul`
   overflow: auto;
   position: relative;
   padding-bottom: 2.4rem;
-  max-height: ${MAX_HEIGHT_SM_UP};
+  max-height: ${MAX_HEIGHT_DESKTOP};
 
-  ${breakpoints.maxSm} {
-    max-height: ${MAX_HEIGHT_SM_DOWN};
+  ${breakpoints.compact} {
+    max-height: ${MAX_HEIGHT_COMPACT};
   }
 `
 
@@ -73,14 +73,14 @@ export const Menu = () => {
 
   return (
     <Wrapper>
-      <Header $hidden="minSm">
+      <Header $hidden="desktop">
         <Logo />
         <Buttons>
           <ThemeToggle />
           <NavigationClose />
         </Buttons>
       </Header>
-      <Heading $hidden="maxSm">Documentation</Heading>
+      <Heading $hidden="compact">Documentation</Heading>
       <ScrollArea>
         {routes.map((route) => (
           <li key={route.id}>

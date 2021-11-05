@@ -82,4 +82,28 @@ export const EmblaCarousel = () => {
 }
 ```
 
+### Adding plugins
+
+The `useEmblaCarousel` hook also accepts [plugins](/plugins/) as a third optional argument. Note that plugins need to be passed in an array like so:
+
+```jsx{3, 6}
+import React, { useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+
+export const EmblaCarousel = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
+
+  return (
+    <div className="embla" ref={emblaRef}>
+      <div className="embla__container">
+        <div className="embla__slide">Slide 1</div>
+        <div className="embla__slide">Slide 2</div>
+        <div className="embla__slide">Slide 3</div>
+      </div>
+    </div>
+  )
+}
+```
+
 Congratulations! You just created your first Embla Carousel component.

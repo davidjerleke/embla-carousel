@@ -7,11 +7,13 @@ date: 2021-02-21
 
 # Methods
 
-Embla Carousel exposes a set of useful methods which makes it very extensible. Assuming you've stored the carousel instance in a variable, a method is called like demonstrated below.
+Embla Carousel exposes a set of **useful methods** which makes it very **extensible**. Assuming you've stored the carousel instance in a variable, a method is called like demonstrated below.
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+
 const embla = EmblaCarousel(emblaNode)
-embla.scrollTo(4)
+embla.scrollTo(4) // Method
 ```
 
 ### containerNode
@@ -114,10 +116,10 @@ For touch pointers, this method will return `false` when the gesture is a drag m
 
 ### reInit
 
-Parameters: `options: EmblaOptions`  
+Parameters: `options?: EmblaOptionsType`, `plugins?: EmblaPluginType[]`  
 Returns: `void`
 
-Hard reset the carousel after it has been initialized. This method allows for changing [options](/api/options/). It's also useful when adding or removing slides, or picking up any other changes like slide dimensions.
+Hard reset the carousel after it has been initialized. This method allows for changing [options](/api/options/) and [plugins](/api/plugins/). It's also useful when adding or removing slides, or picking up any other changes like slide dimensions. Note that passed options will be **merged** with current options, but passed plugins will **replace** current plugins.
 
 ### destroy
 
@@ -128,14 +130,14 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 
 ### on
 
-Parameters: `event: EmblaEvent`, `callback: Function`  
+Parameters: `event: EmblaEventType`, `callback: Function`  
 Returns: `void`
 
 Subscribe to an Embla specific [event](/api/events/) with a callback.
 
 ### off
 
-Parameters: `event: EmblaEvent`, `callback: Function`  
+Parameters: `event: EmblaEventType`, `callback: Function`  
 Returns: `void`
 
 Unsubscribe from an Embla specific [event](/api/events/).

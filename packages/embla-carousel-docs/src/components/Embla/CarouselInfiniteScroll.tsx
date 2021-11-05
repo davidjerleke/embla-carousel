@@ -72,9 +72,9 @@ const Carousel = (props: PropType) => {
 
   const reloadEmbla = useCallback(() => {
     if (!emblaApi) return
-    const oldEngine = emblaApi.dangerouslyGetEngine()
+    const oldEngine = emblaApi.internalEngine()
     emblaApi.reInit()
-    const newEngine = emblaApi.dangerouslyGetEngine()
+    const newEngine = emblaApi.internalEngine()
     Object.assign(newEngine.scrollBody, oldEngine.scrollBody)
     Object.assign(newEngine.location, oldEngine.location)
     Object.assign(newEngine.target, oldEngine.target)
@@ -86,7 +86,7 @@ const Carousel = (props: PropType) => {
 
   useEffect(() => {
     if (!emblaApi || slides.length === emblaApi.slideNodes().length - 1) return
-    const engine = emblaApi.dangerouslyGetEngine()
+    const engine = emblaApi.internalEngine()
     const boundsActive = engine.limit.reachedMax(engine.target.get())
     engine.scrollBounds.toggleActive(boundsActive)
   }, [emblaApi, slides])

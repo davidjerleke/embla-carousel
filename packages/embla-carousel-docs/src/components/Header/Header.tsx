@@ -25,7 +25,7 @@ const Fixed = styled.div`
   left: 0;
   right: 0;
 
-  ${breakpoints.minSm} {
+  ${breakpoints.desktop} {
     z-index: ${LAYERS.NAVIGATION + 1};
   }
 `

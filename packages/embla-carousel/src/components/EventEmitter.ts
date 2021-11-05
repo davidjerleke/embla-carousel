@@ -22,8 +22,7 @@ export function EventEmitter(): EventEmitterType {
   const listeners: ListenersType = {}
 
   function getListeners(evt: EmblaEventType): CallbackType[] {
-    const eventListeners = listeners[evt]
-    return eventListeners || []
+    return listeners[evt] || []
   }
 
   function emit(evt: EmblaEventType): EventEmitterType {

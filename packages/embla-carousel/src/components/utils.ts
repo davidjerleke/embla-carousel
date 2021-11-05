@@ -58,13 +58,3 @@ export function arrayLast<GenericType>(array: GenericType[]): GenericType {
 export function lastIndex<GenericType>(array: GenericType[]): number {
   return Math.max(0, array.length - 1)
 }
-
-export function removeClass(node: HTMLElement, className: string): void {
-  const cl = node.classList
-  if (className && cl.contains(className)) cl.remove(className)
-}
-
-export function addClass(node: HTMLElement, className: string): void {
-  const cl = node.classList
-  if (className && !cl.contains(className)) cl.add(className)
-}

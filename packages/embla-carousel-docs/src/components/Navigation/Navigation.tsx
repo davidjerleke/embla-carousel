@@ -15,7 +15,7 @@ const Wrapper = styled.nav`
 const Nav = styled.div<{ $isOpen: boolean }>`
   z-index: ${LAYERS.NAVIGATION};
 
-  ${breakpoints.maxSm} {
+  ${breakpoints.compact} {
     ${({ $isOpen }) => css`
       transform: ${!$isOpen && 'translateX(-100%)'};
       visibility: ${!$isOpen && 'hidden'};
@@ -27,7 +27,7 @@ const Nav = styled.div<{ $isOpen: boolean }>`
     left: 0;
   }
 
-  ${breakpoints.minSm} {
+  ${breakpoints.desktop} {
     position: sticky;
     top: 9rem;
     bottom: auto;
@@ -84,7 +84,7 @@ export const Navigation = (props: PropType) => {
         {...props}
       >
         <Nav $isOpen={isOpen}>
-          <Overlay onPointerUp={closeNavigation} $hidden="minSm" />
+          <Overlay onPointerUp={closeNavigation} $hidden="desktop" />
           <Menu />
         </Nav>
       </Wrapper>

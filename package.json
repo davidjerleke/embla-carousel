@@ -16,7 +16,8 @@
   "workspaces": [
     "packages/embla-carousel",
     "packages/embla-carousel-react",
-    "packages/embla-carousel-docs"
+    "packages/embla-carousel-docs",
+    "packages/embla-carousel-autoplay"
   ],
   "scripts": {
     "lint": "npm-run-all prettier:report eslint:report",

@@ -10,8 +10,7 @@ import {
   PAGE_TEMPLATES,
 } from 'consts'
 
-const SIDEBAR_WIDTH_MIN_SM = '23rem'
-const SIDEBAR_WIDTH_MIN_MD = '27rem'
+const SIDEBAR_WIDTH = '27rem'
 
 const Wrapper = styled(Frame)`
   position: relative;
@@ -32,19 +31,16 @@ const Main = styled.main<{ $isStartPage: boolean }>`
   ${({ $isStartPage }) =>
     !$isStartPage &&
     css`
-      ${breakpoints.minSm} {
-        max-width: calc(100% - ${SIDEBAR_WIDTH_MIN_SM});
-      }
-      ${breakpoints.minMd} {
-        max-width: calc(100% - ${SIDEBAR_WIDTH_MIN_MD});
+      ${breakpoints.desktop} {
+        max-width: calc(100% - ${SIDEBAR_WIDTH});
       }
     `};
 `
 
 const Nav = styled.div<{ $isStartPage: boolean }>`
-  ${breakpoints.minSm} {
-    padding-right: 3rem;
-    flex: 0 0 ${SIDEBAR_WIDTH_MIN_SM};
+  ${breakpoints.desktop} {
+    padding-right: 4rem;
+    flex: 0 0 ${SIDEBAR_WIDTH};
     ${({ $isStartPage }) =>
       $isStartPage &&
       css`
@@ -53,10 +49,6 @@ const Nav = styled.div<{ $isStartPage: boolean }>`
         left: 0;
         transform: translateX(-100%);
       `};
-  }
-  ${breakpoints.minMd} {
-    padding-right: 4rem;
-    flex: 0 0 ${SIDEBAR_WIDTH_MIN_MD};
   }
 `
 
@@ -67,13 +59,13 @@ type PropType = PropsWithChildren<{
 export const Grid = (props: PropType) => {
   const { children, layout } = props
   const { windowWidth } = useWindowSize()
-  const breakpointSmDown = windowWidth < BREAKPOINTS.SM
+  const collapseBreakpoint = windowWidth < BREAKPOINTS.MD
   const isStartPage = layout === PAGE_TEMPLATES.HOME
 
   return (
     <Wrapper>
       <Nav $isStartPage={isStartPage}>
-        <Navigation collapsed={breakpointSmDown} />
+        <Navigation collapsed={collapseBreakpoint} />
       </Nav>
       <Main $isStartPage={isStartPage} role="main">
         {children}

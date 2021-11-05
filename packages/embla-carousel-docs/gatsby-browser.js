@@ -2,6 +2,9 @@ export const onClientEntry = async () => {
   if (typeof window.IntersectionObserver === 'undefined') {
     await import('intersection-observer')
   }
+  if (!Object.assign) {
+    await import('core-js/features/object/assign')
+  }
 }
 
 export const onRouteUpdate = ({ location }) => {

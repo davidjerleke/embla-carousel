@@ -1,7 +1,7 @@
 ---
 title: Examples
 description: Get started instantly with Embla Carousel by finding an example setup that suits your needs.
-order: 3
+order: 4
 date: 2021-02-21
 ---
 

@@ -57,4 +57,25 @@ Now you're ready to add some **JavaScript** magic to give life to your first Emb
 </script>
 ```
 
+### Adding plugins
+
+When adding plugins, you need to make sure that the script that activates your carousel is placed **after** the script tag that loads the Embla Carousel core package and the plugins:
+
+```html
+<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+```
+
+Plugins included from a CDN will be **prefixed with EmblaCarousel**. Here's an example that shows how to add plugins to your carousel:
+
+```html
+<script type="text/javascript">
+  var emblaNode = document.querySelector('.embla')
+  var options = { loop: false }
+  var plugins = [EmblaCarouselAutoplay()] // Plugins
+
+  var embla = EmblaCarousel(emblaNode, options, plugins)
+</script>
+```
+
 Congratulations! You just created your first Embla Carousel.

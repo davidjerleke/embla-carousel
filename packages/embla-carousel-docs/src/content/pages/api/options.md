@@ -10,7 +10,9 @@ date: 2021-02-21
 Embla Carousel accepts an optional **options** object as the second argument. Here's an example of how to make use of it:
 
 ```js
-const options = { loop: true }
+import EmblaCarousel from 'embla-carousel'
+
+const options = { loop: true } // Options
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
@@ -87,7 +89,7 @@ Clear leading and trailing empty space that causes excessive scrolling. Use `tri
 ### skipSnaps
 
 Type: `boolean`  
-Default: `true`
+Default: `false`
 
 Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [dragFree](/api/options/#dragfree) option is set to `true`.
 
@@ -97,24 +99,3 @@ Type: `number`
 Default: `0`
 
 Choose a fraction representing the percentage portion of a slide that needs to be visible in order to be considered in view. For example, **0.5 equals 50%**.
-
-### selectedClass
-
-Type: `string`  
-Default: `is-selected`
-
-Choose a classname that will be applied to the selected slides. Pass an empty string to opt-out.
-
-### draggableClass
-
-Type: `string`  
-Default: `is-draggable`
-
-Choose a classname that will be applied to a draggable carousel container. Pass an empty string to opt-out.
-
-### draggingClass
-
-Type: `string`  
-Default: `is-dragging`
-
-Choose a classname that will be applied to the container when dragging. Pass an empty string to opt-out.

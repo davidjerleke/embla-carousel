@@ -15,11 +15,11 @@
   </p>
 
   <strong>
-    <h2 align="center">Embla Carousel Docs</h2>
+    <h2 align="center">Embla Carousel Autoplay</h2>
   </strong>
 
   <p align="center">
-    The <strong>documentation website</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>.
+    An <strong>autoplay plugin</strong> for <a href="https://www.embla-carousel.com/">Embla Carousel</a>.
   </p>
 
   <br>

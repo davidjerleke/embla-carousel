@@ -43,7 +43,9 @@ type AlgoliaDocsearchAutocompleteType = {
   open: () => void
 }
 
-export type AlgoliaDocsearchType = (config: AlgoliaDocsearchConfigType) => {
+export type AlgoliaDocsearchType = (
+  config: Partial<AlgoliaDocsearchConfigType>,
+) => {
   input: {
     '0': HTMLInputElement
     autocomplete: AlgoliaDocsearchAutocompleteType

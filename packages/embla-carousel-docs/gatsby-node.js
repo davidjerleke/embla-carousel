@@ -9,7 +9,7 @@ const PAGE_TEMPLATES = {
 
 const addPageChildren = (parent, pages) =>
   pages
-    .filter((page) => page.slug.match(parent.slug))
+    .filter((page) => new RegExp(`^${parent.slug}`).test(page.slug))
     .filter((page) => page.level - 1 === parent.level)
     .reduce((acc, page) => [...acc, ...addPageChildren(page, pages)], [parent])
 

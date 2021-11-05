@@ -6,6 +6,7 @@ import { Direction, DirectionType } from './Direction'
 import { DragHandler, DragHandlerType } from './DragHandler'
 import { DragTracker } from './DragTracker'
 import { EventEmitterType } from './EventEmitter'
+import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
 import { PxToPercent, PxToPercentType } from './PxToPercent'
@@ -19,7 +20,6 @@ import { ScrollSnap } from './ScrollSnap'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
-import { SlideFocus, SlideFocusType } from './SlideFocus'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { Translate, TranslateType } from './Translate'
@@ -41,7 +41,7 @@ export type Engine = {
   pxToPercent: PxToPercentType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
-  slideFocus: SlideFocusType
+  eventStore: EventStoreType
   slideLooper: SlideLooperType
   slidesInView: SlidesInViewType
   target: Vector1DType
@@ -192,6 +192,7 @@ export function Engine(
     axis,
     direction,
     dragHandler,
+    eventStore: EventStore(),
     pxToPercent,
     index,
     indexPrevious,
@@ -208,7 +209,6 @@ export function Engine(
     scrollSnaps,
     scrollTarget,
     scrollTo,
-    slideFocus: SlideFocus(root, scrollTo, slidesToScroll),
     slideLooper: SlideLooper(
       axis,
       viewSize,
