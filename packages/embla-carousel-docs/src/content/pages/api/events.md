@@ -10,11 +10,16 @@ date: 2021-02-21
 Embla Carousel exposes custom events that can be hooked on to. Listening to events allows for extending the carousel. Usage is very simple like demonstrated below.
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+
 const embla = EmblaCarousel(emblaNode)
 
-embla.on('select', (eventName) => {
+const onSelect = (eventName) => {
   console.log(`Embla just triggered ${eventName}!`)
-})
+}
+
+embla.on('select', onSelect) // Add event listener
+embla.off('select', onSelect) // Remove event listener
 ```
 
 ### init

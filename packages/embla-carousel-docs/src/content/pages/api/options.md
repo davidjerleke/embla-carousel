@@ -10,7 +10,9 @@ date: 2021-02-21
 Embla Carousel accepts an optional **options** object as the second argument. Here's an example of how to make use of it:
 
 ```js
-const options = { loop: true }
+import EmblaCarousel from 'embla-carousel'
+
+const options = { loop: true } // Options
 const embla = EmblaCarousel(emblaNode, options)
 ```
 

@@ -23,3 +23,5 @@ Alternatively, you can use a **CDN** to include it in your project. When using a
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 ```
+
+**This section is incomplete and is still being written!**
