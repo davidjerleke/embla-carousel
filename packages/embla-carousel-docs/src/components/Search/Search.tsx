@@ -39,7 +39,7 @@ const SearchDialog = styled.div`
   margin-left: auto;
   margin-right: auto;
 
-  ${breakpoints.minSm} {
+  ${breakpoints.desktop} {
     max-width: ${DIALOG_MAX_WIDTH};
   }
 `

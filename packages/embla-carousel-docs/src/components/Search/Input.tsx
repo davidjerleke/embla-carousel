@@ -22,9 +22,9 @@ const INPUT_HEIGHT = '5.6rem'
 const BUTTON_WIDTH = '4.8rem'
 const FOOTER_HEIGHT = '3.2rem'
 const EDGE_SPACING = '1.2rem'
-const FRAME_TOP_OFFSET_SM_UP = '4rem'
-const SCROLL_HEIGHT_SM_DOWN = `${INPUT_HEIGHT} + (${EDGE_SPACING} * 2) + (${FRAME_BORDER_SIZE} * 2) + ${FOOTER_HEIGHT} + ${EDGE_SPACING}`
-const SCROLL_HEIGHT_SM_UP = `${FRAME_TOP_OFFSET_SM_UP} + ${SCROLL_HEIGHT_SM_DOWN}`
+const FRAME_TOP_OFFSET_DESKTOP = '4rem'
+const SCROLL_HEIGHT_COMPACT = `${INPUT_HEIGHT} + (${EDGE_SPACING} * 2) + (${FRAME_BORDER_SIZE} * 2) + ${FOOTER_HEIGHT} + ${EDGE_SPACING}`
+const SCROLL_HEIGHT_DESKTOP = `${FRAME_TOP_OFFSET_DESKTOP} + ${SCROLL_HEIGHT_COMPACT}`
 
 const Wrapper = styled.div`
   padding: ${EDGE_SPACING};
@@ -34,9 +34,9 @@ const Wrapper = styled.div`
   background-color: var(--background-site);
   position: relative;
 
-  ${breakpoints.minSm} {
+  ${breakpoints.desktop} {
     border-radius: 0.4rem;
-    margin-top: ${FRAME_TOP_OFFSET_SM_UP};
+    margin-top: ${FRAME_TOP_OFFSET_DESKTOP};
   }
 
   .algolia-autocomplete {
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
     border-top-width: 0;
     width: 100vw;
 
-    ${breakpoints.minSm} {
+    ${breakpoints.desktop} {
       width: calc(
         100% + (${FRAME_BORDER_SIZE} * 2) + (${EDGE_SPACING} * 2) +
           (${INPUT_BORDER_SIZE} * 2)
@@ -67,10 +67,10 @@ const Wrapper = styled.div`
   .ds-suggestions {
     overflow: auto;
     margin-top: -0.6rem;
-    max-height: calc(100vh - (${SCROLL_HEIGHT_SM_DOWN}));
+    max-height: calc(100vh - (${SCROLL_HEIGHT_COMPACT}));
 
-    ${breakpoints.minSm} {
-      max-height: calc(100vh - (${SCROLL_HEIGHT_SM_UP}));
+    ${breakpoints.desktop} {
+      max-height: calc(100vh - (${SCROLL_HEIGHT_DESKTOP}));
     }
   }
 
@@ -268,7 +268,7 @@ const SearchButtonClose = styled(PlainButton)`
   align-items: center;
   height: 5.6rem;
 
-  ${breakpoints.minSm} {
+  ${breakpoints.desktop} {
     display: none;
   }
 `
