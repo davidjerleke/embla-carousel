@@ -2,7 +2,7 @@
 title: Plugins
 description: Learn how to add plugins to Embla Carousel and extend it.
 order: 3
-date: 2021-02-21
+date: 2021-11-06
 ---
 
 # Plugins

@@ -5,7 +5,6 @@ export type AutoplayType = EmblaPluginType<OptionsType> & {
   play: () => void
   stop: () => void
   reset: () => void
-  next: () => void
 }
 
 function Autoplay(
@@ -89,7 +88,6 @@ function Autoplay(
     play,
     stop,
     reset,
-    next,
   }
   return self
 }

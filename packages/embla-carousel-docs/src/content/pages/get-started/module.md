@@ -57,4 +57,19 @@ const options = { loop: false }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
+### Adding plugins
+
+Embla Carousel accepts an optional **plugin array** as the thrid argument. Here's a basic example of how to make use of it:
+
+```js
+import EmblaCarousel from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
+
+const emblaNode = document.querySelector('.embla')
+const options = { loop: false }
+const plugins = [Autoplay()] // Plugins
+
+const embla = EmblaCarousel(emblaNode, options, plugins)
+```
+
 Congratulations! You just created your first Embla Carousel.

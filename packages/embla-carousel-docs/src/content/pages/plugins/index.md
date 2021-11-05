@@ -2,7 +2,7 @@
 title: Plugins
 description: Explore plugins that will enable you to extend your carousels with additional features.
 order: 3
-date: 2021-03-13
+date: 2021-11-07
 ---
 
 # Plugins

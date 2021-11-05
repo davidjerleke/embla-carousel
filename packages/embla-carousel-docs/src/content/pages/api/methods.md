@@ -7,7 +7,7 @@ date: 2021-02-21
 
 # Methods
 
-Embla Carousel exposes a set of useful methods which makes it very extensible. Assuming you've stored the carousel instance in a variable, a method is called like demonstrated below.
+Embla Carousel exposes a set of **useful methods** which makes it very **extensible**. Assuming you've stored the carousel instance in a variable, a method is called like demonstrated below.
 
 ```js
 import EmblaCarousel from 'embla-carousel'

@@ -86,7 +86,7 @@ export const EmblaCarousel = () => {
 
 The `useEmblaCarousel` hook also accepts [plugins](/plugins/) as a third optional argument. Note that plugins need to be passed in an array like so:
 
-```jsx{6}
+```jsx{3, 6}
 import React, { useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
