@@ -7,6 +7,8 @@ import {
   LOCALSTORAGE_KEYS,
   THEME_KEYS,
   THEME_PREFIX,
+  THEME_COLORS,
+  THEME_META_SELECTOR,
 } from 'consts'
 
 export const onRenderBody = ({
@@ -20,6 +22,11 @@ export const onRenderBody = ({
   setHtmlAttributes(htmlAttributes)
 
   setHeadComponents([
+    <meta
+      key="theme-color"
+      name="theme-color"
+      content={THEME_COLORS[THEME_KEYS.LIGHT].backgroundSite}
+    />,
     <style
       key="theme-style"
       dangerouslySetInnerHTML={{
@@ -32,19 +39,32 @@ export const onRenderBody = ({
         __html: `
           (function() {            
             var selectedTheme;
+            var themeColors = {
+              light: '${THEME_COLORS[THEME_KEYS.LIGHT].backgroundSite}',
+              dark: '${THEME_COLORS[THEME_KEYS.DARK].backgroundSite}'
+            };
             
             try {
-              selectedTheme = localStorage.getItem('${LOCALSTORAGE_KEYS.THEME}');
+              selectedTheme = localStorage.getItem('${
+                LOCALSTORAGE_KEYS.THEME
+              }');
             } catch (error) {
               console.error(error);
             }
 
-            var preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches && '${THEME_KEYS.DARK}';            
-            var themeKey = selectedTheme || preferredTheme || '${THEME_KEYS.LIGHT}';
-            var oppositeKey = themeKey === '${THEME_KEYS.LIGHT}' ? '${THEME_KEYS.DARK}' : '${THEME_KEYS.LIGHT}';
+            var preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches && '${
+              THEME_KEYS.DARK
+            }';
+            var themeKey = selectedTheme || preferredTheme || '${
+              THEME_KEYS.LIGHT
+            }';
+            var oppositeKey = themeKey === '${THEME_KEYS.LIGHT}' ? '${
+          THEME_KEYS.DARK
+        }' : '${THEME_KEYS.LIGHT}';
                       
             document.documentElement.classList.remove('${THEME_PREFIX}' + oppositeKey);
             document.documentElement.classList.add('${THEME_PREFIX}' + themeKey);
+            document.querySelector("${THEME_META_SELECTOR}").setAttribute('content', themeColors[themeKey]);
             
             window.__THEME__ = themeKey;
           })();

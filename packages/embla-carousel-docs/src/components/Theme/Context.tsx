@@ -11,6 +11,8 @@ import {
   THEME_KEYS,
   ThemeKeyType,
   THEME_PREFIX,
+  THEME_COLORS,
+  THEME_META_SELECTOR,
 } from 'consts'
 import { useLocalStorage } from 'hooks'
 import { isBrowser } from 'utils'
@@ -39,6 +41,13 @@ export const ThemeProvider = (props: PropType) => {
       setLocalStorageItem(next)
       document.documentElement.classList.remove(`${THEME_PREFIX}${current}`)
       document.documentElement.classList.add(`${THEME_PREFIX}${next}`)
+
+      const themeMetaNode = document.querySelector(THEME_META_SELECTOR)
+
+      if (themeMetaNode) {
+        themeMetaNode.setAttribute('content', THEME_COLORS[next].backgroundSite)
+      }
+
       return next
     })
   }, [setTheme])

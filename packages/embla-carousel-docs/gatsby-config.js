@@ -42,6 +42,7 @@ module.exports = {
         icon: 'src/assets/images/maskable.png',
         icon_options: { purpose: 'maskable' },
         include_favicon: false,
+        theme_color_in_head: false,
       },
     },
     {
