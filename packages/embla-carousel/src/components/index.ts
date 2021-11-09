@@ -21,6 +21,7 @@ export type EmblaPluginType<
   options: OptionsType
   init: (embla: EmblaCarouselType) => void
   destroy: () => void
+  [key: string]: unknown
 }
 
 export type EmblaCarouselType = {
@@ -33,7 +34,7 @@ export type EmblaCarouselType = {
   off: EventEmitterType['off']
   on: EventEmitterType['on']
   previousScrollSnap: () => number
-  reInit: (options?: EmblaOptionsType) => void
+  reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
   rootNode: () => HTMLElement
   scrollNext: (jump?: boolean) => void
   scrollPrev: (jump?: boolean) => void
@@ -46,10 +47,10 @@ export type EmblaCarouselType = {
   slidesNotInView: (target?: boolean) => number[]
 }
 
-function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
+function EmblaCarousel(
   nodes: HTMLElement | EmblaNodesType,
   userOptions?: EmblaOptionsType,
-  userPlugins?: EmblaPluginsType[],
+  userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
   const events = EventEmitter()
   const debouncedResize = debounce(resize, 500)
@@ -61,7 +62,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
   let optionsBase = Object.assign({}, defaultOptions)
   let options = Object.assign({}, optionsBase)
   let optionsPseudo: OptionsPseudoType
-  let plugins: EmblaPluginsType[]
+  let plugins: EmblaPluginType[]
   let rootSize = 0
   let root: HTMLElement
   let container: HTMLElement
@@ -79,7 +80,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
 
   function activate(
     withOptions?: EmblaOptionsType,
-    withPlugins?: EmblaPluginsType[],
+    withPlugins?: EmblaPluginType[],
   ): void {
     setupElements()
     optionsBase = Object.assign({}, optionsBase, withOptions)
@@ -109,7 +110,7 @@ function EmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
 
   function reActivate(
     withOptions?: EmblaOptionsType,
-    withPlugins?: EmblaPluginsType[],
+    withPlugins?: EmblaPluginType[],
   ): void {
     if (!activated) return
     const startIndex = selectedScrollSnap()

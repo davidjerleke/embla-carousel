@@ -15,14 +15,14 @@ export type UseEmblaCarouselType = [
   EmblaCarouselType | undefined,
 ]
 
-function useEmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
+function useEmblaCarousel(
   options: EmblaOptionsType = {},
-  plugins: EmblaPluginsType[] = [],
+  plugins: EmblaPluginType[] = [],
 ): UseEmblaCarouselType {
   const [embla, setEmbla] = useState<EmblaCarouselType>()
   const [viewport, setViewport] = useState<HTMLElement>()
   const storedOptions = useRef<EmblaOptionsType>(options)
-  const storedPlugins = useRef<EmblaPluginsType[]>(plugins)
+  const storedPlugins = useRef<EmblaPluginType[]>(plugins)
 
   const activeOptions = useMemo<EmblaOptionsType>(() => {
     if (!areObjectsEqualShallow(storedOptions.current, options)) {
@@ -31,7 +31,7 @@ function useEmblaCarousel<EmblaPluginsType extends EmblaPluginType>(
     return storedOptions.current
   }, [storedOptions, options])
 
-  const activePlugins = useMemo<EmblaPluginsType[]>(() => {
+  const activePlugins = useMemo<EmblaPluginType[]>(() => {
     if (!arePluginsEqual(storedPlugins.current, plugins)) {
       storedPlugins.current = plugins
     }

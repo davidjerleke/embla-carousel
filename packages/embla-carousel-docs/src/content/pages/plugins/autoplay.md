@@ -17,35 +17,23 @@ First you need to install the **npm package** and save it to your dependencies:
 npm install embla-carousel-autoplay --save
 ```
 
-Alternatively, you can use a **CDN** to include it in your project. When using a CDN, make sure that the script tag for this plugin is placed **after** the script tag that loads the Embla Carousel core package, like so:
+Alternatively, you can use a **CDN** to include it in your project:
 
 ```html
-<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 ```
 
-## Parameters
+## Usage
 
-This plugin accepts two **optional** parameters:
+This plugin accepts two **optional** parameters. The **first parameter** is the autoplay [options](/plugins/autoplay/#options) object that allows you to configure it. The **second parameter** allows you to choose a **custom root node** for the autoplay plugin. If this parameter is omitted, the Embla Carousel root node will be used as a default.
 
 ```js
 const options = { delay: 4000 } // Options
-const rootNode = (emblaRoot) => emblaRoot.parentElement // Root node
+const autoplayRoot = (emblaRoot) => emblaRoot.parentElement // Root node
+const autoplay = Autoplay(options, autoplayRoot)
 
-const autoplay = Autoplay(options, rootNode)
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [autoplay]) // Add plugin
 ```
-
-### options
-
-Parameter: `options?: AutoplayOptionsType`
-
-The autoplay [options](/plugins/autoplay/#options) object that allows you to configure it.
-
-### rootNode
-
-Parameter: `rootNode?: (emblaRoot: HTMLElement) => HTMLElement | null`
-
-This parameter allows you to choose a custom root node for the autoplay plugin. If this parameter is omitted, the Embla Carousel root node will be used as a default.
 
 ## Options
 
