@@ -8,11 +8,10 @@ assignees: ''
 
 ### Feature request is related to
 
-- [ ] The Vanilla JavaScript version
-- [ ] The React version
-- [ ] The Embla Carousel core (all versions)
-- [ ] Documentation website
-- [ ] Other
+- [ ] embla-carousel (core package)
+- [ ] embla-carousel-react
+- [ ] embla-carousel-autoplay
+- [ ] embla-carousel-docs (documentation website)
 
 ### Is your feature request related to an issue?
 
