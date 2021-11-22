@@ -6406,7 +6406,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-class-names@6.0.1, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
+"embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
   version: 0.0.0-use.local
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
@@ -6450,7 +6450,6 @@ __metadata:
     "@typescript-eslint/parser": ^4.22.0
     babel-plugin-styled-components: ^1.12.0
     embla-carousel-autoplay: 6.0.1
-    embla-carousel-class-names: 6.0.1
     embla-carousel-react: 6.0.1
     eslint: ^7.24.0
     eslint-config-prettier: ^8.2.0
