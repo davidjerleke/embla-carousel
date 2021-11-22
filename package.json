@@ -17,7 +17,8 @@
     "packages/embla-carousel",
     "packages/embla-carousel-react",
     "packages/embla-carousel-docs",
-    "packages/embla-carousel-autoplay"
+    "packages/embla-carousel-autoplay",
+    "packages/embla-carousel-class-names"
   ],
   "scripts": {
     "lint": "npm-run-all prettier:report eslint:report",
