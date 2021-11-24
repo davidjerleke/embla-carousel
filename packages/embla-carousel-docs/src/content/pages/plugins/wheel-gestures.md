@@ -30,14 +30,16 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
 
 The Class Name plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
-```js   
-const wheelGestures = WheelGesturesPlugin({ wheelDraggingClass: 'my-wheel-class' })
+```js
+const wheelGestures = WheelGesturesPlugin({
+  wheelDraggingClass: 'my-wheel-class',
+})
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
 ```
 
 ### wheelDraggingClass
 
-Type: `string`  
-Default: `is-wheel-dragging`
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`is-wheel-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container during a wheel gesture. Pass an empty string to opt-out.

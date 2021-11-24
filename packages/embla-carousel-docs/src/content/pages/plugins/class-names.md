@@ -47,21 +47,21 @@ const classNames = ClassNames(options)
 
 ### selected
 
-Type: `string`  
-Default: `is-selected`
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`is-selected`</BrandSecondaryText>
 
 Choose a classname that will be applied to the selected slides. Pass an empty string to opt-out.
 
 ### draggable
 
-Type: `string`  
-Default: `is-draggable`
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`is-draggable`</BrandSecondaryText>
 
 Choose a classname that will be applied to a draggable carousel container. Pass an empty string to opt-out.
 
 ### dragging
 
-Type: `string`  
-Default: `is-dragging`
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`is-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container when dragging. Pass an empty string to opt-out.

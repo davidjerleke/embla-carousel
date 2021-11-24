@@ -46,29 +46,29 @@ const autoplay = Autoplay(options)
 
 ### delay
 
-Type: `number`  
-Default: `4000`
+Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
 Delay between transitions in milliseconds.
 
 ### stopOnInteraction
 
-Type: `boolean`  
-Default: `true`
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 If set to `false`, autoplay will not be disabled after drag interactions, and it will restart every time after the interaction.
 
 ### stopOnMouseEnter
 
-Type: `boolean`  
-Default: `false`
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 When enabled, autoplay will pause when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also enabled, it will stop autoplay entirely instead of pausing it.
 
 ### stopOnLastSnap
 
-Type: `boolean`  
-Default: `false`
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 If this parameter is enabled, autoplay will be stopped when it reaches last slide.
 
@@ -85,21 +85,21 @@ autoplay.stop() // Method
 
 ### play
 
-Parameters: `none`  
-Returns: `void`
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Start autoplay.
 
 ### stop
 
-Parameters: `none`  
-Returns: `void`
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Stop autoplay.
 
 ### reset
 
-Parameters: `none`  
-Returns: `void`
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is set to `false`, this will restart the autoplay timer. If not, this method stops autoplay.
