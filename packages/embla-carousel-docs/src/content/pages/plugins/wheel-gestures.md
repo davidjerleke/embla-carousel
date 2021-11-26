@@ -17,9 +17,9 @@ First you need to install the **npm package** and save it to your dependencies:
 npm install embla-carousel-wheel-gestures --save
 ```
 
-Alternatively, you can use a CDN to include it in your project:
+Alternatively, you can use a **CDN** to include it in your project:
 
-```shell
+```html
 <script src="https://unpkg.com/embla-carousel-wheel-gestures/dist/embla-carousel-wheel-gestures.umd.js"></script>
 ```
 
@@ -34,7 +34,7 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
 
 ## Options
 
-The Class Name plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
+The Wheel Gestures plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
 const wheelGestures = WheelGesturesPlugin({
