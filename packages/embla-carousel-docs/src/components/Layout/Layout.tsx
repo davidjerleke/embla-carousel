@@ -3,7 +3,6 @@ import { RoutesProvider } from 'components/Routes'
 import { ThemeProvider } from 'components/Theme'
 import { NavigationProvider } from 'components/Navigation'
 import { SkipToContent, TabAccessProvider } from 'components/TabAccess'
-import { Search, SearchProvider } from 'components/Search'
 import { GlobalStyles } from 'components/Layout/GlobalStyles'
 import { PageTemplateType, PAGE_TEMPLATES } from 'consts'
 import { Grid } from 'components/SiteLayout'
@@ -24,20 +23,17 @@ export const Layout = (props: PropType) => {
       <ThemeProvider>
         <TabAccessProvider>
           <NavigationProvider>
-            <SearchProvider>
-              <GlobalStyles />
-              {isNotFoundPage ? (
-                <>{children}</>
-              ) : (
-                <>
-                  <SkipToContent />
-                  <Header />
-                  <Grid layout={layout}>{children}</Grid>
-                  <Footer />
-                  <Search />
-                </>
-              )}
-            </SearchProvider>
+            <GlobalStyles />
+            {isNotFoundPage ? (
+              <>{children}</>
+            ) : (
+              <>
+                <SkipToContent />
+                <Header />
+                <Grid layout={layout}>{children}</Grid>
+                <Footer />
+              </>
+            )}
           </NavigationProvider>
         </TabAccessProvider>
       </ThemeProvider>

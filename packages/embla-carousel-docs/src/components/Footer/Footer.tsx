@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Frame } from 'components/SiteLayout'
+import { Frame, FRAME_SPACING } from 'components/SiteLayout'
 import { Links } from './Links'
 
 const Wrapper = styled.footer`
-  padding-bottom: 2.4rem;
+  padding-top: ${FRAME_SPACING};
+  padding-bottom: ${FRAME_SPACING};
 `
 
 const Content = styled(Frame)`

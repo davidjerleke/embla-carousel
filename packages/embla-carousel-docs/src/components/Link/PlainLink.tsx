@@ -22,11 +22,12 @@ export type PropType = PropsWithChildren<{
   to: string
   ariaLabel?: string
   tabIndex?: number
+  id?: GatsbyLinkProps<{}>['id']
   onClick?: GatsbyLinkProps<{}>['onClick']
 }>
 
 export const PlainLink = (props: PropType) => {
-  const { to, ariaLabel, tabIndex, children, onClick, ...restProps } = props
+  const { to, id, ariaLabel, tabIndex, children, onClick, ...restProps } = props
   const isInternal = /^\/(?!\/)|^#/.test(to)
   const isTabbing = useTabAccess()
 
@@ -34,6 +35,7 @@ export const PlainLink = (props: PropType) => {
     return (
       <InternalLink
         to={to}
+        id={id}
         aria-label={ariaLabel}
         tabIndex={tabIndex}
         onClick={onClick}
@@ -48,6 +50,7 @@ export const PlainLink = (props: PropType) => {
   return (
     <ExternalLink
       href={to}
+      id={id}
       aria-label={ariaLabel}
       tabIndex={tabIndex}
       onClick={onClick}

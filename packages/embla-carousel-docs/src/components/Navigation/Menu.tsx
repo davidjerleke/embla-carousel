@@ -11,9 +11,7 @@ import { NavigationClose } from './NavigationClose'
 import { SubMenu } from './SubMenu'
 
 const MAX_WIDTH = '37.5rem'
-const HEADING_HEIGHT = '4.8rem'
 const MAX_HEIGHT_COMPACT = `calc(100vh - ${HEADER_HEIGHT})`
-const MAX_HEIGHT_DESKTOP = `calc(100vh - 9rem - ${HEADING_HEIGHT})`
 
 const Wrapper = styled.div`
   background-color: var(--background-site);
@@ -25,6 +23,7 @@ const Wrapper = styled.div`
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
     max-width: ${MAX_WIDTH};
+    box-shadow: 0.1rem 0 0 0 var(--detail-low-contrast);
   }
 `
 
@@ -32,7 +31,7 @@ const ScrollArea = styled.ul`
   overflow: auto;
   position: relative;
   padding-bottom: 2.4rem;
-  max-height: ${MAX_HEIGHT_DESKTOP};
+  max-height: 100%;
 
   ${breakpoints.compact} {
     max-height: ${MAX_HEIGHT_COMPACT};
@@ -56,13 +55,6 @@ const Buttons = styled.div`
   }
 `
 
-const Heading = styled.h4`
-  height: ${HEADING_HEIGHT};
-  font-weight: 700;
-  font-size: 2rem;
-  ${hiddenAtBreakpointStyles};
-`
-
 const MiscMenu = styled(Links)`
   flex-direction: column;
   padding-top: 1.4rem;
@@ -80,7 +72,6 @@ export const Menu = () => {
           <NavigationClose />
         </Buttons>
       </Header>
-      <Heading $hidden="compact">Documentation</Heading>
       <ScrollArea>
         {routes.map((route) => (
           <li key={route.id}>

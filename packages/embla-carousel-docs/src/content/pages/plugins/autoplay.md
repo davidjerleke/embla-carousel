@@ -28,6 +28,9 @@ Alternatively, you can use a **CDN** to include it in your project:
 This plugin accepts two **optional** parameters. The **first parameter** is the autoplay [options](/plugins/autoplay/#options) object that allows you to configure it. The **second parameter** allows you to choose a **custom root node** for the autoplay plugin. If this parameter is omitted, the Embla Carousel root node will be used as a default.
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
+
 const options = { delay: 4000 } // Options
 const autoplayRoot = (emblaRoot) => emblaRoot.parentElement // Root node
 const autoplay = Autoplay(options, autoplayRoot)
@@ -40,6 +43,8 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [autoplay]) // Add plugi
 The Autoplay plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
+import Autoplay from 'embla-carousel-autoplay'
+
 const options = { delay: 4000 }
 const autoplay = Autoplay(options)
 ```
@@ -77,6 +82,8 @@ If this parameter is enabled, autoplay will be stopped when it reaches last slid
 The Autoplay pliugin exposes a set of **useful methods** which lets you control it. Assuming you've stored the plugin instance in a variable, a method is called like demonstrated below:
 
 ```js
+import Autoplay from 'embla-carousel-autoplay'
+
 const options = { delay: 4000 }
 const autoplay = Autoplay(options)
 

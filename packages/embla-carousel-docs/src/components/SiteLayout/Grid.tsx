@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { Navigation } from 'components/Navigation'
 import { useWindowSize } from 'hooks'
-import { Frame } from './Frame'
+import { Frame, FRAME_SPACING } from './Frame'
 import {
   BREAKPOINTS,
   breakpoints,
@@ -16,12 +16,8 @@ const Wrapper = styled(Frame)`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding-top: 4.8rem;
-  padding-bottom: 4.8rem;
-
-  ${breakpoints.maxSm} {
-    padding-top: 2.4rem;
-  }
+  padding-top: ${FRAME_SPACING};
+  padding-bottom: ${FRAME_SPACING};
 `
 
 const Main = styled.main<{ $isStartPage: boolean }>`

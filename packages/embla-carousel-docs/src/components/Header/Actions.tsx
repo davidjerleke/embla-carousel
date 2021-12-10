@@ -4,7 +4,7 @@ import { ThemeToggle } from 'components/Theme'
 import { NavigationLink } from 'components/Link'
 import { breakpoints } from 'consts'
 import { useRoutes } from 'hooks'
-import { SearchToggle } from 'components/Search'
+import { Search } from 'components/Search'
 import { hiddenAtBreakpointStyles } from 'utils'
 
 const ITEM_SPACING_SM_UP = '2.8rem'
@@ -51,7 +51,7 @@ export const Actions = () => {
         </nav>
       </Item>
       <Item>
-        <SearchToggle />
+        <Search />
       </Item>
       <Item $hidden="compact">
         <ThemeToggle />
