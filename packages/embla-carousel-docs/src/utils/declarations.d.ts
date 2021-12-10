@@ -21,6 +21,4 @@ declare module '*.png' {
 
 interface Window {
   __THEME__: import('consts/themes').THEME_KEYS
-  __DOCSEARCH__: ReturnType<import('consts/algoliaSearch').AlgoliaDocsearchType>
-  docsearch: import('consts/algoliaSearch').AlgoliaDocsearchType
 }

@@ -5,22 +5,20 @@ import { useEventListener, useNavigation } from 'hooks'
 import { hiddenAtBreakpointStyles } from 'utils'
 import { breakpoints, LAYERS } from 'consts'
 import { Menu } from './Menu'
+import { FRAME_SPACING } from 'components/SiteLayout'
+import { HEADER_HEIGHT } from 'components/Header'
 
 export const NAVIGATION_ID = 'main-navigation-menu'
 
-const Wrapper = styled.nav`
-  height: 100%;
-`
-
-const Nav = styled.div<{ $isOpen: boolean }>`
+const Nav = styled.nav<{ $isOpen: boolean }>`
   z-index: ${LAYERS.NAVIGATION};
+  position: fixed;
 
   ${breakpoints.compact} {
     ${({ $isOpen }) => css`
       transform: ${!$isOpen && 'translateX(-100%)'};
       visibility: ${!$isOpen && 'hidden'};
     `};
-    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -28,10 +26,8 @@ const Nav = styled.div<{ $isOpen: boolean }>`
   }
 
   ${breakpoints.desktop} {
-    position: sticky;
-    top: 9rem;
-    bottom: auto;
-    left: auto;
+    top: calc(${FRAME_SPACING} + ${HEADER_HEIGHT});
+    bottom: 0;
   }
 `
 
@@ -76,18 +72,17 @@ export const Navigation = (props: PropType) => {
 
   return (
     <FocusTrap active={isOpen}>
-      <Wrapper
+      <Nav
         role={role}
         aria-modal={ariaModal}
         aria-labelledby={id}
         aria-label="Main Navigation Menu"
+        $isOpen={isOpen}
         {...props}
       >
-        <Nav $isOpen={isOpen}>
-          <Overlay onPointerUp={closeNavigation} $hidden="desktop" />
-          <Menu />
-        </Nav>
-      </Wrapper>
+        <Overlay onPointerUp={closeNavigation} $hidden="desktop" />
+        <Menu />
+      </Nav>
     </FocusTrap>
   )
 }

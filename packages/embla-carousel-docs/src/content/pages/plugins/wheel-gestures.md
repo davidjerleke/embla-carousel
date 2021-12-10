@@ -28,6 +28,9 @@ Alternatively, you can use a **CDN** to include it in your project:
 This plugin accepts a single **optional** parameter, which is its [options](/plugins/wheel-gestures/#options) object that allows you to configure it.
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
+
 const wheelGestures = WheelGesturesPlugin()
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
 ```
@@ -37,6 +40,9 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
 The Wheel Gestures plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
+
 const wheelGestures = WheelGesturesPlugin({
   wheelDraggingClass: 'my-wheel-class',
 })
@@ -49,3 +55,10 @@ Type: <BrandPrimaryText>`string`</BrandPrimaryText>
 Default: <BrandSecondaryText>`is-wheel-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container during a wheel gesture. Pass an empty string to opt-out.
+
+### forceWheelAxis
+
+Type: <BrandPrimaryText>`string | undefined`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
+
+Force an axis on which to listen for wheel events. Choose scroll axis between `x` and `y`. Useful if you want to slide horizontally when scrolling vertically or vice versa.

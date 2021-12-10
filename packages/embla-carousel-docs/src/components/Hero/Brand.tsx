@@ -4,6 +4,7 @@ import { breakpoints, cssHackStyles } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { HEADER_HEIGHT } from 'components/Header'
+import { FRAME_SPACING } from 'components/SiteLayout'
 import { useSiteMetadata } from 'hooks'
 
 const Wrapper = styled.div`
@@ -17,6 +18,7 @@ const Wrapper = styled.div`
     padding-top: 9rem;
   }
   ${breakpoints.minSm} {
+    margin-top: ${FRAME_SPACING};
     padding-top: 11rem;
     padding-bottom: 11rem;
   }

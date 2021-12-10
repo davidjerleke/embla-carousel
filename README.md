@@ -47,10 +47,10 @@
 
 <div align="center">
   <strong>
-    <h2 align="center">Platforms</h2>
+    <h2 align="center">Ready for</h2>
   </strong>
   <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with the following tools/libraries.
+    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with the following:
   </p>
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">

@@ -1,12 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { PlainLink, PropType } from './PlainLink'
 import { gradientTextStyles } from 'utils'
 
-const Wrapper = styled(PlainLink)`
+export const contentLinkStyles = css`
   ${gradientTextStyles};
   display: inline-block;
   font-weight: 500;
+`
+
+const Wrapper = styled(PlainLink)`
+  ${contentLinkStyles};
 `
 
 export const ContentLink = (props: PropType) => {

@@ -3,7 +3,7 @@ import { gradientTextStyles, createSquareSizeStyles } from 'utils'
 import styled, { css } from 'styled-components'
 import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
-import { NavigationLink } from 'components/Link'
+import { NavigationLink, PlainLink } from 'components/Link'
 import { ChevronRightIcon } from 'assets/icons'
 import { useRouteActive } from 'hooks'
 
@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   line-height: 1.65;
 `
 
-const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
+const Toggle = styled(PlainLink)<{ $isActive: boolean }>`
   color: var(--text-medium-contrast);
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING} 2rem;
   margin: 0 0;
@@ -80,9 +80,13 @@ export const SubMenu = (props: PropType) => {
   const id = `${title.toLowerCase().split(' ').join('-')}-navigation-menu`
   const toggleAction = isOpen ? 'Hide' : 'Show'
 
-  const toggleOpen = useCallback(() => {
-    setIsOpen((open) => !open)
-  }, [setIsOpen])
+  const toggleOpen = useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault()
+      setIsOpen((open) => !open)
+    },
+    [setIsOpen],
+  )
 
   useEffect(() => {
     setIsOpen(isPartiallyActive)
@@ -96,6 +100,7 @@ export const SubMenu = (props: PropType) => {
         $isActive={isPartiallyActive}
         aria-expanded={isOpen}
         aria-label={`${toggleAction} Navigation Menu`}
+        to="/#"
       >
         <ToggleSvg $isOpen={isOpen} aria-hidden="true" focusable="false" />
         <span>{title}</span>

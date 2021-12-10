@@ -9,6 +9,7 @@ import {
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
+  ALGOLIA_SEARCH,
 } from 'consts'
 
 export const onRenderBody = ({
@@ -102,6 +103,12 @@ export const onRenderBody = ({
       content={`${siteUrl}/share-image.jpg`}
     />,
     <link key="favicon" rel="icon" href={favicon} />,
+    <link
+      key="algolia-preconnect"
+      rel="preconnect"
+      href={`https://${ALGOLIA_SEARCH.APP_ID}-dsn.algolia.net`}
+      crossOrigin
+    />,
   ])
 
   setPreBodyComponents([
