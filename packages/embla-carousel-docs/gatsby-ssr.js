@@ -9,7 +9,7 @@ import {
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
-  ALGOLIA_SEARCH,
+  ALGOLIA_SEARCH_CONFIG,
 } from 'consts'
 
 export const onRenderBody = ({
@@ -106,8 +106,8 @@ export const onRenderBody = ({
     <link
       key="algolia-preconnect"
       rel="preconnect"
-      href={`https://${ALGOLIA_SEARCH.APP_ID}-dsn.algolia.net`}
-      crossOrigin
+      href={`https://${ALGOLIA_SEARCH_CONFIG.APP_ID}-dsn.algolia.net`}
+      crossOrigin="true"
     />,
   ])
 

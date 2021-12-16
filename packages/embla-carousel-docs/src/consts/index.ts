@@ -13,6 +13,6 @@ export {
 export type { ThemeKeyType } from './themes'
 export { supportsStyles } from './supportsStyles'
 export { cssHackStyles } from './cssHackStyles'
-export { ALGOLIA_SEARCH } from './algoliaSearch'
+export { ALGOLIA_SEARCH_CONFIG, ALGOLIA_SELECTORS } from './algoliaSearch'
 export { LAYERS } from './layers'
 export { URLS } from './urls'

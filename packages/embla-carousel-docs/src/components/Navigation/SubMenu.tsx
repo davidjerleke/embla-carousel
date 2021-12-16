@@ -3,9 +3,10 @@ import { gradientTextStyles, createSquareSizeStyles } from 'utils'
 import styled, { css } from 'styled-components'
 import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
-import { NavigationLink, PlainLink } from 'components/Link'
+import { NavigationLink } from 'components/Link'
 import { ChevronRightIcon } from 'assets/icons'
 import { useRouteActive } from 'hooks'
+import { ALGOLIA_SELECTORS } from 'consts'
 
 const ITEM_SPACING = '0.6rem'
 
@@ -15,7 +16,7 @@ const Wrapper = styled.div`
   line-height: 1.65;
 `
 
-const Toggle = styled(PlainLink)<{ $isActive: boolean }>`
+const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
   color: var(--text-medium-contrast);
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING} 2rem;
   margin: 0 0;
@@ -100,10 +101,9 @@ export const SubMenu = (props: PropType) => {
         $isActive={isPartiallyActive}
         aria-expanded={isOpen}
         aria-label={`${toggleAction} Navigation Menu`}
-        to="/#"
       >
         <ToggleSvg $isOpen={isOpen} aria-hidden="true" focusable="false" />
-        <span>{title}</span>
+        <span className={ALGOLIA_SELECTORS.LVL_0}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>
         <li>

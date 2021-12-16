@@ -12,7 +12,7 @@ import {
   visuallyHiddenStyles,
 } from 'utils'
 import {
-  ALGOLIA_SEARCH,
+  ALGOLIA_SEARCH_CONFIG,
   breakpoints,
   LAYERS,
   THEME_KEYS,
@@ -603,9 +603,9 @@ export const Search = () => {
     <>
       <SearchStyles $isTabbing={isTabbing} />
       <DocSearch
-        appId={ALGOLIA_SEARCH.APP_ID}
-        indexName={ALGOLIA_SEARCH.INDEX_NAME}
-        apiKey={ALGOLIA_SEARCH.API_KEY}
+        appId={ALGOLIA_SEARCH_CONFIG.APP_ID}
+        indexName={ALGOLIA_SEARCH_CONFIG.INDEX_NAME}
+        apiKey={ALGOLIA_SEARCH_CONFIG.API_KEY}
       />
     </>
   )
