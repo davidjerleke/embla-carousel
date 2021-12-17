@@ -123,12 +123,9 @@ const contentStyles = css`
     margin-bottom: 1.8rem;
   }
 
-  .DocSearch-NoResults-Prefill-List {
-    display: none;
-  }
-
   .DocSearch-Help a {
     ${contentLinkStyles};
+    ${tabAccessStyles};
   }
 
   .DocSearch-Dropdown {
@@ -348,6 +345,30 @@ const contentStyles = css`
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-action,
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-Tree {
     color: var(--text-high-contrast) !important;
+  }
+
+  .DocSearch-NoResults-Prefill-List {
+    padding-bottom: 1.8rem;
+
+    > ul {
+      display: inline-block;
+      padding-top: 0.6rem;
+      font-size: 1.4rem;
+    }
+
+    li {
+      color: var(--text-high-contrast);
+      list-style-position: inside;
+      list-style-type: '» ';
+      text-align: left;
+    }
+  }
+
+  .DocSearch-Prefill {
+    ${plainButtonStyles};
+    ${contentLinkStyles};
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 `
 

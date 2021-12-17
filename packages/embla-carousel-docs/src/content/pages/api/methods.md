@@ -16,6 +16,13 @@ const embla = EmblaCarousel(emblaNode)
 embla.scrollTo(4) // Method
 ```
 
+### rootNode
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`HTMLElement`</BrandSecondaryText>
+
+Get the root node that holds the scroll container with slides inside. This method can be useful when you need to manipulate the root element dynamically or similar.
+
 ### containerNode
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
