@@ -80,6 +80,7 @@ export const SubMenu = (props: PropType) => {
   const [isOpen, setIsOpen] = useState(isPartiallyActive)
   const id = `${title.toLowerCase().split(' ').join('-')}-navigation-menu`
   const toggleAction = isOpen ? 'Hide' : 'Show'
+  const activeClass = isPartiallyActive ? ALGOLIA_SELECTORS.LVL_0 : undefined
 
   const toggleOpen = useCallback(
     (event: React.MouseEvent) => {
@@ -103,7 +104,7 @@ export const SubMenu = (props: PropType) => {
         aria-label={`${toggleAction} Navigation Menu`}
       >
         <ToggleSvg $isOpen={isOpen} aria-hidden="true" focusable="false" />
-        <span className={ALGOLIA_SELECTORS.LVL_0}>{title}</span>
+        <span className={activeClass}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>
         <li>
