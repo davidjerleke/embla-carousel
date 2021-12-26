@@ -79,7 +79,7 @@ If this parameter is enabled, autoplay will be stopped when it reaches last slid
 
 ## Methods
 
-The Autoplay pliugin exposes a set of **useful methods** which lets you control it. Assuming you've stored the plugin instance in a variable, a method is called like demonstrated below:
+The Autoplay plugin exposes a set of **useful methods** which lets you control it. Assuming you've stored the plugin instance in a variable, a method is called like demonstrated below:
 
 ```js
 import Autoplay from 'embla-carousel-autoplay'
