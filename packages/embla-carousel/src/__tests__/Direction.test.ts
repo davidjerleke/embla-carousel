@@ -8,12 +8,12 @@ describe('Direction', () => {
     const direction = Direction('ltr')
 
     test('Positive number', () => {
-      const number = direction.applyTo(positiveNumber)
+      const number = direction.apply(positiveNumber)
       expect(number).toEqual(positiveNumber)
     })
 
     test('Negative number', () => {
-      const number = direction.applyTo(negativeNumber)
+      const number = direction.apply(negativeNumber)
       expect(number).toEqual(negativeNumber)
     })
   })
@@ -22,12 +22,12 @@ describe('Direction', () => {
     const direction = Direction('rtl')
 
     test('Positive number', () => {
-      const number = direction.applyTo(positiveNumber)
+      const number = direction.apply(positiveNumber)
       expect(number).toEqual(negativeNumber)
     })
 
     test('Negative number', () => {
-      const number = direction.applyTo(negativeNumber)
+      const number = direction.apply(negativeNumber)
       expect(number).toEqual(positiveNumber)
     })
   })

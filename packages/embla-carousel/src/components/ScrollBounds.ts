@@ -1,6 +1,7 @@
 import { LimitType } from './Limit'
 import { ScrollBodyType } from './ScrollBody'
 import { Vector1DType } from './Vector1d'
+import { mathAbs } from './utils'
 
 export type ScrollBoundsType = {
   constrain: (pointerDown: boolean) => void
@@ -30,7 +31,7 @@ export function ScrollBounds(
 
     target.subtract(diffToTarget * friction)
 
-    if (!pointerDown && Math.abs(diffToTarget) < pullBackThreshold) {
+    if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
       target.set(limit.constrain(target.get()))
       scrollBody.useSpeed(10).useMass(3)
     }

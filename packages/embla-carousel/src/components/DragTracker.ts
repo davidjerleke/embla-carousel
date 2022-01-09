@@ -1,12 +1,16 @@
 import { AxisOptionType, AxisType } from './Axis'
 import { PxToPercentType } from './PxToPercent'
-import { Vector1D, Vector1DType } from './Vector1d'
+import { mathAbs } from './utils'
+
+type PointerCoordType = keyof Touch | keyof MouseEvent
+export type PointerEventType = TouchEvent | MouseEvent
 
 export type DragTrackerType = {
-  pointerDown: (evt: Event) => number
-  pointerMove: (evt: Event) => number
-  pointerUp: () => number
-  readPoint: (evt: any, axis: AxisOptionType) => Vector1DType
+  isTouchEvent: (evt: PointerEventType) => evt is TouchEvent
+  pointerDown: (evt: PointerEventType) => number
+  pointerMove: (evt: PointerEventType) => number
+  pointerUp: (evt: PointerEventType) => number
+  readPoint: (evt: PointerEventType, evtAxis?: AxisOptionType) => number
 }
 
 export function DragTracker(
@@ -14,64 +18,52 @@ export function DragTracker(
   pxToPercent: PxToPercentType,
 ): DragTrackerType {
   const { scroll: scrollAxis } = axis
-  const coords = { x: 'clientX', y: 'clientY' }
-  const startDrag = Vector1D(0)
-  const diffDrag = Vector1D(0)
-  const lastDrag = Vector1D(0)
-  const pointValue = Vector1D(0)
-  const trackInterval = 10
-  const trackLength = 5
-  const trackTime = 100
-  let trackPoints: number[] = []
-  let lastMoveTime = new Date().getTime()
-  let isMouse = false
+  const logInterval = 170
 
-  function readPoint(evt: any, type: AxisOptionType): Vector1DType {
-    isMouse = !evt.touches
-    const c = coords[type]
-    const value = isMouse ? evt[c] : evt.touches[0][c]
-    return pointValue.set(value)
+  let startEvent: PointerEventType
+  let lastEvent: PointerEventType
+
+  function isTouchEvent(evt: PointerEventType): evt is TouchEvent {
+    return typeof TouchEvent !== 'undefined' && evt instanceof TouchEvent
   }
 
-  function pointerDown(evt: Event): number {
-    const point = readPoint(evt, scrollAxis)
-    startDrag.set(point)
-    lastDrag.set(point)
-    return pxToPercent.measure(startDrag.get())
+  function readTime(evt: PointerEventType): number {
+    return evt.timeStamp
   }
 
-  function pointerMove(evt: Event): number {
-    const point = readPoint(evt, scrollAxis)
-    const nowTime = new Date().getTime()
-    const diffTime = nowTime - lastMoveTime
-
-    if (diffTime >= trackInterval) {
-      if (diffTime >= trackTime) trackPoints = []
-      trackPoints.push(point.get())
-      lastMoveTime = nowTime
-    }
-
-    diffDrag.set(point).subtract(lastDrag)
-    lastDrag.set(point)
-    return pxToPercent.measure(diffDrag.get())
+  function readPoint(evt: PointerEventType, evtAxis?: AxisOptionType): number {
+    const property = evtAxis || scrollAxis
+    const coord: PointerCoordType = `client${property === 'x' ? 'X' : 'Y'}`
+    return (isTouchEvent(evt) ? evt.touches[0] : evt)[coord]
   }
 
-  function pointerUp(): number {
-    const nowTime = new Date().getTime()
-    const diffTime = nowTime - lastMoveTime
-    const currentPoint = lastDrag.get()
+  function pointerDown(evt: PointerEventType): number {
+    startEvent = evt
+    lastEvent = evt
+    return pxToPercent.measure(readPoint(evt))
+  }
 
-    const force = trackPoints
-      .slice(-trackLength)
-      .map((trackPoint) => currentPoint - trackPoint)
-      .sort((p1, p2) => (Math.abs(p1) < Math.abs(p2) ? 1 : -1))[0]
+  function pointerMove(evt: PointerEventType): number {
+    const diff = readPoint(evt) - readPoint(lastEvent)
+    lastEvent = evt
+    const expired = readTime(lastEvent) - readTime(startEvent) > logInterval
 
-    lastDrag.set(diffTime > trackTime || !force ? 0 : force)
-    trackPoints = []
-    return pxToPercent.measure(lastDrag.get())
+    if (expired) startEvent = evt
+    return pxToPercent.measure(diff)
+  }
+
+  function pointerUp(evt: PointerEventType): number {
+    const diffDrag = readPoint(lastEvent) - readPoint(startEvent)
+    const diffTime = readTime(evt) - readTime(startEvent)
+    const expired = readTime(evt) - readTime(lastEvent) > logInterval
+    const force = diffDrag / diffTime
+    const isFlick = diffTime && !expired && mathAbs(force) > 0.1
+
+    return isFlick ? pxToPercent.measure(force) : 0
   }
 
   const self: DragTrackerType = {
+    isTouchEvent,
     pointerDown,
     pointerMove,
     pointerUp,

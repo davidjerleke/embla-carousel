@@ -1,5 +1,6 @@
 import { LimitType } from './Limit'
 import { Vector1DType } from './Vector1d'
+import { mathAbs } from './utils'
 
 export type TargetType = {
   distance: number
@@ -22,7 +23,7 @@ export function ScrollTarget(
   const { reachedAny, removeOffset, constrain } = limit
 
   function minDistance(d1: number, d2: number): number {
-    return Math.abs(d1) < Math.abs(d2) ? d1 : d2
+    return mathAbs(d1) < mathAbs(d2) ? d1 : d2
   }
 
   function findTargetSnap(target: number): TargetType {
@@ -31,7 +32,7 @@ export function ScrollTarget(
       .map((scrollSnap) => scrollSnap - distance)
       .map((diffToSnap) => shortcut(diffToSnap, 0))
       .map((diff, i) => ({ diff, index: i }))
-      .sort((d1, d2) => Math.abs(d1.diff) - Math.abs(d2.diff))
+      .sort((d1, d2) => mathAbs(d1.diff) - mathAbs(d2.diff))
 
     const { index } = ascDiffsToSnaps[0]
     return { index, distance }
@@ -46,7 +47,7 @@ export function ScrollTarget(
     if (!direction) return minDistance(minDistance(t1, t2), t3)
 
     const shortest = minDistance(t1, direction === 1 ? t2 : t3)
-    return Math.abs(shortest) * direction
+    return mathAbs(shortest) * direction
   }
 
   function byIndex(index: number, direction: number): TargetType {

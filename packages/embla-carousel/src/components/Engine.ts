@@ -23,7 +23,7 @@ import { SlideLooper, SlideLooperType } from './SlideLooper'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { Translate, TranslateType } from './Translate'
-import { arrayKeys, arrayLast, lastIndex } from './utils'
+import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
 export type Engine = {
@@ -111,7 +111,7 @@ export function Engine(
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
-  const index = Counter(lastIndex(scrollSnaps), startIndex, loop)
+  const index = Counter(arrayLastIndex(scrollSnaps), startIndex, loop)
   const indexPrevious = index.clone()
   const slideIndexes = arrayKeys(slides)
 

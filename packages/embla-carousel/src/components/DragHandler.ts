@@ -1,7 +1,7 @@
 import { AnimationType } from './Animation'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
-import { DragTrackerType } from './DragTracker'
+import { DragTrackerType, PointerEventType } from './DragTracker'
 import { EventEmitterType } from './EventEmitter'
 import { AxisType } from './Axis'
 import { EventStore } from './EventStore'
@@ -9,7 +9,7 @@ import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { deltaAbs, factorAbs, mathSign } from './utils'
+import { deltaAbs, factorAbs, mathAbs, mathSign } from './utils'
 
 export type DragHandlerType = {
   addActivationEvents: () => void
@@ -35,19 +35,19 @@ export function DragHandler(
   loop: boolean,
   skipSnaps: boolean,
 ): DragHandlerType {
-  const { scroll: scrollAxis, cross: crossAxis } = axis
+  const { cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
-  const startScroll = Vector1D(0)
-  const startCross = Vector1D(0)
   const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
-  const snapForceBoost = { mouse: 2.5, touch: 3.5 }
-  const freeForceBoost = { mouse: 5, touch: 7 }
+  const snapForceBoost = { mouse: 300, touch: 400 }
+  const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 5 : 16
   const baseMass = 1
   const dragThreshold = 20
 
+  let startScroll = 0
+  let startCross = 0
   let pointerIsDown = false
   let preventScroll = false
   let preventClick = false
@@ -95,14 +95,14 @@ export function DragHandler(
     const isEdge = next.get() === index.min || next.get() === index.max
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
-    if (dragFree || Math.abs(force) < dragThreshold) return baseForce
+    if (dragFree || mathAbs(force) < dragThreshold) return baseForce
     if (!loop && isEdge) return baseForce * 0.6
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
   }
 
-  function down(evt: Event): void {
+  function down(evt: PointerEventType): void {
     isMouse = evt.type === 'mousedown'
     if (isMouse && (evt as MouseEvent).button !== 0) return
 
@@ -117,40 +117,40 @@ export function DragHandler(
     target.set(location)
     scrollBody.useBaseMass().useSpeed(80)
     addInteractionEvents()
-    startScroll.set(dragTracker.readPoint(evt, scrollAxis))
-    startCross.set(dragTracker.readPoint(evt, crossAxis))
+    startScroll = dragTracker.readPoint(evt)
+    startCross = dragTracker.readPoint(evt, crossAxis)
     events.emit('pointerDown')
 
     if (clearPreventClick) preventClick = false
     if (preventDefault) evt.preventDefault()
   }
 
-  function move(evt: Event): void {
+  function move(evt: PointerEventType): void {
     if (!preventScroll && !isMouse) {
-      if (!evt.cancelable) return up()
-      const moveScroll = dragTracker.readPoint(evt, scrollAxis).get()
-      const moveCross = dragTracker.readPoint(evt, crossAxis).get()
-      const diffScroll = deltaAbs(moveScroll, startScroll.get())
-      const diffCross = deltaAbs(moveCross, startCross.get())
+      if (!evt.cancelable) return up(evt)
+      const lastScroll = dragTracker.readPoint(evt)
+      const lastCross = dragTracker.readPoint(evt, crossAxis)
+      const diffScroll = deltaAbs(lastScroll, startScroll)
+      const diffCross = deltaAbs(lastCross, startCross)
       preventScroll = diffScroll > diffCross
-      if (!preventScroll && !preventClick) return up()
+      if (!preventScroll && !preventClick) return up(evt)
     }
     const diff = dragTracker.pointerMove(evt)
     if (!preventClick && diff) preventClick = true
     animation.start()
-    target.add(direction.applyTo(diff))
+    target.add(direction.apply(diff))
     evt.preventDefault()
   }
 
-  function up(): void {
+  function up(evt: PointerEventType): void {
     const currentLocation = scrollTarget.byDistance(0, false)
     const targetChanged = currentLocation.index !== index.get()
-    const rawForce = dragTracker.pointerUp() * forceBoost()
-    const force = allowedForce(direction.applyTo(rawForce), targetChanged)
+    const rawForce = dragTracker.pointerUp(evt) * forceBoost()
+    const force = allowedForce(direction.apply(rawForce), targetChanged)
     const forceFactor = factorAbs(rawForce, force)
     const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
     const isVigorous = targetChanged && forceFactor > 0.75
-    const isBelowThreshold = Math.abs(rawForce) < dragThreshold
+    const isBelowThreshold = mathAbs(rawForce) < dragThreshold
     const speed = isVigorous ? 10 : baseSpeed
     const mass = isVigorous ? baseMass + 2.5 * forceFactor : baseMass
 
@@ -164,7 +164,7 @@ export function DragHandler(
     events.emit('pointerUp')
   }
 
-  function click(evt: Event): void {
+  function click(evt: MouseEvent): void {
     if (preventClick) evt.preventDefault()
   }
 

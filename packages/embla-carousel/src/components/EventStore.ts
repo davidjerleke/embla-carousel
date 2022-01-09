@@ -1,5 +1,5 @@
 type EventRemoverType = () => void
-type EventHandlerType = EventListener | EventListenerObject | null
+type EventHandlerType = (evt: any) => void
 type EventOptionsType = boolean | AddEventListenerOptions | undefined
 
 export type EventStoreType = {

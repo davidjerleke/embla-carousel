@@ -8,19 +8,23 @@ export function map(
   return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
 }
 
+export function mathAbs(n: number): number {
+  return Math.abs(n)
+}
+
 export function mathSign(n: number): number {
-  return !n ? 0 : n / Math.abs(n)
+  return !n ? 0 : n / mathAbs(n)
 }
 
 export function deltaAbs(valueB: number, valueA: number): number {
-  return Math.abs(valueB - valueA)
+  return mathAbs(valueB - valueA)
 }
 
 export function factorAbs(valueB: number, valueA: number): number {
   if (valueB === 0 || valueA === 0) return 0
-  if (Math.abs(valueB) <= Math.abs(valueA)) return 0
-  const diff = deltaAbs(Math.abs(valueB), Math.abs(valueA))
-  return Math.abs(diff / valueB)
+  if (mathAbs(valueB) <= mathAbs(valueA)) return 0
+  const diff = deltaAbs(mathAbs(valueB), mathAbs(valueA))
+  return mathAbs(diff / valueB)
 }
 
 export function roundToDecimals(decimalPoints: number): (n: number) => number {
@@ -36,7 +40,7 @@ export function debounce(callback: () => void, time: number): () => void {
   }
 }
 
-export function groupArray<GenericType>(
+export function arrayGroup<GenericType>(
   array: GenericType[],
   size: number,
 ): GenericType[][] {
@@ -52,9 +56,9 @@ export function arrayKeys<GenericType>(array: GenericType[]): number[] {
 }
 
 export function arrayLast<GenericType>(array: GenericType[]): GenericType {
-  return array[lastIndex(array)]
+  return array[arrayLastIndex(array)]
 }
 
-export function lastIndex<GenericType>(array: GenericType[]): number {
+export function arrayLastIndex<GenericType>(array: GenericType[]): number {
   return Math.max(0, array.length - 1)
 }
