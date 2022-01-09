@@ -15,6 +15,8 @@ export function ScrollBounds(
   scrollBody: ScrollBodyType,
 ): ScrollBoundsType {
   const pullBackThreshold = 10
+  const edgeOffsetTolerance = 50
+  const maxFriction = 0.85
   let disabled = false
 
   function shouldConstrain(): boolean {
@@ -26,8 +28,10 @@ export function ScrollBounds(
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const friction = pointerDown ? 0.7 : 0.45
+    const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
+    const diffFromEdge = mathAbs(limit[edge] - location.get())
     const diffToTarget = target.get() - location.get()
+    const friction = Math.min(diffFromEdge / edgeOffsetTolerance, maxFriction)
 
     target.subtract(diffToTarget * friction)
 
