@@ -96,7 +96,7 @@ export function DragHandler(
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
     if (dragFree || mathAbs(force) < dragThreshold) return baseForce
-    if (!loop && isEdge) return baseForce * 0.6
+    if (!loop && isEdge) return baseForce * 0.4
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
