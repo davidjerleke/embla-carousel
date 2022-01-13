@@ -1,3 +1,5 @@
+import { mathAbs } from './utils'
+
 export type LimitType = {
   min: number
   max: number
@@ -10,7 +12,7 @@ export type LimitType = {
 }
 
 export function Limit(min: number, max: number): LimitType {
-  const length = Math.abs(min - max)
+  const length = mathAbs(min - max)
 
   function reachedMin(n: number): boolean {
     return n < min
@@ -35,10 +37,10 @@ export function Limit(min: number, max: number): LimitType {
   }
 
   const self: LimitType = {
-    constrain,
     length,
     max,
     min,
+    constrain,
     reachedAny,
     reachedMax,
     reachedMin,

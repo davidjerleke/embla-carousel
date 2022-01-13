@@ -1,6 +1,7 @@
 import { LimitType } from './Limit'
 import { ScrollBodyType } from './ScrollBody'
 import { Vector1DType } from './Vector1d'
+import { mathAbs } from './utils'
 
 export type ScrollBoundsType = {
   constrain: (pointerDown: boolean) => void
@@ -14,6 +15,8 @@ export function ScrollBounds(
   scrollBody: ScrollBodyType,
 ): ScrollBoundsType {
   const pullBackThreshold = 10
+  const edgeOffsetTolerance = 50
+  const maxFriction = 0.85
   let disabled = false
 
   function shouldConstrain(): boolean {
@@ -25,12 +28,14 @@ export function ScrollBounds(
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const friction = pointerDown ? 0.7 : 0.45
+    const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
+    const diffToEdge = mathAbs(limit[edge] - location.get())
     const diffToTarget = target.get() - location.get()
+    const friction = Math.min(diffToEdge / edgeOffsetTolerance, maxFriction)
 
     target.subtract(diffToTarget * friction)
 
-    if (!pointerDown && Math.abs(diffToTarget) < pullBackThreshold) {
+    if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
       target.set(limit.constrain(target.get()))
       scrollBody.useSpeed(10).useMass(3)
     }

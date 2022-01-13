@@ -13,8 +13,8 @@ export function Translate(
   direction: DirectionType,
   container: HTMLElement,
 ): TranslateType {
-  const containerStyle = container.style
   const translate = axis.scroll === 'x' ? x : y
+  const containerStyle = container.style
   let disabled = false
 
   function x(n: number): string {
@@ -27,7 +27,7 @@ export function Translate(
 
   function to(target: Vector1DType): void {
     if (disabled) return
-    containerStyle.transform = translate(direction.applyTo(target.get()))
+    containerStyle.transform = translate(direction.apply(target.get()))
   }
 
   function toggleActive(active: boolean): void {

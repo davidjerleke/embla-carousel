@@ -23,7 +23,6 @@ function Autoplay(
     const emblaRoot = carousel.rootNode()
     const root = (userNode && userNode(emblaRoot)) || emblaRoot
 
-    carousel.on('init', play)
     carousel.on('pointerDown', stop)
     carousel.on('pointerUp', reset)
 
@@ -37,10 +36,10 @@ function Autoplay(
         reset()
       })
     }
+    play()
   }
 
   function destroy(): void {
-    carousel.off('init', play)
     carousel.off('pointerDown', stop)
     carousel.off('pointerUp', reset)
     mouseEntered = false

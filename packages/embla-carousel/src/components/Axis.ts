@@ -13,7 +13,7 @@ export type AxisType = {
 
 export function Axis(
   axis: AxisOptionType,
-  contentDirection: DirectionOptionType,
+  direction: DirectionOptionType,
 ): AxisType {
   const scroll = axis === 'y' ? 'y' : 'x'
   const cross = axis === 'y' ? 'x' : 'y'
@@ -27,12 +27,12 @@ export function Axis(
 
   function getStartEdge(): AxisEdgeType {
     if (scroll === 'y') return 'top'
-    return contentDirection === 'rtl' ? 'right' : 'left'
+    return direction === 'rtl' ? 'right' : 'left'
   }
 
   function getEndEdge(): AxisEdgeType {
     if (scroll === 'y') return 'bottom'
-    return contentDirection === 'rtl' ? 'left' : 'right'
+    return direction === 'rtl' ? 'left' : 'right'
   }
 
   const self: AxisType = {

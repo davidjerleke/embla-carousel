@@ -1,4 +1,5 @@
 import { Limit } from './Limit'
+import { mathAbs } from './utils'
 
 export type CounterType = {
   get: () => number
@@ -19,7 +20,7 @@ export function Counter(
   let counter = withinLimit(start)
 
   function withinLimit(n: number): number {
-    return !loop ? constrain(n) : Math.abs((loopEnd + n) % loopEnd)
+    return !loop ? constrain(n) : mathAbs((loopEnd + n) % loopEnd)
   }
 
   function get(): number {
