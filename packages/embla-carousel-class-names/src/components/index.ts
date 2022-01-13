@@ -11,7 +11,7 @@ export type ClassNamesType = EmblaPluginType<OptionsType>
 function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
   const options = Object.assign({}, defaultOptions, userOptions)
   const { selected, draggable, dragging } = options
-  const selectedEvents: EmblaEventType[] = ['init', 'select', 'pointerUp']
+  const selectedEvents: EmblaEventType[] = ['select', 'pointerUp']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
   let carousel: EmblaCarouselType
   let root: HTMLElement
@@ -31,6 +31,7 @@ function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
     }
     if (selected) {
       selectedEvents.forEach((evt) => carousel.on(evt, toggleSelectedClass))
+      toggleSelectedClass()
     }
   }
 
