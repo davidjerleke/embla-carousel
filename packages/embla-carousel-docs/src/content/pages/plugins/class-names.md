@@ -1,7 +1,7 @@
 ---
 title: Class Names
 description: Learn how to add this Class Name plugin to Embla Carousel
-order: 1
+order: 2
 date: 2021-11-22
 ---
 

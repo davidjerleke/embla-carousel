@@ -17,7 +17,6 @@ export function DragTracker(
   axis: AxisType,
   pxToPercent: PxToPercentType,
 ): DragTrackerType {
-  const { scroll: scrollAxis } = axis
   const logInterval = 170
 
   let startEvent: PointerEventType
@@ -32,7 +31,7 @@ export function DragTracker(
   }
 
   function readPoint(evt: PointerEventType, evtAxis?: AxisOptionType): number {
-    const property = evtAxis || scrollAxis
+    const property = evtAxis || axis.scroll
     const coord: PointerCoordType = `client${property === 'x' ? 'X' : 'Y'}`
     return (isTouchEvent(evt) ? evt.touches[0] : evt)[coord]
   }
@@ -45,9 +44,9 @@ export function DragTracker(
 
   function pointerMove(evt: PointerEventType): number {
     const diff = readPoint(evt) - readPoint(lastEvent)
-    lastEvent = evt
-    const expired = readTime(lastEvent) - readTime(startEvent) > logInterval
+    const expired = readTime(evt) - readTime(startEvent) > logInterval
 
+    lastEvent = evt
     if (expired) startEvent = evt
     return pxToPercent.measure(diff)
   }

@@ -13,6 +13,7 @@ function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
   const { selected, draggable, dragging } = options
   const selectedEvents: EmblaEventType[] = ['select', 'pointerUp']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
+
   let carousel: EmblaCarouselType
   let root: HTMLElement
   let slides: HTMLElement[]
@@ -21,9 +22,9 @@ function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
     carousel = embla
     root = carousel.rootNode()
     slides = carousel.slideNodes()
-    const carouselIsDraggable = carousel.internalEngine().options.draggable
+    const isDraggable = carousel.internalEngine().options.draggable
 
-    if (carouselIsDraggable) {
+    if (isDraggable) {
       addClass(root, draggable)
     }
     if (dragging) {

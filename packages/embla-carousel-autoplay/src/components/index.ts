@@ -13,6 +13,7 @@ function Autoplay(
 ): AutoplayType {
   const options = Object.assign({}, defaultOptions, userOptions)
   const { stopOnInteraction, stopOnMouseEnter, stopOnLastSnap, delay } = options
+
   let carousel: EmblaCarouselType
   let mouseEntered = false
   let timer = 0

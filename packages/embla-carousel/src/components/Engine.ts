@@ -50,6 +50,8 @@ export type Engine = {
   scrollTarget: ScrollTargetType
   scrollSnaps: number[]
   slideIndexes: number[]
+  containerRect: DOMRect
+  slideRects: DOMRect[]
 }
 
 export function Engine(
@@ -163,6 +165,7 @@ export function Engine(
     contentSize,
     slideSizes,
     snaps,
+    limit,
     loop,
     inViewThreshold,
   )
@@ -188,6 +191,8 @@ export function Engine(
 
   // Slider
   const engine: Engine = {
+    containerRect,
+    slideRects,
     animation,
     axis,
     direction,

@@ -1,7 +1,7 @@
 ---
 title: Wheel Gestures
 description: Learn how to add this Wheel Gesture plugin to Embla Carousel
-order: 2
+order: 3
 date: 2021-11-22
 ---
 
