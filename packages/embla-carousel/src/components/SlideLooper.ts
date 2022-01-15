@@ -49,7 +49,7 @@ export function SlideLooper(
   function findLoopPoints(indexes: number[], edge: EdgeType): LoopPointType[] {
     const isStartEdge = edge === 'start'
     const offset = isStartEdge ? -contentSize : contentSize
-    const slideBounds = slidesInView.findSlideBounds(offset)
+    const slideBounds = slidesInView.findSlideBounds([offset])
 
     return indexes.map((index) => {
       const initial = isStartEdge ? 0 : -contentSize

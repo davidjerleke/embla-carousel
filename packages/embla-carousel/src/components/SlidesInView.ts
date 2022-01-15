@@ -1,12 +1,14 @@
-type SlideBoundType = {
+import { LimitType } from './Limit'
+
+export type SlideBoundType = {
   start: number
   end: number
   index: number
 }
 
 export type SlidesInViewType = {
-  check: (location: number) => number[]
-  findSlideBounds: (offset: number, threshold?: number) => SlideBoundType[]
+  check: (location: number, bounds?: SlideBoundType[]) => number[]
+  findSlideBounds: (offsets?: number[], threshold?: number) => SlideBoundType[]
 }
 
 export function SlidesInView(
@@ -14,32 +16,41 @@ export function SlidesInView(
   contentSize: number,
   slideSizes: number[],
   snaps: number[],
+  limit: LimitType,
   loop: boolean,
   inViewThreshold: number,
 ): SlidesInViewType {
-  const threshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
-  const offsets = loop ? [0, contentSize, -contentSize] : [0]
-  const slideBounds = offsets.reduce((a: SlideBoundType[], offset) => {
-    return a.concat(findSlideBounds(offset, threshold))
-  }, [])
+  const { removeOffset, constrain } = limit
+  const cachedThreshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
+  const cachedOffsets = loop ? [0, contentSize, -contentSize] : [0]
+  const cachedBounds = findSlideBounds(cachedOffsets, cachedThreshold)
 
   function findSlideBounds(
-    offset: number,
+    offsets?: number[],
     threshold?: number,
   ): SlideBoundType[] {
-    const thresholds = slideSizes.map((s) => s * (threshold || 0))
-    return snaps.map((snap, index) => ({
-      start: snap - slideSizes[index] + thresholds[index] + offset,
-      end: snap + viewSize - thresholds[index] + offset,
-      index,
-    }))
+    const slideOffsets = offsets || cachedOffsets
+    const slideThreshold = threshold || 0
+    const thresholds = slideSizes.map((s) => s * slideThreshold)
+
+    return slideOffsets.reduce((list: SlideBoundType[], offset) => {
+      const bounds = snaps.map((snap, index) => ({
+        start: snap - slideSizes[index] + thresholds[index] + offset,
+        end: snap + viewSize - thresholds[index] + offset,
+        index,
+      }))
+      return list.concat(bounds)
+    }, [])
   }
 
-  function check(location: number): number[] {
+  function check(location: number, bounds?: SlideBoundType[]): number[] {
+    const limitedLocation = loop ? removeOffset(location) : constrain(location)
+    const slideBounds = bounds || cachedBounds
+
     return slideBounds.reduce((list: number[], slideBound) => {
       const { index, start, end } = slideBound
       const inList = list.indexOf(index) !== -1
-      const inView = start < location && end > location
+      const inView = start < limitedLocation && end > limitedLocation
       return !inList && inView ? list.concat([index]) : list
     }, [])
   }
