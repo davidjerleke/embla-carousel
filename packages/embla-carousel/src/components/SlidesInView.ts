@@ -7,7 +7,7 @@ export type SlideBoundType = {
 }
 
 export type SlidesInViewType = {
-  check: (location: number, customBounds?: SlideBoundType[]) => number[]
+  check: (location: number, bounds?: SlideBoundType[]) => number[]
   findSlideBounds: (offsets?: number[], threshold?: number) => SlideBoundType[]
 }
 
