@@ -6830,6 +6830,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"
+  dependencies:
+    "@types/jest": ^26.0.22
+    "@typescript-eslint/eslint-plugin": ^4.22.0
+    "@typescript-eslint/parser": ^4.22.0
+    eslint: ^7.24.0
+    eslint-config-prettier: ^8.2.0
+    eslint-plugin-prettier: ^3.4.0
+    jest: ^26.6.3
+    prettier: ^2.2.1
+    rollup: ^2.45.2
+    ts-jest: ^26.5.5
+    typescript: ^4.2.4
+  peerDependencies:
+    embla-carousel: 6.0.2
+  languageName: unknown
+  linkType: soft
+
 "embla-carousel-autoplay@6.1.0, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
