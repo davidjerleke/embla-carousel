@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
-import { ContentLink, CtaLink } from 'components/Link'
+import { ContentLink, PrimaryButtonLink } from 'components/Link'
 import { hiddenAtBreakpointStyles } from 'utils'
 import { breakpoints } from 'consts'
 
@@ -38,7 +38,7 @@ export const Cta = () => {
         <ContentLink to="/get-started/">documentation</ContentLink> to get
         started.
       </P>
-      <CtaLink to="/examples/basic/">Try Examples</CtaLink>
+      <PrimaryButtonLink to="/examples/basic/">Try Examples</PrimaryButtonLink>
     </CtaWrapper>
   )
 }

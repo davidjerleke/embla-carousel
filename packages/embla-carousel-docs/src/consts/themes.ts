@@ -35,16 +35,16 @@ export enum THEME_KEYS {
 
 export const THEME_COLORS = {
   [THEME_KEYS.LIGHT]: {
-    brandPrimary: 'rgb(47, 114, 193)',
-    brandSecondary: 'rgb(116, 99, 195)',
+    brandPrimary: 'rgb(47, 112, 193)',
+    brandSecondary: 'rgb(116, 97, 195)',
     brandAlternative: 'rgb(19, 120, 134)',
-    backgroundSite: 'rgb(255, 255, 255)',
-    backgroundCode: 'rgb(249, 249, 249)',
+    backgroundSite: 'rgb(249, 249, 249)',
+    backgroundCode: 'rgb(244, 244, 244)',
     textBody: 'rgb(54, 49, 61)',
     textComment: 'rgb(99, 94, 105)',
     textHighContrast: 'rgb(49, 49, 49)',
     textMediumContrast: 'rgb(99, 94, 105)',
-    textLowContrast: 'rgb(120, 117, 122)',
+    textLowContrast: 'rgb(120, 112, 122)',
     detailHighContrast: 'rgb(192, 192, 192)',
     detailMediumContrast: 'rgb(234, 234, 234)',
     detailLowContrast: 'rgb(240, 240, 242)',

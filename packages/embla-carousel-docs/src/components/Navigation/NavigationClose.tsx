@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ctaButtonStyles, PlainButton } from 'components/Button'
+import { primaryButtonStyles, PlainButton } from 'components/Button'
 import { CrossIcon } from 'assets/icons'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation } from 'hooks'
@@ -21,7 +21,7 @@ const Wrapper = styled(PlainButton)`
 
 const Background = styled.div`
   ${createSquareSizeStyles(BACKGROUND_SIZE)};
-  ${ctaButtonStyles};
+  ${primaryButtonStyles};
   padding: 0;
 `
 

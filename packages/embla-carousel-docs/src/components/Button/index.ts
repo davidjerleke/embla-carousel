@@ -1,2 +1,2 @@
 export { plainButtonStyles, PlainButton } from './PlainButton'
-export { CtaButton, ctaButtonStyles } from './CtaButton'
+export { PrimaryButton, primaryButtonStyles } from './PrimaryButton'

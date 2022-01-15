@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { PlainButton } from './PlainButton'
 import { supportsStyles } from 'consts'
 
-export const ctaButtonStyles = css`
+export const primaryButtonStyles = css`
   line-height: 1.15;
   border-radius: 3rem;
   padding: 1.7rem 3.5rem;
@@ -19,6 +19,6 @@ export const ctaButtonStyles = css`
   }
 `
 
-export const CtaButton = styled(PlainButton)`
-  ${ctaButtonStyles};
+export const PrimaryButton = styled(PlainButton)`
+  ${primaryButtonStyles};
 `

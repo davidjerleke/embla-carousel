@@ -10,7 +10,7 @@ export const themeStyles = css`
       display: none;
     }
     ${HeroLogo} {
-      opacity: 0.1;
+      opacity: 0.12;
     }
   }
   .${THEME_PREFIX}${THEME_KEYS.DARK} {

@@ -474,6 +474,7 @@ const inputStyles = css`
     padding-left: ${BUTTON_WIDTH};
     padding-right: ${BUTTON_WIDTH};
     -webkit-appearance: none;
+    border-radius: 0.4rem;
     width: 100%;
     font-size: 1.8rem;
     background-color: var(--background-site);
