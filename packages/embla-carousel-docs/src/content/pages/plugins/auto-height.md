@@ -48,7 +48,7 @@ You can make use of CSS transitions to **transition height** changes. But beware
 The Auto Height plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
-import AutoHeight from 'embla-carousel-class-names'
+import AutoHeight from 'embla-carousel-auto-height'
 
 const options = { destroyHeight: 'auto' }
 const autoHeight = AutoHeight(options)
