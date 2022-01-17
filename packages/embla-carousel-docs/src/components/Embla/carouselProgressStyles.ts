@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { LAYERS, supportsStyles } from 'consts'
+import { gradientBackgroundStyles } from 'utils'
 
 export const ProgressWrapper = styled.div`
   z-index: ${LAYERS.STEP};
@@ -27,11 +28,7 @@ export const ProgressBar = styled.div`
 export const ProgressHighlight = styled.div`
   background-color: var(--brand-primary);
   ${supportsStyles.gradientText} {
-    background-image: linear-gradient(
-      45deg,
-      var(--brand-primary),
-      var(--brand-secondary)
-    );
+    ${gradientBackgroundStyles};
   }
   position: absolute;
   width: 100%;

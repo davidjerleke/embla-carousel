@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { PlainButton } from './PlainButton'
 import { supportsStyles } from 'consts'
+import { gradientBackgroundStyles } from 'utils'
 
 export const primaryButtonStyles = css`
   line-height: 1.15;
@@ -11,11 +12,7 @@ export const primaryButtonStyles = css`
   color: var(--background-site);
   background-color: var(--brand-primary);
   ${supportsStyles.gradientText} {
-    background-image: linear-gradient(
-      45deg,
-      var(--brand-primary),
-      var(--brand-secondary)
-    );
+    ${gradientBackgroundStyles};
   }
 `
 

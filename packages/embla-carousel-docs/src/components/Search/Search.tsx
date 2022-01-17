@@ -8,6 +8,7 @@ import { useTabAccess } from 'hooks'
 import {
   createPlaceholderStyles,
   createSquareSizeStyles,
+  gradientBackgroundStyles,
   gradientTextStyles,
   visuallyHiddenStyles,
 } from 'utils'
@@ -88,11 +89,7 @@ const headerStyles = css`
     position: relative;
     width: 100%;
     border-radius: 0.4rem;
-    background-image: linear-gradient(
-      45deg,
-      var(--brand-primary),
-      var(--brand-secondary)
-    );
+    ${gradientBackgroundStyles};
   }
 `
 
@@ -245,11 +242,7 @@ const contentStyles = css`
       top: 0;
       bottom: 0;
       left: 0;
-      background-image: linear-gradient(
-        45deg,
-        var(--brand-primary),
-        var(--brand-secondary)
-      );
+      ${gradientBackgroundStyles};
     }
 
     &:before {

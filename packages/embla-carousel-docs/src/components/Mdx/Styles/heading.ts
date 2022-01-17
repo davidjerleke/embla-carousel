@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { createSquareSizeStyles } from 'utils'
+import { createSquareSizeStyles, gradientBackgroundStyles } from 'utils'
 import { breakpoints } from 'consts'
 
 export const headingStyles = css`
@@ -24,6 +24,15 @@ export const headingStyles = css`
     font-weight: 800;
     font-size: 3.2rem;
     line-height: 1.25;
+
+    &:after {
+      display: block;
+      height: 0.3rem;
+      width: 5rem;
+      content: '';
+      margin-top: 2.4rem;
+      ${gradientBackgroundStyles};
+    }
   }
 
   h2 {

@@ -9,8 +9,12 @@ import React, {
 import styled from 'styled-components'
 import { PlainButton } from 'components/Button'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { copyToClipboard, visuallyHiddenStyles } from 'utils'
 import { LAYERS } from 'consts'
+import {
+  copyToClipboard,
+  gradientBackgroundStyles,
+  visuallyHiddenStyles,
+} from 'utils'
 
 const extractTextFromCodeBlock = (node: React.ReactNode = ''): string => {
   const nodes = typeof node === 'string' ? [node] : React.Children.toArray(node)
@@ -81,11 +85,7 @@ const CopyCodeButton = styled(PlainButton)`
     bottom: 0;
     left: 0;
     border-radius: 0.4rem;
-    background-image: linear-gradient(
-      45deg,
-      var(--brand-primary),
-      var(--brand-secondary)
-    );
+    ${gradientBackgroundStyles};
   }
 
   &:hover {

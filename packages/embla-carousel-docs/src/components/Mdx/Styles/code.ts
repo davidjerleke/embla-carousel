@@ -1,6 +1,7 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
 import { breakpoints, LAYERS } from 'consts'
+import { gradientBackgroundStyles } from 'utils'
 
 const BORDER_RADIUS = '0.4rem'
 
@@ -93,11 +94,7 @@ export const codeStyles = css`
       bottom: 0;
       content: '';
       pointer-events: none;
-      background-image: linear-gradient(
-        45deg,
-        var(--brand-primary),
-        var(--brand-secondary)
-      );
+      ${gradientBackgroundStyles};
     }
 
     &:after {
