@@ -6846,11 +6846,11 @@ __metadata:
     ts-jest: ^26.5.5
     typescript: ^4.2.4
   peerDependencies:
-    embla-carousel: 6.1.0
+    embla-carousel: 6.1.1
   languageName: unknown
   linkType: soft
 
-"embla-carousel-autoplay@6.1.0, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
+"embla-carousel-autoplay@6.1.1, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
   dependencies:
@@ -6866,7 +6866,7 @@ __metadata:
     ts-jest: ^26.5.5
     typescript: ^4.2.4
   peerDependencies:
-    embla-carousel: 6.1.0
+    embla-carousel: 6.1.1
   languageName: unknown
   linkType: soft
 
@@ -6886,7 +6886,7 @@ __metadata:
     ts-jest: ^26.5.5
     typescript: ^4.2.4
   peerDependencies:
-    embla-carousel: 6.1.0
+    embla-carousel: 6.1.1
   languageName: unknown
   linkType: soft
 
@@ -6907,8 +6907,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
     babel-plugin-styled-components: ^1.12.0
-    embla-carousel-autoplay: 6.1.0
-    embla-carousel-react: 6.1.0
+    embla-carousel-autoplay: 6.1.1
+    embla-carousel-react: 6.1.1
     eslint: ^7.24.0
     eslint-config-prettier: ^8.2.0
     eslint-plugin-prettier: ^3.4.0
@@ -6957,7 +6957,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react@6.1.0, embla-carousel-react@workspace:packages/embla-carousel-react":
+"embla-carousel-react@6.1.1, embla-carousel-react@workspace:packages/embla-carousel-react":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react@workspace:packages/embla-carousel-react"
   dependencies:
@@ -6965,7 +6965,7 @@ __metadata:
     "@types/react": ^17.0.2
     "@typescript-eslint/eslint-plugin": ^4.22.0
     "@typescript-eslint/parser": ^4.22.0
-    embla-carousel: 6.1.0
+    embla-carousel: 6.1.1
     eslint: ^7.24.0
     eslint-config-prettier: ^8.2.0
     eslint-plugin-prettier: ^3.4.0
@@ -6979,7 +6979,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel@6.1.0, embla-carousel@workspace:packages/embla-carousel":
+"embla-carousel@6.1.1, embla-carousel@workspace:packages/embla-carousel":
   version: 0.0.0-use.local
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:
