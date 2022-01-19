@@ -11,6 +11,8 @@ assignees: ''
 - [ ] embla-carousel (core package)
 - [ ] embla-carousel-react
 - [ ] embla-carousel-autoplay
+- [ ] embla-carousel-auto-height
+- [ ] embla-carousel-class-names
 - [ ] embla-carousel-docs (documentation website)
 
 ### Embla Carousel version
