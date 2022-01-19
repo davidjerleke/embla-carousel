@@ -52,6 +52,7 @@ export function DragTracker(
   }
 
   function pointerUp(evt: PointerEventType): number {
+    if (!startEvent || !lastEvent) return 0
     const diffDrag = readPoint(lastEvent) - readPoint(startEvent)
     const diffTime = readTime(evt) - readTime(startEvent)
     const expired = readTime(evt) - readTime(lastEvent) > logInterval
