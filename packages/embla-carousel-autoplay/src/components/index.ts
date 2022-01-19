@@ -12,10 +12,15 @@ function Autoplay(
   userNode?: (emblaRoot: HTMLElement) => HTMLElement | null,
 ): AutoplayType {
   const options = Object.assign({}, defaultOptions, userOptions)
-  const { stopOnInteraction, stopOnMouseEnter, stopOnLastSnap, delay } = options
-
+  const {
+    playOnInit,
+    stopOnInteraction,
+    stopOnMouseEnter,
+    stopOnLastSnap,
+    delay,
+  } = options
+  const interaction = stopOnInteraction ? destroy : stop
   let carousel: EmblaCarouselType
-  let mouseEntered = false
   let timer = 0
 
   function init(embla: EmblaCarouselType): void {
@@ -24,53 +29,53 @@ function Autoplay(
     const emblaRoot = carousel.rootNode()
     const root = (userNode && userNode(emblaRoot)) || emblaRoot
 
-    carousel.on('pointerDown', stop)
-    carousel.on('pointerUp', reset)
+    carousel.on('pointerDown', interaction)
+    if (!stopOnInteraction) carousel.on('pointerUp', reset)
 
     if (stopOnMouseEnter) {
-      eventStore.add(root, 'mouseenter', () => {
-        mouseEntered = true
-        stop()
-      })
-      eventStore.add(root, 'mouseleave', () => {
-        mouseEntered = false
-        reset()
-      })
+      eventStore.add(root, 'mouseenter', interaction)
+      if (!stopOnInteraction) eventStore.add(root, 'mouseleave', reset)
     }
-    play()
+
+    eventStore.add(document, 'visibilitychange', () => {
+      if (document.visibilityState === 'hidden') return stop()
+      reset()
+    })
+    eventStore.add(window, 'pagehide', (event: PageTransitionEvent) => {
+      if (event.persisted) stop()
+    })
+
+    if (playOnInit) play()
   }
 
   function destroy(): void {
-    carousel.off('pointerDown', stop)
-    carousel.off('pointerUp', reset)
-    mouseEntered = false
+    carousel.off('pointerDown', interaction)
+    if (!stopOnInteraction) carousel.off('pointerUp', reset)
     stop()
+    timer = 0
   }
 
   function play(): void {
     stop()
-    requestAnimationFrame(() => {
-      timer = window.setTimeout(next, delay)
-    })
+    timer = window.setTimeout(next, delay)
   }
 
   function stop(): void {
     if (!timer) return
     window.clearTimeout(timer)
-    timer = 0
   }
 
   function reset(): void {
+    if (!timer) return
     stop()
-    if (stopOnMouseEnter && mouseEntered) return
-    if (!stopOnInteraction) play()
+    play()
   }
 
   function next(): void {
     const { index } = carousel.internalEngine()
-    const proceed = index.get() !== index.max || !stopOnLastSnap
+    const kill = stopOnLastSnap && index.get() === index.max
 
-    if (!proceed) return
+    if (kill) return destroy()
 
     if (carousel.canScrollNext()) {
       carousel.scrollNext()

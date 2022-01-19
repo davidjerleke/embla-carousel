@@ -56,6 +56,13 @@ Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
 Delay between transitions in milliseconds.
 
+### playOnInit
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+If set to `false`, you'll have to start autoplay yourself by calling the [play](/plugins/autoplay/#play) method.
+
 ### stopOnInteraction
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  

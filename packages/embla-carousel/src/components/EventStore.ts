@@ -1,11 +1,12 @@
-type EventRemoverType = () => void
+type EventNameType = keyof DocumentEventMap | keyof WindowEventMap
 type EventHandlerType = (evt: any) => void
 type EventOptionsType = boolean | AddEventListenerOptions | undefined
+type EventRemoverType = () => void
 
 export type EventStoreType = {
   add: (
     node: EventTarget,
-    type: keyof WindowEventMap,
+    type: EventNameType,
     handler: EventHandlerType,
     options?: EventOptionsType,
   ) => EventStoreType
@@ -17,14 +18,12 @@ export function EventStore(): EventStoreType {
 
   function add(
     node: EventTarget,
-    type: string,
+    type: EventNameType,
     handler: EventHandlerType,
     options: EventOptionsType = false,
   ): EventStoreType {
     node.addEventListener(type, handler, options)
-    listeners.push(() => {
-      return node.removeEventListener(type, handler, options)
-    })
+    listeners.push(() => node.removeEventListener(type, handler, options))
     return self
   }
 
