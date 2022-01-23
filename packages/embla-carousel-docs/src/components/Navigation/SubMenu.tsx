@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { gradientTextStyles, createSquareSizeStyles } from 'utils'
+import { gradientTextStyles } from 'utils'
 import styled, { css } from 'styled-components'
 import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
 import { NavigationLink } from 'components/Link'
-import { ChevronRightIcon } from 'assets/icons'
 import { useRouteActive } from 'hooks'
 import { ALGOLIA_SELECTORS } from 'consts'
+import { Icon } from 'components/Icon'
 
 const ITEM_SPACING = '0.6rem'
 
@@ -35,10 +35,9 @@ const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
   `};
 `
 
-const ToggleSvg = styled(ChevronRightIcon)<{ $isOpen: boolean }>`
+const ToggleSvg = styled(Icon)<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) => $isOpen && 'rotate(90deg)'};
   color: var(--text-low-contrast);
-  ${createSquareSizeStyles('0.8rem')};
   position: absolute;
   left: 0;
   top: 0;
@@ -103,7 +102,7 @@ export const SubMenu = (props: PropType) => {
         aria-expanded={isOpen}
         aria-label={`${toggleAction} Navigation Menu`}
       >
-        <ToggleSvg $isOpen={isOpen} aria-hidden="true" focusable="false" />
+        <ToggleSvg $isOpen={isOpen} svg="chevronRight" size="0.8rem" />
         <span className={activeClass}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>

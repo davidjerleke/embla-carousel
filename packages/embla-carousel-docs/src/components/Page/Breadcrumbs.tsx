@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { useRouteBreadcrumbs } from 'hooks'
-import { ChevronRightIcon } from 'assets/icons'
-import { createSquareSizeStyles } from 'utils'
+import { Icon } from 'components/Icon'
 
 const Wrapper = styled.nav`
   display: flex;
@@ -25,9 +24,8 @@ const ActiveTitle = styled.span`
   ${itemStyles};
 `
 
-const ChevronSvg = styled(ChevronRightIcon)`
+const Separator = styled(Icon)`
   color: var(--text-low-contrast);
-  ${createSquareSizeStyles('0.6rem')};
   margin: 0 0.6rem;
 `
 
@@ -45,7 +43,12 @@ export const Breadcrumbs = (props: PropType) => {
         index !== breadcrumbs.length - 1 ? (
           <Fragment key={id}>
             <Link to={slug}>{title}</Link>
-            <ChevronSvg role="presentation" focusable="false" />
+            <Separator
+              size="0.6rem"
+              svg="chevronRight"
+              role="presentation"
+              aria-hidden="false"
+            />
           </Fragment>
         ) : (
           <ActiveTitle key={id}>{title}</ActiveTitle>

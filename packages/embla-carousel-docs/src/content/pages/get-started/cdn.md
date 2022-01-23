@@ -13,7 +13,7 @@ Start by including the Embla Carousel script from a CDN with a `script` tag:
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 ```
 
-### The HTML structure
+## The HTML structure
 
 A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following **HTML** structure to your carousel:
 
@@ -27,7 +27,7 @@ A minimal setup requires an **overflow wrapper** and a **scroll container**. Sta
 </div>
 ```
 
-### Styling the carousel
+## Styling the carousel
 
 The wrapping element with the classname `embla` is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
 
@@ -44,7 +44,7 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 }
 ```
 
-### Adding JavaScript
+## Adding JavaScript
 
 Now you're ready to add some **JavaScript** magic to give life to your first Embla Carousel. Make sure to place your script **after** the CDN `script` tag. Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` function.
 
@@ -57,7 +57,7 @@ Now you're ready to add some **JavaScript** magic to give life to your first Emb
 </script>
 ```
 
-### Adding plugins
+## Adding plugins
 
 When adding plugins, you need to make sure that the script that activates your carousel is placed **after** the script tag that loads the Embla Carousel core package and the plugins:
 

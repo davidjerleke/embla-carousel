@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PenIcon } from 'assets/icons'
 import { ContentLink } from 'components/Link'
-import { createSquareSizeStyles } from 'utils'
+import { IconWithText } from 'components/Icon'
 
 const Wrapper = styled.div`
   display: flex;
@@ -20,11 +19,6 @@ const Item = styled.div`
   font-size: 1.4rem;
 `
 
-const PenSvg = styled(PenIcon)`
-  ${createSquareSizeStyles('1.5rem')};
-  margin-right: 0.6rem;
-`
-
 const Link = styled(ContentLink)`
   padding: 0.6rem 0;
   border: none;
@@ -38,8 +32,9 @@ export const CarouselLinks = (props: PropType) => {
   return (
     <Wrapper>
       <Item>
-        <PenSvg aria-hidden="true" focusable="false" />
-        <span>Edit code:</span>
+        <IconWithText iconSvg="pen" iconSize="1.5rem">
+          Edit code:
+        </IconWithText>
       </Item>
       {links.map(({ label, to }) => (
         <Item key={to}>

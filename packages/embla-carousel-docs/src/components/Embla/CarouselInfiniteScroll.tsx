@@ -182,7 +182,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselInfiniteScroll = (props: PropType) => {
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
+  const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper ref={inViewRef}>

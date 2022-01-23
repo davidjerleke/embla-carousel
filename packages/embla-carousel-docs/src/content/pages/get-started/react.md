@@ -13,7 +13,7 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 npm install embla-carousel-react --save
 ```
 
-### The component structure
+## The component structure
 
 Embla Carousel provides the handy `useEmblaCarousel` hook for seamless integration with React. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
 
@@ -36,7 +36,7 @@ export const EmblaCarousel = () => {
 }
 ```
 
-### Styling the carousel
+## Styling the carousel
 
 The hook gives us a **ref** to attach to our wrapping element with the classname `embla`, which is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
 
@@ -53,7 +53,7 @@ The hook gives us a **ref** to attach to our wrapping element with the classname
 }
 ```
 
-### Accessing the carousel API
+## Accessing the carousel API
 
 The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) object as an argument. Additionaly, you can access the [API](/api/) with a `useEffect` like demonstrated below:
 
@@ -82,7 +82,7 @@ export const EmblaCarousel = () => {
 }
 ```
 
-### Adding plugins
+## Adding plugins
 
 The `useEmblaCarousel` hook also accepts [plugins](/plugins/) as a third optional argument. Note that plugins need to be passed in an array like so:
 

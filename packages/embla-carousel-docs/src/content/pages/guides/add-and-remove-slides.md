@@ -12,7 +12,7 @@ This guide will show you **how** to **pick up slide changes** whether you're **a
 - [containerNode](/api/methods/#containernode)
 - [reInit](/api/methods/#reinit)
 
-### Add and remove slides with vanilla JavaScript
+## With vanilla JavaScript
 
 If you intend to add new slides to your carousel, you'll have to **reset** Embla Carousel **after** you've injected the slides into the carousel container. The following example is a simple function demonstrating this:
 
@@ -32,7 +32,7 @@ const removeSlides = (embla, slidesToRemove) => {
 }
 ```
 
-### Add and remove slides with React
+## With React
 
 React users can make use of the `useEffect` hook to pick up changes in slides. A common setup would be to pass your slides to your carousel component using its **props**. The following setup will **reset** the carousel after **slides** have been **added** or **removed**:
 

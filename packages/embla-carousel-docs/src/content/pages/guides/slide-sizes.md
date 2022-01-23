@@ -11,7 +11,7 @@ date: 2021-03-13
 
 This guide will show you how to customize **slide sizes** for your carousels using the [flexbox](/guides/slide-container/#using-flexbox) setup. Embla Carousel supports horizontal and vertical carousels with the [axis](/api/options/#axis) option and that's why this guide will use the term **slide sizes** instead of **widths** or **heights**.
 
-### Declaring sizes
+## Declaring sizes
 
 Slide sizes should in most cases be **declared with CSS**. Embla Carousel **supports any slide size out of the box**, and will pick up whatever size you've declared in your CSS. A very simple setup could look like this:
 
@@ -29,7 +29,7 @@ You can also declare your slide sizes using any other CSS unit like so:
 }
 ```
 
-### Variable sizes
+## Variable sizes
 
 Variable slide sizes is also **supported out of the box**. Declare your slide sizes in your CSS or let the content of your slides determine their sizes.
 
@@ -51,7 +51,7 @@ If you're letting your slide sizes adapt to their content, make sure that the **
 }
 ```
 
-### Responding to breakpoints
+## Responding to breakpoints
 
 Embla Carousel will **automatically pick up** any **changes in slide sizes** when the **window is resized**. It's very simple to set different sizes based on your breakpoints:
 

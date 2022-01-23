@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components'
 import logoLightThemeUrl from 'assets/images/embla-logo-light-theme.svg'
 import logoDarkThemeUrl from 'assets/images/embla-logo-dark-theme.svg'
 import { useInView } from 'react-intersection-observer'
-import { EmblaLightIcon, EmblaDarkIcon } from 'assets/icons'
 import { useSiteMetadata, useTheme } from 'hooks'
 import { LAYERS, THEME_KEYS } from 'consts'
+import { Icon } from 'components/Icon'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -31,11 +31,11 @@ const LogoImage = styled.img`
   ${imageStyles};
 `
 
-export const LogoLightIcon = styled(EmblaLightIcon)`
+export const LogoLightIcon = styled(Icon)`
   ${imageStyles};
 `
 
-export const LogoDarkIcon = styled(EmblaDarkIcon)`
+export const LogoDarkIcon = styled(Icon)`
   ${imageStyles};
 `
 
@@ -63,8 +63,8 @@ export const SiteLogo = (props: PropType) => {
     <Wrapper ref={inViewRef} {...props}>
       {!hasLoaded && (
         <>
-          <LogoLightIcon aria-hidden="true" focusable="false" />
-          <LogoDarkIcon aria-hidden="true" focusable="false" />
+          <LogoLightIcon svg="emblaLight" />
+          <LogoDarkIcon svg="emblaDark" />
         </>
       )}
       {inView && (

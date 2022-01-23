@@ -12,7 +12,7 @@ This guide will show you **how** to **add previous and next buttons** using the 
 - [scrollPrev](/api/methods/#scrollprev)
 - [scrollNext](/api/methods/#scrollnext)
 
-### Button placement
+## Button placement
 
 Assuming your carousel is [draggable](/api/options/#draggable), it's important to note that the **root node** will **respond to pointer events**. The root node is the one that is passed to the `EmblaCarousel` initializer. In the following example, it has the class name `embla`:
 
@@ -63,7 +63,7 @@ Our new wrapper with the class name `embla__viewport` will act as our **new root
 </div>
 ```
 
-### Adding click events with vanilla JavaScript
+## With vanilla JavaScript
 
 Adding event listeners to our buttons is easy. It just requires som basic JavaScript to get this done. First, we need to **grab our wrappers and buttons**:
 
@@ -90,7 +90,7 @@ prevButtonNode.addEventListener('click', embla.scrollPrev, false)
 nextButtonNode.addEventListener('click', embla.scrollNext, false)
 ```
 
-### Adding click events with React
+## With React
 
 Modifying the minimal [component setup](/get-started/react/#the-component-structure) from the installation guide, we're going to use the `emblaApi` to create our `scrollPrev` and `scrollNext` functions:
 

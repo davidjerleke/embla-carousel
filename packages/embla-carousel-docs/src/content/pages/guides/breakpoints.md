@@ -9,7 +9,7 @@ date: 2021-03-22
 
 This guide demonstrates how to customize your carousels for different breakpoints using the [flexbox](/guides/slide-container/#using-flexbox) setup. Embla Carousel offers a convenient way to customize your carousels based on different breakpoints including changing [options](/api/options/), using plain CSS.
 
-### Changing slide sizes
+## Changing slide sizes
 
 Embla Carousel will **automatically pick up** any **changes in slide sizes** when the **window is resized**. It's a walk in the park to change slide sizes based on your breakpoints:
 
@@ -24,7 +24,7 @@ Embla Carousel will **automatically pick up** any **changes in slide sizes** whe
 }
 ```
 
-### Changing slide gaps
+## Changing slide gaps
 
 Embla Carousel will **automatically pick up** any **changes in gap sizes** when the **window is resized**. It's very simple to change gap sizes based on your breakpoints:
 
@@ -39,28 +39,9 @@ Embla Carousel will **automatically pick up** any **changes in gap sizes** when 
 }
 ```
 
-### Changing options
+## Changing options
 
-You can change your [options](/api/options/) based on your breakpoints right in your CSS. Embla Carousel will watch the **content** property of the pseudo element `:before` on your **root node**. The root node is the same element you pass to the Embla Carousel initializer:
-
-```js{2}
-const emblaNode = document.querySelector('.embla')
-const embla = EmblaCarousel(emblaNode) // <-- This is the root node
-```
-
-For React users, the root node is the one that you attach the `emblaRef` to:
-
-```jsx{4}
-  const [emblaRef] = useEmblaCarousel()
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      ...
-    </div>
-  )
-```
-
-The **content** property has to contain a valid JSON object with the [options](/api/options/) you want to apply. Also make sure that the content isn't diplayed by adding `display: none` to the pseudo element. This is achieved like so:
+You can change your [options](/api/options/) based on your breakpoints right in your CSS. Here's an example of a carousel that's only draggable when the screen width is less than 768px:
 
 ```css-with-json
 .embla:before {
@@ -77,23 +58,3 @@ The **content** property has to contain a valid JSON object with the [options](/
   }
 }
 ```
-
-### Option priority
-
-The **pseudo options** object is always given the **highest priority**. It will be merged with the options passed to the `EmblaCarousel` initializer, and if any options are in conflict, the pseudo options will have precedence. In the following example:
-
-```js
-const options = { draggable: false } // <-- These options
-const embla = EmblaCarousel(emblaNode, options)
-```
-
-```css-with-json
-.embla:before {
-  display: none;
-  content: '{
-    "draggable": true /* <-- Will be overridden by these */
-  }';
-}
-```
-
-The carousel in the example above will end up being draggable, because the pseudo options will override the initializer options.

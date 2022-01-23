@@ -12,7 +12,7 @@ This guide demonstrates how to **setup click events** on your **slides**, which 
 - [slideNodes](/api/methods/#slidenodes)
 - [clickAllowed](/api/methods/#clickallowed)
 
-### Adding click events with vanilla JavaScript
+## With vanilla JavaScript
 
 Our click handler is going to log the clicked slide index when the user clicks on a slide. Our handler **will only act** if the pointer interaction is a `click` event and will ignore `drag` events.
 
@@ -30,7 +30,7 @@ embla.slideNodes().forEach((slideNode, index) => {
 })
 ```
 
-### Adding click events with React
+## With React
 
 Adding click events to your slides with React is straightforward. We'll create a `onSlideClick` function wrapped in a `useCallback` and add that click handler to our slides. The important part here is to only run your desired code when the [clickAllowed](/api/methods/#clickallowed) method returns `true`.
 

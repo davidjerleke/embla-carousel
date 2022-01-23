@@ -95,7 +95,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselParallax = (props: PropType) => {
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
+  const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper ref={inViewRef}>

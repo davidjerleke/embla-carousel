@@ -7,6 +7,8 @@ date: 2021-11-22
 
 # Wheel Gestures
 
+<RepositoryLink to="https://github.com/xiel/embla-carousel-wheel-gestures">View plugin on GitHub</RepositoryLink>
+
 This plugin is used to extend Embla Carousel with the ability to use the mouse/trackpad wheel to navigate through the carousel.
 
 ## Installation

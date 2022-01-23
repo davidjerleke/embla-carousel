@@ -7,13 +7,13 @@ date: 2021-02-21
 
 # Module
 
-First you need to install the **npm package** and save it to your dependencies:
+Start by installing the **npm package** and save it to your dependencies:
 
 ```shell
 npm install embla-carousel --save
 ```
 
-### The HTML structure
+## The HTML structure
 
 A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following **HTML** structure to your carousel:
 
@@ -27,7 +27,7 @@ A minimal setup requires an **overflow wrapper** and a **scroll container**. Sta
 </div>
 ```
 
-### Styling the carousel
+## Styling the carousel
 
 The wrapping element with the classname `embla` is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
 
@@ -44,7 +44,7 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 }
 ```
 
-### Adding JavaScript
+## Adding JavaScript
 
 Now you're ready to add some **JavaScript** magic to give life to your first Embla Carousel. Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` function:
 
@@ -57,7 +57,7 @@ const options = { loop: false }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-### Adding plugins
+## Adding plugins
 
 Embla Carousel accepts an optional **plugin array** as the thrid argument. Here's a basic example of how to make use of it:
 

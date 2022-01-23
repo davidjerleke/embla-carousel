@@ -7,7 +7,11 @@ date: 2021-02-21
 
 # Options
 
-Embla Carousel accepts an optional **options** object as the second argument. Here's an example of how to make use of it:
+Embla Carousel takes various **options** in order to customize how the carousel works. You can do this in two different ways.
+
+## Constructor options
+
+The Embla Carousel constructor accepts an optional options object as the **second argument**. Here's an example of how to make use of it:
 
 ```js
 import EmblaCarousel from 'embla-carousel'
@@ -15,6 +19,58 @@ import EmblaCarousel from 'embla-carousel'
 const options = { loop: true } // Options
 const embla = EmblaCarousel(emblaNode, options)
 ```
+
+## Pseudo options
+
+You can set your options right in your CSS. Embla Carousel will watch the **content** property of the pseudo element `:before` on its **root node**. The **content** property has to contain a valid JSON object with the options you want to apply. Also, make sure that the content isn't diplayed:
+
+```css-with-json
+.embla:before {
+  display: none;
+  content: '{
+    "draggable": true
+  }';
+}
+```
+
+The **root node** is the element you pass to the Embla Carousel constructor:
+
+```js{2}
+const emblaNode = document.querySelector('.embla')
+const embla = EmblaCarousel(emblaNode) // <-- This is the root node
+```
+
+For React users, the root node is the one that you attach the `emblaRef` to:
+
+```jsx{4}
+  const [emblaRef] = useEmblaCarousel()
+
+  return (
+    <div className="embla" ref={emblaRef}>
+      ...
+    </div>
+  )
+```
+
+## Option priority
+
+The **pseudo options** object is always given the **highest priority**. It will be merged with the options passed to the `EmblaCarousel` constructor, and if any options are in conflict, the pseudo options will have precedence. In the following example:
+
+```js
+const options = { draggable: false } // <-- These options
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+```css-with-json
+.embla:before {
+  display: none;
+  content: '{
+    "draggable": true /* <-- Will be overridden by these */
+  }';
+}
+```
+
+The carousel in the example above will end up being draggable, because the pseudo options will override the initializer options.
 
 ### axis
 

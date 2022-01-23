@@ -9,7 +9,7 @@ date: 2021-03-13
 
 Embla Carousel allows you to use **any CSS to stack your slides** in the chosen scroll [axis](/api/options/#axis), whether it's CSS Grid, flexbox, inline-blocks or anything else. This guide will show you **how to setup** your **slide container** with flexbox and CSS Grid.
 
-### Using Flexbox
+## Using Flexbox
 
 With the minimal [HTML setup](/get-started/module/#the-html-structure) in place, we're going use flexbox to style our slide container. First, we need to stack our slides in our chosen scroll direction. This is an example of a container with slides stacked **horizontally**:
 
@@ -37,7 +37,7 @@ Now we're ready to declare slide sizes using the `flex` property:
 }
 ```
 
-### Using CSS Grid
+## Using CSS Grid
 
 Creating a CSS Grid container based on the minimal [HTML setup](/get-started/module/#the-html-structure) gives us the power to declare everyting, including slide sizes together with our container styles. Here's an example of a **horizontal** container setup:
 

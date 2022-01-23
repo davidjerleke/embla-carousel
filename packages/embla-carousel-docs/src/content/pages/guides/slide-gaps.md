@@ -9,7 +9,7 @@ date: 2021-03-13
 
 Embla Carousel allows you to use **any CSS to stack your slides** in the chosen scroll [axis](/api/options/#axis), whether it's CSS Grid, flexbox, inline-blocks or anything else. It will conveniently **pick up any spacings** between the slides and **automatically adjust the scroll snaps** accordingly.
 
-### Declaring gaps
+## Declaring gaps
 
 It's recommended to declare gaps between slides **using CSS**. Any CSS that will render space between the slides is valid. You may add spacing in one direction like so:
 
@@ -38,7 +38,7 @@ If you're using CSS Grid you can declare your gaps like so:
 
 > **Note!** If you don't have [loop](/api/options/#loop) enabled, Embla Carousel will ignore any gaps at the start and end edge of the carousel.
 
-### Variable gaps
+## Variable gaps
 
 Just like [variable](/guides/slide-sizes/#variable-sizes) slide sizes, variable gap sizes is **supported out of the box**. Declare your gap sizes in your CSS to achieve this:
 
@@ -52,7 +52,7 @@ Just like [variable](/guides/slide-sizes/#variable-sizes) slide sizes, variable 
 }
 ```
 
-### Responding to breakpoints
+## Responding to breakpoints
 
 Embla Carousel will **automatically pick up** any **changes in gap sizes** when the **window is resized**. It's very simple to set different sizes based on your breakpoints:
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { primaryButtonStyles, PlainButton } from 'components/Button'
-import { CrossIcon } from 'assets/icons'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation } from 'hooks'
+import { Icon } from 'components/Icon'
 
 const BUTTON_SIZE = '4rem'
 const BACKGROUND_SIZE = '3rem'
@@ -25,8 +25,7 @@ const Background = styled.div`
   padding: 0;
 `
 
-export const CrossSvg = styled(CrossIcon)`
-  ${createSquareSizeStyles('2rem')};
+const CloseSvg = styled(Icon)`
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -43,7 +42,7 @@ export const NavigationClose = () => {
       aria-label="Close Main Navigation Menu"
     >
       <Background>
-        <CrossSvg aria-hidden="true" focusable="false" />
+        <CloseSvg svg="cross" size="2rem" />
       </Background>
     </Wrapper>
   )

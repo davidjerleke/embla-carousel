@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
-import { PenIcon } from 'assets/icons'
-import { createSquareSizeStyles } from 'utils'
 import { URLS } from 'consts'
+import { IconWithText } from 'components/Icon'
 
 const Wrapper = styled(PlainLink)`
   display: inline-flex;
@@ -16,11 +15,6 @@ const Wrapper = styled(PlainLink)`
   color: var(--text-low-contrast);
 `
 
-const PenSvg = styled(PenIcon)`
-  margin-right: 0.6rem;
-  ${createSquareSizeStyles('1.5rem')};
-`
-
 type PropType = { pageUrl: string }
 
 export const EditPage = (props: PropType) => {
@@ -29,8 +23,9 @@ export const EditPage = (props: PropType) => {
 
   return (
     <Wrapper to={url}>
-      <PenSvg aria-hidden="true" focusable="false" />
-      <span>Edit this page on GitHub</span>
+      <IconWithText iconSvg="pen" iconSize="1.5rem">
+        Edit this page on GitHub
+      </IconWithText>
     </Wrapper>
   )
 }

@@ -109,7 +109,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselThumb = (props: PropType) => {
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
+  const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper ref={inViewRef}>

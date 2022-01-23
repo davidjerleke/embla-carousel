@@ -7,7 +7,11 @@ date: 2021-11-06
 
 # Plugins
 
-Embla Carousel accepts an optional **plugin array** as the thrid argument. Here's a basic example of how to make use of it:
+The Embla Carousel constructor accepts an optional **plugin array** as the thrid argument, which enables you to **extend your carousels** with additional features.
+
+## Adding a plugin
+
+Here's a basic example of how to make use of it:
 
 ```js
 import EmblaCarousel from 'embla-carousel'
@@ -16,12 +20,12 @@ import Autoplay from 'embla-carousel-autoplay'
 const options = { loop: true }
 const plugins = [Autoplay()] // Plugins
 
-const embla = EmblaCarousel(emblaNode, options, plugins)
+const embla = EmblaCarousel(emblaNode, options, plugins) // Add plugins
 ```
 
 You can find a complete list of plugins [here](/plugins/).
 
-### Options
+## Options
 
 Plugins have their own specific **options** that allows for configuring the plugin to your liking. Here's how to make use of it:
 
@@ -30,7 +34,7 @@ const autoplayOptions = { delay: 2000 }
 const autoplay = Autoplay(autoplayOptions)
 ```
 
-### Methods
+## Methods
 
 Additionally, some plugins expose their own **API methods**. You can make use of these by storing the plugin instance in a variable before passing it to the Embla Carousel initialiser:
 

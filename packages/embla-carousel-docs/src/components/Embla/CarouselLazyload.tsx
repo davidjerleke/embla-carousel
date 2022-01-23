@@ -73,7 +73,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselLazyload = (props: PropType) => {
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
+  const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper ref={inViewRef}>

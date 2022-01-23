@@ -7,13 +7,23 @@ date: 2021-02-21
 
 # Methods
 
-Embla Carousel exposes a set of **useful methods** which makes it very **extensible**. Assuming you've stored the carousel instance in a variable, a method is called like demonstrated below.
+Embla Carousel exposes a set of **useful methods** which makes it very **extensible**.
+
+## Calling methods
+
+Start by initializing a carousel and storing the carousel instance in a variable. In the example below we'll call the carousel instance `embla`:
 
 ```js
 import EmblaCarousel from 'embla-carousel'
 
-const embla = EmblaCarousel(emblaNode)
-embla.scrollTo(4) // Method
+const options = { loop: false }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+Now we're ready to call any available method like demonstrated below:
+
+```js
+embla.scrollNext()
 ```
 
 ### rootNode

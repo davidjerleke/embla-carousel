@@ -5,6 +5,6 @@ export const hrStyles = css`
     border-top: 0;
     border-right: 0;
     border-left: 0;
-    border-bottom: 1px solid var(--detail-medium-contrast);
+    border-bottom: 0.1rem solid var(--detail-medium-contrast);
   }
 `

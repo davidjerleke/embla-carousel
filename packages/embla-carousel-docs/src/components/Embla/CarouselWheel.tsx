@@ -32,7 +32,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselWheel = (props: PropType) => {
-  const [ref, inView] = useInView({ triggerOnce: true })
+  const [ref, inView] = useInView()
 
   return (
     <div ref={ref}>

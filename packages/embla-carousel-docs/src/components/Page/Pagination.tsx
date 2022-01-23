@@ -1,10 +1,10 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
 import { PlainLink } from 'components/Link'
-import { ArrowLeftIcon, ArrowRightIcon } from 'assets/icons'
-import { createSquareSizeStyles, gradientTextStyles } from 'utils'
+import { gradientTextStyles } from 'utils'
 import { supportsStyles } from 'consts'
+import { IconWithText } from 'components/Icon'
 
 const ITEM_SPACING = '2.4rem'
 
@@ -17,8 +17,16 @@ const Wrapper = styled.nav`
 
 const Item = styled.div`
   padding-left: ${ITEM_SPACING};
-  &:nth-child(2) {
+
+  > a {
+    color: var(--brand-primary);
+  }
+
+  &:nth-child(2) > a {
     text-align: right;
+    ${supportsStyles.gradientText} {
+      color: var(--brand-secondary);
+    }
   }
 `
 
@@ -31,24 +39,6 @@ const ItemTitle = styled.div`
   display: inline-flex;
   align-items: center;
   font-weight: 500;
-`
-
-const arrowSvgStyles = css`
-  ${createSquareSizeStyles('1.8rem')}
-  color: var(--brand-primary);
-`
-
-const ArrowLeftSvg = styled(ArrowLeftIcon)`
-  ${arrowSvgStyles};
-  margin-right: 0.6rem;
-`
-
-const ArrowRightSvg = styled(ArrowRightIcon)`
-  ${arrowSvgStyles};
-  ${supportsStyles.gradientText} {
-    color: var(--brand-secondary);
-  }
-  margin-left: 0.6rem;
 `
 
 const GradientText = styled.span`
@@ -70,8 +60,9 @@ export const Pagination = (props: PropType) => {
           <PlainLink to={previous.slug}>
             <ItemLabel>Previous</ItemLabel>
             <ItemTitle>
-              <ArrowLeftSvg aria-hidden="true" focusable="false" />
-              <GradientText>{previous.title}</GradientText>
+              <IconWithText iconSvg="arrowLeft">
+                <GradientText>{previous.title}</GradientText>
+              </IconWithText>
             </ItemTitle>
           </PlainLink>
         )}
@@ -81,8 +72,9 @@ export const Pagination = (props: PropType) => {
           <PlainLink to={next.slug}>
             <ItemLabel>Next</ItemLabel>
             <ItemTitle>
-              <GradientText>{next.title}</GradientText>
-              <ArrowRightSvg aria-hidden="true" focusable="false" />
+              <IconWithText iconSvg="arrowRight" iconSide="right">
+                <GradientText>{next.title}</GradientText>
+              </IconWithText>
             </ItemTitle>
           </PlainLink>
         )}

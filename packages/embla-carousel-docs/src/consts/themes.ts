@@ -1,13 +1,15 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components'
 
-const colorsToVariables = (colors: { [key: string]: string }): string => {
-  const colorKeys = Object.keys(colors)
-  const colorNames = colorKeys.map((colorKey) =>
-    colorKey
-      .split('')
-      .map((c) => (c === c.toUpperCase() ? '-' + c.toLowerCase() : c))
-      .join(''),
-  )
+const camelCaseToPascalCase = (string: string = ''): string =>
+  string
+    .split('')
+    .map((c) => (c === c.toUpperCase() ? '-' + c.toLowerCase() : c))
+    .join('')
+
+const themeToColorVariableStyles = (colors: {
+  [key: string]: string
+}): string => {
+  const colorNames = Object.keys(colors).map(camelCaseToPascalCase)
   return Object.keys(colors).reduce(
     (acc, colorKey, index) =>
       acc + `--${colorNames[index]}:${colors[colorKey]};`,
@@ -15,10 +17,10 @@ const colorsToVariables = (colors: { [key: string]: string }): string => {
   )
 }
 
-const rgbValuesToVariables = (
+const themeToRGBVariableStyles = (
   styledComponentsCss: FlattenSimpleInterpolation,
 ): string => {
-  const css = (styledComponentsCss[0] || '') as string
+  const css = <string>styledComponentsCss[0] || ''
   return css.replace(/:/g, '-rgb-value:').replace(/rgb\(|\)/g, '')
 }
 
@@ -68,21 +70,21 @@ export const THEME_COLORS = {
   },
 }
 
-const THEME_LIGHT = css`
-  ${colorsToVariables(THEME_COLORS[THEME_KEYS.LIGHT])}
+const themeLightStyles = css`
+  ${themeToColorVariableStyles(THEME_COLORS[THEME_KEYS.LIGHT])}
 `
 
-const THEME_DARK = css`
-  ${colorsToVariables(THEME_COLORS[THEME_KEYS.DARK])}
+const themeDarkStyles = css`
+  ${themeToColorVariableStyles(THEME_COLORS[THEME_KEYS.DARK])}
 `
 
 export const themeStyles = css`
   .${THEME_PREFIX}${THEME_KEYS.LIGHT} {
-    ${THEME_LIGHT}
-    ${rgbValuesToVariables(THEME_LIGHT)}
+    ${themeLightStyles}
+    ${themeToRGBVariableStyles(themeLightStyles)}
   }
   .${THEME_PREFIX}${THEME_KEYS.DARK} {
-    ${THEME_DARK}
-    ${rgbValuesToVariables(THEME_DARK)}
+    ${themeDarkStyles}
+    ${themeToRGBVariableStyles(themeDarkStyles)}
   }
 `

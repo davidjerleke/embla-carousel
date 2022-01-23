@@ -1,9 +1,9 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { PlainButton } from 'components/Button'
-import { SunIcon, MoonIcon } from 'assets/icons'
 import { createSquareSizeStyles } from 'utils'
 import { LAYERS, THEME_KEYS } from 'consts'
+import { Icon } from 'components/Icon'
 import { useTheme } from 'hooks'
 
 const BUTTON_SIZE = '4rem'
@@ -22,18 +22,17 @@ const Wrapper = styled(PlainButton)`
 `
 
 const svgStyles = css`
-  ${createSquareSizeStyles(ICON_SIZE)};
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
 `
 
-export const SunSvg = styled(SunIcon)`
+export const LightThemeSvg = styled(Icon)`
   ${svgStyles};
 `
 
-export const MoonSvg = styled(MoonIcon)`
+export const DarkThemeSvg = styled(Icon)`
   ${svgStyles};
 `
 
@@ -48,8 +47,8 @@ export const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label={`Activate ${oppositeTheme} theme`}
     >
-      <MoonSvg aria-hidden="true" focusable="false" />
-      <SunSvg aria-hidden="true" focusable="false" />
+      <DarkThemeSvg svg="moon" size={ICON_SIZE} />
+      <LightThemeSvg svg="sun" size={ICON_SIZE} />
     </Wrapper>
   )
 }

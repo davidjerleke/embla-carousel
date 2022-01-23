@@ -1,41 +1,26 @@
 import React, { PropsWithChildren } from 'react'
-import styled, { css } from 'styled-components'
-import { NpmIcon, GithubIcon } from 'assets/icons'
+import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { OUTLINE_SIZE } from 'components/TabAccess'
-import { createSquareSizeStyles } from 'utils'
 import { URLS } from 'consts'
+import { IconWithText } from 'components/Icon'
 
-const ITEM_SPACING = '3rem'
+const LINK_SPACING = '3rem'
+const ICON_SPACING = '1rem'
 
 const Wrapper = styled.ul`
-  margin-left: -${ITEM_SPACING};
+  margin-left: -${LINK_SPACING};
   display: flex;
 `
 
 const Link = styled(PlainLink)`
-  margin-left: ${ITEM_SPACING};
+  margin-left: ${LINK_SPACING};
   margin-right: -${OUTLINE_SIZE};
   padding: 0.6rem ${OUTLINE_SIZE};
   outline-offset: -${OUTLINE_SIZE};
-  color: var(--text-medium-contrast);
+  color: var(--text-low-contrast);
   display: inline-flex;
   align-items: center;
-`
-
-const linkSvgStyles = css`
-  color: var(--detail-high-contrast);
-  ${createSquareSizeStyles('1.8rem')}
-  margin-right: 1rem;
-  margin-left: -${OUTLINE_SIZE};
-`
-
-const NpmSvg = styled(NpmIcon)`
-  ${linkSvgStyles};
-`
-
-const GithubSvg = styled(GithubIcon)`
-  ${linkSvgStyles};
 `
 
 type PropType = PropsWithChildren<{}>
@@ -47,14 +32,16 @@ export const Links = (props: PropType) => {
     <Wrapper {...restProps}>
       <li>
         <Link to={URLS.NPM_PACKAGE}>
-          <NpmSvg aria-hidden="true" focusable="false" />
-          <span>Npm</span>
+          <IconWithText iconSvg="npm" spacing={ICON_SPACING}>
+            Npm
+          </IconWithText>
         </Link>
       </li>
       <li>
         <Link to={URLS.GITHUB_ROOT}>
-          <GithubSvg aria-hidden="true" focusable="false" />
-          <span>GitHub</span>
+          <IconWithText iconSvg="github" spacing={ICON_SPACING}>
+            GitHub
+          </IconWithText>
         </Link>
       </li>
     </Wrapper>

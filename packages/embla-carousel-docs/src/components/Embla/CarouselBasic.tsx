@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
-import { ChevronLeftIcon, ChevronRightIcon } from 'assets/icons'
 import { imageByIndex } from './images'
+import { Icon } from 'components/Icon'
 import {
   Wrapper,
   Container,
@@ -91,7 +91,7 @@ const Carousel = (props: PropType) => {
             aria-controls={carouselId}
             aria-label="Scroll to previous slide"
           >
-            <ChevronLeftIcon aria-hidden="true" focusable="false" />
+            <Icon svg="chevronLeft" />
           </ArrowButton>
           <ArrowButton
             $direction="next"
@@ -100,7 +100,7 @@ const Carousel = (props: PropType) => {
             aria-controls={carouselId}
             aria-label="Scroll to next slide"
           >
-            <ChevronRightIcon aria-hidden="true" focusable="false" />
+            <Icon svg="chevronRight" />
           </ArrowButton>
         </>
       )}
@@ -122,7 +122,7 @@ const Carousel = (props: PropType) => {
 }
 
 export const CarouselBasic = (props: PropType) => {
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
+  const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper ref={inViewRef}>

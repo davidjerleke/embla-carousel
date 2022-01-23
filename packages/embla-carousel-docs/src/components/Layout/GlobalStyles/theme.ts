@@ -1,12 +1,12 @@
 import { LogoLightIcon, LogoDarkIcon } from 'components/SiteLogo'
-import { SunSvg, MoonSvg } from 'components/Theme'
+import { LightThemeSvg, DarkThemeSvg } from 'components/Theme'
 import { HeroLogo } from 'components/Hero'
 import { THEME_KEYS, THEME_PREFIX } from 'consts'
 import { css } from 'styled-components'
 
 export const themeStyles = css`
   .${THEME_PREFIX}${THEME_KEYS.LIGHT} {
-    ${LogoDarkIcon}, ${SunSvg} {
+    ${LogoDarkIcon}, ${LightThemeSvg} {
       display: none;
     }
     ${HeroLogo} {
@@ -14,7 +14,7 @@ export const themeStyles = css`
     }
   }
   .${THEME_PREFIX}${THEME_KEYS.DARK} {
-    ${LogoLightIcon}, ${MoonSvg} {
+    ${LogoLightIcon}, ${DarkThemeSvg} {
       display: none;
     }
     ${HeroLogo} {
