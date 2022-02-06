@@ -1,15 +1,10 @@
 /*!
- * domready (c) Dustin Diaz 2014 - License MIT
- * ie10 fix - Mikael Kristiansson 2019
- */
-
-/*!
-* focus-trap 6.5.0
+* focus-trap 6.7.2
 * @license MIT, https://github.com/focus-trap/focus-trap/blob/master/LICENSE
 */
 
 /*!
-* tabbable 5.2.0
+* tabbable 5.2.1
 * @license MIT, https://github.com/focus-trap/tabbable/blob/master/LICENSE
 */
 
