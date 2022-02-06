@@ -9,7 +9,12 @@ import {
 export type AutoHeightType = EmblaPluginType<OptionsType>
 
 function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
-  const options = Object.assign({}, defaultOptions, userOptions)
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    AutoHeight.globalOptions,
+    userOptions,
+  )
   const { destroyHeight } = options
   const heightEvents: EmblaEventType[] = ['select', 'pointerUp']
   const inViewThreshold = 0.5
@@ -55,5 +60,7 @@ function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
   }
   return self
 }
+
+AutoHeight.globalOptions = <AutoHeightOptionsType | undefined>undefined
 
 export default AutoHeight

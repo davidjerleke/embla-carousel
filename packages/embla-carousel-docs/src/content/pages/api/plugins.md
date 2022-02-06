@@ -30,15 +30,30 @@ You can find a complete list of plugins [here](/plugins/).
 Plugins have their own specific **options** that allows for configuring the plugin to your liking. Here's how to make use of it:
 
 ```js
+import Autoplay from 'embla-carousel-autoplay'
+
 const autoplayOptions = { delay: 2000 }
 const autoplay = Autoplay(autoplayOptions)
 ```
+
+Most plugins allows you to set **global options** that will be applied to all instances. This allows for overriding the default plugin options with your own:
+
+```js
+import Autoplay from 'embla-carousel-autoplay'
+
+Autoplay.globalOptions = { delay: 4000 }
+```
+
+Make sure to assign global options **before** initializing any instance. You should **only assign it once**, because re-assigning global options can lead to confusing code and unexpected behaviour.
 
 ## Methods
 
 Additionally, some plugins expose their own **API methods**. You can make use of these by storing the plugin instance in a variable before passing it to the Embla Carousel initialiser:
 
 ```js
+import EmblaCarousel from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
+
 const autoplay = Autoplay({ delay: 2000 })
 const embla = EmblaCarousel(emblaNode, options, [autoplay])
 

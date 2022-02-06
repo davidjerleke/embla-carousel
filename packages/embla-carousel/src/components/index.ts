@@ -59,7 +59,11 @@ function EmblaCarousel(
 
   let engine: Engine
   let activated = false
-  let optionsBase = Object.assign({}, defaultOptions)
+  let optionsBase = Object.assign(
+    {},
+    defaultOptions,
+    EmblaCarousel.globalOptions,
+  )
   let options = Object.assign({}, optionsBase)
   let optionsPseudo: OptionsPseudoType
   let plugins: EmblaPluginType[]
@@ -240,5 +244,7 @@ function EmblaCarousel(
   activate(userOptions, userPlugins)
   return self
 }
+
+EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel
