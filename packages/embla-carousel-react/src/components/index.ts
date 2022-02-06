@@ -40,6 +40,7 @@ function useEmblaCarousel(
 
   useEffect(() => {
     if (canUseDOM() && viewport) {
+      EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
       const newEmbla = EmblaCarousel(viewport, activeOptions, activePlugins)
       setEmbla(newEmbla)
       return () => newEmbla.destroy()
@@ -50,5 +51,7 @@ function useEmblaCarousel(
 
   return [<EmblaViewportRefType>setViewport, embla]
 }
+
+useEmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default useEmblaCarousel

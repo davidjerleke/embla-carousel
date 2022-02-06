@@ -7,7 +7,7 @@ date: 2021-02-21
 
 # Options
 
-Embla Carousel takes various **options** in order to customize how the carousel works. You can do this in two different ways.
+Embla Carousel takes various **options** in order to customize how the carousel works. You can provide options in different ways.
 
 ## Constructor options
 
@@ -19,6 +19,26 @@ import EmblaCarousel from 'embla-carousel'
 const options = { loop: true } // Options
 const embla = EmblaCarousel(emblaNode, options)
 ```
+
+## Global options
+
+It's possible to set **global options** that will be applied to all your carousels. This allows for overriding the Embla default options with your own. Global options are assigned like so:
+
+```js
+import EmblaCarousel from 'embla-carousel'
+
+EmblaCarousel.globalOptions = { loop: true }
+```
+
+**React users** can also set global options by assigning them to the `useEmblaCarousel` hook:
+
+```js
+import useEmblaCarousel from 'embla-carousel-react'
+
+useEmblaCarousel.globalOptions = { loop: true }
+```
+
+Make sure to assign global options **before** initializing any carousel. You should **only assign it once**, because re-assigning global options can lead to confusing code and unexpected behaviour.
 
 ## Pseudo options
 
@@ -54,7 +74,13 @@ For React users, the root node is the one that you attach the `emblaRef` to:
 
 ## Option priority
 
-The **pseudo options** object is always given the **highest priority**. It will be merged with the options passed to the `EmblaCarousel` constructor, and if any options are in conflict, the pseudo options will have precedence. In the following example:
+If two different option types are merged, and if any options are in conflict, the option type with the highest priority will have precedence. The **option priority** is as follows:
+
+- [Pseudo](/api/options/#pseudo-options) options _(highest)_
+- [Constructor](/api/options/#constructor-options) options
+- [Global](/api/options/#global-options) options _(lowest)_
+
+In the following example:
 
 ```js
 const options = { draggable: false } // <-- These options
@@ -70,7 +96,7 @@ const embla = EmblaCarousel(emblaNode, options)
 }
 ```
 
-The carousel in the example above will end up being draggable, because the pseudo options will override the initializer options.
+The carousel will end up being draggable, because the pseudo options will override the constructor options.
 
 ### axis
 

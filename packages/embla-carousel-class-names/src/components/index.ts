@@ -9,7 +9,12 @@ import {
 export type ClassNamesType = EmblaPluginType<OptionsType>
 
 function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
-  const options = Object.assign({}, defaultOptions, userOptions)
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    ClassNames.globalOptions,
+    userOptions,
+  )
   const { selected, draggable, dragging } = options
   const selectedEvents: EmblaEventType[] = ['select', 'pointerUp']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
@@ -63,5 +68,7 @@ function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
   }
   return self
 }
+
+ClassNames.globalOptions = <ClassNamesOptionsType | undefined>undefined
 
 export default ClassNames

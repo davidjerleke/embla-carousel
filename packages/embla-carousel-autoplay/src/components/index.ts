@@ -11,7 +11,12 @@ function Autoplay(
   userOptions?: AutoplayOptionsType,
   userNode?: (emblaRoot: HTMLElement) => HTMLElement | null,
 ): AutoplayType {
-  const options = Object.assign({}, defaultOptions, userOptions)
+  const options = Object.assign(
+    {},
+    defaultOptions,
+    Autoplay.globalOptions,
+    userOptions,
+  )
   const {
     playOnInit,
     stopOnInteraction,
@@ -96,5 +101,7 @@ function Autoplay(
   }
   return self
 }
+
+Autoplay.globalOptions = <AutoplayOptionsType | undefined>undefined
 
 export default Autoplay
