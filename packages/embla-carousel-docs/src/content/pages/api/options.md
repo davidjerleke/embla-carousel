@@ -42,7 +42,7 @@ Make sure to assign global options **before** initializing any carousel. You sho
 
 ## Pseudo options
 
-You can set your options right in your CSS. Embla Carousel will watch the **content** property of the pseudo element `:before` on its **root node**. The **content** property has to contain a valid JSON object with the options you want to apply. Also, make sure that the content isn't diplayed:
+You can set your options right in your CSS. Embla Carousel will watch the **content** property of the pseudo element `:before` on its **root node**. The **content** property has to contain a valid JSON object with the options you want to apply. Also, make sure that the content isn't displayed:
 
 ```css-with-json
 .embla:before {
