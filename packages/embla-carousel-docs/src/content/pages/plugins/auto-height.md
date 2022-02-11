@@ -22,7 +22,7 @@ npm install embla-carousel-auto-height --save
 Alternatively, you can use a **CDN** to include it in your project:
 
 ```html
-<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-auto-height.umd.js"></script>
+<script src="https://unpkg.com/embla-carousel-auto-height/embla-carousel-auto-height.umd.js"></script>
 ```
 
 ## Usage
