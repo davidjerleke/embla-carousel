@@ -45,6 +45,15 @@ You can make use of CSS transitions to **transition height** changes. But beware
 }
 ```
 
+If you are following along with the Get Started guide, you will probably want to amend your CSS with the following :
+
+```css{3}
+.embla__container {
+  display: flex;
+  align-items: flex-start;
+}
+```
+
 ## Options
 
 The Auto Height plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
