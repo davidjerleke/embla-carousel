@@ -54,6 +54,12 @@ export const codeStyles = css`
         color: #ffffff;
       }
     }
+    &[data-language='tsx'] {
+      &:before {
+        background-color: #294f80;
+        color: #ffffff;
+      }
+    }
     &[data-language='html'] {
       &:before {
         background-color: #005b9c;

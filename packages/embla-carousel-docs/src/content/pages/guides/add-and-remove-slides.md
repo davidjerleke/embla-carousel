@@ -44,9 +44,7 @@ export const EmblaCarousel = ({ slides }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel()
 
   useEffect(() => {
-    if (emblaApi && emblaApi.slideNodes().length !== slides.length) {
-      emblaApi.reInit()
-    }
+    if (emblaApi) emblaApi.reInit()
   }, [emblaApi, slides])
 
   return (

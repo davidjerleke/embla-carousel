@@ -1,7 +1,7 @@
 ---
 title: CDN
 description: Learn how to setup Embla Carousel using a CDN.
-order: 2
+order: 3
 date: 2021-02-21
 ---
 
