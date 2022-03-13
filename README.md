@@ -95,6 +95,7 @@
     <a href="https://github.com/openscript"><img src="https://avatars3.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/pipisasa"><img src="https://avatars.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/silllli"><img src="https://avatars.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/JoshuaCrewe"><img src="https://avatars.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="60" height="60" style="max-width:100%;"></a>
   </p>
 </div>
 

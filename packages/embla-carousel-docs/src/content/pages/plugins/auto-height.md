@@ -45,12 +45,12 @@ You can make use of CSS transitions to **transition height** changes. But beware
 }
 ```
 
-If you are following along with the Get Started guide, you will probably want to amend your CSS with the following :
+If you've been following along with any of the guides in the [Get Started](/get-started/) section, you will probably want to make sure that each **slide height** is **determined** by the **content** it holds. Amend your CSS with the following to achieve this:
 
 ```css{3}
 .embla__container {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start; /* Add this */
 }
 ```
 
