@@ -39,9 +39,21 @@ module.exports = {
         theme_color: '#8ab4f8',
         display: 'standalone',
         lang: 'en',
-        icon: 'src/assets/images/maskable.svg',
-        icon_options: { purpose: 'maskable' },
         theme_color_in_head: false,
+        legacy: false,
+        icon: 'src/assets/images/favicon.svg',
+        icons: [
+          {
+            src: `favicon-192x192.png`,
+            sizes: `192x192`,
+            type: `image/png`,
+          },
+          {
+            src: `favicon-512x512.png`,
+            sizes: `512x512`,
+            type: `image/png`,
+          },
+        ],
       },
     },
     {

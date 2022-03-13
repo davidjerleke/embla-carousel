@@ -1,5 +1,4 @@
 import React from 'react'
-import favicon from 'assets/images/favicon.png'
 import { removeProtocol } from 'utils'
 import config from './gatsby-config'
 import {
@@ -102,7 +101,11 @@ export const onRenderBody = ({
       name="twitter:image"
       content={`${siteUrl}/share-image.jpg`}
     />,
-    <link key="favicon" rel="icon" href={favicon} />,
+    <link
+      key="appleTouchIcon"
+      rel="apple-touch-icon"
+      href={`${siteUrl}/apple-touch-icon.png`}
+    />,
     <link
       key="algolia-preconnect"
       rel="preconnect"
