@@ -18,11 +18,11 @@ export function Translate(
   let disabled = false
 
   function x(n: number): string {
-    return `translate3d(${n}%,0px,0px)`
+    return `translate3d(${n}px,0px,0px)`
   }
 
   function y(n: number): string {
-    return `translate3d(0px,${n}%,0px)`
+    return `translate3d(0px,${n}px,0px)`
   }
 
   function to(target: Vector1DType): void {

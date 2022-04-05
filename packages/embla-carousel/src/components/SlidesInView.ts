@@ -1,4 +1,4 @@
-import { LimitType } from './Limit'
+import { Limit, LimitType } from './Limit'
 
 export type SlideBoundType = {
   start: number
@@ -21,22 +21,30 @@ export function SlidesInView(
   inViewThreshold: number,
 ): SlidesInViewType {
   const { removeOffset, constrain } = limit
-  const cachedThreshold = Math.min(Math.max(inViewThreshold, 0.01), 0.99)
+  const roundingSafety = 0.5
   const cachedOffsets = loop ? [0, contentSize, -contentSize] : [0]
-  const cachedBounds = findSlideBounds(cachedOffsets, cachedThreshold)
+  const cachedBounds = findSlideBounds(cachedOffsets, inViewThreshold)
+
+  function findSlideThresholds(threshold?: number): number[] {
+    const slideThreshold = threshold || 0
+
+    return slideSizes.map((slideSize) => {
+      const thresholdLimit = Limit(roundingSafety, slideSize - roundingSafety)
+      return thresholdLimit.constrain(slideSize * slideThreshold)
+    })
+  }
 
   function findSlideBounds(
     offsets?: number[],
     threshold?: number,
   ): SlideBoundType[] {
     const slideOffsets = offsets || cachedOffsets
-    const slideThreshold = threshold || 0
-    const thresholds = slideSizes.map((s) => s * slideThreshold)
+    const slideThresholds = findSlideThresholds(threshold)
 
     return slideOffsets.reduce((list: SlideBoundType[], offset) => {
       const bounds = snaps.map((snap, index) => ({
-        start: snap - slideSizes[index] + thresholds[index] + offset,
-        end: snap + viewSize - thresholds[index] + offset,
+        start: snap - slideSizes[index] + slideThresholds[index] + offset,
+        end: snap + viewSize - slideThresholds[index] + offset,
         index,
       }))
       return list.concat(bounds)

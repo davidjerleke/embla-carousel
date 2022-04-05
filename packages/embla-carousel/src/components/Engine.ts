@@ -9,7 +9,7 @@ import { EventEmitterType } from './EventEmitter'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
-import { PxToPercent, PxToPercentType } from './PxToPercent'
+import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
@@ -38,7 +38,7 @@ export type Engine = {
   limit: LimitType
   location: Vector1DType
   options: OptionsType
-  pxToPercent: PxToPercentType
+  percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
   eventStore: EventStoreType
@@ -81,12 +81,11 @@ export function Engine(
   const slideRects = slides.map((slide) => slide.getBoundingClientRect())
   const direction = Direction(contentDirection)
   const axis = Axis(scrollAxis, contentDirection)
-  const pxToPercent = PxToPercent(axis.measureSize(containerRect))
-  const viewSize = pxToPercent.totalPercent
+  const viewSize = axis.measureSize(containerRect)
+  const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
   const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
-    pxToPercent,
     slides,
     slideRects,
     loop,
@@ -94,7 +93,6 @@ export function Engine(
   const { snaps, snapsAligned } = ScrollSnap(
     axis,
     alignment,
-    pxToPercent,
     containerRect,
     slideRects,
     slidesToScroll,
@@ -177,7 +175,7 @@ export function Engine(
     root,
     target,
     dragFree,
-    DragTracker(axis, pxToPercent),
+    DragTracker(axis),
     location,
     animation,
     scrollTo,
@@ -198,15 +196,21 @@ export function Engine(
     direction,
     dragHandler,
     eventStore: EventStore(),
-    pxToPercent,
+    percentOfView,
     index,
     indexPrevious,
     limit,
     location,
     options,
     scrollBody,
-    scrollBounds: ScrollBounds(limit, location, target, scrollBody),
-    scrollLooper: ScrollLooper(contentSize, pxToPercent, limit, location, [
+    scrollBounds: ScrollBounds(
+      limit,
+      location,
+      target,
+      scrollBody,
+      percentOfView,
+    ),
+    scrollLooper: ScrollLooper(contentSize, limit, location, [
       location,
       target,
     ]),
@@ -216,6 +220,7 @@ export function Engine(
     scrollTo,
     slideLooper: SlideLooper(
       axis,
+      direction,
       viewSize,
       contentSize,
       slideSizesWithGaps,

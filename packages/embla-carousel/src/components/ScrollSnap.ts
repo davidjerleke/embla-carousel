@@ -1,6 +1,5 @@
 import { AlignmentType } from './Alignment'
 import { AxisType } from './Axis'
-import { PxToPercentType } from './PxToPercent'
 import { arrayLast, arrayGroup, mathAbs } from './utils'
 
 export type ScrollSnapType = {
@@ -11,7 +10,6 @@ export type ScrollSnapType = {
 export function ScrollSnap(
   axis: AxisType,
   alignment: AlignmentType,
-  pxToPercent: PxToPercentType,
   containerRect: DOMRect,
   slideRects: DOMRect[],
   slidesToScroll: number,
@@ -23,14 +21,12 @@ export function ScrollSnap(
   function measureSizes(): number[] {
     return arrayGroup(slideRects, slidesToScroll)
       .map((rects) => arrayLast(rects)[endEdge] - rects[0][startEdge])
-      .map(pxToPercent.measure)
       .map(mathAbs)
   }
 
   function measureUnaligned(): number[] {
     return slideRects
       .map((rect) => containerRect[startEdge] - rect[startEdge])
-      .map(pxToPercent.measure)
       .map((snap) => -mathAbs(snap))
   }
 

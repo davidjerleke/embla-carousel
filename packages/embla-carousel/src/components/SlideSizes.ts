@@ -1,5 +1,4 @@
 import { AxisType } from './Axis'
-import { PxToPercentType } from './PxToPercent'
 import { arrayLast, arrayLastIndex, mathAbs } from './utils'
 
 export type SlideSizesType = {
@@ -9,14 +8,12 @@ export type SlideSizesType = {
 
 export function SlideSizes(
   axis: AxisType,
-  pxToPercent: PxToPercentType,
   slides: HTMLElement[],
   slideRects: DOMRect[],
   loop: boolean,
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
-  const sizesInPx = slideRects.map(measureSize)
-  const slideSizes = sizesInPx.map(pxToPercent.measure)
+  const slideSizes = slideRects.map(measureSize)
   const slideSizesWithGaps = measureWithGaps()
 
   function measureWithGaps(): number[] {
@@ -25,10 +22,9 @@ export function SlideSizes(
         const isLast = index === arrayLastIndex(rects)
         const style = window.getComputedStyle(arrayLast(slides))
         const endGap = parseFloat(style.getPropertyValue(`margin-${endEdge}`))
-        if (isLast) return sizesInPx[index] + (loop ? endGap : 0)
+        if (isLast) return slideSizes[index] + (loop ? endGap : 0)
         return rects[index + 1][startEdge] - rect[startEdge]
       })
-      .map(pxToPercent.measure)
       .map(mathAbs)
   }
 

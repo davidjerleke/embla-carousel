@@ -1,15 +1,18 @@
 import { AxisType } from './Axis'
 import { arrayKeys } from './utils'
 import { SlidesInViewType } from './SlidesInView'
-import { Vector1DType } from './Vector1d'
+import { Vector1D, Vector1DType } from './Vector1d'
+import { Translate, TranslateType } from './Translate'
+import { DirectionType } from './Direction'
 
 type EdgeType = 'start' | 'end'
 
 type LoopPointType = {
   point: number
-  location: number
   index: number
-  getTarget: () => number
+  translate: TranslateType
+  location: Vector1DType
+  getTarget: () => Vector1DType
 }
 
 export type SlideLooperType = {
@@ -21,6 +24,7 @@ export type SlideLooperType = {
 
 export function SlideLooper(
   axis: AxisType,
+  direction: DirectionType,
   viewSize: number,
   contentSize: number,
   slideSizesWithGaps: number[],
@@ -56,9 +60,16 @@ export function SlideLooper(
       const altered = isStartEdge ? contentSize : 0
       const bounds = slideBounds.filter((b) => b.index === index)[0]
       const point = bounds[isStartEdge ? 'end' : 'start']
-      const getTarget = (): number =>
-        scrollLocation.get() > point ? initial : altered
-      return { point, getTarget, index, location: -1 }
+      const target = Vector1D(-1)
+      const getTarget = (): Vector1DType =>
+        target.set(scrollLocation.get() > point ? initial : altered)
+      return {
+        point, // remove
+        index,
+        location: Vector1D(-1),
+        translate: Translate(axis, direction, slides[index]),
+        getTarget,
+      }
     })
   }
 
@@ -83,19 +94,17 @@ export function SlideLooper(
 
   function loop(): void {
     loopPoints.forEach((loopPoint) => {
-      const { getTarget, location, index } = loopPoint
+      const { getTarget, translate, location } = loopPoint
       const target = getTarget()
-      if (target !== location) {
-        slides[index].style[axis.startEdge] = `${target}%`
-        loopPoint.location = target
-      }
+      if (target.get() === location.get()) return
+      if (target.get() === 0) translate.clear()
+      else translate.to(target)
+      location.set(target)
     })
   }
 
   function clear(): void {
-    loopPoints.forEach(({ index }) => {
-      slides[index].style[axis.startEdge] = ''
-    })
+    loopPoints.forEach((loopPoint) => loopPoint.translate.clear())
   }
 
   const self: SlideLooperType = {

@@ -32,14 +32,6 @@ export function roundToDecimals(decimalPoints: number): (n: number) => number {
   return (n: number): number => Math.round(n * pow) / pow
 }
 
-export function debounce(callback: () => void, time: number): () => void {
-  let timeout = 0
-  return (): void => {
-    window.clearTimeout(timeout)
-    timeout = window.setTimeout(callback, time) || 0
-  }
-}
-
 export function arrayGroup<GenericType>(
   array: GenericType[],
   size: number,

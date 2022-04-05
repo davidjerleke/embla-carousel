@@ -2,7 +2,6 @@ import { Engine } from './Engine'
 import { EventEmitter, EventEmitterType } from './EventEmitter'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsPseudo, OptionsPseudoType } from './OptionsPseudo'
-import { debounce } from './utils'
 
 export type EmblaNodesType = {
   root: HTMLElement
@@ -53,7 +52,6 @@ function EmblaCarousel(
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
   const events = EventEmitter()
-  const debouncedResize = debounce(resize, 500)
   const reInit = reActivate
   const { on, off } = events
 
@@ -91,7 +89,7 @@ function EmblaCarousel(
     options = Object.assign({}, optionsBase, optionsPseudo.get())
     plugins = Object.assign([], withPlugins)
     engine = Engine(root, container, slides, options, events)
-    engine.eventStore.add(window, 'resize', debouncedResize)
+    engine.eventStore.add(window, 'resize', resize)
     engine.translate.to(engine.location)
     rootSize = engine.axis.measureSize(root.getBoundingClientRect())
     plugins.forEach((plugin) => plugin.init(self))
