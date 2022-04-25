@@ -8,6 +8,10 @@ export function map(
   return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
 }
 
+export function isNumber(subject: unknown): subject is number {
+  return typeof subject === 'number'
+}
+
 export function mathAbs(n: number): number {
   return Math.abs(n)
 }
@@ -30,17 +34,6 @@ export function factorAbs(valueB: number, valueA: number): number {
 export function roundToDecimals(decimalPoints: number): (n: number) => number {
   const pow = Math.pow(10, decimalPoints)
   return (n: number): number => Math.round(n * pow) / pow
-}
-
-export function arrayGroup<GenericType>(
-  array: GenericType[],
-  size: number,
-): GenericType[][] {
-  const groups = []
-  for (let i = 0; i < array.length; i += size) {
-    groups.push(array.slice(i, i + size))
-  }
-  return groups
 }
 
 export function arrayKeys<GenericType>(array: GenericType[]): number[] {

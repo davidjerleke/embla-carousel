@@ -117,10 +117,10 @@ Choose content direction between `ltr` and `rtl`. Please note that when using `r
 
 ### slidesToScroll
 
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`1`</BrandSecondaryText>
 
-Group slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number.
+Group slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number, which has to be an integer. Set it to `auto` if you want Embla to group slides automatically.
 
 ### draggable
 

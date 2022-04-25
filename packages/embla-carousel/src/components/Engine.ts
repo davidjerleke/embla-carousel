@@ -22,6 +22,7 @@ import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
+import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
@@ -44,6 +45,7 @@ export type Engine = {
   eventStore: EventStoreType
   slideLooper: SlideLooperType
   slidesInView: SlidesInViewType
+  slidesToScroll: SlidesToScrollType
   target: Vector1DType
   translate: TranslateType
   scrollTo: ScrollToType
@@ -71,7 +73,7 @@ export function Engine(
     loop,
     speed,
     dragFree,
-    slidesToScroll,
+    slidesToScroll: groupSlides,
     skipSnaps,
     containScroll,
   } = options
@@ -89,6 +91,11 @@ export function Engine(
     slides,
     slideRects,
     loop,
+  )
+  const slidesToScroll = SlidesToScroll(
+    viewSize,
+    slideSizesWithGaps,
+    groupSlides,
   )
   const { snaps, snapsAligned } = ScrollSnap(
     axis,
@@ -229,6 +236,7 @@ export function Engine(
       location,
       slides,
     ),
+    slidesToScroll,
     slidesInView,
     slideIndexes,
     target,
