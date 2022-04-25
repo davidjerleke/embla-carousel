@@ -47,9 +47,7 @@ You can set your options right in your CSS. Embla Carousel will watch the **cont
 ```css-with-json
 .embla:before {
   display: none;
-  content: '{
-    "draggable": true
-  }';
+  content: '{ "draggable": true }';  /* <--- put it on a single line */
 }
 ```
 
@@ -90,9 +88,7 @@ const embla = EmblaCarousel(emblaNode, options)
 ```css-with-json
 .embla:before {
   display: none;
-  content: '{
-    "draggable": true /* <-- Will be overridden by these */
-  }';
+  content: '{ "draggable": true }'; /* <-- Will be overridden by these */
 }
 ```
 

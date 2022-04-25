@@ -41,20 +41,18 @@ Embla Carousel will **automatically pick up** any **changes in gap sizes** when 
 
 ## Changing options
 
-You can change your [options](/api/options/) based on your breakpoints right in your CSS. Here's an example of a carousel that's only draggable when the screen width is less than 768px:
+You can change your [options](/api/options/) based on your breakpoints right in your CSS. **Make sure the JSON string is on a single line for the CSS parser to parse it correctly.**
+
+Here's an example of a carousel that's only draggable when the screen width is less than 768px:
 
 ```css-with-json
 .embla:before {
   display: none;
-  content: '{
-    "draggable": true /* Draggable as default */
-  }';
+  content: '{ "draggable": true }'; /* Draggable as default */ 
 }
 @media (min-width: 768px) {
   .embla:before {
-    content: '{
-      "draggable": false /* Not draggable SM up */
-    }';
+    content: '{ "draggable": false }';  /* Not draggable SM up */
   }
 }
 ```
