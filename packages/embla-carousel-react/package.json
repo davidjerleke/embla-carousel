@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
-    "@types/react": "^17.0.2",
+    "@types/react": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
@@ -58,6 +58,6 @@
     "embla-carousel": "6.2.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^18.1.0"
   }
 }
