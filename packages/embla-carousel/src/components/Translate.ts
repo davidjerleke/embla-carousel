@@ -35,7 +35,9 @@ export function Translate(
   }
 
   function clear(): void {
+    if (disabled) return
     containerStyle.transform = ''
+    if (!container.getAttribute('style')) container.removeAttribute('style')
   }
 
   const self: TranslateType = {

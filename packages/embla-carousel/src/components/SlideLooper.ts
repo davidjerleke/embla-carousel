@@ -8,11 +8,10 @@ import { DirectionType } from './Direction'
 type EdgeType = 'start' | 'end'
 
 type LoopPointType = {
-  point: number
   index: number
   translate: TranslateType
   location: Vector1DType
-  getTarget: () => Vector1DType
+  target: () => Vector1DType
 }
 
 export type SlideLooperType = {
@@ -30,7 +29,7 @@ export function SlideLooper(
   slideSizesWithGaps: number[],
   scrollSnaps: number[],
   slidesInView: SlidesInViewType,
-  scrollLocation: Vector1DType,
+  scroll: Vector1DType,
   slides: HTMLElement[],
 ): SlideLooperType {
   const ascItems = arrayKeys(slideSizesWithGaps)
@@ -60,16 +59,11 @@ export function SlideLooper(
       const altered = isStartEdge ? contentSize : 0
       const bounds = slideBounds.filter((b) => b.index === index)[0]
       const point = bounds[isStartEdge ? 'end' : 'start']
-      const target = Vector1D(-1)
-      const getTarget = (): Vector1DType =>
-        target.set(scrollLocation.get() > point ? initial : altered)
-      return {
-        point, // remove
-        index,
-        location: Vector1D(-1),
-        translate: Translate(axis, direction, slides[index]),
-        getTarget,
-      }
+      const shift = Vector1D(-1)
+      const location = Vector1D(-1)
+      const translate = Translate(axis, direction, slides[index])
+      const target = () => shift.set(scroll.get() > point ? initial : altered)
+      return { index, location, translate, target }
     })
   }
 
@@ -94,12 +88,12 @@ export function SlideLooper(
 
   function loop(): void {
     loopPoints.forEach((loopPoint) => {
-      const { getTarget, translate, location } = loopPoint
-      const target = getTarget()
-      if (target.get() === location.get()) return
-      if (target.get() === 0) translate.clear()
-      else translate.to(target)
-      location.set(target)
+      const { target, translate, location } = loopPoint
+      const shift = target()
+      if (shift.get() === location.get()) return
+      if (shift.get() === 0) translate.clear()
+      else translate.to(shift)
+      location.set(shift)
     })
   }
 

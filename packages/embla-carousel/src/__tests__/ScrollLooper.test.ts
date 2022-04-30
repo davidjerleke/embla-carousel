@@ -2,7 +2,7 @@ import { ScrollLooper } from '../components/ScrollLooper'
 import { Vector1D } from '../components/Vector1d'
 import { Limit } from '../components/Limit'
 
-const jointSafety = 0.5
+const jointSafety = 0.1
 const limit = Limit(-100, 100)
 const maxLimitWithLoopJoint = limit.max + jointSafety
 const minLimitWithLoopJoint = limit.min + jointSafety

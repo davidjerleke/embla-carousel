@@ -11,7 +11,7 @@ export function ScrollLooper(
   location: Vector1DType,
   vectors: Vector1DType[],
 ): ScrollLooperType {
-  const jointSafety = 0.5
+  const jointSafety = 0.1
   const min = limit.min + jointSafety
   const max = limit.max + jointSafety
   const { reachedMin, reachedMax } = Limit(min, max)
