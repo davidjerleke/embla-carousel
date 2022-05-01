@@ -181,7 +181,6 @@ export function Engine(
     direction,
     root,
     target,
-    dragFree,
     DragTracker(axis),
     location,
     animation,
@@ -190,7 +189,9 @@ export function Engine(
     scrollTarget,
     index,
     events,
+    percentOfView,
     loop,
+    dragFree,
     skipSnaps,
   )
 

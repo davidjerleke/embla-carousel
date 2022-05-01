@@ -10,6 +10,7 @@ import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { deltaAbs, factorAbs, mathAbs, mathSign } from './utils'
+import { PercentOfViewType } from './PercentOfView'
 
 export type DragHandlerType = {
   addActivationEvents: () => void
@@ -23,7 +24,6 @@ export function DragHandler(
   direction: DirectionType,
   rootNode: HTMLElement,
   target: Vector1DType,
-  dragFree: boolean,
   dragTracker: DragTrackerType,
   location: Vector1DType,
   animation: AnimationType,
@@ -32,7 +32,9 @@ export function DragHandler(
   scrollTarget: ScrollTargetType,
   index: CounterType,
   events: EventEmitterType,
+  percentOfView: PercentOfViewType,
   loop: boolean,
+  dragFree: boolean,
   skipSnaps: boolean,
 ): DragHandlerType {
   const { cross: crossAxis } = axis
@@ -40,11 +42,11 @@ export function DragHandler(
   const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
+  const dragThreshold = percentOfView.measure(20)
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 5 : 16
   const baseMass = 1
-  const dragThreshold = 20
 
   let startScroll = 0
   let startCross = 0

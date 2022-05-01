@@ -137,14 +137,17 @@ export const CarouselWheelItem = (props: PropType) => {
   useEffect(() => {
     if (!emblaApi) return
 
+    rootNodeSize.current = readRootNodeSize()
     const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS
     totalRadius.current = slideCount * WHEEL_ITEM_RADIUS
     rotation.current = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
 
     emblaApi.on('pointerUp', () => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
-      const distanceToTarget = target.get() - location.get()
-      scrollTo.distance(distanceToTarget * 0.1, true)
+      const diffToTarget = target.get() - location.get()
+      const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 3 ? 20 : 0.1
+      const distance = diffToTarget * factor
+      scrollTo.distance(distance, true)
     })
 
     emblaApi.on('scroll', () => {
