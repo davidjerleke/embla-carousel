@@ -1,7 +1,8 @@
-export enum PAGE_TEMPLATES {
-  HOME = 'Home',
-  PAGE = 'Page',
-  NOT_FOUND = '404',
+export const PAGE_TEMPLATES = <const>{
+  HOME: 'Home',
+  PAGE: 'Page',
+  NOT_FOUND: '404',
 }
 
-export type PageTemplateType = `${PAGE_TEMPLATES}`
+export type PageTemplateType =
+  typeof PAGE_TEMPLATES[keyof typeof PAGE_TEMPLATES]

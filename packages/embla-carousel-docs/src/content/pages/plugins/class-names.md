@@ -7,7 +7,7 @@ date: 2021-11-22
 
 # Class Names
 
-<RepositoryLink to="https://github.com/davidcetinkaya/embla-carousel/tree/master/packages/embla-carousel-class-names">View plugin on GitHub</RepositoryLink>
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-class-names">View plugin on GitHub</RepositoryLink>
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
 

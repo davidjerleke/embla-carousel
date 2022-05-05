@@ -28,11 +28,11 @@ export const THEME_META_SELECTOR = `meta[name='theme-color']`
 
 export const THEME_PREFIX = 'theme-'
 
-export type ThemeKeyType = `${THEME_KEYS}`
+export type ThemeKeyType = typeof THEME_KEYS[keyof typeof THEME_KEYS]
 
-export enum THEME_KEYS {
-  LIGHT = 'light',
-  DARK = 'dark',
+export const THEME_KEYS = <const>{
+  LIGHT: 'light',
+  DARK: 'dark',
 }
 
 export const THEME_COLORS = {

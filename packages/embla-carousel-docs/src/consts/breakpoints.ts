@@ -7,13 +7,13 @@ const createMediaQuery = (
   return `@media (${minOrMax}-${dimension}: ${queryValue}px)`
 }
 
-export enum BREAKPOINTS {
-  DEFAULT = 0,
-  XXS = 350,
-  XS = 576,
-  SM = 750,
-  MD = 992,
-  LG = 1200,
+export const BREAKPOINTS = {
+  DEFAULT: 0,
+  XXS: 350,
+  XS: 576,
+  SM: 750,
+  MD: 992,
+  LG: 1200,
 }
 
 export const breakpoints = {

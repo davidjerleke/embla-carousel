@@ -1,14 +1,14 @@
 {
   "name": "embla-carousel-class-names",
   "version": "6.2.0",
-  "author": "David Cetinkaya",
+  "author": "David Jerleke",
   "description": "A class name toggle plugin for Embla Carousel",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/davidcetinkaya/embla-carousel"
+    "url": "git+https://github.com/davidjerleke/embla-carousel"
   },
   "bugs": {
-    "url": "https://github.com/davidcetinkaya/embla-carousel/issues"
+    "url": "https://github.com/davidjerleke/embla-carousel/issues"
   },
   "homepage": "https://www.embla-carousel.com",
   "license": "MIT",

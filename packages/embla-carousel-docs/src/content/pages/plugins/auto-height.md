@@ -7,7 +7,7 @@ date: 2022-01-14
 
 # Auto Height
 
-<RepositoryLink to="https://github.com/davidcetinkaya/embla-carousel/tree/master/packages/embla-carousel-auto-height">View plugin on GitHub</RepositoryLink>
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-auto-height">View plugin on GitHub</RepositoryLink>
 
 This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
 

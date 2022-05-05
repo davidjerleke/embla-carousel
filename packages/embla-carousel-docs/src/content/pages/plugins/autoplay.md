@@ -7,7 +7,7 @@ date: 2021-03-13
 
 # Autoplay
 
-<RepositoryLink to="https://github.com/davidcetinkaya/embla-carousel/tree/master/packages/embla-carousel-autoplay">View plugin on GitHub</RepositoryLink>
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-autoplay">View plugin on GitHub</RepositoryLink>
 
 This plugin is used to extend Embla Carousel with **autoplay** functionality. It comes with a useful set of options that allows you to customize it to your liking.
 
