@@ -8,21 +8,36 @@ export type SlideSizesType = {
 
 export function SlideSizes(
   axis: AxisType,
-  slides: HTMLElement[],
+  containerRect: DOMRect,
   slideRects: DOMRect[],
-  loop: boolean,
+  slides: HTMLElement[],
+  includeEdgeGap: boolean,
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
+  const startGap = measureStartGap()
+  const endGap = measureEndGap()
   const slideSizes = slideRects.map(measureSize)
   const slideSizesWithGaps = measureWithGaps()
+
+  function measureStartGap(): number {
+    if (!includeEdgeGap) return 0
+    const slideRect = slideRects[0]
+    return Math.abs(containerRect[startEdge] - slideRect[startEdge])
+  }
+
+  function measureEndGap(): number {
+    if (!includeEdgeGap) return 0
+    const style = window.getComputedStyle(arrayLast(slides))
+    return parseFloat(style.getPropertyValue('margin-'.concat(endEdge)))
+  }
 
   function measureWithGaps(): number[] {
     return slideRects
       .map((rect, index, rects) => {
+        const isFirst = !index
         const isLast = index === arrayLastIndex(rects)
-        const style = window.getComputedStyle(arrayLast(slides))
-        const endGap = parseFloat(style.getPropertyValue(`margin-${endEdge}`))
-        if (isLast) return slideSizes[index] + (loop ? endGap : 0)
+        if (isFirst) return slideSizes[index] + startGap
+        if (isLast) return slideSizes[index] + endGap
         return rects[index + 1][startEdge] - rect[startEdge]
       })
       .map(mathAbs)

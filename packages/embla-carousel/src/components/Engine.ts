@@ -16,7 +16,7 @@ import { ScrollContain } from './ScrollContain'
 import { ScrollLimit } from './ScrollLimit'
 import { ScrollLooper, ScrollLooperType } from './ScrollLooper'
 import { ScrollProgress, ScrollProgressType } from './ScrollProgress'
-import { ScrollSnap } from './ScrollSnap'
+import { ScrollSnaps } from './ScrollSnaps'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
@@ -86,35 +86,37 @@ export function Engine(
   const viewSize = axis.measureSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
+  const containSnaps = !loop && containScroll !== ''
+  const includeEdgeGap = loop || containScroll !== ''
   const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
-    slides,
+    containerRect,
     slideRects,
-    loop,
+    slides,
+    includeEdgeGap,
   )
   const slidesToScroll = SlidesToScroll(
     viewSize,
     slideSizesWithGaps,
     groupSlides,
   )
-  const { snaps, snapsAligned } = ScrollSnap(
+  const { snaps, snapsAligned } = ScrollSnaps(
     axis,
     alignment,
     containerRect,
     slideRects,
+    slideSizesWithGaps,
     slidesToScroll,
+    containSnaps,
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained } = ScrollContain(
     viewSize,
     contentSize,
-    snaps,
     snapsAligned,
     containScroll,
   )
-
-  const contain = !loop && containScroll !== ''
-  const scrollSnaps = contain ? snapsContained : snapsAligned
+  const scrollSnaps = containSnaps ? snapsContained : snapsAligned
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
