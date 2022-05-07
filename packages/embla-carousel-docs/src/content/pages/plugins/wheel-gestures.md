@@ -64,3 +64,10 @@ Type: <BrandPrimaryText>`string | undefined`</BrandPrimaryText>
 Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
 
 Force an axis on which to listen for wheel events. Choose scroll axis between `x` and `y`. Useful if you want to slide horizontally when scrolling vertically or vice versa.
+
+### target
+
+Type: <BrandPrimaryText>`Element`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
+
+Specify the element that should be observed for wheel events.
