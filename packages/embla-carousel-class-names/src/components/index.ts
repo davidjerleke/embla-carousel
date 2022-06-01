@@ -1,12 +1,9 @@
 import { defaultOptions, ClassNamesOptionsType, OptionsType } from './Options'
 import { addClass, removeClass } from './utils'
-import {
-  EmblaCarouselType,
-  EmblaPluginType,
-  EmblaEventType,
-} from 'embla-carousel'
+import { CreatePluginType } from 'embla-carousel/components/Plugins'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
-export type ClassNamesType = EmblaPluginType<OptionsType>
+export type ClassNamesType = CreatePluginType<{}, OptionsType>
 
 function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
   const options = Object.assign(

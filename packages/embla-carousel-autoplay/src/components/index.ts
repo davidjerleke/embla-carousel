@@ -1,11 +1,15 @@
 import { defaultOptions, AutoplayOptionsType, OptionsType } from './Options'
-import { EmblaCarouselType, EmblaPluginType } from 'embla-carousel'
+import { CreatePluginType } from 'embla-carousel/components/Plugins'
+import { EmblaCarouselType } from 'embla-carousel'
 
-export type AutoplayType = EmblaPluginType<OptionsType> & {
-  play: () => void
-  stop: () => void
-  reset: () => void
-}
+export type AutoplayType = CreatePluginType<
+  {
+    play: () => void
+    stop: () => void
+    reset: () => void
+  },
+  OptionsType
+>
 
 function Autoplay(
   userOptions?: AutoplayOptionsType,

@@ -1,12 +1,9 @@
 import { defaultOptions, AutoHeightOptionsType, OptionsType } from './Options'
 import { SlideBoundType } from 'embla-carousel/components/SlidesInView'
-import {
-  EmblaCarouselType,
-  EmblaEventType,
-  EmblaPluginType,
-} from 'embla-carousel'
+import { CreatePluginType } from 'embla-carousel/components/Plugins'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
-export type AutoHeightType = EmblaPluginType<OptionsType>
+export type AutoHeightType = CreatePluginType<{}, OptionsType>
 
 function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
   const options = Object.assign(
