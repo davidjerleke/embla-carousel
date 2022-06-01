@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState, useMemo } from 'react'
-import { areObjectsEqualShallow, arePluginsEqual, canUseDOM } from './utils'
+import { canUseDOM } from './utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -25,18 +25,26 @@ function useEmblaCarousel(
   const storedPlugins = useRef<EmblaPluginType[]>(plugins)
 
   const activeOptions = useMemo<EmblaOptionsType>(() => {
-    if (!areObjectsEqualShallow(storedOptions.current, options)) {
+    if (
+      !embla
+        ?.internalEngine()
+        .optionsHandler.areEqual(storedOptions.current, options)
+    ) {
       storedOptions.current = options
     }
     return storedOptions.current
-  }, [storedOptions, options])
+  }, [embla, options])
 
   const activePlugins = useMemo<EmblaPluginType[]>(() => {
-    if (!arePluginsEqual(storedPlugins.current, plugins)) {
+    if (
+      !embla
+        ?.internalEngine()
+        .pluginsHandler.areEqual(storedPlugins.current, plugins)
+    ) {
       storedPlugins.current = plugins
     }
     return storedPlugins.current
-  }, [storedPlugins, plugins])
+  }, [embla, plugins])
 
   useEffect(() => {
     if (canUseDOM() && viewport) {

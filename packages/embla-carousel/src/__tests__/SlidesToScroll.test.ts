@@ -1,7 +1,7 @@
 import { SlidesToScroll } from '../components/SlidesToScroll'
 
 const viewSize = 100
-const slideSizesWithGaps = [80, 50, 50, 39, 85, 15, 10]
+const slideSizesWithGaps = [80, 50, 50, 39, 85, 15, 10, 91, 9]
 const slideSizesEmpty: [] = []
 
 describe('SlidesToScroll', () => {
@@ -10,7 +10,7 @@ describe('SlidesToScroll', () => {
 
     test('Groups items into groups where slide sizes <= view size', () => {
       const groups = slidesToScroll.groupSlides(slideSizesWithGaps)
-      expect(groups).toEqual([[80], [50, 50], [39], [85, 15], [10]])
+      expect(groups).toEqual([[80], [50, 50], [39], [85, 15], [10], [91, 9]])
     })
 
     test('Returns an empty array if an empty list is provided', () => {
@@ -25,11 +25,24 @@ describe('SlidesToScroll', () => {
   })
 
   describe('Group by number', () => {
-    const slidesToScroll = SlidesToScroll(viewSize, slideSizesWithGaps, 2)
+    const slidesToScroll = SlidesToScroll(viewSize, slideSizesWithGaps, 3)
 
     test('Groups items into groups that equal the size of the given number', () => {
       const groups = slidesToScroll.groupSlides(slideSizesWithGaps)
-      expect(groups).toEqual([[80, 50], [50, 39], [85, 15], [10]])
+      expect(groups).toEqual([
+        [80, 50, 50],
+        [39, 85, 15],
+        [10, 91, 9],
+      ])
+    })
+
+    test('Groups items that does not add up evenly at the end', () => {
+      const groups = slidesToScroll.groupSlides(slideSizesWithGaps.slice(0, -1))
+      expect(groups).toEqual([
+        [80, 50, 50],
+        [39, 85, 15],
+        [10, 91],
+      ])
     })
 
     test('Returns an empty array if an empty list is provided', () => {

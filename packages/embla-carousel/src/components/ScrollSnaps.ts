@@ -23,14 +23,6 @@ export function ScrollSnaps(
   const snaps = measureUnaligned()
   const snapsAligned = measureAligned()
 
-  function measureStart(): number {
-    return 0
-  }
-
-  function measureEnd(): number {
-    return arrayLast(snaps) - arrayLast(slideSizesWithGaps)
-  }
-
   function measureSizes(): number[] {
     return groupSlides(slideRects)
       .map((rects) => arrayLast(rects)[endEdge] - rects[0][startEdge])
@@ -44,13 +36,16 @@ export function ScrollSnaps(
   }
 
   function measureAligned(): number[] {
+    const containedStartSnap = 0
+    const containedEndSnap = arrayLast(snaps) - arrayLast(slideSizesWithGaps)
+
     return groupSlides(snaps)
       .map((g) => g[0])
       .map((snap, index, groupedSnaps) => {
         const isFirst = !index
         const isLast = index === arrayLastIndex(groupedSnaps)
-        if (containScroll && isFirst) return measureStart()
-        if (containScroll && isLast) return measureEnd()
+        if (containScroll && isFirst) return containedStartSnap
+        if (containScroll && isLast) return containedEndSnap
         return snap + alignments[index]
       })
   }

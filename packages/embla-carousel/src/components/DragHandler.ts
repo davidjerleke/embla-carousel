@@ -2,7 +2,7 @@ import { AnimationType } from './Animation'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
-import { EventEmitterType } from './EventEmitter'
+import { EventHandlerType } from './EventHandler'
 import { AxisType } from './Axis'
 import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
@@ -31,7 +31,7 @@ export function DragHandler(
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
   index: CounterType,
-  events: EventEmitterType,
+  eventHandler: EventHandlerType,
   percentOfView: PercentOfViewType,
   loop: boolean,
   dragFree: boolean,
@@ -121,7 +121,7 @@ export function DragHandler(
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    events.emit('pointerDown')
+    eventHandler.emit('pointerDown')
 
     if (clearPreventClick) preventClick = false
     if (preventDefault) evt.preventDefault()
@@ -163,7 +163,7 @@ export function DragHandler(
     scrollBody.useSpeed(isBelowThreshold ? 9 : speed).useMass(mass)
     scrollTo.distance(force, !dragFree)
     isMouse = false
-    events.emit('pointerUp')
+    eventHandler.emit('pointerUp')
   }
 
   function click(evt: MouseEvent): void {

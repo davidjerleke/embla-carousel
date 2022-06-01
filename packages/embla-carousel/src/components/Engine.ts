@@ -5,11 +5,13 @@ import { Counter, CounterType } from './Counter'
 import { Direction, DirectionType } from './Direction'
 import { DragHandler, DragHandlerType } from './DragHandler'
 import { DragTracker } from './DragTracker'
-import { EventEmitterType } from './EventEmitter'
+import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
+import { OptionsHandlerType } from './OptionsHandler'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
+import { PluginsHandlerType } from './PluginsHandler'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
@@ -39,6 +41,8 @@ export type Engine = {
   limit: LimitType
   location: Vector1DType
   options: OptionsType
+  optionsHandler: OptionsHandlerType
+  pluginsHandler: PluginsHandlerType
   percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
@@ -61,7 +65,9 @@ export function Engine(
   container: HTMLElement,
   slides: HTMLElement[],
   options: OptionsType,
-  events: EventEmitterType,
+  optionsHandler: OptionsHandlerType,
+  pluginsHandler: PluginsHandlerType,
+  eventHandler: EventHandlerType,
 ): Engine {
   // Options
   const {
@@ -132,10 +138,10 @@ export function Engine(
 
     if (settled && !engine.dragHandler.pointerDown()) {
       engine.animation.stop()
-      events.emit('settle')
+      eventHandler.emit('settle')
     }
     if (!settled) {
-      events.emit('scroll')
+      eventHandler.emit('scroll')
     }
     if (loop) {
       engine.scrollLooper.loop(engine.scrollBody.direction())
@@ -165,7 +171,7 @@ export function Engine(
     indexPrevious,
     scrollTarget,
     target,
-    events,
+    eventHandler,
   )
   const slidesInView = SlidesInView(
     viewSize,
@@ -190,7 +196,7 @@ export function Engine(
     scrollBody,
     scrollTarget,
     index,
-    events,
+    eventHandler,
     percentOfView,
     loop,
     dragFree,
@@ -212,6 +218,8 @@ export function Engine(
     limit,
     location,
     options,
+    optionsHandler,
+    pluginsHandler,
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,

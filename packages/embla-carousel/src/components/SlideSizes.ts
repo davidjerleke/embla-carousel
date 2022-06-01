@@ -22,13 +22,13 @@ export function SlideSizes(
   function measureStartGap(): number {
     if (!includeEdgeGap) return 0
     const slideRect = slideRects[0]
-    return Math.abs(containerRect[startEdge] - slideRect[startEdge])
+    return mathAbs(containerRect[startEdge] - slideRect[startEdge])
   }
 
   function measureEndGap(): number {
     if (!includeEdgeGap) return 0
     const style = window.getComputedStyle(arrayLast(slides))
-    return parseFloat(style.getPropertyValue('margin-'.concat(endEdge)))
+    return parseFloat(style.getPropertyValue(`margin-${endEdge}`))
   }
 
   function measureWithGaps(): number[] {

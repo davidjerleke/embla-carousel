@@ -1,6 +1,6 @@
 import { AnimationType } from './Animation'
 import { CounterType } from './Counter'
-import { EventEmitterType } from './EventEmitter'
+import { EventHandlerType } from './EventHandler'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
 import { Vector1DType } from './Vector1d'
 
@@ -15,7 +15,7 @@ export function ScrollTo(
   indexPrevious: CounterType,
   scrollTarget: ScrollTargetType,
   targetVector: Vector1DType,
-  events: EventEmitterType,
+  eventHandler: EventHandlerType,
 ): ScrollToType {
   function scrollTo(target: TargetType): void {
     const distanceDiff = target.distance
@@ -28,7 +28,7 @@ export function ScrollTo(
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())
       indexCurrent.set(target.index)
-      events.emit('select')
+      eventHandler.emit('select')
     }
   }
 

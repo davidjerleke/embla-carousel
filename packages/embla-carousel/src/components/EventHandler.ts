@@ -12,35 +12,35 @@ export type EmblaEventType =
   | 'reInit'
   | 'resize'
 
-export type EventEmitterType = {
-  emit: (evt: EmblaEventType) => EventEmitterType
-  on: (evt: EmblaEventType, cb: CallbackType) => EventEmitterType
-  off: (evt: EmblaEventType, cb: CallbackType) => EventEmitterType
+export type EventHandlerType = {
+  emit: (evt: EmblaEventType) => EventHandlerType
+  on: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
+  off: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
 }
 
-export function EventEmitter(): EventEmitterType {
+export function EventHandler(): EventHandlerType {
   const listeners: ListenersType = {}
 
   function getListeners(evt: EmblaEventType): CallbackType[] {
     return listeners[evt] || []
   }
 
-  function emit(evt: EmblaEventType): EventEmitterType {
+  function emit(evt: EmblaEventType): EventHandlerType {
     getListeners(evt).forEach((e) => e(evt))
     return self
   }
 
-  function on(evt: EmblaEventType, cb: CallbackType): EventEmitterType {
+  function on(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
     listeners[evt] = getListeners(evt).concat([cb])
     return self
   }
 
-  function off(evt: EmblaEventType, cb: CallbackType): EventEmitterType {
+  function off(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
     listeners[evt] = getListeners(evt).filter((e) => e !== cb)
     return self
   }
 
-  const self: EventEmitterType = {
+  const self: EventHandlerType = {
     emit,
     off,
     on,
