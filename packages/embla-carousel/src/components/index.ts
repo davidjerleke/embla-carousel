@@ -114,7 +114,7 @@ function EmblaCarousel(
     withPlugins?: EmblaPluginType[],
   ): void {
     const startIndex = selectedScrollSnap()
-    const newOptions = Object.assign({ startIndex }, withOptions)
+    const newOptions = optionsHandler.merge({ startIndex }, withOptions)
     deActivate()
     activate(newOptions, withPlugins || plugins)
     eventHandler.emit('reInit')
