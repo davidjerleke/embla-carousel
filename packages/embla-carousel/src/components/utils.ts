@@ -94,10 +94,10 @@ export function objectsAreEqual(
   if (objectAKeys.length !== objectBKeys.length) return false
 
   return objectAKeys.every((key) => {
-    const optionA = objectA[key]
-    const optionB = objectB[key]
-    if (typeof optionA === 'function') return `${optionA}` === `${optionB}`
-    if (!isRecord(optionA) || !isRecord(optionB)) return optionA === optionB
-    return objectsAreEqual(optionA, optionB)
+    const valueA = objectA[key]
+    const valueB = objectB[key]
+    if (typeof valueA === 'function') return `${valueA}` === `${valueB}`
+    if (!isRecord(valueA) || !isRecord(valueB)) return valueA === valueB
+    return objectsAreEqual(valueA, valueB)
   })
 }
