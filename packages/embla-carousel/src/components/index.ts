@@ -1,4 +1,4 @@
-import { Engine } from './Engine'
+import { Engine, EngineType } from './Engine'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType } from './Options'
@@ -17,7 +17,7 @@ export type EmblaCarouselType = {
   canScrollPrev: () => boolean
   clickAllowed: () => boolean
   containerNode: () => HTMLElement
-  internalEngine: () => Engine
+  internalEngine: () => EngineType
   destroy: () => void
   off: EventHandlerType['off']
   on: EventHandlerType['on']
@@ -48,7 +48,7 @@ function EmblaCarousel(
   const reInit = reActivate
 
   let destroyed = false
-  let engine: Engine
+  let engine: EngineType
   let optionsBase = optionsHandler.merge(
     defaultOptions,
     EmblaCarousel.globalOptions,
@@ -206,7 +206,7 @@ function EmblaCarousel(
     return engine.dragHandler.clickAllowed()
   }
 
-  function internalEngine(): Engine {
+  function internalEngine(): EngineType {
     return engine
   }
 

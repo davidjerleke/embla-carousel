@@ -29,7 +29,7 @@ import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
-export type Engine = {
+export type EngineType = {
   axis: AxisType
   direction: DirectionType
   animation: AnimationType
@@ -68,7 +68,7 @@ export function Engine(
   optionsHandler: OptionsHandlerType,
   pluginsHandler: PluginsHandlerType,
   eventHandler: EventHandlerType,
-): Engine {
+): EngineType {
   // Options
   const {
     align,
@@ -204,7 +204,7 @@ export function Engine(
   )
 
   // Slider
-  const engine: Engine = {
+  const engine: EngineType = {
     containerRect,
     slideRects,
     animation,
