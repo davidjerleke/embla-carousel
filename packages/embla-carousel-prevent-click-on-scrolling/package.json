@@ -2,7 +2,7 @@
   "name": "embla-carousel-prevent-click-on-scrolling",
   "version": "6.2.0",
   "author": "Raul Pereira da Silva",
-  "description": "A class name toggle plugin for Embla Carousel",
+  "description": "A prevent clicking when scrolling plugin for Embla Carousel",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidjerleke/embla-carousel"
