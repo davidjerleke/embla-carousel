@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "6.2.0",
+  "version": "7.0.0-rc.0",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -45,9 +45,9 @@
     "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
-    "embla-carousel-auto-height": "6.2.0",
-    "embla-carousel-autoplay": "6.2.0",
-    "embla-carousel-class-names": "6.2.0",
+    "embla-carousel-auto-height": "7.0.0-rc.0",
+    "embla-carousel-autoplay": "7.0.0-rc.0",
+    "embla-carousel-class-names": "7.0.0-rc.0",
     "embla-carousel-wheel-gestures": "2.2.0",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",

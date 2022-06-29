@@ -7814,7 +7814,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel-auto-height@6.2.0, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
+"embla-carousel-auto-height@7.0.0-rc.0, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
   version: 0.0.0-use.local
   resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"
   dependencies:
@@ -7830,11 +7830,11 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 6.2.0
+    embla-carousel: 7.0.0-rc.0
   languageName: unknown
   linkType: soft
 
-"embla-carousel-autoplay@6.2.0, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
+"embla-carousel-autoplay@7.0.0-rc.0, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
   dependencies:
@@ -7850,11 +7850,11 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 6.2.0
+    embla-carousel: 7.0.0-rc.0
   languageName: unknown
   linkType: soft
 
-"embla-carousel-class-names@6.2.0, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
+"embla-carousel-class-names@7.0.0-rc.0, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
   version: 0.0.0-use.local
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
@@ -7870,7 +7870,7 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 6.2.0
+    embla-carousel: 7.0.0-rc.0
   languageName: unknown
   linkType: soft
 
@@ -7891,8 +7891,8 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     babel-plugin-styled-components: ^2.0.2
-    embla-carousel-autoplay: 6.2.0
-    embla-carousel-react: 6.2.0
+    embla-carousel-autoplay: 7.0.0-rc.0
+    embla-carousel-react: 7.0.0-rc.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7941,7 +7941,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react@6.2.0, embla-carousel-react@workspace:packages/embla-carousel-react":
+"embla-carousel-react@7.0.0-rc.0, embla-carousel-react@workspace:packages/embla-carousel-react":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react@workspace:packages/embla-carousel-react"
   dependencies:
@@ -7949,7 +7949,7 @@ __metadata:
     "@types/react": ^18.0.8
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel: 6.2.0
+    embla-carousel: 7.0.0-rc.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7974,16 +7974,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel@6.2.0, embla-carousel@workspace:packages/embla-carousel":
+"embla-carousel@7.0.0-rc.0, embla-carousel@workspace:packages/embla-carousel":
   version: 0.0.0-use.local
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:
     "@types/jest": ^27.4.0
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel-auto-height: 6.2.0
-    embla-carousel-autoplay: 6.2.0
-    embla-carousel-class-names: 6.2.0
+    embla-carousel-auto-height: 7.0.0-rc.0
+    embla-carousel-autoplay: 7.0.0-rc.0
+    embla-carousel-class-names: 7.0.0-rc.0
     embla-carousel-wheel-gestures: 2.2.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
