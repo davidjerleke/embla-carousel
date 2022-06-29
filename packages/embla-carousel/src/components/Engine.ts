@@ -5,28 +5,29 @@ import { Counter, CounterType } from './Counter'
 import { Direction, DirectionType } from './Direction'
 import { DragHandler, DragHandlerType } from './DragHandler'
 import { DragTracker } from './DragTracker'
-import { EventEmitterType } from './EventEmitter'
+import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
-import { PxToPercent, PxToPercentType } from './PxToPercent'
+import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
 import { ScrollLimit } from './ScrollLimit'
 import { ScrollLooper, ScrollLooperType } from './ScrollLooper'
 import { ScrollProgress, ScrollProgressType } from './ScrollProgress'
-import { ScrollSnap } from './ScrollSnap'
+import { ScrollSnaps } from './ScrollSnaps'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
+import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
-export type Engine = {
+export type EngineType = {
   axis: AxisType
   direction: DirectionType
   animation: AnimationType
@@ -38,12 +39,13 @@ export type Engine = {
   limit: LimitType
   location: Vector1DType
   options: OptionsType
-  pxToPercent: PxToPercentType
+  percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
   eventStore: EventStoreType
   slideLooper: SlideLooperType
   slidesInView: SlidesInViewType
+  slidesToScroll: SlidesToScrollType
   target: Vector1DType
   translate: TranslateType
   scrollTo: ScrollToType
@@ -59,8 +61,8 @@ export function Engine(
   container: HTMLElement,
   slides: HTMLElement[],
   options: OptionsType,
-  events: EventEmitterType,
-): Engine {
+  eventHandler: EventHandlerType,
+): EngineType {
   // Options
   const {
     align,
@@ -71,7 +73,7 @@ export function Engine(
     loop,
     speed,
     dragFree,
-    slidesToScroll,
+    slidesToScroll: groupSlides,
     skipSnaps,
     containScroll,
   } = options
@@ -81,35 +83,40 @@ export function Engine(
   const slideRects = slides.map((slide) => slide.getBoundingClientRect())
   const direction = Direction(contentDirection)
   const axis = Axis(scrollAxis, contentDirection)
-  const pxToPercent = PxToPercent(axis.measureSize(containerRect))
-  const viewSize = pxToPercent.totalPercent
+  const viewSize = axis.measureSize(containerRect)
+  const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
+  const containSnaps = !loop && containScroll !== ''
+  const includeEdgeGap = loop || containScroll !== ''
   const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
-    pxToPercent,
-    slides,
-    slideRects,
-    loop,
-  )
-  const { snaps, snapsAligned } = ScrollSnap(
-    axis,
-    alignment,
-    pxToPercent,
     containerRect,
     slideRects,
+    slides,
+    includeEdgeGap,
+  )
+  const slidesToScroll = SlidesToScroll(
+    viewSize,
+    slideSizesWithGaps,
+    groupSlides,
+  )
+  const { snaps, snapsAligned } = ScrollSnaps(
+    axis,
+    alignment,
+    containerRect,
+    slideRects,
+    slideSizesWithGaps,
     slidesToScroll,
+    containSnaps,
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained } = ScrollContain(
     viewSize,
     contentSize,
-    snaps,
     snapsAligned,
     containScroll,
   )
-
-  const contain = !loop && containScroll !== ''
-  const scrollSnaps = contain ? snapsContained : snapsAligned
+  const scrollSnaps = containSnaps ? snapsContained : snapsAligned
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
@@ -125,10 +132,10 @@ export function Engine(
 
     if (settled && !engine.dragHandler.pointerDown()) {
       engine.animation.stop()
-      events.emit('settle')
+      eventHandler.emit('settle')
     }
     if (!settled) {
-      events.emit('scroll')
+      eventHandler.emit('scroll')
     }
     if (loop) {
       engine.scrollLooper.loop(engine.scrollBody.direction())
@@ -158,7 +165,7 @@ export function Engine(
     indexPrevious,
     scrollTarget,
     target,
-    events,
+    eventHandler,
   )
   const slidesInView = SlidesInView(
     viewSize,
@@ -176,21 +183,22 @@ export function Engine(
     direction,
     root,
     target,
-    dragFree,
-    DragTracker(axis, pxToPercent),
+    DragTracker(axis),
     location,
     animation,
     scrollTo,
     scrollBody,
     scrollTarget,
     index,
-    events,
+    eventHandler,
+    percentOfView,
     loop,
+    dragFree,
     skipSnaps,
   )
 
-  // Slider
-  const engine: Engine = {
+  // Engine
+  const engine: EngineType = {
     containerRect,
     slideRects,
     animation,
@@ -198,15 +206,21 @@ export function Engine(
     direction,
     dragHandler,
     eventStore: EventStore(),
-    pxToPercent,
+    percentOfView,
     index,
     indexPrevious,
     limit,
     location,
     options,
     scrollBody,
-    scrollBounds: ScrollBounds(limit, location, target, scrollBody),
-    scrollLooper: ScrollLooper(contentSize, pxToPercent, limit, location, [
+    scrollBounds: ScrollBounds(
+      limit,
+      location,
+      target,
+      scrollBody,
+      percentOfView,
+    ),
+    scrollLooper: ScrollLooper(contentSize, limit, location, [
       location,
       target,
     ]),
@@ -216,6 +230,7 @@ export function Engine(
     scrollTo,
     slideLooper: SlideLooper(
       axis,
+      direction,
       viewSize,
       contentSize,
       slideSizesWithGaps,
@@ -224,6 +239,7 @@ export function Engine(
       location,
       slides,
     ),
+    slidesToScroll,
     slidesInView,
     slideIndexes,
     target,

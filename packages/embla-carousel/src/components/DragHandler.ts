@@ -2,7 +2,7 @@ import { AnimationType } from './Animation'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
-import { EventEmitterType } from './EventEmitter'
+import { EventHandlerType } from './EventHandler'
 import { AxisType } from './Axis'
 import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
@@ -10,6 +10,7 @@ import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { deltaAbs, factorAbs, mathAbs, mathSign } from './utils'
+import { PercentOfViewType } from './PercentOfView'
 
 export type DragHandlerType = {
   addActivationEvents: () => void
@@ -23,7 +24,6 @@ export function DragHandler(
   direction: DirectionType,
   rootNode: HTMLElement,
   target: Vector1DType,
-  dragFree: boolean,
   dragTracker: DragTrackerType,
   location: Vector1DType,
   animation: AnimationType,
@@ -31,8 +31,10 @@ export function DragHandler(
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
   index: CounterType,
-  events: EventEmitterType,
+  eventHandler: EventHandlerType,
+  percentOfView: PercentOfViewType,
   loop: boolean,
+  dragFree: boolean,
   skipSnaps: boolean,
 ): DragHandlerType {
   const { cross: crossAxis } = axis
@@ -40,11 +42,11 @@ export function DragHandler(
   const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
+  const dragThreshold = percentOfView.measure(20)
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 5 : 16
   const baseMass = 1
-  const dragThreshold = 20
 
   let startScroll = 0
   let startCross = 0
@@ -119,7 +121,7 @@ export function DragHandler(
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    events.emit('pointerDown')
+    eventHandler.emit('pointerDown')
 
     if (clearPreventClick) preventClick = false
     if (preventDefault) evt.preventDefault()
@@ -161,7 +163,7 @@ export function DragHandler(
     scrollBody.useSpeed(isBelowThreshold ? 9 : speed).useMass(mass)
     scrollTo.distance(force, !dragFree)
     isMouse = false
-    events.emit('pointerUp')
+    eventHandler.emit('pointerUp')
   }
 
   function click(evt: MouseEvent): void {

@@ -1,14 +1,14 @@
-import { EventEmitter, EventEmitterType } from '../components/EventEmitter'
+import { EventHandler, EventHandlerType } from '../components/EventHandler'
 
 let callback1: () => void
 let callback2: () => void
-let eventEmitter: EventEmitterType
+let eventEmitter: EventHandlerType
 
-describe('EventEmitter', () => {
+describe('EventHandler', () => {
   beforeEach(() => {
     callback1 = jest.fn()
     callback2 = jest.fn()
-    eventEmitter = EventEmitter().on('init', callback1).on('init', callback2)
+    eventEmitter = EventHandler().on('init', callback1).on('init', callback2)
   })
 
   describe('Runs all callbacks when they are', () => {

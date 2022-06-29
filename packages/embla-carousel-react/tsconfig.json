@@ -10,6 +10,6 @@
     "moduleResolution": "node",
     "jsx": "react"
   },
-  "include": ["src/index.ts"],
+  "include": ["src"],
   "exclude": ["node_modules", "**/*.test.ts"]
 }

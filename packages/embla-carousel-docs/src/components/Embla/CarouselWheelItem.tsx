@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
+import { flushSync } from 'react-dom'
 import {
   WheelWrapper,
   Wheel,
@@ -93,69 +94,85 @@ type PropType = {
 export const CarouselWheelItem = (props: PropType) => {
   const { id, slideCount, perspective, label, loop = false } = props
   const carouselId = `${id}-carousel-items`
-  const [emblaRef, embla] = useEmblaCarousel({
+  const [emblaRef, emblaApi] = useEmblaCarousel({
     loop,
     axis: 'y',
     dragFree: true,
-    inViewThreshold: 0.5,
   })
   const [wheelReady, setWheelReady] = useState(false)
   const [wheelRotation, setWheelRotation] = useState(0)
   const rootElement = useRef<HTMLDivElement>(null)
-  const rootElementSize = useRef(0)
-  const totalRadius = slideCount * WHEEL_ITEM_RADIUS
-  const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS
+  const rootNodeSize = useRef(0)
+  const totalRadius = useRef(0)
+  const rotation = useRef(0)
   const slideStyles = getSlideStyles(
-    embla,
+    emblaApi,
     loop,
     slideCount,
-    totalRadius,
+    totalRadius.current,
     wheelRotation,
   )
 
-  const getRootElementSize = useCallback(() => {
-    if (!rootElement.current) return 0
-    return rootElement.current.getBoundingClientRect().height
-  }, [])
+  const inactivateEmblaTransform = useCallback(() => {
+    if (!emblaApi) return
+    const { translate, slideLooper } = emblaApi.internalEngine()
+    translate.clear()
+    translate.toggleActive(false)
+    slideLooper.loopPoints.forEach(({ translate }) => {
+      translate.clear()
+      translate.toggleActive(false)
+    })
+  }, [emblaApi])
 
-  const setRotation = useCallback(() => {
-    if (!embla) return
-    const rotation = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
-    setWheelRotation(rotation * embla.scrollProgress())
-  }, [setWheelRotation, slideCount, rotationOffset, embla])
+  const readRootNodeSize = useCallback(() => {
+    if (!emblaApi) return 0
+    return emblaApi.rootNode().getBoundingClientRect().height
+  }, [emblaApi])
+
+  const rotateWheel = useCallback(() => {
+    if (!emblaApi) return
+    setWheelRotation(rotation.current * emblaApi.scrollProgress())
+  }, [emblaApi])
 
   useEffect(() => {
-    if (embla) {
-      rootElementSize.current = getRootElementSize()
-      setWheelReady(true)
-      embla.internalEngine().translate.toggleActive(false)
-      setRotation()
+    if (!emblaApi) return
 
-      embla.on('pointerUp', () => {
-        const { scrollTo, target, location } = embla.internalEngine()
-        const distanceToTarget = target.get() - location.get()
-        scrollTo.distance(distanceToTarget * 0.1, true)
+    rootNodeSize.current = readRootNodeSize()
+    const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS
+    totalRadius.current = slideCount * WHEEL_ITEM_RADIUS
+    rotation.current = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
+
+    emblaApi.on('pointerUp', () => {
+      const { scrollTo, target, location } = emblaApi.internalEngine()
+      const diffToTarget = target.get() - location.get()
+      const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 3 ? 20 : 0.1
+      const distance = diffToTarget * factor
+      scrollTo.distance(distance, true)
+    })
+
+    emblaApi.on('scroll', () => {
+      flushSync(() => rotateWheel())
+    })
+
+    emblaApi.on('resize', () => {
+      const newRootNodeSize = readRootNodeSize()
+      if (rootNodeSize.current === newRootNodeSize) return
+
+      rootNodeSize.current = newRootNodeSize
+      flushSync(() => setWheelReady(false))
+
+      setWheelReady(() => {
+        emblaApi.reInit()
+        inactivateEmblaTransform()
+        rotateWheel()
+        return true
       })
+    })
 
-      embla.on('scroll', () => {
-        setRotation()
-      })
-
-      embla.on('resize', () => {
-        const newRootElementSize = getRootElementSize()
-        if (rootElementSize.current === newRootElementSize) return
-
-        rootElementSize.current = newRootElementSize
-        setWheelReady(false)
-        setWheelReady(() => {
-          embla.reInit()
-          embla.internalEngine().translate.toggleActive(false)
-          setRotation()
-          return true
-        })
-      })
-    }
-  }, [embla, setRotation, getRootElementSize])
+    setWheelReady(true)
+    inactivateEmblaTransform()
+    rotateWheel()
+  }, [emblaApi, inactivateEmblaTransform, readRootNodeSize, rotateWheel])
 
   return (
     <WheelWrapper $perspective={perspective}>

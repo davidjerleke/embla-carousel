@@ -2,21 +2,27 @@ import packageJson from './package.json'
 import {
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
+  CONFIG_GLOBALS as CONFIG_GLOBALS_DEFAULT,
   babel,
   typescript,
   resolve,
   terser,
-  kebabCaseToPascalCase,
+  kebabToPascalCase,
 } from '../../rollup.config'
+
+const CONFIG_GLOBALS = {
+  ...CONFIG_GLOBALS_DEFAULT,
+  react: 'React',
+}
 
 export default [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: `${packageJson.name}.js`,
+        file: `${packageJson.name}.cjs.js`,
         format: 'cjs',
-        globals: { react: 'React' },
+        globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true,
         exports: 'auto',
@@ -24,21 +30,21 @@ export default [
       {
         file: `${packageJson.name}.esm.js`,
         format: 'esm',
-        globals: { react: 'React' },
+        globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true,
       },
       {
         file: `${packageJson.name}.umd.js`,
         format: 'umd',
-        globals: { react: 'React' },
+        globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: false,
-        name: kebabCaseToPascalCase(packageJson.name),
+        name: kebabToPascalCase(packageJson.name),
         plugins: [terser()],
       },
     ],
     plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)],
-    external: ['react'],
+    external: Object.keys(CONFIG_GLOBALS),
   },
 ]

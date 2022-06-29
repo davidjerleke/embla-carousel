@@ -1,32 +1,36 @@
 import { defaultOptions, AutoHeightOptionsType, OptionsType } from './Options'
 import { SlideBoundType } from 'embla-carousel/components/SlidesInView'
-import {
+import { CreatePluginType } from 'embla-carousel/components/Plugins'
+import EmblaCarousel, {
   EmblaCarouselType,
   EmblaEventType,
-  EmblaPluginType,
 } from 'embla-carousel'
 
-export type AutoHeightType = EmblaPluginType<OptionsType>
+export type AutoHeightType = CreatePluginType<{}, OptionsType>
 
 function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
-  const options = Object.assign(
-    {},
+  const optionsHandler = EmblaCarousel.optionsHandler()
+  const optionsBase = optionsHandler.merge(
     defaultOptions,
     AutoHeight.globalOptions,
-    userOptions,
   )
-  const { destroyHeight } = options
+  let options: AutoHeightType['options']
+  let carousel: EmblaCarouselType
+
+  let slideBounds: SlideBoundType[] = []
+  let slideHeights: number[] = []
   const heightEvents: EmblaEventType[] = ['select', 'pointerUp']
   const inViewThreshold = 0.5
 
-  let carousel: EmblaCarouselType
-  let slideBounds: SlideBoundType[] = []
-  let slideHeights: number[] = []
-
   function init(embla: EmblaCarouselType): void {
     carousel = embla
-    const { options, slidesInView, slideRects } = carousel.internalEngine()
-    if (options.axis === 'y') return
+    options = optionsHandler.atMedia(self.options)
+    const {
+      options: { axis },
+      slidesInView,
+      slideRects,
+    } = carousel.internalEngine()
+    if (axis === 'y') return
 
     slideBounds = slidesInView.findSlideBounds(undefined, inViewThreshold)
     slideHeights = slideRects.map((rect) => rect.height)
@@ -48,13 +52,14 @@ function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
   }
 
   function setContainerHeight(evt?: EmblaEventType): void {
-    const height = evt === 'destroy' ? destroyHeight : `${highestInView()}px`
+    const height =
+      evt === 'destroy' ? options.destroyHeight : `${highestInView()}px`
     carousel.containerNode().style.height = height
   }
 
   const self: AutoHeightType = {
-    name: 'AutoHeight',
-    options,
+    name: 'autoHeight',
+    options: optionsHandler.merge(optionsBase, userOptions),
     init,
     destroy,
   }

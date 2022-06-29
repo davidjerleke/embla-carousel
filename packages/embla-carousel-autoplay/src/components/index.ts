@@ -1,45 +1,42 @@
 import { defaultOptions, AutoplayOptionsType, OptionsType } from './Options'
-import { EmblaCarouselType, EmblaPluginType } from 'embla-carousel'
+import { CreatePluginType } from 'embla-carousel/components/Plugins'
+import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel'
 
-export type AutoplayType = EmblaPluginType<OptionsType> & {
-  play: () => void
-  stop: () => void
-  reset: () => void
-}
+export type AutoplayType = CreatePluginType<
+  {
+    play: () => void
+    stop: () => void
+    reset: () => void
+  },
+  OptionsType
+>
 
-function Autoplay(
-  userOptions?: AutoplayOptionsType,
-  userNode?: (emblaRoot: HTMLElement) => HTMLElement | null,
-): AutoplayType {
-  const options = Object.assign(
-    {},
+function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
+  const optionsHandler = EmblaCarousel.optionsHandler()
+  const optionsBase = optionsHandler.merge(
     defaultOptions,
     Autoplay.globalOptions,
-    userOptions,
   )
-  const {
-    playOnInit,
-    stopOnInteraction,
-    stopOnMouseEnter,
-    stopOnLastSnap,
-    delay,
-  } = options
-  const interaction = stopOnInteraction ? destroy : stop
+  let options: AutoplayType['options']
   let carousel: EmblaCarouselType
+
+  let interaction: () => void
   let timer = 0
 
   function init(embla: EmblaCarouselType): void {
     carousel = embla
+    options = optionsHandler.atMedia(self.options)
+    interaction = options.stopOnInteraction ? destroy : stop
     const { eventStore } = carousel.internalEngine()
     const emblaRoot = carousel.rootNode()
-    const root = (userNode && userNode(emblaRoot)) || emblaRoot
+    const root = (options.rootNode && options.rootNode(emblaRoot)) || emblaRoot
 
     carousel.on('pointerDown', interaction)
-    if (!stopOnInteraction) carousel.on('pointerUp', reset)
+    if (!options.stopOnInteraction) carousel.on('pointerUp', reset)
 
-    if (stopOnMouseEnter) {
+    if (options.stopOnMouseEnter) {
       eventStore.add(root, 'mouseenter', interaction)
-      if (!stopOnInteraction) eventStore.add(root, 'mouseleave', reset)
+      if (!options.stopOnInteraction) eventStore.add(root, 'mouseleave', reset)
     }
 
     eventStore.add(document, 'visibilitychange', () => {
@@ -50,19 +47,19 @@ function Autoplay(
       if (event.persisted) stop()
     })
 
-    if (playOnInit) play()
+    if (options.playOnInit) play()
   }
 
   function destroy(): void {
     carousel.off('pointerDown', interaction)
-    if (!stopOnInteraction) carousel.off('pointerUp', reset)
+    if (!options.stopOnInteraction) carousel.off('pointerUp', reset)
     stop()
     timer = 0
   }
 
   function play(): void {
     stop()
-    timer = window.setTimeout(next, delay)
+    timer = window.setTimeout(next, options.delay)
   }
 
   function stop(): void {
@@ -78,7 +75,7 @@ function Autoplay(
 
   function next(): void {
     const { index } = carousel.internalEngine()
-    const kill = stopOnLastSnap && index.get() === index.max
+    const kill = options.stopOnLastSnap && index.get() === index.max
 
     if (kill) return destroy()
 
@@ -91,8 +88,8 @@ function Autoplay(
   }
 
   const self: AutoplayType = {
-    name: 'Autoplay',
-    options,
+    name: 'autoplay',
+    options: optionsHandler.merge(optionsBase, userOptions),
     init,
     destroy,
     play,

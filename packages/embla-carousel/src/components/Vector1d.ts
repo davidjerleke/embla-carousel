@@ -1,3 +1,5 @@
+import { isNumber } from './utils'
+
 export type Vector1DType = {
   get: () => number
   set: (v: Vector1DType | number) => Vector1DType
@@ -46,7 +48,7 @@ export function Vector1D(value: number): Vector1DType {
   }
 
   function readNumber(n: Vector1DType | number): number {
-    return typeof n === 'number' ? n : n.get()
+    return isNumber(n) ? n : n.get()
   }
 
   const self: Vector1DType = {

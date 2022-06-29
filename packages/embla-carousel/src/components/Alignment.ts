@@ -1,3 +1,5 @@
+import { isNumber } from './utils'
+
 export type AlignmentOptionType = 'start' | 'center' | 'end' | number
 
 export type AlignmentType = {
@@ -27,7 +29,7 @@ export function Alignment(
   }
 
   function measure(n: number): number {
-    if (typeof align === 'number') return percent()
+    if (isNumber(align)) return percent()
     return predefined[align](n)
   }
 
