@@ -9,9 +9,7 @@ import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
-import { OptionsHandlerType } from './OptionsHandler'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
-import { PluginsHandlerType } from './PluginsHandler'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
@@ -41,8 +39,6 @@ export type EngineType = {
   limit: LimitType
   location: Vector1DType
   options: OptionsType
-  optionsHandler: OptionsHandlerType
-  pluginsHandler: PluginsHandlerType
   percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
   dragHandler: DragHandlerType
@@ -65,8 +61,6 @@ export function Engine(
   container: HTMLElement,
   slides: HTMLElement[],
   options: OptionsType,
-  optionsHandler: OptionsHandlerType,
-  pluginsHandler: PluginsHandlerType,
   eventHandler: EventHandlerType,
 ): EngineType {
   // Options
@@ -203,7 +197,7 @@ export function Engine(
     skipSnaps,
   )
 
-  // Slider
+  // Engine
   const engine: EngineType = {
     containerRect,
     slideRects,
@@ -218,8 +212,6 @@ export function Engine(
     limit,
     location,
     options,
-    optionsHandler,
-    pluginsHandler,
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,

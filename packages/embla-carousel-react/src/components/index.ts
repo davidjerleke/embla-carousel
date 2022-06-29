@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useMemo } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { canUseDOM } from './utils'
 import EmblaCarousel, {
   EmblaCarouselType,
@@ -19,43 +19,35 @@ function useEmblaCarousel(
   options: EmblaOptionsType = {},
   plugins: EmblaPluginType[] = [],
 ): UseEmblaCarouselType {
+  const optionsHandler = useRef(EmblaCarousel.optionsHandler())
+  const storedOptions = useRef(options)
+  const storedPlugins = useRef(plugins)
   const [embla, setEmbla] = useState<EmblaCarouselType>()
   const [viewport, setViewport] = useState<HTMLElement>()
-  const storedOptions = useRef<EmblaOptionsType>(options)
-  const storedPlugins = useRef<EmblaPluginType[]>(plugins)
-
-  const activeOptions = useMemo<EmblaOptionsType>(() => {
-    if (
-      !embla
-        ?.internalEngine()
-        .optionsHandler.areEqual(storedOptions.current, options)
-    ) {
-      storedOptions.current = options
-    }
-    return storedOptions.current
-  }, [embla, options])
-
-  const activePlugins = useMemo<EmblaPluginType[]>(() => {
-    if (
-      !embla
-        ?.internalEngine()
-        .pluginsHandler.areEqual(storedPlugins.current, plugins)
-    ) {
-      storedPlugins.current = plugins
-    }
-    return storedPlugins.current
-  }, [embla, plugins])
 
   useEffect(() => {
     if (canUseDOM() && viewport) {
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-      const newEmbla = EmblaCarousel(viewport, activeOptions, activePlugins)
+      const newEmbla = EmblaCarousel(
+        viewport,
+        storedOptions.current,
+        storedPlugins.current,
+      )
       setEmbla(newEmbla)
       return () => newEmbla.destroy()
     } else {
       setEmbla(undefined)
     }
-  }, [viewport, activeOptions, activePlugins, setEmbla])
+  }, [viewport, setEmbla])
+
+  useEffect(() => {
+    if (!embla) return
+    if (optionsHandler.current.areEqual(storedOptions.current, options)) return
+
+    storedOptions.current = options
+    storedPlugins.current = plugins
+    embla.reInit(storedOptions.current, storedPlugins.current)
+  }, [embla, options, plugins])
 
   return [<EmblaViewportRefType>setViewport, embla]
 }

@@ -23,23 +23,28 @@ type PropType = {
 const Carousel = (props: PropType) => {
   const { id, options, slideSizes, inView = false } = props
   const carouselId = `${id}-carousel-items`
-  const autoplayRef = useRef(Autoplay({ stopOnInteraction: true }))
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [autoplayRef.current])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    Autoplay({ stopOnInteraction: true }),
+  ])
   const [userTouched, setUserTouched] = useState(false)
   const ariaLive = !userTouched && inView ? 'off' : 'polite'
 
   useEffect(() => {
+    if (!emblaApi) return
+
     if (!inView) {
-      autoplayRef.current.stop()
+      emblaApi.plugins().autoplay?.stop()
     } else if (!userTouched) {
-      autoplayRef.current.play()
+      emblaApi.plugins().autoplay?.play()
     }
-  }, [inView])
+  }, [emblaApi, inView])
 
   const onUserTouch = useCallback(() => {
-    autoplayRef.current.stop()
+    if (!emblaApi) return
+
+    emblaApi.plugins().autoplay?.stop()
     setUserTouched(true)
-  }, [setUserTouched])
+  }, [emblaApi, setUserTouched])
 
   useEffect(() => {
     emblaApi?.on('pointerDown', onUserTouch)

@@ -4,7 +4,7 @@ import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
-import { EmblaPluginType } from './Plugins'
+import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 
 export type EmblaNodesType = {
   root: HTMLElement
@@ -21,6 +21,7 @@ export type EmblaCarouselType = {
   destroy: () => void
   off: EventHandlerType['off']
   on: EventHandlerType['on']
+  plugins: () => EmblaPluginsType
   previousScrollSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
   rootNode: () => HTMLElement
@@ -54,8 +55,8 @@ function EmblaCarousel(
     EmblaCarousel.globalOptions,
   )
   let options = optionsHandler.merge(optionsBase)
-  let pluginsBase: EmblaPluginType[] = []
-  let plugins: EmblaPluginType[] = []
+  let pluginList: EmblaPluginType[] = []
+  let pluginApis: EmblaPluginsType
   let rootSize = 0
   let root: HTMLElement
   let container: HTMLElement
@@ -79,23 +80,14 @@ function EmblaCarousel(
 
     optionsBase = optionsHandler.merge(optionsBase, withOptions)
     options = optionsHandler.atMedia(optionsBase)
-    engine = Engine(
-      root,
-      container,
-      slides,
-      options,
-      optionsHandler,
-      pluginsHandler,
-      eventHandler,
-    )
+    engine = Engine(root, container, slides, options, eventHandler)
     rootSize = engine.axis.measureSize(root.getBoundingClientRect())
 
     if (!options.active) return deActivate()
 
     engine.translate.to(engine.location)
-    pluginsBase = Object.assign([], withPlugins)
-    plugins = pluginsHandler.filterActive(pluginsBase)
-    plugins.forEach((plugin) => plugin.init(self))
+    pluginList = withPlugins || pluginList
+    pluginApis = pluginsHandler.init(pluginList, self)
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -114,9 +106,8 @@ function EmblaCarousel(
     withPlugins?: EmblaPluginType[],
   ): void {
     const startIndex = selectedScrollSnap()
-    const newOptions = optionsHandler.merge({ startIndex }, withOptions)
     deActivate()
-    activate(newOptions, withPlugins || plugins)
+    activate(optionsHandler.merge({ startIndex }, withOptions), withPlugins)
     eventHandler.emit('reInit')
   }
 
@@ -126,7 +117,7 @@ function EmblaCarousel(
     engine.eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
-    plugins.forEach((plugin) => plugin.destroy())
+    pluginsHandler.destroy()
   }
 
   function destroy(): void {
@@ -142,8 +133,7 @@ function EmblaCarousel(
     const optionsChanged = !optionsHandler.areEqual(newOptions, options)
     const newRootSize = engine.axis.measureSize(root.getBoundingClientRect())
     const rootSizeChanged = rootSize !== newRootSize
-    const newPlugins = pluginsHandler.filterActive(pluginsBase)
-    const pluginsChanged = !pluginsHandler.areEqual(newPlugins, plugins)
+    const pluginsChanged = pluginsHandler.haveChanged()
 
     if (rootSizeChanged || optionsChanged || pluginsChanged) reActivate()
     eventHandler.emit('resize')
@@ -206,6 +196,10 @@ function EmblaCarousel(
     return engine.dragHandler.clickAllowed()
   }
 
+  function plugins(): EmblaPluginsType {
+    return pluginApis
+  }
+
   function internalEngine(): EngineType {
     return engine
   }
@@ -231,6 +225,7 @@ function EmblaCarousel(
     destroy,
     off,
     on,
+    plugins,
     previousScrollSnap,
     reInit,
     rootNode,
@@ -252,5 +247,6 @@ function EmblaCarousel(
 }
 
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
+EmblaCarousel.optionsHandler = OptionsHandler
 
 export default EmblaCarousel

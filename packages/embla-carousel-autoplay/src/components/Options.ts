@@ -6,6 +6,7 @@ export type OptionsType = CreateOptionsType<{
   stopOnInteraction: boolean
   stopOnMouseEnter: boolean
   stopOnLastSnap: boolean
+  rootNode: ((emblaRoot: HTMLElement) => HTMLElement | null) | null
 }>
 
 export const defaultOptions: OptionsType = {
@@ -16,6 +17,7 @@ export const defaultOptions: OptionsType = {
   stopOnInteraction: true,
   stopOnMouseEnter: false,
   stopOnLastSnap: false,
+  rootNode: null,
 }
 
 export type AutoplayOptionsType = Partial<OptionsType>

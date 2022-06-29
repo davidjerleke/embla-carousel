@@ -1,48 +1,53 @@
+import { EmblaCarouselType } from '.'
 import { OptionsHandler } from './OptionsHandler'
-import { EmblaPluginType } from './Plugins'
-import { arrayKeys } from './utils'
+import { EmblaPluginsType, EmblaPluginType } from './Plugins'
+
+type PluginChangedHandlerType = () => boolean
 
 export type PluginsHandlerType = {
-  areEqual: (
-    pluginsA: EmblaPluginType[],
-    pluginsB: EmblaPluginType[],
-  ) => boolean
-  filterActive: (plugins: EmblaPluginType[]) => EmblaPluginType[]
+  init: (
+    plugins: EmblaPluginType[],
+    embla: EmblaCarouselType,
+  ) => EmblaPluginsType
+  destroy: () => void
+  haveChanged: PluginChangedHandlerType
 }
 
 export function PluginsHandler(): PluginsHandlerType {
-  const optionsHandler = OptionsHandler()
+  const { atMedia, areEqual } = OptionsHandler()
+  let activePlugins: EmblaPluginType[]
+  let pluginsChanged: PluginChangedHandlerType[] = []
 
-  function sortAndMapPluginsToOptions(
+  function haveChanged(): boolean {
+    return pluginsChanged.some((hasChanged) => hasChanged())
+  }
+
+  function hasChanged(plugin: EmblaPluginType): PluginChangedHandlerType {
+    const options = atMedia(plugin.options)
+    return (): boolean => !areEqual(options, atMedia(plugin.options))
+  }
+
+  function init(
     plugins: EmblaPluginType[],
-  ): EmblaPluginType['options'][] {
-    return plugins
-      .concat()
-      .sort((pluginA, pluginB) => (pluginA.name > pluginB.name ? 1 : -1))
-      .map((plugin) => optionsHandler.atMedia(plugin.options))
+    embla: EmblaCarouselType,
+  ): EmblaPluginsType {
+    pluginsChanged = plugins.map(hasChanged)
+    activePlugins = plugins.filter((plugin) => atMedia(plugin.options).active)
+    activePlugins.forEach((plugin) => plugin.init(embla))
+
+    return plugins.reduce((map, plugin) => {
+      return Object.assign(map, { [plugin.name]: plugin })
+    }, {})
   }
 
-  function areEqual(
-    pluginsA: EmblaPluginType[],
-    pluginsB: EmblaPluginType[],
-  ): boolean {
-    if (pluginsA.length !== pluginsB.length) return false
-    const optionsA = sortAndMapPluginsToOptions(pluginsA)
-    const optionsB = sortAndMapPluginsToOptions(pluginsB)
-    return arrayKeys(optionsA).every((index) =>
-      optionsHandler.areEqual(optionsA[index], optionsB[index]),
-    )
-  }
-
-  function filterActive(plugins: EmblaPluginType[]): EmblaPluginType[] {
-    return plugins.filter(
-      (plugin) => optionsHandler.atMedia(plugin.options).active,
-    )
+  function destroy(): void {
+    activePlugins = activePlugins.filter((plugin) => plugin.destroy())
   }
 
   const self: PluginsHandlerType = {
-    filterActive,
-    areEqual,
+    init,
+    destroy,
+    haveChanged,
   }
   return self
 }
