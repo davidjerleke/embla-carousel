@@ -2,10 +2,12 @@ import { ScrollBounds } from '../components/ScrollBounds'
 import { Vector1D } from '../components/Vector1d'
 import { Limit } from '../components/Limit'
 import { ScrollBody } from '../components/ScrollBody'
+import { PercentOfView } from '../components/PercentOfView'
 
 const pointerIsDown = true
 const pointerIsNotDown = false
-const pullBackThreshold = 10
+const percentOfView = PercentOfView(100)
+const pullBackThreshold = percentOfView.measure(10)
 const limit = Limit(-10, 10)
 const lessThanMinLimit = limit.min - 0.01
 const moreThanMaxLimit = limit.max + 0.01
@@ -14,7 +16,13 @@ const lessThanMaxLimit = limit.max - 0.01
 const location = Vector1D(0)
 const target = Vector1D(0)
 const scrollBody = ScrollBody(location, 10, 1)
-const scrollBounds = ScrollBounds(limit, location, target, scrollBody)
+const scrollBounds = ScrollBounds(
+  limit,
+  location,
+  target,
+  scrollBody,
+  percentOfView,
+)
 
 afterEach(() => scrollBounds.toggleActive(true))
 

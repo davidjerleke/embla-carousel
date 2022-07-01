@@ -8,6 +8,24 @@ export function map(
   return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
 }
 
+export function isNumber(subject: unknown): subject is number {
+  return typeof subject === 'number'
+}
+
+export function isObject(subject: unknown): subject is Record<string, unknown> {
+  return Object.prototype.toString.call(subject) === '[object Object]'
+}
+
+export function isArray(subject: unknown): subject is Record<number, unknown> {
+  return Array.isArray(subject)
+}
+
+export function isRecord(
+  subject: unknown,
+): subject is Record<string | number, unknown> {
+  return isObject(subject) || isArray(subject)
+}
+
 export function mathAbs(n: number): number {
   return Math.abs(n)
 }
@@ -32,33 +50,54 @@ export function roundToDecimals(decimalPoints: number): (n: number) => number {
   return (n: number): number => Math.round(n * pow) / pow
 }
 
-export function debounce(callback: () => void, time: number): () => void {
-  let timeout = 0
-  return (): void => {
-    window.clearTimeout(timeout)
-    timeout = window.setTimeout(callback, time) || 0
-  }
+export function arrayKeys<Type>(array: Type[]): number[] {
+  return objectKeys(array).map(Number)
 }
 
-export function arrayGroup<GenericType>(
-  array: GenericType[],
-  size: number,
-): GenericType[][] {
-  const groups = []
-  for (let i = 0; i < array.length; i += size) {
-    groups.push(array.slice(i, i + size))
-  }
-  return groups
-}
-
-export function arrayKeys<GenericType>(array: GenericType[]): number[] {
-  return Object.keys(array).map(Number)
-}
-
-export function arrayLast<GenericType>(array: GenericType[]): GenericType {
+export function arrayLast<Type>(array: Type[]): Type {
   return array[arrayLastIndex(array)]
 }
 
-export function arrayLastIndex<GenericType>(array: GenericType[]): number {
+export function arrayLastIndex<Type>(array: Type[]): number {
   return Math.max(0, array.length - 1)
+}
+
+export function objectKeys<Type>(object: Type): string[] {
+  return Object.keys(object)
+}
+
+export function objectsMergeDeep(
+  objectA: Record<string, unknown>,
+  objectB: Record<string, unknown>,
+): Record<string, unknown> {
+  return [objectA, objectB].reduce((mergedObjects, currentObject) => {
+    objectKeys(currentObject).forEach((key) => {
+      const valueA = mergedObjects[key]
+      const valueB = currentObject[key]
+      const areObjects = isObject(valueA) && isObject(valueB)
+
+      mergedObjects[key] = areObjects
+        ? objectsMergeDeep(valueA, valueB)
+        : valueB
+    })
+    return mergedObjects
+  }, {})
+}
+
+export function objectsAreEqual(
+  objectA: Record<string, unknown>,
+  objectB: Record<string, unknown>,
+): boolean {
+  const objectAKeys = objectKeys(objectA)
+  const objectBKeys = objectKeys(objectB)
+
+  if (objectAKeys.length !== objectBKeys.length) return false
+
+  return objectAKeys.every((key) => {
+    const valueA = objectA[key]
+    const valueB = objectB[key]
+    if (typeof valueA === 'function') return `${valueA}` === `${valueB}`
+    if (!isRecord(valueA) || !isRecord(valueB)) return valueA === valueB
+    return objectsAreEqual(valueA, valueB)
+  })
 }

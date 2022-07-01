@@ -1,8 +1,18 @@
+import packageJson from './packages/embla-carousel/package.json'
+import localTypescript from 'typescript'
 import babel from '@rollup/plugin-babel'
 import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
-import localTypescript from 'typescript'
+
+const kebabToPascalCase = (string = '') =>
+  string.replace(/(^\w|-\w)/g, (replaceString) =>
+    replaceString.replace(/-/, '').toUpperCase(),
+  )
+
+const CONFIG_GLOBALS = {
+  [packageJson.name]: kebabToPascalCase(packageJson.name),
+}
 
 const CONFIG_BABEL = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -15,18 +25,13 @@ const CONFIG_TYPESCRIPT = {
   typescript: localTypescript,
 }
 
-const kebabCaseToPascalCase = (string = '') => {
-  return string.replace(/(^\w|-\w)/g, (replaceString) =>
-    replaceString.replace(/-/, '').toUpperCase(),
-  )
-}
-
 export {
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
+  CONFIG_GLOBALS,
   babel,
   typescript,
   resolve,
   terser,
-  kebabCaseToPascalCase,
+  kebabToPascalCase,
 }

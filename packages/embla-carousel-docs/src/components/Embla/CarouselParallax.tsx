@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
+import { flushSync } from 'react-dom'
 import { imageByIndex } from './images'
 import {
   Wrapper,
@@ -41,7 +42,7 @@ const Carousel = (props: PropType) => {
 
       if (engine.options.loop) {
         engine.slideLooper.loopPoints.forEach((loopItem) => {
-          const target = loopItem.getTarget()
+          const target = loopItem.target().get()
           if (index === loopItem.index && target !== 0) {
             const sign = Math.sign(target)
             if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress)
@@ -52,12 +53,14 @@ const Carousel = (props: PropType) => {
       return diffToTarget * (-1 / PARALLAX_FACTOR) * 100
     })
     setSlideStyles(styles)
-  }, [emblaApi, setSlideStyles])
+  }, [emblaApi])
 
   useEffect(() => {
     if (!emblaApi) return
-    emblaApi.on('scroll', updateSlideStyles)
     emblaApi.on('resize', updateSlideStyles)
+    emblaApi.on('scroll', () => {
+      flushSync(() => updateSlideStyles())
+    })
     updateSlideStyles()
   }, [emblaApi, updateSlideStyles])
 

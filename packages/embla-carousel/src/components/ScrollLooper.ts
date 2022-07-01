@@ -1,5 +1,4 @@
 import { Limit, LimitType } from './Limit'
-import { PxToPercentType } from './PxToPercent'
 import { Vector1DType } from './Vector1d'
 
 export type ScrollLooperType = {
@@ -8,13 +7,13 @@ export type ScrollLooperType = {
 
 export function ScrollLooper(
   contentSize: number,
-  pxToPercent: PxToPercentType,
   limit: LimitType,
   location: Vector1DType,
   vectors: Vector1DType[],
 ): ScrollLooperType {
-  const min = limit.min + pxToPercent.measure(0.1)
-  const max = limit.max + pxToPercent.measure(0.1)
+  const jointSafety = 0.1
+  const min = limit.min + jointSafety
+  const max = limit.max + jointSafety
   const { reachedMin, reachedMax } = Limit(min, max)
 
   function shouldLoop(direction: number): boolean {

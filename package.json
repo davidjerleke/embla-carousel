@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "6.2.0",
+  "version": "7.0.0-rc01",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -26,7 +26,7 @@
     "lint": "npm-run-all prettier:report eslint:report",
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run test",
-    "start": "yarn workspaces foreach -vpi --exclude \"{embla-carousel-monorepo,embla-carousel}\" run start",
+    "start": "yarn workspace embla-carousel-docs run start",
     "build": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo}\" run build",
     "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:report",
     "eslint:fix": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:fix",
@@ -46,7 +46,7 @@
     "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
     "prettier": "2.5.1",
-    "rollup": "^2.67.0",
+    "rollup": "^2.68.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
     "typescript": "^4.5.5"

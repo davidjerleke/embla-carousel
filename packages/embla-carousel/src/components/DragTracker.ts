@@ -1,5 +1,4 @@
 import { AxisOptionType, AxisType } from './Axis'
-import { PxToPercentType } from './PxToPercent'
 import { mathAbs } from './utils'
 
 type PointerCoordType = keyof Touch | keyof MouseEvent
@@ -13,10 +12,7 @@ export type DragTrackerType = {
   readPoint: (evt: PointerEventType, evtAxis?: AxisOptionType) => number
 }
 
-export function DragTracker(
-  axis: AxisType,
-  pxToPercent: PxToPercentType,
-): DragTrackerType {
+export function DragTracker(axis: AxisType): DragTrackerType {
   const logInterval = 170
 
   let startEvent: PointerEventType
@@ -39,7 +35,7 @@ export function DragTracker(
   function pointerDown(evt: PointerEventType): number {
     startEvent = evt
     lastEvent = evt
-    return pxToPercent.measure(readPoint(evt))
+    return readPoint(evt)
   }
 
   function pointerMove(evt: PointerEventType): number {
@@ -48,7 +44,7 @@ export function DragTracker(
 
     lastEvent = evt
     if (expired) startEvent = evt
-    return pxToPercent.measure(diff)
+    return diff
   }
 
   function pointerUp(evt: PointerEventType): number {
@@ -59,7 +55,7 @@ export function DragTracker(
     const force = diffDrag / diffTime
     const isFlick = diffTime && !expired && mathAbs(force) > 0.1
 
-    return isFlick ? pxToPercent.measure(force) : 0
+    return isFlick ? force : 0
   }
 
   const self: DragTrackerType = {

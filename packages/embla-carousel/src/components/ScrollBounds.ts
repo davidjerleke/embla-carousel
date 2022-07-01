@@ -2,6 +2,7 @@ import { LimitType } from './Limit'
 import { ScrollBodyType } from './ScrollBody'
 import { Vector1DType } from './Vector1d'
 import { mathAbs } from './utils'
+import { PercentOfViewType } from './PercentOfView'
 
 export type ScrollBoundsType = {
   constrain: (pointerDown: boolean) => void
@@ -13,9 +14,10 @@ export function ScrollBounds(
   location: Vector1DType,
   target: Vector1DType,
   scrollBody: ScrollBodyType,
+  percentOfView: PercentOfViewType,
 ): ScrollBoundsType {
-  const pullBackThreshold = 10
-  const edgeOffsetTolerance = 50
+  const pullBackThreshold = percentOfView.measure(10)
+  const edgeOffsetTolerance = percentOfView.measure(50)
   const maxFriction = 0.85
   let disabled = false
 

@@ -6,7 +6,7 @@ import {
   typescript,
   resolve,
   terser,
-  kebabCaseToPascalCase,
+  kebabToPascalCase,
 } from '../../rollup.config'
 
 export default [
@@ -14,7 +14,7 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${packageJson.name}.js`,
+        file: `${packageJson.name}.cjs.js`,
         format: 'cjs',
         strict: true,
         sourcemap: true,
@@ -31,7 +31,7 @@ export default [
         format: 'umd',
         strict: true,
         sourcemap: false,
-        name: kebabCaseToPascalCase(packageJson.name),
+        name: kebabToPascalCase(packageJson.name),
         plugins: [terser()],
       },
     ],
