@@ -1,5 +1,5 @@
-import { useRef, useEffect, useState } from 'react'
-import { canUseDOM } from './utils'
+import { useRef, useEffect, useState, useCallback } from 'react'
+import { arePluginsEqual, canUseDOM } from './utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -25,6 +25,10 @@ function useEmblaCarousel(
   const [embla, setEmbla] = useState<EmblaCarouselType>()
   const [viewport, setViewport] = useState<HTMLElement>()
 
+  const reInit = useCallback(() => {
+    if (embla) embla.reInit(storedOptions.current, storedPlugins.current)
+  }, [embla])
+
   useEffect(() => {
     if (canUseDOM() && viewport) {
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
@@ -41,13 +45,18 @@ function useEmblaCarousel(
   }, [viewport, setEmbla])
 
   useEffect(() => {
-    if (!embla) return
     if (optionsHandler.current.areEqual(storedOptions.current, options)) return
 
     storedOptions.current = options
+    reInit()
+  }, [options, reInit])
+
+  useEffect(() => {
+    if (arePluginsEqual(storedPlugins.current, plugins)) return
+
     storedPlugins.current = plugins
-    embla.reInit(storedOptions.current, storedPlugins.current)
-  }, [embla, options, plugins])
+    reInit()
+  }, [plugins, reInit])
 
   return [<EmblaViewportRefType>setViewport, embla]
 }
