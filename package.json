@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "7.0.0-rc02",
+  "version": "7.0.0-rc03",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -26,7 +26,7 @@
     "format": "npm-run-all prettier:fix eslint:fix",
     "test": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run test",
     "start": "yarn workspace embla-carousel-docs run start",
-    "build": "yarn workspaces foreach -v --topological-dev --exclude \"{embla-carousel-monorepo}\" run build",
+    "build": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo}\" run build",
     "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:report",
     "eslint:fix": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo}\" run eslint:fix",
     "prettier:report": "prettier \"**/*.{js,tsx,ts,scss,json}\" --check",
