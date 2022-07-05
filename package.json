@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "7.0.0-rc01",
+  "version": "7.0.0-rc02",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -36,7 +36,7 @@
     "version:minor": "yarn workspaces foreach version minor && yarn version:push",
     "version:major": "yarn workspaces foreach version major && yarn version:push",
     "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
-    "version:push": "yarn version:create && git add -A && git push && git push --tags"
+    "version:push": "yarn install && yarn version:create && git add -A && git push && git push --tags"
   },
   "devDependencies": {
     "@babel/core": "7.17.0",
