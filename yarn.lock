@@ -7825,7 +7825,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel-auto-height@7.0.0-rc03, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
+"embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
   version: 0.0.0-use.local
   resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"
   dependencies:
@@ -7865,7 +7865,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-class-names@7.0.0-rc03, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
+"embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
   version: 0.0.0-use.local
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
@@ -7974,17 +7974,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-wheel-gestures@npm:2.2.0":
-  version: 2.2.0
-  resolution: "embla-carousel-wheel-gestures@npm:2.2.0"
-  dependencies:
-    wheel-gestures: ^2.2.5
-  peerDependencies:
-    embla-carousel: ^6.0.1
-  checksum: 60428b47390a1ac5a2f61509f1f88079493d95194d34a737bb9ebdfcf38bd453eb73e148a7757ba27f290081c902d3f595d777db881f57e14c7f0dd5b1c13aa2
-  languageName: node
-  linkType: hard
-
 "embla-carousel@7.0.0-rc03, embla-carousel@workspace:packages/embla-carousel":
   version: 0.0.0-use.local
   resolution: "embla-carousel@workspace:packages/embla-carousel"
@@ -7992,10 +7981,6 @@ __metadata:
     "@types/jest": ^27.4.0
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel-auto-height: 7.0.0-rc03
-    embla-carousel-autoplay: 7.0.0-rc03
-    embla-carousel-class-names: 7.0.0-rc03
-    embla-carousel-wheel-gestures: 2.2.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -19221,13 +19206,6 @@ typescript@^4.5.5:
     tr46: ^2.1.0
     webidl-conversions: ^6.1.0
   checksum: a87abcc6cefcece5311eb642858c8fdb234e51ec74196bfacf8def2edae1bfbffdf6acb251646ed6301f8cee44262642d8769c707256125a91387e33f405dd1e
-  languageName: node
-  linkType: hard
-
-"wheel-gestures@npm:^2.2.5":
-  version: 2.2.45
-  resolution: "wheel-gestures@npm:2.2.45"
-  checksum: 7b4b9f89e33e6696c540753a1c1a27bf9149bccac446c2ad9774f76ddf81e6dbf0f29e078f891e64c36578106a2a07220c4bb9e2fe0a9659e6ab97f1f4018fd0
   languageName: node
   linkType: hard
 
