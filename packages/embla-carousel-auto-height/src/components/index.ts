@@ -6,6 +6,12 @@ import EmblaCarousel, {
   EmblaEventType,
 } from 'embla-carousel'
 
+declare module 'embla-carousel/components/Plugins' {
+  interface EmblaPluginsType {
+    autoHeight?: AutoHeightType
+  }
+}
+
 export type AutoHeightType = CreatePluginType<{}, OptionsType>
 
 function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {

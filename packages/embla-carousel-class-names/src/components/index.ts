@@ -6,6 +6,12 @@ import EmblaCarousel, {
   EmblaEventType,
 } from 'embla-carousel'
 
+declare module 'embla-carousel/components/Plugins' {
+  interface EmblaPluginsType {
+    classNames?: ClassNamesType
+  }
+}
+
 export type ClassNamesType = CreatePluginType<{}, OptionsType>
 
 function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
