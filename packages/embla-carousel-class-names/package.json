@@ -21,7 +21,8 @@
     "touch",
     "javascript",
     "typescript",
-    "react"
+    "react",
+    "vue"
   ],
   "unpkg": "embla-carousel-class-names.umd.js",
   "main": "embla-carousel-class-names.cjs.js",

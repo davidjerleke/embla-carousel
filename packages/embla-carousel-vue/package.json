@@ -1,8 +1,8 @@
 {
-  "name": "embla-carousel-auto-height",
+  "name": "embla-carousel-vue",
   "version": "7.0.0-rc04",
   "author": "David Jerleke",
-  "description": "An auto height plugin for Embla Carousel",
+  "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davidjerleke/embla-carousel"
@@ -24,14 +24,14 @@
     "react",
     "vue"
   ],
-  "unpkg": "embla-carousel-auto-height.umd.js",
-  "main": "embla-carousel-auto-height.cjs.js",
-  "module": "embla-carousel-auto-height.esm.js",
-  "browser": "embla-carousel-auto-height.umd.js",
+  "unpkg": "embla-carousel-vue.umd.js",
+  "main": "embla-carousel-vue.cjs.js",
+  "module": "embla-carousel-vue.esm.js",
+  "browser": "embla-carousel-vue.umd.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [
-    "embla-carousel-auto-height*",
+    "embla-carousel-vue*",
     "components/**/*",
     "index.d.ts"
   ],
@@ -53,9 +53,13 @@
     "prettier": "2.5.1",
     "rollup": "^2.68.0",
     "ts-jest": "^27.1.3",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "vue": "^3.2.37"
+  },
+  "dependencies": {
+    "embla-carousel": "7.0.0-rc04"
   },
   "peerDependencies": {
-    "embla-carousel": "7.0.0-rc04"
+    "vue": "^3.2.37"
   }
 }
