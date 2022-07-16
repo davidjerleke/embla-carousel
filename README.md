@@ -64,6 +64,11 @@
     <a href="https://www.embla-carousel.com/get-started/react/">
       <img src="https://www.embla-carousel.com/react-logo.svg" width="45" height="45" />
     </a>
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/vue/">
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="45" 
+      height="45" />
+    </a>
   </p>
 </div>
 
