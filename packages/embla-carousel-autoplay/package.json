@@ -21,7 +21,8 @@
     "touch",
     "javascript",
     "typescript",
-    "react"
+    "react",
+    "vue"
   ],
   "unpkg": "embla-carousel-autoplay.umd.js",
   "main": "embla-carousel-autoplay.cjs.js",

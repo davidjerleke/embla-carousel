@@ -16,6 +16,7 @@
   "workspaces": [
     "packages/embla-carousel",
     "packages/embla-carousel-react",
+    "packages/embla-carousel-vue",
     "packages/embla-carousel-docs",
     "packages/embla-carousel-autoplay",
     "packages/embla-carousel-auto-height",
