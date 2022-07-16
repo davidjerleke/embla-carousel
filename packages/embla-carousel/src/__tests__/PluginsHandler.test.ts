@@ -1,11 +1,20 @@
-import Autoplay from 'embla-carousel-autoplay'
-import ClassNames from 'embla-carousel-class-names'
+import { EmblaPluginType } from '../components/Plugins'
 import { PluginsHandler } from '../components/PluginsHandler'
 import { initializeEmbla } from './index.test'
 
 const pluginsHandler = PluginsHandler()
-const autoplay = Autoplay()
-const classNames = ClassNames()
+const autoplay: EmblaPluginType = {
+  name: 'autoplay',
+  init: jest.fn(),
+  destroy: jest.fn(),
+  options: { active: true, breakpoints: {} },
+}
+const classNames: EmblaPluginType = {
+  name: 'classNames',
+  init: jest.fn(),
+  destroy: jest.fn(),
+  options: { active: true, breakpoints: {} },
+}
 const plugins = [autoplay, classNames]
 const embla = initializeEmbla()()
 
@@ -16,13 +25,10 @@ afterEach(() => {
 describe('PluginsHandler', () => {
   describe('Init', () => {
     test('Initializes the plugins passed', () => {
-      const autoplayInitMethod = jest.spyOn(autoplay, 'init')
-      const classNamesInitMethod = jest.spyOn(classNames, 'init')
-
       pluginsHandler.init(plugins, embla)
 
-      expect(autoplayInitMethod).toHaveBeenCalledTimes(1)
-      expect(classNamesInitMethod).toHaveBeenCalledTimes(1)
+      expect(autoplay.init).toHaveBeenCalledTimes(1)
+      expect(classNames.init).toHaveBeenCalledTimes(1)
     })
 
     test('Returns a object with plugin API:s', () => {
@@ -33,14 +39,11 @@ describe('PluginsHandler', () => {
 
   describe('Destroy', () => {
     test('Destroys the plugins', () => {
-      const autoplayDestroyMethod = jest.spyOn(autoplay, 'destroy')
-      const classNamesDestroyMethod = jest.spyOn(classNames, 'destroy')
-
       pluginsHandler.init(plugins, embla)
       pluginsHandler.destroy()
 
-      expect(autoplayDestroyMethod).toHaveBeenCalledTimes(1)
-      expect(classNamesDestroyMethod).toHaveBeenCalledTimes(1)
+      expect(autoplay.destroy).toHaveBeenCalledTimes(1)
+      expect(classNames.destroy).toHaveBeenCalledTimes(1)
     })
   })
 })
