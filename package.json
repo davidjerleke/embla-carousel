@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "7.0.0-rc04",
+  "version": "7.0.0-rc05",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
