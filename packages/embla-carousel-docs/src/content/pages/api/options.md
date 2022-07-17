@@ -30,7 +30,7 @@ import EmblaCarousel from 'embla-carousel'
 EmblaCarousel.globalOptions = { loop: true }
 ```
 
-**React users** can also set global options by assigning them to the `useEmblaCarousel` hook:
+**React** users can set global options by assigning them to the `useEmblaCarousel` hook:
 
 ```js
 import useEmblaCarousel from 'embla-carousel-react'
@@ -38,61 +38,40 @@ import useEmblaCarousel from 'embla-carousel-react'
 useEmblaCarousel.globalOptions = { loop: true }
 ```
 
+**Vue** users can set global options by assigning them to the `emblaCarouselVue` function:
+
+```js
+import emblaCarouselVue from 'embla-carousel-vue'
+
+emblaCarouselVue.globalOptions = { loop: true }
+```
+
 Make sure to assign global options **before** initializing any carousel. You should **only assign it once**, because re-assigning global options can lead to confusing code and unexpected behaviour.
-
-## Pseudo options
-
-You can set your options right in your CSS. Embla Carousel will watch the **content** property of the pseudo element `:before` on its **root node**. The **content** property has to contain a valid JSON object with the options you want to apply. Also, make sure that the content isn't displayed:
-
-```css-with-json
-.embla:before {
-  display: none;
-  content: '{ "draggable": true }';  /* <--- put it on a single line */
-}
-```
-
-The **root node** is the element you pass to the Embla Carousel constructor:
-
-```js{2}
-const emblaNode = document.querySelector('.embla')
-const embla = EmblaCarousel(emblaNode) // <-- This is the root node
-```
-
-For React users, the root node is the one that you attach the `emblaRef` to:
-
-```jsx{4}
-  const [emblaRef] = useEmblaCarousel()
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      ...
-    </div>
-  )
-```
 
 ## Option priority
 
 If two different option types are merged, and if any options are in conflict, the option type with the highest priority will have precedence. The **option priority** is as follows:
 
-- [Pseudo](/api/options/#pseudo-options) options _(highest)_
-- [Constructor](/api/options/#constructor-options) options
+- [Constructor](/api/options/#constructor-options) options _(highest)_
 - [Global](/api/options/#global-options) options _(lowest)_
 
 In the following example:
 
 ```js
-const options = { draggable: false } // <-- These options
+EmblaCarousel.globalOptions = { draggable: false }
+
+const options = { draggable: true }
 const embla = EmblaCarousel(emblaNode, options)
 ```
 
-```css-with-json
-.embla:before {
-  display: none;
-  content: '{ "draggable": true }'; /* <-- Will be overridden by these */
-}
-```
+The carousel will end up being draggable, because the constructor options will override global options.
 
-The carousel will end up being draggable, because the pseudo options will override the constructor options.
+### active
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Setting this to `false` will not activate or deactivate the carousel. Useful when used together with the [breakpoints](/api/options/#breakpoints) option to toggle the carousel active/inactive depending on media queries.
 
 ### axis
 
@@ -107,6 +86,13 @@ Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>
 Default: <BrandSecondaryText>`center`</BrandSecondaryText>
 
 Align the slides relative to the carousel viewport. Use one of the predefined alignments `start`, `center` or `end`. Alternatively, provide a number between `0 - 1` to align the slides, where **0.5 equals 50%**.
+
+### breakpoints
+
+Type: <BrandPrimaryText>`EmblaOptionsType`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`{}`</BrandSecondaryText>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level. Example: `'(min-width: 768px)': { loop: false }`. Note: If multiple queries match, they will be merged. And when breakpoint options clash, the last one in the list have precedence.
 
 ### direction
 
@@ -141,7 +127,7 @@ Enables momentum scrolling. The speed and duration of the continued scrolling is
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
-Enables infinite looping. Slides need `position: relative;` for this to work. Automatically falls back to false if slide content isn't enough to loop.
+Enables infinite looping. Automatically falls back to false if slide content isn't enough to loop. Embla will apply `translateX` or `translateY` to the slides that need to change position in order to create the loop effect.
 
 ### speed
 
