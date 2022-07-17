@@ -9,23 +9,6 @@ date: 2021-02-21
 
 Embla Carousel exposes a set of **useful methods** which makes it very **extensible**.
 
-## Calling methods
-
-Start by initializing a carousel and storing the carousel instance in a variable. In the example below we'll call the carousel instance `embla`:
-
-```js
-import EmblaCarousel from 'embla-carousel'
-
-const options = { loop: false }
-const embla = EmblaCarousel(emblaNode, options)
-```
-
-Now we're ready to call any available method like demonstrated below:
-
-```js
-embla.scrollNext()
-```
-
 ### rootNode
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
@@ -158,3 +141,20 @@ Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: Function`</Bra
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Unsubscribe from an Embla specific [event](/api/events/).
+
+## Calling methods
+
+Start by initializing a carousel and storing the carousel instance in a variable. In the example below we'll call the carousel instance `embla`:
+
+```js
+import EmblaCarousel from 'embla-carousel'
+
+const options = { loop: false }
+const embla = EmblaCarousel(emblaNode, options)
+```
+
+Now we're ready to call any available method like demonstrated below:
+
+```js
+embla.scrollNext()
+```
