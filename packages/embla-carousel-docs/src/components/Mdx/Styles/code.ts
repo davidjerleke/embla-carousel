@@ -157,6 +157,7 @@ export const codeStyles = css`
   .token.class-name,
   .token.attr-value,
   .token.keyword,
+  .token.property,
   .token.control,
   .token.directive,
   .token.selector,
@@ -166,7 +167,7 @@ export const codeStyles = css`
     color: var(--brand-primary);
   }
   .token.string,
-  .token.property,
+  .token.string-property,
   .token.attr-name,
   .token.entity,
   .token.url,
