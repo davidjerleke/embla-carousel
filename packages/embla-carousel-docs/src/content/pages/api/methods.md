@@ -121,6 +121,13 @@ Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Hard reset the carousel after it has been initialized. This method allows for changing [options](/api/options/) and [plugins](/api/plugins/). It's also useful when adding or removing slides, or picking up any other changes like slide dimensions. Note that passed options will be **merged** with current options, but passed plugins will **replace** current plugins.
 
+### plugins
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`EmblaPluginsType`</BrandSecondaryText>
+
+Returns an object with key value pairs where the keys are the plugin names, and the plugin API:s are the values.
+
 ### destroy
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
