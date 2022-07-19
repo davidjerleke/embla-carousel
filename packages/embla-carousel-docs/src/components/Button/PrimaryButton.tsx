@@ -6,7 +6,7 @@ import { gradientBackgroundStyles } from 'utils'
 export const primaryButtonStyles = css`
   line-height: 1.15;
   border-radius: 3rem;
-  padding: 1.7rem 3.5rem;
+  padding: 1.4rem 2.8rem;
   font-weight: bold;
   display: inline-flex;
   color: var(--background-site);
