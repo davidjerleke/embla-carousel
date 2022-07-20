@@ -8061,6 +8061,7 @@ __metadata:
     gatsby-remark-autolink-headers: ^5.6.0
     gatsby-remark-prismjs: ^6.6.0
     gatsby-source-filesystem: ^4.6.0
+    inter-ui: ^3.19.3
     intersection-observer: ^0.12.0
     lodash: ^4.17.21
     npm-run-all: ^4.1.5
@@ -11295,6 +11296,13 @@ __metadata:
     strip-ansi: ^6.0.0
     through: ^2.3.6
   checksum: 4d387fc1eb6126acbd58cbdb9ad99d2887d181df86ab0c2b9abdf734e751093e2d5882c2b6dc7144d9ab16b7ab30a78a1d7f01fb6a2850a44aeb175d1e3f8778
+  languageName: node
+  linkType: hard
+
+"inter-ui@npm:^3.19.3":
+  version: 3.19.3
+  resolution: "inter-ui@npm:3.19.3"
+  checksum: 74435e742e9829402cf15ac08aa48541c93e96d7528a29ba3bc2a14b059ccd3f330ddba8b1c96f06bfdda46b0c7e1a406db22a309045b3412b66ec4dcb5efa2a
   languageName: node
   linkType: hard
 

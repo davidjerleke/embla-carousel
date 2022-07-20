@@ -73,21 +73,21 @@ const H1 = styled.h1`
   }
 
   ${breakpoints.minXs} {
-    font-size: 6rem;
+    font-size: 5.6rem;
   }
 
   ${breakpoints.minSm} {
-    font-size: 6.6rem;
+    font-size: 6.2rem;
   }
 `
 
 const H2 = styled.h2`
   color: var(--text-medium-contrast);
   line-height: 1.5;
-  font-size: 2rem;
+  font-size: 1.9rem;
 
   ${breakpoints.minSm} {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 `
 
