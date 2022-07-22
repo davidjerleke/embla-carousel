@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { createSquareSizeStyles, gradientBackgroundStyles } from 'utils'
+import { createSquareSizeStyles } from 'utils'
 import { MEDIA } from 'consts'
 
 export const headingStyles = css`
