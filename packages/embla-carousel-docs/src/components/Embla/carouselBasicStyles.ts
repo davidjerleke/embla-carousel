@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { frameCollapseStyles } from 'components/SiteLayout'
 import { EmblaOptionsType } from 'embla-carousel-react'
-import { breakpoints, LAYERS, supportsStyles } from 'consts'
+import { MEDIA, LAYERS, supportsStyles } from 'consts'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 
@@ -16,10 +16,10 @@ export const Wrapper = styled.div`
   background-color: var(--background-code);
   position: relative;
 
-  ${breakpoints.maxSm} {
+  ${MEDIA.MAX_SM} {
     ${frameCollapseStyles};
   }
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     border-radius: ${CAROUSEL_RADIUS};
   }
 `

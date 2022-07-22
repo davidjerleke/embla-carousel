@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { createSquareSizeStyles, gradientBackgroundStyles } from 'utils'
-import { breakpoints } from 'consts'
+import { MEDIA } from 'consts'
 
 export const headingStyles = css`
   h1,
@@ -52,7 +52,7 @@ export const headingStyles = css`
       top: 0;
       bottom: 0;
       width: ${FRAME_SPACING};
-      ${breakpoints.minSm} {
+      ${MEDIA.MIN_SM} {
         width: 2.8rem;
       }
 

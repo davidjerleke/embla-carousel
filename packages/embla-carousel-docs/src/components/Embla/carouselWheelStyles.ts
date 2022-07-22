@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { WHEEL_ITEM_SIZE } from './CarouselWheelItem'
 import { frameCollapseStyles } from 'components/SiteLayout'
 import { CAROUSEL_RADIUS, CAROUSEL_SPACING } from './carouselBasicStyles'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS } from 'consts'
 
 export type PerspectiveType = 'left' | 'right'
 
@@ -15,10 +15,10 @@ export const Wrapper = styled.div`
   padding-left: ${CAROUSEL_SPACING};
   padding-right: ${CAROUSEL_SPACING};
 
-  ${breakpoints.maxSm} {
+  ${MEDIA.MAX_SM} {
     ${frameCollapseStyles};
   }
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     border-radius: ${CAROUSEL_RADIUS};
   }
 `

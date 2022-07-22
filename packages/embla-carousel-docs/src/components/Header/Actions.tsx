@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ThemeToggle } from 'components/Theme'
 import { NavigationLink } from 'components/Link'
-import { breakpoints } from 'consts'
+import { MEDIA } from 'consts'
 import { useRoutes } from 'hooks'
 import { Search } from 'components/Search'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -13,13 +13,13 @@ const Wrapper = styled.ul`
   display: flex;
   align-items: center;
   line-height: 1.65;
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     margin-left: -${ITEM_SPACING_SM_UP};
   }
 `
 
 const Item = styled.li`
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     padding-left: ${ITEM_SPACING_SM_UP};
   }
   display: flex;
@@ -39,7 +39,7 @@ export const Actions = () => {
 
   return (
     <Wrapper>
-      <Item $hidden="compact">
+      <Item $hidden="COMPACT">
         <nav aria-label="Quick Navigation Menu">
           <Wrapper>
             {routes.map((route) => (
@@ -53,7 +53,7 @@ export const Actions = () => {
       <Item>
         <Search />
       </Item>
-      <Item $hidden="compact">
+      <Item $hidden="COMPACT">
         <ThemeToggle />
       </Item>
     </Wrapper>

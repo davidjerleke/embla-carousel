@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 import { ContentLink } from 'components/Link'
-import { breakpoints, supportsStyles } from 'consts'
+import { MEDIA, supportsStyles } from 'consts'
 
 const USP_ITEM_SPACING = '1.4rem'
 
@@ -15,12 +15,12 @@ const Wrapper = styled.ul`
   padding-top: 4.6rem;
   padding-bottom: 0.2rem;
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     padding-top: 7rem;
     padding-bottom: 2.6rem;
   }
 
-  ${breakpoints.minMd} {
+  ${MEDIA.MIN_MD} {
     padding-top: 9.8rem;
     padding-bottom: 5.4rem;
   }
@@ -31,11 +31,11 @@ const Usp = styled.li`
   padding-bottom: ${USP_ITEM_SPACING};
   flex: 0 0 100%;
 
-  ${breakpoints.minXs} {
+  ${MEDIA.MIN_XS} {
     flex: 0 0 calc(100% / 2);
   }
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     flex: 0 0 calc(100% / 3);
   }
 `

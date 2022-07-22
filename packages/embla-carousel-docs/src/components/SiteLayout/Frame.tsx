@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { breakpoints } from 'consts'
+import { MEDIA } from 'consts'
 
 export const FRAME_SPACING = '2.4rem'
 const FRAME_MAX_WIDTH = '100rem'
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   max-width: ${FRAME_MAX_WIDTH};
   width: 100%;
 
-  ${breakpoints.desktop} {
+  ${MEDIA.DESKTOP} {
     width: 90%;
   }
 `

@@ -1,11 +1,11 @@
 import { css } from 'styled-components'
-import { breakpoints, BreakpointKeyType } from 'consts'
+import { MEDIA, BreakpointKeyType } from 'consts'
 
 export const hiddenAtBreakpointStyles = css<{ $hidden?: BreakpointKeyType }>`
   ${({ $hidden }) =>
     $hidden &&
     css`
-      ${breakpoints[$hidden]} {
+      ${MEDIA[$hidden]} {
         display: none;
       }
     `};

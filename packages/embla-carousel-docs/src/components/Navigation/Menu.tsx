@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS } from 'consts'
 import { useRoutes } from 'hooks'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   position: relative;
   height: 100%;
 
-  ${breakpoints.compact} {
+  ${MEDIA.COMPACT} {
     z-index: ${LAYERS.STEP};
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
@@ -33,7 +33,7 @@ const ScrollArea = styled.ul`
   padding-bottom: 2.4rem;
   max-height: 100%;
 
-  ${breakpoints.compact} {
+  ${MEDIA.COMPACT} {
     max-height: ${MAX_HEIGHT_COMPACT};
   }
 `
@@ -65,7 +65,7 @@ export const Menu = () => {
 
   return (
     <Wrapper>
-      <Header $hidden="desktop">
+      <Header $hidden="DESKTOP">
         <Logo />
         <Buttons>
           <ThemeToggle />

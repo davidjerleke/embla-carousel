@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS } from 'consts'
 import { gradientBackgroundStyles } from 'utils'
 
 const BORDER_RADIUS = '0.4rem'
@@ -79,7 +79,7 @@ export const codeStyles = css`
       }
     }
 
-    ${breakpoints.minXs} {
+    ${MEDIA.MIN_XS} {
       border-radius: ${BORDER_RADIUS};
     }
   }

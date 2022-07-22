@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation, useSiteMetadata } from 'hooks'
-import { breakpoints, cssHackStyles } from 'consts'
+import { MEDIA, cssHackStyles } from 'consts'
 import { PlainLink } from 'components/Link'
 import { SiteLogo } from 'components/SiteLogo'
 
@@ -15,7 +15,7 @@ const Wrapper = styled(PlainLink)`
   font-weight: 900;
   font-size: 1.8rem;
 
-  ${breakpoints.minXxs} {
+  ${MEDIA.MIN_XXS} {
     font-size: 2rem;
   }
 
@@ -29,7 +29,7 @@ const HeaderLogo = styled(SiteLogo)`
   display: flex;
   margin-right: 0.8rem;
 
-  ${breakpoints.minXxs} {
+  ${MEDIA.MIN_XXS} {
     ${createSquareSizeStyles('3rem')};
   }
 

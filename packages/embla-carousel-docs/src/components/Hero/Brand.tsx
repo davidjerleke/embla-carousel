@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { breakpoints, cssHackStyles } from 'consts'
+import { MEDIA, cssHackStyles } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { useSiteMetadata } from 'hooks'
@@ -15,11 +15,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   padding-top: 2.4rem;
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     padding-top: 3.6rem;
   }
 
-  ${breakpoints.minMd} {
+  ${MEDIA.MIN_MD} {
     padding-top: 7.4rem;
     align-items: flex-start;
     justify-content: space-between;
@@ -31,11 +31,11 @@ const HeroLogo = styled(SiteLogo)`
   flex: 0 0 auto;
   ${createSquareSizeStyles('16rem')};
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     ${createSquareSizeStyles('22rem')};
   }
 
-  ${breakpoints.minMd} {
+  ${MEDIA.MIN_MD} {
     ${createSquareSizeStyles('28rem')};
   }
 `
@@ -43,12 +43,12 @@ const HeroLogo = styled(SiteLogo)`
 const Content = styled.div`
   max-width: 50rem;
 
-  ${breakpoints.maxMd} {
+  ${MEDIA.MAX_MD} {
     padding-top: 3.6rem;
     text-align: center;
   }
 
-  ${breakpoints.maxSm} {
+  ${MEDIA.MAX_SM} {
     padding-top: 2.4rem;
   }
 `
@@ -72,11 +72,11 @@ const H1 = styled.h1`
     ${gradientTextStyles};
   }
 
-  ${breakpoints.minXs} {
+  ${MEDIA.MIN_XS} {
     font-size: 5.6rem;
   }
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     font-size: 6.2rem;
   }
 `
@@ -86,7 +86,7 @@ const H2 = styled.h2`
   line-height: 1.5;
   font-size: 1.9rem;
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     font-size: 2.1rem;
   }
 `
@@ -94,7 +94,7 @@ const H2 = styled.h2`
 const CtaWrapper = styled.div`
   padding-top: 2.4rem;
 
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     padding-top: 3.6rem;
   }
 `

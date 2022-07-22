@@ -14,7 +14,7 @@ import {
 } from 'utils'
 import {
   ALGOLIA_SEARCH_CONFIG,
-  breakpoints,
+  MEDIA,
   LAYERS,
   THEME_KEYS,
   THEME_PREFIX,
@@ -68,11 +68,11 @@ const modalStyles = css`
     margin-left: auto;
     margin-right: auto;
 
-    ${breakpoints.desktop} {
+    ${MEDIA.DESKTOP} {
       max-width: ${DIALOG_MAX_WIDTH};
     }
 
-    ${breakpoints.desktop} {
+    ${MEDIA.DESKTOP} {
       border-radius: 0.4rem;
       margin-top: ${FRAME_TOP_OFFSET_DESKTOP};
     }
@@ -129,10 +129,10 @@ const contentStyles = css`
     overflow-y: auto;
     overflow-x: hidden;
 
-    ${breakpoints.compact} {
+    ${MEDIA.COMPACT} {
       max-height: calc(100vh - (${SCROLL_HEIGHT_COMPACT}));
     }
-    ${breakpoints.desktop} {
+    ${MEDIA.DESKTOP} {
       max-height: calc(100vh - (${SCROLL_HEIGHT_DESKTOP}));
     }
   }
@@ -218,10 +218,10 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-Tree {
-    ${breakpoints.compact} {
+    ${MEDIA.COMPACT} {
       display: none;
     }
-    ${breakpoints.desktop} {
+    ${MEDIA.DESKTOP} {
       color: var(--detail-high-contrast);
       height: ${INPUT_HEIGHT};
       opacity: 0.5;
@@ -400,7 +400,7 @@ const footerStyles = css`
     margin: 0;
     padding: 0;
 
-    ${breakpoints.compact} {
+    ${MEDIA.COMPACT} {
       display: none;
     }
   }
@@ -571,7 +571,7 @@ const cancelButtonStyles = css`
     align-items: center;
     height: ${INPUT_HEIGHT};
 
-    ${breakpoints.desktop} {
+    ${MEDIA.DESKTOP} {
       display: none;
     }
   }

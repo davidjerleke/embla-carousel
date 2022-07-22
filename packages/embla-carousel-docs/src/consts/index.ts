@@ -3,7 +3,7 @@ export type { PageTemplateType } from './pageTemplates'
 export type { ThemeKeyType } from './themes'
 
 export { LOCALSTORAGE_KEYS } from './localStorage'
-export { breakpoints, BREAKPOINTS } from './breakpoints'
+export { MEDIA, BREAKPOINTS } from './breakpoints'
 export { PAGE_TEMPLATES } from './pageTemplates'
 export {
   themeStyles,

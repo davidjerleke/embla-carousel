@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Frame } from 'components/SiteLayout'
 import { NavigationToggle } from 'components/Navigation'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS } from 'consts'
 import { Actions } from './Actions'
 import { Logo } from './Logo'
 
@@ -25,7 +25,7 @@ const Fixed = styled.div`
   left: 0;
   right: 0;
 
-  ${breakpoints.desktop} {
+  ${MEDIA.DESKTOP} {
     z-index: ${LAYERS.NAVIGATION + 1};
   }
 `
