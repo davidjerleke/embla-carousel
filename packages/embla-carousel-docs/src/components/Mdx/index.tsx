@@ -4,6 +4,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MdxStyles } from './Styles'
 import {
   Div,
+  H1,
   Link,
   Pre,
   PageChildLinks,
@@ -26,6 +27,7 @@ export const Mdx = (props: PropType) => {
           a: Link,
           pre: Pre,
           div: Div,
+          h1: H1,
           RepositoryLink,
           PageChildLinks,
           BrandPrimaryText,

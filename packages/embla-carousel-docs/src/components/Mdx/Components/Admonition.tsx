@@ -2,6 +2,10 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 
+const Heading = styled(IconWithText)`
+  font-weight: bold;
+`
+
 const Wrapper = styled.div`
   color: var(--text-admonition-note);
   background-color: rgba(var(--text-admonition-note-rgb-value), 0.05);
@@ -12,7 +16,8 @@ const Wrapper = styled.div`
   font-size: 1.4rem;
   overflow: hidden;
 
-  p {
+  p,
+  ${Heading} {
     margin-bottom: 0.8rem;
   }
 
@@ -25,10 +30,6 @@ const Wrapper = styled.div`
   }
 `
 
-const Heading = styled(IconWithText)`
-  font-weight: bold;
-`
-
 type PropType = PropsWithChildren<{}>
 
 export const Admonition = (props: PropType) => {
@@ -36,9 +37,7 @@ export const Admonition = (props: PropType) => {
 
   return (
     <Wrapper>
-      <p>
-        <Heading iconSvg="info">Note</Heading>
-      </p>
+      <Heading iconSvg="info">Note</Heading>
       {children}
     </Wrapper>
   )

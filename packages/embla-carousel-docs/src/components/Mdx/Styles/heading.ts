@@ -24,15 +24,6 @@ export const headingStyles = css`
     font-weight: 800;
     font-size: 3.2rem;
     line-height: 1.25;
-
-    &:after {
-      display: block;
-      height: 0.3rem;
-      width: 5rem;
-      content: '';
-      margin-top: 2.4rem;
-      ${gradientBackgroundStyles};
-    }
   }
 
   h2 {

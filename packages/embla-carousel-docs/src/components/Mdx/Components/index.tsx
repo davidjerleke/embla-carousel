@@ -1,5 +1,6 @@
 export { Link } from './Link'
 export { Pre } from './Pre'
+export { H1 } from './H1'
 export { Div } from './Div'
 export { RepositoryLink } from './RepositoryLink'
 export { PageChildLinks } from './PageChildLinks'
