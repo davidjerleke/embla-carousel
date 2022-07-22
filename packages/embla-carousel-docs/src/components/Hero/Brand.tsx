@@ -104,7 +104,7 @@ export const Brand = () => {
 
   return (
     <Wrapper>
-      <HeroLogo />
+      <HeroLogo appearance="blur" />
       <Content>
         <H1>
           {title.split(' ').map((word, index, words) => (

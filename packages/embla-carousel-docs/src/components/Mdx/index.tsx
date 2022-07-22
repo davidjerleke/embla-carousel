@@ -11,6 +11,7 @@ import {
   BrandPrimaryText,
   BrandSecondaryText,
   BrandAlternativeText,
+  Admonition,
 } from './Components'
 
 type PropType = { body: string }
@@ -30,6 +31,7 @@ export const Mdx = (props: PropType) => {
           BrandPrimaryText,
           BrandSecondaryText,
           BrandAlternativeText,
+          Admonition,
         }}
       >
         <MDXRenderer>{body}</MDXRenderer>

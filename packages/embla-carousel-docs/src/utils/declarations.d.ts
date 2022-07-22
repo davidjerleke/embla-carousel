@@ -4,6 +4,11 @@ declare module '*.svg' {
   export default content
 }
 
+declare module 'assets/images/*.svg' {
+  const content: string
+  export default content
+}
+
 declare module '*.jpg' {
   const content: string
   export default content

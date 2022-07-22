@@ -26,12 +26,13 @@ export const IconWithText = (props: PropType) => {
     iconSide = 'left',
     spacing = '0.6rem',
     children,
+    ...restProps
   } = props
   const svgOnLeftSide = iconSide === 'left'
   const svg = <Icon svg={iconSvg} size={iconSize} />
 
   return (
-    <Wrapper $spacing={spacing}>
+    <Wrapper $spacing={spacing} {...restProps}>
       {svgOnLeftSide && svg}
       <span>{children}</span>
       {!svgOnLeftSide && svg}

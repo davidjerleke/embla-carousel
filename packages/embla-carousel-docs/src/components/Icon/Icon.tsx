@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, SVGAttributes } from 'react'
-import { icons, IconType } from 'assets/icons'
+import { ICONS, IconType } from 'assets/icons'
 
 type PropType = PropsWithChildren<
   SVGAttributes<SVGElement> & {
@@ -10,7 +10,7 @@ type PropType = PropsWithChildren<
 
 export const Icon = (props: PropType) => {
   const { svg, size = '100%', ...restProps } = props
-  const Svg = icons[svg]
+  const Svg = ICONS[svg]
 
   return (
     <Svg

@@ -40,7 +40,7 @@ const Usp = styled.li`
   }
 `
 
-const UspContent = styled.div`
+const UspContent = styled.article`
   padding: 2.4rem 2.4rem;
   background-color: var(--background-code);
   border-radius: 1rem;
@@ -86,7 +86,7 @@ export const Usps = () => {
           <UspLink>
             <ContentLink to="/api/">
               <IconWithText iconSvg="arrowRight" iconSide="right">
-                Documentation
+                Read more
               </IconWithText>
             </ContentLink>
           </UspLink>
@@ -103,7 +103,7 @@ export const Usps = () => {
           <UspLink>
             <ContentLink to="/plugins/">
               <IconWithText iconSvg="arrowRight" iconSide="right">
-                Documentation
+                Read more
               </IconWithText>
             </ContentLink>
           </UspLink>
@@ -120,7 +120,7 @@ export const Usps = () => {
           <UspLink>
             <ContentLink to="/get-started/typescript/">
               <IconWithText iconSvg="arrowRight" iconSide="right">
-                Documentation
+                Read more
               </IconWithText>
             </ContentLink>
           </UspLink>

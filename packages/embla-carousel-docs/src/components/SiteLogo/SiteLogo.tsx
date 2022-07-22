@@ -1,7 +1,9 @@
 import React, { PropsWithChildren, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
-import logoLightThemeUrl from 'assets/images/embla-logo-light-theme.svg'
-import logoDarkThemeUrl from 'assets/images/embla-logo-dark-theme.svg'
+import logoLightThemeDefaultUrl from 'assets/images/embla-logo-light-theme.svg'
+import logoDarkThemeDefaultUrl from 'assets/images/embla-logo-dark-theme.svg'
+import logoLightThemeBlurUrl from 'assets/images/embla-logo-light-theme-blur.svg'
+import logoDarkThemeBlurUrl from 'assets/images/embla-logo-dark-theme-blur.svg'
 import { useInView } from 'react-intersection-observer'
 import { useSiteMetadata, useTheme } from 'hooks'
 import { LAYERS, THEME_KEYS } from 'consts'
@@ -24,6 +26,8 @@ const imageStyles = css`
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: ${LAYERS.STEP};
 `
 
@@ -39,32 +43,77 @@ export const LogoDarkIcon = styled(Icon)`
   ${imageStyles};
 `
 
-const LOGO_IMAGES = {
-  [THEME_KEYS.LIGHT]: logoLightThemeUrl as unknown as string,
-  [THEME_KEYS.DARK]: logoDarkThemeUrl as unknown as string,
+type LogoImagesType = {
+  default: {
+    light: string
+    dark: string
+  }
+  blur: {
+    light: string
+    dark: string
+  }
 }
 
-type PropType = PropsWithChildren<{}>
+const LOGO_IMAGES: LogoImagesType = {
+  default: {
+    [THEME_KEYS.LIGHT]: logoLightThemeDefaultUrl,
+    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl,
+  },
+  blur: {
+    [THEME_KEYS.LIGHT]: logoLightThemeBlurUrl,
+    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl,
+  },
+}
+
+type LogoSvgsType = {
+  default: {
+    light: 'emblaLightDefault'
+    dark: 'emblaDarkDefault'
+  }
+  blur: {
+    light: 'emblaLightBlur'
+    dark: 'emblaDarkBlur'
+  }
+}
+
+const LOGO_SVGS: LogoSvgsType = {
+  default: {
+    [THEME_KEYS.LIGHT]: 'emblaLightDefault',
+    [THEME_KEYS.DARK]: 'emblaDarkDefault',
+  },
+  blur: {
+    [THEME_KEYS.LIGHT]: 'emblaLightBlur',
+    [THEME_KEYS.DARK]: 'emblaDarkBlur',
+  },
+}
+
+type PropType = PropsWithChildren<{
+  appearance?: keyof typeof LOGO_IMAGES
+}>
 
 export const SiteLogo = (props: PropType) => {
+  const { appearance = 'default' } = props
   const [inViewRef, inView] = useInView({ triggerOnce: true })
   const [hasLoaded, setHasLoaded] = useState(false)
   const { theme } = useTheme()
   const { title } = useSiteMetadata()
+  const lightSvg = LOGO_SVGS[appearance].light
+  const darkSvg = LOGO_SVGS[appearance].dark
+
   const { src, alt } = useMemo(
     () => ({
-      src: LOGO_IMAGES[theme],
+      src: LOGO_IMAGES[appearance][theme],
       alt: `An illustrated atom like body which is the logotype of ${title}`,
     }),
-    [theme, title],
+    [theme, appearance, title],
   )
 
   return (
     <Wrapper ref={inViewRef} {...props}>
       {!hasLoaded && (
         <>
-          <LogoLightIcon svg="emblaLight" />
-          <LogoDarkIcon svg="emblaDark" />
+          <LogoLightIcon svg={lightSvg} fill={undefined} />
+          <LogoDarkIcon svg={darkSvg} fill={undefined} />
         </>
       )}
       {inView && (
