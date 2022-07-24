@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation, useSiteMetadata } from 'hooks'
-import { MEDIA, cssHackStyles, COLORS } from 'consts'
+import { MEDIA, COLORS } from 'consts'
 import { PlainLink } from 'components/Link'
 import { SiteLogo } from 'components/SiteLogo'
 
@@ -17,10 +17,6 @@ const Wrapper = styled(PlainLink)`
 
   ${MEDIA.MIN_XXS} {
     font-size: 2rem;
-  }
-
-  ${cssHackStyles.firefoxAll} {
-    font-weight: 1000;
   }
 `
 

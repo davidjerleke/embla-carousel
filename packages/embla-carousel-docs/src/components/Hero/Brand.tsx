@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, cssHackStyles, COLORS } from 'consts'
+import { MEDIA, COLORS } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { useSiteMetadata } from 'hooks'
@@ -59,10 +59,6 @@ const H1 = styled.h1`
   margin-bottom: 1.8rem;
   font-weight: 900;
   font-size: 5rem;
-
-  ${cssHackStyles.firefoxAll} {
-    font-weight: 1000;
-  }
 
   > span {
     display: block;
