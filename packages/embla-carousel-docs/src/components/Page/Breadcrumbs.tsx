@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { useRouteBreadcrumbs } from 'hooks'
 import { Icon } from 'components/Icon'
+import { COLORS } from 'consts'
 
 const Wrapper = styled.nav`
   display: flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.nav`
 `
 
 const itemStyles = css`
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   padding: 0.6rem 0;
 `
 
@@ -25,7 +26,7 @@ const ActiveTitle = styled.span`
 `
 
 const Separator = styled(Icon)`
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   margin: 0 0.6rem;
 `
 

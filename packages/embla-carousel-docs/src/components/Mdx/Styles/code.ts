@@ -1,13 +1,13 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { MEDIA, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 import { gradientBackgroundStyles } from 'utils'
 
 const BORDER_RADIUS = '0.4rem'
 
 export const codeStyles = css`
   .language-text {
-    background-color: var(--detail-low-contrast);
+    background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     border-radius: ${BORDER_RADIUS};
     font-size: 1.44rem;
     padding: 0.288rem 0.6rem;
@@ -16,7 +16,7 @@ export const codeStyles = css`
 
   .gatsby-highlight {
     ${frameCollapseStyles};
-    background-color: var(--background-code);
+    background-color: ${COLORS.BACKGROUND_CODE};
     overflow: hidden;
     position: relative;
     font-size: 1.36rem;
@@ -132,15 +132,15 @@ export const codeStyles = css`
   }
 
   pre {
-    color: var(--text-body);
+    color: ${COLORS.TEXT_BODY};
     overflow: auto;
     white-space: pre;
 
     ::-webkit-scrollbar-thumb {
-      background-color: var(--scroll-thumb);
+      background-color: ${COLORS.SCROLL_THUMB};
     }
     ::-webkit-scrollbar-track {
-      background-color: var(--detail-low-contrast);
+      background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     }
     ::-webkit-scrollbar {
       width: 0.4rem;
@@ -152,7 +152,7 @@ export const codeStyles = css`
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: var(--text-comment);
+    color: ${COLORS.TEXT_COMMENT};
   }
   .token.class-name,
   .token.attr-value,
@@ -164,7 +164,7 @@ export const codeStyles = css`
   .token.function:not(.function-variable),
   .token.singlequote,
   .token.unit {
-    color: var(--brand-primary);
+    color: ${COLORS.BRAND_PRIMARY};
   }
   .token.string,
   .token.string-property,
@@ -178,11 +178,11 @@ export const codeStyles = css`
   .token.atrule,
   .token.placeholder,
   .token.variable {
-    color: var(--brand-secondary);
+    color: ${COLORS.BRAND_SECONDARY};
   }
   .token.punctuation,
   .token.plain-text {
-    color: var(--text-high-contrast);
+    color: ${COLORS.TEXT_HIGH_CONTRAST};
   }
   .token.tag,
   .token.boolean,
@@ -190,7 +190,7 @@ export const codeStyles = css`
   .token.function-name,
   .token.constant,
   .token.symbol {
-    color: var(--brand-alternative);
+    color: ${COLORS.BRAND_ALTERNATIVE};
   }
   .token.namespace {
     opacity: 0.75;

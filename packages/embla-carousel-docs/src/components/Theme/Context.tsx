@@ -45,7 +45,10 @@ export const ThemeProvider = (props: PropType) => {
       const themeMetaNode = document.querySelector(THEME_META_SELECTOR)
 
       if (themeMetaNode) {
-        themeMetaNode.setAttribute('content', THEME_COLORS[next].backgroundSite)
+        themeMetaNode.setAttribute(
+          'content',
+          THEME_COLORS[next].BACKGROUND_SITE,
+        )
       }
 
       return next

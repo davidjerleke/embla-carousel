@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 import { ContentLink } from 'components/Link'
-import { MEDIA, supportsStyles } from 'consts'
+import { COLORS, MEDIA, supportsStyles } from 'consts'
 
 const USP_ITEM_SPACING = '1.4rem'
 
@@ -42,7 +42,7 @@ const Usp = styled.li`
 
 const UspContent = styled.article`
   padding: 2.4rem 2.4rem;
-  background-color: var(--background-code);
+  background-color: ${COLORS.BACKGROUND_CODE};
   border-radius: 1rem;
   height: 100%;
   display: flex;
@@ -58,16 +58,16 @@ const UspHeader = styled.h3`
 
 const UspText = styled.p`
   margin-bottom: 1.4rem;
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 
 const UspLink = styled.div`
   > a {
     font-size: 1.4rem;
-    color: var(--brand-primary);
+    color: ${COLORS.BRAND_PRIMARY};
 
     ${supportsStyles.gradientText} {
-      color: var(--brand-secondary);
+      color: ${COLORS.BRAND_SECONDARY};
     }
   }
 `

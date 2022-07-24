@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import FocusTrap from 'focus-trap-react'
 import { useEventListener, useNavigation } from 'hooks'
 import { hiddenAtBreakpointStyles } from 'utils'
-import { MEDIA, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 import { Menu } from './Menu'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { HEADER_HEIGHT } from 'components/Header'
@@ -32,7 +32,7 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
 `
 
 const Overlay = styled.div`
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   opacity: 0.9;
   position: absolute;
   top: 0;

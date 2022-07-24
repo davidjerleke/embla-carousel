@@ -4,6 +4,7 @@ import { createSquareSizeStyles, hiddenAtBreakpointStyles } from 'utils'
 import { PlainButton } from 'components/Button'
 import { useNavigation } from 'hooks'
 import { NAVIGATION_ID } from './Navigation'
+import { COLORS } from 'consts'
 
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
@@ -23,7 +24,7 @@ const Wrapper = styled(PlainButton)`
 const Burger = styled.div<{ $isOpen: boolean }>`
   position: relative;
   > span {
-    background-color: var(--text-high-contrast);
+    background-color: ${COLORS.TEXT_HIGH_CONTRAST};
     display: block;
     height: 0.2rem;
     border-radius: 0.2rem;
@@ -31,7 +32,7 @@ const Burger = styled.div<{ $isOpen: boolean }>`
     width: ${BURGER_SIZE};
     &:before,
     &:after {
-      background-color: var(--text-high-contrast);
+      background-color: ${COLORS.TEXT_HIGH_CONTRAST};
       position: absolute;
       content: "";
       border-radius: 0.2rem;

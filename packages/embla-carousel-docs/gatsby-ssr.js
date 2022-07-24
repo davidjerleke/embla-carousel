@@ -25,7 +25,7 @@ export const onRenderBody = ({
     <meta
       key="theme-color"
       name="theme-color"
-      content={THEME_COLORS[THEME_KEYS.LIGHT].backgroundSite}
+      content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
     />,
     <style
       key="theme-style"
@@ -40,8 +40,8 @@ export const onRenderBody = ({
           (function() {            
             var selectedTheme;
             var themeColors = {
-              light: '${THEME_COLORS[THEME_KEYS.LIGHT].backgroundSite}',
-              dark: '${THEME_COLORS[THEME_KEYS.DARK].backgroundSite}'
+              light: '${THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}',
+              dark: '${THEME_COLORS[THEME_KEYS.DARK].BACKGROUND_SITE}'
             };
             
             try {

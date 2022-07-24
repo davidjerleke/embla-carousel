@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { OUTLINE_SIZE } from 'components/TabAccess'
-import { URLS } from 'consts'
+import { COLORS, URLS } from 'consts'
 import { IconWithText } from 'components/Icon'
 
 const LINK_SPACING = '3rem'
@@ -18,7 +18,7 @@ const Link = styled(PlainLink)`
   margin-right: -${OUTLINE_SIZE};
   padding: 0.6rem ${OUTLINE_SIZE};
   outline-offset: -${OUTLINE_SIZE};
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   display: inline-flex;
   align-items: center;
 `

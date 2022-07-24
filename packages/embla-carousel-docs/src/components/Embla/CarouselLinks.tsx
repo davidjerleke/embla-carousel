@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ContentLink } from 'components/Link'
 import { IconWithText } from 'components/Icon'
+import { COLORS } from 'consts'
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,7 +13,7 @@ const Wrapper = styled.div`
 `
 
 const Item = styled.div`
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   display: flex;
   align-items: center;
   padding-left: 1.4rem;

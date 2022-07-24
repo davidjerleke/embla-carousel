@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
 import { PlainLink } from 'components/Link'
 import { gradientTextStyles } from 'utils'
-import { supportsStyles } from 'consts'
+import { COLORS, supportsStyles } from 'consts'
 import { IconWithText } from 'components/Icon'
 
 const ITEM_SPACING = '2.4rem'
@@ -19,19 +19,19 @@ const Item = styled.div`
   padding-left: ${ITEM_SPACING};
 
   > a {
-    color: var(--brand-primary);
+    color: ${COLORS.BRAND_PRIMARY};
   }
 
   &:nth-child(2) > a {
     text-align: right;
     ${supportsStyles.gradientText} {
-      color: var(--brand-secondary);
+      color: ${COLORS.BRAND_SECONDARY};
     }
   }
 `
 
 const ItemLabel = styled.div`
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   padding-bottom: 0.6rem;
 `
 

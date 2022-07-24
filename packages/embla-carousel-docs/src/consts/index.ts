@@ -11,6 +11,7 @@ export {
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
+  COLORS,
 } from './themes'
 export { supportsStyles } from './supportsStyles'
 export { cssHackStyles } from './cssHackStyles'

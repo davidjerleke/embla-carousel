@@ -1,9 +1,9 @@
 import { gradientBackgroundStyles } from './gradientBackgroundStyles'
-import { supportsStyles } from 'consts'
+import { COLORS, supportsStyles } from 'consts'
 import { css } from 'styled-components'
 
 export const gradientTextStyles = css`
-  color: var(--brand-primary);
+  color: ${COLORS.BRAND_PRIMARY};
   ${supportsStyles.gradientText} {
     ${gradientBackgroundStyles};
     background-clip: text;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { PlainButton } from './PlainButton'
-import { supportsStyles } from 'consts'
+import { COLORS, supportsStyles } from 'consts'
 import { gradientBackgroundStyles } from 'utils'
 
 export const primaryButtonStyles = css`
@@ -9,8 +9,8 @@ export const primaryButtonStyles = css`
   padding: 1.4rem 2.8rem;
   font-weight: bold;
   display: inline-flex;
-  color: var(--background-site);
-  background-color: var(--brand-primary);
+  color: ${COLORS.BACKGROUND_SITE};
+  background-color: ${COLORS.BRAND_PRIMARY};
   ${supportsStyles.gradientText} {
     ${gradientBackgroundStyles};
   }

@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { frameCollapseStyles } from 'components/SiteLayout'
 import { EmblaOptionsType } from 'embla-carousel-react'
-import { MEDIA, LAYERS, supportsStyles } from 'consts'
+import { MEDIA, LAYERS, supportsStyles, COLORS } from 'consts'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 
@@ -13,7 +13,7 @@ export const ITEM_SPACING = '1rem'
 export const Wrapper = styled.div`
   height: ${CAROUSEL_HEIGHT};
   padding: ${CAROUSEL_SPACING};
-  background-color: var(--background-code);
+  background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 
   ${MEDIA.MAX_SM} {
@@ -79,7 +79,7 @@ export const SlideNumber = styled.div`
   position: absolute;
   top: 0.8rem;
   right: 0.9rem;
-  background-color: rgba(var(--background-site-rgb-value), 0.85);
+  background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
   border-radius: 50%;
   line-height: 4.6rem;
   font-weight: 500;
@@ -149,13 +149,11 @@ export const DotButton = styled(PlainButton)<{ $active?: boolean }>`
   margin-left: 0.75rem;
   &:after {
     ${({ $active }) => css`
-      background: ${$active
-        ? 'var(--brand-primary)'
-        : 'var(--background-site)'};
+      background: ${$active ? COLORS.BRAND_PRIMARY : COLORS.BACKGROUND_SITE};
       ${supportsStyles.gradientText} {
         background: ${$active
-          ? 'linear-gradient(45deg, var(--brand-primary), var(--brand-secondary))'
-          : 'var(--background-site)'};
+          ? `linear-gradient(45deg, ${COLORS.BRAND_PRIMARY}, ${COLORS.BRAND_SECONDARY})`
+          : COLORS.BACKGROUND_SITE};
       }
     `};
     border-radius: 0.2rem;
@@ -171,7 +169,7 @@ export const ArrowButton = styled(PlainButton)<{ $direction: 'prev' | 'next' }>`
     right: ${$direction === 'next' && CAROUSEL_SPACING};
   `};
   z-index: ${LAYERS.STEP};
-  color: var(--background-site);
+  color: ${COLORS.BACKGROUND_SITE};
   position: absolute;
   display: flex;
   align-items: center;

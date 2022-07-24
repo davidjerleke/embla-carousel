@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { frameCollapseStyles } from 'components/SiteLayout'
-import { MEDIA, supportsStyles } from 'consts'
+import { COLORS, MEDIA, supportsStyles } from 'consts'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles } from 'utils'
 import {
@@ -15,7 +15,7 @@ const HEIGHT = '30.2rem'
 export const Wrapper = styled.div`
   height: ${HEIGHT};
   padding: ${CAROUSEL_SPACING};
-  background-color: var(--background-code);
+  background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 
   ${MEDIA.MAX_SM} {

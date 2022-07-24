@@ -4,13 +4,14 @@ import { primaryButtonStyles, PlainButton } from 'components/Button'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation } from 'hooks'
 import { Icon } from 'components/Icon'
+import { COLORS } from 'consts'
 
 const BUTTON_SIZE = '4rem'
 const BACKGROUND_SIZE = '3rem'
 
 const Wrapper = styled(PlainButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
-  color: var(--text-high-contrast);
+  color: ${COLORS.TEXT_HIGH_CONTRAST};
   position: relative;
   display: flex;
   align-items: center;

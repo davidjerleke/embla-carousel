@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
-import { URLS } from 'consts'
+import { COLORS, URLS } from 'consts'
 import { IconWithText } from 'components/Icon'
 
 const Wrapper = styled(PlainLink)`
@@ -12,7 +12,7 @@ const Wrapper = styled(PlainLink)`
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
   margin-top: 4.8rem;
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 
 type PropType = { pageUrl: string }

@@ -9,7 +9,7 @@ import React, {
 import styled from 'styled-components'
 import { PlainButton } from 'components/Button'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { LAYERS } from 'consts'
+import { COLORS, LAYERS } from 'consts'
 import {
   copyToClipboard,
   gradientBackgroundStyles,
@@ -45,16 +45,16 @@ const Wrapper = styled.div`
     left: 0;
     background: linear-gradient(
       to left,
-      rgba(var(--background-code-rgb-value), 0) 0,
-      var(--background-code) 100%
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0) 0,
+      ${COLORS.BACKGROUND_CODE} 100%
     );
   }
   &:after {
     right: 0;
     background: linear-gradient(
       to right,
-      rgba(var(--background-code-rgb-value), 0) 0,
-      var(--background-code) 100%
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0) 0,
+      ${COLORS.BACKGROUND_CODE} 100%
     );
   }
 `
@@ -69,7 +69,7 @@ const CopyCodeButton = styled(PlainButton)`
   position: relative;
   z-index: ${LAYERS.STEP};
   margin-right: calc(${FRAME_SPACING} - 0.8rem);
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   padding: 0 0.8rem;
   font-size: 1.2rem;
   height: 2.5rem;
@@ -89,7 +89,7 @@ const CopyCodeButton = styled(PlainButton)`
   }
 
   &:hover {
-    color: var(--background-site);
+    color: ${COLORS.BACKGROUND_SITE};
     &:before {
       visibility: visible;
     }
@@ -97,7 +97,7 @@ const CopyCodeButton = styled(PlainButton)`
 
   @media (hover: none), (hover: on-demand) {
     &:hover {
-      color: var(--text-low-contrast);
+      color: ${COLORS.TEXT_LOW_CONTRAST};
       &:before {
         display: none;
       }

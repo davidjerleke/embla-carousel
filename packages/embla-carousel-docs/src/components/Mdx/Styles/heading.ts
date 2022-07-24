@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { createSquareSizeStyles } from 'utils'
-import { MEDIA } from 'consts'
+import { COLORS, MEDIA } from 'consts'
 
 export const headingStyles = css`
   h1,
@@ -11,7 +11,7 @@ export const headingStyles = css`
   h5,
   h6 {
     font-weight: 700;
-    color: var(--text-high-contrast);
+    color: ${COLORS.TEXT_HIGH_CONTRAST};
   }
 
   h1,
@@ -57,7 +57,7 @@ export const headingStyles = css`
       }
 
       > svg {
-        color: var(--text-low-contrast);
+        color: ${COLORS.TEXT_LOW_CONTRAST};
         transform: translate(-50%, -50%);
         position: absolute;
         top: 50%;

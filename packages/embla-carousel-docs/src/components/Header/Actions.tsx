@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ThemeToggle } from 'components/Theme'
 import { NavigationLink } from 'components/Link'
-import { MEDIA } from 'consts'
+import { COLORS, MEDIA } from 'consts'
 import { useRoutes } from 'hooks'
 import { Search } from 'components/Search'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -28,7 +28,7 @@ const Item = styled.li`
 `
 
 const Link = styled(NavigationLink)`
-  color: var(--text-medium-contrast);
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   display: inline-flex;
   text-align: center;
   padding: 0.6rem 0;

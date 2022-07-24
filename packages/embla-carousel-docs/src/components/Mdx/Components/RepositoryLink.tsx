@@ -2,9 +2,10 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { PlainLink, PropType as LinkPropType } from 'components/Link'
 import { IconWithText } from 'components/Icon'
+import { COLORS } from 'consts'
 
 const Wrapper = styled(PlainLink)`
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   display: inline-flex;
   font-size: 1.4rem;
   padding-top: 0.6rem;

@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { plainLinkStyles } from 'components/Link'
 import { gradientTextStyles, isBrowser } from 'utils'
-import { LAYERS } from 'consts'
+import { COLORS, LAYERS } from 'consts'
 
 export const SKIP_TO_CONTENT_ID = 'main-content'
 
 const Wrapper = styled.a`
   ${plainLinkStyles};
   z-index: ${LAYERS.SEARCH + 1};
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   top: 1rem;
   left: 1rem;
   position: absolute;

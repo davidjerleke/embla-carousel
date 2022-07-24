@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, cssHackStyles } from 'consts'
+import { MEDIA, cssHackStyles, COLORS } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { useSiteMetadata } from 'hooks'
@@ -54,7 +54,7 @@ const Content = styled.div`
 `
 
 const H1 = styled.h1`
-  color: var(--text-high-contrast);
+  color: ${COLORS.TEXT_HIGH_CONTRAST};
   line-height: 0.9;
   margin-bottom: 1.8rem;
   font-weight: 900;
@@ -82,7 +82,7 @@ const H1 = styled.h1`
 `
 
 const H2 = styled.h2`
-  color: var(--text-medium-contrast);
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   line-height: 1.5;
   font-size: 1.9rem;
 

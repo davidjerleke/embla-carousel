@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 import { useRoutes } from 'hooks'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -14,7 +14,7 @@ const MAX_WIDTH = '37.5rem'
 const MAX_HEIGHT_COMPACT = `calc(100vh - ${HEADER_HEIGHT})`
 
 const Wrapper = styled.div`
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   position: relative;
   height: 100%;
 
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
     max-width: ${MAX_WIDTH};
-    box-shadow: 0.1rem 0 0 0 var(--detail-low-contrast);
+    box-shadow: 0.1rem 0 0 0 ${COLORS.DETAIL_LOW_CONTRAST};
   }
 `
 

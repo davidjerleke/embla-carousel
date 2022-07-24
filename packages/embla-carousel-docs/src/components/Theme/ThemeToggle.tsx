@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles } from 'utils'
-import { LAYERS, THEME_KEYS } from 'consts'
+import { COLORS, LAYERS, THEME_KEYS } from 'consts'
 import { Icon } from 'components/Icon'
 import { useTheme } from 'hooks'
 
@@ -12,7 +12,7 @@ const ICON_SIZE = '2.5rem'
 const Wrapper = styled(PlainButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   z-index: ${LAYERS.STEP};
-  color: var(--text-high-contrast);
+  color: ${COLORS.TEXT_HIGH_CONTRAST};
   position: relative;
   display: flex;
   align-items: center;

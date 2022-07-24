@@ -4,6 +4,7 @@ import { useNavigation, useRouteActive } from 'hooks'
 import { RouteType } from 'components/Routes'
 import { PlainLink } from 'components/Link'
 import { gradientTextStyles } from 'utils'
+import { COLORS } from 'consts'
 
 const Wrapper = styled(PlainLink)`
   position: relative;
@@ -12,7 +13,7 @@ const Wrapper = styled(PlainLink)`
 `
 
 const InactiveText = styled.span<{ $isActive: boolean }>`
-  color: var(--text-medium-contrast);
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   opacity: ${({ $isActive }) => ($isActive ? 0 : 1)};
   transform: translateY(-50%);
   position: absolute;

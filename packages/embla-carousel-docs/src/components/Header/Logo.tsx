@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation, useSiteMetadata } from 'hooks'
-import { MEDIA, cssHackStyles } from 'consts'
+import { MEDIA, cssHackStyles, COLORS } from 'consts'
 import { PlainLink } from 'components/Link'
 import { SiteLogo } from 'components/SiteLogo'
 
 const Wrapper = styled(PlainLink)`
-  color: var(--text-high-contrast);
+  color: ${COLORS.TEXT_HIGH_CONTRAST};
   display: flex;
   align-items: center;
   text-decoration: none;

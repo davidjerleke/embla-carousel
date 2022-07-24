@@ -5,7 +5,7 @@ import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
 import { NavigationLink } from 'components/Link'
 import { useRouteActive } from 'hooks'
-import { ALGOLIA_SELECTORS } from 'consts'
+import { ALGOLIA_SELECTORS, COLORS } from 'consts'
 import { Icon } from 'components/Icon'
 
 const ITEM_SPACING = '0.6rem'
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `
 
 const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
-  color: var(--text-medium-contrast);
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING} 2rem;
   margin: 0 0;
   position: relative;
@@ -37,7 +37,7 @@ const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
 
 const ToggleSvg = styled(Icon)<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) => $isOpen && 'rotate(90deg)'};
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   position: absolute;
   left: 0;
   top: 0;
@@ -60,7 +60,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
     left: 0.3rem;
     width: 0.1rem;
     bottom: 0;
-    background-color: var(--detail-medium-contrast);
+    background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
   }
 `
 
