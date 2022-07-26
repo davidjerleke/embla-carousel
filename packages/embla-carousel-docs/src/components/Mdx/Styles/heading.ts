@@ -1,7 +1,9 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { createSquareSizeStyles } from 'utils'
-import { COLORS, MEDIA } from 'consts'
+import { COLORS, MEDIA, SPACINGS } from 'consts'
+
+const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 
 export const headingStyles = css`
   h1,
@@ -17,7 +19,7 @@ export const headingStyles = css`
   h1,
   h2,
   h3 {
-    margin-top: 4.8rem;
+    margin-top: ${SPACINGS.EIGHT};
   }
 
   h1 {
@@ -52,17 +54,18 @@ export const headingStyles = css`
       top: 0;
       bottom: 0;
       width: ${FRAME_SPACING};
-      ${MEDIA.MIN_SM} {
-        width: 2.8rem;
+
+      ${MEDIA.DESKTOP} {
+        width: ${SPACINGS.FIVE};
       }
 
       > svg {
+        ${createSquareSizeStyles(ANCHOR_SVG_SIZE)};
         color: ${COLORS.TEXT_LOW_CONTRAST};
         transform: translate(-50%, -50%);
         position: absolute;
         top: 50%;
         left: 50%;
-        ${createSquareSizeStyles('1.6rem')};
         visibility: hidden;
 
         @media (hover: none), (hover: on-demand) {

@@ -9,7 +9,7 @@ import React, {
 import styled from 'styled-components'
 import { PlainButton } from 'components/Button'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { COLORS, LAYERS } from 'consts'
+import { COLORS, LAYERS, SPACINGS } from 'consts'
 import {
   copyToClipboard,
   gradientBackgroundStyles,
@@ -28,6 +28,8 @@ const extractTextFromCodeBlock = (node: React.ReactNode = ''): string => {
 }
 
 const TIMEOUT = 3000
+const COPY_CODE_BUTTON_PADDING = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
+const COPY_CODE_BUTTON_HEIGHT = SPACINGS.FOUR
 
 const Wrapper = styled.div`
   position: relative;
@@ -68,12 +70,12 @@ const CopyCode = styled.div`
 const CopyCodeButton = styled(PlainButton)`
   position: relative;
   z-index: ${LAYERS.STEP};
-  margin-right: calc(${FRAME_SPACING} - 0.8rem);
+  margin-right: calc(${FRAME_SPACING} - ${COPY_CODE_BUTTON_PADDING});
   color: ${COLORS.TEXT_LOW_CONTRAST};
-  padding: 0 0.8rem;
+  padding: 0 ${COPY_CODE_BUTTON_PADDING};
+  height: ${COPY_CODE_BUTTON_HEIGHT};
+  line-height: ${COPY_CODE_BUTTON_HEIGHT};
   font-size: 1.2rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
   align-items: center;
 
   &:before {

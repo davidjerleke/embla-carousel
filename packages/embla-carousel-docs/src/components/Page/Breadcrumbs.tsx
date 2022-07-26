@@ -3,18 +3,18 @@ import styled, { css } from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { useRouteBreadcrumbs } from 'hooks'
 import { Icon } from 'components/Icon'
-import { COLORS } from 'consts'
+import { COLORS, SPACINGS } from 'consts'
 
 const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   font-size: 1.4rem;
-  margin-bottom: 1.8rem;
+  margin-bottom: ${SPACINGS.THREE};
 `
 
 const itemStyles = css`
   color: ${COLORS.TEXT_LOW_CONTRAST};
-  padding: 0.6rem 0;
+  padding: ${SPACINGS.ONE} 0;
 `
 
 const Link = styled(PlainLink)`
@@ -27,7 +27,7 @@ const ActiveTitle = styled.span`
 
 const Separator = styled(Icon)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
-  margin: 0 0.6rem;
+  margin: 0 ${SPACINGS.ONE};
 `
 
 type PropType = { id: string }

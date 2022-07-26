@@ -1,7 +1,6 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { MEDIA, LAYERS, COLORS } from 'consts'
-import { gradientBackgroundStyles } from 'utils'
+import { MEDIA, LAYERS, COLORS, SPACINGS } from 'consts'
 
 const BORDER_RADIUS = '0.4rem'
 
@@ -9,18 +8,18 @@ export const codeStyles = css`
   .language-text {
     background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     border-radius: ${BORDER_RADIUS};
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
     font-size: 1.44rem;
-    padding: 0.288rem 0.6rem;
     box-sizing: border-box;
   }
 
   .gatsby-highlight {
     ${frameCollapseStyles};
     background-color: ${COLORS.BACKGROUND_CODE};
+    margin-bottom: ${SPACINGS.FOUR};
     overflow: hidden;
     position: relative;
     font-size: 1.36rem;
-    margin-bottom: 2.4rem;
 
     &:before {
       display: block;
@@ -31,7 +30,8 @@ export const codeStyles = css`
       position: absolute;
       top: 0;
       left: ${FRAME_SPACING};
-      padding: 0.4rem 0.8rem;
+      padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
+        ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
       border-bottom-left-radius: ${BORDER_RADIUS};
       border-bottom-right-radius: ${BORDER_RADIUS};
     }
@@ -87,10 +87,10 @@ export const codeStyles = css`
   .gatsby-highlight-code-line {
     position: relative;
     display: block;
-    margin-left: -2.4rem;
-    margin-right: -2.4rem;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    margin-left: -${SPACINGS.FOUR};
+    margin-right: -${SPACINGS.FOUR};
+    padding-left: ${SPACINGS.FOUR};
+    padding-right: ${SPACINGS.FOUR};
 
     &:before,
     &:after {
@@ -100,12 +100,16 @@ export const codeStyles = css`
       bottom: 0;
       content: '';
       pointer-events: none;
-      ${gradientBackgroundStyles};
+      background-image: linear-gradient(
+        90deg,
+        ${COLORS.BRAND_PRIMARY},
+        ${COLORS.BRAND_SECONDARY}
+      );
     }
 
     &:after {
       left: 0;
-      width: 0.4rem;
+      width: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
     }
     &:before {
       right: 0;

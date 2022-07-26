@@ -4,7 +4,7 @@ import { primaryButtonStyles, PlainButton } from 'components/Button'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation } from 'hooks'
 import { Icon } from 'components/Icon'
-import { COLORS } from 'consts'
+import { COLORS, SPACINGS } from 'consts'
 
 const BUTTON_SIZE = '4rem'
 const BACKGROUND_SIZE = '3rem'
@@ -43,7 +43,7 @@ export const NavigationClose = () => {
       aria-label="Close Main Navigation Menu"
     >
       <Background>
-        <CloseSvg svg="cross" size="2rem" />
+        <CloseSvg svg="cross" size={SPACINGS.THREE} />
       </Background>
     </Wrapper>
   )

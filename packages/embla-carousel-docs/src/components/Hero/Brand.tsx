@@ -1,26 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, COLORS } from 'consts'
+import { MEDIA, COLORS, SPACINGS } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { useSiteMetadata } from 'hooks'
 import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
 import { PrimaryButtonLink } from 'components/Link'
 
+const MAX_CONTENT_WIDTH = '50rem'
+
 const Wrapper = styled.div`
+  padding-top: ${SPACINGS.FOUR};
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding-top: 2.4rem;
 
   ${MEDIA.MIN_SM} {
-    padding-top: 3.6rem;
+    padding-top: ${SPACINGS.SIX};
   }
 
   ${MEDIA.MIN_MD} {
-    padding-top: 7.4rem;
+    padding-top: ${SPACINGS.TWELVE};
     align-items: flex-start;
     justify-content: space-between;
     flex-direction: row-reverse;
@@ -41,22 +43,22 @@ const HeroLogo = styled(SiteLogo)`
 `
 
 const Content = styled.div`
-  max-width: 50rem;
+  max-width: ${MAX_CONTENT_WIDTH};
 
   ${MEDIA.MAX_MD} {
-    padding-top: 3.6rem;
+    padding-top: ${SPACINGS.SIX};
     text-align: center;
   }
 
   ${MEDIA.MAX_SM} {
-    padding-top: 2.4rem;
+    padding-top: ${SPACINGS.FOUR};
   }
 `
 
 const H1 = styled.h1`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
+  margin-bottom: ${SPACINGS.THREE};
   line-height: 0.9;
-  margin-bottom: 1.8rem;
   font-weight: 900;
   font-size: 5rem;
 
@@ -88,10 +90,10 @@ const H2 = styled.h2`
 `
 
 const CtaWrapper = styled.div`
-  padding-top: 2.4rem;
+  padding-top: ${SPACINGS.FOUR};
 
   ${MEDIA.MIN_SM} {
-    padding-top: 3.6rem;
+    padding-top: ${SPACINGS.SIX};
   }
 `
 

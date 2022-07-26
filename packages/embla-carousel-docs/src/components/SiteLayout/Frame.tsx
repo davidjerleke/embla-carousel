@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { MEDIA } from 'consts'
+import { MEDIA, SPACINGS } from 'consts'
 
-export const FRAME_SPACING = '2.4rem'
+export const FRAME_SPACING = SPACINGS.FOUR
 const FRAME_MAX_WIDTH = '100rem'
 
 const Wrapper = styled.div`

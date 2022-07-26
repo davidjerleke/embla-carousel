@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
 import { PlainLink } from 'components/Link'
 import { gradientTextStyles } from 'utils'
-import { COLORS, supportsStyles } from 'consts'
+import { COLORS, SPACINGS, supportsStyles } from 'consts'
 import { IconWithText } from 'components/Icon'
 
-const ITEM_SPACING = '2.4rem'
+const ITEM_SPACING = SPACINGS.FOUR
 
 const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
-  margin-top: 4.8rem;
+  margin-top: ${SPACINGS.EIGHT};
   margin-left: -${ITEM_SPACING};
 `
 
@@ -32,7 +32,7 @@ const Item = styled.div`
 
 const ItemLabel = styled.div`
   color: ${COLORS.TEXT_LOW_CONTRAST};
-  padding-bottom: 0.6rem;
+  padding-bottom: ${SPACINGS.ONE};
 `
 
 const ItemTitle = styled.div`

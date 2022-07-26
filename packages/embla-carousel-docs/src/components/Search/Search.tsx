@@ -19,16 +19,17 @@ import {
   THEME_KEYS,
   THEME_PREFIX,
   COLORS,
+  SPACINGS,
 } from 'consts'
 
 const DIALOG_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'
-const INPUT_HEIGHT = '5.6rem'
-const BUTTON_WIDTH = '4.8rem'
-const FOOTER_HEIGHT = '4.4rem'
-const EDGE_SPACING = '1.2rem'
 const SVG_STROKE_WIDTH = '0.14rem'
-const FRAME_TOP_OFFSET_DESKTOP = '4rem'
+const INPUT_HEIGHT = SPACINGS.NINE
+const BUTTON_WIDTH = SPACINGS.EIGHT
+const FOOTER_HEIGHT = SPACINGS.SEVEN
+const EDGE_SPACING = SPACINGS.TWO
+const FRAME_TOP_OFFSET_DESKTOP = SPACINGS.SEVEN
 const SCROLL_HEIGHT_COMPACT = `${EDGE_SPACING} * 2 + ${INPUT_HEIGHT} + ${FOOTER_HEIGHT}`
 const SCROLL_HEIGHT_DESKTOP = `${FRAME_TOP_OFFSET_DESKTOP} + ${SCROLL_HEIGHT_COMPACT}`
 
@@ -99,9 +100,9 @@ const contentStyles = css`
   .DocSearch-StartScreen,
   .DocSearch-ErrorScreen {
     color: ${COLORS.TEXT_LOW_CONTRAST};
+    padding: ${SPACINGS.SIX} 0;
     font-size: 1.3rem;
     margin: 0 auto;
-    padding: 3.6rem 0;
     text-align: center;
     width: 80%;
   }
@@ -116,9 +117,9 @@ const contentStyles = css`
   }
 
   .DocSearch-Title {
-    font-size: 1.8rem;
     color: ${COLORS.TEXT_HIGH_CONTRAST};
-    margin-bottom: 1.8rem;
+    margin-bottom: ${SPACINGS.THREE};
+    font-size: 1.8rem;
   }
 
   .DocSearch-Help a {
@@ -157,16 +158,16 @@ const contentStyles = css`
   }
 
   .DocSearch-HitsFooter a {
+    padding-top: ${EDGE_SPACING};
+    margin-bottom: ${EDGE_SPACING};
     border-bottom: 0.1rem solid;
     color: inherit;
     display: inline-flex;
-    padding-top: ${EDGE_SPACING};
-    margin-bottom: ${EDGE_SPACING};
   }
 
   .DocSearch-Hit {
+    padding-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
     border-radius: 0.4rem;
-    padding-bottom: 0.4rem;
     display: flex;
     position: relative;
   }
@@ -199,20 +200,21 @@ const contentStyles = css`
     ${tabAccessStyles};
     outline-offset: -${OUTLINE_SIZE};
     background-color: ${COLORS.BACKGROUND_CODE};
+    padding-left: ${EDGE_SPACING};
     border-radius: 0.4rem;
     display: block;
-    padding-left: ${EDGE_SPACING};
     width: 100%;
   }
 
   .DocSearch-Hit-source {
     background-color: ${COLORS.BACKGROUND_SITE};
     color: ${COLORS.TEXT_HIGH_CONTRAST};
+    margin: 0 -${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)}
+      ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)} 0;
     font-size: 1.4rem;
     font-weight: 600;
     line-height: 3.2rem;
-    margin: 0 -0.4rem;
-    padding: 0.8rem 0.4rem 0;
     position: sticky;
     top: 0;
     z-index: 10;
@@ -227,7 +229,7 @@ const contentStyles = css`
       height: ${INPUT_HEIGHT};
       opacity: 0.5;
       stroke-width: ${SVG_STROKE_WIDTH};
-      width: 2.4rem;
+      width: ${SPACINGS.FOUR};
     }
   }
 
@@ -257,12 +259,12 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-Container {
-    align-items: center;
     color: ${COLORS.TEXT_MEDIUM_CONTRAST};
-    display: flex;
-    flex-direction: row;
     height: ${INPUT_HEIGHT};
     padding: 0 ${EDGE_SPACING} 0 0;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
   }
 
   .DocSearch-Hit-icon {
@@ -285,13 +287,13 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-action + .DocSearch-Hit-action {
-    margin-left: 0.6rem;
+    margin-left: ${SPACINGS.ONE};
   }
 
   .DocSearch-Hit-action-button {
     ${plainButtonStyles};
     color: inherit;
-    padding: 0.2rem;
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
   }
 
   svg.DocSearch-Hit-Select-Icon {
@@ -314,7 +316,7 @@ const contentStyles = css`
     font-weight: 500;
     justify-content: center;
     line-height: 1.2em;
-    margin: 0 0.8rem;
+    margin: 0 ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
     overflow-x: hidden;
     position: relative;
     text-overflow: ellipsis;
@@ -342,11 +344,11 @@ const contentStyles = css`
   }
 
   .DocSearch-NoResults-Prefill-List {
-    padding-bottom: 1.8rem;
+    padding-bottom: ${SPACINGS.THREE};
 
     > ul {
       display: inline-block;
-      padding-top: 0.6rem;
+      padding-top: ${SPACINGS.ONE};
       font-size: 1.4rem;
     }
 
@@ -361,8 +363,8 @@ const contentStyles = css`
   .DocSearch-Prefill {
     ${plainButtonStyles};
     ${contentLinkStyles};
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
+    padding-top: ${SPACINGS.ONE};
+    padding-bottom: ${SPACINGS.ONE};
   }
 `
 
@@ -385,7 +387,7 @@ const footerStyles = css`
 
   .DocSearch-Logo svg {
     color: #5468ff;
-    margin-left: 0.8rem;
+    margin-left: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   }
 
   .DocSearch-Label {
@@ -412,7 +414,7 @@ const footerStyles = css`
   }
 
   .DocSearch-Commands li:not(:last-of-type) {
-    margin-right: 0.8rem;
+    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};;
   }
 
   .DocSearch-Commands-Key {
@@ -425,7 +427,9 @@ const footerStyles = css`
     );
     box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST};,
       inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-      0 0.1rem 0.2rem 0.1rem rgba(${COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE}, 0.4);
+      0 0.1rem 0.2rem 0.1rem rgba(${
+        COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE
+      }, 0.4);
     display: flex;
     height: 1.8rem;
     justify-content: center;
@@ -443,7 +447,9 @@ const footerStyles = css`
       );
       box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_HIGH_CONTRAST},
         inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-        0 0.1rem 0.2rem 0.1rem rgba(${COLORS.DETAIL_LOW_CONTRAST_RGB_VALUE}, 0.4);
+        0 0.1rem 0.2rem 0.1rem rgba(${
+          COLORS.DETAIL_LOW_CONTRAST_RGB_VALUE
+        }, 0.4);
     }
   }
   .${THEME_PREFIX}${THEME_KEYS.DARK} {
@@ -455,7 +461,9 @@ const footerStyles = css`
       );
       box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST};,
         inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-        0 0.1rem 0.2rem 0.1rem rgba(${COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE}, 0.4);
+        0 0.1rem 0.2rem 0.1rem rgba(${
+          COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE
+        }, 0.4);
     }
   }
 `
@@ -500,8 +508,8 @@ const toggleButtonStyles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: -0.75rem;
-    margin-left: -0.75rem;
+    margin-right: -${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.15)};
+    margin-left: -${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.15)};
 
     &:hover {
       box-shadow: none;
@@ -567,7 +575,7 @@ const cancelButtonStyles = css`
   .DocSearch-Cancel {
     ${plainButtonStyles};
     color: ${COLORS.TEXT_BODY};
-    padding-left: 1rem;
+    padding-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
     display: flex;
     align-items: center;
     height: ${INPUT_HEIGHT};

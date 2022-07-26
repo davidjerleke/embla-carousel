@@ -3,7 +3,13 @@ import styled, { css } from 'styled-components'
 import { Navigation } from 'components/Navigation'
 import { useWindowSize } from 'hooks'
 import { Frame, FRAME_SPACING } from './Frame'
-import { BREAKPOINTS, MEDIA, PageTemplateType, PAGE_TEMPLATES } from 'consts'
+import {
+  BREAKPOINTS,
+  MEDIA,
+  PageTemplateType,
+  PAGE_TEMPLATES,
+  SPACINGS,
+} from 'consts'
 
 const SIDEBAR_WIDTH = '27rem'
 
@@ -30,7 +36,7 @@ const Main = styled.main<{ $isStartPage: boolean }>`
 
 const Nav = styled.div<{ $isStartPage: boolean }>`
   ${MEDIA.DESKTOP} {
-    padding-right: 4rem;
+    padding-right: ${SPACINGS.SEVEN};
     flex: 0 0 ${SIDEBAR_WIDTH};
     ${({ $isStartPage }) =>
       $isStartPage &&

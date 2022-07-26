@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 import { ContentLink } from 'components/Link'
-import { COLORS, MEDIA, supportsStyles } from 'consts'
+import { COLORS, MEDIA, SPACINGS, supportsStyles } from 'consts'
 
 const USP_ITEM_SPACING = '1.4rem'
 
@@ -12,17 +12,16 @@ const Wrapper = styled.ul`
   justify-content: center;
   margin-left: -${USP_ITEM_SPACING};
   margin-bottom: -${USP_ITEM_SPACING};
-  padding-top: 4.6rem;
-  padding-bottom: 0.2rem;
+  padding-top: ${SPACINGS.EIGHT};
 
   ${MEDIA.MIN_SM} {
-    padding-top: 7rem;
-    padding-bottom: 2.6rem;
+    padding-top: ${SPACINGS.ELEVEN};
+    padding-bottom: ${SPACINGS.THREE};
   }
 
   ${MEDIA.MIN_MD} {
-    padding-top: 9.8rem;
-    padding-bottom: 5.4rem;
+    padding-top: ${SPACINGS.SIXTEEN};
+    padding-bottom: ${SPACINGS.EIGHT};
   }
 `
 
@@ -41,7 +40,7 @@ const Usp = styled.li`
 `
 
 const UspContent = styled.article`
-  padding: 2.4rem 2.4rem;
+  padding: ${SPACINGS.FOUR};
   background-color: ${COLORS.BACKGROUND_CODE};
   border-radius: 1rem;
   height: 100%;
@@ -53,11 +52,11 @@ const UspContent = styled.article`
 const UspHeader = styled.h3`
   font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 0.8rem;
+  margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
 `
 
 const UspText = styled.p`
-  margin-bottom: 1.4rem;
+  margin-bottom: ${SPACINGS.THREE};
   color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 

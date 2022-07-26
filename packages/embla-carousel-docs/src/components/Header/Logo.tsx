@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
 import { useNavigation, useSiteMetadata } from 'hooks'
-import { MEDIA, COLORS } from 'consts'
+import { MEDIA, COLORS, SPACINGS } from 'consts'
 import { PlainLink } from 'components/Link'
 import { SiteLogo } from 'components/SiteLogo'
 
@@ -23,7 +23,7 @@ const Wrapper = styled(PlainLink)`
 const HeaderLogo = styled(SiteLogo)`
   ${createSquareSizeStyles('2.8rem')};
   display: flex;
-  margin-right: 0.8rem;
+  margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
 
   ${MEDIA.MIN_XXS} {
     ${createSquareSizeStyles('3rem')};

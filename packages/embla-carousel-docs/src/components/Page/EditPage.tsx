@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
-import { COLORS, URLS } from 'consts'
+import { COLORS, SPACINGS, URLS } from 'consts'
 import { IconWithText } from 'components/Icon'
 
 const Wrapper = styled(PlainLink)`
@@ -9,9 +9,9 @@ const Wrapper = styled(PlainLink)`
   align-items: center;
   font-size: 1.4rem;
   text-decoration: none;
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
-  margin-top: 4.8rem;
+  padding-top: ${SPACINGS.ONE};
+  padding-bottom: ${SPACINGS.ONE};
+  margin-top: ${SPACINGS.EIGHT};
   color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { plainLinkStyles } from 'components/Link'
 import { gradientTextStyles, isBrowser } from 'utils'
-import { COLORS, LAYERS } from 'consts'
+import { COLORS, LAYERS, SPACINGS } from 'consts'
 
 export const SKIP_TO_CONTENT_ID = 'main-content'
 
@@ -17,7 +17,8 @@ const Wrapper = styled.a`
   transform: translateX(-1000rem);
   font-size: 1.8rem;
   font-weight: 500;
-  padding: 1rem 2rem;
+  padding: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)}
+    ${SPACINGS.CUSTOM(({ THREE }) => THREE + 0.2)};
 
   &:focus,
   &:active {

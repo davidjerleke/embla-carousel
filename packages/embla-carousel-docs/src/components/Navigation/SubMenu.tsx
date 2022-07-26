@@ -5,10 +5,11 @@ import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
 import { NavigationLink } from 'components/Link'
 import { useRouteActive } from 'hooks'
-import { ALGOLIA_SELECTORS, COLORS } from 'consts'
+import { ALGOLIA_SELECTORS, COLORS, SPACINGS } from 'consts'
 import { Icon } from 'components/Icon'
 
-const ITEM_SPACING = '0.6rem'
+const ITEM_SPACING = SPACINGS.ONE
+const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,7 +19,8 @@ const Wrapper = styled.div`
 
 const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
-  padding: ${ITEM_SPACING} 0 ${ITEM_SPACING} 2rem;
+  padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
+    calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
   margin: 0 0;
   position: relative;
   line-height: inherit;
@@ -51,7 +53,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
     overflow: ${!$isOpen && 'hidden'};
     visibility: ${!$isOpen && 'hidden'};
   `};
-  padding-left: 3.4rem;
+  padding-left: calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.FOUR});
   position: relative;
   &:before {
     content: '';
@@ -102,7 +104,7 @@ export const SubMenu = (props: PropType) => {
         aria-expanded={isOpen}
         aria-label={`${toggleAction} Navigation Menu`}
       >
-        <ToggleSvg $isOpen={isOpen} svg="chevronRight" size="0.8rem" />
+        <ToggleSvg $isOpen={isOpen} svg="chevronRight" size={TOGGLE_SVG_SIZE} />
         <span className={activeClass}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>

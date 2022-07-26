@@ -11,7 +11,6 @@ export const plainLinkStyles = css<{ $isTabbing: boolean }>`
     ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
     0.5
   );
-
   text-decoration: none;
 `
 

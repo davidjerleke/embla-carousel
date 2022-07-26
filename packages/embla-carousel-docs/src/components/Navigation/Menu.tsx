@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, LAYERS, COLORS } from 'consts'
+import { MEDIA, LAYERS, COLORS, SPACINGS } from 'consts'
 import { useRoutes } from 'hooks'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 const ScrollArea = styled.ul`
   overflow: auto;
   position: relative;
-  padding-bottom: 2.4rem;
+  padding-bottom: ${SPACINGS.FOUR};
   max-height: 100%;
 
   ${MEDIA.COMPACT} {
@@ -51,13 +51,13 @@ const Buttons = styled.div`
   align-items: center;
 
   > button:first-child {
-    margin-right: 0.8rem;
+    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   }
 `
 
 const MiscMenu = styled(Links)`
+  padding-top: ${SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)};
   flex-direction: column;
-  padding-top: 1.4rem;
 `
 
 export const Menu = () => {

@@ -13,7 +13,8 @@ export {
   THEME_META_SELECTOR,
   COLORS,
 } from './themes'
-export { supportsStyles } from './supportsStyles'
 export { ALGOLIA_SEARCH_CONFIG, ALGOLIA_SELECTORS } from './algoliaSearch'
+export { SPACINGS } from './spacings'
 export { LAYERS } from './layers'
 export { URLS } from './urls'
+export { supportsStyles } from './supportsStyles'

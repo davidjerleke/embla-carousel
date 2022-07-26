@@ -1,9 +1,9 @@
 import { css } from 'styled-components'
-import { COLORS } from 'consts'
+import { COLORS, SPACINGS } from 'consts'
 
 export const blockquoteStyles = css`
   blockquote {
-    padding-left: 2.4rem;
+    padding-left: ${SPACINGS.FOUR};
     border-left: 0.4rem solid ${COLORS.DETAIL_LOW_CONTRAST};
 
     > *:last-child {

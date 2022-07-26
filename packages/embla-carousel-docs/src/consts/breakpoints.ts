@@ -1,10 +1,12 @@
-const createMediaQuery = (
+export type BreakpointKeyType = keyof typeof MEDIA
+
+const mediaQuery = (
   value: number,
   minOrMax: 'min' | 'max' = 'min',
-  dimension: 'width' | 'height' = 'width',
+  widthOrHeight: 'width' | 'height' = 'width',
 ): string => {
   const queryValue = minOrMax === 'max' ? value - 1 : value
-  return `@media (${minOrMax}-${dimension}: ${queryValue}px)`
+  return `@media (${minOrMax}-${widthOrHeight}: ${queryValue}px)`
 }
 
 export const BREAKPOINTS = {
@@ -17,18 +19,16 @@ export const BREAKPOINTS = {
 }
 
 export const MEDIA = {
-  COMPACT: createMediaQuery(BREAKPOINTS.MD, 'max'),
-  DESKTOP: createMediaQuery(BREAKPOINTS.MD, 'min'),
-  MIN_XXS: createMediaQuery(BREAKPOINTS.XXS, 'min'),
-  MIN_XS: createMediaQuery(BREAKPOINTS.XS, 'min'),
-  MIN_SM: createMediaQuery(BREAKPOINTS.SM, 'min'),
-  MIN_MD: createMediaQuery(BREAKPOINTS.MD, 'min'),
-  MIN_LG: createMediaQuery(BREAKPOINTS.LG, 'min'),
-  MAX_XXS: createMediaQuery(BREAKPOINTS.XXS, 'max'),
-  MAX_XS: createMediaQuery(BREAKPOINTS.XS, 'max'),
-  MAX_SM: createMediaQuery(BREAKPOINTS.SM, 'max'),
-  MAX_MD: createMediaQuery(BREAKPOINTS.MD, 'max'),
-  MAX_LG: createMediaQuery(BREAKPOINTS.LG, 'max'),
+  COMPACT: mediaQuery(BREAKPOINTS.MD, 'max'),
+  DESKTOP: mediaQuery(BREAKPOINTS.MD, 'min'),
+  MIN_XXS: mediaQuery(BREAKPOINTS.XXS, 'min'),
+  MIN_XS: mediaQuery(BREAKPOINTS.XS, 'min'),
+  MIN_SM: mediaQuery(BREAKPOINTS.SM, 'min'),
+  MIN_MD: mediaQuery(BREAKPOINTS.MD, 'min'),
+  MIN_LG: mediaQuery(BREAKPOINTS.LG, 'min'),
+  MAX_XXS: mediaQuery(BREAKPOINTS.XXS, 'max'),
+  MAX_XS: mediaQuery(BREAKPOINTS.XS, 'max'),
+  MAX_SM: mediaQuery(BREAKPOINTS.SM, 'max'),
+  MAX_MD: mediaQuery(BREAKPOINTS.MD, 'max'),
+  MAX_LG: mediaQuery(BREAKPOINTS.LG, 'max'),
 }
-
-export type BreakpointKeyType = keyof typeof MEDIA

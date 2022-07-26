@@ -1,14 +1,15 @@
+import { SPACINGS } from 'consts'
 import { css } from 'styled-components'
 
 export const listStyles = css`
   ol,
   ul {
-    margin-left: 2.4rem;
+    margin-left: ${SPACINGS.FOUR};
   }
 
   ol > li,
   ul > li {
-    margin-bottom: 1.2rem;
+    margin-bottom: ${SPACINGS.TWO};
   }
 
   ul {

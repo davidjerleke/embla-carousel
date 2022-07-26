@@ -1,18 +1,27 @@
+import { SPACINGS } from 'consts'
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { gradientBackgroundStyles } from 'utils'
+
+const DECORATION_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
+const DECORATION_WIDTH = SPACINGS.CUSTOM(({ EIGHT }) => EIGHT + 0.2)
 
 const Text = styled.span`
   display: block;
   width: 100%;
 `
 
+const DecorationWrapper = styled.span`
+  display: block;
+  font-size: 0;
+`
+
 const Decoration = styled.span`
   ${gradientBackgroundStyles};
+  margin-top: ${SPACINGS.FOUR};
+  height: ${DECORATION_HEIGHT};
+  width: ${DECORATION_WIDTH};
   display: inline-flex;
-  margin-top: 2.4rem;
-  height: 0.3rem;
-  width: 5rem;
 `
 
 type PropType = PropsWithChildren<{}>
@@ -23,7 +32,9 @@ export const H1 = (props: PropType) => {
   return (
     <h1>
       <Text>{children}</Text>
-      <Decoration />
+      <DecorationWrapper>
+        <Decoration />
+      </DecorationWrapper>
     </h1>
   )
 }
