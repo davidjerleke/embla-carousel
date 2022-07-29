@@ -27,11 +27,7 @@ const INPUT_BORDER_SIZE = '0.2rem'
 const SVG_STROKE_WIDTH = '0.14rem'
 const INPUT_HEIGHT = SPACINGS.NINE
 const BUTTON_WIDTH = SPACINGS.EIGHT
-const FOOTER_HEIGHT = SPACINGS.SEVEN
 const EDGE_SPACING = SPACINGS.TWO
-const FRAME_TOP_OFFSET_DESKTOP = SPACINGS.SEVEN
-const SCROLL_HEIGHT_COMPACT = `${EDGE_SPACING} * 2 + ${INPUT_HEIGHT} + ${FOOTER_HEIGHT}`
-const SCROLL_HEIGHT_DESKTOP = `${FRAME_TOP_OFFSET_DESKTOP} + ${SCROLL_HEIGHT_COMPACT}`
 
 const modalStyles = css`
   .DocSearch-Container {
@@ -64,19 +60,15 @@ const modalStyles = css`
     padding: ${EDGE_SPACING};
     box-shadow: 0 0 0 0.1rem ${COLORS.DETAIL_LOW_CONTRAST};
     background-color: ${COLORS.BACKGROUND_SITE};
-    position: relative;
     z-index: ${LAYERS.STEP};
+    position: relative;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 
     ${MEDIA.DESKTOP} {
       max-width: ${DIALOG_MAX_WIDTH};
-    }
-
-    ${MEDIA.DESKTOP} {
-      border-radius: 0.4rem;
-      margin-top: ${FRAME_TOP_OFFSET_DESKTOP};
     }
   }
 `
@@ -84,6 +76,7 @@ const modalStyles = css`
 const headerStyles = css`
   .DocSearch-SearchBar {
     display: flex;
+    flex: 0 0 auto;
   }
 
   .DocSearch-Form {
@@ -130,13 +123,7 @@ const contentStyles = css`
   .DocSearch-Dropdown {
     overflow-y: auto;
     overflow-x: hidden;
-
-    ${MEDIA.COMPACT} {
-      max-height: calc(100vh - (${SCROLL_HEIGHT_COMPACT}));
-    }
-    ${MEDIA.DESKTOP} {
-      max-height: calc(100vh - (${SCROLL_HEIGHT_DESKTOP}));
-    }
+    flex: 1 1 0;
   }
 
   .DocSearch-Help {
@@ -370,7 +357,7 @@ const contentStyles = css`
 
 const footerStyles = css`
   .DocSearch-Footer {
-    height: ${FOOTER_HEIGHT};
+    flex: 0 0 auto;
     padding-top: ${EDGE_SPACING};
     display: flex;
     flex-direction: row-reverse;
@@ -575,13 +562,16 @@ const cancelButtonStyles = css`
   .DocSearch-Cancel {
     ${plainButtonStyles};
     color: ${COLORS.TEXT_BODY};
-    padding-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
+    height: ${INPUT_HEIGHT};
     display: flex;
     align-items: center;
-    height: ${INPUT_HEIGHT};
 
     ${MEDIA.DESKTOP} {
-      display: none;
+      margin-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
+    }
+
+    ${MEDIA.COMPACT} {
+      padding-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
     }
   }
 `
