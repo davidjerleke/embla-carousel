@@ -101,7 +101,7 @@ const contentStyles = css`
   .DocSearch-ErrorScreen {
     color: ${COLORS.TEXT_LOW_CONTRAST};
     padding: ${SPACINGS.SIX} 0;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin: 0 auto;
     text-align: center;
     width: 80%;
@@ -140,7 +140,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Help {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin: 0;
     user-select: none;
   }
@@ -392,7 +392,7 @@ const footerStyles = css`
 
   .DocSearch-Label {
     color: ${COLORS.TEXT_LOW_CONTRAST};
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     line-height: 1.9rem;
   }
 

@@ -1,11 +1,9 @@
 type SpacingCustomType = (spacings: typeof SPACING_VALUES) => number
 
-const spacingWithUnit = (spacing: number): string => spacing + UNIT
+const spacingWithUnit = (spacing: number): string => spacing + 'rem'
 
 const spacingRounded = (spacing: number): number =>
   Math.round((spacing + Number.EPSILON) * 10000) / 10000
-
-const UNIT = 'rem'
 
 const SPACING_VALUES = {
   ONE: 0.6,

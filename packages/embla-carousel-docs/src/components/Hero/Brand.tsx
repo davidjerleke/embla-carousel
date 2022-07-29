@@ -82,7 +82,7 @@ const H1 = styled.h1`
 const H2 = styled.h2`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   line-height: 1.5;
-  font-size: 1.9rem;
+  font-size: 1.8rem;
 
   ${MEDIA.MIN_SM} {
     font-size: 2.1rem;
