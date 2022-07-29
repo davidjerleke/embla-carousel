@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 import { ContentLink } from 'components/Link'
 import { COLORS, MEDIA, SPACINGS, supportsStyles } from 'consts'
+import { gradientTextStyles } from 'utils'
 
 const USP_ITEM_SPACING = '1.4rem'
 
@@ -61,8 +62,12 @@ const UspText = styled.p`
 `
 
 const UspLink = styled.div`
-  > a {
+  span {
     font-size: 1.4rem;
+    ${gradientTextStyles};
+  }
+
+  svg {
     color: ${COLORS.BRAND_PRIMARY};
 
     ${supportsStyles.gradientText} {
