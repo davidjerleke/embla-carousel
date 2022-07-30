@@ -1,9 +1,6 @@
+import { sizeWithUnit } from './unit'
+
 type SpacingCustomType = (spacings: typeof SPACING_VALUES) => number
-
-const spacingWithUnit = (spacing: number): string => spacing + 'rem'
-
-const spacingRounded = (spacing: number): number =>
-  Math.round((spacing + Number.EPSILON) * 10000) / 10000
 
 const SPACING_VALUES = {
   ONE: 0.6,
@@ -25,22 +22,22 @@ const SPACING_VALUES = {
 }
 
 export const SPACINGS = {
-  ONE: spacingWithUnit(SPACING_VALUES.ONE),
-  TWO: spacingWithUnit(SPACING_VALUES.TWO),
-  THREE: spacingWithUnit(SPACING_VALUES.THREE),
-  FOUR: spacingWithUnit(SPACING_VALUES.FOUR),
-  FIVE: spacingWithUnit(SPACING_VALUES.FIVE),
-  SIX: spacingWithUnit(SPACING_VALUES.SIX),
-  SEVEN: spacingWithUnit(SPACING_VALUES.SEVEN),
-  EIGHT: spacingWithUnit(SPACING_VALUES.EIGHT),
-  NINE: spacingWithUnit(SPACING_VALUES.NINE),
-  TEN: spacingWithUnit(SPACING_VALUES.TEN),
-  ELEVEN: spacingWithUnit(SPACING_VALUES.ELEVEN),
-  TWELVE: spacingWithUnit(SPACING_VALUES.TWELVE),
-  THIRTEEN: spacingWithUnit(SPACING_VALUES.THIRTEEN),
-  FOURTEEN: spacingWithUnit(SPACING_VALUES.FOURTEEN),
-  FIFTEEN: spacingWithUnit(SPACING_VALUES.FIFTEEN),
-  SIXTEEN: spacingWithUnit(SPACING_VALUES.SIXTEEN),
+  ONE: sizeWithUnit(SPACING_VALUES.ONE),
+  TWO: sizeWithUnit(SPACING_VALUES.TWO),
+  THREE: sizeWithUnit(SPACING_VALUES.THREE),
+  FOUR: sizeWithUnit(SPACING_VALUES.FOUR),
+  FIVE: sizeWithUnit(SPACING_VALUES.FIVE),
+  SIX: sizeWithUnit(SPACING_VALUES.SIX),
+  SEVEN: sizeWithUnit(SPACING_VALUES.SEVEN),
+  EIGHT: sizeWithUnit(SPACING_VALUES.EIGHT),
+  NINE: sizeWithUnit(SPACING_VALUES.NINE),
+  TEN: sizeWithUnit(SPACING_VALUES.TEN),
+  ELEVEN: sizeWithUnit(SPACING_VALUES.ELEVEN),
+  TWELVE: sizeWithUnit(SPACING_VALUES.TWELVE),
+  THIRTEEN: sizeWithUnit(SPACING_VALUES.THIRTEEN),
+  FOURTEEN: sizeWithUnit(SPACING_VALUES.FOURTEEN),
+  FIFTEEN: sizeWithUnit(SPACING_VALUES.FIFTEEN),
+  SIXTEEN: sizeWithUnit(SPACING_VALUES.SIXTEEN),
   CUSTOM: (callback: SpacingCustomType): string =>
-    spacingWithUnit(spacingRounded(callback(SPACING_VALUES))),
+    sizeWithUnit(callback(SPACING_VALUES)),
 }
