@@ -101,7 +101,7 @@ export function DragHandler(
     if (!loop && isEdge) return baseForce * 0.4
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
-    return scrollTarget.byIndex(next.get(), 0).distance
+    return scrollTarget.byIndex(next.get(), mathSign(force)).distance
   }
 
   function down(evt: PointerEventType): void {
