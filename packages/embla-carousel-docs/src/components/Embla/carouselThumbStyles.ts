@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { frameCollapseStyles } from 'components/SiteLayout'
-import { breakpoints, supportsStyles } from 'consts'
+import { COLORS, MEDIA, supportsStyles } from 'consts'
 import { PlainButton } from 'components/Button'
 import { createSquareSizeStyles } from 'utils'
 import {
@@ -15,13 +15,13 @@ const HEIGHT = '30.2rem'
 export const Wrapper = styled.div`
   height: ${HEIGHT};
   padding: ${CAROUSEL_SPACING};
-  background-color: var(--background-code);
+  background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 
-  ${breakpoints.maxSm} {
+  ${MEDIA.MAX_SM} {
     ${frameCollapseStyles};
   }
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     border-radius: ${CAROUSEL_RADIUS};
   }
 `
@@ -76,11 +76,11 @@ export const ThumbSlide = styled.div`
   height: 100%;
   min-width: 25%;
 
-  ${breakpoints.minXs} {
+  ${MEDIA.MIN_XS} {
     min-width: 18%;
   }
 
-  ${breakpoints.minMd} {
+  ${MEDIA.MIN_MD} {
     min-width: 15%;
   }
 `

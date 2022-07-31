@@ -3,7 +3,7 @@ export type { PageTemplateType } from './pageTemplates'
 export type { ThemeKeyType } from './themes'
 
 export { LOCALSTORAGE_KEYS } from './localStorage'
-export { breakpoints, BREAKPOINTS } from './breakpoints'
+export { MEDIA, BREAKPOINTS } from './breakpoints'
 export { PAGE_TEMPLATES } from './pageTemplates'
 export {
   themeStyles,
@@ -11,9 +11,11 @@ export {
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
+  COLORS,
 } from './themes'
-export { supportsStyles } from './supportsStyles'
-export { cssHackStyles } from './cssHackStyles'
 export { ALGOLIA_SEARCH_CONFIG, ALGOLIA_SELECTORS } from './algoliaSearch'
+export { SPACINGS } from './spacings'
+export { FONT_SIZES } from './fontSizes'
 export { LAYERS } from './layers'
 export { URLS } from './urls'
+export { supportsStyles } from './supportsStyles'

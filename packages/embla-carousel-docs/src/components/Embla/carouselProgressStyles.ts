@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { LAYERS, supportsStyles } from 'consts'
+import { COLORS, LAYERS, supportsStyles } from 'consts'
 import { gradientBackgroundStyles } from 'utils'
 
 export const ProgressWrapper = styled.div`
@@ -16,7 +16,7 @@ export const ProgressWrapper = styled.div`
 `
 
 export const ProgressBar = styled.div`
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   max-width: 210px;
   width: 100%;
   position: relative;
@@ -26,7 +26,7 @@ export const ProgressBar = styled.div`
 `
 
 export const ProgressHighlight = styled.div`
-  background-color: var(--brand-primary);
+  background-color: ${COLORS.BRAND_PRIMARY};
   ${supportsStyles.gradientText} {
     ${gradientBackgroundStyles};
   }

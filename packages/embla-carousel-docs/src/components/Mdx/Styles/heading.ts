@@ -1,7 +1,9 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { createSquareSizeStyles, gradientBackgroundStyles } from 'utils'
-import { breakpoints } from 'consts'
+import { createSquareSizeStyles } from 'utils'
+import { COLORS, FONT_SIZES, MEDIA, SPACINGS } from 'consts'
+
+const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 
 export const headingStyles = css`
   h1,
@@ -10,43 +12,34 @@ export const headingStyles = css`
   h4,
   h5,
   h6 {
+    color: ${COLORS.TEXT_HIGH_CONTRAST};
     font-weight: 700;
-    color: var(--text-high-contrast);
   }
 
   h1,
   h2,
   h3 {
-    margin-top: 4.8rem;
+    margin-top: ${SPACINGS.EIGHT};
   }
 
   h1 {
+    font-size: ${FONT_SIZES.H1};
     font-weight: 800;
-    font-size: 3.2rem;
     line-height: 1.25;
-
-    &:after {
-      display: block;
-      height: 0.3rem;
-      width: 5rem;
-      content: '';
-      margin-top: 2.4rem;
-      ${gradientBackgroundStyles};
-    }
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: ${FONT_SIZES.H2};
     line-height: 1.35;
   }
 
   h3 {
-    font-size: 2.15rem;
+    font-size: ${FONT_SIZES.H3};
     line-height: 1.5;
   }
 
   h4 {
-    font-size: 1.8rem;
+    font-size: ${FONT_SIZES.H4};
   }
 
   h1,
@@ -61,17 +54,18 @@ export const headingStyles = css`
       top: 0;
       bottom: 0;
       width: ${FRAME_SPACING};
-      ${breakpoints.minSm} {
-        width: 2.8rem;
+
+      ${MEDIA.DESKTOP} {
+        width: ${SPACINGS.FIVE};
       }
 
       > svg {
-        color: var(--text-low-contrast);
+        ${createSquareSizeStyles(ANCHOR_SVG_SIZE)};
+        color: ${COLORS.TEXT_LOW_CONTRAST};
         transform: translate(-50%, -50%);
         position: absolute;
         top: 50%;
         left: 50%;
-        ${createSquareSizeStyles('1.6rem')};
         visibility: hidden;
 
         @media (hover: none), (hover: on-demand) {

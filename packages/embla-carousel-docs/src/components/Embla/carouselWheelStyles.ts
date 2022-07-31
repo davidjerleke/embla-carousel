@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { WHEEL_ITEM_SIZE } from './CarouselWheelItem'
 import { frameCollapseStyles } from 'components/SiteLayout'
 import { CAROUSEL_RADIUS, CAROUSEL_SPACING } from './carouselBasicStyles'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 
 export type PerspectiveType = 'left' | 'right'
 
@@ -11,14 +11,14 @@ const VIEWPORT_MAX_WIDTH = '30rem'
 
 export const Wrapper = styled.div`
   height: ${CAROUSEL_HEIGHT};
-  background-color: var(--background-code);
+  background-color: ${COLORS.BACKGROUND_CODE};
   padding-left: ${CAROUSEL_SPACING};
   padding-right: ${CAROUSEL_SPACING};
 
-  ${breakpoints.maxSm} {
+  ${MEDIA.MAX_SM} {
     ${frameCollapseStyles};
   }
-  ${breakpoints.minSm} {
+  ${MEDIA.MIN_SM} {
     border-radius: ${CAROUSEL_RADIUS};
   }
 `
@@ -44,20 +44,20 @@ export const Viewport = styled.div`
   }
   &:before {
     top: -0.5px;
-    border-bottom: 0.5px solid rgba(var(--text-high-contrast-rgb-value), 0.3);
+    border-bottom: 0.5px solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
     background: linear-gradient(
       to top,
-      rgba(var(--background-code-rgb-value), 0.65) 0%,
-      rgba(var(--background-code-rgb-value), 1) 100%
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
     );
   }
   &:after {
     bottom: -0.5px;
-    border-top: 0.5px solid rgba(var(--text-high-contrast-rgb-value), 0.3);
+    border-top: 0.5px solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
     background: linear-gradient(
       to bottom,
-      rgba(var(--background-code-rgb-value), 0.65) 0%,
-      rgba(var(--background-code-rgb-value), 1) 100%
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
     );
   }
 `

@@ -5,9 +5,10 @@ import { useWindowSize } from 'hooks'
 import { Frame, FRAME_SPACING } from './Frame'
 import {
   BREAKPOINTS,
-  breakpoints,
+  MEDIA,
   PageTemplateType,
   PAGE_TEMPLATES,
+  SPACINGS,
 } from 'consts'
 
 const SIDEBAR_WIDTH = '27rem'
@@ -27,15 +28,15 @@ const Main = styled.main<{ $isStartPage: boolean }>`
   ${({ $isStartPage }) =>
     !$isStartPage &&
     css`
-      ${breakpoints.desktop} {
+      ${MEDIA.DESKTOP} {
         max-width: calc(100% - ${SIDEBAR_WIDTH});
       }
     `};
 `
 
 const Nav = styled.div<{ $isStartPage: boolean }>`
-  ${breakpoints.desktop} {
-    padding-right: 4rem;
+  ${MEDIA.DESKTOP} {
+    padding-right: ${SPACINGS.SEVEN};
     flex: 0 0 ${SIDEBAR_WIDTH};
     ${({ $isStartPage }) =>
       $isStartPage &&

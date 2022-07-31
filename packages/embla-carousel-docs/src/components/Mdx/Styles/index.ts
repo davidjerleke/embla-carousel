@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+import { COLORS } from 'consts'
 import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'
 import { codeStyles } from './code'
+import { linkStyles } from './link'
 import { hrStyles } from './hr'
 
 export const MdxStyles = styled.div`
@@ -11,8 +13,9 @@ export const MdxStyles = styled.div`
   ${codeStyles};
   ${headingStyles};
   ${hrStyles};
+  ${linkStyles};
 
-  color: var(--text-body);
+  color: ${COLORS.TEXT_BODY};
 
   h1,
   h2,

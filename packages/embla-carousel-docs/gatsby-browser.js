@@ -1,3 +1,5 @@
+import 'inter-ui/inter.css'
+
 export const onClientEntry = async () => {
   if (typeof window.IntersectionObserver === 'undefined') {
     await import('intersection-observer')

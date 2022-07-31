@@ -41,18 +41,49 @@ Embla Carousel will **automatically pick up** any **changes in gap sizes** when 
 
 ## Changing options
 
-You can change your [options](/api/options/) based on your breakpoints right in your CSS. **Make sure the JSON string is on a single line for the CSS parser to parse it correctly.**
+You can provide [options](/api/options/) that will be applied for specific breakpoints using the [breakpoint](/api/options/#breakpoints) option.
 
-Here's an example of a carousel that's only draggable when the screen width is less than 768px:
+Here's an example of a carousel that's only active when the screen width is less than 768px:
 
-```css-with-json
-.embla:before {
-  display: none;
-  content: '{ "draggable": true }'; /* Draggable as default */ 
+```js
+const options = {
+  active: true,
+  breakpoints: {
+    '(min-width: 768px)': { active: false },
+  },
 }
-@media (min-width: 768px) {
-  .embla:before {
-    content: '{ "draggable": false }';  /* Not draggable SM up */
-  }
+```
+
+Because the default [active](/api/options/#active) value is `true`, we can omit it from the root level and achieve the same result as above like this:
+
+```js
+const options = {
+  breakpoints: {
+    '(min-width: 768px)': { active: false },
+  },
+}
+```
+
+When breakpoint options **are in conflict**, the last option in the breakpoints options will be applied:
+
+```js
+const options = {
+  loop: false,
+  breakpoints: {
+    '(min-width: 768px)': { loop: true },
+    '(min-width: 420px)': { loop: false }, // This will override the (min-width: 768px) breakpoint loop option
+  },
+}
+```
+
+If multiple queries match, they will be **merged**:
+
+```js
+const options = {
+  loop: false, // --> 419px screens and down will apply { loop: false }
+  breakpoints: {
+    '(min-width: 420px)': { align: 'start' }, // --> 420px screens and up will apply { align: 'start', loop: false }
+    '(min-width: 768px)': { loop: true }, // --> 768px screens and up will apply { align: 'start', loop: true }
+  },
 }
 ```

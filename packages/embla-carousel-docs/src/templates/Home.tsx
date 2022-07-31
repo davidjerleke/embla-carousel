@@ -49,7 +49,7 @@ const Home = (props: PropType) => {
               "name": "${removeProtocol(siteUrl)}",
               "description": "${description}",
               "url": "${siteUrl}/",
-              "image": "${siteUrl}/share-image.jpg",
+              "image": "${siteUrl}/share-image.png",
               "logo": "${siteUrl}${maskable}"
             }
           `}

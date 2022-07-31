@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS, SPACINGS } from 'consts'
 import { useRoutes } from 'hooks'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { hiddenAtBreakpointStyles } from 'utils'
@@ -14,26 +14,26 @@ const MAX_WIDTH = '37.5rem'
 const MAX_HEIGHT_COMPACT = `calc(100vh - ${HEADER_HEIGHT})`
 
 const Wrapper = styled.div`
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   position: relative;
   height: 100%;
 
-  ${breakpoints.compact} {
+  ${MEDIA.COMPACT} {
     z-index: ${LAYERS.STEP};
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
     max-width: ${MAX_WIDTH};
-    box-shadow: 0.1rem 0 0 0 var(--detail-low-contrast);
+    box-shadow: 0.1rem 0 0 0 ${COLORS.DETAIL_LOW_CONTRAST};
   }
 `
 
 const ScrollArea = styled.ul`
   overflow: auto;
   position: relative;
-  padding-bottom: 2.4rem;
+  padding-bottom: ${SPACINGS.FOUR};
   max-height: 100%;
 
-  ${breakpoints.compact} {
+  ${MEDIA.COMPACT} {
     max-height: ${MAX_HEIGHT_COMPACT};
   }
 `
@@ -51,13 +51,13 @@ const Buttons = styled.div`
   align-items: center;
 
   > button:first-child {
-    margin-right: 0.8rem;
+    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   }
 `
 
 const MiscMenu = styled(Links)`
+  padding-top: ${SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)};
   flex-direction: column;
-  padding-top: 1.4rem;
 `
 
 export const Menu = () => {
@@ -65,7 +65,7 @@ export const Menu = () => {
 
   return (
     <Wrapper>
-      <Header $hidden="desktop">
+      <Header $hidden="DESKTOP">
         <Logo />
         <Buttons>
           <ThemeToggle />

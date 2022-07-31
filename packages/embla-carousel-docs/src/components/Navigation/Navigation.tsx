@@ -1,9 +1,9 @@
-import React, { PropsWithChildren, useCallback, useEffect } from 'react'
+import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import FocusTrap from 'focus-trap-react'
 import { useEventListener, useNavigation } from 'hooks'
 import { hiddenAtBreakpointStyles } from 'utils'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 import { Menu } from './Menu'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { HEADER_HEIGHT } from 'components/Header'
@@ -14,7 +14,7 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
   z-index: ${LAYERS.NAVIGATION};
   position: fixed;
 
-  ${breakpoints.compact} {
+  ${MEDIA.COMPACT} {
     ${({ $isOpen }) => css`
       transform: ${!$isOpen && 'translateX(-100%)'};
       visibility: ${!$isOpen && 'hidden'};
@@ -25,14 +25,14 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
     left: 0;
   }
 
-  ${breakpoints.desktop} {
+  ${MEDIA.DESKTOP} {
     top: calc(${FRAME_SPACING} + ${HEADER_HEIGHT});
     bottom: 0;
   }
 `
 
 const Overlay = styled.div`
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   opacity: 0.9;
   position: absolute;
   top: 0;
@@ -52,10 +52,11 @@ export const Navigation = (props: PropType) => {
   const id = collapsed ? NAVIGATION_ID : undefined
   const role = collapsed ? 'dialog' : undefined
   const ariaModal = collapsed ? 'true' : undefined
+  const closeKeys = useRef(['Escape', 'Esc'])
 
   const onKeyUp = useCallback(
-    ({ keyCode }) => {
-      if (keyCode === 27) closeNavigation()
+    ({ key }: KeyboardEvent) => {
+      if (closeKeys.current.includes(key)) closeNavigation()
     },
     [closeNavigation],
   )
@@ -80,7 +81,7 @@ export const Navigation = (props: PropType) => {
         $isOpen={isOpen}
         {...props}
       >
-        <Overlay onPointerUp={closeNavigation} $hidden="desktop" />
+        <Overlay onPointerUp={closeNavigation} $hidden="DESKTOP" />
         <Menu />
       </Nav>
     </FocusTrap>

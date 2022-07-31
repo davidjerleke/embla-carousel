@@ -1,3 +1,4 @@
+import { COLORS } from 'consts'
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 
@@ -8,13 +9,13 @@ const ColoredText = styled.span<{ $color: string }>`
 type PropType = PropsWithChildren<{}>
 
 export const BrandPrimaryText = (props: PropType) => {
-  return <ColoredText $color="var(--brand-primary)" {...props} />
+  return <ColoredText $color={COLORS.BRAND_PRIMARY} {...props} />
 }
 
 export const BrandSecondaryText = (props: PropType) => {
-  return <ColoredText $color="var(--brand-secondary)" {...props} />
+  return <ColoredText $color={COLORS.BRAND_SECONDARY} {...props} />
 }
 
 export const BrandAlternativeText = (props: PropType) => {
-  return <ColoredText $color="var(--brand-alternative)" {...props} />
+  return <ColoredText $color={COLORS.BRAND_ALTERNATIVE} {...props} />
 }

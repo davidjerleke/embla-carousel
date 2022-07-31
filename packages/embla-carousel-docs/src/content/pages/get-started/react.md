@@ -55,7 +55,7 @@ The hook gives us a **ref** to attach to our wrapping element with the classname
 
 ## Accessing the carousel API
 
-The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) object as an argument. Additionaly, you can access the [API](/api/) with a `useEffect` like demonstrated below:
+The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with a `useEffect` like demonstrated below:
 
 ```jsx{5, 7-11}
 import React, { useEffect } from 'react'
@@ -84,7 +84,7 @@ export const EmblaCarousel = () => {
 
 ## Adding plugins
 
-The `useEmblaCarousel` hook also accepts [plugins](/plugins/) as a third optional argument. Note that plugins need to be passed in an array like so:
+The `useEmblaCarousel` hook also accepts [plugins](/plugins/) as the second argument. Note that plugins need to be passed in an array like so:
 
 ```jsx{3, 6}
 import React, { useEffect } from 'react'
@@ -92,7 +92,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 
 export const EmblaCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
+  const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])
 
   return (
     <div className="embla" ref={emblaRef}>

@@ -3,21 +3,22 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { plainLinkStyles } from 'components/Link'
 import { gradientTextStyles, isBrowser } from 'utils'
-import { LAYERS } from 'consts'
+import { COLORS, FONT_SIZES, LAYERS, SPACINGS } from 'consts'
 
 export const SKIP_TO_CONTENT_ID = 'main-content'
 
 const Wrapper = styled.a`
   ${plainLinkStyles};
   z-index: ${LAYERS.SEARCH + 1};
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   top: 1rem;
   left: 1rem;
   position: absolute;
   transform: translateX(-1000rem);
-  font-size: 1.8rem;
+  font-size: ${FONT_SIZES.H4};
   font-weight: 500;
-  padding: 1rem 2rem;
+  padding: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)}
+    ${SPACINGS.CUSTOM(({ THREE }) => THREE + 0.2)};
 
   &:focus,
   &:active {

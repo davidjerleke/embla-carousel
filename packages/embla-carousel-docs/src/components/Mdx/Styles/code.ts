@@ -1,37 +1,41 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { breakpoints, LAYERS } from 'consts'
-import { gradientBackgroundStyles } from 'utils'
+import { MEDIA, LAYERS, COLORS, SPACINGS, FONT_SIZES } from 'consts'
 
 const BORDER_RADIUS = '0.4rem'
 
 export const codeStyles = css`
   .language-text {
-    background-color: var(--detail-low-contrast);
+    background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     border-radius: ${BORDER_RADIUS};
-    font-size: 1.44rem;
-    padding: 0.288rem 0.6rem;
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
+    font-size: ${FONT_SIZES.CUSTOM(
+      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
+    )};
     box-sizing: border-box;
   }
 
   .gatsby-highlight {
     ${frameCollapseStyles};
-    background-color: var(--background-code);
+    background-color: ${COLORS.BACKGROUND_CODE};
+    margin-bottom: ${SPACINGS.FOUR};
     overflow: hidden;
     position: relative;
-    font-size: 1.36rem;
-    margin-bottom: 2.4rem;
+    font-size: ${FONT_SIZES.CUSTOM(
+      ({ COMPLEMENTARY }) => COMPLEMENTARY - 0.04,
+    )};
 
     &:before {
       display: block;
       content: attr(data-language);
       line-height: 1;
-      font-size: 1.2rem;
+      font-size: ${FONT_SIZES.DETAIL};
       text-transform: uppercase;
       position: absolute;
       top: 0;
       left: ${FRAME_SPACING};
-      padding: 0.4rem 0.8rem;
+      padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
+        ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
       border-bottom-left-radius: ${BORDER_RADIUS};
       border-bottom-right-radius: ${BORDER_RADIUS};
     }
@@ -79,7 +83,7 @@ export const codeStyles = css`
       }
     }
 
-    ${breakpoints.minXs} {
+    ${MEDIA.MIN_XS} {
       border-radius: ${BORDER_RADIUS};
     }
   }
@@ -87,10 +91,10 @@ export const codeStyles = css`
   .gatsby-highlight-code-line {
     position: relative;
     display: block;
-    margin-left: -2.4rem;
-    margin-right: -2.4rem;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    margin-left: -${SPACINGS.FOUR};
+    margin-right: -${SPACINGS.FOUR};
+    padding-left: ${SPACINGS.FOUR};
+    padding-right: ${SPACINGS.FOUR};
 
     &:before,
     &:after {
@@ -100,12 +104,16 @@ export const codeStyles = css`
       bottom: 0;
       content: '';
       pointer-events: none;
-      ${gradientBackgroundStyles};
+      background-image: linear-gradient(
+        90deg,
+        ${COLORS.BRAND_PRIMARY},
+        ${COLORS.BRAND_SECONDARY}
+      );
     }
 
     &:after {
       left: 0;
-      width: 0.4rem;
+      width: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
     }
     &:before {
       right: 0;
@@ -132,15 +140,15 @@ export const codeStyles = css`
   }
 
   pre {
-    color: var(--text-body);
+    color: ${COLORS.TEXT_BODY};
     overflow: auto;
     white-space: pre;
 
     ::-webkit-scrollbar-thumb {
-      background-color: var(--scroll-thumb);
+      background-color: ${COLORS.SCROLL_THUMB};
     }
     ::-webkit-scrollbar-track {
-      background-color: var(--detail-low-contrast);
+      background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     }
     ::-webkit-scrollbar {
       width: 0.4rem;
@@ -152,21 +160,22 @@ export const codeStyles = css`
   .token.prolog,
   .token.doctype,
   .token.cdata {
-    color: var(--text-comment);
+    color: ${COLORS.TEXT_COMMENT};
   }
   .token.class-name,
   .token.attr-value,
   .token.keyword,
+  .token.property,
   .token.control,
   .token.directive,
   .token.selector,
   .token.function:not(.function-variable),
   .token.singlequote,
   .token.unit {
-    color: var(--brand-primary);
+    color: ${COLORS.BRAND_PRIMARY};
   }
   .token.string,
-  .token.property,
+  .token.string-property,
   .token.attr-name,
   .token.entity,
   .token.url,
@@ -177,11 +186,11 @@ export const codeStyles = css`
   .token.atrule,
   .token.placeholder,
   .token.variable {
-    color: var(--brand-secondary);
+    color: ${COLORS.BRAND_SECONDARY};
   }
   .token.punctuation,
   .token.plain-text {
-    color: var(--text-high-contrast);
+    color: ${COLORS.TEXT_HIGH_CONTRAST};
   }
   .token.tag,
   .token.boolean,
@@ -189,7 +198,7 @@ export const codeStyles = css`
   .token.function-name,
   .token.constant,
   .token.symbol {
-    color: var(--brand-alternative);
+    color: ${COLORS.BRAND_ALTERNATIVE};
   }
   .token.namespace {
     opacity: 0.75;

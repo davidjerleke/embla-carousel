@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { Frame } from 'components/SiteLayout'
 import { NavigationToggle } from 'components/Navigation'
-import { breakpoints, LAYERS } from 'consts'
+import { MEDIA, LAYERS, COLORS } from 'consts'
 import { Actions } from './Actions'
 import { Logo } from './Logo'
 
@@ -19,13 +19,13 @@ const Wrapper = styled.header`
 const Fixed = styled.div`
   ${HEIGHT};
   z-index: ${LAYERS.HEADER};
-  background-color: var(--background-site);
+  background-color: ${COLORS.BACKGROUND_SITE};
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
 
-  ${breakpoints.desktop} {
+  ${MEDIA.DESKTOP} {
     z-index: ${LAYERS.NAVIGATION + 1};
   }
 `

@@ -5,10 +5,11 @@ import { RouteType } from 'components/Routes'
 import { PlainButton } from 'components/Button'
 import { NavigationLink } from 'components/Link'
 import { useRouteActive } from 'hooks'
-import { ALGOLIA_SELECTORS } from 'consts'
+import { ALGOLIA_SELECTORS, COLORS, SPACINGS } from 'consts'
 import { Icon } from 'components/Icon'
 
-const ITEM_SPACING = '0.6rem'
+const ITEM_SPACING = SPACINGS.ONE
+const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,8 +18,9 @@ const Wrapper = styled.div`
 `
 
 const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
-  color: var(--text-medium-contrast);
-  padding: ${ITEM_SPACING} 0 ${ITEM_SPACING} 2rem;
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+  padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
+    calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
   margin: 0 0;
   position: relative;
   line-height: inherit;
@@ -37,7 +39,7 @@ const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
 
 const ToggleSvg = styled(Icon)<{ $isOpen: boolean }>`
   transform: ${({ $isOpen }) => $isOpen && 'rotate(90deg)'};
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   position: absolute;
   left: 0;
   top: 0;
@@ -51,7 +53,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
     overflow: ${!$isOpen && 'hidden'};
     visibility: ${!$isOpen && 'hidden'};
   `};
-  padding-left: 3.4rem;
+  padding-left: calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.FOUR});
   position: relative;
   &:before {
     content: '';
@@ -60,7 +62,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
     left: 0.3rem;
     width: 0.1rem;
     bottom: 0;
-    background-color: var(--detail-medium-contrast);
+    background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
   }
 `
 
@@ -102,7 +104,7 @@ export const SubMenu = (props: PropType) => {
         aria-expanded={isOpen}
         aria-label={`${toggleAction} Navigation Menu`}
       >
-        <ToggleSvg $isOpen={isOpen} svg="chevronRight" size="0.8rem" />
+        <ToggleSvg $isOpen={isOpen} svg="chevronRight" size={TOGGLE_SVG_SIZE} />
         <span className={activeClass}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>

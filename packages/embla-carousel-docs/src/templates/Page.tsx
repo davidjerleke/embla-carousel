@@ -69,7 +69,7 @@ const Page = (props: PropType) => {
               "description": "${description}",
               "url": "${siteUrl}${pageContext.slug}",
               "headline": "${title}",
-              "image": "${siteUrl}/share-image.jpg",
+              "image": "${siteUrl}/share-image.png",
               "datePublished": "${dateToISOString}",
               "dateModified": "${dateToISOString}",
               "author": {

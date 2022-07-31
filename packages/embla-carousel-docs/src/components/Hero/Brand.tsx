@@ -1,138 +1,121 @@
 import React from 'react'
 import styled from 'styled-components'
-import { breakpoints, cssHackStyles } from 'consts'
+import { MEDIA, COLORS, SPACINGS, FONT_SIZES } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
-import { HEADER_HEIGHT } from 'components/Header'
-import { FRAME_SPACING } from 'components/SiteLayout'
 import { useSiteMetadata } from 'hooks'
+import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
+import { PrimaryButtonLink } from 'components/Link'
+
+const MAX_CONTENT_WIDTH = '50rem'
 
 const Wrapper = styled.div`
+  padding-top: ${SPACINGS.FOUR};
+  display: flex;
   position: relative;
-  text-align: center;
-  padding-top: 2rem;
-  margin-right: -1rem;
-  margin-left: -1rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  @media (min-height: 480px) {
-    padding-top: 9rem;
+  ${MEDIA.MIN_SM} {
+    padding-top: ${SPACINGS.SIX};
   }
-  ${breakpoints.minSm} {
-    margin-top: ${FRAME_SPACING};
-    padding-top: 11rem;
-    padding-bottom: 11rem;
-  }
-  &:after {
-    top: ${HEADER_HEIGHT};
-    right: 0;
-    left: 0;
-    position: fixed;
-    display: block;
-    content: '';
-    height: 3rem;
-    pointer-events: none;
-    background: linear-gradient(
-      to top,
-      rgba(var(--background-site-rgb-value), 0) 0,
-      var(--background-site) 100%
-    );
+
+  ${MEDIA.MIN_MD} {
+    padding-top: ${SPACINGS.TWELVE};
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: row-reverse;
   }
 `
 
-export const HeroLogo = styled(SiteLogo)`
-  ${createSquareSizeStyles('25rem')};
-  pointer-events: none;
-  transform: translateX(-30%);
-  position: fixed;
-  top: 0;
+const HeroLogo = styled(SiteLogo)`
+  flex: 0 0 auto;
+  ${createSquareSizeStyles('16rem')};
 
-  ${breakpoints.minSm} {
-    ${createSquareSizeStyles('36rem')};
-    transform: translate(-50%, -50%);
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  ${MEDIA.MIN_SM} {
+    ${createSquareSizeStyles('22rem')};
+  }
+
+  ${MEDIA.MIN_MD} {
+    ${createSquareSizeStyles('28rem')};
+  }
+`
+
+const Content = styled.div`
+  max-width: ${MAX_CONTENT_WIDTH};
+
+  ${MEDIA.MAX_MD} {
+    padding-top: ${SPACINGS.SIX};
+    text-align: center;
+  }
+
+  ${MEDIA.MAX_SM} {
+    padding-top: ${SPACINGS.FOUR};
   }
 `
 
 const H1 = styled.h1`
-  color: var(--text-high-contrast);
-  position: relative;
-  font-size: 3rem;
+  color: ${COLORS.TEXT_HIGH_CONTRAST};
+  margin-bottom: ${SPACINGS.THREE};
+  font-size: ${FONT_SIZES.CUSTOM(({ H2 }) => H2 * 2)};
   line-height: 0.9;
-  margin-bottom: 1.8rem;
   font-weight: 900;
 
-  ${cssHackStyles.firefoxAll} {
-    font-weight: 1000;
+  > span {
+    display: block;
   }
 
   > span:nth-child(2) {
     ${gradientTextStyles};
   }
 
-  > span {
-    display: block;
-  }
-  > span:nth-child(1) {
-    font-size: 5rem;
-  }
-  > span:nth-child(2) {
-    font-size: 5.8rem;
+  ${MEDIA.MIN_XS} {
+    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 2.4)};
   }
 
-  ${breakpoints.minXs} {
-    > span:nth-child(1) {
-      font-size: 6rem;
-    }
-    > span:nth-child(2) {
-      font-size: 7rem;
-    }
-  }
-  ${breakpoints.minSm} {
-    margin-bottom: 0;
-    line-height: 1.2;
-
-    > span {
-      display: inline;
-    }
-    > span:nth-child(1) {
-      font-size: 7rem;
-    }
-    > span:nth-child(2) {
-      font-size: 7rem;
-    }
+  ${MEDIA.MIN_SM} {
+    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 3)};
   }
 `
 
 const H2 = styled.h2`
-  color: var(--text-medium-contrast);
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+  font-size: ${FONT_SIZES.H4};
   line-height: 1.5;
-  font-size: 2rem;
 
-  ${breakpoints.maxSm} {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 50rem;
-  }
-  ${breakpoints.minSm} {
-    font-size: 2.2rem;
+  ${MEDIA.MIN_SM} {
+    font-size: ${FONT_SIZES.CUSTOM(({ H3 }) => H3 - 0.05)};
   }
 `
+
+const CtaWrapper = styled.div`
+  padding-top: ${SPACINGS.FOUR};
+
+  ${MEDIA.MIN_SM} {
+    padding-top: ${SPACINGS.SIX};
+  }
+`
+
 export const Brand = () => {
   const { title, description } = useSiteMetadata()
 
   return (
     <Wrapper>
-      <HeroLogo />
-      <H1>
-        {title.split(' ').map((word, index, words) => (
-          <span key={`${word}-${index}`}>
-            {index === words.length - 1 ? word : `${word} `}
-          </span>
-        ))}
-      </H1>
-      <H2>{description}</H2>
+      <HeroLogo appearance="blur" />
+      <Content>
+        <H1>
+          {title.split(' ').map((word, index) => (
+            <span key={`${word}-${index}`}>{word}</span>
+          ))}
+        </H1>
+        <H2>{description}</H2>
+        <CtaWrapper id={SKIP_TO_CONTENT_ID}>
+          <PrimaryButtonLink to="/examples/basic/">
+            Try Examples
+          </PrimaryButtonLink>
+        </CtaWrapper>
+      </Content>
     </Wrapper>
   )
 }

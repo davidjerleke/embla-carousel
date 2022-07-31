@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://www.embla-carousel.com/"><img width="70" height="70" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://www.embla-carousel.com/"><img width="160" height="160" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
@@ -63,6 +63,11 @@
     &nbsp;
     <a href="https://www.embla-carousel.com/get-started/react/">
       <img src="https://www.embla-carousel.com/react-logo.svg" width="45" height="45" />
+    </a>
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/vue/">
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="45" 
+      height="45" />
     </a>
   </p>
 </div>

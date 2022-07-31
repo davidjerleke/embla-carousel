@@ -2,9 +2,13 @@ import React, { PropsWithChildren, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
 import { tabAccessStyles, OUTLINE_SIZE } from 'components/TabAccess'
 import { useTabAccess } from 'hooks'
+import { COLORS } from 'consts'
 
 export const plainButtonStyles = css<{ $isTabbing: boolean }>`
-  -webkit-tap-highlight-color: rgba(var(--text-high-contrast-rgb-value), 0.5);
+  -webkit-tap-highlight-color: rgba(
+    ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
+    0.5
+  );
   -webkit-appearance: none;
   background-color: transparent;
   touch-action: manipulation;

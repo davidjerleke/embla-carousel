@@ -7,9 +7,13 @@ date: 2021-03-13
 
 # Slide Sizes
 
-> **Note!** If you haven't read about how to setup your slide [container](/guides/slide-container/), please visit that guide before continuing with this.
-
 This guide will show you how to customize **slide sizes** for your carousels using the [flexbox](/guides/slide-container/#using-flexbox) setup. Embla Carousel supports horizontal and vertical carousels with the [axis](/api/options/#axis) option and that's why this guide will use the term **slide sizes** instead of **widths** or **heights**.
+
+<Admonition>
+
+If you haven't read about how to setup your slide [container](/guides/slide-container/), please visit that guide before continuing with this.
+
+</Admonition>
 
 ## Declaring sizes
 

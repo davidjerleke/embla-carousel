@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { IconType } from 'assets/icons'
 import { Icon } from './Icon'
+import { SPACINGS } from 'consts'
 
 const Wrapper = styled.div<{ $spacing: string }>`
   display: flex;
@@ -21,17 +22,18 @@ type PropType = PropsWithChildren<{
 
 export const IconWithText = (props: PropType) => {
   const {
-    iconSvg,
-    iconSize = '1.8rem',
+    spacing = SPACINGS.ONE,
+    iconSize = SPACINGS.THREE,
     iconSide = 'left',
-    spacing = '0.6rem',
+    iconSvg,
     children,
+    ...restProps
   } = props
   const svgOnLeftSide = iconSide === 'left'
   const svg = <Icon svg={iconSvg} size={iconSize} />
 
   return (
-    <Wrapper $spacing={spacing}>
+    <Wrapper $spacing={spacing} {...restProps}>
       {svgOnLeftSide && svg}
       <span>{children}</span>
       {!svgOnLeftSide && svg}

@@ -1,12 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Brand } from './Brand'
-import { Cta } from './Cta'
+import { Usps } from './Usps'
+
+const Wrapper = styled.div``
 
 export const Hero = () => {
   return (
-    <>
+    <Wrapper>
       <Brand />
-      <Cta />
-    </>
+      <Usps />
+    </Wrapper>
   )
 }

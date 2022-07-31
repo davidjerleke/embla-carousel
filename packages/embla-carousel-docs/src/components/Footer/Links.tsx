@@ -2,11 +2,11 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { OUTLINE_SIZE } from 'components/TabAccess'
-import { URLS } from 'consts'
+import { COLORS, SPACINGS, URLS } from 'consts'
 import { IconWithText } from 'components/Icon'
 
-const LINK_SPACING = '3rem'
-const ICON_SPACING = '1rem'
+const LINK_SPACING = SPACINGS.FIVE
+const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
 
 const Wrapper = styled.ul`
   margin-left: -${LINK_SPACING};
@@ -16,9 +16,9 @@ const Wrapper = styled.ul`
 const Link = styled(PlainLink)`
   margin-left: ${LINK_SPACING};
   margin-right: -${OUTLINE_SIZE};
-  padding: 0.6rem ${OUTLINE_SIZE};
+  padding: ${SPACINGS.ONE} ${OUTLINE_SIZE};
   outline-offset: -${OUTLINE_SIZE};
-  color: var(--text-low-contrast);
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   display: inline-flex;
   align-items: center;
 `

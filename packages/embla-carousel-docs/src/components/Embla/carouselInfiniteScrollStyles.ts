@@ -1,3 +1,4 @@
+import { COLORS } from 'consts'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
 import { Slide } from './carouselBasicStyles'
@@ -15,8 +16,9 @@ export const SlideLoading = styled(Slide)`
 `
 
 export const SlideLoadingSpinner = styled.div`
-  border: ${SPINNER_WIDTH} solid rgba(var(--text-high-contrast-rgb-value), 0.2);
-  border-left: ${SPINNER_WIDTH} solid var(--text-high-contrast);
+  border: ${SPINNER_WIDTH} solid
+    rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
+  border-left: ${SPINNER_WIDTH} solid ${COLORS.TEXT_HIGH_CONTRAST};
   font-size: 1rem;
   position: relative;
   text-indent: -9999em;
