@@ -82,7 +82,7 @@ export function SlideLooper(
   function canLoop(): boolean {
     return loopPoints.every(({ index }) => {
       const otherIndexes = ascItems.filter((i) => i !== index)
-      return removeSlideSizes(otherIndexes, viewSize) <= 0
+      return removeSlideSizes(otherIndexes, viewSize) <= 0.1
     })
   }
 
