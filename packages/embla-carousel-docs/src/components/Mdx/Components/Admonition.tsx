@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
-import { COLORS, SPACINGS } from 'consts'
+import { COLORS, SPACINGS, FONT_SIZES } from 'consts'
 
 const Heading = styled(IconWithText)`
   font-weight: bold;
@@ -12,9 +12,9 @@ const Wrapper = styled.div`
   background-color: rgba(${COLORS.TEXT_ADMONITION_NOTE_RGB_VALUE}, 0.05);
   border: 0.1rem solid rgba(${COLORS.TEXT_ADMONITION_NOTE_RGB_VALUE}, 0.1);
   margin-bottom: ${SPACINGS.FOUR};
-  padding: 1.8rem ${SPACINGS.FOUR};
+  padding: ${SPACINGS.THREE} ${SPACINGS.FOUR};
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
   border-radius: 0.4rem;
-  font-size: 1.4rem;
   overflow: hidden;
 
   p,

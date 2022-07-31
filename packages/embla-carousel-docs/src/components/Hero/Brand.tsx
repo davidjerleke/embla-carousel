@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, COLORS, SPACINGS } from 'consts'
+import { MEDIA, COLORS, SPACINGS, FONT_SIZES } from 'consts'
 import { SiteLogo } from 'components/SiteLogo'
 import { createSquareSizeStyles, gradientTextStyles } from 'utils'
 import { useSiteMetadata } from 'hooks'
@@ -58,9 +58,9 @@ const Content = styled.div`
 const H1 = styled.h1`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   margin-bottom: ${SPACINGS.THREE};
+  font-size: ${FONT_SIZES.CUSTOM(({ H2 }) => H2 * 2)};
   line-height: 0.9;
   font-weight: 900;
-  font-size: 5rem;
 
   > span {
     display: block;
@@ -71,21 +71,21 @@ const H1 = styled.h1`
   }
 
   ${MEDIA.MIN_XS} {
-    font-size: 5.6rem;
+    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 2.4)};
   }
 
   ${MEDIA.MIN_SM} {
-    font-size: 6.2rem;
+    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 3)};
   }
 `
 
 const H2 = styled.h2`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+  font-size: ${FONT_SIZES.H4};
   line-height: 1.5;
-  font-size: 1.8rem;
 
   ${MEDIA.MIN_SM} {
-    font-size: 2.1rem;
+    font-size: ${FONT_SIZES.CUSTOM(({ H3 }) => H3 - 0.05)};
   }
 `
 
@@ -105,10 +105,8 @@ export const Brand = () => {
       <HeroLogo appearance="blur" />
       <Content>
         <H1>
-          {title.split(' ').map((word, index, words) => (
-            <span key={`${word}-${index}`}>
-              {index === words.length - 1 ? word : `${word} `}
-            </span>
+          {title.split(' ').map((word, index) => (
+            <span key={`${word}-${index}`}>{word}</span>
           ))}
         </H1>
         <H2>{description}</H2>

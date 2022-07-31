@@ -3,12 +3,12 @@ import styled, { css } from 'styled-components'
 import { PlainLink } from 'components/Link'
 import { useRouteBreadcrumbs } from 'hooks'
 import { Icon } from 'components/Icon'
-import { COLORS, SPACINGS } from 'consts'
+import { COLORS, FONT_SIZES, SPACINGS } from 'consts'
 
 const Wrapper = styled.nav`
   display: flex;
   align-items: center;
-  font-size: 1.4rem;
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-bottom: ${SPACINGS.THREE};
 `
 

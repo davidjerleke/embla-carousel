@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { MEDIA, LAYERS, COLORS, SPACINGS } from 'consts'
+import { MEDIA, LAYERS, COLORS, SPACINGS, FONT_SIZES } from 'consts'
 
 const BORDER_RADIUS = '0.4rem'
 
@@ -9,7 +9,9 @@ export const codeStyles = css`
     background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     border-radius: ${BORDER_RADIUS};
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
-    font-size: 1.44rem;
+    font-size: ${FONT_SIZES.CUSTOM(
+      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
+    )};
     box-sizing: border-box;
   }
 
@@ -19,13 +21,15 @@ export const codeStyles = css`
     margin-bottom: ${SPACINGS.FOUR};
     overflow: hidden;
     position: relative;
-    font-size: 1.36rem;
+    font-size: ${FONT_SIZES.CUSTOM(
+      ({ COMPLEMENTARY }) => COMPLEMENTARY - 0.04,
+    )};
 
     &:before {
       display: block;
       content: attr(data-language);
       line-height: 1;
-      font-size: 1.2rem;
+      font-size: ${FONT_SIZES.DETAIL};
       text-transform: uppercase;
       position: absolute;
       top: 0;

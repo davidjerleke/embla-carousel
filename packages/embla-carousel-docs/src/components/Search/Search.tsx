@@ -20,6 +20,7 @@ import {
   THEME_PREFIX,
   COLORS,
   SPACINGS,
+  FONT_SIZES,
 } from 'consts'
 
 const DIALOG_MAX_WIDTH = '56rem'
@@ -94,7 +95,7 @@ const contentStyles = css`
   .DocSearch-ErrorScreen {
     color: ${COLORS.TEXT_LOW_CONTRAST};
     padding: ${SPACINGS.SIX} 0;
-    font-size: 1.4rem;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     margin: 0 auto;
     text-align: center;
     width: 80%;
@@ -112,7 +113,7 @@ const contentStyles = css`
   .DocSearch-Title {
     color: ${COLORS.TEXT_HIGH_CONTRAST};
     margin-bottom: ${SPACINGS.THREE};
-    font-size: 1.8rem;
+    font-size: ${FONT_SIZES.H4};
   }
 
   .DocSearch-Help a {
@@ -127,7 +128,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Help {
-    font-size: 1.4rem;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     margin: 0;
     user-select: none;
   }
@@ -139,8 +140,8 @@ const contentStyles = css`
 
   .DocSearch-HitsFooter {
     color: ${COLORS.TEXT_LOW_CONTRAST};
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     display: flex;
-    font-size: 1.4rem;
     justify-content: center;
   }
 
@@ -199,7 +200,7 @@ const contentStyles = css`
     margin: 0 -${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)}
       ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)} 0;
-    font-size: 1.4rem;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     font-weight: 600;
     line-height: 3.2rem;
     position: sticky;
@@ -312,12 +313,14 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-title {
-    font-size: 1.44rem;
+    font-size: ${FONT_SIZES.CUSTOM(
+      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
+    )};
   }
 
   .DocSearch-Hit-path {
     color: ${COLORS.TEXT_LOW_CONTRAST};
-    font-size: 1.2rem;
+    font-size: ${FONT_SIZES.DETAIL};
   }
 
   .DocSearch-Hit[aria-selected='true'] .DocSearch-Hit-title,
@@ -334,9 +337,9 @@ const contentStyles = css`
     padding-bottom: ${SPACINGS.THREE};
 
     > ul {
-      display: inline-block;
       padding-top: ${SPACINGS.ONE};
-      font-size: 1.4rem;
+      font-size: ${FONT_SIZES.COMPLEMENTARY};
+      display: inline-block;
     }
 
     li {
@@ -379,7 +382,7 @@ const footerStyles = css`
 
   .DocSearch-Label {
     color: ${COLORS.TEXT_LOW_CONTRAST};
-    font-size: 1.2rem;
+    font-size: ${FONT_SIZES.DETAIL};
     line-height: 1.9rem;
   }
 
@@ -465,7 +468,7 @@ const inputStyles = css`
     -webkit-appearance: none;
     border-radius: 0.4rem;
     width: 100%;
-    font-size: 1.8rem;
+    font-size: ${FONT_SIZES.H4};
     background-color: ${COLORS.BACKGROUND_SITE};
     color: ${COLORS.TEXT_BODY};
     border: 0;

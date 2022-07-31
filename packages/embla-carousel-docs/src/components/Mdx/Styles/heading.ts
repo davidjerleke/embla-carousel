@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout'
 import { createSquareSizeStyles } from 'utils'
-import { COLORS, MEDIA, SPACINGS } from 'consts'
+import { COLORS, FONT_SIZES, MEDIA, SPACINGS } from 'consts'
 
 const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 
@@ -12,8 +12,8 @@ export const headingStyles = css`
   h4,
   h5,
   h6 {
-    font-weight: 700;
     color: ${COLORS.TEXT_HIGH_CONTRAST};
+    font-weight: 700;
   }
 
   h1,
@@ -23,23 +23,23 @@ export const headingStyles = css`
   }
 
   h1 {
+    font-size: ${FONT_SIZES.H1};
     font-weight: 800;
-    font-size: 3.2rem;
     line-height: 1.25;
   }
 
   h2 {
-    font-size: 2.5rem;
+    font-size: ${FONT_SIZES.H2};
     line-height: 1.35;
   }
 
   h3 {
-    font-size: 2.15rem;
+    font-size: ${FONT_SIZES.H3};
     line-height: 1.5;
   }
 
   h4 {
-    font-size: 1.8rem;
+    font-size: ${FONT_SIZES.H4};
   }
 
   h1,

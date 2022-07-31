@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { IconWithText } from 'components/Icon'
 import { ContentLink } from 'components/Link'
-import { COLORS, MEDIA, SPACINGS, supportsStyles } from 'consts'
+import { COLORS, FONT_SIZES, MEDIA, SPACINGS, supportsStyles } from 'consts'
 import { gradientTextStyles } from 'utils'
 
-const USP_ITEM_SPACING = '1.4rem'
+const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
 
 const Wrapper = styled.ul`
   display: flex;
@@ -51,9 +51,9 @@ const UspContent = styled.article`
 `
 
 const UspHeader = styled.h3`
-  font-size: 1.8rem;
-  font-weight: bold;
   margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+  font-size: ${FONT_SIZES.H4};
+  font-weight: bold;
 `
 
 const UspText = styled.p`
@@ -63,7 +63,7 @@ const UspText = styled.p`
 
 const UspLink = styled.div`
   span {
-    font-size: 1.4rem;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     ${gradientTextStyles};
   }
 

@@ -15,6 +15,7 @@ export {
 } from './themes'
 export { ALGOLIA_SEARCH_CONFIG, ALGOLIA_SELECTORS } from './algoliaSearch'
 export { SPACINGS } from './spacings'
+export { FONT_SIZES } from './fontSizes'
 export { LAYERS } from './layers'
 export { URLS } from './urls'
 export { supportsStyles } from './supportsStyles'

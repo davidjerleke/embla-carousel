@@ -1,4 +1,4 @@
-import { COLORS } from 'consts'
+import { COLORS, FONT_SIZES } from 'consts'
 import { css } from 'styled-components'
 
 export const baseStyles = css`
@@ -9,7 +9,7 @@ export const baseStyles = css`
   body {
     background-color: ${COLORS.BACKGROUND_SITE};
     color: ${COLORS.TEXT_HIGH_CONTRAST};
+    font-size: ${FONT_SIZES.BODY};
     line-height: 1.65;
-    font-size: 1.6rem;
   }
 `

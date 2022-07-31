@@ -9,7 +9,7 @@ import React, {
 import styled from 'styled-components'
 import { PlainButton } from 'components/Button'
 import { FRAME_SPACING } from 'components/SiteLayout'
-import { COLORS, LAYERS, SPACINGS } from 'consts'
+import { COLORS, FONT_SIZES, LAYERS, SPACINGS } from 'consts'
 import {
   copyToClipboard,
   gradientBackgroundStyles,
@@ -75,7 +75,7 @@ const CopyCodeButton = styled(PlainButton)`
   padding: 0 ${COPY_CODE_BUTTON_PADDING};
   height: ${COPY_CODE_BUTTON_HEIGHT};
   line-height: ${COPY_CODE_BUTTON_HEIGHT};
-  font-size: 1.2rem;
+  font-size: ${FONT_SIZES.DETAIL};
   align-items: center;
 
   &:before {
