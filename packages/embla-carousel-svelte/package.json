@@ -1,5 +1,5 @@
 {
-  "name": "embla-carousel",
+  "name": "embla-carousel-svelte",
   "version": "7.0.0-rc05",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -25,19 +25,19 @@
     "vue",
     "svelte"
   ],
-  "unpkg": "embla-carousel.umd.js",
-  "main": "embla-carousel.cjs.js",
-  "module": "embla-carousel.esm.js",
-  "browser": "embla-carousel.umd.js",
+  "unpkg": "embla-carousel-svelte.umd.js",
+  "main": "embla-carousel-svelte.cjs.js",
+  "module": "embla-carousel-svelte.esm.js",
+  "browser": "embla-carousel-svelte.umd.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [
-    "embla-carousel*",
+    "embla-carousel-svelte*",
     "components/**/*",
     "index.d.ts"
   ],
   "scripts": {
-    "test": "jest --config jest.config.js",
+    "test": "echo \"Info: no tests specified\" && exit 0",
     "build": "rollup -c",
     "start": "rollup -c --watch",
     "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
@@ -53,7 +53,14 @@
     "jest": "^27.5.0",
     "prettier": "2.5.1",
     "rollup": "^2.68.0",
+    "svelte": "^3.49.0",
     "ts-jest": "^27.1.3",
     "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "embla-carousel": "7.0.0-rc05"
+  },
+  "peerDependencies": {
+    "svelte": "^3.49.0"
   }
 }

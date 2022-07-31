@@ -53,7 +53,6 @@ The `emblaCarouselVue` function gives us an **emblaNode** to attach to our wrapp
     display: flex;
   }
   .embla__slide {
-    position: relative;
     flex: 0 0 100%;
   }
 </style>

@@ -5,6 +5,8 @@
     </a>
   </p>
 
+  <br>
+
   <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
     <a href="https://www.npmjs.com/package/embla-carousel-vue"><img src="https://img.shields.io/npm/v/embla-carousel-vue.svg?color=%23c1a8e2"></a>

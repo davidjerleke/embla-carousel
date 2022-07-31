@@ -1,7 +1,7 @@
 ---
 title: IE11
 description: How to add Internet Explorer 11 support to Embla Carousel.
-order: 4
+order: 6
 date: 2021-02-21
 ---
 

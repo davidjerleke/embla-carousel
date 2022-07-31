@@ -39,7 +39,6 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
   display: flex;
 }
 .embla__slide {
-  position: relative;
   flex: 0 0 100%;
 }
 ```

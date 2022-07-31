@@ -5,6 +5,8 @@
     </a>
   </p>
 
+  <br>
+
   <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
     <a href="https://www.npmjs.com/package/embla-carousel"><img src="https://img.shields.io/npm/v/embla-carousel.svg?color=%23c1a8e2"></a>
@@ -66,8 +68,10 @@
     </a>
     &nbsp;
     <a href="https://www.embla-carousel.com/get-started/vue/">
-      <img src="https://www.embla-carousel.com/vue-logo.svg" width="45" 
-      height="45" />
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="45" height="45" />
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/svelte/">
+      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="45" height="45" />
     </a>
   </p>
 </div>
