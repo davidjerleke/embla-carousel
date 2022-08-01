@@ -1,11 +1,9 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://www.embla-carousel.com/"><img width="160" height="160" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://www.embla-carousel.com/"><img width="120" height="120" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
-
-  <br>
 
   <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
