@@ -19,17 +19,17 @@ function emblaCarouselVue(
   const storedOptions = ref(isRef(options) ? options.value : options)
   const storedPlugins = ref(isRef(plugins) ? plugins.value : plugins)
   const emblaNode = ref<HTMLElement>()
-  const emblaApi = ref<EmblaCarouselType>()
+  const embla = ref<EmblaCarouselType>()
 
   function reInit() {
-    if (!emblaApi.value) return
-    emblaApi.value.reInit(storedOptions.value, storedPlugins.value)
+    if (!embla.value) return
+    embla.value.reInit(storedOptions.value, storedPlugins.value)
   }
 
   onMounted(() => {
     if (!canUseDOM() || !emblaNode.value) return
     EmblaCarousel.globalOptions = emblaCarouselVue.globalOptions
-    emblaApi.value = EmblaCarousel(
+    embla.value = EmblaCarousel(
       emblaNode.value,
       storedOptions.value,
       storedPlugins.value,
@@ -37,7 +37,7 @@ function emblaCarouselVue(
   })
 
   onUnmounted(() => {
-    if (emblaApi.value) emblaApi.value.destroy()
+    if (embla.value) embla.value.destroy()
   })
 
   if (isRef(options)) {
@@ -58,7 +58,7 @@ function emblaCarouselVue(
     })
   }
 
-  return [emblaNode, emblaApi]
+  return [emblaNode, embla]
 }
 
 emblaCarouselVue.globalOptions = <EmblaOptionsType | undefined>undefined

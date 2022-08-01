@@ -175,6 +175,16 @@ import emblaCarouselVue from 'embla-carousel-vue'
 emblaCarouselVue.globalOptions = { loop: true }
 ```
 
+### Svelte global options
+
+**Svelte** users can set global options by assigning them to the `emblaCarouselSvelte` action:
+
+```js
+import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+emblaCarouselSvelte.globalOptions = { loop: true }
+```
+
 Make sure to assign global options **before** initializing any carousel. You should **only assign it once**, because re-assigning global options can lead to confusing code and unexpected behaviour.
 
 ## Option priority

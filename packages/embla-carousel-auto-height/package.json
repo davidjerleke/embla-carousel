@@ -22,7 +22,8 @@
     "javascript",
     "typescript",
     "react",
-    "vue"
+    "vue",
+    "svelte"
   ],
   "unpkg": "embla-carousel-auto-height.umd.js",
   "main": "embla-carousel-auto-height.cjs.js",

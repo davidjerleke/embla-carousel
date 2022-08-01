@@ -1,7 +1,7 @@
 ---
 title: TypeScript
 description: Learn how to setup Embla Carousel using TypeScript.
-order: 3
+order: 4
 date: 2021-02-21
 ---
 
@@ -11,7 +11,6 @@ Before continuing with this guide, make sure to setup a working carousel followi
 
 - [module](/get-started/module/)
 - [react](/get-started/react/)
-- [vue](/get-started/vue/)
 
 Embla Carousel and all its related packages are fully typed and has built-in type definitions, because they're written in TypeScript.
 

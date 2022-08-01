@@ -1,0 +1,103 @@
+---
+title: Svelte
+description: Learn how to setup Embla Carousel using Svelte.
+order: 3
+date: 2021-02-21
+---
+
+# Svelte
+
+Start by installing the Embla Carousel **npm package** and add it to your dependencies.
+
+```shell
+npm install embla-carousel-svelte --save
+```
+
+Embla Carousel provides the handy `emblaCarouselSvelte` action for seamless integration with Svelte. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
+
+```html
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+</script>
+
+<div class="embla" use:emblaCarouselSvelte>
+  <div class="embla__container">
+    <div class="embla__slide">Slide 1</div>
+    <div class="embla__slide">Slide 2</div>
+    <div class="embla__slide">Slide 3</div>
+  </div>
+</div>
+```
+
+## Styling the carousel
+
+The element with the classname `embla` is needed to cover the scroll overflow. Its child element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+
+```html
+<style>
+  .embla {
+    overflow: hidden;
+  }
+  .embla__container {
+    display: flex;
+  }
+  .embla__slide {
+    flex: 0 0 100%;
+  }
+</style>
+```
+
+## Accessing the carousel API
+
+The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `init` event to store the carousel instance in a variable:
+
+```html{6-8, 10-13, 16}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi
+
+  const emblaConfig = {
+    options: { loop: false },
+  }
+
+  const onInit = (event) => {
+    emblaApi = event.detail
+    // Embla API is ready
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte={emblaConfig} on:init={onInit}>
+  <div class="embla__container">
+    <div class="embla__slide">Slide 1</div>
+    <div class="embla__slide">Slide 2</div>
+    <div class="embla__slide">Slide 3</div>
+  </div>
+</div>
+```
+
+## Adding plugins
+
+The `emblaCarouselSvelte` action parameter also accepts [plugins](/plugins/). Note that plugins need to be passed in an array like so:
+
+```html{3, 7}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+  import Autoplay from 'embla-carousel-autoplay'
+
+  const emblaConfig = {
+    options: { loop: false },
+    plugins: [Autoplay()],
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte={emblaConfig}>
+  <div class="embla__container">
+    <div class="embla__slide">Slide 1</div>
+    <div class="embla__slide">Slide 2</div>
+    <div class="embla__slide">Slide 3</div>
+  </div>
+</div>
+```
+
+Congratulations! You just created your first Embla Carousel component.

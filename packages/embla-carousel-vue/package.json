@@ -22,7 +22,8 @@
     "javascript",
     "typescript",
     "react",
-    "vue"
+    "vue",
+    "svelte"
   ],
   "unpkg": "embla-carousel-vue.umd.js",
   "main": "embla-carousel-vue.cjs.js",

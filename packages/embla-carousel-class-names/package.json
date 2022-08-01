@@ -22,7 +22,8 @@
     "javascript",
     "typescript",
     "react",
-    "vue"
+    "vue",
+    "svelte"
   ],
   "unpkg": "embla-carousel-class-names.umd.js",
   "main": "embla-carousel-class-names.cjs.js",

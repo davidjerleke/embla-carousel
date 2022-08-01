@@ -1,7 +1,7 @@
 ---
 title: CDN
 description: Learn how to setup Embla Carousel using a CDN.
-order: 4
+order: 5
 date: 2021-02-21
 ---
 
@@ -39,7 +39,6 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
   display: flex;
 }
 .embla__slide {
-  position: relative;
   flex: 0 0 100%;
 }
 ```
