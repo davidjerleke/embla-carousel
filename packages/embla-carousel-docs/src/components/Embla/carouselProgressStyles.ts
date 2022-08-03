@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import { COLORS, LAYERS, supportsStyles } from 'consts'
-import { gradientBackgroundStyles } from 'utils'
+import { COLORS } from 'consts/themes'
+import { LAYERS } from 'consts/layers'
+import { supportsStyles } from 'consts/supportsStyles'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 
 export const ProgressWrapper = styled.div`
   z-index: ${LAYERS.STEP};

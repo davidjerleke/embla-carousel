@@ -1,6 +1,11 @@
 import { css } from 'styled-components'
-import { frameCollapseStyles, FRAME_SPACING } from 'components/SiteLayout'
-import { MEDIA, LAYERS, COLORS, SPACINGS, FONT_SIZES } from 'consts'
+import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
+import { MEDIA } from 'consts/breakpoints'
+import { LAYERS } from 'consts/layers'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
 
 const BORDER_RADIUS = '0.4rem'
 

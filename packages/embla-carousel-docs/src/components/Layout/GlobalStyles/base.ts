@@ -1,4 +1,5 @@
-import { COLORS, FONT_SIZES } from 'consts'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
 import { css } from 'styled-components'
 
 export const baseStyles = css`

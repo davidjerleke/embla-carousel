@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { createSquareSizeStyles } from 'utils'
-import { useSiteMetadata } from 'hooks'
-import { MEDIA, COLORS, SPACINGS, FONT_SIZES } from 'consts'
-import { PlainLink } from 'components/Link'
-import { SiteLogo } from 'components/SiteLogo'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { MEDIA } from 'consts/breakpoints'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { PlainLink } from 'components/Link/PlainLink'
+import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 
 const Wrapper = styled(PlainLink)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};

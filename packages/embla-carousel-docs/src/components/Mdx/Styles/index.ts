@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { COLORS } from 'consts'
+import { COLORS } from 'consts/themes'
 import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'

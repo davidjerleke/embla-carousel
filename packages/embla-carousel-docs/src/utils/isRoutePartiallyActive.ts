@@ -1,4 +1,4 @@
-import { RouteType } from 'components/Routes'
+import { RouteType } from 'components/Routes/Context'
 
 export const isRoutePartiallyActive = (
   route: RouteType,

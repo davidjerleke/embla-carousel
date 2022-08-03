@@ -4,7 +4,8 @@ import React, {
   useMemo,
   useState,
 } from 'react'
-import { createHierarchicalRoutes, createFlatRoutes } from 'utils'
+import { createHierarchicalRoutes } from 'utils/createHierarchicalRoutes'
+import { createFlatRoutes } from 'utils/createFlatRoutes'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const query = graphql`

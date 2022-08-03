@@ -1,15 +1,12 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
-import { Navigation } from 'components/Navigation'
-import { useRoutes, useWindowSize } from 'hooks'
+import { Navigation } from 'components/Navigation/Navigation'
+import { useRoutes } from 'hooks/useRoutes'
+import { useWindowSize } from 'hooks/useWindowSize'
 import { Frame, FRAME_SPACING } from './Frame'
-import {
-  BREAKPOINTS,
-  MEDIA,
-  PageTemplateType,
-  PAGE_TEMPLATES,
-  SPACINGS,
-} from 'consts'
+import { BREAKPOINTS, MEDIA } from 'consts/breakpoints'
+import { SPACINGS } from 'consts/spacings'
+import { PAGE_TEMPLATES, PageTemplateType } from 'consts/pageTemplates'
 
 const SIDEBAR_WIDTH = '27rem'
 

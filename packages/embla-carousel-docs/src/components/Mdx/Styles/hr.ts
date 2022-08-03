@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { COLORS } from 'consts'
+import { COLORS } from 'consts/themes'
 
 export const hrStyles = css`
   hr {

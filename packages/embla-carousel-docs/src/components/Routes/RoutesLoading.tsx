@@ -1,44 +1,25 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import { COLORS, LAYERS, MEDIA } from 'consts'
-import { gradientBackgroundStyles } from 'utils'
-import { HEADER_HEIGHT } from 'components/Header'
-import { useNavigation, useRoutes } from 'hooks'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { HEADER_HEIGHT } from 'components/Header/Header'
+import { useRoutes } from 'hooks/useRoutes'
+import { useNavigation } from 'hooks/useNavigation'
+import { LAYERS } from 'consts/layers'
+import { MEDIA } from 'consts/breakpoints'
 
-// opacity: ${({ $loading }) => ($loading ? 1 : 0)};
-// visibility: ${({ $loading }) => ($loading ? 'visible' : 'hidden')};
-// pointer-events: ${({ $loading }) => ($loading ? 'auto' : 'none')};
-const positionStyles = css`
-  position: fixed;
+const Wrapper = styled.div`
   z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
   top: ${HEADER_HEIGHT};
   left: 0;
   right: 0;
   bottom: 0;
+  position: fixed;
   pointer-events: none;
+  overflow: hidden;
 
   ${MEDIA.DESKTOP} {
     top: 0;
   }
-`
-
-const Overlay = styled.div<{ $loading: boolean }>`
-  ${positionStyles};
-  opacity: ${({ $loading }) => ($loading ? 0.9 : 0)};
-  visibility: ${({ $loading }) => ($loading ? 'visible' : 'hidden')};
-  pointer-events: ${({ $loading }) => ($loading ? 'auto' : 'none')};
-  background-color: ${COLORS.BACKGROUND_SITE};
-  transition: visibility 0.3s linear, opacity 0.3s linear;
-
-  ${MEDIA.DESKTOP} {
-    display: none;
-  }
-`
-
-const ProgressBarWrapper = styled.div`
-  ${positionStyles};
-  z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
-  overflow: hidden;
 `
 
 const ProgressBar = styled.div<{ $loading: boolean }>`
@@ -66,7 +47,7 @@ const ProgressBar = styled.div<{ $loading: boolean }>`
 
 type PropType = { pageId: string }
 
-export const Loading = (props: PropType) => {
+export const RoutesLoading = (props: PropType) => {
   const { pageId } = props
   const { isLoading, setIsLoading } = useRoutes()
   const { isOpen, closeNavigation } = useNavigation()
@@ -115,11 +96,8 @@ export const Loading = (props: PropType) => {
   }, [])
 
   return (
-    <>
-      <Overlay $loading={isLoading} />
-      <ProgressBarWrapper>
-        <ProgressBar ref={progressElement} $loading={isLoading} />
-      </ProgressBarWrapper>
-    </>
+    <Wrapper>
+      <ProgressBar ref={progressElement} $loading={isLoading} />
+    </Wrapper>
   )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
-import { ContentLink, PlainLink } from 'components/Link'
+import { ContentLink } from 'components/Link/ContentLink'
+import { PlainLink } from 'components/Link/PlainLink'
 
 type PropType = {
   href: string

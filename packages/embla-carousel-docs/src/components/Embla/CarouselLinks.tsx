@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ContentLink } from 'components/Link'
-import { IconWithText } from 'components/Icon'
-import { COLORS } from 'consts'
+import { ContentLink } from 'components/Link/ContentLink'
+import { IconWithText } from 'components/Icon/IconWithText'
+import { COLORS } from 'consts/themes'
 
 const Wrapper = styled.div`
   display: flex;

@@ -1,10 +1,10 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { useRouteActive } from 'hooks'
-import { RouteType } from 'components/Routes'
-import { PlainLink } from 'components/Link'
-import { gradientTextStyles } from 'utils'
-import { COLORS } from 'consts'
+import { useRouteActive } from 'hooks/useRouteActive'
+import { RouteType } from 'components/Routes/Context'
+import { PlainLink } from 'components/Link/PlainLink'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { COLORS } from 'consts/themes'
 
 const Wrapper = styled(PlainLink)`
   position: relative;

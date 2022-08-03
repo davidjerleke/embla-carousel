@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { COLORS } from 'consts'
+import { COLORS } from 'consts/themes'
 
 export const OUTLINE_SIZE = '0.2rem'
 

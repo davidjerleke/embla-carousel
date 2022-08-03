@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import {
   RoutesContext,
   RoutesContextType as UseRoutesType,
-} from 'components/Routes'
+} from 'components/Routes/Context'
 
 export const useRoutes = (): UseRoutesType => {
   return useContext(RoutesContext)

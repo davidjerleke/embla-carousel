@@ -1,13 +1,15 @@
 import React, { PropsWithChildren } from 'react'
-import { RoutesProvider } from 'components/Routes'
-import { ThemeProvider } from 'components/Theme'
-import { NavigationProvider } from 'components/Navigation'
-import { SkipToContent, TabAccessProvider } from 'components/TabAccess'
-import { GlobalStyles } from 'components/Layout/GlobalStyles'
-import { PageTemplateType, PAGE_TEMPLATES } from 'consts'
-import { Grid, Loading } from 'components/SiteLayout'
-import { Header } from 'components/Header'
-import { Footer } from 'components/Footer'
+import { RoutesProvider } from 'components/Routes/Context'
+import { ThemeProvider } from 'components/Theme/Context'
+import { NavigationProvider } from 'components/Navigation/Context'
+import { TabAccessProvider } from 'components/TabAccess/Context'
+import { SkipToContent } from 'components/TabAccess/SkipToContent'
+import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
+import { PageTemplateType, PAGE_TEMPLATES } from 'consts/pageTemplates'
+import { Grid } from 'components/SiteLayout/Grid'
+import { RoutesLoading } from 'components/Routes/RoutesLoading'
+import { Header } from 'components/Header/Header'
+import { Footer } from 'components/Footer/Footer'
 
 type PropType = PropsWithChildren<{
   pageContext: { layout: PageTemplateType; id: string }
@@ -30,7 +32,7 @@ export const Layout = (props: PropType) => {
               <>
                 <SkipToContent />
                 <Header />
-                <Loading pageId={id} />
+                <RoutesLoading pageId={id} />
                 <Grid layout={layout}>{children}</Grid>
                 <Footer />
               </>

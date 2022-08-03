@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { MEDIA, SPACINGS } from 'consts'
+import { MEDIA } from 'consts/breakpoints'
+import { SPACINGS } from 'consts/spacings'
 
 export const FRAME_SPACING = SPACINGS.FOUR
 const FRAME_MAX_WIDTH = '100rem'

@@ -1,6 +1,6 @@
-import { COLORS } from 'consts'
+import { COLORS } from 'consts/themes'
 import styled from 'styled-components'
-import { createSquareSizeStyles } from 'utils'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { Slide } from './carouselBasicStyles'
 
 const SPINNER_SIZE = '5rem'

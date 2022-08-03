@@ -1,5 +1,6 @@
 import { css } from 'styled-components'
-import { COLORS, SPACINGS } from 'consts'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
 
 export const blockquoteStyles = css`
   blockquote {

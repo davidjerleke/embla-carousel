@@ -7,14 +7,15 @@ import React, {
   useState,
 } from 'react'
 import styled from 'styled-components'
-import { PlainButton } from 'components/Button'
-import { FRAME_SPACING } from 'components/SiteLayout'
-import { COLORS, FONT_SIZES, LAYERS, SPACINGS } from 'consts'
-import {
-  copyToClipboard,
-  gradientBackgroundStyles,
-  visuallyHiddenStyles,
-} from 'utils'
+import { PlainButton } from 'components/Button/PlainButton'
+import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { LAYERS } from 'consts/layers'
+import { SPACINGS } from 'consts/spacings'
+import { copyToClipboard } from 'utils/copyToClipboard'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 
 const extractTextFromCodeBlock = (node: React.ReactNode = ''): string => {
   const nodes = typeof node === 'string' ? [node] : React.Children.toArray(node)

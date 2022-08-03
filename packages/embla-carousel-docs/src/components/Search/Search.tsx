@@ -1,27 +1,24 @@
 import React from 'react'
 import { createGlobalStyle, css } from 'styled-components'
-import { plainButtonStyles } from 'components/Button'
 import { DocSearch } from '@docsearch/react'
-import { OUTLINE_SIZE, tabAccessStyles } from 'components/TabAccess'
-import { contentLinkStyles } from 'components/Link'
-import { useTabAccess } from 'hooks'
+import { plainButtonStyles } from 'components/Button/PlainButton'
+import { contentLinkStyles } from 'components/Link/ContentLink'
 import {
-  createPlaceholderStyles,
-  createSquareSizeStyles,
-  gradientBackgroundStyles,
-  gradientTextStyles,
-  visuallyHiddenStyles,
-} from 'utils'
-import {
-  ALGOLIA_SEARCH_CONFIG,
-  MEDIA,
-  LAYERS,
-  THEME_KEYS,
-  THEME_PREFIX,
-  COLORS,
-  SPACINGS,
-  FONT_SIZES,
-} from 'consts'
+  OUTLINE_SIZE,
+  tabAccessStyles,
+} from 'components/TabAccess/tabAccessStyles'
+import { useTabAccess } from 'hooks/useTabAccess'
+import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
+import { ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
+import { MEDIA } from 'consts/breakpoints'
+import { LAYERS } from 'consts/layers'
+import { SPACINGS } from 'consts/spacings'
+import { THEME_KEYS, THEME_PREFIX, COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
 
 const DIALOG_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'

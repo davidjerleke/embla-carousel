@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useEventListener } from 'hooks'
+import { useEventListener } from 'hooks/useEventListener'
 import { debounce } from 'lodash'
 
 type PropType = {

@@ -1,5 +1,5 @@
-import { MEDIA } from 'consts'
 import styled, { css } from 'styled-components'
+import { MEDIA } from 'consts/breakpoints'
 import { FRAME_SPACING } from './Frame'
 
 export const frameCollapseStyles = css`

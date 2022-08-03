@@ -4,7 +4,7 @@ import React, {
   PropsWithChildren,
   useCallback,
 } from 'react'
-import { useEventListener } from 'hooks'
+import { useEventListener } from 'hooks/useEventListener'
 
 export type TabAccessContextType = boolean
 

@@ -2,9 +2,11 @@ import React, { PropsWithChildren, useCallback, useRef } from 'react'
 import { useLocation } from '@reach/router'
 import styled, { css } from 'styled-components'
 import { GatsbyLinkProps, Link } from 'gatsby'
-import { tabAccessStyles } from 'components/TabAccess'
-import { useNavigation, useRoutes, useTabAccess } from 'hooks'
-import { COLORS } from 'consts'
+import { tabAccessStyles } from 'components/TabAccess/tabAccessStyles'
+import { useNavigation } from 'hooks/useNavigation'
+import { useRoutes } from 'hooks/useRoutes'
+import { useTabAccess } from 'hooks/useTabAccess'
+import { COLORS } from 'consts/themes'
 
 export const plainLinkStyles = css<{ $isTabbing: boolean }>`
   ${tabAccessStyles};

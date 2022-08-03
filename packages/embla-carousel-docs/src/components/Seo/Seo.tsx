@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { Helmet } from 'react-helmet'
-import { useSiteMetadata } from 'hooks'
-import { removeProtocol } from 'utils'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { removeProtocol } from 'utils/removeProtocol'
 
 type PropType = PropsWithChildren<{
   title: string

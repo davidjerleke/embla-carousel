@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { PlainLink } from 'components/Link'
-import { OUTLINE_SIZE } from 'components/TabAccess'
-import { COLORS, SPACINGS, URLS } from 'consts'
-import { IconWithText } from 'components/Icon'
+import { PlainLink } from 'components/Link/PlainLink'
+import { OUTLINE_SIZE } from 'components/TabAccess/tabAccessStyles'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { URLS } from 'consts/urls'
+import { IconWithText } from 'components/Icon/IconWithText'
 
 const LINK_SPACING = SPACINGS.FIVE
 const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)

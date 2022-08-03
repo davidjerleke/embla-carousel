@@ -5,9 +5,12 @@ import logoDarkThemeDefaultUrl from 'assets/images/embla-logo-dark-theme.svg'
 import logoLightThemeBlurUrl from 'assets/images/embla-logo-light-theme-blur.svg'
 import logoDarkThemeBlurUrl from 'assets/images/embla-logo-dark-theme-blur.svg'
 import { useInView } from 'react-intersection-observer'
-import { useSiteMetadata, useTheme } from 'hooks'
-import { LAYERS, THEME_KEYS } from 'consts'
-import { Icon } from 'components/Icon'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { useTheme } from 'hooks/useTheme'
+import { THEME_KEYS } from 'consts/themes'
+import { LAYERS } from 'consts/layers'
+
+import { Icon } from 'components/Icon/Icon'
 
 const Wrapper = styled.div`
   width: 100%;

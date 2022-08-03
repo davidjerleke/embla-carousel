@@ -7,15 +7,15 @@ import React, {
   useState,
 } from 'react'
 import {
-  LOCALSTORAGE_KEYS,
   THEME_KEYS,
-  ThemeKeyType,
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
-} from 'consts'
-import { useLocalStorage } from 'hooks'
-import { isBrowser } from 'utils'
+  ThemeKeyType,
+} from 'consts/themes'
+import { LOCALSTORAGE_KEYS } from 'consts/localStorage'
+import { useLocalStorage } from 'hooks/useLocalStorage'
+import { isBrowser } from 'utils/isBrowser'
 
 export type ThemeContextType = {
   theme: ThemeKeyType

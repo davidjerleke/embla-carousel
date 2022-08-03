@@ -1,8 +1,11 @@
 import React, { PropsWithChildren, ButtonHTMLAttributes } from 'react'
 import styled, { css } from 'styled-components'
-import { tabAccessStyles, OUTLINE_SIZE } from 'components/TabAccess'
-import { useTabAccess } from 'hooks'
-import { COLORS } from 'consts'
+import {
+  tabAccessStyles,
+  OUTLINE_SIZE,
+} from 'components/TabAccess/tabAccessStyles'
+import { useTabAccess } from 'hooks/useTabAccess'
+import { COLORS } from 'consts/themes'
 
 export const plainButtonStyles = css<{ $isTabbing: boolean }>`
   -webkit-tap-highlight-color: rgba(

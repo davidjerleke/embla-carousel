@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
-import { plainLinkStyles } from 'components/Link'
-import { gradientTextStyles, isBrowser } from 'utils'
-import { COLORS, FONT_SIZES, LAYERS, SPACINGS } from 'consts'
+import { plainLinkStyles } from 'components/Link/PlainLink'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { isBrowser } from 'utils/isBrowser'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { LAYERS } from 'consts/layers'
+import { SPACINGS } from 'consts/spacings'
 
 export const SKIP_TO_CONTENT_ID = 'main-content'
 

@@ -1,9 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IconWithText } from 'components/Icon'
-import { ContentLink } from 'components/Link'
-import { COLORS, FONT_SIZES, MEDIA, SPACINGS, supportsStyles } from 'consts'
-import { gradientTextStyles } from 'utils'
+import { IconWithText } from 'components/Icon/IconWithText'
+import { ContentLink } from 'components/Link/ContentLink'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { MEDIA } from 'consts/breakpoints'
+import { SPACINGS } from 'consts/spacings'
+import { supportsStyles } from 'consts/supportsStyles'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
 
 const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
 
