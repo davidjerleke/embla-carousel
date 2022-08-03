@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { createSquareSizeStyles } from 'utils'
-import { useNavigation, useSiteMetadata } from 'hooks'
+import { useSiteMetadata } from 'hooks'
 import { MEDIA, COLORS, SPACINGS, FONT_SIZES } from 'consts'
 import { PlainLink } from 'components/Link'
 import { SiteLogo } from 'components/SiteLogo'
@@ -35,15 +35,10 @@ const HeaderLogo = styled(SiteLogo)`
 `
 
 export const Logo = () => {
-  const { closeNavigation } = useNavigation()
   const { title } = useSiteMetadata()
 
   return (
-    <Wrapper
-      aria-label="Permalink to home page"
-      onClick={closeNavigation}
-      to="/"
-    >
+    <Wrapper aria-label="Permalink to home page" to="/">
       <HeaderLogo />
       <span>{title}</span>
     </Wrapper>

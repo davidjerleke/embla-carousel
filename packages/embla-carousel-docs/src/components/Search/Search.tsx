@@ -28,6 +28,7 @@ const INPUT_BORDER_SIZE = '0.2rem'
 const SVG_STROKE_WIDTH = '0.14rem'
 const INPUT_HEIGHT = SPACINGS.NINE
 const BUTTON_WIDTH = SPACINGS.EIGHT
+const DESKTOP_END_SPACING = SPACINGS.TEN
 const EDGE_SPACING = SPACINGS.TWO
 
 const modalStyles = css`
@@ -70,6 +71,8 @@ const modalStyles = css`
 
     ${MEDIA.DESKTOP} {
       max-width: ${DIALOG_MAX_WIDTH};
+      margin: ${DESKTOP_END_SPACING} auto;
+      height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
     }
   }
 `

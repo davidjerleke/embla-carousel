@@ -35,6 +35,7 @@ const ScrollArea = styled.ul`
 
   ${MEDIA.COMPACT} {
     max-height: ${MAX_HEIGHT_COMPACT};
+    padding-bottom: ${SPACINGS.ELEVEN};
   }
 `
 

@@ -5,17 +5,17 @@ import { NavigationProvider } from 'components/Navigation'
 import { SkipToContent, TabAccessProvider } from 'components/TabAccess'
 import { GlobalStyles } from 'components/Layout/GlobalStyles'
 import { PageTemplateType, PAGE_TEMPLATES } from 'consts'
-import { Grid } from 'components/SiteLayout'
+import { Grid, Loading } from 'components/SiteLayout'
 import { Header } from 'components/Header'
 import { Footer } from 'components/Footer'
 
 type PropType = PropsWithChildren<{
-  pageContext: { layout: PageTemplateType }
+  pageContext: { layout: PageTemplateType; id: string }
 }>
 
 export const Layout = (props: PropType) => {
   const { children, pageContext } = props
-  const { layout } = pageContext
+  const { layout, id } = pageContext
   const isNotFoundPage = layout === PAGE_TEMPLATES.NOT_FOUND
 
   return (
@@ -30,6 +30,7 @@ export const Layout = (props: PropType) => {
               <>
                 <SkipToContent />
                 <Header />
+                <Loading pageId={id} />
                 <Grid layout={layout}>{children}</Grid>
                 <Footer />
               </>

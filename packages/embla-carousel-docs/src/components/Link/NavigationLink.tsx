@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { useNavigation, useRouteActive } from 'hooks'
+import { useRouteActive } from 'hooks'
 import { RouteType } from 'components/Routes'
 import { PlainLink } from 'components/Link'
 import { gradientTextStyles } from 'utils'
@@ -36,11 +36,10 @@ type PropType = PropsWithChildren<{
 export const NavigationLink = (props: PropType) => {
   const { route, isActive, children, ...restProps } = props
   const { isPartiallyActive } = useRouteActive(route)
-  const { closeNavigation } = useNavigation()
   const active = isActive ?? isPartiallyActive
 
   return (
-    <Wrapper to={route.slug} onClick={closeNavigation} {...restProps}>
+    <Wrapper to={route.slug} {...restProps}>
       <InactiveText $isActive={active}>{children}</InactiveText>
       <ActiveText $isActive={active} aria-hidden="true">
         {children}

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { Navigation } from 'components/Navigation'
-import { useWindowSize } from 'hooks'
+import { useRoutes, useWindowSize } from 'hooks'
 import { Frame, FRAME_SPACING } from './Frame'
 import {
   BREAKPOINTS,
@@ -56,6 +56,7 @@ type PropType = PropsWithChildren<{
 export const Grid = (props: PropType) => {
   const { children, layout } = props
   const { windowWidth } = useWindowSize()
+  const { isLoading } = useRoutes()
   const collapseBreakpoint = windowWidth < BREAKPOINTS.MD
   const isStartPage = layout === PAGE_TEMPLATES.HOME
 
@@ -64,7 +65,12 @@ export const Grid = (props: PropType) => {
       <Nav $isStartPage={isStartPage}>
         <Navigation collapsed={collapseBreakpoint} />
       </Nav>
-      <Main $isStartPage={isStartPage} role="main">
+      <Main
+        role="main"
+        aria-live="polite"
+        aria-busy={isLoading}
+        $isStartPage={isStartPage}
+      >
         {children}
       </Main>
     </Wrapper>

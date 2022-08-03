@@ -10,7 +10,6 @@ import { PrimaryButtonLink } from 'components/Link'
 const MAX_CONTENT_WIDTH = '50rem'
 
 const Wrapper = styled.div`
-  padding-top: ${SPACINGS.FOUR};
   display: flex;
   position: relative;
   align-items: center;
@@ -31,7 +30,7 @@ const Wrapper = styled.div`
 
 const HeroLogo = styled(SiteLogo)`
   flex: 0 0 auto;
-  ${createSquareSizeStyles('16rem')};
+  ${createSquareSizeStyles('15rem')};
 
   ${MEDIA.MIN_SM} {
     ${createSquareSizeStyles('22rem')};
