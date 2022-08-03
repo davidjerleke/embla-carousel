@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { useRoutes } from 'hooks/useRoutes'
