@@ -1,8 +1,10 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { PlainLink, PropType as LinkPropType } from 'components/Link'
-import { IconWithText } from 'components/Icon'
-import { COLORS, SPACINGS, FONT_SIZES } from 'consts'
+import { PlainLink, PropType as LinkPropType } from 'components/Link/PlainLink'
+import { IconWithText } from 'components/Icon/IconWithText'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
 
 const Wrapper = styled(PlainLink)`
   color: ${COLORS.TEXT_LOW_CONTRAST};

@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components'
 import { PlainButton } from './PlainButton'
-import { COLORS, SPACINGS, supportsStyles } from 'consts'
-import { gradientBackgroundStyles } from 'utils'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { supportsStyles } from 'consts/supportsStyles'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 
 export const primaryButtonStyles = css`
   line-height: 1.15;

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ITEM_SPACING, SlideInner, SlideImg } from './carouselBasicStyles'
-import { supportsStyles } from 'consts'
+import { supportsStyles } from 'consts/supportsStyles'
 
 export const ParallaxSlideInner = styled(SlideInner)`
   overflow: hidden;

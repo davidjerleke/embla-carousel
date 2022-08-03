@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
-import { useWindowResize } from 'hooks'
-import { isBrowser } from 'utils'
+import { useWindowResize } from 'hooks/useWindowResize'
+import { isBrowser } from 'utils/isBrowser'
 
 type UseWindowSizeType = {
   windowWidth: number

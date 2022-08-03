@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
-import { numberWithinRange } from 'utils'
+import { numberWithinRange } from 'utils/numberWithinRange'
 import {
   Wrapper,
   Container,

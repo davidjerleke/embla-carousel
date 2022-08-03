@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { gradientTextStyles } from 'utils'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
 import styled, { css } from 'styled-components'
-import { RouteType } from 'components/Routes'
-import { PlainButton } from 'components/Button'
-import { NavigationLink } from 'components/Link'
-import { useRouteActive } from 'hooks'
-import { ALGOLIA_SELECTORS, COLORS, SPACINGS } from 'consts'
-import { Icon } from 'components/Icon'
+import { RouteType } from 'components/Routes/Context'
+import { PlainButton } from 'components/Button/PlainButton'
+import { NavigationLink } from 'components/Link/NavigationLink'
+import { useRouteActive } from 'hooks/useRouteActive'
+import { ALGOLIA_SELECTORS } from 'consts/algoliaSearch'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+
+import { Icon } from 'components/Icon/Icon'
 
 const ITEM_SPACING = SPACINGS.ONE
 const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)

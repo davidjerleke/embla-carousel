@@ -1,5 +1,6 @@
 import { useRef, useEffect, useCallback, RefObject } from 'react'
-import { getRefElementOrNode, isBrowser } from 'utils'
+import { getRefElementOrNode } from 'utils/getRefElementOrNode'
+import { isBrowser } from 'utils/isBrowser'
 
 type PropType = {
   type: keyof WindowEventMap

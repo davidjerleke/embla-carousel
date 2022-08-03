@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components'
 import { WHEEL_ITEM_SIZE } from './CarouselWheelItem'
-import { frameCollapseStyles } from 'components/SiteLayout'
+import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
 import { CAROUSEL_RADIUS, CAROUSEL_SPACING } from './carouselBasicStyles'
-import { MEDIA, LAYERS, COLORS } from 'consts'
+import { MEDIA } from 'consts/breakpoints'
+import { LAYERS } from 'consts/layers'
+import { COLORS } from 'consts/themes'
 
 export type PerspectiveType = 'left' | 'right'
 

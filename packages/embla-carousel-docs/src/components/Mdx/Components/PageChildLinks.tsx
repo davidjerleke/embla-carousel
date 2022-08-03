@@ -1,6 +1,7 @@
 import React from 'react'
-import { useRouteChildren, useRouteCurrent } from 'hooks'
-import { ContentLink } from 'components/Link'
+import { useRouteChildren } from 'hooks/useRouteChildren'
+import { useRouteCurrent } from 'hooks/useRouteCurrent'
+import { ContentLink } from 'components/Link/ContentLink'
 
 export const PageChildLinks = () => {
   const routeChildren = useRouteChildren(useRouteCurrent())

@@ -1,12 +1,14 @@
 import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
-import FocusTrap from 'focus-trap-react'
-import { useEventListener, useNavigation } from 'hooks'
-import { hiddenAtBreakpointStyles } from 'utils'
-import { MEDIA, LAYERS, COLORS } from 'consts'
+import { useNavigation } from 'hooks/useNavigation'
+import { useEventListener } from 'hooks/useEventListener'
+import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
+import { MEDIA } from 'consts/breakpoints'
+import { LAYERS } from 'consts/layers'
+import { COLORS } from 'consts/themes'
 import { Menu } from './Menu'
-import { FRAME_SPACING } from 'components/SiteLayout'
-import { HEADER_HEIGHT } from 'components/Header'
+import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { HEADER_HEIGHT } from 'components/Header/Header'
 
 export const NAVIGATION_ID = 'main-navigation-menu'
 
@@ -15,14 +17,14 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
 
   ${MEDIA.COMPACT} {
-    ${({ $isOpen }) => css`
-      transform: ${!$isOpen && 'translateX(-100%)'};
-      visibility: ${!$isOpen && 'hidden'};
-    `};
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    ${({ $isOpen }) => css`
+      transform: ${!$isOpen && 'translateX(-100%)'};
+      visibility: ${!$isOpen && 'hidden'};
+    `};
   }
 
   ${MEDIA.DESKTOP} {
@@ -72,18 +74,16 @@ export const Navigation = (props: PropType) => {
   }, [collapsed, closeNavigation])
 
   return (
-    <FocusTrap active={isOpen}>
-      <Nav
-        role={role}
-        aria-modal={ariaModal}
-        aria-labelledby={id}
-        aria-label="Main Navigation Menu"
-        $isOpen={isOpen}
-        {...props}
-      >
-        <Overlay onPointerUp={closeNavigation} $hidden="DESKTOP" />
-        <Menu />
-      </Nav>
-    </FocusTrap>
+    <Nav
+      role={role}
+      aria-modal={ariaModal}
+      aria-labelledby={id}
+      aria-label="Main Navigation Menu"
+      $isOpen={isOpen}
+      {...props}
+    >
+      <Overlay onPointerUp={closeNavigation} $hidden="DESKTOP" />
+      <Menu />
+    </Nav>
   )
 }

@@ -1,6 +1,6 @@
-import { LogoLightIcon, LogoDarkIcon } from 'components/SiteLogo'
-import { LightThemeSvg, DarkThemeSvg } from 'components/Theme'
-import { THEME_KEYS, THEME_PREFIX } from 'consts'
+import { LogoLightIcon, LogoDarkIcon } from 'components/SiteLogo/SiteLogo'
+import { LightThemeSvg, DarkThemeSvg } from 'components/Theme/ThemeToggle'
+import { THEME_KEYS, THEME_PREFIX } from 'consts/themes'
 import { css } from 'styled-components'
 
 export const themeStyles = css`

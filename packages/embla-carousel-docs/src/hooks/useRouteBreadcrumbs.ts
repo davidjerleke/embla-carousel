@@ -1,5 +1,5 @@
-import { RouteType } from 'components/Routes'
-import { isRoutePartiallyActive } from 'utils'
+import { RouteType } from 'components/Routes/Context'
+import { isRoutePartiallyActive } from 'utils/isRoutePartiallyActive'
 import { useRoutes } from './useRoutes'
 
 export const useRouteBreadcrumbs = (id: string): RouteType[] => {

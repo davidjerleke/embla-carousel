@@ -1,4 +1,4 @@
-import { RouteType, MdxAllRoutesType } from 'components/Routes'
+import { RouteType, MdxAllRoutesType } from 'components/Routes/Context'
 import { addRouteChildren } from './addRouteChildren'
 import { createFlatRoutes } from './createFlatRoutes'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Frame, FRAME_SPACING } from 'components/SiteLayout'
+import { Frame, FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { Links } from './Links'
 
 const Wrapper = styled.footer`

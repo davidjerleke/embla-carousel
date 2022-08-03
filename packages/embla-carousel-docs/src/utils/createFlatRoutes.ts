@@ -1,4 +1,4 @@
-import { MdxAllRoutesType, RouteType } from 'components/Routes'
+import { MdxAllRoutesType, RouteType } from 'components/Routes/Context'
 
 export const createFlatRoutes = (data: MdxAllRoutesType): RouteType[] => {
   return data.allMdx.edges

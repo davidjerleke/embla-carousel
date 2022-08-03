@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { IconType } from 'assets/icons'
 import { Icon } from './Icon'
-import { SPACINGS } from 'consts'
+import { SPACINGS } from 'consts/spacings'
 
 const Wrapper = styled.div<{ $spacing: string }>`
   display: flex;

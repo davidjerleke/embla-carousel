@@ -1,7 +1,9 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { IconWithText } from 'components/Icon'
-import { COLORS, SPACINGS, FONT_SIZES } from 'consts'
+import { IconWithText } from 'components/Icon/IconWithText'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
 
 const Heading = styled(IconWithText)`
   font-weight: bold;

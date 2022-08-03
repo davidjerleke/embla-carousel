@@ -1,5 +1,5 @@
-import { RouteType } from 'components/Routes'
-import { isRoutePartiallyActive } from 'utils'
+import { RouteType } from 'components/Routes/Context'
+import { isRoutePartiallyActive } from 'utils/isRoutePartiallyActive'
 
 export const addRouteChildren = (
   parent: RouteType,

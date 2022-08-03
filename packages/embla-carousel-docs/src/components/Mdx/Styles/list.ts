@@ -1,4 +1,4 @@
-import { SPACINGS } from 'consts'
+import { SPACINGS } from 'consts/spacings'
 import { css } from 'styled-components'
 
 export const listStyles = css`

@@ -1,13 +1,15 @@
 import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
-import { Seo } from 'components/Seo'
+import { Seo } from 'components/Seo/Seo'
 import maskable from 'assets/images/maskable.png'
-import { useSiteMetadata } from 'hooks'
-import { EditPage, Pagination, Breadcrumbs } from 'components/Page'
-import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
-import { RouteType } from 'components/Routes'
-import { removeProtocol } from 'utils'
-import { Mdx } from 'components/Mdx'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { EditPage } from 'components/Page/EditPage'
+import { Pagination } from 'components/Page/Pagination'
+import { Breadcrumbs } from 'components/Page/Breadcrumbs'
+import { SKIP_TO_CONTENT_ID } from 'components/TabAccess/SkipToContent'
+import { RouteType } from 'components/Routes/Context'
+import { removeProtocol } from 'utils/removeProtocol'
+import { Mdx } from 'components/Mdx/Mdx'
 
 export const query = graphql`
   query PageQuery($id: String) {

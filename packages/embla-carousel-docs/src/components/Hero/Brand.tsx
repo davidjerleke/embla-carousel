@@ -1,16 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import { MEDIA, COLORS, SPACINGS, FONT_SIZES } from 'consts'
-import { SiteLogo } from 'components/SiteLogo'
-import { createSquareSizeStyles, gradientTextStyles } from 'utils'
-import { useSiteMetadata } from 'hooks'
-import { SKIP_TO_CONTENT_ID } from 'components/TabAccess'
-import { PrimaryButtonLink } from 'components/Link'
+import { MEDIA } from 'consts/breakpoints'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { SiteLogo } from 'components/SiteLogo/SiteLogo'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { SKIP_TO_CONTENT_ID } from 'components/TabAccess/SkipToContent'
+import { PrimaryButtonLink } from 'components/Link/ButtonLink'
 
 const MAX_CONTENT_WIDTH = '50rem'
 
 const Wrapper = styled.div`
-  padding-top: ${SPACINGS.FOUR};
   display: flex;
   position: relative;
   align-items: center;
@@ -31,7 +34,7 @@ const Wrapper = styled.div`
 
 const HeroLogo = styled(SiteLogo)`
   flex: 0 0 auto;
-  ${createSquareSizeStyles('16rem')};
+  ${createSquareSizeStyles('15rem')};
 
   ${MEDIA.MIN_SM} {
     ${createSquareSizeStyles('22rem')};

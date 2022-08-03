@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://www.embla-carousel.com/"><img width="120" height="120" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://www.embla-carousel.com/"><img width="100" height="100" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
@@ -50,7 +50,7 @@
     <h2 align="center">Ready for</h2>
   </strong>
   <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with the following:
+    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with:
   </p>
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">

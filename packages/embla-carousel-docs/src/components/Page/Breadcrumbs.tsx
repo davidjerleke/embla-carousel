@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
-import { PlainLink } from 'components/Link'
-import { useRouteBreadcrumbs } from 'hooks'
-import { Icon } from 'components/Icon'
-import { COLORS, FONT_SIZES, SPACINGS } from 'consts'
+import { PlainLink } from 'components/Link/PlainLink'
+import { useRouteBreadcrumbs } from 'hooks/useRouteBreadcrumbs'
+import { Icon } from 'components/Icon/Icon'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { SPACINGS } from 'consts/spacings'
 
 const Wrapper = styled.nav`
   display: flex;

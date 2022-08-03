@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PlainLink } from 'components/Link'
-import { COLORS, FONT_SIZES, SPACINGS, URLS } from 'consts'
-import { IconWithText } from 'components/Icon'
+import { PlainLink } from 'components/Link/PlainLink'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { SPACINGS } from 'consts/spacings'
+import { URLS } from 'consts/urls'
+import { IconWithText } from 'components/Icon/IconWithText'
 
 const Wrapper = styled(PlainLink)`
   display: inline-flex;

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { PlainLink, PropType } from './PlainLink'
-import { gradientTextStyles } from 'utils'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
 
 export const contentLinkStyles = css`
   ${gradientTextStyles};

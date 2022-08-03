@@ -1,8 +1,10 @@
 import styled from 'styled-components'
-import { frameCollapseStyles } from 'components/SiteLayout'
-import { COLORS, MEDIA, supportsStyles } from 'consts'
-import { PlainButton } from 'components/Button'
-import { createSquareSizeStyles } from 'utils'
+import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
+import { COLORS } from 'consts/themes'
+import { MEDIA } from 'consts/breakpoints'
+import { supportsStyles } from 'consts/supportsStyles'
+import { PlainButton } from 'components/Button/PlainButton'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import {
   CAROUSEL_RADIUS,
   CAROUSEL_SPACING,

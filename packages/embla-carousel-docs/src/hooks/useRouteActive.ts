@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { useLocation } from '@reach/router'
-import { isRouteActive, isRoutePartiallyActive } from 'utils'
-import { RouteType } from 'components/Routes'
+import { isRouteActive } from 'utils/isRouteActive'
+import { isRoutePartiallyActive } from 'utils/isRoutePartiallyActive'
+import { RouteType } from 'components/Routes/Context'
 
 type UseRouteActiveType = {
   isActive: boolean

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { useInView } from 'react-intersection-observer'
 import { imageByIndex } from './images'
-import { Icon } from 'components/Icon'
+import { Icon } from 'components/Icon/Icon'
 import {
   Wrapper,
   Container,

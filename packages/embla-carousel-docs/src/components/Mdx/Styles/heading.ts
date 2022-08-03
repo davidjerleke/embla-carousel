@@ -1,7 +1,10 @@
 import { css } from 'styled-components'
-import { FRAME_SPACING } from 'components/SiteLayout'
-import { createSquareSizeStyles } from 'utils'
-import { COLORS, FONT_SIZES, MEDIA, SPACINGS } from 'consts'
+import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { COLORS } from 'consts/themes'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { MEDIA } from 'consts/breakpoints'
+import { SPACINGS } from 'consts/spacings'
 
 const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 

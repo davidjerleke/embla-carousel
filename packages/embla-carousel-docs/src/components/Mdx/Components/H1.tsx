@@ -1,7 +1,7 @@
-import { SPACINGS } from 'consts'
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { gradientBackgroundStyles } from 'utils'
+import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { SPACINGS } from 'consts/spacings'
 
 const DECORATION_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
 const DECORATION_WIDTH = SPACINGS.CUSTOM(({ EIGHT }) => EIGHT + 0.2)

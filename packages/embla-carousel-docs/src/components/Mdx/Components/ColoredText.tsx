@@ -1,6 +1,6 @@
-import { COLORS } from 'consts'
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
+import { COLORS } from 'consts/themes'
 
 const ColoredText = styled.span<{ $color: string }>`
   color: ${({ $color }) => $color};

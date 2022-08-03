@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ThemeToggle } from 'components/Theme'
-import { NavigationLink } from 'components/Link'
-import { COLORS, MEDIA, SPACINGS } from 'consts'
-import { useRoutes } from 'hooks'
-import { Search } from 'components/Search'
-import { hiddenAtBreakpointStyles } from 'utils'
+import { ThemeToggle } from 'components/Theme/ThemeToggle'
+import { NavigationLink } from 'components/Link/NavigationLink'
+import { COLORS } from 'consts/themes'
+import { MEDIA } from 'consts/breakpoints'
+import { SPACINGS } from 'consts/spacings'
+import { useRoutes } from 'hooks/useRoutes'
+import { Search } from 'components/Search/Search'
+import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 
 const ITEM_SPACING_SM_UP = SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.4)
 

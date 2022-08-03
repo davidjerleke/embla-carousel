@@ -1,7 +1,7 @@
 import React from 'react'
-import { Mdx } from 'components/Mdx'
+import { Mdx } from 'components/Mdx/Mdx'
 import { graphql } from 'gatsby'
-import { Frame } from 'components/SiteLayout'
+import { Frame } from 'components/SiteLayout/Frame'
 import styled from 'styled-components'
 
 const MAX_WIDTH = '68.2rem'

@@ -1,5 +1,6 @@
 import { gradientBackgroundStyles } from './gradientBackgroundStyles'
-import { COLORS, supportsStyles } from 'consts'
+import { COLORS } from 'consts/themes'
+import { supportsStyles } from 'consts/supportsStyles'
 import { css } from 'styled-components'
 
 export const gradientTextStyles = css`

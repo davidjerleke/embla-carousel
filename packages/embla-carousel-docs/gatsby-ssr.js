@@ -1,15 +1,15 @@
 import React from 'react'
-import { removeProtocol } from 'utils'
 import config from './gatsby-config'
 import {
-  themeStyles,
-  LOCALSTORAGE_KEYS,
   THEME_KEYS,
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
-  ALGOLIA_SEARCH_CONFIG,
-} from 'consts'
+  themeStyles,
+} from 'consts/themes'
+import { LOCALSTORAGE_KEYS } from 'consts/localStorage'
+import { ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
+import { removeProtocol } from 'utils/removeProtocol'
 
 export const onRenderBody = ({
   setHtmlAttributes,

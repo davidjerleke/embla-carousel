@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
-import { PlainLink } from 'components/Link'
-import { gradientTextStyles } from 'utils'
-import { COLORS, SPACINGS, supportsStyles } from 'consts'
-import { IconWithText } from 'components/Icon'
+import { PlainLink } from 'components/Link/PlainLink'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { supportsStyles } from 'consts/supportsStyles'
+import { IconWithText } from 'components/Icon/IconWithText'
 
 const ITEM_SPACING = SPACINGS.FOUR
 

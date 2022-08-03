@@ -1,12 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Frame } from 'components/SiteLayout'
-import { NavigationToggle } from 'components/Navigation'
-import { MEDIA, LAYERS, COLORS } from 'consts'
+import { Frame } from 'components/SiteLayout/Frame'
+import { NavigationToggle } from 'components/Navigation/NavigationToggle'
+import { MEDIA } from 'consts/breakpoints'
+import { LAYERS } from 'consts/layers'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
 import { Actions } from './Actions'
 import { Logo } from './Logo'
 
-export const HEADER_HEIGHT = '6rem'
+export const HEADER_HEIGHT = SPACINGS.TEN
 
 const HEIGHT = css`
   height: ${HEADER_HEIGHT};
