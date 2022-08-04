@@ -32,14 +32,15 @@ const Wrapper = styled.div`
 `
 
 const ScrollArea = styled.ul`
+  padding-bottom: ${SPACINGS.FOUR};
   overflow: auto;
   position: relative;
-  padding-bottom: ${SPACINGS.FOUR};
   max-height: 100%;
 
   ${MEDIA.COMPACT} {
-    max-height: ${MAX_HEIGHT_COMPACT};
     padding-bottom: ${SPACINGS.ELEVEN};
+    padding-top: ${SPACINGS.TWO};
+    max-height: ${MAX_HEIGHT_COMPACT};
   }
 `
 
