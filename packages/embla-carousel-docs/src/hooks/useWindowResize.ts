@@ -15,8 +15,5 @@ export const useWindowResize = (props: PropType): void => {
       : (event: Event) => callback(event)
   }, [wait, callback])
 
-  useEventListener({
-    type: 'resize',
-    listener: onResize,
-  })
+  useEventListener('resize', onResize)
 }

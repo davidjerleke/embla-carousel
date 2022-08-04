@@ -10,6 +10,7 @@ import { Actions } from './Actions'
 import { Logo } from './Logo'
 
 export const HEADER_HEIGHT = SPACINGS.TEN
+export const HEADER_ID = 'site-header'
 
 const HEIGHT = css`
   height: ${HEADER_HEIGHT};
@@ -42,7 +43,7 @@ const Content = styled(Frame)`
 
 export const Header = () => {
   return (
-    <Wrapper>
+    <Wrapper id={HEADER_ID}>
       <Fixed>
         <Content>
           <NavigationToggle />

@@ -2,15 +2,16 @@ import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
-import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
-import { COLORS } from 'consts/themes'
 import { Menu } from './Menu'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { HEADER_HEIGHT } from 'components/Header/Header'
+import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
+import FocusTrap from 'focus-trap-react'
+import { isBrowser } from 'utils/isBrowser'
 
 export const NAVIGATION_ID = 'main-navigation-menu'
+const MENU_ID = 'main-menu'
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
   z-index: ${LAYERS.NAVIGATION};
@@ -33,17 +34,6 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
   }
 `
 
-const Overlay = styled.div`
-  background-color: ${COLORS.BACKGROUND_SITE};
-  opacity: 0.9;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  ${hiddenAtBreakpointStyles};
-`
-
 type PropType = PropsWithChildren<{
   collapsed: boolean
 }>
@@ -56,6 +46,13 @@ export const Navigation = (props: PropType) => {
   const ariaModal = collapsed ? 'true' : undefined
   const closeKeys = useRef(['Escape', 'Esc'])
 
+  const getFocusTrapElements = useCallback((): HTMLElement[] => {
+    if (!isBrowser) return []
+    const header = document.getElementById(HEADER_ID)
+    const nav = document.getElementById(MENU_ID)
+    return header && nav ? [header, nav] : []
+  }, [])
+
   const onKeyUp = useCallback(
     ({ key }: KeyboardEvent) => {
       if (closeKeys.current.includes(key)) closeNavigation()
@@ -63,10 +60,7 @@ export const Navigation = (props: PropType) => {
     [closeNavigation],
   )
 
-  useEventListener({
-    type: 'keyup',
-    listener: onKeyUp,
-  })
+  useEventListener('keyup', onKeyUp)
 
   useEffect(() => {
     if (!collapsed) closeNavigation()
@@ -74,16 +68,18 @@ export const Navigation = (props: PropType) => {
   }, [collapsed, closeNavigation])
 
   return (
-    <Nav
-      role={role}
-      aria-modal={ariaModal}
-      aria-labelledby={id}
-      aria-label="Main Navigation Menu"
-      $isOpen={isOpen}
-      {...props}
-    >
-      <Overlay onPointerUp={closeNavigation} $hidden="DESKTOP" />
-      <Menu />
-    </Nav>
+    <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
+      <Nav
+        id={MENU_ID}
+        role={role}
+        aria-modal={ariaModal}
+        aria-labelledby={id}
+        aria-label="Main Navigation Menu"
+        $isOpen={isOpen}
+        {...props}
+      >
+        <Menu />
+      </Nav>
+    </FocusTrap>
   )
 }

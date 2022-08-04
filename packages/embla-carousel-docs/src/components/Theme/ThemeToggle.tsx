@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { PlainButton } from 'components/Button/PlainButton'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
@@ -38,7 +38,10 @@ export const DarkThemeSvg = styled(Icon)`
   ${svgStyles};
 `
 
-export const ThemeToggle = () => {
+type PropType = PropsWithChildren<{}>
+
+export const ThemeToggle = (props: PropType) => {
+  const { children, ...restProps } = props
   const { theme, toggleTheme } = useTheme()
   const isLightTheme = theme === THEME_KEYS.LIGHT
   const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
@@ -48,7 +51,9 @@ export const ThemeToggle = () => {
       type="button"
       onClick={toggleTheme}
       aria-label={`Activate ${oppositeTheme} theme`}
+      {...restProps}
     >
+      {children}
       <DarkThemeSvg svg="moon" size={ICON_SIZE} />
       <LightThemeSvg svg="sun" size={ICON_SIZE} />
     </Wrapper>

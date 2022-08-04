@@ -4,6 +4,4 @@ import {
   RoutesContextType as UseRoutesType,
 } from 'components/Routes/Context'
 
-export const useRoutes = (): UseRoutesType => {
-  return useContext(RoutesContext)
-}
+export const useRoutes = (): UseRoutesType => useContext(RoutesContext)

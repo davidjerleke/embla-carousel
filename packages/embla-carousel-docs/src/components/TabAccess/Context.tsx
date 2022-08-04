@@ -21,21 +21,14 @@ export const TabAccessProvider = (props: PropType) => {
   }, [setUserIsTabbing, userIsTabbing])
 
   const onKeyDown = useCallback(
-    ({ keyCode }) => {
-      if (keyCode === 9 && !userIsTabbing) setUserIsTabbing(true)
+    ({ key }: KeyboardEvent) => {
+      if (key === 'Tab' && !userIsTabbing) setUserIsTabbing(true)
     },
     [setUserIsTabbing, userIsTabbing],
   )
 
-  useEventListener({
-    type: 'keydown',
-    listener: onKeyDown,
-  })
-
-  useEventListener({
-    type: 'mousedown',
-    listener: onMouseDown,
-  })
+  useEventListener('keydown', onKeyDown)
+  useEventListener('mousedown', onMouseDown)
 
   return (
     <TabAccessContext.Provider value={userIsTabbing}>

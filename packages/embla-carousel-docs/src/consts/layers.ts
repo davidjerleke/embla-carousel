@@ -1,6 +1,6 @@
 export const LAYERS = {
   SEARCH: 30,
-  NAVIGATION: 20,
-  HEADER: 10,
+  HEADER: 20,
+  NAVIGATION: 10,
   STEP: 1,
 }

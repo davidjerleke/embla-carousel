@@ -8,8 +8,8 @@ import { useRouteActive } from 'hooks/useRouteActive'
 import { ALGOLIA_SELECTORS } from 'consts/algoliaSearch'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-
 import { Icon } from 'components/Icon/Icon'
+import { MEDIA } from 'consts/breakpoints'
 
 const ITEM_SPACING = SPACINGS.ONE
 const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
@@ -18,6 +18,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 1.65;
+
+  ${MEDIA.COMPACT} {
+    border-bottom: 0.1rem solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+  }
 `
 
 const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
@@ -38,6 +42,11 @@ const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
       ${$isActive && gradientTextStyles};
     }
   `};
+
+  ${MEDIA.COMPACT} {
+    padding: ${SPACINGS.TWO} 0 ${SPACINGS.TWO}
+      calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
+  }
 `
 
 const ToggleSvg = styled(Icon)<{ $isOpen: boolean }>`
@@ -55,24 +64,32 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
     height: ${!$isOpen && '0px'};
     overflow: ${!$isOpen && 'hidden'};
     visibility: ${!$isOpen && 'hidden'};
+
+    ${MEDIA.COMPACT} {
+      margin-top: ${$isOpen && `-${SPACINGS.ONE}`};
+      padding-bottom: ${$isOpen && SPACINGS.TWO};
+    }
   `};
   padding-left: calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.FOUR});
   position: relative;
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0.3rem;
-    width: 0.1rem;
-    bottom: 0;
-    background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+
+  ${MEDIA.DESKTOP} {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0.3rem;
+      width: 0.1rem;
+      bottom: 0;
+      background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    }
   }
 `
 
 const Link = styled(NavigationLink)`
-  padding: ${ITEM_SPACING} 0;
   margin: 0 0;
   text-align: left;
+  padding: ${ITEM_SPACING} 0;
 `
 
 type PropType = { route: RouteType }

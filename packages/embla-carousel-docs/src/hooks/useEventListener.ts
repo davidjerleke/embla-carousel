@@ -1,36 +1,57 @@
-import { useRef, useEffect, useCallback, RefObject } from 'react'
-import { getRefElementOrNode } from 'utils/getRefElementOrNode'
-import { isBrowser } from 'utils/isBrowser'
+import { RefObject, useEffect, useRef } from 'react'
 
-type PropType = {
-  type: keyof WindowEventMap
-  listener: EventListener
-  element?: RefObject<Element> | Document | Window | null
-  options?: AddEventListenerOptions
-}
+export function useEventListener<K extends keyof WindowEventMap>(
+  eventName: K,
+  handler: (event: WindowEventMap[K]) => void,
+  element?: undefined,
+  options?: boolean | AddEventListenerOptions,
+): void
 
-export const useEventListener = (props: PropType): void => {
-  const storedListener = useRef<EventListener>()
-  const {
-    type,
-    listener,
-    element = isBrowser ? window : undefined,
-    options,
-  } = props
+export function useEventListener<
+  K extends keyof HTMLElementEventMap,
+  T extends HTMLElement = HTMLDivElement,
+>(
+  eventName: K,
+  handler: (event: HTMLElementEventMap[K]) => void,
+  element: RefObject<T>,
+  options?: boolean | AddEventListenerOptions,
+): void
+
+export function useEventListener<K extends keyof DocumentEventMap>(
+  eventName: K,
+  handler: (event: DocumentEventMap[K]) => void,
+  element: RefObject<Document>,
+  options?: boolean | AddEventListenerOptions,
+): void
+
+export function useEventListener<
+  KW extends keyof WindowEventMap,
+  KH extends keyof HTMLElementEventMap,
+  T extends HTMLElement | void = void,
+>(
+  eventName: KW | KH,
+  handler: (
+    event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event,
+  ) => void,
+  element?: RefObject<T>,
+  options?: boolean | AddEventListenerOptions,
+): void {
+  const savedHandler = useRef(handler)
 
   useEffect(() => {
-    storedListener.current = listener
-  }, [listener])
-
-  const onEvent = useCallback((event: Event) => {
-    storedListener.current?.(event)
-  }, [])
+    savedHandler.current = handler
+  }, [handler])
 
   useEffect(() => {
-    const target = getRefElementOrNode(element)
-    if (!target) return
+    const targetElement: T | Window = element?.current || window
+    if (!(targetElement && targetElement.addEventListener)) return
 
-    target.addEventListener(type, onEvent, options)
-    return () => target.removeEventListener(type, onEvent)
-  }, [type, element, options, onEvent])
+    const eventListener: typeof handler = (event) => savedHandler.current(event)
+
+    targetElement.addEventListener(eventName, eventListener, options)
+
+    return () => {
+      targetElement.removeEventListener(eventName, eventListener)
+    }
+  }, [eventName, element, options])
 }

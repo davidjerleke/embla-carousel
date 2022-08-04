@@ -2,20 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
-import { COLORS } from 'consts/themes'
+import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { useRoutes } from 'hooks/useRoutes'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 import { HEADER_HEIGHT } from 'components/Header/Header'
-import { Logo } from 'components/Header/Logo'
 import { Links } from 'components/Footer/Links'
-import { ThemeToggle } from 'components/Theme/ThemeToggle'
-import { NavigationClose } from './NavigationClose'
 import { SubMenu } from './SubMenu'
+import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
+import { useTheme } from 'hooks/useTheme'
+import {
+  DarkThemeSvg,
+  LightThemeSvg,
+  ThemeToggle,
+} from 'components/Theme/ThemeToggle'
 
-const MAX_WIDTH = '37.5rem'
-const MAX_HEIGHT_COMPACT = `calc(100vh - ${HEADER_HEIGHT})`
+const MAX_WIDTH_COMPACT = '36rem'
 
 const Wrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -26,7 +28,6 @@ const Wrapper = styled.div`
     z-index: ${LAYERS.STEP};
     padding-right: ${FRAME_SPACING};
     padding-left: ${FRAME_SPACING};
-    max-width: ${MAX_WIDTH};
     box-shadow: 0.1rem 0 0 0 ${COLORS.DETAIL_LOW_CONTRAST};
   }
 `
@@ -38,54 +39,74 @@ const ScrollArea = styled.ul`
   max-height: 100%;
 
   ${MEDIA.COMPACT} {
-    padding-bottom: ${SPACINGS.ELEVEN};
-    padding-top: ${SPACINGS.TWO};
-    max-height: ${MAX_HEIGHT_COMPACT};
+    padding-bottom: ${SPACINGS.FOURTEEN};
+    padding-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
+    max-width: ${MAX_WIDTH_COMPACT};
+    margin-left: auto;
+    margin-right: auto;
   }
 `
 
-const Header = styled.div`
-  height: ${HEADER_HEIGHT};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+const ThemeToggleWrapper = styled.li`
   ${hiddenAtBreakpointStyles};
 `
 
-const Buttons = styled.div`
-  display: flex;
-  align-items: center;
+const ThemeToggleButton = styled(ThemeToggle)`
+  background-color: ${COLORS.BACKGROUND_CODE};
+  width: 100%;
+  justify-content: space-between;
+  padding: 1.8rem 2rem;
+  margin-top: ${SPACINGS.FOUR};
+  height: auto;
+  margin-right: 0;
+  margin-left: 0;
+  border-radius: 0.4rem;
+  overflow: hidden;
 
-  > button:first-child {
-    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+  > ${LightThemeSvg}, ${DarkThemeSvg} {
+    left: auto;
+    right: 2rem;
+    transform: translateY(-50%);
   }
 `
 
-const MiscMenu = styled(Links)`
-  padding-top: ${SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)};
-  flex-direction: column;
+const ThemeToggleText = styled.span`
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+`
+
+const MiscLinks = styled(Links)`
+  padding-top: ${SPACINGS.THREE};
+
+  ${MEDIA.COMPACT} {
+    justify-content: center;
+  }
+
+  ${MEDIA.DESKTOP} {
+    flex-direction: column;
+  }
 `
 
 export const Menu = () => {
   const { hierarchical: routes } = useRoutes()
+  const { theme } = useTheme()
+  const isLightTheme = theme === THEME_KEYS.LIGHT
+  const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
     <Wrapper>
-      <Header $hidden="DESKTOP">
-        <Logo />
-        <Buttons>
-          <ThemeToggle />
-          <NavigationClose />
-        </Buttons>
-      </Header>
       <ScrollArea>
         {routes.map((route) => (
           <li key={route.id}>
             <SubMenu route={route} />
           </li>
         ))}
+        <ThemeToggleWrapper $hidden="DESKTOP">
+          <ThemeToggleButton>
+            <ThemeToggleText>Activate {oppositeTheme} theme</ThemeToggleText>
+          </ThemeToggleButton>
+        </ThemeToggleWrapper>
         <li>
-          <MiscMenu />
+          <MiscLinks />
         </li>
       </ScrollArea>
     </Wrapper>

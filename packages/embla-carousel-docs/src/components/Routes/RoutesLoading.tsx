@@ -7,6 +7,8 @@ import { useNavigation } from 'hooks/useNavigation'
 import { LAYERS } from 'consts/layers'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
+import { useCallback } from 'react'
+import { useEventListener } from 'hooks/useEventListener'
 
 const PROGRESS_BAR_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
 
@@ -60,6 +62,9 @@ export const RoutesLoading = (props: PropType) => {
   const animationRaf = useRef(0)
   const animationTimeout = useRef(0)
 
+  const onAnimationEnd = useCallback(() => setAnimating(false), [])
+  useEventListener('animationend', onAnimationEnd, progressElement)
+
   useEffect(() => {
     if (!isLoading) return
 
@@ -94,16 +99,6 @@ export const RoutesLoading = (props: PropType) => {
     lastPageId.current = pageId
     setIsLoading(false)
   }, [pageId, isOpen, closeNavigation, setIsLoading])
-
-  useEffect(() => {
-    const progress = progressElement.current
-    const onAnimationEnd = () => setAnimating(false)
-    if (progress) progress.addEventListener('animationend', onAnimationEnd)
-
-    return () => {
-      if (progress) progress.removeEventListener('animationend', onAnimationEnd)
-    }
-  }, [])
 
   useEffect(() => {
     return () => {

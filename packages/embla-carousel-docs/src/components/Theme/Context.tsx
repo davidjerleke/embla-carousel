@@ -36,29 +36,27 @@ export const ThemeProvider = (props: PropType) => {
 
   const toggleTheme = useCallback(() => {
     setTheme((current) => {
-      const next =
-        current === THEME_KEYS.LIGHT ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
+      const isLightTheme = current === THEME_KEYS.LIGHT
+      const next = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
+      const themeMetaNode = document.querySelector(THEME_META_SELECTOR)
+
       setLocalStorageItem(next)
       document.documentElement.classList.remove(`${THEME_PREFIX}${current}`)
       document.documentElement.classList.add(`${THEME_PREFIX}${next}`)
 
-      const themeMetaNode = document.querySelector(THEME_META_SELECTOR)
-
       if (themeMetaNode) {
-        themeMetaNode.setAttribute(
-          'content',
-          THEME_COLORS[next].BACKGROUND_SITE,
-        )
+        const nextBackgroundColor = THEME_COLORS[next].BACKGROUND_SITE
+        themeMetaNode.setAttribute('content', nextBackgroundColor)
       }
 
       return next
     })
-  }, [setTheme])
+  }, [])
 
   useEffect(() => {
     const initialTheme = isBrowser ? window.__THEME__ : THEME_KEYS.LIGHT
     setTheme(initialTheme)
-  }, [setTheme])
+  }, [])
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme, toggleTheme])
 
