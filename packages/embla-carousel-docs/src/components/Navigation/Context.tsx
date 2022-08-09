@@ -29,8 +29,8 @@ export const NavigationProvider = (props: PropType) => {
   }, [setIsOpen])
 
   const closeNavigation = useCallback(() => {
-    if (isOpen) setIsOpen(false)
-  }, [setIsOpen, isOpen])
+    setIsOpen(false)
+  }, [setIsOpen])
 
   const value = useMemo(
     () => ({

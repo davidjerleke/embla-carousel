@@ -4,6 +4,9 @@ export const ALGOLIA_SEARCH_CONFIG = {
   INDEX_NAME: 'embla-carousel',
 }
 
-export const ALGOLIA_SELECTORS = {
+export const ALGOLIA_CLASSNAMES = {
   LVL_0: 'algolia-docsearch-lvl-0',
+  SEARCH_ACTIVE: 'DocSearch--active',
+  SEARCH_INPUT: 'DocSearch-Input',
+  SEARCH_TOGGLE_BUTTON: 'DocSearch-Button',
 }

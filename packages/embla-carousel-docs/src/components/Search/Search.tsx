@@ -1,24 +1,26 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { createGlobalStyle, css } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 import { plainButtonStyles } from 'components/Button/PlainButton'
 import { contentLinkStyles } from 'components/Link/ContentLink'
-import {
-  OUTLINE_SIZE,
-  tabAccessStyles,
-} from 'components/TabAccess/tabAccessStyles'
 import { useTabAccess } from 'hooks/useTabAccess'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
-import { ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
+import { ALGOLIA_CLASSNAMES, ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 import { THEME_KEYS, THEME_PREFIX, COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
+import { useNavigation } from 'hooks/useNavigation'
+import { isBrowser } from 'utils/isBrowser'
+import {
+  OUTLINE_SIZE,
+  tabAccessStyles,
+} from 'components/TabAccess/tabAccessStyles'
 
 const DIALOG_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'
@@ -568,14 +570,7 @@ const cancelButtonStyles = css`
     height: ${INPUT_HEIGHT};
     display: flex;
     align-items: center;
-
-    ${MEDIA.DESKTOP} {
-      margin-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
-    }
-
-    ${MEDIA.COMPACT} {
-      padding-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
-    }
+    margin-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
   }
 `
 
@@ -615,6 +610,49 @@ const SearchStyles = createGlobalStyle<{ $isTabbing: boolean }>`
 
 export const Search = () => {
   const isTabbing = useTabAccess()
+  const { closeNavigation } = useNavigation()
+  const toggleElement = useRef<HTMLButtonElement | null>(null)
+
+  useEffect(() => {
+    if (!isBrowser || toggleElement.current) return
+
+    toggleElement.current = document.querySelector(
+      `.${ALGOLIA_CLASSNAMES.SEARCH_TOGGLE_BUTTON}`,
+    )
+
+    if (toggleElement.current) {
+      toggleElement.current.addEventListener('click', closeNavigation)
+    }
+
+    return () => {
+      if (toggleElement.current) {
+        toggleElement.current.removeEventListener('click', closeNavigation)
+      }
+    }
+  }, [closeNavigation])
+
+  useEffect(() => {
+    if (!isBrowser) return
+    const { body } = document
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type !== 'attributes') return
+        if (!body.classList.contains(ALGOLIA_CLASSNAMES.SEARCH_ACTIVE)) return
+
+        const input = body.querySelector(`.${ALGOLIA_CLASSNAMES.SEARCH_INPUT}`)
+        if (input) setTimeout(() => (input as HTMLInputElement).focus(), 0)
+      })
+    })
+
+    observer.observe(body, {
+      attributes: true,
+      childList: false,
+      subtree: false,
+    })
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>

@@ -5,7 +5,7 @@ import { RouteType } from 'components/Routes/Context'
 import { PlainButton } from 'components/Button/PlainButton'
 import { NavigationLink } from 'components/Link/NavigationLink'
 import { useRouteActive } from 'hooks/useRouteActive'
-import { ALGOLIA_SELECTORS } from 'consts/algoliaSearch'
+import { ALGOLIA_CLASSNAMES } from 'consts/algoliaSearch'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { Icon } from 'components/Icon/Icon'
@@ -101,7 +101,7 @@ export const SubMenu = (props: PropType) => {
   const [isOpen, setIsOpen] = useState(isPartiallyActive)
   const id = `${title.toLowerCase().split(' ').join('-')}-navigation-menu`
   const toggleAction = isOpen ? 'Hide' : 'Show'
-  const activeClass = isPartiallyActive ? ALGOLIA_SELECTORS.LVL_0 : undefined
+  const activeClass = isPartiallyActive ? ALGOLIA_CLASSNAMES.LVL_0 : undefined
 
   const toggleOpen = useCallback(
     (event: React.MouseEvent) => {

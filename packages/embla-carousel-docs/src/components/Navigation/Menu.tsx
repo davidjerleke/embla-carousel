@@ -39,7 +39,7 @@ const ScrollArea = styled.ul`
   max-height: 100%;
 
   ${MEDIA.COMPACT} {
-    padding-bottom: ${SPACINGS.FOURTEEN};
+    padding-bottom: ${SPACINGS.TWELVE};
     padding-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
     max-width: ${MAX_WIDTH_COMPACT};
     margin-left: auto;
