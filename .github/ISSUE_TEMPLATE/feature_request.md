@@ -6,17 +6,12 @@ labels: feature request
 assignees: ''
 ---
 
-## 🚨 IMPORTANT! Read this before you submit a feature request
-As of may 2021, I will only create new features as I see fit, without considering any public opinions. I’ll only consider working on **funded feature requests**. But please be sure to [discuss](https://github.com/davidcetinkaya/embla-carousel/discussions/new) your request first - We need to make sure that your feature request is aligned with the Embla Carousel vision.
-
-Note that this doesn't mean that this library is deprecated. **It's still actively maintained**.
-
----
-
 ### Feature request is related to
 
 - [ ] embla-carousel (core package)
 - [ ] embla-carousel-react
+- [ ] embla-carousel-vue
+- [ ] embla-carousel-svelte
 - [ ] embla-carousel-autoplay
 - [ ] embla-carousel-auto-height
 - [ ] embla-carousel-class-names
