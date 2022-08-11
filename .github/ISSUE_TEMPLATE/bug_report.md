@@ -10,6 +10,8 @@ assignees: ''
 
 - [ ] embla-carousel (core package)
 - [ ] embla-carousel-react
+- [ ] embla-carousel-vue
+- [ ] embla-carousel-svelte
 - [ ] embla-carousel-autoplay
 - [ ] embla-carousel-auto-height
 - [ ] embla-carousel-class-names
