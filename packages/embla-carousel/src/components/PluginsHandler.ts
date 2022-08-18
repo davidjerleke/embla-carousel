@@ -15,7 +15,7 @@ export type PluginsHandlerType = {
 
 export function PluginsHandler(): PluginsHandlerType {
   const { atMedia, areEqual } = OptionsHandler()
-  let activePlugins: EmblaPluginType[]
+  let activePlugins: EmblaPluginType[] = []
   let pluginsChanged: PluginChangedHandlerType[] = []
 
   function haveChanged(): boolean {
