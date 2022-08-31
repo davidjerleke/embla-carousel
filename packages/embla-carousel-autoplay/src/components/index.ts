@@ -10,7 +10,7 @@ declare module 'embla-carousel/components/Plugins' {
 
 export type AutoplayType = CreatePluginType<
   {
-    play: () => void
+    play: (jump?: boolean) => void
     stop: () => void
     reset: () => void
   },
@@ -25,13 +25,14 @@ function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
   )
   let options: AutoplayType['options']
   let carousel: EmblaCarouselType
-
   let interaction: () => void
   let timer = 0
+  let jump = false
 
   function init(embla: EmblaCarouselType): void {
     carousel = embla
     options = optionsHandler.atMedia(self.options)
+    jump = options.jump
     interaction = options.stopOnInteraction ? destroy : stop
     const { eventStore } = carousel.internalEngine()
     const emblaRoot = carousel.rootNode()
@@ -63,8 +64,9 @@ function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
     timer = 0
   }
 
-  function play(): void {
+  function play(jumpOverride?: boolean): void {
     stop()
+    if (typeof jumpOverride !== 'undefined') jump = jumpOverride
     timer = window.setTimeout(next, options.delay)
   }
 
@@ -86,9 +88,9 @@ function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
     if (kill) return destroy()
 
     if (carousel.canScrollNext()) {
-      carousel.scrollNext()
+      carousel.scrollNext(jump)
     } else {
-      carousel.scrollTo(0)
+      carousel.scrollTo(0, jump)
     }
     play()
   }
