@@ -58,6 +58,13 @@ Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
 Delay between transitions in milliseconds.
 
+### jump
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`false`</BrandSecondaryText>
+
+When set to true `true`, autoplay will do instant slide transitions when advancing.
+
 ### playOnInit
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
@@ -88,23 +95,18 @@ If this parameter is enabled, autoplay will be stopped when it reaches last slid
 
 ## Methods
 
-The Autoplay plugin exposes a set of **useful methods** which lets you control it. Assuming you've stored the plugin instance in a variable, a method is called like demonstrated below:
+The Autoplay plugin exposes a set of **useful methods** which lets you control it. Assuming you've passed the plugin to the Embla Carousel constructor, a method is called like demonstrated below:
 
 ```js
-import Autoplay from 'embla-carousel-autoplay'
-
-const options = { delay: 4000 }
-const autoplay = Autoplay(options)
-
-autoplay.stop() // Method
+embla.plugins().autoplay.stop() // Method
 ```
 
 ### play
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Start autoplay.
+Start autoplay. Set the **jump** parameter to `true` when you want autoplay to do instant slide transitions when advancing. Please note that providing a value to this method vill override the [jump](/plugins/autoplay/#jump) option.
 
 ### stop
 
