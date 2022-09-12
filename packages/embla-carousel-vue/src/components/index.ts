@@ -6,10 +6,10 @@ import EmblaCarousel, {
   EmblaPluginType,
 } from 'embla-carousel'
 
-export type EmblaCarouselVueType = (
-  | Ref<HTMLElement | undefined>
-  | Ref<EmblaCarouselType | undefined>
-)[]
+export type EmblaCarouselVueType = [
+  Ref<HTMLElement | undefined>,
+  Ref<EmblaCarouselType | undefined>,
+]
 
 function emblaCarouselVue(
   options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
