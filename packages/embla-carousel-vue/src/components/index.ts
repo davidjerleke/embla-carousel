@@ -8,7 +8,7 @@ import EmblaCarousel, {
 
 export type EmblaCarouselVueType = [
   Ref<HTMLElement | undefined>,
-  Ref<EmblaCarouselType | undefined>
+  Ref<EmblaCarouselType | undefined>,
 ]
 
 function emblaCarouselVue(
