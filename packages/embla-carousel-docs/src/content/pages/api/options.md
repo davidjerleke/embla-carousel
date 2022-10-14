@@ -75,7 +75,7 @@ Enables infinite looping. Automatically falls back to false if slide content isn
 ### speed
 
 Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`10`</BrandSecondaryText><br />
+Default: <BrandSecondaryText>`10`</BrandSecondaryText>
 
 Adjust scroll speed when triggered by any of the API methods. Higher numbers enables faster scrolling. Drag interactions are not affected because speed is then determined by the drag force. Only values between `1`-`20` are recommended.
 
