@@ -103,8 +103,9 @@
     <a href="https://github.com/pipisasa"><img src="https://avatars.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/silllli"><img src="https://avatars.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/JoshuaCrewe"><img src="https://avatars.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="60" height="60" style="max-width:100%;"></a>
-    <a href="https://github.com/th-km"><img src="https://avatars.githubusercontent.com/u/35410212?s=120&v=4" title="th-km"" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/th-km"><img src="https://avatars.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/rojadesign"><img src="https://avatars.githubusercontent.com/u/35687281?s=120&v=4" title="th-km"" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/SaizFerri"><img src="https://avatars.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="60" height="60" style="max-width:100%;"></a>
   </p>
 </div>
 

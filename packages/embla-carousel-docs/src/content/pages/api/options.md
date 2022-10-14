@@ -76,10 +76,10 @@ Enables infinite looping. Automatically falls back to false if slide content isn
 
 Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`10`</BrandSecondaryText><br />
-Recommended: <BrandSecondaryText>`1-20`</BrandSecondaryText>
 
-Adjust scroll speed when triggered by any of the API methods. Higher numbers enables faster scrolling. Drag interactions are not affected because speed is then determined by the drag force.<br />
-<b>Note: </b>The speed option is actually controlling the magnitude of the attraction force to the target (where the carousel is headed). Embla doesn't use simple transitions to scroll. Instead, it uses a simple physics simulation when scrolling.
+Adjust scroll speed when triggered by any of the API methods. Higher numbers enables faster scrolling. Drag interactions are not affected because speed is then determined by the drag force. Only values between `1`-`20` are recommended.
+
+**Note:** The speed option is actually controlling the magnitude of the attraction force to the target (where the carousel is headed). This is because Embla uses a simple physics simulation when scrolling instead of transitions.
 
 ### startIndex
 
