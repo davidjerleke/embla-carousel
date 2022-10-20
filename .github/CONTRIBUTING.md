@@ -10,7 +10,7 @@ Thank you for considering contributing to Embla Carousel, contributions are welc
 
 All bug reports require a reduced test case. Providing a test case is the best way to get any issue addressed. It helps us all to understand the problem. Without this, your issue **may be closed**. Please follow this checklist:
 
-- **`Test case:`** Create one by forking one of the CodeSandboxes on the [examples page](https://davidcetinkaya.github.io/embla-carousel/examples). If applicable, choose the most relevant one.
+- **`Test case:`** Create one by forking one of the CodeSandboxes on the [examples page](https://www.embla-carousel.com/examples/). If applicable, choose the most relevant one.
 - **`Demonstrate:`** Make sure the test case clearly demonstrates the issue.
 - **`Do not:`** Provide a link to a production site. That's not a test case.
 - **`Create a Pull Request:`** If you want to solve the bug yourself, please make sure the branch name follows this pattern `bug/branchname-goes-here`.
