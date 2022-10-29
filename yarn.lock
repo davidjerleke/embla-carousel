@@ -18118,8 +18118,8 @@ resolve@^2.0.0-next.3:
   linkType: hard
 
 "terser@npm:^5.0.0, terser@npm:^5.2.0, terser@npm:^5.7.2":
-  version: 5.14.1
-  resolution: "terser@npm:5.14.1"
+  version: 5.15.1
+  resolution: "terser@npm:5.15.1"
   dependencies:
     "@jridgewell/source-map": ^0.3.2
     acorn: ^8.5.0
@@ -18127,7 +18127,7 @@ resolve@^2.0.0-next.3:
     source-map-support: ~0.5.20
   bin:
     terser: bin/terser
-  checksum: 7b0e51f3d193a11cad82f07e3b0c1d62122eec786f809bdf2a54b865aaa1450872c3a7b6c33b5a40e264834060ffc1d4e197f971a76da5b0137997d756eb7548
+  checksum: 9880a1e0956983a1ce5de204ea35121c0009fa41d582a6904ae850e1953a1a2cc021168439565280c5a8eee67c85a874175627e24989b046c7a72589b81c3979
   languageName: node
   linkType: hard
 
