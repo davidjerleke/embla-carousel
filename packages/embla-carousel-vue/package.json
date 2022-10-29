@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-vue",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -25,10 +25,9 @@
     "vue",
     "svelte"
   ],
+  "main": "embla-carousel-vue.umd.js",
   "unpkg": "embla-carousel-vue.umd.js",
-  "main": "embla-carousel-vue.cjs.js",
   "module": "embla-carousel-vue.esm.js",
-  "browser": "embla-carousel-vue.umd.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [
@@ -58,7 +57,7 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "embla-carousel": "7.0.3"
+    "embla-carousel": "7.0.4"
   },
   "peerDependencies": {
     "vue": "^3.2.37"
