@@ -8,6 +8,15 @@ date: 2021-02-21
 import { CarouselLinks } from 'components/Embla/CarouselLinks'
 import { CarouselBasic } from 'components/Embla/CarouselBasic'
 
+import { ExampleCarouselDefault } from 'components/Examples/Basic/Default'
+import { ExampleCarouselLoop } from 'components/Examples/Basic/Loop'
+import { ExampleCarouselRightToLeft } from 'components/Examples/Basic/RightToLeft'
+import { ExampleCarouselSlidesToScroll } from 'components/Examples/Basic/SlidesToScroll'
+import { ExampleCarouselDragFree } from 'components/Examples/Basic/DragFree'
+import { ExampleCarouselAlign } from 'components/Examples/Basic/Align'
+import { ExampleCarouselVariableWidths } from 'components/Examples/Basic/VariableWidths'
+import { ExampleCarouselYAxis } from 'components/Examples/Basic/YAxis'
+
 # Basic Examples
 
 Basic carousel setups that require minimal effort to get started with.
@@ -26,7 +35,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic id="basic" slideSizes={[100, 100, 100, 100, 100]} />
+<ExampleCarouselDefault />
 
 ### Loop
 
@@ -42,11 +51,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="loop"
-  options={{ loop: true }}
-  slideSizes={[100, 100, 100, 100, 100]}
-/>
+<ExampleCarouselLoop />
 
 ### Right To Left
 
@@ -62,11 +67,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="right-to-left"
-  options={{ direction: 'rtl' }}
-  slideSizes={[100, 100, 100, 100, 100]}
-/>
+<ExampleCarouselRightToLeft />
 
 ### Slides To Scroll
 
@@ -82,11 +83,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="slides-to-scroll"
-  options={{ slidesToScroll: 2, containScroll: 'trimSnaps' }}
-  slideSizes={[50, 50, 50, 50, 50, 50]}
-/>
+<ExampleCarouselSlidesToScroll />
 
 ### Drag Free
 
@@ -102,11 +99,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="drag-free"
-  options={{ dragFree: true, containScroll: 'trimSnaps' }}
-  slideSizes={[50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]}
-/>
+<ExampleCarouselDragFree />
 
 ### Align
 
@@ -122,7 +115,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic id="align" slideSizes={[80, 80, 80, 80, 80]} />
+<ExampleCarouselAlign />
 
 ### Variable Widths
 
@@ -138,11 +131,7 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="variable-widths"
-  slideSizes={[60, 40, 30, 90, 35, 55, 85, 46, 30]}
-  options={{ containScroll: 'keepSnaps', dragFree: true }}
-/>
+<ExampleCarouselVariableWidths />
 
 ### Y-axis
 
@@ -158,8 +147,4 @@ Basic carousel setups that require minimal effort to get started with.
     },
   ]}
 />
-<CarouselBasic
-  id="y-axis"
-  slideSizes={[100, 100, 100, 100, 100]}
-  options={{ axis: 'y' }}
-/>
+<ExampleCarouselYAxis />
