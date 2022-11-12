@@ -1,131 +1,120 @@
-import DefaultSandboxCarousel from '../SandboxFiles/DefaultSandboxCarousel'
+import CarouselDefault from '../SandboxFiles/CarouselDefault'
 
 import {
-  Wrapper as ExampleCarouselDefaultWrapper,
-  ID as exampleCarouselDefaultID,
-  OPTIONS as exampleCarouselDefaultOptions,
-  SLIDES as exampleCarouselDefaultSlides,
+  Wrapper as CarouselDefaultWrapper,
+  ID as carouselDefaultID,
+  OPTIONS as carouselDefaultOptions,
+  SLIDES as carouselDefaultSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/Default'
 import {
-  Wrapper as ExampleCarouselLoopWrapper,
-  ID as exampleCarouselLoopID,
-  OPTIONS as exampleCarouselLoopOptions,
-  SLIDES as exampleCarouselLoopSlides,
+  Wrapper as CarouselLoopWrapper,
+  ID as carouselLoopID,
+  OPTIONS as carouselLoopOptions,
+  SLIDES as carouselLoopSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/Loop'
 import {
-  Wrapper as ExampleCarouselRightToLeftWrapper,
-  ID as exampleCarouselRightToLeftID,
-  OPTIONS as exampleCarouselRightToLeftOptions,
-  SLIDES as exampleCarouselRightToLeftSlides,
+  Wrapper as CarouselRightToLeftWrapper,
+  ID as carouselRightToLeftID,
+  OPTIONS as carouselRightToLeftOptions,
+  SLIDES as carouselRightToLeftSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/RightToLeft'
 import {
-  Wrapper as ExampleCarouselSlidesToScrollWrapper,
-  ID as exampleCarouselSlidesToScrollID,
-  OPTIONS as exampleCarouselSlidesToScrollOptions,
-  SLIDES as exampleCarouselSlidesToScrollSlides,
+  Wrapper as CarouselSlidesToScrollWrapper,
+  ID as carouselSlidesToScrollID,
+  OPTIONS as carouselSlidesToScrollOptions,
+  SLIDES as carouselSlidesToScrollSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/SlidesToScroll'
 import {
-  Wrapper as ExampleCarouselDragFreeWrapper,
-  ID as exampleCarouselDragFreeID,
-  OPTIONS as exampleCarouselDragFreeOptions,
-  SLIDES as exampleCarouselDragFreeSlides,
+  Wrapper as CarouselDragFreeWrapper,
+  ID as carouselDragFreeID,
+  OPTIONS as carouselDragFreeOptions,
+  SLIDES as carouselDragFreeSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/DragFree'
 import {
-  Wrapper as ExampleCarouselAlignWrapper,
-  ID as exampleCarouselAlignID,
-  OPTIONS as exampleCarouselAlignOptions,
-  SLIDES as exampleCarouselAlignSlides,
+  Wrapper as CarouselAlignWrapper,
+  ID as carouselAlignID,
+  OPTIONS as carouselAlignOptions,
+  SLIDES as carouselAlignSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/Align'
 import {
-  Wrapper as ExampleCarouselVariableWidthsWrapper,
-  ID as exampleCarouselVariableWidthsID,
-  OPTIONS as exampleCarouselVariableWidthsOptions,
-  SLIDES as exampleCarouselVariableWidthsSlides,
+  Wrapper as CarouselVariableWidthsWrapper,
+  ID as carouselVariableWidthsID,
+  OPTIONS as carouselVariableWidthsOptions,
+  SLIDES as carouselVariableWidthsSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/VariableWidths'
 import {
-  Wrapper as ExampleCarouselYAxisWrapper,
-  ID as exampleCarouselYAxisID,
-  OPTIONS as exampleCarouselYAxisOptions,
-  SLIDES as exampleCarouselYAxisSlides,
+  Wrapper as CarouselYAxisWrapper,
+  ID as carouselYAxisID,
+  OPTIONS as carouselYAxisOptions,
+  SLIDES as carouselYAxisSlides,
 } from '../../../../packages/embla-carousel-docs/src/components/Examples/Basic/YAxis'
 
-const ExamplesBasic = () => {
+export const SandboxesBasic = () => {
   return (
     <>
-      <h1 className="examples__h1">Basic</h1>
-
       <h2 className="examples__h2">Default</h2>
-      <ExampleCarouselDefaultWrapper id={exampleCarouselDefaultID}>
-        <DefaultSandboxCarousel
-          slides={exampleCarouselDefaultSlides}
-          options={exampleCarouselDefaultOptions}
+      <CarouselDefaultWrapper className={carouselDefaultID}>
+        <CarouselDefault
+          slides={carouselDefaultSlides}
+          options={carouselDefaultOptions}
         />
-      </ExampleCarouselDefaultWrapper>
+      </CarouselDefaultWrapper>
 
       <h2 className="examples__h2">Loop</h2>
-      <ExampleCarouselLoopWrapper id={exampleCarouselLoopID}>
-        <DefaultSandboxCarousel
-          slides={exampleCarouselLoopSlides}
-          options={exampleCarouselLoopOptions}
+      <CarouselLoopWrapper className={carouselLoopID}>
+        <CarouselDefault
+          slides={carouselLoopSlides}
+          options={carouselLoopOptions}
         />
-      </ExampleCarouselLoopWrapper>
+      </CarouselLoopWrapper>
 
       <h2 className="examples__h2">Right to left</h2>
-      <ExampleCarouselRightToLeftWrapper
-        id={exampleCarouselRightToLeftID}
-        dir="rtl"
-      >
-        <DefaultSandboxCarousel
-          slides={exampleCarouselRightToLeftSlides}
-          options={exampleCarouselRightToLeftOptions}
+      <CarouselRightToLeftWrapper className={carouselRightToLeftID} dir="rtl">
+        <CarouselDefault
+          slides={carouselRightToLeftSlides}
+          options={carouselRightToLeftOptions}
         />
-      </ExampleCarouselRightToLeftWrapper>
+      </CarouselRightToLeftWrapper>
 
       <h2 className="examples__h2">Slides To Scroll</h2>
-      <ExampleCarouselSlidesToScrollWrapper
-        id={exampleCarouselSlidesToScrollID}
-      >
-        <DefaultSandboxCarousel
-          slides={exampleCarouselSlidesToScrollSlides}
-          options={exampleCarouselSlidesToScrollOptions}
+      <CarouselSlidesToScrollWrapper className={carouselSlidesToScrollID}>
+        <CarouselDefault
+          slides={carouselSlidesToScrollSlides}
+          options={carouselSlidesToScrollOptions}
         />
-      </ExampleCarouselSlidesToScrollWrapper>
+      </CarouselSlidesToScrollWrapper>
 
       <h2 className="examples__h2">Drag Free</h2>
-      <ExampleCarouselDragFreeWrapper id={exampleCarouselDragFreeID}>
-        <DefaultSandboxCarousel
-          slides={exampleCarouselDragFreeSlides}
-          options={exampleCarouselDragFreeOptions}
+      <CarouselDragFreeWrapper className={carouselDragFreeID}>
+        <CarouselDefault
+          slides={carouselDragFreeSlides}
+          options={carouselDragFreeOptions}
         />
-      </ExampleCarouselDragFreeWrapper>
+      </CarouselDragFreeWrapper>
 
       <h2 className="examples__h2">Align</h2>
-      <ExampleCarouselAlignWrapper id={exampleCarouselAlignID}>
-        <DefaultSandboxCarousel
-          slides={exampleCarouselAlignSlides}
-          options={exampleCarouselAlignOptions}
+      <CarouselAlignWrapper className={carouselAlignID}>
+        <CarouselDefault
+          slides={carouselAlignSlides}
+          options={carouselAlignOptions}
         />
-      </ExampleCarouselAlignWrapper>
+      </CarouselAlignWrapper>
 
       <h2 className="examples__h2">Variable Widths</h2>
-      <ExampleCarouselVariableWidthsWrapper
-        id={exampleCarouselVariableWidthsID}
-      >
-        <DefaultSandboxCarousel
-          slides={exampleCarouselVariableWidthsSlides}
-          options={exampleCarouselVariableWidthsOptions}
+      <CarouselVariableWidthsWrapper className={carouselVariableWidthsID}>
+        <CarouselDefault
+          slides={carouselVariableWidthsSlides}
+          options={carouselVariableWidthsOptions}
         />
-      </ExampleCarouselVariableWidthsWrapper>
+      </CarouselVariableWidthsWrapper>
 
       <h2 className="examples__h2">Y-axis</h2>
-      <ExampleCarouselYAxisWrapper id={exampleCarouselYAxisID}>
-        <DefaultSandboxCarousel
-          slides={exampleCarouselYAxisSlides}
-          options={exampleCarouselYAxisOptions}
+      <CarouselYAxisWrapper className={carouselYAxisID}>
+        <CarouselDefault
+          slides={carouselYAxisSlides}
+          options={carouselYAxisOptions}
         />
-      </ExampleCarouselYAxisWrapper>
+      </CarouselYAxisWrapper>
     </>
   )
 }
-
-export default ExamplesBasic

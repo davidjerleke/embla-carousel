@@ -6,13 +6,17 @@ date: 2021-02-21
 ---
 
 import { CarouselLinks } from 'components/Embla/CarouselLinks'
-import { CarouselProgress } from 'components/Embla/CarouselProgress'
-import { CarouselParallax } from 'components/Embla/CarouselParallax'
+
 import { CarouselAutoplay } from 'components/Embla/CarouselAutoplay'
 import { CarouselScale } from 'components/Embla/CarouselScale'
 import { CarouselLazyload } from 'components/Embla/CarouselLazyload'
 import { CarouselInfiniteScroll } from 'components/Embla/CarouselInfiniteScroll'
 import { CarouselWheel } from 'components/Embla/CarouselWheel'
+
+import { ExampleCarouselProgress } from 'components/Examples/Inspiration/Progress'
+import { ExampleCarouselParallax } from 'components/Examples/Inspiration/Parallax'
+import { ExampleCarouselScale } from 'components/Examples/Inspiration/Scale'
+import { ExampleCarouselOpacity } from 'components/Examples/Inspiration/Opacity'
 
 # Inspiration Examples
 
@@ -32,11 +36,7 @@ Extend Embla Carousel easily with its extensible [API](/api/) and [plugins](/plu
     },
   ]}
 />
-<CarouselProgress
-  id="progress"
-  options={{ dragFree: true }}
-  slideSizes={[100, 100, 100, 100, 100]}
-/>
+<ExampleCarouselProgress />
 
 ### Parallax
 
@@ -52,11 +52,7 @@ Extend Embla Carousel easily with its extensible [API](/api/) and [plugins](/plu
     },
   ]}
 />
-<CarouselParallax
-  id="parallax"
-  options={{ inViewThreshold: 0, dragFree: true }}
-  slideSizes={[80, 80, 80, 80, 80]}
-/>
+<ExampleCarouselParallax />
 
 ### Autoplay
 

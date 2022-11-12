@@ -3971,6 +3971,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@remix-run/router@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@remix-run/router@npm:1.0.3"
+  checksum: 7e535f3c24bf6b0a48aff3de70ee74e5402fe93105aa9bd01f275d5d8f5a9a8a7cadec08d18cf5544d4f24bc9d7a091abc1c9d4ea8efb2893e9077f104a51459
+  languageName: node
+  linkType: hard
+
 "@rollup/plugin-babel@npm:^5.3.0":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
@@ -8388,9 +8395,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-<<<<<<< HEAD
-"embla-carousel-react@7.0.5, embla-carousel-react@workspace:packages/embla-carousel-react":
-=======
 "embla-carousel-react-sandboxes@workspace:sandboxes/embla-carousel-react-sandboxes":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react-sandboxes@workspace:sandboxes/embla-carousel-react-sandboxes"
@@ -8400,13 +8404,13 @@ __metadata:
     "@vitejs/plugin-react": ^2.2.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-router-dom: ^6.4.3
     typescript: ^4.6.4
     vite: ^3.2.0
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react@7.0.4, embla-carousel-react@workspace:packages/embla-carousel-react":
->>>>>>> 861742c (Scaffold React sandboxes and playground)
+"embla-carousel-react@7.0.5, embla-carousel-react@workspace:packages/embla-carousel-react":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react@workspace:packages/embla-carousel-react"
   dependencies:
@@ -16660,6 +16664,30 @@ __metadata:
   version: 0.9.0
   resolution: "react-refresh@npm:0.9.0"
   checksum: 6440146176f19402ffb7d66f317e40b1c42c88579b4d439b49021e38be6307c642da3e8732a72e6997b6bb1127db0da92f4aa433da4313ce8ebad0c1efa2ed4a
+  languageName: node
+  linkType: hard
+
+"react-router-dom@npm:^6.4.3":
+  version: 6.4.3
+  resolution: "react-router-dom@npm:6.4.3"
+  dependencies:
+    "@remix-run/router": 1.0.3
+    react-router: 6.4.3
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  checksum: 67a44d8dc45761a1c88793cac73839bb657168ef61b9473eb39b186b4a3ea1472454fd96f8997dc541cb1e79a723d62f9503cbc9179b63b8f1d634ed6d2b079a
+  languageName: node
+  linkType: hard
+
+"react-router@npm:6.4.3":
+  version: 6.4.3
+  resolution: "react-router@npm:6.4.3"
+  dependencies:
+    "@remix-run/router": 1.0.3
+  peerDependencies:
+    react: ">=16.8"
+  checksum: b89c0495c6837b1457915c08c5acc4eb7a2e9e3fae0420faf9bfc6311ecdfe78627cc1034c0e975bccd9aeeb70d1dcc5021322779dd3053d94c47e37339d77eb
   languageName: node
   linkType: hard
 

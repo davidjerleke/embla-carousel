@@ -1,14 +1,17 @@
 .examples {
   padding-top: 8rem;
   padding-bottom: 8rem;
-  max-width: 67rem;
+  width: 67rem;
+  max-width: 100%;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
   margin-left: auto;
   margin-right: auto;
 }
 
 .examples__h1 {
   margin-bottom: 4rem;
-  font-size: 4rem;
+  font-size: 3.6rem;
   font-weight: 900;
 }
 
@@ -17,4 +20,19 @@
   margin-bottom: 2rem;
   font-size: 2.6rem;
   font-weight: bold;
+}
+
+.examples__checkboxes {
+  margin-left: -2rem;
+  margin-bottom: 2rem;
+}
+
+.examples__checkbox {
+  cursor: pointer;
+  padding: 1rem 0;
+  margin-left: 2rem;
+}
+
+.examples__checkbox__label {
+  margin-left: 0.5rem;
 }

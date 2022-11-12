@@ -6,8 +6,9 @@ date: 2021-02-21
 ---
 
 import { CarouselLinks } from 'components/Embla/CarouselLinks'
-import { CarouselBasic } from 'components/Embla/CarouselBasic'
-import { CarouselThumb } from 'components/Embla/CarouselThumb'
+
+import { ExampleCarouselArrowsDots } from 'components/Examples/Navigation/ArrowsDots'
+import { ExampleCarouselThumbs } from 'components/Examples/Navigation/Thumbs'
 
 # Navigation Examples
 
@@ -27,12 +28,7 @@ Add navigation to your carousels by utilizing the Embla Carousel [API](/api/).
     },
   ]}
 />
-<CarouselBasic
-  id="arrows-and-dots"
-  showDotButtons={true}
-  showArrowButtons={true}
-  slideSizes={[100, 100, 100, 100, 100]}
-/>
+<ExampleCarouselArrowsDots />
 
 ### Thumbnails
 
@@ -48,7 +44,4 @@ Add navigation to your carousels by utilizing the Embla Carousel [API](/api/).
     },
   ]}
 />
-<CarouselThumb
-  id="thumbnails"
-  slideSizes={[100, 100, 100, 100, 100, 100, 100, 100, 100, 100]}
-/>
+<ExampleCarouselThumbs />
