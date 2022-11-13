@@ -350,6 +350,16 @@ const LAZY_LOAD_STYLES = css`
   }
 `
 
+const CLASS_NAMES_STYLES = css`
+  .embla__class-names {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .embla__class-names:not(.is-selected) {
+    opacity: 0.16;
+  }
+`
+
 const INFINITE_SCROLL_STYLES = css`
   .embla__slide__loading {
     position: relative;
@@ -602,6 +612,19 @@ export const createCarouselScaleStyles = (
   axis: EmblaOptionsType['axis'] = 'x',
 ): string => {
   return createCarouselDefaultStyles(slideSize, spacingSize, axis, SCALE_STYLES)
+}
+
+export const createCarouselClassNamesStyles = (
+  slideSize: string = '100%',
+  spacingSize: string = '1rem',
+  axis: EmblaOptionsType['axis'] = 'x',
+): string => {
+  return createCarouselDefaultStyles(
+    slideSize,
+    spacingSize,
+    axis,
+    CLASS_NAMES_STYLES,
+  )
 }
 
 export const createCarouselLazyLoadStyles = (

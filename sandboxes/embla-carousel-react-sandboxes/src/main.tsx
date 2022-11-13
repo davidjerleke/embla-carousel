@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Sandboxes } from './Sandboxes'
+import { App } from './App'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Sandboxes />
+    <App />
   </React.StrictMode>,
 )

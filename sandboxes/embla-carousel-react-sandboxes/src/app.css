@@ -18,21 +18,13 @@
 .examples__h2 {
   margin-top: 4rem;
   margin-bottom: 2rem;
-  font-size: 2.6rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
-.examples__checkboxes {
-  margin-left: -2rem;
+.examples__h3 {
+  margin-top: 4rem;
   margin-bottom: 2rem;
-}
-
-.examples__checkbox {
-  cursor: pointer;
-  padding: 1rem 0;
-  margin-left: 2rem;
-}
-
-.examples__checkbox__label {
-  margin-left: 0.5rem;
+  font-size: 2.1rem;
+  font-weight: bold;
 }

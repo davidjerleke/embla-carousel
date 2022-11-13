@@ -2,12 +2,12 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselLazyLoad from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselLazyLoad'
+import CarouselAutoplay from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselAutoplay'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselLazyLoadStyles } from 'components/Examples/createCarouselStyles'
+import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-lazy-load'
+export const ID = 'example-carousel-autoplay'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = {}
 
@@ -15,16 +15,16 @@ export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselLazyLoadStyles()};
+    ${createCarouselDefaultStyles()};
   }
 `
 
-export const ExampleCarouselLazyLoad = () => {
+export const ExampleCarouselAutoplay = () => {
   const [inViewRef, inView] = useInView()
 
   return (
     <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselLazyLoad slides={SLIDES} options={OPTIONS} /> : null}
+      {inView ? <CarouselAutoplay slides={SLIDES} options={OPTIONS} /> : null}
     </Wrapper>
   )
 }
