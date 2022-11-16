@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { themeStyles } from '../../../packages/embla-carousel-docs/src/consts/themes'
 import { resetStyles } from '../../../packages/embla-carousel-docs/src/components/Layout/GlobalStyles/reset'
 import { baseStyles } from '../../../packages/embla-carousel-docs/src/components/Layout/GlobalStyles/base'
@@ -18,7 +18,7 @@ const injectBaseStyles = (): void => {
   document.head.appendChild(styleElement)
 }
 
-export const App = () => {
+export const App: React.FC = () => {
   useEffect(() => injectBaseStyles(), [])
 
   return (

@@ -1,3 +1,4 @@
+import React from 'react'
 import CarouselDefault from './SandboxFiles/CarouselDefault'
 import CarouselArrowsDots from './SandboxFiles/CarouselArrowsDots'
 import CarouselThumbs from './SandboxFiles/CarouselThumbs'
@@ -133,7 +134,7 @@ import {
   ID as carouselIosPickerID,
 } from '../../../packages/embla-carousel-docs/src/components/Examples/Miscellaneous/IosPicker'
 
-export const Sandboxes = () => {
+export const Sandboxes: React.FC = () => {
   return (
     <>
       <h2 className="examples__h2">Basic</h2>

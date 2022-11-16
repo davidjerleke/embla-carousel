@@ -13,9 +13,11 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "removeComments": false,
+    "noEmit": false,
+    "jsx": "preserve",
+    "emitDeclarationOnly": false
   },
-  "include": ["src"],
+  "include": ["src/SandboxFilesDist", "declarations.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel-react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselDefault from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselDefault'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
