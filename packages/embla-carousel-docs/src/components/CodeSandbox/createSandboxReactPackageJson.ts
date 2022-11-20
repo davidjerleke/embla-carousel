@@ -1,11 +1,12 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
+import { PackageJsonType } from './types'
 
-export const createPackageJson = () => ({
+const sandboxReactPackageJsonTemplate: PackageJsonType = {
   name: 'react',
   version: '1.0.0',
-  description: 'React example starter project',
+  description: 'Embla Carousel React example',
   keywords: ['react', 'starter'],
-  main: 'src/index.js',
+  main: 'src/js/index.js',
   dependencies: {
     react: docsPackageJson.dependencies.react,
     'react-dom': docsPackageJson.dependencies['react-dom'],
@@ -24,4 +25,10 @@ export const createPackageJson = () => ({
     eject: 'react-scripts eject',
   },
   browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
-})
+}
+
+export const createSandboxReactPackageJson = (
+  customConfig: Record<string, unknown>,
+): PackageJsonType => {
+  return Object.assign({}, sandboxReactPackageJsonTemplate, customConfig)
+}

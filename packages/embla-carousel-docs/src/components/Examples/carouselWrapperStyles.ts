@@ -9,7 +9,7 @@ export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 export const CAROUSEL_SPACING = '1.6rem'
 export const CAROUSEL_RADIUS = '0.4rem'
 
-const baseWrapperStyles = css`
+export const baseWrapperStyles = css`
   padding: ${CAROUSEL_SPACING};
   background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;

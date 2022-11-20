@@ -5,11 +5,12 @@ import Header from './Header';
 import Footer from './Footer';
 
 const SLIDE_COUNT = 5;
-const slides = Array.from(Array(SLIDE_COUNT).keys());
+const OPTIONS = {};
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
-const App = () => (<main>
+const App = () => (<main className="sandbox">
     <Header />
-    <EmblaCarousel slides={slides}/>
+    <EmblaCarousel slides={SLIDES} options={OPTIONS}/>
     <Footer />
   </main>);
 

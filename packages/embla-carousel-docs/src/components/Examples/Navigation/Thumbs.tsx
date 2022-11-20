@@ -7,7 +7,7 @@ import { carouselThumbsWrapperStyles } from 'components/Examples/carouselWrapper
 import { createCarouselThumbsStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-thumbs'
+export const ID = 'embla-carousel-react-thumbs'
 export const SLIDES = createSlides(10)
 export const OPTIONS: EmblaOptionsType = {}
 

@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-autoplay'
+export const ID = 'embla-carousel-react-autoplay'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = {}
 

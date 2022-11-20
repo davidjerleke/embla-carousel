@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselScaleStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-scale'
+export const ID = 'embla-carousel-react-scale'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { loop: true }
 

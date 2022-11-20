@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-drag-free'
+export const ID = 'embla-carousel-react-drag-free'
 export const SLIDES = createSlides(16)
 export const OPTIONS: EmblaOptionsType = {
   dragFree: true,

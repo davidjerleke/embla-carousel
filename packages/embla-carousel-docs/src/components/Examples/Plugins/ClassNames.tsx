@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselClassNamesStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-class-names'
+export const ID = 'embla-carousel-react-class-names'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 1 }
 

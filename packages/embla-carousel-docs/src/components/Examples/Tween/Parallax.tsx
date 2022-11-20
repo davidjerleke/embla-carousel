@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselParallaxStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'example-carousel-parallax'
+export const ID = 'embla-carousel-react-parallax'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 0, dragFree: true }
 

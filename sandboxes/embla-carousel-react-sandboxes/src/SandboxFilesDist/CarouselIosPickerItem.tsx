@@ -15,6 +15,11 @@ const IN_VIEW_DEGREES = WHEEL_ITEM_RADIUS * WHEEL_ITEMS_IN_VIEW
 const isInView = (wheelLocation: number, slidePosition: number): boolean =>
   Math.abs(wheelLocation - slidePosition) < IN_VIEW_DEGREES
  
+type SlideStyle = {
+  opacity: number
+  transform: string
+}
+ 
 const slideStyle = (
   embla: EmblaCarouselType,
   index: number,
@@ -22,7 +27,7 @@ const slideStyle = (
   slideCount: number,
   totalRadius: number,
   wheelRotation: number,
-) => {
+): SlideStyle => {
   const wheelLocation = embla.scrollProgress() * totalRadius
   const positionDefault = embla.scrollSnapList()[index] * totalRadius
   const positionLoopEnd = positionDefault - totalRadius
@@ -64,7 +69,7 @@ const getSlideStyles = (
   totalRadius: number,
   wheelRotation: number,
 ) => {
-  const styles = []
+  const styles: Partial<SlideStyle>[] = []
   for (let index = 0; index < slideCount; index += 1) {
     const style = embla
       ? slideStyle(embla, index, loop, slideCount, totalRadius, wheelRotation)
