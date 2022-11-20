@@ -28,7 +28,7 @@ const sandboxReactPackageJsonTemplate: PackageJsonType = {
 }
 
 export const createSandboxReactPackageJson = (
-  customConfig: Record<string, unknown>,
+  customConfig: Partial<PackageJsonType>,
 ): PackageJsonType => {
   return Object.assign({}, sandboxReactPackageJsonTemplate, customConfig)
 }

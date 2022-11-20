@@ -1,17 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createSandboxReactPackageJson } from '../createSandboxReactPackageJson'
 import { createSandboxReact } from '../createSandboxReact'
+import { useRoutes } from 'hooks/useRoutes'
 
 const CarouselJs: string =
   require('!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx').default
+
 const packageJson = createSandboxReactPackageJson({
   name: 'embla-carousel-react-default',
 })
 
-export const createSandboxReactDefault = async (): Promise<string> =>
+export const createSandboxReactDefault = (): Promise<string> =>
   createSandboxReact(packageJson, CarouselJs)
 
 export const CreateSandboxReactDefault = () => {
+  const { setIsLoading } = useRoutes()
   const [sandbox, setSandbox] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -20,15 +23,18 @@ export const CreateSandboxReactDefault = () => {
       event.preventDefault()
       if (sandbox) return formRef.current?.submit()
 
+      setIsLoading(true)
       const codeSandbox = await createSandboxReactDefault()
       setSandbox(codeSandbox)
     },
-    [sandbox],
+    [sandbox, setIsLoading],
   )
 
   useEffect(() => {
-    if (sandbox) formRef.current?.submit()
-  }, [sandbox])
+    if (!sandbox) return
+    formRef.current?.submit()
+    setIsLoading(false)
+  }, [sandbox, setIsLoading])
 
   return (
     <form
