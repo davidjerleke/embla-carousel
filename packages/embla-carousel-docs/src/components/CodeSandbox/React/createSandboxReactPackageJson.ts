@@ -1,5 +1,5 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
-import { PackageJsonType } from './types'
+import { PackageJsonType } from '../types'
 
 const sandboxReactPackageJsonTemplate: PackageJsonType = {
   name: 'react',
@@ -16,7 +16,7 @@ const sandboxReactPackageJsonTemplate: PackageJsonType = {
   },
   devDependencies: {
     '@babel/runtime': '7.13.8',
-    typescript: '4.1.3',
+    typescript: '4.4.2',
   },
   scripts: {
     start: 'react-scripts start',

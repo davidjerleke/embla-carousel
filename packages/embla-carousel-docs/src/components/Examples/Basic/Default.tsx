@@ -6,7 +6,6 @@ import CarouselDefault from 'embla-carousel-react-sandboxes/src/SandboxFiles/Car
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
-import { ExampleCarouselDefaultSandboxes } from './DefaultSandboxes'
 
 export const ID = 'embla-carousel-react-default'
 export const SLIDES = createSlides(5)
@@ -25,11 +24,8 @@ export const ExampleCarouselDefault = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <>
-      <ExampleCarouselDefaultSandboxes />
-      <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselDefault slides={SLIDES} options={OPTIONS} /> : null}
-      </Wrapper>
-    </>
+    <Wrapper className={ID} ref={inViewRef}>
+      {inView ? <CarouselDefault slides={SLIDES} options={OPTIONS} /> : null}
+    </Wrapper>
   )
 }
