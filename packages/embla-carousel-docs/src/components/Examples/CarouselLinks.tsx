@@ -4,6 +4,8 @@ import { ContentLink } from 'components/Link/ContentLink'
 import { IconWithText } from 'components/Icon/IconWithText'
 import { COLORS } from 'consts/themes'
 
+// REMOVE FILE WHEN DONE
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;

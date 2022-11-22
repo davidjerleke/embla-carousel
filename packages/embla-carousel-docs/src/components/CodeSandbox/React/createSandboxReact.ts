@@ -1,6 +1,6 @@
 import { EmblaOptionsType } from 'embla-carousel-react'
 import { getParameters } from 'codesandbox/lib/api/define'
-import { PackageJsonType, SandboxConfigType } from './types'
+import { PackageJsonType, SandboxConfigType } from '../types'
 import { resetStyles } from 'components/Layout/GlobalStyles/reset'
 import { baseStyles } from 'components/Layout/GlobalStyles/base'
 import { fontStyles } from 'components/Layout/GlobalStyles/font'
@@ -8,7 +8,6 @@ import { themeStyles } from 'consts/themes'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { createSandboxReactIndexHtml } from './createSandboxReactIndexHtml'
 import { createSandboxReactDefaultEntry } from './createSandboxReactEntry'
-import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSandboxReactHeader } from './createSandboxReactHeader'
 import { createSandboxReactFooter } from './createSandboxReactFooter'
 import { createSandboxReactImages } from './createSandboxReactImages'
@@ -40,13 +39,21 @@ const SANDBOX_CAROUSEL_CSS = styledComponentsStylesToString(
 
 export const createSandboxReact = async (
   packageJson: PackageJsonType,
-  carousel: string,
-  slideCount: number = 5,
-  options: EmblaOptionsType = {},
-  styles: string = createCarouselDefaultStyles(),
-  customConfig?: SandboxConfigType['files'],
+  carouselScript: string,
+  slides: number[],
+  options: EmblaOptionsType,
+  styles: string,
+  sandboxOverrides?: SandboxConfigType['files'],
 ): Promise<string> => {
   const { prettierConfig, formatCss, formatJs } = await loadPrettier()
+  const [entryHtml, entryScript, headerScript, footerScript, imagesScript] =
+    await Promise.all([
+      createSandboxReactIndexHtml(packageJson.name),
+      createSandboxReactDefaultEntry(slides, options),
+      createSandboxReactHeader(packageJson.name),
+      createSandboxReactFooter(),
+      createSandboxReactImages(),
+    ])
 
   const DEFAULT_CONFIG: SandboxConfigType['files'] = {
     '.prettierrc': {
@@ -59,7 +66,7 @@ export const createSandboxReact = async (
     },
     'public/index.html': {
       isBinary: false,
-      content: createSandboxReactIndexHtml(packageJson.name),
+      content: entryHtml,
     },
     'src/css/base.css': {
       isBinary: false,
@@ -73,25 +80,25 @@ export const createSandboxReact = async (
       isBinary: false,
       content: formatCss(SANDBOX_CAROUSEL_CSS + styles),
     },
-    'src/js/index.js': {
+    'src/js/index.jsx': {
       isBinary: false,
-      content: formatJs(createSandboxReactDefaultEntry(slideCount, options)),
+      content: formatJs(entryScript),
     },
-    'src/js/Header.js': {
+    'src/js/Header.jsx': {
       isBinary: false,
-      content: formatJs(createSandboxReactHeader(packageJson.name)),
+      content: formatJs(headerScript),
     },
-    'src/js/Footer.js': {
+    'src/js/Footer.jsx': {
       isBinary: false,
-      content: formatJs(createSandboxReactFooter()),
+      content: formatJs(footerScript),
     },
-    'src/js/EmblaCarousel.js': {
+    'src/js/EmblaCarousel.jsx': {
       isBinary: false,
-      content: formatJs(carousel),
+      content: formatJs(carouselScript),
     },
-    'src/js/imageByIndex.js': {
+    'src/js/imageByIndex.jsx': {
       isBinary: false,
-      content: formatJs(createSandboxReactImages()),
+      content: formatJs(imagesScript),
     },
     'src/images/slide-1.jpg': {
       isBinary: true,
@@ -112,6 +119,6 @@ export const createSandboxReact = async (
   }
 
   return getParameters({
-    files: Object.assign({}, DEFAULT_CONFIG, customConfig),
+    files: Object.assign({}, DEFAULT_CONFIG, sandboxOverrides),
   })
 }

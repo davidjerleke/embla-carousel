@@ -6,7 +6,7 @@ const sandboxReactPackageJsonTemplate: PackageJsonType = {
   version: '1.0.0',
   description: 'Embla Carousel React example',
   keywords: ['react', 'starter'],
-  main: 'src/js/index.js',
+  main: 'src/js/index.jsx',
   dependencies: {
     react: docsPackageJson.dependencies.react,
     'react-dom': docsPackageJson.dependencies['react-dom'],

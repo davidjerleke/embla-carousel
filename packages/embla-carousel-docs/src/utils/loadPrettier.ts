@@ -4,9 +4,11 @@ import { Options as PretterOptions } from 'prettier'
 const PRETTIER_CONFIG = <PretterOptions>prettierrc
 
 export const loadPrettier = async () => {
-  const prettier = await import('prettier')
-  const cssParser = await import('prettier/parser-postcss')
-  const babelParser = await import('prettier/parser-babel')
+  const [prettier, cssParser, babelParser] = await Promise.all([
+    import('prettier'),
+    import('prettier/parser-postcss'),
+    import('prettier/parser-babel'),
+  ])
 
   const prettierCssParser: PretterOptions = {
     ...PRETTIER_CONFIG,

@@ -12,3 +12,5 @@ export type SandboxConfigType = {
     }
   }
 }
+
+export type SandboxLanguageType = 'javascript' | 'typescript'
