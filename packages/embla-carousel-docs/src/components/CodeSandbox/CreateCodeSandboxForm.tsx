@@ -50,6 +50,7 @@ export const CreateCodeSandboxForm = (props: PropType) => {
     if (!sandbox) return
     formRef.current?.submit()
     setIsLoading(false)
+    setSandbox('')
   }, [sandbox, setIsLoading])
 
   return (

@@ -1,10 +1,26 @@
-const IMAGE_PATH_REGEX = /(?<=from\s')(.*)(?=\/images)/g
+import {
+  isLanguageTypeScript,
+  SandboxLanguageType,
+  SandboxModuleType,
+} from '../types'
 
-export const createSandboxReactImages = async (): Promise<string> => {
-  const imageByIndex = await import(
-    '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/imageByIndex.js'
-  )
-  // Add ts too!
+const IMAGE_PATH_IN_IMPORT_REGEX = /(?<=from\s')(.*)(?=\/images)/g
 
-  return imageByIndex.default.replace(IMAGE_PATH_REGEX, '..')
+export const createSandboxReactImages = async (
+  language: SandboxLanguageType,
+): Promise<string> => {
+  const isTypeScript = isLanguageTypeScript(language)
+  let imageByIndex: SandboxModuleType
+
+  if (isTypeScript) {
+    imageByIndex = await import(
+      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/imageByIndex.ts'
+    )
+  } else {
+    imageByIndex = await import(
+      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/imageByIndex.js'
+    )
+  }
+
+  return imageByIndex.default.replace(IMAGE_PATH_IN_IMPORT_REGEX, '..')
 }

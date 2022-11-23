@@ -22,16 +22,26 @@ export const loadPrettier = async () => {
     plugins: [babelParser],
   }
 
+  const prettierBabeTsParser: PretterOptions = {
+    ...PRETTIER_CONFIG,
+    parser: 'babel-ts',
+    plugins: [babelParser],
+  }
+
   const formatCss = (css: string): string =>
     prettier.format(css, prettierCssParser)
 
   const formatJs = (js: string): string =>
     prettier.format(js, prettierBabelParser)
 
+  const formatTs = (ts: string): string =>
+    prettier.format(ts, prettierBabeTsParser)
+
   return {
     prettier,
     prettierConfig: PRETTIER_CONFIG,
     formatCss,
     formatJs,
+    formatTs,
   }
 }

@@ -1,11 +1,9 @@
 import { css } from 'styled-components'
+import { snakeCaseToKebabCase } from 'utils/snakeCaseToKebabCase'
 
 export type ThemeKeyType = typeof THEME_KEYS[keyof typeof THEME_KEYS]
 
 type ThemeColorsType = { [key in keyof typeof THEME_COLORS.light]: string }
-
-const snakeCaseToKebabCase = (string: string = ''): string =>
-  string.replace(/_/g, '-').toLowerCase()
 
 const colorsToCssVariableMap = (colors: ThemeColorsType): ThemeColorsType => {
   return Object.keys(colors).reduce((map, key) => {

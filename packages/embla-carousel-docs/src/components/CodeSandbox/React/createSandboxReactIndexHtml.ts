@@ -9,6 +9,8 @@ export const createSandboxReactIndexHtml = async (
     '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/index.html'
   )
 
+  // get theme from document.html!
+
   const formattedTitle = kebabCaseToPascalCase(title, ' ')
   return indexHTML.default
     .replace('__replace_sandbox_name__', formattedTitle)
