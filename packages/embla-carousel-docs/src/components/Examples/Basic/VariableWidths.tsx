@@ -10,12 +10,13 @@ import { createSlides } from 'components/Examples/createSlides'
 export const ID = 'embla-carousel-react-variable-widths'
 export const SLIDES = createSlides(9)
 export const OPTIONS: EmblaOptionsType = {}
+export const STYLES = createCarouselVariableWidthStyles()
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselVariableWidthStyles()};
+    ${STYLES};
   }
 `
 

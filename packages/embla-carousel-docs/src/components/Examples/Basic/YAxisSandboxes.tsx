@@ -1,6 +1,6 @@
 import React from 'react'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Default'
+import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/YAxis'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -46,6 +46,6 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   },
 ]
 
-export const ExampleCarouselDefaultSandboxes = () => {
+export const ExampleCarouselYAxisSandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
 }

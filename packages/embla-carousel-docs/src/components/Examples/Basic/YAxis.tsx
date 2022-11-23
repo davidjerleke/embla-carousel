@@ -10,12 +10,17 @@ import { createSlides } from 'components/Examples/createSlides'
 export const ID = 'embla-carousel-react-y-axis'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { axis: 'y' }
+export const STYLES = createCarouselDefaultStyles(
+  undefined,
+  undefined,
+  OPTIONS.axis,
+)
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselDefaultStyles(undefined, undefined, OPTIONS.axis)};
+    ${STYLES};
   }
 `
 

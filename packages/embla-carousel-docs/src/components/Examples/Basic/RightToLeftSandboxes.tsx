@@ -1,6 +1,11 @@
 import React from 'react'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Default'
+import {
+  ID,
+  SLIDES,
+  OPTIONS,
+  STYLES,
+} from 'components/Examples/Basic/RightToLeft'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -15,7 +20,7 @@ const SHARED_CONFIG = {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselRightToLeft.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -26,7 +31,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.tsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselRightToLeft.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -46,6 +51,6 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   },
 ]
 
-export const ExampleCarouselDefaultSandboxes = () => {
+export const ExampleCarouselRightToLeftSandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
 }

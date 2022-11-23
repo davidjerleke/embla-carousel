@@ -1,6 +1,11 @@
 import React from 'react'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Default'
+import {
+  ID,
+  SLIDES,
+  OPTIONS,
+  STYLES,
+} from 'components/Examples/Basic/VariableWidths'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -46,6 +51,6 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   },
 ]
 
-export const ExampleCarouselDefaultSandboxes = () => {
+export const ExampleCarouselVariableWidthsSandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
 }

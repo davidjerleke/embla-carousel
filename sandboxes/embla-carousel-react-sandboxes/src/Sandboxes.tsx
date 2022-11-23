@@ -1,5 +1,6 @@
 import React from 'react'
 import CarouselDefault from './SandboxFiles/CarouselDefault'
+import CarouselRightToLeft from './SandboxFiles/CarouselRightToLeft'
 import CarouselArrowsDots from './SandboxFiles/CarouselArrowsDots'
 import CarouselThumbs from './SandboxFiles/CarouselThumbs'
 import CarouselProgress from './SandboxFiles/CarouselProgress'
@@ -156,8 +157,8 @@ export const Sandboxes: React.FC = () => {
       </CarouselLoopWrapper>
 
       <h3 className="examples__h3">Right to left</h3>
-      <CarouselRightToLeftWrapper className={carouselRightToLeftID} dir="rtl">
-        <CarouselDefault
+      <CarouselRightToLeftWrapper className={carouselRightToLeftID}>
+        <CarouselRightToLeft
           slides={carouselRightToLeftSlides}
           options={carouselRightToLeftOptions}
         />

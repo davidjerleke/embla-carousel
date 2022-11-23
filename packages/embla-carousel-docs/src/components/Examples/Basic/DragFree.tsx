@@ -13,12 +13,13 @@ export const OPTIONS: EmblaOptionsType = {
   dragFree: true,
   containScroll: 'trimSnaps',
 }
+export const STYLES = createCarouselDefaultStyles('50%')
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselDefaultStyles('50%')};
+    ${STYLES};
   }
 `
 
