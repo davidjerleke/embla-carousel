@@ -300,6 +300,7 @@ const SCALE_STYLES = css`
   .embla__scale {
     height: 100%;
     position: relative;
+    backface-visibility: hidden;
   }
 `
 
