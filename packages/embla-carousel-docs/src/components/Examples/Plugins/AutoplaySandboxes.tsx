@@ -1,6 +1,12 @@
 import React from 'react'
+import docsPackageJson from 'embla-carousel-docs/package.json'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Loop'
+import {
+  ID,
+  SLIDES,
+  OPTIONS,
+  STYLES,
+} from 'components/Examples/Plugins/Autoplay'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -11,11 +17,15 @@ const SHARED_CONFIG = {
   options: OPTIONS,
   styles: STYLES,
   id: ID,
+  plugins: {
+    'embla-carousel-autoplay':
+      docsPackageJson.dependencies['embla-carousel-autoplay'],
+  },
 }
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselAutoplay.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -26,7 +36,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.tsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselAutoplay.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -46,6 +56,6 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   },
 ]
 
-export const ExampleCarouselLoopSandboxes = () => {
+export const ExampleCarouselAutoplaySandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
 }

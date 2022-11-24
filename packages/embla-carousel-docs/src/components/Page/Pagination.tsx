@@ -5,7 +5,6 @@ import { PlainLink } from 'components/Link/PlainLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { supportsStyles } from 'consts/supportsStyles'
 import { IconWithText } from 'components/Icon/IconWithText'
 
 const ITEM_SPACING = SPACINGS.FOUR
@@ -26,9 +25,7 @@ const Item = styled.div`
 
   &:nth-child(2) > a {
     text-align: right;
-    ${supportsStyles.gradientText} {
-      color: ${COLORS.BRAND_SECONDARY};
-    }
+    color: ${COLORS.BRAND_SECONDARY};
   }
 `
 

@@ -7,7 +7,7 @@ import {
 
 export const createSandboxReactHeader = async (
   language: SandboxLanguageType,
-  title: string = '',
+  id: string = '',
 ): Promise<string> => {
   const isTypeScript = isLanguageTypeScript(language)
   let header: SandboxModuleType
@@ -22,6 +22,6 @@ export const createSandboxReactHeader = async (
     )
   }
 
-  const formattedTitle = kebabCaseToPascalCase(title, ' ')
+  const formattedTitle = kebabCaseToPascalCase(id, ' ')
   return header.default.replace('__replace_sandbox_name__', formattedTitle)
 }

@@ -10,12 +10,13 @@ import { createSlides } from 'components/Examples/createSlides'
 export const ID = 'embla-carousel-react-scale'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { loop: true }
+export const STYLES = createCarouselScaleStyles()
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselScaleStyles()};
+    ${STYLES};
   }
 `
 

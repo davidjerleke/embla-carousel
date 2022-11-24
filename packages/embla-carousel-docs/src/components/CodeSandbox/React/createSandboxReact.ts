@@ -22,7 +22,7 @@ import {
 } from 'components/Examples/sandboxStyles'
 import {
   isLanguageTypeScript,
-  languageToExtension,
+  languageToReactExtension,
   SandboxConfigType,
   SandboxCreateType,
 } from '../types'
@@ -36,34 +36,29 @@ const BASE_CSS = styledComponentsStylesToString(
 
 const SANDBOX_CSS = styledComponentsStylesToString(
   sandboxWrapperStyles,
+  sandboxCarouselStyles,
   sandboxHeaderStyles,
   sandboxFooterStyles,
-)
-
-const SANDBOX_CAROUSEL_CSS = styledComponentsStylesToString(
-  sandboxCarouselStyles,
 )
 
 export const createSandboxReact = async (
   config: SandboxCreateType,
 ): Promise<string> => {
   const {
+    id,
     carouselScript,
     slides,
     options,
     styles,
-    packageJsonOverrides,
+    plugins,
     sandboxOverrides,
     language = 'javascript',
   } = config
   const { prettierConfig, formatCss, formatJs, formatTs } = await loadPrettier()
-  const scriptExtension = languageToExtension(language)
+  const scriptExtension = languageToReactExtension(language)
   const isTypeScript = isLanguageTypeScript(language)
   const formatScript = isTypeScript ? formatTs : formatJs
-  const packageJson = createSandboxReactPackageJson(
-    language,
-    packageJsonOverrides,
-  )
+  const packageJson = createSandboxReactPackageJson(language, id, plugins)
   const tsConfig = createSandboxReactTsConfig()
   const [
     entryHtml,
@@ -73,9 +68,9 @@ export const createSandboxReact = async (
     imagesScript,
     tsDeclarations,
   ] = await Promise.all([
-    createSandboxReactIndexHtml(packageJson.name),
+    createSandboxReactIndexHtml(id),
     createSandboxReactDefaultEntry(language, slides, options),
-    createSandboxReactHeader(language, packageJson.name),
+    createSandboxReactHeader(language, id),
     createSandboxReactFooter(language),
     createSandboxReactImages(language),
     createSandboxReactTsDeclarations(),
@@ -104,7 +99,7 @@ export const createSandboxReact = async (
     },
     [`src/css/embla.css`]: {
       isBinary: false,
-      content: formatCss(SANDBOX_CAROUSEL_CSS + styles),
+      content: formatCss(styles),
     },
     [`src/js/index.${scriptExtension}`]: {
       isBinary: false,

@@ -6,7 +6,6 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { supportsStyles } from 'consts/supportsStyles'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 
 const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
@@ -72,11 +71,7 @@ const UspLink = styled.div`
   }
 
   svg {
-    color: ${COLORS.BRAND_PRIMARY};
-
-    ${supportsStyles.gradientText} {
-      color: ${COLORS.BRAND_SECONDARY};
-    }
+    color: ${COLORS.BRAND_SECONDARY};
   }
 `
 

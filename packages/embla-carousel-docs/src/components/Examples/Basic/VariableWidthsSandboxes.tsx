@@ -15,7 +15,7 @@ const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
   styles: STYLES,
-  packageJsonOverrides: { name: ID },
+  id: ID,
 }
 
 const sandboxReactJavaScript = async (): Promise<string> => {

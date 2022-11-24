@@ -1,22 +1,25 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
+import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 import {
-  languageToExtension,
+  languageToReactExtension,
   PackageJsonType,
   SandboxLanguageType,
+  SandboxPluginsType,
 } from '../types'
 
 export const createSandboxReactPackageJson = (
   language: SandboxLanguageType,
-  overrides?: PackageJsonType,
+  id: string,
+  plugins?: SandboxPluginsType,
 ): PackageJsonType => {
   const isJavaScript = language === 'javascript'
-  const scriptExtension = languageToExtension(language)
+  const scriptExtension = languageToReactExtension(language)
   const { dependencies, devDependencies } = docsPackageJson
 
-  const packageJson: PackageJsonType = {
-    name: 'react',
+  return {
+    name: id,
     version: '1.0.0',
-    description: 'Embla Carousel React example',
+    description: `${kebabCaseToPascalCase(id, ' ')} Example`,
     keywords: ['react', 'starter', language],
     main: `src/js/index.${scriptExtension}`,
     dependencies: {
@@ -24,6 +27,7 @@ export const createSandboxReactPackageJson = (
       'react-dom': dependencies['react-dom'],
       'react-scripts': '4.0.0',
       'embla-carousel-react': dependencies['embla-carousel-react'],
+      ...(plugins && plugins),
     },
     devDependencies: isJavaScript
       ? { '@babel/runtime': '7.13.8' }
@@ -40,6 +44,4 @@ export const createSandboxReactPackageJson = (
     },
     browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
   }
-
-  return Object.assign({}, packageJson, overrides)
 }

@@ -10,12 +10,13 @@ import { createSlides } from 'components/Examples/createSlides'
 export const ID = 'embla-carousel-react-class-names'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 1 }
+export const STYLES = createCarouselClassNamesStyles('60%')
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselClassNamesStyles('60%')};
+    ${STYLES};
   }
 `
 

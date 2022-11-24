@@ -10,12 +10,13 @@ import { createSlides } from 'components/Examples/createSlides'
 export const ID = 'embla-carousel-react-opacity'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { loop: true }
+export const STYLES = createCarouselDefaultStyles('70%')
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselDefaultStyles('70%')};
+    ${STYLES};
   }
 `
 

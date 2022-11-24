@@ -2,7 +2,7 @@ import { ThemeKeyType, THEME_KEYS, THEME_PREFIX } from 'consts/themes'
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 
 export const createSandboxReactIndexHtml = async (
-  title: string = '',
+  id: string = '',
   themeKey: ThemeKeyType = THEME_KEYS.LIGHT,
 ): Promise<string> => {
   const indexHTML = await import(
@@ -11,8 +11,8 @@ export const createSandboxReactIndexHtml = async (
 
   // Get theme from document.html!
 
-  const formattedTitle = kebabCaseToPascalCase(title, ' ')
+  const title = kebabCaseToPascalCase(id, ' ')
   return indexHTML.default
-    .replace('__replace_sandbox_name__', formattedTitle)
+    .replace('__replace_sandbox_name__', title)
     .replace('__replace_sandbox_theme__', THEME_PREFIX + themeKey)
 }

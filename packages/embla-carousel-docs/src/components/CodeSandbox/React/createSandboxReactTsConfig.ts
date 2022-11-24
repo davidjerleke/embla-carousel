@@ -1,9 +1,7 @@
 import { TsConfigType } from '../types'
 
-export const createSandboxReactTsConfig = (
-  overrides?: TsConfigType,
-): TsConfigType => {
-  const tsConfig: TsConfigType = {
+export const createSandboxReactTsConfig = (): TsConfigType => {
+  return {
     include: ['./src/**/*', './declarations.d.ts'],
     compilerOptions: {
       strict: true,
@@ -12,6 +10,4 @@ export const createSandboxReactTsConfig = (
       jsx: 'react-jsx',
     },
   }
-
-  return Object.assign({}, tsConfig, overrides)
 }

@@ -188,12 +188,15 @@ const THUMBS_STYLES = css`
 
   .embla-thumbs__slide {
     flex: 0 0 28%;
-    ${MEDIA.MIN_XS} {
-      flex: 0 0 18%;
-    }
     padding-left: 0.8rem;
     position: relative;
     height: 100%;
+  }
+
+  ${MEDIA.MIN_XS} {
+    .embla-thumbs__slide {
+      flex: 0 0 18%;
+    }
   }
 
   .embla-thumbs__slide__button {

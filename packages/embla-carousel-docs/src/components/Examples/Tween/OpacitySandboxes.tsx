@@ -1,6 +1,6 @@
 import React from 'react'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Loop'
+import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Tween/Opacity'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -15,7 +15,7 @@ const SHARED_CONFIG = {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselOpacity.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -26,7 +26,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.tsx`
+    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselOpacity.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -46,6 +46,6 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   },
 ]
 
-export const ExampleCarouselLoopSandboxes = () => {
+export const ExampleCarouselOpacitySandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
 }

@@ -12,12 +12,14 @@ export const sandboxWrapperStyles = css`
 `
 
 export const sandboxCarouselStyles = css`
-  .embla {
+  .sandbox__carousel {
     padding: ${CAROUSEL_SPACING};
     background-color: ${COLORS.BACKGROUND_CODE};
     position: relative;
+  }
 
-    ${MEDIA.MIN_SM} {
+  ${MEDIA.MIN_SM} {
+    .sandbox__carousel {
       border-radius: ${CAROUSEL_RADIUS};
     }
   }
