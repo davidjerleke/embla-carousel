@@ -14,12 +14,13 @@ export const OPTIONS: EmblaOptionsType = {
   dragFree: true,
   containScroll: 'keepSnaps',
 }
+export const STYLES = createCarouselInfiniteScrollStyles()
 
 export const Wrapper = styled.div`
   ${carouselDefaultWrapperStyles};
 
   &.${ID} {
-    ${createCarouselInfiniteScrollStyles()};
+    ${STYLES};
   }
 `
 

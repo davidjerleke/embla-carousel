@@ -9,7 +9,7 @@ const SLIDE_COUNT = 5
 const OPTIONS: EmblaOptionsType = {}
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
  
-const App = () => (
+const App: React.FC = () => (
   <main className="sandbox">
     <Header />
     <section className="sandbox__carousel">

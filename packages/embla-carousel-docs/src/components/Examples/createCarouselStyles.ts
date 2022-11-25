@@ -328,15 +328,6 @@ const LAZY_LOAD_STYLES = css`
     animation: loading 1.1s infinite linear;
     border-radius: 50%;
     ${createSquareSizeStyles('5rem')};
-
-    @keyframes loading {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
   }
 
   .embla__lazy-load__spinner:after {
@@ -351,6 +342,15 @@ const LAZY_LOAD_STYLES = css`
 
   .embla__lazy-load.has-loaded .embla__lazy-load__img {
     opacity: 1;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `
 
@@ -389,20 +389,20 @@ const INFINITE_SCROLL_STYLES = css`
     animation: loading 1.1s infinite linear;
     border-radius: 50%;
     ${createSquareSizeStyles('5rem')};
-
-    @keyframes loading {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
   }
 
   .embla__slide__loading__spinner:after {
     border-radius: inherit;
     ${createSquareSizeStyles('5rem')};
+  }
+
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `
 
