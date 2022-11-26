@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-arrow-dots'
+export const ID = 'embla-carousel-arrow-dots'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselArrowsDotsStyles()

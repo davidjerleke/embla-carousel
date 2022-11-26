@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-slides-to-scroll'
+export const ID = 'embla-carousel-slides-to-scroll'
 export const SLIDES = createSlides(8)
 export const OPTIONS: EmblaOptionsType = {
   slidesToScroll: 'auto',

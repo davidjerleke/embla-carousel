@@ -376,7 +376,8 @@ const INFINITE_SCROLL_STYLES = css`
   .embla__slide__loading {
     position: relative;
     flex: 0 0 15rem;
-    height: 100%;
+    max-__replace-axis-size__: 15rem;
+    height: var(--slide-height);
     display: flex;
     align-items: center;
     justify-content: center;

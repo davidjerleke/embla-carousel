@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselProgressStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-progress'
+export const ID = 'embla-carousel-progress'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { dragFree: true }
 export const STYLES = createCarouselProgressStyles()

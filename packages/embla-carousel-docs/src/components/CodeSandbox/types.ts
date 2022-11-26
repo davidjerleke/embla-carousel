@@ -1,4 +1,3 @@
-import docsPackageJson from 'embla-carousel-docs/package.json'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import {
   PackageJson as BasePackageJsonType,
@@ -22,7 +21,9 @@ export type SandboxConfigType = {
 
 export type SandboxLanguageType = 'javascript' | 'typescript'
 
-export type SandboxLanguageExtensionType = 'jsx' | 'tsx'
+export type SandboxReactExtensionType = 'jsx' | 'tsx'
+
+export type SandboxVanillaExtensionType = 'js' | 'ts'
 
 export type SandboxPluginsType = {
   ['embla-carousel-autoplay']?: string
@@ -43,8 +44,14 @@ export type SandboxCreateType = {
 
 export const languageToReactExtension = (
   language: SandboxLanguageType,
-): SandboxLanguageExtensionType => {
+): SandboxReactExtensionType => {
   return language === 'javascript' ? 'jsx' : 'tsx'
+}
+
+export const languageToVanillaExtension = (
+  language: SandboxLanguageType,
+): SandboxVanillaExtensionType => {
+  return language === 'javascript' ? 'js' : 'ts'
 }
 
 export const isLanguageTypeScript = (

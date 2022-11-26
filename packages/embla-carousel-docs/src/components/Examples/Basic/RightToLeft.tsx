@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-right-to-left'
+export const ID = 'embla-carousel-right-to-left'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { direction: 'rtl' }
 export const STYLES = createCarouselDefaultStyles()

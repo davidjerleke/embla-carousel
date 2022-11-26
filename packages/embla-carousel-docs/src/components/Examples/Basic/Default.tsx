@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-default'
+export const ID = 'embla-carousel-default'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselDefaultStyles()

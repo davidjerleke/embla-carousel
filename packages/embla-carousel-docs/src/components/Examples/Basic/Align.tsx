@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-align'
+export const ID = 'embla-carousel-align'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { align: 'center' }
 export const STYLES = createCarouselDefaultStyles('80%')

@@ -7,7 +7,7 @@ import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrappe
 import { createCarouselLazyLoadStyles } from 'components/Examples/createCarouselStyles'
 import { createSlides } from 'components/Examples/createSlides'
 
-export const ID = 'embla-carousel-react-lazy-load'
+export const ID = 'embla-carousel-lazy-load'
 export const SLIDES = createSlides(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 0 }
 export const STYLES = createCarouselLazyLoadStyles()

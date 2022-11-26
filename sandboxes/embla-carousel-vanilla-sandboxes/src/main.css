@@ -1,0 +1,30 @@
+.examples {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  width: 67rem;
+  max-width: 100%;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.examples__h1 {
+  margin-bottom: 4rem;
+  font-size: 3.6rem;
+  font-weight: 900;
+}
+
+.examples__h2 {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.examples__h3 {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  font-size: 2.1rem;
+  font-weight: bold;
+}

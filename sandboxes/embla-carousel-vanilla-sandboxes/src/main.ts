@@ -1,23 +1,25 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import { styledComponentsStylesToString } from '../../../packages/embla-carousel-docs/src/utils/styledComponentStylesToString'
+import { themeStyles } from '../../../packages/embla-carousel-docs/src/consts/themes'
+import { resetStyles } from '../../../packages/embla-carousel-docs/src/components/Layout/GlobalStyles/reset'
+import { baseStyles } from '../../../packages/embla-carousel-docs/src/components/Layout/GlobalStyles/base'
+import { fontStyles } from '../../../packages/embla-carousel-docs/src/components/Layout/GlobalStyles/font'
+import './main.css'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// move to embla-carousel-sandbox-utils
+const injectBaseStyles = (): void => {
+  const styleElement = document.createElement('style')
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+  styleElement.innerHTML = styledComponentsStylesToString(
+    themeStyles,
+    resetStyles,
+    baseStyles,
+    fontStyles,
+  )
+
+  styleElement.id = 'baseStyles'
+  document.head.appendChild(styleElement)
+}
+
+injectBaseStyles()
+
+console.log('vanilla')

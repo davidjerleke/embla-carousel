@@ -18,6 +18,6 @@
     "jsx": "preserve",
     "emitDeclarationOnly": false
   },
-  "include": ["src/SandboxFilesDist", "declarations.d.ts"],
+  "include": ["src/SandboxFilesDist", "src/declarations.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

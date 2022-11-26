@@ -55,11 +55,12 @@ export const createSandboxReact = async (
     sandboxOverrides,
     language = 'javascript',
   } = config
+  const title = `${id}-react`
   const { prettierConfig, formatCss, formatJs, formatTs } = await loadPrettier()
   const scriptExtension = languageToReactExtension(language)
   const isTypeScript = isLanguageTypeScript(language)
   const formatScript = isTypeScript ? formatTs : formatJs
-  const packageJson = createSandboxReactPackageJson(language, id, plugins)
+  const packageJson = createSandboxReactPackageJson(language, title, plugins)
   const tsConfig = createSandboxReactTsConfig()
   const [
     entryHtml,
@@ -69,9 +70,9 @@ export const createSandboxReact = async (
     imagesScript,
     tsDeclarations,
   ] = await Promise.all([
-    createSandboxReactIndexHtml(id),
+    createSandboxReactIndexHtml(title),
     indexScript || createSandboxReactDefaultEntry(language, slides, options),
-    createSandboxReactHeader(language, id),
+    createSandboxReactHeader(language, title),
     createSandboxReactFooter(language),
     createSandboxReactImages(language),
     createSandboxReactTsDeclarations(),
