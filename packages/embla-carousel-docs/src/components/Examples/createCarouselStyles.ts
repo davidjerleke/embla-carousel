@@ -1,21 +1,28 @@
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
-import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { EmblaOptionsType } from 'embla-carousel'
 import { css, FlattenSimpleInterpolation } from 'styled-components'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 import { MEDIA } from 'consts/breakpoints'
 import {
   CAROUSEL_DEFAULT_HEIGHT,
-  CAROUSEL_THUMBS_HEIGHT,
+  CAROUSEL_THUMB_SLIDES_HEIGHT,
   CAROUSEL_IOS_PICKER_HEIGHT,
-  CAROUSEL_SPACING,
+  CAROUSEL_THUMB_SLIDES_SPACING,
+  CAROUSEL_WRAPPER_SPACING,
+  CAROUSEL_SLIDES_SPACING,
 } from './carouselWrapperStyles'
 
-// improve height instead of 100% everywhere
-
 const BASE_STYLES = css`
+  .embla {
+    --slide-spacing: __replace_axis_spacing_amount__;
+    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
+    --slide-size: __replace_slide_size__;
+  }
+
   .embla__viewport {
     overflow: hidden;
   }
@@ -24,19 +31,19 @@ const BASE_STYLES = css`
     display: flex;
     flex-direction: __replace_axis_flex__;
     height: __replace_axis_height__;
-    margin-__replace_axis_spacing__: -__replace_axis_spacing_amount__;
+    margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
   }
 
   .embla__slide {
-    flex: 0 0 __replace_slide_size__;
-    padding-__replace_axis_spacing__: __replace_axis_spacing_amount__;
+    flex: 0 0 var(--slide-size);
+    max-__replace-axis-size__: var(--slide-size);
+    padding-__replace_axis_spacing__: var(--slide-spacing);
     position: relative;
-    height: 100%;
   }
 
   .embla__slide__img {
     display: block;
-    height: 100%;
+    height: var(--slide-height);
     width: 100%;
     object-fit: cover;
   }
@@ -174,7 +181,9 @@ const ARROWS_DOTS_STYLES = css`
 
 const THUMBS_STYLES = css`
   .embla-thumbs {
-    margin-top: 0.8rem;
+    --thumbs-slide-spacing: ${CAROUSEL_THUMB_SLIDES_SPACING};
+    --thumbs-slide-height: ${CAROUSEL_THUMB_SLIDES_HEIGHT};
+    margin-top: var(--thumbs-slide-spacing);
   }
 
   .embla-thumbs__viewport {
@@ -184,17 +193,13 @@ const THUMBS_STYLES = css`
   .embla-thumbs__container {
     display: flex;
     flex-direction: row;
-    margin-left: -0.8rem;
-    height: calc(
-      ${CAROUSEL_THUMBS_HEIGHT} - ${CAROUSEL_DEFAULT_HEIGHT} - 0.8rem
-    );
+    margin-left: calc(var(--thumbs-slide-spacing) * -1);
   }
 
   .embla-thumbs__slide {
     flex: 0 0 28%;
-    padding-left: 0.8rem;
+    padding-left: var(--thumbs-slide-spacing);
     position: relative;
-    height: 100%;
   }
 
   ${MEDIA.MIN_XS} {
@@ -213,7 +218,6 @@ const THUMBS_STYLES = css`
     border: 0;
     padding: 0;
     margin: 0;
-    height: 100%;
     width: 100%;
     opacity: 0.2;
     transition: opacity 0.2s;
@@ -225,7 +229,7 @@ const THUMBS_STYLES = css`
 
   .embla-thumbs__slide__img {
     display: block;
-    height: 100%;
+    height: var(--thumbs-slide-height);
     width: 100%;
     object-fit: cover;
   }
@@ -412,8 +416,8 @@ const INFINITE_SCROLL_STYLES = css`
 
 const IOS_PICKER_STYLES = css`
   .sandbox__carousel .embla {
-    margin-top: -${CAROUSEL_SPACING};
-    margin-bottom: -${CAROUSEL_SPACING};
+    margin-top: -${CAROUSEL_WRAPPER_SPACING};
+    margin-bottom: -${CAROUSEL_WRAPPER_SPACING};
   }
 
   .embla {
@@ -535,31 +539,33 @@ const IOS_PICKER_STYLES = css`
 
 export const createCarouselDefaultStyles = (
   slideSize: string = '100%',
-  spacingSize: string = '1rem',
+  spacingSize: string = CAROUSEL_SLIDES_SPACING,
   axis: EmblaOptionsType['axis'] = 'x',
   customStyles: FlattenSimpleInterpolation = [],
 ): string => {
   const horizontal = axis === 'x'
   const flexDirection = horizontal ? 'row' : 'column'
   const spacingDirection = horizontal ? 'left' : 'top'
+  const sizeDimention = horizontal ? 'width' : 'height'
   const height = horizontal
-    ? CAROUSEL_DEFAULT_HEIGHT
-    : `calc(${CAROUSEL_DEFAULT_HEIGHT} + ${spacingSize})`
+    ? 'auto'
+    : `calc(var(--slide-spacing) + var(--slide-height))`
 
-  const baseStyles = BASE_STYLES.join('')
+  const baseStyles = styledComponentsStylesToString(BASE_STYLES)
     .replace(/__replace_axis_flex__/gi, flexDirection)
+    .replace(/__replace-axis-size__/gi, sizeDimention)
     .replace(/__replace_axis_spacing__/gi, spacingDirection)
     .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
     .replace(/__replace_axis_height__/gi, height)
     .replace(/__replace_slide_size__/gi, slideSize)
 
-  return baseStyles + customStyles.join('')
+  return baseStyles + styledComponentsStylesToString(customStyles)
 }
 
 export const createCarouselVariableWidthStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -570,9 +576,9 @@ export const createCarouselVariableWidthStyles = (
 }
 
 export const createCarouselArrowsDotsStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -583,9 +589,9 @@ export const createCarouselArrowsDotsStyles = (
 }
 
 export const createCarouselThumbsStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -596,9 +602,9 @@ export const createCarouselThumbsStyles = (
 }
 
 export const createCarouselProgressStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -609,9 +615,9 @@ export const createCarouselProgressStyles = (
 }
 
 export const createCarouselParallaxStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -622,17 +628,17 @@ export const createCarouselParallaxStyles = (
 }
 
 export const createCarouselScaleStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(slideSize, spacingSize, axis, SCALE_STYLES)
 }
 
 export const createCarouselClassNamesStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -643,9 +649,9 @@ export const createCarouselClassNamesStyles = (
 }
 
 export const createCarouselLazyLoadStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -656,9 +662,9 @@ export const createCarouselLazyLoadStyles = (
 }
 
 export const createCarouselInfiniteScrollStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis'],
 ): string => {
   return createCarouselDefaultStyles(
     slideSize,
@@ -668,16 +674,6 @@ export const createCarouselInfiniteScrollStyles = (
   )
 }
 
-export const createCarouselIosPickerStyles = (
-  slideSize: string = '100%',
-  spacingSize: string = '1rem',
-  axis: EmblaOptionsType['axis'] = 'x',
-): string => {
-  return IOS_PICKER_STYLES.join('')
-  return createCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    IOS_PICKER_STYLES,
-  )
+export const createCarouselIosPickerStyles = (): string => {
+  return styledComponentsStylesToString(IOS_PICKER_STYLES)
 }

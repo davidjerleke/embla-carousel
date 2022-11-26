@@ -1,7 +1,10 @@
 import { css } from 'styled-components'
-import { CAROUSEL_RADIUS, CAROUSEL_SPACING } from './carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
+import {
+  CAROUSEL_RADIUS,
+  CAROUSEL_WRAPPER_SPACING,
+} from './carouselWrapperStyles'
 
 export const sandboxWrapperStyles = css`
   .sandbox {
@@ -19,7 +22,7 @@ export const sandboxCarouselStyles = css`
 
   .sandbox__carousel {
     position: relative;
-    padding: ${CAROUSEL_SPACING};
+    padding: ${CAROUSEL_WRAPPER_SPACING};
   }
 
   ${MEDIA.MIN_SM} {
