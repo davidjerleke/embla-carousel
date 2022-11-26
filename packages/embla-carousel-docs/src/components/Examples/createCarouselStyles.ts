@@ -9,7 +9,11 @@ import { MEDIA } from 'consts/breakpoints'
 import {
   CAROUSEL_DEFAULT_HEIGHT,
   CAROUSEL_THUMBS_HEIGHT,
+  CAROUSEL_IOS_PICKER_HEIGHT,
+  CAROUSEL_SPACING,
 } from './carouselWrapperStyles'
+
+// improve height instead of 100% everywhere
 
 const BASE_STYLES = css`
   .embla__viewport {
@@ -407,44 +411,51 @@ const INFINITE_SCROLL_STYLES = css`
 `
 
 const IOS_PICKER_STYLES = css`
+  .sandbox__carousel .embla {
+    margin-top: -${CAROUSEL_SPACING};
+    margin-bottom: -${CAROUSEL_SPACING};
+  }
+
   .embla {
     position: relative;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: ${CAROUSEL_IOS_PICKER_HEIGHT};
     max-width: 30rem;
     margin-left: auto;
     margin-right: auto;
-    &:before,
-    &:after {
-      position: absolute;
-      left: 0;
-      right: 0;
-      content: '';
-      display: block;
-      height: calc(50% - 32px / 2);
-      z-index: ${LAYERS.STEP};
-      pointer-events: none;
-    }
-    &:before {
-      top: -0.5px;
-      border-bottom: 0.5px solid
-        rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
-      background: linear-gradient(
-        to top,
-        rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
-        rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
-      );
-    }
-    &:after {
-      bottom: -0.5px;
-      border-top: 0.5px solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
-      background: linear-gradient(
-        to bottom,
-        rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
-        rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
-      );
-    }
+  }
+
+  .embla:before,
+  .embla:after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    content: '';
+    display: block;
+    height: calc(50% - 32px / 2);
+    z-index: ${LAYERS.STEP};
+    pointer-events: none;
+  }
+
+  .embla:before {
+    top: -0.5px;
+    border-bottom: 0.5px solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
+    background: linear-gradient(
+      to top,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
+    );
+  }
+
+  .embla:after {
+    bottom: -0.5px;
+    border-top: 0.5px solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.3);
+    background: linear-gradient(
+      to bottom,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0.65) 0%,
+      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 1) 100%
+    );
   }
 
   .embla__ios-picker {
@@ -662,6 +673,7 @@ export const createCarouselIosPickerStyles = (
   spacingSize: string = '1rem',
   axis: EmblaOptionsType['axis'] = 'x',
 ): string => {
+  return IOS_PICKER_STYLES.join('')
   return createCarouselDefaultStyles(
     slideSize,
     spacingSize,

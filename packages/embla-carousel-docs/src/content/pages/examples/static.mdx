@@ -62,6 +62,10 @@ import { ExampleCarouselInfiniteScroll } from 'components/Examples/Miscellaneous
 import { ExampleCarouselInfiniteScrollSandboxes } from 'components/Examples/Miscellaneous/InfiniteScrollSandboxes'
 
 import { ExampleCarouselIosPicker } from 'components/Examples/Miscellaneous/IosPicker'
+import {
+  ExampleCarouselIosPickerDefaultSandboxes,
+  ExampleCarouselIosPickerLoopSandboxes,
+} from 'components/Examples/Miscellaneous/IosPickerSandboxes'
 
 # Static Examples
 
@@ -179,32 +183,10 @@ Add features using the [API](/api/) and the internal engine.
 
 ### IOS Picker Default
 
-<CarouselLinks
-  links={[
-    {
-      label: 'Vanilla',
-      to: `https://codesandbox.io/s/embla-carousel-ios-picker-default-vanilla-4ypkc`,
-    },
-    {
-      label: 'React',
-      to: `https://codesandbox.io/s/embla-carousel-ios-picker-default-react-fotej`,
-    },
-  ]}
-/>
-<ExampleCarouselIosPicker />
+<ExampleCarouselIosPickerDefaultSandboxes />
+<ExampleCarouselIosPicker loop={false} />
 
 ### IOS Picker Loop
 
-<CarouselLinks
-  links={[
-    {
-      label: 'Vanilla',
-      to: `https://codesandbox.io/s/embla-carousel-ios-picker-loop-vanilla-ltt1z`,
-    },
-    {
-      label: 'React',
-      to: `https://codesandbox.io/s/embla-carousel-ios-picker-loop-react-6mdkp`,
-    },
-  ]}
-/>
+<ExampleCarouselIosPickerLoopSandboxes />
 <ExampleCarouselIosPicker loop={true} />

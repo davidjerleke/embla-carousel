@@ -4,9 +4,12 @@ import EmblaCarousel from './CarouselDefault'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import Header from './Header'
 import Footer from './Footer'
+import '../css/base.css'
+import '../css/sandbox.css'
+import '../css/embla.css'
  
-const SLIDE_COUNT = 5
 const OPTIONS: EmblaOptionsType = {}
+const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
  
 const App: React.FC = () => (

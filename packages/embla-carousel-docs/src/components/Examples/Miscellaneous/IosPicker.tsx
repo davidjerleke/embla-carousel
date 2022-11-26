@@ -7,17 +7,18 @@ import { iosPickerWrapperStyles } from 'components/Examples/carouselWrapperStyle
 import { createCarouselIosPickerStyles } from 'components/Examples/createCarouselStyles'
 
 export const ID = 'embla-carousel-react-ios-picker'
+export const STYLES = createCarouselIosPickerStyles()
 
 export const Wrapper = styled.div`
   ${iosPickerWrapperStyles};
 
   &.${ID} {
-    ${createCarouselIosPickerStyles()};
+    ${STYLES};
   }
 `
 
 type PropType = {
-  loop?: EmblaOptionsType['loop']
+  loop: EmblaOptionsType['loop'] // change to options!
 }
 
 export const ExampleCarouselIosPicker = (props: PropType) => {

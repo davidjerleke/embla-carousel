@@ -12,10 +12,14 @@ export const sandboxWrapperStyles = css`
 `
 
 export const sandboxCarouselStyles = css`
-  .sandbox__carousel {
-    padding: ${CAROUSEL_SPACING};
+  .sandbox__carousel,
+  .sandbox__ios-picker {
     background-color: ${COLORS.BACKGROUND_CODE};
+  }
+
+  .sandbox__carousel {
     position: relative;
+    padding: ${CAROUSEL_SPACING};
   }
 
   ${MEDIA.MIN_SM} {

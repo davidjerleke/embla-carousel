@@ -1,22 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import EmblaCarousel from './CarouselDefault'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import EmblaCarousel from './CarouselIosPicker'
 import Header from './Header'
 import Footer from './Footer'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
 
-const OPTIONS: EmblaOptionsType = {}
-const SLIDE_COUNT = 5
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+const LOOP = false
 
 const App: React.FC = () => (
   <main className="sandbox">
     <Header />
-    <section className="sandbox__carousel">
-      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
+    <section className="sandbox__ios-picker">
+      <EmblaCarousel loop={LOOP} />
     </section>
     <Footer />
   </main>

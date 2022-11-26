@@ -35,6 +35,7 @@ export type SandboxCreateType = {
   options: EmblaOptionsType
   slides: number[]
   styles: string
+  indexScript?: string
   plugins?: SandboxPluginsType
   language?: SandboxLanguageType
   sandboxOverrides?: SandboxConfigType['files']

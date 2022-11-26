@@ -47,6 +47,7 @@ export const createSandboxReact = async (
   const {
     id,
     carouselScript,
+    indexScript,
     slides,
     options,
     styles,
@@ -69,7 +70,7 @@ export const createSandboxReact = async (
     tsDeclarations,
   ] = await Promise.all([
     createSandboxReactIndexHtml(id),
-    createSandboxReactDefaultEntry(language, slides, options),
+    indexScript || createSandboxReactDefaultEntry(language, slides, options),
     createSandboxReactHeader(language, id),
     createSandboxReactFooter(language),
     createSandboxReactImages(language),

@@ -5,11 +5,11 @@ import {
   SandboxModuleType,
 } from '../types'
 
-const FIRST_EMPTY_LINE_REGEX = /^\s*\n/m
-const SLIDE_COUNT_REGEX = /SLIDE_COUNT = \d{1,}/
+const CAROUSEL_IMPORT_REGEX = /((?<=EmblaCarousel\sfrom\s)(.*))/
+const SLIDE_COUNT_REGEX = /((?<=SLIDE_COUNT\s\=\s)\d{1,})/
+const LOOP_REGEX = /((?<=LOOP\s\=\s)(true|false))/
 const OPTIONS_REGEX =
   /((?<=EmblaOptionsType\s\=\s)(.*))|((?<=OPTIONS\s\=\s)(.*))/
-const CAROUSEL_IMPORT_REGEX = /(?<=.\/)CarouselDefault/
 
 export const createSandboxReactDefaultEntry = async (
   language: SandboxLanguageType,
@@ -30,10 +30,29 @@ export const createSandboxReactDefaultEntry = async (
   }
 
   return entry.default
-    .replace(CAROUSEL_IMPORT_REGEX, 'EmblaCarousel')
-    .replace(SLIDE_COUNT_REGEX, `SLIDE_COUNT = ${slides.length}`)
+    .replace(CAROUSEL_IMPORT_REGEX, '"./EmblaCarousel"')
+    .replace(SLIDE_COUNT_REGEX, slides.length.toString())
     .replace(OPTIONS_REGEX, JSON.stringify(options))
-    .replace(FIRST_EMPTY_LINE_REGEX, "import '../css/base.css' \n\n")
-    .replace(FIRST_EMPTY_LINE_REGEX, "import '../css/sandbox.css' \n\n")
-    .replace(FIRST_EMPTY_LINE_REGEX, "import '../css/embla.css' \n\n")
+}
+
+export const createSandboxReactIosPickerEntry = async (
+  language: SandboxLanguageType,
+  loop: boolean,
+): Promise<string> => {
+  const isTypeScript = isLanguageTypeScript(language)
+  let entry: SandboxModuleType
+
+  if (isTypeScript) {
+    entry = await import(
+      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerEntry.tsx'
+    )
+  } else {
+    entry = await import(
+      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerEntry.jsx'
+    )
+  }
+
+  return entry.default
+    .replace(CAROUSEL_IMPORT_REGEX, '"./EmblaCarousel"')
+    .replace(LOOP_REGEX, loop.toString())
 }
