@@ -95,7 +95,6 @@ export const createSandboxReact = async (
       isBinary: false,
       content: formatScript(imagesScript),
     },
-    ...SANDBOX_IMAGES,
   }
 
   if (isTypeScript) {
@@ -112,6 +111,6 @@ export const createSandboxReact = async (
   }
 
   return getParameters({
-    files: Object.assign({}, sandboxConfig, sandboxOverrides),
+    files: Object.assign({}, sandboxConfig, SANDBOX_IMAGES, sandboxOverrides),
   })
 }

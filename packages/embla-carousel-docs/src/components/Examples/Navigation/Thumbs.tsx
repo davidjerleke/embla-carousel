@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselThumbs from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselThumbs'
 import { carouselThumbsWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselThumbsStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-thumbs'
-export const SLIDES = createSlides(10)
+export const SLIDES = arrayFromNumber(10)
 export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselThumbsStyles()
 

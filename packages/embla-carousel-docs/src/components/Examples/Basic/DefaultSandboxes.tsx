@@ -36,15 +36,37 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   })
 }
 
-// TEST
 const sandboxVanillaJavaScript = async (): Promise<string> => {
-  // const carousel = await import(
-  //   `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx`
-  // )
+  const [carousel, html] = await Promise.all([
+    import(
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.js'
+    ),
+    import(
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'
+    ),
+  ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: '', //carousel.default,
+    carouselScript: carousel.default,
+    carouselHtml: html.default,
     language: 'javascript',
+  })
+}
+
+const sandboxVanillaTypeScript = async (): Promise<string> => {
+  const [carousel, html] = await Promise.all([
+    import(
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.ts'
+    ),
+    import(
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'
+    ),
+  ])
+  return createSandboxVanilla({
+    ...SHARED_CONFIG,
+    carouselScript: carousel.default,
+    carouselHtml: html.default,
+    language: 'typescript',
   })
 }
 
@@ -52,6 +74,10 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   {
     label: 'Vanilla',
     createSandbox: sandboxVanillaJavaScript,
+  },
+  {
+    label: 'Vanilla+TS',
+    createSandbox: sandboxVanillaTypeScript,
   },
   {
     label: 'React',

@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselProgress from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselProgress'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselProgressStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-progress'
-export const SLIDES = createSlides(5)
+export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = { dragFree: true }
 export const STYLES = createCarouselProgressStyles()
 

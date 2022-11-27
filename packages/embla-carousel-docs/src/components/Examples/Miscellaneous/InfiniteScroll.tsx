@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselInfiniteScroll from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselInfiniteScroll'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselInfiniteScrollStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-infinite-scroll'
-export const SLIDES = createSlides(5)
+export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = {
   inViewThreshold: 0,
   dragFree: true,

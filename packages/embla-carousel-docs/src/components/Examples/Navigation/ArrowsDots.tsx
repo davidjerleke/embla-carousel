@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselArrowsDots from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselArrowsDots'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-arrow-dots'
-export const SLIDES = createSlides(5)
+export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselArrowsDotsStyles()
 

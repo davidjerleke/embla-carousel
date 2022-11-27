@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselClassNames from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselClassNames'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselClassNamesStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-class-names'
-export const SLIDES = createSlides(5)
+export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 1 }
 export const STYLES = createCarouselClassNamesStyles('60%')
 

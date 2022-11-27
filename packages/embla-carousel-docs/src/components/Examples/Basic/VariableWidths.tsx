@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselDefault from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselDefault'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselVariableWidthStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-variable-widths'
-export const SLIDES = createSlides(9)
+export const SLIDES = arrayFromNumber(9)
 export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselVariableWidthStyles()
 

@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselLazyLoad from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselLazyLoad'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselLazyLoadStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-lazy-load'
-export const SLIDES = createSlides(5)
+export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = { inViewThreshold: 0 }
 export const STYLES = createCarouselLazyLoadStyles()
 

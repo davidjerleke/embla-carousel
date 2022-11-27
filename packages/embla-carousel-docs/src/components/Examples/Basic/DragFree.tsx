@@ -5,10 +5,10 @@ import { useInView } from 'react-intersection-observer'
 import CarouselDefault from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselDefault'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
-import { createSlides } from 'components/Examples/createSlides'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-drag-free'
-export const SLIDES = createSlides(16)
+export const SLIDES = arrayFromNumber(16)
 export const OPTIONS: EmblaOptionsType = {
   dragFree: true,
   containScroll: 'trimSnaps',

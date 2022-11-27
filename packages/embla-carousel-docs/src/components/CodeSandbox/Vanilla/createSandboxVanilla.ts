@@ -1,11 +1,12 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import { BASE_CSS, SANDBOX_CSS } from '../sandboxStyles'
 import { SANDBOX_IMAGES } from '../sandboxImages'
+import { SANDBOX_REGEX_OPTIONS } from '../sandboxRegex'
 import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxVanillaPackageJson } from './createSandboxVanillaPackageJson'
 import { createSandboxVanillaTsConfig } from './createSandboxVanillaTsConfig'
 import { createSandboxVanillaTsDeclarations } from './createSandboxVanillaTsDeclarations'
-import { createSandboxVanillaDefaultEntry } from './createSandboxVanillaEntry'
+// import { createSandboxVanillaDefaultEntry } from './createSandboxVanillaEntry'
 import { createSandboxVanillaDefaultHtml } from './createSandboxVanillaHtml'
 import { SandboxVanillaCreateType, SandboxConfigType } from '../sandboxTypes'
 import {
@@ -19,7 +20,7 @@ export const createSandboxVanilla = async (
   const {
     id,
     carouselScript,
-    indexScript,
+    carouselHtml,
     slides,
     options,
     styles,
@@ -35,16 +36,25 @@ export const createSandboxVanilla = async (
   const formatScript = isTypeScript ? formatTs : formatJs
   const packageJson = createSandboxVanillaPackageJson(language, title, plugins)
   const tsConfig = createSandboxVanillaTsConfig()
+  const entryScript = carouselScript.replace(
+    SANDBOX_REGEX_OPTIONS,
+    JSON.stringify(options),
+  )
   const [
     entryHtml,
-    entryScript,
+    // entryScript,
     // headerScript,
     // footerScript,
     // imagesScript,
     tsDeclarations,
   ] = await Promise.all([
-    createSandboxVanillaDefaultHtml(title, scriptExtension),
-    indexScript || createSandboxVanillaDefaultEntry(language, options),
+    createSandboxVanillaDefaultHtml(
+      title,
+      scriptExtension,
+      slides,
+      carouselHtml,
+    ),
+    // indexScript || createSandboxVanillaDefaultEntry(language, options),
     // createSandboxReactHeader(language, title),
     // createSandboxReactFooter(language),
     // createSandboxReactImages(language),
@@ -80,15 +90,6 @@ export const createSandboxVanilla = async (
       isBinary: false,
       content: formatScript(entryScript),
     },
-    // [`src/js/EmblaCarousel.${scriptExtension}`]: {
-    //   isBinary: false,
-    //   content: formatScript(carouselScript),
-    // },
-    // [`src/js/imageByIndex.${scriptExtension}`]: {
-    //   isBinary: false,
-    //   content: formatScript(imagesScript),
-    // },
-    ...SANDBOX_IMAGES,
   }
 
   if (isTypeScript) {
@@ -105,6 +106,6 @@ export const createSandboxVanilla = async (
   }
 
   return getParameters({
-    files: Object.assign({}, sandboxConfig, sandboxOverrides),
+    files: Object.assign({}, sandboxConfig, SANDBOX_IMAGES, sandboxOverrides),
   })
 }
