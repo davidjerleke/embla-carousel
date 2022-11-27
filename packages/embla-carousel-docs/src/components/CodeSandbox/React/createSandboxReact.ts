@@ -1,9 +1,7 @@
 import { getParameters } from 'codesandbox/lib/api/define'
-import { resetStyles } from 'components/Layout/GlobalStyles/reset'
-import { baseStyles } from 'components/Layout/GlobalStyles/base'
-import { fontStyles } from 'components/Layout/GlobalStyles/font'
-import { themeStyles } from 'consts/themes'
-import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
+import { BASE_CSS, SANDBOX_CSS } from 'components/CodeSandbox/sandboxStyles'
+import { SANDBOX_IMAGES } from '../sandboxImages'
+import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxReactPackageJson } from './createSandboxReactPackageJson'
 import { createSandboxReactIndexHtml } from './createSandboxReactIndexHtml'
 import { createSandboxReactDefaultEntry } from './createSandboxReactEntry'
@@ -12,37 +10,11 @@ import { createSandboxReactFooter } from './createSandboxReactFooter'
 import { createSandboxReactImages } from './createSandboxReactImages'
 import { createSandboxReactTsConfig } from './createSandboxReactTsConfig'
 import { createSandboxReactTsDeclarations } from './createSandboxReactTsDeclarations'
-import { loadPrettier } from 'utils/loadPrettier'
-import { URLS } from 'consts/urls'
-import {
-  sandboxCarouselStyles,
-  sandboxFooterStyles,
-  sandboxHeaderStyles,
-  sandboxWrapperStyles,
-} from 'components/Examples/sandboxStyles'
-import {
-  isLanguageTypeScript,
-  languageToReactExtension,
-  SandboxConfigType,
-  SandboxCreateType,
-} from '../types'
-
-const BASE_CSS = styledComponentsStylesToString(
-  themeStyles,
-  resetStyles,
-  baseStyles,
-  fontStyles,
-)
-
-const SANDBOX_CSS = styledComponentsStylesToString(
-  sandboxWrapperStyles,
-  sandboxCarouselStyles,
-  sandboxHeaderStyles,
-  sandboxFooterStyles,
-)
+import { isLanguageTypeScript, languageToReactExtension } from '../sandboxUtils'
+import { SandboxConfigType, SandboxReactCreateType } from '../sandboxTypes'
 
 export const createSandboxReact = async (
-  config: SandboxCreateType,
+  config: SandboxReactCreateType,
 ): Promise<string> => {
   const {
     id,
@@ -123,22 +95,7 @@ export const createSandboxReact = async (
       isBinary: false,
       content: formatScript(imagesScript),
     },
-    [`src/images/slide-1.jpg`]: {
-      isBinary: true,
-      content: `${URLS.GITHUB_DOCUMENTATION_RAW}/src/assets/images/slide-1.jpg`,
-    },
-    [`src/images/slide-2.jpg`]: {
-      isBinary: true,
-      content: `${URLS.GITHUB_DOCUMENTATION_RAW}/src/assets/images/slide-2.jpg`,
-    },
-    [`src/images/slide-3.jpg`]: {
-      isBinary: true,
-      content: `${URLS.GITHUB_DOCUMENTATION_RAW}/src/assets/images/slide-3.jpg`,
-    },
-    [`src/images/slide-4.jpg`]: {
-      isBinary: true,
-      content: `${URLS.GITHUB_DOCUMENTATION_RAW}/src/assets/images/slide-4.jpg`,
-    },
+    ...SANDBOX_IMAGES,
   }
 
   if (isTypeScript) {

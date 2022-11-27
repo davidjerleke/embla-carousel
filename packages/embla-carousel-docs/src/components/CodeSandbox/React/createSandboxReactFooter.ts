@@ -1,9 +1,7 @@
 import { URLS } from 'consts/urls'
-import {
-  isLanguageTypeScript,
-  SandboxLanguageType,
-  SandboxModuleType,
-} from '../types'
+import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
+import { isLanguageTypeScript } from '../sandboxUtils'
+import { SANDBOX_REGEX_REPOSITORY_URL } from '../sandboxRegex'
 
 export const createSandboxReactFooter = async (
   language: SandboxLanguageType,
@@ -21,5 +19,5 @@ export const createSandboxReactFooter = async (
     )
   }
 
-  return footer.default.replace('__replace_repository_url__', URLS.GITHUB_ROOT)
+  return footer.default.replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
 }

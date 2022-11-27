@@ -4,11 +4,18 @@ import { Options as PretterOptions } from 'prettier'
 const PRETTIER_CONFIG = <PretterOptions>prettierrc
 
 export const loadPrettier = async () => {
-  const [prettier, cssParser, babelParser] = await Promise.all([
+  const [prettier, htmlParser, cssParser, babelParser] = await Promise.all([
     import('prettier'),
+    import('prettier/parser-html'),
     import('prettier/parser-postcss'),
     import('prettier/parser-babel'),
   ])
+
+  const prettierHtmlParser: PretterOptions = {
+    ...PRETTIER_CONFIG,
+    parser: 'html',
+    plugins: [htmlParser],
+  }
 
   const prettierCssParser: PretterOptions = {
     ...PRETTIER_CONFIG,
@@ -28,6 +35,9 @@ export const loadPrettier = async () => {
     plugins: [babelParser],
   }
 
+  const formatHtml = (html: string): string =>
+    prettier.format(html, prettierHtmlParser)
+
   const formatCss = (css: string): string =>
     prettier.format(css, prettierCssParser)
 
@@ -40,6 +50,7 @@ export const loadPrettier = async () => {
   return {
     prettier,
     prettierConfig: PRETTIER_CONFIG,
+    formatHtml,
     formatCss,
     formatJs,
     formatTs,

@@ -2,7 +2,10 @@ import React from 'react'
 
 const Footer: React.FC = () => (
   <footer className="sandbox__footer">
-    <a className="sandbox__footer__link" href="__replace_repository_url__">
+    <a
+      className="sandbox__footer__link"
+      href="__replace_sandbox_repository_url__"
+    >
       <svg
         className="sandbox__footer__link__svg"
         xmlns="http://www.w3.org/2000/svg"

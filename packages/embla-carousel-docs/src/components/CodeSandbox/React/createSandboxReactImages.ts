@@ -1,10 +1,6 @@
-import {
-  isLanguageTypeScript,
-  SandboxLanguageType,
-  SandboxModuleType,
-} from '../types'
-
-const IMAGE_PATH_IN_IMPORT_REGEX = /(?<=from\s')(.*)(?=\/images)/g
+import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
+import { isLanguageTypeScript } from '../sandboxUtils'
+import { SANDBOX_REGEX_IMAGE_IMPORT } from '../sandboxRegex'
 
 export const createSandboxReactImages = async (
   language: SandboxLanguageType,
@@ -22,5 +18,5 @@ export const createSandboxReactImages = async (
     )
   }
 
-  return imageByIndex.default.replace(IMAGE_PATH_IN_IMPORT_REGEX, '..')
+  return imageByIndex.default.replace(SANDBOX_REGEX_IMAGE_IMPORT, '..')
 }

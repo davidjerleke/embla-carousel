@@ -1,9 +1,7 @@
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
-import {
-  isLanguageTypeScript,
-  SandboxLanguageType,
-  SandboxModuleType,
-} from '../types'
+import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
+import { isLanguageTypeScript } from '../sandboxUtils'
+import { SANDBOX_REGEX_TITLE } from '../sandboxRegex'
 
 export const createSandboxReactHeader = async (
   language: SandboxLanguageType,
@@ -23,5 +21,5 @@ export const createSandboxReactHeader = async (
   }
 
   const formattedTitle = kebabCaseToPascalCase(id, ' ')
-  return header.default.replace('__replace_sandbox_name__', formattedTitle)
+  return header.default.replace(SANDBOX_REGEX_TITLE, formattedTitle)
 }

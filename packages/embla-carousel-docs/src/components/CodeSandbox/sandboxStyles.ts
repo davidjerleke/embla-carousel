@@ -1,12 +1,16 @@
 import { css } from 'styled-components'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
+import { resetStyles } from 'components/Layout/GlobalStyles/reset'
+import { baseStyles } from 'components/Layout/GlobalStyles/base'
+import { fontStyles } from 'components/Layout/GlobalStyles/font'
 import { MEDIA } from 'consts/breakpoints'
-import { COLORS } from 'consts/themes'
+import { COLORS, themeStyles } from 'consts/themes'
 import {
   CAROUSEL_RADIUS,
   CAROUSEL_WRAPPER_SPACING,
-} from './carouselWrapperStyles'
+} from '../Examples/carouselWrapperStyles'
 
-export const sandboxWrapperStyles = css`
+const sandboxWrapperStyles = css`
   .sandbox {
     max-width: 67rem;
     margin-left: auto;
@@ -14,7 +18,7 @@ export const sandboxWrapperStyles = css`
   }
 `
 
-export const sandboxCarouselStyles = css`
+const sandboxCarouselStyles = css`
   .sandbox__carousel,
   .sandbox__ios-picker {
     background-color: ${COLORS.BACKGROUND_CODE};
@@ -32,7 +36,7 @@ export const sandboxCarouselStyles = css`
   }
 `
 
-export const sandboxHeaderStyles = css`
+const sandboxHeaderStyles = css`
   .sandbox__header {
     font-size: 2rem;
     font-weight: bold;
@@ -41,7 +45,7 @@ export const sandboxHeaderStyles = css`
   }
 `
 
-export const sandboxFooterStyles = css`
+const sandboxFooterStyles = css`
   .sandbox__footer {
     display: flex;
     justify-content: center;
@@ -68,3 +72,17 @@ export const sandboxFooterStyles = css`
     fill: currentColor;
   }
 `
+
+export const BASE_CSS = styledComponentsStylesToString(
+  themeStyles,
+  resetStyles,
+  baseStyles,
+  fontStyles,
+)
+
+export const SANDBOX_CSS = styledComponentsStylesToString(
+  sandboxWrapperStyles,
+  sandboxCarouselStyles,
+  sandboxHeaderStyles,
+  sandboxFooterStyles,
+)

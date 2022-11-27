@@ -1,15 +1,11 @@
 import { EmblaOptionsType } from 'embla-carousel-react'
-import {
-  isLanguageTypeScript,
-  SandboxLanguageType,
-  SandboxModuleType,
-} from '../types'
+import { SANDBOX_REGEX_OPTIONS } from '../sandboxRegex'
+import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
+import { isLanguageTypeScript } from '../sandboxUtils'
 
 const CAROUSEL_IMPORT_REGEX = /((?<=EmblaCarousel\sfrom\s)(.*))/
 const SLIDE_COUNT_REGEX = /((?<=SLIDE_COUNT\s\=\s)\d{1,})/
 const LOOP_REGEX = /((?<=LOOP\s\=\s)(true|false))/
-const OPTIONS_REGEX =
-  /((?<=EmblaOptionsType\s\=\s)(.*))|((?<=OPTIONS\s\=\s)(.*))/
 
 export const createSandboxReactDefaultEntry = async (
   language: SandboxLanguageType,
@@ -32,7 +28,7 @@ export const createSandboxReactDefaultEntry = async (
   return entry.default
     .replace(CAROUSEL_IMPORT_REGEX, '"./EmblaCarousel"')
     .replace(SLIDE_COUNT_REGEX, slides.length.toString())
-    .replace(OPTIONS_REGEX, JSON.stringify(options))
+    .replace(SANDBOX_REGEX_OPTIONS, JSON.stringify(options))
 }
 
 export const createSandboxReactIosPickerEntry = async (

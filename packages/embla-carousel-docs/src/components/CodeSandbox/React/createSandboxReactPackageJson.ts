@@ -1,11 +1,11 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { languageToReactExtension } from '../sandboxUtils'
 import {
-  languageToReactExtension,
-  PackageJsonType,
   SandboxLanguageType,
   SandboxPluginsType,
-} from '../types'
+  PackageJsonType,
+} from '../sandboxTypes'
 
 export const createSandboxReactPackageJson = (
   language: SandboxLanguageType,

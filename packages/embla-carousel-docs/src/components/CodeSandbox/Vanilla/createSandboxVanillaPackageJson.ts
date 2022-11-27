@@ -4,7 +4,7 @@ import {
   PackageJsonType,
   SandboxLanguageType,
   SandboxPluginsType,
-} from '../types'
+} from '../sandboxTypes'
 
 export const createSandboxVanillaPackageJson = (
   language: SandboxLanguageType,

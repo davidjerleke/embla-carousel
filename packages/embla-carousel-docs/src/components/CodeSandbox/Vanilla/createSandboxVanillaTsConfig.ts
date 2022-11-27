@@ -1,4 +1,4 @@
-import { TsConfigType } from '../types'
+import { TsConfigType } from '../sandboxTypes'
 
 export const createSandboxVanillaTsConfig = (): TsConfigType => {
   return {

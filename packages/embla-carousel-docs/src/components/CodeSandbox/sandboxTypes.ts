@@ -19,6 +19,8 @@ export type SandboxConfigType = {
   }
 }
 
+export type SandboxModuleType = { default: string }
+
 export type SandboxLanguageType = 'javascript' | 'typescript'
 
 export type SandboxReactExtensionType = 'jsx' | 'tsx'
@@ -30,7 +32,7 @@ export type SandboxPluginsType = {
   ['embla-carousel-class-names']?: string
 }
 
-export type SandboxCreateType = {
+export type SandboxReactCreateType = {
   id: string
   carouselScript: string
   options: EmblaOptionsType
@@ -42,22 +44,14 @@ export type SandboxCreateType = {
   sandboxOverrides?: SandboxConfigType['files']
 }
 
-export const languageToReactExtension = (
-  language: SandboxLanguageType,
-): SandboxReactExtensionType => {
-  return language === 'javascript' ? 'jsx' : 'tsx'
+export type SandboxVanillaCreateType = {
+  id: string
+  carouselScript: string
+  options: EmblaOptionsType
+  slides: number[]
+  styles: string
+  indexScript?: string
+  plugins?: SandboxPluginsType
+  language?: SandboxLanguageType
+  sandboxOverrides?: SandboxConfigType['files']
 }
-
-export const languageToVanillaExtension = (
-  language: SandboxLanguageType,
-): SandboxVanillaExtensionType => {
-  return language === 'javascript' ? 'js' : 'ts'
-}
-
-export const isLanguageTypeScript = (
-  language: SandboxLanguageType,
-): boolean => {
-  return language === 'typescript'
-}
-
-export type SandboxModuleType = { default: string }
