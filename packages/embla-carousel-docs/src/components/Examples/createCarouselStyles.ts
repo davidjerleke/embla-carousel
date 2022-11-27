@@ -36,7 +36,7 @@ const BASE_STYLES = css`
 
   .embla__slide {
     flex: 0 0 var(--slide-size);
-    max-__replace-axis-size__: var(--slide-size);
+    min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
     position: relative;
   }
@@ -198,6 +198,7 @@ const THUMBS_STYLES = css`
 
   .embla-thumbs__slide {
     flex: 0 0 28%;
+    min-__replace-axis-size__: 0;
     padding-left: var(--thumbs-slide-spacing);
     position: relative;
   }
@@ -376,7 +377,7 @@ const INFINITE_SCROLL_STYLES = css`
   .embla__slide__loading {
     position: relative;
     flex: 0 0 15rem;
-    max-__replace-axis-size__: 15rem;
+    min-__replace-axis-size__: 0;
     height: var(--slide-height);
     display: flex;
     align-items: center;
@@ -552,15 +553,17 @@ export const createCarouselDefaultStyles = (
     ? 'auto'
     : `calc(var(--slide-spacing) + var(--slide-height))`
 
-  const baseStyles = styledComponentsStylesToString(BASE_STYLES)
+  const mergedStyles =
+    styledComponentsStylesToString(BASE_STYLES) +
+    styledComponentsStylesToString(customStyles)
+
+  return mergedStyles
     .replace(/__replace_axis_flex__/gi, flexDirection)
     .replace(/__replace-axis-size__/gi, sizeDimention)
     .replace(/__replace_axis_spacing__/gi, spacingDirection)
     .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
     .replace(/__replace_axis_height__/gi, height)
     .replace(/__replace_slide_size__/gi, slideSize)
-
-  return baseStyles + styledComponentsStylesToString(customStyles)
 }
 
 export const createCarouselVariableWidthStyles = (
