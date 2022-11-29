@@ -17,11 +17,11 @@ export const createSandboxReactDefaultEntry = async (
 
   if (isTypeScript) {
     entry = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.tsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselDefaultEntry.tsx'
     )
   } else {
     entry = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.jsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselDefaultEntry.jsx'
     )
   }
 
@@ -40,11 +40,11 @@ export const createSandboxReactIosPickerEntry = async (
 
   if (isTypeScript) {
     entry = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerEntry.tsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPickerEntry.tsx'
     )
   } else {
     entry = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerEntry.jsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPickerEntry.jsx'
     )
   }
 

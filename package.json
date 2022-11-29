@@ -22,8 +22,8 @@
     "packages/embla-carousel-autoplay",
     "packages/embla-carousel-auto-height",
     "packages/embla-carousel-class-names",
-    "sandboxes/embla-carousel-vanilla-sandboxes",
-    "sandboxes/embla-carousel-react-sandboxes"
+    "playgrounds/embla-carousel-playground-vanilla",
+    "playgrounds/embla-carousel-playground-react"
   ],
   "scripts": {
     "lint": "npm-run-all prettier:report eslint:report",
@@ -43,10 +43,10 @@
     "version:push": "yarn install && yarn version:create && git add -A && git push && git push --tags",
     "watch:package-vanilla": "yarn workspace embla-carousel run start",
     "watch:package-react": "yarn workspace embla-carousel-react run start",
-    "watch:sandbox-vanilla": "yarn workspace embla-carousel-vanilla-sandboxes run dev",
-    "watch:sandbox-react": "yarn workspace embla-carousel-react-sandboxes run dev",
-    "start:vanilla": "npm-run-all --parallel watch:package-vanilla watch:sandbox-vanilla",
-    "start:react": "npm-run-all --parallel watch:package-vanilla watch:package-react watch:sandbox-react"
+    "watch:playground-vanilla": "yarn workspace embla-carousel-vanilla-playground run dev",
+    "watch:playground-react": "yarn workspace embla-carousel-react-playground run dev",
+    "start:vanilla": "npm-run-all --parallel watch:package-vanilla watch:playground-vanilla",
+    "start:react": "npm-run-all --parallel watch:package-vanilla watch:package-react watch:playground-react"
   },
   "devDependencies": {
     "@babel/core": "7.17.0",

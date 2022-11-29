@@ -20,7 +20,7 @@ const SHARED_CONFIG = {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselProgress.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselProgress.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -31,7 +31,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselProgress.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselProgress.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

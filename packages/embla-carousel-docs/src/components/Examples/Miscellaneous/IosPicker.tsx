@@ -2,7 +2,7 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselIosPicker from 'embla-carousel-react-sandboxes/src/SandboxFiles/CarouselIosPicker'
+import CarouselIosPicker from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselIosPicker'
 import { iosPickerWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselIosPickerStyles } from 'components/Examples/createCarouselStyles'
 

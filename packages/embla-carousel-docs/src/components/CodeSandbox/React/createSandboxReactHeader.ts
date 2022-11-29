@@ -12,11 +12,11 @@ export const createSandboxReactHeader = async (
 
   if (isTypeScript) {
     header = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/Header.tsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Header.tsx'
     )
   } else {
     header = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/Header.jsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Header.jsx'
     )
   }
 

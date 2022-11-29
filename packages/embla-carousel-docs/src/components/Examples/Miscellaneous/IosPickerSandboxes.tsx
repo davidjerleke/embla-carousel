@@ -26,10 +26,10 @@ const sandboxReactJavaScript = async (loop: boolean): Promise<string> => {
   const [entry, carousel, item] = await Promise.all([
     createSandboxReactIosPickerEntry('javascript', loop),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPicker.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPicker.jsx`
     ),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerItem.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPickerItem.jsx`
     ),
   ])
 
@@ -53,10 +53,10 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
   const [entry, carousel, item] = await Promise.all([
     createSandboxReactIosPickerEntry('typescript', loop),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPicker.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPicker.tsx`
     ),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselIosPickerItem.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselIosPickerItem.tsx`
     ),
   ])
 

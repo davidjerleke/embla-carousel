@@ -29,10 +29,10 @@ const sandboxReactJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselArrowsDots.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDots.jsx`
     ),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselArrowsDotsButtons.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDotsButtons.jsx`
     ),
   ])
   return createSandboxReact({
@@ -52,10 +52,10 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselArrowsDots.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDots.tsx`
     ),
     import(
-      `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselArrowsDotsButtons.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDotsButtons.tsx`
     ),
   ])
   return createSandboxReact({

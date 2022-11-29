@@ -11,11 +11,11 @@ export const createSandboxReactFooter = async (
 
   if (isTypeScript) {
     footer = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/Footer.tsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Footer.tsx'
     )
   } else {
     footer = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/Footer.jsx'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Footer.jsx'
     )
   }
 

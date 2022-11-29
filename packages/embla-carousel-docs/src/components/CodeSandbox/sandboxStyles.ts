@@ -18,6 +18,7 @@ const sandboxWrapperStyles = css`
   }
 `
 
+// MOVE sandbox__ios-picker styles?
 const sandboxCarouselStyles = css`
   .sandbox__carousel,
   .sandbox__ios-picker {

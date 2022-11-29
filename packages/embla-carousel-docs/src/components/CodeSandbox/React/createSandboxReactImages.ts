@@ -10,11 +10,11 @@ export const createSandboxReactImages = async (
 
   if (isTypeScript) {
     imageByIndex = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/imageByIndex.ts'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/imageByIndex.ts'
     )
   } else {
     imageByIndex = await import(
-      '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/imageByIndex.js'
+      '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/imageByIndex.js'
     )
   }
 

@@ -8830,18 +8830,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react-sandboxes@workspace:sandboxes/embla-carousel-react-sandboxes":
+"embla-carousel-playground-react@workspace:playgrounds/embla-carousel-playground-react":
   version: 0.0.0-use.local
-  resolution: "embla-carousel-react-sandboxes@workspace:sandboxes/embla-carousel-react-sandboxes"
+  resolution: "embla-carousel-playground-react@workspace:playgrounds/embla-carousel-playground-react"
   dependencies:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@vitejs/plugin-react": ^2.2.0
-    npm-run-all: ^4.1.5
+    embla-carousel-react: 7.0.5
     react: ^18.2.0
     react-dom: ^18.2.0
     react-router-dom: ^6.4.3
-    shx: ^0.3.4
+    typescript: ^4.6.4
+    vite: ^3.2.0
+  languageName: unknown
+  linkType: soft
+
+"embla-carousel-playground-vanilla@workspace:playgrounds/embla-carousel-playground-vanilla":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-playground-vanilla@workspace:playgrounds/embla-carousel-playground-vanilla"
+  dependencies:
+    embla-carousel: 7.0.5
     typescript: ^4.6.4
     vite: ^3.2.0
   languageName: unknown
@@ -8888,18 +8897,6 @@ __metadata:
     typescript: ^4.5.5
   peerDependencies:
     svelte: ^3.49.0
-  languageName: unknown
-  linkType: soft
-
-"embla-carousel-vanilla-sandboxes@workspace:sandboxes/embla-carousel-vanilla-sandboxes":
-  version: 0.0.0-use.local
-  resolution: "embla-carousel-vanilla-sandboxes@workspace:sandboxes/embla-carousel-vanilla-sandboxes"
-  dependencies:
-    embla-carousel: 7.0.5
-    npm-run-all: ^4.1.5
-    shx: ^0.3.4
-    typescript: ^4.6.4
-    vite: ^3.2.0
   languageName: unknown
   linkType: soft
 

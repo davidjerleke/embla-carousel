@@ -16,7 +16,7 @@ const SHARED_CONFIG = {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselDefault.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -27,7 +27,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/CarouselDefault.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselDefault.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -39,10 +39,10 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const [carousel, html] = await Promise.all([
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.js'
     ),
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.html'
     ),
   ])
   return createSandboxVanilla({
@@ -56,10 +56,10 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const [carousel, html] = await Promise.all([
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.ts'
     ),
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.html'
     ),
   ])
   return createSandboxVanilla({

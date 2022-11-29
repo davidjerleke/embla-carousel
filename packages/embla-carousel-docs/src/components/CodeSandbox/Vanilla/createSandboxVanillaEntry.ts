@@ -17,7 +17,7 @@ export const createSandboxVanillaEntry = async (
   carouselHtml: string,
 ): Promise<string> => {
   const indexHTML = await import(
-    '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/index.html'
+    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/index.html'
   )
   const theme = THEME_PREFIX + getThemeFromDocument()
   const title = kebabCaseToPascalCase(id, ' ')

@@ -1,0 +1,17 @@
+.playground {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  width: 67rem;
+  max-width: 100%;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.playground__h1 {
+  margin-bottom: 4rem;
+  font-size: 3.6rem;
+  font-weight: 900;
+  text-align: center;
+}
