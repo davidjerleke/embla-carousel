@@ -19,10 +19,16 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Info: no tests specified\" && exit 0",
+    "sandboxfiles:before-build": "npx ts-node --project src/components/CodeSandbox/Compilation/tsconfig.node.json src/components/CodeSandbox/Compilation/build-before.ts",
+    "sandboxfiles:after-build": "npx ts-node --project src/components/CodeSandbox/Compilation/tsconfig.node.json src/components/CodeSandbox/Compilation/build-after.ts",
+    "sandboxfiles:copy-vanilla": "shx cp src/components/CodeSandbox/Vanilla/SandboxFilesSrc/* src/components/CodeSandbox/Vanilla/SandboxFilesDist/",
+    "sandboxfiles:copy-react": "shx cp src/components/CodeSandbox/React/SandboxFilesSrc/* src/components/CodeSandbox/React/SandboxFilesDist/",
+    "sandboxfiles:build": "tsc --project src/components/CodeSandbox/Compilation/tsconfig.sandboxfiles.json",
     "predeploy:clean": "shx rm -r ../../docs",
     "predeploy:build": "npm-run-all clean build",
     "predeploy:copy": "shx cp -r ./public ../../docs",
-    "predeploy": "npm-run-all predeploy:clean predeploy:build predeploy:copy",
+    "predeploy:sandboxfiles": "npm-run-all sandboxfiles:copy-vanilla sandboxfiles:copy-react sandboxfiles:before-build sandboxfiles:build sandboxfiles:after-build",
+    "predeploy": "npm-run-all predeploy:clean predeploy:build predeploy:copy predeploy:sandboxfiles",
     "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
     "eslint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
   },
@@ -55,7 +61,8 @@
     "react-dom": "^18.1.0",
     "react-helmet": "^6.1.0",
     "react-intersection-observer": "^8.33.1",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.178",

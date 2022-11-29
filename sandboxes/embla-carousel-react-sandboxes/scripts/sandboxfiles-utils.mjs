@@ -1,6 +1,10 @@
 import fs from 'fs'
 
-export const PATH_TO_SANDBOX_FILES = 'src/SandboxFilesDist'
+export const PATHS_TO_SANDBOX_FILES = [
+  'src/components/CodeSandbox/Vanilla/SandboxFilesDist',
+  'src/components/CodeSandbox/React/SandboxFilesDist',
+]
+
 export const COMMENTS_REGEX = /\/\*.+?\*\/|\/\/.*(?=[\n\r])/g
 export const EMPTY_LINE_REGEX = /^\s*\n/gm
 

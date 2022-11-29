@@ -1,26 +1,30 @@
-// import { EmblaOptionsType } from 'embla-carousel-react'
-// import { SANDBOX_REGEX_OPTIONS } from '../sandboxRegex'
-// import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
-// import { isLanguageTypeScript } from '../sandboxUtils'
+import { THEME_PREFIX } from 'consts/themes'
+import { URLS } from 'consts/urls'
+import { getThemeFromDocument } from 'utils/getThemeFromDocument'
+import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { SandboxVanillaExtensionType } from '../sandboxTypes'
+import {
+  SANDBOX_REGEX_CODE,
+  SANDBOX_REGEX_LANGUAGE_EXTENSION,
+  SANDBOX_REGEX_REPOSITORY_URL,
+  SANDBOX_REGEX_THEME,
+  SANDBOX_REGEX_TITLE,
+} from '../sandboxRegex'
 
-// export const createSandboxVanillaDefaultEntry = async (
-//   language: SandboxLanguageType,
-//   options: EmblaOptionsType,
-// ): Promise<string> => {
-//   const isTypeScript = isLanguageTypeScript(language)
-//   let entry: SandboxModuleType
-
-//   if (isTypeScript) {
-//     entry = await import(
-//       '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.ts'
-//     )
-//   } else {
-//     entry = await import(
-//       '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.js'
-//     )
-//   }
-
-//   return entry.default.replace(SANDBOX_REGEX_OPTIONS, JSON.stringify(options))
-// }
-
-export {}
+export const createSandboxVanillaEntry = async (
+  id: string,
+  languageExtension: SandboxVanillaExtensionType,
+  carouselHtml: string,
+): Promise<string> => {
+  const indexHTML = await import(
+    '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/index.html'
+  )
+  const theme = THEME_PREFIX + getThemeFromDocument()
+  const title = kebabCaseToPascalCase(id, ' ')
+  return indexHTML.default
+    .replace(SANDBOX_REGEX_THEME, theme)
+    .replace(SANDBOX_REGEX_TITLE, title)
+    .replace(SANDBOX_REGEX_LANGUAGE_EXTENSION, languageExtension)
+    .replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
+    .replace(SANDBOX_REGEX_CODE, carouselHtml)
+}

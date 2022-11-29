@@ -1,4 +1,4 @@
-.examples {
+.playground {
   padding-top: 8rem;
   padding-bottom: 8rem;
   width: 67rem;
@@ -9,22 +9,8 @@
   margin-right: auto;
 }
 
-.examples__h1 {
+.playground__h1 {
   margin-bottom: 4rem;
   font-size: 3.6rem;
   font-weight: 900;
-}
-
-.examples__h2 {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.examples__h3 {
-  margin-top: 4rem;
-  margin-bottom: 2rem;
-  font-size: 2.1rem;
-  font-weight: bold;
 }

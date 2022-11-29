@@ -6,7 +6,7 @@ import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxVanillaPackageJson } from './createSandboxVanillaPackageJson'
 import { createSandboxVanillaTsConfig } from './createSandboxVanillaTsConfig'
 import { createSandboxVanillaTsDeclarations } from './createSandboxVanillaTsDeclarations'
-// import { createSandboxVanillaDefaultEntry } from './createSandboxVanillaEntry'
+import { createSandboxVanillaEntry } from './createSandboxVanillaEntry'
 import { createSandboxVanillaDefaultHtml } from './createSandboxVanillaHtml'
 import { SandboxVanillaCreateType, SandboxConfigType } from '../sandboxTypes'
 import {
@@ -21,6 +21,7 @@ export const createSandboxVanilla = async (
     id,
     carouselScript,
     carouselHtml,
+    slidesHtml,
     slides,
     options,
     styles,
@@ -40,24 +41,12 @@ export const createSandboxVanilla = async (
     SANDBOX_REGEX_OPTIONS,
     JSON.stringify(options),
   )
-  const [
-    entryHtml,
-    // entryScript,
-    // headerScript,
-    // footerScript,
-    // imagesScript,
-    tsDeclarations,
-  ] = await Promise.all([
-    createSandboxVanillaDefaultHtml(
+  const [entryHtml, tsDeclarations] = await Promise.all([
+    createSandboxVanillaEntry(
       title,
       scriptExtension,
-      slides,
-      carouselHtml,
+      slidesHtml || createSandboxVanillaDefaultHtml(slides, carouselHtml),
     ),
-    // indexScript || createSandboxVanillaDefaultEntry(language, options),
-    // createSandboxReactHeader(language, title),
-    // createSandboxReactFooter(language),
-    // createSandboxReactImages(language),
     createSandboxVanillaTsDeclarations(),
   ])
 

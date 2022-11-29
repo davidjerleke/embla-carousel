@@ -12,6 +12,9 @@
     "build": "npm-run-all copy:ts before-build:ts build:ts after-build:ts",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "embla-carousel": "7.0.5"
+  },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
     "shx": "^0.3.4",

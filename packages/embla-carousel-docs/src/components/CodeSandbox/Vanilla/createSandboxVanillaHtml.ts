@@ -1,15 +1,4 @@
-import { THEME_PREFIX } from 'consts/themes'
-import { URLS } from 'consts/urls'
-import { getThemeFromDocument } from 'utils/getThemeFromDocument'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
-import { SandboxVanillaExtensionType } from '../sandboxTypes'
 import { SANDBOX_IMAGE_URLS } from '../sandboxImages'
-import {
-  SANDBOX_REGEX_LANGUAGE_EXTENSION,
-  SANDBOX_REGEX_REPOSITORY_URL,
-  SANDBOX_REGEX_THEME,
-  SANDBOX_REGEX_TITLE,
-} from '../sandboxRegex'
 
 const SANDBOX_SLIDE_TEMPLATE_TEXT_REGEX = /__replace_sandbox_slide_template__/g
 
@@ -18,18 +7,12 @@ const SANDBOX_SLIDE_TEMPLATE_REGEX =
 
 const SANDBOX_SLIDES_REGEX = /__replace_sandbox_slides__/g
 
-export const createSandboxVanillaDefaultHtml = async (
-  id: string = '',
-  languageExtension: SandboxVanillaExtensionType,
+export const createSandboxVanillaDefaultHtml = (
   slides: number[],
-  html: string,
-): Promise<string> => {
-  const indexHTML = await import(
-    '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/index.html'
-  )
-
+  carouselHtml: string,
+): string => {
   const slidesTemplate =
-    html
+    carouselHtml
       .match(SANDBOX_SLIDE_TEMPLATE_REGEX)
       ?.map((match) =>
         match.replace(SANDBOX_SLIDE_TEMPLATE_TEXT_REGEX, ''),
@@ -46,16 +29,9 @@ export const createSandboxVanillaDefaultHtml = async (
     })
     .join('')
 
-  const newHtml = html
+  const newHtml = carouselHtml
     .replace(SANDBOX_SLIDE_TEMPLATE_REGEX, '')
     .replace(SANDBOX_SLIDES_REGEX, slidesHtml)
 
-  const theme = THEME_PREFIX + getThemeFromDocument()
-  const title = kebabCaseToPascalCase(id, ' ')
-  return indexHTML.default
-    .replace(SANDBOX_REGEX_THEME, theme)
-    .replace(SANDBOX_REGEX_TITLE, title)
-    .replace(SANDBOX_REGEX_LANGUAGE_EXTENSION, languageExtension)
-    .replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
-    .replace(/__replace_sandbox_code__/g, newHtml)
+  return newHtml
 }

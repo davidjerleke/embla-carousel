@@ -4,7 +4,7 @@ import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 import { SANDBOX_REGEX_THEME, SANDBOX_REGEX_TITLE } from '../sandboxRegex'
 
 export const createSandboxReactIndexHtml = async (
-  id: string = '',
+  id: string,
 ): Promise<string> => {
   const indexHTML = await import(
     '!!raw-loader!embla-carousel-react-sandboxes/src/SandboxFilesDist/index.html'

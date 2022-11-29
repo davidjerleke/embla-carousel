@@ -5,7 +5,7 @@ import { SANDBOX_REGEX_TITLE } from '../sandboxRegex'
 
 export const createSandboxReactHeader = async (
   language: SandboxLanguageType,
-  id: string = '',
+  id: string,
 ): Promise<string> => {
   const isTypeScript = isLanguageTypeScript(language)
   let header: SandboxModuleType

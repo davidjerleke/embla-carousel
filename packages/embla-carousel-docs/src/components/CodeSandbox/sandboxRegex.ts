@@ -12,3 +12,5 @@ export const SANDBOX_REGEX_IMAGE_IMPORT = /(?<=from\s')(.*)(?=\/images)/g
 export const SANDBOX_REGEX_TITLE = /__replace_sandbox_title__/g
 
 export const SANDBOX_REGEX_THEME = /__replace_sandbox_theme__/g
+
+export const SANDBOX_REGEX_CODE = /__replace_sandbox_code__/g

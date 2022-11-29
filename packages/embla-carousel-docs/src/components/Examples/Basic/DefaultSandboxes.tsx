@@ -39,7 +39,7 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const [carousel, html] = await Promise.all([
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.js'
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.js'
     ),
     import(
       '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'
@@ -56,7 +56,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const [carousel, html] = await Promise.all([
     import(
-      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefaultEntry.ts'
+      '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.ts'
     ),
     import(
       '!!raw-loader!embla-carousel-vanilla-sandboxes/src/SandboxFilesDist/CarouselDefault.html'

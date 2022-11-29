@@ -39,6 +39,7 @@ export type SandboxVanillaCreateType = {
   options: EmblaOptionsType
   slides: number[]
   styles: string
+  slidesHtml?: string
   plugins?: SandboxPluginsType
   language?: SandboxLanguageType
   sandboxOverrides?: SandboxConfigType['files']
