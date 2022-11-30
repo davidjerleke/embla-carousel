@@ -7,7 +7,7 @@ import { createSandboxVanillaPackageJson } from './createSandboxVanillaPackageJs
 import { createSandboxVanillaTsConfig } from './createSandboxVanillaTsConfig'
 import { createSandboxVanillaTsDeclarations } from './createSandboxVanillaTsDeclarations'
 import { createSandboxVanillaEntry } from './createSandboxVanillaEntry'
-import { createSandboxVanillaDefaultHtml } from './createSandboxVanillaHtml'
+import { createSandboxVanillaImagePaths } from './createSandboxVanillaImagePaths'
 import { SandboxVanillaCreateType, SandboxConfigType } from '../sandboxTypes'
 import {
   languageToVanillaExtension,
@@ -21,8 +21,6 @@ export const createSandboxVanilla = async (
     id,
     carouselScript,
     carouselHtml,
-    slidesHtml,
-    slides,
     options,
     styles,
     plugins,
@@ -45,7 +43,7 @@ export const createSandboxVanilla = async (
     createSandboxVanillaEntry(
       title,
       scriptExtension,
-      slidesHtml || createSandboxVanillaDefaultHtml(slides, carouselHtml),
+      createSandboxVanillaImagePaths(carouselHtml),
     ),
     createSandboxVanillaTsDeclarations(),
   ])

@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 `
 
 type PropType = {
-  loop: EmblaOptionsType['loop'] // change to options!
+  loop: EmblaOptionsType['loop']
 }
 
 export const ExampleCarouselIosPicker = (props: PropType) => {
