@@ -11,7 +11,7 @@ const LOOP = false;
 
 const App = () => (<main className="sandbox">
     <Header />
-    <section className="sandbox__ios-picker">
+    <section className="sandbox__carousel">
       <EmblaCarousel loop={LOOP}/>
     </section>
     <Footer />

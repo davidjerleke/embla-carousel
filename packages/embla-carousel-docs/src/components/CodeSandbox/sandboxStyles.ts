@@ -3,12 +3,9 @@ import { styledComponentsStylesToString } from 'utils/styledComponentStylesToStr
 import { resetStyles } from 'components/Layout/GlobalStyles/reset'
 import { baseStyles } from 'components/Layout/GlobalStyles/base'
 import { fontStyles } from 'components/Layout/GlobalStyles/font'
+import { CAROUSEL_RADIUS } from '../Examples/carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS, themeStyles } from 'consts/themes'
-import {
-  CAROUSEL_RADIUS,
-  CAROUSEL_WRAPPER_SPACING,
-} from '../Examples/carouselWrapperStyles'
 
 const sandboxWrapperStyles = css`
   .sandbox {
@@ -18,16 +15,13 @@ const sandboxWrapperStyles = css`
   }
 `
 
-// MOVE sandbox__ios-picker styles?
 const sandboxCarouselStyles = css`
-  .sandbox__carousel,
-  .sandbox__ios-picker {
+  .sandbox__carousel {
     background-color: ${COLORS.BACKGROUND_CODE};
   }
 
   .sandbox__carousel {
     position: relative;
-    padding: ${CAROUSEL_WRAPPER_SPACING};
   }
 
   ${MEDIA.MIN_SM} {

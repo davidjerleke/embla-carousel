@@ -19,8 +19,9 @@ import {
 const BASE_STYLES = css`
   .embla {
     --slide-spacing: __replace_axis_spacing_amount__;
-    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
     --slide-size: __replace_slide_size__;
+    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
+    padding: ${CAROUSEL_WRAPPER_SPACING};
   }
 
   .embla__viewport {
@@ -303,8 +304,8 @@ const PARALLAX_STYLES = css`
 
   .embla__parallax__img {
     max-width: none;
-    width: calc(100% + (1rem * 2));
-    margin-left: -1rem;
+    width: calc(100% + (var(--slide-spacing) * 2));
+    margin-left: calc(var(--slide-spacing) * -1);
   }
 `
 
@@ -417,11 +418,6 @@ const INFINITE_SCROLL_STYLES = css`
 `
 
 const IOS_PICKER_STYLES = css`
-  .sandbox__carousel .embla {
-    margin-top: -${CAROUSEL_WRAPPER_SPACING};
-    margin-bottom: -${CAROUSEL_WRAPPER_SPACING};
-  }
-
   .embla {
     position: relative;
     display: flex;

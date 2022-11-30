@@ -11,6 +11,10 @@ export const createSandboxVanillaDefaultHtml = (
   slides: number[],
   carouselHtml: string,
 ): string => {
+  return carouselHtml
+    .replace(/\/static/g, 'src/images')
+    .replace(/(?<=-\d{1,})(.*)(?=.jpg)/g, '')
+
   const slidesTemplate =
     carouselHtml
       .match(SANDBOX_SLIDE_TEMPLATE_REGEX)

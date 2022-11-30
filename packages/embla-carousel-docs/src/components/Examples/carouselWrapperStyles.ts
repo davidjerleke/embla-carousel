@@ -12,7 +12,6 @@ export const CAROUSEL_WRAPPER_SPACING = '1.6rem'
 export const CAROUSEL_RADIUS = '0.4rem'
 
 export const baseWrapperStyles = css`
-  padding: ${CAROUSEL_WRAPPER_SPACING};
   background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 

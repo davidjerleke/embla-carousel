@@ -7,6 +7,9 @@ import {
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
 
+// Test
+import * as ReactDOMServer from 'react-dom/server'
+
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
@@ -56,16 +59,21 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const [carousel, html] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.js'
     ),
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.html'
-    ),
+    import('components/CodeSandbox/React/SandboxFilesDist/CarouselDefault'),
   ])
+
+  const Car = html.default
+
+  const carouselHtml = ReactDOMServer.renderToStaticMarkup(
+    <Car options={OPTIONS} slides={SLIDES} />,
+  )
+
   return createSandboxVanilla({
     ...SHARED_CONFIG,
     carouselScript: carousel.default,
-    carouselHtml: html.default,
+    carouselHtml: carouselHtml,
     language: 'typescript',
   })
 }
