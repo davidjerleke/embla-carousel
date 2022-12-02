@@ -36,8 +36,8 @@ const EmblaCarousel = (props) => {
                     }
                 });
             }
-            const opacity = 1 - Math.abs(diffToTarget * TWEEN_FACTOR);
-            return numberWithinRange(opacity, 0, 1);
+            const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR);
+            return numberWithinRange(tweenValue, 0, 1);
         });
         setTweenValues(styles);
     }, [emblaApi, setTweenValues]);
@@ -56,7 +56,9 @@ const EmblaCarousel = (props) => {
     return (<div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (<div className="embla__slide" key={index} style={{ opacity: tweenValues[index] }}>
+          {slides.map((index) => (<div className="embla__slide" key={index} style={{
+                ...(tweenValues.length && { opacity: tweenValues[index] }),
+            }}>
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>

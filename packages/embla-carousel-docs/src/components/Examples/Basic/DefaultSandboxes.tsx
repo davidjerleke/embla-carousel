@@ -68,7 +68,7 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 
 const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
   {
-    label: 'Vanilla', // change to variables
+    label: 'Vanilla', // TODO: change to variables
     createSandbox: sandboxVanillaJavaScript,
   },
   {

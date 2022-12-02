@@ -34,17 +34,15 @@ const EmblaCarousel = (props) => {
         emblaMainApi.on('reInit', onSelect);
     }, [emblaMainApi, onSelect]);
     
-    return (<>
-      <div className="embla">
-        <div className="embla__viewport" ref={emblaMainRef}>
-          <div className="embla__container">
-            {slides.map((index) => (<div className="embla__slide" key={index}>
-                <div className="embla__slide__number">
-                  <span>{index + 1}</span>
-                </div>
-                <img className="embla__slide__img" src={imageByIndex(index)} alt="Your alt text"/>
-              </div>))}
-          </div>
+    return (<div className="embla">
+      <div className="embla__viewport" ref={emblaMainRef}>
+        <div className="embla__container">
+          {slides.map((index) => (<div className="embla__slide" key={index}>
+              <div className="embla__slide__number">
+                <span>{index + 1}</span>
+              </div>
+              <img className="embla__slide__img" src={imageByIndex(index)} alt="Your alt text"/>
+            </div>))}
         </div>
       </div>
  
@@ -55,7 +53,7 @@ const EmblaCarousel = (props) => {
           </div>
         </div>
       </div>
-    </>);
+    </div>);
 };
 
 export default EmblaCarousel;

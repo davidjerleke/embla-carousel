@@ -38,8 +38,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           }
         })
       }
-      const scale = 1 - Math.abs(diffToTarget * TWEEN_FACTOR)
-      return numberWithinRange(scale, 0, 1)
+      const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR)
+      return numberWithinRange(tweenValue, 0, 1)
     })
     setTweenValues(styles)
   }, [emblaApi, setTweenValues])
@@ -62,7 +62,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             <div className="embla__slide" key={index}>
               <div
                 className="embla__scale"
-                style={{ transform: `scale(${tweenValues[index]})` }}
+                style={{
+                  ...(tweenValues.length && {
+                    transform: `scale(${tweenValues[index]})`,
+                  }),
+                }}
               >
                 <div className="embla__slide__number">
                   <span>{index + 1}</span>

@@ -6,7 +6,7 @@ import '../css/embla.css';
 const OPTIONS = {};
 
 const emblaNode = document.querySelector('.embla');
-const viewPortNode = emblaNode.querySelector('.embla__viewport');
+const viewportNode = emblaNode.querySelector('.embla__viewport');
 
 // @ts-ignore
-const emblaApi = EmblaCarousel(viewPortNode, OPTIONS);
+const emblaApi = EmblaCarousel(viewportNode, OPTIONS);

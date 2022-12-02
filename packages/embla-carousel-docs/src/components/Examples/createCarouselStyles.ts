@@ -225,7 +225,7 @@ const THUMBS_STYLES = css`
     transition: opacity 0.2s;
   }
 
-  .embla-thumbs__slide.is-selected .embla-thumbs__slide__button {
+  .embla-thumbs__slide--selected .embla-thumbs__slide__button {
     opacity: 1;
   }
 

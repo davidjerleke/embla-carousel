@@ -57,7 +57,11 @@ const EmblaCarousel = (props) => {
                 <span>{index + 1}</span>
               </div>
               <div className="embla__parallax">
-                <div className="embla__parallax__layer" style={{ transform: `translateX(${tweenValues[index]}%)` }}>
+                <div className="embla__parallax__layer" style={{
+                ...(tweenValues.length && {
+                    transform: `translateX(${tweenValues[index]}%)`,
+                }),
+            }}>
                   <img className="embla__slide__img embla__parallax__img" src={imageByIndex(index)} alt="Your alt text"/>
                 </div>
               </div>

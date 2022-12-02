@@ -61,7 +61,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__parallax">
                 <div
                   className="embla__parallax__layer"
-                  style={{ transform: `translateX(${tweenValues[index]}%)` }}
+                  style={{
+                    ...(tweenValues.length && {
+                      transform: `translateX(${tweenValues[index]}%)`,
+                    }),
+                  }}
                 >
                   <img
                     className="embla__slide__img embla__parallax__img"
