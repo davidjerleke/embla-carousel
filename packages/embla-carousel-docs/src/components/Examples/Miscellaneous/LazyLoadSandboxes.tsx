@@ -12,6 +12,12 @@ import {
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
 
+// TODO: Make slide numbers circles again
+// TODO: Add sandbox form labels function to keep it dry
+// TODO: Make sandbox lables like React, Vanilla a constant
+// TODO: Remove emblaNode from vanilla example carousels
+// TODO: Add fileStructureVanilla.ts and fileStructureReact.ts constants
+
 const renameLazyLoadButtonsImport = (rawFile: string): string =>
   rawFile.replace(REPLACE_IMPORT_REGEX, FILE_NAME)
 
