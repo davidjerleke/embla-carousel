@@ -37,7 +37,7 @@ const renameReactButtonsImport = renameImportPath(
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
-  const [carousel, tween] = await Promise.all([
+  const [carousel, arrowsDotsButtons] = await Promise.all([
     import(
       '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselArrowsDots.js'
     ),
@@ -55,7 +55,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     sandboxOverrides: {
       [`src/js/${VANILLA_BUTTONS_FILE_NAME}.js`]: {
         isBinary: false,
-        content: formatJs(tween.default),
+        content: formatJs(arrowsDotsButtons.default),
       },
     },
   })
@@ -63,7 +63,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
-  const [carousel, tween] = await Promise.all([
+  const [carousel, arrowsDotsButtons] = await Promise.all([
     import(
       '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselArrowsDots.ts'
     ),
@@ -81,7 +81,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     sandboxOverrides: {
       [`src/js/${VANILLA_BUTTONS_FILE_NAME}.ts`]: {
         isBinary: false,
-        content: formatTs(tween.default),
+        content: formatTs(arrowsDotsButtons.default),
       },
     },
   })

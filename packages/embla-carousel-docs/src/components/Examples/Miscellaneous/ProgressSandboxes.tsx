@@ -1,5 +1,10 @@
 import React from 'react'
+import * as ReactDOMServer from 'react-dom/server'
+import CarouselProgress from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselProgress'
+import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
+import { loadPrettier } from 'utils/loadPrettier'
+import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   ID,
   SLIDES,
@@ -16,6 +21,64 @@ const SHARED_CONFIG = {
   options: OPTIONS,
   styles: STYLES,
   id: ID,
+}
+
+const VANILLA_PROGRESS_FILE_NAME = 'progress'
+const renameVanillaProgressImport = renameImportPath(
+  'carouselProgressBar',
+  `./${VANILLA_PROGRESS_FILE_NAME}`,
+)
+
+const sandboxVanillaJavaScript = async (): Promise<string> => {
+  const { formatJs } = await loadPrettier()
+  const [carousel, progressBar] = await Promise.all([
+    import(
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselProgress.js'
+    ),
+    import(
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselProgressBar.js`
+    ),
+  ])
+  return createSandboxVanilla({
+    ...SHARED_CONFIG,
+    carouselScript: renameVanillaProgressImport(carousel.default),
+    carouselHtml: ReactDOMServer.renderToStaticMarkup(
+      <CarouselProgress options={OPTIONS} slides={SLIDES} />,
+    ),
+    language: 'javascript',
+    sandboxOverrides: {
+      [`src/js/${VANILLA_PROGRESS_FILE_NAME}.js`]: {
+        isBinary: false,
+        content: formatJs(progressBar.default),
+      },
+    },
+  })
+}
+
+const sandboxVanillaTypeScript = async (): Promise<string> => {
+  const { formatTs } = await loadPrettier()
+  const [carousel, progressBar] = await Promise.all([
+    import(
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselProgress.ts'
+    ),
+    import(
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselProgressBar.ts`
+    ),
+  ])
+  return createSandboxVanilla({
+    ...SHARED_CONFIG,
+    carouselScript: renameVanillaProgressImport(carousel.default),
+    carouselHtml: ReactDOMServer.renderToStaticMarkup(
+      <CarouselProgress options={OPTIONS} slides={SLIDES} />,
+    ),
+    language: 'typescript',
+    sandboxOverrides: {
+      [`src/js/${VANILLA_PROGRESS_FILE_NAME}.ts`]: {
+        isBinary: false,
+        content: formatTs(progressBar.default),
+      },
+    },
+  })
 }
 
 const sandboxReactJavaScript = async (): Promise<string> => {
@@ -41,6 +104,14 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 }
 
 const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
+  {
+    label: 'Vanilla',
+    createSandbox: sandboxVanillaJavaScript,
+  },
+  {
+    label: 'Vanilla+TS',
+    createSandbox: sandboxVanillaTypeScript,
+  },
   {
     label: 'React',
     createSandbox: sandboxReactJavaScript,

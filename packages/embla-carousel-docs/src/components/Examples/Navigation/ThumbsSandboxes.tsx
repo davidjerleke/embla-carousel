@@ -23,10 +23,10 @@ const SHARED_CONFIG = {
   id: ID,
 }
 
-const VANILLA_BUTTONS_FILE_NAME = 'thumb-buttons'
+const VANILLA_THUMBS_FILE_NAME = 'thumb-buttons'
 const renameVanillaThumbsImport = renameImportPath(
   'carouselThumbsButtons',
-  `./${VANILLA_BUTTONS_FILE_NAME}`,
+  `./${VANILLA_THUMBS_FILE_NAME}`,
 )
 
 const REACT_THUMBS_FILE_NAME = 'EmblaCarouselThumbsButton'
@@ -37,7 +37,7 @@ const renameReactThumbsImport = renameImportPath(
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
-  const [carousel, tween] = await Promise.all([
+  const [carousel, thumbsButtons] = await Promise.all([
     import(
       '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselThumbs.js'
     ),
@@ -53,9 +53,9 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_BUTTONS_FILE_NAME}.js`]: {
+      [`src/js/${VANILLA_THUMBS_FILE_NAME}.js`]: {
         isBinary: false,
-        content: formatJs(tween.default),
+        content: formatJs(thumbsButtons.default),
       },
     },
   })
@@ -63,7 +63,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
-  const [carousel, tween] = await Promise.all([
+  const [carousel, thumbsButtons] = await Promise.all([
     import(
       '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselThumbs.ts'
     ),
@@ -79,9 +79,9 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_BUTTONS_FILE_NAME}.ts`]: {
+      [`src/js/${VANILLA_THUMBS_FILE_NAME}.ts`]: {
         isBinary: false,
-        content: formatTs(tween.default),
+        content: formatTs(thumbsButtons.default),
       },
     },
   })

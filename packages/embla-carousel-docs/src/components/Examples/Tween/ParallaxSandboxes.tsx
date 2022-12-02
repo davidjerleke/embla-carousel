@@ -18,10 +18,10 @@ const SHARED_CONFIG = {
   id: ID,
 }
 
-const VANILLA_TWEEN_PARALLAX_FILE_NAME = 'tween-parallax'
-const renameVanillaScaleTweenImport = renameImportPath(
+const VANILLA_TWEEN_FILE_NAME = 'tween-parallax'
+const renameVanillaTweenImport = renameImportPath(
   'carouselParallaxTween',
-  `./${VANILLA_TWEEN_PARALLAX_FILE_NAME}`,
+  `./${VANILLA_TWEEN_FILE_NAME}`,
 )
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
@@ -36,13 +36,13 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaScaleTweenImport(carousel.default),
+    carouselScript: renameVanillaTweenImport(carousel.default),
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselParallax options={OPTIONS} slides={SLIDES} />,
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_TWEEN_PARALLAX_FILE_NAME}.js`]: {
+      [`src/js/${VANILLA_TWEEN_FILE_NAME}.js`]: {
         isBinary: false,
         content: formatJs(tween.default),
       },
@@ -62,13 +62,13 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaScaleTweenImport(carousel.default),
+    carouselScript: renameVanillaTweenImport(carousel.default),
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselParallax options={OPTIONS} slides={SLIDES} />,
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_TWEEN_PARALLAX_FILE_NAME}.ts`]: {
+      [`src/js/${VANILLA_TWEEN_FILE_NAME}.ts`]: {
         isBinary: false,
         content: formatTs(tween.default),
       },
