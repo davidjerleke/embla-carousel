@@ -350,7 +350,7 @@ const LAZY_LOAD_STYLES = css`
     transition: opacity 0.2s ease-in-out;
   }
 
-  .embla__lazy-load.has-loaded .embla__lazy-load__img {
+  .embla__lazy-load--has-loaded .embla__lazy-load__img {
     opacity: 1;
   }
 
