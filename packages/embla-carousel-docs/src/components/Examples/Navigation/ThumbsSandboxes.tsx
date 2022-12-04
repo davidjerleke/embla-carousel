@@ -1,10 +1,9 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselThumbs from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselThumbs'
+import CarouselThumbs from 'components/CodeSandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   ID,
   SLIDES,
@@ -24,30 +23,21 @@ const SHARED_CONFIG = {
 }
 
 const VANILLA_THUMBS_FILE_NAME = 'thumb-buttons'
-const renameVanillaThumbsImport = renameImportPath(
-  'carouselThumbsButtons',
-  `./${VANILLA_THUMBS_FILE_NAME}`,
-)
-
 const REACT_THUMBS_FILE_NAME = 'EmblaCarouselThumbsButton'
-const renameReactThumbsImport = renameImportPath(
-  'CarouselThumbsButton',
-  `./${REACT_THUMBS_FILE_NAME}`,
-)
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, thumbsButtons] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselThumbs.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselThumbsButtons.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.js`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaThumbsImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselThumbs options={OPTIONS} slides={SLIDES} />,
     ),
@@ -65,15 +55,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, thumbsButtons] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselThumbs.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselThumbsButtons.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaThumbsImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselThumbs options={OPTIONS} slides={SLIDES} />,
     ),
@@ -91,15 +81,15 @@ const sandboxReactJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselThumbs.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.jsx`
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselThumbsButton.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.jsx`
     ),
   ])
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: renameReactThumbsImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'javascript',
     sandboxOverrides: {
       [`src/js/${REACT_THUMBS_FILE_NAME}.jsx`]: {
@@ -114,15 +104,15 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselThumbs.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.tsx`
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselThumbsButton.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.tsx`
     ),
   ])
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: renameReactThumbsImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'typescript',
     sandboxOverrides: {
       [`src/js/${REACT_THUMBS_FILE_NAME}.tsx`]: {

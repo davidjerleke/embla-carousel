@@ -8,17 +8,18 @@ import { createSandboxReactDefaultEntry } from './createSandboxReactEntry'
 import { createSandboxReactHeader } from './createSandboxReactHeader'
 import { createSandboxReactFooter } from './createSandboxReactFooter'
 import { createSandboxReactImages } from './createSandboxReactImages'
+import { createSandboxReactImagePath } from './createSandboxReactImagePath'
 import { createSandboxReactTsConfig } from './createSandboxReactTsConfig'
 import { createSandboxReactTsDeclarations } from './createSandboxReactTsDeclarations'
-import { isLanguageTypeScript, languageToReactExtension } from '../sandboxUtils'
 import { SandboxConfigType, SandboxReactCreateType } from '../sandboxTypes'
+import { isLanguageTypeScript, languageToReactExtension } from '../sandboxUtils'
 
 export const createSandboxReact = async (
   config: SandboxReactCreateType,
 ): Promise<string> => {
   const {
     id,
-    carouselScript,
+    carouselScript: carouselScriptRaw,
     indexScript,
     slides,
     options,
@@ -34,6 +35,7 @@ export const createSandboxReact = async (
   const formatScript = isTypeScript ? formatTs : formatJs
   const packageJson = createSandboxReactPackageJson(language, title, plugins)
   const tsConfig = createSandboxReactTsConfig()
+  const carouselScript = createSandboxReactImagePath(carouselScriptRaw)
   const [
     entryHtml,
     entryScript,

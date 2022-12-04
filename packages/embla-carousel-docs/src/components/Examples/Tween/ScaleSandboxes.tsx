@@ -1,10 +1,9 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselScale from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselScale'
+import CarouselScale from 'components/CodeSandbox/React/SandboxFilesSrc/Scale/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Tween/Scale'
 import {
   CreateCodeSandboxForms,
@@ -19,24 +18,20 @@ const SHARED_CONFIG = {
 }
 
 const VANILLA_TWEEN_FILE_NAME = 'tween-scale'
-const renameVanillaTweenImport = renameImportPath(
-  'carouselScaleTween',
-  `./${VANILLA_TWEEN_FILE_NAME}`,
-)
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, tween] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselScale.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Scale/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselScaleTween.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Scale/tween-scale.js`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaTweenImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselScale options={OPTIONS} slides={SLIDES} />,
     ),
@@ -54,15 +49,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, tween] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselScale.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Scale/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselScaleTween.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Scale/tween-scale.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaTweenImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselScale options={OPTIONS} slides={SLIDES} />,
     ),
@@ -78,7 +73,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselScale.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Scale/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -89,7 +84,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselScale.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Scale/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

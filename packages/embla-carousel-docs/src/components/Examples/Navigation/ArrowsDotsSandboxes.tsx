@@ -1,10 +1,9 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselArrowsDots from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselArrowsDots'
+import CarouselArrowsDots from 'components/CodeSandbox/React/SandboxFilesSrc/ArrowsDots/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   ID,
   SLIDES,
@@ -24,30 +23,21 @@ const SHARED_CONFIG = {
 }
 
 const VANILLA_BUTTONS_FILE_NAME = 'arrows-dots-buttons'
-const renameVanillaButtonsImport = renameImportPath(
-  'carouselArrowsDotsButtons',
-  `./${VANILLA_BUTTONS_FILE_NAME}`,
-)
-
-const REACT_BUTTONS_FILE_NAME = 'EmblaCarouselButtons'
-const renameReactButtonsImport = renameImportPath(
-  'CarouselArrowsDotsButtons',
-  `./${REACT_BUTTONS_FILE_NAME}`,
-)
+const REACT_BUTTONS_FILE_NAME = 'EmblaCarouselArrowsDotsButtons'
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, arrowsDotsButtons] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselArrowsDots.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ArrowsDots/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselArrowsDotsButtons.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ArrowsDots/arrows-dots-buttons.js`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaButtonsImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselArrowsDots options={OPTIONS} slides={SLIDES} />,
     ),
@@ -65,15 +55,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, arrowsDotsButtons] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselArrowsDots.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ArrowsDots/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselArrowsDotsButtons.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ArrowsDots/arrows-dots-buttons.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaButtonsImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselArrowsDots options={OPTIONS} slides={SLIDES} />,
     ),
@@ -91,15 +81,15 @@ const sandboxReactJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDots.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ArrowsDots/EmblaCarousel.jsx`
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDotsButtons.jsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ArrowsDots/EmblaCarouselArrowsDotsButtons.jsx`
     ),
   ])
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: renameReactButtonsImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'javascript',
     sandboxOverrides: {
       [`src/js/${REACT_BUTTONS_FILE_NAME}.jsx`]: {
@@ -114,15 +104,15 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, buttons] = await Promise.all([
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDots.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ArrowsDots/EmblaCarousel.tsx`
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselArrowsDotsButtons.tsx`
+      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ArrowsDots/EmblaCarouselArrowsDotsButtons.tsx`
     ),
   ])
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: renameReactButtonsImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'typescript',
     sandboxOverrides: {
       [`src/js/${REACT_BUTTONS_FILE_NAME}.tsx`]: {

@@ -1,13 +1,13 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import { BASE_CSS, SANDBOX_CSS } from '../sandboxStyles'
 import { SANDBOX_IMAGES } from '../sandboxImages'
-import { SANDBOX_REGEX_OPTIONS } from '../sandboxRegex'
 import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxVanillaPackageJson } from './createSandboxVanillaPackageJson'
 import { createSandboxVanillaTsConfig } from './createSandboxVanillaTsConfig'
 import { createSandboxVanillaTsDeclarations } from './createSandboxVanillaTsDeclarations'
 import { createSandboxVanillaEntry } from './createSandboxVanillaEntry'
 import { createSandboxVanillaImagePaths } from './createSandboxVanillaImagePaths'
+import { createSandboxVanillaOptions } from './createSandboxVanillaOptions'
 import { SandboxVanillaCreateType, SandboxConfigType } from '../sandboxTypes'
 import {
   languageToVanillaExtension,
@@ -35,11 +35,7 @@ export const createSandboxVanilla = async (
   const formatScript = isTypeScript ? formatTs : formatJs
   const packageJson = createSandboxVanillaPackageJson(language, title, plugins)
   const tsConfig = createSandboxVanillaTsConfig()
-  const entryScript = carouselScript.replace(
-    SANDBOX_REGEX_OPTIONS,
-    JSON.stringify(options),
-  )
-
+  const entryScript = createSandboxVanillaOptions(carouselScript, options)
   const [entryHtml, tsDeclarations] = await Promise.all([
     createSandboxVanillaEntry(
       title,

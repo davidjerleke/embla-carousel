@@ -1,7 +1,7 @@
 import React from 'react'
 import docsPackageJson from 'embla-carousel-docs/package.json'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselAutoplay from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselAutoplay'
+import CarouselAutoplay from 'components/CodeSandbox/React/SandboxFilesSrc/Autoplay/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import {
@@ -28,7 +28,7 @@ const SHARED_CONFIG = {
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselAutoplay.js'
+    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Autoplay/EmblaCarousel.js'
   )
   return createSandboxVanilla({
     ...SHARED_CONFIG,
@@ -42,7 +42,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselAutoplay.ts'
+    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Autoplay/EmblaCarousel.ts'
   )
   return createSandboxVanilla({
     ...SHARED_CONFIG,
@@ -56,7 +56,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselAutoplay.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Autoplay/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -67,7 +67,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselAutoplay.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Autoplay/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

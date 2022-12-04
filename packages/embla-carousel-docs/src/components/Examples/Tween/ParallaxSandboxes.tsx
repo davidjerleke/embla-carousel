@@ -1,11 +1,10 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselParallax from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselParallax'
+import CarouselParallax from 'components/CodeSandbox/React/SandboxFilesSrc/Parallax/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Tween/Parallax'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
@@ -19,24 +18,20 @@ const SHARED_CONFIG = {
 }
 
 const VANILLA_TWEEN_FILE_NAME = 'tween-parallax'
-const renameVanillaTweenImport = renameImportPath(
-  'carouselParallaxTween',
-  `./${VANILLA_TWEEN_FILE_NAME}`,
-)
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, tween] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselParallax.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Parallax/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselParallaxTween.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Parallax/tween-parallax.js`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaTweenImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselParallax options={OPTIONS} slides={SLIDES} />,
     ),
@@ -54,15 +49,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, tween] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselParallax.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Parallax/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselParallaxTween.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Parallax/tween-parallax.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaTweenImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselParallax options={OPTIONS} slides={SLIDES} />,
     ),
@@ -78,7 +73,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselParallax.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Parallax/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -89,7 +84,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselParallax.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Parallax/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

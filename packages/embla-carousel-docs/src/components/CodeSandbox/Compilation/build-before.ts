@@ -10,7 +10,7 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
     `${path}/`,
     (filename, content) => {
       fs.writeFile(
-        `${path}/${filename}`,
+        filename,
         content.replace(
           EMPTY_LINE_REGEX,
           `/* The TypeScript compiler won't clear this empty line! */ \n`,

@@ -22,10 +22,13 @@ export const isLanguageTypeScript = (
   return language === 'typescript'
 }
 
-export const renameImportPath =
-  (oldName: string, newName: string) => (rawFile: string) => {
-    return rawFile.replace(
-      new RegExp(`(?<=from\\s'|")(.*)${oldName}(?='|")`),
-      newName,
-    )
-  }
+export const renameImportPath = (
+  rawFile: string,
+  oldName: string,
+  newName: string,
+): string => {
+  return rawFile.replace(
+    new RegExp(`(?<=from\\s'|")(.*)${oldName}(?='|")`),
+    newName,
+  )
+}

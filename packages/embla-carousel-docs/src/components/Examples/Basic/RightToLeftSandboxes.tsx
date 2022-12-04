@@ -1,6 +1,6 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselRightToLeft from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselRightToLeft'
+import CarouselRightToLeft from 'components/CodeSandbox/React/SandboxFilesSrc/RightToLeft/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import {
@@ -23,7 +23,7 @@ const SHARED_CONFIG = {
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.js'
+    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Default/EmblaCarousel.js'
   )
   return createSandboxVanilla({
     ...SHARED_CONFIG,
@@ -37,7 +37,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
 
 const sandboxVanillaTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselDefault.ts'
+    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Default/EmblaCarousel.ts'
   )
   return createSandboxVanilla({
     ...SHARED_CONFIG,
@@ -51,7 +51,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselRightToLeft.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/RightToLeft/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -62,7 +62,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselRightToLeft.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/RightToLeft/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

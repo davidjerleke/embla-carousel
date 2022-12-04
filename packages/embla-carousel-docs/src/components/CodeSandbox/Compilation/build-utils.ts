@@ -13,11 +13,14 @@ export const readFiles = (
   onError: (error: NodeJS.ErrnoException | null) => void,
 ) => {
   fs.readdirSync(dirname, { withFileTypes: true }).forEach((entry) => {
-    if (entry.isDirectory()) return readFiles(dirname, onFileContent, onError)
+    if (entry.isDirectory()) console.log(entry, 'entry')
+    if (entry.isDirectory()) {
+      return readFiles(dirname + entry.name + '/', onFileContent, onError)
+    }
 
     fs.readFile(dirname + entry.name, 'utf-8', (error, content) => {
       if (error) return onError(error)
-      onFileContent(entry.name, content)
+      onFileContent(dirname + entry.name, content)
     })
   })
 }

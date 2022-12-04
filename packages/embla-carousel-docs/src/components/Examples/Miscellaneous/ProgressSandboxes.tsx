@@ -1,10 +1,9 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselProgress from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselProgress'
+import CarouselProgress from 'components/CodeSandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   ID,
   SLIDES,
@@ -23,25 +22,21 @@ const SHARED_CONFIG = {
   id: ID,
 }
 
-const VANILLA_PROGRESS_FILE_NAME = 'progress'
-const renameVanillaProgressImport = renameImportPath(
-  'carouselProgressBar',
-  `./${VANILLA_PROGRESS_FILE_NAME}`,
-)
+const VANILLA_PROGRESS_FILE_NAME = 'progress-bar'
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, progressBar] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselProgress.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselProgressBar.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.js`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaProgressImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselProgress options={OPTIONS} slides={SLIDES} />,
     ),
@@ -59,15 +54,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, progressBar] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselProgress.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselProgressBar.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaProgressImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselProgress options={OPTIONS} slides={SLIDES} />,
     ),
@@ -83,7 +78,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselProgress.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Progress/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -94,7 +89,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselProgress.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Progress/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,

@@ -53,14 +53,14 @@ const BASE_STYLES = css`
     ${createSquareSizeStyles('4.6rem')}
     z-index: ${LAYERS.STEP};
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 0.6rem;
+    right: 0.6rem;
+    border-radius: 50%;
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 4.6rem;
     font-weight: 500;
     text-align: center;
     pointer-events: none;
-    border-top-left-radius: 0.4rem;
   }
 
   .embla__slide__number > span {
@@ -240,14 +240,14 @@ const THUMBS_STYLES = css`
     ${createSquareSizeStyles('3rem')}
     z-index: ${LAYERS.STEP};
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 0.3rem;
+    right: 0.3rem;
+    border-radius: 50%;
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 3rem;
     font-weight: 500;
     text-align: center;
     pointer-events: none;
-    border-top-left-radius: 0.4rem;
   }
 
   .embla-thumbs__slide__number > span {

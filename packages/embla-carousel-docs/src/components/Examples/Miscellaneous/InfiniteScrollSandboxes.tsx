@@ -1,10 +1,9 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselInfiniteScroll from 'components/CodeSandbox/React/SandboxFilesSrc/CarouselInfiniteScroll'
+import CarouselInfiniteScroll from 'components/CodeSandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { loadPrettier } from 'utils/loadPrettier'
-import { renameImportPath } from 'components/CodeSandbox/sandboxUtils'
 import {
   ID,
   SLIDES,
@@ -24,25 +23,21 @@ const SHARED_CONFIG = {
 }
 
 const VANILLA_INFINITE_SCROLL_FILE_NAME = 'infinite-scroll'
-const renameVanillaInfiniteScrollImport = renameImportPath(
-  'carouselInfiniteScrollHandler',
-  `./${VANILLA_INFINITE_SCROLL_FILE_NAME}`,
-)
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
   const { formatJs } = await loadPrettier()
   const [carousel, infiniteScroll] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselInfiniteScroll.js'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/InfiniteScroll/EmblaCarousel.js'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselInfiniteScrollHandler.js`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/InfiniteScroll/infinite-scroll.js`
     ),
   ])
 
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaInfiniteScrollImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselInfiniteScroll options={OPTIONS} slides={SLIDES} />,
     ),
@@ -60,15 +55,15 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
   const { formatTs } = await loadPrettier()
   const [carousel, infiniteScroll] = await Promise.all([
     import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/CarouselInfiniteScroll.ts'
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/InfiniteScroll/EmblaCarousel.ts'
     ),
     import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/carouselInfiniteScrollHandler.ts`
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/InfiniteScroll/infinite-scroll.ts`
     ),
   ])
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: renameVanillaInfiniteScrollImport(carousel.default),
+    carouselScript: carousel.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <CarouselInfiniteScroll options={OPTIONS} slides={SLIDES} />,
     ),
@@ -84,7 +79,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
 
 const sandboxReactJavaScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselInfiniteScroll.jsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/InfiniteScroll/EmblaCarousel.jsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
@@ -95,7 +90,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
 
 const sandboxReactTypeScript = async (): Promise<string> => {
   const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/CarouselInfiniteScroll.tsx`
+    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/InfiniteScroll/EmblaCarousel.tsx`
   )
   return createSandboxReact({
     ...SHARED_CONFIG,
