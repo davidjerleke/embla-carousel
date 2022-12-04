@@ -143,10 +143,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             </div>
           ))}
           {hasMoreToLoad && (
-            <div className="embla__slide embla__slide__loading">
-              {loadingMore && (
-                <span className="embla__slide__loading__spinner" />
+            <div
+              className={'embla-infinite-scroll'.concat(
+                loadingMore ? ' embla-infinite-scroll--loading-more' : '',
               )}
+            >
+              <span className="embla-infinite-scroll__spinner" />
             </div>
           )}
         </div>

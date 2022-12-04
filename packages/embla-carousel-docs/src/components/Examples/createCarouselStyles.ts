@@ -375,7 +375,7 @@ const CLASS_NAMES_STYLES = css`
 `
 
 const INFINITE_SCROLL_STYLES = css`
-  .embla__slide__loading {
+  .embla-infinite-scroll {
     position: relative;
     flex: 0 0 15rem;
     min-__replace-axis-size__: 0;
@@ -385,11 +385,11 @@ const INFINITE_SCROLL_STYLES = css`
     justify-content: center;
   }
 
-  .embla__slide__loading__spinner {
+  .embla-infinite-scroll__spinner {
+    display: none;
     border: 0.4rem solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
     border-left: 0.4rem solid ${COLORS.TEXT_HIGH_CONTRAST};
     font-size: 1rem;
-    display: inline-flex;
     position: absolute;
     top: 0;
     left: 0;
@@ -402,9 +402,13 @@ const INFINITE_SCROLL_STYLES = css`
     ${createSquareSizeStyles('5rem')};
   }
 
-  .embla__slide__loading__spinner:after {
+  .embla-infinite-scroll__spinner:after {
     border-radius: inherit;
     ${createSquareSizeStyles('5rem')};
+  }
+
+  .embla-infinite-scroll--loading-more > .embla-infinite-scroll__spinner {
+    display: inline-flex;
   }
 
   @keyframes loading {

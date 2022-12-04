@@ -22,6 +22,8 @@ import {
 // TODO: Remove emblaNode from vanilla example carousels
 // TODO: Add fileStructureVanilla.ts and fileStructureReact.ts constants
 // TODO: Add React.FC to all components!
+// TODO: Make plugins a constant
+// TODO: Add try catch to prettier format so page doesn't crash
 
 const SHARED_CONFIG = {
   slides: SLIDES,

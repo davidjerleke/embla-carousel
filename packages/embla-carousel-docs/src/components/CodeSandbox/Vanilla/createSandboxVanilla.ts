@@ -39,6 +39,7 @@ export const createSandboxVanilla = async (
     SANDBOX_REGEX_OPTIONS,
     JSON.stringify(options),
   )
+
   const [entryHtml, tsDeclarations] = await Promise.all([
     createSandboxVanillaEntry(
       title,
