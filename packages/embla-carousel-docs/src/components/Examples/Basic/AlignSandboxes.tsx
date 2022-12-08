@@ -8,6 +8,10 @@ import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
+import {
+  createSandboxLabel,
+  SANDBOX_LABELS,
+} from 'components/CodeSandbox/sandboxLabels'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
@@ -67,22 +71,10 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 }
 
 const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  {
-    label: 'Vanilla',
-    createSandbox: sandboxVanillaJavaScript,
-  },
-  {
-    label: 'Vanilla+TS',
-    createSandbox: sandboxVanillaTypeScript,
-  },
-  {
-    label: 'React',
-    createSandbox: sandboxReactJavaScript,
-  },
-  {
-    label: 'React+TS',
-    createSandbox: sandboxReactTypeScript,
-  },
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, sandboxVanillaJavaScript),
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, sandboxVanillaTypeScript),
+  createSandboxLabel(SANDBOX_LABELS.REACT_JS, sandboxReactJavaScript),
+  createSandboxLabel(SANDBOX_LABELS.REACT_TS, sandboxReactTypeScript),
 ]
 
 export const ExampleCarouselAlignSandboxes = () => {

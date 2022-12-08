@@ -14,9 +14,11 @@ import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
+import {
+  createSandboxLabel,
+  SANDBOX_LABELS,
+} from 'components/CodeSandbox/sandboxLabels'
 
-// TODO: Add sandbox form labels function to keep it dry
-// TODO: Make sandbox lables like React, Vanilla a constant
 // TODO: Remove emblaNode from vanilla example carousels
 // TODO: Add fileStructureVanilla.ts and fileStructureReact.ts constants
 // TODO: Add React.FC to all components!
@@ -132,22 +134,10 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 }
 
 const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  {
-    label: 'Vanilla',
-    createSandbox: sandboxVanillaJavaScript,
-  },
-  {
-    label: 'Vanilla+TS',
-    createSandbox: sandboxVanillaTypeScript,
-  },
-  {
-    label: 'React',
-    createSandbox: sandboxReactJavaScript,
-  },
-  {
-    label: 'React+TS',
-    createSandbox: sandboxReactTypeScript,
-  },
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, sandboxVanillaJavaScript),
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, sandboxVanillaTypeScript),
+  createSandboxLabel(SANDBOX_LABELS.REACT_JS, sandboxReactJavaScript),
+  createSandboxLabel(SANDBOX_LABELS.REACT_TS, sandboxReactTypeScript),
 ]
 
 export const ExampleCarouselLazyLoadSandboxes = () => {

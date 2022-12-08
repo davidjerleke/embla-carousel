@@ -10,6 +10,10 @@ import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
+import {
+  createSandboxLabel,
+  SANDBOX_LABELS,
+} from 'components/CodeSandbox/sandboxLabels'
 
 const SHARED_CONFIG = {
   slides: [],
@@ -126,41 +130,33 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
 }
 
 const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  {
-    label: 'Vanilla',
-    createSandbox: () => sandboxVanillaJavaScript(false),
-  },
-  {
-    label: 'Vanilla+TS',
-    createSandbox: () => sandboxVanillaTypeScript(false),
-  },
-  {
-    label: 'React',
-    createSandbox: () => sandboxReactJavaScript(false),
-  },
-  {
-    label: 'React+TS',
-    createSandbox: () => sandboxReactTypeScript(false),
-  },
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, () =>
+    sandboxVanillaJavaScript(false),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, () =>
+    sandboxVanillaTypeScript(false),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.REACT_JS, () =>
+    sandboxReactJavaScript(false),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.REACT_TS, () =>
+    sandboxReactTypeScript(false),
+  ),
 ]
 
 const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  {
-    label: 'Vanilla',
-    createSandbox: () => sandboxVanillaJavaScript(true),
-  },
-  {
-    label: 'Vanilla+TS',
-    createSandbox: () => sandboxVanillaTypeScript(true),
-  },
-  {
-    label: 'React',
-    createSandbox: () => sandboxReactJavaScript(true),
-  },
-  {
-    label: 'React+TS',
-    createSandbox: () => sandboxReactTypeScript(true),
-  },
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, () =>
+    sandboxVanillaJavaScript(true),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, () =>
+    sandboxVanillaTypeScript(true),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.REACT_JS, () =>
+    sandboxReactJavaScript(true),
+  ),
+  createSandboxLabel(SANDBOX_LABELS.REACT_TS, () =>
+    sandboxReactTypeScript(true),
+  ),
 ]
 
 export const ExampleCarouselIosPickerDefaultSandboxes = () => {
