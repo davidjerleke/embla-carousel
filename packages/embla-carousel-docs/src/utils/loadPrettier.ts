@@ -35,17 +35,33 @@ export const loadPrettier = async () => {
     plugins: [babelParser],
   }
 
+  const prettierFormatSafe = (
+    subject: string,
+    parser: PretterOptions,
+  ): string => {
+    let formattedString = ''
+    try {
+      formattedString = prettier.format(subject, parser)
+    } catch (error) {
+      console.warn(
+        'Pretter was not able to format a file caused by invalid syntax',
+        error,
+      )
+    }
+    return formattedString
+  }
+
   const formatHtml = (html: string): string =>
-    prettier.format(html, prettierHtmlParser)
+    prettierFormatSafe(html, prettierHtmlParser)
 
   const formatCss = (css: string): string =>
-    prettier.format(css, prettierCssParser)
+    prettierFormatSafe(css, prettierCssParser)
 
   const formatJs = (js: string): string =>
-    prettier.format(js, prettierBabelParser)
+    prettierFormatSafe(js, prettierBabelParser)
 
   const formatTs = (ts: string): string =>
-    prettier.format(ts, prettierBabeTsParser)
+    prettierFormatSafe(ts, prettierBabeTsParser)
 
   return {
     prettier,

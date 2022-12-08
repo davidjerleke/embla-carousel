@@ -13,7 +13,6 @@ export const readFiles = (
   onError: (error: NodeJS.ErrnoException | null) => void,
 ) => {
   fs.readdirSync(dirname, { withFileTypes: true }).forEach((entry) => {
-    if (entry.isDirectory()) console.log(entry, 'entry')
     if (entry.isDirectory()) {
       return readFiles(dirname + entry.name + '/', onFileContent, onError)
     }

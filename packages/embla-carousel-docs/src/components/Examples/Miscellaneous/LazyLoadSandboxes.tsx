@@ -21,7 +21,6 @@ import {
 // TODO: Add fileStructureVanilla.ts and fileStructureReact.ts constants
 // TODO: Add React.FC to all components!
 // TODO: Make plugins a constant
-// TODO: Add try catch to prettier format so page doesn't crash
 // TODO: Check if title can be added to each Example carousel instead of MDX
 
 const SHARED_CONFIG = {
