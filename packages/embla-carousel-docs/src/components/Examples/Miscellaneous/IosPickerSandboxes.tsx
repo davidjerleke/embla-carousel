@@ -1,18 +1,15 @@
 import React from 'react'
-import { loadPrettier } from 'utils/loadPrettier'
+import * as ReactDOMServer from 'react-dom/server'
+import CarouselIosPicker from 'components/CodeSandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
+import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
 import { createSandboxReactIosPickerEntry } from 'components/CodeSandbox/React/createSandboxReactEntry'
+import { loadPrettier } from 'utils/loadPrettier'
 import { ID, STYLES } from 'components/Examples/Miscellaneous/IosPicker'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
-
-const renameIosPickerItemImport = (rawFile: string): string =>
-  rawFile.replace(REPLACE_IMPORT_REGEX, FILE_NAME)
-
-const REPLACE_IMPORT_REGEX = /(?<=.\/)CarouselIosPickerItem/
-const FILE_NAME = 'EmblaCarouselIosPickerItem'
 
 const SHARED_CONFIG = {
   slides: [],
@@ -20,9 +17,62 @@ const SHARED_CONFIG = {
   id: ID,
 }
 
+const VANILLA_IOS_PICKER_FILE_NAME = 'ios-picker'
+const REACT_IOS_PICKER_FILE_NAME = 'EmblaCarouselIosPickerItem'
+
+const sandboxVanillaJavaScript = async (loop: boolean): Promise<string> => {
+  const { formatJs } = await loadPrettier()
+  const [carousel, infiniteScroll] = await Promise.all([
+    import(
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.js'
+    ),
+    import(
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.js`
+    ),
+  ])
+
+  return createSandboxVanilla({
+    ...SHARED_CONFIG,
+    options: { loop },
+    carouselScript: carousel.default,
+    carouselHtml: ReactDOMServer.renderToStaticMarkup(<CarouselIosPicker />),
+    language: 'javascript',
+    sandboxOverrides: {
+      [`src/js/${VANILLA_IOS_PICKER_FILE_NAME}.js`]: {
+        isBinary: false,
+        content: formatJs(infiniteScroll.default),
+      },
+    },
+  })
+}
+
+const sandboxVanillaTypeScript = async (loop: boolean): Promise<string> => {
+  const { formatTs } = await loadPrettier()
+  const [carousel, infiniteScroll] = await Promise.all([
+    import(
+      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.ts'
+    ),
+    import(
+      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.ts`
+    ),
+  ])
+  return createSandboxVanilla({
+    ...SHARED_CONFIG,
+    options: { loop },
+    carouselScript: carousel.default,
+    carouselHtml: ReactDOMServer.renderToStaticMarkup(<CarouselIosPicker />),
+    language: 'typescript',
+    sandboxOverrides: {
+      [`src/js/${VANILLA_IOS_PICKER_FILE_NAME}.ts`]: {
+        isBinary: false,
+        content: formatTs(infiniteScroll.default),
+      },
+    },
+  })
+}
+
 const sandboxReactJavaScript = async (loop: boolean): Promise<string> => {
   const { formatJs } = await loadPrettier()
-  console.log('loop', loop)
   const [entry, carousel, item] = await Promise.all([
     createSandboxReactIosPickerEntry('javascript', loop),
     import(
@@ -37,10 +87,10 @@ const sandboxReactJavaScript = async (loop: boolean): Promise<string> => {
     ...SHARED_CONFIG,
     indexScript: entry,
     options: { loop },
-    carouselScript: renameIosPickerItemImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${FILE_NAME}.jsx`]: {
+      [`src/js/${REACT_IOS_PICKER_FILE_NAME}.jsx`]: {
         isBinary: false,
         content: formatJs(item.default),
       },
@@ -64,10 +114,10 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
     ...SHARED_CONFIG,
     indexScript: entry,
     options: { loop },
-    carouselScript: renameIosPickerItemImport(carousel.default),
+    carouselScript: carousel.default,
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${FILE_NAME}.tsx`]: {
+      [`src/js/${REACT_IOS_PICKER_FILE_NAME}.tsx`]: {
         isBinary: false,
         content: formatTs(item.default),
       },
@@ -76,6 +126,14 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
 }
 
 const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] = [
+  {
+    label: 'Vanilla',
+    createSandbox: () => sandboxVanillaJavaScript(false),
+  },
+  {
+    label: 'Vanilla+TS',
+    createSandbox: () => sandboxVanillaTypeScript(false),
+  },
   {
     label: 'React',
     createSandbox: () => sandboxReactJavaScript(false),
@@ -87,6 +145,14 @@ const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] = [
 ]
 
 const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] = [
+  {
+    label: 'Vanilla',
+    createSandbox: () => sandboxVanillaJavaScript(true),
+  },
+  {
+    label: 'Vanilla+TS',
+    createSandbox: () => sandboxVanillaTypeScript(true),
+  },
   {
     label: 'React',
     createSandbox: () => sandboxReactJavaScript(true),

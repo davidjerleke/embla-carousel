@@ -3,20 +3,21 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { flushSync } from 'react-dom';
 
 const CIRCLE_DEGREES = 360;
-const WHEEL_ITEM_SIZE = 32;
+const WHEEL_ITEM_SIZE = 30;
 const WHEEL_ITEM_COUNT = 18;
 const WHEEL_ITEMS_IN_VIEW = 4;
-const WHEEL_ITEM_RADIUS = CIRCLE_DEGREES / WHEEL_ITEM_COUNT;
-const WHEEL_RADIUS = Math.round(WHEEL_ITEM_SIZE / 2 / Math.tan(Math.PI / WHEEL_ITEM_COUNT));
-const IN_VIEW_DEGREES = WHEEL_ITEM_RADIUS * WHEEL_ITEMS_IN_VIEW;
+
+export const WHEEL_ITEM_RADIUS = CIRCLE_DEGREES / WHEEL_ITEM_COUNT;
+export const IN_VIEW_DEGREES = WHEEL_ITEM_RADIUS * WHEEL_ITEMS_IN_VIEW;
+export const WHEEL_RADIUS = Math.round(WHEEL_ITEM_SIZE / 2 / Math.tan(Math.PI / WHEEL_ITEM_COUNT));
 
 const isInView = (wheelLocation, slidePosition) => Math.abs(wheelLocation - slidePosition) < IN_VIEW_DEGREES;
 
-const slideStyle = (embla, index, loop, slideCount, totalRadius, wheelRotation) => {
-    const wheelLocation = embla.scrollProgress() * totalRadius;
-    const positionDefault = embla.scrollSnapList()[index] * totalRadius;
-    const positionLoopEnd = positionDefault - totalRadius;
+const getSlideStyles = (emblaApi, index, loop, slideCount, totalRadius) => {
+    const wheelLocation = emblaApi.scrollProgress() * totalRadius;
+    const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius;
     const positionLoopStart = positionDefault + totalRadius;
+    const positionLoopEnd = positionDefault - totalRadius;
     
     let inView = false;
     let angle = index * -WHEEL_ITEM_RADIUS;
@@ -38,22 +39,26 @@ const slideStyle = (embla, index, loop, slideCount, totalRadius, wheelRotation) 
     if (inView) {
         return {
             opacity: 1,
-            transform: `rotateX(${angle + wheelRotation}deg) translateZ(${WHEEL_RADIUS}px)`,
+            transform: `rotateX(${angle}deg) translateZ(${WHEEL_RADIUS}px)`,
         };
     }
-    
     return { opacity: 0, transform: 'none' };
 };
 
-const getSlideStyles = (embla, loop, slideCount, totalRadius, wheelRotation) => {
-    const styles = [];
+export const getContainerStyles = (wheelRotation) => ({
+    transform: `translateZ(${WHEEL_RADIUS}px) rotateX(${wheelRotation}deg)`,
+});
+
+export const getSlidesStyles = (emblaApi, loop, slideCount, totalRadius) => {
+    const slidesStyles = [];
+    
     for (let index = 0; index < slideCount; index += 1) {
-        const style = embla
-            ? slideStyle(embla, index, loop, slideCount, totalRadius, wheelRotation)
+        const slideStyle = emblaApi
+            ? getSlideStyles(emblaApi, index, loop, slideCount, totalRadius)
             : {};
-        styles.push(style);
+        slidesStyles.push(slideStyle);
     }
-    return styles;
+    return slidesStyles;
 };
 
 export const IosPickerItem = (props) => {
@@ -67,9 +72,10 @@ export const IosPickerItem = (props) => {
     const [wheelRotation, setWheelRotation] = useState(0);
     const rootNodeRef = useRef(null);
     const rootNodeSize = useRef(0);
-    const totalRadius = useRef(0);
-    const rotation = useRef(0);
-    const slideStyles = getSlideStyles(emblaApi, loop, slideCount, totalRadius.current, wheelRotation);
+    const totalRadius = slideCount * WHEEL_ITEM_RADIUS;
+    const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS;
+    const containerStyles = getContainerStyles(wheelRotation);
+    const slideStyles = getSlidesStyles(emblaApi, loop, slideCount, totalRadius);
     
     const inactivateEmblaTransform = useCallback(() => {
         if (!emblaApi)
@@ -92,17 +98,15 @@ export const IosPickerItem = (props) => {
     const rotateWheel = useCallback(() => {
         if (!emblaApi)
             return;
-        setWheelRotation(rotation.current * emblaApi.scrollProgress());
-    }, [emblaApi]);
+        const rotation = slideCount * WHEEL_ITEM_RADIUS - rotationOffset;
+        setWheelRotation(rotation * emblaApi.scrollProgress());
+    }, [emblaApi, slideCount, rotationOffset, setWheelRotation]);
     
     useEffect(() => {
         if (!emblaApi)
             return;
         
         rootNodeSize.current = readRootNodeSize();
-        const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS;
-        totalRadius.current = slideCount * WHEEL_ITEM_RADIUS;
-        rotation.current = slideCount * WHEEL_ITEM_RADIUS - rotationOffset;
         
         emblaApi.on('pointerUp', () => {
             const { scrollTo, target, location } = emblaApi.internalEngine();
@@ -139,8 +143,8 @@ export const IosPickerItem = (props) => {
     
     return (<div className="embla__ios-picker">
       <div className="embla__ios-picker__scene" ref={rootNodeRef}>
-        <div className="embla__ios-picker__viewport" ref={emblaRef}>
-          <div className={`embla__ios-picker__container embla__ios-picker__container--perspective-${perspective}`}>
+        <div className={`embla__ios-picker__viewport embla__ios-picker__viewport--perspective-${perspective}`} ref={emblaRef}>
+          <div className="embla__ios-picker__container" style={wheelReady ? containerStyles : { transform: 'none' }}>
             {slideStyles.map((slideStyle, index) => (<div className="embla__ios-picker__slide" key={index} style={wheelReady
                 ? slideStyle
                 : { position: 'static', transform: 'none' }}>
@@ -149,8 +153,6 @@ export const IosPickerItem = (props) => {
           </div>
         </div>
       </div>
-      <div className={`embla__ios-picker__label embla__ios-picker__label--perspective-${perspective}`}>
-        {label}
-      </div>
+      <div className="embla__ios-picker__label">{label}</div>
     </div>);
 };

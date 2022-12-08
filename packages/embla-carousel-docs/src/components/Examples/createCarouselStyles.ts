@@ -469,6 +469,7 @@ const IOS_PICKER_STYLES = css`
     display: flex;
     align-items: center;
     min-width: 50%;
+    justify-content: center;
     line-height: 1;
     font-size: 1.8rem;
   }
@@ -484,6 +485,7 @@ const IOS_PICKER_STYLES = css`
     width: 100%;
     position: relative;
     display: flex;
+    perspective: 1000px;
     align-items: center;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -494,20 +496,22 @@ const IOS_PICKER_STYLES = css`
     -webkit-tap-highlight-color: transparent;
   }
 
+  .embla__ios-picker__viewport--perspective-left {
+    perspective-origin: calc(50% + 130px) 50%;
+    transform: translateX(27px);
+  }
+
+  .embla__ios-picker__viewport--perspective-right {
+    perspective-origin: calc(50% - 130px) 50%;
+    transform: translateX(-27px);
+  }
+
   .embla__ios-picker__container {
     height: 32px;
     width: 100%;
-    perspective: 1000px;
-  }
-
-  .embla__ios-picker__container--perspective-left {
-    perspective-origin: 150% center;
-    transform: translateX(-8px) !important;
-  }
-
-  .embla__ios-picker__container--perspective-right {
-    perspective-origin: -50% center;
-    transform: translateX(-32px) !important;
+    position: absolute;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .embla__ios-picker__slide {
@@ -527,15 +531,8 @@ const IOS_PICKER_STYLES = css`
 
   .embla__ios-picker__label {
     font-weight: bold;
+    transform: translateX(-55px);
     pointer-events: none;
-  }
-
-  .embla__ios-picker__label--perspective-left {
-    transform: translate(-76px);
-  }
-
-  .embla__ios-picker__label--perspective-right {
-    transform: translate(-70px);
   }
 `
 

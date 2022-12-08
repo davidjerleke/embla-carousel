@@ -7,6 +7,8 @@ export const SANDBOX_REGEX_LANGUAGE_EXTENSION =
 export const SANDBOX_REGEX_REPOSITORY_URL =
   /__replace_sandbox_repository_url__/g
 
+export const SANDBOX_REGEX_IOS_PICKER_LOOP = /((?<=LOOP\s\=\s)(true|false))/
+
 export const SANDBOX_REGEX_IMAGE_IMPORT = /(?<=from\s')(.*)(?=\/images)/g
 
 export const SANDBOX_REGEX_TITLE = /__replace_sandbox_title__/g
