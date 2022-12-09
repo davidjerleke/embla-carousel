@@ -19,8 +19,6 @@ import {
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
 
 // TODO: Add React.FC to all components!
-// TODO: Make plugins a constant
-// TODO: Fix Y-axis badges
 
 const SHARED_CONFIG = {
   slides: SLIDES,

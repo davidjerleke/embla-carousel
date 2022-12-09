@@ -3,7 +3,7 @@ import { styledComponentsStylesToString } from 'utils/styledComponentStylesToStr
 import { resetStyles } from 'components/Layout/GlobalStyles/reset'
 import { baseStyles } from 'components/Layout/GlobalStyles/base'
 import { fontStyles } from 'components/Layout/GlobalStyles/font'
-import { CAROUSEL_RADIUS } from '../Examples/carouselWrapperStyles'
+import { CAROUSEL_WRAPPER_RADIUS } from '../Examples/carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS, themeStyles } from 'consts/themes'
 
@@ -26,7 +26,7 @@ const sandboxCarouselStyles = css`
 
   ${MEDIA.MIN_SM} {
     .sandbox__carousel {
-      border-radius: ${CAROUSEL_RADIUS};
+      border-radius: ${CAROUSEL_WRAPPER_RADIUS};
     }
   }
 `

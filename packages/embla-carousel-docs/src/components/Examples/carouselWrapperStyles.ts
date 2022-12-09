@@ -9,7 +9,7 @@ export const CAROUSEL_THUMB_SLIDES_SPACING = '0.8rem'
 export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 export const CAROUSEL_SLIDES_SPACING = '1rem'
 export const CAROUSEL_WRAPPER_SPACING = '1.6rem'
-export const CAROUSEL_RADIUS = '0.4rem'
+export const CAROUSEL_WRAPPER_RADIUS = '0.4rem'
 
 export const baseWrapperStyles = css`
   background-color: ${COLORS.BACKGROUND_CODE};
@@ -19,7 +19,7 @@ export const baseWrapperStyles = css`
     ${frameCollapseStyles};
   }
   ${MEDIA.MIN_SM} {
-    border-radius: ${CAROUSEL_RADIUS};
+    border-radius: ${CAROUSEL_WRAPPER_RADIUS};
   }
 `
 
@@ -46,6 +46,6 @@ export const iosPickerWrapperStyles = css`
     ${frameCollapseStyles};
   }
   ${MEDIA.MIN_SM} {
-    border-radius: ${CAROUSEL_RADIUS};
+    border-radius: ${CAROUSEL_WRAPPER_RADIUS};
   }
 `

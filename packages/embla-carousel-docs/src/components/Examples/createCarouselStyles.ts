@@ -53,7 +53,7 @@ const BASE_STYLES = css`
     ${createSquareSizeStyles('4.6rem')}
     z-index: ${LAYERS.STEP};
     position: absolute;
-    top: 0.6rem;
+    top: __replace_axis_slide_number_spacing__;
     right: 0.6rem;
     border-radius: 50%;
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
@@ -549,6 +549,9 @@ export const createCarouselDefaultStyles = (
   const height = horizontal
     ? 'auto'
     : `calc(var(--slide-spacing) + var(--slide-height))`
+  const slideNumberSpacing = horizontal
+    ? '0.6rem'
+    : 'calc(var(--slide-spacing) + 0.6rem)'
 
   const mergedStyles =
     styledComponentsStylesToString(BASE_STYLES) +
@@ -560,6 +563,7 @@ export const createCarouselDefaultStyles = (
     .replace(/__replace_axis_spacing__/gi, spacingDirection)
     .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
     .replace(/__replace_axis_height__/gi, height)
+    .replace(/__replace_axis_slide_number_spacing__/gi, slideNumberSpacing)
     .replace(/__replace_slide_size__/gi, slideSize)
 }
 
