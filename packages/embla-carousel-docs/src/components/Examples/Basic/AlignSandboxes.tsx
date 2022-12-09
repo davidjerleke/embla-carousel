@@ -3,15 +3,12 @@ import * as ReactDOMServer from 'react-dom/server'
 import CarouselDefault from 'components/CodeSandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
+import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
 import { ID, SLIDES, OPTIONS, STYLES } from 'components/Examples/Basic/Align'
 import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
-import {
-  createSandboxLabel,
-  SANDBOX_LABELS,
-} from 'components/CodeSandbox/sandboxLabels'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
@@ -70,12 +67,13 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   })
 }
 
-const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, sandboxVanillaJavaScript),
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, sandboxVanillaTypeScript),
-  createSandboxLabel(SANDBOX_LABELS.REACT_JS, sandboxReactJavaScript),
-  createSandboxLabel(SANDBOX_LABELS.REACT_TS, sandboxReactTypeScript),
-]
+const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] =
+  createSandboxFunctionsWithLabels({
+    vanillaJs: sandboxVanillaJavaScript,
+    vanillaTs: sandboxVanillaTypeScript,
+    reactJs: sandboxReactJavaScript,
+    reactTs: sandboxReactTypeScript,
+  })
 
 export const ExampleCarouselAlignSandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES} />

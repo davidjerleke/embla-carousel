@@ -5,6 +5,7 @@ import { SANDBOX_REACT_FOLDERS } from 'components/CodeSandbox/React/sandboxReact
 import CarouselIosPicker from 'components/CodeSandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
+import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
 import { createSandboxReactIosPickerEntry } from 'components/CodeSandbox/React/createSandboxReactEntry'
 import { loadPrettier } from 'utils/loadPrettier'
 import { ID, STYLES } from 'components/Examples/Miscellaneous/IosPicker'
@@ -12,10 +13,6 @@ import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
-import {
-  createSandboxLabel,
-  SANDBOX_LABELS,
-} from 'components/CodeSandbox/sandboxLabels'
 
 const SHARED_CONFIG = {
   slides: [],
@@ -131,35 +128,21 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
   })
 }
 
-const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, () =>
-    sandboxVanillaJavaScript(false),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, () =>
-    sandboxVanillaTypeScript(false),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.REACT_JS, () =>
-    sandboxReactJavaScript(false),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.REACT_TS, () =>
-    sandboxReactTypeScript(false),
-  ),
-]
+const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] =
+  createSandboxFunctionsWithLabels({
+    vanillaJs: () => sandboxVanillaJavaScript(false),
+    vanillaTs: () => sandboxVanillaTypeScript(false),
+    reactJs: () => sandboxReactJavaScript(false),
+    reactTs: () => sandboxReactTypeScript(false),
+  })
 
-const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] = [
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_JS, () =>
-    sandboxVanillaJavaScript(true),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.VANILLA_TS, () =>
-    sandboxVanillaTypeScript(true),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.REACT_JS, () =>
-    sandboxReactJavaScript(true),
-  ),
-  createSandboxLabel(SANDBOX_LABELS.REACT_TS, () =>
-    sandboxReactTypeScript(true),
-  ),
-]
+const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] =
+  createSandboxFunctionsWithLabels({
+    vanillaJs: () => sandboxVanillaJavaScript(true),
+    vanillaTs: () => sandboxVanillaTypeScript(true),
+    reactJs: () => sandboxReactJavaScript(true),
+    reactTs: () => sandboxReactTypeScript(true),
+  })
 
 export const ExampleCarouselIosPickerDefaultSandboxes = () => {
   return <CreateCodeSandboxForms sandboxes={SANDBOXES_DEFAULT} />
