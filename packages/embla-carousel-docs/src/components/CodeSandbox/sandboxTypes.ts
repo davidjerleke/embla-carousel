@@ -28,29 +28,26 @@ export type SandboxVanillaExtensionType = 'js' | 'ts'
 export type SandboxReactExtensionType = 'jsx' | 'tsx'
 
 export type SandboxPluginsType = {
-  ['embla-carousel-autoplay']?: string
-  ['embla-carousel-class-names']?: string
+  'embla-carousel-autoplay'?: string
+  'embla-carousel-class-names'?: string
 }
 
-export type SandboxVanillaCreateType = {
+export type SandboxSharedCreateType = {
   id: string
+  options: EmblaOptionsType
+  styles: string
+  plugins?: SandboxPluginsType
+  language?: SandboxLanguageType
+  sandboxOverrides?: SandboxConfigType['files']
+}
+
+export type SandboxVanillaCreateType = SandboxSharedCreateType & {
   carouselScript: string
   carouselHtml: string
-  options: EmblaOptionsType
-  styles: string
-  plugins?: SandboxPluginsType
-  language?: SandboxLanguageType
-  sandboxOverrides?: SandboxConfigType['files']
 }
 
-export type SandboxReactCreateType = {
-  id: string
+export type SandboxReactCreateType = SandboxSharedCreateType & {
   carouselScript: string
-  options: EmblaOptionsType
   slides: number[]
-  styles: string
   indexScript?: string
-  plugins?: SandboxPluginsType
-  language?: SandboxLanguageType
-  sandboxOverrides?: SandboxConfigType['files']
 }

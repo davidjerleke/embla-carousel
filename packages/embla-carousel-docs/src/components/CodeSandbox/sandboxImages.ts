@@ -9,12 +9,12 @@ const SANDBOX_IMAGE_URLS: string[] = arrayFromNumber(4).map((index) => {
 })
 
 export const createSandboxImages = (
-  path: string,
+  pathToImageFolder: string,
 ): SandboxConfigType['files'] => {
   return SANDBOX_IMAGE_URLS.reduce(
     (allImages, imageUrl, index) => ({
       ...allImages,
-      [`${path}/slide-${index + 1}.jpg`]: {
+      [`${pathToImageFolder}/slide-${index + 1}.jpg`]: {
         isBinary: true,
         content: imageUrl,
       },

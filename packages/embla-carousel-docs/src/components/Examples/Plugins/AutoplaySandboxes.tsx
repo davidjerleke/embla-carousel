@@ -1,5 +1,4 @@
 import React from 'react'
-import docsPackageJson from 'embla-carousel-docs/package.json'
 import * as ReactDOMServer from 'react-dom/server'
 import CarouselAutoplay from 'components/CodeSandbox/React/SandboxFilesSrc/Autoplay/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
@@ -15,16 +14,17 @@ import {
   CreateCodeSandboxForms,
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
+import {
+  addSandboxPlugins,
+  SANDBOX_PLUGIN_AUTOPLAY,
+} from 'components/CodeSandbox/sandboxPlugins'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
   styles: STYLES,
   id: ID,
-  plugins: {
-    'embla-carousel-autoplay':
-      docsPackageJson.dependencies['embla-carousel-autoplay'],
-  },
+  ...addSandboxPlugins(SANDBOX_PLUGIN_AUTOPLAY),
 }
 
 const sandboxVanillaJavaScript = async (): Promise<string> => {
