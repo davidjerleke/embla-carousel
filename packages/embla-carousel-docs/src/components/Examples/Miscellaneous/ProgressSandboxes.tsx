@@ -1,5 +1,6 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
 import CarouselProgress from 'components/CodeSandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
@@ -46,7 +47,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_PROGRESS_FILE_NAME}.js`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_PROGRESS_FILE_NAME}.js`]: {
         isBinary: false,
         content: formatJs(progressBar.default),
       },
@@ -72,7 +73,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_PROGRESS_FILE_NAME}.ts`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_PROGRESS_FILE_NAME}.ts`]: {
         isBinary: false,
         content: formatTs(progressBar.default),
       },

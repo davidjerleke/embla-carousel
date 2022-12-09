@@ -1,5 +1,7 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
+import { SANDBOX_REACT_FOLDERS } from 'components/CodeSandbox/React/sandboxReactFolders'
 import CarouselLazyLoad from 'components/CodeSandbox/React/SandboxFilesSrc/LazyLoad/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
@@ -19,11 +21,11 @@ import {
   SANDBOX_LABELS,
 } from 'components/CodeSandbox/sandboxLabels'
 
-// TODO: Remove emblaNode from vanilla example carousels
-// TODO: Add fileStructureVanilla.ts and fileStructureReact.ts constants
+// TODO: Add sandboxVanillaFolders.ts and sandboxReactFolders.ts constants
 // TODO: Add React.FC to all components!
 // TODO: Make plugins a constant
-// TODO: Check if title can be added to each Example carousel instead of MDX
+// TODO: Fix Y-axis badges
+// TODO: Remove "The file was saved!" from node script
 
 const SHARED_CONFIG = {
   slides: SLIDES,
@@ -53,7 +55,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_LAZY_LOAD_FILE_NAME}.js`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_LAZY_LOAD_FILE_NAME}.js`]: {
         isBinary: false,
         content: formatJs(lazyLoadImage.default),
       },
@@ -79,7 +81,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_LAZY_LOAD_FILE_NAME}.ts`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_LAZY_LOAD_FILE_NAME}.ts`]: {
         isBinary: false,
         content: formatTs(lazyLoadImage.default),
       },
@@ -102,7 +104,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
     carouselScript: carousel.default,
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${REACT_LAZY_LOAD_FILE_NAME}.jsx`]: {
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_LAZY_LOAD_FILE_NAME}.jsx`]: {
         isBinary: false,
         content: formatJs(buttons.default),
       },
@@ -125,7 +127,7 @@ const sandboxReactTypeScript = async (): Promise<string> => {
     carouselScript: carousel.default,
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${REACT_LAZY_LOAD_FILE_NAME}.tsx`]: {
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_LAZY_LOAD_FILE_NAME}.tsx`]: {
         isBinary: false,
         content: formatTs(buttons.default),
       },

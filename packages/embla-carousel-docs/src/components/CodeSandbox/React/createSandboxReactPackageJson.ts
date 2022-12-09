@@ -1,4 +1,5 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
+import { SANDBOX_REACT_FOLDERS } from './sandboxReactFolders'
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 import { languageToReactExtension } from '../sandboxUtils'
 import {
@@ -21,7 +22,7 @@ export const createSandboxReactPackageJson = (
     version: '1.0.0',
     description: `${kebabCaseToPascalCase(id, ' ')} Example`,
     keywords: ['react', 'starter', language],
-    main: `src/js/index.${scriptExtension}`,
+    main: `${SANDBOX_REACT_FOLDERS.JS}/index.${scriptExtension}`,
     dependencies: {
       react: dependencies.react,
       'react-dom': dependencies['react-dom'],

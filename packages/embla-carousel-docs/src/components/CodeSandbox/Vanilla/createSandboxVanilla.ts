@@ -1,6 +1,7 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import { BASE_CSS, SANDBOX_CSS } from '../sandboxStyles'
-import { SANDBOX_IMAGES } from '../sandboxImages'
+import { SANDBOX_VANILLA_FOLDERS } from './sandboxVanillaFolders'
+import { createSandboxImages } from '../sandboxImages'
 import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxVanillaPackageJson } from './createSandboxVanillaPackageJson'
 import { createSandboxVanillaTsConfig } from './createSandboxVanillaTsConfig'
@@ -28,6 +29,7 @@ export const createSandboxVanilla = async (
     language = 'javascript',
   } = config
   const title = `${id}-vanilla`
+  const sandboxImages = createSandboxImages(SANDBOX_VANILLA_FOLDERS.IMAGES)
   const { prettierConfig, formatHtml, formatCss, formatJs, formatTs } =
     await loadPrettier()
   const scriptExtension = languageToVanillaExtension(language)
@@ -58,19 +60,19 @@ export const createSandboxVanilla = async (
       isBinary: false,
       content: formatHtml(entryHtml),
     },
-    [`src/css/base.css`]: {
+    [`${SANDBOX_VANILLA_FOLDERS.CSS}/base.css`]: {
       isBinary: false,
       content: formatCss(BASE_CSS),
     },
-    [`src/css/sandbox.css`]: {
+    [`${SANDBOX_VANILLA_FOLDERS.CSS}/sandbox.css`]: {
       isBinary: false,
       content: formatCss(SANDBOX_CSS),
     },
-    [`src/css/embla.css`]: {
+    [`${SANDBOX_VANILLA_FOLDERS.CSS}/embla.css`]: {
       isBinary: false,
       content: formatCss(styles),
     },
-    [`src/js/index.${scriptExtension}`]: {
+    [`${SANDBOX_VANILLA_FOLDERS.JS}/index.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(entryScript),
     },
@@ -90,6 +92,6 @@ export const createSandboxVanilla = async (
   }
 
   return getParameters({
-    files: Object.assign({}, sandboxConfig, SANDBOX_IMAGES, sandboxOverrides),
+    files: Object.assign({}, sandboxConfig, sandboxImages, sandboxOverrides),
   })
 }

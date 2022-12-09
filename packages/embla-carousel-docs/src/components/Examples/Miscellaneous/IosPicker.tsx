@@ -6,7 +6,7 @@ import CarouselIosPicker from 'components/CodeSandbox/React/SandboxFilesSrc/IosP
 import { iosPickerWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselIosPickerStyles } from 'components/Examples/createCarouselStyles'
 
-export const ID = 'embla-carousel-ios-picker'
+export const ID = 'embla-carousel-ios-style-picker'
 export const STYLES = createCarouselIosPickerStyles()
 
 export const Wrapper = styled.div`

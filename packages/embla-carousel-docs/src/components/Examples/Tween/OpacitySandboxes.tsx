@@ -1,5 +1,6 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
 import CarouselOpacity from 'components/CodeSandbox/React/SandboxFilesSrc/Opacity/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
@@ -41,7 +42,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_TWEEN_FILE_NAME}.js`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_TWEEN_FILE_NAME}.js`]: {
         isBinary: false,
         content: formatJs(tween.default),
       },
@@ -67,7 +68,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_TWEEN_FILE_NAME}.ts`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_TWEEN_FILE_NAME}.ts`]: {
         isBinary: false,
         content: formatTs(tween.default),
       },

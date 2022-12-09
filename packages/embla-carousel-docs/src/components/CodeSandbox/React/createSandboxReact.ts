@@ -1,6 +1,7 @@
 import { getParameters } from 'codesandbox/lib/api/define'
 import { BASE_CSS, SANDBOX_CSS } from 'components/CodeSandbox/sandboxStyles'
-import { SANDBOX_IMAGES } from '../sandboxImages'
+import { SANDBOX_REACT_FOLDERS } from './sandboxReactFolders'
+import { createSandboxImages } from '../sandboxImages'
 import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxReactPackageJson } from './createSandboxReactPackageJson'
 import { createSandboxReactIndexHtml } from './createSandboxReactIndexHtml'
@@ -29,6 +30,7 @@ export const createSandboxReact = async (
     language = 'javascript',
   } = config
   const title = `${id}-react`
+  const sandboxImages = createSandboxImages(SANDBOX_REACT_FOLDERS.IMAGES)
   const { prettierConfig, formatCss, formatJs, formatTs } = await loadPrettier()
   const scriptExtension = languageToReactExtension(language)
   const isTypeScript = isLanguageTypeScript(language)
@@ -61,39 +63,39 @@ export const createSandboxReact = async (
       isBinary: false,
       content: JSON.stringify(packageJson, null, '\t'),
     },
-    [`public/index.html`]: {
+    [`${SANDBOX_REACT_FOLDERS.PUBLIC}/index.html`]: {
       isBinary: false,
       content: entryHtml,
     },
-    [`src/css/base.css`]: {
+    [`${SANDBOX_REACT_FOLDERS.CSS}/base.css`]: {
       isBinary: false,
       content: formatCss(BASE_CSS),
     },
-    [`src/css/sandbox.css`]: {
+    [`${SANDBOX_REACT_FOLDERS.CSS}/sandbox.css`]: {
       isBinary: false,
       content: formatCss(SANDBOX_CSS),
     },
-    [`src/css/embla.css`]: {
+    [`${SANDBOX_REACT_FOLDERS.CSS}/embla.css`]: {
       isBinary: false,
       content: formatCss(styles),
     },
-    [`src/js/index.${scriptExtension}`]: {
+    [`${SANDBOX_REACT_FOLDERS.JS}/index.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(entryScript),
     },
-    [`src/js/Header.${scriptExtension}`]: {
+    [`${SANDBOX_REACT_FOLDERS.JS}/Header.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(headerScript),
     },
-    [`src/js/Footer.${scriptExtension}`]: {
+    [`${SANDBOX_REACT_FOLDERS.JS}/Footer.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(footerScript),
     },
-    [`src/js/EmblaCarousel.${scriptExtension}`]: {
+    [`${SANDBOX_REACT_FOLDERS.JS}/EmblaCarousel.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(carouselScript),
     },
-    [`src/js/imageByIndex.${scriptExtension}`]: {
+    [`${SANDBOX_REACT_FOLDERS.JS}/imageByIndex.${scriptExtension}`]: {
       isBinary: false,
       content: formatScript(imagesScript),
     },
@@ -113,6 +115,6 @@ export const createSandboxReact = async (
   }
 
   return getParameters({
-    files: Object.assign({}, sandboxConfig, SANDBOX_IMAGES, sandboxOverrides),
+    files: Object.assign({}, sandboxConfig, sandboxImages, sandboxOverrides),
   })
 }

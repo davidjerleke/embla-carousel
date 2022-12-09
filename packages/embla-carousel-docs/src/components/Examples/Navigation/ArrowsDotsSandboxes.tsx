@@ -1,5 +1,7 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
+import { SANDBOX_REACT_FOLDERS } from 'components/CodeSandbox/React/sandboxReactFolders'
 import CarouselArrowsDots from 'components/CodeSandbox/React/SandboxFilesSrc/ArrowsDots/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
@@ -47,7 +49,7 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_BUTTONS_FILE_NAME}.js`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_BUTTONS_FILE_NAME}.js`]: {
         isBinary: false,
         content: formatJs(arrowsDotsButtons.default),
       },
@@ -73,7 +75,7 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_BUTTONS_FILE_NAME}.ts`]: {
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_BUTTONS_FILE_NAME}.ts`]: {
         isBinary: false,
         content: formatTs(arrowsDotsButtons.default),
       },
@@ -96,7 +98,7 @@ const sandboxReactJavaScript = async (): Promise<string> => {
     carouselScript: carousel.default,
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${REACT_BUTTONS_FILE_NAME}.jsx`]: {
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_BUTTONS_FILE_NAME}.jsx`]: {
         isBinary: false,
         content: formatJs(buttons.default),
       },
@@ -119,7 +121,7 @@ const sandboxReactTypeScript = async (): Promise<string> => {
     carouselScript: carousel.default,
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${REACT_BUTTONS_FILE_NAME}.tsx`]: {
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_BUTTONS_FILE_NAME}.tsx`]: {
         isBinary: false,
         content: formatTs(buttons.default),
       },

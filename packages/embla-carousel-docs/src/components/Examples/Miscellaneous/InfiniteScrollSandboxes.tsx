@@ -1,5 +1,6 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
 import CarouselInfiniteScroll from 'components/CodeSandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
 import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
 import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
@@ -47,10 +48,11 @@ const sandboxVanillaJavaScript = async (): Promise<string> => {
     ),
     language: 'javascript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_INFINITE_SCROLL_FILE_NAME}.js`]: {
-        isBinary: false,
-        content: formatJs(infiniteScroll.default),
-      },
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_INFINITE_SCROLL_FILE_NAME}.js`]:
+        {
+          isBinary: false,
+          content: formatJs(infiniteScroll.default),
+        },
     },
   })
 }
@@ -73,10 +75,11 @@ const sandboxVanillaTypeScript = async (): Promise<string> => {
     ),
     language: 'typescript',
     sandboxOverrides: {
-      [`src/js/${VANILLA_INFINITE_SCROLL_FILE_NAME}.ts`]: {
-        isBinary: false,
-        content: formatTs(infiniteScroll.default),
-      },
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_INFINITE_SCROLL_FILE_NAME}.ts`]:
+        {
+          isBinary: false,
+          content: formatTs(infiniteScroll.default),
+        },
     },
   })
 }

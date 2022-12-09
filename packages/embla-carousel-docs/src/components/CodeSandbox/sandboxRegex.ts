@@ -1,11 +1,10 @@
 export const SANDBOX_REGEX_OPTIONS =
   /((?<=EmblaOptionsType\s\=\s)(.*))|((?<=OPTIONS\s\=\s)(.*))/
 
-export const SANDBOX_REGEX_LANGUAGE_EXTENSION =
-  /__replace_sandbox_language_extension__/g
-
 export const SANDBOX_REGEX_REPOSITORY_URL =
   /__replace_sandbox_repository_url__/g
+
+export const SANDBOX_REGEX_SCRIPT_SRC = /__replace_sandbox_script_src__/g
 
 export const SANDBOX_REGEX_IOS_PICKER_LOOP = /((?<=LOOP\s\=\s)(true|false))/
 
