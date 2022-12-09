@@ -21,11 +21,9 @@ import {
   SANDBOX_LABELS,
 } from 'components/CodeSandbox/sandboxLabels'
 
-// TODO: Add sandboxVanillaFolders.ts and sandboxReactFolders.ts constants
 // TODO: Add React.FC to all components!
 // TODO: Make plugins a constant
 // TODO: Fix Y-axis badges
-// TODO: Remove "The file was saved!" from node script
 
 const SHARED_CONFIG = {
   slides: SLIDES,

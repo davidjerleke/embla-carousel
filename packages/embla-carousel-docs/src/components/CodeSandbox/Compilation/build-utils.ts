@@ -6,6 +6,9 @@ export const PATHS_TO_SANDBOX_FILES = [
 ]
 
 export const EMPTY_LINE_REGEX = /^\s*\n/gm
+export const CONSOLE_FONT_COLOR_RED = '\x1b[31m'
+export const CONSOLE_FONT_COLOR_GREEN = '\x1b[32m'
+export const CONSOLE_FONT_COLOR_CYAN = '\x1b[36m%s\x1b[0m'
 
 export const readFiles = (
   dirname: string,
