@@ -41,6 +41,24 @@ module.exports = {
         'react/display-name': 'off',
       },
     },
+    {
+      files: [
+        'src/components/CodeSandbox/Vanilla/SandboxFilesSrc/**/*',
+        'src/components/CodeSandbox/Vanilla/SandboxFilesDist/**/*',
+        'src/components/CodeSandbox/React/SandboxFilesSrc/**/*',
+        'src/components/CodeSandbox/React/SandboxFilesDist/**/*',
+      ],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+      },
+    },
+    {
+      files: ['src/components/CodeSandbox/Compilation/**/*'],
+      rules: {
+        'no-console': 'off',
+      },
+    },
   ],
   env: {
     browser: true,

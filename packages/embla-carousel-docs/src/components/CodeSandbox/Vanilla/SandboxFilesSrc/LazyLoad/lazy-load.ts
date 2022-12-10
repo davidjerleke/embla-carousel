@@ -1,6 +1,8 @@
 import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
-export const setupLazyLoadImage = (emblaApi: EmblaCarouselType) => {
+export const setupLazyLoadImage = (
+  emblaApi: EmblaCarouselType,
+): ((eventName: EmblaEventType) => void) => {
   const imagesInView: number[] = []
   const slideNodes = emblaApi.slideNodes()
   const spinnerNodes = slideNodes.map(

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "echo \"Info: no tests specified\" && exit 0"
   },
   "dependencies": {
     "embla-carousel": "7.0.5"

@@ -1,30 +1,30 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import imageByIndex from '../imageByIndex'
- 
+
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
- 
+
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [scrollProgress, setScrollProgress] = useState(0)
- 
+
   const onScroll = useCallback(() => {
     if (!emblaApi) return
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
     setScrollProgress(progress * 100)
   }, [emblaApi, setScrollProgress])
- 
+
   useEffect(() => {
     if (!emblaApi) return
     onScroll()
     emblaApi.on('scroll', onScroll)
     emblaApi.on('reInit', onScroll)
   }, [emblaApi, onScroll])
- 
+
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
@@ -52,5 +52,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
- 
+
 export default EmblaCarousel

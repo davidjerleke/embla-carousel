@@ -40,7 +40,7 @@ export const SLIDE_TEMPLATE = `
 export const setupInfiniteScroll = (
   emblaApi: EmblaCarouselType,
   loadMoreCallback: InfiniteScrollCallbackType,
-) => {
+): (() => void) => {
   const loadingNode = <HTMLElement>(
     emblaApi.containerNode().querySelector('.embla-infinite-scroll')
   )

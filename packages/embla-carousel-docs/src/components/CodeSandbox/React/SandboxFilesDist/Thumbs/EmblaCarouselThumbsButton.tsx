@@ -1,15 +1,15 @@
 import React from 'react'
- 
+
 type PropType = {
   selected: boolean
   imgSrc: string
   index: number
   onClick: () => void
 }
- 
+
 export const Thumb: React.FC<PropType> = (props) => {
   const { selected, imgSrc, index, onClick } = props
- 
+
   return (
     <div
       className={'embla-thumbs__slide'.concat(

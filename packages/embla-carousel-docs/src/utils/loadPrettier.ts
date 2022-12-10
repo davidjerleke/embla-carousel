@@ -1,9 +1,17 @@
 import prettierrc from '../../.prettierrc'
 import { Options as PretterOptions } from 'prettier'
 
+type LoadPrettierType = {
+  prettierConfig: PretterOptions
+  formatHtml: (html: string) => string
+  formatCss: (css: string) => string
+  formatJs: (js: string) => string
+  formatTs: (ts: string) => string
+}
+
 const PRETTIER_CONFIG = <PretterOptions>prettierrc
 
-export const loadPrettier = async () => {
+export const loadPrettier = async (): Promise<LoadPrettierType> => {
   const [prettier, htmlParser, cssParser, babelParser] = await Promise.all([
     import('prettier'),
     import('prettier/parser-html'),
@@ -43,10 +51,7 @@ export const loadPrettier = async () => {
     try {
       formattedString = prettier.format(subject, parser)
     } catch (error) {
-      console.warn(
-        'Pretter was not able to format a file caused by invalid syntax',
-        error,
-      )
+      console.warn('Prettier was not able to format file', error) // eslint-disable-line no-console
     }
     return formattedString
   }
@@ -64,7 +69,6 @@ export const loadPrettier = async () => {
     prettierFormatSafe(ts, prettierBabeTsParser)
 
   return {
-    prettier,
     prettierConfig: PRETTIER_CONFIG,
     formatHtml,
     formatCss,

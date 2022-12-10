@@ -1,14 +1,14 @@
 import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import { IosPickerItem } from './EmblaCarouselIosPickerItem'
- 
+
 type PropType = {
   loop?: EmblaOptionsType['loop']
 }
- 
+
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { loop } = props
- 
+
   return (
     <div className="embla">
       <IosPickerItem
@@ -26,5 +26,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
- 
+
 export default EmblaCarousel

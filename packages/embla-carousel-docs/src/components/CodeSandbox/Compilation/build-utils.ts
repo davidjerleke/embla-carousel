@@ -14,7 +14,7 @@ export const readFiles = (
   dirname: string,
   onFileContent: (filename: string, content: string) => void,
   onError: (error: NodeJS.ErrnoException | null) => void,
-) => {
+): void => {
   fs.readdirSync(dirname, { withFileTypes: true }).forEach((entry) => {
     if (entry.isDirectory()) {
       return readFiles(dirname + entry.name + '/', onFileContent, onError)

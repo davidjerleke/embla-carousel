@@ -1,16 +1,16 @@
 import React from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import imageByIndex from '../imageByIndex'
- 
+
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
- 
+
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef] = useEmblaCarousel(options)
- 
+
   return (
     <div className="embla" dir="rtl">
       <div className="embla__viewport" ref={emblaRef}>
@@ -32,5 +32,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
- 
+
 export default EmblaCarousel

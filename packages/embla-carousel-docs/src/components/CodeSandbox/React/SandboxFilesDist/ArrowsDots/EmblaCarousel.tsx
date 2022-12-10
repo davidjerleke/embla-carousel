@@ -6,12 +6,12 @@ import {
   NextButton,
 } from './EmblaCarouselArrowsDotsButtons'
 import imageByIndex from '../imageByIndex'
- 
+
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
- 
+
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
@@ -19,7 +19,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
- 
+
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
     [emblaApi],
@@ -32,14 +32,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     (index: number) => emblaApi && emblaApi.scrollTo(index),
     [emblaApi],
   )
- 
+
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setSelectedIndex(emblaApi.selectedScrollSnap())
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
   }, [emblaApi, setSelectedIndex])
- 
+
   useEffect(() => {
     if (!emblaApi) return
     onSelect()
@@ -47,7 +47,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
   }, [emblaApi, setScrollSnaps, onSelect])
- 
+
   return (
     <>
       <div className="embla">
@@ -67,11 +67,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
             ))}
           </div>
         </div>
- 
+
         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
- 
+
       <div className="embla__dots">
         {scrollSnaps.map((_, index) => (
           <DotButton
@@ -84,5 +84,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </>
   )
 }
- 
+
 export default EmblaCarousel
