@@ -114,7 +114,7 @@ export const Brand = () => {
         </H1>
         <H2>{description}</H2>
         <CtaWrapper id={SKIP_TO_CONTENT_ID}>
-          <PrimaryButtonLink to="/examples/basic/">
+          <PrimaryButtonLink to="/examples/static/">
             Try Examples
           </PrimaryButtonLink>
         </CtaWrapper>

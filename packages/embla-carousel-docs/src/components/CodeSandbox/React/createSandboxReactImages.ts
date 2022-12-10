@@ -1,6 +1,7 @@
 import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
 import { isLanguageTypeScript } from '../sandboxUtils'
-import { SANDBOX_REGEX_IMAGE_IMPORT } from '../sandboxRegex'
+
+const IMAGE_BY_INDEX_IMPORT_REGEX = /import(.*)from\s'assets/g
 
 export const createSandboxReactImages = async (
   language: SandboxLanguageType,
@@ -17,6 +18,7 @@ export const createSandboxReactImages = async (
       '!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/imageByIndex.js'
     )
   }
-
-  return imageByIndex.default.replace(SANDBOX_REGEX_IMAGE_IMPORT, '..')
+  return imageByIndex.default.replace(IMAGE_BY_INDEX_IMPORT_REGEX, (match) =>
+    match.replace('assets', '..'),
+  )
 }

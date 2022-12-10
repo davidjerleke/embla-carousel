@@ -1,7 +1,7 @@
 import { THEME_PREFIX } from 'consts/themes'
 import { getThemeFromDocument } from 'utils/getThemeFromDocument'
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
-import { SANDBOX_REGEX_THEME, SANDBOX_REGEX_TITLE } from '../sandboxRegex'
+import { SANDBOX_REGEX_THEME, SANDBOX_REGEX_TITLE } from '../sandboxUtils'
 
 export const createSandboxReactIndexHtml = async (
   id: string,

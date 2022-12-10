@@ -1,7 +1,9 @@
 import { URLS } from 'consts/urls'
 import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
-import { isLanguageTypeScript } from '../sandboxUtils'
-import { SANDBOX_REGEX_REPOSITORY_URL } from '../sandboxRegex'
+import {
+  isLanguageTypeScript,
+  SANDBOX_REGEX_REPOSITORY_URL,
+} from '../sandboxUtils'
 
 export const createSandboxReactFooter = async (
   language: SandboxLanguageType,

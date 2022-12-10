@@ -1,12 +1,13 @@
 import { SANDBOX_VANILLA_FOLDERS } from './sandboxVanillaFolders'
 
-const REMOVE_IMAGE_HASH_REGEX = /(?<=slide-\d)(.*?)(?=.jpg)/g
-const REWRITE_IMAGE_PATH_REGEX = /\/static\//g
+const IMG_SRC_WITH_HASH_REGEX = /\/static\/slide-\d{1,}-.+?\./g
+const IMG_SLIDE_WITH_NUMBER_REGEX = /slide-\d{1,}/
 
 export const createSandboxVanillaImagePaths = (
   carouselHtml: string,
 ): string => {
-  return carouselHtml
-    .replace(REMOVE_IMAGE_HASH_REGEX, '')
-    .replace(REWRITE_IMAGE_PATH_REGEX, `${SANDBOX_VANILLA_FOLDERS.IMAGES}/`)
+  return carouselHtml.replace(IMG_SRC_WITH_HASH_REGEX, (match) => {
+    const slideWithNumber = match.match(IMG_SLIDE_WITH_NUMBER_REGEX) || []
+    return `${SANDBOX_VANILLA_FOLDERS.IMAGES}/${slideWithNumber}.`
+  })
 }

@@ -43,6 +43,7 @@ The element with the classname `embla` is needed to cover the scroll overflow. I
   }
   .embla__slide {
     flex: 0 0 100%;
+    min-width: 0;
   }
 </style>
 ```

@@ -49,6 +49,7 @@ The hook gives us a **ref** to attach to our wrapping element with the classname
 }
 .embla__slide {
   flex: 0 0 100%;
+  min-width: 0;
 }
 ```
 

@@ -1,7 +1,6 @@
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 import { SandboxLanguageType, SandboxModuleType } from '../sandboxTypes'
-import { isLanguageTypeScript } from '../sandboxUtils'
-import { SANDBOX_REGEX_TITLE } from '../sandboxRegex'
+import { isLanguageTypeScript, SANDBOX_REGEX_TITLE } from '../sandboxUtils'
 
 export const createSandboxReactHeader = async (
   language: SandboxLanguageType,
