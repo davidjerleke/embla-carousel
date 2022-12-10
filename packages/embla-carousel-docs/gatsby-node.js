@@ -111,7 +111,7 @@ exports.createPages = async ({
 exports.onCreateWebpackConfig = ({ actions: { setWebpackConfig } }) => {
   setWebpackConfig({
     resolve: {
-      modules: ['node_modules', 'src', '../../sandboxes'],
+      modules: ['node_modules', 'src'],
     },
   })
 }
