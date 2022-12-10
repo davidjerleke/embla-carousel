@@ -18,8 +18,6 @@ import {
   PropType as CreateCodeSandboxFormsPropType,
 } from 'components/CodeSandbox/CreateCodeSandboxForms'
 
-// TODO: Add React.FC to all components!
-
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
