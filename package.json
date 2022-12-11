@@ -63,7 +63,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm-run-all lint test format build"
+      "pre-push": "npm-run-all test build lint"
     }
   }
 }
