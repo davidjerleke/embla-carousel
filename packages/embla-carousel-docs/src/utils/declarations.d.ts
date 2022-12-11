@@ -24,6 +24,11 @@ declare module '*.png' {
   export default content
 }
 
+declare module '!!raw-loader!*' {
+  const contents: string
+  export = contents
+}
+
 interface Window {
   __THEME__: import('consts/themes').THEME_KEYS
 }

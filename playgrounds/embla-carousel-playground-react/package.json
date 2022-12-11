@@ -1,0 +1,24 @@
+{
+  "name": "embla-carousel-playground-react",
+  "private": true,
+  "version": "7.0.5",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "echo \"Info: no tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "embla-carousel-react": "7.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.3"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.22",
+    "@types/react-dom": "^18.0.7",
+    "@vitejs/plugin-react": "^2.2.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.0"
+  }
+}

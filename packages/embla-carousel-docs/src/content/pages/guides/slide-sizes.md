@@ -22,6 +22,7 @@ Slide sizes should in most cases be **declared with CSS**. Embla Carousel **supp
 ```css
 .embla__slide {
   flex: 0 0 50%; /* Slide covers 50% of the viewport */
+  min-width: 0;
 }
 ```
 
@@ -30,6 +31,7 @@ You can also declare your slide sizes using any other CSS unit like so:
 ```css
 .embla__slide {
   flex: 0 0 200px; /* Slide covers 200px of the viewport */
+  min-width: 0;
 }
 ```
 
@@ -40,9 +42,11 @@ Variable slide sizes is also **supported out of the box**. Declare your slide si
 ```css
 .embla__slide:nth-child(1) {
   flex: 0 0 30%; /* Slide covers 30% of the viewport */
+  min-width: 0;
 }
 .embla__slide:nth-child(2) {
   flex: 0 0 60%; /* Slide covers 60% of the viewport */
+  min-width: 0;
 }
 ```
 
@@ -51,6 +55,7 @@ If you're letting your slide sizes adapt to their content, make sure that the **
 ```css
 .embla__slide {
   flex: 0 0 auto; /* Adapt slide size to its content */
+  min-width: 0;
   max-width: 100%; /* Prevent from growing larger than viewport */
 }
 ```
@@ -62,6 +67,7 @@ Embla Carousel will **automatically pick up** any **changes in slide sizes** whe
 ```css
 .embla__slide {
   flex: 0 0 100%; /* Default slide covers 100% of the viewport */
+  min-width: 0;
 }
 @media (min-width: 768px) {
   .embla__slide {

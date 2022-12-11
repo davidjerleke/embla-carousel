@@ -40,7 +40,7 @@ export const PlainLink = (props: PropType) => {
   const isTabbing = useTabAccess()
   const { pathname } = useLocation()
   const { setIsLoading } = useRoutes()
-  const { closeNavigation } = useNavigation() // CHANGE TO DIFFERENT FILE AND CONTEXT? NAVIGATION ISN'T GOOD
+  const { closeNavigation } = useNavigation()
 
   const onClickInternalLink = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {

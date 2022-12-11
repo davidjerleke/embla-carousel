@@ -1,0 +1,18 @@
+{
+  "name": "embla-carousel-playground-vanilla",
+  "private": true,
+  "version": "7.0.5",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "echo \"Info: no tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "embla-carousel": "7.0.5"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.2.0"
+  }
+}

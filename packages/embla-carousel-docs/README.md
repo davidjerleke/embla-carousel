@@ -38,7 +38,7 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/basic/">Examples</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/static/">Examples</a>&nbsp;</code>
     </strong>
   </p>
 </div>

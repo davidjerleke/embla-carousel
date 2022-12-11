@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { PlainButton } from './PlainButton'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { supportsStyles } from 'consts/supportsStyles'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
 
 export const primaryButtonStyles = css`
@@ -14,9 +13,7 @@ export const primaryButtonStyles = css`
   display: inline-flex;
   color: ${COLORS.BACKGROUND_SITE};
   background-color: ${COLORS.BRAND_PRIMARY};
-  ${supportsStyles.gradientText} {
-    ${gradientBackgroundStyles};
-  }
+  ${gradientBackgroundStyles};
 `
 
 export const PrimaryButton = styled(PlainButton)`
