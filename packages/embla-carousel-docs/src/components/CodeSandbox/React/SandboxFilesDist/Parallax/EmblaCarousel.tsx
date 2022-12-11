@@ -2,29 +2,29 @@ import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { flushSync } from 'react-dom'
 import imageByIndex from '../imageByIndex'
-
+ 
 const TWEEN_FACTOR = 1.2
-
+ 
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
-
+ 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [tweenValues, setTweenValues] = useState<number[]>([])
-
+ 
   const onScroll = useCallback(() => {
     if (!emblaApi) return
-
+ 
     const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
-
+ 
     const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
       if (!emblaApi.slidesInView().includes(index)) return 0
       let diffToTarget = scrollSnap - scrollProgress
-
+ 
       if (engine.options.loop) {
         engine.slideLooper.loopPoints.forEach((loopItem) => {
           const target = loopItem.target().get()
@@ -39,7 +39,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     })
     setTweenValues(styles)
   }, [emblaApi, setTweenValues])
-
+ 
   useEffect(() => {
     if (!emblaApi) return
     onScroll()
@@ -48,7 +48,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     })
     emblaApi.on('reInit', onScroll)
   }, [emblaApi, onScroll])
-
+ 
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
@@ -81,5 +81,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
-
+ 
 export default EmblaCarousel

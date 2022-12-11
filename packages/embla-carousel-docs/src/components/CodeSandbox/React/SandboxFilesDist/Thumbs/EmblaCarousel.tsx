@@ -2,12 +2,12 @@ import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
 import imageByIndex from '../imageByIndex'
-
+ 
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
-
+ 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -16,7 +16,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     containScroll: 'keepSnaps',
     dragFree: true,
   })
-
+ 
   const onThumbClick = useCallback(
     (index: number) => {
       if (!emblaMainApi || !emblaThumbsApi) return
@@ -24,20 +24,20 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     },
     [emblaMainApi, emblaThumbsApi],
   )
-
+ 
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
     setSelectedIndex(emblaMainApi.selectedScrollSnap())
     emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
   }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
-
+ 
   useEffect(() => {
     if (!emblaMainApi) return
     onSelect()
     emblaMainApi.on('select', onSelect)
     emblaMainApi.on('reInit', onSelect)
   }, [emblaMainApi, onSelect])
-
+ 
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaMainRef}>
@@ -56,7 +56,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           ))}
         </div>
       </div>
-
+ 
       <div className="embla-thumbs">
         <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
           <div className="embla-thumbs__container">
@@ -75,5 +75,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
-
+ 
 export default EmblaCarousel

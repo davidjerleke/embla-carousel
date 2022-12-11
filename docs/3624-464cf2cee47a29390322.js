@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[3624],{3624:function(e,a,n){n.r(a),a.default="import React from 'react';\n\nconst Header = () => (<header>\n    <h1 className=\"sandbox__header\">__replace_sandbox_title__</h1>\n  </header>);\n\nexport default Header;\n"}}]);
+//# sourceMappingURL=3624-464cf2cee47a29390322.js.map

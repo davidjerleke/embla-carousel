@@ -1,17 +1,17 @@
 import { EmblaCarouselType } from 'embla-carousel'
-
+ 
 const TWEEN_FACTOR = 1.2
-
+ 
 const calculateTweenValuesParallax = (
   emblaApi: EmblaCarouselType,
 ): number[] => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
-
+ 
   return emblaApi.scrollSnapList().map((scrollSnap, index) => {
     if (!emblaApi.slidesInView().includes(index)) return 0
     let diffToTarget = scrollSnap - scrollProgress
-
+ 
     if (engine.options.loop) {
       engine.slideLooper.loopPoints.forEach((loopItem) => {
         const target = loopItem.target().get()
@@ -25,7 +25,7 @@ const calculateTweenValuesParallax = (
     return diffToTarget * (-1 / TWEEN_FACTOR) * 100
   })
 }
-
+ 
 export const setupTweenParallax = (
   emblaApi: EmblaCarouselType,
 ): {
@@ -37,18 +37,18 @@ export const setupTweenParallax = (
       .slideNodes()
       .map((slideNode) => slideNode.querySelector('.embla__parallax__layer'))
   )
-
+ 
   const applyTweenParallax = (): void => {
     const tweenValues = calculateTweenValuesParallax(emblaApi)
     tweenValues.forEach((tweenValue, index) => {
       tweenNodes[index].style.transform = `translateX(${tweenValue}%`
     })
   }
-
+ 
   const removeTweenParallax = (): void => {
     tweenNodes.forEach((slide) => slide.removeAttribute('style'))
   }
-
+ 
   return {
     applyTweenParallax,
     removeTweenParallax,

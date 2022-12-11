@@ -1,5 +1,5 @@
 import React from 'react'
-
+ 
 const Footer: React.FC = () => (
   <footer className="sandbox__footer">
     <a
@@ -17,5 +17,5 @@ const Footer: React.FC = () => (
     </a>
   </footer>
 )
-
+ 
 export default Footer

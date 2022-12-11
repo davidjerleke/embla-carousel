@@ -2,20 +2,20 @@ import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
 import { LazyLoadImage } from './EmblaCarouselLazyLoadImage'
 import imageByIndex from '../imageByIndex'
-
+ 
 type PropType = {
   slides: number[]
   options?: EmblaOptionsType
 }
-
+ 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRed, emblaApi] = useEmblaCarousel(options)
   const [slidesInView, setSlidesInView] = useState<number[]>([])
-
+ 
   const findSlidesInView = useCallback(() => {
     if (!emblaApi) return
-
+ 
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
         emblaApi.off('select', findSlidesInView)
@@ -26,14 +26,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       return slidesInView.concat(inView)
     })
   }, [emblaApi, setSlidesInView])
-
+ 
   useEffect(() => {
     if (!emblaApi) return
     findSlidesInView()
     emblaApi.on('select', findSlidesInView)
     emblaApi.on('reInit', findSlidesInView)
   }, [emblaApi, findSlidesInView])
-
+ 
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRed}>
@@ -51,5 +51,5 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     </div>
   )
 }
-
+ 
 export default EmblaCarousel

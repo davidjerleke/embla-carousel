@@ -2,21 +2,21 @@ import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
 } from 'embla-carousel'
-
+ 
 const CIRCLE_DEGREES = 360
 const WHEEL_ITEM_SIZE = 30
 const WHEEL_ITEM_COUNT = 18
 const WHEEL_ITEMS_IN_VIEW = 4
-
+ 
 const WHEEL_ITEM_RADIUS = CIRCLE_DEGREES / WHEEL_ITEM_COUNT
 const IN_VIEW_DEGREES = WHEEL_ITEM_RADIUS * WHEEL_ITEMS_IN_VIEW
 const WHEEL_RADIUS = Math.round(
   WHEEL_ITEM_SIZE / 2 / Math.tan(Math.PI / WHEEL_ITEM_COUNT),
 )
-
+ 
 const slideIsInView = (wheelLocation: number, slidePosition: number): boolean =>
   Math.abs(wheelLocation - slidePosition) < IN_VIEW_DEGREES
-
+ 
 const rotateSlide = (
   emblaApi: EmblaCarouselType,
   index: number,
@@ -29,24 +29,24 @@ const rotateSlide = (
   const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
-
+ 
   let inView = false
   let angle = index * -WHEEL_ITEM_RADIUS
-
+ 
   if (slideIsInView(wheelLocation, positionDefault)) {
     inView = true
   }
-
+ 
   if (loop && slideIsInView(wheelLocation, positionLoopEnd)) {
     inView = true
     angle = -CIRCLE_DEGREES + (slideCount - index) * WHEEL_ITEM_RADIUS
   }
-
+ 
   if (loop && slideIsInView(wheelLocation, positionLoopStart)) {
     inView = true
     angle = -(totalRadius % CIRCLE_DEGREES) - index * WHEEL_ITEM_RADIUS
   }
-
+ 
   if (inView) {
     slideNode.style.opacity = '1'
     slideNode.style.transform = `rotateX(${angle}deg) translateZ(${WHEEL_RADIUS}px)`
@@ -55,7 +55,7 @@ const rotateSlide = (
     slideNode.style.transform = 'none'
   }
 }
-
+ 
 const rotateSlides = (
   emblaApi: EmblaCarouselType,
   loop: boolean,
@@ -68,7 +68,7 @@ const rotateSlides = (
     }
   }
 }
-
+ 
 const rotateWheel = (
   emblaApi: EmblaCarouselType,
   slideCount: number,
@@ -80,7 +80,7 @@ const rotateWheel = (
     emblaApi.containerNode().style.transform = `translateZ(${WHEEL_RADIUS}px) rotateX(${wheelRotation}deg)`
   }
 }
-
+ 
 const inactivateEmblaTransform = (emblaApi: EmblaCarouselType): void => {
   const { translate, slideLooper } = emblaApi.internalEngine()
   translate.clear()
@@ -90,7 +90,7 @@ const inactivateEmblaTransform = (emblaApi: EmblaCarouselType): void => {
     translate.toggleActive(false)
   })
 }
-
+ 
 export const setupIosPicker = (
   iosPickerNode: HTMLElement,
   options: EmblaOptionsType,
@@ -128,9 +128,9 @@ export const setupIosPicker = (
     inactivateEmblaTransform(emblaApi)
     rotate()
   })
-
+ 
   inactivateEmblaTransform(emblaApi)
   rotate()
-
+ 
   return emblaApi
 }
