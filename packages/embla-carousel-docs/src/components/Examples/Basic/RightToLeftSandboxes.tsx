@@ -11,9 +11,9 @@ import {
   STYLES,
 } from 'components/Examples/Basic/RightToLeft'
 import {
-  CreateCodeSandboxForms,
-  PropType as CreateCodeSandboxFormsPropType,
-} from 'components/CodeSandbox/CreateCodeSandboxForms'
+  SelectCodeSandbox,
+  PropType as SelectCodeSandboxPropType,
+} from 'components/CodeSandbox/SelectCodeSandbox'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
@@ -72,7 +72,7 @@ const sandboxReactTypeScript = async (): Promise<string> => {
   })
 }
 
-const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] =
+const SANDBOXES: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
     vanillaJs: sandboxVanillaJavaScript,
     vanillaTs: sandboxVanillaTypeScript,
@@ -81,5 +81,5 @@ const SANDBOXES: CreateCodeSandboxFormsPropType['sandboxes'] =
   })
 
 export const ExampleCarouselRightToLeftSandboxes = () => {
-  return <CreateCodeSandboxForms sandboxes={SANDBOXES} />
+  return <SelectCodeSandbox sandboxes={SANDBOXES} />
 }

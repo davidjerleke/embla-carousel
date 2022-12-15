@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react'
 import styled from 'styled-components'
-import { PlainButton } from 'components/Button/PlainButton'
+import { BareButton } from 'components/Button/BareButton'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
@@ -68,7 +68,7 @@ const CopyCode = styled.div`
   height: 0;
 `
 
-const CopyCodeButton = styled(PlainButton)`
+const CopyCodeButton = styled(BareButton)`
   position: relative;
   z-index: ${LAYERS.STEP};
   margin-right: calc(${FRAME_SPACING} - ${COPY_CODE_BUTTON_PADDING});

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { primaryButtonStyles } from 'components/Button/PrimaryButton'
+import { primaryButtonFilledStyles } from 'components/Button/PrimaryButtonFilled'
 import { PlainLink } from './PlainLink'
 
-export const PrimaryButtonLink = styled(PlainLink)`
-  ${primaryButtonStyles};
+export const PrimaryButtonFilledLink = styled(PlainLink)`
+  ${primaryButtonFilledStyles};
 `

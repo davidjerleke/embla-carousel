@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import styled, { css } from 'styled-components'
 import { RouteType } from 'components/Routes/Context'
-import { PlainButton } from 'components/Button/PlainButton'
+import { BareButton } from 'components/Button/BareButton'
 import { NavigationLink } from 'components/Link/NavigationLink'
 import { useRouteActive } from 'hooks/useRouteActive'
 import { ALGOLIA_CLASSNAMES } from 'consts/algoliaSearch'
@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   }
 `
 
-const Toggle = styled(PlainButton)<{ $isActive: boolean }>`
+const Toggle = styled(BareButton)<{ $isActive: boolean }>`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
     calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});

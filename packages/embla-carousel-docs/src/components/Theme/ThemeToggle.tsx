@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
-import { PlainButton } from 'components/Button/PlainButton'
+import { BareButton } from 'components/Button/BareButton'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { COLORS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
@@ -11,7 +11,7 @@ import { useTheme } from 'hooks/useTheme'
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '2.5rem'
 
-const Wrapper = styled(PlainButton)`
+const Wrapper = styled(BareButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   z-index: ${LAYERS.STEP};
   color: ${COLORS.TEXT_HIGH_CONTRAST};

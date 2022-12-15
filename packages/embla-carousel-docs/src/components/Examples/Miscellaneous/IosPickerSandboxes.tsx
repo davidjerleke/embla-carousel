@@ -10,9 +10,9 @@ import { createSandboxReactIosPickerEntry } from 'components/CodeSandbox/React/c
 import { loadPrettier } from 'utils/loadPrettier'
 import { ID, STYLES } from 'components/Examples/Miscellaneous/IosPicker'
 import {
-  CreateCodeSandboxForms,
-  PropType as CreateCodeSandboxFormsPropType,
-} from 'components/CodeSandbox/CreateCodeSandboxForms'
+  SelectCodeSandbox,
+  PropType as SelectCodeSandboxPropType,
+} from 'components/CodeSandbox/SelectCodeSandbox'
 
 const SHARED_CONFIG = {
   slides: [],
@@ -128,7 +128,7 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
   })
 }
 
-const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] =
+const SANDBOXES_DEFAULT: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
     vanillaJs: () => sandboxVanillaJavaScript(false),
     vanillaTs: () => sandboxVanillaTypeScript(false),
@@ -136,7 +136,7 @@ const SANDBOXES_DEFAULT: CreateCodeSandboxFormsPropType['sandboxes'] =
     reactTs: () => sandboxReactTypeScript(false),
   })
 
-const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] =
+const SANDBOXES_LOOP: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
     vanillaJs: () => sandboxVanillaJavaScript(true),
     vanillaTs: () => sandboxVanillaTypeScript(true),
@@ -145,9 +145,9 @@ const SANDBOXES_LOOP: CreateCodeSandboxFormsPropType['sandboxes'] =
   })
 
 export const ExampleCarouselIosPickerDefaultSandboxes = () => {
-  return <CreateCodeSandboxForms sandboxes={SANDBOXES_DEFAULT} />
+  return <SelectCodeSandbox sandboxes={SANDBOXES_DEFAULT} />
 }
 
 export const ExampleCarouselIosPickerLoopSandboxes = () => {
-  return <CreateCodeSandboxForms sandboxes={SANDBOXES_LOOP} />
+  return <SelectCodeSandbox sandboxes={SANDBOXES_LOOP} />
 }

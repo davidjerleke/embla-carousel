@@ -58,7 +58,7 @@ const BASE_STYLES = css`
     border-radius: 50%;
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 4.6rem;
-    font-weight: 500;
+    font-weight: 900;
     text-align: center;
     pointer-events: none;
   }

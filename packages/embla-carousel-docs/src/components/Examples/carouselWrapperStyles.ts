@@ -15,10 +15,10 @@ export const baseWrapperStyles = css`
   background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 
-  ${MEDIA.MAX_SM} {
+  ${MEDIA.MAX_XXS} {
     ${frameCollapseStyles};
   }
-  ${MEDIA.MIN_SM} {
+  ${MEDIA.MIN_XXS} {
     border-radius: ${CAROUSEL_WRAPPER_RADIUS};
   }
 `

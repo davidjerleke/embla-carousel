@@ -9,7 +9,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { SKIP_TO_CONTENT_ID } from 'components/TabAccess/SkipToContent'
-import { PrimaryButtonLink } from 'components/Link/ButtonLink'
+import { PrimaryButtonFilledLink } from 'components/Link/ButtonLink'
 
 const MAX_CONTENT_WIDTH = '50rem'
 
@@ -114,9 +114,9 @@ export const Brand = () => {
         </H1>
         <H2>{description}</H2>
         <CtaWrapper id={SKIP_TO_CONTENT_ID}>
-          <PrimaryButtonLink to="/examples/static/">
+          <PrimaryButtonFilledLink to="/examples/static/">
             Try Examples
-          </PrimaryButtonLink>
+          </PrimaryButtonFilledLink>
         </CtaWrapper>
       </Content>
     </Wrapper>

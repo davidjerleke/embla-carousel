@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { createGlobalStyle, css } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
-import { plainButtonStyles } from 'components/Button/PlainButton'
+import { bareButtonStyles } from 'components/Button/BareButton'
 import { contentLinkStyles } from 'components/Link/ContentLink'
 import { useTabAccess } from 'hooks/useTabAccess'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
@@ -22,7 +22,7 @@ import {
   tabAccessStyles,
 } from 'components/TabAccess/tabAccessStyles'
 
-const DIALOG_MAX_WIDTH = '56rem'
+const MODAL_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'
 const SVG_STROKE_WIDTH = '0.14rem'
 const INPUT_HEIGHT = SPACINGS.NINE
@@ -69,7 +69,7 @@ const modalStyles = css`
     height: 100vh;
 
     ${MEDIA.DESKTOP} {
-      max-width: ${DIALOG_MAX_WIDTH};
+      max-width: ${MODAL_MAX_WIDTH};
       margin: ${DESKTOP_END_SPACING} auto;
       height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
     }
@@ -281,7 +281,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-action-button {
-    ${plainButtonStyles};
+    ${bareButtonStyles};
     color: inherit;
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
   }
@@ -353,7 +353,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Prefill {
-    ${plainButtonStyles};
+    ${bareButtonStyles};
     ${contentLinkStyles};
     padding-top: ${SPACINGS.ONE};
     padding-bottom: ${SPACINGS.ONE};
@@ -468,6 +468,7 @@ const inputStyles = css`
     padding-left: ${BUTTON_WIDTH};
     padding-right: ${BUTTON_WIDTH};
     -webkit-appearance: none;
+    appearance: none;
     border-radius: 0.4rem;
     width: 100%;
     font-size: ${FONT_SIZES.H4};
@@ -495,7 +496,7 @@ const inputStyles = css`
 const toggleButtonStyles = css`
   .DocSearch-Button {
     ${createSquareSizeStyles('4rem')};
-    ${plainButtonStyles};
+    ${bareButtonStyles};
     border-radius: 0;
     display: flex;
     align-items: center;
@@ -541,7 +542,7 @@ const magnifyerButtonStyles = css`
 
 const resetButtonStyles = css`
   .DocSearch-Reset {
-    ${plainButtonStyles};
+    ${bareButtonStyles};
     width: ${BUTTON_WIDTH};
     top: ${INPUT_BORDER_SIZE};
     bottom: ${INPUT_BORDER_SIZE};
@@ -565,7 +566,7 @@ const resetButtonStyles = css`
 
 const cancelButtonStyles = css`
   .DocSearch-Cancel {
-    ${plainButtonStyles};
+    ${bareButtonStyles};
     color: ${COLORS.TEXT_BODY};
     height: ${INPUT_HEIGHT};
     display: flex;

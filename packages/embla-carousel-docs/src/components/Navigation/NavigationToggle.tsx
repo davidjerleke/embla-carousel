@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
-import { PlainButton } from 'components/Button/PlainButton'
+import { BareButton } from 'components/Button/BareButton'
 import { useNavigation } from 'hooks/useNavigation'
 import { NAVIGATION_ID } from './Navigation'
 import { COLORS } from 'consts/themes'
@@ -10,7 +10,7 @@ import { COLORS } from 'consts/themes'
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
 
-const Wrapper = styled(PlainButton)`
+const Wrapper = styled(BareButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;

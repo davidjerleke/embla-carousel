@@ -51,3 +51,8 @@ export type SandboxReactCreateType = SandboxSharedCreateType & {
   slides: number[]
   indexScript?: string
 }
+
+export type SelectCodeSandboxType = {
+  label: string
+  createSandbox: () => Promise<string>
+}

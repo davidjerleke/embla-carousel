@@ -121,6 +121,7 @@ export const resetStyles = css`
   [type='reset'],
   [type='submit'] {
     -webkit-appearance: none;
+    appearance: none;
   }
 
   button::-moz-focus-inner,
