@@ -57,7 +57,7 @@ export type PropType = {
   sandboxes: SelectCodeSandboxType[]
 }
 
-export const CreateCodeSandboxForm = (props: PropType) => {
+export const SelectCodeSandboxForm = (props: PropType) => {
   const { sandboxes = [] } = props
   const [chosenSandboxLabel, setChosenSandboxLabel] = useState('')
   const [sandbox, setSandbox] = useState('')

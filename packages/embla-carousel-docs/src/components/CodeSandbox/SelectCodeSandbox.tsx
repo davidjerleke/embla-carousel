@@ -12,7 +12,7 @@ import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { FONT_SIZES } from 'consts/fontSizes'
-import { CreateCodeSandboxForm } from './SelectCodeSandboxForm'
+import { SelectCodeSandboxForm } from './SelectCodeSandboxForm'
 
 const MODAL_MAX_WIDTH = '36rem'
 const DESKTOP_END_SPACING = SPACINGS.TEN
@@ -125,7 +125,7 @@ export const SelectCodeSandbox = (props: PropType) => {
                 />
               </SelectionModalCloseButton>
             </SelectionModalHeader>
-            <CreateCodeSandboxForm sandboxes={sandboxes} />
+            <SelectCodeSandboxForm sandboxes={sandboxes} />
           </SelectionModalContent>
         </SelectionModal>
       )}
