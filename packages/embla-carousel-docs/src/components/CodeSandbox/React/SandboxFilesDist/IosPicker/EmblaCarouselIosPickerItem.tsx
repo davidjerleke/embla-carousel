@@ -1,26 +1,26 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
 import { flushSync } from 'react-dom'
- 
+
 const CIRCLE_DEGREES = 360
 const WHEEL_ITEM_SIZE = 30
 const WHEEL_ITEM_COUNT = 18
 const WHEEL_ITEMS_IN_VIEW = 4
- 
+
 export const WHEEL_ITEM_RADIUS = CIRCLE_DEGREES / WHEEL_ITEM_COUNT
 export const IN_VIEW_DEGREES = WHEEL_ITEM_RADIUS * WHEEL_ITEMS_IN_VIEW
 export const WHEEL_RADIUS = Math.round(
   WHEEL_ITEM_SIZE / 2 / Math.tan(Math.PI / WHEEL_ITEM_COUNT),
 )
- 
+
 const isInView = (wheelLocation: number, slidePosition: number): boolean =>
   Math.abs(wheelLocation - slidePosition) < IN_VIEW_DEGREES
- 
+
 type SlideStylesType = {
   opacity: number
   transform: string
 }
- 
+
 const getSlideStyles = (
   emblaApi: EmblaCarouselType,
   index: number,
@@ -32,24 +32,24 @@ const getSlideStyles = (
   const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
- 
+
   let inView = false
   let angle = index * -WHEEL_ITEM_RADIUS
- 
+
   if (isInView(wheelLocation, positionDefault)) {
     inView = true
   }
- 
+
   if (loop && isInView(wheelLocation, positionLoopEnd)) {
     inView = true
     angle = -CIRCLE_DEGREES + (slideCount - index) * WHEEL_ITEM_RADIUS
   }
- 
+
   if (loop && isInView(wheelLocation, positionLoopStart)) {
     inView = true
     angle = -(totalRadius % CIRCLE_DEGREES) - index * WHEEL_ITEM_RADIUS
   }
- 
+
   if (inView) {
     return {
       opacity: 1,
@@ -58,13 +58,13 @@ const getSlideStyles = (
   }
   return { opacity: 0, transform: 'none' }
 }
- 
+
 export const getContainerStyles = (
   wheelRotation: number,
 ): Pick<SlideStylesType, 'transform'> => ({
   transform: `translateZ(${WHEEL_RADIUS}px) rotateX(${wheelRotation}deg)`,
 })
- 
+
 export const getSlidesStyles = (
   emblaApi: EmblaCarouselType | undefined,
   loop: boolean,
@@ -72,7 +72,7 @@ export const getSlidesStyles = (
   totalRadius: number,
 ): SlideStylesType[] => {
   const slidesStyles: SlideStylesType[] = []
- 
+
   for (let index = 0; index < slideCount; index += 1) {
     const slideStyle = emblaApi
       ? getSlideStyles(emblaApi, index, loop, slideCount, totalRadius)
@@ -81,14 +81,14 @@ export const getSlidesStyles = (
   }
   return slidesStyles
 }
- 
+
 type PropType = {
   loop?: boolean
   label: string
   slideCount: number
   perspective: 'left' | 'right'
 }
- 
+
 export const IosPickerItem: React.FC<PropType> = (props) => {
   const { slideCount, perspective, label, loop = false } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -104,7 +104,7 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
   const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS
   const containerStyles = getContainerStyles(wheelRotation)
   const slideStyles = getSlidesStyles(emblaApi, loop, slideCount, totalRadius)
- 
+
   const inactivateEmblaTransform = useCallback(() => {
     if (!emblaApi) return
     const { translate, slideLooper } = emblaApi.internalEngine()
@@ -115,23 +115,23 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
       translate.toggleActive(false)
     })
   }, [emblaApi])
- 
+
   const readRootNodeSize = useCallback(() => {
     if (!emblaApi) return 0
     return emblaApi.rootNode().getBoundingClientRect().height
   }, [emblaApi])
- 
+
   const rotateWheel = useCallback(() => {
     if (!emblaApi) return
     const rotation = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
     setWheelRotation(rotation * emblaApi.scrollProgress())
   }, [emblaApi, slideCount, rotationOffset, setWheelRotation])
- 
+
   useEffect(() => {
     if (!emblaApi) return
- 
+
     rootNodeSize.current = readRootNodeSize()
- 
+
     emblaApi.on('pointerUp', () => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
       const diffToTarget = target.get() - location.get()
@@ -139,18 +139,18 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
       const distance = diffToTarget * factor
       scrollTo.distance(distance, true)
     })
- 
+
     emblaApi.on('scroll', () => {
       flushSync(() => rotateWheel())
     })
- 
+
     emblaApi.on('resize', () => {
       const newRootNodeSize = readRootNodeSize()
       if (rootNodeSize.current === newRootNodeSize) return
- 
+
       rootNodeSize.current = newRootNodeSize
       flushSync(() => setWheelReady(false))
- 
+
       setWheelReady(() => {
         emblaApi.reInit()
         inactivateEmblaTransform()
@@ -158,12 +158,12 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
         return true
       })
     })
- 
+
     setWheelReady(true)
     inactivateEmblaTransform()
     rotateWheel()
   }, [emblaApi, inactivateEmblaTransform, readRootNodeSize, rotateWheel])
- 
+
   return (
     <div className="embla__ios-picker">
       <div className="embla__ios-picker__scene" ref={rootNodeRef}>

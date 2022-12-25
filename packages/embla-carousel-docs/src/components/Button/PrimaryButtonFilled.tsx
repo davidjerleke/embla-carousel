@@ -1,4 +1,3 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 import { BareButton } from './BareButton'
 import { COLORS } from 'consts/themes'

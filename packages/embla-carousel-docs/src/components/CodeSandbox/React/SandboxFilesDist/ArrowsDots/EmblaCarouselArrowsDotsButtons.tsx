@@ -1,13 +1,13 @@
 import React from 'react'
- 
+
 type DotButtonPropType = {
   selected: boolean
   onClick: () => void
 }
- 
+
 export const DotButton: React.FC<DotButtonPropType> = (props) => {
   const { selected, onClick } = props
- 
+
   return (
     <button
       className={'embla__dot'.concat(selected ? ' embla__dot--selected' : '')}
@@ -16,15 +16,15 @@ export const DotButton: React.FC<DotButtonPropType> = (props) => {
     />
   )
 }
- 
+
 type PrevNextButtonPropType = {
   enabled: boolean
   onClick: () => void
 }
- 
+
 export const PrevButton: React.FC<PrevNextButtonPropType> = (props) => {
   const { enabled, onClick } = props
- 
+
   return (
     <button
       className="embla__button embla__button--prev"
@@ -37,10 +37,10 @@ export const PrevButton: React.FC<PrevNextButtonPropType> = (props) => {
     </button>
   )
 }
- 
+
 export const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
   const { enabled, onClick } = props
- 
+
   return (
     <button
       className="embla__button embla__button--next"
