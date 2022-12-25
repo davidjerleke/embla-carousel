@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
+import React, { PropsWithChildren, useCallback, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
@@ -11,6 +11,7 @@ import FocusTrap from 'focus-trap-react'
 import { isBrowser } from 'utils/isBrowser'
 
 export const NAVIGATION_ID = 'main-navigation-menu'
+const CLOSE_KEYS = ['Escape', 'Esc']
 const MENU_ID = 'main-menu'
 
 const Nav = styled.nav<{ $isOpen: boolean }>`
@@ -44,7 +45,6 @@ export const Navigation = (props: PropType) => {
   const id = collapsed ? NAVIGATION_ID : undefined
   const role = collapsed ? 'dialog' : undefined
   const ariaModal = collapsed ? 'true' : undefined
-  const closeKeys = useRef(['Escape', 'Esc'])
 
   const getFocusTrapElements = useCallback((): HTMLElement[] => {
     if (!isBrowser) return []
@@ -55,7 +55,7 @@ export const Navigation = (props: PropType) => {
 
   const onKeyUp = useCallback(
     ({ key }: KeyboardEvent) => {
-      if (closeKeys.current.includes(key)) closeNavigation()
+      if (CLOSE_KEYS.includes(key)) closeNavigation()
     },
     [closeNavigation],
   )

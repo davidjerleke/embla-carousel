@@ -69,10 +69,10 @@ const sandboxReactTypeScript = async (): Promise<string> => {
 
 const SANDBOXES: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
-    vanillaJs: sandboxVanillaJavaScript,
-    vanillaTs: sandboxVanillaTypeScript,
-    reactJs: sandboxReactJavaScript,
-    reactTs: sandboxReactTypeScript,
+    VANILLA_JS: sandboxVanillaJavaScript,
+    VANILLA_TS: sandboxVanillaTypeScript,
+    REACT_JS: sandboxReactJavaScript,
+    REACT_TS: sandboxReactTypeScript,
   })
 
 export const ExampleCarouselDragFreeSandboxes = () => {

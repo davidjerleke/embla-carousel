@@ -4,7 +4,6 @@ import { BareButton } from './BareButton'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
-import { PropType } from './BareButton'
 
 export const primaryButtonFilledStyles = css`
   ${gradientBackgroundStyles};
@@ -17,7 +16,7 @@ export const primaryButtonFilledStyles = css`
   display: inline-flex;
 `
 
-const Wrapper = styled(BareButton)`
+export const PrimaryButtonFilled = styled(BareButton)`
   ${primaryButtonFilledStyles};
 
   &:disabled {
@@ -25,13 +24,3 @@ const Wrapper = styled(BareButton)`
     background-color: ${COLORS.DETAIL_HIGH_CONTRAST};
   }
 `
-
-export const PrimaryButtonFilled = (props: PropType) => {
-  const { children, ...restProps } = props
-
-  return (
-    <Wrapper {...restProps}>
-      <span>{children}</span>
-    </Wrapper>
-  )
-}

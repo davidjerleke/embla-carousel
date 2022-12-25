@@ -3,6 +3,9 @@ import sun from './sun.svg'
 import pen from './pen.svg'
 import npm from './npm-logo.svg'
 import github from './github-logo.svg'
+import javascript from './javascript-logo.svg'
+import typescript from './typescript-logo.svg'
+import react from './react-logo.svg'
 import search from './search.svg'
 import cross from './cross.svg'
 import info from './info.svg'
@@ -23,6 +26,9 @@ export const ICONS = {
   pen,
   npm,
   github,
+  javascript,
+  typescript,
+  react,
   search,
   cross,
   info,

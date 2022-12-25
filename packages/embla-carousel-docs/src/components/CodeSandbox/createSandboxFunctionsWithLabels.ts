@@ -1,10 +1,10 @@
 import { SelectCodeSandboxType } from './sandboxTypes'
 
 export const SANDBOX_CREATE_LABELS = {
-  reactJs: 'React',
-  reactTs: 'React TypeScript',
-  vanillaJs: 'Vanilla',
-  vanillaTs: 'Vanilla TypeScript',
+  VANILLA_JS: 'Vanilla',
+  VANILLA_TS: 'Vanilla + TypeScript',
+  REACT_TS: 'React + TypeScript',
+  REACT_JS: 'React',
 }
 
 type CreateSandboxesKeyType = keyof typeof SANDBOX_CREATE_LABELS

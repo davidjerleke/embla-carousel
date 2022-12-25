@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
+import FocusTrap from 'focus-trap-react'
 import { SelectCodeSandboxType } from './sandboxTypes'
 import { BareButton } from 'components/Button/BareButton'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
@@ -13,21 +14,29 @@ import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { SelectCodeSandboxForm } from './SelectCodeSandboxForm'
+import { Portal } from 'components/Portal/Portal'
+import { useEventListener } from 'hooks/useEventListener'
 
+export const SELECT_CODESANDBOX_DIALOG_ID = 'select-codesandbox-dialog'
+const CLOSE_KEYS = ['Escape', 'Esc']
 const MODAL_MAX_WIDTH = '36rem'
 const DESKTOP_END_SPACING = SPACINGS.TEN
 
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '2.35rem'
 
+const Wrapper = styled.div`
+  margin-top: -${SPACINGS.THREE};
+`
+
 const SelectCodeSandboxButton = styled(BareButton)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
-  align-items: center;
-  padding: 1.2rem 0 1.2rem 0;
-  border-radius: 0.4rem;
-  font-weight: 500;
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-bottom: ${SPACINGS.ONE};
+  padding: ${SPACINGS.TWO} 0 ${SPACINGS.TWO} 0;
+  align-items: center;
+  border-radius: 0.4rem;
+  font-weight: 500;
 
   span {
     ${gradientTextStyles};
@@ -35,66 +44,63 @@ const SelectCodeSandboxButton = styled(BareButton)`
 `
 
 const SelectionModal = styled.div`
-  z-index: ${LAYERS.SEARCH};
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-  &:before {
-    position: absolute;
-    background-color: ${COLORS.BACKGROUND_SITE};
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    content: '';
-    display: flex;
-
-    ${MEDIA.DESKTOP} {
-      opacity: 0.9;
-    }
-  }
-`
-
-const SelectionModalContent = styled.div`
-  padding: ${FRAME_SPACING};
+  z-index: ${LAYERS.SEARCH + LAYERS.STEP};
+  padding: ${FRAME_SPACING} 0;
   background-color: ${COLORS.BACKGROUND_SITE};
-  z-index: ${LAYERS.STEP};
-  position: relative;
+  max-width: ${MODAL_MAX_WIDTH};
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: auto;
   width: 100%;
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   height: 100vh;
-  max-width: ${MODAL_MAX_WIDTH};
 
-  ${MEDIA.DESKTOP} {
+  ${MEDIA.MIN_XS} {
     box-shadow: 0 0 0 0.1rem ${COLORS.DETAIL_LOW_CONTRAST};
-    margin: ${DESKTOP_END_SPACING} auto;
-    height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
+    top: ${DESKTOP_END_SPACING};
+    max-height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
+    height: auto;
   }
 `
 
-const SelectionModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${SPACINGS.FOUR};
-`
+const SelectionModalOverlay = styled.div`
+  z-index: ${LAYERS.SEARCH};
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: ${COLORS.BACKGROUND_SITE};
 
-const SelectionModalHeading = styled.h3`
-  margin: 0 !important;
+  ${MEDIA.MIN_XS} {
+    opacity: 0.9;
+  }
 `
 
 const SelectionModalCloseButton = styled(BareButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
-  margin-right: calc((${BUTTON_SIZE} - ${ICON_SIZE}) / 2 * -1);
+  z-index: ${LAYERS.STEP};
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
+const SelectionModalScrollArea = styled.div`
+  padding: 0 ${FRAME_SPACING};
+  overflow: auto;
+  position: relative;
+  max-height: 100%;
+
+  ${MEDIA.COMPACT} {
+    padding-bottom: ${SPACINGS.TWELVE};
+  }
 `
 
 export type PropType = {
@@ -105,30 +111,55 @@ export const SelectCodeSandbox = (props: PropType) => {
   const { sandboxes = [] } = props
   const [selectionOpen, setSelectionOpen] = useState(false)
 
+  const onKeyUp = useCallback(
+    ({ key }: KeyboardEvent) => {
+      if (CLOSE_KEYS.includes(key)) setSelectionOpen(false)
+    },
+    [setSelectionOpen],
+  )
+
+  useEventListener('keyup', onKeyUp)
+
   return (
-    <>
-      <SelectCodeSandboxButton onClick={() => setSelectionOpen(true)}>
+    <Wrapper>
+      <SelectCodeSandboxButton
+        id={SELECT_CODESANDBOX_DIALOG_ID}
+        aria-expanded={selectionOpen}
+        aria-label="Show Select CodeSandbox Dialog"
+        onClick={() => setSelectionOpen(true)}
+      >
         <IconWithText iconSvg="pen" iconSize="1.4rem">
           Edit Code
         </IconWithText>
       </SelectCodeSandboxButton>
+
       {selectionOpen && (
-        <SelectionModal>
-          <SelectionModalContent>
-            <SelectionModalHeader>
-              <SelectionModalHeading>Select CodeSandbox</SelectionModalHeading>
-              <SelectionModalCloseButton>
-                <Icon
-                  svg="cross"
-                  size={ICON_SIZE}
+        <Portal>
+          <FocusTrap active={true}>
+            <div>
+              <SelectionModalOverlay onClick={() => setSelectionOpen(false)} />
+
+              <SelectionModal
+                role="dialog"
+                aria-modal="true"
+                aria-label="Select CodeSandbox Dialog"
+                aria-labelledby={SELECT_CODESANDBOX_DIALOG_ID}
+              >
+                <SelectionModalCloseButton
+                  aria-label="Hide Select CodeSandbox Dialog"
                   onClick={() => setSelectionOpen(false)}
-                />
-              </SelectionModalCloseButton>
-            </SelectionModalHeader>
-            <SelectCodeSandboxForm sandboxes={sandboxes} />
-          </SelectionModalContent>
-        </SelectionModal>
+                >
+                  <Icon svg="cross" size={ICON_SIZE} />
+                </SelectionModalCloseButton>
+
+                <SelectionModalScrollArea>
+                  <SelectCodeSandboxForm sandboxes={sandboxes} />
+                </SelectionModalScrollArea>
+              </SelectionModal>
+            </div>
+          </FocusTrap>
+        </Portal>
       )}
-    </>
+    </Wrapper>
   )
 }

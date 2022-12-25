@@ -6,7 +6,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 const DEFAULT_SIZE = '3rem'
 const DEFAULT_THICKNESS = '0.2rem'
 
-const Wrapper = styled.div<{
+const Wrapper = styled.span<{
   $size: string
   $thickness: string
   $color: string
