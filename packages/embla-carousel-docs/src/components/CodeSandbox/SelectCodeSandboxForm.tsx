@@ -13,6 +13,7 @@ import { FONT_SIZES } from 'consts/fontSizes'
 import { IconType } from 'assets/icons'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 
 const OPTION_SPACING = SPACINGS.ONE
 
@@ -31,6 +32,7 @@ const Wrapper = styled.form`
 const Fieldset = styled.fieldset`
   margin-left: -${OPTION_SPACING};
   margin-bottom: -${OPTION_SPACING};
+  padding-bottom: ${SPACINGS.FIVE};
   border: 0;
   display: flex;
   flex-wrap: wrap;
@@ -78,7 +80,8 @@ const RadioLabelSvg = styled(Icon)`
   margin-bottom: ${SPACINGS.TWO};
 `
 
-const Input = styled.input`
+const RadioInput = styled.input`
+  ${visuallyHiddenStyles};
   -webkit-appearance: none;
   appearance: none;
 
@@ -88,7 +91,6 @@ const Input = styled.input`
 `
 
 const SubmitButton = styled(PrimaryButtonFilled)<{ $isLoading: boolean }>`
-  margin-top: ${SPACINGS.FIVE};
   position: relative;
   width: 100%;
   text-align: center;
@@ -144,7 +146,7 @@ export const SelectCodeSandboxForm = (props: PropType) => {
 
         {sandboxes.map((sandboxes) => (
           <React.Fragment key={sandboxes.label}>
-            <Input
+            <RadioInput
               type="radio"
               name="choose-sandbox"
               id={sandboxes.label}
