@@ -47,7 +47,7 @@ const SelectionModal = styled.div`
   z-index: ${LAYERS.SEARCH + LAYERS.STEP};
   padding: ${FRAME_SPACING} 0;
   background-color: ${COLORS.BACKGROUND_SITE};
-  max-width: ${MODAL_MAX_WIDTH};
+
   position: fixed;
   left: 0;
   right: 0;
@@ -60,6 +60,7 @@ const SelectionModal = styled.div`
   height: 100vh;
 
   ${MEDIA.MIN_XS} {
+    max-width: ${MODAL_MAX_WIDTH};
     box-shadow: 0 0 0 0.1rem ${COLORS.DETAIL_LOW_CONTRAST};
     top: ${DESKTOP_END_SPACING};
     max-height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
@@ -97,10 +98,6 @@ const SelectionModalScrollArea = styled.div`
   overflow: auto;
   position: relative;
   max-height: 100%;
-
-  ${MEDIA.COMPACT} {
-    padding-bottom: ${SPACINGS.TWELVE};
-  }
 `
 
 export type PropType = {

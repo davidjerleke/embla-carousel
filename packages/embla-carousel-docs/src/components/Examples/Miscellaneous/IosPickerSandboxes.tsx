@@ -130,18 +130,18 @@ const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
 
 const SANDBOXES_DEFAULT: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
-    vanillaJs: () => sandboxVanillaJavaScript(false),
-    vanillaTs: () => sandboxVanillaTypeScript(false),
-    reactJs: () => sandboxReactJavaScript(false),
-    reactTs: () => sandboxReactTypeScript(false),
+    VANILLA_JS: () => sandboxVanillaJavaScript(false),
+    VANILLA_TS: () => sandboxVanillaTypeScript(false),
+    REACT_JS: () => sandboxReactJavaScript(false),
+    REACT_TS: () => sandboxReactTypeScript(false),
   })
 
 const SANDBOXES_LOOP: SelectCodeSandboxPropType['sandboxes'] =
   createSandboxFunctionsWithLabels({
-    vanillaJs: () => sandboxVanillaJavaScript(true),
-    vanillaTs: () => sandboxVanillaTypeScript(true),
-    reactJs: () => sandboxReactJavaScript(true),
-    reactTs: () => sandboxReactTypeScript(true),
+    VANILLA_JS: () => sandboxVanillaJavaScript(true),
+    VANILLA_TS: () => sandboxVanillaTypeScript(true),
+    REACT_JS: () => sandboxReactJavaScript(true),
+    REACT_TS: () => sandboxReactTypeScript(true),
   })
 
 export const ExampleCarouselIosPickerDefaultSandboxes = () => {

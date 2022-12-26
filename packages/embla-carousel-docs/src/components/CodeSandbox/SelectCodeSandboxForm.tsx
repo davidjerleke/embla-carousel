@@ -29,13 +29,12 @@ const Wrapper = styled.form`
   flex-direction: column;
 `
 
-const Fieldset = styled.fieldset`
+const Fieldset = styled.div`
   margin-left: -${OPTION_SPACING};
   margin-bottom: -${OPTION_SPACING};
   padding-bottom: ${SPACINGS.FIVE};
   border: 0;
-  display: flex;
-  flex-wrap: wrap;
+  displat: inline-block;
 `
 
 const Legend = styled.legend`
@@ -47,12 +46,14 @@ const Legend = styled.legend`
   line-height: 1.5;
 `
 
+const RadioWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`
+
 const RadioLabel = styled.label`
   padding-left: ${OPTION_SPACING};
   padding-bottom: ${OPTION_SPACING};
-  flex: 0 0 50%;
-  min-width: 0;
-  display: flex;
 `
 
 const RadioLabelContent = styled.span<{ $checked?: boolean }>`
@@ -144,26 +145,28 @@ export const SelectCodeSandboxForm = (props: PropType) => {
       <Fieldset>
         <Legend>Select CodeSandbox</Legend>
 
-        {sandboxes.map((sandboxes) => (
-          <React.Fragment key={sandboxes.label}>
-            <RadioInput
-              type="radio"
-              name="choose-sandbox"
-              id={sandboxes.label}
-              value={sandboxes.label}
-              onChange={onChange}
-              checked={chosenSandboxLabel === sandboxes.label}
-            />
-            <RadioLabel htmlFor={sandboxes.label}>
-              <RadioLabelContent
-                $checked={chosenSandboxLabel === sandboxes.label}
-              >
-                <RadioLabelSvg svg={ICONS_BY_LABEL[sandboxes.label]} />
-                {sandboxes.label}
-              </RadioLabelContent>
-            </RadioLabel>
-          </React.Fragment>
-        ))}
+        <RadioWrapper>
+          {sandboxes.map((sandboxes) => (
+            <React.Fragment key={sandboxes.label}>
+              <RadioLabel htmlFor={sandboxes.label}>
+                <RadioInput
+                  type="radio"
+                  name="choose-sandbox"
+                  id={sandboxes.label}
+                  value={sandboxes.label}
+                  onChange={onChange}
+                  checked={chosenSandboxLabel === sandboxes.label}
+                />
+                <RadioLabelContent
+                  $checked={chosenSandboxLabel === sandboxes.label}
+                >
+                  <RadioLabelSvg svg={ICONS_BY_LABEL[sandboxes.label]} />
+                  {sandboxes.label}
+                </RadioLabelContent>
+              </RadioLabel>
+            </React.Fragment>
+          ))}
+        </RadioWrapper>
       </Fieldset>
 
       <input type="hidden" name="parameters" value={sandbox} />

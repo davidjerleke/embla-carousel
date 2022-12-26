@@ -15,10 +15,10 @@ export const baseWrapperStyles = css`
   background-color: ${COLORS.BACKGROUND_CODE};
   position: relative;
 
-  ${MEDIA.MAX_XXS} {
+  ${MEDIA.COMPACT} {
     ${frameCollapseStyles};
   }
-  ${MEDIA.MIN_XXS} {
+  ${MEDIA.DESKTOP} {
     border-radius: ${CAROUSEL_WRAPPER_RADIUS};
   }
 `
@@ -42,10 +42,10 @@ export const iosPickerWrapperStyles = css`
   padding-left: ${CAROUSEL_WRAPPER_SPACING};
   padding-right: ${CAROUSEL_WRAPPER_SPACING};
 
-  ${MEDIA.MAX_SM} {
+  ${MEDIA.COMPACT} {
     ${frameCollapseStyles};
   }
-  ${MEDIA.MIN_SM} {
+  ${MEDIA.DESKTOP} {
     border-radius: ${CAROUSEL_WRAPPER_RADIUS};
   }
 `
