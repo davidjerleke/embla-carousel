@@ -33,8 +33,7 @@ This plugin accepts a single **optional** parameter, which is its [options](/plu
 import EmblaCarousel from 'embla-carousel'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
-const wheelGestures = WheelGesturesPlugin()
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [WheelGesturesPlugin()]) // Add plugin
 ```
 
 ## Options
@@ -45,10 +44,13 @@ The Wheel Gestures plugin accepts an optional **options** object as the first ar
 import EmblaCarousel from 'embla-carousel'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
-const wheelGestures = WheelGesturesPlugin({
+const wheelGesturesOptions = {
   wheelDraggingClass: 'my-wheel-class',
-})
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [wheelGestures])
+}
+
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [
+  WheelGesturesPlugin(wheelGesturesOptions), // Add plugin with options
+])
 ```
 
 ### wheelDraggingClass

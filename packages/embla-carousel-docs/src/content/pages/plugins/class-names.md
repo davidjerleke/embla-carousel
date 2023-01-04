@@ -33,8 +33,7 @@ This plugin accepts a single **optional** parameter, which is its [options](/plu
 import EmblaCarousel from 'embla-carousel'
 import ClassNames from 'embla-carousel-class-names'
 
-const options = { selected: 'my-selected-class' } // Options
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [ClassNames(options)]) // Add plugin
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [ClassNames()]) // Add plugin
 ```
 
 ## Options
@@ -42,10 +41,14 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [ClassNames(options)]) /
 The Class Name plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
+import EmblaCarousel from 'embla-carousel'
 import ClassNames from 'embla-carousel-class-names'
 
-const options = { selected: 'my-selected-class' }
-const classNames = ClassNames(options)
+const classNamesOptions = { selected: 'my-selected-class' }
+
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [
+  ClassNames(classNamesOptions), // Add plugin with options
+])
 ```
 
 ### selected
