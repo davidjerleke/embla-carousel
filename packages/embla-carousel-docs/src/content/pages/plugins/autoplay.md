@@ -27,17 +27,13 @@ Alternatively, you can use a **CDN** to include it in your project:
 
 ## Usage
 
-This plugin accepts two **optional** parameters. The **first parameter** is the autoplay [options](/plugins/autoplay/#options) object that allows you to configure it. The **second parameter** allows you to choose a **custom root node** for the autoplay plugin. If this parameter is omitted, the Embla Carousel root node will be used as a default.
+This plugin accepts a single optional parameter, which is its [options](/plugins/autoplay/#options) object that allows you to configure it. You maybe want to choose a **custom root node** for the autoplay plugin. This can be done with the [rootNode](/plugins/autoplay/#rootnode) options attribute. The root node will respond to interaction events and stop autoplay when a user interacts with the carousel. If this attribute is omitted, the Embla Carousel root node will be used as a default.
 
 ```js
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
-const options = { delay: 4000 } // Options
-const autoplayRoot = (emblaRoot) => emblaRoot.parentElement // Root node
-const autoplay = Autoplay(options, autoplayRoot)
-
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [autoplay]) // Add plugin
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [Autoplay()]) // Add plugin
 ```
 
 ## Options
@@ -45,10 +41,17 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [autoplay]) // Add plugi
 The Autoplay plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
+import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
-const options = { delay: 4000 }
-const autoplay = Autoplay(options)
+const autoplayOptions = {
+  delay: 4000,
+  rootNode: (emblaRoot) => emblaRoot.parentElement,
+}
+
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [
+  Autoplay(autoplayOptions), // Add plugin with options
+])
 ```
 
 ### delay
@@ -92,6 +95,13 @@ Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 If this parameter is enabled, autoplay will be stopped when it reaches last slide.
+
+### rootNode
+
+Type: <BrandPrimaryText>`(emblaRoot: HTMLElement) => HTMLElement | null`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`null`</BrandSecondaryText>
+
+The node that should respond to user interactions like [stopOnMouseEnter](/plugins/autoplay/#stoponmouseenter) and [stopOnInteraction](/plugins/autoplay/#stoponinteraction).
 
 ## Methods
 

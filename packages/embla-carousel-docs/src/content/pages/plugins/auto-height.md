@@ -33,8 +33,7 @@ This plugin accepts a single **optional** parameter, which is its [options](/plu
 import EmblaCarousel from 'embla-carousel'
 import AutoHeight from 'embla-carousel-auto-height'
 
-const options = { destroyHeight: 'auto' } // Options
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [AutoHeight(options)]) // Add plugin
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [AutoHeight()]) // Add plugin
 ```
 
 You can make use of CSS transitions to **transition height** changes. But beware: Transitioning height triggers reflow and may cause a performance hit.
@@ -59,10 +58,14 @@ If you've been following along with any of the guides in the [Get Started](/get-
 The Auto Height plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
 
 ```js
+import EmblaCarousel from 'embla-carousel'
 import AutoHeight from 'embla-carousel-auto-height'
 
-const options = { destroyHeight: 'auto' }
-const autoHeight = AutoHeight(options)
+const autoHeightOptions = { destroyHeight: 'auto' } // Options
+
+const embla = EmblaCarousel(emblaRoot, { loop: false }, [
+  AutoHeight(autoHeightOptions), // Add plugin with options
+])
 ```
 
 ### destroyHeight
