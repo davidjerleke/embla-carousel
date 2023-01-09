@@ -87,13 +87,13 @@ export function Engine(
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
   const containSnaps = !loop && containScroll !== ''
-  const includeEdgeGap = loop || containScroll !== ''
+  const readEdgeGap = loop || containScroll !== ''
   const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
     containerRect,
     slideRects,
     slides,
-    includeEdgeGap,
+    readEdgeGap,
   )
   const slidesToScroll = SlidesToScroll(
     viewSize,

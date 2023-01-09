@@ -11,22 +11,23 @@ export function SlideSizes(
   containerRect: DOMRect,
   slideRects: DOMRect[],
   slides: HTMLElement[],
-  includeEdgeGap: boolean,
+  readEdgeGap: boolean,
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
+  const withEdgeGap = arrayLastIndex(slides) > 0 && readEdgeGap
   const startGap = measureStartGap()
   const endGap = measureEndGap()
   const slideSizes = slideRects.map(measureSize)
   const slideSizesWithGaps = measureWithGaps()
 
   function measureStartGap(): number {
-    if (!includeEdgeGap) return 0
+    if (!withEdgeGap) return 0
     const slideRect = slideRects[0]
     return mathAbs(containerRect[startEdge] - slideRect[startEdge])
   }
 
   function measureEndGap(): number {
-    if (!includeEdgeGap) return 0
+    if (!withEdgeGap) return 0
     const style = window.getComputedStyle(arrayLast(slides))
     return parseFloat(style.getPropertyValue(`margin-${endEdge}`))
   }
