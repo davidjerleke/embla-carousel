@@ -14,7 +14,7 @@ export function SlideSizes(
   readEdgeGap: boolean,
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
-  const withEdgeGap = arrayLastIndex(slides) > 0 && readEdgeGap
+  const withEdgeGap = slideRects[0] && readEdgeGap
   const startGap = measureStartGap()
   const endGap = measureEndGap()
   const slideSizes = slideRects.map(measureSize)
