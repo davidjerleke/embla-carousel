@@ -92,7 +92,9 @@ function EmblaCarousel(
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
         deActivate()
-        return activate({ loop: false }, withPlugins)
+        activate({ loop: false }, withPlugins)
+        optionsBase = optionsHandler.merge(optionsBase, { loop: true })
+        return
       }
       engine.slideLooper.loop()
     }
