@@ -18,8 +18,9 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Info: no tests specified\" && exit 0",
-    "build": "npm-run-all sandboxfiles:build gatsby:build",
+    "build": "npm-run-all sandboxfiles:build sandboxfiles:format gatsby:build",
     "gatsby:build": "gatsby build",
+    "sandboxfiles:format": "yarn workspace embla-carousel-monorepo run format",
     "sandboxfiles:build": "npm-run-all sandboxfiles:copy-vanilla sandboxfiles:copy-react sandboxfiles:before-ts sandboxfiles:ts sandboxfiles:after-ts",
     "sandboxfiles:before-ts": "npx ts-node --project src/components/CodeSandbox/Compilation/tsconfig.node.json src/components/CodeSandbox/Compilation/build-before.ts",
     "sandboxfiles:after-ts": "npx ts-node --project src/components/CodeSandbox/Compilation/tsconfig.node.json src/components/CodeSandbox/Compilation/build-after.ts",
@@ -30,8 +31,7 @@
     "predeploy:build": "npm-run-all clean build",
     "predeploy:copy": "shx cp -r ./public ../../docs",
     "predeploy": "npm-run-all predeploy:clean predeploy:build predeploy:copy",
-    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
-    "eslint:fix": "eslint \"src/**/*.{js,tsx,ts}\" --fix"
+    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\""
   },
   "dependencies": {
     "@docsearch/react": "^3.0.0",
