@@ -39,6 +39,7 @@ export function DragHandler(
 ): DragHandlerType {
   const { cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
+  const nonPassiveEvent = { passive: false }
   const dragStartPoint = Vector1D(0)
   const activationEvents = EventStore()
   const interactionEvents = EventStore()
@@ -58,21 +59,21 @@ export function DragHandler(
   function addActivationEvents(): void {
     const node = rootNode
     activationEvents
-      .add(node, 'touchmove', () => undefined)
+      .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
       .add(node, 'touchstart', down)
       .add(node, 'mousedown', down)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
-      .add(node, 'click', click)
+      .add(node, 'click', click, nonPassiveEvent)
   }
 
   function addInteractionEvents(): void {
-    const node = !isMouse ? rootNode : document
+    const node = isMouse ? document : rootNode
     interactionEvents
-      .add(node, 'touchmove', move)
+      .add(node, 'touchmove', move, nonPassiveEvent)
       .add(node, 'touchend', up)
-      .add(node, 'mousemove', move)
+      .add(node, 'mousemove', move, nonPassiveEvent)
       .add(node, 'mouseup', up)
   }
 
@@ -105,13 +106,12 @@ export function DragHandler(
   }
 
   function down(evt: PointerEventType): void {
-    isMouse = evt.type === 'mousedown'
+    isMouse = !dragTracker.isTouchEvent(evt)
     if (isMouse && (evt as MouseEvent).button !== 0) return
+    if (isFocusNode(evt.target as Element)) return
 
     const isMoving = deltaAbs(target.get(), location.get()) >= 2
     const clearPreventClick = isMouse || !isMoving
-    const isNotFocusNode = !isFocusNode(evt.target as Element)
-    const preventDefault = isMoving || (isMouse && isNotFocusNode)
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
@@ -124,7 +124,6 @@ export function DragHandler(
     eventHandler.emit('pointerDown')
 
     if (clearPreventClick) preventClick = false
-    if (preventDefault) evt.preventDefault()
   }
 
   function move(evt: PointerEventType): void {
