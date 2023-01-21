@@ -65,7 +65,7 @@ export function DragHandler(
       .add(node, 'mousedown', down)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
-      .add(node, 'click', click, nonPassiveEvent)
+      .add(node, 'click', click, true)
   }
 
   function addInteractionEvents(): void {
@@ -166,9 +166,13 @@ export function DragHandler(
   }
 
   function click(evt: MouseEvent): void {
-    if (preventClick) evt.preventDefault()
+    if (preventClick) {
+      evt.stopPropagation()
+      evt.preventDefault()
+    }
   }
 
+  // DEPRECATED - Remove in v8 because handled automatically
   function clickAllowed(): boolean {
     return !preventClick
   }
