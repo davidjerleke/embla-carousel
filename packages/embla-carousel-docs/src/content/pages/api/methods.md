@@ -112,6 +112,8 @@ Get slide indexes not visible in the carousel viewport. Honors the [inViewThresh
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
 
+**Note!** This method is **deprecated**. From **v7.0.8** and up this is handled automatically by Embla.
+
 For touch pointers, this method will return `false` when the gesture is a drag move or if the carousel is clicked during scroll. For mouse pointers, this method will only return `false` when the gesture is a drag move.
 
 ### reInit
