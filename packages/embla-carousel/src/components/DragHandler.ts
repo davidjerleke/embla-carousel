@@ -59,6 +59,7 @@ export function DragHandler(
   function addActivationEvents(): void {
     const node = rootNode
     activationEvents
+      .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
       .add(node, 'touchstart', down)
