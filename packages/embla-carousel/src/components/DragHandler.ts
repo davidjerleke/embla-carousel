@@ -66,6 +66,7 @@ export function DragHandler(
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
+      .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
   }
 
   function addInteractionEvents(): void {
