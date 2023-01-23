@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import maskable from 'assets/images/maskable.png'
 import { graphql } from 'gatsby'
@@ -23,19 +23,14 @@ export const query = graphql`
   }
 `
 
-type PropType = {
-  data: {
-    mdx: {
-      body: string
-    }
-  }
+type PropType = PropsWithChildren<{
   pageContext: {
     id: string
   }
-}
+}>
 
 const Home = (props: PropType) => {
-  const { body } = props.data.mdx
+  const { children } = props
   const { siteUrl, description } = useSiteMetadata()
 
   return (
@@ -57,7 +52,7 @@ const Home = (props: PropType) => {
       </Seo>
       <Hero />
       <MdxWrapper>
-        <Mdx body={body} />
+        <Mdx>{children}</Mdx>
       </MdxWrapper>
     </>
   )

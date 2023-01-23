@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { PropsWithChildren, useMemo } from 'react'
 import { graphql } from 'gatsby'
 import { Seo } from 'components/Seo/Seo'
 import maskable from 'assets/images/maskable.png'
@@ -14,7 +14,6 @@ import { Mdx } from 'components/Mdx/Mdx'
 export const query = graphql`
   query PageQuery($id: String) {
     mdx(id: { eq: $id }) {
-      body
       frontmatter {
         title
         description
@@ -24,10 +23,9 @@ export const query = graphql`
   }
 `
 
-export type PropType = {
+export type PropType = PropsWithChildren<{
   data: {
     mdx: {
-      body: string
       frontmatter: {
         title: string
         date: string
@@ -42,13 +40,13 @@ export type PropType = {
     previous?: RouteType
     slug: string
   }
-}
+}>
 
 const Page = (props: PropType) => {
   const { siteUrl, author } = useSiteMetadata()
-  const { data, pageContext } = props
+  const { data, pageContext, children } = props
   const { next, previous, filePath, id } = pageContext
-  const { frontmatter, body } = data.mdx
+  const { frontmatter } = data.mdx
   const { title, description, date } = frontmatter
   const dateToISOString = useMemo(
     () => new Date(`${date} UTC`).toISOString(),
@@ -94,7 +92,7 @@ const Page = (props: PropType) => {
       </Seo>
       <Breadcrumbs id={id} />
       <article id={SKIP_TO_CONTENT_ID}>
-        <Mdx body={body} />
+        <Mdx>{children}</Mdx>
       </article>
       <EditPage pageUrl={filePath} />
       <Pagination previous={previous} next={next} />

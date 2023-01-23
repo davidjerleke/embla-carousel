@@ -1,5 +1,4 @@
-import React from 'react'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
+import React, { PropsWithChildren } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { MdxStyles } from './Styles'
 import { Link } from 'components/Mdx/Components/Link'
@@ -16,18 +15,18 @@ import {
   BrandSecondaryText,
 } from 'components/Mdx/Components/ColoredText'
 
-type PropType = { body: string }
+type PropType = PropsWithChildren<{}>
 
 export const Mdx = (props: PropType) => {
-  const { body } = props
+  const { children } = props
 
   return (
     <MdxStyles>
       <MDXProvider
         components={{
+          div: Div,
           a: Link,
           pre: Pre,
-          div: Div,
           code: Code,
           h1: H1,
           RepositoryLink,
@@ -38,7 +37,7 @@ export const Mdx = (props: PropType) => {
           Admonition,
         }}
       >
-        <MDXRenderer>{body}</MDXRenderer>
+        {children}
       </MDXProvider>
     </MdxStyles>
   )

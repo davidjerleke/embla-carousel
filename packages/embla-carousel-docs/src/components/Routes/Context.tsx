@@ -11,7 +11,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 const query = graphql`
   query AllRoutesQuery {
     allMdx(
-      sort: { order: ASC, fields: [frontmatter___order] }
+      sort: { frontmatter: { order: ASC } }
       filter: {
         frontmatter: { title: { ne: "404" } }
         fields: { slug: { ne: "/404/" } }

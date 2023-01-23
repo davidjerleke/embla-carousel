@@ -1,10 +1,12 @@
 import React, { PropsWithChildren } from 'react'
 
-type PropType = PropsWithChildren<{
-  className: string
-}>
+type PropType = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+>
 
 export const Code = (props: PropType) => {
+  console.log(props, 'code')
   if (props.className !== 'language-text') return <code {...props} />
   const { children, ...restProps } = props
 

@@ -1,8 +1,8 @@
-import React from 'react'
-import { Mdx } from 'components/Mdx/Mdx'
+import React, { PropsWithChildren } from 'react'
+import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import { Frame } from 'components/SiteLayout/Frame'
-import styled from 'styled-components'
+import { Mdx } from 'components/Mdx/Mdx'
 
 const MAX_WIDTH = '68.2rem'
 
@@ -26,25 +26,21 @@ export const query = graphql`
   }
 `
 
-type PropType = {
-  data: {
-    mdx: {
-      body: string
-    }
-  }
+type PropType = PropsWithChildren<{
   pageContext: {
     id: string
   }
-}
+}>
 
 const NotFound = (props: PropType) => {
-  const { body } = props.data.mdx
+  const { children } = props
 
   return (
     <Wrapper>
       <Frame>
-        <Mdx body={body} />
+        <Mdx>{children}</Mdx>
       </Frame>
+      <code />
     </Wrapper>
   )
 }

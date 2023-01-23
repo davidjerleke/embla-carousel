@@ -31,18 +31,20 @@ exports.createPages = async ({
   reporter,
 }) => {
   const { errors, data } = await graphql(`
-    query {
-      allMdx(sort: { fields: [frontmatter___order], order: ASC }) {
+    {
+      allMdx(sort: { frontmatter: { order: ASC } }) {
         edges {
           node {
             id
-            fileAbsolutePath
             fields {
               slug
             }
             frontmatter {
               title
               order
+            }
+            internal {
+              contentFilePath
             }
           }
         }
@@ -71,18 +73,24 @@ exports.createPages = async ({
   const exclude = [startPage.node.fields.slug, notFoundPage.node.fields.slug]
   const pages = edges.filter(({ node }) => !exclude.includes(node.fields.slug))
 
+  const startPageTemplate = path.resolve(
+    `./src/templates/${PAGE_TEMPLATES.HOME}.tsx`,
+  )
   createPage({
     path: startPage.node.fields.slug,
-    component: path.resolve(`./src/templates/${PAGE_TEMPLATES.HOME}.tsx`),
+    component: `${startPageTemplate}?__contentFilePath=${startPage.node.internal.contentFilePath}`,
     context: {
       id: startPage.node.id,
       layout: PAGE_TEMPLATES.HOME,
     },
   })
 
+  const notFoundPageTemplate = path.resolve(
+    path.resolve(`./src/templates/${PAGE_TEMPLATES.NOT_FOUND}.tsx`),
+  )
   createPage({
     path: notFoundPage.node.fields.slug,
-    component: path.resolve(`./src/templates/${PAGE_TEMPLATES.NOT_FOUND}.tsx`),
+    component: `${notFoundPageTemplate}?__contentFilePath=${notFoundPage.node.internal.contentFilePath}`,
     context: {
       id: notFoundPage.node.id,
       layout: PAGE_TEMPLATES.NOT_FOUND,
@@ -90,17 +98,21 @@ exports.createPages = async ({
   })
 
   pages.forEach(({ node }) => {
-    const { id, fields, fileAbsolutePath: filePath } = node
+    const { id, fields /*fileAbsolutePath: filePath*/ } = node
     const index = pageListWithChildren.findIndex((page) => page.id === id)
 
+    const pageTemplate = path.resolve(
+      path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
+    )
     createPage({
       path: fields.slug,
-      component: path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
+      // component: path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
+      component: `${pageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
       context: {
         id,
         layout: PAGE_TEMPLATES.PAGE,
         slug: fields.slug,
-        filePath: filePath.substring(filePath.indexOf('src'), filePath.length),
+        // filePath: filePath.substring(filePath.indexOf('src'), filePath.length),
         next: pageListWithChildren[index + 1],
         previous: pageListWithChildren[index - 1],
       },
