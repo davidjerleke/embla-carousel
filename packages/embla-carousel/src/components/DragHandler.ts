@@ -59,6 +59,7 @@ export function DragHandler(
   function addActivationEvents(): void {
     const node = rootNode
     activationEvents
+      .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
       .add(node, 'touchstart', down)
@@ -66,7 +67,6 @@ export function DragHandler(
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
-      .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
   }
 
   function addInteractionEvents(): void {
