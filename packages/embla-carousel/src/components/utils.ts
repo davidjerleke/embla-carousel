@@ -62,7 +62,7 @@ export function arrayLastIndex<Type>(array: Type[]): number {
   return Math.max(0, array.length - 1)
 }
 
-export function objectKeys<Type>(object: Type): string[] {
+export function objectKeys<Type extends object>(object: Type): string[] {
   return Object.keys(object)
 }
 

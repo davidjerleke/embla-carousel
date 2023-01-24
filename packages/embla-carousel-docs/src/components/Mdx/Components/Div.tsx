@@ -10,7 +10,9 @@ type PropType = React.DetailedHTMLProps<
 >
 
 export const Div = (props: PropType) => {
-  const { /*['data-language']: dataLanguage,*/ className } = props
+  const {
+    /*['data-language']: dataLanguage, className */
+  } = props
 
   console.log(props)
 
