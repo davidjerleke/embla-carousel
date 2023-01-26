@@ -28,12 +28,14 @@ export const onRenderBody = ({
       content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
     />,
     <style
+      id="theme-styles"
       key="theme-style"
       dangerouslySetInnerHTML={{
         __html: `${themeStyles.join('')}`,
       }}
     />,
     <script
+      id="theme-script"
       key="theme-script"
       dangerouslySetInnerHTML={{
         __html: `

@@ -180,6 +180,7 @@ export const codeStyles = css`
   .token.class-name,
   .token.maybe-class-name:not(.imports),
   .token.literal-property.property,
+  .token.unit,
   .token.symbol {
     color: ${COLORS.BRAND_ALTERNATIVE};
   }
@@ -195,6 +196,8 @@ export const codeStyles = css`
   .token.regex,
   .token.atrule,
   .token.placeholder,
+  .token.number,
+  .token.n-th.number,
   .token.variable {
     color: ${COLORS.BRAND_SECONDARY};
   }
@@ -208,9 +211,7 @@ export const codeStyles = css`
   .token.singlequote,
   .token.boolean,
   .token.operator,
-  .token.number,
-  .token.dom,
-  .token.unit {
+  .token.dom {
     color: ${COLORS.BRAND_PRIMARY};
   }
 

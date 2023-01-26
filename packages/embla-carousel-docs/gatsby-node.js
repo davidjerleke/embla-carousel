@@ -10,6 +10,9 @@ const PAGE_TEMPLATES = {
 const resolveComponentPath = (template, node) =>
   `${template}?__contentFilePath=${node.internal.contentFilePath}`
 
+const resolveFilePath = (node) =>
+  node.internal.contentFilePath.replace(/.+?embla-carousel-docs\//, '')
+
 const addPageChildren = (parent, pages) =>
   pages
     .filter((page) => new RegExp(`^${parent.slug}`).test(page.slug))
@@ -85,6 +88,8 @@ exports.createPages = async ({
     context: {
       id: startPage.node.id,
       layout: PAGE_TEMPLATES.HOME,
+      slug: startPage.node.fields.slug,
+      filePath: resolveFilePath(startPage.node),
     },
   })
 
@@ -97,16 +102,14 @@ exports.createPages = async ({
     context: {
       id: notFoundPage.node.id,
       layout: PAGE_TEMPLATES.NOT_FOUND,
+      slug: notFoundPage.node.fields.slug,
+      filePath: resolveFilePath(notFoundPage.node),
     },
   })
 
   pages.forEach(({ node }) => {
     const { id, fields } = node
     const index = pageListWithChildren.findIndex((page) => page.id === id)
-    const filePath = node.internal.contentFilePath.replace(
-      /.+?embla-carousel-docs\//,
-      '',
-    )
 
     const pageTemplate = path.resolve(
       path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
@@ -118,7 +121,7 @@ exports.createPages = async ({
         id,
         layout: PAGE_TEMPLATES.PAGE,
         slug: fields.slug,
-        filePath,
+        filePath: resolveFilePath(node),
         next: pageListWithChildren[index + 1],
         previous: pageListWithChildren[index - 1],
       },
