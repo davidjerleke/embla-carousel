@@ -6,13 +6,8 @@ type PropType = React.DetailedHTMLProps<
 >
 
 export const Code = (props: PropType) => {
-  // console.log(props, 'code')
-  if (props.className !== 'language-text') return <code {...props} />
-  const { children, ...restProps } = props
+  const { children, className } = props
 
-  return (
-    <code {...restProps}>
-      <span>{children}</span>
-    </code>
-  )
+  if (className) return <code {...props} />
+  return <code className="language-text">{children}</code>
 }

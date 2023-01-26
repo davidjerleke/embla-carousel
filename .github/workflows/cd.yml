@@ -15,7 +15,7 @@ jobs:
       - name: Setup node for npmjs.org as registry
         uses: actions/setup-node@v1
         with:
-          node-version: '16.x'
+          node-version: '18.x'
           registry-url: 'https://registry.npmjs.org'
 
       - name: Install 🔧

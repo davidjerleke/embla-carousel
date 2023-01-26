@@ -7,6 +7,9 @@ const PAGE_TEMPLATES = {
   NOT_FOUND: `404`,
 }
 
+const resolveComponentPath = (template, node) =>
+  `${template}?__contentFilePath=${node.internal.contentFilePath}`
+
 const addPageChildren = (parent, pages) =>
   pages
     .filter((page) => new RegExp(`^${parent.slug}`).test(page.slug))
@@ -78,7 +81,7 @@ exports.createPages = async ({
   )
   createPage({
     path: startPage.node.fields.slug,
-    component: `${startPageTemplate}?__contentFilePath=${startPage.node.internal.contentFilePath}`,
+    component: resolveComponentPath(startPageTemplate, startPage.node),
     context: {
       id: startPage.node.id,
       layout: PAGE_TEMPLATES.HOME,
@@ -90,7 +93,7 @@ exports.createPages = async ({
   )
   createPage({
     path: notFoundPage.node.fields.slug,
-    component: `${notFoundPageTemplate}?__contentFilePath=${notFoundPage.node.internal.contentFilePath}`,
+    component: resolveComponentPath(notFoundPageTemplate, notFoundPage.node),
     context: {
       id: notFoundPage.node.id,
       layout: PAGE_TEMPLATES.NOT_FOUND,
@@ -98,21 +101,24 @@ exports.createPages = async ({
   })
 
   pages.forEach(({ node }) => {
-    const { id, fields /*fileAbsolutePath: filePath*/ } = node
+    const { id, fields } = node
     const index = pageListWithChildren.findIndex((page) => page.id === id)
+    const filePath = node.internal.contentFilePath.replace(
+      /.+?embla-carousel-docs\//,
+      '',
+    )
 
     const pageTemplate = path.resolve(
       path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
     )
     createPage({
       path: fields.slug,
-      // component: path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
-      component: `${pageTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+      component: resolveComponentPath(pageTemplate, node),
       context: {
         id,
         layout: PAGE_TEMPLATES.PAGE,
         slug: fields.slug,
-        // filePath: filePath.substring(filePath.indexOf('src'), filePath.length),
+        filePath,
         next: pageListWithChildren[index + 1],
         previous: pageListWithChildren[index - 1],
       },

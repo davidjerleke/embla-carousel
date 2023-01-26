@@ -7694,6 +7694,7 @@ __metadata:
     lodash: ^4.17.21
     npm-run-all: ^4.1.5
     prettier: 2.5.1
+    prism-react-renderer: ^1.3.5
     prismjs: ^1.26.0
     react: ^18.1.0
     react-dom: ^18.1.0
@@ -16199,6 +16200,15 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^17.0.1
   checksum: cf610cffcb793885d16f184a62162f2dd0df31642d9a18edf4ca298e909a8fe80bdbf556d5c9573992c102ce8bf948691da91bf9739bee0ffb6e79c8a8a6e088
+  languageName: node
+  linkType: hard
+
+"prism-react-renderer@npm:^1.3.5":
+  version: 1.3.5
+  resolution: "prism-react-renderer@npm:1.3.5"
+  peerDependencies:
+    react: ">=0.14.9"
+  checksum: c18806dcbc4c0b4fd6fd15bd06b4f7c0a6da98d93af235c3e970854994eb9b59e23315abb6cfc29e69da26d36709a47e25da85ab27fed81b6812f0a52caf6dfa
   languageName: node
   linkType: hard
 

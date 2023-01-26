@@ -161,24 +161,29 @@ export const codeStyles = css`
     }
   }
 
+  .token-line {
+    display: block;
+  }
+
   .token.comment,
   .token.prolog,
   .token.doctype,
   .token.cdata {
     color: ${COLORS.TEXT_COMMENT};
   }
+
+  .token.tag,
+  .token.function-name,
+  .token.constant,
+  .token.function-variable,
+  .token.function,
   .token.class-name,
-  .token.attr-value,
-  .token.keyword,
-  .token.property,
-  .token.control,
-  .token.directive,
-  .token.selector,
-  .token.function:not(.function-variable),
-  .token.singlequote,
-  .token.unit {
-    color: ${COLORS.BRAND_PRIMARY};
+  .token.maybe-class-name:not(.imports),
+  .token.literal-property.property,
+  .token.symbol {
+    color: ${COLORS.BRAND_ALTERNATIVE};
   }
+
   .token.string,
   .token.string-property,
   .token.attr-name,
@@ -193,18 +198,29 @@ export const codeStyles = css`
   .token.variable {
     color: ${COLORS.BRAND_SECONDARY};
   }
+
+  .token.attr-value,
+  .token.keyword,
+  .token.property,
+  .token.control,
+  .token.directive,
+  .token.selector,
+  .token.singlequote,
+  .token.boolean,
+  .token.operator,
+  .token.number,
+  .token.dom,
+  .token.unit {
+    color: ${COLORS.BRAND_PRIMARY};
+  }
+
+  .token.console,
   .token.punctuation,
+  .token.tag.script:not(.punctuation):not(.function),
   .token.plain-text {
     color: ${COLORS.TEXT_HIGH_CONTRAST};
   }
-  .token.tag,
-  .token.boolean,
-  .token.number,
-  .token.function-name,
-  .token.constant,
-  .token.symbol {
-    color: ${COLORS.BRAND_ALTERNATIVE};
-  }
+
   .token.namespace {
     opacity: 0.75;
   }

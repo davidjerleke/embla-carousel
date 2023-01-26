@@ -35,7 +35,7 @@ Therefore, it's **not a good idea** to place the previous and next buttons insid
 
 To solve this, we're going to modify the minimal [HTML setup](/get-started/module/#the-html-structure) from the installation guide by creating a **viewport wrapper** around our container like so:
 
-```html{2, 8}
+```html{2,8}
 <div class="embla">
   <div class="embla__viewport">
     <div class="embla__container">

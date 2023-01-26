@@ -10,3 +10,5 @@ export const URLS = {
   NPM_PACKAGE: `https://www.npmjs.com/package/embla-carousel`,
   CODESANDBOX_DEFINE: `https://codesandbox.io/api/v1/sandboxes/define`,
 }
+
+// https://github.com/davidjerleke/embla-carousel/blob/master/packages/embla-carousel-docs/src/content/pages/get-started/react.md

@@ -63,7 +63,7 @@ The `emblaCarouselVue` function gives us an **emblaNode** to attach to our wrapp
 
 The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `onMounted` like demonstrated below:
 
-```html{17, 19-23}
+```html{17,19-23}
 <template>
   <div class="embla" ref="emblaNode">
     <div class="embla__container">
@@ -98,7 +98,7 @@ The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/
 
 The `emblaCarouselVue` function also accepts [plugins](/plugins/) as the second argument. Note that plugins need to be passed in an array like so:
 
-```html{13, 17}
+```html{13,17}
 <template>
   <div class="embla" ref="emblaNode">
     <div class="embla__container">
