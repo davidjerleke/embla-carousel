@@ -7,6 +7,12 @@ const PAGE_TEMPLATES = {
   NOT_FOUND: `404`,
 }
 
+const resolveComponentPath = (template, node) =>
+  `${template}?__contentFilePath=${node.internal.contentFilePath}`
+
+const resolveFilePath = (node) =>
+  node.internal.contentFilePath.replace(/.+?embla-carousel-docs\//, '')
+
 const addPageChildren = (parent, pages) =>
   pages
     .filter((page) => new RegExp(`^${parent.slug}`).test(page.slug))
@@ -31,18 +37,20 @@ exports.createPages = async ({
   reporter,
 }) => {
   const { errors, data } = await graphql(`
-    query {
-      allMdx(sort: { fields: [frontmatter___order], order: ASC }) {
+    {
+      allMdx(sort: { frontmatter: { order: ASC } }) {
         edges {
           node {
             id
-            fileAbsolutePath
             fields {
               slug
             }
             frontmatter {
               title
               order
+            }
+            internal {
+              contentFilePath
             }
           }
         }
@@ -71,36 +79,49 @@ exports.createPages = async ({
   const exclude = [startPage.node.fields.slug, notFoundPage.node.fields.slug]
   const pages = edges.filter(({ node }) => !exclude.includes(node.fields.slug))
 
+  const startPageTemplate = path.resolve(
+    `./src/templates/${PAGE_TEMPLATES.HOME}.tsx`,
+  )
   createPage({
     path: startPage.node.fields.slug,
-    component: path.resolve(`./src/templates/${PAGE_TEMPLATES.HOME}.tsx`),
+    component: resolveComponentPath(startPageTemplate, startPage.node),
     context: {
       id: startPage.node.id,
       layout: PAGE_TEMPLATES.HOME,
+      slug: startPage.node.fields.slug,
+      filePath: resolveFilePath(startPage.node),
     },
   })
 
+  const notFoundPageTemplate = path.resolve(
+    path.resolve(`./src/templates/${PAGE_TEMPLATES.NOT_FOUND}.tsx`),
+  )
   createPage({
     path: notFoundPage.node.fields.slug,
-    component: path.resolve(`./src/templates/${PAGE_TEMPLATES.NOT_FOUND}.tsx`),
+    component: resolveComponentPath(notFoundPageTemplate, notFoundPage.node),
     context: {
       id: notFoundPage.node.id,
       layout: PAGE_TEMPLATES.NOT_FOUND,
+      slug: notFoundPage.node.fields.slug,
+      filePath: resolveFilePath(notFoundPage.node),
     },
   })
 
   pages.forEach(({ node }) => {
-    const { id, fields, fileAbsolutePath: filePath } = node
+    const { id, fields } = node
     const index = pageListWithChildren.findIndex((page) => page.id === id)
 
+    const pageTemplate = path.resolve(
+      path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
+    )
     createPage({
       path: fields.slug,
-      component: path.resolve(`./src/templates/${PAGE_TEMPLATES.PAGE}.tsx`),
+      component: resolveComponentPath(pageTemplate, node),
       context: {
         id,
         layout: PAGE_TEMPLATES.PAGE,
         slug: fields.slug,
-        filePath: filePath.substring(filePath.indexOf('src'), filePath.length),
+        filePath: resolveFilePath(node),
         next: pageListWithChildren[index + 1],
         previous: pageListWithChildren[index - 1],
       },

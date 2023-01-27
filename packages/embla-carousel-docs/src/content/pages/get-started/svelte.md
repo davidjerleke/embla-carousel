@@ -52,7 +52,7 @@ The element with the classname `embla` is needed to cover the scroll overflow. I
 
 The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `init` event to store the carousel instance in a variable:
 
-```html{6-8, 10-13, 16}
+```html{6-8,10-13,16}
 <script>
   import emblaCarouselSvelte from 'embla-carousel-svelte'
 
@@ -81,7 +81,7 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
 
 The `emblaCarouselSvelte` action parameter also accepts [plugins](/plugins/). Note that plugins need to be passed in an array like so:
 
-```html{3, 7}
+```html{3,7}
 <script>
   import emblaCarouselSvelte from 'embla-carousel-svelte'
   import Autoplay from 'embla-carousel-autoplay'

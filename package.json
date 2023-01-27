@@ -63,5 +63,6 @@
     "hooks": {
       "pre-push": "npm-run-all test lint"
     }
-  }
+  },
+  "packageManager": "yarn@3.3.1"
 }

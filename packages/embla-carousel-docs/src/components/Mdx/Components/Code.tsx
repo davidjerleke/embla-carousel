@@ -1,16 +1,10 @@
-import React, { PropsWithChildren } from 'react'
+import React, { HTMLAttributes } from 'react'
 
-type PropType = PropsWithChildren<{
-  className: string
-}>
+type PropType = HTMLAttributes<HTMLElement>
 
 export const Code = (props: PropType) => {
-  if (props.className !== 'language-text') return <code {...props} />
-  const { children, ...restProps } = props
+  const { children, className = '' } = props
 
-  return (
-    <code {...restProps}>
-      <span>{children}</span>
-    </code>
-  )
+  if (className) return <code {...props} />
+  return <code className="language-text">{children}</code>
 }

@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import maskable from 'assets/images/maskable.png'
 import { graphql } from 'gatsby'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { PageTemplatePropType } from 'consts/pageTemplates'
+import { removeProtocol } from 'utils/removeProtocol'
 import { Hero } from 'components/Hero/Hero'
 import { Seo } from 'components/Seo/Seo'
 import { Mdx } from 'components/Mdx/Mdx'
-import { removeProtocol } from 'utils/removeProtocol'
 
 const MAX_WIDTH = '68.2rem'
 
@@ -18,46 +19,47 @@ const MdxWrapper = styled.div`
 export const query = graphql`
   query HomeQuery($id: String) {
     mdx(id: { eq: $id }) {
-      body
+      frontmatter {
+        title
+        description
+        date(formatString: "DD MMMM YYYY")
+      }
     }
   }
 `
 
-type PropType = {
-  data: {
-    mdx: {
-      body: string
-    }
-  }
-  pageContext: {
-    id: string
-  }
-}
-
-const Home = (props: PropType) => {
-  const { body } = props.data.mdx
+export const Head = () => {
   const { siteUrl, description } = useSiteMetadata()
 
   return (
+    <Seo title={description} description={description} url={siteUrl}>
+      <script type="application/ld+json">
+        {`
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "${removeProtocol(siteUrl)}",
+          "description": "${description}",
+          "url": "${siteUrl}/",
+          "image": "${siteUrl}/share-image.png",
+          "logo": "${siteUrl}${maskable}"
+        }
+      `}
+      </script>
+    </Seo>
+  )
+}
+
+type PropType = PropsWithChildren<PageTemplatePropType>
+
+const Home = (props: PropType) => {
+  const { children } = props
+
+  return (
     <>
-      <Seo title={description} description={description} url={siteUrl}>
-        <script type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "${removeProtocol(siteUrl)}",
-              "description": "${description}",
-              "url": "${siteUrl}/",
-              "image": "${siteUrl}/share-image.png",
-              "logo": "${siteUrl}${maskable}"
-            }
-          `}
-        </script>
-      </Seo>
       <Hero />
       <MdxWrapper>
-        <Mdx body={body} />
+        <Mdx>{children}</Mdx>
       </MdxWrapper>
     </>
   )

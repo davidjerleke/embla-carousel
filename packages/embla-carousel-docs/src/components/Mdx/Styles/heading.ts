@@ -53,22 +53,28 @@ export const headingStyles = css`
   h6 {
     > .anchor {
       position: absolute;
-      right: 100%;
-      top: 0;
-      bottom: 0;
-      width: ${FRAME_SPACING};
+      top: 50%;
+      transform: translateY(-50%);
+      padding-right: 0;
+      ${createSquareSizeStyles(FRAME_SPACING)};
+      margin-left: -${FRAME_SPACING};
 
       ${MEDIA.DESKTOP} {
-        width: ${SPACINGS.FIVE};
+        ${createSquareSizeStyles(SPACINGS.FIVE)};
+        margin-left: -${SPACINGS.FIVE};
       }
+    }
+
+    > .anchor > div {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       > svg {
         ${createSquareSizeStyles(ANCHOR_SVG_SIZE)};
         color: ${COLORS.TEXT_LOW_CONTRAST};
-        transform: translate(-50%, -50%);
-        position: absolute;
-        top: 50%;
-        left: 50%;
         visibility: hidden;
 
         @media (hover: none), (hover: on-demand) {
@@ -82,18 +88,18 @@ export const headingStyles = css`
     }
   }
 
-  h1:hover .anchor > svg,
-  h2:hover .anchor > svg,
-  h3:hover .anchor > svg,
-  h4:hover .anchor > svg,
-  h5:hover .anchor > svg,
-  h6:hover .anchor > svg,
-  h1 .anchor:focus > svg,
-  h2 .anchor:focus > svg,
-  h3 .anchor:focus > svg,
-  h4 .anchor:focus > svg,
-  h5 .anchor:focus > svg,
-  h6 .anchor:focus > svg {
+  h1:hover .anchor > div > svg,
+  h2:hover .anchor > div > svg,
+  h3:hover .anchor > div > svg,
+  h4:hover .anchor > div > svg,
+  h5:hover .anchor > div > svg,
+  h6:hover .anchor > div > svg,
+  h1 .anchor:focus > div > svg,
+  h2 .anchor:focus > div > svg,
+  h3 .anchor:focus > div > svg,
+  h4 .anchor:focus > div > svg,
+  h5 .anchor:focus > div > svg,
+  h6 .anchor:focus > div > svg {
     visibility: visible;
   }
 `

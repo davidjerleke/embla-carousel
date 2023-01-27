@@ -34,7 +34,7 @@ embla.slideNodes().forEach((slideNode, index) => {
 
 Adding click events to your slides with React is straightforward. We'll create a `onSlideClick` function wrapped in a `useCallback` and add that click handler to our slides. The important part here is to only run your desired code when the [clickAllowed](/api/methods/#clickallowed) method returns `true`.
 
-```jsx{9, 21}
+```jsx{9,21}
 import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 

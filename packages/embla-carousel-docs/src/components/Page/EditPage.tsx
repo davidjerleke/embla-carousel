@@ -18,7 +18,9 @@ const Wrapper = styled(PlainLink)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 
-type PropType = { pageUrl: string }
+type PropType = {
+  pageUrl: string
+}
 
 export const EditPage = (props: PropType) => {
   const { pageUrl } = props

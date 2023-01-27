@@ -5,15 +5,13 @@ import { NavigationProvider } from 'components/Navigation/Context'
 import { TabAccessProvider } from 'components/TabAccess/Context'
 import { SkipToContent } from 'components/TabAccess/SkipToContent'
 import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
-import { PageTemplateType, PAGE_TEMPLATES } from 'consts/pageTemplates'
+import { PageTemplatePropType, PAGE_TEMPLATES } from 'consts/pageTemplates'
 import { Grid } from 'components/SiteLayout/Grid'
 import { RoutesLoading } from 'components/Routes/RoutesLoading'
 import { Header } from 'components/Header/Header'
 import { Footer } from 'components/Footer/Footer'
 
-type PropType = PropsWithChildren<{
-  pageContext: { layout: PageTemplateType; id: string }
-}>
+type PropType = PropsWithChildren<Pick<PageTemplatePropType, 'pageContext'>>
 
 export const Layout = (props: PropType) => {
   const { children, pageContext } = props
