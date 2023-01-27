@@ -1,2 +1,0 @@
-(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[7657],{7657:function(e,s,o){var u=o(6314),r=o(3912),a=o(121),c=o(6147);e.exports=function(e){return u(e)||r(e)||a(e)||c()},e.exports.__esModule=!0,e.exports.default=e.exports}}]);
-//# sourceMappingURL=7657-e4ad7c8fd2860fe7b302.js.map
