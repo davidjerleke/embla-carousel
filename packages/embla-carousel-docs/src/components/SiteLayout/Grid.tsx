@@ -7,16 +7,26 @@ import { BREAKPOINTS, MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { PAGE_TEMPLATES, PageTemplateType } from 'consts/pageTemplates'
 import { LAYERS } from 'consts/layers'
-import {
-  SiteNavigation,
-  SITE_NAVIGATION_WIDTH,
-} from 'components/SiteNavigation/SiteNavigation'
-import {
-  TableOfContents,
-  THIS_PAGE_NAVIGATION_WIDTH,
-} from 'components/TableOfContents/TableOfContents'
+import { SiteNavigation } from 'components/SiteNavigation/SiteNavigation'
+import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 
-export const SIDEBAR_WIDTH = '28rem'
+const SIDEBAR_LG_UP_WIDTH = '28rem'
+const SIDEBAR_LG_DOWN_WIDTH = '21rem'
+
+const sidebarStyles = css`
+  min-width: 0;
+  flex: 0 0 auto;
+
+  ${MEDIA.DESKTOP} {
+    width: ${SIDEBAR_LG_DOWN_WIDTH};
+    max-width: ${SIDEBAR_LG_DOWN_WIDTH};
+  }
+
+  ${MEDIA.MIN_LG} {
+    width: ${SIDEBAR_LG_UP_WIDTH};
+    max-width: ${SIDEBAR_LG_UP_WIDTH};
+  }
+`
 
 const Wrapper = styled(Frame)`
   position: relative;
@@ -36,20 +46,17 @@ const Main = styled.main<{ $isStartPage: boolean }>`
   ${({ $isStartPage }) =>
     !$isStartPage &&
     css`
-      ${MEDIA.MIN_LG} {
-        padding-right: ${SPACINGS.SEVEN};
-      }
       ${MEDIA.DESKTOP} {
+        padding-right: ${SPACINGS.SEVEN};
         padding-left: ${SPACINGS.SEVEN};
       }
     `};
 `
 
 const SiteNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
-  ${MEDIA.DESKTOP} {
-    flex: 0 0 ${SITE_NAVIGATION_WIDTH};
-    min-width: 0;
+  ${sidebarStyles};
 
+  ${MEDIA.DESKTOP} {
     ${({ $isStartPage }) =>
       $isStartPage &&
       css`
@@ -62,11 +69,9 @@ const SiteNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
 `
 
 const TableOfContentsWrapper = styled.div`
-  ${MEDIA.MIN_LG} {
-    flex: 0 0 ${THIS_PAGE_NAVIGATION_WIDTH};
-    min-width: 0;
-  }
-  ${MEDIA.MAX_LG} {
+  ${sidebarStyles};
+
+  ${MEDIA.COMPACT} {
     display: none;
   }
 `

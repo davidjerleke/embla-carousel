@@ -11,7 +11,6 @@ import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
 import { isBrowser } from 'utils/isBrowser'
 
-export const SITE_NAVIGATION_WIDTH = '28rem'
 export const NAVIGATION_ID = 'main-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
 const MENU_ID = 'main-menu'
@@ -32,10 +31,14 @@ const Wrapper = styled.nav<{ $isOpen: boolean }>`
   }
 
   ${MEDIA.DESKTOP} {
-    width: ${SITE_NAVIGATION_WIDTH};
-    padding-right: ${SPACINGS.SEVEN};
+    width: inherit;
+    max-width: inherit;
     top: calc(${FRAME_SPACING} + ${HEADER_HEIGHT});
     bottom: 0;
+  }
+
+  ${MEDIA.MIN_LG} {
+    padding-right: ${SPACINGS.SEVEN};
   }
 `
 
