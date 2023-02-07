@@ -29,17 +29,17 @@ const ActiveText = styled.span<{ $isActive: boolean }>`
 `
 
 type PropType = PropsWithChildren<{
-  route: RouteType
+  slug: RouteType['slug']
   isActive?: boolean
 }>
 
 export const NavigationLink = (props: PropType) => {
-  const { route, isActive, children, ...restProps } = props
-  const { isPartiallyActive } = useRouteActive(route)
+  const { slug, isActive, children, ...restProps } = props
+  const { isPartiallyActive } = useRouteActive(slug)
   const active = isActive ?? isPartiallyActive
 
   return (
-    <Wrapper to={route.slug} {...restProps}>
+    <Wrapper to={slug} {...restProps}>
       <InactiveText $isActive={active}>{children}</InactiveText>
       <ActiveText $isActive={active} aria-hidden="true">
         {children}

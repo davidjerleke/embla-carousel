@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useCallback, useEffect } from 'react'
 import styled, { css } from 'styled-components'
+import FocusTrap from 'focus-trap-react'
 import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
 import { MEDIA } from 'consts/breakpoints'
@@ -7,18 +8,19 @@ import { LAYERS } from 'consts/layers'
 import { Menu } from './Menu'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
-import FocusTrap from 'focus-trap-react'
+import { SPACINGS } from 'consts/spacings'
 import { isBrowser } from 'utils/isBrowser'
 
+export const SITE_NAVIGATION_WIDTH = '28rem'
 export const NAVIGATION_ID = 'main-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
 const MENU_ID = 'main-menu'
 
-const Nav = styled.nav<{ $isOpen: boolean }>`
-  z-index: ${LAYERS.NAVIGATION};
+const Wrapper = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
 
   ${MEDIA.COMPACT} {
+    z-index: ${LAYERS.NAVIGATION};
     top: 0;
     right: 0;
     bottom: 0;
@@ -30,6 +32,8 @@ const Nav = styled.nav<{ $isOpen: boolean }>`
   }
 
   ${MEDIA.DESKTOP} {
+    width: ${SITE_NAVIGATION_WIDTH};
+    padding-right: ${SPACINGS.SEVEN};
     top: calc(${FRAME_SPACING} + ${HEADER_HEIGHT});
     bottom: 0;
   }
@@ -39,7 +43,7 @@ type PropType = PropsWithChildren<{
   collapsed: boolean
 }>
 
-export const Navigation = (props: PropType) => {
+export const SiteNavigation = (props: PropType) => {
   const { collapsed } = props
   const { isOpen, closeNavigation } = useNavigation()
   const id = collapsed ? NAVIGATION_ID : undefined
@@ -69,7 +73,7 @@ export const Navigation = (props: PropType) => {
 
   return (
     <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
-      <Nav
+      <Wrapper
         id={MENU_ID}
         role={role}
         aria-modal={ariaModal}
@@ -79,7 +83,7 @@ export const Navigation = (props: PropType) => {
         {...props}
       >
         <Menu />
-      </Nav>
+      </Wrapper>
     </FocusTrap>
   )
 }

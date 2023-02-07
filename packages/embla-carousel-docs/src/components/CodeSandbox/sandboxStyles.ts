@@ -9,24 +9,35 @@ import { COLORS, themeStyles } from 'consts/themes'
 
 const sandboxWrapperStyles = css`
   .sandbox {
-    max-width: 67rem;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+  }
+
+  ${MEDIA.MIN_SM} {
+    .sandbox {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 67rem;
+    }
   }
 `
 
 const sandboxCarouselStyles = css`
   .sandbox__carousel {
+    position: relative;
     background-color: ${COLORS.BACKGROUND_CODE};
   }
 
-  .sandbox__carousel {
-    position: relative;
+  ${MEDIA.MAX_SM} {
+    .sandbox__carousel {
+      border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    }
   }
 
   ${MEDIA.MIN_SM} {
     .sandbox__carousel {
       border-radius: ${CAROUSEL_WRAPPER_RADIUS};
+      border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
     }
   }
 `

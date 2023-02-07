@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { RoutesProvider } from 'components/Routes/Context'
 import { ThemeProvider } from 'components/Theme/Context'
-import { NavigationProvider } from 'components/Navigation/Context'
+import { NavigationProvider } from 'components/SiteNavigation/Context'
 import { TabAccessProvider } from 'components/TabAccess/Context'
 import { SkipToContent } from 'components/TabAccess/SkipToContent'
 import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
@@ -10,11 +10,20 @@ import { Grid } from 'components/SiteLayout/Grid'
 import { RoutesLoading } from 'components/Routes/RoutesLoading'
 import { Header } from 'components/Header/Header'
 import { Footer } from 'components/Footer/Footer'
+import { TableOfContentsProvider } from 'components/TableOfContents/Context'
 
-type PropType = PropsWithChildren<Pick<PageTemplatePropType, 'pageContext'>>
+type PropType = PropsWithChildren<
+  Pick<PageTemplatePropType, 'pageContext' | 'data'>
+>
 
 export const Layout = (props: PropType) => {
-  const { children, pageContext } = props
+  const {
+    children,
+    pageContext,
+    data: {
+      mdx: { tableOfContents },
+    },
+  } = props
   const { layout, id } = pageContext
   const isNotFoundPage = layout === PAGE_TEMPLATES.NOT_FOUND
 
@@ -31,7 +40,9 @@ export const Layout = (props: PropType) => {
                 <SkipToContent />
                 <Header />
                 <RoutesLoading pageId={id} />
-                <Grid layout={layout}>{children}</Grid>
+                <TableOfContentsProvider tableOfContents={tableOfContents}>
+                  <Grid layout={layout}>{children}</Grid>
+                </TableOfContentsProvider>
                 <Footer />
               </>
             )}

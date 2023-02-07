@@ -92,12 +92,14 @@ const Link = styled(NavigationLink)`
   padding: ${ITEM_SPACING} 0;
 `
 
-type PropType = { route: RouteType }
+type PropType = {
+  route: RouteType
+}
 
 export const SubMenu = (props: PropType) => {
   const { route } = props
   const { title, children } = route
-  const { isPartiallyActive, isActive } = useRouteActive(route)
+  const { isPartiallyActive, isActive } = useRouteActive(route.slug)
   const [isOpen, setIsOpen] = useState(isPartiallyActive)
   const id = `${title.toLowerCase().split(' ').join('-')}-navigation-menu`
   const toggleAction = isOpen ? 'Hide' : 'Show'
@@ -129,13 +131,13 @@ export const SubMenu = (props: PropType) => {
       </Toggle>
       <Menu $isOpen={isOpen}>
         <li>
-          <Link route={route} isActive={isActive}>
+          <Link slug={route.slug} isActive={isActive}>
             Overview
           </Link>
         </li>
         {children.map((child) => (
           <li key={child.id}>
-            <Link route={child}>{child.title}</Link>
+            <Link slug={child.slug}>{child.title}</Link>
           </li>
         ))}
       </Menu>

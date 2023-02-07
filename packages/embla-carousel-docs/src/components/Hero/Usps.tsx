@@ -1,12 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IconWithText } from 'components/Icon/IconWithText'
-import { ContentLink } from 'components/Link/ContentLink'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { CardLink } from 'components/Link/CardLink'
 
 const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
 
@@ -32,6 +30,7 @@ const Wrapper = styled.ul`
 const Usp = styled.li`
   padding-left: ${USP_ITEM_SPACING};
   padding-bottom: ${USP_ITEM_SPACING};
+  min-width: 0;
   flex: 0 0 100%;
 
   ${MEDIA.MIN_XS} {
@@ -43,17 +42,8 @@ const Usp = styled.li`
   }
 `
 
-const UspContent = styled.article`
-  padding: ${SPACINGS.FOUR};
-  background-color: ${COLORS.BACKGROUND_CODE};
-  border-radius: 1rem;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
-
 const UspHeader = styled.h3`
+  color: ${COLORS.TEXT_BODY};
   margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   font-size: ${FONT_SIZES.H4};
   font-weight: bold;
@@ -64,70 +54,38 @@ const UspText = styled.p`
   color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 
-const UspLink = styled.div`
-  span {
-    font-size: ${FONT_SIZES.COMPLEMENTARY};
-    ${gradientTextStyles};
-  }
-
-  svg {
-    color: ${COLORS.BRAND_SECONDARY};
-  }
-`
-
 export const Usps = () => {
   return (
     <Wrapper>
       <Usp>
-        <UspContent>
+        <CardLink to="/api/">
           <div>
             <UspHeader>Highly Extensible</UspHeader>
             <UspText>
               An API designed with flexibility and extensibility in mind.
             </UspText>
           </div>
-          <UspLink>
-            <ContentLink to="/api/">
-              <IconWithText iconSvg="arrowRight" iconSide="right">
-                Read more
-              </IconWithText>
-            </ContentLink>
-          </UspLink>
-        </UspContent>
+        </CardLink>
       </Usp>
       <Usp>
-        <UspContent>
+        <CardLink to="/plugins/">
           <div>
             <UspHeader>Plugin System</UspHeader>
             <UspText>
               Add functionality and customize your carousels as you go.
             </UspText>
           </div>
-          <UspLink>
-            <ContentLink to="/plugins/">
-              <IconWithText iconSvg="arrowRight" iconSide="right">
-                Read more
-              </IconWithText>
-            </ContentLink>
-          </UspLink>
-        </UspContent>
+        </CardLink>
       </Usp>
       <Usp>
-        <UspContent>
+        <CardLink to="/get-started/typescript/">
           <div>
             <UspHeader>Fully Typed</UspHeader>
             <UspText>
               Built-in types because it is written in TypeScript.
             </UspText>
           </div>
-          <UspLink>
-            <ContentLink to="/get-started/typescript/">
-              <IconWithText iconSvg="arrowRight" iconSide="right">
-                Read more
-              </IconWithText>
-            </ContentLink>
-          </UspLink>
-        </UspContent>
+        </CardLink>
       </Usp>
     </Wrapper>
   )

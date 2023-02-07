@@ -8,6 +8,7 @@ export const createFlatRoutes = (data: MdxAllRoutesType): RouteType[] => {
       slug: fields.slug,
       title: frontmatter.title,
       order: frontmatter.order || 0,
+      description: frontmatter.description,
       level: fields.slug.split('/').filter(Boolean).length,
       children: [],
     }))

@@ -137,7 +137,6 @@ const contentStyles = css`
 
   .DocSearch-Hits mark {
     ${gradientTextStyles};
-    background: none;
   }
 
   .DocSearch-HitsFooter {

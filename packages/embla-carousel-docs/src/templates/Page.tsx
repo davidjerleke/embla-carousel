@@ -17,6 +17,7 @@ import {
 export const query = graphql`
   query PageQuery($id: String) {
     mdx(id: { eq: $id }) {
+      tableOfContents
       frontmatter {
         title
         description

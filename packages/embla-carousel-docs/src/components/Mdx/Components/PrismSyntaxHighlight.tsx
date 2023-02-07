@@ -5,12 +5,14 @@ import Highlight, {
   Language as PrismLanguage,
 } from 'prism-react-renderer'
 
+export const HIGHLIGHT_CLASS_NAME = 'prism-highlight'
+export const HIGHLIGHT_LINE_CLASS_NAME = `${HIGHLIGHT_CLASS_NAME}-code-line`
+
 const REGEX_HIGHLIGHT_META = /{[^}]+}/
 const REGEX_HIGHLIGHT_RANGE = /\d{1,}-\d{1,}/
 const REGEX_HIGHLIGHT_RANGE_END = /-\d{1,}/
 const REGEX_HIGHLIGHT_RANGE_START = /\d{1,}-/
 const REGEX_LANGUAGE_PREFIX = /language-/gm
-const HIGHLIGHT_CLASS_NAME = 'gatsby-highlight-code-line'
 
 const parseHighlightedLines = (className: string): number[] => {
   const highlightedLines: number[] = []
@@ -46,7 +48,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
   }, [className])
 
   return (
-    <div className="gatsby-highlight" data-language={language}>
+    <div className={HIGHLIGHT_CLASS_NAME} data-language={language}>
       <PrismSyntaxWrapper code={children}>
         <Highlight
           {...defaultProps}
@@ -69,7 +71,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
                     const lineNumber = index + 1
 
                     if (highlightedLines.includes(lineNumber)) {
-                      lineProps.className = `${lineProps.className} ${HIGHLIGHT_CLASS_NAME}`
+                      lineProps.className = `${lineProps.className} ${HIGHLIGHT_LINE_CLASS_NAME}`
                     }
 
                     return (

@@ -9,14 +9,14 @@ type UseRouteActiveType = {
   isPartiallyActive: boolean
 }
 
-export const useRouteActive = (route: RouteType): UseRouteActiveType => {
+export const useRouteActive = (slug: RouteType['slug']): UseRouteActiveType => {
   const { pathname } = useLocation()
   const routeState = useMemo(
     () => ({
-      isActive: isRouteActive(route, pathname),
-      isPartiallyActive: isRoutePartiallyActive(route, pathname),
+      isActive: isRouteActive(slug, pathname),
+      isPartiallyActive: isRoutePartiallyActive(slug, pathname),
     }),
-    [route, pathname],
+    [slug, pathname],
   )
 
   return routeState

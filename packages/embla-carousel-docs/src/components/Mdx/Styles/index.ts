@@ -9,39 +9,42 @@ import { hrStyles } from './hr'
 
 export const MdxStyles = styled.div`
   ${blockquoteStyles};
-  ${listStyles};
   ${codeStyles};
-  ${headingStyles};
   ${hrStyles};
   ${linkStyles};
 
   color: ${COLORS.TEXT_BODY};
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  hgroup,
-  ul,
-  ol,
-  dl,
-  blockquote,
-  p,
-  address,
-  table,
-  fieldset,
-  figure,
-  pre,
-  hr,
-  ul,
-  ol,
-  dd,
-  blockquote code,
-  kbd,
-  samp {
-    margin-bottom: 2.4rem;
+  > {
+    ${listStyles};
+    ${headingStyles};
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    hgroup,
+    ul,
+    ol,
+    dl,
+    blockquote,
+    p,
+    address,
+    table,
+    fieldset,
+    figure,
+    pre,
+    hr,
+    ul,
+    ol,
+    dd,
+    blockquote code,
+    kbd,
+    samp {
+      margin-bottom: 2.4rem;
+    }
   }
 
   > *:first-child {

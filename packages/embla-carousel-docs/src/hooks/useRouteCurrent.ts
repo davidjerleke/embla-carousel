@@ -6,5 +6,5 @@ import { isRouteActive } from 'utils/isRouteActive'
 export const useRouteCurrent = (): RouteType => {
   const { flat: routes } = useRoutes()
   const { pathname } = useLocation()
-  return routes.filter((route) => isRouteActive(route, pathname))[0]
+  return routes.filter((route) => isRouteActive(route.slug, pathname))[0]
 }

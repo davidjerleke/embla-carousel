@@ -23,6 +23,7 @@ const query = graphql`
           frontmatter {
             title
             order
+            description
           }
           fields {
             slug
@@ -42,6 +43,7 @@ export type MdxAllRoutesType = {
         frontmatter: {
           title: string
           order: number
+          description: string
         }
       }
     }[]
@@ -52,6 +54,7 @@ export type RouteType = {
   id: string
   slug: string
   title: string
+  description: string
   level: number
   order: number
   children: RouteType[]

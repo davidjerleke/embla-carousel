@@ -46,7 +46,7 @@ export const Actions = () => {
           <Wrapper>
             {routes.map((route) => (
               <Item key={route.id}>
-                <Link route={route}>{route.title}</Link>
+                <Link slug={route.slug}>{route.title}</Link>
               </Item>
             ))}
           </Wrapper>

@@ -1,27 +1,36 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 
-export const FRAME_SPACING = SPACINGS.FOUR
-const FRAME_MAX_WIDTH = '100rem'
+type FrameSizesType = keyof typeof FRAME_SIZES
 
-const Wrapper = styled.div`
+export const FRAME_SIZES = {
+  DEFAULT: '144rem',
+  MD: '100rem',
+}
+
+export const FRAME_SPACING = SPACINGS.FOUR
+
+const Wrapper = styled.div<{ $size: string }>`
   margin-left: auto;
   margin-right: auto;
   padding-left: ${FRAME_SPACING};
   padding-right: ${FRAME_SPACING};
-  max-width: ${FRAME_MAX_WIDTH};
+  max-width: ${({ $size }) => $size};
   width: 100%;
-
-  ${MEDIA.DESKTOP} {
-    width: 90%;
-  }
 `
 
-type PropType = PropsWithChildren<{}>
+type PropType = PropsWithChildren<{
+  size?: FrameSizesType
+}>
 
 export const Frame = (props: PropType) => {
-  const { children, ...restProps } = props
-  return <Wrapper {...restProps}>{children}</Wrapper>
+  const { size = 'DEFAULT', children, ...restProps } = props
+  const frameSize = FRAME_SIZES[size]
+
+  return (
+    <Wrapper $size={frameSize} {...restProps}>
+      {children}
+    </Wrapper>
+  )
 }

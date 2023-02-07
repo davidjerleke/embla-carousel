@@ -4,7 +4,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 import { BareButton } from 'components/Button/BareButton'
 import { useNavigation } from 'hooks/useNavigation'
-import { NAVIGATION_ID } from './Navigation'
+import { NAVIGATION_ID } from './SiteNavigation'
 import { COLORS } from 'consts/themes'
 
 const BUTTON_SIZE = '4rem'
@@ -60,7 +60,7 @@ const Burger = styled.div<{ $isOpen: boolean }>`
   }
 `
 
-export const NavigationToggle = () => {
+export const SiteNavigationToggle = () => {
   const { isOpen, toggleNavigation } = useNavigation()
   const toggleAction = isOpen ? 'Hide' : 'Show'
 

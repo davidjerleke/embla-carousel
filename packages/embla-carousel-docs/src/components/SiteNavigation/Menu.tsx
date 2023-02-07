@@ -83,6 +83,7 @@ const MiscLinks = styled(Links)`
 
   ${MEDIA.DESKTOP} {
     flex-direction: column;
+    margin-bottom: -${SPACINGS.ONE};
   }
 `
 
