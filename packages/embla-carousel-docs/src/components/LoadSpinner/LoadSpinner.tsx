@@ -6,7 +6,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 const DEFAULT_SIZE = '3rem'
 const DEFAULT_THICKNESS = '0.2rem'
 
-const Wrapper = styled.span<{
+const LoadSpinnerWrapper = styled.span<{
   $size: string
   $thickness: string
   $color: string
@@ -62,11 +62,16 @@ export const LoadSpinner = (props: PropType) => {
   } = props
 
   return (
-    <Wrapper $size={size} $thickness={thickness} $color={color} {...restProps}>
+    <LoadSpinnerWrapper
+      $size={size}
+      $thickness={thickness}
+      $color={color}
+      {...restProps}
+    >
       <span />
       <span />
       <span />
       <span />
-    </Wrapper>
+    </LoadSpinnerWrapper>
   )
 }

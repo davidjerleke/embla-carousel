@@ -9,7 +9,7 @@ const Heading = styled(IconWithText)`
   font-weight: bold;
 `
 
-const Wrapper = styled.div`
+const AdmonitionWrapper = styled.div`
   color: ${COLORS.TEXT_ADMONITION_NOTE};
   background-color: rgba(${COLORS.TEXT_ADMONITION_NOTE_RGB_VALUE}, 0.05);
   border: 0.1rem solid rgba(${COLORS.TEXT_ADMONITION_NOTE_RGB_VALUE}, 0.1);
@@ -39,9 +39,9 @@ export const Admonition = (props: PropType) => {
   const { children } = props
 
   return (
-    <Wrapper>
+    <AdmonitionWrapper>
       <Heading iconSvg="info">Note</Heading>
       {children}
-    </Wrapper>
+    </AdmonitionWrapper>
   )
 }

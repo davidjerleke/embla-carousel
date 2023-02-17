@@ -11,7 +11,7 @@ export const FRAME_SIZES = {
 
 export const FRAME_SPACING = SPACINGS.FOUR
 
-const Wrapper = styled.div<{ $size: string }>`
+const FrameWrapper = styled.div<{ $size: string }>`
   margin-left: auto;
   margin-right: auto;
   padding-left: ${FRAME_SPACING};
@@ -29,8 +29,8 @@ export const Frame = (props: PropType) => {
   const frameSize = FRAME_SIZES[size]
 
   return (
-    <Wrapper $size={frameSize} {...restProps}>
+    <FrameWrapper $size={frameSize} {...restProps}>
       {children}
-    </Wrapper>
+    </FrameWrapper>
   )
 }

@@ -8,7 +8,7 @@ export const onRouteUpdate = ({ location }) => {
   const element = document.getElementById(id)
 
   if (element) {
-    const topOffset = 60
+    const topOffset = 72
     const Y = element.getBoundingClientRect().top + window.scrollY - topOffset
     window.scroll(0, Y)
   }

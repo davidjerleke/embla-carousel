@@ -7,7 +7,7 @@ import { HEADER_HEIGHT } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
 import { Menu } from './Menu'
 
-const Wrapper = styled.nav`
+const TableOfContentsWrapper = styled.nav`
   ${MEDIA.DESKTOP} {
     position: fixed;
     z-index: ${LAYERS.NAVIGATION};
@@ -25,8 +25,8 @@ const Wrapper = styled.nav`
 
 export const TableOfContents = () => {
   return (
-    <Wrapper aria-label="table of contents">
+    <TableOfContentsWrapper aria-label="table of contents">
       <Menu />
-    </Wrapper>
+    </TableOfContentsWrapper>
   )
 }

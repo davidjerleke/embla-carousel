@@ -18,9 +18,11 @@ export const BREAKPOINTS = {
   LG: 1200,
 }
 
+export const BREAKPOINT_COMPACT = BREAKPOINTS.MD
+
 export const MEDIA = {
-  COMPACT: mediaQuery(BREAKPOINTS.MD, 'max'),
-  DESKTOP: mediaQuery(BREAKPOINTS.MD, 'min'),
+  COMPACT: mediaQuery(BREAKPOINT_COMPACT, 'max'),
+  DESKTOP: mediaQuery(BREAKPOINT_COMPACT, 'min'),
   MIN_XXS: mediaQuery(BREAKPOINTS.XXS, 'min'),
   MIN_XS: mediaQuery(BREAKPOINTS.XS, 'min'),
   MIN_SM: mediaQuery(BREAKPOINTS.SM, 'min'),

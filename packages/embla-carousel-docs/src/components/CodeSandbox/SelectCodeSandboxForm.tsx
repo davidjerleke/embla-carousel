@@ -8,7 +8,7 @@ import { SelectCodeSandboxType } from './sandboxTypes'
 import { PrimaryButtonFilled } from 'components/Button/PrimaryButtonFilled'
 import { COLORS } from 'consts/themes'
 import { SANDBOX_CREATE_LABELS } from './createSandboxFunctionsWithLabels'
-import { OUTLINE_SIZE } from 'components/TabAccess/tabAccessStyles'
+import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { IconType } from 'assets/icons'
 import { Icon } from 'components/Icon/Icon'
@@ -24,7 +24,7 @@ const ICONS_BY_LABEL: { [key: string]: IconType } = {
   [SANDBOX_CREATE_LABELS.REACT_TS]: 'react',
 }
 
-const Wrapper = styled.form`
+const SelectCodeSandboxFormWrapper = styled.form`
   display: flex;
   flex-direction: column;
 `
@@ -141,7 +141,11 @@ export const SelectCodeSandboxForm = (props: PropType) => {
   }, [chosenSandboxLabel])
 
   return (
-    <Wrapper action={URLS.CODESANDBOX_DEFINE} method="POST" target="_blank">
+    <SelectCodeSandboxFormWrapper
+      action={URLS.CODESANDBOX_DEFINE}
+      method="POST"
+      target="_blank"
+    >
       <Fieldset>
         <Legend>Select CodeSandbox</Legend>
 
@@ -180,6 +184,6 @@ export const SelectCodeSandboxForm = (props: PropType) => {
           />
         )}
       </SubmitButton>
-    </Wrapper>
+    </SelectCodeSandboxFormWrapper>
   )
 }

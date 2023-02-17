@@ -9,9 +9,9 @@ import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 
-export const SKIP_TO_CONTENT_ID = 'main-content'
+export const MAIN_CONTENT_ID = 'main-content'
 
-const Wrapper = styled.a`
+const SkipToContentWrapper = styled.a`
   ${plainLinkStyles};
   z-index: ${LAYERS.SEARCH + 1};
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -52,14 +52,18 @@ export const SkipToContent = () => {
 
   useEffect(() => {
     if (!isBrowser) return
-    setContentElement(document.getElementById(SKIP_TO_CONTENT_ID))
+    setContentElement(document.getElementById(MAIN_CONTENT_ID))
   }, [setContentElement])
 
   if (!contentElement) return null
 
   return (
-    <Wrapper href={`#${SKIP_TO_CONTENT_ID}`} onClick={onClick} $isTabbing>
+    <SkipToContentWrapper
+      href={`#${MAIN_CONTENT_ID}`}
+      onClick={onClick}
+      $isKeyNavigating
+    >
       <LinkText>Skip to content</LinkText>
-    </Wrapper>
+    </SkipToContentWrapper>
   )
 }

@@ -14,7 +14,7 @@ import { MEDIA } from 'consts/breakpoints'
 const ITEM_SPACING = SPACINGS.ONE
 const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 
-const Wrapper = styled.div`
+const SiteNavigationSubMenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 1.65;
@@ -96,7 +96,7 @@ type PropType = {
   route: RouteType
 }
 
-export const SubMenu = (props: PropType) => {
+export const SiteNavigationSubMenu = (props: PropType) => {
   const { route } = props
   const { title, children } = route
   const { isPartiallyActive, isActive } = useRouteActive(route.slug)
@@ -118,7 +118,7 @@ export const SubMenu = (props: PropType) => {
   }, [setIsOpen, isPartiallyActive])
 
   return (
-    <Wrapper aria-labelledby={id}>
+    <SiteNavigationSubMenuWrapper aria-labelledby={id}>
       <Toggle
         id={id}
         onClick={toggleOpen}
@@ -141,6 +141,6 @@ export const SubMenu = (props: PropType) => {
           </li>
         ))}
       </Menu>
-    </Wrapper>
+    </SiteNavigationSubMenuWrapper>
   )
 }

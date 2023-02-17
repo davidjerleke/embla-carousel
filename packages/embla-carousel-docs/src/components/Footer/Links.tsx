@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { PlainLink } from 'components/Link/PlainLink'
-import { OUTLINE_SIZE } from 'components/TabAccess/tabAccessStyles'
+import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
@@ -10,7 +10,7 @@ import { IconWithText } from 'components/Icon/IconWithText'
 const LINK_SPACING = SPACINGS.FIVE
 const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
 
-const Wrapper = styled.ul`
+const LinksWrapper = styled.ul`
   margin-left: -${LINK_SPACING};
   display: flex;
 `
@@ -31,7 +31,7 @@ export const Links = (props: PropType) => {
   const { ...restProps } = props
 
   return (
-    <Wrapper {...restProps}>
+    <LinksWrapper {...restProps}>
       <li>
         <Link to={URLS.NPM_PACKAGE}>
           <IconWithText iconSvg="npm" spacing={ICON_SPACING}>
@@ -46,6 +46,6 @@ export const Links = (props: PropType) => {
           </IconWithText>
         </Link>
       </li>
-    </Wrapper>
+    </LinksWrapper>
   )
 }

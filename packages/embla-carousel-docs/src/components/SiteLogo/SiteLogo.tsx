@@ -12,7 +12,7 @@ import { LAYERS } from 'consts/layers'
 
 import { Icon } from 'components/Icon/Icon'
 
-const Wrapper = styled.div`
+const SiteLogoWrapper = styled.div`
   width: 100%;
   position: relative;
   &:before {
@@ -112,7 +112,7 @@ export const SiteLogo = (props: PropType) => {
   )
 
   return (
-    <Wrapper ref={inViewRef} {...props}>
+    <SiteLogoWrapper ref={inViewRef} {...props}>
       {!hasLoaded && (
         <>
           <LogoLightIcon svg={lightSvg} fill={undefined} />
@@ -122,6 +122,6 @@ export const SiteLogo = (props: PropType) => {
       {inView && (
         <LogoImage src={src} alt={alt} onLoad={() => setHasLoaded(true)} />
       )}
-    </Wrapper>
+    </SiteLogoWrapper>
   )
 }

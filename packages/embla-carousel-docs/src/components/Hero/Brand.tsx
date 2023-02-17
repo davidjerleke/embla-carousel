@@ -8,7 +8,7 @@ import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
-import { SKIP_TO_CONTENT_ID } from 'components/TabAccess/SkipToContent'
+import { MAIN_CONTENT_ID } from 'components/KeyNavigating/SkipToContent'
 import { PrimaryButtonFilledLink } from 'components/Link/ButtonLink'
 
 const MAX_CONTENT_WIDTH = '50rem'
@@ -113,7 +113,7 @@ export const Brand = () => {
           ))}
         </H1>
         <H2>{description}</H2>
-        <CtaWrapper id={SKIP_TO_CONTENT_ID}>
+        <CtaWrapper id={MAIN_CONTENT_ID}>
           <PrimaryButtonFilledLink to="/examples/static/">
             Try Examples
           </PrimaryButtonFilledLink>

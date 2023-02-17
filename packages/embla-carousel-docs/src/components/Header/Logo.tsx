@@ -9,7 +9,7 @@ import { FONT_SIZES } from 'consts/fontSizes'
 import { PlainLink } from 'components/Link/PlainLink'
 import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 
-const Wrapper = styled(PlainLink)`
+const LogoWrapper = styled(PlainLink)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   font-size: ${FONT_SIZES.H4};
   display: flex;
@@ -41,9 +41,9 @@ export const Logo = () => {
   const { title } = useSiteMetadata()
 
   return (
-    <Wrapper aria-label="Permalink to home page" to="/">
+    <LogoWrapper aria-label="Permalink to home page" to="/">
       <HeaderLogo />
       <span>{title}</span>
-    </Wrapper>
+    </LogoWrapper>
   )
 }

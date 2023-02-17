@@ -5,9 +5,14 @@ order: 2
 date: 2021-11-22
 ---
 
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabItem } from 'components/Tabs/TabItem'
+
 # Class Names
 
-<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-class-names">View plugin on GitHub</RepositoryLink>
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-class-names">
+  View plugin on GitHub
+</RepositoryLink>
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
 
@@ -15,9 +20,22 @@ Class Names is a **class name toggle** utility plugin for Embla Carousel that en
 
 First you need to install the **npm package** and save it to your dependencies:
 
-```shell
-npm install embla-carousel-class-names --save
-```
+<Tabs groupId="package-manager">
+  <TabItem label="npm" value="npm">
+
+    ```shell
+    npm install embla-carousel-class-names --save
+    ```
+
+  </TabItem>
+  <TabItem label="yarn" value="yarn">
+
+    ```shell
+    yarn add embla-carousel-class-names
+    ```
+
+  </TabItem>
+</Tabs>
 
 Alternatively, you can use a **CDN** to include it in your project:
 

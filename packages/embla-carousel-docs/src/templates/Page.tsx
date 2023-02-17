@@ -6,7 +6,7 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { EditPage } from 'components/Page/EditPage'
 import { Pagination } from 'components/Page/Pagination'
 import { Breadcrumbs } from 'components/Page/Breadcrumbs'
-import { SKIP_TO_CONTENT_ID } from 'components/TabAccess/SkipToContent'
+import { MAIN_CONTENT_ID } from 'components/KeyNavigating/SkipToContent'
 import { removeProtocol } from 'utils/removeProtocol'
 import { Mdx } from 'components/Mdx/Mdx'
 import {
@@ -84,7 +84,7 @@ const Page = (props: PropType) => {
   return (
     <>
       <Breadcrumbs id={id} />
-      <article id={SKIP_TO_CONTENT_ID}>
+      <article id={MAIN_CONTENT_ID}>
         <Mdx>{children}</Mdx>
       </article>
       <EditPage pageUrl={filePath} />

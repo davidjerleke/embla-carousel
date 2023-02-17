@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { TabsWrapper, TabPanel } from 'components/Tabs/Tabs'
 import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'
@@ -15,6 +17,7 @@ export const MdxStyles = styled.div`
 
   color: ${COLORS.TEXT_BODY};
 
+  ${TabPanel} >,
   > {
     ${listStyles};
     ${headingStyles};
@@ -42,8 +45,9 @@ export const MdxStyles = styled.div`
     dd,
     blockquote code,
     kbd,
-    samp {
-      margin-bottom: 2.4rem;
+    samp,
+    ${TabsWrapper} {
+      margin-bottom: ${SPACINGS.FOUR};
     }
   }
 

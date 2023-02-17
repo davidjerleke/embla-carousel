@@ -35,6 +35,7 @@ const Item = styled.li`
 
 const UspHeader = styled.h3`
   color: ${COLORS.TEXT_BODY};
+  margin-top: 0;
   margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   font-size: ${FONT_SIZES.H4};
   font-weight: bold;

@@ -5,7 +5,7 @@ import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
-import { Menu } from './Menu'
+import { SiteNavigationMenu } from './SiteNavigationMenu'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
@@ -15,7 +15,7 @@ export const NAVIGATION_ID = 'main-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
 const MENU_ID = 'main-menu'
 
-const Wrapper = styled.nav<{ $isOpen: boolean }>`
+const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
 
   ${MEDIA.COMPACT} {
@@ -42,7 +42,7 @@ const Wrapper = styled.nav<{ $isOpen: boolean }>`
   }
 `
 
-type PropType = PropsWithChildren<{
+export type PropType = PropsWithChildren<{
   collapsed: boolean
 }>
 
@@ -76,7 +76,7 @@ export const SiteNavigation = (props: PropType) => {
 
   return (
     <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
-      <Wrapper
+      <SiteNavigationWrapper
         id={MENU_ID}
         role={role}
         aria-modal={ariaModal}
@@ -85,8 +85,8 @@ export const SiteNavigation = (props: PropType) => {
         $isOpen={isOpen}
         {...props}
       >
-        <Menu />
-      </Wrapper>
+        <SiteNavigationMenu />
+      </SiteNavigationWrapper>
     </FocusTrap>
   )
 }

@@ -11,7 +11,7 @@ import { useTheme } from 'hooks/useTheme'
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '2.5rem'
 
-const Wrapper = styled(BareButton)`
+const ThemeToggleWrapper = styled(BareButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   z-index: ${LAYERS.STEP};
   color: ${COLORS.TEXT_HIGH_CONTRAST};
@@ -47,7 +47,7 @@ export const ThemeToggle = (props: PropType) => {
   const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
-    <Wrapper
+    <ThemeToggleWrapper
       type="button"
       onClick={toggleTheme}
       aria-label={`Activate ${oppositeTheme} theme`}
@@ -56,6 +56,6 @@ export const ThemeToggle = (props: PropType) => {
       {children}
       <DarkThemeSvg svg="moon" size={ICON_SIZE} />
       <LightThemeSvg svg="sun" size={ICON_SIZE} />
-    </Wrapper>
+    </ThemeToggleWrapper>
   )
 }

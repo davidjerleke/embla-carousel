@@ -10,7 +10,7 @@ import { COLORS } from 'consts/themes'
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
 
-const Wrapper = styled(BareButton)`
+const SiteNavigationToggleWrapper = styled(BareButton)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;
@@ -65,7 +65,7 @@ export const SiteNavigationToggle = () => {
   const toggleAction = isOpen ? 'Hide' : 'Show'
 
   return (
-    <Wrapper
+    <SiteNavigationToggleWrapper
       id={NAVIGATION_ID}
       onClick={toggleNavigation}
       aria-expanded={isOpen}
@@ -75,6 +75,6 @@ export const SiteNavigationToggle = () => {
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />
       </Burger>
-    </Wrapper>
+    </SiteNavigationToggleWrapper>
   )
 }

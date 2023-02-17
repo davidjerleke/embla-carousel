@@ -16,7 +16,7 @@ const HEIGHT = css`
   height: ${HEADER_HEIGHT};
 `
 
-const Wrapper = styled.header`
+const HeaderWrapper = styled.header`
   ${HEIGHT};
 `
 
@@ -45,7 +45,7 @@ const Content = styled(Frame)`
 
 export const Header = () => {
   return (
-    <Wrapper id={HEADER_ID}>
+    <HeaderWrapper id={HEADER_ID}>
       <Fixed>
         <Content>
           <SiteNavigationToggle />
@@ -53,6 +53,6 @@ export const Header = () => {
           <Actions />
         </Content>
       </Fixed>
-    </Wrapper>
+    </HeaderWrapper>
   )
 }

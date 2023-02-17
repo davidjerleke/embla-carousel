@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Frame, FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { Links } from './Links'
 
-const Wrapper = styled.footer`
+const FooterWrapper = styled.footer`
   padding-top: ${FRAME_SPACING};
   padding-bottom: ${FRAME_SPACING};
 `
@@ -15,10 +15,10 @@ const Content = styled(Frame)`
 
 export const Footer = () => {
   return (
-    <Wrapper>
+    <FooterWrapper>
       <Content>
         <Links />
       </Content>
-    </Wrapper>
+    </FooterWrapper>
   )
 }

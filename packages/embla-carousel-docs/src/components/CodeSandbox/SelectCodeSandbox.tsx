@@ -25,7 +25,7 @@ const DESKTOP_END_SPACING = SPACINGS.TEN
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '2.35rem'
 
-const Wrapper = styled.div`
+const SelectCodeSandboxWrapper = styled.div`
   margin-top: -${SPACINGS.THREE};
 `
 
@@ -118,7 +118,7 @@ export const SelectCodeSandbox = (props: PropType) => {
   useEventListener('keyup', onKeyUp)
 
   return (
-    <Wrapper>
+    <SelectCodeSandboxWrapper>
       <SelectCodeSandboxButton
         id={SELECT_CODESANDBOX_DIALOG_ID}
         aria-expanded={selectionOpen}
@@ -157,6 +157,6 @@ export const SelectCodeSandbox = (props: PropType) => {
           </FocusTrap>
         </Portal>
       )}
-    </Wrapper>
+    </SelectCodeSandboxWrapper>
   )
 }

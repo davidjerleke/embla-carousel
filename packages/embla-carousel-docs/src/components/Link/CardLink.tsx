@@ -7,7 +7,7 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 
-const Wrapper = styled(PlainLink)`
+const CardLinkWrapper = styled(PlainLink)`
   padding: ${SPACINGS.FOUR};
   border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
   background-color: ${COLORS.BACKGROUND_CODE};
@@ -34,7 +34,7 @@ export const CardLink = (props: PropType) => {
   const { children, ...restProps } = props
 
   return (
-    <Wrapper {...restProps}>
+    <CardLinkWrapper {...restProps}>
       {children}
 
       <ReadMoreText>
@@ -42,6 +42,6 @@ export const CardLink = (props: PropType) => {
           Read more
         </IconWithText>
       </ReadMoreText>
-    </Wrapper>
+    </CardLinkWrapper>
   )
 }

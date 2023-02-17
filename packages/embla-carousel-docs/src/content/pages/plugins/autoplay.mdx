@@ -5,9 +5,14 @@ order: 0
 date: 2021-03-13
 ---
 
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabItem } from 'components/Tabs/TabItem'
+
 # Autoplay
 
-<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-autoplay">View plugin on GitHub</RepositoryLink>
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-autoplay">
+  View plugin on GitHub
+</RepositoryLink>
 
 This plugin is used to extend Embla Carousel with **autoplay** functionality. It comes with a useful set of options that allows you to customize it to your liking.
 
@@ -15,9 +20,22 @@ This plugin is used to extend Embla Carousel with **autoplay** functionality. It
 
 First you need to install the **npm package** and save it to your dependencies:
 
-```shell
-npm install embla-carousel-autoplay --save
-```
+<Tabs groupId="package-manager">
+  <TabItem label="npm" value="npm">
+
+    ```shell
+    npm install embla-carousel-autoplay --save
+    ```
+
+  </TabItem>
+  <TabItem label="yarn" value="yarn">
+
+    ```shell
+    yarn add embla-carousel-autoplay
+    ```
+
+  </TabItem>
+</Tabs>
 
 Alternatively, you can use a **CDN** to include it in your project:
 

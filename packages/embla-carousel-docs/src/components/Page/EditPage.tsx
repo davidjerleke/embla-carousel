@@ -7,7 +7,7 @@ import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
 import { IconWithText } from 'components/Icon/IconWithText'
 
-const Wrapper = styled(PlainLink)`
+const EditPageWrapper = styled(PlainLink)`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
@@ -27,10 +27,10 @@ export const EditPage = (props: PropType) => {
   const url = `${URLS.GITHUB_DOCUMENTATION}/${pageUrl}`
 
   return (
-    <Wrapper to={url}>
+    <EditPageWrapper to={url}>
       <IconWithText iconSvg="pen" iconSize="1.5rem">
         Edit this page on GitHub
       </IconWithText>
-    </Wrapper>
+    </EditPageWrapper>
   )
 }

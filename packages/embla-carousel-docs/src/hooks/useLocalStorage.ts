@@ -8,14 +8,14 @@ type UseLocalStorageType = {
 
 export const useLocalStorage = (key: string): UseLocalStorageType => {
   const getLocalStorageItem = useCallback(() => {
-    if (!isBrowser) return ''
+    if (!isBrowser) return '""'
     let storedValue
     try {
       storedValue = localStorage.getItem(key)
     } catch (error) {
       console.error(error) // eslint-disable-line no-console
     }
-    return storedValue || ''
+    return storedValue || '""'
   }, [])
 
   const setLocalStorageItem = useCallback((value: string) => {

@@ -2,14 +2,14 @@ import React, { PropsWithChildren, useCallback, useRef } from 'react'
 import { useLocation } from '@reach/router'
 import styled, { css } from 'styled-components'
 import { GatsbyLinkProps, Link } from 'gatsby'
-import { tabAccessStyles } from 'components/TabAccess/tabAccessStyles'
+import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useNavigation } from 'hooks/useNavigation'
 import { useRoutes } from 'hooks/useRoutes'
-import { useTabAccess } from 'hooks/useTabAccess'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { COLORS } from 'consts/themes'
 
-export const plainLinkStyles = css<{ $isTabbing: boolean }>`
-  ${tabAccessStyles};
+export const plainLinkStyles = css<{ $isKeyNavigating: boolean }>`
+  ${keyNavigatingStyles};
   -webkit-tap-highlight-color: rgba(
     ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
     0.5
@@ -37,7 +37,7 @@ export const PlainLink = (props: PropType) => {
   const { to, id, ariaLabel, tabIndex, children, onClick, ...restProps } = props
   const linkElement = useRef<HTMLAnchorElement | null>(null)
   const isInternal = /^\/(?!\/)|^#/.test(to)
-  const isTabbing = useTabAccess()
+  const { isKeyNavigating } = useKeyNavigating()
   const { pathname } = useLocation()
   const { setIsLoading } = useRoutes()
   const { closeNavigation } = useNavigation()
@@ -70,7 +70,7 @@ export const PlainLink = (props: PropType) => {
         aria-label={ariaLabel}
         tabIndex={tabIndex}
         onClick={onClickInternalLink}
-        $isTabbing={isTabbing}
+        $isKeyNavigating={isKeyNavigating}
         {...restProps}
       >
         {children}
@@ -85,7 +85,7 @@ export const PlainLink = (props: PropType) => {
       aria-label={ariaLabel}
       tabIndex={tabIndex}
       onClick={onClick}
-      $isTabbing={isTabbing}
+      $isKeyNavigating={isKeyNavigating}
       target="_blank"
       rel="noreferrer"
       {...restProps}

@@ -3,7 +3,7 @@ import { createGlobalStyle, css } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 import { bareButtonStyles } from 'components/Button/BareButton'
 import { contentLinkStyles } from 'components/Link/ContentLink'
-import { useTabAccess } from 'hooks/useTabAccess'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
@@ -19,8 +19,8 @@ import { useNavigation } from 'hooks/useNavigation'
 import { isBrowser } from 'utils/isBrowser'
 import {
   OUTLINE_SIZE,
-  tabAccessStyles,
-} from 'components/TabAccess/tabAccessStyles'
+  keyNavigatingStyles,
+} from 'components/KeyNavigating/keyNavigatingStyles'
 
 const MODAL_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'
@@ -120,7 +120,7 @@ const contentStyles = css`
 
   .DocSearch-Help a {
     ${contentLinkStyles};
-    ${tabAccessStyles};
+    ${keyNavigatingStyles};
   }
 
   .DocSearch-Dropdown {
@@ -186,7 +186,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit a {
-    ${tabAccessStyles};
+    ${keyNavigatingStyles};
     outline-offset: -${OUTLINE_SIZE};
     background-color: ${COLORS.BACKGROUND_CODE};
     padding-left: ${EDGE_SPACING};
@@ -372,7 +372,7 @@ const footerStyles = css`
   }
 
   .DocSearch-Logo a {
-    ${tabAccessStyles};
+    ${keyNavigatingStyles};
     display: flex;
   }
 
@@ -462,7 +462,7 @@ const footerStyles = css`
 const inputStyles = css`
   .DocSearch-Input {
     ${createPlaceholderStyles(COLORS.TEXT_LOW_CONTRAST)};
-    ${tabAccessStyles};
+    ${keyNavigatingStyles};
     height: calc(${INPUT_HEIGHT} - (${INPUT_BORDER_SIZE} * 2));
     padding-left: ${BUTTON_WIDTH};
     padding-right: ${BUTTON_WIDTH};
@@ -595,7 +595,7 @@ const loadingIndicatorStyles = css`
   }
 `
 
-const SearchStyles = createGlobalStyle<{ $isTabbing: boolean }>`
+const SearchStyles = createGlobalStyle<{ $isKeyNavigating: boolean }>`
   ${modalStyles};
   ${headerStyles};
   ${contentStyles};
@@ -609,7 +609,7 @@ const SearchStyles = createGlobalStyle<{ $isTabbing: boolean }>`
 `
 
 export const Search = () => {
-  const isTabbing = useTabAccess()
+  const { isKeyNavigating } = useKeyNavigating()
   const { closeNavigation } = useNavigation()
   const toggleElement = useRef<HTMLButtonElement | null>(null)
 
@@ -656,7 +656,7 @@ export const Search = () => {
 
   return (
     <>
-      <SearchStyles $isTabbing={isTabbing} />
+      <SearchStyles $isKeyNavigating={isKeyNavigating} />
       <DocSearch
         appId={ALGOLIA_SEARCH_CONFIG.APP_ID}
         indexName={ALGOLIA_SEARCH_CONFIG.INDEX_NAME}

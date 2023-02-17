@@ -9,10 +9,10 @@ export const contentLinkStyles = css`
   font-weight: 500;
 `
 
-const Wrapper = styled(PlainLink)`
+const ContentLinkWrapper = styled(PlainLink)`
   ${contentLinkStyles};
 `
 
 export const ContentLink = (props: PropType) => {
-  return <Wrapper {...props} />
+  return <ContentLinkWrapper {...props} />
 }

@@ -5,6 +5,7 @@ import { TableOfContentsItemType } from './Context'
 import { MenuItems } from './MenuItems'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { MEDIA } from 'consts/breakpoints'
 
 const extractHeadingIds = (
   items: TableOfContentsItemType['items'] = [],
@@ -29,6 +30,10 @@ const Heading = styled.div`
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.TWO};
   font-weight: bold;
+
+  ${MEDIA.COMPACT} {
+    display: none;
+  }
 `
 
 export const Menu = () => {
