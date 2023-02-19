@@ -1,16 +1,18 @@
 import React, { PropsWithChildren } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { Links } from 'components/Footer/Links'
+import { MEDIA } from 'consts/breakpoints'
 import { HEADER_HEIGHT } from 'components/Header/Header'
-import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { TableOfContents } from 'components/TableOfContents/TableOfContents'
-import { TabItem } from 'components/Tabs/TabItem'
+import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { LAYERS } from 'consts/layers'
+import { TableOfContents } from 'components/TableOfContents/TableOfContents'
+import { Links } from 'components/Footer/Links'
+import { TabItem } from 'components/Tabs/TabItem'
 import { Tab, TabList, TabPanel, Tabs } from 'components/Tabs/Tabs'
 import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { useTheme } from 'hooks/useTheme'
 import {
   ThemeToggle,
@@ -20,6 +22,8 @@ import {
 
 const MAX_WIDTH_COMPACT = '36rem'
 
+const scrollShadowStyles = `0 0 transparent, 0 -1.2rem 1.6rem ${COLORS.BACKGROUND_SITE}`
+
 const SiteNavigationMenuCompactWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
   position: relative;
@@ -27,40 +31,78 @@ const SiteNavigationMenuCompactWrapper = styled.div`
   z-index: ${LAYERS.STEP};
   padding-right: ${FRAME_SPACING};
   padding-left: ${FRAME_SPACING};
-  padding-bottom: calc(${HEADER_HEIGHT} + ${OUTLINE_SIZE});
-  padding-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
+  padding-bottom: ${HEADER_HEIGHT};
+  padding-top: ${HEADER_HEIGHT};
+
+  ${MEDIA.DESKTOP} {
+    display: none;
+  }
 `
 
-const MenuTabs = styled(Tabs)<{ $showTabs?: boolean }>`
+const MenuTabs = styled(Tabs)<{
+  $isKeyNavigating: boolean
+}>`
   height: 100%;
 
   ${TabList} {
     height: ${HEADER_HEIGHT};
+    z-index: ${LAYERS.STEP * 2};
     position: absolute;
     bottom: 0;
-    left: ${FRAME_SPACING};
-    right: ${FRAME_SPACING};
+    left: 0;
+    right: 0;
+    padding-left: ${FRAME_SPACING};
+    padding-right: ${FRAME_SPACING};
     margin-bottom: 0;
     background-color: ${COLORS.BACKGROUND_SITE};
     border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
     border-bottom: 0;
-    z-index: ${LAYERS.STEP * 2};
-    max-width: calc(${MAX_WIDTH_COMPACT} + ${FRAME_SPACING} * 2);
-    margin-left: auto;
-    margin-right: auto;
+    justify-content: center;
   }
 
   ${TabPanel} {
+    position: relative;
     height: 100%;
+    outline-offset: -${OUTLINE_SIZE};
+    overflow: hidden;
+
+    &:before,
+    &:after {
+      box-shadow: ${({ $isKeyNavigating }) =>
+        $isKeyNavigating ? 'none' : scrollShadowStyles};
+
+      position: absolute;
+      z-index: ${LAYERS.STEP};
+      height: ${HEADER_HEIGHT};
+      left: 0;
+      right: 0;
+      content: '';
+      pointer-events: none;
+    }
+
+    &:before {
+      top: -${HEADER_HEIGHT};
+      transform: rotate(180deg);
+    }
+
+    &:after {
+      bottom: -${HEADER_HEIGHT};
+    }
+
+    &:focus {
+      z-index: ${LAYERS.HEADER};
+    }
   }
 
   ${Tab} {
     flex-grow: 1;
     justify-content: center;
+    max-width: calc(${MAX_WIDTH_COMPACT} / 2);
   }
 `
 
 const ScrollArea = styled.ul`
+  padding-top: ${SPACINGS.TWO};
   padding-bottom: ${SPACINGS.FOUR};
   max-width: ${MAX_WIDTH_COMPACT};
   overflow: auto;
@@ -107,12 +149,13 @@ type PropType = PropsWithChildren<{}>
 export const SiteNavigationMenuCompact = (props: PropType) => {
   const { children } = props
   const { theme } = useTheme()
+  const { isKeyNavigating } = useKeyNavigating()
   const isLightTheme = theme === THEME_KEYS.LIGHT
   const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
     <SiteNavigationMenuCompactWrapper>
-      <MenuTabs>
+      <MenuTabs $isKeyNavigating={isKeyNavigating}>
         <TabItem label="Main menu" value="main-menu">
           <ScrollArea>
             {children}

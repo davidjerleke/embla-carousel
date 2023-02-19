@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
+import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { Links } from 'components/Footer/Links'
 
@@ -8,6 +9,10 @@ const SiteNavigationMenuDesktopWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
   position: relative;
   height: 100%;
+
+  ${MEDIA.COMPACT} {
+    display: none;
+  }
 `
 
 const ScrollArea = styled.ul`
