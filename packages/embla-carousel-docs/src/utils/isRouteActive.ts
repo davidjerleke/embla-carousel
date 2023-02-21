@@ -1,4 +1,4 @@
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 
 export const isRouteActive = (
   slug: RouteType['slug'],

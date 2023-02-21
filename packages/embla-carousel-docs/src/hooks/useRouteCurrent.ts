@@ -1,6 +1,6 @@
 import { useLocation } from '@reach/router'
 import { useRoutes } from './useRoutes'
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 import { isRouteActive } from 'utils/isRouteActive'
 
 export const useRouteCurrent = (): RouteType => {

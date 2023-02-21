@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TableOfContentsItemType } from './Context'
+import { TableOfContentsItemType } from './TableOfContentsContext'
 import { SPACINGS } from 'consts/spacings'
-import { MenuItem } from './MenuItem'
+import { TableOfContentsMenuItem } from './TableOfContentsMenuItem'
 
 const hasItemsOnly = (item: TableOfContentsItemType): boolean =>
   !item.url && !item.title && typeof item.items !== undefined
 
-const LEVEL_SPACING = SPACINGS.THREE
+const LEVEL_SPACING = SPACINGS.CUSTOM(() => 1.6)
 
-const MenuItemsWrapper = styled.ol<{ $withSpacing: boolean }>`
+const TableOfContentsMenuItemsWrapper = styled.ol<{ $withSpacing: boolean }>`
   padding-left: ${({ $withSpacing }) => ($withSpacing ? LEVEL_SPACING : 0)};
   list-style: none;
 `
@@ -20,16 +20,16 @@ type PropType = {
   level?: number
 }
 
-export const MenuItems = (props: PropType) => {
+export const TableOfContentsMenuItems = (props: PropType) => {
   const { items = [], activeId, level = 0 } = props
   const nextLevel = level + 1
 
   return (
-    <MenuItemsWrapper $withSpacing={level > 0}>
+    <TableOfContentsMenuItemsWrapper $withSpacing={level > 0}>
       {items.map((item, index) => {
         if (hasItemsOnly(item)) {
           return (
-            <MenuItems
+            <TableOfContentsMenuItems
               key={`${index}-level`}
               items={item.items}
               activeId={activeId}
@@ -41,17 +41,21 @@ export const MenuItems = (props: PropType) => {
         const isActive = activeId === item.url?.slice(1)
 
         return (
-          <MenuItem key={item.url} item={item} isActive={isActive}>
+          <TableOfContentsMenuItem
+            key={item.url}
+            item={item}
+            isActive={isActive}
+          >
             {item.items && (
-              <MenuItems
+              <TableOfContentsMenuItems
                 items={item.items}
                 activeId={activeId}
                 level={nextLevel}
               />
             )}
-          </MenuItem>
+          </TableOfContentsMenuItem>
         )
       })}
-    </MenuItemsWrapper>
+    </TableOfContentsMenuItemsWrapper>
   )
 }

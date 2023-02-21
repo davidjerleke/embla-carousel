@@ -8,12 +8,12 @@ import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/SkipToContent'
+import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { PrimaryButtonFilledLink } from 'components/Link/ButtonLink'
 
 const MAX_CONTENT_WIDTH = '50rem'
 
-const Wrapper = styled.div`
+const HeroBrandWrapper = styled.div`
   display: flex;
   position: relative;
   align-items: center;
@@ -100,11 +100,11 @@ const CtaWrapper = styled.div`
   }
 `
 
-export const Brand = () => {
+export const HeroBrand = () => {
   const { title, description } = useSiteMetadata()
 
   return (
-    <Wrapper>
+    <HeroBrandWrapper>
       <HeroLogo appearance="blur" />
       <Content>
         <H1>
@@ -119,6 +119,6 @@ export const Brand = () => {
           </PrimaryButtonFilledLink>
         </CtaWrapper>
       </Content>
-    </Wrapper>
+    </HeroBrandWrapper>
   )
 }

@@ -33,7 +33,7 @@ const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
   ${MEDIA.DESKTOP} {
     width: inherit;
     max-width: inherit;
-    top: calc(${FRAME_SPACING} + ${HEADER_HEIGHT});
+    top: ${HEADER_HEIGHT};
     bottom: 0;
   }
 

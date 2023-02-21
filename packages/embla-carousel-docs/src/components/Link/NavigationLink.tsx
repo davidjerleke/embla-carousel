@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { useRouteActive } from 'hooks/useRouteActive'
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 import { PlainLink } from 'components/Link/PlainLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { COLORS } from 'consts/themes'

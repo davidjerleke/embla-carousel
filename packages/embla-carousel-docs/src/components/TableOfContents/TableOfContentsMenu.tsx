@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { useTableOfContents } from 'hooks/useTableOfContents'
-import { TableOfContentsItemType } from './Context'
-import { MenuItems } from './MenuItems'
+import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
+import { useTableOfContents } from 'hooks/useTableOfContents'
+import { TableOfContentsItemType } from './TableOfContentsContext'
+import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
 
 const extractHeadingIds = (
   items: TableOfContentsItemType['items'] = [],
@@ -19,10 +20,15 @@ const extractHeadingIds = (
   }, headingIds)
 }
 
-const ScrollArea = styled.div`
+const TableOfContentsMenuWrapper = styled.div`
   overflow: auto;
   position: relative;
   max-height: 100%;
+
+  ${MEDIA.DESKTOP} {
+    padding-top: ${FRAME_SPACING};
+    padding-bottom: ${FRAME_SPACING};
+  }
 `
 
 const Heading = styled.div`
@@ -32,11 +38,13 @@ const Heading = styled.div`
   font-weight: bold;
 
   ${MEDIA.COMPACT} {
-    display: none;
+    padding-top: ${SPACINGS.TWO};
+    border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    margin-bottom: ${SPACINGS.TWO};
   }
 `
 
-export const Menu = () => {
+export const TableOfContentsMenu = () => {
   const [activeId, setActiveId] = useState('')
   const { items = [] } = useTableOfContents()
   const headingIds = useMemo(() => extractHeadingIds(items), [items])
@@ -67,9 +75,9 @@ export const Menu = () => {
   if (!items) return null
 
   return (
-    <ScrollArea>
+    <TableOfContentsMenuWrapper>
       <Heading>On this page</Heading>
-      <MenuItems items={items} activeId={activeId} />
-    </ScrollArea>
+      <TableOfContentsMenuItems items={items} activeId={activeId} />
+    </TableOfContentsMenuWrapper>
   )
 }

@@ -6,8 +6,8 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { Actions } from './Actions'
-import { Logo } from './Logo'
+import { HeaderActions } from './HeaderActions'
+import { HeaderLogo } from './HeaderLogo'
 
 export const HEADER_HEIGHT = SPACINGS.TEN
 export const HEADER_ID = 'site-header'
@@ -49,8 +49,8 @@ export const Header = () => {
       <Fixed>
         <Content>
           <SiteNavigationToggle />
-          <Logo />
-          <Actions />
+          <HeaderLogo />
+          <HeaderActions />
         </Content>
       </Fixed>
     </HeaderWrapper>

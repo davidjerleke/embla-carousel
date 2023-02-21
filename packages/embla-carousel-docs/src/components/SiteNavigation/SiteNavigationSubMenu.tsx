@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import styled, { css } from 'styled-components'
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 import { BareButton } from 'components/Button/BareButton'
 import { NavigationLink } from 'components/Link/NavigationLink'
 import { useRouteActive } from 'hooks/useRouteActive'

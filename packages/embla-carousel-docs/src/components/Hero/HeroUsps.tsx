@@ -8,7 +8,7 @@ import { CardLink } from 'components/Link/CardLink'
 
 const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
 
-const Wrapper = styled.ul`
+const HeroUspsWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -54,9 +54,9 @@ const UspText = styled.p`
   color: ${COLORS.TEXT_LOW_CONTRAST};
 `
 
-export const Usps = () => {
+export const HeroUsps = () => {
   return (
-    <Wrapper>
+    <HeroUspsWrapper>
       <Usp>
         <CardLink to="/api/">
           <div>
@@ -87,6 +87,6 @@ export const Usps = () => {
           </div>
         </CardLink>
       </Usp>
-    </Wrapper>
+    </HeroUspsWrapper>
   )
 }

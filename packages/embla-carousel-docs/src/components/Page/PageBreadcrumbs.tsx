@@ -7,7 +7,7 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { SPACINGS } from 'consts/spacings'
 
-const BreadcrumbsWrapper = styled.nav`
+const PageBreadcrumbsWrapper = styled.nav`
   display: flex;
   align-items: center;
   font-size: ${FONT_SIZES.COMPLEMENTARY};
@@ -34,14 +34,14 @@ const Separator = styled(Icon)`
 
 type PropType = { id: string }
 
-export const Breadcrumbs = (props: PropType) => {
+export const PageBreadcrumbs = (props: PropType) => {
   const { id } = props
   const breadcrumbs = useRouteBreadcrumbs(id)
 
   if (breadcrumbs.length === 0) return null
 
   return (
-    <BreadcrumbsWrapper aria-label="Breadcrumb Navigation">
+    <PageBreadcrumbsWrapper aria-label="Breadcrumb Navigation">
       {breadcrumbs.map(({ id, slug, title }, index) =>
         index !== breadcrumbs.length - 1 ? (
           <Fragment key={id}>
@@ -57,6 +57,6 @@ export const Breadcrumbs = (props: PropType) => {
           <ActiveTitle key={id}>{title}</ActiveTitle>
         ),
       )}
-    </BreadcrumbsWrapper>
+    </PageBreadcrumbsWrapper>
   )
 }

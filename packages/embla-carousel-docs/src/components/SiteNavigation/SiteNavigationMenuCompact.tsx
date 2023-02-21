@@ -8,8 +8,8 @@ import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { LAYERS } from 'consts/layers'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
-import { Links } from 'components/Footer/Links'
-import { TabItem } from 'components/Tabs/TabItem'
+import { FooterLinks } from 'components/Footer/FooterLinks'
+import { TabsItem } from 'components/Tabs/TabsItem'
 import { Tab, TabList, TabPanel, Tabs } from 'components/Tabs/Tabs'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { useTheme } from 'hooks/useTheme'
@@ -102,7 +102,7 @@ const MenuTabs = styled(Tabs)<{
   }
 `
 
-const ScrollArea = styled.ul`
+const ScrollArea = styled.div`
   padding-top: ${SPACINGS.TWO};
   padding-bottom: ${SPACINGS.FOUR};
   max-width: ${MAX_WIDTH_COMPACT};
@@ -136,7 +136,7 @@ const ThemeToggleText = styled.span`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
 `
 
-const MiscLinks = styled(Links)`
+const MiscLinks = styled(FooterLinks)`
   padding-top: ${SPACINGS.THREE};
   justify-content: center;
 `
@@ -165,25 +165,27 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
   return (
     <SiteNavigationMenuCompactWrapper>
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
-        <TabItem label="Main menu" value="main-menu">
+        <TabsItem label="Main menu" value="main-menu">
           <ScrollArea>
-            {children}
+            <ul>
+              {children}
 
-            <li>
-              <ThemeToggleButton>
-                <ThemeToggleText>
-                  Activate {oppositeTheme} theme
-                </ThemeToggleText>
-              </ThemeToggleButton>
-            </li>
+              <li>
+                <ThemeToggleButton>
+                  <ThemeToggleText>
+                    Activate {oppositeTheme} theme
+                  </ThemeToggleText>
+                </ThemeToggleButton>
+              </li>
 
-            <li>
-              <MiscLinks />
-            </li>
+              <li>
+                <MiscLinks />
+              </li>
+            </ul>
           </ScrollArea>
-        </TabItem>
+        </TabsItem>
 
-        <TabItem
+        <TabsItem
           label="On this page"
           value="table-of-contents"
           disabled={!showTableOfContents}
@@ -191,7 +193,7 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
           <ScrollArea>
             <TableOfContents />
           </ScrollArea>
-        </TabItem>
+        </TabsItem>
       </MenuTabs>
     </SiteNavigationMenuCompactWrapper>
   )

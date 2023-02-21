@@ -11,7 +11,7 @@ import { SPACINGS } from 'consts/spacings'
 
 export const MAIN_CONTENT_ID = 'main-content'
 
-const SkipToContentWrapper = styled.a`
+const KeyNavigatingSkipToContentWrapper = styled.a`
   ${plainLinkStyles};
   z-index: ${LAYERS.SEARCH + 1};
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -37,7 +37,7 @@ const LinkText = styled.span`
   position: relative;
 `
 
-export const SkipToContent = () => {
+export const KeyNavigatingSkipToContent = () => {
   const [contentElement, setContentElement] = useState<HTMLElement | null>(null)
 
   const onClick = useCallback(
@@ -58,12 +58,12 @@ export const SkipToContent = () => {
   if (!contentElement) return null
 
   return (
-    <SkipToContentWrapper
+    <KeyNavigatingSkipToContentWrapper
       href={`#${MAIN_CONTENT_ID}`}
       onClick={onClick}
       $isKeyNavigating
     >
       <LinkText>Skip to content</LinkText>
-    </SkipToContentWrapper>
+    </KeyNavigatingSkipToContentWrapper>
   )
 }

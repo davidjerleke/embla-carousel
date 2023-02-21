@@ -20,7 +20,7 @@ export const NavigationContext = createContext<NavigationContextType>({
 
 type PropType = PropsWithChildren<{}>
 
-export const NavigationProvider = (props: PropType) => {
+export const SiteNavigationProvider = (props: PropType) => {
   const { children } = props
   const [isOpen, setIsOpen] = useState<boolean>(false)
 

@@ -1,5 +1,5 @@
-import { RouteType } from 'components/Routes/Context'
-import { TableOfContentsType } from 'components/TableOfContents/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
+import { TableOfContentsType } from 'components/TableOfContents/TableOfContentsContext'
 
 export const PAGE_TEMPLATES = <const>{
   HOME: 'Home',

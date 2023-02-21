@@ -11,7 +11,7 @@ import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 
 const ITEM_SPACING_SM_UP = SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.4)
 
-const ActionsWrapper = styled.ul`
+const HeaderActionsWrapper = styled.ul`
   display: flex;
   align-items: center;
   line-height: 1.65;
@@ -36,20 +36,20 @@ const Link = styled(NavigationLink)`
   padding: ${SPACINGS.ONE} 0;
 `
 
-export const Actions = () => {
+export const HeaderActions = () => {
   const { hierarchical: routes } = useRoutes()
 
   return (
-    <ActionsWrapper>
+    <HeaderActionsWrapper>
       <Item $hidden="COMPACT">
         <nav aria-label="Quick Navigation Menu">
-          <ActionsWrapper>
+          <HeaderActionsWrapper>
             {routes.map((route) => (
               <Item key={route.id}>
                 <Link slug={route.slug}>{route.title}</Link>
               </Item>
             ))}
-          </ActionsWrapper>
+          </HeaderActionsWrapper>
         </nav>
       </Item>
       <Item>
@@ -58,6 +58,6 @@ export const Actions = () => {
       <Item $hidden="COMPACT">
         <ThemeToggle />
       </Item>
-    </ActionsWrapper>
+    </HeaderActionsWrapper>
   )
 }

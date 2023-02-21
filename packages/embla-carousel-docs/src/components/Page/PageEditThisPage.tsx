@@ -7,7 +7,7 @@ import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
 import { IconWithText } from 'components/Icon/IconWithText'
 
-const EditPageWrapper = styled(PlainLink)`
+const PageEditThisPageWrapper = styled(PlainLink)`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
@@ -22,15 +22,15 @@ type PropType = {
   pageUrl: string
 }
 
-export const EditPage = (props: PropType) => {
+export const PageEditThisPage = (props: PropType) => {
   const { pageUrl } = props
   const url = `${URLS.GITHUB_DOCUMENTATION}/${pageUrl}`
 
   return (
-    <EditPageWrapper to={url}>
+    <PageEditThisPageWrapper to={url}>
       <IconWithText iconSvg="pen" iconSize="1.5rem">
         Edit this page on GitHub
       </IconWithText>
-    </EditPageWrapper>
+    </PageEditThisPageWrapper>
   )
 }

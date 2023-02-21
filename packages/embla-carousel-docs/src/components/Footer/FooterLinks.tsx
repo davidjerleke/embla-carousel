@@ -10,7 +10,7 @@ import { IconWithText } from 'components/Icon/IconWithText'
 const LINK_SPACING = SPACINGS.FIVE
 const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
 
-const LinksWrapper = styled.ul`
+const FooterLinksWrapper = styled.ul`
   margin-left: -${LINK_SPACING};
   display: flex;
 `
@@ -27,11 +27,11 @@ const Link = styled(PlainLink)`
 
 type PropType = PropsWithChildren<{}>
 
-export const Links = (props: PropType) => {
+export const FooterLinks = (props: PropType) => {
   const { ...restProps } = props
 
   return (
-    <LinksWrapper {...restProps}>
+    <FooterLinksWrapper {...restProps}>
       <li>
         <Link to={URLS.NPM_PACKAGE}>
           <IconWithText iconSvg="npm" spacing={ICON_SPACING}>
@@ -46,6 +46,6 @@ export const Links = (props: PropType) => {
           </IconWithText>
         </Link>
       </li>
-    </LinksWrapper>
+    </FooterLinksWrapper>
   )
 }

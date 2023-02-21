@@ -1,4 +1,4 @@
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 import { isRoutePartiallyActive } from 'utils/isRoutePartiallyActive'
 import { useRoutes } from './useRoutes'
 

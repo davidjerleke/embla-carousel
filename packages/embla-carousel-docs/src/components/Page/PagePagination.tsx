@@ -9,7 +9,7 @@ import { IconWithText } from 'components/Icon/IconWithText'
 
 const ITEM_SPACING = SPACINGS.FOUR
 
-const PaginationWrapper = styled.nav`
+const PagePaginationWrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   margin-top: ${SPACINGS.EIGHT};
@@ -49,11 +49,11 @@ type PropType = {
   previous: PageType['pageContext']['previous']
 }
 
-export const Pagination = (props: PropType) => {
+export const PagePagination = (props: PropType) => {
   const { next, previous } = props
 
   return (
-    <PaginationWrapper aria-label="Pagination Navigation">
+    <PagePaginationWrapper aria-label="Pagination Navigation">
       <Item>
         {previous && (
           <PlainLink to={previous.slug}>
@@ -78,6 +78,6 @@ export const Pagination = (props: PropType) => {
           </PlainLink>
         )}
       </Item>
-    </PaginationWrapper>
+    </PagePaginationWrapper>
   )
 }

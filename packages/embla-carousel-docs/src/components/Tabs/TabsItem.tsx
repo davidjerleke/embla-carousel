@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 
-export const isTabItemProps = (props: any): props is PropType => {
+export const isTabsItemProps = (props: any): props is PropType => {
   return 'value' in props && 'label' in props
 }
 
@@ -11,6 +11,6 @@ export type PropType = PropsWithChildren<{
   disabled?: boolean
 }>
 
-export const TabItem = (props: PropType) => {
+export const TabsItem = (props: PropType) => {
   return <React.Fragment {...props} />
 }

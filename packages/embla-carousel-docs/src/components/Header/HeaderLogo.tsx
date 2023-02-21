@@ -9,7 +9,7 @@ import { FONT_SIZES } from 'consts/fontSizes'
 import { PlainLink } from 'components/Link/PlainLink'
 import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 
-const LogoWrapper = styled(PlainLink)`
+const HeaderLogoWrapper = styled(PlainLink)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   font-size: ${FONT_SIZES.H4};
   display: flex;
@@ -23,7 +23,7 @@ const LogoWrapper = styled(PlainLink)`
   }
 `
 
-const HeaderLogo = styled(SiteLogo)`
+const HeaderLogoImage = styled(SiteLogo)`
   ${createSquareSizeStyles('2.8rem')};
   margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   display: flex;
@@ -37,13 +37,13 @@ const HeaderLogo = styled(SiteLogo)`
   }
 `
 
-export const Logo = () => {
+export const HeaderLogo = () => {
   const { title } = useSiteMetadata()
 
   return (
-    <LogoWrapper aria-label="Permalink to home page" to="/">
-      <HeaderLogo />
+    <HeaderLogoWrapper aria-label="Permalink to home page" to="/">
+      <HeaderLogoImage />
       <span>{title}</span>
-    </LogoWrapper>
+    </HeaderLogoWrapper>
   )
 }

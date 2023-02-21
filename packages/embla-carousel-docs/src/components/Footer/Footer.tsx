@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Frame, FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { Links } from './Links'
+import { FooterLinks } from './FooterLinks'
 
 const FooterWrapper = styled.footer`
   padding-top: ${FRAME_SPACING};
@@ -17,7 +17,7 @@ export const Footer = () => {
   return (
     <FooterWrapper>
       <Content>
-        <Links />
+        <FooterLinks />
       </Content>
     </FooterWrapper>
   )

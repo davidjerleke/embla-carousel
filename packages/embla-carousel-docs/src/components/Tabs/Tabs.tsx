@@ -8,9 +8,9 @@ import React, {
 } from 'react'
 import uniqueId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
-import { isTabItemProps, PropType as TabItemPropType } from './TabItem'
+import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
 import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/SkipToContent'
+import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { BareButton } from 'components/Button/BareButton'
 import { SPACINGS } from 'consts/spacings'
 import { useTabs } from 'hooks/useTabs'
@@ -22,16 +22,16 @@ import {
   InactiveText as TabInactiveText,
 } from 'components/Link/NavigationLink'
 
-const mapChildrenToTabs = (children: React.ReactNode): TabItemPropType[] => {
+const mapChildrenToTabs = (children: React.ReactNode): TabsItemPropType[] => {
   return React.Children.toArray(children)
     .map((child) => (React.isValidElement(child) ? child.props : {}))
-    .filter(isTabItemProps)
+    .filter(isTabsItemProps)
 }
 
 const getDefaultTab = (
-  tabs: TabItemPropType[],
+  tabs: TabsItemPropType[],
   storedTabSelection: string,
-): TabItemPropType => {
+): TabsItemPropType => {
   const storedTab = tabs.find((tab) => tab.value === storedTabSelection)
   return storedTab || tabs.find((tab) => tab.default) || tabs[0]
 }
@@ -93,13 +93,13 @@ export const Tabs = (props: PropType) => {
       defaultTab: getDefaultTab(tabs, storedTabSelection),
     }
   }, [children, storedTabSelection])
-  const [activeTab, setActiveTab] = useState<TabItemPropType>(defaultTab)
+  const [activeTab, setActiveTab] = useState<TabsItemPropType>(defaultTab)
   const tabRefs = useRef(tabs.map(() => React.createRef<HTMLButtonElement>()))
   const tabRefLoopIndex = useRef(0)
   const tabsWrapperRef = useRef<HTMLDivElement>(null)
   const tabsRectTop = useRef(0)
   const getTabIndex = useCallback(
-    (tabToFind: TabItemPropType): number => {
+    (tabToFind: TabsItemPropType): number => {
       return tabs.findIndex((tab) => tab.value === tabToFind.value)
     },
     [tabs],
@@ -111,7 +111,7 @@ export const Tabs = (props: PropType) => {
   }, [])
 
   const setActiveTabAndStoreSelection = useCallback(
-    (tab: TabItemPropType) => {
+    (tab: TabsItemPropType) => {
       tabsRectTop.current = readTabsRectTop()
       activeTabIndex.current = getTabIndex(tab)
       setActiveTab(tab)

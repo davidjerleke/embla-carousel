@@ -3,10 +3,10 @@ import { graphql } from 'gatsby'
 import { Seo } from 'components/Seo/Seo'
 import maskable from 'assets/images/maskable.png'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
-import { EditPage } from 'components/Page/EditPage'
-import { Pagination } from 'components/Page/Pagination'
-import { Breadcrumbs } from 'components/Page/Breadcrumbs'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/SkipToContent'
+import { PageEditThisPage } from 'components/Page/PageEditThisPage'
+import { PagePagination } from 'components/Page/PagePagination'
+import { PageBreadcrumbs } from 'components/Page/PageBreadcrumbs'
+import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { removeProtocol } from 'utils/removeProtocol'
 import { Mdx } from 'components/Mdx/Mdx'
 import {
@@ -83,12 +83,12 @@ const Page = (props: PropType) => {
 
   return (
     <>
-      <Breadcrumbs id={id} />
+      <PageBreadcrumbs id={id} />
       <article id={MAIN_CONTENT_ID}>
         <Mdx>{children}</Mdx>
       </article>
-      <EditPage pageUrl={filePath} />
-      <Pagination previous={previous} next={next} />
+      <PageEditThisPage pageUrl={filePath} />
+      <PagePagination previous={previous} next={next} />
     </>
   )
 }

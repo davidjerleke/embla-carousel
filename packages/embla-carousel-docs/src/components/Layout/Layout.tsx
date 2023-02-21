@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react'
-import { RoutesProvider } from 'components/Routes/Context'
-import { ThemeProvider } from 'components/Theme/Context'
-import { NavigationProvider } from 'components/SiteNavigation/Context'
-import { KeyNavigatingProvider } from 'components/KeyNavigating/Context'
-import { TabsProvider } from 'components/Tabs/Context'
-import { TableOfContentsProvider } from 'components/TableOfContents/Context'
-import { SkipToContent } from 'components/KeyNavigating/SkipToContent'
+import { RoutesProvider } from 'components/Routes/RoutesContext'
+import { ThemeProvider } from 'components/Theme/ThemeContext'
+import { SiteNavigationProvider } from 'components/SiteNavigation/SiteNavigationContext'
+import { KeyNavigatingProvider } from 'components/KeyNavigating/KeyNavigatingContext'
+import { TabsProvider } from 'components/Tabs/TabsContext'
+import { TableOfContentsProvider } from 'components/TableOfContents/TableOfContentsContext'
+import { KeyNavigatingSkipToContent } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
 import { PageTemplatePropType, PAGE_TEMPLATES } from 'consts/pageTemplates'
 import { Grid } from 'components/SiteLayout/Grid'
@@ -32,13 +32,13 @@ export const Layout = (props: PropType) => {
     <RoutesProvider>
       <ThemeProvider>
         <KeyNavigatingProvider>
-          <NavigationProvider>
+          <SiteNavigationProvider>
             <GlobalStyles />
             {isNotFoundPage ? (
               <>{children}</>
             ) : (
               <>
-                <SkipToContent />
+                <KeyNavigatingSkipToContent />
                 <Header />
                 <RoutesLoading pageId={id} />
                 <TabsProvider>
@@ -49,7 +49,7 @@ export const Layout = (props: PropType) => {
                 <Footer />
               </>
             )}
-          </NavigationProvider>
+          </SiteNavigationProvider>
         </KeyNavigatingProvider>
       </ThemeProvider>
     </RoutesProvider>
