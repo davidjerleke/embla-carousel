@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from 'react'
-import styled, { css } from 'styled-components'
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
@@ -11,9 +11,10 @@ import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 import { Links } from 'components/Footer/Links'
 import { TabItem } from 'components/Tabs/TabItem'
 import { Tab, TabList, TabPanel, Tabs } from 'components/Tabs/Tabs'
-import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { useTheme } from 'hooks/useTheme'
+import { useNavigation } from 'hooks/useNavigation'
+import { useTableOfContents } from 'hooks/useTableOfContents'
 import {
   ThemeToggle,
   LightThemeSvg,
@@ -112,10 +113,6 @@ const ScrollArea = styled.ul`
   margin-right: auto;
 `
 
-const ThemeToggleWrapper = styled.li`
-  ${hiddenAtBreakpointStyles};
-`
-
 const ThemeToggleButton = styled(ThemeToggle)`
   background-color: ${COLORS.BACKGROUND_CODE};
   width: 100%;
@@ -150,8 +147,20 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
   const { children } = props
   const { theme } = useTheme()
   const { isKeyNavigating } = useKeyNavigating()
+  const { isOpen } = useNavigation()
+  const isOpenRef = useRef(isOpen)
+  const tableOfContents = useTableOfContents()
+  const [showTableOfContents, setShowTableOfContents] = useState(true)
   const isLightTheme = theme === THEME_KEYS.LIGHT
   const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
+
+  useEffect(() => {
+    if (isOpen !== isOpenRef.current) {
+      const show = isOpen && !!tableOfContents.items?.length
+      setShowTableOfContents(show)
+      isOpenRef.current = isOpen
+    }
+  }, [isOpen, tableOfContents])
 
   return (
     <SiteNavigationMenuCompactWrapper>
@@ -160,13 +169,13 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
           <ScrollArea>
             {children}
 
-            <ThemeToggleWrapper $hidden="DESKTOP">
+            <li>
               <ThemeToggleButton>
                 <ThemeToggleText>
                   Activate {oppositeTheme} theme
                 </ThemeToggleText>
               </ThemeToggleButton>
-            </ThemeToggleWrapper>
+            </li>
 
             <li>
               <MiscLinks />
@@ -177,7 +186,7 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
         <TabItem
           label="On this page"
           value="table-of-contents"
-          disabled={false /* TODO: fix! */}
+          disabled={!showTableOfContents}
         >
           <ScrollArea>
             <TableOfContents />

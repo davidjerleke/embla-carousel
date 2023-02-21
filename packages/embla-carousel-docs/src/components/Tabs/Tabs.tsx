@@ -78,7 +78,6 @@ export const Tab = styled(BareButton)<{ $selected: boolean }>`
 
 type PropType = PropsWithChildren<{
   groupId?: string
-  selectedTabIndex?: number
 }>
 
 export const Tabs = (props: PropType) => {
@@ -87,7 +86,7 @@ export const Tabs = (props: PropType) => {
   const { storedTabSelections, storeTabSelection } = useTabs()
   const storedTabSelection = storedTabSelections[groupId]
   const { tabs, tabsId, defaultTab } = useMemo(() => {
-    const tabs = mapChildrenToTabs(children)
+    const tabs = mapChildrenToTabs(children).filter((tab) => !tab.disabled)
     return {
       tabs,
       tabsId: uniqueId(),
@@ -96,7 +95,8 @@ export const Tabs = (props: PropType) => {
   }, [children, storedTabSelection])
   const [activeTab, setActiveTab] = useState<TabItemPropType>(defaultTab)
   const tabRefs = useRef(tabs.map(() => React.createRef<HTMLButtonElement>()))
-  const tabsRef = useRef<HTMLDivElement>(null)
+  const tabRefLoopIndex = useRef(0)
+  const tabsWrapperRef = useRef<HTMLDivElement>(null)
   const tabsRectTop = useRef(0)
   const getTabIndex = useCallback(
     (tabToFind: TabItemPropType): number => {
@@ -104,10 +104,10 @@ export const Tabs = (props: PropType) => {
     },
     [tabs],
   )
-  const activeTabIndex = useRef(getTabIndex(activeTab))
+  const activeTabIndex = useRef(getTabIndex(defaultTab))
 
   const readTabsRectTop = useCallback(() => {
-    return tabsRef.current?.getBoundingClientRect().top || 0
+    return tabsWrapperRef.current?.getBoundingClientRect().top || 0
   }, [])
 
   const setActiveTabAndStoreSelection = useCallback(
@@ -202,11 +202,27 @@ export const Tabs = (props: PropType) => {
     if (tabToActivate) setActiveTabAndStoreSelection(tabToActivate)
   }, [activeTab, storedTabSelection, setActiveTabAndStoreSelection])
 
+  useEffect(() => {
+    const hasActiveTab = tabs.find((tab) => tab.value === activeTab.value)
+    if (hasActiveTab) return
+
+    const newDefaultTab = getDefaultTab(tabs, storedTabSelection)
+    setActiveTab(newDefaultTab)
+    activeTabIndex.current = getTabIndex(newDefaultTab)
+  }, [tabs, activeTab, storedTabSelection])
+
   return (
-    <TabsWrapper ref={tabsRef} {...restProps}>
+    <TabsWrapper ref={tabsWrapperRef} {...restProps}>
       <TabList role="tablist" aria-orientation="horizontal">
-        {tabs.map((tab, index) => {
+        {mapChildrenToTabs(children).map((tab) => {
           const selected = activeTab.value === tab.value
+          const enabled = !tab.disabled
+          const tabRefIndex = tabRefLoopIndex.current
+
+          if (enabled) {
+            const isLastTab = tabRefIndex === tabs.length - 1
+            tabRefLoopIndex.current = isLastTab ? 0 : tabRefIndex + 1
+          }
 
           return (
             <Tab
@@ -214,13 +230,13 @@ export const Tabs = (props: PropType) => {
               key={`tab-${tab.value}`}
               id={`tab-id-${tab.value}-${tabsId}`}
               tabIndex={selected ? 0 : -1}
-              ref={tabRefs.current[index]}
+              ref={enabled ? tabRefs.current[tabRefIndex] : undefined}
               aria-controls={`panel-id-${tab.value}-${tabsId}`}
               aria-selected={selected}
               onKeyDown={onKeyDown}
               onClick={() => setActiveTabAndStoreSelection(tab)}
               $selected={selected}
-              disabled={tab.disabled}
+              disabled={!enabled}
             >
               <TabInactiveText $isActive={selected}>
                 {tab.label}
