@@ -5,6 +5,7 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
+import { HEADER_HEIGHT } from 'components/Header/Header'
 
 const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 
@@ -15,6 +16,7 @@ export const headingStyles = css`
   h4,
   h5,
   h6 {
+    scroll-margin-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
     color: ${COLORS.TEXT_HIGH_CONTRAST};
     font-weight: 700;
   }

@@ -57,7 +57,7 @@ export const onRenderBody = ({
             var preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches && '${
               THEME_KEYS.DARK
             }';
-            var themeKey = selectedTheme || preferredTheme || '${
+            var themeKey = selectedTheme || preferredTheme || '${
               THEME_KEYS.LIGHT
             }';
             var oppositeKey = themeKey === '${THEME_KEYS.LIGHT}' ? '${

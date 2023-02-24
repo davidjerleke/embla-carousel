@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
-import { PlainLink } from 'components/Link/PlainLink'
+import { BareLink } from 'components/Link/BareLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
@@ -56,26 +56,26 @@ export const PagePagination = (props: PropType) => {
     <PagePaginationWrapper aria-label="Pagination Navigation">
       <Item>
         {previous && (
-          <PlainLink to={previous.slug}>
+          <BareLink to={previous.slug}>
             <ItemLabel>Previous</ItemLabel>
             <ItemTitle>
               <IconWithText iconSvg="arrowLeft">
                 <GradientText>{previous.title}</GradientText>
               </IconWithText>
             </ItemTitle>
-          </PlainLink>
+          </BareLink>
         )}
       </Item>
       <Item>
         {next && (
-          <PlainLink to={next.slug}>
+          <BareLink to={next.slug}>
             <ItemLabel>Next</ItemLabel>
             <ItemTitle>
               <IconWithText iconSvg="arrowRight" iconSide="right">
                 <GradientText>{next.title}</GradientText>
               </IconWithText>
             </ItemTitle>
-          </PlainLink>
+          </BareLink>
         )}
       </Item>
     </PagePaginationWrapper>

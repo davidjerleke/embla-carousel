@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
-import { PlainLink } from 'components/Link/PlainLink'
+import { BareLink } from 'components/Link/BareLink'
 import { useRouteBreadcrumbs } from 'hooks/useRouteBreadcrumbs'
 import { Icon } from 'components/Icon/Icon'
 import { COLORS } from 'consts/themes'
@@ -19,7 +19,7 @@ const itemStyles = css`
   padding: ${SPACINGS.ONE} 0;
 `
 
-const Link = styled(PlainLink)`
+const Link = styled(BareLink)`
   ${itemStyles};
 `
 

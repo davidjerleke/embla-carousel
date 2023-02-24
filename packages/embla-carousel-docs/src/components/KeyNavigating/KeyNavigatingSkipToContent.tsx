@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
-import { plainLinkStyles } from 'components/Link/PlainLink'
+import { plainLinkStyles } from 'components/Link/BareLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { isBrowser } from 'utils/isBrowser'
 import { COLORS } from 'consts/themes'

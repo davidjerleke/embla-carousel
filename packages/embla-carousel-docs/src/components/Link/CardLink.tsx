@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
 import { IconWithText } from 'components/Icon/IconWithText'
-import { PlainLink, PropType } from './PlainLink'
+import { BareLink, PropType } from './BareLink'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 
-const CardLinkWrapper = styled(PlainLink)`
+const CardLinkWrapper = styled(BareLink)`
   padding: ${SPACINGS.FOUR};
   border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
   background-color: ${COLORS.BACKGROUND_CODE};

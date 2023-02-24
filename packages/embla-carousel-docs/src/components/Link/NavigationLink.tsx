@@ -2,11 +2,11 @@ import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { useRouteActive } from 'hooks/useRouteActive'
 import { RouteType } from 'components/Routes/RoutesContext'
-import { PlainLink } from 'components/Link/PlainLink'
+import { BareLink } from 'components/Link/BareLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 import { COLORS } from 'consts/themes'
 
-const NavigationLinkWrapper = styled(PlainLink)`
+const NavigationLinkWrapper = styled(BareLink)`
   position: relative;
   display: inline-flex;
   align-items: center;

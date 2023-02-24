@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PlainLink } from 'components/Link/PlainLink'
+import { BareLink } from 'components/Link/BareLink'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
 import { IconWithText } from 'components/Icon/IconWithText'
 
-const PageEditThisPageWrapper = styled(PlainLink)`
+const PageEditThisPageWrapper = styled(BareLink)`
   display: inline-flex;
   align-items: center;
   text-decoration: none;

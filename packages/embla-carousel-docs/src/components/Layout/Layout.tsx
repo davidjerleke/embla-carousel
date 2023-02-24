@@ -21,12 +21,11 @@ export const Layout = (props: PropType) => {
   const {
     children,
     pageContext,
-    data: {
-      mdx: { tableOfContents },
-    },
+    data: { mdx },
   } = props
   const { layout, id } = pageContext
   const isNotFoundPage = layout === PAGE_TEMPLATES.NOT_FOUND
+  const tableOfContents = mdx?.tableOfContents
 
   return (
     <RoutesProvider>

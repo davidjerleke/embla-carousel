@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { PlainLink } from 'components/Link/PlainLink'
+import { BareLink } from 'components/Link/BareLink'
 import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
@@ -15,7 +15,7 @@ const FooterLinksWrapper = styled.ul`
   display: flex;
 `
 
-const Link = styled(PlainLink)`
+const Link = styled(BareLink)`
   margin-left: ${LINK_SPACING};
   margin-right: -${OUTLINE_SIZE};
   padding: ${SPACINGS.ONE} ${OUTLINE_SIZE};

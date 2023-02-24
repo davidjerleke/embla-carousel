@@ -8,6 +8,8 @@ import { useRoutes } from 'hooks/useRoutes'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { COLORS } from 'consts/themes'
 
+const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
+
 export const plainLinkStyles = css<{ $isKeyNavigating: boolean }>`
   ${keyNavigatingStyles};
   -webkit-tap-highlight-color: rgba(
@@ -33,10 +35,10 @@ export type PropType = PropsWithChildren<{
   onClick?: GatsbyLinkProps<{}>['onClick']
 }>
 
-export const PlainLink = (props: PropType) => {
+export const BareLink = (props: PropType) => {
   const { to, id, ariaLabel, tabIndex, children, onClick, ...restProps } = props
   const linkElement = useRef<HTMLAnchorElement | null>(null)
-  const isInternal = /^\/(?!\/)|^#/.test(to)
+  const isInternal = INTERNAL_LINK_REGEX.test(to)
   const { isKeyNavigating } = useKeyNavigating()
   const { pathname } = useLocation()
   const { setIsLoading } = useRoutes()
@@ -54,7 +56,8 @@ export const PlainLink = (props: PropType) => {
       const targetIsCurrentUrl = pathname === linkElement.current.pathname
 
       if (targetIsCurrentUrl) {
-        closeNavigation()
+        if (linkElement.current.hash) setTimeout(() => closeNavigation(), 0)
+        else closeNavigation()
       } else {
         setIsLoading(true)
       }
