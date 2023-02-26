@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { TabsWrapper, TabPanel } from 'components/Tabs/Tabs'
+import { AdmonitionWrapper, AdmonitionContent } from '../Components/Admonition'
 import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'
@@ -18,6 +19,7 @@ export const MdxStyles = styled.div`
   color: ${COLORS.TEXT_BODY};
 
   ${TabPanel} >,
+  ${AdmonitionContent} >,
   > {
     ${listStyles};
     ${headingStyles};
@@ -46,15 +48,19 @@ export const MdxStyles = styled.div`
     blockquote code,
     kbd,
     samp,
-    ${TabsWrapper} {
+    ${TabsWrapper}, ${AdmonitionWrapper} {
       margin-bottom: ${SPACINGS.FOUR};
     }
   }
 
+  ${TabPanel} > *:first-child,
+  ${AdmonitionContent} > *:first-child,
   > *:first-child {
     margin-top: 0;
   }
 
+  ${TabPanel} > *:last-child, 
+  ${AdmonitionContent} > *:last-child, 
   > *:last-child {
     margin-bottom: 0;
   }

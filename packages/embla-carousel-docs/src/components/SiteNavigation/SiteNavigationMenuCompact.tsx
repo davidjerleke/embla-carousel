@@ -156,7 +156,7 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
 
   useEffect(() => {
     if (isOpen !== isOpenRef.current) {
-      const show = isOpen && !!tableOfContents.items?.length
+      const show = !!tableOfContents.items?.length
       setShowTableOfContents(show)
       isOpenRef.current = isOpen
     }

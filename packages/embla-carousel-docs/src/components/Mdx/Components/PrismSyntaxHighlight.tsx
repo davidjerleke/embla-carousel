@@ -5,8 +5,8 @@ import Highlight, {
   Language as PrismLanguage,
 } from 'prism-react-renderer'
 
-export const HIGHLIGHT_CLASS_NAME = 'prism-highlight'
-export const HIGHLIGHT_LINE_CLASS_NAME = `${HIGHLIGHT_CLASS_NAME}-code-line`
+export const PRISM_HIGHLIGHT_CLASS_NAME = 'prism-highlight'
+export const PRISM_HIGHLIGHT_LINE_CLASS_NAME = `${PRISM_HIGHLIGHT_CLASS_NAME}-code-line`
 
 const REGEX_HIGHLIGHT_META = /{[^}]+}/
 const REGEX_HIGHLIGHT_RANGE = /\d{1,}-\d{1,}/
@@ -48,7 +48,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
   }, [className])
 
   return (
-    <div className={HIGHLIGHT_CLASS_NAME} data-language={language}>
+    <div className={PRISM_HIGHLIGHT_CLASS_NAME} data-language={language}>
       <PrismSyntaxWrapper code={children}>
         <Highlight
           {...defaultProps}
@@ -71,7 +71,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
                     const lineNumber = index + 1
 
                     if (highlightedLines.includes(lineNumber)) {
-                      lineProps.className = `${lineProps.className} ${HIGHLIGHT_LINE_CLASS_NAME}`
+                      lineProps.className = `${lineProps.className} ${PRISM_HIGHLIGHT_LINE_CLASS_NAME}`
                     }
 
                     return (

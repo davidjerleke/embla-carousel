@@ -9,6 +9,8 @@ import react from './react-logo.svg'
 import search from './search.svg'
 import cross from './cross.svg'
 import info from './info.svg'
+import warning from './warning.svg'
+import danger from './danger.svg'
 import arrowLeft from './arrow-left.svg'
 import arrowRight from './arrow-right.svg'
 import chevronLeft from './chevron-left.svg'
@@ -32,6 +34,8 @@ export const ICONS = {
   search,
   cross,
   info,
+  warning,
+  danger,
   arrowLeft,
   arrowRight,
   chevronLeft,

@@ -6,15 +6,17 @@ import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
+import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
 import {
-  HIGHLIGHT_CLASS_NAME,
-  HIGHLIGHT_LINE_CLASS_NAME,
+  PRISM_HIGHLIGHT_CLASS_NAME,
+  PRISM_HIGHLIGHT_LINE_CLASS_NAME,
 } from 'components/Mdx/Components/PrismSyntaxHighlight'
+import { AdmonitionWrapper } from '../Components/Admonition'
 
 const BORDER_RADIUS = '0.4rem'
 
 export const codeStyles = css`
-  .language-text {
+  .${CODE_HIGHLIGHT_CLASS_NAME} {
     background-color: ${COLORS.BACKGROUND_CODE};
     border-radius: ${BORDER_RADIUS};
     border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
@@ -25,7 +27,12 @@ export const codeStyles = css`
     box-sizing: border-box;
   }
 
-  .${HIGHLIGHT_CLASS_NAME} {
+  ${AdmonitionWrapper} .${CODE_HIGHLIGHT_CLASS_NAME} {
+    background-color: ${COLORS.BACKGROUND_SITE};
+    border-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+  }
+
+  .${PRISM_HIGHLIGHT_CLASS_NAME} {
     ${frameCollapseStyles};
     background-color: ${COLORS.BACKGROUND_CODE};
     margin-bottom: ${SPACINGS.FOUR};
@@ -117,7 +124,7 @@ export const codeStyles = css`
     }
   }
 
-  .${HIGHLIGHT_LINE_CLASS_NAME} {
+  .${PRISM_HIGHLIGHT_LINE_CLASS_NAME} {
     position: relative;
     display: block;
     margin-left: -${SPACINGS.FOUR};
@@ -151,14 +158,14 @@ export const codeStyles = css`
     }
   }
 
-  .${HIGHLIGHT_CLASS_NAME} pre[class*='language-'] {
+  .${PRISM_HIGHLIGHT_CLASS_NAME} pre[class*='language-'] {
     padding: ${FRAME_SPACING} 0;
     background-color: transparent;
     border: 0;
     margin-bottom: 0;
   }
 
-  .${HIGHLIGHT_CLASS_NAME} pre code {
+  .${PRISM_HIGHLIGHT_CLASS_NAME} pre code {
     padding: 0 ${FRAME_SPACING};
     background-color: transparent;
     display: block;
