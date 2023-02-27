@@ -55,21 +55,32 @@ export const headingStyles = css`
   h6 {
     > .anchor {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 0;
+      left: 0;
       padding-right: 0;
-      ${createSquareSizeStyles(FRAME_SPACING)};
-      margin-left: -${FRAME_SPACING};
+      width: ${FRAME_SPACING};
 
       ${MEDIA.DESKTOP} {
-        ${createSquareSizeStyles(SPACINGS.FIVE)};
-        margin-left: -${SPACINGS.FIVE};
+        width: ${SPACINGS.FIVE};
+      }
+
+      &:before {
+        color: ${COLORS.BACKGROUND_SITE};
+        line-height: inherit;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        content: '-';
+        pointer-events: none;
       }
     }
 
     > .anchor > div {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       display: flex;
       align-items: center;
       justify-content: center;
