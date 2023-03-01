@@ -5,9 +5,80 @@ order: 1
 date: 2021-02-21
 ---
 
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+
 # Methods
 
-Embla Carousel exposes a set of **useful methods** which makes it very **extensible**.
+Once a carousel is up and running, Embla Carousel exposes a set of **useful methods** which makes it very **extensible**.
+
+## Usage
+
+You need an **initialized carousel** in order to **make use of methods**. They can be accessed during the lifecycle of a carousel and won't do anything after a carousel instance has been destroyed with the [destroy](/api/methods/#destroy) method.
+
+### Calling methods
+
+In the following example, the [scrollNext](/api/methods/#scrollnext) method is called as soon as the carousel has been initialized.
+
+<Tabs groupId="library">
+<TabsItem label="Vanilla" value="vanilla">
+
+```js{5}
+import EmblaCarousel from 'embla-carousel'
+
+const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+
+emblaApi.scrollNext()
+```
+
+</TabsItem>
+<TabsItem label="React" value="react">
+
+```jsx{8}
+import { useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export const EmblaCarousel = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.scrollNext()
+  }, [emblaApi])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem label="Vue" value="vue">
+
+```html{10}
+<script>
+  import { watchEffect } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  export default {
+    setup() {
+      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+
+      watchEffect(() => {
+        if (emblaApi.value) emblaApi.value.scrollNext()
+      })
+
+      // ...
+    },
+  }
+</script>
+```
+
+</TabsItem>
+</Tabs>
+
+---
+
+## Reference
+
+Below follows an exhaustive **list of all** Embla Carousel **methods** with their respective parameters and return values.
 
 ### rootNode
 
@@ -150,20 +221,3 @@ Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: Function`</Bra
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Unsubscribe from an Embla specific [event](/api/events/).
-
-## Calling methods
-
-Start by initializing a carousel and storing the carousel instance in a variable. In the example below we'll call the carousel instance `embla`:
-
-```js
-import EmblaCarousel from 'embla-carousel'
-
-const options = { loop: false }
-const embla = EmblaCarousel(emblaNode, options)
-```
-
-Now we're ready to call any available method like demonstrated below:
-
-```js
-embla.scrollNext()
-```
