@@ -50,20 +50,21 @@ export type PropType = PropsWithRef<
   >
 >
 
-export const BareButton = React.forwardRef(
-  (props: PropType, ref: React.ForwardedRef<HTMLButtonElement>) => {
-    const { children, ...restProps } = props
-    const { isKeyNavigating } = useKeyNavigating()
+export const BareButton = React.forwardRef(function BareButton(
+  props: PropType,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+) {
+  const { children, ...restProps } = props
+  const { isKeyNavigating } = useKeyNavigating()
 
-    return (
-      <BareButtonWrapper
-        $isKeyNavigating={isKeyNavigating}
-        ref={ref}
-        $isButton
-        {...restProps}
-      >
-        {children}
-      </BareButtonWrapper>
-    )
-  },
-)
+  return (
+    <BareButtonWrapper
+      $isKeyNavigating={isKeyNavigating}
+      ref={ref}
+      $isButton
+      {...restProps}
+    >
+      {children}
+    </BareButtonWrapper>
+  )
+})
