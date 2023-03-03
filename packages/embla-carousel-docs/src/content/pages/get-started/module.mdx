@@ -60,9 +60,9 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 }
 ```
 
-## Adding JavaScript
+## Accessing the carousel API
 
-Now you're ready to add some **JavaScript** magic to give life to your first Embla Carousel. Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` function:
+Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** the **carousel** and give you **access** to the Embla Carousel [API](/api/).
 
 ```js
 import EmblaCarousel from 'embla-carousel'
@@ -70,7 +70,9 @@ import EmblaCarousel from 'embla-carousel'
 const emblaNode = document.querySelector('.embla')
 const options = { loop: false }
 
-const embla = EmblaCarousel(emblaNode, options)
+const emblaApi = EmblaCarousel(emblaNode, options)
+
+console.log(emblaApi.slideNodes()) // Access API
 ```
 
 ## Adding plugins
@@ -85,7 +87,7 @@ const emblaNode = document.querySelector('.embla')
 const options = { loop: false }
 const plugins = [Autoplay()] // Plugins
 
-const embla = EmblaCarousel(emblaNode, options, plugins)
+const emblaApi = EmblaCarousel(emblaNode, options, plugins)
 ```
 
 Congratulations! You just created your first Embla Carousel.

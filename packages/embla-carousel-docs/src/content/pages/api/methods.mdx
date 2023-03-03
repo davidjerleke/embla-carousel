@@ -28,7 +28,7 @@ import EmblaCarousel from 'embla-carousel'
 
 const emblaApi = EmblaCarousel(emblaNode, { loop: true })
 
-emblaApi.scrollNext()
+console.log(emblaApi.slideNodes())
 ```
 
 </TabsItem>
@@ -42,7 +42,7 @@ export const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
   useEffect(() => {
-    if (emblaApi) emblaApi.scrollNext()
+    if (emblaApi) console.log(emblaApi.slideNodes())
   }, [emblaApi])
 
   // ...
@@ -62,7 +62,7 @@ export const EmblaCarousel = () => {
       const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
       watchEffect(() => {
-        if (emblaApi.value) emblaApi.value.scrollNext()
+        if (emblaApi.value) console.log(emblaApi.value.slideNodes())
       })
 
       // ...

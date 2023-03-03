@@ -82,7 +82,7 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
 
   const onInit = (event) => {
     emblaApi = event.detail
-    // Embla API is ready
+    console.log(emblaApi.slideNodes()) // Access API
   }
 </script>
 

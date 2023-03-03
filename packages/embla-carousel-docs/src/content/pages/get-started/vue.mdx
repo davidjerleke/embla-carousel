@@ -77,7 +77,7 @@ The `emblaCarouselVue` function gives us an **emblaNode** to attach to our wrapp
 
 ## Accessing the carousel API
 
-The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `onMounted` like demonstrated below:
+The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `watchEffect` like demonstrated below:
 
 ```html{17,19-23}
 <template>
@@ -91,16 +91,16 @@ The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/
 </template>
 
 <script>
-  import { onMounted } from 'vue'
+  import { watchEffect } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
 
   export default {
     setup() {
       const [emblaNode, emblaApi] = emblaCarouselVue({ loop: false })
 
-      onMounted(() => {
+      watchEffect(() => {
         if (emblaApi.value) {
-          // Embla API is ready
+          console.log(emblaApi.value.slideNodes()) // Access API
         }
       })
 
