@@ -28,12 +28,19 @@ const mapChildrenToTabs = (children: React.ReactNode): TabsItemPropType[] => {
     .filter(isTabsItemProps)
 }
 
-const getDefaultTab = (
+const pickDefaultTab = (
   tabs: TabsItemPropType[],
   storedTabSelection: string,
 ): TabsItemPropType => {
   const storedTab = tabs.find((tab) => tab.value === storedTabSelection)
   return storedTab || tabs.find((tab) => tab.default) || tabs[0]
+}
+
+const getActiveTabIndex = (
+  tabToFind: TabsItemPropType,
+  tabs: TabsItemPropType[],
+): number => {
+  return tabs.findIndex((tab) => tab.value === tabToFind.value)
 }
 
 export const TabsWrapper = styled.div``
@@ -85,40 +92,36 @@ export const Tabs = (props: PropType) => {
   const { isKeyNavigating, setIsKeyNavigating } = useKeyNavigating()
   const { storedTabSelections, storeTabSelection } = useTabs()
   const storedTabSelection = storedTabSelections[groupId]
+  const allTabs = useMemo(() => mapChildrenToTabs(children), [children])
   const { tabs, tabsId, defaultTab } = useMemo(() => {
-    const tabs = mapChildrenToTabs(children).filter((tab) => !tab.disabled)
+    const enabledTabs = allTabs.filter((tab) => !tab.disabled)
     return {
-      tabs,
+      tabs: enabledTabs,
       tabsId: uniqueId(),
-      defaultTab: getDefaultTab(tabs, storedTabSelection),
+      defaultTab: pickDefaultTab(enabledTabs, storedTabSelection),
     }
-  }, [children, storedTabSelection])
+  }, [allTabs, storedTabSelection])
   const [activeTab, setActiveTab] = useState<TabsItemPropType>(defaultTab)
+  const focusedTab = useRef<HTMLButtonElement>()
   const tabRefs = useRef(tabs.map(() => React.createRef<HTMLButtonElement>()))
   const tabRefLoopIndex = useRef(0)
-  const tabsWrapperRef = useRef<HTMLDivElement>(null)
-  const tabsRectTop = useRef(0)
-  const getTabIndex = useCallback(
-    (tabToFind: TabsItemPropType): number => {
-      return tabs.findIndex((tab) => tab.value === tabToFind.value)
-    },
-    [tabs],
-  )
-  const activeTabIndex = useRef(getTabIndex(defaultTab))
+  const tabsWrapper = useRef<HTMLDivElement>(null)
+  const tabsWrapperRectTop = useRef(0)
+  const activeTabIndex = useRef(getActiveTabIndex(defaultTab, tabs))
 
   const readTabsRectTop = useCallback(() => {
-    return tabsWrapperRef.current?.getBoundingClientRect().top || 0
+    return tabsWrapper.current?.getBoundingClientRect().top || 0
   }, [])
 
   const setActiveTabAndStoreSelection = useCallback(
     (tab: TabsItemPropType) => {
-      tabsRectTop.current = readTabsRectTop()
-      activeTabIndex.current = getTabIndex(tab)
+      tabsWrapperRectTop.current = readTabsRectTop()
+      activeTabIndex.current = getActiveTabIndex(tab, tabs)
       setActiveTab(tab)
 
       if (groupId) storeTabSelection(groupId, tab.value)
     },
-    [groupId, readTabsRectTop, getTabIndex, storeTabSelection],
+    [tabs, groupId, readTabsRectTop, storeTabSelection],
   )
 
   const goToTab = useCallback(
@@ -129,6 +132,7 @@ export const Tabs = (props: PropType) => {
       if (tab && tabElement) {
         setActiveTabAndStoreSelection(tab)
         setIsKeyNavigating(true)
+        focusedTab.current = tabElement
         tabElement.focus()
       }
     },
@@ -178,14 +182,15 @@ export const Tabs = (props: PropType) => {
 
     const resizeObserver = new ResizeObserver((entries) => {
       const autoNavigated = !tabRefs.current.some(
-        (tabRef) => tabRef.current === document.activeElement,
+        (tabRef) => tabRef.current === focusedTab.current,
       )
+
       if (autoNavigated) return
 
       for (const entry of entries) {
         if (entry.contentRect.height === storedHeight) return
         storedHeight = entry.contentRect.height
-        const rectTopDiff = readTabsRectTop() - tabsRectTop.current
+        const rectTopDiff = readTabsRectTop() - tabsWrapperRectTop.current
         if (rectTopDiff) window.scrollBy(0, rectTopDiff)
       }
     })
@@ -206,18 +211,19 @@ export const Tabs = (props: PropType) => {
     const hasActiveTab = tabs.find((tab) => tab.value === activeTab.value)
     if (hasActiveTab) return
 
-    const newDefaultTab = getDefaultTab(tabs, storedTabSelection)
+    const newDefaultTab = pickDefaultTab(tabs, storedTabSelection)
     setActiveTab(newDefaultTab)
-    activeTabIndex.current = getTabIndex(newDefaultTab)
+    activeTabIndex.current = getActiveTabIndex(newDefaultTab, tabs)
   }, [tabs, activeTab, storedTabSelection])
 
   return (
-    <TabsWrapper ref={tabsWrapperRef} {...restProps}>
+    <TabsWrapper ref={tabsWrapper} {...restProps}>
       <TabList role="tablist" aria-orientation="horizontal">
-        {mapChildrenToTabs(children).map((tab) => {
+        {allTabs.map((tab) => {
           const selected = activeTab.value === tab.value
           const enabled = !tab.disabled
           const tabRefIndex = tabRefLoopIndex.current
+          const tabElementRef = tabRefs.current[tabRefIndex]
 
           if (enabled) {
             const isLastTab = tabRefIndex === tabs.length - 1
@@ -230,11 +236,15 @@ export const Tabs = (props: PropType) => {
               key={`tab-${tab.value}`}
               id={`tab-id-${tab.value}-${tabsId}`}
               tabIndex={selected ? 0 : -1}
-              ref={enabled ? tabRefs.current[tabRefIndex] : undefined}
+              ref={enabled ? tabElementRef : undefined}
               aria-controls={`panel-id-${tab.value}-${tabsId}`}
               aria-selected={selected}
               onKeyDown={onKeyDown}
-              onClick={() => setActiveTabAndStoreSelection(tab)}
+              onClick={() => {
+                const tabElement = tabElementRef.current
+                if (tabElement) focusedTab.current = tabElement
+                setActiveTabAndStoreSelection(tab)
+              }}
               $selected={selected}
               disabled={!enabled}
             >
