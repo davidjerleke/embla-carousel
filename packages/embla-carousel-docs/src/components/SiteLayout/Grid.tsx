@@ -8,8 +8,6 @@ import { PAGE_TEMPLATES, PageTemplateType } from 'consts/pageTemplates'
 import { LAYERS } from 'consts/layers'
 import { SiteNavigation } from 'components/SiteNavigation/SiteNavigation'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
-import { useBreakpoints } from 'hooks/useBreakpoints'
-import { isBrowser } from 'utils/isBrowser'
 
 const SIDEBAR_LG_UP_WIDTH = '28rem'
 const SIDEBAR_LG_DOWN_WIDTH = '21rem'
@@ -69,8 +67,18 @@ const SiteNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
   }
 `
 
-const TableOfContentsWrapper = styled.div`
+const TableOfContentsWrapper = styled.div<{ $isStartPage: boolean }>`
   ${sidebarStyles};
+
+  ${MEDIA.COMPACT} {
+    display: none;
+  }
+
+  ${({ $isStartPage }) =>
+    $isStartPage &&
+    css`
+      display: none;
+    `};
 `
 
 type PropType = PropsWithChildren<{
@@ -80,15 +88,13 @@ type PropType = PropsWithChildren<{
 export const Grid = (props: PropType) => {
   const { children, layout } = props
   const { isLoading } = useRoutes()
-  const { isCompact, isDesktop } = useBreakpoints()
   const isStartPage = layout === PAGE_TEMPLATES.HOME
-  const showTableOfContents = !isStartPage && (isDesktop || !isBrowser)
   const frameSize = isStartPage ? 'MD' : undefined
 
   return (
     <GridWrapper size={frameSize}>
       <SiteNavigationWrapper $isStartPage={isStartPage}>
-        <SiteNavigation collapsed={isCompact} />
+        <SiteNavigation />
       </SiteNavigationWrapper>
 
       <Main
@@ -100,11 +106,9 @@ export const Grid = (props: PropType) => {
         {children}
       </Main>
 
-      {showTableOfContents && (
-        <TableOfContentsWrapper>
-          <TableOfContents />
-        </TableOfContentsWrapper>
-      )}
+      <TableOfContentsWrapper $isStartPage={isStartPage}>
+        <TableOfContents />
+      </TableOfContentsWrapper>
     </GridWrapper>
   )
 }

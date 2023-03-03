@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components'
 import FocusTrap from 'focus-trap-react'
 import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
+import { useBreakpoints } from 'hooks/useBreakpoints'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { SiteNavigationMenu } from './SiteNavigationMenu'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
 import { isBrowser } from 'utils/isBrowser'
@@ -42,16 +42,11 @@ const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
   }
 `
 
-export type PropType = PropsWithChildren<{
-  collapsed: boolean
-}>
+export type PropType = PropsWithChildren<{}>
 
 export const SiteNavigation = (props: PropType) => {
-  const { collapsed } = props
+  const { isCompact } = useBreakpoints()
   const { isOpen, closeNavigation } = useNavigation()
-  const id = collapsed ? NAVIGATION_ID : undefined
-  const role = collapsed ? 'dialog' : undefined
-  const ariaModal = collapsed ? 'true' : undefined
 
   const getFocusTrapElements = useCallback((): HTMLElement[] => {
     if (!isBrowser) return []
@@ -70,17 +65,17 @@ export const SiteNavigation = (props: PropType) => {
   useEventListener('keyup', onKeyUp)
 
   useEffect(() => {
-    if (!collapsed) closeNavigation()
+    if (!isCompact) closeNavigation()
     return () => closeNavigation()
-  }, [collapsed, closeNavigation])
+  }, [isCompact, closeNavigation])
 
   return (
     <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
       <SiteNavigationWrapper
         id={MENU_ID}
-        role={role}
-        aria-modal={ariaModal}
-        aria-labelledby={id}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={NAVIGATION_ID}
         aria-label="Main Navigation Menu"
         $isOpen={isOpen}
         {...props}
