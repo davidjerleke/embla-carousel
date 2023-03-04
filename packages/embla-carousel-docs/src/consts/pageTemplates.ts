@@ -1,4 +1,5 @@
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
+import { TableOfContentsType } from 'components/TableOfContents/TableOfContentsContext'
 
 export const PAGE_TEMPLATES = <const>{
   HOME: 'Home',
@@ -12,6 +13,7 @@ export type PageTemplateType =
 export type PageTemplatePropType = {
   data: {
     mdx: {
+      tableOfContents: TableOfContentsType
       frontmatter: {
         title: string
         date: string

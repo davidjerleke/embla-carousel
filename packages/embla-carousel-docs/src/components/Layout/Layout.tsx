@@ -1,9 +1,11 @@
 import React, { PropsWithChildren } from 'react'
-import { RoutesProvider } from 'components/Routes/Context'
-import { ThemeProvider } from 'components/Theme/Context'
-import { NavigationProvider } from 'components/Navigation/Context'
-import { TabAccessProvider } from 'components/TabAccess/Context'
-import { SkipToContent } from 'components/TabAccess/SkipToContent'
+import { RoutesProvider } from 'components/Routes/RoutesContext'
+import { ThemeProvider } from 'components/Theme/ThemeContext'
+import { SiteNavigationProvider } from 'components/SiteNavigation/SiteNavigationContext'
+import { KeyNavigatingProvider } from 'components/KeyNavigating/KeyNavigatingContext'
+import { TabsProvider } from 'components/Tabs/TabsContext'
+import { TableOfContentsProvider } from 'components/TableOfContents/TableOfContentsContext'
+import { KeyNavigatingSkipToContent } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
 import { PageTemplatePropType, PAGE_TEMPLATES } from 'consts/pageTemplates'
 import { Grid } from 'components/SiteLayout/Grid'
@@ -11,32 +13,43 @@ import { RoutesLoading } from 'components/Routes/RoutesLoading'
 import { Header } from 'components/Header/Header'
 import { Footer } from 'components/Footer/Footer'
 
-type PropType = PropsWithChildren<Pick<PageTemplatePropType, 'pageContext'>>
+type PropType = PropsWithChildren<
+  Pick<PageTemplatePropType, 'pageContext' | 'data'>
+>
 
 export const Layout = (props: PropType) => {
-  const { children, pageContext } = props
+  const {
+    children,
+    pageContext,
+    data: { mdx },
+  } = props
   const { layout, id } = pageContext
   const isNotFoundPage = layout === PAGE_TEMPLATES.NOT_FOUND
+  const tableOfContents = mdx?.tableOfContents
 
   return (
     <RoutesProvider>
       <ThemeProvider>
-        <TabAccessProvider>
-          <NavigationProvider>
+        <KeyNavigatingProvider>
+          <SiteNavigationProvider>
             <GlobalStyles />
             {isNotFoundPage ? (
               <>{children}</>
             ) : (
               <>
-                <SkipToContent />
+                <KeyNavigatingSkipToContent />
                 <Header />
                 <RoutesLoading pageId={id} />
-                <Grid layout={layout}>{children}</Grid>
+                <TabsProvider>
+                  <TableOfContentsProvider tableOfContents={tableOfContents}>
+                    <Grid layout={layout}>{children}</Grid>
+                  </TableOfContentsProvider>
+                </TabsProvider>
                 <Footer />
               </>
             )}
-          </NavigationProvider>
-        </TabAccessProvider>
+          </SiteNavigationProvider>
+        </KeyNavigatingProvider>
       </ThemeProvider>
     </RoutesProvider>
   )

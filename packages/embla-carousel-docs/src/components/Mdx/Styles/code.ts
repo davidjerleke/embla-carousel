@@ -6,13 +6,20 @@ import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
+import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
+import {
+  PRISM_HIGHLIGHT_CLASS_NAME,
+  PRISM_HIGHLIGHT_LINE_CLASS_NAME,
+} from 'components/Mdx/Components/PrismSyntaxHighlight'
+import { AdmonitionWrapper } from '../Components/Admonition'
 
 const BORDER_RADIUS = '0.4rem'
 
 export const codeStyles = css`
-  .language-text {
-    background-color: ${COLORS.DETAIL_LOW_CONTRAST};
+  .${CODE_HIGHLIGHT_CLASS_NAME} {
+    background-color: ${COLORS.BACKGROUND_CODE};
     border-radius: ${BORDER_RADIUS};
+    border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
     font-size: ${FONT_SIZES.CUSTOM(
       ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
@@ -20,7 +27,12 @@ export const codeStyles = css`
     box-sizing: border-box;
   }
 
-  .gatsby-highlight {
+  ${AdmonitionWrapper} .${CODE_HIGHLIGHT_CLASS_NAME} {
+    background-color: ${COLORS.BACKGROUND_SITE};
+    border-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+  }
+
+  .${PRISM_HIGHLIGHT_CLASS_NAME} {
     ${frameCollapseStyles};
     background-color: ${COLORS.BACKGROUND_CODE};
     margin-bottom: ${SPACINGS.FOUR};
@@ -29,6 +41,10 @@ export const codeStyles = css`
     font-size: ${FONT_SIZES.CUSTOM(
       ({ COMPLEMENTARY }) => COMPLEMENTARY - 0.04,
     )};
+
+    ${MEDIA.MIN_XS} {
+      border-radius: ${BORDER_RADIUS};
+    }
 
     &:before {
       display: block;
@@ -43,6 +59,25 @@ export const codeStyles = css`
         ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
       border-bottom-left-radius: ${BORDER_RADIUS};
       border-bottom-right-radius: ${BORDER_RADIUS};
+    }
+
+    &:after {
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      border-radius: inherit;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      ${MEDIA.MIN_XS} {
+        border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      }
+      ${MEDIA.MAX_XS} {
+        border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+        border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      }
     }
 
     &[data-language='jsx'] {
@@ -87,13 +122,9 @@ export const codeStyles = css`
         color: #232129;
       }
     }
-
-    ${MEDIA.MIN_XS} {
-      border-radius: ${BORDER_RADIUS};
-    }
   }
 
-  .gatsby-highlight-code-line {
+  .${PRISM_HIGHLIGHT_LINE_CLASS_NAME} {
     position: relative;
     display: block;
     margin-left: -${SPACINGS.FOUR};
@@ -127,14 +158,14 @@ export const codeStyles = css`
     }
   }
 
-  .gatsby-highlight pre[class*='language-'] {
+  .${PRISM_HIGHLIGHT_CLASS_NAME} pre[class*='language-'] {
     padding: ${FRAME_SPACING} 0;
     background-color: transparent;
     border: 0;
     margin-bottom: 0;
   }
 
-  .gatsby-highlight pre code {
+  .${PRISM_HIGHLIGHT_CLASS_NAME} pre code {
     padding: 0 ${FRAME_SPACING};
     background-color: transparent;
     display: block;

@@ -1,17 +1,17 @@
-import React, { PropsWithChildren, ButtonHTMLAttributes } from 'react'
+import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
-import { useTabAccess } from 'hooks/useTabAccess'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { COLORS } from 'consts/themes'
 import {
-  tabAccessStyles,
+  keyNavigatingStyles,
   OUTLINE_SIZE,
-} from 'components/TabAccess/tabAccessStyles'
+} from 'components/KeyNavigating/keyNavigatingStyles'
 
 export const bareButtonStyles = css<{
-  $isTabbing: boolean
+  $isKeyNavigating: boolean
   $isButton?: boolean
 }>`
-  ${tabAccessStyles};
+  ${keyNavigatingStyles};
   color: ${COLORS.TEXT_BODY};
   outline-offset: -${OUTLINE_SIZE};
   -webkit-tap-highlight-color: rgba(
@@ -38,22 +38,33 @@ export const bareButtonStyles = css<{
     `}
 `
 
-const Wrapper = styled.button`
+const BareButtonWrapper = styled.button`
   ${bareButtonStyles};
   position: relative;
 `
 
-export type PropType = PropsWithChildren<
-  ButtonHTMLAttributes<HTMLButtonElement>
+export type PropType = PropsWithRef<
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >
 >
 
-export const BareButton = (props: PropType) => {
+export const BareButton = React.forwardRef(function BareButton(
+  props: PropType,
+  ref: React.ForwardedRef<HTMLButtonElement>,
+) {
   const { children, ...restProps } = props
-  const isTabbing = useTabAccess()
+  const { isKeyNavigating } = useKeyNavigating()
 
   return (
-    <Wrapper $isTabbing={isTabbing} $isButton {...restProps}>
+    <BareButtonWrapper
+      $isKeyNavigating={isKeyNavigating}
+      ref={ref}
+      $isButton
+      {...restProps}
+    >
       {children}
-    </Wrapper>
+    </BareButtonWrapper>
   )
-}
+})

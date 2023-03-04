@@ -12,7 +12,7 @@ import { useEventListener } from 'hooks/useEventListener'
 
 const PROGRESS_BAR_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
 
-const Wrapper = styled.div`
+const RoutesLoadingWrapper = styled.div`
   z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
   top: ${HEADER_HEIGHT};
   height: ${PROGRESS_BAR_HEIGHT};
@@ -110,12 +110,12 @@ export const RoutesLoading = (props: PropType) => {
   }, [])
 
   return (
-    <Wrapper>
+    <RoutesLoadingWrapper>
       <ProgressBar
         ref={progressElement}
         $loading={isLoading}
         $animating={animating}
       />
-    </Wrapper>
+    </RoutesLoadingWrapper>
   )
 }

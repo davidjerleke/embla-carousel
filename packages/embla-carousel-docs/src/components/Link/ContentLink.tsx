@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { PlainLink, PropType } from './PlainLink'
+import { BareLink, PropType } from './BareLink'
 import { gradientTextStyles } from 'utils/gradientTextStyles'
 
 export const contentLinkStyles = css`
@@ -9,10 +9,10 @@ export const contentLinkStyles = css`
   font-weight: 500;
 `
 
-const Wrapper = styled(PlainLink)`
+const ContentLinkWrapper = styled(BareLink)`
   ${contentLinkStyles};
 `
 
 export const ContentLink = (props: PropType) => {
-  return <Wrapper {...props} />
+  return <ContentLinkWrapper {...props} />
 }

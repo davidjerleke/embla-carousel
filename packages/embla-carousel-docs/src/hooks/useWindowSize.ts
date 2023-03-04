@@ -7,7 +7,7 @@ type UseWindowSizeType = {
   windowHeight: number
 }
 
-export const useWindowSize = (wait: number = 300): UseWindowSizeType => {
+export const useWindowSize = (wait: number = 0): UseWindowSizeType => {
   const getWindowSize = useCallback(
     () => ({
       windowWidth: isBrowser ? window.innerWidth : 0,

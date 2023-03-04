@@ -7,8 +7,8 @@ export const listStyles = css`
     margin-left: ${SPACINGS.FOUR};
   }
 
-  ol > li,
-  ul > li {
+  ol > li:not(:last-child),
+  ul > li:not(:last-child) {
     margin-bottom: ${SPACINGS.TWO};
   }
 

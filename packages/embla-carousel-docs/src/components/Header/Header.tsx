@@ -1,13 +1,13 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Frame } from 'components/SiteLayout/Frame'
-import { NavigationToggle } from 'components/Navigation/NavigationToggle'
+import { SiteNavigationToggle } from 'components/SiteNavigation/SiteNavigationToggle'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { Actions } from './Actions'
-import { Logo } from './Logo'
+import { HeaderActions } from './HeaderActions'
+import { HeaderLogo } from './HeaderLogo'
 
 export const HEADER_HEIGHT = SPACINGS.TEN
 export const HEADER_ID = 'site-header'
@@ -16,14 +16,16 @@ const HEIGHT = css`
   height: ${HEADER_HEIGHT};
 `
 
-const Wrapper = styled.header`
+const HeaderWrapper = styled.header`
   ${HEIGHT};
 `
 
 const Fixed = styled.div`
   ${HEIGHT};
   z-index: ${LAYERS.HEADER};
-  background-color: ${COLORS.BACKGROUND_SITE};
+  background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.8);
+  border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  backdrop-filter: saturate(180%) blur(5px);
   position: fixed;
   top: 0;
   left: 0;
@@ -43,14 +45,14 @@ const Content = styled(Frame)`
 
 export const Header = () => {
   return (
-    <Wrapper id={HEADER_ID}>
+    <HeaderWrapper id={HEADER_ID}>
       <Fixed>
         <Content>
-          <NavigationToggle />
-          <Logo />
-          <Actions />
+          <SiteNavigationToggle />
+          <HeaderLogo />
+          <HeaderActions />
         </Content>
       </Fixed>
-    </Wrapper>
+    </HeaderWrapper>
   )
 }

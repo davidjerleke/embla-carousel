@@ -2,7 +2,7 @@ import { useEffect, PropsWithChildren, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { isBrowser } from 'utils/isBrowser'
 
-const getPortalWrapper = (): HTMLElement | null => {
+const getExistingOrCreatePortalWrapper = (): HTMLElement | null => {
   if (!isBrowser) return null
 
   let wrapper = document.getElementById(PORTAL_ELEMENT_ID)
@@ -20,7 +20,7 @@ type PropType = PropsWithChildren<{}>
 
 export const Portal = (props: PropType) => {
   const { children } = props
-  const portalWrapper = useRef(getPortalWrapper())
+  const portalWrapper = useRef(getExistingOrCreatePortalWrapper())
   const portalContent = useRef<HTMLDivElement>(
     isBrowser ? document.createElement('div') : null,
   )

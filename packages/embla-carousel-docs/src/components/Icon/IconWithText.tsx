@@ -4,7 +4,7 @@ import { IconType } from 'assets/icons'
 import { Icon } from './Icon'
 import { SPACINGS } from 'consts/spacings'
 
-const Wrapper = styled.div<{ $spacing: string }>`
+const IconWithTextWrapper = styled.div<{ $spacing: string }>`
   display: flex;
   align-items: center;
 
@@ -33,10 +33,10 @@ export const IconWithText = (props: PropType) => {
   const svg = <Icon svg={iconSvg} size={iconSize} />
 
   return (
-    <Wrapper $spacing={spacing} {...restProps}>
+    <IconWithTextWrapper $spacing={spacing} {...restProps}>
       {svgOnLeftSide && svg}
       <span>{children}</span>
       {!svgOnLeftSide && svg}
-    </Wrapper>
+    </IconWithTextWrapper>
   )
 }

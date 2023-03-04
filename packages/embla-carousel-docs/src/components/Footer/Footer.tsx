@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Frame, FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { Links } from './Links'
+import { FooterLinks } from './FooterLinks'
 
-const Wrapper = styled.footer`
+const FooterWrapper = styled.footer`
   padding-top: ${FRAME_SPACING};
   padding-bottom: ${FRAME_SPACING};
 `
@@ -15,10 +15,10 @@ const Content = styled(Frame)`
 
 export const Footer = () => {
   return (
-    <Wrapper>
+    <FooterWrapper>
       <Content>
-        <Links />
+        <FooterLinks />
       </Content>
-    </Wrapper>
+    </FooterWrapper>
   )
 }

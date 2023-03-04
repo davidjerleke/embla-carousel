@@ -1,12 +1,12 @@
-import React, { PropsWithChildren, SVGAttributes } from 'react'
+import React, { PropsWithChildren } from 'react'
 import { ICONS, IconType } from 'assets/icons'
+import { css } from 'styled-components'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
-type PropType = PropsWithChildren<
-  SVGAttributes<SVGElement> & {
-    svg: IconType
-    size?: string
-  }
->
+type PropType = PropsWithChildren<{
+  svg: IconType
+  size?: string
+}>
 
 export const Icon = (props: PropType) => {
   const { svg, size = '100%', ...restProps } = props
@@ -17,8 +17,9 @@ export const Icon = (props: PropType) => {
       fill="currentColor"
       aria-hidden="true"
       focusable="false"
-      width={size}
-      height={size}
+      $css={css`
+        ${createSquareSizeStyles(size)}
+      `}
       {...restProps}
     />
   )

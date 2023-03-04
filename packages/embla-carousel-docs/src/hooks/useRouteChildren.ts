@@ -1,4 +1,4 @@
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 import { addRouteChildren } from 'utils/addRouteChildren'
 import { useRoutes } from 'hooks/useRoutes'
 

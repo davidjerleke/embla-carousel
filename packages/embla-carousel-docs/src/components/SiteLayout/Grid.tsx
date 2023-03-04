@@ -1,16 +1,33 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
-import { Navigation } from 'components/Navigation/Navigation'
 import { useRoutes } from 'hooks/useRoutes'
-import { useWindowSize } from 'hooks/useWindowSize'
 import { Frame, FRAME_SPACING } from './Frame'
-import { BREAKPOINTS, MEDIA } from 'consts/breakpoints'
+import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { PAGE_TEMPLATES, PageTemplateType } from 'consts/pageTemplates'
+import { LAYERS } from 'consts/layers'
+import { SiteNavigation } from 'components/SiteNavigation/SiteNavigation'
+import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 
-const SIDEBAR_WIDTH = '27rem'
+const SIDEBAR_LG_UP_WIDTH = '28rem'
+const SIDEBAR_LG_DOWN_WIDTH = '21rem'
 
-const Wrapper = styled(Frame)`
+const sidebarStyles = css`
+  min-width: 0;
+  flex: 0 0 auto;
+
+  ${MEDIA.DESKTOP} {
+    width: ${SIDEBAR_LG_DOWN_WIDTH};
+    max-width: ${SIDEBAR_LG_DOWN_WIDTH};
+  }
+
+  ${MEDIA.MIN_LG} {
+    width: ${SIDEBAR_LG_UP_WIDTH};
+    max-width: ${SIDEBAR_LG_UP_WIDTH};
+  }
+`
+
+const GridWrapper = styled(Frame)`
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -20,21 +37,25 @@ const Wrapper = styled(Frame)`
 
 const Main = styled.main<{ $isStartPage: boolean }>`
   flex: 1;
+  min-width: 0;
   max-width: 100%;
+  position: relative;
+  z-index: ${LAYERS.STEP};
 
   ${({ $isStartPage }) =>
     !$isStartPage &&
     css`
       ${MEDIA.DESKTOP} {
-        max-width: calc(100% - ${SIDEBAR_WIDTH});
+        padding-right: ${SPACINGS.SEVEN};
+        padding-left: ${SPACINGS.SEVEN};
       }
     `};
 `
 
-const Nav = styled.div<{ $isStartPage: boolean }>`
+const SiteNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
+  ${sidebarStyles};
+
   ${MEDIA.DESKTOP} {
-    padding-right: ${SPACINGS.SEVEN};
-    flex: 0 0 ${SIDEBAR_WIDTH};
     ${({ $isStartPage }) =>
       $isStartPage &&
       css`
@@ -46,30 +67,48 @@ const Nav = styled.div<{ $isStartPage: boolean }>`
   }
 `
 
+const TableOfContentsWrapper = styled.div<{ $isStartPage: boolean }>`
+  ${sidebarStyles};
+
+  ${MEDIA.COMPACT} {
+    display: none;
+  }
+
+  ${({ $isStartPage }) =>
+    $isStartPage &&
+    css`
+      display: none;
+    `};
+`
+
 type PropType = PropsWithChildren<{
   layout: PageTemplateType
 }>
 
 export const Grid = (props: PropType) => {
   const { children, layout } = props
-  const { windowWidth } = useWindowSize()
   const { isLoading } = useRoutes()
-  const collapseBreakpoint = windowWidth < BREAKPOINTS.MD
   const isStartPage = layout === PAGE_TEMPLATES.HOME
+  const frameSize = isStartPage ? 'MD' : undefined
 
   return (
-    <Wrapper>
-      <Nav $isStartPage={isStartPage}>
-        <Navigation collapsed={collapseBreakpoint} />
-      </Nav>
+    <GridWrapper size={frameSize}>
+      <SiteNavigationWrapper $isStartPage={isStartPage}>
+        <SiteNavigation />
+      </SiteNavigationWrapper>
+
       <Main
         role="main"
         aria-live="polite"
-        aria-busy={isLoading}
         $isStartPage={isStartPage}
+        aria-busy={isLoading}
       >
         {children}
       </Main>
-    </Wrapper>
+
+      <TableOfContentsWrapper $isStartPage={isStartPage}>
+        <TableOfContents />
+      </TableOfContentsWrapper>
+    </GridWrapper>
   )
 }

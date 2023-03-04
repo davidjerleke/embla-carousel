@@ -1,9 +1,8 @@
-import { RouteType } from 'components/Routes/Context'
+import { RouteType } from 'components/Routes/RoutesContext'
 
 export const isRoutePartiallyActive = (
-  route: RouteType,
+  slug: RouteType['slug'],
   locationPathname: string,
 ): boolean => {
-  const { slug } = route
   return locationPathname.substring(0, slug.length) === slug
 }

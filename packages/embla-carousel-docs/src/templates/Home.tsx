@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import styled from 'styled-components'
 import maskable from 'assets/images/maskable.png'
 import { graphql } from 'gatsby'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
@@ -8,13 +7,6 @@ import { removeProtocol } from 'utils/removeProtocol'
 import { Hero } from 'components/Hero/Hero'
 import { Seo } from 'components/Seo/Seo'
 import { Mdx } from 'components/Mdx/Mdx'
-
-const MAX_WIDTH = '68.2rem'
-
-const MdxWrapper = styled.div`
-  max-width: ${MAX_WIDTH};
-  margin: 0 auto;
-`
 
 export const query = graphql`
   query HomeQuery($id: String) {
@@ -58,9 +50,7 @@ const Home = (props: PropType) => {
   return (
     <>
       <Hero />
-      <MdxWrapper>
-        <Mdx>{children}</Mdx>
-      </MdxWrapper>
+      <Mdx>{children}</Mdx>
     </>
   )
 }
