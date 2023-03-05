@@ -18,6 +18,8 @@ export type CreateOptionsType<Type extends LooseOptionsType> = Type & {
 export type OptionsType = CreateOptionsType<{
   align: AlignmentOptionType
   axis: AxisOptionType
+  container: string | HTMLElement | null
+  slides: string | HTMLElement[] | NodeListOf<HTMLElement> | null
   containScroll: ScrollContainOptionType
   direction: DirectionOptionType
   slidesToScroll: SlidesToScrollOptionType
@@ -33,6 +35,8 @@ export type OptionsType = CreateOptionsType<{
 export const defaultOptions: OptionsType = {
   align: 'center',
   axis: 'x',
+  container: null,
+  slides: null,
   containScroll: '',
   direction: 'ltr',
   slidesToScroll: 1,

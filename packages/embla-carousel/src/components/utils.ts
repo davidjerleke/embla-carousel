@@ -12,6 +12,10 @@ export function isNumber(subject: unknown): subject is number {
   return typeof subject === 'number'
 }
 
+export function isString(subject: unknown): subject is string {
+  return typeof subject === 'string'
+}
+
 export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
 }

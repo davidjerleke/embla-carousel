@@ -5,12 +5,7 @@ import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-
-export type EmblaNodesType = {
-  root: HTMLElement
-  container?: HTMLElement
-  slides?: HTMLElement[]
-}
+import { isString } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -37,7 +32,7 @@ export type EmblaCarouselType = {
 }
 
 function EmblaCarousel(
-  nodes: HTMLElement | EmblaNodesType,
+  root: HTMLElement,
   userOptions?: EmblaOptionsType,
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
@@ -58,17 +53,21 @@ function EmblaCarousel(
   let pluginList: EmblaPluginType[] = []
   let pluginApis: EmblaPluginsType
   let rootSize = 0
-  let root: HTMLElement
   let container: HTMLElement
   let slides: HTMLElement[]
 
   function storeElements(): void {
-    const providedContainer = 'container' in nodes && nodes.container
-    const providedSlides = 'slides' in nodes && nodes.slides
+    const { container: userContainer, slides: userSlides } = options
 
-    root = 'root' in nodes ? nodes.root : nodes
-    container = providedContainer || <HTMLElement>root.children[0]
-    slides = providedSlides || [].slice.call(container.children)
+    const customContainer = isString(userContainer)
+      ? root.querySelector(userContainer)
+      : userContainer
+    container = <HTMLElement>(customContainer || root.children[0])
+
+    const customSlides = isString(userSlides)
+      ? container.querySelectorAll(userSlides)
+      : userSlides
+    slides = <HTMLElement[]>[].slice.call(customSlides || container.children)
   }
 
   function activate(
@@ -76,10 +75,12 @@ function EmblaCarousel(
     withPlugins?: EmblaPluginType[],
   ): void {
     if (destroyed) return
-    storeElements()
 
     optionsBase = optionsHandler.merge(optionsBase, withOptions)
     options = optionsHandler.atMedia(optionsBase)
+
+    storeElements()
+
     engine = Engine(root, container, slides, options, eventHandler)
     rootSize = engine.axis.measureSize(root.getBoundingClientRect())
 
