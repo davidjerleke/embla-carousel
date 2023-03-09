@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { useRoutes } from 'hooks/useRoutes'
 import { useNavigation } from 'hooks/useNavigation'
@@ -28,7 +28,7 @@ const RoutesLoadingWrapper = styled.div`
 `
 
 const ProgressBar = styled.div<{ $loading: boolean; $animating: boolean }>`
-  ${gradientBackgroundStyles};
+  ${brandGradientBackgroundStyles};
   z-index: ${LAYERS.STEP};
   height: ${PROGRESS_BAR_HEIGHT};
   width: 100%;

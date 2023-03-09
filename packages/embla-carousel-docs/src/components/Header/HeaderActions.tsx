@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { ThemeToggle } from 'components/Theme/ThemeToggle'
 import { NavigationLink } from 'components/Link/NavigationLink'
 import { COLORS } from 'consts/themes'
@@ -7,7 +7,6 @@ import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { useRoutes } from 'hooks/useRoutes'
 import { Search } from 'components/Search/Search'
-import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 
 const ITEM_SPACING_SM_UP = SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.4)
 
@@ -20,13 +19,20 @@ const HeaderActionsWrapper = styled.ul`
   }
 `
 
-const Item = styled.li`
+const Item = styled.li<{ $hiddenAtCompact?: boolean }>`
   ${MEDIA.MIN_SM} {
     padding-left: ${ITEM_SPACING_SM_UP};
   }
   display: flex;
   align-items: center;
-  ${hiddenAtBreakpointStyles};
+
+  ${({ $hiddenAtCompact }) =>
+    $hiddenAtCompact &&
+    css`
+      ${MEDIA.COMPACT} {
+        display: none;
+      }
+    `};
 `
 
 const Link = styled(NavigationLink)`
@@ -41,7 +47,7 @@ export const HeaderActions = () => {
 
   return (
     <HeaderActionsWrapper>
-      <Item $hidden="COMPACT">
+      <Item $hiddenAtCompact>
         <nav aria-label="Quick Navigation Menu">
           <HeaderActionsWrapper>
             {routes.map((route) => (
@@ -55,7 +61,7 @@ export const HeaderActions = () => {
       <Item>
         <Search />
       </Item>
-      <Item $hidden="COMPACT">
+      <Item $hiddenAtCompact>
         <ThemeToggle />
       </Item>
     </HeaderActionsWrapper>

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useRouteActive } from 'hooks/useRouteActive'
 import { RouteType } from 'components/Routes/RoutesContext'
 import { BareLink } from 'components/Link/BareLink'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 import { COLORS } from 'consts/themes'
 
 const NavigationLinkWrapper = styled(BareLink)`
@@ -25,7 +25,7 @@ export const InactiveText = styled.span<{ $isActive: boolean }>`
 export const ActiveText = styled.span<{ $isActive: boolean }>`
   opacity: ${({ $isActive }) => ($isActive ? 1 : 0)};
   font-weight: 500;
-  ${gradientTextStyles};
+  ${brandGradientTextStyles};
 `
 
 type PropType = PropsWithChildren<{

@@ -9,7 +9,7 @@ import React, {
 import uniqueId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { BareButton } from 'components/Button/BareButton'
 import { SPACINGS } from 'consts/spacings'
@@ -71,7 +71,7 @@ export const Tab = styled(BareButton)<{ $selected: boolean }>`
     $selected &&
     css`
       &:before {
-        ${gradientBackgroundStyles};
+        ${brandGradientBackgroundStyles};
         content: '';
         position: absolute;
         left: 0;

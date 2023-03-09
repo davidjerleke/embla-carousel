@@ -1,17 +1,16 @@
 import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
-import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
+import { AdmonitionWrapper } from '../Components/Admonition'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME,
 } from 'components/Mdx/Components/PrismSyntaxHighlight'
-import { AdmonitionWrapper } from '../Components/Admonition'
 
 const BORDER_RADIUS = '0.4rem'
 
@@ -34,50 +33,22 @@ export const codeStyles = css`
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} {
     ${frameCollapseStyles};
-    background-color: ${COLORS.BACKGROUND_CODE};
-    margin-bottom: ${SPACINGS.FOUR};
-    overflow: hidden;
     position: relative;
-    font-size: ${FONT_SIZES.CUSTOM(
-      ({ COMPLEMENTARY }) => COMPLEMENTARY - 0.04,
-    )};
-
-    ${MEDIA.MIN_XS} {
-      border-radius: ${BORDER_RADIUS};
-    }
 
     &:before {
+      z-index: ${LAYERS.STEP};
       display: block;
       content: attr(data-language);
       line-height: 1;
       font-size: ${FONT_SIZES.DETAIL};
       text-transform: uppercase;
       position: absolute;
-      top: 0;
+      top: 0.1rem;
       left: ${FRAME_SPACING};
       padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
         ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
       border-bottom-left-radius: ${BORDER_RADIUS};
       border-bottom-right-radius: ${BORDER_RADIUS};
-    }
-
-    &:after {
-      content: '';
-      pointer-events: none;
-      position: absolute;
-      border-radius: inherit;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      ${MEDIA.MIN_XS} {
-        border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-      }
-      ${MEDIA.MAX_XS} {
-        border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-        border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-      }
     }
 
     &[data-language='jsx'] {
@@ -134,7 +105,6 @@ export const codeStyles = css`
 
     &:before,
     &:after {
-      z-index: ${LAYERS.STEP};
       position: absolute;
       top: 0;
       bottom: 0;
@@ -150,6 +120,7 @@ export const codeStyles = css`
     &:after {
       left: 0;
       width: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
+      z-index: ${LAYERS.STEP};
     }
     &:before {
       right: 0;
@@ -187,7 +158,6 @@ export const codeStyles = css`
       background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     }
     ::-webkit-scrollbar {
-      width: 0.4rem;
       height: 0.5rem;
     }
   }

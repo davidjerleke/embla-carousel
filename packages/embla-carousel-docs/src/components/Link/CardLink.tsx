@@ -5,7 +5,7 @@ import { IconWithText } from 'components/Icon/IconWithText'
 import { BareLink, PropType } from './BareLink'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 
 const CardLinkWrapper = styled(BareLink)`
   padding: ${SPACINGS.FOUR};
@@ -20,7 +20,7 @@ const CardLinkWrapper = styled(BareLink)`
 
 const ReadMoreText = styled.div`
   span {
-    ${gradientTextStyles};
+    ${brandGradientTextStyles};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
     font-weight: 500;
   }

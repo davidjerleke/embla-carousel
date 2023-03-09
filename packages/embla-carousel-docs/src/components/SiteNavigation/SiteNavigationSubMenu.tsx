@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 import styled, { css } from 'styled-components'
 import { RouteType } from 'components/Routes/RoutesContext'
 import { BareButton } from 'components/Button/BareButton'
@@ -10,6 +10,12 @@ import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { Icon } from 'components/Icon/Icon'
 import { MEDIA } from 'consts/breakpoints'
+
+const createMenuId = (title: string = '', isDesktopMenu: boolean): string => {
+  const titleInKebabCase = title.toLowerCase().split(' ').join('-')
+  const menuType = isDesktopMenu ? 'desktop' : 'compact'
+  return `${titleInKebabCase}-navigation-${menuType}-menu`
+}
 
 const ITEM_SPACING = SPACINGS.ONE
 const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
@@ -39,7 +45,7 @@ const Toggle = styled(BareButton)<{ $isActive: boolean }>`
   ${({ $isActive }) => css`
     font-weight: ${$isActive && '500'};
     > span {
-      ${$isActive && gradientTextStyles};
+      ${$isActive && brandGradientTextStyles};
     }
   `};
 
@@ -94,16 +100,18 @@ const Link = styled(NavigationLink)`
 
 type PropType = {
   route: RouteType
+  isDesktopMenu: boolean
 }
 
 export const SiteNavigationSubMenu = (props: PropType) => {
-  const { route } = props
+  const { route, isDesktopMenu } = props
   const { title, children } = route
   const { isPartiallyActive, isActive } = useRouteActive(route.slug)
   const [isOpen, setIsOpen] = useState(isPartiallyActive)
-  const id = `${title.toLowerCase().split(' ').join('-')}-navigation-menu`
   const toggleAction = isOpen ? 'Hide' : 'Show'
-  const activeClass = isPartiallyActive ? ALGOLIA_CLASSNAMES.LVL_0 : undefined
+  const applyAlgoliaClass = isPartiallyActive && isDesktopMenu
+  const algoliaClass = applyAlgoliaClass ? ALGOLIA_CLASSNAMES.LVL_0 : undefined
+  const id = createMenuId(title, isDesktopMenu)
 
   const toggleOpen = useCallback(
     (event: React.MouseEvent) => {
@@ -127,7 +135,7 @@ export const SiteNavigationSubMenu = (props: PropType) => {
         aria-label={`${toggleAction} Navigation Menu`}
       >
         <ToggleSvg $isOpen={isOpen} svg="chevronRight" size={TOGGLE_SVG_SIZE} />
-        <span className={activeClass}>{title}</span>
+        <span className={algoliaClass}>{title}</span>
       </Toggle>
       <Menu $isOpen={isOpen}>
         <li>

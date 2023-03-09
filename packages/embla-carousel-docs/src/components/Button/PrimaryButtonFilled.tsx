@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components'
 import { BareButton } from './BareButton'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
 
 export const primaryButtonFilledStyles = css`
-  ${gradientBackgroundStyles};
+  ${brandGradientBackgroundStyles};
   color: ${COLORS.BACKGROUND_SITE};
   padding: ${SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)}
     ${SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.2)};

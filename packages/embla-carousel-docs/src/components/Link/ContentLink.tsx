@@ -1,10 +1,10 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { BareLink, PropType } from './BareLink'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 
 export const contentLinkStyles = css`
-  ${gradientTextStyles};
+  ${brandGradientTextStyles};
   display: inline-block;
   font-weight: 500;
 `

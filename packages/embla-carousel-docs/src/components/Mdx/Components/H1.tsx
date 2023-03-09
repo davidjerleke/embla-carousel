@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
 import { SPACINGS } from 'consts/spacings'
 
 const DECORATION_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
@@ -17,7 +17,7 @@ const DecorationWrapper = styled.span`
 `
 
 const Decoration = styled.span`
-  ${gradientBackgroundStyles};
+  ${brandGradientBackgroundStyles};
   margin-top: ${SPACINGS.FOUR};
   height: ${DECORATION_HEIGHT};
   width: ${DECORATION_WIDTH};

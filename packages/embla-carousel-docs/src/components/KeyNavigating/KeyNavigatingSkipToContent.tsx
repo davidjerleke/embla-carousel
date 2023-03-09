@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, MouseEvent } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { plainLinkStyles } from 'components/Link/BareLink'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 import { isBrowser } from 'utils/isBrowser'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
@@ -32,7 +32,7 @@ const KeyNavigatingSkipToContentWrapper = styled.a`
 `
 
 const LinkText = styled.span`
-  ${gradientTextStyles};
+  ${brandGradientTextStyles};
   z-index: ${LAYERS.STEP};
   position: relative;
 `

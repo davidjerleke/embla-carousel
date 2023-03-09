@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
@@ -11,10 +11,15 @@ import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { Tab, TabList, TabPanel, Tabs } from 'components/Tabs/Tabs'
+import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { useTheme } from 'hooks/useTheme'
 import { useNavigation } from 'hooks/useNavigation'
 import { useTableOfContents } from 'hooks/useTableOfContents'
+import {
+  createScrollBarShadowStyles,
+  SCROLL_BAR_SHADOW_SIZE,
+} from 'consts/scrollBars'
 import {
   ThemeToggle,
   LightThemeSvg,
@@ -22,8 +27,6 @@ import {
 } from 'components/Theme/ThemeToggle'
 
 const MAX_WIDTH_COMPACT = '36rem'
-
-const scrollShadowStyles = `0 0 transparent, 0 -1.2rem 1.6rem ${COLORS.BACKGROUND_SITE}`
 
 const SiteNavigationMenuCompactWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -69,25 +72,21 @@ const MenuTabs = styled(Tabs)<{
 
     &:before,
     &:after {
-      box-shadow: ${({ $isKeyNavigating }) =>
-        $isKeyNavigating ? 'none' : scrollShadowStyles};
-
       position: absolute;
       z-index: ${LAYERS.STEP};
-      height: ${HEADER_HEIGHT};
-      left: 0;
-      right: 0;
+      left: -${FRAME_SPACING};
+      right: -${FRAME_SPACING};
       content: '';
-      pointer-events: none;
     }
 
     &:before {
-      top: -${HEADER_HEIGHT};
-      transform: rotate(180deg);
+      ${createScrollBarShadowStyles('top')};
+      top: -${SCROLL_BAR_SHADOW_SIZE};
     }
 
     &:after {
-      bottom: -${HEADER_HEIGHT};
+      ${createScrollBarShadowStyles('bottom')};
+      bottom: -${SCROLL_BAR_SHADOW_SIZE};
     }
 
     &:focus {
@@ -141,10 +140,7 @@ const MiscLinks = styled(FooterLinks)`
   justify-content: center;
 `
 
-type PropType = PropsWithChildren<{}>
-
-export const SiteNavigationMenuCompact = (props: PropType) => {
-  const { children } = props
+export const SiteNavigationMenuCompact = () => {
   const { theme } = useTheme()
   const { isKeyNavigating } = useKeyNavigating()
   const { isOpen } = useNavigation()
@@ -168,7 +164,7 @@ export const SiteNavigationMenuCompact = (props: PropType) => {
         <TabsItem label="Main menu" value="main-menu">
           <ScrollArea>
             <ul>
-              {children}
+              <SiteNavigationSubMenus />
 
               <li>
                 <ThemeToggleButton>

@@ -1,11 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { hiddenAtBreakpointStyles } from 'utils/hiddenAtBreakpointStyles'
 import { BareButton } from 'components/Button/BareButton'
 import { useNavigation } from 'hooks/useNavigation'
 import { NAVIGATION_ID } from './SiteNavigation'
 import { COLORS } from 'consts/themes'
+import { MEDIA } from 'consts/breakpoints'
 
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
@@ -19,7 +19,10 @@ const SiteNavigationToggleWrapper = styled(BareButton)`
   padding: 0;
   margin-left: calc((${BUTTON_SIZE} - ${BURGER_SIZE}) / 2 * -1);
   margin-right: calc((${BUTTON_SIZE} - ${BURGER_SIZE}) / 2 * -1);
-  ${hiddenAtBreakpointStyles};
+
+  ${MEDIA.DESKTOP} {
+    display: none;
+  }
 `
 
 const Burger = styled.div<{ $isOpen: boolean }>`
@@ -70,7 +73,6 @@ export const SiteNavigationToggle = () => {
       onClick={toggleNavigation}
       aria-expanded={isOpen}
       aria-label={`${toggleAction} Main Navigation Menu`}
-      $hidden="DESKTOP"
     >
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />

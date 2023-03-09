@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { PRISM_HIGHLIGHT_CLASS_NAME } from '../Components/PrismSyntaxHighlight'
 import { TabsWrapper, TabPanel } from 'components/Tabs/Tabs'
 import { AdmonitionWrapper, AdmonitionContent } from '../Components/Admonition'
 import { headingStyles } from './heading'
@@ -48,7 +49,7 @@ export const MdxStyles = styled.div`
     blockquote code,
     kbd,
     samp,
-    ${TabsWrapper}, ${AdmonitionWrapper} {
+    .${PRISM_HIGHLIGHT_CLASS_NAME}, ${TabsWrapper}, ${AdmonitionWrapper} {
       margin-bottom: ${SPACINGS.FOUR};
     }
   }

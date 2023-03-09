@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
@@ -6,10 +6,12 @@ import { SPACINGS } from 'consts/spacings'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { LAYERS } from 'consts/layers'
-import { HEADER_HEIGHT } from 'components/Header/Header'
+import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
-
-const scrollShadowStyles = `0 0 transparent, 0 -1.2rem 1.6rem ${COLORS.BACKGROUND_SITE}`
+import {
+  createScrollBarShadowStyles,
+  SCROLL_BAR_SHADOW_SIZE,
+} from 'consts/scrollBars'
 
 const SiteNavigationMenuDesktopWrapper = styled.div<{
   $isKeyNavigating: boolean
@@ -20,25 +22,21 @@ const SiteNavigationMenuDesktopWrapper = styled.div<{
 
   &:before,
   &:after {
-    box-shadow: ${({ $isKeyNavigating }) =>
-      $isKeyNavigating ? 'none' : scrollShadowStyles};
-
     position: absolute;
     z-index: ${LAYERS.STEP};
-    height: ${HEADER_HEIGHT};
     left: -${FRAME_SPACING};
     right: -${FRAME_SPACING};
     content: '';
-    pointer-events: none;
   }
 
   &:before {
-    top: -${HEADER_HEIGHT};
-    transform: rotate(180deg);
+    ${createScrollBarShadowStyles('top')};
+    top: -${SCROLL_BAR_SHADOW_SIZE};
   }
 
   &:after {
-    bottom: -${HEADER_HEIGHT};
+    ${createScrollBarShadowStyles('bottom')};
+    bottom: -${SCROLL_BAR_SHADOW_SIZE};
   }
 
   ${MEDIA.COMPACT} {
@@ -58,16 +56,13 @@ const MiscLinks = styled(FooterLinks)`
   flex-direction: column;
 `
 
-type PropType = PropsWithChildren<{}>
-
-export const SiteNavigationMenuDesktop = (props: PropType) => {
-  const { children } = props
+export const SiteNavigationMenuDesktop = () => {
   const { isKeyNavigating } = useKeyNavigating()
 
   return (
     <SiteNavigationMenuDesktopWrapper $isKeyNavigating={isKeyNavigating}>
       <ScrollArea>
-        {children}
+        <SiteNavigationSubMenus isDesktopMenu />
         <li>
           <MiscLinks />
         </li>

@@ -6,10 +6,11 @@ import { useEventListener } from 'hooks/useEventListener'
 import { useBreakpoints } from 'hooks/useBreakpoints'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
-import { SiteNavigationMenu } from './SiteNavigationMenu'
 import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
 import { isBrowser } from 'utils/isBrowser'
+import { SiteNavigationMenuDesktop } from './SiteNavigationMenuDesktop'
+import { SiteNavigationMenuCompact } from './SiteNavigationMenuCompact'
 
 export const NAVIGATION_ID = 'main-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
@@ -80,7 +81,8 @@ export const SiteNavigation = (props: PropType) => {
         $isOpen={isOpen}
         {...props}
       >
-        <SiteNavigationMenu />
+        <SiteNavigationMenuDesktop />
+        <SiteNavigationMenuCompact />
       </SiteNavigationWrapper>
     </FocusTrap>
   )

@@ -13,40 +13,52 @@ import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 import { copyToClipboard } from 'utils/copyToClipboard'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
+import { MEDIA } from 'consts/breakpoints'
+import {
+  createScrollBarShadowStyles,
+  SCROLL_BAR_SHADOW_SIZE,
+} from 'consts/scrollBars'
 
 const TIMEOUT = 3000
 const COPY_CODE_BUTTON_PADDING = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 const COPY_CODE_BUTTON_HEIGHT = SPACINGS.FOUR
+const BORDER_RADIUS = '0.4rem'
 
-const Wrapper = styled.div`
+const PrismSyntaxFrameWrapper = styled.div`
   position: relative;
+  overflow: hidden;
+  font-size: ${FONT_SIZES.CUSTOM(({ COMPLEMENTARY }) => COMPLEMENTARY - 0.04)};
+  background-color: ${COLORS.BACKGROUND_CODE};
+
+  ${MEDIA.MIN_XS} {
+    border-radius: ${BORDER_RADIUS};
+    border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  }
+  ${MEDIA.MAX_XS} {
+    border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  }
+
   &:before,
   &:after {
+    z-index: ${LAYERS.STEP};
     width: ${FRAME_SPACING};
     display: block;
     position: absolute;
     content: '';
     top: 0;
     bottom: 0;
-    pointer-events: none;
   }
   &:before {
-    left: 0;
-    background: linear-gradient(
-      to left,
-      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0) 0,
-      ${COLORS.BACKGROUND_CODE} 100%
-    );
+    ${createScrollBarShadowStyles('left', COLORS.BACKGROUND_CODE)};
+    left: -${SCROLL_BAR_SHADOW_SIZE};
   }
   &:after {
-    right: 0;
-    background: linear-gradient(
-      to right,
-      rgba(${COLORS.BACKGROUND_CODE_RGB_VALUE}, 0) 0,
-      ${COLORS.BACKGROUND_CODE} 100%
-    );
+    ${createScrollBarShadowStyles('right', COLORS.BACKGROUND_CODE)};
+    right: -${SCROLL_BAR_SHADOW_SIZE};
   }
 `
 
@@ -58,7 +70,7 @@ const CopyCode = styled.div`
 
 const CopyCodeButton = styled(BareButton)`
   position: relative;
-  z-index: ${LAYERS.STEP};
+  z-index: ${LAYERS.STEP * 2};
   margin-right: calc(${FRAME_SPACING} - ${COPY_CODE_BUTTON_PADDING});
   color: ${COLORS.TEXT_LOW_CONTRAST};
   padding: 0 ${COPY_CODE_BUTTON_PADDING};
@@ -76,7 +88,7 @@ const CopyCodeButton = styled(BareButton)`
     bottom: 0;
     left: 0;
     border-radius: 0.4rem;
-    ${gradientBackgroundStyles};
+    ${brandGradientBackgroundStyles};
   }
 
   &:hover {
@@ -107,8 +119,9 @@ const ButtonText = styled.span`
 
 type PropType = PropsWithChildren<{ code: string }>
 
-export const PrismSyntaxWrapper = (props: PropType) => {
+export const PrismSyntaxFrame = (props: PropType) => {
   const { children, code } = props
+  const { isKeyNavigating } = useKeyNavigating()
   const [isCopied, setIsCopied] = useState(false)
   const timeout = useRef(0)
 
@@ -125,7 +138,7 @@ export const PrismSyntaxWrapper = (props: PropType) => {
   }, [])
 
   return (
-    <Wrapper>
+    <PrismSyntaxFrameWrapper $isKeyNavigating={isKeyNavigating}>
       <CopyCode>
         <CopyCodeButton
           aria-label="Copy code snippet to clipboard"
@@ -142,6 +155,6 @@ export const PrismSyntaxWrapper = (props: PropType) => {
         </CopyCodeButton>
       </CopyCode>
       {children}
-    </Wrapper>
+    </PrismSyntaxFrameWrapper>
   )
 }

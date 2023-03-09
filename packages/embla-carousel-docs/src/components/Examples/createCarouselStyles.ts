@@ -3,9 +3,9 @@ import { COLORS } from 'consts/themes'
 import { EmblaOptionsType } from 'embla-carousel'
 import { css, FlattenSimpleInterpolation } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
 import { MEDIA } from 'consts/breakpoints'
 import {
   CAROUSEL_DEFAULT_HEIGHT,
@@ -64,7 +64,7 @@ const BASE_STYLES = css`
   }
 
   .embla__slide__number > span {
-    ${gradientTextStyles}
+    ${brandGradientTextStyles}
     font-size: 1.6rem;
     display: block;
     position: absolute;
@@ -251,7 +251,7 @@ const THUMBS_STYLES = css`
   }
 
   .embla-thumbs__slide__number > span {
-    ${gradientTextStyles}
+    ${brandGradientTextStyles}
     font-size: 1.4rem;
     display: block;
     position: absolute;
@@ -281,7 +281,7 @@ const PROGRESS_STYLES = css`
   }
 
   .embla__progress__bar {
-    ${gradientBackgroundStyles};
+    ${brandGradientBackgroundStyles};
     position: absolute;
     width: 100%;
     top: 0;

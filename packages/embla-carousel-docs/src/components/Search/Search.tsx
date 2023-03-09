@@ -6,8 +6,8 @@ import { contentLinkStyles } from 'components/Link/ContentLink'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { gradientBackgroundStyles } from 'utils/gradientBackgroundStyles'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientBackgroundStyles } from 'consts/gradients'
+import { brandGradientTextStyles } from 'consts/gradients'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import { ALGOLIA_CLASSNAMES, ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
 import { MEDIA } from 'consts/breakpoints'
@@ -87,7 +87,7 @@ const headerStyles = css`
     position: relative;
     width: 100%;
     border-radius: 0.4rem;
-    ${gradientBackgroundStyles};
+    ${brandGradientBackgroundStyles};
   }
 `
 
@@ -136,7 +136,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hits mark {
-    ${gradientTextStyles};
+    ${brandGradientTextStyles};
   }
 
   .DocSearch-HitsFooter {
@@ -234,7 +234,7 @@ const contentStyles = css`
       top: 0;
       bottom: 0;
       left: 0;
-      ${gradientBackgroundStyles};
+      ${brandGradientBackgroundStyles};
     }
 
     &:before {

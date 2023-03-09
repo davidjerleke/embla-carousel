@@ -4,12 +4,13 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
-import { COLORS } from 'consts/themes'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TableOfContentsMenu } from './TableOfContentsMenu'
-
-const scrollShadowStyles = `0 0 transparent, 0 -1.2rem 1.6rem ${COLORS.BACKGROUND_SITE}`
+import {
+  createScrollBarShadowStyles,
+  SCROLL_BAR_SHADOW_SIZE,
+} from 'consts/scrollBars'
 
 const TableOfContentsWrapper = styled.nav`
   ${MEDIA.DESKTOP} {
@@ -34,25 +35,21 @@ const MenuWrapper = styled.div<{
   ${MEDIA.DESKTOP} {
     &:before,
     &:after {
-      box-shadow: ${({ $isKeyNavigating }) =>
-        $isKeyNavigating ? 'none' : scrollShadowStyles};
-
       position: absolute;
       z-index: ${LAYERS.STEP};
-      height: ${HEADER_HEIGHT};
       left: -${FRAME_SPACING};
       right: -${FRAME_SPACING};
       content: '';
-      pointer-events: none;
     }
 
     &:before {
-      top: -${HEADER_HEIGHT};
-      transform: rotate(180deg);
+      ${createScrollBarShadowStyles('top')};
+      top: -${SCROLL_BAR_SHADOW_SIZE};
     }
 
     &:after {
-      bottom: -${HEADER_HEIGHT};
+      ${createScrollBarShadowStyles('bottom')};
+      bottom: -${SCROLL_BAR_SHADOW_SIZE};
     }
   }
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import FocusTrap from 'focus-trap-react'
 import { SelectCodeSandboxType } from './sandboxTypes'
 import { BareButton } from 'components/Button/BareButton'
-import { gradientTextStyles } from 'utils/gradientTextStyles'
+import { brandGradientTextStyles } from 'consts/gradients'
 import { IconWithText } from 'components/Icon/IconWithText'
 import { COLORS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
@@ -39,7 +39,7 @@ const SelectCodeSandboxButton = styled(BareButton)`
   font-weight: 500;
 
   span {
-    ${gradientTextStyles};
+    ${brandGradientTextStyles};
   }
 `
 

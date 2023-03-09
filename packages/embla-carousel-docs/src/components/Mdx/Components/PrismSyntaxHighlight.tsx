@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { PrismSyntaxWrapper } from './PrismSyntaxWrapper'
+import { PrismSyntaxFrame } from './PrismSyntaxFrame'
 import Highlight, {
   defaultProps,
   Language as PrismLanguage,
@@ -49,7 +49,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
 
   return (
     <div className={PRISM_HIGHLIGHT_CLASS_NAME} data-language={language}>
-      <PrismSyntaxWrapper code={children}>
+      <PrismSyntaxFrame code={children}>
         <Highlight
           {...defaultProps}
           code={children}
@@ -86,7 +86,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
             </pre>
           )}
         </Highlight>
-      </PrismSyntaxWrapper>
+      </PrismSyntaxFrame>
     </div>
   )
 }
