@@ -18,6 +18,7 @@ import { useNavigation } from 'hooks/useNavigation'
 import { useTableOfContents } from 'hooks/useTableOfContents'
 import {
   createScrollBarShadowStyles,
+  createScrollBarStyles,
   SCROLL_BAR_SHADOW_SIZE,
 } from 'consts/scrollBars'
 import {
@@ -102,10 +103,12 @@ const MenuTabs = styled(Tabs)<{
 `
 
 const ScrollArea = styled.div`
+  ${createScrollBarStyles('y')};
   padding-top: ${SPACINGS.TWO};
   padding-bottom: ${SPACINGS.FOUR};
   max-width: ${MAX_WIDTH_COMPACT};
   overflow: auto;
+  scrollbar-gutter: stable both-edges;
   position: relative;
   max-height: 100%;
   margin-left: auto;

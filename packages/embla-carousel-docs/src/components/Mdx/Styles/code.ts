@@ -7,6 +7,7 @@ import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
 import { AdmonitionWrapper } from '../Components/Admonition'
+import { createScrollBarStyles } from 'consts/scrollBars'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME,
@@ -147,19 +148,10 @@ export const codeStyles = css`
   }
 
   pre {
+    ${createScrollBarStyles('x')};
     color: ${COLORS.TEXT_BODY};
     overflow: auto;
     white-space: pre;
-
-    ::-webkit-scrollbar-thumb {
-      background-color: ${COLORS.SCROLL_THUMB};
-    }
-    ::-webkit-scrollbar-track {
-      background-color: ${COLORS.DETAIL_LOW_CONTRAST};
-    }
-    ::-webkit-scrollbar {
-      height: 0.5rem;
-    }
   }
 
   .token-line {

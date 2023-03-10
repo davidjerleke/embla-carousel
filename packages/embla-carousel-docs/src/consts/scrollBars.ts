@@ -1,7 +1,44 @@
-import { css } from 'styled-components'
+import { css, FlattenSimpleInterpolation } from 'styled-components'
 import { COLORS } from './themes'
 
-type ScrollBarShadowSideType = keyof typeof SCROLL_BAR_SHADOWS
+type ScrollBarAxisType = 'x' | 'y'
+
+export const createScrollBarStyles = (
+  axis: ScrollBarAxisType,
+): FlattenSimpleInterpolation => {
+  const sizeProperty = axis === 'x' ? 'height' : 'width'
+
+  return css`
+    ::-webkit-scrollbar-thumb {
+      background-color: transparent;
+      border-radius: 0.4rem;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    ::-webkit-scrollbar {
+      ${sizeProperty}: 0.6rem;
+    }
+
+    &:hover {
+      ::-webkit-scrollbar-thumb {
+        background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+      }
+    }
+
+    @media (hover: none), (hover: on-demand) {
+      &:hover {
+        ::-webkit-scrollbar-thumb {
+          background-color: transparent;
+        }
+      }
+
+      ::-webkit-scrollbar {
+        ${sizeProperty}: 0;
+      }
+    }
+  `
+}
 
 const SCROLL_BAR_SHADOW_OFFSET = '1.2rem'
 const SCROLL_BAR_SHADOW_BLUR = '1.6rem'
@@ -15,6 +52,8 @@ const SCROLL_BAR_SHADOWS = {
   top: `0 ${SCROLL_BAR_SHADOW_OFFSET} ${SCROLL_BAR_SHADOW_BLUR}`,
   bottom: `0 -${SCROLL_BAR_SHADOW_OFFSET} ${SCROLL_BAR_SHADOW_BLUR}`,
 }
+
+type ScrollBarShadowSideType = keyof typeof SCROLL_BAR_SHADOWS
 
 export const createScrollBarShadowStyles = (
   side: ScrollBarShadowSideType,

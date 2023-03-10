@@ -7,6 +7,7 @@ import { MEDIA } from 'consts/breakpoints'
 import { useTableOfContents } from 'hooks/useTableOfContents'
 import { TableOfContentsItemType } from './TableOfContentsContext'
 import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
+import { createScrollBarStyles } from 'consts/scrollBars'
 
 const extractHeadingIds = (
   items: TableOfContentsItemType['items'] = [],
@@ -21,6 +22,7 @@ const extractHeadingIds = (
 }
 
 const TableOfContentsMenuWrapper = styled.div`
+  ${createScrollBarStyles('y')};
   overflow: auto;
   position: relative;
   max-height: 100%;

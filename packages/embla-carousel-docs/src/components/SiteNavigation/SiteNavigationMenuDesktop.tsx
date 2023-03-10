@@ -10,6 +10,7 @@ import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
   createScrollBarShadowStyles,
+  createScrollBarStyles,
   SCROLL_BAR_SHADOW_SIZE,
 } from 'consts/scrollBars'
 
@@ -45,6 +46,7 @@ const SiteNavigationMenuDesktopWrapper = styled.div<{
 `
 
 const ScrollArea = styled.ul`
+  ${createScrollBarStyles('y')};
   padding-top: ${FRAME_SPACING};
   padding-bottom: ${FRAME_SPACING};
   overflow: auto;
