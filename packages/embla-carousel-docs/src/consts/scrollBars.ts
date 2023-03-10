@@ -1,4 +1,9 @@
-import { css, FlattenSimpleInterpolation } from 'styled-components'
+import {
+  css,
+  FlattenInterpolation,
+  FlattenSimpleInterpolation,
+  ThemedStyledProps,
+} from 'styled-components'
 import { COLORS } from './themes'
 
 type ScrollBarAxisType = 'x' | 'y'
@@ -58,7 +63,14 @@ type ScrollBarShadowSideType = keyof typeof SCROLL_BAR_SHADOWS
 export const createScrollBarShadowStyles = (
   side: ScrollBarShadowSideType,
   color: string = COLORS.BACKGROUND_SITE,
-) => {
+): FlattenInterpolation<
+  ThemedStyledProps<
+    {
+      $isKeyNavigating: boolean
+    },
+    unknown
+  >
+> => {
   const sizeProperty = side === 'left' || side === 'right' ? 'width' : 'height'
 
   return css<{ $isKeyNavigating: boolean }>`
