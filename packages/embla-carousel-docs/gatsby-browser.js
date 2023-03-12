@@ -1,4 +1,4 @@
-import 'inter-ui/inter.css'
+import 'components/Layout/GlobalStyles/fontFace.css'
 
 export const onRouteUpdate = ({ location }) => {
   const { hash } = location

@@ -34,6 +34,20 @@ export const onRenderBody = ({
         __html: `${themeStyles.join('')}`,
       }}
     />,
+    <link
+      rel="preload"
+      href="/fonts/Inter-roman.var.woff2?v=3.19"
+      as="font"
+      crossorigin="anonymous"
+      type="font/woff2"
+    />,
+    <link
+      rel="preload"
+      href="/fonts/Inter-italic.var.woff2?v=3.19"
+      as="font"
+      crossorigin="anonymous"
+      type="font/woff2"
+    />,
     <script
       id="theme-script"
       key="theme-script"
