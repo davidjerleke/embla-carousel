@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
@@ -63,7 +63,7 @@ const H1 = styled.h1`
   margin-bottom: ${SPACINGS.THREE};
   font-size: ${FONT_SIZES.CUSTOM(({ H2 }) => H2 * 2)};
   line-height: 0.9;
-  font-weight: 900;
+  font-weight: ${FONT_WEIGHTS.BLACK};
 
   > span {
     display: block;

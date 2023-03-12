@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { CardLink } from 'components/Link/CardLink'
@@ -46,7 +46,7 @@ const UspHeader = styled.h3`
   color: ${COLORS.TEXT_BODY};
   margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   font-size: ${FONT_SIZES.H4};
-  font-weight: bold;
+  font-weight: ${FONT_WEIGHTS.BOLD};
 `
 
 const UspText = styled.p`

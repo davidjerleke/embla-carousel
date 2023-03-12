@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 
 export const resetStyles = css`
   html {
@@ -49,7 +50,7 @@ export const resetStyles = css`
   h5,
   h6 {
     font-size: 100%;
-    font-weight: normal;
+    font-weight: ${FONT_WEIGHTS.NORMAL};
   }
 
   ul {

@@ -1,13 +1,16 @@
+import { css, FlattenSimpleInterpolation } from 'styled-components'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { MEDIA } from 'consts/breakpoints'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { EmblaOptionsType } from 'embla-carousel'
-import { css, FlattenSimpleInterpolation } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import {
+  BRAND_GRADIENT_TEXT_STYLES,
+  BRAND_GRADIENT_BACKGROUND_STYLES,
+} from 'consts/gradients'
 import {
   CAROUSEL_DEFAULT_HEIGHT,
   CAROUSEL_THUMB_SLIDES_HEIGHT,
@@ -59,7 +62,7 @@ const BASE_STYLES = css`
     border-radius: ${BORDER_RADIUSES.CIRCLE};
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 4.6rem;
-    font-weight: 900;
+    font-weight: ${FONT_WEIGHTS.BLACK};
     text-align: center;
     pointer-events: none;
   }
@@ -246,7 +249,7 @@ const THUMBS_STYLES = css`
     border-radius: ${BORDER_RADIUSES.CIRCLE};
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 3rem;
-    font-weight: 500;
+    font-weight: ${FONT_WEIGHTS.MEDIUM};
     text-align: center;
     pointer-events: none;
   }
@@ -535,7 +538,7 @@ const IOS_PICKER_STYLES = css`
   }
 
   .embla__ios-picker__label {
-    font-weight: bold;
+    font-weight: ${FONT_WEIGHTS.BOLD};
     transform: translateX(-55px);
     pointer-events: none;
   }

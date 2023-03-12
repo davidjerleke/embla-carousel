@@ -6,6 +6,7 @@ import { fontStyles } from 'components/Layout/GlobalStyles/font'
 import { CAROUSEL_WRAPPER_RADIUS } from '../Examples/carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { COLORS, themeStyles } from 'consts/themes'
 
 const sandboxWrapperStyles = css`
@@ -46,7 +47,7 @@ const sandboxCarouselStyles = css`
 const sandboxHeaderStyles = css`
   .sandbox__header {
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: ${FONT_WEIGHTS.BOLD};
     text-align: center;
     padding: 4rem 2rem 2rem 2rem;
   }
@@ -65,7 +66,7 @@ const sandboxFooterStyles = css`
     background-color: transparent;
     text-decoration: none;
     text-align: center;
-    font-weight: bold;
+    font-weight: ${FONT_WEIGHTS.BOLD};
     color: ${COLORS.TEXT_LOW_CONTRAST};
     font-size: 1.4rem;
   }

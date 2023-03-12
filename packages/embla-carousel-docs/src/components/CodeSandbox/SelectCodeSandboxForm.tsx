@@ -4,7 +4,7 @@ import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
 import { COLORS } from 'consts/themes'
 import { SANDBOX_CREATE_LABELS } from './createSandboxFunctionsWithLabels'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { useEffect } from 'react'
 import { LoadSpinner } from 'components/LoadSpinner/LoadSpinner'
@@ -42,7 +42,7 @@ const Legend = styled.legend`
   font-size: ${FONT_SIZES.H3};
   padding-left: ${OPTION_SPACING};
   width: 100%;
-  font-weight: 700;
+  font-weight: ${FONT_WEIGHTS.BOLD};
   line-height: 1.5;
 `
 
@@ -66,7 +66,7 @@ const RadioLabelContent = styled.span<{ $checked?: boolean }>`
   text-align: center;
   align-items: center;
   font-size: ${FONT_SIZES.DETAIL};
-  font-weight: 500;
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
   cursor: pointer;
   background-color: ${COLORS.BACKGROUND_CODE};
   ${({ $checked }) =>

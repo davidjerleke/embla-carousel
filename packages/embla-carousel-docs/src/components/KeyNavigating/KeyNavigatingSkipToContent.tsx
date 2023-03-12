@@ -5,7 +5,7 @@ import { plainLinkStyles } from 'components/Link/BareLink'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { isBrowser } from 'utils/isBrowser'
 import { COLORS } from 'consts/themes'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 
@@ -20,7 +20,7 @@ const KeyNavigatingSkipToContentWrapper = styled.a`
   position: absolute;
   transform: translateX(-1000rem);
   font-size: ${FONT_SIZES.H4};
-  font-weight: 500;
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
   padding: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)}
     ${SPACINGS.CUSTOM(({ THREE }) => THREE + 0.2)};
 

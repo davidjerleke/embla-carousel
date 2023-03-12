@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
 import { COLORS } from 'consts/themes'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { IconWithText } from 'components/Icon/IconWithText'
 import { BareLink, PropType } from './BareLink'
@@ -23,7 +23,7 @@ const ReadMoreText = styled.div`
   span {
     ${BRAND_GRADIENT_TEXT_STYLES};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
-    font-weight: 500;
+    font-weight: ${FONT_WEIGHTS.MEDIUM};
   }
 
   svg {

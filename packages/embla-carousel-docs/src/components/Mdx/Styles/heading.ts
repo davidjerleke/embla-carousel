@@ -2,7 +2,7 @@ import { css } from 'styled-components'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { COLORS } from 'consts/themes'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { HEADER_HEIGHT } from 'components/Header/Header'
@@ -18,7 +18,7 @@ export const headingStyles = css`
   h6 {
     scroll-margin-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
     color: ${COLORS.TEXT_HIGH_CONTRAST};
-    font-weight: 700;
+    font-weight: ${FONT_WEIGHTS.BOLD};
   }
 
   h1,
@@ -29,7 +29,7 @@ export const headingStyles = css`
 
   h1 {
     font-size: ${FONT_SIZES.H1};
-    font-weight: 800;
+    font-weight: ${FONT_WEIGHTS.EXTRA_BOLD};
     line-height: 1.25;
   }
 

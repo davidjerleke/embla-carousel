@@ -6,6 +6,7 @@ import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { RouteType } from 'components/Routes/RoutesContext'
 import { BareButton } from 'components/Button/BareButton'
 import { NavigationLink } from 'components/Link/NavigationLink'
@@ -44,7 +45,7 @@ const Toggle = styled(BareButton)<{ $isActive: boolean }>`
   width: 100%;
 
   ${({ $isActive }) => css`
-    font-weight: ${$isActive && '500'};
+    font-weight: ${$isActive && FONT_WEIGHTS.MEDIUM};
     > span {
       ${$isActive && BRAND_GRADIENT_TEXT_STYLES};
     }

@@ -23,3 +23,13 @@ export const FONT_SIZES = {
   CUSTOM: (callback: FontSizeCustomType): string =>
     sizeWithUnit(callback(FONT_SIZE_VALUES)),
 }
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping
+export const FONT_WEIGHTS = {
+  NORMAL: '400',
+  MEDIUM: '500',
+  SEMI_BOLD: '600',
+  BOLD: '700',
+  EXTRA_BOLD: '800',
+  BLACK: '900',
+}

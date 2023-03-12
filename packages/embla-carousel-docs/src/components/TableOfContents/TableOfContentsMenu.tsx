@@ -5,6 +5,7 @@ import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { useTableOfContents } from 'hooks/useTableOfContents'
 import { TableOfContentsItemType } from './TableOfContentsContext'
 import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
@@ -38,7 +39,7 @@ const Heading = styled.div`
   color: ${COLORS.TEXT_BODY};
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.TWO};
-  font-weight: bold;
+  font-weight: ${FONT_WEIGHTS.BOLD};
 
   ${MEDIA.COMPACT} {
     padding-top: ${SPACINGS.TWO};

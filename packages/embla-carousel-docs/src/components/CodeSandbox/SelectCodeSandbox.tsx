@@ -11,7 +11,7 @@ import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { BORDER_RADIUSES } from 'consts/border'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { SelectCodeSandboxForm } from './SelectCodeSandboxForm'
@@ -37,7 +37,7 @@ const SelectCodeSandboxButton = styled(BareButton)`
   padding: ${SPACINGS.TWO} 0 ${SPACINGS.TWO} 0;
   border-radius: ${BORDER_RADIUSES.BOX};
   align-items: center;
-  font-weight: 500;
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
 
   span {
     ${BRAND_GRADIENT_TEXT_STYLES};

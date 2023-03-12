@@ -3,6 +3,7 @@ import { BareButton } from './BareButton'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 
 export const primaryButtonFilledStyles = css`
   ${BRAND_GRADIENT_BACKGROUND_STYLES};
@@ -11,7 +12,7 @@ export const primaryButtonFilledStyles = css`
     ${SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.2)};
   line-height: 1.15;
   border-radius: 3rem;
-  font-weight: bold;
+  font-weight: ${FONT_WEIGHTS.BOLD};
   display: inline-flex;
 `
 

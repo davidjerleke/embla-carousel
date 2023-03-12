@@ -5,6 +5,7 @@ import { BareLink } from 'components/Link/BareLink'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { IconWithText } from 'components/Icon/IconWithText'
 
 const ITEM_SPACING = SPACINGS.FOUR
@@ -37,7 +38,7 @@ const ItemLabel = styled.div`
 const ItemTitle = styled.div`
   display: inline-flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: ${FONT_WEIGHTS.MEDIUM};
 `
 
 const GradientText = styled.span`

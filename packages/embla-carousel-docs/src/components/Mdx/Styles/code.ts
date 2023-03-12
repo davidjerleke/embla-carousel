@@ -4,7 +4,7 @@ import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
 import { BORDER_SIZES } from 'consts/border'
 import { AdmonitionWrapper } from '../Components/Admonition'
@@ -227,7 +227,7 @@ export const codeStyles = css`
   }
   .token.important,
   .token.bold {
-    font-weight: 600;
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
   }
   .token.entity {
     cursor: help;

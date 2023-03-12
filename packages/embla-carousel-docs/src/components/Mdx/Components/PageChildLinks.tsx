@@ -5,7 +5,7 @@ import { CardLink } from 'components/Link/CardLink'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import styled from 'styled-components'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { COLORS } from 'consts/themes'
 
 const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
@@ -38,7 +38,7 @@ const UspHeader = styled.h3`
   margin-top: 0;
   margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   font-size: ${FONT_SIZES.H4};
-  font-weight: bold;
+  font-weight: ${FONT_WEIGHTS.BOLD};
 `
 
 const UspText = styled.p`

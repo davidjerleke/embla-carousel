@@ -14,7 +14,7 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 import { THEME_KEYS, THEME_PREFIX, COLORS } from 'consts/themes'
-import { FONT_SIZES } from 'consts/fontSizes'
+import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { useNavigation } from 'hooks/useNavigation'
 import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
@@ -200,7 +200,7 @@ const contentStyles = css`
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)}
       ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)} 0;
     font-size: ${FONT_SIZES.COMPLEMENTARY};
-    font-weight: 600;
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
     line-height: 3.2rem;
     position: sticky;
     top: 0;
@@ -300,7 +300,7 @@ const contentStyles = css`
     display: flex;
     flex: 1 1 auto;
     flex-direction: column;
-    font-weight: 500;
+    font-weight: ${FONT_WEIGHTS.MEDIUM};
     justify-content: center;
     line-height: 1.2em;
     margin: 0 ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
