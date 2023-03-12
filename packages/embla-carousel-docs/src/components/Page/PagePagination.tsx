@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { PropType as PageType } from 'templates/Page'
 import { BareLink } from 'components/Link/BareLink'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { IconWithText } from 'components/Icon/IconWithText'
@@ -41,7 +41,7 @@ const ItemTitle = styled.div`
 `
 
 const GradientText = styled.span`
-  ${brandGradientTextStyles};
+  ${BRAND_GRADIENT_TEXT_STYLES};
 `
 
 type PropType = {

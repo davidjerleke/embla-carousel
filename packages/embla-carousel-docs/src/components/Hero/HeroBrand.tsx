@@ -6,7 +6,7 @@ import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { PrimaryButtonFilledLink } from 'components/Link/ButtonLink'
@@ -70,7 +70,7 @@ const H1 = styled.h1`
   }
 
   > span:nth-child(2) {
-    ${brandGradientTextStyles};
+    ${BRAND_GRADIENT_TEXT_STYLES};
   }
 
   ${MEDIA.MIN_XS} {

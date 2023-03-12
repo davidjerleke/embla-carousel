@@ -1,9 +1,10 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { brandGradientBackgroundStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { SPACINGS } from 'consts/spacings'
+import { BORDER_SIZES } from 'consts/border'
 
-const DECORATION_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
+const DECORATION_HEIGHT = BORDER_SIZES.ACCENT_HORIZONTAL
 const DECORATION_WIDTH = SPACINGS.CUSTOM(({ EIGHT }) => EIGHT + 0.2)
 
 const Text = styled.span`
@@ -17,10 +18,11 @@ const DecorationWrapper = styled.span`
 `
 
 const Decoration = styled.span`
-  ${brandGradientBackgroundStyles};
+  ${BRAND_GRADIENT_BACKGROUND_STYLES};
   margin-top: ${SPACINGS.FOUR};
   height: ${DECORATION_HEIGHT};
   width: ${DECORATION_WIDTH};
+  max-width: 100%;
   display: inline-flex;
 `
 

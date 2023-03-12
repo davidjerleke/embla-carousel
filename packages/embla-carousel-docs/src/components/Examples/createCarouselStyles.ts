@@ -1,12 +1,13 @@
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { MEDIA } from 'consts/breakpoints'
 import { EmblaOptionsType } from 'embla-carousel'
 import { css, FlattenSimpleInterpolation } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { brandGradientBackgroundStyles } from 'consts/gradients'
-import { MEDIA } from 'consts/breakpoints'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import {
   CAROUSEL_DEFAULT_HEIGHT,
   CAROUSEL_THUMB_SLIDES_HEIGHT,
@@ -55,7 +56,7 @@ const BASE_STYLES = css`
     position: absolute;
     top: __replace_axis_slide_number_spacing__;
     right: 0.6rem;
-    border-radius: 50%;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 4.6rem;
     font-weight: 900;
@@ -64,7 +65,7 @@ const BASE_STYLES = css`
   }
 
   .embla__slide__number > span {
-    ${brandGradientTextStyles}
+    ${BRAND_GRADIENT_TEXT_STYLES}
     font-size: 1.6rem;
     display: block;
     position: absolute;
@@ -140,7 +141,7 @@ const ARROWS_DOTS_STYLES = css`
 
   .embla__dot:after {
     background: ${COLORS.BACKGROUND_SITE};
-    border-radius: 0.2rem;
+    border-radius: ${BORDER_RADIUSES.LINE};
     width: 100%;
     height: 0.3rem;
     content: '';
@@ -242,7 +243,7 @@ const THUMBS_STYLES = css`
     position: absolute;
     top: 0.3rem;
     right: 0.3rem;
-    border-radius: 50%;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 3rem;
     font-weight: 500;
@@ -251,7 +252,7 @@ const THUMBS_STYLES = css`
   }
 
   .embla-thumbs__slide__number > span {
-    ${brandGradientTextStyles}
+    ${BRAND_GRADIENT_TEXT_STYLES}
     font-size: 1.4rem;
     display: block;
     position: absolute;
@@ -268,7 +269,7 @@ const PROGRESS_STYLES = css`
     background-color: ${COLORS.BACKGROUND_SITE};
     position: absolute;
     height: 0.3rem;
-    border-radius: 0.2rem;
+    border-radius: ${BORDER_RADIUSES.LINE};
     left: 0;
     right: 0;
     bottom: 2.6rem;
@@ -281,7 +282,7 @@ const PROGRESS_STYLES = css`
   }
 
   .embla__progress__bar {
-    ${brandGradientBackgroundStyles};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES};
     position: absolute;
     width: 100%;
     top: 0;
@@ -324,8 +325,10 @@ const LAZY_LOAD_STYLES = css`
   }
 
   .embla__lazy-load__spinner {
-    border: 0.4rem solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: 0.4rem solid ${COLORS.TEXT_HIGH_CONTRAST};
+    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
+      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
+    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
+      ${COLORS.TEXT_HIGH_CONTRAST};
     font-size: 1rem;
     display: inline-flex;
     position: absolute;
@@ -336,7 +339,7 @@ const LAZY_LOAD_STYLES = css`
     margin: auto;
     text-indent: -9999em;
     animation: loading 1.1s infinite linear;
-    border-radius: 50%;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
     ${createSquareSizeStyles('5rem')};
   }
 
@@ -387,8 +390,10 @@ const INFINITE_SCROLL_STYLES = css`
 
   .embla-infinite-scroll__spinner {
     display: none;
-    border: 0.4rem solid rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: 0.4rem solid ${COLORS.TEXT_HIGH_CONTRAST};
+    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
+      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
+    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
+      ${COLORS.TEXT_HIGH_CONTRAST};
     font-size: 1rem;
     position: absolute;
     top: 0;
@@ -398,7 +403,7 @@ const INFINITE_SCROLL_STYLES = css`
     margin: auto;
     text-indent: -9999em;
     animation: loading 1.1s infinite linear;
-    border-radius: 50%;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
     ${createSquareSizeStyles('5rem')};
   }
 

@@ -1,17 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
-import { IconWithText } from 'components/Icon/IconWithText'
-import { BareLink, PropType } from './BareLink'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { IconWithText } from 'components/Icon/IconWithText'
+import { BareLink, PropType } from './BareLink'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 
 const CardLinkWrapper = styled(BareLink)`
   padding: ${SPACINGS.FOUR};
-  border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   background-color: ${COLORS.BACKGROUND_CODE};
-  border-radius: 1rem;
+  border-radius: ${BORDER_RADIUSES.CARD};
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -20,7 +21,7 @@ const CardLinkWrapper = styled(BareLink)`
 
 const ReadMoreText = styled.div`
   span {
-    ${brandGradientTextStyles};
+    ${BRAND_GRADIENT_TEXT_STYLES};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
     font-weight: 500;
   }

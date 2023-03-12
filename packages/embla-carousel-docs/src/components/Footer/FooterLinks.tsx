@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { BareLink } from 'components/Link/BareLink'
-import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
 import { IconWithText } from 'components/Icon/IconWithText'
+import { BORDER_SIZES } from 'consts/border'
 
 const LINK_SPACING = SPACINGS.FIVE
 const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
@@ -17,9 +17,9 @@ const FooterLinksWrapper = styled.ul`
 
 const Link = styled(BareLink)`
   margin-left: ${LINK_SPACING};
-  margin-right: -${OUTLINE_SIZE};
-  padding: ${SPACINGS.ONE} ${OUTLINE_SIZE};
-  outline-offset: -${OUTLINE_SIZE};
+  margin-right: -${BORDER_SIZES.OUTLINE};
+  padding: ${SPACINGS.ONE} ${BORDER_SIZES.OUTLINE};
+  outline-offset: -${BORDER_SIZES.OUTLINE};
   color: ${COLORS.TEXT_LOW_CONTRAST};
   display: inline-flex;
   align-items: center;

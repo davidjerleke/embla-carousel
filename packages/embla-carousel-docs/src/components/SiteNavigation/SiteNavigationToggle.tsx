@@ -1,11 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { BareButton } from 'components/Button/BareButton'
-import { useNavigation } from 'hooks/useNavigation'
 import { NAVIGATION_ID } from './SiteNavigation'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
+import { BORDER_RADIUSES } from 'consts/border'
+import { useNavigation } from 'hooks/useNavigation'
+import { BareButton } from 'components/Button/BareButton'
+import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
@@ -31,7 +32,7 @@ const Burger = styled.div<{ $isOpen: boolean }>`
     background-color: ${COLORS.TEXT_HIGH_CONTRAST};
     display: block;
     height: 0.2rem;
-    border-radius: 0.2rem;
+    border-radius: ${BORDER_RADIUSES.LINE};
     position: relative;
     width: ${BURGER_SIZE};
     &:before,
@@ -39,7 +40,7 @@ const Burger = styled.div<{ $isOpen: boolean }>`
       background-color: ${COLORS.TEXT_HIGH_CONTRAST};
       position: absolute;
       content: "";
-      border-radius: 0.2rem;
+      border-radius: ${BORDER_RADIUSES.LINE};
       display: block;
       height: 100%;
       width: 100%;

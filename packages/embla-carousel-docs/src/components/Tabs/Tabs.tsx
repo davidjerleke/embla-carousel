@@ -9,12 +9,13 @@ import React, {
 import uniqueId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
-import { brandGradientBackgroundStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { BareButton } from 'components/Button/BareButton'
 import { SPACINGS } from 'consts/spacings'
-import { useTabs } from 'hooks/useTabs'
+import { BORDER_SIZES } from 'consts/border'
 import { COLORS } from 'consts/themes'
+import { useTabs } from 'hooks/useTabs'
 import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
@@ -47,7 +48,7 @@ export const TabsWrapper = styled.div``
 
 export const TabList = styled.div`
   margin-bottom: ${SPACINGS.FOUR};
-  border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   display: flex;
   overflow-x: auto;
 `
@@ -71,13 +72,13 @@ export const Tab = styled(BareButton)<{ $selected: boolean }>`
     $selected &&
     css`
       &:before {
-        ${brandGradientBackgroundStyles};
+        ${BRAND_GRADIENT_BACKGROUND_STYLES};
         content: '';
         position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
-        height: 0.3rem;
+        height: ${BORDER_SIZES.ACCENT_HORIZONTAL};
         pointer-events: none;
       }
     `};

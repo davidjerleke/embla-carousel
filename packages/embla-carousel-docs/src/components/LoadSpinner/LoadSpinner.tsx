@@ -1,6 +1,7 @@
-import { COLORS } from 'consts/themes'
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { BORDER_RADIUSES } from 'consts/border'
+import { COLORS } from 'consts/themes'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
 const DEFAULT_SIZE = '3rem'
@@ -23,7 +24,7 @@ const LoadSpinnerWrapper = styled.span<{
     `}
     display: block;
     position: absolute;
-    border-radius: 50%;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
     animation: rotate 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   }
 

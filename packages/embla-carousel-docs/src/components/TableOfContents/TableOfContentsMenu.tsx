@@ -4,6 +4,7 @@ import { FRAME_SPACING } from 'components/SiteLayout/Frame'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
+import { BORDER_SIZES } from 'consts/border'
 import { useTableOfContents } from 'hooks/useTableOfContents'
 import { TableOfContentsItemType } from './TableOfContentsContext'
 import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
@@ -41,7 +42,7 @@ const Heading = styled.div`
 
   ${MEDIA.COMPACT} {
     padding-top: ${SPACINGS.TWO};
-    border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     margin-bottom: ${SPACINGS.TWO};
   }
 `

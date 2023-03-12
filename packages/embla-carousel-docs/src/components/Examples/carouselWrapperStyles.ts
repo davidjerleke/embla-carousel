@@ -2,6 +2,7 @@ import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
 import { css } from 'styled-components'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
+import { BORDER_SIZES } from 'consts/border'
 
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
 export const CAROUSEL_THUMB_SLIDES_HEIGHT = '9rem'
@@ -29,11 +30,11 @@ const borderStyles = css`
     border-radius: inherit;
 
     ${MEDIA.MIN_XS} {
-      border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     }
     ${MEDIA.MAX_XS} {
-      border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-      border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     }
   }
 `

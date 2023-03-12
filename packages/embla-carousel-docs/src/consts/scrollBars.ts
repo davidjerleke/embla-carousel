@@ -4,6 +4,7 @@ import {
   FlattenSimpleInterpolation,
   ThemedStyledProps,
 } from 'styled-components'
+import { BORDER_RADIUSES } from './border'
 import { COLORS } from './themes'
 
 type ScrollBarAxisType = 'x' | 'y'
@@ -16,7 +17,7 @@ export const createScrollBarStyles = (
   return css`
     ::-webkit-scrollbar-thumb {
       background-color: transparent;
-      border-radius: 0.4rem;
+      border-radius: ${BORDER_RADIUSES.BOX};
     }
     ::-webkit-scrollbar-track {
       background-color: transparent;

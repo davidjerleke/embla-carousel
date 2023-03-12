@@ -1,15 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { brandGradientTextStyles } from 'consts/gradients'
 import styled, { css } from 'styled-components'
+import { ALGOLIA_CLASSNAMES } from 'consts/algoliaSearch'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
+import { MEDIA } from 'consts/breakpoints'
+import { BORDER_SIZES } from 'consts/border'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { RouteType } from 'components/Routes/RoutesContext'
 import { BareButton } from 'components/Button/BareButton'
 import { NavigationLink } from 'components/Link/NavigationLink'
 import { useRouteActive } from 'hooks/useRouteActive'
-import { ALGOLIA_CLASSNAMES } from 'consts/algoliaSearch'
-import { COLORS } from 'consts/themes'
-import { SPACINGS } from 'consts/spacings'
 import { Icon } from 'components/Icon/Icon'
-import { MEDIA } from 'consts/breakpoints'
 
 const createMenuId = (title: string = '', isDesktopMenu: boolean): string => {
   const titleInKebabCase = title.toLowerCase().split(' ').join('-')
@@ -26,7 +27,7 @@ const SiteNavigationSubMenuWrapper = styled.div`
   line-height: 1.65;
 
   ${MEDIA.COMPACT} {
-    border-bottom: 0.1rem solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
   }
 `
 
@@ -45,7 +46,7 @@ const Toggle = styled(BareButton)<{ $isActive: boolean }>`
   ${({ $isActive }) => css`
     font-weight: ${$isActive && '500'};
     > span {
-      ${$isActive && brandGradientTextStyles};
+      ${$isActive && BRAND_GRADIENT_TEXT_STYLES};
     }
   `};
 
@@ -85,7 +86,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
       position: absolute;
       top: 0;
       left: 0.3rem;
-      width: 0.1rem;
+      width: ${BORDER_SIZES.DETAIL};
       bottom: 0;
       background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
     }

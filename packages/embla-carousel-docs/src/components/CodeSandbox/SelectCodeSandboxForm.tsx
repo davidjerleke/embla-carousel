@@ -2,14 +2,14 @@ import React, { useCallback, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
 import { URLS } from 'consts/urls'
+import { COLORS } from 'consts/themes'
+import { SANDBOX_CREATE_LABELS } from './createSandboxFunctionsWithLabels'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { useEffect } from 'react'
 import { LoadSpinner } from 'components/LoadSpinner/LoadSpinner'
 import { SelectCodeSandboxType } from './sandboxTypes'
 import { PrimaryButtonFilled } from 'components/Button/PrimaryButtonFilled'
-import { COLORS } from 'consts/themes'
-import { SANDBOX_CREATE_LABELS } from './createSandboxFunctionsWithLabels'
-import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
-import { FONT_SIZES } from 'consts/fontSizes'
 import { IconType } from 'assets/icons'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
@@ -59,7 +59,7 @@ const RadioLabel = styled.label`
 const RadioLabelContent = styled.span<{ $checked?: boolean }>`
   display: flex;
   width: 100%;
-  border-radius: 1rem;
+  border-radius: ${BORDER_RADIUSES.CARD};
   flex-direction: column;
   padding: 1.2rem;
   line-height: 1;
@@ -72,7 +72,7 @@ const RadioLabelContent = styled.span<{ $checked?: boolean }>`
   ${({ $checked }) =>
     $checked &&
     css`
-      outline: ${COLORS.BRAND_PRIMARY} solid ${OUTLINE_SIZE};
+      outline: ${COLORS.BRAND_PRIMARY} solid ${BORDER_SIZES.OUTLINE};
     `}
 `
 
@@ -87,7 +87,7 @@ const RadioInput = styled.input`
   appearance: none;
 
   &:focus + label > ${RadioLabelContent} {
-    outline: ${COLORS.BRAND_PRIMARY} solid ${OUTLINE_SIZE};
+    outline: ${COLORS.BRAND_PRIMARY} solid ${BORDER_SIZES.OUTLINE};
   }
 `
 

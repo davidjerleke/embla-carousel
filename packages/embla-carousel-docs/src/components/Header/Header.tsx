@@ -6,6 +6,7 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { BORDER_SIZES } from 'consts/border'
 import { HeaderActions } from './HeaderActions'
 import { HeaderLogo } from './HeaderLogo'
 
@@ -24,7 +25,7 @@ const Fixed = styled.div`
   ${HEIGHT};
   z-index: ${LAYERS.HEADER};
   background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.8);
-  border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+  border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   backdrop-filter: saturate(180%) blur(5px);
   position: fixed;
   top: 0;

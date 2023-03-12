@@ -5,11 +5,12 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
 type PropType = PropsWithChildren<{
   svg: IconType
+  color?: string
   size?: string
 }>
 
 export const Icon = (props: PropType) => {
-  const { svg, size = '100%', ...restProps } = props
+  const { svg, size = '100%', color = 'currentColor', ...restProps } = props
   const Svg = ICONS[svg]
 
   return (
@@ -18,7 +19,8 @@ export const Icon = (props: PropType) => {
       aria-hidden="true"
       focusable="false"
       $css={css`
-        ${createSquareSizeStyles(size)}
+        color: ${color || 'inherit'};
+        ${createSquareSizeStyles(size)};
       `}
       {...restProps}
     />

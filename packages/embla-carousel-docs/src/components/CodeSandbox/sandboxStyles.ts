@@ -5,6 +5,7 @@ import { baseStyles } from 'components/Layout/GlobalStyles/base'
 import { fontStyles } from 'components/Layout/GlobalStyles/font'
 import { CAROUSEL_WRAPPER_RADIUS } from '../Examples/carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
+import { BORDER_SIZES } from 'consts/border'
 import { COLORS, themeStyles } from 'consts/themes'
 
 const sandboxWrapperStyles = css`
@@ -29,15 +30,15 @@ const sandboxCarouselStyles = css`
 
   ${MEDIA.MAX_SM} {
     .sandbox__carousel {
-      border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-      border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     }
   }
 
   ${MEDIA.MIN_SM} {
     .sandbox__carousel {
       border-radius: ${CAROUSEL_WRAPPER_RADIUS};
-      border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+      border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     }
   }
 `
@@ -63,7 +64,6 @@ const sandboxFooterStyles = css`
     align-items: center;
     background-color: transparent;
     text-decoration: none;
-    border-radius: 3rem;
     text-align: center;
     font-weight: bold;
     color: ${COLORS.TEXT_LOW_CONTRAST};

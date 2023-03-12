@@ -6,6 +6,7 @@ import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
+import { BORDER_SIZES } from 'consts/border'
 import { AdmonitionWrapper } from '../Components/Admonition'
 import { createScrollBarStyles } from 'consts/scrollBars'
 import {
@@ -19,7 +20,7 @@ export const codeStyles = css`
   .${CODE_HIGHLIGHT_CLASS_NAME} {
     background-color: ${COLORS.BACKGROUND_CODE};
     border-radius: ${BORDER_RADIUS};
-    border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
     font-size: ${FONT_SIZES.CUSTOM(
       ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
@@ -120,7 +121,7 @@ export const codeStyles = css`
 
     &:after {
       left: 0;
-      width: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
+      width: ${BORDER_SIZES.ACCENT_VERTICAL};
       z-index: ${LAYERS.STEP};
     }
     &:before {

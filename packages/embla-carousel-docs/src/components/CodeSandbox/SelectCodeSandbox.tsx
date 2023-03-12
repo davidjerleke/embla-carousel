@@ -3,16 +3,17 @@ import styled from 'styled-components'
 import FocusTrap from 'focus-trap-react'
 import { SelectCodeSandboxType } from './sandboxTypes'
 import { BareButton } from 'components/Button/BareButton'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { IconWithText } from 'components/Icon/IconWithText'
 import { COLORS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { BORDER_RADIUSES } from 'consts/border'
+import { FONT_SIZES } from 'consts/fontSizes'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { FONT_SIZES } from 'consts/fontSizes'
 import { SelectCodeSandboxForm } from './SelectCodeSandboxForm'
 import { Portal } from 'components/Portal/Portal'
 import { useEventListener } from 'hooks/useEventListener'
@@ -34,12 +35,12 @@ const SelectCodeSandboxButton = styled(BareButton)`
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-bottom: ${SPACINGS.ONE};
   padding: ${SPACINGS.TWO} 0 ${SPACINGS.TWO} 0;
+  border-radius: ${BORDER_RADIUSES.BOX};
   align-items: center;
-  border-radius: 0.4rem;
   font-weight: 500;
 
   span {
-    ${brandGradientTextStyles};
+    ${BRAND_GRADIENT_TEXT_STYLES};
   }
 `
 

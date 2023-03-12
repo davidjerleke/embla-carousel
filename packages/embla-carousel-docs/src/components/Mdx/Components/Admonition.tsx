@@ -2,6 +2,7 @@ import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { Icon } from 'components/Icon/Icon'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { IconType } from 'assets/icons'
@@ -41,12 +42,12 @@ export const AdmonitionWrapper = styled.div<{
 }>`
   display: flex;
   padding: ${SPACINGS.TWO};
-  border-top-right-radius: 0.4rem;
-  border-bottom-right-radius: 0.4rem;
+  border-top-right-radius: ${BORDER_RADIUSES.BOX};
+  border-bottom-right-radius: ${BORDER_RADIUSES.BOX};
   position: relative;
 
   ${({ $admonition, $opacity }) => css`
-    border-left: 0.4rem solid ${$admonition.color};
+    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid ${$admonition.color};
     background-color: rgba(${$admonition.colorRgbValue}, ${$opacity});
   `};
 `

@@ -12,11 +12,12 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { MEDIA } from 'consts/breakpoints'
 import { copyToClipboard } from 'utils/copyToClipboard'
-import { brandGradientBackgroundStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
-import { MEDIA } from 'consts/breakpoints'
 import {
   createScrollBarShadowStyles,
   SCROLL_BAR_SHADOW_SIZE,
@@ -35,11 +36,11 @@ const PrismSyntaxFrameWrapper = styled.div`
 
   ${MEDIA.MIN_XS} {
     border-radius: ${BORDER_RADIUS};
-    border: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   }
   ${MEDIA.MAX_XS} {
-    border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
-    border-bottom: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   }
 
   &:before,
@@ -87,8 +88,8 @@ const CopyCodeButton = styled(BareButton)`
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: 0.4rem;
-    ${brandGradientBackgroundStyles};
+    border-radius: ${BORDER_RADIUSES.BOX};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES};
   }
 
   &:hover {

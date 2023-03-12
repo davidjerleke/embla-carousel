@@ -1,11 +1,9 @@
 import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { COLORS } from 'consts/themes'
-import {
-  keyNavigatingStyles,
-  OUTLINE_SIZE,
-} from 'components/KeyNavigating/keyNavigatingStyles'
+import { BORDER_SIZES } from 'consts/border'
+import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 
 export const bareButtonStyles = css<{
   $isKeyNavigating: boolean
@@ -13,7 +11,7 @@ export const bareButtonStyles = css<{
 }>`
   ${keyNavigatingStyles};
   color: ${COLORS.TEXT_BODY};
-  outline-offset: -${OUTLINE_SIZE};
+  outline-offset: -${BORDER_SIZES.OUTLINE};
   -webkit-tap-highlight-color: rgba(
     ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
     0.5

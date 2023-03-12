@@ -6,8 +6,8 @@ import { contentLinkStyles } from 'components/Link/ContentLink'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { brandGradientBackgroundStyles } from 'consts/gradients'
-import { brandGradientTextStyles } from 'consts/gradients'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import { ALGOLIA_CLASSNAMES, ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
 import { MEDIA } from 'consts/breakpoints'
@@ -15,12 +15,10 @@ import { LAYERS } from 'consts/layers'
 import { SPACINGS } from 'consts/spacings'
 import { THEME_KEYS, THEME_PREFIX, COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { useNavigation } from 'hooks/useNavigation'
+import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { isBrowser } from 'utils/isBrowser'
-import {
-  OUTLINE_SIZE,
-  keyNavigatingStyles,
-} from 'components/KeyNavigating/keyNavigatingStyles'
 
 const MODAL_MAX_WIDTH = '56rem'
 const INPUT_BORDER_SIZE = '0.2rem'
@@ -86,8 +84,8 @@ const headerStyles = css`
     padding: ${INPUT_BORDER_SIZE};
     position: relative;
     width: 100%;
-    border-radius: 0.4rem;
-    ${brandGradientBackgroundStyles};
+    border-radius: ${BORDER_RADIUSES.BOX};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES};
   }
 `
 
@@ -136,7 +134,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hits mark {
-    ${brandGradientTextStyles};
+    ${BRAND_GRADIENT_TEXT_STYLES};
   }
 
   .DocSearch-HitsFooter {
@@ -149,14 +147,14 @@ const contentStyles = css`
   .DocSearch-HitsFooter a {
     padding-top: ${EDGE_SPACING};
     margin-bottom: ${EDGE_SPACING};
-    border-bottom: 0.1rem solid;
+    border-bottom: ${BORDER_SIZES.DETAIL} solid;
     color: inherit;
     display: inline-flex;
   }
 
   .DocSearch-Hit {
     padding-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
-    border-radius: 0.4rem;
+    border-radius: ${BORDER_RADIUSES.BOX};
     display: flex;
     position: relative;
   }
@@ -187,10 +185,10 @@ const contentStyles = css`
 
   .DocSearch-Hit a {
     ${keyNavigatingStyles};
-    outline-offset: -${OUTLINE_SIZE};
+    outline-offset: -${BORDER_SIZES.OUTLINE};
     background-color: ${COLORS.BACKGROUND_CODE};
     padding-left: ${EDGE_SPACING};
-    border-radius: 0.4rem;
+    border-radius: ${BORDER_RADIUSES.BOX};
     display: block;
     width: 100%;
   }
@@ -234,14 +232,14 @@ const contentStyles = css`
       top: 0;
       bottom: 0;
       left: 0;
-      ${brandGradientBackgroundStyles};
+      ${BRAND_GRADIENT_BACKGROUND_STYLES};
     }
 
     &:before {
       width: 0.4rem;
     }
     &:after {
-      border-radius: 0.4rem;
+      border-radius: ${BORDER_RADIUSES.BOX};
       right: 0;
       opacity: 0.07;
     }
@@ -410,7 +408,7 @@ const footerStyles = css`
 
   .DocSearch-Commands-Key {
     align-items: center;
-    border-radius: 0.2rem;
+    border-radius: ${BORDER_RADIUSES.LINE};
     background: linear-gradient(
       -225deg,
       ${COLORS.DETAIL_MEDIUM_CONTRAST} 0%,
@@ -468,7 +466,7 @@ const inputStyles = css`
     padding-right: ${BUTTON_WIDTH};
     -webkit-appearance: none;
     appearance: none;
-    border-radius: 0.4rem;
+    border-radius: ${BORDER_RADIUSES.BOX};
     width: 100%;
     font-size: ${FONT_SIZES.H4};
     background-color: ${COLORS.BACKGROUND_SITE};

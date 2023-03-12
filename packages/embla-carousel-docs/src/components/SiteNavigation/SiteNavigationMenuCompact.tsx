@@ -5,8 +5,8 @@ import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { OUTLINE_SIZE } from 'components/KeyNavigating/keyNavigatingStyles'
 import { LAYERS } from 'consts/layers'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { TabsItem } from 'components/Tabs/TabsItem'
@@ -60,7 +60,7 @@ const MenuTabs = styled(Tabs)<{
     padding-right: ${FRAME_SPACING};
     margin-bottom: 0;
     background-color: ${COLORS.BACKGROUND_SITE};
-    border-top: 0.1rem solid ${COLORS.DETAIL_LOW_CONTRAST};
+    border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     border-bottom: 0;
     justify-content: center;
   }
@@ -68,7 +68,7 @@ const MenuTabs = styled(Tabs)<{
   ${TabPanel} {
     position: relative;
     height: 100%;
-    outline-offset: -${OUTLINE_SIZE};
+    outline-offset: -${BORDER_SIZES.OUTLINE};
     overflow: hidden;
 
     &:before,
@@ -124,7 +124,7 @@ const ThemeToggleButton = styled(ThemeToggle)`
   height: auto;
   margin-right: 0;
   margin-left: 0;
-  border-radius: 0.4rem;
+  border-radius: ${BORDER_RADIUSES.BOX};
   overflow: hidden;
 
   > ${LightThemeSvg}, ${DarkThemeSvg} {
