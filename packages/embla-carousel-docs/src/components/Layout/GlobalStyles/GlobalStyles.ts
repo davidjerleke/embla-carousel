@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
-import { baseStyles } from './base'
-import { resetStyles } from './reset'
-import { themeStyles } from './theme'
-import { fontStyles } from './font'
+import { BASE_STYLES } from './base'
+import { RESET_STYLES } from './reset'
+import { THEME_STYLES } from './theme'
+import { FONT_STYLES } from './font'
 
 export const GlobalStyles = createGlobalStyle`
-  ${fontStyles};
-  ${resetStyles};
-  ${baseStyles};
-  ${themeStyles};
+  ${FONT_STYLES};
+  ${RESET_STYLES};
+  ${BASE_STYLES};
+  ${THEME_STYLES};
 `

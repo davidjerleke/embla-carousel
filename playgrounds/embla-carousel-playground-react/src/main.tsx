@@ -4,11 +4,11 @@ import { EmblaOptionsType } from 'embla-carousel-react'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'
-import { resetStyles } from 'components/Layout/GlobalStyles/reset'
-import { baseStyles } from 'components/Layout/GlobalStyles/base'
-import { fontStyles } from 'components/Layout/GlobalStyles/font'
+import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
+import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
+import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
 import { SANDBOX_CSS } from 'components/CodeSandbox/sandboxStyles'
-import { themeStyles } from 'consts/themes'
+import { THEME_STYLES } from 'consts/themes'
 import Carousel from './Carousel/Carousel'
 import './main.css'
 
@@ -20,10 +20,10 @@ const injectBaseStyles = (): void => {
     SANDBOX_CSS +
     carouselStyles +
     styledComponentsStylesToString(
-      themeStyles,
-      resetStyles,
-      baseStyles,
-      fontStyles,
+      THEME_STYLES,
+      RESET_STYLES,
+      BASE_STYLES,
+      FONT_STYLES,
     )
   styleElement.id = 'baseStyles'
   document.head.appendChild(styleElement)

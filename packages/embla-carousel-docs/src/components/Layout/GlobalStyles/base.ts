@@ -2,7 +2,7 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { css } from 'styled-components'
 
-export const baseStyles = css`
+export const BASE_STYLES = css`
   html {
     background-color: ${COLORS.BACKGROUND_SITE};
     font-size: 62.5%;

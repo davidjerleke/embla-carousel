@@ -5,10 +5,12 @@ import {
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
-  themeStyles,
+  THEME_STYLES,
 } from 'consts/themes'
 import { LOCALSTORAGE_KEYS } from 'consts/localStorage'
 import { ALGOLIA_SEARCH_CONFIG } from 'consts/algoliaSearch'
+import { FONT_FACE_STYLES } from 'consts/fontFace'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { removeProtocol } from 'utils/removeProtocol'
 
 export const onRenderBody = ({
@@ -31,22 +33,8 @@ export const onRenderBody = ({
       id="theme-styles"
       key="theme-style"
       dangerouslySetInnerHTML={{
-        __html: `${themeStyles.join('')}`,
+        __html: styledComponentsStylesToString(THEME_STYLES),
       }}
-    />,
-    <link
-      rel="preload"
-      href="/fonts/Inter-roman.var.woff2?v=3.19"
-      as="font"
-      crossorigin="anonymous"
-      type="font/woff2"
-    />,
-    <link
-      rel="preload"
-      href="/fonts/Inter-italic.var.woff2?v=3.19"
-      as="font"
-      crossorigin="anonymous"
-      type="font/woff2"
     />,
     <script
       id="theme-script"
@@ -85,6 +73,13 @@ export const onRenderBody = ({
             window.__THEME__ = themeKey;
           })();
         `,
+      }}
+    />,
+    <style
+      id="font-face"
+      key="font-face"
+      dangerouslySetInnerHTML={{
+        __html: styledComponentsStylesToString(FONT_FACE_STYLES),
       }}
     />,
     <meta

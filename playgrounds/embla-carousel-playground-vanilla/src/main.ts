@@ -2,10 +2,10 @@ import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'
 import { SANDBOX_CSS } from 'components/CodeSandbox/sandboxStyles'
-import { themeStyles } from 'consts/themes'
-import { resetStyles } from 'components/Layout/GlobalStyles/reset'
-import { baseStyles } from 'components/Layout/GlobalStyles/base'
-import { fontStyles } from 'components/Layout/GlobalStyles/font'
+import { THEME_STYLES } from 'consts/themes'
+import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
+import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
+import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
 import { createSlides } from './Carousel/setupSlides'
 import {
   addPrevNextBtnsClickHandlers,
@@ -25,10 +25,10 @@ const injectBaseStyles = (): void => {
     SANDBOX_CSS +
     createCarouselArrowsDotsStyles('100%') +
     styledComponentsStylesToString(
-      themeStyles,
-      resetStyles,
-      baseStyles,
-      fontStyles,
+      THEME_STYLES,
+      RESET_STYLES,
+      BASE_STYLES,
+      FONT_STYLES,
     )
 
   styleElement.id = 'baseStyles'

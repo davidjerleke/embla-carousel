@@ -1,18 +1,19 @@
 import { css } from 'styled-components'
+import { FONT_FAMILY } from 'consts/fontFace'
 
-export const fontStyles = css`
+export const FONT_STYLES = css`
   html {
-    font-family: 'Inter', 'system-ui', -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    font-family: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
       'Segoe UI Emoji', 'Segoe UI Symbol';
     letter-spacing: -0.02rem;
   }
 
   @supports (font-variation-settings: normal) {
     html {
-      font-family: 'Inter var', 'system-ui', -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol';
+      font-family: ${FONT_FAMILY}, 'system-ui', -apple-system,
+        BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     }
   }
 `

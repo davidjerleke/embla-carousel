@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
 
-export const resetStyles = css`
+export const RESET_STYLES = css`
   html {
     box-sizing: border-box;
     line-height: 1.15;

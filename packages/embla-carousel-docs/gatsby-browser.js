@@ -1,5 +1,3 @@
-import 'components/Layout/GlobalStyles/fontFace.css'
-
 export const onRouteUpdate = ({ location }) => {
   const { hash } = location
   if (!hash) return

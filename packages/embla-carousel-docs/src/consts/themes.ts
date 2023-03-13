@@ -106,19 +106,19 @@ export const THEME_COLORS = {
 
 export const COLORS = colorsToCssVariableMap(THEME_COLORS[THEME_KEYS.LIGHT])
 
-const themeLightStyles = css`
+const THEME_LIGHT_STYLES = css`
   ${themeToColorVariableStyles(THEME_COLORS[THEME_KEYS.LIGHT])}
 `
 
-const themeDarkStyles = css`
+const THEME_DARK_STYLES = css`
   ${themeToColorVariableStyles(THEME_COLORS[THEME_KEYS.DARK])}
 `
 
-export const themeStyles = css`
+export const THEME_STYLES = css`
   .${THEME_PREFIX}${THEME_KEYS.LIGHT} {
-    ${themeLightStyles}
+    ${THEME_LIGHT_STYLES}
   }
   .${THEME_PREFIX}${THEME_KEYS.DARK} {
-    ${themeDarkStyles}
+    ${THEME_DARK_STYLES}
   }
 `

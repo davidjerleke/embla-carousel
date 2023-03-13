@@ -1,15 +1,15 @@
 import { css } from 'styled-components'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { resetStyles } from 'components/Layout/GlobalStyles/reset'
-import { baseStyles } from 'components/Layout/GlobalStyles/base'
-import { fontStyles } from 'components/Layout/GlobalStyles/font'
+import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
+import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
+import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
 import { CAROUSEL_WRAPPER_RADIUS } from '../Examples/carouselWrapperStyles'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
-import { COLORS, themeStyles } from 'consts/themes'
+import { COLORS, THEME_STYLES } from 'consts/themes'
 
-const sandboxWrapperStyles = css`
+const SANDBOX_WRAPPER_STYLES = css`
   .sandbox {
     width: 100%;
   }
@@ -23,7 +23,7 @@ const sandboxWrapperStyles = css`
   }
 `
 
-const sandboxCarouselStyles = css`
+const SANDBOX_CAROUSEL_STYLES = css`
   .sandbox__carousel {
     position: relative;
     background-color: ${COLORS.BACKGROUND_CODE};
@@ -44,7 +44,7 @@ const sandboxCarouselStyles = css`
   }
 `
 
-const sandboxHeaderStyles = css`
+const SANDBOX_HEADER_STYLES = css`
   .sandbox__header {
     font-size: 2rem;
     font-weight: ${FONT_WEIGHTS.BOLD};
@@ -53,7 +53,7 @@ const sandboxHeaderStyles = css`
   }
 `
 
-const sandboxFooterStyles = css`
+const SANDBOX_FOOTER_STYLES = css`
   .sandbox__footer {
     display: flex;
     justify-content: center;
@@ -81,15 +81,15 @@ const sandboxFooterStyles = css`
 `
 
 export const BASE_CSS = styledComponentsStylesToString(
-  themeStyles,
-  resetStyles,
-  baseStyles,
-  fontStyles,
+  THEME_STYLES,
+  RESET_STYLES,
+  BASE_STYLES,
+  FONT_STYLES,
 )
 
 export const SANDBOX_CSS = styledComponentsStylesToString(
-  sandboxWrapperStyles,
-  sandboxCarouselStyles,
-  sandboxHeaderStyles,
-  sandboxFooterStyles,
+  SANDBOX_WRAPPER_STYLES,
+  SANDBOX_CAROUSEL_STYLES,
+  SANDBOX_HEADER_STYLES,
+  SANDBOX_FOOTER_STYLES,
 )
