@@ -12,14 +12,14 @@ type PropType = {
 export const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    // Autoplay({
-    //   delay: 3000,
-    //   breakpoints: {
-    //     '(min-width: 768px)': {
-    //       delay: 6000,
-    //     },
-    //   },
-    // }),
+    Autoplay({
+      delay: 3000,
+      breakpoints: {
+        '(min-width: 768px)': {
+          delay: 6000,
+        },
+      },
+    }),
   ])
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)

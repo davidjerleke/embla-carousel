@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from '.'
+import { EmblaCarouselType } from './EmblaCarousel'
 import { OptionsHandler } from './OptionsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 

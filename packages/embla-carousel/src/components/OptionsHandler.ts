@@ -29,9 +29,6 @@ export function OptionsHandler(): OptionsHandlerType {
     optionsA: TypeA,
     optionsB: TypeB,
   ): boolean {
-    // const breakpointsA = JSON.stringify(objectKeys(optionsA.breakpoints || {}))
-    // const breakpointsB = JSON.stringify(objectKeys(optionsB.breakpoints || {}))
-    // if (breakpointsA !== breakpointsB) return false
     return objectsAreEqual(optionsA, optionsB) // TODO: Move to embla-carousel-reactive-utils
   }
 

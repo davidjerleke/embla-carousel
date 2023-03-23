@@ -42,7 +42,7 @@ const App: React.FC = () => {
   const [slides, setSlides] = useState(arrayFromNumber(5))
 
   useEffect(() => {
-    // setTimeout(() => setSlides(arrayFromNumber(6)), 2000)
+    // setTimeout(() => setSlides(arrayFromNumber(10)), 2000)
     return injectBaseStyles()
   }, [])
 

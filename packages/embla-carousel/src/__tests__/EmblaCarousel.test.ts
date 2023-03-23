@@ -1,5 +1,5 @@
 import { EmblaOptionsType } from '../components/Options'
-import EmblaCarousel, { EmblaCarouselType } from '../components/index'
+import EmblaCarousel, { EmblaCarouselType } from '../components/EmblaCarousel'
 
 export const initializeEmbla = (
   withContainer: boolean = true,

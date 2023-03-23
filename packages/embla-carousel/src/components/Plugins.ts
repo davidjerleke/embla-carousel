@@ -1,5 +1,5 @@
 import { CreateOptionsType, LooseOptionsType } from './Options'
-import { EmblaCarouselType } from './'
+import { EmblaCarouselType } from './EmblaCarousel'
 
 export type LoosePluginType = {
   [key: string]: unknown
