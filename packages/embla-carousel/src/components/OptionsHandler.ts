@@ -23,6 +23,7 @@ export function OptionsHandler(): OptionsHandlerType {
     return <TypeA>objectsMergeDeep(optionsA, optionsB || {})
   }
 
+  // TODO: Move to embla-carousel-reactive-utils
   function areEqual<TypeA extends OptionsType, TypeB extends OptionsType>(
     optionsA: TypeA,
     optionsB: TypeB,
@@ -30,7 +31,7 @@ export function OptionsHandler(): OptionsHandlerType {
     const breakpointsA = JSON.stringify(objectKeys(optionsA.breakpoints || {}))
     const breakpointsB = JSON.stringify(objectKeys(optionsB.breakpoints || {}))
     if (breakpointsA !== breakpointsB) return false
-    return objectsAreEqual(optionsA, optionsB)
+    return objectsAreEqual(optionsA, optionsB) // TODO: Move to embla-carousel-reactive-utils
   }
 
   function atMedia<Type extends OptionsType>(options: Type): Type {

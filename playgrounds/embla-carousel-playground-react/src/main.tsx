@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
@@ -29,17 +29,28 @@ const injectBaseStyles = (): void => {
   document.head.appendChild(styleElement)
 }
 
-const OPTIONS: EmblaOptionsType = {}
+const OPTIONS: EmblaOptionsType = {
+  breakpoints: {
+    '(min-width: 768px)': {
+      loop: true,
+    },
+  },
+}
 const SLIDES = arrayFromNumber(5)
 
 const App: React.FC = () => {
-  useEffect(() => injectBaseStyles(), [])
+  const [slides, setSlides] = useState(arrayFromNumber(5))
+
+  useEffect(() => {
+    // setTimeout(() => setSlides(arrayFromNumber(6)), 2000)
+    return injectBaseStyles()
+  }, [])
 
   return (
     <main className="playground">
       <h1 className="playground__h1">Playground - React</h1>
       <div className="sandbox__carousel">
-        <Carousel options={OPTIONS} slides={SLIDES} />
+        <Carousel options={OPTIONS} slides={slides} />
       </div>
     </main>
   )

@@ -10,6 +10,7 @@ import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
 import { OptionsType } from './Options'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
+import { ResizeHandler, ResizeHandlerType } from './ResizeHandler'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
@@ -20,6 +21,7 @@ import { ScrollSnaps } from './ScrollSnaps'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
+import { SlidesHandler, SlidesHandlerType } from './SlidesHandler'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
@@ -48,6 +50,8 @@ export type EngineType = {
   slidesToScroll: SlidesToScrollType
   target: Vector1DType
   translate: TranslateType
+  resizeHandler: ResizeHandlerType
+  slidesHandler: SlidesHandlerType
   scrollTo: ScrollToType
   scrollTarget: ScrollTargetType
   scrollSnaps: number[]
@@ -212,6 +216,7 @@ export function Engine(
     limit,
     location,
     options,
+    resizeHandler: ResizeHandler(container, slides, axis, eventHandler),
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,
@@ -239,9 +244,10 @@ export function Engine(
       location,
       slides,
     ),
-    slidesToScroll,
+    slidesHandler: SlidesHandler(container),
     slidesInView,
     slideIndexes,
+    slidesToScroll,
     target,
     translate: Translate(axis, direction, container),
   }

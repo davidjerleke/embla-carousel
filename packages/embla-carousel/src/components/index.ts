@@ -5,7 +5,7 @@ import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString } from './utils'
+import { isString, objectKeys } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -36,7 +36,7 @@ function EmblaCarousel(
   userOptions?: EmblaOptionsType,
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
-  const resizeHandlers = EventStore()
+  const mediaHandlers = EventStore()
   const optionsHandler = OptionsHandler()
   const pluginsHandler = PluginsHandler()
   const eventHandler = EventHandler()
@@ -52,7 +52,7 @@ function EmblaCarousel(
   let options = optionsHandler.merge(optionsBase)
   let pluginList: EmblaPluginType[] = []
   let pluginApis: EmblaPluginsType
-  let rootSize = 0
+
   let container: HTMLElement
   let slides: HTMLElement[]
 
@@ -80,15 +80,39 @@ function EmblaCarousel(
     options = optionsHandler.atMedia(optionsBase)
 
     storeElements()
-
     engine = Engine(root, container, slides, options, eventHandler)
-    rootSize = engine.axis.measureSize(root.getBoundingClientRect())
 
     if (!options.active) return deActivate()
 
     engine.translate.to(engine.location)
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
+
+    // NEW ---------------------->
+
+    // move to optionsHandler
+    const mediaQueryList = pluginList.reduce(
+      (acc, { options }) => acc.concat(objectKeys(options.breakpoints)),
+      objectKeys(optionsBase.breakpoints),
+    )
+    const uniqueMediaQueryList = mediaQueryList.filter((mediaQuery, index) => {
+      return mediaQueryList.indexOf(mediaQuery) === index
+    }) // change to new [...Set(mediaQueryList)]
+
+    mediaHandlers.removeAll()
+    uniqueMediaQueryList.forEach((mediaQuery) => {
+      mediaHandlers.add(matchMedia(mediaQuery), 'change', () => {
+        console.log('options changed')
+        return reActivate()
+      })
+    })
+
+    engine.slidesHandler.init(reActivate)
+    engine.resizeHandler.init(reActivate)
+
+    // TODO: DRY out engine.axis.measureSize() used in many places
+
+    // NEW ----------------------<
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -120,26 +144,17 @@ function EmblaCarousel(
     engine.eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
+    engine.resizeHandler.destroy()
+    engine.slidesHandler.destroy()
     pluginsHandler.destroy()
   }
 
   function destroy(): void {
     if (destroyed) return
     destroyed = true
-    resizeHandlers.removeAll()
+    mediaHandlers.removeAll()
     deActivate()
     eventHandler.emit('destroy')
-  }
-
-  function resize(): void {
-    const newOptions = optionsHandler.atMedia(optionsBase)
-    const optionsChanged = !optionsHandler.areEqual(newOptions, options)
-    const newRootSize = engine.axis.measureSize(root.getBoundingClientRect())
-    const rootSizeChanged = rootSize !== newRootSize
-    const pluginsChanged = pluginsHandler.haveChanged()
-
-    if (rootSizeChanged || optionsChanged || pluginsChanged) reActivate()
-    eventHandler.emit('resize')
   }
 
   function slidesInView(target?: boolean): number[] {
@@ -244,7 +259,6 @@ function EmblaCarousel(
   }
 
   activate(userOptions, userPlugins)
-  resizeHandlers.add(window, 'resize', resize)
   setTimeout(() => eventHandler.emit('init'), 0)
   return self
 }

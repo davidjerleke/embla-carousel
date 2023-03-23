@@ -20,6 +20,7 @@ function useEmblaCarousel(
   plugins: EmblaPluginType[] = [],
 ): UseEmblaCarouselType {
   const optionsHandler = useRef(EmblaCarousel.optionsHandler())
+  const slideObserver = useRef<MutationObserver>()
   const storedOptions = useRef(options)
   const storedPlugins = useRef(plugins)
   const [embla, setEmbla] = useState<EmblaCarouselType>()
@@ -38,8 +39,35 @@ function useEmblaCarousel(
         storedPlugins.current,
       )
       setEmbla(newEmbla)
-      return () => newEmbla.destroy()
+
+      // const queue: MutationRecord[][] = []
+
+      // const reInitLazy = () => {
+      //   newEmbla.reInit()
+      //   queue.length = 0
+      // }
+
+      // const slideObserverConfig = { childList: true }
+      // slideObserver.current = new MutationObserver((mutationList) => {
+      //   for (const mutation of mutationList) {
+      //     if (mutation.type === 'childList') {
+      //       if (!queue.length) requestAnimationFrame(reInitLazy)
+      //       queue.push(mutationList)
+      //     }
+      //   }
+      // })
+
+      // slideObserver.current.observe(
+      //   newEmbla.containerNode(),
+      //   slideObserverConfig,
+      // )
+
+      return () => {
+        // if (slideObserver.current) slideObserver.current.disconnect()
+        newEmbla.destroy()
+      }
     } else {
+      // if (slideObserver.current) slideObserver.current.disconnect()
       setEmbla(undefined)
     }
   }, [viewport, setEmbla])
