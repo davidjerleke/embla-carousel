@@ -13,6 +13,7 @@ export type OptionsHandlerType = {
     optionsB: TypeB,
   ) => boolean
   atMedia: <Type extends OptionsType>(options: Type) => Type
+  mediaQueries: (optionsList: OptionsType[]) => MediaQueryList[]
 }
 
 export function OptionsHandler(): OptionsHandlerType {
@@ -28,9 +29,9 @@ export function OptionsHandler(): OptionsHandlerType {
     optionsA: TypeA,
     optionsB: TypeB,
   ): boolean {
-    const breakpointsA = JSON.stringify(objectKeys(optionsA.breakpoints || {}))
-    const breakpointsB = JSON.stringify(objectKeys(optionsB.breakpoints || {}))
-    if (breakpointsA !== breakpointsB) return false
+    // const breakpointsA = JSON.stringify(objectKeys(optionsA.breakpoints || {}))
+    // const breakpointsB = JSON.stringify(objectKeys(optionsB.breakpoints || {}))
+    // if (breakpointsA !== breakpointsB) return false
     return objectsAreEqual(optionsA, optionsB) // TODO: Move to embla-carousel-reactive-utils
   }
 
@@ -44,10 +45,18 @@ export function OptionsHandler(): OptionsHandlerType {
     return merge(options, matchedMediaOptions)
   }
 
+  function mediaQueries(optionsList: OptionsType[]): MediaQueryList[] {
+    return optionsList
+      .map((options) => objectKeys(options.breakpoints || {}))
+      .reduce((acc, mediaQueries) => acc.concat(mediaQueries), [])
+      .map(matchMedia)
+  }
+
   const self: OptionsHandlerType = {
     merge,
     areEqual,
     atMedia,
+    mediaQueries,
   }
   return self
 }

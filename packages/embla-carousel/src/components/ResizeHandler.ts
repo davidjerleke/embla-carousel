@@ -15,6 +15,7 @@ export function ResizeHandler(
   let resizeObserver: ResizeObserver
   let containerSize: number
   let slideSizes: number[] = []
+  let destroyed = false
 
   function readSize(node: Element | HTMLElement): number {
     return axis.measureSize(node.getBoundingClientRect())
@@ -29,7 +30,7 @@ export function ResizeHandler(
         const slideSize = slideSizes[slides.indexOf(<HTMLElement>entry.target)]
         const lastSize = entry.target === container ? containerSize : slideSize
 
-        if (lastSize !== readSize(entry.target)) cb()
+        if (lastSize !== readSize(entry.target) && !destroyed) cb()
         eventHandler.emit('resize')
       })
     })
@@ -40,6 +41,7 @@ export function ResizeHandler(
 
   function destroy(): void {
     resizeObserver.disconnect()
+    destroyed = true
   }
 
   const self: ResizeHandlerType = {

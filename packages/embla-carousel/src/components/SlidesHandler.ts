@@ -5,12 +5,13 @@ export type SlidesHandlerType = {
 
 export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
   let mutationObserver: MutationObserver
+  let destroyed = false
 
   function init<CallbackType extends Function>(cb: CallbackType): void {
-    mutationObserver = new MutationObserver((mutationList) => {
-      for (const mutation of mutationList) {
-        if (mutation.type === 'childList') cb()
-      }
+    mutationObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' && !destroyed) cb()
+      })
     })
 
     mutationObserver.observe(container, { childList: true })
@@ -18,6 +19,7 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
 
   function destroy(): void {
     mutationObserver.disconnect()
+    destroyed = true
   }
 
   const self: SlidesHandlerType = {

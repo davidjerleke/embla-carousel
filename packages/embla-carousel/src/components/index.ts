@@ -5,7 +5,7 @@ import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString, objectKeys } from './utils'
+import { isString } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -88,31 +88,12 @@ function EmblaCarousel(
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
 
-    // NEW ---------------------->
-
-    // move to optionsHandler
-    const mediaQueryList = pluginList.reduce(
-      (acc, { options }) => acc.concat(objectKeys(options.breakpoints)),
-      objectKeys(optionsBase.breakpoints),
-    )
-    const uniqueMediaQueryList = mediaQueryList.filter((mediaQuery, index) => {
-      return mediaQueryList.indexOf(mediaQuery) === index
-    }) // change to new [...Set(mediaQueryList)]
-
-    mediaHandlers.removeAll()
-    uniqueMediaQueryList.forEach((mediaQuery) => {
-      mediaHandlers.add(matchMedia(mediaQuery), 'change', () => {
-        console.log('options changed')
-        return reActivate()
-      })
-    })
+    optionsHandler
+      .mediaQueries([optionsBase, ...pluginList.map((p) => p.options)])
+      .forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
     engine.slidesHandler.init(reActivate)
     engine.resizeHandler.init(reActivate)
-
-    // TODO: DRY out engine.axis.measureSize() used in many places
-
-    // NEW ----------------------<
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -147,6 +128,7 @@ function EmblaCarousel(
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
     pluginsHandler.destroy()
+    mediaHandlers.removeAll()
   }
 
   function destroy(): void {

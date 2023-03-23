@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "ES2015",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "esModuleInterop": true,
