@@ -20,22 +20,12 @@ export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
 }
 
-export function isArray(subject: unknown): subject is Record<number, unknown> {
-  return Array.isArray(subject)
-}
-
-export function isRecord(
-  subject: unknown,
-): subject is Record<string | number, unknown> {
-  return isObject(subject) || isArray(subject)
-}
-
 export function mathAbs(n: number): number {
   return Math.abs(n)
 }
 
 export function mathSign(n: number): number {
-  return !n ? 0 : n / mathAbs(n)
+  return Math.sign(n)
 }
 
 export function deltaAbs(valueB: number, valueA: number): number {
@@ -86,22 +76,4 @@ export function objectsMergeDeep(
     })
     return mergedObjects
   }, {})
-}
-
-export function objectsAreEqual(
-  objectA: Record<string, unknown>,
-  objectB: Record<string, unknown>,
-): boolean {
-  const objectAKeys = objectKeys(objectA)
-  const objectBKeys = objectKeys(objectB)
-
-  if (objectAKeys.length !== objectBKeys.length) return false
-
-  return objectAKeys.every((key) => {
-    const valueA = objectA[key]
-    const valueB = objectB[key]
-    if (typeof valueA === 'function') return `${valueA}` === `${valueB}`
-    if (!isRecord(valueA) || !isRecord(valueB)) return valueA === valueB
-    return objectsAreEqual(valueA, valueB)
-  })
 }

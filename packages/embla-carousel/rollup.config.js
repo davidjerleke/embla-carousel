@@ -26,13 +26,21 @@ export default [
         strict: true,
         sourcemap: true,
       },
+    ],
+    plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)],
+  },
+  {
+    input: 'src/index.ts',
+    output: [
       {
         file: `${packageJson.name}.umd.js`,
         format: 'umd',
         strict: true,
         sourcemap: false,
         name: kebabToPascalCase(packageJson.name),
-        plugins: [terser()],
+        plugins: [
+          /*, terser() */
+        ],
       },
     ],
     plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)],

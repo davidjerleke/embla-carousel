@@ -16,6 +16,7 @@ export type EmblaCarouselType = {
   destroy: () => void
   off: EventHandlerType['off']
   on: EventHandlerType['on']
+  emit: EventHandlerType['emit']
   plugins: () => EmblaPluginsType
   previousScrollSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
@@ -37,19 +38,16 @@ function EmblaCarousel(
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
   const mediaHandlers = EventStore()
-  const optionsHandler = OptionsHandler()
   const pluginsHandler = PluginsHandler()
   const eventHandler = EventHandler()
-  const { on, off } = eventHandler
+  const { mergeOptions, optionsAtMedia, optionsMediaQueries } = OptionsHandler()
+  const { on, off, emit } = eventHandler
   const reInit = reActivate
 
   let destroyed = false
   let engine: EngineType
-  let optionsBase = optionsHandler.merge(
-    defaultOptions,
-    EmblaCarousel.globalOptions,
-  )
-  let options = optionsHandler.merge(optionsBase)
+  let optionsBase = mergeOptions(defaultOptions, EmblaCarousel.globalOptions)
+  let options = mergeOptions(optionsBase)
   let pluginList: EmblaPluginType[] = []
   let pluginApis: EmblaPluginsType
 
@@ -76,8 +74,8 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
-    optionsBase = optionsHandler.merge(optionsBase, withOptions)
-    options = optionsHandler.atMedia(optionsBase)
+    optionsBase = mergeOptions(optionsBase, withOptions)
+    options = optionsAtMedia(optionsBase)
 
     storeElements()
     engine = Engine(root, container, slides, options, eventHandler)
@@ -88,9 +86,10 @@ function EmblaCarousel(
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
 
-    optionsHandler
-      .mediaQueries([optionsBase, ...pluginList.map((p) => p.options)])
-      .forEach((query) => mediaHandlers.add(query, 'change', reActivate))
+    optionsMediaQueries([
+      optionsBase,
+      ...pluginList.map(({ options }) => options),
+    ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
     engine.slidesHandler.init(reActivate)
     engine.resizeHandler.init(reActivate)
@@ -99,7 +98,7 @@ function EmblaCarousel(
       if (!engine.slideLooper.canLoop()) {
         deActivate()
         activate({ loop: false }, withPlugins)
-        optionsBase = optionsHandler.merge(optionsBase, { loop: true })
+        optionsBase = mergeOptions(optionsBase, { loop: true })
         return
       }
       engine.slideLooper.loop()
@@ -115,7 +114,7 @@ function EmblaCarousel(
   ): void {
     const startIndex = selectedScrollSnap()
     deActivate()
-    activate(optionsHandler.merge({ startIndex }, withOptions), withPlugins)
+    activate(mergeOptions({ startIndex }, withOptions), withPlugins)
     eventHandler.emit('reInit')
   }
 
@@ -225,6 +224,7 @@ function EmblaCarousel(
     destroy,
     off,
     on,
+    emit,
     plugins,
     previousScrollSnap,
     reInit,
@@ -246,6 +246,5 @@ function EmblaCarousel(
 }
 
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
-EmblaCarousel.optionsHandler = OptionsHandler
 
 export default EmblaCarousel

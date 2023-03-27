@@ -7720,6 +7720,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     embla-carousel: 7.1.0
+    embla-carousel-reactive-utils: 7.1.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7733,6 +7734,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"embla-carousel-reactive-utils@7.1.0, embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils"
+  dependencies:
+    "@types/jest": ^27.4.0
+    "@typescript-eslint/eslint-plugin": ^5.10.2
+    "@typescript-eslint/parser": ^5.10.2
+    eslint: ^8.8.0
+    eslint-config-prettier: ^8.3.0
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^27.5.0
+    prettier: 2.5.1
+    rollup: ^2.68.0
+    ts-jest: ^27.1.3
+    typescript: ^4.5.5
+  peerDependencies:
+    embla-carousel: 7.1.0
+  languageName: unknown
+  linkType: soft
+
 "embla-carousel-svelte@workspace:packages/embla-carousel-svelte":
   version: 0.0.0-use.local
   resolution: "embla-carousel-svelte@workspace:packages/embla-carousel-svelte"
@@ -7741,6 +7762,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     embla-carousel: 7.1.0
+    embla-carousel-reactive-utils: 7.1.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7763,6 +7785,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
     embla-carousel: 7.1.0
+    embla-carousel-reactive-utils: 7.1.0
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
