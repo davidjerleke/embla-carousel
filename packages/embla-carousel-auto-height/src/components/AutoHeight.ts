@@ -1,10 +1,8 @@
-import { defaultOptions, AutoHeightOptionsType, OptionsType } from './Options'
+import { defaultOptions, OptionsType } from './Options'
 import { SlideBoundType } from 'embla-carousel/components/SlidesInView'
 import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import EmblaCarousel, {
-  EmblaCarouselType,
-  EmblaEventType,
-} from 'embla-carousel'
+import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
 declare module 'embla-carousel/components/Plugins' {
   interface EmblaPluginsType {
@@ -14,23 +12,27 @@ declare module 'embla-carousel/components/Plugins' {
 
 export type AutoHeightType = CreatePluginType<{}, OptionsType>
 
-function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
-  const optionsHandler = EmblaCarousel.optionsHandler()
-  const optionsBase = optionsHandler.merge(
-    defaultOptions,
-    AutoHeight.globalOptions,
-  )
-  let options: AutoHeightType['options']
-  let carousel: EmblaCarouselType
+export type AutoHeightOptionsType = AutoHeightType['options']
 
+function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
+  let options: OptionsType
+  let carousel: EmblaCarouselType
   let slideBounds: SlideBoundType[] = []
   let slideHeights: number[] = []
   const heightEvents: EmblaEventType[] = ['select', 'pointerUp']
   const inViewThreshold = 0.5
 
-  function init(embla: EmblaCarouselType): void {
+  function init(
+    embla: EmblaCarouselType,
+    optionsHandler: OptionsHandlerType,
+  ): void {
     carousel = embla
-    options = optionsHandler.atMedia(self.options)
+
+    const { mergeOptions, optionsAtMedia } = optionsHandler
+    const optionsBase = mergeOptions(defaultOptions, AutoHeight.globalOptions)
+    const allOptions = mergeOptions(optionsBase, userOptions)
+    options = optionsAtMedia(allOptions)
+
     const {
       options: { axis },
       slidesInView,
@@ -65,7 +67,7 @@ function AutoHeight(userOptions?: AutoHeightOptionsType): AutoHeightType {
 
   const self: AutoHeightType = {
     name: 'autoHeight',
-    options: optionsHandler.merge(optionsBase, userOptions),
+    options: userOptions,
     init,
     destroy,
   }

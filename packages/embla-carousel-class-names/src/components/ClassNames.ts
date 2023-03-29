@@ -1,10 +1,8 @@
-import { defaultOptions, ClassNamesOptionsType, OptionsType } from './Options'
+import { defaultOptions, OptionsType } from './Options'
 import { addClass, removeClass } from './utils'
 import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import EmblaCarousel, {
-  EmblaCarouselType,
-  EmblaEventType,
-} from 'embla-carousel'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
 
 declare module 'embla-carousel/components/Plugins' {
   interface EmblaPluginsType {
@@ -14,23 +12,27 @@ declare module 'embla-carousel/components/Plugins' {
 
 export type ClassNamesType = CreatePluginType<{}, OptionsType>
 
-function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
-  const optionsHandler = EmblaCarousel.optionsHandler()
-  const optionsBase = optionsHandler.merge(
-    defaultOptions,
-    ClassNames.globalOptions,
-  )
-  let options: ClassNamesType['options']
-  let carousel: EmblaCarouselType
+export type ClassNamesOptionsType = ClassNamesType['options']
 
+function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
+  let options: OptionsType
+  let carousel: EmblaCarouselType
   let root: HTMLElement
   let slides: HTMLElement[]
   const selectedEvents: EmblaEventType[] = ['select', 'pointerUp']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
 
-  function init(embla: EmblaCarouselType): void {
+  function init(
+    embla: EmblaCarouselType,
+    optionsHandler: OptionsHandlerType,
+  ): void {
     carousel = embla
-    options = optionsHandler.atMedia(self.options)
+
+    const { mergeOptions, optionsAtMedia } = optionsHandler
+    const optionsBase = mergeOptions(defaultOptions, ClassNames.globalOptions)
+    const allOptions = mergeOptions(optionsBase, userOptions)
+    options = optionsAtMedia(allOptions)
+
     root = carousel.rootNode()
     slides = carousel.slideNodes()
     const isDraggable = carousel.internalEngine().options.draggable
@@ -68,7 +70,7 @@ function ClassNames(userOptions?: ClassNamesOptionsType): ClassNamesType {
 
   const self: ClassNamesType = {
     name: 'classNames',
-    options: optionsHandler.merge(optionsBase, userOptions),
+    options: userOptions,
     init,
     destroy,
   }

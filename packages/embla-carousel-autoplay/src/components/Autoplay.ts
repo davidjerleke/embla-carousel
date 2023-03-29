@@ -1,6 +1,7 @@
-import { AutoplayOptionsType, defaultOptions, OptionsType } from './Options'
+import { OptionsType, defaultOptions } from './Options'
 import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel'
+import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
+import { EmblaCarouselType } from 'embla-carousel'
 
 declare module 'embla-carousel/components/Plugins' {
   interface EmblaPluginsType {
@@ -17,23 +18,29 @@ export type AutoplayType = CreatePluginType<
   OptionsType
 >
 
-function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
-  const optionsHandler = EmblaCarousel.optionsHandler()
-  const optionsBase = optionsHandler.merge(
-    defaultOptions,
-    Autoplay.globalOptions,
-  )
-  let options: AutoplayType['options']
+export type AutoplayOptionsType = AutoplayType['options']
+
+function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
+  let options: OptionsType
   let carousel: EmblaCarouselType
   let interaction: () => void
   let timer = 0
   let jump = false
 
-  function init(embla: EmblaCarouselType): void {
+  function init(
+    embla: EmblaCarouselType,
+    optionsHandler: OptionsHandlerType,
+  ): void {
     carousel = embla
-    options = optionsHandler.atMedia(self.options)
+
+    const { mergeOptions, optionsAtMedia } = optionsHandler
+    const optionsBase = mergeOptions(defaultOptions, Autoplay.globalOptions)
+    const allOptions = mergeOptions(optionsBase, userOptions)
+    options = optionsAtMedia(allOptions)
+
     jump = options.jump
     interaction = options.stopOnInteraction ? destroy : stop
+
     const { eventStore } = carousel.internalEngine()
     const emblaRoot = carousel.rootNode()
     const root = (options.rootNode && options.rootNode(emblaRoot)) || emblaRoot
@@ -97,7 +104,7 @@ function Autoplay(userOptions?: AutoplayOptionsType): AutoplayType {
 
   const self: AutoplayType = {
     name: 'autoplay',
-    options: optionsHandler.merge(optionsBase, userOptions),
+    options: userOptions,
     init,
     destroy,
     play,

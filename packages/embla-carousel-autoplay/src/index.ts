@@ -1,4 +1,3 @@
-export { AutoplayType } from './components/Autoplay'
-export { AutoplayOptionsType } from './components/Options'
+export { AutoplayType, AutoplayOptionsType } from './components/Autoplay'
 
 export { default } from './components/Autoplay'

@@ -11,7 +11,7 @@ export type PluginsHandlerType = {
 }
 
 export function PluginsHandler(): PluginsHandlerType {
-  const { optionsAtMedia } = OptionsHandler()
+  const optionsHandler = OptionsHandler()
   let activePlugins: EmblaPluginType[] = []
 
   function init(
@@ -19,9 +19,9 @@ export function PluginsHandler(): PluginsHandlerType {
     emblaApi: EmblaCarouselType,
   ): EmblaPluginsType {
     activePlugins = plugins.filter(
-      ({ options }) => optionsAtMedia(options).active,
+      ({ options }) => optionsHandler.optionsAtMedia(options).active !== false,
     )
-    activePlugins.forEach((plugin) => plugin.init(emblaApi))
+    activePlugins.forEach((plugin) => plugin.init(emblaApi, optionsHandler))
 
     return plugins.reduce(
       (map, plugin) => Object.assign(map, { [plugin.name]: plugin }),

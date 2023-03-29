@@ -1,4 +1,3 @@
-export { AutoHeightType } from './components/AutoHeight'
-export { AutoHeightOptionsType } from './components/Options'
+export { AutoHeightType, AutoHeightOptionsType } from './components/AutoHeight'
 
 export { default } from './components/AutoHeight'
