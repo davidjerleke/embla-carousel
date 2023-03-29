@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
 import { DotButton, PrevButton, NextButton } from './Buttons'
 import imageByIndex from './imageByIndex'
 
@@ -11,16 +10,7 @@ type PropType = {
 
 export const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    Autoplay({
-      delay: 3000,
-      breakpoints: {
-        '(min-width: 768px)': {
-          delay: 6000,
-        },
-      },
-    }),
-  ])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -46,19 +36,13 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
     setNextBtnEnabled(emblaApi.canScrollNext())
   }, [emblaApi, setSelectedIndex])
 
-  const updateScrollSnaps = useCallback(() => {
-    if (!emblaApi) return
-    setScrollSnaps(emblaApi.scrollSnapList())
-  }, [emblaApi])
-
   useEffect(() => {
     if (!emblaApi) return
     onSelect()
-    updateScrollSnaps()
+    setScrollSnaps(emblaApi.scrollSnapList())
     emblaApi.on('select', onSelect)
     emblaApi.on('reInit', onSelect)
-    emblaApi.on('reInit', updateScrollSnaps)
-  }, [emblaApi, updateScrollSnaps, onSelect])
+  }, [emblaApi, setScrollSnaps, onSelect])
 
   return (
     <>
