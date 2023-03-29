@@ -1,4 +1,4 @@
-import { isString, isNumber, isObject } from '../components/utils'
+import { isString, isNumber, isBoolean, isObject } from '../components/utils'
 
 describe('isString', () => {
   test('Only returns true for strings', () => {
@@ -27,6 +27,22 @@ describe('isNumber', () => {
     expect(isNumber(Symbol('symbol'))).toBe(false)
     expect(isNumber(NaN)).toBe(true)
     expect(isNumber(10)).toBe(true)
+  })
+})
+
+describe('isBoolean', () => {
+  test('Only returns true for objects', () => {
+    expect(isBoolean(null)).toBe(false)
+    expect(isBoolean(undefined)).toBe(false)
+    expect(isBoolean(/\s/)).toBe(false)
+    expect(isBoolean('10')).toBe(false)
+    expect(isBoolean([])).toBe(false)
+    expect(isBoolean({})).toBe(false)
+    expect(isBoolean(true)).toBe(true)
+    expect(isBoolean(false)).toBe(true)
+    expect(isBoolean(Symbol('symbol'))).toBe(false)
+    expect(isBoolean(NaN)).toBe(false)
+    expect(isBoolean(10)).toBe(false)
   })
 })
 

@@ -1,8 +1,20 @@
 import { AxisType } from './Axis'
+import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
+import { isBoolean } from './utils'
+
+type ResizeHandlerCallbackType = (
+  entries: ResizeObserverEntry[],
+  emblaApi: EmblaCarouselType,
+) => void
+
+export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
 
 export type ResizeHandlerType = {
-  init: <CallbackType extends () => void>(cb: CallbackType) => void
+  init: (
+    emblaApi: EmblaCarouselType,
+    watchResize: ResizeHandlerOptionType,
+  ) => void
   destroy: () => void
 }
 
@@ -21,18 +33,29 @@ export function ResizeHandler(
     return axis.measureSize(node.getBoundingClientRect())
   }
 
-  function init<CallbackType extends () => void>(cb: CallbackType): void {
+  function init(
+    emblaApi: EmblaCarouselType,
+    watchResize: ResizeHandlerOptionType,
+  ): void {
+    if (!watchResize) return
+
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 
-    resizeObserver = new ResizeObserver((entries) => {
+    const defaultCallback = (entries: ResizeObserverEntry[]): void => {
       entries.forEach((entry) => {
         const slideSize = slideSizes[slides.indexOf(<HTMLElement>entry.target)]
         const lastSize = entry.target === container ? containerSize : slideSize
 
-        if (lastSize !== readSize(entry.target) && !destroyed) cb()
+        if (lastSize !== readSize(entry.target)) emblaApi.reInit()
         eventHandler.emit('resize')
       })
+    }
+
+    resizeObserver = new ResizeObserver((entries) => {
+      if (destroyed) return
+      if (isBoolean(watchResize)) defaultCallback(entries)
+      else watchResize(entries, emblaApi)
     })
 
     const observeNodes = [container].concat(slides)
@@ -40,7 +63,7 @@ export function ResizeHandler(
   }
 
   function destroy(): void {
-    resizeObserver.disconnect()
+    if (resizeObserver) resizeObserver.disconnect()
     destroyed = true
   }
 

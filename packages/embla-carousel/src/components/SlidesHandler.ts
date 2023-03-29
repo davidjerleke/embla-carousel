@@ -1,5 +1,18 @@
+import { EmblaCarouselType } from './EmblaCarousel'
+import { isBoolean } from './utils'
+
+type SlidesHandlerCallbackType = (
+  mutations: MutationRecord[],
+  emblaApi: EmblaCarouselType,
+) => void
+
+export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
+
 export type SlidesHandlerType = {
-  init: <CallbackType extends () => void>(cb: CallbackType) => void
+  init: (
+    emblaApi: EmblaCarouselType,
+    watchSlides: SlidesHandlerOptionType,
+  ) => void
   destroy: () => void
 }
 
@@ -7,18 +20,29 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init<CallbackType extends () => void>(cb: CallbackType): void {
-    mutationObserver = new MutationObserver((mutations) => {
+  function init(
+    emblaApi: EmblaCarouselType,
+    watchSlides: SlidesHandlerOptionType,
+  ): void {
+    if (!watchSlides) return
+
+    const defaultCallback = (mutations: MutationRecord[]): void => {
       mutations.forEach((mutation) => {
-        if (mutation.type === 'childList' && !destroyed) cb()
+        if (mutation.type === 'childList') emblaApi.reInit()
       })
+    }
+
+    mutationObserver = new MutationObserver((mutations) => {
+      if (destroyed) return
+      if (isBoolean(watchSlides)) defaultCallback(mutations)
+      else watchSlides(mutations, emblaApi)
     })
 
     mutationObserver.observe(container, { childList: true })
   }
 
   function destroy(): void {
-    mutationObserver.disconnect()
+    if (mutationObserver) mutationObserver.disconnect()
     destroyed = true
   }
 

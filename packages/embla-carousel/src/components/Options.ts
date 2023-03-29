@@ -3,6 +3,8 @@ import { AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
 import { DirectionOptionType } from './Direction'
 import { ScrollContainOptionType } from './ScrollContain'
+import { ResizeHandlerOptionType } from './ResizeHandler'
+import { SlidesHandlerOptionType } from './SlidesHandler'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -30,6 +32,8 @@ export type OptionsType = CreateOptionsType<{
   skipSnaps: boolean
   speed: number
   startIndex: number
+  watchResize: ResizeHandlerOptionType
+  watchSlides: SlidesHandlerOptionType
 }>
 
 export const defaultOptions: OptionsType = {
@@ -49,6 +53,8 @@ export const defaultOptions: OptionsType = {
   speed: 10,
   startIndex: 0,
   active: true,
+  watchResize: true,
+  watchSlides: true,
 }
 
 export type EmblaOptionsType = Partial<OptionsType>

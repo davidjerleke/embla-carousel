@@ -91,8 +91,8 @@ function EmblaCarousel(
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
-    engine.slidesHandler.init(reActivate)
-    engine.resizeHandler.init(reActivate)
+    engine.resizeHandler.init(self, options.watchResize)
+    engine.slidesHandler.init(self, options.watchSlides)
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {

@@ -16,6 +16,10 @@ export function isString(subject: unknown): subject is string {
   return typeof subject === 'string'
 }
 
+export function isBoolean(subject: unknown): subject is boolean {
+  return typeof subject === 'boolean'
+}
+
 export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
 }
