@@ -1,6 +1,6 @@
 import { OptionsHandler } from '../components/OptionsHandler'
 
-const optionsHandler = OptionsHandler()
+const { optionsAtMedia, optionsMediaQueries } = OptionsHandler()
 const matchMediaQuery = '(min-width: 768px)'
 const matchMediaQuery2 = '(min-width: 576px)'
 const notMatchMediaQuery = '(min-width: 992px)'
@@ -13,7 +13,30 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 describe('OptionsHandler', () => {
-  describe('atMedia', () => {
+  describe('optionsMediaQueries', () => {
+    const optionsA = {
+      align: 'start',
+      breakpoints: {
+        [matchMediaQuery]: { align: 'center' },
+        [matchMediaQuery2]: { loop: true },
+      },
+    }
+    const optionsB = {
+      align: 'end',
+      breakpoints: {
+        [notMatchMediaQuery]: { align: 'end' },
+      },
+    }
+
+    const mediaQueries = optionsMediaQueries([optionsA, optionsB])
+    expect(mediaQueries).toEqual([
+      { matches: true },
+      { matches: true },
+      { matches: false },
+    ])
+  })
+
+  describe('optionsAtMedia', () => {
     test('Returns options where breakpoint options that matchMedia are assigned to the root level', () => {
       const options = {
         loop: false,
@@ -24,7 +47,7 @@ describe('OptionsHandler', () => {
         },
       }
 
-      const matchMediaOptions = optionsHandler.atMedia(options)
+      const matchMediaOptions = optionsAtMedia(options)
       expect(matchMediaOptions).toEqual({
         loop: true,
         align: 'start',
@@ -44,7 +67,7 @@ describe('OptionsHandler', () => {
         },
       }
 
-      const matchMediaOptions = optionsHandler.atMedia(options)
+      const matchMediaOptions = optionsAtMedia(options)
       expect(matchMediaOptions).toEqual({
         align: 'end',
         breakpoints: {
@@ -64,7 +87,7 @@ describe('OptionsHandler', () => {
         },
       }
 
-      const matchMediaOptions = optionsHandler.atMedia(options)
+      const matchMediaOptions = optionsAtMedia(options)
       expect(matchMediaOptions).toEqual({
         loop: true,
         align: 'end',
@@ -73,56 +96,6 @@ describe('OptionsHandler', () => {
           [matchMediaQuery2]: { align: 'end' },
         },
       })
-    })
-  })
-
-  describe('areEqual', () => {
-    test('Is key order sensitive for breakpoint option keys', () => {
-      const optionsA = {
-        loop: false,
-        align: 'start',
-        breakpoints: {
-          [matchMediaQuery]: { loop: true },
-          [notMatchMediaQuery]: { align: 'end' },
-        },
-      }
-      const optionsB = {
-        loop: false,
-        align: 'start',
-        breakpoints: {
-          [notMatchMediaQuery]: { align: 'end' },
-          [matchMediaQuery]: { loop: true },
-        },
-      }
-
-      const optionsAreEqual = optionsHandler.areEqual(optionsA, optionsB)
-      expect(optionsAreEqual).toBe(false)
-    })
-
-    test('Is not key order sensitive for any other option keys', () => {
-      const optionsA = {
-        loop: false,
-        align: 'start',
-        breakpoints: {
-          [matchMediaQuery]: {
-            loop: true,
-            align: 'end',
-          },
-        },
-      }
-      const optionsB = {
-        align: 'start',
-        loop: false,
-        breakpoints: {
-          [matchMediaQuery]: {
-            align: 'end',
-            loop: true,
-          },
-        },
-      }
-
-      const optionsAreEqual = optionsHandler.areEqual(optionsA, optionsB)
-      expect(optionsAreEqual).toBe(true)
     })
   })
 })

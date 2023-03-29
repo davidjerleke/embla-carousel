@@ -1,5 +1,5 @@
 export type SlidesHandlerType = {
-  init: <CallbackType extends Function>(cb: CallbackType) => void
+  init: <CallbackType extends () => void>(cb: CallbackType) => void
   destroy: () => void
 }
 
@@ -7,7 +7,7 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init<CallbackType extends Function>(cb: CallbackType): void {
+  function init<CallbackType extends () => void>(cb: CallbackType): void {
     mutationObserver = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'childList' && !destroyed) cb()

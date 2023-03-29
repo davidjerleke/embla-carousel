@@ -2,7 +2,7 @@ import { AxisType } from './Axis'
 import { EventHandlerType } from './EventHandler'
 
 export type ResizeHandlerType = {
-  init: <CallbackType extends Function>(cb: CallbackType) => void
+  init: <CallbackType extends () => void>(cb: CallbackType) => void
   destroy: () => void
 }
 
@@ -21,7 +21,7 @@ export function ResizeHandler(
     return axis.measureSize(node.getBoundingClientRect())
   }
 
-  function init<CallbackType extends Function>(cb: CallbackType): void {
+  function init<CallbackType extends () => void>(cb: CallbackType): void {
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 

@@ -1,6 +1,6 @@
+import { EmblaCarouselType } from '../components/EmblaCarousel'
 import { EmblaPluginType } from '../components/Plugins'
 import { PluginsHandler } from '../components/PluginsHandler'
-import { initializeEmbla } from './index.test'
 
 const pluginsHandler = PluginsHandler()
 const autoplay: EmblaPluginType = {
@@ -16,7 +16,7 @@ const classNames: EmblaPluginType = {
   options: { active: true, breakpoints: {} },
 }
 const plugins = [autoplay, classNames]
-const embla = initializeEmbla()()
+const emblaApi = <EmblaCarouselType>{}
 
 afterEach(() => {
   jest.clearAllMocks()
@@ -25,21 +25,21 @@ afterEach(() => {
 describe('PluginsHandler', () => {
   describe('Init', () => {
     test('Initializes the plugins passed', () => {
-      pluginsHandler.init(plugins, embla)
+      pluginsHandler.init(plugins, emblaApi)
 
       expect(autoplay.init).toHaveBeenCalledTimes(1)
       expect(classNames.init).toHaveBeenCalledTimes(1)
     })
 
     test('Returns a object with plugin API:s', () => {
-      const pluginApis = pluginsHandler.init(plugins, embla)
+      const pluginApis = pluginsHandler.init(plugins, emblaApi)
       expect(pluginApis).toEqual({ autoplay, classNames })
     })
   })
 
   describe('Destroy', () => {
     test('Destroys the plugins', () => {
-      pluginsHandler.init(plugins, embla)
+      pluginsHandler.init(plugins, emblaApi)
       pluginsHandler.destroy()
 
       expect(autoplay.destroy).toHaveBeenCalledTimes(1)

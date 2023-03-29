@@ -4,7 +4,7 @@ const viewSize = 100
 const percentage = 10
 const noSize = 0
 
-describe('PxToPercent', () => {
+describe('PercentOfView', () => {
   test('Converts given number to percentage of view', () => {
     const measure = PercentOfView(viewSize).measure(percentage)
     expect(measure).toBe(10)

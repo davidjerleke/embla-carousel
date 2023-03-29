@@ -5,9 +5,8 @@ const snapSizes = [80, 40, 30, 40, 60]
 const scrollSnaps = [10, -50, -85, -120, -170]
 const contentSize = snapSizes.reduce((a, s) => a + s, 0)
 
-const getScrollLimit = (loop: boolean): LimitType => {
-  return ScrollLimit(contentSize, scrollSnaps, loop).limit
-}
+const getScrollLimit = (loop: boolean): LimitType =>
+  ScrollLimit(contentSize, scrollSnaps, loop).limit
 
 describe('ScrollLimit', () => {
   describe('When loop is', () => {

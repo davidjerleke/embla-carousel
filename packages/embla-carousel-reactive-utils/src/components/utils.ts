@@ -1,10 +1,10 @@
 import { EmblaPluginType } from 'embla-carousel'
 
-function isObject(subject: unknown): subject is Record<string, unknown> {
+export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
 }
 
-function isRecord(
+export function isRecord(
   subject: unknown,
 ): subject is Record<string | number, unknown> {
   return isObject(subject) || Array.isArray(subject)
@@ -19,17 +19,22 @@ export function canUseDOM(): boolean {
 }
 
 export function areOptionsEqual(
-  objectA: Record<string, unknown>,
-  objectB: Record<string, unknown>,
+  optionsA: Record<string, unknown>,
+  optionsB: Record<string, unknown>,
 ): boolean {
-  const objectAKeys = Object.keys(objectA)
-  const objectBKeys = Object.keys(objectB)
+  const optionsAKeys = Object.keys(optionsA)
+  const optionsBKeys = Object.keys(optionsB)
 
-  if (objectAKeys.length !== objectBKeys.length) return false
+  if (optionsAKeys.length !== optionsBKeys.length) return false
 
-  return objectAKeys.every((key) => {
-    const valueA = objectA[key]
-    const valueB = objectB[key]
+  const breakpointsA = JSON.stringify(Object.keys(optionsA.breakpoints || {}))
+  const breakpointsB = JSON.stringify(Object.keys(optionsB.breakpoints || {}))
+
+  if (breakpointsA !== breakpointsB) return false
+
+  return optionsAKeys.every((key) => {
+    const valueA = optionsA[key]
+    const valueB = optionsB[key]
     if (typeof valueA === 'function') return `${valueA}` === `${valueB}`
     if (!isRecord(valueA) || !isRecord(valueB)) return valueA === valueB
     return areOptionsEqual(valueA, valueB)

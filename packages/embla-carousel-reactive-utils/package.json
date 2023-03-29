@@ -36,7 +36,7 @@
     "index.d.ts"
   ],
   "scripts": {
-    "test": "echo \"Info: no tests specified\" && exit 0",
+    "test": "jest --config jest.config.js",
     "build": "rollup -c",
     "start": "rollup -c --watch",
     "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\""
