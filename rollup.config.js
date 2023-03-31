@@ -2,7 +2,7 @@ import emblaPackageJson from 'embla-carousel/package.json'
 import utilsPackageJson from 'embla-carousel-reactive-utils/package.json'
 import localTypescript from 'typescript'
 import babel from '@rollup/plugin-babel'
-import typescript from '@rollup/plugin-typescript'
+import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import { terser } from 'rollup-plugin-terser'
 
