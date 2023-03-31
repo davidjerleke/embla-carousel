@@ -43,13 +43,18 @@ export function ResizeHandler(
     slideSizes = slides.map(readSize)
 
     const defaultCallback = (entries: ResizeObserverEntry[]): void => {
-      entries.forEach((entry) => {
-        const slideSize = slideSizes[slides.indexOf(<HTMLElement>entry.target)]
-        const lastSize = entry.target === container ? containerSize : slideSize
+      for (const entry of entries) {
+        const isContainer = entry.target === container
+        const slideIndex = slides.indexOf(<HTMLElement>entry.target)
+        const lastSize = isContainer ? containerSize : slideSizes[slideIndex]
+        const newSize = readSize(isContainer ? container : slides[slideIndex])
 
-        if (lastSize !== readSize(entry.target)) emblaApi.reInit()
-        eventHandler.emit('resize')
-      })
+        if (lastSize !== newSize) {
+          emblaApi.reInit()
+          eventHandler.emit('resize')
+          break
+        }
+      }
     }
 
     resizeObserver = new ResizeObserver((entries) => {

@@ -13,6 +13,7 @@ export const OPTIONS: EmblaOptionsType = {
   inViewThreshold: 0,
   dragFree: true,
   containScroll: 'keepSnaps',
+  watchSlides: false,
 }
 export const STYLES = createCarouselInfiniteScrollStyles()
 

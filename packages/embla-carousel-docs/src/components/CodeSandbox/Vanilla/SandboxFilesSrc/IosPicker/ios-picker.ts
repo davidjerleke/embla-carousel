@@ -96,6 +96,7 @@ export const setupIosPicker = (
   options: EmblaOptionsType,
 ): EmblaCarouselType => {
   const emblaApi = EmblaCarousel(iosPickerNode, options)
+  const rootNode = emblaApi.rootNode()
   const slideCount = emblaApi.slideNodes().length
   const {
     options: { loop },
@@ -104,13 +105,17 @@ export const setupIosPicker = (
   const rotationOffset = loop ? 0 : WHEEL_ITEM_RADIUS
   const rotateWheelFunc = rotateWheel(emblaApi, slideCount, rotationOffset)
   const rotateSlidesFunc = rotateSlides(emblaApi, loop, slideCount, totalRadius)
+  const readRootNodeSize = () => rootNode.getBoundingClientRect().height
   const rotate = (): void => {
     rotateWheelFunc()
     rotateSlidesFunc()
   }
+  let rootNodeSize = readRootNodeSize()
+
   emblaApi.slideNodes().forEach((slideNode) => {
     slideNode.style.position = 'absolute'
   })
+
   emblaApi.on('pointerUp', () => {
     const { scrollTo, target, location } = emblaApi.internalEngine()
     const diffToTarget = target.get() - location.get()
@@ -118,16 +123,32 @@ export const setupIosPicker = (
     const distance = diffToTarget * factor
     scrollTo.distance(distance, true)
   })
+
   emblaApi.on('scroll', rotate)
-  emblaApi.on('reInit', () => {
-    emblaApi.containerNode().removeAttribute('style')
-    emblaApi.slideNodes().forEach((slideNode) => {
-      slideNode.removeAttribute('style')
-    })
-    emblaApi.reInit()
-    inactivateEmblaTransform(emblaApi)
-    rotate()
+
+  const resizeObserver = new ResizeObserver(() => {
+    const newRootNodeSize = readRootNodeSize()
+
+    if (newRootNodeSize !== rootNodeSize) {
+      rootNodeSize = newRootNodeSize
+
+      emblaApi.containerNode().style.transform = 'none'
+      emblaApi.slideNodes().forEach((slideNode) => {
+        slideNode.style.transform = 'none'
+        slideNode.style.position = 'static'
+      })
+
+      emblaApi.reInit()
+      inactivateEmblaTransform(emblaApi)
+
+      emblaApi.slideNodes().forEach((slideNode) => {
+        slideNode.style.position = 'absolute'
+      })
+      rotate()
+    }
   })
+
+  resizeObserver.observe(rootNode)
 
   inactivateEmblaTransform(emblaApi)
   rotate()
