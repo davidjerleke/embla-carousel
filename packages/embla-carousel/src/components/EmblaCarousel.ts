@@ -10,7 +10,6 @@ import { isString } from './utils'
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
-  clickAllowed: () => boolean
   containerNode: () => HTMLElement
   internalEngine: () => EngineType
   destroy: () => void
@@ -191,10 +190,6 @@ function EmblaCarousel(
     return engine.indexPrevious.get()
   }
 
-  function clickAllowed(): boolean {
-    return engine.dragHandler.clickAllowed()
-  }
-
   function plugins(): EmblaPluginsType {
     return pluginApis
   }
@@ -218,7 +213,6 @@ function EmblaCarousel(
   const self: EmblaCarouselType = {
     canScrollNext,
     canScrollPrev,
-    clickAllowed,
     containerNode,
     internalEngine,
     destroy,

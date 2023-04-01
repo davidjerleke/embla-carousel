@@ -174,11 +174,15 @@ export const EmblaCarousel = () => {
 
 Below follows an exhaustive **list of all** Embla Carousel **events** together with information about how they work.
 
+---
+
 ### init
 
 Once: <BrandPrimaryText>`yes`</BrandPrimaryText>
 
 Runs when the carousel mounts for the first time. This only fires once which means that it won't fire when the carousel is re-initialized using the [reInit](/api/methods/#reinit) method.
+
+---
 
 ### reInit
 
@@ -186,11 +190,15 @@ Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the [reInit](/api/methods/#reinit) method is called. When the window is resized, Embla Carousel automatically calls the [reInit](/api/methods/#reinit) method which will also fire this event.
 
+---
+
 ### destroy
 
 Once: <BrandPrimaryText>`yes`</BrandPrimaryText>
 
 Runs when the carousel has been destroyed using the [destroy](/api/methods/#destroy) method. This only fires once and will be the last event the carousel fires.
+
+---
 
 ### select
 
@@ -198,11 +206,15 @@ Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the selected scroll snap changes. The select event is triggered by drag interactions or the [scrollNext](/api/methods/#scrollnext), [scrollPrev](/api/methods/#scrollPrev) or [scrollTo](/api/methods/#scrollto) methods.
 
+---
+
 ### scroll
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the carousel is scrolling. It might be a good idea to throttle this if you're doing expensive stuff in your callback function.
+
+---
 
 ### settle
 
@@ -210,17 +222,23 @@ Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the carousel has settled after scroll has been triggered. Please note that this can take longer than you think when [dragFree](/api/options/#dragfree) is enabled or when using slow transition [speeds](/api/options/#speed).
 
+---
+
 ### resize
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the carousel has resized triggered by the window `resize` event. This event will call the [reInit](/api/methods/#reinit) method internally.
 
+---
+
 ### pointerDown
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
 Runs when the user has a pointer down on the carousel. It's triggered by a `touchstart` or a `mousedown` event.
+
+---
 
 ### pointerUp
 
