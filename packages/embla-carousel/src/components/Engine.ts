@@ -90,8 +90,8 @@ export function Engine(
   const viewSize = axis.measureSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
-  const containSnaps = !loop && containScroll !== ''
-  const readEdgeGap = loop || containScroll !== ''
+  const containSnaps = !loop && !!containScroll
+  const readEdgeGap = loop || !!containScroll
   const { slideSizes, slideSizesWithGaps } = SlideSizes(
     axis,
     containerRect,
