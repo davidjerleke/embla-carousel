@@ -21,5 +21,3 @@ export const defaultOptions: OptionsType = {
   stopOnLastSnap: false,
   rootNode: null,
 }
-
-export type AutoplayOptionsType = Partial<OptionsType>

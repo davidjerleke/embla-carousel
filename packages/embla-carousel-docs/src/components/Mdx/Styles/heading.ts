@@ -7,6 +7,7 @@ import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 
+export const HEADING_TOP_SPACING = SPACINGS.EIGHT
 const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)
 
 export const headingStyles = css`
@@ -24,7 +25,7 @@ export const headingStyles = css`
   h1,
   h2,
   h3 {
-    margin-top: ${SPACINGS.EIGHT};
+    margin-top: ${HEADING_TOP_SPACING};
   }
 
   h1 {

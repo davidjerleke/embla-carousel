@@ -56,7 +56,8 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "embla-carousel": "7.1.0"
+    "embla-carousel": "7.1.0",
+    "embla-carousel-reactive-utils": "7.1.0"
   },
   "peerDependencies": {
     "vue": "^3.2.37"

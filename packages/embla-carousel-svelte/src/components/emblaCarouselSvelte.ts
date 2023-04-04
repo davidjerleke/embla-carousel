@@ -1,5 +1,9 @@
 import { ActionReturn } from 'svelte/action'
-import { arePluginsEqual, canUseDOM } from './utils'
+import {
+  areOptionsEqual,
+  arePluginsEqual,
+  canUseDOM,
+} from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -17,7 +21,6 @@ function emblaCarouselSvelte(
   emblaNode: HTMLElement,
   emblaConfig: EmblaCarouselParameterType = { options: {}, plugins: [] },
 ): EmblaCarouselSvelteType {
-  const areOptionsEqual = EmblaCarousel.optionsHandler().areEqual
   let storedEmblaConfig = emblaConfig
   let embla: EmblaCarouselType
 

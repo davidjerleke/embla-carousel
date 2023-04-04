@@ -1,4 +1,3 @@
-export { ClassNamesType } from './components'
-export { ClassNamesOptionsType } from './components/Options'
+export { ClassNamesType, ClassNamesOptionsType } from './components/ClassNames'
 
-export { default } from './components'
+export { default } from './components/ClassNames'

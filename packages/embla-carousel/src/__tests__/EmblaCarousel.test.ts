@@ -1,5 +1,21 @@
 import { EmblaOptionsType } from '../components/Options'
-import EmblaCarousel, { EmblaCarouselType } from '../components/index'
+import EmblaCarousel, { EmblaCarouselType } from '../components/EmblaCarousel'
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(() => ({
+    matches: false,
+  })),
+})
+
+Object.defineProperty(window, 'ResizeObserver', {
+  writable: true,
+  value: jest.fn().mockImplementation(() => ({
+    observe: () => undefined,
+    unobserve: () => undefined,
+    disconnect: () => undefined,
+  })),
+})
 
 export const initializeEmbla = (
   withContainer: boolean = true,

@@ -1,5 +1,6 @@
 import { CreateOptionsType, LooseOptionsType } from './Options'
-import { EmblaCarouselType } from './'
+import { EmblaCarouselType } from './EmblaCarousel'
+import { OptionsHandlerType } from './OptionsHandler'
 
 export type LoosePluginType = {
   [key: string]: unknown
@@ -10,8 +11,8 @@ export type CreatePluginType<
   TypeB extends LooseOptionsType,
 > = TypeA & {
   name: string
-  options: CreateOptionsType<TypeB>
-  init: (embla: EmblaCarouselType) => void
+  options: Partial<CreateOptionsType<TypeB>>
+  init: (embla: EmblaCarouselType, OptionsHandler: OptionsHandlerType) => void
   destroy: () => void
 }
 

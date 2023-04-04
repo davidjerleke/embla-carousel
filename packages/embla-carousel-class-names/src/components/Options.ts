@@ -13,5 +13,3 @@ export const defaultOptions: OptionsType = {
   draggable: 'is-draggable',
   dragging: 'is-dragging',
 }
-
-export type ClassNamesOptionsType = Partial<OptionsType>

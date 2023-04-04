@@ -56,7 +56,8 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "embla-carousel": "7.1.0"
+    "embla-carousel": "7.1.0",
+    "embla-carousel-reactive-utils": "7.1.0"
   },
   "peerDependencies": {
     "svelte": "^3.49.0"

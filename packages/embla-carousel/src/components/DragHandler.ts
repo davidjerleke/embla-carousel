@@ -14,7 +14,6 @@ import { PercentOfViewType } from './PercentOfView'
 
 export type DragHandlerType = {
   addActivationEvents: () => void
-  clickAllowed: () => boolean
   pointerDown: () => boolean
   removeAllEvents: () => void
 }
@@ -173,18 +172,12 @@ export function DragHandler(
     }
   }
 
-  // DEPRECATED - Remove in v8 because handled automatically
-  function clickAllowed(): boolean {
-    return !preventClick
-  }
-
   function pointerDown(): boolean {
     return pointerIsDown
   }
 
   const self: DragHandlerType = {
     addActivationEvents,
-    clickAllowed,
     pointerDown,
     removeAllEvents,
   }

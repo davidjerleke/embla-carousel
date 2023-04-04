@@ -1,4 +1,5 @@
-import packageJson from './packages/embla-carousel/package.json'
+import emblaPackageJson from 'embla-carousel/package.json'
+import utilsPackageJson from 'embla-carousel-reactive-utils/package.json'
 import localTypescript from 'typescript'
 import babel from '@rollup/plugin-babel'
 import typescript from 'rollup-plugin-typescript2'
@@ -11,7 +12,17 @@ const kebabToPascalCase = (string = '') =>
   )
 
 const CONFIG_GLOBALS = {
-  [packageJson.name]: kebabToPascalCase(packageJson.name),
+  [emblaPackageJson.name]: kebabToPascalCase(emblaPackageJson.name),
+  [utilsPackageJson.name]: kebabToPascalCase(utilsPackageJson.name),
+}
+
+const CONFIG_EXTERNAL_MODULES = {
+  moduleDirectories: ['node_modules', utilsPackageJson.name],
+}
+
+const CONFIG_EXTERNAL_MODULE_SUPPRESS = (warning, next) => {
+  if (warning.code === 'INPUT_HOOK_IN_OUTPUT_PLUGIN') return
+  next(warning)
 }
 
 const CONFIG_BABEL = {
@@ -29,6 +40,8 @@ export {
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
   CONFIG_GLOBALS,
+  CONFIG_EXTERNAL_MODULES,
+  CONFIG_EXTERNAL_MODULE_SUPPRESS,
   babel,
   typescript,
   resolve,

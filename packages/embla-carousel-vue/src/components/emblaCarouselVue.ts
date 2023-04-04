@@ -1,5 +1,9 @@
 import { Ref, ref, isRef, watch, onMounted, onUnmounted } from 'vue'
-import { canUseDOM, arePluginsEqual } from './utils'
+import {
+  areOptionsEqual,
+  arePluginsEqual,
+  canUseDOM,
+} from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
@@ -15,7 +19,6 @@ function emblaCarouselVue(
   options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
   plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = [],
 ): EmblaCarouselVueType {
-  const areOptionsEqual = EmblaCarousel.optionsHandler().areEqual
   const storedOptions = ref(isRef(options) ? options.value : options)
   const storedPlugins = ref(isRef(plugins) ? plugins.value : plugins)
   const emblaNode = ref<HTMLElement>()
@@ -43,7 +46,6 @@ function emblaCarouselVue(
   if (isRef(options)) {
     watch(options, (newOptions) => {
       if (areOptionsEqual(storedOptions.value, newOptions)) return
-
       storedOptions.value = newOptions
       reInit()
     })
@@ -52,7 +54,6 @@ function emblaCarouselVue(
   if (isRef(plugins)) {
     watch(plugins, (newPlugins) => {
       if (arePluginsEqual(storedPlugins.value, newPlugins)) return
-
       storedPlugins.value = newPlugins
       reInit()
     })

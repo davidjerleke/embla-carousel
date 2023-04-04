@@ -70,6 +70,8 @@ export const IosPickerItem = (props) => {
     loop,
     axis: 'y',
     dragFree: true,
+    watchResize: false,
+    watchSlides: false,
   })
   const [wheelReady, setWheelReady] = useState(false)
   const [wheelRotation, setWheelRotation] = useState(0)
@@ -80,7 +82,7 @@ export const IosPickerItem = (props) => {
   const containerStyles = getContainerStyles(wheelRotation)
   const slideStyles = getSlidesStyles(emblaApi, loop, slideCount, totalRadius)
 
-  const inactivateEmblaTransform = useCallback(() => {
+  const inactivateEmblaTransform = useCallback((emblaApi) => {
     if (!emblaApi) return
     const { translate, slideLooper } = emblaApi.internalEngine()
     translate.clear()
@@ -89,23 +91,24 @@ export const IosPickerItem = (props) => {
       translate.clear()
       translate.toggleActive(false)
     })
-  }, [emblaApi])
+  }, [])
 
-  const readRootNodeSize = useCallback(() => {
+  const readRootNodeSize = useCallback((emblaApi) => {
     if (!emblaApi) return 0
     return emblaApi.rootNode().getBoundingClientRect().height
-  }, [emblaApi])
+  }, [])
 
-  const rotateWheel = useCallback(() => {
-    if (!emblaApi) return
-    const rotation = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
-    setWheelRotation(rotation * emblaApi.scrollProgress())
-  }, [emblaApi, slideCount, rotationOffset, setWheelRotation])
+  const rotateWheel = useCallback(
+    (emblaApi) => {
+      if (!emblaApi) return
+      const rotation = slideCount * WHEEL_ITEM_RADIUS - rotationOffset
+      setWheelRotation(rotation * emblaApi.scrollProgress())
+    },
+    [slideCount, rotationOffset, setWheelRotation],
+  )
 
   useEffect(() => {
     if (!emblaApi) return
-
-    rootNodeSize.current = readRootNodeSize()
 
     emblaApi.on('pointerUp', () => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
@@ -116,28 +119,44 @@ export const IosPickerItem = (props) => {
     })
 
     emblaApi.on('scroll', () => {
-      flushSync(() => rotateWheel())
-    })
-
-    emblaApi.on('resize', () => {
-      const newRootNodeSize = readRootNodeSize()
-      if (rootNodeSize.current === newRootNodeSize) return
-
-      rootNodeSize.current = newRootNodeSize
-      flushSync(() => setWheelReady(false))
-
-      setWheelReady(() => {
-        emblaApi.reInit()
-        inactivateEmblaTransform()
-        rotateWheel()
-        return true
-      })
+      flushSync(() => rotateWheel(emblaApi))
     })
 
     setWheelReady(true)
-    inactivateEmblaTransform()
-    rotateWheel()
-  }, [emblaApi, inactivateEmblaTransform, readRootNodeSize, rotateWheel])
+    inactivateEmblaTransform(emblaApi)
+    rotateWheel(emblaApi)
+  }, [emblaApi, inactivateEmblaTransform, rotateWheel])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    if (!rootNodeSize.current) rootNodeSize.current = readRootNodeSize(emblaApi)
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (readRootNodeSize(emblaApi) !== rootNodeSize.current) {
+        rootNodeSize.current = readRootNodeSize(emblaApi)
+        flushSync(() => setWheelReady(false))
+
+        setWheelReady(() => {
+          emblaApi.reInit()
+          inactivateEmblaTransform(emblaApi)
+          rotateWheel(emblaApi)
+          return true
+        })
+      }
+    })
+
+    resizeObserver.observe(emblaApi.rootNode())
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [
+    emblaApi,
+    inactivateEmblaTransform,
+    setWheelReady,
+    rotateWheel,
+    readRootNodeSize,
+  ])
 
   return (
     <div className="embla__ios-picker">

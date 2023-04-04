@@ -100,7 +100,7 @@ module.exports = {
       },
     },
   ],
-  flags: {
-    DEV_SSR: true,
-  },
+  // flags: {
+  //   DEV_SSR: true,
+  // },
 }

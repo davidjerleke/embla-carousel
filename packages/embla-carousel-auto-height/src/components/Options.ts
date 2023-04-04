@@ -9,5 +9,3 @@ export const defaultOptions: OptionsType = {
   breakpoints: {},
   destroyHeight: 'auto',
 }
-
-export type AutoHeightOptionsType = Partial<OptionsType>

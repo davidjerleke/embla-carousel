@@ -3,6 +3,7 @@ import { css } from 'styled-components'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
+import { LAYERS } from 'consts/layers'
 
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
 export const CAROUSEL_THUMB_SLIDES_HEIGHT = '9rem'
@@ -20,6 +21,7 @@ const borderStyles = css`
   }
 
   &:after {
+    z-index: ${LAYERS.STEP};
     content: '';
     pointer-events: none;
     position: absolute;
