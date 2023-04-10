@@ -129,12 +129,16 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Draw
-  const update = (): void => {
-    if (!loop) engine.scrollBounds.constrain(engine.dragHandler.pointerDown())
-    engine.scrollBody.seek(target).update()
+  const update = (frameRate: number): void => {
+    const pointerDown = engine.dragHandler.pointerDown()
+    if (!loop) engine.scrollBounds.constrain(pointerDown)
+
+    engine.scrollBody
+      .seek(target, frameRate, !options.loop && pointerDown)
+      .update()
     const settled = engine.scrollBody.settle(target)
 
-    if (settled && !engine.dragHandler.pointerDown()) {
+    if (settled && !pointerDown) {
       engine.animation.stop()
       eventHandler.emit('settle')
     }
@@ -149,6 +153,16 @@ export function Engine(
     engine.translate.to(location)
     engine.animation.proceed()
   }
+
+  let prevTime = new Date()
+
+  eventHandler.on('select', () => {
+    prevTime = new Date()
+  })
+  eventHandler.on('settle', () => {
+    console.log(new Date().getTime() - prevTime.getTime())
+    console.log('--------settle--------')
+  })
 
   // Shared
   const animation = Animation(update)

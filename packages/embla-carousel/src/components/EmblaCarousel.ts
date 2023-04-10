@@ -90,6 +90,7 @@ function EmblaCarousel(
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
+    engine.animation.init()
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
 
@@ -119,7 +120,7 @@ function EmblaCarousel(
 
   function deActivate(): void {
     engine.dragHandler.removeAllEvents()
-    engine.animation.stop()
+    engine.animation.destroy()
     engine.eventStore.removeAll()
     engine.translate.clear()
     engine.slideLooper.clear()
@@ -145,7 +146,7 @@ function EmblaCarousel(
 
   function slidesNotInView(target?: boolean): number[] {
     const inView = slidesInView(target)
-    return engine.slideIndexes.filter((index) => inView.indexOf(index) === -1)
+    return engine.slideIndexes.filter((index) => !inView.includes(index))
   }
 
   function scrollTo(index: number, jump?: boolean, direction?: number): void {

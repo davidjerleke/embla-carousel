@@ -57,7 +57,7 @@ export function SlidesInView(
 
     return slideBounds.reduce((list: number[], slideBound) => {
       const { index, start, end } = slideBound
-      const inList = list.indexOf(index) !== -1
+      const inList = list.includes(index)
       const inView = start < limitedLocation && end > limitedLocation
       return !inList && inView ? list.concat([index]) : list
     }, [])

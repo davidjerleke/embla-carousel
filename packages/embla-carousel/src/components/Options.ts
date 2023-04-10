@@ -50,7 +50,7 @@ export const defaultOptions: OptionsType = {
   inViewThreshold: 0,
   loop: false,
   skipSnaps: false,
-  speed: 10,
+  speed: 12,
   startIndex: 0,
   active: true,
   watchResize: true,

@@ -18,7 +18,7 @@ export function ScrollBounds(
 ): ScrollBoundsType {
   const pullBackThreshold = percentOfView.measure(10)
   const edgeOffsetTolerance = percentOfView.measure(50)
-  const maxFriction = 0.85
+  const maxFriction = 0.99
   let disabled = false
 
   function shouldConstrain(): boolean {
