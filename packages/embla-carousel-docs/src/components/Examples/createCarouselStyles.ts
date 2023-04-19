@@ -33,6 +33,7 @@ const BASE_STYLES = css`
   }
 
   .embla__container {
+    backface-visibility: hidden;
     display: flex;
     flex-direction: __replace_axis_flex__;
     height: __replace_axis_height__;

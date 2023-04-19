@@ -129,13 +129,11 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Draw
-  const update = (frameRate: number): void => {
+  const update = (): void => {
     const pointerDown = engine.dragHandler.pointerDown()
     if (!loop) engine.scrollBounds.constrain(pointerDown)
 
-    engine.scrollBody
-      .seek(target, frameRate, !options.loop && pointerDown)
-      .update()
+    engine.scrollBody.seek(target).update()
     const settled = engine.scrollBody.settle(target)
 
     if (settled && !pointerDown) {
@@ -151,7 +149,7 @@ export function Engine(
     }
 
     engine.translate.to(location)
-    engine.animation.proceed()
+    // engine.animation.proceed()
   }
 
   let prevTime = new Date()

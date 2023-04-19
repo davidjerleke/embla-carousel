@@ -10,9 +10,11 @@ export type AnimationType = {
   proceed: () => void
 }
 
-export function Animation(callback: FrameRequestCallback): AnimationType {
+export function Animation(callback: CallbackType): AnimationType {
+  const timeStep = 1000 / 60
   const documentVisibleHandler = EventStore()
   let lastTimeStamp: number | null = null
+  let delta = 0
   let animationFrame = 0
 
   function init(): void {
@@ -33,13 +35,20 @@ export function Animation(callback: FrameRequestCallback): AnimationType {
   }
 
   function animate(timeStamp: DOMHighResTimeStamp): void {
-    if (lastTimeStamp === null) {
+    if (!lastTimeStamp) {
       lastTimeStamp = timeStamp
       return start()
     }
 
-    callback(timeStamp - lastTimeStamp)
-    if (animationFrame) lastTimeStamp = timeStamp
+    delta += timeStamp - lastTimeStamp
+    lastTimeStamp = timeStamp
+
+    while (delta >= timeStep) {
+      callback()
+      delta -= timeStep
+    }
+
+    if (animationFrame) start()
   }
 
   function start(): void {
