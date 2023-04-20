@@ -45,7 +45,7 @@ export function DragHandler(
   const dragThreshold = percentOfView.measure(20)
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
-  const baseSpeed = dragFree ? 45 : 25
+  const baseSpeed = dragFree ? 43 : 25
   const baseFriction = 0.68
 
   let startScroll = 0
@@ -117,8 +117,8 @@ export function DragHandler(
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     dragStartPoint.set(target)
-    scrollBody.useFriction(0.2).useSpeed(1)
     target.set(location)
+    scrollBody.useFriction(0).useSpeed(0)
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
@@ -150,9 +150,6 @@ export function DragHandler(
     const targetChanged = currentLocation.index !== index.get()
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
     const force = allowedForce(direction.apply(rawForce), targetChanged)
-
-    console.log(force, 'force')
-
     const forceFactor = factorAbs(rawForce, force)
     const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
     const speed = baseSpeed - 10 * forceFactor

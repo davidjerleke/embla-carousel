@@ -7,7 +7,6 @@ export type AnimationType = {
   destroy: () => void
   start: () => void
   stop: () => void
-  // proceed: () => void
 }
 
 export function Animation(callback: CallbackType): AnimationType {
@@ -64,7 +63,6 @@ export function Animation(callback: CallbackType): AnimationType {
   const self: AnimationType = {
     init,
     destroy,
-    // proceed: ifAnimating(true, start),
     start: ifAnimating(false, start),
     stop: ifAnimating(true, stop),
   }

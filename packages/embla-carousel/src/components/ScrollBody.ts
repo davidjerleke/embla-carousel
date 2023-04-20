@@ -17,49 +17,26 @@ export function ScrollBody(
   baseFriction: number,
 ): ScrollBodyType {
   const roundToTwoDecimals = roundToDecimals(2)
-  const velocity = Vector1D(0)
-  const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
 
   let attractionDirection = 0
   let speed = baseSpeed
   let friction = baseFriction
 
-  let xSpeed = 0
-
   function seek(target: Vector1DType): void {
     const diff = target.get() - location.get()
+    const isInstant = !friction && !speed
 
-    const hasSettled = !roundToTwoDecimals(diff)
-
-    if (hasSettled) {
+    if (isInstant) {
+      attraction.set(0)
       location.set(target)
-      return
+    } else {
+      attraction.add(diff / speed)
+      attraction.multiply(friction)
+      location.add(attraction)
     }
 
-    // if (!xSpeed && !friction) {
-    //   attractionDirection = mathSign(diff)
-    //   location.set(target)
-    //   return
-    // }
-    // console.log(diff, 'd')
-
-    // console.log(friction, speed, diff, 'friction, speed, diff')
-
-    location.add(xSpeed)
-    attractionDirection = mathSign(xSpeed)
-
-    // const steps = 25
-    xSpeed += speed ? diff / speed : diff
-
-    if (friction) xSpeed *= friction
-
-    // attraction.set(target).subtract(location)
-    // const magnitude = map(attraction.get(), 0, 100, 0, speed)
-    // attractionDirection = mathSign(attraction.get())
-    // attraction.normalize().multiply(magnitude).subtract(velocity)
-    // applyForce(attraction)
-    // return self
+    attractionDirection = mathSign(attraction.get() || diff)
   }
 
   function settle(target: Vector1DType): boolean {

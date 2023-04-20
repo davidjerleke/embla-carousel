@@ -158,7 +158,7 @@ export function Engine(
   })
   eventHandler.on('settle', () => {
     console.log(new Date().getTime() - prevTime.getTime())
-    console.log('--------settle--------')
+    console.log('-----settle-----')
   })
 
   // Shared
