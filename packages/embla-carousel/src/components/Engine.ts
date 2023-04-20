@@ -138,6 +138,7 @@ export function Engine(
 
     if (settled && !pointerDown) {
       engine.animation.stop()
+      console.log(settled, 'settled')
       eventHandler.emit('settle')
     }
     if (!settled) {
@@ -150,16 +151,6 @@ export function Engine(
 
     engine.translate.to(location)
   }
-
-  let prevTime = new Date()
-
-  eventHandler.on('select', () => {
-    prevTime = new Date()
-  })
-  eventHandler.on('settle', () => {
-    console.log(new Date().getTime() - prevTime.getTime())
-    console.log('-----settle-----')
-  })
 
   // Shared
   const animation = Animation(update)
