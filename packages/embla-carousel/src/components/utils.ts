@@ -1,13 +1,3 @@
-export function map(
-  value: number,
-  iStart: number,
-  iStop: number,
-  oStart: number,
-  oStop: number,
-): number {
-  return oStart + (oStop - oStart) * ((value - iStart) / (iStop - iStart))
-}
-
 export function isNumber(subject: unknown): subject is number {
   return typeof subject === 'number'
 }

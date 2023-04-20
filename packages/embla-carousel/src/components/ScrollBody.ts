@@ -1,22 +1,20 @@
-import { Limit } from './Limit'
-import { map, roundToDecimals, mathSign } from './utils'
+import { roundToDecimals, mathSign } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
 export type ScrollBodyType = {
   direction: () => number
-  seek: (target: Vector1DType) => ScrollBodyType
+  seek: (target: Vector1DType) => void
   settle: (target: Vector1DType) => boolean
-  update: () => void
-  useBaseMass: () => ScrollBodyType
+  useBaseFriction: () => ScrollBodyType
   useBaseSpeed: () => ScrollBodyType
-  useMass: (n: number) => ScrollBodyType
+  useFriction: (n: number) => ScrollBodyType
   useSpeed: (n: number) => ScrollBodyType
 }
 
 export function ScrollBody(
   location: Vector1DType,
   baseSpeed: number,
-  baseMass: number,
+  baseFriction: number,
 ): ScrollBodyType {
   const roundToTwoDecimals = roundToDecimals(2)
   const velocity = Vector1D(0)
@@ -25,26 +23,43 @@ export function ScrollBody(
 
   let attractionDirection = 0
   let speed = baseSpeed
-  let mass = baseMass
+  let friction = baseFriction
 
-  function update(): void {
-    velocity.add(acceleration)
-    location.add(velocity)
-    acceleration.multiply(0)
-  }
+  let xSpeed = 0
 
-  function applyForce(force: Vector1DType): void {
-    force.divide(mass)
-    acceleration.add(force)
-  }
+  function seek(target: Vector1DType): void {
+    const diff = target.get() - location.get()
 
-  function seek(target: Vector1DType): ScrollBodyType {
-    attraction.set(target).subtract(location)
-    const magnitude = map(attraction.get(), 0, 100, 0, speed)
-    attractionDirection = mathSign(attraction.get())
-    attraction.normalize().multiply(magnitude).subtract(velocity)
-    applyForce(attraction)
-    return self
+    const hasSettled = !roundToTwoDecimals(diff)
+
+    if (hasSettled) {
+      location.set(target)
+      return
+    }
+
+    // if (!xSpeed && !friction) {
+    //   attractionDirection = mathSign(diff)
+    //   location.set(target)
+    //   return
+    // }
+    // console.log(diff, 'd')
+
+    // console.log(friction, speed, diff, 'friction, speed, diff')
+
+    location.add(xSpeed)
+    attractionDirection = mathSign(xSpeed)
+
+    // const steps = 25
+    xSpeed += speed ? diff / speed : diff
+
+    if (friction) xSpeed *= friction
+
+    // attraction.set(target).subtract(location)
+    // const magnitude = map(attraction.get(), 0, 100, 0, speed)
+    // attractionDirection = mathSign(attraction.get())
+    // attraction.normalize().multiply(magnitude).subtract(velocity)
+    // applyForce(attraction)
+    // return self
   }
 
   function settle(target: Vector1DType): boolean {
@@ -62,8 +77,8 @@ export function ScrollBody(
     return useSpeed(baseSpeed)
   }
 
-  function useBaseMass(): ScrollBodyType {
-    return useMass(baseMass)
+  function useBaseFriction(): ScrollBodyType {
+    return useFriction(baseFriction)
   }
 
   function useSpeed(n: number): ScrollBodyType {
@@ -71,8 +86,8 @@ export function ScrollBody(
     return self
   }
 
-  function useMass(n: number): ScrollBodyType {
-    mass = n
+  function useFriction(n: number): ScrollBodyType {
+    friction = n
     return self
   }
 
@@ -80,10 +95,9 @@ export function ScrollBody(
     direction,
     seek,
     settle,
-    update,
-    useBaseMass,
+    useBaseFriction,
     useBaseSpeed,
-    useMass,
+    useFriction,
     useSpeed,
   }
   return self

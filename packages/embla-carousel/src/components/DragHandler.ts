@@ -45,8 +45,8 @@ export function DragHandler(
   const dragThreshold = percentOfView.measure(20)
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
-  const baseSpeed = dragFree ? 5 : 16
-  const baseMass = 1
+  const baseSpeed = dragFree ? 45 : 25
+  const baseFriction = 0.68
 
   let startScroll = 0
   let startCross = 0
@@ -95,11 +95,12 @@ export function DragHandler(
 
   function allowedForce(force: number, targetChanged: boolean): number {
     const next = index.clone().add(mathSign(force) * -1)
-    const isEdge = next.get() === index.min || next.get() === index.max
+    // const isEdge = next.get() === index.min || next.get() === index.max
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
+    // if (!loop && isEdge)
+    //   return Math.min(mathAbs(baseForce), 50) * mathSign(force)
     if (dragFree || mathAbs(force) < dragThreshold) return baseForce
-    if (!loop && isEdge) return baseForce * 0.4
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
@@ -116,8 +117,8 @@ export function DragHandler(
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     dragStartPoint.set(target)
+    scrollBody.useFriction(0.2).useSpeed(1)
     target.set(location)
-    scrollBody.useBaseMass().useSpeed(80)
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
@@ -138,6 +139,7 @@ export function DragHandler(
     }
     const diff = dragTracker.pointerMove(evt)
     if (!preventClick && diff) preventClick = true
+
     animation.start()
     target.add(direction.apply(diff))
     evt.preventDefault()
@@ -148,18 +150,19 @@ export function DragHandler(
     const targetChanged = currentLocation.index !== index.get()
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
     const force = allowedForce(direction.apply(rawForce), targetChanged)
+
+    console.log(force, 'force')
+
     const forceFactor = factorAbs(rawForce, force)
     const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
-    const isVigorous = targetChanged && forceFactor > 0.75
-    const isBelowThreshold = mathAbs(rawForce) < dragThreshold
-    const speed = isVigorous ? 10 : baseSpeed
-    const mass = isVigorous ? baseMass + 2.5 * forceFactor : baseMass
+    const speed = baseSpeed - 10 * forceFactor
+    const friction = baseFriction + forceFactor / 50
 
     if (isMoving && !isMouse) preventClick = true
     preventScroll = false
     pointerIsDown = false
     interactionEvents.removeAll()
-    scrollBody.useSpeed(isBelowThreshold ? 9 : speed).useMass(mass)
+    scrollBody.useSpeed(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
     eventHandler.emit('pointerUp')

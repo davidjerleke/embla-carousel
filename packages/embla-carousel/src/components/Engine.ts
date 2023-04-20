@@ -133,7 +133,7 @@ export function Engine(
     const pointerDown = engine.dragHandler.pointerDown()
     if (!loop) engine.scrollBounds.constrain(pointerDown)
 
-    engine.scrollBody.seek(target).update()
+    engine.scrollBody.seek(target)
     const settled = engine.scrollBody.settle(target)
 
     if (settled && !pointerDown) {
@@ -149,7 +149,6 @@ export function Engine(
     }
 
     engine.translate.to(location)
-    // engine.animation.proceed()
   }
 
   let prevTime = new Date()
@@ -167,7 +166,7 @@ export function Engine(
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const scrollBody = ScrollBody(location, speed, 1)
+  const scrollBody = ScrollBody(location, speed, 0.68)
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,

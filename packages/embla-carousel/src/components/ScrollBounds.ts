@@ -1,4 +1,4 @@
-import { LimitType } from './Limit'
+import { Limit, LimitType } from './Limit'
 import { ScrollBodyType } from './ScrollBody'
 import { Vector1DType } from './Vector1d'
 import { mathAbs } from './utils'
@@ -33,13 +33,16 @@ export function ScrollBounds(
     const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
     const diffToEdge = mathAbs(limit[edge] - location.get())
     const diffToTarget = target.get() - location.get()
-    const friction = Math.min(diffToEdge / edgeOffsetTolerance, maxFriction)
+    const frictionLimit = Limit(0.1, 0.99)
+    const friction = frictionLimit.constrain(diffToEdge / edgeOffsetTolerance)
 
     target.subtract(diffToTarget * friction)
+    // console.log(friction, 'friciton')
+    // scrollBody.useBaseSpeed().useBaseFriction()
 
     if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
       target.set(limit.constrain(target.get()))
-      scrollBody.useSpeed(10).useMass(3)
+      // scrollBody.useBaseSpeed().useBaseFriction()
     }
   }
 
