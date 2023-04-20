@@ -83,8 +83,8 @@ export function DragHandler(
   }
 
   function isFocusNode(node: Element): boolean {
-    const name = node.nodeName || ''
-    return focusNodes.indexOf(name) > -1
+    const nodeName = node.nodeName || ''
+    return focusNodes.includes(nodeName)
   }
 
   function forceBoost(): number {
@@ -95,11 +95,8 @@ export function DragHandler(
 
   function allowedForce(force: number, targetChanged: boolean): number {
     const next = index.clone().add(mathSign(force) * -1)
-    // const isEdge = next.get() === index.min || next.get() === index.max
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
-    // if (!loop && isEdge)
-    //   return Math.min(mathAbs(baseForce), 50) * mathSign(force)
     if (dragFree || mathAbs(force) < dragThreshold) return baseForce
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
@@ -117,8 +114,8 @@ export function DragHandler(
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     dragStartPoint.set(target)
-    target.set(location)
     scrollBody.useFriction(0).useSpeed(0)
+    target.set(location)
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
@@ -140,6 +137,7 @@ export function DragHandler(
     const diff = dragTracker.pointerMove(evt)
     if (!preventClick && diff) preventClick = true
 
+    scrollBody.useFriction(0.3).useSpeed(1)
     animation.start()
     target.add(direction.apply(diff))
     evt.preventDefault()
