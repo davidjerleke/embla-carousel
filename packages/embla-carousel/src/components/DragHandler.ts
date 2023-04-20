@@ -32,9 +32,9 @@ export function DragHandler(
   index: CounterType,
   eventHandler: EventHandlerType,
   percentOfView: PercentOfViewType,
-  loop: boolean,
   dragFree: boolean,
   skipSnaps: boolean,
+  baseFriction: number,
 ): DragHandlerType {
   const { cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
@@ -46,7 +46,6 @@ export function DragHandler(
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 43 : 25
-  const baseFriction = 0.68
 
   let startScroll = 0
   let startCross = 0
@@ -114,7 +113,7 @@ export function DragHandler(
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     dragStartPoint.set(target)
-    scrollBody.useFriction(0).useSpeed(0)
+    scrollBody.useFriction(0).useDuration(0)
     target.set(location)
     addInteractionEvents()
     startScroll = dragTracker.readPoint(evt)
@@ -137,7 +136,7 @@ export function DragHandler(
     const diff = dragTracker.pointerMove(evt)
     if (!preventClick && diff) preventClick = true
 
-    scrollBody.useFriction(0.3).useSpeed(1)
+    scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
     target.add(direction.apply(diff))
     evt.preventDefault()
@@ -157,7 +156,7 @@ export function DragHandler(
     preventScroll = false
     pointerIsDown = false
     interactionEvents.removeAll()
-    scrollBody.useSpeed(speed).useFriction(friction)
+    scrollBody.useDuration(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
     eventHandler.emit('pointerUp')

@@ -212,7 +212,22 @@ Choose content direction between `ltr` and `rtl`.
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
-Enables momentum scrolling. The speed and duration of the continued scrolling is proportional to how vigorous the drag gesture is.
+Enables momentum scrolling. The duration of the continued scrolling is proportional to how vigorous the drag gesture is.
+
+---
+
+### duration
+
+Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`25`</BrandSecondaryText>
+
+Set scroll duration when triggered by any of the API methods. Higher numbers enables slower scrolling. Drag interactions are not affected because duration is then determined by the drag force.
+
+<Admonition type="note">
+  **Note:** Duration is **not** in milliseconds because Embla uses a attraction
+  physics simulation when scrolling instead of easings. Only values between
+  `20`-`60` are recommended.
+</Admonition>
 
 ---
 
@@ -283,17 +298,6 @@ Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>
 Default: <BrandSecondaryText>`1`</BrandSecondaryText>
 
 Group slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number, which has to be an integer. Set it to `auto` if you want Embla to group slides automatically.
-
----
-
-### speed
-
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`12`</BrandSecondaryText>
-
-Adjust scroll speed when triggered by any of the API methods. Higher numbers enables faster scrolling. Drag interactions are not affected because speed is then determined by the drag force. Only values between `5`-`20` are recommended.
-
-**Note:** The speed option is actually controlling the magnitude of the attraction force to the target (where the carousel is headed). This is because Embla uses a simple physics simulation when scrolling instead of transitions.
 
 ---
 

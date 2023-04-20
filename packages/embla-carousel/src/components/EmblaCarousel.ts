@@ -151,7 +151,7 @@ function EmblaCarousel(
 
   function scrollTo(index: number, jump?: boolean, direction?: number): void {
     if (!options.active || destroyed) return
-    engine.scrollBody.useBaseFriction().useSpeed(jump ? 0 : options.speed)
+    engine.scrollBody.useBaseFriction().useDuration(jump ? 0 : options.duration)
     engine.scrollTo.index(index, direction || 0)
   }
 

@@ -6,32 +6,32 @@ export type ScrollBodyType = {
   seek: (target: Vector1DType) => void
   settle: (target: Vector1DType) => boolean
   useBaseFriction: () => ScrollBodyType
-  useBaseSpeed: () => ScrollBodyType
+  useBaseDuration: () => ScrollBodyType
   useFriction: (n: number) => ScrollBodyType
-  useSpeed: (n: number) => ScrollBodyType
+  useDuration: (n: number) => ScrollBodyType
 }
 
 export function ScrollBody(
   location: Vector1DType,
-  baseSpeed: number,
+  baseDuration: number,
   baseFriction: number,
 ): ScrollBodyType {
   const roundToTwoDecimals = roundToDecimals(2)
   const attraction = Vector1D(0)
 
   let attractionDirection = 0
-  let speed = baseSpeed
+  let duration = baseDuration
   let friction = baseFriction
 
   function seek(target: Vector1DType): void {
     const diff = target.get() - location.get()
-    const isInstant = !friction || !speed
+    const isInstant = !friction || !duration
 
     if (isInstant) {
       attraction.set(0)
       location.set(target)
     } else {
-      attraction.add(diff / speed)
+      attraction.add(diff / duration)
       attraction.multiply(friction)
       location.add(attraction)
     }
@@ -50,16 +50,16 @@ export function ScrollBody(
     return attractionDirection
   }
 
-  function useBaseSpeed(): ScrollBodyType {
-    return useSpeed(baseSpeed)
+  function useBaseDuration(): ScrollBodyType {
+    return useDuration(baseDuration)
   }
 
   function useBaseFriction(): ScrollBodyType {
     return useFriction(baseFriction)
   }
 
-  function useSpeed(n: number): ScrollBodyType {
-    speed = n
+  function useDuration(n: number): ScrollBodyType {
+    duration = n
     return self
   }
 
@@ -73,9 +73,9 @@ export function ScrollBody(
     seek,
     settle,
     useBaseFriction,
-    useBaseSpeed,
+    useBaseDuration,
     useFriction,
-    useSpeed,
+    useDuration,
   }
   return self
 }

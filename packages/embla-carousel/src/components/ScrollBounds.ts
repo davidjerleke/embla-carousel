@@ -39,7 +39,7 @@ export function ScrollBounds(
 
     if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
       target.set(limit.constrain(target.get()))
-      scrollBody.useBaseSpeed().useBaseFriction()
+      scrollBody.useDuration(25).useBaseFriction()
     }
   }
 

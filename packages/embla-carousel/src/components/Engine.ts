@@ -75,7 +75,7 @@ export function Engine(
     startIndex,
     inViewThreshold,
     loop,
-    speed,
+    duration,
     dragFree,
     slidesToScroll: groupSlides,
     skipSnaps,
@@ -153,11 +153,12 @@ export function Engine(
   }
 
   // Shared
+  const friction = 0.68
   const animation = Animation(update)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const scrollBody = ScrollBody(location, speed, 0.68)
+  const scrollBody = ScrollBody(location, duration, friction)
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
@@ -183,26 +184,6 @@ export function Engine(
     inViewThreshold,
   )
 
-  // DragHandler
-  const dragHandler = DragHandler(
-    axis,
-    direction,
-    root,
-    target,
-    DragTracker(axis),
-    location,
-    animation,
-    scrollTo,
-    scrollBody,
-    scrollTarget,
-    index,
-    eventHandler,
-    percentOfView,
-    loop,
-    dragFree,
-    skipSnaps,
-  )
-
   // Engine
   const engine: EngineType = {
     containerRect,
@@ -210,7 +191,24 @@ export function Engine(
     animation,
     axis,
     direction,
-    dragHandler,
+    dragHandler: DragHandler(
+      axis,
+      direction,
+      root,
+      target,
+      DragTracker(axis),
+      location,
+      animation,
+      scrollTo,
+      scrollBody,
+      scrollTarget,
+      index,
+      eventHandler,
+      percentOfView,
+      dragFree,
+      skipSnaps,
+      friction,
+    ),
     eventStore: EventStore(),
     percentOfView,
     index,
