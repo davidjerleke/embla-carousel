@@ -25,7 +25,7 @@ export function ScrollBody(
 
   function seek(target: Vector1DType): void {
     const diff = target.get() - location.get()
-    const isInstant = !friction && !speed
+    const isInstant = !friction || !speed
 
     if (isInstant) {
       attraction.set(0)
