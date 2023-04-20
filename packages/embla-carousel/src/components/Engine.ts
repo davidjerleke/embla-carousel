@@ -138,7 +138,6 @@ export function Engine(
 
     if (settled && !pointerDown) {
       engine.animation.stop()
-      console.log(settled, 'settled')
       eventHandler.emit('settle')
     }
     if (!settled) {
