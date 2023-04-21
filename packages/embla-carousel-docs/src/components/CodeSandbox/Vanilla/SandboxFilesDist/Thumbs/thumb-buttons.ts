@@ -6,9 +6,9 @@ export const addThumbBtnsClickHandlers = (
 ): (() => void) => {
   const slidesThumbs = emblaApiThumb.slideNodes()
 
-  const scrollToIndex = slidesThumbs.map((_, index) => (): void => {
-    if (emblaApiThumb.clickAllowed()) emblaApiMain.scrollTo(index)
-  })
+  const scrollToIndex = slidesThumbs.map(
+    (_, index) => (): void => emblaApiMain.scrollTo(index),
+  )
 
   slidesThumbs.forEach((slideNode, index) => {
     slideNode.addEventListener('click', scrollToIndex[index], false)

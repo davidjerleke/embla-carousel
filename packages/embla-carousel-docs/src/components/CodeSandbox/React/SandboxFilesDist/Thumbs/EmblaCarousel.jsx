@@ -15,7 +15,7 @@ const EmblaCarousel = (props) => {
   const onThumbClick = useCallback(
     (index) => {
       if (!emblaMainApi || !emblaThumbsApi) return
-      if (emblaThumbsApi.clickAllowed()) emblaMainApi.scrollTo(index)
+      emblaMainApi.scrollTo(index)
     },
     [emblaMainApi, emblaThumbsApi],
   )
