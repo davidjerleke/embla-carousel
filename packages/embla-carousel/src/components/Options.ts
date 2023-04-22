@@ -30,7 +30,7 @@ export type OptionsType = CreateOptionsType<{
   inViewThreshold: number
   loop: boolean
   skipSnaps: boolean
-  speed: number
+  duration: number
   startIndex: number
   watchResize: ResizeHandlerOptionType
   watchSlides: SlidesHandlerOptionType
@@ -50,7 +50,7 @@ export const defaultOptions: OptionsType = {
   inViewThreshold: 0,
   loop: false,
   skipSnaps: false,
-  speed: 10,
+  duration: 25,
   startIndex: 0,
   active: true,
   watchResize: true,

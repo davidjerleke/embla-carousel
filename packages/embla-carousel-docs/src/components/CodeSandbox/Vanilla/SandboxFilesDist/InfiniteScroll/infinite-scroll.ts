@@ -68,14 +68,16 @@ export const setupInfiniteScroll = (
 
     emblaApi.reInit()
     const newEngine = emblaApi.internalEngine()
-    const propsToCopy: (keyof EngineType)[] = [
+    const copyEngineModules: (keyof EngineType)[] = [
       'scrollBody',
       'location',
       'target',
     ]
-    propsToCopy.forEach((propToCopy) =>
-      Object.assign(newEngine[propToCopy], oldEngine[propToCopy]),
+    copyEngineModules.forEach((engineModule) =>
+      Object.assign(newEngine[engineModule], oldEngine[engineModule]),
     )
+
+    newEngine.translate.to(oldEngine.location)
     const { index } = newEngine.scrollTarget.byDistance(0, false)
     newEngine.index.set(index)
     newEngine.animation.start()
@@ -100,7 +102,7 @@ export const setupInfiniteScroll = (
     deactivateBounds()
   }
 
-  const loadMore = (newSlides?: HTMLElement[]) => {
+  const loadMore = (newSlides?: HTMLElement[]): void => {
     hasMoreToLoad = !!newSlides
     removeLoadingSlide()
     if (newSlides) addMoreSlides(newSlides)

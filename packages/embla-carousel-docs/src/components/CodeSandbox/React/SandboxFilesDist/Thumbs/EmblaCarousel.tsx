@@ -20,7 +20,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const onThumbClick = useCallback(
     (index: number) => {
       if (!emblaMainApi || !emblaThumbsApi) return
-      if (emblaThumbsApi.clickAllowed()) emblaMainApi.scrollTo(index)
+      emblaMainApi.scrollTo(index)
     },
     [emblaMainApi, emblaThumbsApi],
   )

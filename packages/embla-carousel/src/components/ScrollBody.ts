@@ -1,49 +1,42 @@
-import { map, roundToDecimals, mathSign } from './utils'
+import { roundToDecimals, mathSign } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
 export type ScrollBodyType = {
   direction: () => number
-  seek: (target: Vector1DType) => ScrollBodyType
+  seek: (target: Vector1DType) => void
   settle: (target: Vector1DType) => boolean
-  update: () => void
-  useBaseMass: () => ScrollBodyType
-  useBaseSpeed: () => ScrollBodyType
-  useMass: (n: number) => ScrollBodyType
-  useSpeed: (n: number) => ScrollBodyType
+  useBaseFriction: () => ScrollBodyType
+  useBaseDuration: () => ScrollBodyType
+  useFriction: (n: number) => ScrollBodyType
+  useDuration: (n: number) => ScrollBodyType
 }
 
 export function ScrollBody(
   location: Vector1DType,
-  baseSpeed: number,
-  baseMass: number,
+  baseDuration: number,
+  baseFriction: number,
 ): ScrollBodyType {
   const roundToTwoDecimals = roundToDecimals(2)
-  const velocity = Vector1D(0)
-  const acceleration = Vector1D(0)
   const attraction = Vector1D(0)
 
   let attractionDirection = 0
-  let speed = baseSpeed
-  let mass = baseMass
+  let duration = baseDuration
+  let friction = baseFriction
 
-  function update(): void {
-    velocity.add(acceleration)
-    location.add(velocity)
-    acceleration.multiply(0)
-  }
+  function seek(target: Vector1DType): void {
+    const diff = target.get() - location.get()
+    const isInstant = !friction || !duration
 
-  function applyForce(force: Vector1DType): void {
-    force.divide(mass)
-    acceleration.add(force)
-  }
+    if (isInstant) {
+      attraction.set(0)
+      location.set(target)
+    } else {
+      attraction.add(diff / duration)
+      attraction.multiply(friction)
+      location.add(attraction)
+    }
 
-  function seek(target: Vector1DType): ScrollBodyType {
-    attraction.set(target).subtract(location)
-    const magnitude = map(attraction.get(), 0, 100, 0, speed)
-    attractionDirection = mathSign(attraction.get())
-    attraction.normalize().multiply(magnitude).subtract(velocity)
-    applyForce(attraction)
-    return self
+    attractionDirection = mathSign(attraction.get() || diff)
   }
 
   function settle(target: Vector1DType): boolean {
@@ -57,21 +50,21 @@ export function ScrollBody(
     return attractionDirection
   }
 
-  function useBaseSpeed(): ScrollBodyType {
-    return useSpeed(baseSpeed)
+  function useBaseDuration(): ScrollBodyType {
+    return useDuration(baseDuration)
   }
 
-  function useBaseMass(): ScrollBodyType {
-    return useMass(baseMass)
+  function useBaseFriction(): ScrollBodyType {
+    return useFriction(baseFriction)
   }
 
-  function useSpeed(n: number): ScrollBodyType {
-    speed = n
+  function useDuration(n: number): ScrollBodyType {
+    duration = n
     return self
   }
 
-  function useMass(n: number): ScrollBodyType {
-    mass = n
+  function useFriction(n: number): ScrollBodyType {
+    friction = n
     return self
   }
 
@@ -79,11 +72,10 @@ export function ScrollBody(
     direction,
     seek,
     settle,
-    update,
-    useBaseMass,
-    useBaseSpeed,
-    useMass,
-    useSpeed,
+    useBaseFriction,
+    useBaseDuration,
+    useFriction,
+    useDuration,
   }
   return self
 }

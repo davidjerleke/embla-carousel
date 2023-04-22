@@ -38,7 +38,7 @@ const injectBaseStyles = (): void => {
 injectBaseStyles()
 
 const SLIDE_COUNT = 5
-const OPTIONS: EmblaOptionsType = {}
+const OPTIONS: EmblaOptionsType = { dragFree: false }
 
 const emblaNode = <HTMLElement>document.querySelector('.embla')
 const viewPortNode = <HTMLElement>emblaNode.querySelector('.embla__viewport')
