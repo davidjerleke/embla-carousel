@@ -11,111 +11,100 @@ const mockApiCall = (minWait, maxWait, callback) => {
 
 const EmblaCarousel = (props) => {
   const { options, slides: propSlides } = props
-  const scrollListener = useRef(() => undefined)
+  const scrollListenerRef = useRef(() => undefined)
+  const listenForScrollRef = useRef(true)
+  const hasMoreToLoadRef = useRef(true)
   const [slides, setSlides] = useState(propSlides)
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [hasMoreToLoad, setHasMoreToLoad] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [pointerIsDown, setPointerIsDown] = useState(false)
 
-  const setPointerDown = useCallback(() => setPointerIsDown(true), [])
-  const setPointerNotDown = useCallback(() => setPointerIsDown(false), [])
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...options,
+    watchSlides: (_, emblaApi) => {
+      const reloadEmbla = () => {
+        const oldEngine = emblaApi.internalEngine()
 
-  const lastSlideIsInView = useCallback(() => {
-    if (!emblaApi) return false
-    const lastSlide = emblaApi.slideNodes().length - 1
-    return emblaApi.slidesInView().indexOf(lastSlide) !== -1
-  }, [emblaApi])
+        emblaApi.reInit()
+        const newEngine = emblaApi.internalEngine()
+        const copyEngineModules = ['scrollBody', 'location', 'target']
+        copyEngineModules.forEach((engineModule) => {
+          Object.assign(newEngine[engineModule], oldEngine[engineModule])
+        })
 
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return
-    setLoadingMore((isLoadingMore) => {
-      if (isLoadingMore) return true
-      const shouldLoadMore = lastSlideIsInView()
-      if (shouldLoadMore) emblaApi.off('scroll', scrollListener.current)
-      return shouldLoadMore
+        newEngine.translate.to(oldEngine.location)
+        const { index } = newEngine.scrollTarget.byDistance(0, false)
+        newEngine.index.set(index)
+        newEngine.animation.start()
+
+        setLoadingMore(false)
+        listenForScrollRef.current = true
+      }
+
+      const reloadAfterPointerUp = () => {
+        emblaApi.off('pointerUp', reloadAfterPointerUp)
+        reloadEmbla()
+      }
+
+      const engine = emblaApi.internalEngine()
+
+      if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
+        const boundsActive = engine.limit.reachedMax(engine.target.get())
+        engine.scrollBounds.toggleActive(boundsActive)
+        emblaApi.on('pointerUp', reloadAfterPointerUp)
+      } else {
+        reloadEmbla()
+      }
+    },
+  })
+
+  const onScroll = useCallback((emblaApi) => {
+    if (!listenForScrollRef.current) return
+
+    setLoadingMore((loadingMore) => {
+      const lastSlide = emblaApi.slideNodes().length - 1
+      const lastSlideInView = emblaApi.slidesInView().includes(lastSlide)
+      const loadMore = !loadingMore && lastSlideInView
+
+      if (loadMore) {
+        listenForScrollRef.current = false
+
+        mockApiCall(1000, 2000, () => {
+          setSlides((currentSlides) => {
+            if (currentSlides.length === 20) {
+              setHasMoreToLoad(false)
+              emblaApi.off('scroll', scrollListenerRef.current)
+              return currentSlides
+            }
+            const newSlideCount = currentSlides.length + 5
+            return Array.from(Array(newSlideCount).keys())
+          })
+        })
+      }
+
+      return loadingMore || lastSlideInView
     })
-  }, [emblaApi, setLoadingMore, lastSlideIsInView])
+  }, [])
 
-  const addScrollListener = useCallback(() => {
-    if (!emblaApi || !hasMoreToLoad) return
-    scrollListener.current = () => onScroll()
-    emblaApi.on('scroll', scrollListener.current)
-  }, [emblaApi, hasMoreToLoad, onScroll])
-
-  const reloadEmbla = useCallback(() => {
-    if (!emblaApi) return
-    const oldEngine = emblaApi.internalEngine()
-    emblaApi.reInit()
-    const newEngine = emblaApi.internalEngine()
-    Object.assign(newEngine.scrollBody, oldEngine.scrollBody)
-    Object.assign(newEngine.location, oldEngine.location)
-    Object.assign(newEngine.target, oldEngine.target)
-    const { index } = newEngine.scrollTarget.byDistance(0, false)
-    newEngine.index.set(index)
-    newEngine.animation.start()
-    setLoadingMore(false)
-  }, [emblaApi])
-
-  useEffect(() => {
-    if (!emblaApi || slides.length === emblaApi.slideNodes().length - 1) return
-    const engine = emblaApi.internalEngine()
-    const boundsActive = engine.limit.reachedMax(engine.target.get())
-    engine.scrollBounds.toggleActive(boundsActive)
-  }, [emblaApi, slides])
-
-  useEffect(() => {
-    if (!emblaApi || !hasMoreToLoad || pointerIsDown) return
-    if (slides.length === emblaApi.slideNodes().length - 1) return
-    reloadEmbla()
-    addScrollListener()
-  }, [
-    emblaApi,
-    slides,
-    pointerIsDown,
-    hasMoreToLoad,
-    reloadEmbla,
-    addScrollListener,
-  ])
-
-  useEffect(() => {
-    if (!emblaApi || hasMoreToLoad) return
-    if (slides.length === emblaApi.slideNodes().length) return
-    if (pointerIsDown && !lastSlideIsInView()) return
-    reloadEmbla()
-    emblaApi.off('pointerDown', setPointerDown)
-    emblaApi.off('pointerUp', setPointerNotDown)
-  }, [
-    emblaApi,
-    slides,
-    hasMoreToLoad,
-    pointerIsDown,
-    setPointerDown,
-    setPointerNotDown,
-    reloadEmbla,
-    lastSlideIsInView,
-  ])
+  const addScrollListener = useCallback(
+    (emblaApi) => {
+      scrollListenerRef.current = () => onScroll(emblaApi)
+      emblaApi.on('scroll', scrollListenerRef.current)
+    },
+    [onScroll],
+  )
 
   useEffect(() => {
     if (!emblaApi) return
-    emblaApi.on('pointerDown', setPointerDown)
-    emblaApi.on('pointerUp', setPointerNotDown)
-    addScrollListener()
-  }, [emblaApi, setPointerDown, setPointerNotDown, addScrollListener])
+    addScrollListener(emblaApi)
+
+    const onResize = () => emblaApi.reInit()
+    window.addEventListener('resize', onResize)
+    emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
+  }, [emblaApi, addScrollListener])
 
   useEffect(() => {
-    if (!loadingMore) return
-    mockApiCall(1000, 2000, () => {
-      setSlides((currentSlides) => {
-        if (currentSlides.length === 20) {
-          setHasMoreToLoad(false)
-          return currentSlides
-        }
-        const newSlideCount = currentSlides.length + 5
-        return Array.from(Array(newSlideCount).keys())
-      })
-    })
-  }, [setSlides, loadingMore])
+    hasMoreToLoadRef.current = hasMoreToLoad
+  }, [hasMoreToLoad])
 
   return (
     <div className="embla">

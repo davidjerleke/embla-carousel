@@ -15,6 +15,8 @@ const emblaNode = document.querySelector('.embla')
 const viewportNode = emblaNode.querySelector('.embla__viewport')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
+
+const onResize = () => emblaApi.reInit()
 const startInfiniteScroll = setupInfiniteScroll(
   emblaApi,
   (loadMore, endInfiniteScroll, slideCount) => {
@@ -40,3 +42,7 @@ const startInfiniteScroll = setupInfiniteScroll(
 )
 
 emblaApi.on('init', startInfiniteScroll)
+emblaApi.on('destroy', () => {
+  window.removeEventListener('resize', onResize)
+})
+window.addEventListener('resize', onResize)
