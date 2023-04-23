@@ -34,7 +34,7 @@ export function OptionsHandler(): OptionsHandlerType {
     return optionsList
       .map((options) => objectKeys(options.breakpoints || {}))
       .reduce((acc, mediaQueries) => acc.concat(mediaQueries), [])
-      .map(matchMedia)
+      .map(window.matchMedia)
   }
 
   const self: OptionsHandlerType = {

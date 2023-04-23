@@ -4,7 +4,7 @@ import { isBoolean } from './utils'
 type SlidesHandlerCallbackType = (
   mutations: MutationRecord[],
   emblaApi: EmblaCarouselType,
-) => void
+) => boolean | void
 
 export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
 
@@ -37,8 +37,9 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
 
     mutationObserver = new MutationObserver((mutations) => {
       if (destroyed) return
-      if (isBoolean(watchSlides)) defaultCallback(mutations)
-      else watchSlides(mutations, emblaApi)
+      if (isBoolean(watchSlides) || watchSlides(mutations, emblaApi)) {
+        defaultCallback(mutations)
+      }
     })
 
     mutationObserver.observe(container, { childList: true })

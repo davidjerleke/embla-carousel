@@ -312,26 +312,30 @@ Set the initial scroll snap to the given number. First snap index starts at `0`.
 
 ### watchResize
 
-Type: <BrandPrimaryText>`boolean | (entries: ResizeObserverEntry[], emblaApi: EmblaCarouselType) => void`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`boolean | (entries: ResizeObserverEntry[], emblaApi: EmblaCarouselType) => boolean | void`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reInit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour or pass a custom callback to write your own resize logic.
 
 <Admonition type="note">
-  **Note:** Passing a custom callback doesn't add your logic to the default
-  Embla resize behaviour, it will disable the default behaviour.
+  **Note:** When passing a custom callback it will run **before** the default
+  Embla resize behaviour. Return `true` in your callback if you want Embla to
+  run its default resize behaviour after your callback, or return `false` if you
+  want to disable it.
 </Admonition>
 
 ---
 
 ### watchSlides
 
-Type: <BrandPrimaryText>`boolean | (mutations: MutationRecord[], emblaApi: EmblaCarouselType) => void`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`boolean | (mutations: MutationRecord[], emblaApi: EmblaCarouselType) => boolean | void`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reInit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour or pass a custom callback to write your own resize logic.
 
 <Admonition type="note">
-  **Note:** Passing a custom callback doesn't add your logic to the default
-  Embla mutation behaviour, it will disable the default behaviour.
+  **Note:** When passing a custom callback it will run **before** the default
+  Embla mutation behaviour. Return `true` in your callback if you want Embla to
+  run its default mutation behaviour after your callback, or return `false` if
+  you want to disable it.
 </Admonition>

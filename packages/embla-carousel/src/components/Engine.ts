@@ -129,7 +129,7 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Draw
-  const update = (): void => {
+  const animationCallback = (): void => {
     const pointerDown = engine.dragHandler.pointerDown()
     if (!loop) engine.scrollBounds.constrain(pointerDown)
 
@@ -153,7 +153,7 @@ export function Engine(
 
   // Shared
   const friction = 0.68
-  const animation = Animation(update)
+  const animation = Animation(animationCallback)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)

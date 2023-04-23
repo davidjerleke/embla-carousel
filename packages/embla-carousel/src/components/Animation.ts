@@ -10,8 +10,8 @@ export type AnimationType = {
 }
 
 export function Animation(callback: CallbackType): AnimationType {
-  const timeStep = 1000 / 60
   const documentVisibleHandler = EventStore()
+  const timeStep = 1000 / 60
   let lastTimeStamp: number | null = null
   let delta = 0
   let animationFrame = 0

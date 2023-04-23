@@ -6,7 +6,7 @@ import { isBoolean } from './utils'
 type ResizeHandlerCallbackType = (
   entries: ResizeObserverEntry[],
   emblaApi: EmblaCarouselType,
-) => void
+) => boolean | void
 
 export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
 
@@ -59,8 +59,9 @@ export function ResizeHandler(
 
     resizeObserver = new ResizeObserver((entries) => {
       if (destroyed) return
-      if (isBoolean(watchResize)) defaultCallback(entries)
-      else watchResize(entries, emblaApi)
+      if (isBoolean(watchResize) || watchResize(entries, emblaApi)) {
+        defaultCallback(entries)
+      }
     })
 
     const observeNodes = [container].concat(slides)
