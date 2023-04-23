@@ -10,7 +10,7 @@ export type EventStoreType = {
     handler: EventHandlerType,
     options?: EventOptionsType,
   ) => EventStoreType
-  removeAll: () => EventStoreType
+  clear: () => void
 }
 
 export function EventStore(): EventStoreType {
@@ -27,14 +27,13 @@ export function EventStore(): EventStoreType {
     return self
   }
 
-  function removeAll(): EventStoreType {
+  function clear(): void {
     listeners = listeners.filter((remove) => remove())
-    return self
   }
 
   const self: EventStoreType = {
     add,
-    removeAll,
+    clear,
   }
   return self
 }

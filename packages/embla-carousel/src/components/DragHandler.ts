@@ -11,11 +11,12 @@ import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { deltaAbs, factorAbs, mathAbs, mathSign } from './utils'
 import { PercentOfViewType } from './PercentOfView'
+import { Limit } from './Limit'
 
 export type DragHandlerType = {
-  addActivationEvents: () => void
+  init: () => void
+  destroy: () => void
   pointerDown: () => boolean
-  removeAllEvents: () => void
 }
 
 export function DragHandler(
@@ -40,9 +41,9 @@ export function DragHandler(
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const nonPassiveEvent = { passive: false }
   const dragStartPoint = Vector1D(0)
-  const activationEvents = EventStore()
-  const interactionEvents = EventStore()
-  const dragThreshold = percentOfView.measure(20)
+  const initEvents = EventStore()
+  const dragEvents = EventStore()
+  const goToNextThreshold = Limit(50, 225).constrain(percentOfView.measure(20))
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 43 : 25
@@ -54,9 +55,9 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function addActivationEvents(): void {
+  function init(): void {
     const node = rootNode
-    activationEvents
+    initEvents
       .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
@@ -67,18 +68,18 @@ export function DragHandler(
       .add(node, 'click', click, true)
   }
 
-  function addInteractionEvents(): void {
+  function destroy(): void {
+    initEvents.clear()
+    dragEvents.clear()
+  }
+
+  function addDragEvents(): void {
     const node = isMouse ? document : rootNode
-    interactionEvents
+    dragEvents
       .add(node, 'touchmove', move, nonPassiveEvent)
       .add(node, 'touchend', up)
       .add(node, 'mousemove', move, nonPassiveEvent)
       .add(node, 'mouseup', up)
-  }
-
-  function removeAllEvents(): void {
-    activationEvents.removeAll()
-    interactionEvents.removeAll()
   }
 
   function isFocusNode(node: Element): boolean {
@@ -96,7 +97,7 @@ export function DragHandler(
     const next = index.clone().add(mathSign(force) * -1)
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
-    if (dragFree || mathAbs(force) < dragThreshold) return baseForce
+    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
     if (skipSnaps && targetChanged) return baseForce * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
@@ -115,7 +116,7 @@ export function DragHandler(
     dragStartPoint.set(target)
     scrollBody.useFriction(0).useDuration(0)
     target.set(location)
-    addInteractionEvents()
+    addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
     eventHandler.emit('pointerDown')
@@ -155,7 +156,7 @@ export function DragHandler(
     if (isMoving && !isMouse) preventClick = true
     preventScroll = false
     pointerIsDown = false
-    interactionEvents.removeAll()
+    dragEvents.clear()
     scrollBody.useDuration(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
@@ -174,9 +175,9 @@ export function DragHandler(
   }
 
   const self: DragHandlerType = {
-    addActivationEvents,
+    init,
     pointerDown,
-    removeAllEvents,
+    destroy,
   }
   return self
 }

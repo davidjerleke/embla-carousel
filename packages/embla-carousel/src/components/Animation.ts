@@ -24,7 +24,7 @@ export function Animation(callback: CallbackType): AnimationType {
 
   function destroy(): void {
     stop()
-    documentVisibleHandler.removeAll()
+    documentVisibleHandler.clear()
   }
 
   function ifAnimating(active: boolean, cb: CallbackType): CallbackType {

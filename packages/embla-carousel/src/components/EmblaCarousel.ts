@@ -104,7 +104,7 @@ function EmblaCarousel(
       engine.slideLooper.loop()
     }
     if (options.draggable && container.offsetParent && slides.length) {
-      engine.dragHandler.addActivationEvents()
+      engine.dragHandler.init()
     }
   }
 
@@ -119,21 +119,21 @@ function EmblaCarousel(
   }
 
   function deActivate(): void {
-    engine.dragHandler.removeAllEvents()
+    engine.dragHandler.destroy()
     engine.animation.destroy()
-    engine.eventStore.removeAll()
+    engine.eventStore.clear()
     engine.translate.clear()
     engine.slideLooper.clear()
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
     pluginsHandler.destroy()
-    mediaHandlers.removeAll()
+    mediaHandlers.clear()
   }
 
   function destroy(): void {
     if (destroyed) return
     destroyed = true
-    mediaHandlers.removeAll()
+    mediaHandlers.clear()
     deActivate()
     eventHandler.emit('destroy')
   }
