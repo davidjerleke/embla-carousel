@@ -26,7 +26,7 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
   ): void {
     if (!watchSlides) return
 
-    const defaultCallback = (mutations: MutationRecord[]): void => {
+    function defaultCallback(mutations: MutationRecord[]): void {
       for (const mutation of mutations) {
         if (mutation.type === 'childList') {
           emblaApi.reInit()

@@ -42,7 +42,7 @@ export function ResizeHandler(
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 
-    const defaultCallback = (entries: ResizeObserverEntry[]): void => {
+    function defaultCallback(entries: ResizeObserverEntry[]): void {
       for (const entry of entries) {
         const isContainer = entry.target === container
         const slideIndex = slides.indexOf(<HTMLElement>entry.target)

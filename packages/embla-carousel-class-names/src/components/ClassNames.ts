@@ -35,7 +35,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
 
     root = carousel.rootNode()
     slides = carousel.slideNodes()
-    const isDraggable = carousel.internalEngine().options.draggable
+    const isDraggable = !!carousel.internalEngine().options.watchDrag
 
     if (isDraggable) {
       addClass(root, options.draggable)

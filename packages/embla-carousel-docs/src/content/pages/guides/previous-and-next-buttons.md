@@ -14,7 +14,7 @@ This guide will show you **how** to **add previous and next buttons** using the 
 
 ## Button placement
 
-Assuming your carousel is [draggable](/api/options/#draggable), it's important to note that the **root node** will **respond to pointer events**. The root node is the one that is passed to the `EmblaCarousel` initializer. In the following example, it has the class name `embla`:
+Assuming your carousel is [draggable](/api/options/#watchdrag), it's important to note that the **root node** will **respond to pointer events**. The root node is the one that is passed to the `EmblaCarousel` initializer. In the following example, it has the class name `embla`:
 
 ```html
 <div class="embla">

@@ -103,8 +103,8 @@ function EmblaCarousel(
       }
       engine.slideLooper.loop()
     }
-    if (options.draggable && container.offsetParent && slides.length) {
-      engine.dragHandler.init()
+    if (container.offsetParent && slides.length) {
+      engine.dragHandler.init(self, options.watchDrag)
     }
   }
 
