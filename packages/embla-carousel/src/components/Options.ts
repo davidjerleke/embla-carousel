@@ -3,6 +3,7 @@ import { AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
 import { DirectionOptionType } from './Direction'
 import { ScrollContainOptionType } from './ScrollContain'
+import { DragHandlerOptionType } from './DragHandler'
 import { ResizeHandlerOptionType } from './ResizeHandler'
 import { SlidesHandlerOptionType } from './SlidesHandler'
 
@@ -26,12 +27,12 @@ export type OptionsType = CreateOptionsType<{
   direction: DirectionOptionType
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
-  draggable: boolean
   inViewThreshold: number
   loop: boolean
   skipSnaps: boolean
   duration: number
   startIndex: number
+  watchDrag: DragHandlerOptionType
   watchResize: ResizeHandlerOptionType
   watchSlides: SlidesHandlerOptionType
 }>
@@ -46,13 +47,13 @@ export const defaultOptions: OptionsType = {
   slidesToScroll: 1,
   breakpoints: {},
   dragFree: false,
-  draggable: true,
   inViewThreshold: 0,
   loop: false,
   skipSnaps: false,
   duration: 25,
   startIndex: 0,
   active: true,
+  watchDrag: true,
   watchResize: true,
   watchSlides: true,
 }

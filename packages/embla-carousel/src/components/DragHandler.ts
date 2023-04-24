@@ -1,3 +1,4 @@
+import { EmblaCarouselType } from './EmblaCarousel'
 import { AnimationType } from './Animation'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
@@ -9,12 +10,19 @@ import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { deltaAbs, factorAbs, mathAbs, mathSign } from './utils'
+import { deltaAbs, factorAbs, isBoolean, mathAbs, mathSign } from './utils'
 import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
 
+type DragHandlerCallbackType = (
+  evt: PointerEventType,
+  emblaApi: EmblaCarouselType,
+) => boolean | void
+
+export type DragHandlerOptionType = boolean | DragHandlerCallbackType
+
 export type DragHandlerType = {
-  init: () => void
+  init: (emblaApi: EmblaCarouselType, watchDrag: DragHandlerOptionType) => void
   destroy: () => void
   pointerDown: () => boolean
 }
@@ -55,14 +63,23 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function init(): void {
+  function init(
+    emblaApi: EmblaCarouselType,
+    watchDrag: DragHandlerOptionType,
+  ): void {
+    if (!watchDrag) return
+
+    function downIfAllowed(evt: PointerEventType): void {
+      if (isBoolean(watchDrag) || watchDrag(evt, emblaApi)) down(evt)
+    }
+
     const node = rootNode
     initEvents
       .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
-      .add(node, 'touchstart', down)
-      .add(node, 'mousedown', down)
+      .add(node, 'touchstart', downIfAllowed)
+      .add(node, 'mousedown', downIfAllowed)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
