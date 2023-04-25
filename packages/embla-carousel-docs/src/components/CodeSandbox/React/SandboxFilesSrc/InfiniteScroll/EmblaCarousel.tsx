@@ -33,7 +33,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     ...options,
-    watchSlides: (_, emblaApi) => {
+    watchSlides: (emblaApi) => {
       const reloadEmbla = (): void => {
         const oldEngine = emblaApi.internalEngine()
 

@@ -20,7 +20,7 @@ const EmblaCarousel = (props) => {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     ...options,
-    watchSlides: (_, emblaApi) => {
+    watchSlides: (emblaApi) => {
       const reloadEmbla = () => {
         const oldEngine = emblaApi.internalEngine()
 

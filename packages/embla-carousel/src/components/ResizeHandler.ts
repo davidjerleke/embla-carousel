@@ -4,8 +4,8 @@ import { EventHandlerType } from './EventHandler'
 import { isBoolean } from './utils'
 
 type ResizeHandlerCallbackType = (
-  entries: ResizeObserverEntry[],
   emblaApi: EmblaCarouselType,
+  entries: ResizeObserverEntry[],
 ) => boolean | void
 
 export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
@@ -59,7 +59,7 @@ export function ResizeHandler(
 
     resizeObserver = new ResizeObserver((entries) => {
       if (destroyed) return
-      if (isBoolean(watchResize) || watchResize(entries, emblaApi)) {
+      if (isBoolean(watchResize) || watchResize(emblaApi, entries)) {
         defaultCallback(entries)
       }
     })

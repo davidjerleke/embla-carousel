@@ -15,8 +15,8 @@ import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
 
 type DragHandlerCallbackType = (
-  evt: PointerEventType,
   emblaApi: EmblaCarouselType,
+  evt: PointerEventType,
 ) => boolean | void
 
 export type DragHandlerOptionType = boolean | DragHandlerCallbackType
@@ -70,7 +70,7 @@ export function DragHandler(
     if (!watchDrag) return
 
     function downIfAllowed(evt: PointerEventType): void {
-      if (isBoolean(watchDrag) || watchDrag(evt, emblaApi)) down(evt)
+      if (isBoolean(watchDrag) || watchDrag(emblaApi, evt)) down(evt)
     }
 
     const node = rootNode

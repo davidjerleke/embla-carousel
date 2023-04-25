@@ -243,7 +243,7 @@ export function Engine(
       location,
       slides,
     ),
-    slidesHandler: SlidesHandler(container),
+    slidesHandler: SlidesHandler(container, eventHandler),
     slidesInView,
     slideIndexes,
     slidesToScroll,

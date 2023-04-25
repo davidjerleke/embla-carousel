@@ -49,7 +49,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
 
   function destroy(): void {
     heightEvents.forEach((evt) => carousel.off(evt, setContainerHeight))
-    setContainerHeight('destroy')
+    setContainerHeight(undefined, 'destroy')
   }
 
   function highestInView(): number {
@@ -59,7 +59,10 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     return heights.reduce((a, b) => Math.max(a, b), 0)
   }
 
-  function setContainerHeight(evt?: EmblaEventType): void {
+  function setContainerHeight(
+    _?: EmblaCarouselType,
+    evt?: EmblaEventType,
+  ): void {
     const height =
       evt === 'destroy' ? options.destroyHeight : `${highestInView()}px`
     carousel.containerNode().style.height = height

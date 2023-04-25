@@ -257,7 +257,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 
 ### on
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (eventName) => void`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => void`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 **Subscribe** to an Embla specific [event](/api/events/) with a **callback**. Added event listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
@@ -266,7 +266,7 @@ Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 ### off
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (eventName) => void`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => void`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 **Unsubscribe** from an Embla specific [event](/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [on](/api/methods/#on) method.
