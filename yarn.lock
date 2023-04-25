@@ -7573,11 +7573,11 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 7.1.0
+    embla-carousel: 8.0.0-rc01
   languageName: unknown
   linkType: soft
 
-"embla-carousel-autoplay@7.1.0, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
+"embla-carousel-autoplay@8.0.0-rc01, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
   dependencies:
@@ -7593,11 +7593,11 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 7.1.0
+    embla-carousel: 8.0.0-rc01
   languageName: unknown
   linkType: soft
 
-"embla-carousel-class-names@7.1.0, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
+"embla-carousel-class-names@8.0.0-rc01, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
   version: 0.0.0-use.local
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
@@ -7613,7 +7613,7 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 7.1.0
+    embla-carousel: 8.0.0-rc01
   languageName: unknown
   linkType: soft
 
@@ -7634,9 +7634,9 @@ __metadata:
     "@typescript-eslint/parser": ^5.10.2
     babel-plugin-styled-components: ^2.0.2
     codesandbox: ^2.2.3
-    embla-carousel-autoplay: 7.1.0
-    embla-carousel-class-names: 7.1.0
-    embla-carousel-react: 7.1.0
+    embla-carousel-autoplay: 8.0.0-rc01
+    embla-carousel-class-names: 8.0.0-rc01
+    embla-carousel-react: 8.0.0-rc01
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7692,7 +7692,7 @@ __metadata:
     "@types/react": ^18.0.22
     "@types/react-dom": ^18.0.7
     "@vitejs/plugin-react": ^2.2.0
-    embla-carousel-react: 7.1.0
+    embla-carousel-react: 8.0.0-rc01
     react: ^18.2.0
     react-dom: ^18.2.0
     react-router-dom: ^6.4.3
@@ -7705,13 +7705,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "embla-carousel-playground-vanilla@workspace:playgrounds/embla-carousel-playground-vanilla"
   dependencies:
-    embla-carousel: 7.1.0
+    embla-carousel: 8.0.0-rc01
     typescript: ^4.6.4
     vite: ^3.2.0
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react@7.1.0, embla-carousel-react@workspace:packages/embla-carousel-react":
+"embla-carousel-react@8.0.0-rc01, embla-carousel-react@workspace:packages/embla-carousel-react":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react@workspace:packages/embla-carousel-react"
   dependencies:
@@ -7719,8 +7719,8 @@ __metadata:
     "@types/react": ^18.0.8
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel: 7.1.0
-    embla-carousel-reactive-utils: 7.1.0
+    embla-carousel: 8.0.0-rc01
+    embla-carousel-reactive-utils: 8.0.0-rc01
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7734,7 +7734,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-reactive-utils@7.1.0, embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils":
+"embla-carousel-reactive-utils@8.0.0-rc01, embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils":
   version: 0.0.0-use.local
   resolution: "embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils"
   dependencies:
@@ -7750,7 +7750,7 @@ __metadata:
     ts-jest: ^27.1.3
     typescript: ^4.5.5
   peerDependencies:
-    embla-carousel: 7.1.0
+    embla-carousel: 8.0.0-rc01
   languageName: unknown
   linkType: soft
 
@@ -7761,8 +7761,8 @@ __metadata:
     "@types/jest": ^27.4.0
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel: 7.1.0
-    embla-carousel-reactive-utils: 7.1.0
+    embla-carousel: 8.0.0-rc01
+    embla-carousel-reactive-utils: 8.0.0-rc01
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7784,8 +7784,8 @@ __metadata:
     "@types/jest": ^27.4.0
     "@typescript-eslint/eslint-plugin": ^5.10.2
     "@typescript-eslint/parser": ^5.10.2
-    embla-carousel: 7.1.0
-    embla-carousel-reactive-utils: 7.1.0
+    embla-carousel: 8.0.0-rc01
+    embla-carousel-reactive-utils: 8.0.0-rc01
     eslint: ^8.8.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^4.0.0
@@ -7800,7 +7800,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel@7.1.0, embla-carousel@workspace:packages/embla-carousel":
+"embla-carousel@8.0.0-rc01, embla-carousel@workspace:packages/embla-carousel":
   version: 0.0.0-use.local
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:
