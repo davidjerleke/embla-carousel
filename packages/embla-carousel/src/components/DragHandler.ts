@@ -10,9 +10,16 @@ import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { deltaAbs, factorAbs, isBoolean, mathAbs, mathSign } from './utils'
 import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
+import {
+  deltaAbs,
+  factorAbs,
+  isBoolean,
+  isMouseEvent,
+  mathAbs,
+  mathSign,
+} from './utils'
 
 type DragHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
@@ -56,6 +63,7 @@ export function DragHandler(
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 43 : 25
 
+  let isMoving = false
   let startScroll = 0
   let startCross = 0
   let pointerIsDown = false
@@ -121,12 +129,13 @@ export function DragHandler(
   }
 
   function down(evt: PointerEventType): void {
-    isMouse = !dragTracker.isTouchEvent(evt)
-    if (isMouse && (evt as MouseEvent).button !== 0) return
+    const isMouseEvt = isMouseEvent(evt)
+    isMouse = isMouseEvt
+    if (isMouseEvt && evt.button !== 0) return
     if (isFocusNode(evt.target as Element)) return
 
-    const isMoving = deltaAbs(target.get(), location.get()) >= 2
-    const clearPreventClick = isMouse || !isMoving
+    preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
+    isMoving = deltaAbs(target.get(), location.get()) >= 2
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
@@ -137,8 +146,6 @@ export function DragHandler(
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
     eventHandler.emit('pointerDown')
-
-    if (clearPreventClick) preventClick = false
   }
 
   function move(evt: PointerEventType): void {
@@ -149,10 +156,10 @@ export function DragHandler(
       const diffScroll = deltaAbs(lastScroll, startScroll)
       const diffCross = deltaAbs(lastCross, startCross)
       preventScroll = diffScroll > diffCross
-      if (!preventScroll && !preventClick) return up(evt)
+      if (!preventScroll) return up(evt)
     }
     const diff = dragTracker.pointerMove(evt)
-    if (!preventClick && diff) preventClick = true
+    if (diff) preventClick = true
 
     scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
@@ -166,11 +173,9 @@ export function DragHandler(
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
     const force = allowedForce(direction.apply(rawForce), targetChanged)
     const forceFactor = factorAbs(rawForce, force)
-    const isMoving = deltaAbs(target.get(), dragStartPoint.get()) >= 0.5
     const speed = baseSpeed - 10 * forceFactor
     const friction = baseFriction + forceFactor / 50
 
-    if (isMoving && !isMouse) preventClick = true
     preventScroll = false
     pointerIsDown = false
     dragEvents.clear()
