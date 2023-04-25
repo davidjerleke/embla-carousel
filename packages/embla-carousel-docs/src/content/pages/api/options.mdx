@@ -303,7 +303,7 @@ Set the initial scroll snap to the given number. First snap index starts at `0`.
 
 ### watchDrag
 
-Type: <BrandPrimaryText>`boolean | (event: MouseEvent | TouchEvent, emblaApi: EmblaCarouselType) => boolean | void`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, event: MouseEvent | TouchEvent) => boolean | void`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 Enables for scrolling the carousel with mouse and touch interactions. Set this to `false` to disable drag events or pass a custom callback to add your own drag logic.
@@ -319,7 +319,7 @@ Enables for scrolling the carousel with mouse and touch interactions. Set this t
 
 ### watchResize
 
-Type: <BrandPrimaryText>`boolean | (entries: ResizeObserverEntry[], emblaApi: EmblaCarouselType) => boolean | void`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, entries: ResizeObserverEntry[]) => boolean | void`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reInit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.
@@ -335,7 +335,7 @@ Embla automatically watches the [container](/api/methods/#containernode/) and [s
 
 ### watchSlides
 
-Type: <BrandPrimaryText>`boolean | (mutations: MutationRecord[], emblaApi: EmblaCarouselType) => boolean | void`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, mutations: MutationRecord[]) => boolean | void`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reInit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.

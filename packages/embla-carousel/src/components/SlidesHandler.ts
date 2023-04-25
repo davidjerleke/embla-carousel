@@ -1,9 +1,10 @@
 import { EmblaCarouselType } from './EmblaCarousel'
+import { EventHandlerType } from './EventHandler'
 import { isBoolean } from './utils'
 
 type SlidesHandlerCallbackType = (
-  mutations: MutationRecord[],
   emblaApi: EmblaCarouselType,
+  mutations: MutationRecord[],
 ) => boolean | void
 
 export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
@@ -16,7 +17,10 @@ export type SlidesHandlerType = {
   destroy: () => void
 }
 
-export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
+export function SlidesHandler(
+  container: HTMLElement,
+  eventHandler: EventHandlerType,
+): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
@@ -30,6 +34,7 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
       for (const mutation of mutations) {
         if (mutation.type === 'childList') {
           emblaApi.reInit()
+          eventHandler.emit('slidesChanged')
           break
         }
       }
@@ -37,7 +42,7 @@ export function SlidesHandler(container: HTMLElement): SlidesHandlerType {
 
     mutationObserver = new MutationObserver((mutations) => {
       if (destroyed) return
-      if (isBoolean(watchSlides) || watchSlides(mutations, emblaApi)) {
+      if (isBoolean(watchSlides) || watchSlides(emblaApi, mutations)) {
         defaultCallback(mutations)
       }
     })

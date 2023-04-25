@@ -56,7 +56,10 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     slides.forEach((slide) => removeClass(slide, options.selected))
   }
 
-  function toggleDraggingClass(evt: EmblaEventType): void {
+  function toggleDraggingClass(
+    _: EmblaCarouselType,
+    evt: EmblaEventType,
+  ): void {
     if (evt === 'pointerDown') addClass(root, options.dragging)
     else removeClass(root, options.dragging)
   }

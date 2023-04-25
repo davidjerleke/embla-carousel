@@ -28,7 +28,7 @@ import EmblaCarousel from 'embla-carousel'
 
 const emblaApi = EmblaCarousel(emblaNode, { loop: true })
 
-const onSelect = (eventName) => {
+const onSelect = (emblaApi, eventName) => {
   console.log(`Embla just triggered ${eventName}!`)
 }
 
@@ -45,7 +45,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 export const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const onSelect = useCallback((eventName) => {
+  const onSelect = useCallback((emblaApi, eventName) => {
     console.log(`Embla just triggered ${eventName}!`)
   }, [])
 
@@ -69,7 +69,7 @@ export const EmblaCarousel = () => {
     setup() {
       const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-      const onSelect = (eventName) => {
+      const onSelect = (emblaApi, eventName) => {
         console.log(`Embla just triggered ${eventName}!`)
       }
 
@@ -98,7 +98,7 @@ import EmblaCarousel from 'embla-carousel'
 
 const emblaApi = EmblaCarousel(emblaNode, { loop: true })
 
-const onSelect = (eventName) => {
+const onSelect = (emblaApi, eventName) => {
   console.log(`Embla just triggered ${eventName}!`)
 }
 
@@ -119,7 +119,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 export const EmblaCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const onSelect = useCallback((eventName) => {
+  const onSelect = useCallback((emblaApi, eventName) => {
     console.log(`Embla just triggered ${eventName}!`)
   }, [])
 
@@ -147,7 +147,7 @@ export const EmblaCarousel = () => {
     setup() {
       const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-      const onSelect = (eventName) => {
+      const onSelect = (emblaApi, eventName) => {
         console.log(`Embla just triggered ${eventName}!`)
       }
 
@@ -228,7 +228,15 @@ Runs when the carousel has settled after scroll has been triggered. Please note 
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
-Runs when the carousel has resized triggered by the window `resize` event. This event will call the [reInit](/api/methods/#reinit) method internally.
+Runs when the carousel container or the slide sizes change. It's using [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) under the hood.
+
+---
+
+### slidesChanged
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Runs when slides are added to, or removed from the carousel [container](/api/options/#container). It's using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood.
 
 ---
 
