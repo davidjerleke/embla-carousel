@@ -1,22 +1,29 @@
 import { EventStore } from './EventStore'
+import { EngineType } from './Engine'
 
 type CallbackType = () => void
+type AnimationCallbackType = (engine: EngineType) => void
 
 export type AnimationType = {
-  init: () => void
+  init: (engineInstance: EngineType) => void
   destroy: () => void
   start: () => void
   stop: () => void
 }
 
-export function Animation(callback: CallbackType): AnimationType {
+export function Animation(
+  update: AnimationCallbackType,
+  draw: AnimationCallbackType,
+): AnimationType {
   const documentVisibleHandler = EventStore()
   const timeStep = 1000 / 60
   let lastTimeStamp: number | null = null
   let delta = 0
   let animationFrame = 0
+  let engine: EngineType
 
-  function init(): void {
+  function init(engineInstance: EngineType): void {
+    engine = engineInstance
     documentVisibleHandler.add(document, 'visibilitychange', () => {
       if (document.hidden) lastTimeStamp = null
     })
@@ -43,10 +50,11 @@ export function Animation(callback: CallbackType): AnimationType {
     lastTimeStamp = timeStamp
 
     while (delta >= timeStep) {
-      callback()
+      update(engine)
       delta -= timeStep
     }
 
+    draw(engine)
     if (animationFrame) start()
   }
 

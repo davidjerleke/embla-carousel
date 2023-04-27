@@ -30,6 +30,7 @@ import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 
 export type EngineType = {
+  eventHandler: EventHandlerType
   axis: AxisType
   direction: DirectionType
   animation: AnimationType
@@ -128,32 +129,43 @@ export function Engine(
   const indexPrevious = index.clone()
   const slideIndexes = arrayKeys(slides)
 
-  // Draw
-  const animationCallback = (): void => {
-    const pointerDown = engine.dragHandler.pointerDown()
-    if (!loop) engine.scrollBounds.constrain(pointerDown)
+  // Animation
+  function update({
+    target,
+    dragHandler,
+    scrollBody,
+    scrollBounds,
+    scrollLooper,
+    slideLooper,
+    eventHandler,
+    animation,
+  }: EngineType): void {
+    const pointerDown = dragHandler.pointerDown()
 
-    engine.scrollBody.seek(target)
-    const settled = engine.scrollBody.settle(target)
+    if (!loop) scrollBounds.constrain(pointerDown)
+
+    const settled = scrollBody.seek(target).settle(target)
 
     if (settled && !pointerDown) {
-      engine.animation.stop()
+      animation.stop()
       eventHandler.emit('settle')
     }
     if (!settled) {
       eventHandler.emit('scroll')
     }
     if (loop) {
-      engine.scrollLooper.loop(engine.scrollBody.direction())
-      engine.slideLooper.loop()
+      scrollLooper.loop(scrollBody.direction())
+      slideLooper.loop()
     }
+  }
 
-    engine.translate.to(location)
+  function draw({ translate, location }: EngineType): void {
+    translate.to(location)
   }
 
   // Shared
   const friction = 0.68
-  const animation = Animation(animationCallback)
+  const animation = Animation(update, draw)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
@@ -185,6 +197,7 @@ export function Engine(
 
   // Engine
   const engine: EngineType = {
+    eventHandler,
     containerRect,
     slideRects,
     animation,

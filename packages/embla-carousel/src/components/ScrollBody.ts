@@ -3,7 +3,7 @@ import { Vector1D, Vector1DType } from './Vector1d'
 
 export type ScrollBodyType = {
   direction: () => number
-  seek: (target: Vector1DType) => void
+  seek: (target: Vector1DType) => ScrollBodyType
   settle: (target: Vector1DType) => boolean
   useBaseFriction: () => ScrollBodyType
   useBaseDuration: () => ScrollBodyType
@@ -23,7 +23,7 @@ export function ScrollBody(
   let duration = baseDuration
   let friction = baseFriction
 
-  function seek(target: Vector1DType): void {
+  function seek(target: Vector1DType): ScrollBodyType {
     const diff = target.get() - location.get()
     const isInstant = !friction || !duration
 
@@ -37,6 +37,7 @@ export function ScrollBody(
     }
 
     attractionDirection = mathSign(attraction.get() || diff)
+    return self
   }
 
   function settle(target: Vector1DType): boolean {

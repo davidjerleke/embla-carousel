@@ -90,8 +90,8 @@ function EmblaCarousel(
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
-    engine.animation.init()
-    eventHandler.init(self)
+    engine.animation.init(engine)
+    engine.eventHandler.init(self)
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
 
