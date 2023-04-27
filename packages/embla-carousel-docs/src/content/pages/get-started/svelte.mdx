@@ -68,17 +68,14 @@ The element with the classname `embla` is needed to cover the scroll overflow. I
 
 ## Accessing the carousel API
 
-The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `init` event to store the carousel instance in a variable:
+The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `emblaInit` event to store the carousel instance in a variable:
 
-```html{6-8,10-13,16}
+```html{5,7-10,13}
 <script>
   import emblaCarouselSvelte from 'embla-carousel-svelte'
 
   let emblaApi
-
-  const emblaConfig = {
-    options: { loop: false },
-  }
+  let options = { loop: false }
 
   const onInit = (event) => {
     emblaApi = event.detail
@@ -86,7 +83,7 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
   }
 </script>
 
-<div class="embla" use:emblaCarouselSvelte={emblaConfig} on:init={onInit}>
+<div class="embla" use:emblaCarouselSvelte="{{ options }}" on:emblaInit="{onInit}">
   <div class="embla__container">
     <div class="embla__slide">Slide 1</div>
     <div class="embla__slide">Slide 2</div>
@@ -99,18 +96,16 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
 
 The `emblaCarouselSvelte` action parameter also accepts [plugins](/plugins/). Note that plugins need to be passed in an array like so:
 
-```html{3,7}
+```html{3,6,9}
 <script>
   import emblaCarouselSvelte from 'embla-carousel-svelte'
   import Autoplay from 'embla-carousel-autoplay'
 
-  const emblaConfig = {
-    options: { loop: false },
-    plugins: [Autoplay()],
-  }
+  let options = { loop: false }
+  let plugins = [Autoplay()]
 </script>
 
-<div class="embla" use:emblaCarouselSvelte={emblaConfig}>
+<div class="embla" use:emblaCarouselSvelte="{{ options, plugins }}">
   <div class="embla__container">
     <div class="embla__slide">Slide 1</div>
     <div class="embla__slide">Slide 2</div>
