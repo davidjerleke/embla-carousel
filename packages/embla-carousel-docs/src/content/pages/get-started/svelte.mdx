@@ -68,7 +68,7 @@ The element with the classname `embla` is needed to cover the scroll overflow. I
 
 ## Accessing the carousel API
 
-The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `init` event to store the carousel instance in a variable:
+The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `emblaInit` event to store the carousel instance in a variable:
 
 ```html{5,7-10,13}
 <script>
@@ -83,7 +83,7 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
   }
 </script>
 
-<div class="embla" use:emblaCarouselSvelte="{{ options }}" on:init="{onInit}">
+<div class="embla" use:emblaCarouselSvelte="{{ options }}" on:emblaInit="{onInit}">
   <div class="embla__container">
     <div class="embla__slide">Slide 1</div>
     <div class="embla__slide">Slide 2</div>

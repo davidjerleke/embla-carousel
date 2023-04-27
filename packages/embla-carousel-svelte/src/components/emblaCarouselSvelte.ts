@@ -16,7 +16,7 @@ type EmblaCarouselParameterType = {
 }
 
 type EmblaCarouselAttributesType = {
-  'on:init': (evt: CustomEvent<EmblaCarouselType>) => void
+  'on:emblaInit'?: (evt: CustomEvent<EmblaCarouselType>) => void
 }
 
 export type EmblaCarouselSvelteType = ActionReturn<
@@ -39,7 +39,7 @@ function emblaCarouselSvelte(
       storedEmblaConfig.plugins,
     )
     embla.on('init', () =>
-      emblaNode.dispatchEvent(new CustomEvent('init', { detail: embla })),
+      emblaNode.dispatchEvent(new CustomEvent('emblaInit', { detail: embla })),
     )
   }
 
