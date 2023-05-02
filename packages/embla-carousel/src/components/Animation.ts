@@ -1,8 +1,14 @@
 import { EventStore } from './EventStore'
 import { EngineType } from './Engine'
+import { mathAbs } from './utils'
 
 type CallbackType = () => void
-type AnimationCallbackType = (engine: EngineType) => void
+
+export type AnimationUpdateType = (engine: EngineType) => void
+export type AnimationRenderType = (
+  engine: EngineType,
+  lagFactor: number,
+) => void
 
 export type AnimationType = {
   init: (engineInstance: EngineType) => void
@@ -12,20 +18,23 @@ export type AnimationType = {
 }
 
 export function Animation(
-  update: AnimationCallbackType,
-  draw: AnimationCallbackType,
+  update: AnimationUpdateType,
+  render: AnimationRenderType,
 ): AnimationType {
   const documentVisibleHandler = EventStore()
   const timeStep = 1000 / 60
   let lastTimeStamp: number | null = null
-  let delta = 0
+  let lag = 0
   let animationFrame = 0
   let engine: EngineType
 
   function init(engineInstance: EngineType): void {
     engine = engineInstance
     documentVisibleHandler.add(document, 'visibilitychange', () => {
-      if (document.hidden) lastTimeStamp = null
+      if (document.hidden) {
+        lastTimeStamp = null
+        lag = 0
+      }
     })
   }
 
@@ -46,15 +55,16 @@ export function Animation(
       return start()
     }
 
-    delta += timeStamp - lastTimeStamp
+    const elapsed = timeStamp - lastTimeStamp
     lastTimeStamp = timeStamp
+    lag += elapsed
 
-    while (delta >= timeStep) {
+    while (lag >= timeStep) {
       update(engine)
-      delta -= timeStep
+      lag -= timeStep
     }
 
-    draw(engine)
+    render(engine, mathAbs(lag / timeStep))
     if (animationFrame) start()
   }
 
@@ -65,6 +75,7 @@ export function Animation(
   function stop(): void {
     window.cancelAnimationFrame(animationFrame)
     lastTimeStamp = null
+    lag = 0
     animationFrame = 0
   }
 

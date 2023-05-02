@@ -1,54 +1,58 @@
-import { roundToDecimals, mathSign } from './utils'
-import { Vector1D, Vector1DType } from './Vector1d'
+import { mathSign, mathAbs } from './utils'
+import { Vector1DType } from './Vector1d'
 
 export type ScrollBodyType = {
   direction: () => number
-  seek: (target: Vector1DType) => ScrollBodyType
-  settle: (target: Vector1DType) => boolean
+  seek: () => ScrollBodyType
+  settled: () => boolean
   useBaseFriction: () => ScrollBodyType
   useBaseDuration: () => ScrollBodyType
   useFriction: (n: number) => ScrollBodyType
   useDuration: (n: number) => ScrollBodyType
+  velocity: () => number
 }
 
 export function ScrollBody(
   location: Vector1DType,
+  target: Vector1DType,
   baseDuration: number,
   baseFriction: number,
 ): ScrollBodyType {
-  const roundToTwoDecimals = roundToDecimals(2)
-  const attraction = Vector1D(0)
-
-  let attractionDirection = 0
+  let hasSettled = true
+  let bodyVelocity = 0
+  let scrollDirection = 0
   let duration = baseDuration
   let friction = baseFriction
 
-  function seek(target: Vector1DType): ScrollBodyType {
-    const diff = target.get() - location.get()
+  function seek(): ScrollBodyType {
+    const diff = target.value - location.value
     const isInstant = !friction || !duration
 
     if (isInstant) {
-      attraction.set(0)
-      location.set(target)
+      bodyVelocity = 0
+      location.value = target.value
     } else {
-      attraction.add(diff / duration)
-      attraction.multiply(friction)
-      location.add(attraction)
+      bodyVelocity += diff / duration
+      bodyVelocity *= friction
+      location.value += bodyVelocity
     }
 
-    attractionDirection = mathSign(attraction.get() || diff)
+    scrollDirection = mathSign(bodyVelocity || diff)
+    hasSettled = mathAbs(diff) < 0.001
     return self
   }
 
-  function settle(target: Vector1DType): boolean {
-    const diff = target.get() - location.get()
-    const hasSettled = !roundToTwoDecimals(diff)
-    if (hasSettled) location.set(target)
+  function settled(): boolean {
+    if (hasSettled) location.value = target.value
     return hasSettled
   }
 
+  function velocity(): number {
+    return bodyVelocity
+  }
+
   function direction(): number {
-    return attractionDirection
+    return scrollDirection
   }
 
   function useBaseDuration(): ScrollBodyType {
@@ -72,11 +76,12 @@ export function ScrollBody(
   const self: ScrollBodyType = {
     direction,
     seek,
-    settle,
+    settled,
     useBaseFriction,
     useBaseDuration,
     useFriction,
     useDuration,
+    velocity,
   }
   return self
 }

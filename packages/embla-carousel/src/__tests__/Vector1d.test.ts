@@ -14,62 +14,40 @@ beforeEach(() => {
 describe('Vector1D', () => {
   describe('Get & Set', () => {
     test('Gets the value it has been initialized to', () => {
-      expect(vector1.get()).toBe(initialVectorValue1)
+      expect(vector1.value).toBe(initialVectorValue1)
     })
 
-    test('Sets its value to the given vector', () => {
-      vector1.set(vector2)
-      expect(vector1.get()).toBe(initialVectorValue2)
+    test('Sets its value to the given number', () => {
+      vector1.value = vector2.value
+      expect(vector1.value).toBe(initialVectorValue2)
     })
   })
 
   describe('Operations', () => {
-    test('Adds the given vector to its value', () => {
+    test('Adds the given number to its value', () => {
       const total = initialVectorValue1 + initialVectorValue2
-      vector1.add(vector2)
-      expect(vector1.get()).toBe(total)
+      vector1.value += vector2.value
+      expect(vector1.value).toBe(total)
     })
 
-    test('Subtracts the given vector from its value', () => {
+    test('Subtracts the given number from its value', () => {
       const total = initialVectorValue1 - initialVectorValue2
-      vector1.subtract(vector2)
-      expect(vector1.get()).toBe(total)
+      vector1.value -= vector2.value
+      expect(vector1.value).toBe(total)
     })
 
     test('Multiplies the given number with its value', () => {
       const factor = 5
       const total = initialVectorValue1 * factor
-      vector1.multiply(factor)
-      expect(vector1.get()).toBe(total)
+      vector1.value *= factor
+      expect(vector1.value).toBe(total)
     })
 
     test('Divides its value with the given number', () => {
       const divisor = 5
       const total = initialVectorValue1 / divisor
-      vector1.divide(divisor)
-      expect(vector1.get()).toBe(total)
-    })
-
-    test('Adds the given number to its value', () => {
-      const total = initialVectorValue1 + initialVectorValue2
-      vector1.add(initialVectorValue2)
-      expect(vector1.get()).toBe(total)
-    })
-
-    test('Subtracts the given number from its value', () => {
-      const total = initialVectorValue1 - initialVectorValue2
-      vector1.subtract(initialVectorValue2)
-      expect(vector1.get()).toBe(total)
-    })
-
-    test('Normalizes a positive vector to 1', () => {
-      vector1.normalize()
-      expect(vector1.get()).toBe(1)
-    })
-
-    test('Normalizes a negative vector to 1', () => {
-      vector1.multiply(-1).normalize()
-      expect(vector1.get()).toBe(1)
+      vector1.value /= divisor
+      expect(vector1.value).toBe(total)
     })
   })
 })

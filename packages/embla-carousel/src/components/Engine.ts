@@ -1,5 +1,4 @@
 import { Alignment } from './Alignment'
-import { Animation, AnimationType } from './Animation'
 import { Axis, AxisType } from './Axis'
 import { Counter, CounterType } from './Counter'
 import { Direction, DirectionType } from './Direction'
@@ -28,6 +27,12 @@ import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
+import {
+  Animation,
+  AnimationRenderType,
+  AnimationType,
+  AnimationUpdateType,
+} from './Animation'
 
 export type EngineType = {
   eventHandler: EventHandlerType
@@ -130,8 +135,7 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Animation
-  function update({
-    target,
+  const update: AnimationUpdateType = ({
     dragHandler,
     scrollBody,
     scrollBounds,
@@ -139,18 +143,18 @@ export function Engine(
     slideLooper,
     eventHandler,
     animation,
-  }: EngineType): void {
+  }) => {
     const pointerDown = dragHandler.pointerDown()
 
     if (!loop) scrollBounds.constrain(pointerDown)
 
-    const settled = scrollBody.seek(target).settle(target)
+    const hasSettled = scrollBody.seek().settled()
 
-    if (settled && !pointerDown) {
+    if (hasSettled && !pointerDown) {
       animation.stop()
       eventHandler.emit('settle')
     }
-    if (!settled) {
+    if (!hasSettled) {
       eventHandler.emit('scroll')
     }
     if (loop) {
@@ -159,17 +163,22 @@ export function Engine(
     }
   }
 
-  function draw({ translate, location }: EngineType): void {
-    translate.to(location)
+  const render: AnimationRenderType = (
+    { scrollBody, translate, location },
+    lagFactor,
+  ) => {
+    const velocity = scrollBody.velocity()
+    const lagLocation = location.value - velocity + velocity * lagFactor
+    translate.to(lagLocation)
   }
 
   // Shared
   const friction = 0.68
-  const animation = Animation(update, draw)
+  const animation = Animation(update, render)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const scrollBody = ScrollBody(location, duration, friction)
+  const scrollBody = ScrollBody(location, target, duration, friction)
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,

@@ -49,13 +49,13 @@ export function ScrollTarget(
   }
 
   function byIndex(index: number, direction: number): TargetType {
-    const diffToSnap = scrollSnaps[index] - targetVector.get()
+    const diffToSnap = scrollSnaps[index] - targetVector.value
     const distance = shortcut(diffToSnap, direction)
     return { index, distance }
   }
 
   function byDistance(distance: number, snap: boolean): TargetType {
-    const target = targetVector.get() + distance
+    const target = targetVector.value + distance
     const { index, distance: targetSnapDistance } = findTargetSnap(target)
     const reachedBound = !loop && reachedAny(target)
 

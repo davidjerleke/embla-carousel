@@ -39,11 +39,6 @@ export function factorAbs(valueB: number, valueA: number): number {
   return mathAbs(diff / valueB)
 }
 
-export function roundToDecimals(decimalPoints: number): (n: number) => number {
-  const pow = Math.pow(10, decimalPoints)
-  return (n: number): number => Math.round(n * pow) / pow
-}
-
 export function arrayKeys<Type>(array: Type[]): number[] {
   return objectKeys(array).map(Number)
 }

@@ -1,10 +1,9 @@
 import { AxisType } from './Axis'
 import { DirectionType } from './Direction'
-import { Vector1DType } from './Vector1d'
 
 export type TranslateType = {
   clear: () => void
-  to: (vector: Vector1DType) => void
+  to: (target: number) => void
   toggleActive: (active: boolean) => void
 }
 
@@ -25,9 +24,9 @@ export function Translate(
     return `translate3d(0px,${n}px,0px)`
   }
 
-  function to(target: Vector1DType): void {
+  function to(target: number): void {
     if (disabled) return
-    containerStyle.transform = translate(direction.apply(target.get()))
+    containerStyle.transform = translate(direction.apply(target))
   }
 
   function toggleActive(active: boolean): void {

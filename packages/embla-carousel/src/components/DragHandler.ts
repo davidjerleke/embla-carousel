@@ -9,7 +9,7 @@ import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
-import { Vector1D, Vector1DType } from './Vector1d'
+import { Vector1DType } from './Vector1d'
 import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
 import {
@@ -55,7 +55,6 @@ export function DragHandler(
   const { cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const nonPassiveEvent = { passive: false }
-  const dragStartPoint = Vector1D(0)
   const initEvents = EventStore()
   const dragEvents = EventStore()
   const goToNextThreshold = Limit(50, 225).constrain(percentOfView.measure(20))
@@ -135,13 +134,12 @@ export function DragHandler(
     if (isFocusNode(evt.target as Element)) return
 
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
-    isMoving = deltaAbs(target.get(), location.get()) >= 2
+    isMoving = deltaAbs(target.value, location.value) >= 2
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
-    dragStartPoint.set(target)
     scrollBody.useFriction(0).useDuration(0)
-    target.set(location)
+    target.value = location.value
     addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
@@ -163,7 +161,7 @@ export function DragHandler(
 
     scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
-    target.add(direction.apply(diff))
+    target.value += direction.apply(diff)
     evt.preventDefault()
   }
 

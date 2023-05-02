@@ -118,7 +118,7 @@ export const setupIosPicker = (
 
   emblaApi.on('pointerUp', () => {
     const { scrollTo, target, location } = emblaApi.internalEngine()
-    const diffToTarget = target.get() - location.get()
+    const diffToTarget = target.value - location.value
     const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
     const distance = diffToTarget * factor
     scrollTo.distance(distance, true)

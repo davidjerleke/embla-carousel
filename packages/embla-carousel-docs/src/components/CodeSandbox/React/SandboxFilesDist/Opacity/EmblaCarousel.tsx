@@ -25,12 +25,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const scrollProgress = emblaApi.scrollProgress()
 
     const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
-      if (!emblaApi.slidesInView().includes(index)) return 0
       let diffToTarget = scrollSnap - scrollProgress
 
       if (engine.options.loop) {
         engine.slideLooper.loopPoints.forEach((loopItem) => {
-          const target = loopItem.target().get()
+          const target = loopItem.target()
           if (index === loopItem.index && target !== 0) {
             const sign = Math.sign(target)
             if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress)

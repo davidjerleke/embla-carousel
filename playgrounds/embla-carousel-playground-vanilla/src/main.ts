@@ -23,7 +23,7 @@ const injectBaseStyles = (): void => {
 
   styleElement.innerHTML =
     SANDBOX_CSS +
-    createCarouselArrowsDotsStyles('100%') +
+    createCarouselArrowsDotsStyles('50%') +
     styledComponentsStylesToString(
       THEME_STYLES,
       RESET_STYLES,
@@ -37,8 +37,12 @@ const injectBaseStyles = (): void => {
 
 injectBaseStyles()
 
-const SLIDE_COUNT = 5
-const OPTIONS: EmblaOptionsType = { dragFree: false }
+const SLIDE_COUNT = 16
+const OPTIONS: EmblaOptionsType = {
+  loop: false,
+  dragFree: true,
+  containScroll: 'trimSnaps',
+}
 
 const emblaNode = <HTMLElement>document.querySelector('.embla')
 const viewPortNode = <HTMLElement>emblaNode.querySelector('.embla__viewport')
@@ -64,3 +68,14 @@ emblaApi.on('select', toggleDotButtonsActive)
 emblaApi.on('select', togglePrevNextButtonsActive)
 emblaApi.on('init', toggleDotButtonsActive)
 emblaApi.reInit()
+
+let startTime = performance.now()
+
+emblaApi.on('select', () => {
+  startTime = performance.now()
+})
+
+emblaApi.on('settle', () => {
+  const endTime = performance.now()
+  console.log('settled', endTime - startTime)
+})

@@ -48,7 +48,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           Object.assign(newEngine[engineModule], oldEngine[engineModule])
         })
 
-        newEngine.translate.to(oldEngine.location)
+        newEngine.translate.to(oldEngine.location.value)
         const { index } = newEngine.scrollTarget.byDistance(0, false)
         newEngine.index.set(index)
         newEngine.animation.start()
@@ -65,7 +65,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       const engine = emblaApi.internalEngine()
 
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
-        const boundsActive = engine.limit.reachedMax(engine.target.get())
+        const boundsActive = engine.limit.reachedMax(engine.target.value)
         engine.scrollBounds.toggleActive(boundsActive)
         emblaApi.on('pointerUp', reloadAfterPointerUp)
       } else {
