@@ -14,44 +14,44 @@ const vectors = [Vector1D(vector1InitialValue), Vector1D(vector2InitialValue)]
 const scrollLooper = ScrollLooper(contentSize, limit, location, vectors)
 
 beforeEach(() => {
-  vectors[0].value = vector1InitialValue
-  vectors[1].value = vector2InitialValue
+  vectors[0].set(vector1InitialValue)
+  vectors[1].set(vector2InitialValue)
 })
 
 describe('ScrollLooper', () => {
   describe('Loops vectors when direction is', () => {
     test('1 and location > limit MAX', () => {
       const direction = 1
-      location.value = maxLimitWithLoopJoint + 0.01
+      location.set(maxLimitWithLoopJoint + 0.01)
       scrollLooper.loop(direction)
-      expect(vectors[0].value).toBe(vector1InitialValue - contentSize)
-      expect(vectors[1].value).toBe(vector2InitialValue - contentSize)
+      expect(vectors[0].get()).toBe(vector1InitialValue - contentSize)
+      expect(vectors[1].get()).toBe(vector2InitialValue - contentSize)
     })
 
     test('-1 and location < limit MIN', () => {
       const direction = -1
-      location.value = minLimitWithLoopJoint - 0.01
+      location.set(minLimitWithLoopJoint - 0.01)
       scrollLooper.loop(direction)
-      expect(vectors[0].value).toBe(vector1InitialValue + contentSize)
-      expect(vectors[1].value).toBe(vector2InitialValue + contentSize)
+      expect(vectors[0].get()).toBe(vector1InitialValue + contentSize)
+      expect(vectors[1].get()).toBe(vector2InitialValue + contentSize)
     })
   })
 
   describe('Does not loop vectors when direction is', () => {
     test('1 and location is within limit MAX', () => {
       const direction = 1
-      location.value = maxLimitWithLoopJoint
+      location.set(maxLimitWithLoopJoint)
       scrollLooper.loop(direction)
-      expect(vectors[0].value).toBe(vector1InitialValue)
-      expect(vectors[1].value).toBe(vector2InitialValue)
+      expect(vectors[0].get()).toBe(vector1InitialValue)
+      expect(vectors[1].get()).toBe(vector2InitialValue)
     })
 
     test('-1 and location is within limit MIN', () => {
       const direction = -1
-      location.value = minLimitWithLoopJoint
+      location.set(minLimitWithLoopJoint)
       scrollLooper.loop(direction)
-      expect(vectors[0].value).toBe(vector1InitialValue)
-      expect(vectors[1].value).toBe(vector2InitialValue)
+      expect(vectors[0].get()).toBe(vector1InitialValue)
+      expect(vectors[1].get()).toBe(vector2InitialValue)
     })
   })
 })

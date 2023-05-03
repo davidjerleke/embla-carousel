@@ -61,7 +61,7 @@ export function SlideLooper(
       const point = bounds[isStartEdge ? 'end' : 'start']
       const location = Vector1D(-1)
       const translate = Translate(axis, direction, slides[index])
-      const target = () => (scroll.value > point ? initial : altered)
+      const target = () => (scroll.get() > point ? initial : altered)
       return { index, location, translate, target }
     })
   }
@@ -89,10 +89,9 @@ export function SlideLooper(
     loopPoints.forEach((loopPoint) => {
       const { target, translate, location } = loopPoint
       const shift = target()
-      if (shift === location.value) return
-      if (!shift) translate.clear()
-      else translate.to(shift)
-      location.value = shift
+      if (shift === location.get()) return
+      translate.to(shift)
+      location.set(shift)
     })
   }
 

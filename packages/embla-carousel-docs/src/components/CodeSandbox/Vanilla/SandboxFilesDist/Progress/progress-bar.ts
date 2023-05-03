@@ -9,7 +9,7 @@ export const setupProgressBar = (
 } => {
   const applyProgress = (): void => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
-    progressNode.style.transform = `translateX(${progress * 100}%)`
+    progressNode.style.transform = `translate3d(${progress * 100}%,0px,0px)`
   }
 
   const removeProgress = (): void => {

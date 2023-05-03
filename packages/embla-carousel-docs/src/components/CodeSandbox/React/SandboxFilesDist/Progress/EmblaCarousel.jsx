@@ -41,7 +41,7 @@ const EmblaCarousel = (props) => {
       <div className="embla__progress">
         <div
           className="embla__progress__bar"
-          style={{ transform: `translateX(${scrollProgress}%)` }}
+          style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
         />
       </div>
     </div>

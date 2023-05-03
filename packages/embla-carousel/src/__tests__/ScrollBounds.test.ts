@@ -33,51 +33,51 @@ describe('ScrollBounds', () => {
 
     describe('And diff to target < pullBackThreshold, it', () => {
       beforeEach(() => {
-        location.value = lessThanMinLimit
-        target.value = withinPullBackThreshold
+        location.set(lessThanMinLimit)
+        target.set(withinPullBackThreshold)
       })
 
       test('Pulls back if pointer is not down', () => {
         scrollBounds.constrain(pointerIsNotDown)
-        expect(target.value).toBe(limit.min)
+        expect(target.get()).toBe(limit.min)
       })
 
       test('Does not pull back if pointer is down', () => {
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBeLessThan(limit.min)
+        expect(target.get()).toBeLessThan(limit.min)
       })
 
       test('Does not pull back if toggled inactive', () => {
         scrollBounds.toggleActive(false)
         scrollBounds.constrain(pointerIsNotDown)
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBe(withinPullBackThreshold)
+        expect(target.get()).toBe(withinPullBackThreshold)
       })
     })
 
     describe('And diff to target > pullBackThreshold, it applies', () => {
       beforeEach(() => {
-        location.value = lessThanMinLimit
-        target.value = pastPullBackThreshold
+        location.set(lessThanMinLimit)
+        target.set(pastPullBackThreshold)
       })
 
       test('Friction if pointer is not down', () => {
         scrollBounds.constrain(pointerIsNotDown)
-        expect(target.value).toBeLessThan(lessThanMinLimit)
-        expect(target.value).toBeGreaterThan(pastPullBackThreshold)
+        expect(target.get()).toBeLessThan(lessThanMinLimit)
+        expect(target.get()).toBeGreaterThan(pastPullBackThreshold)
       })
 
       test('Friction if pointer is down', () => {
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBeLessThan(lessThanMinLimit)
-        expect(target.value).toBeGreaterThan(pastPullBackThreshold)
+        expect(target.get()).toBeLessThan(lessThanMinLimit)
+        expect(target.get()).toBeGreaterThan(pastPullBackThreshold)
       })
 
       test('No friction if toggled inactive', () => {
         scrollBounds.toggleActive(false)
         scrollBounds.constrain(pointerIsNotDown)
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBe(pastPullBackThreshold)
+        expect(target.get()).toBe(pastPullBackThreshold)
       })
     })
   })
@@ -88,118 +88,118 @@ describe('ScrollBounds', () => {
 
     describe('And diff to target < pullBackThreshold, it', () => {
       beforeEach(() => {
-        location.value = moreThanMaxLimit
-        target.value = withinPullBackThreshold
+        location.set(moreThanMaxLimit)
+        target.set(withinPullBackThreshold)
       })
 
       test('Pulls back if pointer is not down', () => {
         scrollBounds.constrain(pointerIsNotDown)
-        expect(target.value).toBe(limit.max)
+        expect(target.get()).toBe(limit.max)
       })
 
       test('Does not pull back if pointer is down', () => {
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBeGreaterThan(limit.max)
+        expect(target.get()).toBeGreaterThan(limit.max)
       })
 
       test('Does not pull back if toggled inactive', () => {
         scrollBounds.toggleActive(false)
         scrollBounds.constrain(pointerIsNotDown)
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBe(withinPullBackThreshold)
+        expect(target.get()).toBe(withinPullBackThreshold)
       })
     })
 
     describe('And diff to target > pullBackThreshold, it applies', () => {
       beforeEach(() => {
-        location.value = moreThanMaxLimit
-        target.value = pastPullBackThreshold
+        location.set(moreThanMaxLimit)
+        target.set(pastPullBackThreshold)
       })
 
       test('Friction if pointer is not down', () => {
         scrollBounds.constrain(pointerIsNotDown)
-        expect(target.value).toBeGreaterThan(moreThanMaxLimit)
-        expect(target.value).toBeLessThan(pastPullBackThreshold)
+        expect(target.get()).toBeGreaterThan(moreThanMaxLimit)
+        expect(target.get()).toBeLessThan(pastPullBackThreshold)
       })
 
       test('Friction if pointer is down', () => {
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBeGreaterThan(moreThanMaxLimit)
-        expect(target.value).toBeLessThan(pastPullBackThreshold)
+        expect(target.get()).toBeGreaterThan(moreThanMaxLimit)
+        expect(target.get()).toBeLessThan(pastPullBackThreshold)
       })
 
       test('No friction if toggled inactive', () => {
         scrollBounds.toggleActive(false)
         scrollBounds.constrain(pointerIsNotDown)
         scrollBounds.constrain(pointerIsDown)
-        expect(target.value).toBe(pastPullBackThreshold)
+        expect(target.get()).toBe(pastPullBackThreshold)
       })
     })
   })
 
   describe('It does not do anything when', () => {
     test('Location < limit min and target is limit min', () => {
-      location.value = lessThanMinLimit
-      target.value = limit.min
+      location.set(lessThanMinLimit)
+      target.set(limit.min)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(limit.min)
+      expect(target.get()).toBe(limit.min)
     })
 
     test('Location < limit min and target > limit min', () => {
-      location.value = lessThanMinLimit
-      target.value = moreThanMinLimit
+      location.set(lessThanMinLimit)
+      target.set(moreThanMinLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(moreThanMinLimit)
+      expect(target.get()).toBe(moreThanMinLimit)
     })
 
     test('Target < limit min and location is limit min', () => {
-      location.value = limit.min
-      target.value = lessThanMinLimit
+      location.set(limit.min)
+      target.set(lessThanMinLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(lessThanMinLimit)
+      expect(target.get()).toBe(lessThanMinLimit)
     })
 
     test('Target < limit min and location > limit min', () => {
-      location.value = moreThanMinLimit
-      target.value = lessThanMinLimit
+      location.set(moreThanMinLimit)
+      target.set(lessThanMinLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(lessThanMinLimit)
+      expect(target.get()).toBe(lessThanMinLimit)
     })
 
     test('Location > limit max and target is limit max', () => {
-      location.value = moreThanMaxLimit
-      target.value = limit.max
+      location.set(moreThanMaxLimit)
+      target.set(limit.max)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(limit.max)
+      expect(target.get()).toBe(limit.max)
     })
 
     test('Location > limit max and target < limit max', () => {
-      location.value = moreThanMaxLimit
-      target.value = lessThanMaxLimit
+      location.set(moreThanMaxLimit)
+      target.set(lessThanMaxLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(lessThanMaxLimit)
+      expect(target.get()).toBe(lessThanMaxLimit)
     })
 
     test('Target > limit max and location is limit max', () => {
-      location.value = limit.max
-      target.value = moreThanMaxLimit
+      location.set(limit.max)
+      target.set(moreThanMaxLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(moreThanMaxLimit)
+      expect(target.get()).toBe(moreThanMaxLimit)
     })
 
     test('Target < limit max and location > limit min', () => {
-      location.value = lessThanMaxLimit
-      target.value = moreThanMaxLimit
+      location.set(lessThanMaxLimit)
+      target.set(moreThanMaxLimit)
       scrollBounds.constrain(pointerIsNotDown)
       scrollBounds.constrain(pointerIsDown)
-      expect(target.value).toBe(moreThanMaxLimit)
+      expect(target.get()).toBe(moreThanMaxLimit)
     })
   })
 })

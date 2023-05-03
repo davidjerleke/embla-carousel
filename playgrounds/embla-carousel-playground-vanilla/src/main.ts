@@ -69,13 +69,23 @@ emblaApi.on('select', togglePrevNextButtonsActive)
 emblaApi.on('init', toggleDotButtonsActive)
 emblaApi.reInit()
 
-let startTime = performance.now()
+// let startTime = performance.now()
 
-emblaApi.on('select', () => {
-  startTime = performance.now()
+// emblaApi.on('select', () => {
+//   startTime = performance.now()
+// })
+
+// emblaApi.on('settle', () => {
+//   const endTime = performance.now()
+//   console.log('settled', endTime - startTime)
+// })
+
+emblaApi.slideNodes().forEach((n, i) => {
+  n.addEventListener('click', () => {
+    console.log('Clicked index: ' + (i + 1))
+  })
 })
 
-emblaApi.on('settle', () => {
-  const endTime = performance.now()
-  console.log('settled', endTime - startTime)
-})
+// document.addEventListener('click', () => {
+//   console.log('Clicked document')
+// })

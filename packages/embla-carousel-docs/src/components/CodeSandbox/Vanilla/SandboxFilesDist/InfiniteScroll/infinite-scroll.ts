@@ -55,7 +55,7 @@ export const setupInfiniteScroll = (
   const deactivateBounds = () => {
     if (slideCount === emblaApi.slideNodes().length - 1) return
     const engine = emblaApi.internalEngine()
-    const boundsActive = engine.limit.reachedMax(engine.target.value)
+    const boundsActive = engine.limit.reachedMax(engine.target.get())
     engine.scrollBounds.toggleActive(boundsActive)
   }
 
@@ -77,7 +77,7 @@ export const setupInfiniteScroll = (
       Object.assign(newEngine[engineModule], oldEngine[engineModule]),
     )
 
-    newEngine.translate.to(oldEngine.location.value)
+    newEngine.translate.to(oldEngine.location.get())
     const { index } = newEngine.scrollTarget.byDistance(0, false)
     newEngine.index.set(index)
     newEngine.animation.start()

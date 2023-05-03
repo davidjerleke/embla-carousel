@@ -40,15 +40,15 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         emblaApi.reInit()
         const newEngine = emblaApi.internalEngine()
         const copyEngineModules: (keyof EngineType)[] = [
-          'scrollBody',
           'location',
           'target',
+          'scrollBody',
         ]
         copyEngineModules.forEach((engineModule) => {
           Object.assign(newEngine[engineModule], oldEngine[engineModule])
         })
 
-        newEngine.translate.to(oldEngine.location.value)
+        newEngine.translate.to(oldEngine.location.get())
         const { index } = newEngine.scrollTarget.byDistance(0, false)
         newEngine.index.set(index)
         newEngine.animation.start()
@@ -65,7 +65,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       const engine = emblaApi.internalEngine()
 
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
-        const boundsActive = engine.limit.reachedMax(engine.target.value)
+        const boundsActive = engine.limit.reachedMax(engine.target.get())
         engine.scrollBounds.toggleActive(boundsActive)
         emblaApi.on('pointerUp', reloadAfterPointerUp)
       } else {
@@ -117,6 +117,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const onResize = () => emblaApi.reInit()
     window.addEventListener('resize', onResize)
     emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
+
+    // @ts-ignore
+    window.embla = emblaApi
   }, [emblaApi, addScrollListener])
 
   useEffect(() => {
