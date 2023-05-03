@@ -57,7 +57,7 @@ const EmblaCarousel = (props) => {
                   className="embla__parallax__layer"
                   style={{
                     ...(tweenValues.length && {
-                      transform: `translate3d(${tweenValues[index]}%,0px,0px)`,
+                      transform: `translateX(${tweenValues[index]}%)`,
                     }),
                   }}
                 >
