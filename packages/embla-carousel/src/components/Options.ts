@@ -27,6 +27,7 @@ export type OptionsType = CreateOptionsType<{
   direction: DirectionOptionType
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
+  dragThreshold: number
   inViewThreshold: number
   loop: boolean
   skipSnaps: boolean
@@ -47,6 +48,7 @@ export const defaultOptions: OptionsType = {
   slidesToScroll: 1,
   breakpoints: {},
   dragFree: false,
+  dragThreshold: 10,
   inViewThreshold: 0,
   loop: false,
   skipSnaps: false,

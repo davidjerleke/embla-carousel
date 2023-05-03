@@ -216,6 +216,21 @@ Enables momentum scrolling. The duration of the continued scrolling is proportio
 
 ---
 
+### dragThreshold
+
+Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`10`</BrandSecondaryText>
+
+Drag threshold in pixels. This only affects **when** clicks are fired and not. In contrast to other carousel libraries, it will **not affect when dragging** of the carousel **starts**.
+
+<Admonition type="note">
+  **Note:** Browsers handle touch events differently than mouse events. Browsers
+  won't fire the click event when a touch event includes an accidental slight
+  swipe gesture. This is why this threshold only works for mouse events.
+</Admonition>
+
+---
+
 ### duration
 
 Type: <BrandPrimaryText>`number`</BrandPrimaryText>  

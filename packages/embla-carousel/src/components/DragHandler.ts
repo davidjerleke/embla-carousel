@@ -49,6 +49,7 @@ export function DragHandler(
   eventHandler: EventHandlerType,
   percentOfView: PercentOfViewType,
   dragFree: boolean,
+  dragThreshold: number,
   skipSnaps: boolean,
   baseFriction: number,
 ): DragHandlerType {
@@ -147,17 +148,18 @@ export function DragHandler(
   }
 
   function move(evt: PointerEventType): void {
+    const lastScroll = dragTracker.readPoint(evt)
+    const lastCross = dragTracker.readPoint(evt, crossAxis)
+    const diffScroll = deltaAbs(lastScroll, startScroll)
+    const diffCross = deltaAbs(lastCross, startCross)
+
     if (!preventScroll && !isMouse) {
       if (!evt.cancelable) return up(evt)
-      const lastScroll = dragTracker.readPoint(evt)
-      const lastCross = dragTracker.readPoint(evt, crossAxis)
-      const diffScroll = deltaAbs(lastScroll, startScroll)
-      const diffCross = deltaAbs(lastCross, startCross)
       preventScroll = diffScroll > diffCross
       if (!preventScroll) return up(evt)
     }
     const diff = dragTracker.pointerMove(evt)
-    if (diff) preventClick = true
+    if (diffScroll > dragThreshold) preventClick = true
 
     scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
