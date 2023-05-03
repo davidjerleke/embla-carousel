@@ -134,12 +134,12 @@ export function DragHandler(
     if (isFocusNode(evt.target as Element)) return
 
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
-    isMoving = deltaAbs(target.value, location.value) >= 2
+    isMoving = deltaAbs(target.get(), location.get()) >= 2
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     scrollBody.useFriction(0).useDuration(0)
-    target.value = location.value
+    target.set(location)
     addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
@@ -161,7 +161,7 @@ export function DragHandler(
 
     scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
-    target.value += direction.apply(diff)
+    target.add(direction.apply(diff))
     evt.preventDefault()
   }
 

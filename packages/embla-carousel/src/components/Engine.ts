@@ -168,7 +168,7 @@ export function Engine(
     lagFactor,
   ) => {
     const velocity = scrollBody.velocity()
-    const lagLocation = location.value - velocity + velocity * lagFactor
+    const lagLocation = location.get() - velocity + velocity * lagFactor
     translate.to(lagLocation)
   }
 

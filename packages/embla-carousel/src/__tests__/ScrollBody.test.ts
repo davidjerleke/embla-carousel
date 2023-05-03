@@ -11,63 +11,63 @@ const location = Vector1D(initialLocation)
 const scrollBody = ScrollBody(location, target, 25, 0.68)
 
 beforeEach(() => {
-  target.value = initialLocation
-  location.value = initialLocation
+  target.set(initialLocation)
+  location.set(initialLocation)
 })
 
 describe('ScrollBody', () => {
   describe('Seeks target in a', () => {
     test('Positive direction when target is positive', () => {
-      target.value = targetPositive
+      target.set(targetPositive)
       scrollBody.seek()
-      expect(location.value).toBeGreaterThan(initialLocation)
+      expect(location.get()).toBeGreaterThan(initialLocation)
     })
 
     test('Negative direction when target is negative', () => {
-      target.value = targetNegative
+      target.set(targetNegative)
       scrollBody.seek()
-      expect(location.value).toBeLessThan(initialLocation)
+      expect(location.get()).toBeLessThan(initialLocation)
     })
   })
 
   describe('Instantly goes to', () => {
     test('Positive target when duration is 0', () => {
-      target.value = targetPositive
+      target.set(targetPositive)
       scrollBody.useDuration(0)
       scrollBody.seek()
-      expect(location.value).toBe(targetPositive)
+      expect(location.get()).toBe(targetPositive)
     })
 
     test('Negative target when duration is 0', () => {
-      target.value = targetNegative
+      target.set(targetNegative)
       scrollBody.useDuration(0)
       scrollBody.seek()
-      expect(location.value).toBe(targetNegative)
+      expect(location.get()).toBe(targetNegative)
     })
   })
 
   describe('Direction is', () => {
     test('1 when it seeks a positive target', () => {
-      target.value = targetPositive
+      target.set(targetPositive)
       scrollBody.seek()
       expect(scrollBody.direction()).toBe(directionPositive)
     })
 
     test('1 when it instantly goes to a positive target', () => {
-      target.value = targetPositive
+      target.set(targetPositive)
       scrollBody.useDuration(0)
       scrollBody.seek()
       expect(scrollBody.direction()).toBe(directionPositive)
     })
 
     test('-1 when it seeks a negative target', () => {
-      target.value = targetNegative
+      target.set(targetNegative)
       scrollBody.seek()
       expect(scrollBody.direction()).toBe(directionNegative)
     })
 
     test('-1 when it instantly goes to a negative target', () => {
-      target.value = targetNegative
+      target.set(targetNegative)
       scrollBody.useDuration(0)
       scrollBody.seek()
       expect(scrollBody.direction()).toBe(directionNegative)
@@ -76,15 +76,15 @@ describe('ScrollBody', () => {
 
   describe('Settle is', () => {
     test('True when diff to given target is <= 0.001', () => {
-      target.value = targetPositive
-      location.value = 9.999
+      target.set(targetPositive)
+      location.set(9.999)
       scrollBody.seek()
       expect(scrollBody.settled()).toBe(true)
     })
 
     test('False when diff to given target is > 0.001', () => {
-      target.value = targetPositive
-      location.value = 9.99
+      target.set(targetPositive)
+      location.set(9.99)
       scrollBody.seek()
       expect(scrollBody.settled()).toBe(false)
     })

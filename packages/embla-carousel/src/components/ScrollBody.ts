@@ -25,16 +25,16 @@ export function ScrollBody(
   let friction = baseFriction
 
   function seek(): ScrollBodyType {
-    const diff = target.value - location.value
+    const diff = target.get() - location.get()
     const isInstant = !friction || !duration
 
     if (isInstant) {
       bodyVelocity = 0
-      location.value = target.value
+      location.set(target)
     } else {
       bodyVelocity += diff / duration
       bodyVelocity *= friction
-      location.value += bodyVelocity
+      location.add(bodyVelocity)
     }
 
     scrollDirection = mathSign(bodyVelocity || diff)
@@ -43,7 +43,7 @@ export function ScrollBody(
   }
 
   function settled(): boolean {
-    if (hasSettled) location.value = target.value
+    if (hasSettled) location.set(target)
     return hasSettled
   }
 

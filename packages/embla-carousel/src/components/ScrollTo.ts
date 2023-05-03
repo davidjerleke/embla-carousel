@@ -23,7 +23,7 @@ export function ScrollTo(
 
     if (distanceDiff) {
       animation.start()
-      targetVector.value += distanceDiff
+      targetVector.add(distanceDiff)
     }
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())

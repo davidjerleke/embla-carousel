@@ -81,7 +81,7 @@ function EmblaCarousel(
 
     if (!options.active) return deActivate()
 
-    engine.translate.to(engine.location.value)
+    engine.translate.to(engine.location.get())
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
 
@@ -140,7 +140,7 @@ function EmblaCarousel(
   }
 
   function slidesInView(target?: boolean): number[] {
-    const location = engine[target ? 'target' : 'location'].value
+    const location = engine[target ? 'target' : 'location'].get()
     const type = options.loop ? 'removeOffset' : 'constrain'
     return engine.slidesInView.check(engine.limit[type](location))
   }
@@ -181,7 +181,7 @@ function EmblaCarousel(
   }
 
   function scrollProgress(): number {
-    return engine.scrollProgress.get(engine.location.value)
+    return engine.scrollProgress.get(engine.location.get())
   }
 
   function selectedScrollSnap(): number {
