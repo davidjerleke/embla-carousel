@@ -35,12 +35,14 @@ const BASE_STYLES = css`
   .embla__container {
     backface-visibility: hidden;
     display: flex;
+    touch-action: __replace-axis-touch_action__;
     flex-direction: __replace_axis_flex__;
     height: __replace_axis_height__;
     margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
   }
 
   .embla__slide {
+    overflow: hidden;
     flex: 0 0 var(--slide-size);
     min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
@@ -250,7 +252,7 @@ const THUMBS_STYLES = css`
     border-radius: ${BORDER_RADIUSES.CIRCLE};
     background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
     line-height: 3rem;
-    font-weight: ${FONT_WEIGHTS.MEDIUM};
+    font-weight: ${FONT_WEIGHTS.BLACK};
     text-align: center;
     pointer-events: none;
   }
@@ -521,6 +523,7 @@ const IOS_PICKER_STYLES = css`
     position: absolute;
     transform-style: preserve-3d;
     will-change: transform;
+    touch-action: pan-x;
   }
 
   .embla__ios-picker__slide {
@@ -554,6 +557,7 @@ export const createCarouselDefaultStyles = (
   const horizontal = axis === 'x'
   const flexDirection = horizontal ? 'row' : 'column'
   const spacingDirection = horizontal ? 'left' : 'top'
+  const panDirection = `pan-${horizontal ? 'y' : 'x'}`
   const sizeDimention = horizontal ? 'width' : 'height'
   const height = horizontal
     ? 'auto'
@@ -569,6 +573,7 @@ export const createCarouselDefaultStyles = (
   return mergedStyles
     .replace(/__replace_axis_flex__/gi, flexDirection)
     .replace(/__replace-axis-size__/gi, sizeDimention)
+    .replace(/__replace-axis-touch_action__/gi, panDirection)
     .replace(/__replace_axis_spacing__/gi, spacingDirection)
     .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
     .replace(/__replace_axis_height__/gi, height)
