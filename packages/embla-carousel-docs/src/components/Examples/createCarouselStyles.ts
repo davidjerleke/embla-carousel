@@ -483,6 +483,7 @@ const IOS_PICKER_STYLES = css`
     justify-content: center;
     line-height: 1;
     font-size: 1.8rem;
+    touch-action: pan-x;
   }
 
   .embla__ios-picker__scene {
