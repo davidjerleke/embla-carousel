@@ -28,11 +28,11 @@ import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import {
-  Animation,
-  AnimationRenderType,
   AnimationType,
+  AnimationRenderType,
   AnimationUpdateType,
-} from './Animation'
+  AnimationsType,
+} from './Animations'
 
 export type EngineType = {
   eventHandler: EventHandlerType
@@ -72,6 +72,7 @@ export function Engine(
   slides: HTMLElement[],
   options: OptionsType,
   eventHandler: EventHandlerType,
+  animations: AnimationsType,
 ): EngineType {
   // Options
   const {
@@ -144,6 +145,7 @@ export function Engine(
     slideLooper,
     eventHandler,
     animation,
+    options: { loop },
   }) => {
     const pointerDown = dragHandler.pointerDown()
 
@@ -166,16 +168,22 @@ export function Engine(
 
   const render: AnimationRenderType = (
     { scrollBody, translate, location },
-    lagFactor,
+    lagOffset,
   ) => {
     const velocity = scrollBody.velocity()
-    const lagLocation = location.get() - velocity + velocity * lagFactor
-    translate.to(lagLocation)
+    const offsetLocation = location.get() - velocity + velocity * lagOffset
+    translate.to(offsetLocation)
+  }
+
+  const animation: AnimationType = {
+    update: () => update(engine),
+    render: (lagOffset: number) => render(engine, lagOffset),
+    start: () => animations.start(engine),
+    stop: () => animations.stop(engine),
   }
 
   // Shared
   const friction = 0.68
-  const animation = Animation(update, render)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)

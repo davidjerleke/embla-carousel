@@ -1,4 +1,5 @@
 import { Engine, EngineType } from './Engine'
+import { Animations } from './Animations'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType } from './Options'
@@ -37,8 +38,10 @@ function EmblaCarousel(
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
   const mediaHandlers = EventStore()
+  const documentVisibleHandler = EventStore()
   const pluginsHandler = PluginsHandler()
   const eventHandler = EventHandler()
+  const { animations } = EmblaCarousel
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = OptionsHandler()
   const { on, off, emit } = eventHandler
   const reInit = reActivate
@@ -77,11 +80,12 @@ function EmblaCarousel(
     options = optionsAtMedia(optionsBase)
 
     storeElements()
-    engine = Engine(root, container, slides, options, eventHandler)
+    engine = Engine(root, container, slides, options, eventHandler, animations)
 
     if (!options.active) return deActivate()
 
     engine.translate.to(engine.location.get())
+
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
 
@@ -90,10 +94,13 @@ function EmblaCarousel(
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
-    engine.animation.init(engine)
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
+
+    documentVisibleHandler.add(document, 'visibilitychange', () => {
+      if (document.hidden) animations.reset()
+    })
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -121,7 +128,7 @@ function EmblaCarousel(
 
   function deActivate(): void {
     engine.dragHandler.destroy()
-    engine.animation.destroy()
+    engine.animation.stop()
     engine.eventStore.clear()
     engine.translate.clear()
     engine.slideLooper.clear()
@@ -129,6 +136,7 @@ function EmblaCarousel(
     engine.slidesHandler.destroy()
     pluginsHandler.destroy()
     mediaHandlers.clear()
+    documentVisibleHandler.clear()
   }
 
   function destroy(): void {
@@ -241,6 +249,7 @@ function EmblaCarousel(
   return self
 }
 
+EmblaCarousel.animations = Animations()
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel

@@ -1,4 +1,4 @@
-import { AnimationType } from './Animation'
+import { AnimationType } from './Animations'
 import { CounterType } from './Counter'
 import { EventHandlerType } from './EventHandler'
 import { ScrollTargetType, TargetType } from './ScrollTarget'

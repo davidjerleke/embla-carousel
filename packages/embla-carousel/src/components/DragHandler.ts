@@ -1,5 +1,5 @@
 import { EmblaCarouselType } from './EmblaCarousel'
-import { AnimationType } from './Animation'
+import { AnimationType } from './Animations'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
