@@ -38,6 +38,7 @@ export function DragHandler(
   axis: AxisType,
   direction: DirectionType,
   rootNode: HTMLElement,
+  ownerDocument: Document,
   target: Vector1DType,
   dragTracker: DragTrackerType,
   location: Vector1DType,
@@ -99,7 +100,7 @@ export function DragHandler(
   }
 
   function addDragEvents(): void {
-    const node = isMouse ? document : rootNode
+    const node = isMouse ? ownerDocument : rootNode
     dragEvents
       .add(node, 'touchmove', move, nonPassiveEvent)
       .add(node, 'touchend', up)

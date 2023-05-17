@@ -1,8 +1,10 @@
 import { EmblaCarouselType } from '../components/EmblaCarousel'
+import { OptionsHandler } from '../components/OptionsHandler'
 import { EmblaPluginType } from '../components/Plugins'
 import { PluginsHandler } from '../components/PluginsHandler'
 
-const pluginsHandler = PluginsHandler()
+const optionsHandler = OptionsHandler(window)
+const pluginsHandler = PluginsHandler(optionsHandler)
 const autoplay: EmblaPluginType = {
   name: 'autoplay',
   init: jest.fn(),

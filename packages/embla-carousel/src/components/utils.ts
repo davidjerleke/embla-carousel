@@ -1,5 +1,7 @@
 import { PointerEventType } from './DragTracker'
 
+export type WindowType = Window & typeof globalThis
+
 export function isNumber(subject: unknown): subject is number {
   return typeof subject === 'number'
 }

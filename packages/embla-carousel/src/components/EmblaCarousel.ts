@@ -1,12 +1,12 @@
 import { Engine, EngineType } from './Engine'
-import { Animations } from './Animations'
+import { Animations, AnimationsType } from './Animations'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString } from './utils'
+import { isString, WindowType } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -37,12 +37,15 @@ function EmblaCarousel(
   userOptions?: EmblaOptionsType,
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
+  const ownerDocument = root.ownerDocument
+  const ownerWindow = <WindowType>ownerDocument.defaultView
+  const optionsHandler = OptionsHandler(ownerWindow)
+  const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
   const documentVisibleHandler = EventStore()
-  const pluginsHandler = PluginsHandler()
   const eventHandler = EventHandler()
-  const { animations } = EmblaCarousel
-  const { mergeOptions, optionsAtMedia, optionsMediaQueries } = OptionsHandler()
+  const { animationsList } = EmblaCarousel
+  const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
   const { on, off, emit } = eventHandler
   const reInit = reActivate
 
@@ -76,11 +79,25 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
+    const animationGroup = animationsList.find((a) => a.window === ownerWindow)
+    const animations = animationGroup || Animations(ownerWindow)
+    if (!animationGroup) animationsList.push(animations)
+
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
 
     storeElements()
-    engine = Engine(root, container, slides, options, eventHandler, animations)
+
+    engine = Engine(
+      root,
+      container,
+      slides,
+      ownerDocument,
+      ownerWindow,
+      options,
+      eventHandler,
+      animations,
+    )
 
     if (!options.active) return deActivate()
 
@@ -98,8 +115,8 @@ function EmblaCarousel(
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
 
-    documentVisibleHandler.add(document, 'visibilitychange', () => {
-      if (document.hidden) animations.reset()
+    documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
+      if (ownerDocument.hidden) animations.reset()
     })
 
     if (options.loop) {
@@ -249,7 +266,7 @@ function EmblaCarousel(
   return self
 }
 
-EmblaCarousel.animations = Animations()
+EmblaCarousel.animationsList = <AnimationsType[]>[] // Animations()
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel

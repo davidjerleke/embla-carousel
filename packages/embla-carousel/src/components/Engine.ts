@@ -25,7 +25,7 @@ import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
-import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
+import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import {
   AnimationType,
@@ -35,6 +35,8 @@ import {
 } from './Animations'
 
 export type EngineType = {
+  ownerDocument: Document
+  ownerWindow: WindowType
   eventHandler: EventHandlerType
   axis: AxisType
   direction: DirectionType
@@ -70,6 +72,8 @@ export function Engine(
   root: HTMLElement,
   container: HTMLElement,
   slides: HTMLElement[],
+  ownerDocument: Document,
+  ownerWindow: WindowType,
   options: OptionsType,
   eventHandler: EventHandlerType,
   animations: AnimationsType,
@@ -106,6 +110,7 @@ export function Engine(
     slideRects,
     slides,
     readEdgeGap,
+    ownerWindow,
   )
   const slidesToScroll = SlidesToScroll(
     viewSize,
@@ -215,6 +220,8 @@ export function Engine(
 
   // Engine
   const engine: EngineType = {
+    ownerDocument,
+    ownerWindow,
     eventHandler,
     containerRect,
     slideRects,
@@ -225,6 +232,7 @@ export function Engine(
       axis,
       direction,
       root,
+      ownerDocument,
       target,
       DragTracker(axis),
       location,

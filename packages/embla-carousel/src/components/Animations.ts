@@ -1,5 +1,5 @@
 import { EngineType } from './Engine'
-import { mathAbs } from './utils'
+import { mathAbs, WindowType } from './utils'
 
 export type AnimationUpdateType = (engine: EngineType) => void
 export type AnimationRenderType = (
@@ -18,9 +18,10 @@ export type AnimationsType = {
   start: (engine: EngineType) => void
   stop: (engine: EngineType) => void
   reset: () => void
+  window: WindowType
 }
 
-export function Animations(): AnimationsType {
+export function Animations(ownerWindow: WindowType): AnimationsType {
   const timeStep = 1000 / 60
   let engines: EngineType[] = []
   let lastTimeStamp: number | null = null
@@ -42,21 +43,21 @@ export function Animations(): AnimationsType {
     const lagOffset = mathAbs(lag / timeStep)
     engines.forEach(({ animation }) => animation.render(lagOffset))
 
-    if (animationFrame) window.requestAnimationFrame(animate)
+    if (animationFrame) ownerWindow.requestAnimationFrame(animate)
   }
 
   function start(engine: EngineType): void {
     if (!engines.includes(engine)) engines.push(engine)
     if (animationFrame) return
 
-    animationFrame = window.requestAnimationFrame(animate)
+    animationFrame = ownerWindow.requestAnimationFrame(animate)
   }
 
   function stop(engine: EngineType): void {
     engines = engines.filter((e) => e !== engine)
     if (engines.length) return
 
-    window.cancelAnimationFrame(animationFrame)
+    ownerWindow.cancelAnimationFrame(animationFrame)
     lastTimeStamp = null
     lag = 0
     animationFrame = 0
@@ -71,6 +72,7 @@ export function Animations(): AnimationsType {
     start,
     stop,
     reset,
+    window: ownerWindow,
   }
   return self
 }

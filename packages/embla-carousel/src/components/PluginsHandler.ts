@@ -1,5 +1,5 @@
 import { EmblaCarouselType } from './EmblaCarousel'
-import { OptionsHandler } from './OptionsHandler'
+import { OptionsHandlerType } from './OptionsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 
 export type PluginsHandlerType = {
@@ -10,8 +10,9 @@ export type PluginsHandlerType = {
   destroy: () => void
 }
 
-export function PluginsHandler(): PluginsHandlerType {
-  const optionsHandler = OptionsHandler()
+export function PluginsHandler(
+  optionsHandler: OptionsHandlerType,
+): PluginsHandlerType {
   let activePlugins: EmblaPluginType[] = []
 
   function init(
