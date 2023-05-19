@@ -25,27 +25,27 @@ function useEmblaCarousel(
 ): UseEmblaCarouselType {
   const storedOptions = useRef(options)
   const storedPlugins = useRef(plugins)
-  const [embla, setEmbla] = useState<EmblaCarouselType>()
+  const [emblaApi, setEmblaApi] = useState<EmblaCarouselType>()
   const [viewport, setViewport] = useState<HTMLElement>()
 
   const reInit = useCallback(() => {
-    if (embla) embla.reInit(storedOptions.current, storedPlugins.current)
-  }, [embla])
+    if (emblaApi) emblaApi.reInit(storedOptions.current, storedPlugins.current)
+  }, [emblaApi])
 
   useEffect(() => {
     if (canUseDOM() && viewport) {
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-      const newEmbla = EmblaCarousel(
+      const newEmblaApi = EmblaCarousel(
         viewport,
         storedOptions.current,
         storedPlugins.current,
       )
-      setEmbla(newEmbla)
-      return () => newEmbla.destroy()
+      setEmblaApi(newEmblaApi)
+      return () => newEmblaApi.destroy()
     } else {
-      setEmbla(undefined)
+      setEmblaApi(undefined)
     }
-  }, [viewport, setEmbla])
+  }, [viewport, setEmblaApi])
 
   useEffect(() => {
     if (areOptionsEqual(storedOptions.current, options)) return
@@ -59,7 +59,7 @@ function useEmblaCarousel(
     reInit()
   }, [plugins, reInit])
 
-  return [<EmblaViewportRefType>setViewport, embla]
+  return [<EmblaViewportRefType>setViewport, emblaApi]
 }
 
 useEmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined

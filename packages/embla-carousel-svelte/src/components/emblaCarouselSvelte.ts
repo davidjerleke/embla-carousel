@@ -29,23 +29,25 @@ function emblaCarouselSvelte(
   emblaConfig: EmblaCarouselParameterType = { options: {}, plugins: [] },
 ): EmblaCarouselSvelteType {
   let storedEmblaConfig = emblaConfig
-  let embla: EmblaCarouselType
+  let emblaApi: EmblaCarouselType
 
   if (canUseDOM()) {
     EmblaCarousel.globalOptions = emblaCarouselSvelte.globalOptions
-    embla = EmblaCarousel(
+    emblaApi = EmblaCarousel(
       emblaNode,
       storedEmblaConfig.options,
       storedEmblaConfig.plugins,
     )
-    embla.on('init', () =>
-      emblaNode.dispatchEvent(new CustomEvent('emblaInit', { detail: embla })),
+    emblaApi.on('init', () =>
+      emblaNode.dispatchEvent(
+        new CustomEvent('emblaInit', { detail: emblaApi }),
+      ),
     )
   }
 
   return {
     destroy: () => {
-      if (embla) embla.destroy()
+      if (emblaApi) emblaApi.destroy()
     },
     update: (newEmblaConfig) => {
       const optionsChanged = !areOptionsEqual(
@@ -60,8 +62,8 @@ function emblaCarouselSvelte(
       if (!optionsChanged && !pluginsChanged) return
       storedEmblaConfig = newEmblaConfig
 
-      if (embla) {
-        embla.reInit(storedEmblaConfig.options, storedEmblaConfig.plugins)
+      if (emblaApi) {
+        emblaApi.reInit(storedEmblaConfig.options, storedEmblaConfig.plugins)
       }
     },
   }
