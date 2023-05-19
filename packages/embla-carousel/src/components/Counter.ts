@@ -31,7 +31,7 @@ export function Counter(
   }
 
   function add(n: number): CounterType {
-    return set(get() + n)
+    return clone().set(get() + n)
   }
 
   function clone(): CounterType {

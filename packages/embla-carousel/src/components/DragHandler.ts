@@ -19,6 +19,7 @@ import {
   isMouseEvent,
   mathAbs,
   mathSign,
+  WindowType,
 } from './utils'
 
 type DragHandlerCallbackType = (
@@ -39,6 +40,7 @@ export function DragHandler(
   direction: DirectionType,
   rootNode: HTMLElement,
   ownerDocument: Document,
+  ownerWindow: WindowType,
   target: Vector1DType,
   dragTracker: DragTrackerType,
   location: Vector1DType,
@@ -120,7 +122,7 @@ export function DragHandler(
   }
 
   function allowedForce(force: number, targetChanged: boolean): number {
-    const next = index.clone().add(mathSign(force) * -1)
+    const next = index.add(mathSign(force) * -1)
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
     if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
@@ -130,7 +132,7 @@ export function DragHandler(
   }
 
   function down(evt: PointerEventType): void {
-    const isMouseEvt = isMouseEvent(evt)
+    const isMouseEvt = isMouseEvent(evt, ownerWindow)
     isMouse = isMouseEvt
     if (isMouseEvt && evt.button !== 0) return
     if (isFocusNode(evt.target as Element)) return

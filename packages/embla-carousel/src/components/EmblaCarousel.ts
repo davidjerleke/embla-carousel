@@ -44,7 +44,7 @@ function EmblaCarousel(
   const mediaHandlers = EventStore()
   const documentVisibleHandler = EventStore()
   const eventHandler = EventHandler()
-  const { animationsList } = EmblaCarousel
+  const { animationRealms } = EmblaCarousel
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
   const { on, off, emit } = eventHandler
   const reInit = reActivate
@@ -79,9 +79,9 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
-    const animationGroup = animationsList.find((a) => a.window === ownerWindow)
-    const animations = animationGroup || Animations(ownerWindow)
-    if (!animationGroup) animationsList.push(animations)
+    const animationRealm = animationRealms.find((a) => a.window === ownerWindow)
+    const animations = animationRealm || Animations(ownerWindow)
+    if (!animationRealm) animationRealms.push(animations)
 
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
@@ -182,23 +182,23 @@ function EmblaCarousel(
   }
 
   function scrollNext(jump?: boolean): void {
-    const next = engine.index.clone().add(1)
-    scrollTo(next.get(), jump === true, -1)
+    const next = engine.index.add(1).get()
+    scrollTo(next, jump === true, -1)
   }
 
   function scrollPrev(jump?: boolean): void {
-    const prev = engine.index.clone().add(-1)
-    scrollTo(prev.get(), jump === true, 1)
+    const prev = engine.index.add(-1).get()
+    scrollTo(prev, jump === true, 1)
   }
 
   function canScrollNext(): boolean {
-    const next = engine.index.clone().add(1)
-    return next.get() !== selectedScrollSnap()
+    const next = engine.index.add(1).get()
+    return next !== selectedScrollSnap()
   }
 
   function canScrollPrev(): boolean {
-    const prev = engine.index.clone().add(-1)
-    return prev.get() !== selectedScrollSnap()
+    const prev = engine.index.add(-1).get()
+    return prev !== selectedScrollSnap()
   }
 
   function scrollSnapList(): number[] {
@@ -266,7 +266,7 @@ function EmblaCarousel(
   return self
 }
 
-EmblaCarousel.animationsList = <AnimationsType[]>[] // Animations()
+EmblaCarousel.animationRealms = <AnimationsType[]>[]
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel
