@@ -16,43 +16,43 @@ export type ClassNamesOptionsType = ClassNamesType['options']
 
 function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let options: OptionsType
-  let carousel: EmblaCarouselType
+  let emblaApi: EmblaCarouselType
   let root: HTMLElement
   let slides: HTMLElement[]
   const selectedEvents: EmblaEventType[] = ['select', 'pointerUp']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
 
   function init(
-    embla: EmblaCarouselType,
+    emblaApiInstance: EmblaCarouselType,
     optionsHandler: OptionsHandlerType,
   ): void {
-    carousel = embla
+    emblaApi = emblaApiInstance
 
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, ClassNames.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
     options = optionsAtMedia(allOptions)
 
-    root = carousel.rootNode()
-    slides = carousel.slideNodes()
-    const isDraggable = !!carousel.internalEngine().options.watchDrag
+    root = emblaApi.rootNode()
+    slides = emblaApi.slideNodes()
+    const isDraggable = !!emblaApi.internalEngine().options.watchDrag
 
     if (isDraggable) {
       addClass(root, options.draggable)
     }
     if (options.dragging) {
-      draggingEvents.forEach((evt) => carousel.on(evt, toggleDraggingClass))
+      draggingEvents.forEach((evt) => emblaApi.on(evt, toggleDraggingClass))
     }
     if (options.selected) {
-      selectedEvents.forEach((evt) => carousel.on(evt, toggleSelectedClass))
+      selectedEvents.forEach((evt) => emblaApi.on(evt, toggleSelectedClass))
       toggleSelectedClass()
     }
   }
 
   function destroy(): void {
     removeClass(root, options.draggable)
-    draggingEvents.forEach((evt) => carousel.off(evt, toggleDraggingClass))
-    selectedEvents.forEach((evt) => carousel.off(evt, toggleSelectedClass))
+    draggingEvents.forEach((evt) => emblaApi.off(evt, toggleDraggingClass))
+    selectedEvents.forEach((evt) => emblaApi.off(evt, toggleSelectedClass))
     slides.forEach((slide) => removeClass(slide, options.selected))
   }
 
@@ -65,8 +65,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function toggleSelectedClass(): void {
-    const inView = carousel.slidesInView(true)
-    const notInView = carousel.slidesNotInView(true)
+    const inView = emblaApi.slidesInView(true)
+    const notInView = emblaApi.slidesNotInView(true)
     notInView.forEach((index) => removeClass(slides[index], options.selected))
     inView.forEach((index) => addClass(slides[index], options.selected))
   }

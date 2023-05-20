@@ -1,5 +1,5 @@
 import { EmblaCarouselType } from './EmblaCarousel'
-import { AnimationType } from './Animation'
+import { AnimationType } from './Animations'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
@@ -19,6 +19,7 @@ import {
   isMouseEvent,
   mathAbs,
   mathSign,
+  WindowType,
 } from './utils'
 
 type DragHandlerCallbackType = (
@@ -38,6 +39,8 @@ export function DragHandler(
   axis: AxisType,
   direction: DirectionType,
   rootNode: HTMLElement,
+  ownerDocument: Document,
+  ownerWindow: WindowType,
   target: Vector1DType,
   dragTracker: DragTrackerType,
   location: Vector1DType,
@@ -99,7 +102,7 @@ export function DragHandler(
   }
 
   function addDragEvents(): void {
-    const node = isMouse ? document : rootNode
+    const node = isMouse ? ownerDocument : rootNode
     dragEvents
       .add(node, 'touchmove', move, nonPassiveEvent)
       .add(node, 'touchend', up)
@@ -119,7 +122,7 @@ export function DragHandler(
   }
 
   function allowedForce(force: number, targetChanged: boolean): number {
-    const next = index.clone().add(mathSign(force) * -1)
+    const next = index.add(mathSign(force) * -1)
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
     if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
@@ -129,7 +132,7 @@ export function DragHandler(
   }
 
   function down(evt: PointerEventType): void {
-    const isMouseEvt = isMouseEvent(evt)
+    const isMouseEvt = isMouseEvent(evt, ownerWindow)
     isMouse = isMouseEvt
     if (isMouseEvt && evt.button !== 0) return
     if (isFocusNode(evt.target as Element)) return

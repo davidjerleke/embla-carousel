@@ -1,5 +1,7 @@
 import { PointerEventType } from './DragTracker'
 
+export type WindowType = Window & typeof globalThis
+
 export function isNumber(subject: unknown): subject is number {
   return typeof subject === 'number'
 }
@@ -14,10 +16,6 @@ export function isBoolean(subject: unknown): subject is boolean {
 
 export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
-}
-
-export function isMouseEvent(evt: PointerEventType): evt is MouseEvent {
-  return typeof MouseEvent !== 'undefined' && evt instanceof MouseEvent
 }
 
 export function mathAbs(n: number): number {
@@ -71,4 +69,14 @@ export function objectsMergeDeep(
     })
     return mergedObjects
   }, {})
+}
+
+export function isMouseEvent(
+  evt: PointerEventType,
+  ownerWindow: WindowType,
+): evt is MouseEvent {
+  return (
+    typeof ownerWindow.MouseEvent !== 'undefined' &&
+    evt instanceof ownerWindow.MouseEvent
+  )
 }

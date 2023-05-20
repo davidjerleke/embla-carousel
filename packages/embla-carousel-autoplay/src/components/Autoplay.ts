@@ -22,16 +22,16 @@ export type AutoplayOptionsType = AutoplayType['options']
 
 function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let options: OptionsType
-  let carousel: EmblaCarouselType
+  let emblaApi: EmblaCarouselType
   let interaction: () => void
   let timer = 0
   let jump = false
 
   function init(
-    embla: EmblaCarouselType,
+    emblaApiInstance: EmblaCarouselType,
     optionsHandler: OptionsHandlerType,
   ): void {
-    carousel = embla
+    emblaApi = emblaApiInstance
 
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, Autoplay.globalOptions)
@@ -41,23 +41,23 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     jump = options.jump
     interaction = options.stopOnInteraction ? destroy : stop
 
-    const { eventStore } = carousel.internalEngine()
-    const emblaRoot = carousel.rootNode()
+    const { eventStore, ownerDocument, ownerWindow } = emblaApi.internalEngine()
+    const emblaRoot = emblaApi.rootNode()
     const root = (options.rootNode && options.rootNode(emblaRoot)) || emblaRoot
 
-    carousel.on('pointerDown', interaction)
-    if (!options.stopOnInteraction) carousel.on('pointerUp', reset)
+    emblaApi.on('pointerDown', interaction)
+    if (!options.stopOnInteraction) emblaApi.on('pointerUp', reset)
 
     if (options.stopOnMouseEnter) {
       eventStore.add(root, 'mouseenter', interaction)
       if (!options.stopOnInteraction) eventStore.add(root, 'mouseleave', reset)
     }
 
-    eventStore.add(document, 'visibilitychange', () => {
-      if (document.visibilityState === 'hidden') return stop()
+    eventStore.add(ownerDocument, 'visibilitychange', () => {
+      if (ownerDocument.visibilityState === 'hidden') return stop()
       reset()
     })
-    eventStore.add(window, 'pagehide', (event: PageTransitionEvent) => {
+    eventStore.add(ownerWindow, 'pagehide', (event: PageTransitionEvent) => {
       if (event.persisted) stop()
     })
 
@@ -65,8 +65,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function destroy(): void {
-    carousel.off('pointerDown', interaction)
-    if (!options.stopOnInteraction) carousel.off('pointerUp', reset)
+    emblaApi.off('pointerDown', interaction)
+    if (!options.stopOnInteraction) emblaApi.off('pointerUp', reset)
     stop()
     timer = 0
   }
@@ -89,15 +89,16 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function next(): void {
-    const { index } = carousel.internalEngine()
-    const kill = options.stopOnLastSnap && index.get() === index.max
+    const { index } = emblaApi.internalEngine()
+    const lastIndex = emblaApi.scrollSnapList().length - 1
+    const kill = options.stopOnLastSnap && index.get() === lastIndex
 
     if (kill) return destroy()
 
-    if (carousel.canScrollNext()) {
-      carousel.scrollNext(jump)
+    if (emblaApi.canScrollNext()) {
+      emblaApi.scrollNext(jump)
     } else {
-      carousel.scrollTo(0, jump)
+      emblaApi.scrollTo(0, jump)
     }
     play()
   }

@@ -1,5 +1,5 @@
 import { AxisType } from './Axis'
-import { arrayLast, arrayLastIndex, mathAbs } from './utils'
+import { arrayLast, arrayLastIndex, mathAbs, WindowType } from './utils'
 
 export type SlideSizesType = {
   slideSizes: number[]
@@ -12,6 +12,7 @@ export function SlideSizes(
   slideRects: DOMRect[],
   slides: HTMLElement[],
   readEdgeGap: boolean,
+  ownerWindow: WindowType,
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
   const withEdgeGap = slideRects[0] && readEdgeGap
@@ -28,7 +29,7 @@ export function SlideSizes(
 
   function measureEndGap(): number {
     if (!withEdgeGap) return 0
-    const style = window.getComputedStyle(arrayLast(slides))
+    const style = ownerWindow.getComputedStyle(arrayLast(slides))
     return parseFloat(style.getPropertyValue(`margin-${endEdge}`))
   }
 

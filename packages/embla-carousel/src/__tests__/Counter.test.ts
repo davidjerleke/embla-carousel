@@ -136,6 +136,10 @@ describe('Counter', () => {
       test('And preserves its current value', () => {
         expect(loopCounter.clone().get()).toBe(start)
       })
+
+      test('And returns it when add is invoked', () => {
+        expect(loopCounter.add(1)).not.toBe(loopCounter)
+      })
     })
   })
 })

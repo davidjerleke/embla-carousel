@@ -39,35 +39,48 @@ injectBaseStyles()
 
 const SLIDE_COUNT = 16
 const OPTIONS: EmblaOptionsType = {
-  loop: false,
+  // loop: true,
   dragFree: true,
   containScroll: 'trimSnaps',
 }
 
-const emblaNode = <HTMLElement>document.querySelector('.embla')
-const viewPortNode = <HTMLElement>emblaNode.querySelector('.embla__viewport')
-const containerNode = <HTMLElement>document.querySelector('.embla__container')
-const prevBtnNode = <HTMLElement>emblaNode.querySelector('.embla__button--prev')
-const nextBtnNode = <HTMLElement>emblaNode.querySelector('.embla__button--next')
-const dotsNode = <HTMLElement>document.querySelector('.embla__dots')
-
-createSlides(containerNode, SLIDE_COUNT)
-
-const emblaApi = EmblaCarousel(viewPortNode, OPTIONS)
-const dotNodes = createDotBtns(emblaApi, dotsNode)
-const toggleDotButtonsActive = toggleDotBtnsActive(emblaApi, dotNodes)
-const togglePrevNextButtonsActive = togglePrevNextBtnsActive(
-  emblaApi,
-  prevBtnNode,
-  nextBtnNode,
+const emblaNodes = <HTMLElement[]>(
+  Array.from(document.querySelectorAll('.embla'))
 )
-addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
-addDotBtnsClickHandlers(emblaApi, dotNodes)
 
-emblaApi.on('select', toggleDotButtonsActive)
-emblaApi.on('select', togglePrevNextButtonsActive)
-emblaApi.on('init', toggleDotButtonsActive)
-emblaApi.reInit()
+emblaNodes.forEach((emblaNode) => {
+  const viewPortNode = <HTMLElement>emblaNode.querySelector('.embla__viewport')
+  const containerNode = <HTMLElement>(
+    emblaNode.querySelector('.embla__container')
+  )
+  const prevBtnNode = <HTMLElement>(
+    emblaNode.querySelector('.embla__button--prev')
+  )
+  const nextBtnNode = <HTMLElement>(
+    emblaNode.querySelector('.embla__button--next')
+  )
+  const dotsNode = <HTMLElement>(
+    emblaNode.parentElement.querySelector('.embla__dots')
+  )
+
+  createSlides(containerNode, SLIDE_COUNT)
+
+  const emblaApi = EmblaCarousel(viewPortNode, OPTIONS)
+  const dotNodes = createDotBtns(emblaApi, dotsNode)
+  const toggleDotButtonsActive = toggleDotBtnsActive(emblaApi, dotNodes)
+  const togglePrevNextButtonsActive = togglePrevNextBtnsActive(
+    emblaApi,
+    prevBtnNode,
+    nextBtnNode,
+  )
+  addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
+  addDotBtnsClickHandlers(emblaApi, dotNodes)
+
+  emblaApi.on('select', toggleDotButtonsActive)
+  emblaApi.on('select', togglePrevNextButtonsActive)
+  emblaApi.on('init', toggleDotButtonsActive)
+  emblaApi.reInit()
+})
 
 // let startTime = performance.now()
 
@@ -80,11 +93,11 @@ emblaApi.reInit()
 //   console.log('settled', endTime - startTime)
 // })
 
-emblaApi.slideNodes().forEach((n, i) => {
-  n.addEventListener('click', () => {
-    console.log('Clicked index: ' + (i + 1))
-  })
-})
+// emblaApi.slideNodes().forEach((n, i) => {
+//   n.addEventListener('click', () => {
+//     console.log('Clicked index: ' + (i + 1))
+//   })
+// })
 
 // document.addEventListener('click', () => {
 //   console.log('Clicked document')

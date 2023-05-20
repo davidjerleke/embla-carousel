@@ -42,7 +42,6 @@ const BASE_STYLES = css`
   }
 
   .embla__slide {
-    overflow: hidden;
     flex: 0 0 var(--slide-size);
     min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
@@ -483,7 +482,6 @@ const IOS_PICKER_STYLES = css`
     justify-content: center;
     line-height: 1;
     font-size: 1.8rem;
-    touch-action: pan-x;
   }
 
   .embla__ios-picker__scene {
@@ -524,7 +522,6 @@ const IOS_PICKER_STYLES = css`
     position: absolute;
     transform-style: preserve-3d;
     will-change: transform;
-    touch-action: pan-x;
   }
 
   .embla__ios-picker__slide {

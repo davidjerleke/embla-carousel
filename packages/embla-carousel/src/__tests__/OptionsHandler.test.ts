@@ -1,6 +1,6 @@
 import { OptionsHandler } from '../components/OptionsHandler'
 
-const { optionsAtMedia, optionsMediaQueries } = OptionsHandler()
+const { optionsAtMedia, optionsMediaQueries } = OptionsHandler(window)
 const matchMediaQuery = '(min-width: 768px)'
 const matchMediaQuery2 = '(min-width: 576px)'
 const notMatchMediaQuery = '(min-width: 992px)'

@@ -16,17 +16,17 @@ export type AutoHeightOptionsType = AutoHeightType['options']
 
 function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   let options: OptionsType
-  let carousel: EmblaCarouselType
+  let emblaApi: EmblaCarouselType
   let slideBounds: SlideBoundType[] = []
   let slideHeights: number[] = []
   const heightEvents: EmblaEventType[] = ['select', 'pointerUp']
   const inViewThreshold = 0.5
 
   function init(
-    embla: EmblaCarouselType,
+    emblaApiInstance: EmblaCarouselType,
     optionsHandler: OptionsHandlerType,
   ): void {
-    carousel = embla
+    emblaApi = emblaApiInstance
 
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, AutoHeight.globalOptions)
@@ -37,23 +37,23 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
       options: { axis },
       slidesInView,
       slideRects,
-    } = carousel.internalEngine()
+    } = emblaApi.internalEngine()
     if (axis === 'y') return
 
     slideBounds = slidesInView.findSlideBounds(undefined, inViewThreshold)
     slideHeights = slideRects.map((rect) => rect.height)
 
-    heightEvents.forEach((evt) => carousel.on(evt, setContainerHeight))
+    heightEvents.forEach((evt) => emblaApi.on(evt, setContainerHeight))
     setContainerHeight()
   }
 
   function destroy(): void {
-    heightEvents.forEach((evt) => carousel.off(evt, setContainerHeight))
+    heightEvents.forEach((evt) => emblaApi.off(evt, setContainerHeight))
     setContainerHeight(undefined, 'destroy')
   }
 
   function highestInView(): number {
-    const { slidesInView, target } = carousel.internalEngine()
+    const { slidesInView, target } = emblaApi.internalEngine()
     const inViewIndexes = slidesInView.check(target.get(), slideBounds)
     const heights = inViewIndexes.map((index) => slideHeights[index])
     return heights.reduce((a, b) => Math.max(a, b), 0)
@@ -65,7 +65,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   ): void {
     const height =
       evt === 'destroy' ? options.destroyHeight : `${highestInView()}px`
-    carousel.containerNode().style.height = height
+    emblaApi.containerNode().style.height = height
   }
 
   const self: AutoHeightType = {

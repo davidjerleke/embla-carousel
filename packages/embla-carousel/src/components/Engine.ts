@@ -25,16 +25,18 @@ import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
-import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
+import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import {
-  Animation,
-  AnimationRenderType,
   AnimationType,
+  AnimationRenderType,
   AnimationUpdateType,
-} from './Animation'
+  AnimationsType,
+} from './Animations'
 
 export type EngineType = {
+  ownerDocument: Document
+  ownerWindow: WindowType
   eventHandler: EventHandlerType
   axis: AxisType
   direction: DirectionType
@@ -70,8 +72,11 @@ export function Engine(
   root: HTMLElement,
   container: HTMLElement,
   slides: HTMLElement[],
+  ownerDocument: Document,
+  ownerWindow: WindowType,
   options: OptionsType,
   eventHandler: EventHandlerType,
+  animations: AnimationsType,
 ): EngineType {
   // Options
   const {
@@ -105,6 +110,7 @@ export function Engine(
     slideRects,
     slides,
     readEdgeGap,
+    ownerWindow,
   )
   const slidesToScroll = SlidesToScroll(
     viewSize,
@@ -144,6 +150,7 @@ export function Engine(
     slideLooper,
     eventHandler,
     animation,
+    options: { loop },
   }) => {
     const pointerDown = dragHandler.pointerDown()
 
@@ -166,16 +173,22 @@ export function Engine(
 
   const render: AnimationRenderType = (
     { scrollBody, translate, location },
-    lagFactor,
+    lagOffset,
   ) => {
     const velocity = scrollBody.velocity()
-    const lagLocation = location.get() - velocity + velocity * lagFactor
-    translate.to(lagLocation)
+    const offsetLocation = location.get() - velocity + velocity * lagOffset
+    translate.to(offsetLocation)
+  }
+
+  const animation: AnimationType = {
+    update: () => update(engine),
+    render: (lagOffset: number) => render(engine, lagOffset),
+    start: () => animations.start(engine),
+    stop: () => animations.stop(engine),
   }
 
   // Shared
   const friction = 0.68
-  const animation = Animation(update, render)
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
   const target = Vector1D(startLocation)
@@ -207,6 +220,8 @@ export function Engine(
 
   // Engine
   const engine: EngineType = {
+    ownerDocument,
+    ownerWindow,
     eventHandler,
     containerRect,
     slideRects,
@@ -217,8 +232,10 @@ export function Engine(
       axis,
       direction,
       root,
+      ownerDocument,
+      ownerWindow,
       target,
-      DragTracker(axis),
+      DragTracker(axis, ownerWindow),
       location,
       animation,
       scrollTo,

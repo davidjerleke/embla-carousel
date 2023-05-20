@@ -1,11 +1,12 @@
 import { Engine, EngineType } from './Engine'
+import { Animations, AnimationsType } from './Animations'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString } from './utils'
+import { isString, WindowType } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -36,10 +37,15 @@ function EmblaCarousel(
   userOptions?: EmblaOptionsType,
   userPlugins?: EmblaPluginType[],
 ): EmblaCarouselType {
+  const ownerDocument = root.ownerDocument
+  const ownerWindow = <WindowType>ownerDocument.defaultView
+  const optionsHandler = OptionsHandler(ownerWindow)
+  const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
-  const pluginsHandler = PluginsHandler()
+  const documentVisibleHandler = EventStore()
   const eventHandler = EventHandler()
-  const { mergeOptions, optionsAtMedia, optionsMediaQueries } = OptionsHandler()
+  const { animationRealms } = EmblaCarousel
+  const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
   const { on, off, emit } = eventHandler
   const reInit = reActivate
 
@@ -73,15 +79,30 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
+    const animationRealm = animationRealms.find((a) => a.window === ownerWindow)
+    const animations = animationRealm || Animations(ownerWindow)
+    if (!animationRealm) animationRealms.push(animations)
+
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
 
     storeElements()
-    engine = Engine(root, container, slides, options, eventHandler)
+
+    engine = Engine(
+      root,
+      container,
+      slides,
+      ownerDocument,
+      ownerWindow,
+      options,
+      eventHandler,
+      animations,
+    )
 
     if (!options.active) return deActivate()
 
     engine.translate.to(engine.location.get())
+
     pluginList = withPlugins || pluginList
     pluginApis = pluginsHandler.init(pluginList, self)
 
@@ -90,10 +111,13 @@ function EmblaCarousel(
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
-    engine.animation.init(engine)
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
+
+    documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
+      if (ownerDocument.hidden) animations.reset()
+    })
 
     if (options.loop) {
       if (!engine.slideLooper.canLoop()) {
@@ -121,7 +145,7 @@ function EmblaCarousel(
 
   function deActivate(): void {
     engine.dragHandler.destroy()
-    engine.animation.destroy()
+    engine.animation.stop()
     engine.eventStore.clear()
     engine.translate.clear()
     engine.slideLooper.clear()
@@ -129,6 +153,7 @@ function EmblaCarousel(
     engine.slidesHandler.destroy()
     pluginsHandler.destroy()
     mediaHandlers.clear()
+    documentVisibleHandler.clear()
   }
 
   function destroy(): void {
@@ -157,23 +182,23 @@ function EmblaCarousel(
   }
 
   function scrollNext(jump?: boolean): void {
-    const next = engine.index.clone().add(1)
-    scrollTo(next.get(), jump === true, -1)
+    const next = engine.index.add(1).get()
+    scrollTo(next, jump === true, -1)
   }
 
   function scrollPrev(jump?: boolean): void {
-    const prev = engine.index.clone().add(-1)
-    scrollTo(prev.get(), jump === true, 1)
+    const prev = engine.index.add(-1).get()
+    scrollTo(prev, jump === true, 1)
   }
 
   function canScrollNext(): boolean {
-    const next = engine.index.clone().add(1)
-    return next.get() !== selectedScrollSnap()
+    const next = engine.index.add(1).get()
+    return next !== selectedScrollSnap()
   }
 
   function canScrollPrev(): boolean {
-    const prev = engine.index.clone().add(-1)
-    return prev.get() !== selectedScrollSnap()
+    const prev = engine.index.add(-1).get()
+    return prev !== selectedScrollSnap()
   }
 
   function scrollSnapList(): number[] {
@@ -241,6 +266,7 @@ function EmblaCarousel(
   return self
 }
 
+EmblaCarousel.animationRealms = <AnimationsType[]>[]
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel

@@ -10,15 +10,9 @@ export function ScrollLimit(
   scrollSnaps: number[],
   loop: boolean,
 ): ScrollLimitType {
-  const limit = measureLimit()
-
-  function measureLimit(): LimitType {
-    const startSnap = scrollSnaps[0]
-    const endSnap = arrayLast(scrollSnaps)
-    const min = loop ? startSnap - contentSize : endSnap
-    const max = startSnap
-    return Limit(min, max)
-  }
+  const max = scrollSnaps[0]
+  const min = loop ? max - contentSize : arrayLast(scrollSnaps)
+  const limit = Limit(min, max)
 
   const self: ScrollLimitType = {
     limit,

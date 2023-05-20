@@ -67,4 +67,5 @@ export const iosPickerWrapperStyles = css`
   background-color: ${COLORS.BACKGROUND_CODE};
   padding-left: ${CAROUSEL_WRAPPER_SPACING};
   padding-right: ${CAROUSEL_WRAPPER_SPACING};
+  touch-action: none;
 `
