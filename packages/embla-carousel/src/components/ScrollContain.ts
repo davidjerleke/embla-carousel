@@ -14,7 +14,7 @@ export function ScrollContain(
   containScroll: ScrollContainOptionType,
 ): ScrollContainType {
   const scrollBounds = Limit(-contentSize + viewSize, snapsAligned[0])
-  const snapsBounded = snapsAligned.map(scrollBounds.constrain)
+  const snapsBounded = measureBounded()
   const snapsContained = measureContained()
 
   function findDuplicates(): LimitType {
@@ -23,6 +23,12 @@ export function ScrollContain(
     const min = snapsBounded.lastIndexOf(startSnap)
     const max = snapsBounded.indexOf(endSnap) + 1
     return Limit(min, max)
+  }
+
+  function measureBounded(): number[] {
+    return snapsAligned
+      .map(scrollBounds.constrain)
+      .map((scrollBound) => parseFloat(scrollBound.toFixed(3)))
   }
 
   function measureContained(): number[] {
