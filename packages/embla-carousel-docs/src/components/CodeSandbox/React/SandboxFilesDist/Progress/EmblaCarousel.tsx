@@ -1,5 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
+import useEmblaCarousel, {
+  EmblaCarouselType,
+  EmblaOptionsType,
+} from 'embla-carousel-react'
 import imageByIndex from '../imageByIndex'
 
 type PropType = {
@@ -12,17 +15,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [scrollProgress, setScrollProgress] = useState(0)
 
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return
+  const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
     setScrollProgress(progress * 100)
-  }, [emblaApi, setScrollProgress])
+  }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    onScroll()
-    emblaApi.on('scroll', onScroll)
+
+    onScroll(emblaApi)
     emblaApi.on('reInit', onScroll)
+    emblaApi.on('scroll', onScroll)
   }, [emblaApi, onScroll])
 
   return (

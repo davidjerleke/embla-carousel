@@ -7,17 +7,17 @@ const EmblaCarousel = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [scrollProgress, setScrollProgress] = useState(0)
 
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return
+  const onScroll = useCallback((emblaApi) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
     setScrollProgress(progress * 100)
-  }, [emblaApi, setScrollProgress])
+  }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    onScroll()
-    emblaApi.on('scroll', onScroll)
+
+    onScroll(emblaApi)
     emblaApi.on('reInit', onScroll)
+    emblaApi.on('scroll', onScroll)
   }, [emblaApi, onScroll])
 
   return (

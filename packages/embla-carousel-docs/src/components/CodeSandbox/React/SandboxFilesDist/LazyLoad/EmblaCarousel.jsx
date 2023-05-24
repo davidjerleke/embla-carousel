@@ -8,26 +8,25 @@ const EmblaCarousel = (props) => {
   const [emblaRed, emblaApi] = useEmblaCarousel(options)
   const [slidesInView, setSlidesInView] = useState([])
 
-  const findSlidesInView = useCallback(() => {
-    if (!emblaApi) return
-
+  const updateSlidesInView = useCallback((emblaApi) => {
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('select', findSlidesInView)
+        emblaApi.off('select', updateSlidesInView)
       }
       const inView = emblaApi
         .slidesInView(true)
-        .filter((index) => slidesInView.indexOf(index) === -1)
+        .filter((index) => !slidesInView.includes(index))
       return slidesInView.concat(inView)
     })
-  }, [emblaApi, setSlidesInView])
+  }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    findSlidesInView()
-    emblaApi.on('select', findSlidesInView)
-    emblaApi.on('reInit', findSlidesInView)
-  }, [emblaApi, findSlidesInView])
+
+    updateSlidesInView(emblaApi)
+    emblaApi.on('select', updateSlidesInView)
+    emblaApi.on('reInit', updateSlidesInView)
+  }, [emblaApi, updateSlidesInView])
 
   return (
     <div className="embla">

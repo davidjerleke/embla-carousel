@@ -28,24 +28,25 @@ const EmblaCarousel = (props) => {
     [emblaApi],
   )
 
+  const onInit = useCallback((emblaApi) => {
+    setScrollSnaps(emblaApi.scrollSnapList())
+  }, [])
+
   const onSelect = useCallback((emblaApi) => {
     setSelectedIndex(emblaApi.selectedScrollSnap())
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
   }, [])
 
-  const onInit = useCallback((emblaApi) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
-  }, [])
-
   useEffect(() => {
     if (!emblaApi) return
+
     onInit(emblaApi)
     onSelect(emblaApi)
     emblaApi.on('reInit', onInit)
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
-  }, [emblaApi, onSelect])
+  }, [emblaApi, onInit, onSelect])
 
   return (
     <>
