@@ -1646,6 +1646,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.20.13":
+  version: 7.22.3
+  resolution: "@babel/runtime@npm:7.22.3"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 8fc50785ca4cba749fed90bffca7e6fd52d4709755654e95b8d2a945fc034b56fb8c2e8a0183fea7c4abb86bf5fa77678c0ea35163b6920649833d180c34c234
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.16.7, @babel/template@npm:^7.18.10, @babel/template@npm:^7.20.7, @babel/template@npm:^7.3.3":
   version: 7.20.7
   resolution: "@babel/template@npm:7.20.7"
@@ -7647,7 +7656,7 @@ __metadata:
     gatsby-plugin-manifest: ^5.4.0
     gatsby-plugin-mdx: ^5.4.0
     gatsby-plugin-react-svg: ^3.3.0
-    gatsby-plugin-sitemap: ^6.4.0
+    gatsby-plugin-sitemap: ^6.10.0
     gatsby-plugin-styled-components: ^6.4.0
     gatsby-remark-autolink-headers: ^6.4.0
     gatsby-source-filesystem: ^5.4.0
@@ -9956,11 +9965,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-sitemap@npm:^6.4.0":
-  version: 6.4.0
-  resolution: "gatsby-plugin-sitemap@npm:6.4.0"
+"gatsby-plugin-sitemap@npm:^6.10.0":
+  version: 6.10.0
+  resolution: "gatsby-plugin-sitemap@npm:6.10.0"
   dependencies:
-    "@babel/runtime": ^7.20.7
+    "@babel/runtime": ^7.20.13
     common-tags: ^1.8.2
     minimatch: ^3.1.2
     sitemap: ^7.1.1
@@ -9968,7 +9977,7 @@ __metadata:
     gatsby: ^5.0.0-next
     react: ^18.0.0 || ^0.0.0
     react-dom: ^18.0.0 || ^0.0.0
-  checksum: a8be0cac9644d0f99f2107d48c13ff4264fc5934c23dcf6ba894f4fdcbb8b81b9f5111fc9e8aa5f5d3eb04cb190fdb06e3a3872a9cecebbc2ba62697be8ea843
+  checksum: f4d615ef5072f43f452748362e65a5f568fd46190dd68c6966f783556da805dcfa483aee4e42b191d8a26f8f6e0ab514c066b793d6336214cad094d9d3bfe107
   languageName: node
   linkType: hard
 

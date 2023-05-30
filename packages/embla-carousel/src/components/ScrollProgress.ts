@@ -13,7 +13,7 @@ export function ScrollProgress(limit: LimitType): ScrollProgressType {
   }
 
   const self: ScrollProgressType = {
-    get,
+    get
   }
   return self
 }

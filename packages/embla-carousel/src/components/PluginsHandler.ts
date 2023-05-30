@@ -5,28 +5,28 @@ import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 export type PluginsHandlerType = {
   init: (
     plugins: EmblaPluginType[],
-    embla: EmblaCarouselType,
+    embla: EmblaCarouselType
   ) => EmblaPluginsType
   destroy: () => void
 }
 
 export function PluginsHandler(
-  optionsHandler: OptionsHandlerType,
+  optionsHandler: OptionsHandlerType
 ): PluginsHandlerType {
   let activePlugins: EmblaPluginType[] = []
 
   function init(
     plugins: EmblaPluginType[],
-    emblaApi: EmblaCarouselType,
+    emblaApi: EmblaCarouselType
   ): EmblaPluginsType {
     activePlugins = plugins.filter(
-      ({ options }) => optionsHandler.optionsAtMedia(options).active !== false,
+      ({ options }) => optionsHandler.optionsAtMedia(options).active !== false
     )
     activePlugins.forEach((plugin) => plugin.init(emblaApi, optionsHandler))
 
     return plugins.reduce(
       (map, plugin) => Object.assign(map, { [plugin.name]: plugin }),
-      {},
+      {}
     )
   }
 
@@ -36,7 +36,7 @@ export function PluginsHandler(
 
   const self: PluginsHandlerType = {
     init,
-    destroy,
+    destroy
   }
   return self
 }

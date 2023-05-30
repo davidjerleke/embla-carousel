@@ -53,5 +53,5 @@ export const ICONS = {
   emblaLightDefault: styledSvg(emblaLightDefault),
   emblaDarkDefault: styledSvg(emblaDarkDefault),
   emblaLightBlur: styledSvg(emblaLightBlur),
-  emblaDarkBlur: styledSvg(emblaDarkBlur),
+  emblaDarkBlur: styledSvg(emblaDarkBlur)
 }

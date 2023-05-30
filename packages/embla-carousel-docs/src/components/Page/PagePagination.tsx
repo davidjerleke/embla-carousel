@@ -1,25 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PropType as PageType } from 'templates/Page'
-import { BareLink } from 'components/Link/BareLink'
+import { PropType as PageDefaultType } from 'templates/Default'
+import { LinkBare } from 'components/Link/LinkBare'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
-import { IconWithText } from 'components/Icon/IconWithText'
+import { IconWithText, IconWithTextText } from 'components/Icon/IconWithText'
+import { createGapStyles } from 'utils/createGapStyles'
 
 const ITEM_SPACING = SPACINGS.FOUR
 
 const PagePaginationWrapper = styled.nav`
+  ${createGapStyles(ITEM_SPACING, '', 'div')};
   display: flex;
   justify-content: space-between;
   margin-top: ${SPACINGS.EIGHT};
-  margin-left: -${ITEM_SPACING};
 `
 
 const Item = styled.div`
-  padding-left: ${ITEM_SPACING};
-
   > a {
     color: ${COLORS.BRAND_PRIMARY};
   }
@@ -39,15 +38,15 @@ const ItemTitle = styled.div`
   display: inline-flex;
   align-items: center;
   font-weight: ${FONT_WEIGHTS.MEDIUM};
-`
 
-const GradientText = styled.span`
-  ${BRAND_GRADIENT_TEXT_STYLES};
+  ${IconWithTextText} {
+    ${BRAND_GRADIENT_TEXT_STYLES};
+  }
 `
 
 type PropType = {
-  next: PageType['pageContext']['next']
-  previous: PageType['pageContext']['previous']
+  next: PageDefaultType['pageContext']['next']
+  previous: PageDefaultType['pageContext']['previous']
 }
 
 export const PagePagination = (props: PropType) => {
@@ -57,26 +56,24 @@ export const PagePagination = (props: PropType) => {
     <PagePaginationWrapper aria-label="Pagination Navigation">
       <Item>
         {previous && (
-          <BareLink to={previous.slug}>
+          <LinkBare to={previous.slug}>
             <ItemLabel>Previous</ItemLabel>
             <ItemTitle>
-              <IconWithText iconSvg="arrowLeft">
-                <GradientText>{previous.title}</GradientText>
-              </IconWithText>
+              <IconWithText iconSvg="arrowLeft">{previous.title}</IconWithText>
             </ItemTitle>
-          </BareLink>
+          </LinkBare>
         )}
       </Item>
       <Item>
         {next && (
-          <BareLink to={next.slug}>
+          <LinkBare to={next.slug}>
             <ItemLabel>Next</ItemLabel>
             <ItemTitle>
               <IconWithText iconSvg="arrowRight" iconSide="right">
-                <GradientText>{next.title}</GradientText>
+                {next.title}
               </IconWithText>
             </ItemTitle>
-          </BareLink>
+          </LinkBare>
         )}
       </Item>
     </PagePaginationWrapper>

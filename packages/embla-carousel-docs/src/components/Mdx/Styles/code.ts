@@ -1,29 +1,28 @@
 import { css } from 'styled-components'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
-import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
+import { pageFrameCollapseStyles } from 'components/Page/PageFrameCollapse'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
+import { BORDER_SIZES } from 'consts/border'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
-import { BORDER_SIZES } from 'consts/border'
+import { PRISM_FRAME_RADIUS } from '../Components/PrismSyntaxFrame'
 import { AdmonitionWrapper } from '../Components/Admonition'
 import { createScrollBarStyles } from 'consts/scrollBars'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
-  PRISM_HIGHLIGHT_LINE_CLASS_NAME,
+  PRISM_HIGHLIGHT_LINE_CLASS_NAME
 } from 'components/Mdx/Components/PrismSyntaxHighlight'
-
-const BORDER_RADIUS = '0.4rem'
 
 export const codeStyles = css`
   .${CODE_HIGHLIGHT_CLASS_NAME} {
     background-color: ${COLORS.BACKGROUND_CODE};
-    border-radius: ${BORDER_RADIUS};
+    border-radius: ${PRISM_FRAME_RADIUS};
     border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE / 2)} ${SPACINGS.ONE};
     font-size: ${FONT_SIZES.CUSTOM(
-      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
+      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04
     )};
     box-sizing: border-box;
   }
@@ -34,7 +33,7 @@ export const codeStyles = css`
   }
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} {
-    ${frameCollapseStyles};
+    ${pageFrameCollapseStyles};
     position: relative;
 
     &:before {
@@ -46,11 +45,11 @@ export const codeStyles = css`
       text-transform: uppercase;
       position: absolute;
       top: 0.1rem;
-      left: ${FRAME_SPACING};
+      left: ${PAGE_FRAME_SPACING};
       padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
         ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
-      border-bottom-left-radius: ${BORDER_RADIUS};
-      border-bottom-right-radius: ${BORDER_RADIUS};
+      border-bottom-left-radius: ${PRISM_FRAME_RADIUS};
+      border-bottom-right-radius: ${PRISM_FRAME_RADIUS};
     }
 
     &[data-language='jsx'] {
@@ -132,14 +131,14 @@ export const codeStyles = css`
   }
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} pre[class*='language-'] {
-    padding: ${FRAME_SPACING} 0;
+    padding: ${PAGE_FRAME_SPACING} 0;
     background-color: transparent;
     border: 0;
     margin-bottom: 0;
   }
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} pre code {
-    padding: 0 ${FRAME_SPACING};
+    padding: 0 ${PAGE_FRAME_SPACING};
     background-color: transparent;
     display: block;
     font-size: 100%;

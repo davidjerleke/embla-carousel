@@ -12,7 +12,7 @@ export function Direction(direction: DirectionOptionType): DirectionType {
   }
 
   const self: DirectionType = {
-    apply,
+    apply
   }
   return self
 }

@@ -13,7 +13,7 @@ export type TableOfContentsType = {
 export type TableOfContentsContextType = TableOfContentsItemType
 
 export const TableOfContentsContext = createContext<TableOfContentsContextType>(
-  {},
+  {}
 )
 
 type PropType = PropsWithChildren<{
@@ -23,10 +23,10 @@ type PropType = PropsWithChildren<{
 export const TableOfContentsProvider = (props: PropType) => {
   const { tableOfContents, children } = props
 
-  const value = useMemo(
-    () => tableOfContents?.items[0] || { items: [] },
-    [tableOfContents],
-  )
+  const value = useMemo(() => {
+    const hasItems = tableOfContents?.items && tableOfContents.items[0]
+    return hasItems || { items: [] }
+  }, [tableOfContents])
 
   return (
     <TableOfContentsContext.Provider value={value}>

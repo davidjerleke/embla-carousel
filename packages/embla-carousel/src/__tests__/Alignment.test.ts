@@ -1,7 +1,7 @@
 import {
   Alignment,
   AlignmentOptionType,
-  AlignmentType,
+  AlignmentType
 } from '../components/Alignment'
 
 const viewSize = 100

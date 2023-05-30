@@ -60,12 +60,12 @@ type LogoImagesType = {
 const LOGO_IMAGES: LogoImagesType = {
   default: {
     [THEME_KEYS.LIGHT]: logoLightThemeDefaultUrl,
-    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl,
+    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl
   },
   blur: {
     [THEME_KEYS.LIGHT]: logoLightThemeBlurUrl,
-    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl,
-  },
+    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl
+  }
 }
 
 type LogoSvgsType = {
@@ -82,12 +82,12 @@ type LogoSvgsType = {
 const LOGO_SVGS: LogoSvgsType = {
   default: {
     [THEME_KEYS.LIGHT]: 'emblaLightDefault',
-    [THEME_KEYS.DARK]: 'emblaDarkDefault',
+    [THEME_KEYS.DARK]: 'emblaDarkDefault'
   },
   blur: {
     [THEME_KEYS.LIGHT]: 'emblaLightBlur',
-    [THEME_KEYS.DARK]: 'emblaDarkBlur',
-  },
+    [THEME_KEYS.DARK]: 'emblaDarkBlur'
+  }
 }
 
 type PropType = PropsWithChildren<{
@@ -106,9 +106,9 @@ export const SiteLogo = (props: PropType) => {
   const { src, alt } = useMemo(
     () => ({
       src: LOGO_IMAGES[appearance][theme],
-      alt: `An illustrated atom like body which is the logotype of ${title}`,
+      alt: `An illustrated atom like body which is the logotype of ${title}`
     }),
-    [theme, appearance, title],
+    [theme, appearance, title]
   )
 
   return (

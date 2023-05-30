@@ -4,7 +4,7 @@ import { isBoolean } from './utils'
 
 type SlidesHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
-  mutations: MutationRecord[],
+  mutations: MutationRecord[]
 ) => boolean | void
 
 export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
@@ -12,21 +12,21 @@ export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
 export type SlidesHandlerType = {
   init: (
     emblaApi: EmblaCarouselType,
-    watchSlides: SlidesHandlerOptionType,
+    watchSlides: SlidesHandlerOptionType
   ) => void
   destroy: () => void
 }
 
 export function SlidesHandler(
   container: HTMLElement,
-  eventHandler: EventHandlerType,
+  eventHandler: EventHandlerType
 ): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
   function init(
     emblaApi: EmblaCarouselType,
-    watchSlides: SlidesHandlerOptionType,
+    watchSlides: SlidesHandlerOptionType
   ): void {
     if (!watchSlides) return
 
@@ -57,7 +57,7 @@ export function SlidesHandler(
 
   const self: SlidesHandlerType = {
     init,
-    destroy,
+    destroy
   }
   return self
 }

@@ -24,7 +24,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
 
   function init(
     emblaApiInstance: EmblaCarouselType,
-    optionsHandler: OptionsHandlerType,
+    optionsHandler: OptionsHandlerType
   ): void {
     emblaApi = emblaApiInstance
 
@@ -36,7 +36,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     const {
       options: { axis },
       slidesInView,
-      slideRects,
+      slideRects
     } = emblaApi.internalEngine()
     if (axis === 'y') return
 
@@ -61,7 +61,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
 
   function setContainerHeight(
     _?: EmblaCarouselType,
-    evt?: EmblaEventType,
+    evt?: EmblaEventType
   ): void {
     const height =
       evt === 'destroy' ? options.destroyHeight : `${highestInView()}px`
@@ -72,7 +72,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     name: 'autoHeight',
     options: userOptions,
     init,
-    destroy,
+    destroy
   }
   return self
 }

@@ -1,28 +1,27 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { ThemeToggle } from 'components/Theme/ThemeToggle'
-import { NavigationLink } from 'components/Link/NavigationLink'
+import { LinkNavigation } from 'components/Link/LinkNavigation'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { useRoutes } from 'hooks/useRoutes'
 import { Search } from 'components/Search/Search'
+import { createGapStyles } from 'utils/createGapStyles'
 
-const ITEM_SPACING_SM_UP = SPACINGS.CUSTOM(({ FOUR }) => FOUR + 0.4)
+const ITEM_SPACING_DESKTOP = SPACINGS.CUSTOM(() => 2.8)
 
 const HeaderActionsWrapper = styled.ul`
   display: flex;
   align-items: center;
   line-height: 1.65;
-  ${MEDIA.MIN_SM} {
-    margin-left: -${ITEM_SPACING_SM_UP};
+
+  ${MEDIA.DESKTOP} {
+    ${createGapStyles(ITEM_SPACING_DESKTOP, '', 'li')}
   }
 `
 
 const Item = styled.li<{ $hiddenAtCompact?: boolean }>`
-  ${MEDIA.MIN_SM} {
-    padding-left: ${ITEM_SPACING_SM_UP};
-  }
   display: flex;
   align-items: center;
 
@@ -35,7 +34,7 @@ const Item = styled.li<{ $hiddenAtCompact?: boolean }>`
     `};
 `
 
-const Link = styled(NavigationLink)`
+const Link = styled(LinkNavigation)`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   display: inline-flex;
   text-align: center;

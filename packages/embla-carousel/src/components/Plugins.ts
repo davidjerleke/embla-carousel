@@ -8,7 +8,7 @@ export type LoosePluginType = {
 
 export type CreatePluginType<
   TypeA extends LoosePluginType,
-  TypeB extends LooseOptionsType,
+  TypeB extends LooseOptionsType
 > = TypeA & {
   name: string
   options: Partial<CreateOptionsType<TypeB>>

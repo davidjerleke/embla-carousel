@@ -8,8 +8,12 @@ import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { createGapStyles } from 'utils/createGapStyles'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
-import { PrimaryButtonFilledLink } from 'components/Link/ButtonLink'
+import {
+  LinkButtonPrimaryFilled,
+  LinkButtonPrimaryOutlined
+} from 'components/Link/LinkButton'
 
 const MAX_CONTENT_WIDTH = '50rem'
 
@@ -61,7 +65,7 @@ const Content = styled.div`
 const H1 = styled.h1`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   margin-bottom: ${SPACINGS.THREE};
-  font-size: ${FONT_SIZES.CUSTOM(({ H2 }) => H2 * 2)};
+  font-size: ${FONT_SIZES.CUSTOM(() => 5)};
   line-height: 0.9;
   font-weight: ${FONT_WEIGHTS.BLACK};
 
@@ -74,11 +78,11 @@ const H1 = styled.h1`
   }
 
   ${MEDIA.MIN_XS} {
-    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 2.4)};
+    font-size: ${FONT_SIZES.CUSTOM(() => 5.6)};
   }
 
   ${MEDIA.MIN_SM} {
-    font-size: ${FONT_SIZES.CUSTOM(({ H1 }) => H1 + 3)};
+    font-size: ${FONT_SIZES.CUSTOM(() => 6.2)};
   }
 `
 
@@ -88,15 +92,21 @@ const H2 = styled.h2`
   line-height: 1.5;
 
   ${MEDIA.MIN_SM} {
-    font-size: ${FONT_SIZES.CUSTOM(({ H3 }) => H3 - 0.05)};
+    font-size: ${FONT_SIZES.CUSTOM(() => 2.1)};
   }
 `
 
-const CtaWrapper = styled.div`
+const CtaWrapper = styled.ul`
+  ${createGapStyles(SPACINGS.TWO, SPACINGS.TWO)};
+  display: flex;
+  flex-wrap: wrap;
   padding-top: ${SPACINGS.FOUR};
 
   ${MEDIA.MIN_SM} {
     padding-top: ${SPACINGS.SIX};
+  }
+  ${MEDIA.COMPACT} {
+    justify-content: center;
   }
 `
 
@@ -114,9 +124,16 @@ export const HeroBrand = () => {
         </H1>
         <H2>{description}</H2>
         <CtaWrapper id={MAIN_CONTENT_ID}>
-          <PrimaryButtonFilledLink to="/examples/static/">
-            Try Examples
-          </PrimaryButtonFilledLink>
+          <li>
+            <LinkButtonPrimaryFilled to="/examples/predefined/">
+              Examples
+            </LinkButtonPrimaryFilled>
+          </li>
+          <li>
+            <LinkButtonPrimaryOutlined to="/examples/generator/">
+              Generator
+            </LinkButtonPrimaryOutlined>
+          </li>
         </CtaWrapper>
       </Content>
     </HeroBrandWrapper>

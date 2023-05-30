@@ -1,90 +1,90 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import CarouselClassNames from 'components/CodeSandbox/React/SandboxFilesSrc/ClassNames/EmblaCarousel'
-import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
-import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
+import CarouselClassNames from 'components/Sandbox/React/SandboxFilesSrc/ClassNames/EmblaCarousel'
+import { createSandboxVanilla } from 'components/Sandbox/Vanilla/createSandboxVanilla'
+import { createSandboxReact } from 'components/Sandbox/React/createSandboxReact'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import {
   ID,
   SLIDES,
   OPTIONS,
-  STYLES,
+  STYLES
 } from 'components/Examples/Plugins/ClassNames'
 import {
-  SelectCodeSandbox,
-  PropType as SelectCodeSandboxPropType,
-} from 'components/CodeSandbox/SelectCodeSandbox'
+  SandboxLanguageType,
+  SandboxModuleType,
+  SandboxSelectionType,
+  SANDBOX_LANGUAGES,
+  SANDBOX_PLUGINS
+} from 'consts/sandbox'
 import {
   addSandboxPlugins,
-  SANDBOX_PLUGIN_CLASS_NAMES,
-} from 'components/CodeSandbox/sandboxPlugins'
+  createSandboxFunctionsWithLabels,
+  sandboxLanguageUtils
+} from 'utils/sandbox'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
   styles: STYLES,
   id: ID,
-  ...addSandboxPlugins(SANDBOX_PLUGIN_CLASS_NAMES),
+  ...addSandboxPlugins(SANDBOX_PLUGINS.CLASS_NAMES)
 }
 
-const sandboxVanillaJavaScript = async (): Promise<string> => {
-  const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ClassNames/EmblaCarousel.js'
-  )
+const sandboxVanilla = async (
+  language: SandboxLanguageType
+): Promise<string> => {
+  const { isTypeScript } = await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
+
+  if (isTypeScript) {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/ClassNames/EmblaCarousel.ts'
+    )
+  } else {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/ClassNames/EmblaCarousel.js'
+    )
+  }
+
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
+    language,
+    carouselScript: carouselScript.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselClassNames options={OPTIONS} slides={SLIDES} />,
-    ),
-    language: 'javascript',
+      <CarouselClassNames options={OPTIONS} slides={SLIDES} />
+    )
   })
 }
 
-const sandboxVanillaTypeScript = async (): Promise<string> => {
-  const carousel = await import(
-    '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/ClassNames/EmblaCarousel.ts'
-  )
-  return createSandboxVanilla({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselClassNames options={OPTIONS} slides={SLIDES} />,
-    ),
-    language: 'typescript',
-  })
-}
+const sandboxReact = async (language: SandboxLanguageType): Promise<string> => {
+  const { isTypeScript } = await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
 
-const sandboxReactJavaScript = async (): Promise<string> => {
-  const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ClassNames/EmblaCarousel.jsx`
-  )
+  if (isTypeScript) {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/ClassNames/EmblaCarousel.tsx`
+    )
+  } else {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/ClassNames/EmblaCarousel.jsx`
+    )
+  }
+
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'javascript',
+    language,
+    carouselScript: carouselScript.default
   })
 }
 
-const sandboxReactTypeScript = async (): Promise<string> => {
-  const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/ClassNames/EmblaCarousel.tsx`
-  )
-  return createSandboxReact({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'typescript',
-  })
-}
-
-const SANDBOXES: SelectCodeSandboxPropType['sandboxes'] =
-  createSandboxFunctionsWithLabels({
-    VANILLA_JS: sandboxVanillaJavaScript,
-    VANILLA_TS: sandboxVanillaTypeScript,
-    REACT_JS: sandboxReactJavaScript,
-    REACT_TS: sandboxReactTypeScript,
-  })
+const SANDBOXES: SandboxSelectionType[] = createSandboxFunctionsWithLabels({
+  VANILLA_JS: () => sandboxVanilla(SANDBOX_LANGUAGES.JAVASCRIPT),
+  VANILLA_TS: () => sandboxVanilla(SANDBOX_LANGUAGES.TYPESCRIPT),
+  REACT_JS: () => sandboxReact(SANDBOX_LANGUAGES.JAVASCRIPT),
+  REACT_TS: () => sandboxReact(SANDBOX_LANGUAGES.TYPESCRIPT)
+})
 
 export const ExampleCarouselClassNamesSandboxes = () => {
-  return <SelectCodeSandbox sandboxes={SANDBOXES} />
+  return <SandboxSelection sandboxes={SANDBOXES} />
 }

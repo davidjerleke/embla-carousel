@@ -7,5 +7,5 @@ export type OptionsType = CreateOptionsType<{
 export const defaultOptions: OptionsType = {
   active: true,
   breakpoints: {},
-  destroyHeight: 'auto',
+  destroyHeight: 'auto'
 }

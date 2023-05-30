@@ -11,5 +11,5 @@ export const defaultOptions: OptionsType = {
   breakpoints: {},
   selected: 'is-selected',
   draggable: 'is-draggable',
-  dragging: 'is-dragging',
+  dragging: 'is-dragging'
 }

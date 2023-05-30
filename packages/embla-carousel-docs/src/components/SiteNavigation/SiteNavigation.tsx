@@ -60,7 +60,7 @@ export const SiteNavigation = (props: PropType) => {
     ({ key }: KeyboardEvent) => {
       if (CLOSE_KEYS.includes(key)) closeNavigation()
     },
-    [closeNavigation],
+    [closeNavigation]
   )
 
   useEventListener('keyup', onKeyUp)

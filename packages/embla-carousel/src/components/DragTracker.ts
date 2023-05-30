@@ -13,7 +13,7 @@ export type DragTrackerType = {
 
 export function DragTracker(
   axis: AxisType,
-  ownerWindow: WindowType,
+  ownerWindow: WindowType
 ): DragTrackerType {
   const logInterval = 170
 
@@ -60,7 +60,7 @@ export function DragTracker(
     pointerDown,
     pointerMove,
     pointerUp,
-    readPoint,
+    readPoint
   }
   return self
 }

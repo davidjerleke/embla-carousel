@@ -29,7 +29,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function init(
     emblaApiInstance: EmblaCarouselType,
-    optionsHandler: OptionsHandlerType,
+    optionsHandler: OptionsHandlerType
   ): void {
     emblaApi = emblaApiInstance
 
@@ -110,7 +110,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     destroy,
     play,
     stop,
-    reset,
+    reset
   }
   return self
 }

@@ -1,8 +1,8 @@
-import { frameCollapseStyles } from 'components/SiteLayout/FrameCollapse'
+import { pageFrameCollapseStyles } from 'components/Page/PageFrameCollapse'
 import { css } from 'styled-components'
 import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
-import { BORDER_SIZES } from 'consts/border'
+import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { LAYERS } from 'consts/layers'
 
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
@@ -11,7 +11,7 @@ export const CAROUSEL_THUMB_SLIDES_SPACING = '0.8rem'
 export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 export const CAROUSEL_SLIDES_SPACING = '1rem'
 export const CAROUSEL_WRAPPER_SPACING = '1.6rem'
-export const CAROUSEL_WRAPPER_RADIUS = '0.4rem'
+export const CAROUSEL_WRAPPER_RADIUS = BORDER_RADIUSES.BOX
 
 const borderStyles = css`
   position: relative;
@@ -42,7 +42,7 @@ const borderStyles = css`
 `
 
 const baseWrapperStyles = css`
-  ${frameCollapseStyles};
+  ${pageFrameCollapseStyles};
   ${borderStyles};
   background-color: ${COLORS.BACKGROUND_CODE};
 `
@@ -61,7 +61,7 @@ export const carouselThumbsWrapperStyles = css`
 `
 
 export const iosPickerWrapperStyles = css`
-  ${frameCollapseStyles};
+  ${pageFrameCollapseStyles};
   ${borderStyles};
   height: ${CAROUSEL_IOS_PICKER_HEIGHT};
   background-color: ${COLORS.BACKGROUND_CODE};

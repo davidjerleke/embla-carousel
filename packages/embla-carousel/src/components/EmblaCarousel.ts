@@ -35,7 +35,7 @@ export type EmblaCarouselType = {
 function EmblaCarousel(
   root: HTMLElement,
   userOptions?: EmblaOptionsType,
-  userPlugins?: EmblaPluginType[],
+  userPlugins?: EmblaPluginType[]
 ): EmblaCarouselType {
   const ownerDocument = root.ownerDocument
   const ownerWindow = <WindowType>ownerDocument.defaultView
@@ -75,7 +75,7 @@ function EmblaCarousel(
 
   function createEngine(
     options: OptionsType,
-    animations: AnimationsType,
+    animations: AnimationsType
   ): EngineType {
     const engine = Engine(
       root,
@@ -85,7 +85,7 @@ function EmblaCarousel(
       ownerWindow,
       options,
       eventHandler,
-      animations,
+      animations
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
@@ -97,7 +97,7 @@ function EmblaCarousel(
 
   function activate(
     withOptions?: EmblaOptionsType,
-    withPlugins?: EmblaPluginType[],
+    withPlugins?: EmblaPluginType[]
   ): void {
     if (destroyed) return
 
@@ -115,7 +115,7 @@ function EmblaCarousel(
 
     optionsMediaQueries([
       optionsBase,
-      ...pluginList.map(({ options }) => options),
+      ...pluginList.map(({ options }) => options)
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
     if (!options.active) return
@@ -140,7 +140,7 @@ function EmblaCarousel(
 
   function reActivate(
     withOptions?: EmblaOptionsType,
-    withPlugins?: EmblaPluginType[],
+    withPlugins?: EmblaPluginType[]
   ): void {
     const startIndex = selectedScrollSnap()
     deActivate()
@@ -263,7 +263,7 @@ function EmblaCarousel(
     selectedScrollSnap,
     slideNodes,
     slidesInView,
-    slidesNotInView,
+    slidesNotInView
   }
 
   activate(userOptions, userPlugins)

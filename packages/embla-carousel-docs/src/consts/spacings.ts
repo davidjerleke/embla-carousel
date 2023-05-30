@@ -18,7 +18,7 @@ const SPACING_VALUES = {
   THIRTEEN: 7.8,
   FOURTEEN: 8.4,
   FIFTEEN: 9,
-  SIXTEEN: 9.6,
+  SIXTEEN: 9.6
 }
 
 export const SPACINGS = {
@@ -39,5 +39,5 @@ export const SPACINGS = {
   FIFTEEN: sizeWithUnit(SPACING_VALUES.FIFTEEN),
   SIXTEEN: sizeWithUnit(SPACING_VALUES.SIXTEEN),
   CUSTOM: (callback: SpacingCustomType): string =>
-    sizeWithUnit(callback(SPACING_VALUES)),
+    sizeWithUnit(callback(SPACING_VALUES))
 }

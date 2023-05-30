@@ -7,24 +7,22 @@ import { TabsProvider } from 'components/Tabs/TabsContext'
 import { TableOfContentsProvider } from 'components/TableOfContents/TableOfContentsContext'
 import { KeyNavigatingSkipToContent } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
 import { GlobalStyles } from 'components/Layout/GlobalStyles/GlobalStyles'
-import { PageTemplatePropType, PAGE_TEMPLATES } from 'consts/pageTemplates'
-import { Grid } from 'components/SiteLayout/Grid'
+import { PagePropType, PAGE_LAYOUTS } from 'consts/page'
+import { PageGrid } from 'components/Page/PageGrid'
 import { RoutesLoading } from 'components/Routes/RoutesLoading'
 import { Header } from 'components/Header/Header'
 import { Footer } from 'components/Footer/Footer'
 
-type PropType = PropsWithChildren<
-  Pick<PageTemplatePropType, 'pageContext' | 'data'>
->
+type PropType = PropsWithChildren<PagePropType>
 
 export const Layout = (props: PropType) => {
   const {
     children,
     pageContext,
-    data: { mdx },
+    data: { mdx }
   } = props
   const { layout, id } = pageContext
-  const isNotFoundPage = layout === PAGE_TEMPLATES.NOT_FOUND
+  const isNotFoundPage = layout === PAGE_LAYOUTS.NOT_FOUND
   const tableOfContents = mdx?.tableOfContents
 
   return (
@@ -42,7 +40,7 @@ export const Layout = (props: PropType) => {
                 <RoutesLoading pageId={id} />
                 <TabsProvider>
                   <TableOfContentsProvider tableOfContents={tableOfContents}>
-                    <Grid layout={layout}>{children}</Grid>
+                    <PageGrid layout={layout}>{children}</PageGrid>
                   </TableOfContentsProvider>
                 </TabsProvider>
                 <Footer />

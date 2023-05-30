@@ -5,6 +5,6 @@ export const styledComponentsStylesToString = (
 ): string => {
   return stylesList.reduce(
     (allStyles, styles) => allStyles + styles.join(''),
-    '',
+    ''
   )
 }

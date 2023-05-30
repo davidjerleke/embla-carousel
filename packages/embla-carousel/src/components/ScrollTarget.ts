@@ -18,7 +18,7 @@ export function ScrollTarget(
   scrollSnaps: number[],
   contentSize: number,
   limit: LimitType,
-  targetVector: Vector1DType,
+  targetVector: Vector1DType
 ): ScrollTargetType {
   const { reachedAny, removeOffset, constrain } = limit
 
@@ -70,7 +70,7 @@ export function ScrollTarget(
   const self: ScrollTargetType = {
     byDistance,
     byIndex,
-    shortcut,
+    shortcut
   }
   return self
 }

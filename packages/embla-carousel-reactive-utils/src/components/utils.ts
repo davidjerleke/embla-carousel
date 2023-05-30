@@ -5,7 +5,7 @@ export function isObject(subject: unknown): subject is Record<string, unknown> {
 }
 
 export function isRecord(
-  subject: unknown,
+  subject: unknown
 ): subject is Record<string | number, unknown> {
   return isObject(subject) || Array.isArray(subject)
 }
@@ -20,7 +20,7 @@ export function canUseDOM(): boolean {
 
 export function areOptionsEqual(
   optionsA: Record<string, unknown>,
-  optionsB: Record<string, unknown>,
+  optionsB: Record<string, unknown>
 ): boolean {
   const optionsAKeys = Object.keys(optionsA)
   const optionsBKeys = Object.keys(optionsB)
@@ -42,7 +42,7 @@ export function areOptionsEqual(
 }
 
 export function sortAndMapPluginToOptions(
-  plugins: EmblaPluginType[],
+  plugins: EmblaPluginType[]
 ): EmblaPluginType['options'][] {
   return plugins
     .concat()
@@ -52,7 +52,7 @@ export function sortAndMapPluginToOptions(
 
 export function arePluginsEqual(
   pluginsA: EmblaPluginType[],
-  pluginsB: EmblaPluginType[],
+  pluginsB: EmblaPluginType[]
 ): boolean {
   if (pluginsA.length !== pluginsB.length) return false
 

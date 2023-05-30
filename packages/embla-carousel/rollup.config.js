@@ -6,7 +6,7 @@ import {
   typescript,
   resolve,
   terser,
-  kebabToPascalCase,
+  kebabToPascalCase
 } from '../../rollup.config'
 
 export default [
@@ -18,13 +18,13 @@ export default [
         format: 'cjs',
         strict: true,
         sourcemap: true,
-        exports: 'auto',
+        exports: 'auto'
       },
       {
         file: `${packageJson.name}.esm.js`,
         format: 'esm',
         strict: true,
-        sourcemap: true,
+        sourcemap: true
       },
       {
         file: `${packageJson.name}.umd.js`,
@@ -32,9 +32,9 @@ export default [
         strict: true,
         sourcemap: false,
         name: kebabToPascalCase(packageJson.name),
-        plugins: [terser()],
-      },
+        plugins: [terser()]
+      }
     ],
-    plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)],
-  },
+    plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)]
+  }
 ]

@@ -14,7 +14,7 @@ const query = graphql`
   }
 `
 
-type SiteMetadataType = {
+export type SiteMetadataType = {
   site: {
     siteMetadata: {
       title: string

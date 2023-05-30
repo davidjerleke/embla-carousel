@@ -30,7 +30,7 @@ import { Vector1D, Vector1DType } from './Vector1d'
 import {
   AnimationType,
   AnimationUpdateType,
-  AnimationsType,
+  AnimationsType
 } from './Animations'
 
 export type EngineType = {
@@ -75,7 +75,7 @@ export function Engine(
   ownerWindow: WindowType,
   options: OptionsType,
   eventHandler: EventHandlerType,
-  animations: AnimationsType,
+  animations: AnimationsType
 ): EngineType {
   // Options
   const {
@@ -90,7 +90,7 @@ export function Engine(
     dragThreshold,
     slidesToScroll: groupSlides,
     skipSnaps,
-    containScroll,
+    containScroll
   } = options
 
   // Measurements
@@ -109,12 +109,12 @@ export function Engine(
     slideRects,
     slides,
     readEdgeGap,
-    ownerWindow,
+    ownerWindow
   )
   const slidesToScroll = SlidesToScroll(
     viewSize,
     slideSizesWithGaps,
-    groupSlides,
+    groupSlides
   )
   const { snaps, snapsAligned } = ScrollSnaps(
     axis,
@@ -123,14 +123,14 @@ export function Engine(
     slideRects,
     slideSizesWithGaps,
     slidesToScroll,
-    containSnaps,
+    containSnaps
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained } = ScrollContain(
     viewSize,
     contentSize,
     snapsAligned,
-    containScroll,
+    containScroll
   )
   const scrollSnaps = containSnaps ? snapsContained : snapsAligned
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
@@ -150,7 +150,7 @@ export function Engine(
     animation,
     slideLooper,
     translate,
-    options: { loop },
+    options: { loop }
   }) => {
     const pointerDown = dragHandler.pointerDown()
 
@@ -175,7 +175,7 @@ export function Engine(
   const animation: AnimationType = {
     start: () => animations.start(engine),
     stop: () => animations.stop(engine),
-    update: () => update(engine),
+    update: () => update(engine)
   }
 
   // Shared
@@ -189,7 +189,7 @@ export function Engine(
     scrollSnaps,
     contentSize,
     limit,
-    target,
+    target
   )
   const scrollTo = ScrollTo(
     animation,
@@ -198,7 +198,7 @@ export function Engine(
     scrollTarget,
     scrollBody,
     target,
-    eventHandler,
+    eventHandler
   )
   const slidesInView = SlidesInView(
     viewSize,
@@ -207,7 +207,7 @@ export function Engine(
     snaps,
     limit,
     loop,
-    inViewThreshold,
+    inViewThreshold
   )
 
   // Engine
@@ -239,7 +239,7 @@ export function Engine(
       dragFree,
       dragThreshold,
       skipSnaps,
-      friction,
+      friction
     ),
     eventStore: EventStore(),
     percentOfView,
@@ -253,7 +253,7 @@ export function Engine(
       eventHandler,
       ownerWindow,
       slides,
-      axis,
+      axis
     ),
     scrollBody,
     scrollBounds: ScrollBounds(
@@ -261,11 +261,11 @@ export function Engine(
       location,
       target,
       scrollBody,
-      percentOfView,
+      percentOfView
     ),
     scrollLooper: ScrollLooper(contentSize, limit, location, [
       location,
-      target,
+      target
     ]),
     scrollProgress: ScrollProgress(limit),
     scrollSnaps,
@@ -280,14 +280,14 @@ export function Engine(
       scrollSnaps,
       slidesInView,
       location,
-      slides,
+      slides
     ),
     slidesHandler: SlidesHandler(container, eventHandler),
     slidesInView,
     slideIndexes,
     slidesToScroll,
     target,
-    translate: Translate(axis, direction, container),
+    translate: Translate(axis, direction, container)
   }
   return engine
 }

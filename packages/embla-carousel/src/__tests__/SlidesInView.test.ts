@@ -21,7 +21,7 @@ const getContentSize = (loop: boolean): number => {
 
 const getSlidesInView = (
   loop: boolean,
-  inViewThreshold: number,
+  inViewThreshold: number
 ): SlidesInViewType => {
   const contentSize = getContentSize(loop)
   const { limit } = ScrollLimit(contentSize, snaps, loop)
@@ -33,7 +33,7 @@ const getSlidesInView = (
     snaps,
     limit,
     loop,
-    inViewThreshold,
+    inViewThreshold
   )
 }
 

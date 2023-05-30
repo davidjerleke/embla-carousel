@@ -4,14 +4,14 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react'
 import {
   THEME_KEYS,
   THEME_PREFIX,
   THEME_COLORS,
   THEME_META_SELECTOR,
-  ThemeKeyType,
+  ThemeKeyType
 } from 'consts/themes'
 import { LOCALSTORAGE_KEYS } from 'consts/localStorage'
 import { useLocalStorage } from 'hooks/useLocalStorage'
@@ -24,7 +24,7 @@ export type ThemeContextType = {
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: THEME_KEYS.LIGHT,
-  toggleTheme: () => undefined,
+  toggleTheme: () => undefined
 })
 
 type PropType = PropsWithChildren<{}>

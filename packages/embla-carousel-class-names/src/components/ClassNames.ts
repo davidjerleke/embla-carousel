@@ -24,7 +24,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
 
   function init(
     emblaApiInstance: EmblaCarouselType,
-    optionsHandler: OptionsHandlerType,
+    optionsHandler: OptionsHandlerType
   ): void {
     emblaApi = emblaApiInstance
 
@@ -58,7 +58,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
 
   function toggleDraggingClass(
     _: EmblaCarouselType,
-    evt: EmblaEventType,
+    evt: EmblaEventType
   ): void {
     if (evt === 'pointerDown') addClass(root, options.dragging)
     else removeClass(root, options.dragging)
@@ -75,7 +75,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     name: 'classNames',
     options: userOptions,
     init,
-    destroy,
+    destroy
   }
   return self
 }

@@ -16,36 +16,36 @@ export const loadPrettier = async (): Promise<LoadPrettierType> => {
     import('prettier'),
     import('prettier/parser-html'),
     import('prettier/parser-postcss'),
-    import('prettier/parser-babel'),
+    import('prettier/parser-babel')
   ])
 
   const prettierHtmlParser: PretterOptions = {
     ...PRETTIER_CONFIG,
     parser: 'html',
-    plugins: [htmlParser],
+    plugins: [htmlParser]
   }
 
   const prettierCssParser: PretterOptions = {
     ...PRETTIER_CONFIG,
     parser: 'css',
-    plugins: [cssParser],
+    plugins: [cssParser]
   }
 
   const prettierBabelParser: PretterOptions = {
     ...PRETTIER_CONFIG,
     parser: 'babel',
-    plugins: [babelParser],
+    plugins: [babelParser]
   }
 
   const prettierBabeTsParser: PretterOptions = {
     ...PRETTIER_CONFIG,
     parser: 'babel-ts',
-    plugins: [babelParser],
+    plugins: [babelParser]
   }
 
   const prettierFormatSafe = (
     subject: string,
-    parser: PretterOptions,
+    parser: PretterOptions
   ): string => {
     let formattedString = ''
     try {
@@ -73,6 +73,6 @@ export const loadPrettier = async (): Promise<LoadPrettierType> => {
     formatHtml,
     formatCss,
     formatJs,
-    formatTs,
+    formatTs
   }
 }

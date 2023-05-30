@@ -3,14 +3,14 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
-    ecmaFeatures: { jsx: true },
+    ecmaFeatures: { jsx: true }
   },
   extends: [
     'eslint:recommended',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
   rules: {
     'no-debugger': 2,
@@ -22,52 +22,58 @@ module.exports = {
       'error',
       {
         types: {
-          '{}': false,
+          '{}': false
         },
-        extendDefaults: true,
-      },
-    ],
+        extendDefaults: true
+      }
+    ]
   },
   overrides: [
     {
       files: ['*.ts'],
       rules: {
-        '@typescript-eslint/explicit-module-boundary-types': ['error'],
-      },
+        '@typescript-eslint/explicit-module-boundary-types': ['error']
+      }
     },
     {
       files: ['src/components/Page/Mdx.tsx'],
       rules: {
-        'react/display-name': 'off',
-      },
+        'react/display-name': 'off'
+      }
     },
     {
       files: [
-        'src/components/CodeSandbox/Vanilla/SandboxFilesSrc/**/*',
-        'src/components/CodeSandbox/Vanilla/SandboxFilesDist/**/*',
-        'src/components/CodeSandbox/React/SandboxFilesSrc/**/*',
-        'src/components/CodeSandbox/React/SandboxFilesDist/**/*',
+        'src/components/Sandbox/Vanilla/SandboxFilesSrc/**/*',
+        'src/components/Sandbox/Vanilla/SandboxFilesDist/**/*',
+        'src/components/Sandbox/React/SandboxFilesSrc/**/*',
+        'src/components/Sandbox/React/SandboxFilesDist/**/*'
       ],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/ban-ts-comment': 'off',
-      },
+        '@typescript-eslint/ban-ts-comment': 'off'
+      }
     },
     {
-      files: ['src/components/CodeSandbox/Compilation/**/*'],
+      files: ['src/components/Sandbox/Compilation/**/*'],
       rules: {
-        'no-console': 'off',
-      },
+        'no-console': 'off'
+      }
     },
+    {
+      files: ['src/utils/createGapStyles.ts'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off'
+      }
+    }
   ],
   env: {
     browser: true,
     es6: true,
-    jest: true,
+    jest: true
   },
   settings: {
     react: {
-      version: 'detect',
-    },
-  },
+      version: 'detect'
+    }
+  }
 }

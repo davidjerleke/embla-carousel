@@ -8,7 +8,7 @@ export function PercentOfView(viewSize: number): PercentOfViewType {
   }
 
   const self: PercentOfViewType = {
-    measure,
+    measure
   }
   return self
 }

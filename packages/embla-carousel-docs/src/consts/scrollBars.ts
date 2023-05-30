@@ -2,7 +2,7 @@ import {
   css,
   FlattenInterpolation,
   FlattenSimpleInterpolation,
-  ThemedStyledProps,
+  ThemedStyledProps
 } from 'styled-components'
 import { BORDER_RADIUSES } from './border'
 import { COLORS } from './themes'
@@ -10,7 +10,7 @@ import { COLORS } from './themes'
 type ScrollBarAxisType = 'x' | 'y'
 
 export const createScrollBarStyles = (
-  axis: ScrollBarAxisType,
+  axis: ScrollBarAxisType
 ): FlattenSimpleInterpolation => {
   const sizeProperty = axis === 'x' ? 'height' : 'width'
 
@@ -56,14 +56,14 @@ const SCROLL_BAR_SHADOWS = {
   left: `${SCROLL_BAR_SHADOW_OFFSET} 0 ${SCROLL_BAR_SHADOW_BLUR}`,
   right: `-${SCROLL_BAR_SHADOW_OFFSET} 0 ${SCROLL_BAR_SHADOW_BLUR}`,
   top: `0 ${SCROLL_BAR_SHADOW_OFFSET} ${SCROLL_BAR_SHADOW_BLUR}`,
-  bottom: `0 -${SCROLL_BAR_SHADOW_OFFSET} ${SCROLL_BAR_SHADOW_BLUR}`,
+  bottom: `0 -${SCROLL_BAR_SHADOW_OFFSET} ${SCROLL_BAR_SHADOW_BLUR}`
 }
 
 type ScrollBarShadowSideType = keyof typeof SCROLL_BAR_SHADOWS
 
 export const createScrollBarShadowStyles = (
   side: ScrollBarShadowSideType,
-  color: string = COLORS.BACKGROUND_SITE,
+  color: string = COLORS.BACKGROUND_SITE
 ): FlattenInterpolation<
   ThemedStyledProps<
     {

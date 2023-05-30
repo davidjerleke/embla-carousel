@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_SIZES } from 'consts/border'
 import { TableOfContentsItemType } from './TableOfContentsContext'
-import { NavigationLink } from 'components/Link/NavigationLink'
+import { LinkNavigation } from 'components/Link/LinkNavigation'
 
-const Link = styled(NavigationLink)`
+const Link = styled(LinkNavigation)`
   padding-top: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
   padding-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
   outline-offset: -${BORDER_SIZES.OUTLINE};

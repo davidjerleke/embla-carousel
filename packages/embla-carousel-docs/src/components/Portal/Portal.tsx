@@ -22,7 +22,7 @@ export const Portal = (props: PropType) => {
   const { children } = props
   const portalWrapper = useRef(getExistingOrCreatePortalWrapper())
   const portalContent = useRef<HTMLDivElement>(
-    isBrowser ? document.createElement('div') : null,
+    isBrowser ? document.createElement('div') : null
   )
 
   useEffect(() => {

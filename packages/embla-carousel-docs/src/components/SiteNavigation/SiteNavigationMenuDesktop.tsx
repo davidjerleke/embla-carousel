@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { LAYERS } from 'consts/layers'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
@@ -11,7 +11,7 @@ import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
-  SCROLL_BAR_SHADOW_SIZE,
+  SCROLL_BAR_SHADOW_SIZE
 } from 'consts/scrollBars'
 
 const SiteNavigationMenuDesktopWrapper = styled.div<{
@@ -25,8 +25,8 @@ const SiteNavigationMenuDesktopWrapper = styled.div<{
   &:after {
     position: absolute;
     z-index: ${LAYERS.STEP};
-    left: -${FRAME_SPACING};
-    right: -${FRAME_SPACING};
+    left: -${PAGE_FRAME_SPACING};
+    right: -${PAGE_FRAME_SPACING};
     content: '';
   }
 
@@ -47,8 +47,8 @@ const SiteNavigationMenuDesktopWrapper = styled.div<{
 
 const ScrollArea = styled.ul`
   ${createScrollBarStyles('y')};
-  padding-top: ${FRAME_SPACING};
-  padding-bottom: ${FRAME_SPACING};
+  padding-top: ${PAGE_FRAME_SPACING};
+  padding-bottom: ${PAGE_FRAME_SPACING};
   overflow: auto;
   max-height: 100%;
 `

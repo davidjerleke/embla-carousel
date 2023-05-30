@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { createGlobalStyle, css } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
-import { bareButtonStyles } from 'components/Button/BareButton'
-import { contentLinkStyles } from 'components/Link/ContentLink'
+import { buttonBareStyles } from 'components/Button/ButtonBare'
+import { linkContentStyles } from 'components/Link/LinkContent'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createPlaceholderStyles } from 'utils/createPlaceholderStyles'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
@@ -57,7 +57,7 @@ const modalStyles = css`
 
   .DocSearch-Modal {
     padding: ${EDGE_SPACING};
-    box-shadow: 0 0 0 0.1rem ${COLORS.DETAIL_LOW_CONTRAST};
+    box-shadow: 0 0 0 ${BORDER_SIZES.DETAIL} ${COLORS.DETAIL_LOW_CONTRAST};
     background-color: ${COLORS.BACKGROUND_SITE};
     z-index: ${LAYERS.STEP};
     position: relative;
@@ -117,7 +117,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Help a {
-    ${contentLinkStyles};
+    ${linkContentStyles};
     ${keyNavigatingStyles};
   }
 
@@ -278,7 +278,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit-action-button {
-    ${bareButtonStyles};
+    ${buttonBareStyles};
     color: inherit;
     padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
   }
@@ -313,7 +313,7 @@ const contentStyles = css`
 
   .DocSearch-Hit-title {
     font-size: ${FONT_SIZES.CUSTOM(
-      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04,
+      ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04
     )};
   }
 
@@ -350,8 +350,8 @@ const contentStyles = css`
   }
 
   .DocSearch-Prefill {
-    ${bareButtonStyles};
-    ${contentLinkStyles};
+    ${buttonBareStyles};
+    ${linkContentStyles};
     padding-top: ${SPACINGS.ONE};
     padding-bottom: ${SPACINGS.ONE};
   }
@@ -493,7 +493,7 @@ const inputStyles = css`
 const toggleButtonStyles = css`
   .DocSearch-Button {
     ${createSquareSizeStyles('4rem')};
-    ${bareButtonStyles};
+    ${buttonBareStyles};
     border-radius: 0;
     display: flex;
     align-items: center;
@@ -539,7 +539,7 @@ const magnifyerButtonStyles = css`
 
 const resetButtonStyles = css`
   .DocSearch-Reset {
-    ${bareButtonStyles};
+    ${buttonBareStyles};
     width: ${BUTTON_WIDTH};
     top: ${INPUT_BORDER_SIZE};
     bottom: ${INPUT_BORDER_SIZE};
@@ -563,7 +563,7 @@ const resetButtonStyles = css`
 
 const cancelButtonStyles = css`
   .DocSearch-Cancel {
-    ${bareButtonStyles};
+    ${buttonBareStyles};
     color: ${COLORS.TEXT_BODY};
     height: ${INPUT_HEIGHT};
     display: flex;
@@ -615,7 +615,7 @@ export const Search = () => {
     if (!isBrowser || toggleElement.current) return
 
     toggleElement.current = document.querySelector(
-      `.${ALGOLIA_CLASSNAMES.SEARCH_TOGGLE_BUTTON}`,
+      `.${ALGOLIA_CLASSNAMES.SEARCH_TOGGLE_BUTTON}`
     )
 
     if (toggleElement.current) {
@@ -646,7 +646,7 @@ export const Search = () => {
     observer.observe(body, {
       attributes: true,
       childList: false,
-      subtree: false,
+      subtree: false
     })
 
     return () => observer.disconnect()

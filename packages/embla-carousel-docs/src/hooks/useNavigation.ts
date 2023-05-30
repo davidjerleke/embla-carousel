@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import {
   NavigationContext,
-  NavigationContextType,
+  NavigationContextType
 } from 'components/SiteNavigation/SiteNavigationContext'
 
 export const useNavigation = (): NavigationContextType =>

@@ -15,7 +15,7 @@ export function ScrollSnaps(
   slideRects: DOMRect[],
   slideSizesWithGaps: number[],
   slidesToScroll: SlidesToScrollType,
-  containScroll: boolean,
+  containScroll: boolean
 ): ScrollSnapsType {
   const { startEdge, endEdge } = axis
   const { groupSlides } = slidesToScroll
@@ -52,7 +52,7 @@ export function ScrollSnaps(
 
   const self: ScrollSnapsType = {
     snaps,
-    snapsAligned,
+    snapsAligned
   }
   return self
 }

@@ -64,7 +64,7 @@ export function Animations(ownerWindow: WindowType): AnimationsType {
     start,
     stop,
     reset,
-    window: ownerWindow,
+    window: ownerWindow
   }
   return self
 }

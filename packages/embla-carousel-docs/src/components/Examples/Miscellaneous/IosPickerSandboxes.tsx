@@ -1,153 +1,137 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
-import { SANDBOX_REACT_FOLDERS } from 'components/CodeSandbox/React/sandboxReactFolders'
-import CarouselIosPicker from 'components/CodeSandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
-import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
-import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
-import { createSandboxReactIosPickerEntry } from 'components/CodeSandbox/React/createSandboxReactEntry'
-import { loadPrettier } from 'utils/loadPrettier'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/Sandbox/Vanilla/sandboxVanillaFolders'
+import { SANDBOX_REACT_FOLDERS } from 'components/Sandbox/React/sandboxReactFolders'
+import CarouselIosPicker from 'components/Sandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
+import { createSandboxVanilla } from 'components/Sandbox/Vanilla/createSandboxVanilla'
+import { createSandboxReact } from 'components/Sandbox/React/createSandboxReact'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { createSandboxReactIosPickerEntry } from 'components/Sandbox/React/createSandboxReactEntry'
 import { ID, STYLES } from 'components/Examples/Miscellaneous/IosPicker'
 import {
-  SelectCodeSandbox,
-  PropType as SelectCodeSandboxPropType,
-} from 'components/CodeSandbox/SelectCodeSandbox'
+  SandboxLanguageType,
+  SandboxModuleType,
+  SandboxSelectionType,
+  SANDBOX_LANGUAGES
+} from 'consts/sandbox'
+import {
+  createSandboxFunctionsWithLabels,
+  sandboxLanguageUtils
+} from 'utils/sandbox'
 
 const SHARED_CONFIG = {
   slides: [],
   styles: STYLES,
-  id: ID,
+  id: ID
 }
 
 const VANILLA_IOS_PICKER_FILE_NAME = 'ios-picker'
 const REACT_IOS_PICKER_FILE_NAME = 'EmblaCarouselIosPickerItem'
 
-const sandboxVanillaJavaScript = async (loop: boolean): Promise<string> => {
-  const { formatJs } = await loadPrettier()
-  const [carousel, infiniteScroll] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.js'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.js`
-    ),
-  ])
+const sandboxVanilla = async (
+  language: SandboxLanguageType,
+  loop: boolean
+): Promise<string> => {
+  const { isTypeScript, vanillaScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
+  let iosPickerScript: SandboxModuleType
+
+  if (isTypeScript) {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.ts'
+    )
+    iosPickerScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.ts`
+    )
+  } else {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.js'
+    )
+    iosPickerScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.js`
+    )
+  }
 
   return createSandboxVanilla({
     ...SHARED_CONFIG,
+    language,
     options: { loop },
-    carouselScript: carousel.default,
+    carouselScript: carouselScript.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(<CarouselIosPicker />),
-    language: 'javascript',
     sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_IOS_PICKER_FILE_NAME}.js`]: {
-        isBinary: false,
-        content: formatJs(infiniteScroll.default),
-      },
-    },
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_IOS_PICKER_FILE_NAME}.${vanillaScriptExtension}`]:
+        {
+          isBinary: false,
+          content: formatScript(iosPickerScript.default)
+        }
+    }
   })
 }
 
-const sandboxVanillaTypeScript = async (loop: boolean): Promise<string> => {
-  const { formatTs } = await loadPrettier()
-  const [carousel, infiniteScroll] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/EmblaCarousel.ts'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/IosPicker/ios-picker.ts`
-    ),
-  ])
-  return createSandboxVanilla({
-    ...SHARED_CONFIG,
-    options: { loop },
-    carouselScript: carousel.default,
-    carouselHtml: ReactDOMServer.renderToStaticMarkup(<CarouselIosPicker />),
-    language: 'typescript',
-    sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_IOS_PICKER_FILE_NAME}.ts`]: {
-        isBinary: false,
-        content: formatTs(infiniteScroll.default),
-      },
-    },
-  })
-}
+const sandboxReact = async (
+  language: SandboxLanguageType,
+  loop: boolean
+): Promise<string> => {
+  const { isTypeScript, reactScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
+  const indexScript = await createSandboxReactIosPickerEntry(isTypeScript, loop)
+  let carouselScript: SandboxModuleType
+  let itemScript: SandboxModuleType
 
-const sandboxReactJavaScript = async (loop: boolean): Promise<string> => {
-  const { formatJs } = await loadPrettier()
-  const [entry, carousel, item] = await Promise.all([
-    createSandboxReactIosPickerEntry('javascript', loop),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/IosPicker/EmblaCarousel.jsx`
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/IosPicker/EmblaCarouselIosPickerItem.jsx`
-    ),
-  ])
+  if (isTypeScript) {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/IosPicker/EmblaCarousel.tsx`
+    )
+    itemScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/IosPicker/EmblaCarouselIosPickerItem.tsx`
+    )
+  } else {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/IosPicker/EmblaCarousel.jsx`
+    )
+    itemScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/IosPicker/EmblaCarouselIosPickerItem.jsx`
+    )
+  }
 
   return createSandboxReact({
     ...SHARED_CONFIG,
-    indexScript: entry,
+    language,
+    indexScript: indexScript,
     options: { loop },
-    carouselScript: carousel.default,
-    language: 'javascript',
+    carouselScript: carouselScript.default,
     sandboxOverrides: {
-      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_IOS_PICKER_FILE_NAME}.jsx`]: {
-        isBinary: false,
-        content: formatJs(item.default),
-      },
-    },
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_IOS_PICKER_FILE_NAME}.${reactScriptExtension}`]:
+        {
+          isBinary: false,
+          content: formatScript(itemScript.default)
+        }
+    }
   })
 }
 
-const sandboxReactTypeScript = async (loop: boolean): Promise<string> => {
-  const { formatTs } = await loadPrettier()
-  const [entry, carousel, item] = await Promise.all([
-    createSandboxReactIosPickerEntry('typescript', loop),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/IosPicker/EmblaCarousel.tsx`
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/IosPicker/EmblaCarouselIosPickerItem.tsx`
-    ),
-  ])
-
-  return createSandboxReact({
-    ...SHARED_CONFIG,
-    indexScript: entry,
-    options: { loop },
-    carouselScript: carousel.default,
-    language: 'typescript',
-    sandboxOverrides: {
-      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_IOS_PICKER_FILE_NAME}.tsx`]: {
-        isBinary: false,
-        content: formatTs(item.default),
-      },
-    },
-  })
-}
-
-const SANDBOXES_DEFAULT: SelectCodeSandboxPropType['sandboxes'] =
+const SANDBOXES_DEFAULT: SandboxSelectionType[] =
   createSandboxFunctionsWithLabels({
-    VANILLA_JS: () => sandboxVanillaJavaScript(false),
-    VANILLA_TS: () => sandboxVanillaTypeScript(false),
-    REACT_JS: () => sandboxReactJavaScript(false),
-    REACT_TS: () => sandboxReactTypeScript(false),
+    VANILLA_JS: () => sandboxVanilla(SANDBOX_LANGUAGES.JAVASCRIPT, false),
+    VANILLA_TS: () => sandboxVanilla(SANDBOX_LANGUAGES.TYPESCRIPT, false),
+    REACT_JS: () => sandboxReact(SANDBOX_LANGUAGES.JAVASCRIPT, false),
+    REACT_TS: () => sandboxReact(SANDBOX_LANGUAGES.TYPESCRIPT, false)
   })
 
-const SANDBOXES_LOOP: SelectCodeSandboxPropType['sandboxes'] =
-  createSandboxFunctionsWithLabels({
-    VANILLA_JS: () => sandboxVanillaJavaScript(true),
-    VANILLA_TS: () => sandboxVanillaTypeScript(true),
-    REACT_JS: () => sandboxReactJavaScript(true),
-    REACT_TS: () => sandboxReactTypeScript(true),
-  })
+const SANDBOXES_LOOP: SandboxSelectionType[] = createSandboxFunctionsWithLabels(
+  {
+    VANILLA_JS: () => sandboxVanilla(SANDBOX_LANGUAGES.JAVASCRIPT, true),
+    VANILLA_TS: () => sandboxVanilla(SANDBOX_LANGUAGES.TYPESCRIPT, true),
+    REACT_JS: () => sandboxReact(SANDBOX_LANGUAGES.JAVASCRIPT, true),
+    REACT_TS: () => sandboxReact(SANDBOX_LANGUAGES.TYPESCRIPT, true)
+  }
+)
 
 export const ExampleCarouselIosPickerDefaultSandboxes = () => {
-  return <SelectCodeSandbox sandboxes={SANDBOXES_DEFAULT} />
+  return <SandboxSelection sandboxes={SANDBOXES_DEFAULT} />
 }
 
 export const ExampleCarouselIosPickerLoopSandboxes = () => {
-  return <SelectCodeSandbox sandboxes={SANDBOXES_LOOP} />
+  return <SandboxSelection sandboxes={SANDBOXES_LOOP} />
 }

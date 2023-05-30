@@ -29,6 +29,6 @@ export const useLocalStorage = (key: string): UseLocalStorageType => {
 
   return {
     getLocalStorageItem,
-    setLocalStorageItem,
+    setLocalStorageItem
   }
 }

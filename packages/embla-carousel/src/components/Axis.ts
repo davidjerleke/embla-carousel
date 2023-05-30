@@ -13,7 +13,7 @@ export type AxisType = {
 
 export function Axis(
   axis: AxisOptionType,
-  direction: DirectionOptionType,
+  direction: DirectionOptionType
 ): AxisType {
   const scroll = axis === 'y' ? 'y' : 'x'
   const cross = axis === 'y' ? 'x' : 'y'
@@ -40,7 +40,7 @@ export function Axis(
     cross,
     startEdge,
     endEdge,
-    measureSize,
+    measureSize
   }
   return self
 }

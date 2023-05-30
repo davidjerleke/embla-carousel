@@ -3,7 +3,7 @@ export type BreakpointKeyType = keyof typeof MEDIA
 const mediaQuery = (
   value: number,
   minOrMax: 'min' | 'max' = 'min',
-  widthOrHeight: 'width' | 'height' = 'width',
+  widthOrHeight: 'width' | 'height' = 'width'
 ): string => {
   const queryValue = minOrMax === 'max' ? value - 1 : value
   return `@media (${minOrMax}-${widthOrHeight}: ${queryValue}px)`
@@ -15,7 +15,7 @@ export const BREAKPOINTS = {
   XS: 576,
   SM: 750,
   MD: 992,
-  LG: 1200,
+  LG: 1200
 }
 
 export const BREAKPOINT_COMPACT = BREAKPOINTS.MD
@@ -32,5 +32,5 @@ export const MEDIA = {
   MAX_XS: mediaQuery(BREAKPOINTS.XS, 'max'),
   MAX_SM: mediaQuery(BREAKPOINTS.SM, 'max'),
   MAX_MD: mediaQuery(BREAKPOINTS.MD, 'max'),
-  MAX_LG: mediaQuery(BREAKPOINTS.LG, 'max'),
+  MAX_LG: mediaQuery(BREAKPOINTS.LG, 'max')
 }

@@ -19,5 +19,5 @@ export const defaultOptions: OptionsType = {
   stopOnInteraction: true,
   stopOnMouseEnter: false,
   stopOnLastSnap: false,
-  rootNode: null,
+  rootNode: null
 }

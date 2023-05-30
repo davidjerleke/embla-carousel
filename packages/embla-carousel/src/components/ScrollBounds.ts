@@ -14,7 +14,7 @@ export function ScrollBounds(
   location: Vector1DType,
   target: Vector1DType,
   scrollBody: ScrollBodyType,
-  percentOfView: PercentOfViewType,
+  percentOfView: PercentOfViewType
 ): ScrollBoundsType {
   const pullBackThreshold = percentOfView.measure(10)
   const edgeOffsetTolerance = percentOfView.measure(50)
@@ -49,7 +49,7 @@ export function ScrollBounds(
 
   const self: ScrollBoundsType = {
     constrain,
-    toggleActive,
+    toggleActive
   }
   return self
 }

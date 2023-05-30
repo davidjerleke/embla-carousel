@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
@@ -12,7 +12,7 @@ import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
 import { createScrollBarStyles } from 'consts/scrollBars'
 
 const extractHeadingIds = (
-  items: TableOfContentsItemType['items'] = [],
+  items: TableOfContentsItemType['items'] = []
 ): string[] => {
   const headingIds: string[] = []
 
@@ -30,8 +30,8 @@ const TableOfContentsMenuWrapper = styled.div`
   max-height: 100%;
 
   ${MEDIA.DESKTOP} {
-    padding-top: ${FRAME_SPACING};
-    padding-bottom: ${FRAME_SPACING};
+    padding-top: ${PAGE_FRAME_SPACING};
+    padding-bottom: ${PAGE_FRAME_SPACING};
   }
 `
 
@@ -60,7 +60,7 @@ export const TableOfContentsMenu = () => {
           if (entry.isIntersecting) setActiveId(entry.target.id)
         })
       },
-      { rootMargin: `0% 0% -80% 0%` },
+      { rootMargin: `0% 0% -80% 0%` }
     )
 
     headingIds.forEach((id) => {

@@ -9,12 +9,12 @@ const horizontalSize = 100
 const verticalSize = 50
 const mockRect = {
   width: horizontalSize,
-  height: verticalSize,
+  height: verticalSize
 } as DOMRect
 
 const getAxis = (
   axis: AxisOptionType,
-  contentDirection: DirectionOptionType,
+  contentDirection: DirectionOptionType
 ): AxisType => Axis(axis, contentDirection)
 
 describe('Axis', () => {

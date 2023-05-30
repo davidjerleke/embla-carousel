@@ -3,7 +3,7 @@ import { isRoutePartiallyActive } from 'utils/isRoutePartiallyActive'
 
 export const addRouteChildren = (
   parent: RouteType,
-  routes: RouteType[],
+  routes: RouteType[]
 ): RouteType => {
   parent.children = routes
     .filter(({ slug }) => isRoutePartiallyActive(parent.slug, slug))

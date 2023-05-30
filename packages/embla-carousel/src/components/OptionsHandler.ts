@@ -6,7 +6,7 @@ type OptionsType = Partial<CreateOptionsType<LooseOptionsType>>
 export type OptionsHandlerType = {
   mergeOptions: <TypeA extends OptionsType, TypeB extends OptionsType>(
     optionsA: TypeA,
-    optionsB?: TypeB,
+    optionsB?: TypeB
   ) => TypeA
   optionsAtMedia: <Type extends OptionsType>(options: Type) => Type
   optionsMediaQueries: (optionsList: OptionsType[]) => MediaQueryList[]
@@ -15,7 +15,7 @@ export type OptionsHandlerType = {
 export function OptionsHandler(ownerWindow: WindowType): OptionsHandlerType {
   function mergeOptions<TypeA extends OptionsType, TypeB extends OptionsType>(
     optionsA: TypeA,
-    optionsB?: TypeB,
+    optionsB?: TypeB
   ): TypeA {
     return <TypeA>objectsMergeDeep(optionsA, optionsB || {})
   }
@@ -40,7 +40,7 @@ export function OptionsHandler(ownerWindow: WindowType): OptionsHandlerType {
   const self: OptionsHandlerType = {
     mergeOptions,
     optionsAtMedia,
-    optionsMediaQueries,
+    optionsMediaQueries
   }
   return self
 }

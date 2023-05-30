@@ -4,14 +4,14 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react'
 import uniqueId from 'lodash/uniqueId'
 import styled, { css } from 'styled-components'
 import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
-import { BareButton } from 'components/Button/BareButton'
+import { ButtonBare } from 'components/Button/ButtonBare'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_SIZES } from 'consts/border'
 import { COLORS } from 'consts/themes'
@@ -20,8 +20,8 @@ import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyle
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
   ActiveText as TabActiveText,
-  InactiveText as TabInactiveText,
-} from 'components/Link/NavigationLink'
+  InactiveText as TabInactiveText
+} from 'components/Link/LinkNavigation'
 
 const mapChildrenToTabs = (children: React.ReactNode): TabsItemPropType[] => {
   return React.Children.toArray(children)
@@ -31,7 +31,7 @@ const mapChildrenToTabs = (children: React.ReactNode): TabsItemPropType[] => {
 
 const pickDefaultTab = (
   tabs: TabsItemPropType[],
-  storedTabSelection: string,
+  storedTabSelection: string
 ): TabsItemPropType => {
   const storedTab = tabs.find((tab) => tab.value === storedTabSelection)
   return storedTab || tabs.find((tab) => tab.default) || tabs[0]
@@ -39,7 +39,7 @@ const pickDefaultTab = (
 
 const getActiveTabIndex = (
   tabToFind: TabsItemPropType,
-  tabs: TabsItemPropType[],
+  tabs: TabsItemPropType[]
 ): number => {
   return tabs.findIndex((tab) => tab.value === tabToFind.value)
 }
@@ -57,7 +57,7 @@ export const TabPanel = styled.section`
   ${keyNavigatingStyles};
 `
 
-export const Tab = styled(BareButton)<{ $selected: boolean }>`
+export const Tab = styled(ButtonBare)<{ $selected: boolean }>`
   padding: ${SPACINGS.TWO} ${SPACINGS.TWO};
   position: relative;
   display: inline-flex;
@@ -99,7 +99,7 @@ export const Tabs = (props: PropType) => {
     return {
       tabs: enabledTabs,
       tabsId: uniqueId(),
-      defaultTab: pickDefaultTab(enabledTabs, storedTabSelection),
+      defaultTab: pickDefaultTab(enabledTabs, storedTabSelection)
     }
   }, [allTabs, storedTabSelection])
   const [activeTab, setActiveTab] = useState<TabsItemPropType>(defaultTab)
@@ -122,7 +122,7 @@ export const Tabs = (props: PropType) => {
 
       if (groupId) storeTabSelection(groupId, tab.value)
     },
-    [tabs, groupId, readTabsRectTop, storeTabSelection],
+    [tabs, groupId, readTabsRectTop, storeTabSelection]
   )
 
   const goToTab = useCallback(
@@ -137,7 +137,7 @@ export const Tabs = (props: PropType) => {
         tabElement.focus()
       }
     },
-    [tabs, setActiveTabAndStoreSelection, setIsKeyNavigating],
+    [tabs, setActiveTabAndStoreSelection, setIsKeyNavigating]
   )
 
   const onKeyDown = useCallback(
@@ -162,7 +162,7 @@ export const Tabs = (props: PropType) => {
         ArrowRight: goToNextTab,
         ArrowLeft: goToPrevTab,
         Home: goToFirstTab,
-        End: goToLastTab,
+        End: goToLastTab
       }
 
       const navigateToTab = keyNavigationMap[event.key]
@@ -172,7 +172,7 @@ export const Tabs = (props: PropType) => {
         navigateToTab()
       }
     },
-    [tabs, goToTab],
+    [tabs, goToTab]
   )
 
   useEffect(() => {
@@ -183,7 +183,7 @@ export const Tabs = (props: PropType) => {
 
     const resizeObserver = new ResizeObserver((entries) => {
       const autoNavigated = !tabRefs.current.some(
-        (tabRef) => tabRef.current === focusedTab.current,
+        (tabRef) => tabRef.current === focusedTab.current
       )
 
       if (autoNavigated) return

@@ -6,10 +6,10 @@ import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
-import { BareLink } from 'components/Link/BareLink'
+import { LinkBare } from 'components/Link/LinkBare'
 import { SiteLogo } from 'components/SiteLogo/SiteLogo'
 
-const HeaderLogoWrapper = styled(BareLink)`
+const HeaderLogoWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   font-size: ${FONT_SIZES.H4};
   display: flex;

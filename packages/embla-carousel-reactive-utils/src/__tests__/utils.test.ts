@@ -75,11 +75,11 @@ describe('areOptionsEqual', () => {
                 nestedString: 'a',
                 nestedArray: ['a1', 'a2'],
                 nestedElement,
-                nestedFunction: () => false,
-              },
-            ],
-          },
-        },
+                nestedFunction: () => false
+              }
+            ]
+          }
+        }
       }
       const objectB = {
         boolean: false,
@@ -101,11 +101,11 @@ describe('areOptionsEqual', () => {
                 nestedString: 'a',
                 nestedArray: ['a1', 'a2'],
                 nestedElement,
-                nestedFunction: () => false,
-              },
-            ],
-          },
-        },
+                nestedFunction: () => false
+              }
+            ]
+          }
+        }
       }
 
       const areEqual = areOptionsEqual(objectA, objectB)
@@ -136,11 +136,11 @@ describe('areOptionsEqual', () => {
                 nestedString: 'a',
                 nestedArray: ['a1', 'a2'],
                 nestedElement,
-                nestedFunction: () => false,
-              },
-            ],
-          },
-        },
+                nestedFunction: () => false
+              }
+            ]
+          }
+        }
       }
       const objectB = {
         boolean: false,
@@ -162,11 +162,11 @@ describe('areOptionsEqual', () => {
                 nestedString: 'a',
                 nestedArray: ['a1', 'a2'],
                 nestedElement,
-                nestedFunction: () => false,
-              },
-            ],
-          },
-        },
+                nestedFunction: () => false
+              }
+            ]
+          }
+        }
       }
 
       const areEqual = areOptionsEqual(objectA, objectB)
@@ -181,16 +181,16 @@ describe('areOptionsEqual', () => {
         align: 'start',
         breakpoints: {
           [matchMediaQuery]: { loop: true },
-          [notMatchMediaQuery]: { align: 'end' },
-        },
+          [notMatchMediaQuery]: { align: 'end' }
+        }
       }
       const optionsB = {
         loop: false,
         align: 'start',
         breakpoints: {
           [notMatchMediaQuery]: { align: 'end' },
-          [matchMediaQuery]: { loop: true },
-        },
+          [matchMediaQuery]: { loop: true }
+        }
       }
 
       const optionsAreEqual = areOptionsEqual(optionsA, optionsB)
@@ -204,9 +204,9 @@ describe('areOptionsEqual', () => {
         breakpoints: {
           [matchMediaQuery]: {
             loop: true,
-            align: 'end',
-          },
-        },
+            align: 'end'
+          }
+        }
       }
       const optionsB = {
         align: 'start',
@@ -214,9 +214,9 @@ describe('areOptionsEqual', () => {
         breakpoints: {
           [matchMediaQuery]: {
             align: 'end',
-            loop: true,
-          },
-        },
+            loop: true
+          }
+        }
       }
 
       const optionsAreEqual = areOptionsEqual(optionsA, optionsB)

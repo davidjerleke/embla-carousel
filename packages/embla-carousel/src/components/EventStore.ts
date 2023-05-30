@@ -8,7 +8,7 @@ export type EventStoreType = {
     node: EventTarget,
     type: EventNameType,
     handler: EventHandlerType,
-    options?: EventOptionsType,
+    options?: EventOptionsType
   ) => EventStoreType
   clear: () => void
 }
@@ -20,7 +20,7 @@ export function EventStore(): EventStoreType {
     node: EventTarget,
     type: EventNameType,
     handler: EventHandlerType,
-    options: EventOptionsType = { passive: true },
+    options: EventOptionsType = { passive: true }
   ): EventStoreType {
     node.addEventListener(type, handler, options)
     listeners.push(() => node.removeEventListener(type, handler, options))
@@ -33,7 +33,7 @@ export function EventStore(): EventStoreType {
 
   const self: EventStoreType = {
     add,
-    clear,
+    clear
   }
   return self
 }

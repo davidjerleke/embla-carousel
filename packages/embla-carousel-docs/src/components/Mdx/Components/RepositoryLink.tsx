@@ -1,12 +1,12 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { BareLink, PropType as LinkPropType } from 'components/Link/BareLink'
+import { LinkBare, PropType as LinkPropType } from 'components/Link/LinkBare'
 import { IconWithText } from 'components/Icon/IconWithText'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 
-const RepositoryLinkWrapper = styled(BareLink)`
+const RepositoryLinkWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.ONE};

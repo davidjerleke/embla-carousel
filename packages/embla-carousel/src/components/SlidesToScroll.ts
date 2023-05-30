@@ -9,7 +9,7 @@ export type SlidesToScrollType = {
 export function SlidesToScroll(
   viewSize: number,
   slideSizesWithGaps: number[],
-  slidesToScroll: SlidesToScrollOptionType,
+  slidesToScroll: SlidesToScrollOptionType
 ): SlidesToScrollType {
   const groupByNumber = isNumber(slidesToScroll)
 
@@ -34,7 +34,7 @@ export function SlidesToScroll(
   }
 
   const self: SlidesToScrollType = {
-    groupSlides,
+    groupSlides
   }
   return self
 }

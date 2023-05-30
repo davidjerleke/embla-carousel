@@ -5,7 +5,7 @@ import { isBoolean, WindowType } from './utils'
 
 type ResizeHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
-  entries: ResizeObserverEntry[],
+  entries: ResizeObserverEntry[]
 ) => boolean | void
 
 export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
@@ -13,7 +13,7 @@ export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
 export type ResizeHandlerType = {
   init: (
     emblaApi: EmblaCarouselType,
-    watchResize: ResizeHandlerOptionType,
+    watchResize: ResizeHandlerOptionType
   ) => void
   destroy: () => void
 }
@@ -23,7 +23,7 @@ export function ResizeHandler(
   eventHandler: EventHandlerType,
   ownerWindow: WindowType,
   slides: HTMLElement[],
-  axis: AxisType,
+  axis: AxisType
 ): ResizeHandlerType {
   let resizeObserver: ResizeObserver
   let containerSize: number
@@ -36,7 +36,7 @@ export function ResizeHandler(
 
   function init(
     emblaApi: EmblaCarouselType,
-    watchResize: ResizeHandlerOptionType,
+    watchResize: ResizeHandlerOptionType
   ): void {
     if (!watchResize) return
 
@@ -78,7 +78,7 @@ export function ResizeHandler(
 
   const self: ResizeHandlerType = {
     init,
-    destroy,
+    destroy
   }
   return self
 }

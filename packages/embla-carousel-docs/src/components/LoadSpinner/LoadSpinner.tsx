@@ -48,7 +48,7 @@ const LoadSpinnerWrapper = styled.span<{
   }
 `
 
-type PropType = {
+export type PropType = {
   size?: string
   thickness?: string
   color?: string
