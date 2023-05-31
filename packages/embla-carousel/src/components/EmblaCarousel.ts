@@ -85,6 +85,7 @@ function EmblaCarousel(
 
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
+    pluginList = withPlugins || pluginList
 
     storeElements()
 
@@ -99,18 +100,14 @@ function EmblaCarousel(
       animations,
     )
 
-    if (!options.active) return deActivate()
-
-    engine.translate.to(engine.location.get())
-
-    pluginList = withPlugins || pluginList
-    pluginApis = pluginsHandler.init(pluginList, self)
-
     optionsMediaQueries([
       optionsBase,
       ...pluginList.map(({ options }) => options),
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
+    if (!options.active) return
+
+    engine.translate.to(engine.location.get())
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
@@ -131,6 +128,8 @@ function EmblaCarousel(
     if (container.offsetParent && slides.length) {
       engine.dragHandler.init(self, options.watchDrag)
     }
+
+    pluginApis = pluginsHandler.init(pluginList, self)
   }
 
   function reActivate(
