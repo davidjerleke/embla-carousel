@@ -256,7 +256,13 @@ export function Engine(
     limit,
     location,
     options,
-    resizeHandler: ResizeHandler(container, slides, axis, eventHandler),
+    resizeHandler: ResizeHandler(
+      container,
+      eventHandler,
+      ownerWindow,
+      slides,
+      axis,
+    ),
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,
