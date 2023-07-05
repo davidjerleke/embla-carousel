@@ -1,6 +1,7 @@
 import { AnimationType } from './Animations'
 import { CounterType } from './Counter'
 import { EventHandlerType } from './EventHandler'
+import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
 import { Vector1DType } from './Vector1d'
 
@@ -14,6 +15,7 @@ export function ScrollTo(
   indexCurrent: CounterType,
   indexPrevious: CounterType,
   scrollTarget: ScrollTargetType,
+  scrollBody: ScrollBodyType,
   targetVector: Vector1DType,
   eventHandler: EventHandlerType,
 ): ScrollToType {
@@ -21,10 +23,11 @@ export function ScrollTo(
     const distanceDiff = target.distance
     const indexDiff = target.index !== indexCurrent.get()
 
-    if (distanceDiff) {
-      animation.start()
-      targetVector.add(distanceDiff)
-    }
+    scrollBody.useDirection(distanceDiff)
+    targetVector.add(distanceDiff)
+
+    if (distanceDiff) animation.start()
+
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())
       indexCurrent.set(target.index)
