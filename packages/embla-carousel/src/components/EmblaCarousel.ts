@@ -2,7 +2,7 @@ import { Engine, EngineType } from './Engine'
 import { Animations, AnimationsType } from './Animations'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
-import { defaultOptions, EmblaOptionsType } from './Options'
+import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
@@ -73,6 +73,28 @@ function EmblaCarousel(
     slides = <HTMLElement[]>[].slice.call(customSlides || container.children)
   }
 
+  function createEngine(
+    options: OptionsType,
+    animations: AnimationsType,
+  ): EngineType {
+    const engine = Engine(
+      root,
+      container,
+      slides,
+      ownerDocument,
+      ownerWindow,
+      options,
+      eventHandler,
+      animations,
+    )
+
+    if (options.loop && !engine.slideLooper.canLoop()) {
+      const optionsWithoutLoop = Object.assign({}, options, { loop: false })
+      return createEngine(optionsWithoutLoop, animations)
+    }
+    return engine
+  }
+
   function activate(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[],
@@ -89,16 +111,7 @@ function EmblaCarousel(
 
     storeElements()
 
-    engine = Engine(
-      root,
-      container,
-      slides,
-      ownerDocument,
-      ownerWindow,
-      options,
-      eventHandler,
-      animations,
-    )
+    engine = createEngine(options, animations)
 
     optionsMediaQueries([
       optionsBase,
@@ -116,15 +129,8 @@ function EmblaCarousel(
       if (ownerDocument.hidden) animations.reset()
     })
 
-    if (options.loop) {
-      if (!engine.slideLooper.canLoop()) {
-        deActivate()
-        activate({ loop: false }, withPlugins)
-        optionsBase = mergeOptions(optionsBase, { loop: true })
-        return
-      }
-      engine.slideLooper.loop()
-    }
+    if (engine.options.loop) engine.slideLooper.loop()
+
     if (container.offsetParent && slides.length) {
       engine.dragHandler.init(self, options.watchDrag)
     }

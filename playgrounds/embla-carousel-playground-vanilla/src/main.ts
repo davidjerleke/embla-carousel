@@ -37,11 +37,27 @@ const injectBaseStyles = (): void => {
 
 injectBaseStyles()
 
-const SLIDE_COUNT = 16
+const SLIDE_COUNT = 2
 const OPTIONS: EmblaOptionsType = {
-  // loop: true,
-  dragFree: true,
+  align: 'start',
   containScroll: 'trimSnaps',
+  breakpoints: {
+    '(max-width: 767px)': {
+      dragFree: true,
+      loop: false,
+      slidesToScroll: 1,
+    },
+    '(min-width: 768px) and (max-width: 1023px)': {
+      loop: true,
+      dragFree: false,
+      slidesToScroll: 2,
+    },
+    '(min-width: 1024px)': {
+      loop: true,
+      dragFree: false,
+      slidesToScroll: 3,
+    },
+  },
 }
 
 const emblaNodes = <HTMLElement[]>(
