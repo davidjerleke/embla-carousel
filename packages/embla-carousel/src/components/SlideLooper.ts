@@ -10,7 +10,7 @@ type EdgeType = 'start' | 'end'
 type LoopPointType = {
   index: number
   translate: TranslateType
-  location: Vector1DType
+  slideLocation: Vector1DType
   target: () => number
 }
 
@@ -29,7 +29,7 @@ export function SlideLooper(
   slideSizesWithGaps: number[],
   scrollSnaps: number[],
   slidesInView: SlidesInViewType,
-  scroll: Vector1DType,
+  location: Vector1DType,
   slides: HTMLElement[],
 ): SlideLooperType {
   const ascItems = arrayKeys(slideSizesWithGaps)
@@ -58,11 +58,14 @@ export function SlideLooper(
       const initial = isStartEdge ? 0 : -contentSize
       const altered = isStartEdge ? contentSize : 0
       const bounds = slideBounds.filter((b) => b.index === index)[0]
-      const point = bounds[isStartEdge ? 'end' : 'start']
-      const location = Vector1D(-1)
-      const translate = Translate(axis, direction, slides[index])
-      const target = () => (scroll.get() > point ? initial : altered)
-      return { index, location, translate, target }
+      const loopPoint = bounds[isStartEdge ? 'end' : 'start']
+
+      return {
+        index,
+        slideLocation: Vector1D(-1),
+        translate: Translate(axis, direction, slides[index]),
+        target: () => (location.get() > loopPoint ? initial : altered),
+      }
     })
   }
 
@@ -87,11 +90,11 @@ export function SlideLooper(
 
   function loop(): void {
     loopPoints.forEach((loopPoint) => {
-      const { target, translate, location } = loopPoint
-      const shift = target()
-      if (shift === location.get()) return
-      translate.to(shift)
-      location.set(shift)
+      const { target, translate, slideLocation } = loopPoint
+      const shiftLocation = target()
+      if (shiftLocation === slideLocation.get()) return
+      translate.to(shiftLocation)
+      slideLocation.set(shiftLocation)
     })
   }
 

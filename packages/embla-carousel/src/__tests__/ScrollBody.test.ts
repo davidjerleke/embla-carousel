@@ -46,31 +46,20 @@ describe('ScrollBody', () => {
     })
   })
 
-  describe('Direction is', () => {
-    test('1 when it seeks a positive target', () => {
-      target.set(targetPositive)
-      scrollBody.seek()
+  describe('Direction is ', () => {
+    test('1 when given distance is positive', () => {
+      scrollBody.useDirection(targetPositive)
       expect(scrollBody.direction()).toBe(directionPositive)
     })
 
-    test('1 when it instantly goes to a positive target', () => {
-      target.set(targetPositive)
-      scrollBody.useDuration(0)
-      scrollBody.seek()
-      expect(scrollBody.direction()).toBe(directionPositive)
-    })
-
-    test('-1 when it seeks a negative target', () => {
-      target.set(targetNegative)
-      scrollBody.seek()
+    test('-1 when given distance is negative', () => {
+      scrollBody.useDirection(targetNegative)
       expect(scrollBody.direction()).toBe(directionNegative)
     })
 
-    test('-1 when it instantly goes to a negative target', () => {
-      target.set(targetNegative)
-      scrollBody.useDuration(0)
-      scrollBody.seek()
-      expect(scrollBody.direction()).toBe(directionNegative)
+    test('0 when given distance is zero', () => {
+      scrollBody.useDirection(0)
+      expect(scrollBody.direction()).toBe(0)
     })
   })
 

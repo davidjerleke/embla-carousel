@@ -29,7 +29,6 @@ import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import {
   AnimationType,
-  AnimationRenderType,
   AnimationUpdateType,
   AnimationsType,
 } from './Animations'
@@ -147,9 +146,10 @@ export function Engine(
     scrollBody,
     scrollBounds,
     scrollLooper,
-    slideLooper,
     eventHandler,
     animation,
+    slideLooper,
+    translate,
     options: { loop },
   }) => {
     const pointerDown = dragHandler.pointerDown()
@@ -162,29 +162,20 @@ export function Engine(
       animation.stop()
       eventHandler.emit('settle')
     }
-    if (!hasSettled) {
-      eventHandler.emit('scroll')
-    }
+    if (!hasSettled) eventHandler.emit('scroll')
+
     if (loop) {
       scrollLooper.loop(scrollBody.direction())
       slideLooper.loop()
     }
-  }
 
-  const render: AnimationRenderType = (
-    { scrollBody, translate, location },
-    lagOffset,
-  ) => {
-    const velocity = scrollBody.velocity()
-    const offsetLocation = location.get() - velocity + velocity * lagOffset
-    translate.to(offsetLocation)
+    translate.to(location.get())
   }
 
   const animation: AnimationType = {
-    update: () => update(engine),
-    render: (lagOffset: number) => render(engine, lagOffset),
     start: () => animations.start(engine),
     stop: () => animations.stop(engine),
+    update: () => update(engine),
   }
 
   // Shared
@@ -205,6 +196,7 @@ export function Engine(
     index,
     indexPrevious,
     scrollTarget,
+    scrollBody,
     target,
     eventHandler,
   )
