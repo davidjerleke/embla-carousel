@@ -43,7 +43,7 @@ export const defaultOptions: OptionsType = {
   axis: 'x',
   container: null,
   slides: null,
-  containScroll: null,
+  containScroll: 'trimSnaps',
   direction: 'ltr',
   slidesToScroll: 1,
   breakpoints: {},
