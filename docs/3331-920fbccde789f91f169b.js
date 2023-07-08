@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[3331],{3331:function(e,n,c){c.r(n),n.default="declare module '*.jpg' {\n  const content: string\n  export default content\n}\n"}}]);
+//# sourceMappingURL=3331-920fbccde789f91f169b.js.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"3331-920fbccde789f91f169b.js","mappings":"uIAAA,4F","sources":["webpack://embla-carousel-docs/./src/components/Sandbox/React/SandboxFilesDist/declarations.d.ts"],"sourcesContent":["export default \"declare module '*.jpg' {\\n  const content: string\\n  export default content\\n}\\n\";"],"names":[],"sourceRoot":""}
