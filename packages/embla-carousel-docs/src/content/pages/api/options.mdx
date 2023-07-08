@@ -182,10 +182,16 @@ Enables choosing a custom container element which holds the slides. By **default
 
 ### containScroll
 
-Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`''`</BrandSecondaryText>
+Type: <BrandPrimaryText>`false` | `string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`'trimSnaps'`</BrandSecondaryText>
 
 Clear leading and trailing empty space that causes excessive scrolling. Use `trimSnaps` to only use snap points that trigger scrolling or `keepSnaps` to keep them.
+
+<Admonition type="note">
+  **Note:** When this is active, it will **override alignments** applied by the
+  [align](#align) option for enough slides at the **start** and the **end** of
+  the carousel, in order to **cover** the **leading** and **trailing space**.
+</Admonition>
 
 ---
 
