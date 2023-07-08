@@ -3,7 +3,7 @@ import React, {
   PropsWithChildren,
   useCallback,
   useMemo,
-  useState,
+  useState
 } from 'react'
 import { useLocalStorage } from 'hooks/useLocalStorage'
 import { LOCALSTORAGE_KEYS } from 'consts/localStorage'
@@ -15,7 +15,7 @@ export type TabsContextType = {
 
 export const TabsContext = createContext<TabsContextType>({
   storedTabSelections: {},
-  storeTabSelection: () => undefined,
+  storeTabSelection: () => undefined
 })
 
 type PropType = PropsWithChildren<{}>
@@ -23,7 +23,7 @@ type PropType = PropsWithChildren<{}>
 export const TabsProvider = (props: PropType) => {
   const { children } = props
   const { getLocalStorageItem, setLocalStorageItem } = useLocalStorage(
-    LOCALSTORAGE_KEYS.TAB_SELECTIONS,
+    LOCALSTORAGE_KEYS.TAB_SELECTIONS
   )
   const [storedTabSelections, setStoredTabSelections] = useState<
     TabsContextType['storedTabSelections']
@@ -35,12 +35,12 @@ export const TabsProvider = (props: PropType) => {
       setStoredTabSelections(updatedSelections)
       setLocalStorageItem(JSON.stringify(updatedSelections))
     },
-    [storedTabSelections, setLocalStorageItem],
+    [storedTabSelections, setLocalStorageItem]
   )
 
   const value = useMemo(
     () => ({ storedTabSelections, storeTabSelection }),
-    [storedTabSelections],
+    [storedTabSelections]
   )
 
   return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>

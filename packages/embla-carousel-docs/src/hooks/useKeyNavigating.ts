@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import {
   KeyNavigatingContext,
-  KeyNavigatingContextType,
+  KeyNavigatingContextType
 } from 'components/KeyNavigating/KeyNavigatingContext'
 
 export const useKeyNavigating = (): KeyNavigatingContextType =>

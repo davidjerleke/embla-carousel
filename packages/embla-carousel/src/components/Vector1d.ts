@@ -34,7 +34,7 @@ export function Vector1D(initialValue: number): Vector1DType {
     get,
     set,
     add,
-    subtract,
+    subtract
   }
   return self
 }

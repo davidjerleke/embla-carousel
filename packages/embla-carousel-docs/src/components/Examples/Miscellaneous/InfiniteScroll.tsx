@@ -2,7 +2,7 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselInfiniteScroll from 'components/CodeSandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
+import CarouselInfiniteScroll from 'components/Sandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
 import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
 import { createCarouselInfiniteScrollStyles } from 'components/Examples/createCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
@@ -14,7 +14,7 @@ export const OPTIONS: EmblaOptionsType = {
   dragFree: true,
   containScroll: 'keepSnaps',
   watchSlides: false,
-  watchResize: false,
+  watchResize: false
 }
 export const STYLES = createCarouselInfiniteScrollStyles()
 

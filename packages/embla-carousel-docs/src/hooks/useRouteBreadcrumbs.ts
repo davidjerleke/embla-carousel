@@ -8,7 +8,7 @@ export const useRouteBreadcrumbs = (id: string): RouteType[] => {
 
   return routes
     .filter((route) =>
-      isRoutePartiallyActive(route.slug, currentRoute?.slug || ''),
+      isRoutePartiallyActive(route.slug, currentRoute?.slug || '')
     )
     .sort((a, b) => a.level - b.level)
 }

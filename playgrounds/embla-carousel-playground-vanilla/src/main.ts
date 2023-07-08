@@ -1,7 +1,7 @@
 import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'
-import { SANDBOX_CSS } from 'components/CodeSandbox/sandboxStyles'
+import { SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
 import { THEME_STYLES } from 'consts/themes'
 import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
 import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
@@ -9,12 +9,12 @@ import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
 import { createSlides } from './Carousel/setupSlides'
 import {
   addPrevNextBtnsClickHandlers,
-  togglePrevNextBtnsActive,
+  togglePrevNextBtnsActive
 } from './Carousel/setupButtons'
 import {
   addDotBtnsClickHandlers,
   createDotBtns,
-  toggleDotBtnsActive,
+  toggleDotBtnsActive
 } from './Carousel/setupDots'
 import './main.css'
 
@@ -28,7 +28,7 @@ const injectBaseStyles = (): void => {
       THEME_STYLES,
       RESET_STYLES,
       BASE_STYLES,
-      FONT_STYLES,
+      FONT_STYLES
     )
 
   styleElement.id = 'baseStyles'
@@ -41,7 +41,7 @@ const SLIDE_COUNT = 16
 const OPTIONS: EmblaOptionsType = {
   // loop: true,
   dragFree: true,
-  containScroll: 'trimSnaps',
+  containScroll: 'trimSnaps'
 }
 
 const emblaNodes = <HTMLElement[]>(
@@ -71,7 +71,7 @@ emblaNodes.forEach((emblaNode) => {
   const togglePrevNextButtonsActive = togglePrevNextBtnsActive(
     emblaApi,
     prevBtnNode,
-    nextBtnNode,
+    nextBtnNode
   )
   addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
   addDotBtnsClickHandlers(emblaApi, dotNodes)

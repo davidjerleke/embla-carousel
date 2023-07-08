@@ -4,8 +4,8 @@ import EmblaCarousel, { EmblaCarouselType } from '../components/EmblaCarousel'
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(() => ({
-    matches: false,
-  })),
+    matches: false
+  }))
 })
 
 Object.defineProperty(window, 'ResizeObserver', {
@@ -13,14 +13,14 @@ Object.defineProperty(window, 'ResizeObserver', {
   value: jest.fn().mockImplementation(() => ({
     observe: () => undefined,
     unobserve: () => undefined,
-    disconnect: () => undefined,
-  })),
+    disconnect: () => undefined
+  }))
 })
 
 export const initializeEmbla = (
   withContainer: boolean = true,
   withSlides: boolean = true,
-  options?: EmblaOptionsType,
+  options?: EmblaOptionsType
 ): (() => EmblaCarouselType) => {
   const rootNode = document.createElement('div')
   const containerNode = document.createElement('div')

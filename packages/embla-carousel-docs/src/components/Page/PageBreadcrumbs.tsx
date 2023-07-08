@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
-import { BareLink } from 'components/Link/BareLink'
+import { LinkBare } from 'components/Link/LinkBare'
 import { useRouteBreadcrumbs } from 'hooks/useRouteBreadcrumbs'
 import { Icon } from 'components/Icon/Icon'
 import { COLORS } from 'consts/themes'
@@ -19,7 +19,7 @@ const itemStyles = css`
   padding: ${SPACINGS.ONE} 0;
 `
 
-const Link = styled(BareLink)`
+const Link = styled(LinkBare)`
   ${itemStyles};
 `
 
@@ -55,7 +55,7 @@ export const PageBreadcrumbs = (props: PropType) => {
           </Fragment>
         ) : (
           <ActiveTitle key={id}>{title}</ActiveTitle>
-        ),
+        )
       )}
     </PageBreadcrumbsWrapper>
   )

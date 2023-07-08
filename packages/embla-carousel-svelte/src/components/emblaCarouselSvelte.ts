@@ -2,12 +2,12 @@ import { ActionReturn } from 'svelte/action'
 import {
   areOptionsEqual,
   arePluginsEqual,
-  canUseDOM,
+  canUseDOM
 } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
-  EmblaPluginType,
+  EmblaPluginType
 } from 'embla-carousel'
 
 type EmblaCarouselParameterType = {
@@ -26,7 +26,7 @@ export type EmblaCarouselSvelteType = ActionReturn<
 
 function emblaCarouselSvelte(
   emblaNode: HTMLElement,
-  emblaConfig: EmblaCarouselParameterType = { options: {}, plugins: [] },
+  emblaConfig: EmblaCarouselParameterType = { options: {}, plugins: [] }
 ): EmblaCarouselSvelteType {
   let storedEmblaConfig = emblaConfig
   let emblaApi: EmblaCarouselType
@@ -36,12 +36,12 @@ function emblaCarouselSvelte(
     emblaApi = EmblaCarousel(
       emblaNode,
       storedEmblaConfig.options,
-      storedEmblaConfig.plugins,
+      storedEmblaConfig.plugins
     )
     emblaApi.on('init', () =>
       emblaNode.dispatchEvent(
-        new CustomEvent('emblaInit', { detail: emblaApi }),
-      ),
+        new CustomEvent('emblaInit', { detail: emblaApi })
+      )
     )
   }
 
@@ -52,11 +52,11 @@ function emblaCarouselSvelte(
     update: (newEmblaConfig) => {
       const optionsChanged = !areOptionsEqual(
         storedEmblaConfig.options,
-        newEmblaConfig.options,
+        newEmblaConfig.options
       )
       const pluginsChanged = !arePluginsEqual(
         storedEmblaConfig.plugins,
-        newEmblaConfig.plugins,
+        newEmblaConfig.plugins
       )
 
       if (!optionsChanged && !pluginsChanged) return
@@ -65,7 +65,7 @@ function emblaCarouselSvelte(
       if (emblaApi) {
         emblaApi.reInit(storedEmblaConfig.options, storedEmblaConfig.plugins)
       }
-    },
+    }
   }
 }
 

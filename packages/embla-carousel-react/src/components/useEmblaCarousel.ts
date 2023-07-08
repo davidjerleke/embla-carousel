@@ -2,26 +2,26 @@ import { useRef, useEffect, useState, useCallback } from 'react'
 import {
   areOptionsEqual,
   arePluginsEqual,
-  canUseDOM,
+  canUseDOM
 } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
-  EmblaPluginType,
+  EmblaPluginType
 } from 'embla-carousel'
 
 type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
-  instance: ViewportElement | null,
+  instance: ViewportElement | null
 ) => void
 
 export type UseEmblaCarouselType = [
   EmblaViewportRefType,
-  EmblaCarouselType | undefined,
+  EmblaCarouselType | undefined
 ]
 
 function useEmblaCarousel(
   options: EmblaOptionsType = {},
-  plugins: EmblaPluginType[] = [],
+  plugins: EmblaPluginType[] = []
 ): UseEmblaCarouselType {
   const storedOptions = useRef(options)
   const storedPlugins = useRef(plugins)
@@ -38,7 +38,7 @@ function useEmblaCarousel(
       const newEmblaApi = EmblaCarousel(
         viewport,
         storedOptions.current,
-        storedPlugins.current,
+        storedPlugins.current
       )
       setEmblaApi(newEmblaApi)
       return () => newEmblaApi.destroy()

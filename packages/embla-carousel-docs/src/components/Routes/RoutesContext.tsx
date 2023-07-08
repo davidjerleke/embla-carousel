@@ -2,10 +2,11 @@ import React, {
   createContext,
   PropsWithChildren,
   useMemo,
-  useState,
+  useState
 } from 'react'
 import { createHierarchicalRoutes } from 'utils/createHierarchicalRoutes'
 import { createFlatRoutes } from 'utils/createFlatRoutes'
+import { GraphQLAllDataType } from 'consts/graphQL'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const query = graphql`
@@ -34,22 +35,6 @@ const query = graphql`
   }
 `
 
-export type MdxAllRoutesType = {
-  allMdx: {
-    edges: {
-      node: {
-        id: string
-        fields: { slug: string }
-        frontmatter: {
-          title: string
-          order: number
-          description: string
-        }
-      }
-    }[]
-  }
-}
-
 export type RouteType = {
   id: string
   slug: string
@@ -71,14 +56,14 @@ export const RoutesContext = createContext<RoutesContextType>({
   hierarchical: [],
   flat: [],
   isLoading: false,
-  setIsLoading: () => undefined,
+  setIsLoading: () => undefined
 })
 
 type PropType = PropsWithChildren<{}>
 
 export const RoutesProvider = (props: PropType) => {
   const { children } = props
-  const data = useStaticQuery<MdxAllRoutesType>(query)
+  const data = useStaticQuery<GraphQLAllDataType>(query)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const value = useMemo(
@@ -86,9 +71,9 @@ export const RoutesProvider = (props: PropType) => {
       hierarchical: createHierarchicalRoutes(data),
       flat: createFlatRoutes(data),
       isLoading,
-      setIsLoading,
+      setIsLoading
     }),
-    [data, isLoading],
+    [data, isLoading]
   )
 
   return (

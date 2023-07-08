@@ -21,7 +21,7 @@ const scrollBounds = ScrollBounds(
   location,
   target,
   scrollBody,
-  percentOfView,
+  percentOfView
 )
 
 afterEach(() => scrollBounds.toggleActive(true))

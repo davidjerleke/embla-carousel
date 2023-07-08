@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
@@ -59,7 +59,7 @@ export const headingStyles = css`
       top: 0;
       left: 0;
       padding-right: 0;
-      width: ${FRAME_SPACING};
+      width: ${PAGE_FRAME_SPACING};
 
       ${MEDIA.DESKTOP} {
         width: ${SPACINGS.FIVE};

@@ -32,7 +32,7 @@ describe('SlidesToScroll', () => {
       expect(groups).toEqual([
         [80, 50, 50],
         [39, 85, 15],
-        [10, 91, 9],
+        [10, 91, 9]
       ])
     })
 
@@ -41,7 +41,7 @@ describe('SlidesToScroll', () => {
       expect(groups).toEqual([
         [80, 50, 50],
         [39, 85, 15],
-        [10, 91],
+        [10, 91]
       ])
     })
 

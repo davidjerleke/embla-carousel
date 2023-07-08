@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel, {
   EmblaCarouselType,
-  EmblaOptionsType,
+  EmblaOptionsType
 } from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
 import imageByIndex from './imageByIndex'
@@ -21,15 +21,15 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi],
+    [emblaApi]
   )
   const scrollNext = useCallback(
     () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi],
+    [emblaApi]
   )
   const scrollTo = useCallback(
     (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi],
+    [emblaApi]
   )
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {

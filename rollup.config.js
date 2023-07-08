@@ -8,16 +8,16 @@ import { terser } from 'rollup-plugin-terser'
 
 const kebabToPascalCase = (string = '') =>
   string.replace(/(^\w|-\w)/g, (replaceString) =>
-    replaceString.replace(/-/, '').toUpperCase(),
+    replaceString.replace(/-/, '').toUpperCase()
   )
 
 const CONFIG_GLOBALS = {
   [emblaPackageJson.name]: kebabToPascalCase(emblaPackageJson.name),
-  [utilsPackageJson.name]: kebabToPascalCase(utilsPackageJson.name),
+  [utilsPackageJson.name]: kebabToPascalCase(utilsPackageJson.name)
 }
 
 const CONFIG_EXTERNAL_MODULES = {
-  moduleDirectories: ['node_modules', utilsPackageJson.name],
+  moduleDirectories: ['node_modules', utilsPackageJson.name]
 }
 
 const CONFIG_EXTERNAL_MODULE_SUPPRESS = (warning, next) => {
@@ -28,12 +28,12 @@ const CONFIG_EXTERNAL_MODULE_SUPPRESS = (warning, next) => {
 const CONFIG_BABEL = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
   exclude: 'node_modules/**',
-  babelHelpers: 'bundled',
+  babelHelpers: 'bundled'
 }
 
 const CONFIG_TYPESCRIPT = {
   tsconfig: 'tsconfig.json',
-  typescript: localTypescript,
+  typescript: localTypescript
 }
 
 export {
@@ -46,5 +46,5 @@ export {
   typescript,
   resolve,
   terser,
-  kebabToPascalCase,
+  kebabToPascalCase
 }

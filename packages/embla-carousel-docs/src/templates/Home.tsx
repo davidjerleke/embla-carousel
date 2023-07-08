@@ -1,15 +1,15 @@
 import React, { PropsWithChildren } from 'react'
 import maskable from 'assets/images/maskable.png'
 import { graphql } from 'gatsby'
+import { PagePropType, PageHomeLayoutType } from 'consts/page'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
-import { PageTemplatePropType } from 'consts/pageTemplates'
 import { removeProtocol } from 'utils/removeProtocol'
 import { Hero } from 'components/Hero/Hero'
 import { Seo } from 'components/Seo/Seo'
 import { Mdx } from 'components/Mdx/Mdx'
 
 export const query = graphql`
-  query HomeQuery($id: String) {
+  query PageHomeQuery($id: String) {
     mdx(id: { eq: $id }) {
       frontmatter {
         title
@@ -42,9 +42,9 @@ export const Head = () => {
   )
 }
 
-type PropType = PropsWithChildren<PageTemplatePropType>
+type PropType = PropsWithChildren<PagePropType<PageHomeLayoutType>>
 
-const Home = (props: PropType) => {
+const PageHome = (props: PropType) => {
   const { children } = props
 
   return (
@@ -55,4 +55,4 @@ const Home = (props: PropType) => {
   )
 }
 
-export default Home
+export default PageHome

@@ -14,9 +14,9 @@ export const useRouteActive = (slug: RouteType['slug']): UseRouteActiveType => {
   const routeState = useMemo(
     () => ({
       isActive: isRouteActive(slug, pathname),
-      isPartiallyActive: isRoutePartiallyActive(slug, pathname),
+      isPartiallyActive: isRoutePartiallyActive(slug, pathname)
     }),
-    [slug, pathname],
+    [slug, pathname]
   )
 
   return routeState

@@ -2,22 +2,22 @@ import { Ref, ref, isRef, watch, onMounted, onUnmounted } from 'vue'
 import {
   areOptionsEqual,
   arePluginsEqual,
-  canUseDOM,
+  canUseDOM
 } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
-  EmblaPluginType,
+  EmblaPluginType
 } from 'embla-carousel'
 
 export type EmblaCarouselVueType = [
   Ref<HTMLElement | undefined>,
-  Ref<EmblaCarouselType | undefined>,
+  Ref<EmblaCarouselType | undefined>
 ]
 
 function emblaCarouselVue(
   options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
-  plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = [],
+  plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = []
 ): EmblaCarouselVueType {
   const storedOptions = ref(isRef(options) ? options.value : options)
   const storedPlugins = ref(isRef(plugins) ? plugins.value : plugins)
@@ -35,7 +35,7 @@ function emblaCarouselVue(
     emblaApi.value = EmblaCarousel(
       emblaNode.value,
       storedOptions.value,
-      storedPlugins.value,
+      storedPlugins.value
     )
   })
 

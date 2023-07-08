@@ -8,8 +8,8 @@ import { BORDER_SIZES } from 'consts/border'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { RouteType } from 'components/Routes/RoutesContext'
-import { BareButton } from 'components/Button/BareButton'
-import { NavigationLink } from 'components/Link/NavigationLink'
+import { ButtonBare } from 'components/Button/ButtonBare'
+import { LinkNavigation } from 'components/Link/LinkNavigation'
 import { useRouteActive } from 'hooks/useRouteActive'
 import { Icon } from 'components/Icon/Icon'
 
@@ -32,7 +32,7 @@ const SiteNavigationSubMenuWrapper = styled.div`
   }
 `
 
-const Toggle = styled(BareButton)<{ $isActive: boolean }>`
+const Toggle = styled(ButtonBare)<{ $isActive: boolean }>`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
     calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
@@ -94,7 +94,7 @@ const Menu = styled.ul<{ $isOpen: boolean }>`
   }
 `
 
-const Link = styled(NavigationLink)`
+const Link = styled(LinkNavigation)`
   margin: 0 0;
   text-align: left;
   padding: ${ITEM_SPACING} 0;
@@ -120,7 +120,7 @@ export const SiteNavigationSubMenu = (props: PropType) => {
       event.preventDefault()
       setIsOpen((open) => !open)
     },
-    [setIsOpen],
+    [setIsOpen]
   )
 
   useEffect(() => {

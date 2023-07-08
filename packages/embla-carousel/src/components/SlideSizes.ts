@@ -12,7 +12,7 @@ export function SlideSizes(
   slideRects: DOMRect[],
   slides: HTMLElement[],
   readEdgeGap: boolean,
-  ownerWindow: WindowType,
+  ownerWindow: WindowType
 ): SlideSizesType {
   const { measureSize, startEdge, endEdge } = axis
   const withEdgeGap = slideRects[0] && readEdgeGap
@@ -47,7 +47,7 @@ export function SlideSizes(
 
   const self: SlideSizesType = {
     slideSizes,
-    slideSizesWithGaps,
+    slideSizesWithGaps
   }
   return self
 }

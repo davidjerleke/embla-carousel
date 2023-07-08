@@ -6,24 +6,24 @@ export default defineConfig({
     alias: {
       consts: path.resolve(
         __dirname,
-        '../../packages/embla-carousel-docs/src/consts',
+        '../../packages/embla-carousel-docs/src/consts'
       ),
       utils: path.resolve(
         __dirname,
-        '../../packages/embla-carousel-docs/src/utils',
+        '../../packages/embla-carousel-docs/src/utils'
       ),
       hooks: path.resolve(
         __dirname,
-        '../../packages/embla-carousel-docs/src/hooks',
+        '../../packages/embla-carousel-docs/src/hooks'
       ),
       components: path.resolve(
         __dirname,
-        '../../packages/embla-carousel-docs/src/components',
+        '../../packages/embla-carousel-docs/src/components'
       ),
       assets: path.resolve(
         __dirname,
-        '../../packages/embla-carousel-docs/src/assets',
-      ),
-    },
-  },
+        '../../packages/embla-carousel-docs/src/assets'
+      )
+    }
+  }
 })

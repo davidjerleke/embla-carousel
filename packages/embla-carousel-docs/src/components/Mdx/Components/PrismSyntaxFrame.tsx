@@ -3,11 +3,11 @@ import React, {
   useCallback,
   useEffect,
   useRef,
-  useState,
+  useState
 } from 'react'
 import styled from 'styled-components'
-import { BareButton } from 'components/Button/BareButton'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { ButtonBare } from 'components/Button/ButtonBare'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
@@ -20,13 +20,13 @@ import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import {
   createScrollBarShadowStyles,
-  SCROLL_BAR_SHADOW_SIZE,
+  SCROLL_BAR_SHADOW_SIZE
 } from 'consts/scrollBars'
 
-const TIMEOUT = 3000
+export const PRISM_FRAME_RADIUS = BORDER_RADIUSES.BOX
+const COPY_CODE_TIMEOUT = 3000
 const COPY_CODE_BUTTON_PADDING = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 const COPY_CODE_BUTTON_HEIGHT = SPACINGS.FOUR
-const BORDER_RADIUS = '0.4rem'
 
 const PrismSyntaxFrameWrapper = styled.div`
   position: relative;
@@ -35,7 +35,7 @@ const PrismSyntaxFrameWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_CODE};
 
   ${MEDIA.MIN_XS} {
-    border-radius: ${BORDER_RADIUS};
+    border-radius: ${PRISM_FRAME_RADIUS};
     border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   }
   ${MEDIA.MAX_XS} {
@@ -46,7 +46,7 @@ const PrismSyntaxFrameWrapper = styled.div`
   &:before,
   &:after {
     z-index: ${LAYERS.STEP};
-    width: ${FRAME_SPACING};
+    width: ${PAGE_FRAME_SPACING};
     display: block;
     position: absolute;
     content: '';
@@ -69,10 +69,10 @@ const CopyCode = styled.div`
   height: 0;
 `
 
-const CopyCodeButton = styled(BareButton)`
+const CopyCodeButton = styled(ButtonBare)`
   position: relative;
   z-index: ${LAYERS.STEP * 2};
-  margin-right: calc(${FRAME_SPACING} - ${COPY_CODE_BUTTON_PADDING});
+  margin-right: calc(${PAGE_FRAME_SPACING} - ${COPY_CODE_BUTTON_PADDING});
   color: ${COLORS.TEXT_LOW_CONTRAST};
   padding: 0 ${COPY_CODE_BUTTON_PADDING};
   height: ${COPY_CODE_BUTTON_HEIGHT};
@@ -88,7 +88,7 @@ const CopyCodeButton = styled(BareButton)`
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: ${BORDER_RADIUSES.BOX};
+    border-radius: ${PRISM_FRAME_RADIUS};
     ${BRAND_GRADIENT_BACKGROUND_STYLES};
   }
 
@@ -129,7 +129,10 @@ export const PrismSyntaxFrame = (props: PropType) => {
   const onButtonClick = useCallback(() => {
     copyToClipboard(code)
     setIsCopied(true)
-    timeout.current = window.setTimeout(() => setIsCopied(false), TIMEOUT)
+    timeout.current = window.setTimeout(
+      () => setIsCopied(false),
+      COPY_CODE_TIMEOUT
+    )
   }, [code, setIsCopied])
 
   useEffect(() => {

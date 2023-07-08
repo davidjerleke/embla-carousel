@@ -2,5 +2,5 @@ export {
   canUseDOM,
   areOptionsEqual,
   sortAndMapPluginToOptions,
-  arePluginsEqual,
+  arePluginsEqual
 } from './components/utils'

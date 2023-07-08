@@ -18,7 +18,7 @@ export function SlidesInView(
   snaps: number[],
   limit: LimitType,
   loop: boolean,
-  inViewThreshold: number,
+  inViewThreshold: number
 ): SlidesInViewType {
   const { removeOffset, constrain } = limit
   const roundingSafety = 0.5
@@ -36,7 +36,7 @@ export function SlidesInView(
 
   function findSlideBounds(
     offsets?: number[],
-    threshold?: number,
+    threshold?: number
   ): SlideBoundType[] {
     const slideOffsets = offsets || cachedOffsets
     const slideThresholds = findSlideThresholds(threshold)
@@ -45,7 +45,7 @@ export function SlidesInView(
       const bounds = snaps.map((snap, index) => ({
         start: snap - slideSizes[index] + slideThresholds[index] + offset,
         end: snap + viewSize - slideThresholds[index] + offset,
-        index,
+        index
       }))
       return list.concat(bounds)
     }, [])
@@ -65,7 +65,7 @@ export function SlidesInView(
 
   const self: SlidesInViewType = {
     check,
-    findSlideBounds,
+    findSlideBounds
   }
   return self
 }

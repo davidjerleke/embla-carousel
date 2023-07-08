@@ -11,7 +11,7 @@ export type CounterType = {
 export function Counter(
   max: number,
   start: number,
-  loop: boolean,
+  loop: boolean
 ): CounterType {
   const { constrain } = Limit(0, max)
   const loopEnd = max + 1
@@ -42,7 +42,7 @@ export function Counter(
     get,
     set,
     add,
-    clone,
+    clone
   }
   return self
 }

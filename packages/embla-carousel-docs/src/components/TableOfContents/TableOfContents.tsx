@@ -4,12 +4,12 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TableOfContentsMenu } from './TableOfContentsMenu'
 import {
   createScrollBarShadowStyles,
-  SCROLL_BAR_SHADOW_SIZE,
+  SCROLL_BAR_SHADOW_SIZE
 } from 'consts/scrollBars'
 
 const TableOfContentsWrapper = styled.nav`
@@ -37,8 +37,8 @@ const MenuWrapper = styled.div<{
     &:after {
       position: absolute;
       z-index: ${LAYERS.STEP};
-      left: -${FRAME_SPACING};
-      right: -${FRAME_SPACING};
+      left: -${PAGE_FRAME_SPACING};
+      right: -${PAGE_FRAME_SPACING};
       content: '';
     }
 

@@ -4,7 +4,7 @@ import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { HEADER_HEIGHT } from 'components/Header/Header'
-import { FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { LAYERS } from 'consts/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
@@ -19,12 +19,12 @@ import { useTableOfContents } from 'hooks/useTableOfContents'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
-  SCROLL_BAR_SHADOW_SIZE,
+  SCROLL_BAR_SHADOW_SIZE
 } from 'consts/scrollBars'
 import {
   ThemeToggle,
   LightThemeSvg,
-  DarkThemeSvg,
+  DarkThemeSvg
 } from 'components/Theme/ThemeToggle'
 
 const MAX_WIDTH_COMPACT = '36rem'
@@ -34,8 +34,8 @@ const SiteNavigationMenuCompactWrapper = styled.div`
   position: relative;
   height: 100%;
   z-index: ${LAYERS.STEP};
-  padding-right: ${FRAME_SPACING};
-  padding-left: ${FRAME_SPACING};
+  padding-right: ${PAGE_FRAME_SPACING};
+  padding-left: ${PAGE_FRAME_SPACING};
   padding-bottom: ${HEADER_HEIGHT};
   padding-top: ${HEADER_HEIGHT};
 
@@ -56,8 +56,8 @@ const MenuTabs = styled(Tabs)<{
     bottom: 0;
     left: 0;
     right: 0;
-    padding-left: ${FRAME_SPACING};
-    padding-right: ${FRAME_SPACING};
+    padding-left: ${PAGE_FRAME_SPACING};
+    padding-right: ${PAGE_FRAME_SPACING};
     margin-bottom: 0;
     background-color: ${COLORS.BACKGROUND_SITE};
     border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
@@ -75,8 +75,8 @@ const MenuTabs = styled(Tabs)<{
     &:after {
       position: absolute;
       z-index: ${LAYERS.STEP};
-      left: -${FRAME_SPACING};
-      right: -${FRAME_SPACING};
+      left: -${PAGE_FRAME_SPACING};
+      right: -${PAGE_FRAME_SPACING};
       content: '';
     }
 

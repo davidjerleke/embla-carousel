@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Frame, FRAME_SPACING } from 'components/SiteLayout/Frame'
+import { PageFrame, PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { FooterLinks } from './FooterLinks'
 
 const FooterWrapper = styled.footer`
-  padding-top: ${FRAME_SPACING};
-  padding-bottom: ${FRAME_SPACING};
+  padding-top: ${PAGE_FRAME_SPACING};
+  padding-bottom: ${PAGE_FRAME_SPACING};
 `
 
-const Content = styled(Frame)`
+const Content = styled(PageFrame)`
   display: flex;
   justify-content: center;
 `

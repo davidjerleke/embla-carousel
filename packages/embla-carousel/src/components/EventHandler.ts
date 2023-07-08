@@ -53,7 +53,7 @@ export function EventHandler(): EventHandlerType {
     init,
     emit,
     off,
-    on,
+    on
   }
   return self
 }

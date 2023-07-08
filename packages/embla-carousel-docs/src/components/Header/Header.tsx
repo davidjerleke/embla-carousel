@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Frame } from 'components/SiteLayout/Frame'
+import { PageFrame } from 'components/Page/PageFrame'
 import { SiteNavigationToggle } from 'components/SiteNavigation/SiteNavigationToggle'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
@@ -37,7 +37,7 @@ const Fixed = styled.div`
   }
 `
 
-const Content = styled(Frame)`
+const Content = styled(PageFrame)`
   ${HEIGHT};
   display: flex;
   align-items: center;

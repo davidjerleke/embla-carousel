@@ -4,16 +4,16 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { CardLink } from 'components/Link/CardLink'
+import { LinkCard } from 'components/Link/LinkCard'
+import { createGapStyles } from 'utils/createGapStyles'
 
-const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
+const USP_ITEM_SPACING = SPACINGS.CUSTOM(() => 1.4)
 
 const HeroUspsWrapper = styled.ul`
+  ${createGapStyles(USP_ITEM_SPACING, USP_ITEM_SPACING, 'li')};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-left: -${USP_ITEM_SPACING};
-  margin-bottom: -${USP_ITEM_SPACING};
   padding-top: ${SPACINGS.EIGHT};
 
   ${MEDIA.MIN_SM} {
@@ -28,8 +28,6 @@ const HeroUspsWrapper = styled.ul`
 `
 
 const Usp = styled.li`
-  padding-left: ${USP_ITEM_SPACING};
-  padding-bottom: ${USP_ITEM_SPACING};
   min-width: 0;
   flex: 0 0 100%;
 
@@ -58,34 +56,34 @@ export const HeroUsps = () => {
   return (
     <HeroUspsWrapper>
       <Usp>
-        <CardLink to="/api/">
+        <LinkCard to="/api/">
           <div>
             <UspHeader>Highly Extensible</UspHeader>
             <UspText>
               An API designed with flexibility and extensibility in mind.
             </UspText>
           </div>
-        </CardLink>
+        </LinkCard>
       </Usp>
       <Usp>
-        <CardLink to="/plugins/">
+        <LinkCard to="/plugins/">
           <div>
             <UspHeader>Plugin System</UspHeader>
             <UspText>
               Add functionality and customize your carousels as you go.
             </UspText>
           </div>
-        </CardLink>
+        </LinkCard>
       </Usp>
       <Usp>
-        <CardLink to="/get-started/typescript/">
+        <LinkCard to="/get-started/typescript/">
           <div>
             <UspHeader>Fully Typed</UspHeader>
             <UspText>
               Built-in types because it is written in TypeScript.
             </UspText>
           </div>
-        </CardLink>
+        </LinkCard>
       </Usp>
     </HeroUspsWrapper>
   )

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import {
   TableOfContentsContext,
-  TableOfContentsContextType,
+  TableOfContentsContextType
 } from 'components/TableOfContents/TableOfContentsContext'
 
 export const useTableOfContents = (): TableOfContentsContextType =>

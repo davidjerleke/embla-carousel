@@ -1,7 +1,7 @@
 import { css, FlattenSimpleInterpolation } from 'styled-components'
 
 export const createPlaceholderStyles = (
-  color: string,
+  color: string
 ): FlattenSimpleInterpolation => css`
   ::-webkit-input-placeholder {
     color: ${color};

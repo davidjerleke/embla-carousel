@@ -1,113 +1,105 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
-import CarouselProgress from 'components/CodeSandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
-import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
-import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
-import { loadPrettier } from 'utils/loadPrettier'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/Sandbox/Vanilla/sandboxVanillaFolders'
+import CarouselProgress from 'components/Sandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
+import { createSandboxVanilla } from 'components/Sandbox/Vanilla/createSandboxVanilla'
+import { createSandboxReact } from 'components/Sandbox/React/createSandboxReact'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import {
   ID,
   SLIDES,
   OPTIONS,
-  STYLES,
+  STYLES
 } from 'components/Examples/Miscellaneous/Progress'
 import {
-  SelectCodeSandbox,
-  PropType as SelectCodeSandboxPropType,
-} from 'components/CodeSandbox/SelectCodeSandbox'
+  SandboxLanguageType,
+  SandboxModuleType,
+  SandboxSelectionType,
+  SANDBOX_LANGUAGES
+} from 'consts/sandbox'
+import {
+  createSandboxFunctionsWithLabels,
+  sandboxLanguageUtils
+} from 'utils/sandbox'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
   styles: STYLES,
-  id: ID,
+  id: ID
 }
 
 const VANILLA_PROGRESS_FILE_NAME = 'progress-bar'
 
-const sandboxVanillaJavaScript = async (): Promise<string> => {
-  const { formatJs } = await loadPrettier()
-  const [carousel, progressBar] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.js'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.js`
-    ),
-  ])
+const sandboxVanilla = async (
+  language: SandboxLanguageType
+): Promise<string> => {
+  const { isTypeScript, vanillaScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
+  let progressBarScript: SandboxModuleType
+
+  if (isTypeScript) {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.ts'
+    )
+    progressBarScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.ts`
+    )
+  } else {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.js'
+    )
+    progressBarScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.js`
+    )
+  }
+
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
+    language,
+    carouselScript: carouselScript.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselProgress options={OPTIONS} slides={SLIDES} />,
+      <CarouselProgress options={OPTIONS} slides={SLIDES} />
     ),
-    language: 'javascript',
     sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_PROGRESS_FILE_NAME}.js`]: {
-        isBinary: false,
-        content: formatJs(progressBar.default),
-      },
-    },
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_PROGRESS_FILE_NAME}.${vanillaScriptExtension}`]:
+        {
+          isBinary: false,
+          content: formatScript(progressBarScript.default)
+        }
+    }
   })
 }
 
-const sandboxVanillaTypeScript = async (): Promise<string> => {
-  const { formatTs } = await loadPrettier()
-  const [carousel, progressBar] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/EmblaCarousel.ts'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Progress/progress-bar.ts`
-    ),
-  ])
-  return createSandboxVanilla({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselProgress options={OPTIONS} slides={SLIDES} />,
-    ),
-    language: 'typescript',
-    sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_PROGRESS_FILE_NAME}.ts`]: {
-        isBinary: false,
-        content: formatTs(progressBar.default),
-      },
-    },
-  })
-}
+const sandboxReact = async (language: SandboxLanguageType): Promise<string> => {
+  const { isTypeScript } = await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
 
-const sandboxReactJavaScript = async (): Promise<string> => {
-  const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Progress/EmblaCarousel.jsx`
-  )
+  if (isTypeScript) {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Progress/EmblaCarousel.tsx`
+    )
+  } else {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Progress/EmblaCarousel.jsx`
+    )
+  }
+
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'javascript',
+    language,
+    carouselScript: carouselScript.default
   })
 }
 
-const sandboxReactTypeScript = async (): Promise<string> => {
-  const carousel = await import(
-    `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Progress/EmblaCarousel.tsx`
-  )
-  return createSandboxReact({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'typescript',
-  })
-}
-
-const SANDBOXES: SelectCodeSandboxPropType['sandboxes'] =
-  createSandboxFunctionsWithLabels({
-    VANILLA_JS: sandboxVanillaJavaScript,
-    VANILLA_TS: sandboxVanillaTypeScript,
-    REACT_JS: sandboxReactJavaScript,
-    REACT_TS: sandboxReactTypeScript,
-  })
+const SANDBOXES: SandboxSelectionType[] = createSandboxFunctionsWithLabels({
+  VANILLA_JS: () => sandboxVanilla(SANDBOX_LANGUAGES.JAVASCRIPT),
+  VANILLA_TS: () => sandboxVanilla(SANDBOX_LANGUAGES.TYPESCRIPT),
+  REACT_JS: () => sandboxReact(SANDBOX_LANGUAGES.JAVASCRIPT),
+  REACT_TS: () => sandboxReact(SANDBOX_LANGUAGES.TYPESCRIPT)
+})
 
 export const ExampleCarouselProgressSandboxes = () => {
-  return <SelectCodeSandbox sandboxes={SANDBOXES} />
+  return <SandboxSelection sandboxes={SANDBOXES} />
 }

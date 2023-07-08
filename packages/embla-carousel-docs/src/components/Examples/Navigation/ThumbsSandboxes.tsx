@@ -1,139 +1,122 @@
 import React from 'react'
 import * as ReactDOMServer from 'react-dom/server'
-import { SANDBOX_VANILLA_FOLDERS } from 'components/CodeSandbox/Vanilla/sandboxVanillaFolders'
-import { SANDBOX_REACT_FOLDERS } from 'components/CodeSandbox/React/sandboxReactFolders'
-import CarouselThumbs from 'components/CodeSandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel'
-import { createSandboxVanilla } from 'components/CodeSandbox/Vanilla/createSandboxVanilla'
-import { createSandboxReact } from 'components/CodeSandbox/React/createSandboxReact'
-import { createSandboxFunctionsWithLabels } from 'components/CodeSandbox/createSandboxFunctionsWithLabels'
-import { loadPrettier } from 'utils/loadPrettier'
+import { SANDBOX_VANILLA_FOLDERS } from 'components/Sandbox/Vanilla/sandboxVanillaFolders'
+import { SANDBOX_REACT_FOLDERS } from 'components/Sandbox/React/sandboxReactFolders'
+import CarouselThumbs from 'components/Sandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel'
+import { createSandboxVanilla } from 'components/Sandbox/Vanilla/createSandboxVanilla'
+import { createSandboxReact } from 'components/Sandbox/React/createSandboxReact'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import {
   ID,
   SLIDES,
   OPTIONS,
-  STYLES,
+  STYLES
 } from 'components/Examples/Navigation/Thumbs'
 import {
-  SelectCodeSandbox,
-  PropType as SelectCodeSandboxPropType,
-} from 'components/CodeSandbox/SelectCodeSandbox'
+  SandboxLanguageType,
+  SandboxModuleType,
+  SandboxSelectionType,
+  SANDBOX_LANGUAGES
+} from 'consts/sandbox'
+import {
+  createSandboxFunctionsWithLabels,
+  sandboxLanguageUtils
+} from 'utils/sandbox'
 
 const SHARED_CONFIG = {
   slides: SLIDES,
   options: OPTIONS,
   styles: STYLES,
-  id: ID,
+  id: ID
 }
 
 const VANILLA_THUMBS_FILE_NAME = 'thumb-buttons'
 const REACT_THUMBS_FILE_NAME = 'EmblaCarouselThumbsButton'
 
-const sandboxVanillaJavaScript = async (): Promise<string> => {
-  const { formatJs } = await loadPrettier()
-  const [carousel, thumbsButtons] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.js'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.js`
-    ),
-  ])
+const sandboxVanilla = async (
+  language: SandboxLanguageType
+): Promise<string> => {
+  const { isTypeScript, vanillaScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
+  let buttonsScript: SandboxModuleType
+
+  if (isTypeScript) {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.ts'
+    )
+    buttonsScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.ts`
+    )
+  } else {
+    carouselScript = await import(
+      '!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.js'
+    )
+    buttonsScript = await import(
+      `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.js`
+    )
+  }
+
   return createSandboxVanilla({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
+    language,
+    carouselScript: carouselScript.default,
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselThumbs options={OPTIONS} slides={SLIDES} />,
+      <CarouselThumbs options={OPTIONS} slides={SLIDES} />
     ),
-    language: 'javascript',
     sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_THUMBS_FILE_NAME}.js`]: {
-        isBinary: false,
-        content: formatJs(thumbsButtons.default),
-      },
-    },
+      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_THUMBS_FILE_NAME}.${vanillaScriptExtension}`]:
+        {
+          isBinary: false,
+          content: formatScript(buttonsScript.default)
+        }
+    }
   })
 }
 
-const sandboxVanillaTypeScript = async (): Promise<string> => {
-  const { formatTs } = await loadPrettier()
-  const [carousel, thumbsButtons] = await Promise.all([
-    import(
-      '!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/EmblaCarousel.ts'
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/Vanilla/SandboxFilesDist/Thumbs/thumb-buttons.ts`
-    ),
-  ])
-  return createSandboxVanilla({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    carouselHtml: ReactDOMServer.renderToStaticMarkup(
-      <CarouselThumbs options={OPTIONS} slides={SLIDES} />,
-    ),
-    language: 'typescript',
-    sandboxOverrides: {
-      [`${SANDBOX_VANILLA_FOLDERS.JS}/${VANILLA_THUMBS_FILE_NAME}.ts`]: {
-        isBinary: false,
-        content: formatTs(thumbsButtons.default),
-      },
-    },
-  })
-}
+const sandboxReact = async (language: SandboxLanguageType): Promise<string> => {
+  const { isTypeScript, reactScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
+  let carouselScript: SandboxModuleType
+  let buttonsScript: SandboxModuleType
 
-const sandboxReactJavaScript = async (): Promise<string> => {
-  const { formatJs } = await loadPrettier()
-  const [carousel, buttons] = await Promise.all([
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.jsx`
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.jsx`
-    ),
-  ])
+  if (isTypeScript) {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.tsx`
+    )
+    buttonsScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.tsx`
+    )
+  } else {
+    carouselScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.jsx`
+    )
+    buttonsScript = await import(
+      `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.jsx`
+    )
+  }
+
   return createSandboxReact({
     ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'javascript',
+    language,
+    carouselScript: carouselScript.default,
     sandboxOverrides: {
-      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_THUMBS_FILE_NAME}.jsx`]: {
-        isBinary: false,
-        content: formatJs(buttons.default),
-      },
-    },
+      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_THUMBS_FILE_NAME}.${reactScriptExtension}`]:
+        {
+          isBinary: false,
+          content: formatScript(buttonsScript.default)
+        }
+    }
   })
 }
 
-const sandboxReactTypeScript = async (): Promise<string> => {
-  const { formatTs } = await loadPrettier()
-  const [carousel, buttons] = await Promise.all([
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarousel.tsx`
-    ),
-    import(
-      `!!raw-loader!components/CodeSandbox/React/SandboxFilesDist/Thumbs/EmblaCarouselThumbsButton.tsx`
-    ),
-  ])
-  return createSandboxReact({
-    ...SHARED_CONFIG,
-    carouselScript: carousel.default,
-    language: 'typescript',
-    sandboxOverrides: {
-      [`${SANDBOX_REACT_FOLDERS.JS}/${REACT_THUMBS_FILE_NAME}.tsx`]: {
-        isBinary: false,
-        content: formatTs(buttons.default),
-      },
-    },
-  })
-}
-
-const SANDBOXES: SelectCodeSandboxPropType['sandboxes'] =
-  createSandboxFunctionsWithLabels({
-    VANILLA_JS: sandboxVanillaJavaScript,
-    VANILLA_TS: sandboxVanillaTypeScript,
-    REACT_JS: sandboxReactJavaScript,
-    REACT_TS: sandboxReactTypeScript,
-  })
+const SANDBOXES: SandboxSelectionType[] = createSandboxFunctionsWithLabels({
+  VANILLA_JS: () => sandboxVanilla(SANDBOX_LANGUAGES.JAVASCRIPT),
+  VANILLA_TS: () => sandboxVanilla(SANDBOX_LANGUAGES.TYPESCRIPT),
+  REACT_JS: () => sandboxReact(SANDBOX_LANGUAGES.JAVASCRIPT),
+  REACT_TS: () => sandboxReact(SANDBOX_LANGUAGES.TYPESCRIPT)
+})
 
 export const ExampleCarouselThumbsSandboxes = () => {
-  return <SelectCodeSandbox sandboxes={SANDBOXES} />
+  return <SandboxSelection sandboxes={SANDBOXES} />
 }

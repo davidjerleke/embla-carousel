@@ -1,26 +1,23 @@
 import React from 'react'
 import { useRouteChildren } from 'hooks/useRouteChildren'
 import { useRouteCurrent } from 'hooks/useRouteCurrent'
-import { CardLink } from 'components/Link/CardLink'
+import { LinkCard } from 'components/Link/LinkCard'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import styled from 'styled-components'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { COLORS } from 'consts/themes'
+import { createGapStyles } from 'utils/createGapStyles'
 
-const USP_ITEM_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO + 0.2)
+const USP_ITEM_SPACING = SPACINGS.CUSTOM(() => 1.4)
 
-const Wrapper = styled.ul`
+const PageChildLinksWrapper = styled.ul`
+  ${createGapStyles(USP_ITEM_SPACING, USP_ITEM_SPACING, 'li')};
   display: flex;
   flex-wrap: wrap;
-  margin-left: -${USP_ITEM_SPACING} !important;
-  margin-bottom: -${USP_ITEM_SPACING};
-  list-style: none !important;
 `
 
 const Item = styled.li`
-  padding-left: ${USP_ITEM_SPACING};
-  padding-bottom: ${USP_ITEM_SPACING};
   flex: 0 0 100%;
   min-width: 0;
 
@@ -36,7 +33,7 @@ const Item = styled.li`
 const UspHeader = styled.h3`
   color: ${COLORS.TEXT_BODY};
   margin-top: 0;
-  margin-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+  margin-bottom: ${SPACINGS.CUSTOM(() => 0.8)};
   font-size: ${FONT_SIZES.H4};
   font-weight: ${FONT_WEIGHTS.BOLD};
 `
@@ -58,18 +55,18 @@ export const PageChildLinks = () => {
 
   return (
     <div>
-      <Wrapper>
+      <PageChildLinksWrapper>
         {routeChildren.map(({ id, slug, title, description }) => (
           <Item key={id}>
-            <CardLink to={slug}>
+            <LinkCard to={slug}>
               <div>
                 <UspHeader>{title}</UspHeader>
                 <UspText>{description}</UspText>
               </div>
-            </CardLink>
+            </LinkCard>
           </Item>
         ))}
-      </Wrapper>
+      </PageChildLinksWrapper>
     </div>
   )
 }

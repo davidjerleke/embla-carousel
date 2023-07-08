@@ -3,7 +3,7 @@ import React, {
   PropsWithChildren,
   useCallback,
   useMemo,
-  useState,
+  useState
 } from 'react'
 
 export type NavigationContextType = {
@@ -15,7 +15,7 @@ export type NavigationContextType = {
 export const NavigationContext = createContext<NavigationContextType>({
   isOpen: false,
   toggleNavigation: () => undefined,
-  closeNavigation: () => undefined,
+  closeNavigation: () => undefined
 })
 
 type PropType = PropsWithChildren<{}>
@@ -36,9 +36,9 @@ export const SiteNavigationProvider = (props: PropType) => {
     () => ({
       isOpen,
       toggleNavigation,
-      closeNavigation,
+      closeNavigation
     }),
-    [isOpen, toggleNavigation, closeNavigation],
+    [isOpen, toggleNavigation, closeNavigation]
   )
 
   return (

@@ -11,7 +11,7 @@ import { Admonition } from 'components/Mdx/Components/Admonition'
 import {
   BrandAlternativeText,
   BrandPrimaryText,
-  BrandSecondaryText,
+  BrandSecondaryText
 } from 'components/Mdx/Components/ColoredText'
 
 type PropType = PropsWithChildren<{}>
@@ -32,7 +32,7 @@ export const Mdx = (props: PropType) => {
           BrandPrimaryText,
           BrandSecondaryText,
           BrandAlternativeText,
-          Admonition,
+          Admonition
         }}
       >
         {children}

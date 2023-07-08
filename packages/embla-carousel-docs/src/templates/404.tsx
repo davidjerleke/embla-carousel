@@ -1,14 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
-import { Frame } from 'components/SiteLayout/Frame'
 import { Mdx } from 'components/Mdx/Mdx'
+import { PageFrame } from 'components/Page/PageFrame'
+import { PagePropType, PageNotFoundLayoutType } from 'consts/page'
 
-const MAX_WIDTH = '68.2rem'
-
-const Wrapper = styled.div`
-  max-width: ${MAX_WIDTH};
-  margin: 0 auto;
+const PageNotFoundWrapper = styled(PageFrame)`
   text-align: center;
   &:before {
     content: '';
@@ -19,30 +16,23 @@ const Wrapper = styled.div`
 `
 
 export const query = graphql`
-  query NotFoundQuery($id: String) {
+  query PageNotFoundQuery($id: String) {
     mdx(id: { eq: $id }) {
       body
     }
   }
 `
 
-type PropType = PropsWithChildren<{
-  pageContext: {
-    id: string
-  }
-}>
+type PropType = PropsWithChildren<PagePropType<PageNotFoundLayoutType>>
 
-const NotFound = (props: PropType) => {
+const PageNotFound = (props: PropType) => {
   const { children } = props
 
   return (
-    <Wrapper>
-      <Frame>
-        <Mdx>{children}</Mdx>
-      </Frame>
-      <code />
-    </Wrapper>
+    <PageNotFoundWrapper size="SM">
+      <Mdx>{children}</Mdx>
+    </PageNotFoundWrapper>
   )
 }
 
-export default NotFound
+export default PageNotFound

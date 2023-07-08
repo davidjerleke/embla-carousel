@@ -8,7 +8,7 @@ export type AlignmentType = {
 
 export function Alignment(
   align: AlignmentOptionType,
-  viewSize: number,
+  viewSize: number
 ): AlignmentType {
   const predefined = { start, center, end }
 
@@ -34,7 +34,7 @@ export function Alignment(
   }
 
   const self: AlignmentType = {
-    measure,
+    measure
   }
   return self
 }

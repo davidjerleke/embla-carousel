@@ -55,7 +55,7 @@ export function objectKeys<Type extends object>(object: Type): string[] {
 
 export function objectsMergeDeep(
   objectA: Record<string, unknown>,
-  objectB: Record<string, unknown>,
+  objectB: Record<string, unknown>
 ): Record<string, unknown> {
   return [objectA, objectB].reduce((mergedObjects, currentObject) => {
     objectKeys(currentObject).forEach((key) => {
@@ -73,7 +73,7 @@ export function objectsMergeDeep(
 
 export function isMouseEvent(
   evt: PointerEventType,
-  ownerWindow: WindowType,
+  ownerWindow: WindowType
 ): evt is MouseEvent {
   return (
     typeof ownerWindow.MouseEvent !== 'undefined' &&

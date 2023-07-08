@@ -3,7 +3,7 @@ import { EmblaCarouselType } from 'embla-carousel'
 export const addPrevNextBtnsClickHandlers = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
-  nextBtn: HTMLElement,
+  nextBtn: HTMLElement
 ): void => {
   prevBtn.addEventListener('click', () => emblaApi.scrollPrev(), false)
   nextBtn.addEventListener('click', () => emblaApi.scrollNext(), false)
@@ -12,7 +12,7 @@ export const addPrevNextBtnsClickHandlers = (
 export const togglePrevNextBtnsActive = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
-  nextBtn: HTMLElement,
+  nextBtn: HTMLElement
 ) => {
   return (): void => {
     if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')

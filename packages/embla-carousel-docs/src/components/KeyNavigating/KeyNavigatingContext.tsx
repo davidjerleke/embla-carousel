@@ -3,7 +3,7 @@ import React, {
   createContext,
   PropsWithChildren,
   useCallback,
-  useMemo,
+  useMemo
 } from 'react'
 import { useEventListener } from 'hooks/useEventListener'
 
@@ -14,7 +14,7 @@ export type KeyNavigatingContextType = {
 
 export const KeyNavigatingContext = createContext<KeyNavigatingContextType>({
   isKeyNavigating: false,
-  setIsKeyNavigating: () => undefined,
+  setIsKeyNavigating: () => undefined
 })
 
 type PropType = PropsWithChildren<{}>
@@ -31,15 +31,15 @@ export const KeyNavigatingProvider = (props: PropType) => {
     ({ key }: KeyboardEvent) => {
       if (key === 'Tab' && !isKeyNavigating) setIsKeyNavigating(true)
     },
-    [isKeyNavigating, setIsKeyNavigating],
+    [isKeyNavigating, setIsKeyNavigating]
   )
 
   const value = useMemo(
     () => ({
       isKeyNavigating,
-      setIsKeyNavigating,
+      setIsKeyNavigating
     }),
-    [isKeyNavigating, setIsKeyNavigating],
+    [isKeyNavigating, setIsKeyNavigating]
   )
 
   useEventListener('keydown', onKeyDown)

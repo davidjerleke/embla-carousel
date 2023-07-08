@@ -2,7 +2,7 @@ import { EmblaCarouselType } from 'embla-carousel'
 
 export const addDotBtnsClickHandlers = (
   emblaApi: EmblaCarouselType,
-  dotNodes: HTMLElement[],
+  dotNodes: HTMLElement[]
 ): void => {
   dotNodes.forEach((dotNode, index) => {
     dotNode.addEventListener('click', () => emblaApi.scrollTo(index), false)
@@ -11,7 +11,7 @@ export const addDotBtnsClickHandlers = (
 
 export const createDotBtns = (
   emblaApi: EmblaCarouselType,
-  dotsNode: HTMLElement,
+  dotsNode: HTMLElement
 ): HTMLElement[] => {
   const template = <HTMLElement>document.getElementById('embla-dot-template')
 

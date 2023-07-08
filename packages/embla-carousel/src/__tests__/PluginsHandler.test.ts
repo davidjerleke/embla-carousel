@@ -9,13 +9,13 @@ const autoplay: EmblaPluginType = {
   name: 'autoplay',
   init: jest.fn(),
   destroy: jest.fn(),
-  options: { active: true, breakpoints: {} },
+  options: { active: true, breakpoints: {} }
 }
 const classNames: EmblaPluginType = {
   name: 'classNames',
   init: jest.fn(),
   destroy: jest.fn(),
-  options: { active: true, breakpoints: {} },
+  options: { active: true, breakpoints: {} }
 }
 const plugins = [autoplay, classNames]
 const emblaApi = <EmblaCarouselType>{}

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { PrismSyntaxFrame } from './PrismSyntaxFrame'
 import Highlight, {
   defaultProps,
-  Language as PrismLanguage,
+  Language as PrismLanguage
 } from 'prism-react-renderer'
 
 export const PRISM_HIGHLIGHT_CLASS_NAME = 'prism-highlight'

@@ -8,8 +8,8 @@ const notMatchMediaQuery = '(min-width: 992px)'
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
-    matches: [matchMediaQuery, matchMediaQuery2].includes(query),
-  })),
+    matches: [matchMediaQuery, matchMediaQuery2].includes(query)
+  }))
 })
 
 describe('OptionsHandler', () => {
@@ -18,21 +18,21 @@ describe('OptionsHandler', () => {
       align: 'start',
       breakpoints: {
         [matchMediaQuery]: { align: 'center' },
-        [matchMediaQuery2]: { loop: true },
-      },
+        [matchMediaQuery2]: { loop: true }
+      }
     }
     const optionsB = {
       align: 'end',
       breakpoints: {
-        [notMatchMediaQuery]: { align: 'end' },
-      },
+        [notMatchMediaQuery]: { align: 'end' }
+      }
     }
 
     const mediaQueries = optionsMediaQueries([optionsA, optionsB])
     expect(mediaQueries).toEqual([
       { matches: true },
       { matches: true },
-      { matches: false },
+      { matches: false }
     ])
   })
 
@@ -43,8 +43,8 @@ describe('OptionsHandler', () => {
         align: 'start',
         breakpoints: {
           [matchMediaQuery]: { loop: true },
-          [notMatchMediaQuery]: { align: 'end' },
-        },
+          [notMatchMediaQuery]: { align: 'end' }
+        }
       }
 
       const matchMediaOptions = optionsAtMedia(options)
@@ -53,8 +53,8 @@ describe('OptionsHandler', () => {
         align: 'start',
         breakpoints: {
           [matchMediaQuery]: { loop: true },
-          [notMatchMediaQuery]: { align: 'end' },
-        },
+          [notMatchMediaQuery]: { align: 'end' }
+        }
       })
     })
 
@@ -63,8 +63,8 @@ describe('OptionsHandler', () => {
         align: 'start',
         breakpoints: {
           [matchMediaQuery]: { align: 'center' },
-          [matchMediaQuery2]: { align: 'end' },
-        },
+          [matchMediaQuery2]: { align: 'end' }
+        }
       }
 
       const matchMediaOptions = optionsAtMedia(options)
@@ -72,8 +72,8 @@ describe('OptionsHandler', () => {
         align: 'end',
         breakpoints: {
           [matchMediaQuery]: { align: 'center' },
-          [matchMediaQuery2]: { align: 'end' },
-        },
+          [matchMediaQuery2]: { align: 'end' }
+        }
       })
     })
 
@@ -83,8 +83,8 @@ describe('OptionsHandler', () => {
         align: 'start',
         breakpoints: {
           [matchMediaQuery]: { loop: true },
-          [matchMediaQuery2]: { align: 'end' },
-        },
+          [matchMediaQuery2]: { align: 'end' }
+        }
       }
 
       const matchMediaOptions = optionsAtMedia(options)
@@ -93,8 +93,8 @@ describe('OptionsHandler', () => {
         align: 'end',
         breakpoints: {
           [matchMediaQuery]: { loop: true },
-          [matchMediaQuery2]: { align: 'end' },
-        },
+          [matchMediaQuery2]: { align: 'end' }
+        }
       })
     })
   })

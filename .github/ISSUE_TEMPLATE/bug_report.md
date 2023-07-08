@@ -15,7 +15,8 @@ assignees: ''
 - [ ] embla-carousel-autoplay
 - [ ] embla-carousel-auto-height
 - [ ] embla-carousel-class-names
-- [ ] embla-carousel-docs (documentation website)
+- [ ] embla-carousel-docs (documentation)
+- [ ] embla-carousel-docs (generator)
 
 ### Embla Carousel version
 

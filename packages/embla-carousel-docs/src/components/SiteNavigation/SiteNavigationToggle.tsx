@@ -5,13 +5,13 @@ import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_RADIUSES } from 'consts/border'
 import { useNavigation } from 'hooks/useNavigation'
-import { BareButton } from 'components/Button/BareButton'
+import { ButtonBare } from 'components/Button/ButtonBare'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
 
-const SiteNavigationToggleWrapper = styled(BareButton)`
+const SiteNavigationToggleWrapper = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;

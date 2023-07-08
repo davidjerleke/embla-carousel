@@ -9,7 +9,7 @@ export function ScrollLooper(
   contentSize: number,
   limit: LimitType,
   location: Vector1DType,
-  vectors: Vector1DType[],
+  vectors: Vector1DType[]
 ): ScrollLooperType {
   const jointSafety = 0.1
   const min = limit.min + jointSafety
@@ -30,7 +30,7 @@ export function ScrollLooper(
   }
 
   const self: ScrollLooperType = {
-    loop,
+    loop
   }
   return self
 }
