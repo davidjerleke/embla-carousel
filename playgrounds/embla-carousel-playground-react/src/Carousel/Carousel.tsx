@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
+import useEmblaCarousel, {
+  EmblaCarouselType,
+  EmblaOptionsType,
+} from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
 import imageByIndex from './imageByIndex'
 
@@ -29,21 +32,25 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
     [emblaApi],
   )
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList())
+  }, [])
+
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedScrollSnap())
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
-  }, [emblaApi, setSelectedIndex])
+  }, [])
 
   useEffect(() => {
     if (!emblaApi) return
-    onSelect()
-    setScrollSnaps(emblaApi.scrollSnapList())
-    emblaApi.on('select', onSelect)
-    emblaApi.on('reInit', onSelect)
-  }, [emblaApi, setScrollSnaps, onSelect])
 
+    onInit(emblaApi)
+    onSelect(emblaApi)
+    emblaApi.on('reInit', onInit)
+    emblaApi.on('reInit', onSelect)
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onInit, onSelect])
   return (
     <>
       <div className="embla">
