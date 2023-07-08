@@ -150,7 +150,7 @@ export const CarouselGeneratorAlignmentSettings = () => {
   const align = formData[INPUT_ALIGN.FIELD_NAME]
   const containScroll = formData[INPUT_CONTAIN_SCROLL.FIELD_NAME]
     ? 'trimSnaps'
-    : null
+    : false
   const [options, setOptions] = useState<EmblaOptionsType>({
     align,
     containScroll,

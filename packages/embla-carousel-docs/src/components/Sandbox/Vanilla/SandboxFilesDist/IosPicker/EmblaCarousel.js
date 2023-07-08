@@ -12,6 +12,7 @@ const iosPickerNodes = Array.from(wheelNodes)
 const iosPickers = iosPickerNodes.map((iosPickerNode) =>
   setupIosPicker(iosPickerNode, {
     dragFree: true,
+    containScroll: false,
     loop: LOOP,
     axis: 'y',
     watchResize: false,

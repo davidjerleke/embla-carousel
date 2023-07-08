@@ -20,7 +20,7 @@ export const CONTEXT_DEFAULT_VALUE: CarouselGeneratorContextType = {
     slideGapSize: '10',
     edgeGap: '0',
     align: 'center',
-    containScroll: false,
+    containScroll: true,
     navigationPrevNextButtons: false,
     navigationDots: false,
     autoplay: false,

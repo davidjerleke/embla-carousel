@@ -9,7 +9,10 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-align'
 export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { align: 'center' }
+export const OPTIONS: EmblaOptionsType = {
+  align: 'center',
+  containScroll: false
+}
 export const STYLES = createCarouselDefaultStyles('80%')
 
 export const Wrapper = styled.div`

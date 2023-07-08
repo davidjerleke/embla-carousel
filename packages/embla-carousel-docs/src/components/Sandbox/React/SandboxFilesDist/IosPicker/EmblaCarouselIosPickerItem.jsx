@@ -70,6 +70,7 @@ export const IosPickerItem = (props) => {
     loop,
     axis: 'y',
     dragFree: true,
+    containScroll: false,
     watchResize: false,
     watchSlides: false
   })

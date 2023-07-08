@@ -95,6 +95,7 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
     loop,
     axis: 'y',
     dragFree: true,
+    containScroll: false,
     watchResize: false,
     watchSlides: false
   })

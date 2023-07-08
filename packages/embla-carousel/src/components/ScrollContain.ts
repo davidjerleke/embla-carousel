@@ -1,7 +1,7 @@
 import { Limit, LimitType } from './Limit'
 import { arrayLast } from './utils'
 
-export type ScrollContainOptionType = null | 'trimSnaps' | 'keepSnaps'
+export type ScrollContainOptionType = false | 'trimSnaps' | 'keepSnaps'
 
 export type ScrollContainType = {
   snapsContained: number[]
