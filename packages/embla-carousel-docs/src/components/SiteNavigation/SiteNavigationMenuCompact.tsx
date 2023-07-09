@@ -127,7 +127,7 @@ const ThemeToggleButton = styled(ThemeToggle)`
   border-radius: ${BORDER_RADIUSES.BOX};
   overflow: hidden;
 
-  > ${LightThemeSvg}, ${DarkThemeSvg} {
+  ${LightThemeSvg}, ${DarkThemeSvg} {
     left: auto;
     right: 2rem;
     transform: translateY(-50%);
