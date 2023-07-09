@@ -30,7 +30,8 @@ import { Vector1D, Vector1DType } from './Vector1d'
 import {
   AnimationType,
   AnimationUpdateType,
-  AnimationsType
+  AnimationsType,
+  AnimationRenderType
 } from './Animations'
 
 export type EngineType = {
@@ -47,6 +48,7 @@ export type EngineType = {
   indexPrevious: CounterType
   limit: LimitType
   location: Vector1DType
+  offsetLocation: Vector1DType
   options: OptionsType
   percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
@@ -145,11 +147,8 @@ export function Engine(
     dragHandler,
     scrollBody,
     scrollBounds,
-    scrollLooper,
     eventHandler,
     animation,
-    slideLooper,
-    translate,
     options: { loop }
   }) => {
     const pointerDown = dragHandler.pointerDown()
@@ -162,26 +161,45 @@ export function Engine(
       animation.stop()
       eventHandler.emit('settle')
     }
+
     if (!hasSettled) eventHandler.emit('scroll')
+  }
+
+  const render: AnimationRenderType = (
+    {
+      scrollBody,
+      translate,
+      location,
+      offsetLocation,
+      scrollLooper,
+      slideLooper,
+      options: { loop }
+    },
+    lagOffset
+  ) => {
+    const velocity = scrollBody.velocity()
+    offsetLocation.set(location.get() - velocity + velocity * lagOffset)
 
     if (loop) {
       scrollLooper.loop(scrollBody.direction())
       slideLooper.loop()
     }
 
-    translate.to(location.get())
+    translate.to(offsetLocation.get())
   }
 
   const animation: AnimationType = {
     start: () => animations.start(engine),
     stop: () => animations.stop(engine),
-    update: () => update(engine)
+    update: () => update(engine),
+    render: (lagOffset: number) => render(engine, lagOffset)
   }
 
   // Shared
   const friction = 0.68
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
+  const offsetLocation = Vector1D(startLocation)
   const target = Vector1D(startLocation)
   const scrollBody = ScrollBody(location, target, duration, friction)
   const scrollTarget = ScrollTarget(
@@ -247,6 +265,7 @@ export function Engine(
     indexPrevious,
     limit,
     location,
+    offsetLocation,
     options,
     resizeHandler: ResizeHandler(
       container,
@@ -263,8 +282,9 @@ export function Engine(
       scrollBody,
       percentOfView
     ),
-    scrollLooper: ScrollLooper(contentSize, limit, location, [
+    scrollLooper: ScrollLooper(contentSize, limit, offsetLocation, [
       location,
+      offsetLocation,
       target
     ]),
     scrollProgress: ScrollProgress(limit),
@@ -279,7 +299,7 @@ export function Engine(
       slideSizesWithGaps,
       scrollSnaps,
       slidesInView,
-      location,
+      offsetLocation,
       slides
     ),
     slidesHandler: SlidesHandler(container, eventHandler),

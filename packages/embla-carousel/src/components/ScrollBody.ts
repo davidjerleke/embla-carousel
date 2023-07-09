@@ -4,6 +4,7 @@ import { Vector1DType } from './Vector1d'
 export type ScrollBodyType = {
   direction: () => number
   duration: () => number
+  velocity: () => number
   seek: () => ScrollBodyType
   settled: () => boolean
   useBaseFriction: () => ScrollBodyType
@@ -54,6 +55,10 @@ export function ScrollBody(
     return scrollDirection
   }
 
+  function velocity(): number {
+    return bodyVelocity
+  }
+
   function useBaseDuration(): ScrollBodyType {
     return useDuration(baseDuration)
   }
@@ -80,6 +85,7 @@ export function ScrollBody(
   const self: ScrollBodyType = {
     direction,
     duration,
+    velocity,
     seek,
     settled,
     useBaseFriction,

@@ -29,7 +29,7 @@ export function SlideLooper(
   slideSizesWithGaps: number[],
   scrollSnaps: number[],
   slidesInView: SlidesInViewType,
-  location: Vector1DType,
+  offsetLocation: Vector1DType,
   slides: HTMLElement[]
 ): SlideLooperType {
   const ascItems = arrayKeys(slideSizesWithGaps)
@@ -64,7 +64,7 @@ export function SlideLooper(
         index,
         slideLocation: Vector1D(-1),
         translate: Translate(axis, direction, slides[index]),
-        target: () => (location.get() > loopPoint ? initial : altered)
+        target: () => (offsetLocation.get() > loopPoint ? initial : altered)
       }
     })
   }

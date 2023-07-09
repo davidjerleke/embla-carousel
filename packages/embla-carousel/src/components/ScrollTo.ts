@@ -26,7 +26,15 @@ export function ScrollTo(
     scrollBody.useDirection(distanceDiff)
     targetVector.add(distanceDiff)
 
-    if (distanceDiff) animation.start()
+    if (distanceDiff) {
+      if (scrollBody.duration()) {
+        animation.start()
+      } else {
+        animation.update()
+        animation.render(1)
+        animation.update()
+      }
+    }
 
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())

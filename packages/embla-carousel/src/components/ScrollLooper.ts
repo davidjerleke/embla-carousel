@@ -8,7 +8,7 @@ export type ScrollLooperType = {
 export function ScrollLooper(
   contentSize: number,
   limit: LimitType,
-  location: Vector1DType,
+  offsetLocation: Vector1DType,
   vectors: Vector1DType[]
 ): ScrollLooperType {
   const jointSafety = 0.1
@@ -17,8 +17,8 @@ export function ScrollLooper(
   const { reachedMin, reachedMax } = Limit(min, max)
 
   function shouldLoop(direction: number): boolean {
-    if (direction === 1) return reachedMax(location.get())
-    if (direction === -1) return reachedMin(location.get())
+    if (direction === 1) return reachedMax(offsetLocation.get())
+    if (direction === -1) return reachedMin(offsetLocation.get())
     return false
   }
 

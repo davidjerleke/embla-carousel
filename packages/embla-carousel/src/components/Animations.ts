@@ -1,12 +1,17 @@
 import { EngineType } from './Engine'
-import { WindowType } from './utils'
+import { mathAbs, WindowType } from './utils'
 
 export type AnimationUpdateType = (engine: EngineType) => void
+export type AnimationRenderType = (
+  engine: EngineType,
+  lagFactor: number
+) => void
 
 export type AnimationType = {
   start: () => void
   stop: () => void
   update: () => void
+  render: (lagFactor: number) => void
 }
 
 export type AnimationsType = {
@@ -34,6 +39,9 @@ export function Animations(ownerWindow: WindowType): AnimationsType {
       engines.forEach(({ animation }) => animation.update())
       lag -= timeStep
     }
+
+    const lagOffset = mathAbs(lag / timeStep)
+    engines.forEach(({ animation }) => animation.render(lagOffset))
 
     if (animationFrame) ownerWindow.requestAnimationFrame(animate)
   }
