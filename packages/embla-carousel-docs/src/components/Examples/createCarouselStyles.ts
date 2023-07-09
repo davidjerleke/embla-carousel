@@ -141,7 +141,7 @@ export const ARROWS_STYLES = css`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    ${createSquareSizeStyles('4rem')};
+    ${createSquareSizeStyles('4rem')}
   }
 
   .embla__button:disabled {
@@ -149,7 +149,7 @@ export const ARROWS_STYLES = css`
   }
 
   .embla__button__svg {
-    ${createSquareSizeStyles('65%')};
+    ${createSquareSizeStyles('65%')}
   }
 `
 
@@ -178,7 +178,7 @@ export const DOTS_STYLES = css`
   }
 
   .embla__dot {
-    ${createSquareSizeStyles('2.4rem')};
+    ${createSquareSizeStyles('2.4rem')}
     display: flex;
     align-items: center;
     margin-right: 0.75rem;
@@ -199,8 +199,8 @@ export const DOTS_STYLES = css`
 `
 
 export const ARROWS_DOTS_STYLES = css`
-  ${ARROWS_STYLES};
-  ${DOTS_STYLES};
+  ${ARROWS_STYLES}
+  ${DOTS_STYLES}
 `
 
 export const THUMBS_STYLES = css`
@@ -304,7 +304,7 @@ const PROGRESS_STYLES = css`
   }
 
   .embla__progress__bar {
-    ${BRAND_GRADIENT_BACKGROUND_STYLES};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES}
     position: absolute;
     width: 100%;
     top: 0;
@@ -362,12 +362,12 @@ const LAZY_LOAD_STYLES = css`
     text-indent: -9999em;
     animation: loading 1.1s infinite linear;
     border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')};
+    ${createSquareSizeStyles('5rem')}
   }
 
   .embla__lazy-load__spinner:after {
     border-radius: inherit;
-    ${createSquareSizeStyles('5rem')};
+    ${createSquareSizeStyles('5rem')}
   }
 
   .embla__lazy-load__img {
@@ -426,12 +426,12 @@ const INFINITE_SCROLL_STYLES = css`
     text-indent: -9999em;
     animation: loading 1.1s infinite linear;
     border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')};
+    ${createSquareSizeStyles('5rem')}
   }
 
   .embla-infinite-scroll__spinner:after {
     border-radius: inherit;
-    ${createSquareSizeStyles('5rem')};
+    ${createSquareSizeStyles('5rem')}
   }
 
   .embla-infinite-scroll--loading-more > .embla-infinite-scroll__spinner {

@@ -7,10 +7,7 @@ import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
 import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
 import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
 import { createSlides } from './Carousel/setupSlides'
-import {
-  addPrevNextBtnsClickHandlers,
-  togglePrevNextBtnsActive
-} from './Carousel/setupButtons'
+import { addPrevNextBtnsClickHandlers } from './Carousel/setupButtons'
 import {
   addDotBtnsClickHandlers,
   createDotBtns,
@@ -23,7 +20,7 @@ const injectBaseStyles = (): void => {
 
   styleElement.innerHTML =
     SANDBOX_CSS +
-    createCarouselArrowsDotsStyles('50%') +
+    createCarouselArrowsDotsStyles() +
     styledComponentsStylesToString(
       THEME_STYLES,
       RESET_STYLES,
@@ -31,7 +28,6 @@ const injectBaseStyles = (): void => {
       FONT_STYLES
     )
 
-  styleElement.id = 'baseStyles'
   document.head.appendChild(styleElement)
 }
 
@@ -68,16 +64,10 @@ emblaNodes.forEach((emblaNode) => {
   const emblaApi = EmblaCarousel(viewPortNode, OPTIONS)
   const dotNodes = createDotBtns(emblaApi, dotsNode)
   const toggleDotButtonsActive = toggleDotBtnsActive(emblaApi, dotNodes)
-  const togglePrevNextButtonsActive = togglePrevNextBtnsActive(
-    emblaApi,
-    prevBtnNode,
-    nextBtnNode
-  )
   addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
   addDotBtnsClickHandlers(emblaApi, dotNodes)
 
   emblaApi.on('select', toggleDotButtonsActive)
-  emblaApi.on('select', togglePrevNextButtonsActive)
   emblaApi.on('init', toggleDotButtonsActive)
   emblaApi.reInit()
 })

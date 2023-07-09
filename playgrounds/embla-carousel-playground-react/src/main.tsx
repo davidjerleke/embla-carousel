@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { EmblaOptionsType } from 'embla-carousel-react'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
@@ -17,24 +17,24 @@ const injectBaseStyles = (): void => {
   const carouselStyles = createCarouselArrowsDotsStyles()
 
   styleElement.innerHTML =
-    SANDBOX_CSS +
-    carouselStyles +
     styledComponentsStylesToString(
       THEME_STYLES,
       RESET_STYLES,
       BASE_STYLES,
       FONT_STYLES
-    )
-  styleElement.id = 'baseStyles'
+    ) +
+    carouselStyles +
+    SANDBOX_CSS
+
   document.head.appendChild(styleElement)
 }
 
 const OPTIONS: EmblaOptionsType = {}
 const SLIDES = arrayFromNumber(5)
 
-const App: React.FC = () => {
-  useEffect(() => injectBaseStyles(), [])
+injectBaseStyles()
 
+const App: React.FC = () => {
   return (
     <main className="playground">
       <h1 className="playground__h1">Playground - React</h1>

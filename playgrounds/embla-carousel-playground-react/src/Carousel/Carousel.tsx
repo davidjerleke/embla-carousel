@@ -71,8 +71,10 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
           </div>
         </div>
 
-        <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-        <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        <div className="embla__buttons">
+          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+          <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+        </div>
       </div>
 
       <div className="embla__dots">
