@@ -1,7 +1,7 @@
 {
   "name": "embla-carousel-playground-vanilla",
   "private": true,
-  "version": "8.0.0-rc09",
+  "version": "8.0.0-rc10",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +9,7 @@
     "test": "echo \"Info: no tests specified\" && exit 0"
   },
   "dependencies": {
-    "embla-carousel": "8.0.0-rc09"
+    "embla-carousel": "8.0.0-rc10"
   },
   "devDependencies": {
     "typescript": "^4.6.4",
