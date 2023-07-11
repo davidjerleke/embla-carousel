@@ -162,13 +162,11 @@ export function DragHandler(
       if (!preventScroll) return up(evt)
     }
     const diff = dragTracker.pointerMove(evt)
-    const directionDiff = direction.apply(diff)
     if (diffScroll > dragThreshold) preventClick = true
 
     scrollBody.useFriction(0.3).useDuration(1)
-    if (directionDiff) scrollBody.useDirection(directionDiff)
     animation.start()
-    target.add(directionDiff)
+    target.add(direction.apply(diff))
     evt.preventDefault()
   }
 

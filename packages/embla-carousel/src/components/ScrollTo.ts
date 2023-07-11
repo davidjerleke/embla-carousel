@@ -23,7 +23,6 @@ export function ScrollTo(
     const distanceDiff = target.distance
     const indexDiff = target.index !== indexCurrent.get()
 
-    scrollBody.useDirection(distanceDiff)
     targetVector.add(distanceDiff)
 
     if (distanceDiff) {

@@ -11,7 +11,6 @@ export type ScrollBodyType = {
   useBaseDuration: () => ScrollBodyType
   useFriction: (n: number) => ScrollBodyType
   useDuration: (n: number) => ScrollBodyType
-  useDirection: (n: number) => ScrollBodyType
 }
 
 export function ScrollBody(
@@ -25,20 +24,30 @@ export function ScrollBody(
   let scrollDirection = 0
   let scrollDuration = baseDuration
   let scrollFriction = baseFriction
+  let rawLocation = location.get()
+  let rawLocationPrevious = 0
 
   function seek(): ScrollBodyType {
     const diff = target.get() - location.get()
     const isInstant = !scrollDuration
+    let directionDiff = 0
 
     if (isInstant) {
       bodyVelocity = 0
       location.set(target)
+
+      directionDiff = diff
     } else {
       bodyVelocity += diff / scrollDuration
       bodyVelocity *= scrollFriction
+      rawLocation += bodyVelocity
       location.add(bodyVelocity)
+
+      directionDiff = rawLocation - rawLocationPrevious
     }
 
+    scrollDirection = mathSign(directionDiff)
+    rawLocationPrevious = rawLocation
     hasSettled = mathAbs(diff) < 0.001
     return self
   }
@@ -77,11 +86,6 @@ export function ScrollBody(
     return self
   }
 
-  function useDirection(n: number): ScrollBodyType {
-    scrollDirection = mathSign(n)
-    return self
-  }
-
   const self: ScrollBodyType = {
     direction,
     duration,
@@ -90,7 +94,6 @@ export function ScrollBody(
     settled,
     useBaseFriction,
     useBaseDuration,
-    useDirection,
     useFriction,
     useDuration
   }
