@@ -106,12 +106,12 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
     <meta
       key="og:image"
       property="og:image"
-      content={`${siteUrl}/share-image.jpg`}
+      content={`${siteUrl}/share-image.png`}
     />,
     <meta
       key="twitter:image"
       name="twitter:image"
-      content={`${siteUrl}/share-image.jpg`}
+      content={`${siteUrl}/share-image.png`}
     />,
     <link
       key="appleTouchIcon"
