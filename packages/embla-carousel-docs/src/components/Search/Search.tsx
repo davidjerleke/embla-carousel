@@ -16,8 +16,8 @@ import { SPACINGS } from 'consts/spacings'
 import { THEME_KEYS, THEME_PREFIX, COLORS } from 'consts/themes'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 import { useNavigation } from 'hooks/useNavigation'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { isBrowser } from 'utils/isBrowser'
 
 const MODAL_MAX_WIDTH = '56rem'
@@ -118,7 +118,7 @@ const contentStyles = css`
 
   .DocSearch-Help a {
     ${linkContentStyles};
-    ${keyNavigatingStyles};
+    ${KEY_NAVIGATING_STYLES};
   }
 
   .DocSearch-Dropdown {
@@ -184,7 +184,7 @@ const contentStyles = css`
   }
 
   .DocSearch-Hit a {
-    ${keyNavigatingStyles};
+    ${KEY_NAVIGATING_STYLES};
     outline-offset: -${BORDER_SIZES.OUTLINE};
     background-color: ${COLORS.BACKGROUND_CODE};
     padding-left: ${EDGE_SPACING};
@@ -370,7 +370,7 @@ const footerStyles = css`
   }
 
   .DocSearch-Logo a {
-    ${keyNavigatingStyles};
+    ${KEY_NAVIGATING_STYLES};
     display: flex;
   }
 
@@ -460,7 +460,7 @@ const footerStyles = css`
 const inputStyles = css`
   .DocSearch-Input {
     ${createPlaceholderStyles(COLORS.TEXT_LOW_CONTRAST)};
-    ${keyNavigatingStyles};
+    ${KEY_NAVIGATING_STYLES};
     height: calc(${INPUT_HEIGHT} - (${INPUT_BORDER_SIZE} * 2));
     padding-left: ${BUTTON_WIDTH};
     padding-right: ${BUTTON_WIDTH};

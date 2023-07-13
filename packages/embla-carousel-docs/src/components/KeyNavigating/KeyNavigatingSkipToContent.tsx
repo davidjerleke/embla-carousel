@@ -4,7 +4,7 @@ import { LinkButtonPrimaryOutlined } from 'components/Link/LinkButton'
 import { navigate } from '@reach/router'
 import { isBrowser } from 'utils/isBrowser'
 import { LAYERS } from 'consts/layers'
-import { keyNavigatingStyles } from './keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 export const MAIN_CONTENT_ID = 'main-content'
 
@@ -17,7 +17,7 @@ const KeyNavigatingSkipToContentWrapper = styled(LinkButtonPrimaryOutlined)`
 
   &:focus,
   &:active {
-    ${keyNavigatingStyles};
+    ${KEY_NAVIGATING_STYLES};
     position: fixed;
     transform: translateX(0);
   }

@@ -42,7 +42,6 @@ export const MdxStyles = styled.div`
     fieldset,
     figure,
     pre,
-    hr,
     ul,
     ol,
     dd,

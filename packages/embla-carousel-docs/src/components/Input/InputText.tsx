@@ -2,12 +2,13 @@ import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { COLORS } from 'consts/themes'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 const HEIGHT = SPACINGS.EIGHT
 const SIDES_PADDING = SPACINGS.THREE
@@ -85,7 +86,8 @@ const Input = styled.input<{
   $isKeyNavigating: boolean
   $inputHasValue: boolean
 }>`
-  ${keyNavigatingStyles};
+  ${TAP_HIGHLIGHT_STYLES};
+  ${KEY_NAVIGATING_STYLES};
   z-index: ${LAYERS.STEP};
   height: calc(100% - ${BORDER_SIZES.DETAIL} * 2);
   width: calc(100% - ${BORDER_SIZES.DETAIL} * 2);

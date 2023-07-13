@@ -2,20 +2,17 @@ import React, { PropsWithChildren, useCallback, useRef } from 'react'
 import { useLocation } from '@reach/router'
 import styled, { css } from 'styled-components'
 import { GatsbyLinkProps, Link } from 'gatsby'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useNavigation } from 'hooks/useNavigation'
 import { useRoutes } from 'hooks/useRoutes'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
-import { COLORS } from 'consts/themes'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
 
 export const linkBareStyles = css<{ $isKeyNavigating: boolean }>`
-  ${keyNavigatingStyles};
-  -webkit-tap-highlight-color: rgba(
-    ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
-    0.5
-  );
+  ${KEY_NAVIGATING_STYLES};
+  ${TAP_HIGHLIGHT_STYLES};
   text-decoration: none;
 `
 

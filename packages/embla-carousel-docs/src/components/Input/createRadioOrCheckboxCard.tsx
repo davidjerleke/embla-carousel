@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { CARD_STYLES } from 'consts/card'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
@@ -8,10 +7,13 @@ import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
 import { PropType } from './createRadioOrCheckboxDefault'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 const RadioOrCheckboxCardWrapper = styled.label`
+  ${TAP_HIGHLIGHT_STYLES};
   ${CARD_STYLES};
   display: flex;
   align-items: center;
@@ -53,7 +55,8 @@ const Highlight = styled.span`
 `
 
 const Input = styled.input<{ $isKeyNavigating: boolean }>`
-  ${keyNavigatingStyles};
+  ${TAP_HIGHLIGHT_STYLES};
+  ${KEY_NAVIGATING_STYLES};
   position: absolute;
   border-radius: ${BORDER_RADIUSES.CARD};
   top: 0;

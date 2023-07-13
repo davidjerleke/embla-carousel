@@ -13,6 +13,7 @@ export const hrStyles = css`
     border-left: 0;
     border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
     margin-top: ${HEADING_TOP_SPACING};
+    margin-bottom: ${HEADING_TOP_SPACING};
     width: ${DECORATION_WIDTH};
     background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
   }

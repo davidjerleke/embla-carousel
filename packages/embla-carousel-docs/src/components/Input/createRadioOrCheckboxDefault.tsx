@@ -4,10 +4,11 @@ import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { BORDER_RADIUSES } from 'consts/border'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 const INPUT_SIZE = '2.5rem'
 const CHECK_SIZE = '1.2rem'
@@ -33,7 +34,8 @@ const InputLineHeight = styled.span`
 
 const Input = styled.input<{ $isKeyNavigating: boolean }>`
   ${createSquareSizeStyles(INPUT_SIZE)};
-  ${keyNavigatingStyles};
+  ${TAP_HIGHLIGHT_STYLES};
+  ${KEY_NAVIGATING_STYLES};
   appearance: none;
   -webkit-appearance: none;
   position: absolute;
@@ -105,6 +107,7 @@ const InputCheckbox = styled(Input)`
 `
 
 const Label = styled.label<{ $disabled?: boolean }>`
+  ${TAP_HIGHLIGHT_STYLES};
   padding-left: ${SPACINGS.TWO};
   min-width: 0;
   flex: 0 0 calc(100% - ${INPUT_SIZE});

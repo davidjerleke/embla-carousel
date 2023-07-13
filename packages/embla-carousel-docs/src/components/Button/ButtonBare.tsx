@@ -2,20 +2,18 @@ import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 
 export const buttonBareStyles = css<{
   $isKeyNavigating: boolean
   $isButton?: boolean
 }>`
-  ${keyNavigatingStyles};
+  ${KEY_NAVIGATING_STYLES};
+  ${TAP_HIGHLIGHT_STYLES};
   color: ${COLORS.TEXT_BODY};
   outline-offset: -${BORDER_SIZES.OUTLINE};
-  -webkit-tap-highlight-color: rgba(
-    ${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE},
-    0.5
-  );
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;

@@ -11,12 +11,12 @@ import styled, { css } from 'styled-components'
 import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
-import { ButtonBare } from 'components/Button/ButtonBare'
+import { ButtonBare, ButtonBareText } from 'components/Button/ButtonBare'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_SIZES } from 'consts/border'
 import { COLORS } from 'consts/themes'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 import { useTabs } from 'hooks/useTabs'
-import { keyNavigatingStyles } from 'components/KeyNavigating/keyNavigatingStyles'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
   ActiveText as TabActiveText,
@@ -54,7 +54,7 @@ export const TabList = styled.div`
 `
 
 export const TabPanel = styled.section`
-  ${keyNavigatingStyles};
+  ${KEY_NAVIGATING_STYLES};
 `
 
 export const Tab = styled(ButtonBare)<{ $selected: boolean }>`
@@ -64,7 +64,7 @@ export const Tab = styled(ButtonBare)<{ $selected: boolean }>`
   align-items: center;
   position: relative;
 
-  &:disabled > ${TabInactiveText} {
+  &:disabled > ${ButtonBareText} > ${TabInactiveText} {
     color: ${COLORS.DETAIL_HIGH_CONTRAST};
   }
 
