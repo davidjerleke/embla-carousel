@@ -9,7 +9,6 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { useTheme } from 'hooks/useTheme'
 import { THEME_KEYS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
-
 import { Icon } from 'components/Icon/Icon'
 
 const SiteLogoWrapper = styled.div`
