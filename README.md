@@ -32,7 +32,7 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/generator/">Generator</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
     </strong>
   </p>
 
