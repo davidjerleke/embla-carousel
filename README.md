@@ -19,10 +19,23 @@
   </strong>
 
   <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
+    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
   </p>
 
   <br>
+
+  <p align="center">
+    <strong>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/predefined/">Examples</a>&nbsp;</code>
+    </strong>
+  </p>
+
+  <p align="center">
+    <strong>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/generator/">Generator</a>&nbsp;</code>
+    </strong>
+  </p>
+
 
   <p align="center">
     <strong>
@@ -35,12 +48,6 @@
       <code>&nbsp;<a href="https://www.embla-carousel.com/api/">API Reference</a>&nbsp;</code>
     </strong>
   </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/">Examples</a>&nbsp;</code>
-    </strong>
-  </p>
 </div>
 
 <br>
@@ -49,9 +56,7 @@
   <strong>
     <h2 align="center">Ready for</h2>
   </strong>
-  <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with:
-  </p>
+  
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">
       <img src="https://www.embla-carousel.com/javascript-logo.svg" width="45" height="45" />
