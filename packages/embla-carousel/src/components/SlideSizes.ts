@@ -4,6 +4,8 @@ import { arrayLast, arrayLastIndex, mathAbs, WindowType } from './utils'
 export type SlideSizesType = {
   slideSizes: number[]
   slideSizesWithGaps: number[]
+  startGap: number
+  endGap: number
 }
 
 export function SlideSizes(
@@ -47,7 +49,9 @@ export function SlideSizes(
 
   const self: SlideSizesType = {
     slideSizes,
-    slideSizesWithGaps
+    slideSizesWithGaps,
+    startGap,
+    endGap
   }
   return self
 }

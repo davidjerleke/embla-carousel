@@ -105,7 +105,7 @@ export function Engine(
   const alignment = Alignment(align, viewSize)
   const containSnaps = !loop && !!containScroll
   const readEdgeGap = loop || !!containScroll
-  const { slideSizes, slideSizesWithGaps } = SlideSizes(
+  const { slideSizes, slideSizesWithGaps, startGap, endGap } = SlideSizes(
     axis,
     containerRect,
     slideRects,
@@ -114,9 +114,15 @@ export function Engine(
     ownerWindow
   )
   const slidesToScroll = SlidesToScroll(
+    axis,
+    direction,
     viewSize,
-    slideSizesWithGaps,
-    groupSlides
+    groupSlides,
+    loop,
+    containerRect,
+    slideRects,
+    startGap,
+    endGap
   )
   const { snaps, snapsAligned } = ScrollSnaps(
     axis,
