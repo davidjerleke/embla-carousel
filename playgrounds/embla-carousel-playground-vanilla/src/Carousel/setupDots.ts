@@ -24,6 +24,7 @@ export const createDotBtns = (
 
 export const toggleDotBtnsActive =
   (emblaApi: EmblaCarouselType, dotNodes: HTMLElement[]) => (): void => {
+    if (!dotNodes.length) return
     const previous = emblaApi.previousScrollSnap()
     const selected = emblaApi.selectedScrollSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')

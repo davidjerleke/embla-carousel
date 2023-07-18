@@ -1,4 +1,12 @@
-import { arrayKeys, arrayLast, isNumber } from './utils'
+import { AxisType } from './Axis'
+import { DirectionType } from './Direction'
+import {
+  arrayKeys,
+  arrayLast,
+  arrayLastIndex,
+  isNumber,
+  mathAbs
+} from './utils'
 
 export type SlidesToScrollOptionType = 'auto' | number
 
@@ -7,10 +15,17 @@ export type SlidesToScrollType = {
 }
 
 export function SlidesToScroll(
+  axis: AxisType,
+  direction: DirectionType,
   viewSize: number,
-  slideSizesWithGaps: number[],
-  slidesToScroll: SlidesToScrollOptionType
+  slidesToScroll: SlidesToScrollOptionType,
+  loop: boolean,
+  containerRect: DOMRect,
+  slideRects: DOMRect[],
+  startGap: number,
+  endGap: number
 ): SlidesToScrollType {
+  const { startEdge, endEdge } = axis
   const groupByNumber = isNumber(slidesToScroll)
 
   function byNumber<Type>(array: Type[], groupSize: number): Type[][] {
@@ -20,13 +35,28 @@ export function SlidesToScroll(
   }
 
   function bySize<Type>(array: Type[]): Type[][] {
+    if (!array.length) return []
+
     return arrayKeys(array)
-      .reduce((groupSizes: number[], i) => {
-        const chunk = slideSizesWithGaps.slice(arrayLast(groupSizes), i + 1)
-        const chunkSize = chunk.reduce((a, s) => a + s, 0)
-        return !i || chunkSize > viewSize ? groupSizes.concat(i) : groupSizes
+      .reduce((groupSizes: number[], rectB) => {
+        const rectA = arrayLast(groupSizes) || 0
+        const isFirst = rectA === 0
+        const isLast = rectB === arrayLastIndex(array)
+
+        const edgeA = containerRect[startEdge] - slideRects[rectA][startEdge]
+        const edgeB = containerRect[startEdge] - slideRects[rectB][endEdge]
+        const gapA = !loop && isFirst ? direction.apply(startGap) : 0
+        const gapB = !loop && isLast ? direction.apply(endGap) : 0
+        const chunkSize = mathAbs(edgeB - gapB - (edgeA + gapA))
+
+        if (chunkSize > viewSize) groupSizes.push(rectB)
+        if (isLast) groupSizes.push(array.length)
+        return groupSizes
       }, [])
-      .map((start, i, groupSizes) => array.slice(start, groupSizes[i + 1]))
+      .map((currentSize, index, groupSizes) => {
+        const previousSize = Math.max(groupSizes[index - 1] || 0)
+        return array.slice(previousSize, currentSize)
+      })
   }
 
   function groupSlides<Type>(array: Type[]): Type[][] {

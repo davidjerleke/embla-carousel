@@ -7,10 +7,10 @@ const ltrDirection = 'ltr'
 const rtlDirection = 'rtl'
 const horizontalSize = 100
 const verticalSize = 50
-const mockRect = {
+const mockRect = <DOMRect>{
   width: horizontalSize,
   height: verticalSize
-} as DOMRect
+}
 
 const getAxis = (
   axis: AxisOptionType,
