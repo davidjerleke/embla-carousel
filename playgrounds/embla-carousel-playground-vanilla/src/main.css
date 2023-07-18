@@ -20,3 +20,11 @@
   font-weight: 900;
   text-align: center;
 }
+
+.embla__slide {
+  background-color: red;
+}
+
+.embla__slide__img {
+  opacity: 0;
+}

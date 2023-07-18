@@ -172,7 +172,8 @@ function EmblaCarousel(
   function slidesInView(target?: boolean): number[] {
     const location = engine[target ? 'target' : 'location'].get()
     const type = options.loop ? 'removeOffset' : 'constrain'
-    return engine.slidesInView.check(engine.limit[type](location))
+    return []
+    // return engine.slidesInView.check(engine.limit[type](location))
   }
 
   function slidesNotInView(target?: boolean): number[] {

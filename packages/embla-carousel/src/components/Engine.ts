@@ -224,15 +224,7 @@ export function Engine(
     target,
     eventHandler
   )
-  const slidesInView = SlidesInView(
-    viewSize,
-    contentSize,
-    slideSizes,
-    snaps,
-    limit,
-    loop,
-    inViewThreshold
-  )
+  const slidesInView = SlidesInView(slides)
 
   // Engine
   const engine: EngineType = {
@@ -302,9 +294,10 @@ export function Engine(
       direction,
       viewSize,
       contentSize,
+      slideSizes,
       slideSizesWithGaps,
+      snaps,
       scrollSnaps,
-      slidesInView,
       offsetLocation,
       slides
     ),

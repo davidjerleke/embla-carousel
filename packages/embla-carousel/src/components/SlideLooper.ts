@@ -1,11 +1,13 @@
 import { AxisType } from './Axis'
 import { arrayKeys } from './utils'
-import { SlidesInViewType } from './SlidesInView'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { Translate, TranslateType } from './Translate'
 import { DirectionType } from './Direction'
 
-type EdgeType = 'start' | 'end'
+type SlideBoundType = {
+  start: number
+  end: number
+}
 
 type LoopPointType = {
   index: number
@@ -26,12 +28,14 @@ export function SlideLooper(
   direction: DirectionType,
   viewSize: number,
   contentSize: number,
+  slideSizes: number[],
   slideSizesWithGaps: number[],
+  snaps: number[],
   scrollSnaps: number[],
-  slidesInView: SlidesInViewType,
   offsetLocation: Vector1DType,
   slides: HTMLElement[]
 ): SlideLooperType {
+  const roundingSafety = 0.5
   const ascItems = arrayKeys(slideSizesWithGaps)
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
   const loopPoints = startPoints().concat(endPoints())
@@ -49,16 +53,25 @@ export function SlideLooper(
     }, [])
   }
 
-  function findLoopPoints(indexes: number[], edge: EdgeType): LoopPointType[] {
-    const isStartEdge = edge === 'start'
-    const offset = isStartEdge ? -contentSize : contentSize
-    const slideBounds = slidesInView.findSlideBounds([offset])
+  function findSlideBounds(offset: number): SlideBoundType[] {
+    return snaps.map((snap, index) => ({
+      start: snap - slideSizes[index] + roundingSafety + offset,
+      end: snap + viewSize - roundingSafety + offset
+    }))
+  }
+
+  function findLoopPoints(
+    indexes: number[],
+    offset: number,
+    isEndEdge: boolean
+  ): LoopPointType[] {
+    const slideBounds = findSlideBounds(offset)
 
     return indexes.map((index) => {
-      const initial = isStartEdge ? 0 : -contentSize
-      const altered = isStartEdge ? contentSize : 0
-      const bounds = slideBounds.filter((b) => b.index === index)[0]
-      const loopPoint = bounds[isStartEdge ? 'end' : 'start']
+      const initial = isEndEdge ? 0 : -contentSize
+      const altered = isEndEdge ? contentSize : 0
+      const boundEdge = isEndEdge ? 'end' : 'start'
+      const loopPoint = slideBounds[index][boundEdge]
 
       return {
         index,
@@ -72,13 +85,13 @@ export function SlideLooper(
   function startPoints(): LoopPointType[] {
     const gap = scrollSnaps[0] - 1
     const indexes = slidesInGap(descItems, gap)
-    return findLoopPoints(indexes, 'end')
+    return findLoopPoints(indexes, contentSize, false)
   }
 
   function endPoints(): LoopPointType[] {
     const gap = viewSize - scrollSnaps[0] - 1
     const indexes = slidesInGap(ascItems, gap)
-    return findLoopPoints(indexes, 'start')
+    return findLoopPoints(indexes, -contentSize, true)
   }
 
   function canLoop(): boolean {
