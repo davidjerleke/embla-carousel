@@ -9,7 +9,7 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-lazy-load'
 export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { inViewThreshold: 0 }
+export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselLazyLoadStyles()
 
 export const Wrapper = styled.div`

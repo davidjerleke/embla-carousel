@@ -10,7 +10,6 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 export const ID = 'embla-carousel-infinite-scroll'
 export const SLIDES = arrayFromNumber(5)
 export const OPTIONS: EmblaOptionsType = {
-  inViewThreshold: 0,
   dragFree: true,
   containScroll: 'keepSnaps',
   watchSlides: false,

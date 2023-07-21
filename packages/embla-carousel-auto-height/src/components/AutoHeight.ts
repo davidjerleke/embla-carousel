@@ -54,7 +54,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
 
   function highestInView(): number {
     const { slidesInView, target } = emblaApi.internalEngine()
-    const inViewIndexes = slidesInView.check(target.get(), slideBounds)
+    const inViewIndexes = slidesInView.check(target.get(), slideBounds) // change to exposed snaps instead
     const heights = inViewIndexes.map((index) => slideHeights[index])
     return heights.reduce((a, b) => Math.max(a, b), 0)
   }

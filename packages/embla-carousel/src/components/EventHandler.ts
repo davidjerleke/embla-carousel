@@ -8,6 +8,7 @@ export type EmblaEventType =
   | 'pointerDown'
   | 'pointerUp'
   | 'slidesChanged'
+  | 'slidesInView'
   | 'scroll'
   | 'select'
   | 'settle'

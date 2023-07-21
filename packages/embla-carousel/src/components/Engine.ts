@@ -85,7 +85,6 @@ export function Engine(
     axis: scrollAxis,
     direction: contentDirection,
     startIndex,
-    inViewThreshold,
     loop,
     duration,
     dragFree,
@@ -224,7 +223,7 @@ export function Engine(
     target,
     eventHandler
   )
-  const slidesInView = SlidesInView(slides)
+  const slidesInView = SlidesInView(slides, eventHandler)
 
   // Engine
   const engine: EngineType = {
