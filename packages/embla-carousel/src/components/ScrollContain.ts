@@ -13,7 +13,7 @@ export function ScrollContain(
   snapsAligned: number[],
   containScroll: ScrollContainOptionType
 ): ScrollContainType {
-  const scrollBounds = Limit(-contentSize + viewSize, snapsAligned[0])
+  const scrollBounds = Limit(-contentSize + viewSize, 0)
   const snapsBounded = measureBounded()
   const snapsContained = measureContained()
 

@@ -128,9 +128,7 @@ export function Engine(
     alignment,
     containerRect,
     slideRects,
-    slideSizesWithGaps,
-    slidesToScroll,
-    containSnaps
+    slidesToScroll
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained } = ScrollContain(

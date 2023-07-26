@@ -1,7 +1,7 @@
 import { AlignmentType } from './Alignment'
 import { AxisType } from './Axis'
 import { SlidesToScrollType } from './SlidesToScroll'
-import { arrayLast, arrayLastIndex, mathAbs } from './utils'
+import { arrayLast, mathAbs } from './utils'
 
 export type ScrollSnapsType = {
   snaps: number[]
@@ -13,9 +13,7 @@ export function ScrollSnaps(
   alignment: AlignmentType,
   containerRect: DOMRect,
   slideRects: DOMRect[],
-  slideSizesWithGaps: number[],
-  slidesToScroll: SlidesToScrollType,
-  containScroll: boolean
+  slidesToScroll: SlidesToScrollType
 ): ScrollSnapsType {
   const { startEdge, endEdge } = axis
   const { groupSlides } = slidesToScroll
@@ -36,18 +34,9 @@ export function ScrollSnaps(
   }
 
   function measureAligned(): number[] {
-    const containedStartSnap = 0
-    const containedEndSnap = arrayLast(snaps) - arrayLast(slideSizesWithGaps)
-
     return groupSlides(snaps)
       .map((g) => g[0])
-      .map((snap, index, groupedSnaps) => {
-        const isFirst = !index
-        const isLast = index === arrayLastIndex(groupedSnaps)
-        if (containScroll && isFirst) return containedStartSnap
-        if (containScroll && isLast) return containedEndSnap
-        return snap + alignments[index]
-      })
+      .map((snap, index) => snap + alignments[index])
   }
 
   const self: ScrollSnapsType = {
