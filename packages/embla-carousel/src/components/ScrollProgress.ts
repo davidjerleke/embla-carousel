@@ -5,11 +5,11 @@ export type ScrollProgressType = {
 }
 
 export function ScrollProgress(limit: LimitType): ScrollProgressType {
-  const { max, length: scrollLength } = limit
+  const { max, length } = limit
 
   function get(n: number): number {
     const currentLocation = n - max
-    return currentLocation / -scrollLength
+    return length ? currentLocation / -length : 0
   }
 
   const self: ScrollProgressType = {
