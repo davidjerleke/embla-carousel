@@ -1,4 +1,5 @@
 import { EventHandlerType } from './EventHandler'
+import { objectKeys } from './utils'
 
 type IntersectionEntryMapType = {
   [key: number]: IntersectionObserverEntry
@@ -7,7 +8,7 @@ type IntersectionEntryMapType = {
 export type SlidesInViewType = {
   init: () => void
   destroy: () => void
-  get: (threshold: number, inView?: boolean) => number[]
+  get: (inView?: boolean) => number[]
 }
 
 export function SlidesInView(
@@ -15,6 +16,8 @@ export function SlidesInView(
   eventHandler: EventHandlerType
 ): SlidesInViewType {
   const intersectionEntryMap: IntersectionEntryMapType = {}
+  let inViewCache: number[] | null = null
+  let notInViewCache: number[] | null = null
   let intersectionObserver: IntersectionObserver
   let destroyed = false
 
@@ -26,6 +29,9 @@ export function SlidesInView(
         const index = slides.indexOf(<HTMLElement>entry.target)
         intersectionEntryMap[index] = entry
       })
+
+      inViewCache = null
+      notInViewCache = null
       eventHandler.emit('slidesInView')
     })
 
@@ -37,18 +43,27 @@ export function SlidesInView(
     destroyed = true
   }
 
-  function get(threshold: number, inView: boolean = true): number[] {
-    const thresholdLimited = threshold || 0.001
+  function get(inView: boolean = true): number[] {
+    if (inView && inViewCache) return inViewCache
+    if (!inView && notInViewCache) return notInViewCache
 
-    return Object.keys(intersectionEntryMap).reduce((list, slideIndex) => {
-      const index = parseInt(slideIndex)
-      const { intersectionRatio } = intersectionEntryMap[index]
-      const inViewMatch = inView && intersectionRatio >= thresholdLimited
-      const notInViewMatch = !inView && intersectionRatio < thresholdLimited
+    const slideIndexes = objectKeys(intersectionEntryMap).reduce(
+      (list: number[], slideIndex) => {
+        const index = parseInt(slideIndex)
+        const { isIntersecting } = intersectionEntryMap[index]
+        const inViewMatch = inView && isIntersecting
+        const notInViewMatch = !inView && !isIntersecting
 
-      if (inViewMatch || notInViewMatch) return [...list, index]
-      return list
-    }, <number[]>[])
+        if (inViewMatch || notInViewMatch) return [...list, index]
+        return list
+      },
+      []
+    )
+
+    if (inView) inViewCache = slideIndexes
+    if (!inView) notInViewCache = slideIndexes
+
+    return slideIndexes
   }
 
   const self: SlidesInViewType = {

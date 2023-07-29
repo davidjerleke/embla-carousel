@@ -15,4 +15,4 @@ const loadImagesInView = setupLazyLoadImage(emblaApi)
 emblaApi
   .on('init', loadImagesInView)
   .on('reInit', loadImagesInView)
-  .on('select', loadImagesInView)
+  .on('slidesInView', loadImagesInView)

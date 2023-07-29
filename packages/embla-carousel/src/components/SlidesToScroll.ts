@@ -38,8 +38,8 @@ export function SlidesToScroll(
     if (!array.length) return []
 
     return arrayKeys(array)
-      .reduce((groupSizes: number[], rectB) => {
-        const rectA = arrayLast(groupSizes) || 0
+      .reduce((groups: number[], rectB) => {
+        const rectA = arrayLast(groups) || 0
         const isFirst = rectA === 0
         const isLast = rectB === arrayLastIndex(array)
 
@@ -49,12 +49,12 @@ export function SlidesToScroll(
         const gapB = !loop && isLast ? direction.apply(endGap) : 0
         const chunkSize = mathAbs(edgeB - gapB - (edgeA + gapA))
 
-        if (chunkSize > viewSize) groupSizes.push(rectB)
-        if (isLast) groupSizes.push(array.length)
-        return groupSizes
+        if (chunkSize > viewSize) groups.push(rectB)
+        if (isLast) groups.push(array.length)
+        return groups
       }, [])
-      .map((currentSize, index, groupSizes) => {
-        const previousSize = Math.max(groupSizes[index - 1] || 0)
+      .map((currentSize, index, groups) => {
+        const previousSize = Math.max(groups[index - 1] || 0)
         return array.slice(previousSize, currentSize)
       })
   }

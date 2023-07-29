@@ -28,8 +28,8 @@ export type EmblaCarouselType = {
   scrollTo: (index: number, jump?: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
-  slidesInView: (threshold?: number) => number[]
-  slidesNotInView: (threshold?: number) => number[]
+  slidesInView: () => number[]
+  slidesNotInView: () => number[]
 }
 
 function EmblaCarousel(
@@ -197,7 +197,7 @@ function EmblaCarousel(
   }
 
   function scrollSnapList(): number[] {
-    return engine.scrollSnaps.map(engine.scrollProgress.get)
+    return engine.scrollSnapList
   }
 
   function scrollProgress(): number {
@@ -212,12 +212,12 @@ function EmblaCarousel(
     return engine.indexPrevious.get()
   }
 
-  function slidesInView(threshold: number = 0): number[] {
-    return engine.slidesInView.get(threshold)
+  function slidesInView(): number[] {
+    return engine.slidesInView.get()
   }
 
-  function slidesNotInView(threshold: number = 0): number[] {
-    return engine.slidesInView.get(threshold, false)
+  function slidesNotInView(): number[] {
+    return engine.slidesInView.get(false)
   }
 
   function plugins(): EmblaPluginsType {

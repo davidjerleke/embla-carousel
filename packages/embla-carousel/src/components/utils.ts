@@ -49,6 +49,10 @@ export function arrayLastIndex<Type>(array: Type[]): number {
   return Math.max(0, array.length - 1)
 }
 
+export function arrayFromNumber(n: number, startAt: number = 0): number[] {
+  return Array.from(Array(n), (_, i) => startAt + i)
+}
+
 export function objectKeys<Type extends object>(object: Type): string[] {
   return Object.keys(object)
 }
