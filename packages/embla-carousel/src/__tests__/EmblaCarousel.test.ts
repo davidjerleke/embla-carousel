@@ -1,6 +1,17 @@
 import { EmblaOptionsType } from '../components/Options'
 import EmblaCarousel, { EmblaCarouselType } from '../components/EmblaCarousel'
 
+const observe = jest.fn()
+const unobserve = jest.fn()
+
+Object.defineProperty(window, 'IntersectionObserver', {
+  writable: true,
+  value: jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn()
+  }))
+})
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(() => ({
