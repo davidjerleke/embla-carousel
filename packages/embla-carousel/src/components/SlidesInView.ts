@@ -43,22 +43,26 @@ export function SlidesInView(
     destroyed = true
   }
 
-  function get(inView: boolean = true): number[] {
-    if (inView && inViewCache) return inViewCache
-    if (!inView && notInViewCache) return notInViewCache
-
-    const slideIndexes = objectKeys(intersectionEntryMap).reduce(
+  function createInViewList(inView: boolean): number[] {
+    return objectKeys(intersectionEntryMap).reduce(
       (list: number[], slideIndex) => {
         const index = parseInt(slideIndex)
         const { isIntersecting } = intersectionEntryMap[index]
         const inViewMatch = inView && isIntersecting
         const notInViewMatch = !inView && !isIntersecting
 
-        if (inViewMatch || notInViewMatch) return [...list, index]
+        if (inViewMatch || notInViewMatch) list.push(index)
         return list
       },
       []
     )
+  }
+
+  function get(inView: boolean = true): number[] {
+    if (inView && inViewCache) return inViewCache
+    if (!inView && notInViewCache) return notInViewCache
+
+    const slideIndexes = createInViewList(inView)
 
     if (inView) inViewCache = slideIndexes
     if (!inView) notInViewCache = slideIndexes

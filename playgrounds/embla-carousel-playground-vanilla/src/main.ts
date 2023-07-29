@@ -37,7 +37,6 @@ const SLIDE_COUNT = 4
 const OPTIONS: EmblaOptionsType = {
   loop: true,
   dragFree: true,
-  // align: 'start',
   containScroll: 'trimSnaps'
 }
 
@@ -70,7 +69,7 @@ emblaNodes.forEach((emblaNode) => {
 
   emblaApi.on('select', toggleDotButtonsActive)
   emblaApi.on('init', toggleDotButtonsActive)
-  // emblaApi.reInit()
+
   //@ts-ignore
   window.embla = emblaApi
 })
