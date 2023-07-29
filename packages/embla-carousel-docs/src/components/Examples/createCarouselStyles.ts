@@ -394,7 +394,7 @@ const CLASS_NAMES_STYLES = css`
     transition: opacity 0.2s ease-in-out;
   }
 
-  .embla__class-names:not(.is-selected) {
+  .embla__class-names:not(.is-snapped) {
     opacity: 0.16;
   }
 `

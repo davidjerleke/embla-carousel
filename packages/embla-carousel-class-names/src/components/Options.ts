@@ -1,7 +1,8 @@
 import { CreateOptionsType } from 'embla-carousel/components/Options'
 
 export type OptionsType = CreateOptionsType<{
-  selected: string
+  snapped: string
+  inView: string
   draggable: string
   dragging: string
 }>
@@ -9,7 +10,8 @@ export type OptionsType = CreateOptionsType<{
 export const defaultOptions: OptionsType = {
   active: true,
   breakpoints: {},
-  selected: 'is-selected',
+  snapped: 'is-snapped',
+  inView: 'is-in-view',
   draggable: 'is-draggable',
   dragging: 'is-dragging'
 }

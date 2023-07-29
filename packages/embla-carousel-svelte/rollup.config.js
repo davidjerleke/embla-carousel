@@ -57,7 +57,7 @@ export default [
         strict: true,
         sourcemap: false,
         name: kebabToPascalCase(packageJson.name),
-        plugins: [resolve() /*, terser() */]
+        plugins: [resolve(), terser()]
       }
     ],
     onwarn: CONFIG_EXTERNAL_MODULE_SUPPRESS,

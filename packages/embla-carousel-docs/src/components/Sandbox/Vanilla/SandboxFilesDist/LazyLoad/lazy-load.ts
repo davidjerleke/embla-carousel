@@ -33,7 +33,7 @@ export const setupLazyLoadImage = (
 
   const loadImagesInView = (): boolean => {
     emblaApi
-      .slidesInView(true)
+      .slidesInView()
       .filter((index) => !imagesInView.includes(index))
       .forEach(loadImageInView)
     return imagesInView.length === imageNodes.length

@@ -5,6 +5,7 @@ export type ScrollContainOptionType = false | 'trimSnaps' | 'keepSnaps'
 
 export type ScrollContainType = {
   snapsContained: number[]
+  scrollContainLimit: LimitType
 }
 
 export function ScrollContain(
@@ -13,11 +14,12 @@ export function ScrollContain(
   snapsAligned: number[],
   containScroll: ScrollContainOptionType
 ): ScrollContainType {
-  const scrollBounds = Limit(-contentSize + viewSize, snapsAligned[0])
+  const scrollBounds = Limit(-contentSize + viewSize, 0)
   const snapsBounded = measureBounded()
+  const scrollContainLimit = findScrollContainLimit()
   const snapsContained = measureContained()
 
-  function findDuplicates(): LimitType {
+  function findScrollContainLimit(): LimitType {
     const startSnap = snapsBounded[0]
     const endSnap = arrayLast(snapsBounded)
     const min = snapsBounded.lastIndexOf(startSnap)
@@ -34,12 +36,13 @@ export function ScrollContain(
   function measureContained(): number[] {
     if (contentSize <= viewSize) return [scrollBounds.max]
     if (containScroll === 'keepSnaps') return snapsBounded
-    const { min, max } = findDuplicates()
+    const { min, max } = scrollContainLimit
     return snapsBounded.slice(min, max)
   }
 
   const self: ScrollContainType = {
-    snapsContained
+    snapsContained,
+    scrollContainLimit
   }
   return self
 }

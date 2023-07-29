@@ -9,7 +9,7 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-class-names'
 export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { inViewThreshold: 1 }
+export const OPTIONS: EmblaOptionsType = {}
 export const STYLES = createCarouselClassNamesStyles('60%')
 
 export const Wrapper = styled.div`

@@ -9,7 +9,7 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const ID = 'embla-carousel-parallax'
 export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { inViewThreshold: 0, dragFree: true }
+export const OPTIONS: EmblaOptionsType = { dragFree: true }
 export const STYLES = createCarouselParallaxStyles('80%')
 
 export const Wrapper = styled.div`

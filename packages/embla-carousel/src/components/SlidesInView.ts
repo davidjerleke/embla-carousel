@@ -1,71 +1,80 @@
-import { Limit, LimitType } from './Limit'
+import { EventHandlerType } from './EventHandler'
+import { objectKeys } from './utils'
 
-export type SlideBoundType = {
-  start: number
-  end: number
-  index: number
+type IntersectionEntryMapType = {
+  [key: number]: IntersectionObserverEntry
 }
 
 export type SlidesInViewType = {
-  check: (location: number, bounds?: SlideBoundType[]) => number[]
-  findSlideBounds: (offsets?: number[], threshold?: number) => SlideBoundType[]
+  init: () => void
+  destroy: () => void
+  get: (inView?: boolean) => number[]
 }
 
 export function SlidesInView(
-  viewSize: number,
-  contentSize: number,
-  slideSizes: number[],
-  snaps: number[],
-  limit: LimitType,
-  loop: boolean,
-  inViewThreshold: number
+  slides: HTMLElement[],
+  eventHandler: EventHandlerType
 ): SlidesInViewType {
-  const { removeOffset, constrain } = limit
-  const roundingSafety = 0.5
-  const cachedOffsets = loop ? [0, contentSize, -contentSize] : [0]
-  const cachedBounds = findSlideBounds(cachedOffsets, inViewThreshold)
+  const intersectionEntryMap: IntersectionEntryMapType = {}
+  let inViewCache: number[] | null = null
+  let notInViewCache: number[] | null = null
+  let intersectionObserver: IntersectionObserver
+  let destroyed = false
 
-  function findSlideThresholds(threshold?: number): number[] {
-    const slideThreshold = threshold || 0
+  function init(): void {
+    intersectionObserver = new IntersectionObserver((entries) => {
+      if (destroyed) return
 
-    return slideSizes.map((slideSize) => {
-      const thresholdLimit = Limit(roundingSafety, slideSize - roundingSafety)
-      return thresholdLimit.constrain(slideSize * slideThreshold)
+      entries.forEach((entry) => {
+        const index = slides.indexOf(<HTMLElement>entry.target)
+        intersectionEntryMap[index] = entry
+      })
+
+      inViewCache = null
+      notInViewCache = null
+      eventHandler.emit('slidesInView')
     })
+
+    slides.forEach((slide) => intersectionObserver.observe(slide))
   }
 
-  function findSlideBounds(
-    offsets?: number[],
-    threshold?: number
-  ): SlideBoundType[] {
-    const slideOffsets = offsets || cachedOffsets
-    const slideThresholds = findSlideThresholds(threshold)
-
-    return slideOffsets.reduce((list: SlideBoundType[], offset) => {
-      const bounds = snaps.map((snap, index) => ({
-        start: snap - slideSizes[index] + slideThresholds[index] + offset,
-        end: snap + viewSize - slideThresholds[index] + offset,
-        index
-      }))
-      return list.concat(bounds)
-    }, [])
+  function destroy(): void {
+    if (intersectionObserver) intersectionObserver.disconnect()
+    destroyed = true
   }
 
-  function check(location: number, bounds?: SlideBoundType[]): number[] {
-    const limitedLocation = loop ? removeOffset(location) : constrain(location)
-    const slideBounds = bounds || cachedBounds
+  function createInViewList(inView: boolean): number[] {
+    return objectKeys(intersectionEntryMap).reduce(
+      (list: number[], slideIndex) => {
+        const index = parseInt(slideIndex)
+        const { isIntersecting } = intersectionEntryMap[index]
+        const inViewMatch = inView && isIntersecting
+        const notInViewMatch = !inView && !isIntersecting
 
-    return slideBounds.reduce((list: number[], slideBound) => {
-      const { index, start, end } = slideBound
-      const inList = list.includes(index)
-      const inView = start < limitedLocation && end > limitedLocation
-      return !inList && inView ? list.concat([index]) : list
-    }, [])
+        if (inViewMatch || notInViewMatch) list.push(index)
+        return list
+      },
+      []
+    )
+  }
+
+  function get(inView: boolean = true): number[] {
+    if (inView && inViewCache) return inViewCache
+    if (!inView && notInViewCache) return notInViewCache
+
+    const slideIndexes = createInViewList(inView)
+
+    if (inView) inViewCache = slideIndexes
+    if (!inView) notInViewCache = slideIndexes
+
+    return slideIndexes
   }
 
   const self: SlidesInViewType = {
-    check,
-    findSlideBounds
+    init,
+    destroy,
+    get
   }
+
   return self
 }

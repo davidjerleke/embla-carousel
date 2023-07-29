@@ -28,8 +28,8 @@ export type EmblaCarouselType = {
   scrollTo: (index: number, jump?: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
-  slidesInView: (target?: boolean) => number[]
-  slidesNotInView: (target?: boolean) => number[]
+  slidesInView: () => number[]
+  slidesNotInView: () => number[]
 }
 
 function EmblaCarousel(
@@ -121,6 +121,7 @@ function EmblaCarousel(
     if (!options.active) return
 
     engine.translate.to(engine.location.get())
+    engine.slidesInView.init()
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self, options.watchResize)
     engine.slidesHandler.init(self, options.watchSlides)
@@ -169,17 +170,6 @@ function EmblaCarousel(
     eventHandler.emit('destroy')
   }
 
-  function slidesInView(target?: boolean): number[] {
-    const location = engine[target ? 'target' : 'location'].get()
-    const type = options.loop ? 'removeOffset' : 'constrain'
-    return engine.slidesInView.check(engine.limit[type](location))
-  }
-
-  function slidesNotInView(target?: boolean): number[] {
-    const inView = slidesInView(target)
-    return engine.slideIndexes.filter((index) => !inView.includes(index))
-  }
-
   function scrollTo(index: number, jump?: boolean, direction?: number): void {
     if (!options.active || destroyed) return
     engine.scrollBody.useBaseFriction().useDuration(jump ? 0 : options.duration)
@@ -207,7 +197,7 @@ function EmblaCarousel(
   }
 
   function scrollSnapList(): number[] {
-    return engine.scrollSnaps.map(engine.scrollProgress.get)
+    return engine.scrollSnapList
   }
 
   function scrollProgress(): number {
@@ -220,6 +210,14 @@ function EmblaCarousel(
 
   function previousScrollSnap(): number {
     return engine.indexPrevious.get()
+  }
+
+  function slidesInView(): number[] {
+    return engine.slidesInView.get()
+  }
+
+  function slidesNotInView(): number[] {
+    return engine.slidesInView.get(false)
   }
 
   function plugins(): EmblaPluginsType {

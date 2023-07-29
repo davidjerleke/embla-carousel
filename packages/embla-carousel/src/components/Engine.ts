@@ -17,6 +17,7 @@ import { ScrollLimit } from './ScrollLimit'
 import { ScrollLooper, ScrollLooperType } from './ScrollLooper'
 import { ScrollProgress, ScrollProgressType } from './ScrollProgress'
 import { ScrollSnaps } from './ScrollSnaps'
+import { SlideRegistry, SlideRegistryType } from './SlideRegistry'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
@@ -63,8 +64,10 @@ export type EngineType = {
   slidesHandler: SlidesHandlerType
   scrollTo: ScrollToType
   scrollTarget: ScrollTargetType
+  scrollSnapList: number[]
   scrollSnaps: number[]
   slideIndexes: number[]
+  slideRegistry: SlideRegistryType['slideRegistry']
   containerRect: DOMRect
   slideRects: DOMRect[]
 }
@@ -85,7 +88,6 @@ export function Engine(
     axis: scrollAxis,
     direction: contentDirection,
     startIndex,
-    inViewThreshold,
     loop,
     duration,
     dragFree,
@@ -129,12 +131,10 @@ export function Engine(
     alignment,
     containerRect,
     slideRects,
-    slideSizesWithGaps,
-    slidesToScroll,
-    containSnaps
+    slidesToScroll
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
-  const { snapsContained } = ScrollContain(
+  const { snapsContained, scrollContainLimit } = ScrollContain(
     viewSize,
     contentSize,
     snapsAligned,
@@ -224,15 +224,16 @@ export function Engine(
     target,
     eventHandler
   )
-  const slidesInView = SlidesInView(
+  const scrollProgress = ScrollProgress(limit)
+  const { slideRegistry } = SlideRegistry(
     viewSize,
     contentSize,
-    slideSizes,
-    snaps,
-    limit,
-    loop,
-    inViewThreshold
+    scrollContainLimit,
+    containScroll,
+    slidesToScroll,
+    slideIndexes
   )
+  const slidesInView = SlidesInView(slides, eventHandler)
 
   // Engine
   const engine: EngineType = {
@@ -293,7 +294,8 @@ export function Engine(
       offsetLocation,
       target
     ]),
-    scrollProgress: ScrollProgress(limit),
+    scrollProgress,
+    scrollSnapList: scrollSnaps.map(scrollProgress.get),
     scrollSnaps,
     scrollTarget,
     scrollTo,
@@ -302,15 +304,17 @@ export function Engine(
       direction,
       viewSize,
       contentSize,
+      slideSizes,
       slideSizesWithGaps,
+      snaps,
       scrollSnaps,
-      slidesInView,
       offsetLocation,
       slides
     ),
     slidesHandler: SlidesHandler(container, eventHandler),
     slidesInView,
     slideIndexes,
+    slideRegistry,
     slidesToScroll,
     target,
     translate: Translate(axis, direction, container)
