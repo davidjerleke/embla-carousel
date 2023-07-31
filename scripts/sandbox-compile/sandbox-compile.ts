@@ -14,8 +14,6 @@ const PATHS_TO_SANDBOX_FILES: string[] = [
   path.join(process.cwd(), 'src/components/Sandbox/React/SandboxFilesDist')
 ]
 
-// console.log(CONSOLE_FONT_COLORS.YELLOW, `Compiling sandboxes...`)
-
 PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
   try {
     readFiles(

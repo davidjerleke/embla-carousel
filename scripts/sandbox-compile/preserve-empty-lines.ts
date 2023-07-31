@@ -1,7 +1,6 @@
 import { escapeRegExp } from '../utils'
 
 const EMPTY_LINE_REGEX = /^\s*\n/gm
-
 const PRESERVE_EMPTY_LINE_COMMENT = `/* The TypeScript compiler won't clear this empty line! */`
 const PRESERVE_EMPTY_LINE_REGEX = escapeRegExp(PRESERVE_EMPTY_LINE_COMMENT)
 
