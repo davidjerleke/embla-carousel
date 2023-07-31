@@ -14,10 +14,12 @@ const PATHS_TO_SANDBOX_FILES: string[] = [
   path.join(process.cwd(), 'src/components/Sandbox/React/SandboxFilesDist')
 ]
 
-PATHS_TO_SANDBOX_FILES.forEach((path) => {
+// console.log(CONSOLE_FONT_COLORS.YELLOW, `Compiling sandboxes...`)
+
+PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
   try {
     readFiles(
-      `${path}/`,
+      `${pathToSandboxFile}/`,
       (filename, content) => {
         if (EXTENSION_REGEX.DECLARATION.test(filename)) {
           return
@@ -48,7 +50,7 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
 
     console.log(
       CONSOLE_FONT_COLORS.CYAN,
-      `Sandboxes created succesfully: ${path}`
+      `Sandboxes compiled succesfully: ${pathToSandboxFile}.`
     )
   } catch (error) {
     console.log(CONSOLE_FONT_COLORS.RED, error)

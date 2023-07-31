@@ -3,6 +3,7 @@ import fs from 'fs'
 export const CONSOLE_FONT_COLORS = {
   RED: '\x1b[31m',
   GREEN: '\x1b[32m',
+  YELLOW: '\x1b[33m',
   CYAN: '\x1b[36m%s\x1b[0m'
 }
 
