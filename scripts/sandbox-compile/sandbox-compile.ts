@@ -1,11 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { tsCompile } from './ts-compile'
-import {
-  readFiles,
-  CONSOLE_FONT_COLOR_RED,
-  CONSOLE_FONT_COLOR_GREEN
-} from '../utils'
+import { readFiles, CONSOLE_FONT_COLORS } from '../utils'
 
 const EXTENSION_REGEX = {
   DECLARATION: /.d.ts$/,
@@ -13,7 +9,7 @@ const EXTENSION_REGEX = {
   TS: /.ts$/
 }
 
-const PATHS_TO_SANDBOX_FILES = [
+const PATHS_TO_SANDBOX_FILES: string[] = [
   path.join(process.cwd(), 'src/components/Sandbox/Vanilla/SandboxFilesDist'),
   path.join(process.cwd(), 'src/components/Sandbox/React/SandboxFilesDist')
 ]
@@ -28,25 +24,22 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
         }
 
         if (EXTENSION_REGEX.TS.test(filename)) {
-          console.log(tsCompile(content))
-          console.log('-------------')
+          const jsContent = tsCompile(content)
+          const jsFilename = filename.replace(EXTENSION_REGEX.TS, '.js')
+
+          fs.writeFile(jsFilename, jsContent, (error) => {
+            if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
+          })
         }
 
         if (EXTENSION_REGEX.TSX.test(filename)) {
-          console.log(tsCompile(content, { jsx: 1 }))
-          console.log('-------------')
-        }
+          const jsContent = tsCompile(content, { jsx: 1 })
+          const jsFilename = filename.replace(EXTENSION_REGEX.TSX, '.jsx')
 
-        // fs.writeFile(
-        //   filename,
-        //   content.replace(
-        //     /\/\* The TypeScript compiler won't clear this empty line! \*\//gm,
-        //     ''
-        //   ),
-        //   (error) => {
-        //     if (error) return console.log(error)
-        //   }
-        // )
+          fs.writeFile(jsFilename, jsContent, (error) => {
+            if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
+          })
+        }
       },
       (error) => {
         throw error
@@ -54,10 +47,10 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
     )
 
     console.log(
-      CONSOLE_FONT_COLOR_GREEN,
+      CONSOLE_FONT_COLORS.CYAN,
       `Sandboxes created succesfully: ${path}`
     )
   } catch (error) {
-    console.log(CONSOLE_FONT_COLOR_RED, error)
+    console.log(CONSOLE_FONT_COLORS.RED, error)
   }
 })

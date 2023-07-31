@@ -1,8 +1,10 @@
 import fs from 'fs'
 
-export const CONSOLE_FONT_COLOR_RED = '\x1b[31m'
-export const CONSOLE_FONT_COLOR_GREEN = '\x1b[32m'
-export const CONSOLE_FONT_COLOR_CYAN = '\x1b[36m%s\x1b[0m'
+export const CONSOLE_FONT_COLORS = {
+  RED: '\x1b[31m',
+  GREEN: '\x1b[32m',
+  CYAN: '\x1b[36m%s\x1b[0m'
+}
 
 export const escapeRegExp = (string: string): string => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
