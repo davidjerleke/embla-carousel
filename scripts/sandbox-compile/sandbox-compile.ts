@@ -4,9 +4,9 @@ import { tsCompile } from './ts-compile'
 import { readFiles, CONSOLE_FONT_COLORS } from '../utils'
 
 const EXTENSION_REGEX = {
-  DECLARATION: /.d.ts$/,
-  TSX: /.tsx$/,
-  TS: /.ts$/
+  DECLARATION: /\.d\.ts$/,
+  TSX: /\.tsx$/,
+  TS: /\.ts$/
 }
 
 const PATHS_TO_SANDBOX_FILES: string[] = [
@@ -24,8 +24,8 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
         }
 
         if (EXTENSION_REGEX.TS.test(filename)) {
-          const jsContent = tsCompile(content)
           const jsFilename = filename.replace(EXTENSION_REGEX.TS, '.js')
+          const jsContent = tsCompile(content)
 
           fs.writeFile(jsFilename, jsContent, (error) => {
             if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
@@ -33,8 +33,8 @@ PATHS_TO_SANDBOX_FILES.forEach((path) => {
         }
 
         if (EXTENSION_REGEX.TSX.test(filename)) {
-          const jsContent = tsCompile(content, { jsx: 1 })
           const jsFilename = filename.replace(EXTENSION_REGEX.TSX, '.jsx')
+          const jsContent = tsCompile(content, { jsx: 1 })
 
           fs.writeFile(jsFilename, jsContent, (error) => {
             if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
