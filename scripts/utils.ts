@@ -7,8 +7,27 @@ export const CONSOLE_FONT_COLORS = {
   CYAN: '\x1b[36m%s\x1b[0m'
 }
 
+export const kebabCaseToPascalCase = (
+  string: string = '',
+  separator: string = ''
+): string => {
+  return string.replace(/(^\w|-\w)/g, (replaceString) =>
+    replaceString.replace(/-/, separator).toUpperCase()
+  )
+}
+
 export const escapeRegExp = (string: string): string => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+}
+
+export const parseNodeParameters = (): { [key: string]: string } => {
+  return process.argv
+    .slice(2)
+    .filter((arg) => /^--/.test(arg))
+    .reduce((args, arg) => {
+      const [key, value] = arg.replace(/^--/, '').split('=')
+      return { ...args, [key]: value }
+    }, {})
 }
 
 export const readFiles = (

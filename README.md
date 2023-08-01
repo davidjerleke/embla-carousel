@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
+    <strong>Embla Carousel</strong> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
   </p>
 
   <br>
@@ -36,16 +36,9 @@
     </strong>
   </p>
 
-
   <p align="center">
     <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/api/">API Reference</a>&nbsp;</code>
     </strong>
   </p>
 </div>

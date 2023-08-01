@@ -19,26 +19,26 @@
   </strong>
 
   <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source. Build awesome carousels by extending Embla Carousel with your own CSS and JavaScript.
+    <strong>Embla Carousel</strong> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
   </p>
 
   <br>
 
   <p align="center">
     <strong>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/predefined/">Examples</a>&nbsp;</code>
+    </strong>
+  </p>
+
+  <p align="center">
+    <strong>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
+    </strong>
+  </p>
+
+  <p align="center">
+    <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/api/">API Reference</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/">Examples</a>&nbsp;</code>
     </strong>
   </p>
 </div>
@@ -47,11 +47,9 @@
 
 <div align="center">
   <strong>
-    <h2 align="center">Platforms</h2>
+    <h2 align="center">Ready for</h2>
   </strong>
-  <p align="center">
-    <a href="https://www.embla-carousel.com/">Embla Carousel</a> is ready to use with the following tools/libraries.
-  </p>
+  
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">
       <img src="https://www.embla-carousel.com/javascript-logo.svg" width="45" height="45" />
@@ -63,6 +61,13 @@
     &nbsp;
     <a href="https://www.embla-carousel.com/get-started/react/">
       <img src="https://www.embla-carousel.com/react-logo.svg" width="45" height="45" />
+    </a>
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/vue/">
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="45" height="45" />
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/svelte/">
+      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="45" height="45" />
     </a>
   </p>
 </div>
@@ -93,7 +98,13 @@
     <a href="https://github.com/omarkhatibco"><img src="https://avatars1.githubusercontent.com/u/9054278?s=120&v=4" title="omarkhatibco" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/ppromerojr"><img src="https://avatars1.githubusercontent.com/u/15343254?s=120&v=4" title="ppromerojr" width="60" height="60" style="max-width:100%;"></a>
     <a href="https://github.com/openscript"><img src="https://avatars3.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="60" height="60" style="max-width:100%;"></a>
-
+    <a href="https://github.com/pipisasa"><img src="https://avatars.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/silllli"><img src="https://avatars.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/JoshuaCrewe"><img src="https://avatars.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/th-km"><img src="https://avatars.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/rojadesign"><img src="https://avatars.githubusercontent.com/u/35687281?s=120&v=4" title="th-km"" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/SaizFerri"><img src="https://avatars.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="60" height="60" style="max-width:100%;"></a>
+    <a href="https://github.com/horseeyephil"><img src="https://avatars.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="60" height="60" style="max-width:100%;"></a>
   </p>
 </div>
 

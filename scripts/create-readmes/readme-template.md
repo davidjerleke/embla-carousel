@@ -15,7 +15,7 @@
   </p>
 
   <strong>
-    <h2 align="center">Embla Carousel Reactive Utils</h2>
+    <h2 align="center">__REPLACE_PACKAGE_NAME__</h2>
   </strong>
 
   <p align="center">
@@ -128,7 +128,7 @@
 <h2 align="center">Open Source</h2>
 
 <p align="center">
-  <sup>Copyright © 2019-present, David Jerleke.</sup><br>
+  <sup>Copyright © 2019-present, __REPLACE_PACKAGE_AUTHOR__.</sup><br>
   Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.
 </p>
 

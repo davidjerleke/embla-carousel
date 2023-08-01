@@ -21,7 +21,7 @@
     "build": "npm-run-all sandboxfiles:build gatsby:build",
     "gatsby:build": "gatsby build",
     "sandboxfiles:build": "npm-run-all sandboxfiles:copy-vanilla sandboxfiles:copy-react sandboxfiles:compile",
-    "sandboxfiles:compile": "npx ts-node --project ../../scripts/tsconfig.node.json ../../scripts/sandbox-compile/sandbox-compile.ts",
+    "sandboxfiles:compile": "npx ts-node --project ../../scripts/tsconfig.node.json ../../scripts/create-sandboxes/index.ts",
     "sandboxfiles:copy-vanilla": "shx cp -r src/components/Sandbox/Vanilla/SandboxFilesSrc/. src/components/Sandbox/Vanilla/SandboxFilesDist/",
     "sandboxfiles:copy-react": "shx cp -r src/components/Sandbox/React/SandboxFilesSrc/. src/components/Sandbox/React/SandboxFilesDist/",
     "predeploy:clean": "shx rm -r ../../docs",

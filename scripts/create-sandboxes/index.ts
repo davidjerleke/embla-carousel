@@ -18,26 +18,26 @@ PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
   try {
     readFiles(
       `${pathToSandboxFile}/`,
-      (filename, content) => {
+      (filename, fileContent) => {
         if (EXTENSION_REGEX.DECLARATION.test(filename)) {
           return
         }
 
         if (EXTENSION_REGEX.TS.test(filename)) {
           const jsFilename = filename.replace(EXTENSION_REGEX.TS, '.js')
-          const jsContent = tsCompile(content)
+          const jsContent = tsCompile(fileContent)
 
           fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
+            if (error) console.log(CONSOLE_FONT_COLORS.RED, error)
           })
         }
 
         if (EXTENSION_REGEX.TSX.test(filename)) {
           const jsFilename = filename.replace(EXTENSION_REGEX.TSX, '.jsx')
-          const jsContent = tsCompile(content, { jsx: 1 })
+          const jsContent = tsCompile(fileContent, { jsx: 1 })
 
           fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) return console.log(CONSOLE_FONT_COLORS.RED, error)
+            if (error) console.log(CONSOLE_FONT_COLORS.RED, error)
           })
         }
       },
@@ -48,7 +48,7 @@ PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
 
     console.log(
       CONSOLE_FONT_COLORS.CYAN,
-      `Sandboxes compiled succesfully: ${pathToSandboxFile}.`
+      `SUCCESS: Sandboxes compiled succesfully: ${pathToSandboxFile}.`
     )
   } catch (error) {
     console.log(CONSOLE_FONT_COLORS.RED, error)
