@@ -24,9 +24,10 @@ try {
 
   createReadme(template, '')
 
-  WORKSPACES.filter((workspace) =>
-    PACKAGES_FOLDER_REGEX.test(workspace)
-  ).forEach((workspace) => createReadme(template, workspace))
+  WORKSPACES.forEach((workspace) => {
+    if (!PACKAGES_FOLDER_REGEX.test(workspace)) return
+    createReadme(template, workspace)
+  })
 
   console.log(
     CONSOLE_FONT_COLORS.CYAN,
