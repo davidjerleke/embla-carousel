@@ -10,24 +10,19 @@ type SlidesHandlerCallbackType = (
 export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
 
 export type SlidesHandlerType = {
-  init: (
-    emblaApi: EmblaCarouselType,
-    watchSlides: SlidesHandlerOptionType
-  ) => void
+  init: (emblaApi: EmblaCarouselType) => void
   destroy: () => void
 }
 
 export function SlidesHandler(
   container: HTMLElement,
-  eventHandler: EventHandlerType
+  eventHandler: EventHandlerType,
+  watchSlides: SlidesHandlerOptionType
 ): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init(
-    emblaApi: EmblaCarouselType,
-    watchSlides: SlidesHandlerOptionType
-  ): void {
+  function init(emblaApi: EmblaCarouselType): void {
     if (!watchSlides) return
 
     function defaultCallback(mutations: MutationRecord[]): void {

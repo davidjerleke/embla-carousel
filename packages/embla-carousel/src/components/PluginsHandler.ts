@@ -4,8 +4,8 @@ import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 
 export type PluginsHandlerType = {
   init: (
-    plugins: EmblaPluginType[],
-    embla: EmblaCarouselType
+    emblaApi: EmblaCarouselType,
+    plugins: EmblaPluginType[]
   ) => EmblaPluginsType
   destroy: () => void
 }
@@ -16,8 +16,8 @@ export function PluginsHandler(
   let activePlugins: EmblaPluginType[] = []
 
   function init(
-    plugins: EmblaPluginType[],
-    emblaApi: EmblaCarouselType
+    emblaApi: EmblaCarouselType,
+    plugins: EmblaPluginType[]
   ): EmblaPluginsType {
     activePlugins = plugins.filter(
       ({ options }) => optionsHandler.optionsAtMedia(options).active !== false

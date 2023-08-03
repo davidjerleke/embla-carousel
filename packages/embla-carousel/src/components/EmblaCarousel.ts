@@ -122,21 +122,19 @@ function EmblaCarousel(
 
     engine.translate.to(engine.location.get())
     engine.slidesInView.init()
+    engine.slideFocus.init()
     engine.eventHandler.init(self)
-    engine.resizeHandler.init(self, options.watchResize)
-    engine.slidesHandler.init(self, options.watchSlides)
+    engine.resizeHandler.init(self)
+    engine.slidesHandler.init(self)
 
     documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
       if (ownerDocument.hidden) animations.reset()
     })
 
     if (engine.options.loop) engine.slideLooper.loop()
+    if (container.offsetParent && slides.length) engine.dragHandler.init(self)
 
-    if (container.offsetParent && slides.length) {
-      engine.dragHandler.init(self, options.watchDrag)
-    }
-
-    pluginApis = pluginsHandler.init(pluginList, self)
+    pluginApis = pluginsHandler.init(self, pluginList)
   }
 
   function reActivate(
