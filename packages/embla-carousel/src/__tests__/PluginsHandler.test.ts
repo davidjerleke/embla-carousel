@@ -27,21 +27,21 @@ afterEach(() => {
 describe('PluginsHandler', () => {
   describe('Init', () => {
     test('Initializes the plugins passed', () => {
-      pluginsHandler.init(plugins, emblaApi)
+      pluginsHandler.init(emblaApi, plugins)
 
       expect(autoplay.init).toHaveBeenCalledTimes(1)
       expect(classNames.init).toHaveBeenCalledTimes(1)
     })
 
     test('Returns a object with plugin API:s', () => {
-      const pluginApis = pluginsHandler.init(plugins, emblaApi)
+      const pluginApis = pluginsHandler.init(emblaApi, plugins)
       expect(pluginApis).toEqual({ autoplay, classNames })
     })
   })
 
   describe('Destroy', () => {
     test('Destroys the plugins', () => {
-      pluginsHandler.init(plugins, emblaApi)
+      pluginsHandler.init(emblaApi, plugins)
       pluginsHandler.destroy()
 
       expect(autoplay.destroy).toHaveBeenCalledTimes(1)

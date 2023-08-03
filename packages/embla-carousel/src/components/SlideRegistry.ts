@@ -1,5 +1,4 @@
 import { LimitType } from './Limit'
-import { ScrollContainOptionType } from './ScrollContain'
 import { SlidesToScrollType } from './SlidesToScroll'
 import { arrayFromNumber, arrayLast, arrayLastIndex } from './utils'
 
@@ -10,8 +9,8 @@ export type SlideRegistryType = {
 export function SlideRegistry(
   viewSize: number,
   contentSize: number,
+  containSnaps: boolean,
   scrollContainLimit: LimitType,
-  containScroll: ScrollContainOptionType,
   slidesToScroll: SlidesToScrollType,
   slideIndexes: number[]
 ): SlideRegistryType {
@@ -21,7 +20,7 @@ export function SlideRegistry(
 
   function createSlideRegistry(): number[][] {
     const groupedSlideIndexes = groupSlides(slideIndexes)
-    if (!containScroll || contentSize <= viewSize) return groupedSlideIndexes
+    if (!containSnaps || contentSize <= viewSize) return groupedSlideIndexes
 
     return groupedSlideIndexes.slice(min, max).map((group, index, groups) => {
       const indexIsFirst = !index

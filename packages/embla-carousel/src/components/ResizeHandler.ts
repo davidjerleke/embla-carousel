@@ -11,10 +11,7 @@ type ResizeHandlerCallbackType = (
 export type ResizeHandlerOptionType = boolean | ResizeHandlerCallbackType
 
 export type ResizeHandlerType = {
-  init: (
-    emblaApi: EmblaCarouselType,
-    watchResize: ResizeHandlerOptionType
-  ) => void
+  init: (emblaApi: EmblaCarouselType) => void
   destroy: () => void
 }
 
@@ -23,7 +20,8 @@ export function ResizeHandler(
   eventHandler: EventHandlerType,
   ownerWindow: WindowType,
   slides: HTMLElement[],
-  axis: AxisType
+  axis: AxisType,
+  watchResize: ResizeHandlerOptionType
 ): ResizeHandlerType {
   let resizeObserver: ResizeObserver
   let containerSize: number
@@ -34,10 +32,7 @@ export function ResizeHandler(
     return axis.measureSize(node.getBoundingClientRect())
   }
 
-  function init(
-    emblaApi: EmblaCarouselType,
-    watchResize: ResizeHandlerOptionType
-  ): void {
+  function init(emblaApi: EmblaCarouselType): void {
     if (!watchResize) return
 
     containerSize = readSize(container)

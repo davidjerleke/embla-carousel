@@ -30,7 +30,7 @@ type DragHandlerCallbackType = (
 export type DragHandlerOptionType = boolean | DragHandlerCallbackType
 
 export type DragHandlerType = {
-  init: (emblaApi: EmblaCarouselType, watchDrag: DragHandlerOptionType) => void
+  init: (emblaApi: EmblaCarouselType) => void
   destroy: () => void
   pointerDown: () => boolean
 }
@@ -54,7 +54,8 @@ export function DragHandler(
   dragFree: boolean,
   dragThreshold: number,
   skipSnaps: boolean,
-  baseFriction: number
+  baseFriction: number,
+  watchDrag: DragHandlerOptionType
 ): DragHandlerType {
   const { cross: crossAxis } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
@@ -74,10 +75,7 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function init(
-    emblaApi: EmblaCarouselType,
-    watchDrag: DragHandlerOptionType
-  ): void {
+  function init(emblaApi: EmblaCarouselType): void {
     if (!watchDrag) return
 
     function downIfAllowed(evt: PointerEventType): void {

@@ -20,6 +20,7 @@ import { ScrollSnaps } from './ScrollSnaps'
 import { SlideRegistry, SlideRegistryType } from './SlideRegistry'
 import { ScrollTarget, ScrollTargetType } from './ScrollTarget'
 import { ScrollTo, ScrollToType } from './ScrollTo'
+import { SlideFocus, SlideFocusType } from './SlideFocus'
 import { SlideLooper, SlideLooperType } from './SlideLooper'
 import { SlidesHandler, SlidesHandlerType } from './SlidesHandler'
 import { SlidesInView, SlidesInViewType } from './SlidesInView'
@@ -67,6 +68,7 @@ export type EngineType = {
   scrollSnapList: number[]
   scrollSnaps: number[]
   slideIndexes: number[]
+  slideFocus: SlideFocusType
   slideRegistry: SlideRegistryType['slideRegistry']
   containerRect: DOMRect
   slideRects: DOMRect[]
@@ -94,7 +96,10 @@ export function Engine(
     dragThreshold,
     slidesToScroll: groupSlides,
     skipSnaps,
-    containScroll
+    containScroll,
+    watchResize,
+    watchSlides,
+    watchDrag
   } = options
 
   // Measurements
@@ -225,15 +230,24 @@ export function Engine(
     eventHandler
   )
   const scrollProgress = ScrollProgress(limit)
+  const eventStore = EventStore()
+  const slidesInView = SlidesInView(slides, eventHandler)
   const { slideRegistry } = SlideRegistry(
     viewSize,
     contentSize,
+    containSnaps,
     scrollContainLimit,
-    containScroll,
     slidesToScroll,
     slideIndexes
   )
-  const slidesInView = SlidesInView(slides, eventHandler)
+  const slideFocus = SlideFocus(
+    root,
+    slides,
+    slideRegistry,
+    scrollTo,
+    scrollBody,
+    eventStore
+  )
 
   // Engine
   const engine: EngineType = {
@@ -264,9 +278,10 @@ export function Engine(
       dragFree,
       dragThreshold,
       skipSnaps,
-      friction
+      friction,
+      watchDrag
     ),
-    eventStore: EventStore(),
+    eventStore,
     percentOfView,
     index,
     indexPrevious,
@@ -279,7 +294,8 @@ export function Engine(
       eventHandler,
       ownerWindow,
       slides,
-      axis
+      axis,
+      watchResize
     ),
     scrollBody,
     scrollBounds: ScrollBounds(
@@ -311,7 +327,8 @@ export function Engine(
       offsetLocation,
       slides
     ),
-    slidesHandler: SlidesHandler(container, eventHandler),
+    slideFocus,
+    slidesHandler: SlidesHandler(container, eventHandler, watchSlides),
     slidesInView,
     slideIndexes,
     slideRegistry,
