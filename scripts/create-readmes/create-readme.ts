@@ -8,8 +8,8 @@ const PACKAGE_AUTHOR_REGEX = /__REPLACE_PACKAGE_AUTHOR__/g
 
 export const createReadme = (template: string, workspace: string): void => {
   const workspacePath = path.join(process.cwd(), workspace)
-  const packageJsonPath = `${workspacePath}/package.json`
-  const readmePath = `${workspacePath}/README.md`
+  const packageJsonPath = path.join(workspacePath, 'package.json')
+  const readmePath = path.join(workspacePath, 'README.md')
   const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
 
   if (!workspacePackageJson) return
