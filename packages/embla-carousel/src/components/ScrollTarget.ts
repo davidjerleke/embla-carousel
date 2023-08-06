@@ -1,6 +1,6 @@
 import { LimitType } from './Limit'
 import { Vector1DType } from './Vector1d'
-import { mathAbs, mathSign } from './utils'
+import { arrayLast, mathAbs, mathSign } from './utils'
 
 export type TargetType = {
   distance: number
@@ -45,7 +45,8 @@ export function ScrollTarget(
     if (!direction) return minDistance(targets)
 
     const matchingTargets = targets.filter((t) => mathSign(t) === direction)
-    return minDistance(matchingTargets)
+    if (matchingTargets.length) return minDistance(matchingTargets)
+    return arrayLast(targets) - contentSize
   }
 
   function byIndex(index: number, direction: number): TargetType {
