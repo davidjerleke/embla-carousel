@@ -10,6 +10,7 @@ type SlideBoundType = {
 }
 
 type LoopPointType = {
+  loopPoint: number
   index: number
   translate: TranslateType
   slideLocation: Vector1DType
@@ -75,6 +76,7 @@ export function SlideLooper(
 
       return {
         index,
+        loopPoint,
         slideLocation: Vector1D(-1),
         translate: Translate(axis, direction, slides[index]),
         target: () => (offsetLocation.get() > loopPoint ? initial : altered)
@@ -83,7 +85,7 @@ export function SlideLooper(
   }
 
   function startPoints(): LoopPointType[] {
-    const gap = scrollSnaps[0] - 1
+    const gap = scrollSnaps[0]
     const indexes = slidesInGap(descItems, gap)
     return findLoopPoints(indexes, contentSize, false)
   }

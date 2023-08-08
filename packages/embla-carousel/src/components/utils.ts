@@ -49,6 +49,10 @@ export function arrayLastIndex<Type>(array: Type[]): number {
   return Math.max(0, array.length - 1)
 }
 
+export function arrayIsLastIndex<Type>(array: Type[], index: number): boolean {
+  return index === arrayLastIndex(array)
+}
+
 export function arrayFromNumber(n: number, startAt: number = 0): number[] {
   return Array.from(Array(n), (_, i) => startAt + i)
 }

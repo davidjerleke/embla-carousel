@@ -20,7 +20,7 @@ const injectBaseStyles = (): void => {
 
   styleElement.innerHTML =
     SANDBOX_CSS +
-    createCarouselArrowsDotsStyles('55%') +
+    createCarouselArrowsDotsStyles() +
     styledComponentsStylesToString(
       THEME_STYLES,
       RESET_STYLES,
@@ -33,11 +33,10 @@ const injectBaseStyles = (): void => {
 
 injectBaseStyles()
 
-const SLIDE_COUNT = 4
+const SLIDE_COUNT = 10
 const OPTIONS: EmblaOptionsType = {
   loop: true,
-  dragFree: true,
-  containScroll: 'trimSnaps'
+  align: 'start'
 }
 
 const emblaNodes = <HTMLElement[]>(
@@ -73,24 +72,3 @@ emblaNodes.forEach((emblaNode) => {
   //@ts-ignore
   window.embla = emblaApi
 })
-
-// let startTime = performance.now()
-
-// emblaApi.on('select', () => {
-//   startTime = performance.now()
-// })
-
-// emblaApi.on('settle', () => {
-//   const endTime = performance.now()
-//   console.log('settled', endTime - startTime)
-// })
-
-// emblaApi.slideNodes().forEach((n, i) => {
-//   n.addEventListener('click', () => {
-//     console.log('Clicked index: ' + (i + 1))
-//   })
-// })
-
-// document.addEventListener('click', () => {
-//   console.log('Clicked document')
-// })

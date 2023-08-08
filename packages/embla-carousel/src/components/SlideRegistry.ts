@@ -1,6 +1,11 @@
 import { LimitType } from './Limit'
 import { SlidesToScrollType } from './SlidesToScroll'
-import { arrayFromNumber, arrayLast, arrayLastIndex } from './utils'
+import {
+  arrayFromNumber,
+  arrayIsLastIndex,
+  arrayLast,
+  arrayLastIndex
+} from './utils'
 
 export type SlideRegistryType = {
   slideRegistry: number[][]
@@ -23,14 +28,14 @@ export function SlideRegistry(
     if (!containSnaps || contentSize <= viewSize) return groupedSlideIndexes
 
     return groupedSlideIndexes.slice(min, max).map((group, index, groups) => {
-      const indexIsFirst = !index
-      const indexIsLast = !indexIsFirst && index === arrayLastIndex(groups)
+      const isFirst = !index
+      const isLast = arrayIsLastIndex(groups, index)
 
-      if (indexIsFirst) {
+      if (isFirst) {
         const range = arrayLast(groups[0]) + 1
         return arrayFromNumber(range)
       }
-      if (indexIsLast) {
+      if (isLast) {
         const range = arrayLastIndex(slideIndexes) - arrayLast(groups)[0] + 1
         return arrayFromNumber(range, arrayLast(groups)[0])
       }
