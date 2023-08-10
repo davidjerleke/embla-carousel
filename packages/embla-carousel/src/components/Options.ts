@@ -6,6 +6,7 @@ import { ScrollContainOptionType } from './ScrollContain'
 import { DragHandlerOptionType } from './DragHandler'
 import { ResizeHandlerOptionType } from './ResizeHandler'
 import { SlidesHandlerOptionType } from './SlidesHandler'
+import { SlidesInViewOptionsType } from './SlidesInView'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -28,6 +29,7 @@ export type OptionsType = CreateOptionsType<{
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
   dragThreshold: number
+  inViewThreshold: SlidesInViewOptionsType
   loop: boolean
   skipSnaps: boolean
   duration: number
@@ -45,6 +47,7 @@ export const defaultOptions: OptionsType = {
   containScroll: 'trimSnaps',
   direction: 'ltr',
   slidesToScroll: 1,
+  inViewThreshold: 0,
   breakpoints: {},
   dragFree: false,
   dragThreshold: 10,

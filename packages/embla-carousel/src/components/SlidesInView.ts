@@ -5,6 +5,8 @@ type IntersectionEntryMapType = {
   [key: number]: IntersectionObserverEntry
 }
 
+export type SlidesInViewOptionsType = IntersectionObserverInit['threshold']
+
 export type SlidesInViewType = {
   init: () => void
   destroy: () => void
@@ -13,7 +15,8 @@ export type SlidesInViewType = {
 
 export function SlidesInView(
   slides: HTMLElement[],
-  eventHandler: EventHandlerType
+  eventHandler: EventHandlerType,
+  threshold: SlidesInViewOptionsType
 ): SlidesInViewType {
   const intersectionEntryMap: IntersectionEntryMapType = {}
   let inViewCache: number[] | null = null
@@ -22,18 +25,21 @@ export function SlidesInView(
   let destroyed = false
 
   function init(): void {
-    intersectionObserver = new IntersectionObserver((entries) => {
-      if (destroyed) return
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        if (destroyed) return
 
-      entries.forEach((entry) => {
-        const index = slides.indexOf(<HTMLElement>entry.target)
-        intersectionEntryMap[index] = entry
-      })
+        entries.forEach((entry) => {
+          const index = slides.indexOf(<HTMLElement>entry.target)
+          intersectionEntryMap[index] = entry
+        })
 
-      inViewCache = null
-      notInViewCache = null
-      eventHandler.emit('slidesInView')
-    })
+        inViewCache = null
+        notInViewCache = null
+        eventHandler.emit('slidesInView')
+      },
+      { threshold }
+    )
 
     slides.forEach((slide) => intersectionObserver.observe(slide))
   }

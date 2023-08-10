@@ -94,6 +94,7 @@ export function Engine(
     duration,
     dragFree,
     dragThreshold,
+    inViewThreshold,
     slidesToScroll: groupSlides,
     skipSnaps,
     containScroll,
@@ -231,7 +232,7 @@ export function Engine(
   )
   const scrollProgress = ScrollProgress(limit)
   const eventStore = EventStore()
-  const slidesInView = SlidesInView(slides, eventHandler)
+  const slidesInView = SlidesInView(slides, eventHandler, inViewThreshold)
   const { slideRegistry } = SlideRegistry(
     viewSize,
     contentSize,
