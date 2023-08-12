@@ -14,6 +14,7 @@ export type SlidesInViewType = {
 }
 
 export function SlidesInView(
+  container: HTMLElement,
   slides: HTMLElement[],
   eventHandler: EventHandlerType,
   threshold: SlidesInViewOptionsType
@@ -23,6 +24,8 @@ export function SlidesInView(
   let notInViewCache: number[] | null = null
   let intersectionObserver: IntersectionObserver
   let destroyed = false
+
+  console.log(container.parentElement)
 
   function init(): void {
     intersectionObserver = new IntersectionObserver(
@@ -38,7 +41,10 @@ export function SlidesInView(
         notInViewCache = null
         eventHandler.emit('slidesInView')
       },
-      { threshold }
+      {
+        root: container.parentElement,
+        threshold
+      }
     )
 
     slides.forEach((slide) => intersectionObserver.observe(slide))

@@ -232,7 +232,12 @@ export function Engine(
   )
   const scrollProgress = ScrollProgress(limit)
   const eventStore = EventStore()
-  const slidesInView = SlidesInView(slides, eventHandler, inViewThreshold)
+  const slidesInView = SlidesInView(
+    container,
+    slides,
+    eventHandler,
+    inViewThreshold
+  )
   const { slideRegistry } = SlideRegistry(
     viewSize,
     contentSize,
