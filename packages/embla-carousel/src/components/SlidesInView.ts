@@ -25,8 +25,6 @@ export function SlidesInView(
   let intersectionObserver: IntersectionObserver
   let destroyed = false
 
-  console.log(container.parentElement)
-
   function init(): void {
     intersectionObserver = new IntersectionObserver(
       (entries) => {
