@@ -60,6 +60,6 @@
     "embla-carousel-reactive-utils": "8.0.0-rc11"
   },
   "peerDependencies": {
-    "svelte": "^3.49.0"
+    "svelte": "^3.49.0 || ^4.0.0"
   }
 }
