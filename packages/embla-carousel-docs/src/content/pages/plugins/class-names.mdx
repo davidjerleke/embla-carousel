@@ -65,16 +65,28 @@ import ClassNames from 'embla-carousel-class-names'
 const classNamesOptions = { selected: 'my-selected-class' }
 
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  ClassNames(classNamesOptions), // Add plugin with options
+  ClassNames(classNamesOptions) // Add plugin with options
 ])
 ```
 
-### selected
+### snapped
 
 Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-selected`</BrandSecondaryText>
+Default: <BrandSecondaryText>`is-snapped`</BrandSecondaryText>
 
-Choose a classname that will be applied to the selected slides. Pass an empty string to opt-out.
+Choose a classname that will be applied to the snapped slides. Pass an empty string to opt-out.
+
+### inView
+
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`is-in-view`</BrandSecondaryText>
+
+Choose a classname that will be applied to slides in view. Pass an empty string to opt-out.
+
+<Admonition type="note">
+  This feature will honor the [inViewThreshold](/api/options/#inviewthreshold)
+  option.
+</Admonition>
 
 ### draggable
 
@@ -89,3 +101,8 @@ Type: <BrandPrimaryText>`string`</BrandPrimaryText>
 Default: <BrandSecondaryText>`is-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container when dragging. Pass an empty string to opt-out.
+
+snapped: 'is-snapped',
+inView: 'is-in-view',
+draggable: 'is-draggable',
+dragging: 'is-dragging'
