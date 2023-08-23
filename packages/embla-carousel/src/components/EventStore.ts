@@ -22,8 +22,9 @@ export function EventStore(): EventStoreType {
     handler: EventHandlerType,
     options: EventOptionsType = { passive: true }
   ): EventStoreType {
-    node.addEventListener(type, handler, options)
-    listeners.push(() => node.removeEventListener(type, handler, options))
+    node.addEventListener?.(type, handler, options)
+    listeners.push(() => node.removeEventListener?.
+    (type, handler, options))
     return self
   }
 
