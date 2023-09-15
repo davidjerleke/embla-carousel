@@ -22,8 +22,13 @@ export function EventStore(): EventStoreType {
     handler: EventHandlerType,
     options: EventOptionsType = { passive: true }
   ): EventStoreType {
-    node.addEventListener(type, handler, options)
-    listeners.push(() => node.removeEventListener(type, handler, options))
+    if ('addEventListener' in node) {
+      node.addEventListener(type, handler, options)
+      listeners.push(() => node.removeEventListener(type, handler, options))
+    } else if ('addListener' in node) {
+      (node as MediaQueryList).addListener(handler);
+      listeners.push(() => (node as MediaQueryList).removeListener(handler))
+    }
     return self
   }
 
