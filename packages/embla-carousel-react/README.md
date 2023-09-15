@@ -6,11 +6,11 @@
   </p>
 
   <p align="center">
-    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8&style=flat-square"></a>
-    <a href="https://www.npmjs.com/package/embla-carousel-react"><img src="https://img.shields.io/npm/v/embla-carousel-react.svg?color=%23c1a8e2&style=flat-square"></a>
-    <a href="https://github.com/davidjerleke/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22"><img src="https://img.shields.io/github/actions/workflow/status/davidjerleke/embla-carousel/cd.yml?color=%238ab4f8&style=flat-square"></a>
-    <a href="https://prettier.io"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?color=%23c1a8e2&style=flat-square"></a>
-    <a href="https://bundlephobia.com/result?p=embla-carousel-react@latest"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel-react?color=%238ab4f8&style=flat-square&label=gzip%20size">
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
+    <a href="https://www.npmjs.com/package/embla-carousel-react"><img src="https://img.shields.io/npm/v/embla-carousel-react.svg?color=%23c1a8e2"></a>
+    <a href="https://github.com/davidjerleke/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22"><img src="https://img.shields.io/github/actions/workflow/status/davidjerleke/embla-carousel/cd.yml?color=%238ab4f8"></a>
+    <a href="https://prettier.io"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?color=%23c1a8e2"></a>
+    <a href="https://bundlephobia.com/result?p=embla-carousel-react@latest"><img src="https://img.shields.io/bundlephobia/minzip/embla-carousel-react?color=%238ab4f8&label=gzip%20size">
     </a>
   </p>
 
@@ -105,6 +105,7 @@
     <a href="https://github.com/rojadesign"><img src="https://avatars.githubusercontent.com/u/35687281?s=120&v=4" title="th-km"" width="50" height="50" style="max-width:100%;"></a>
     <a href="https://github.com/SaizFerri"><img src="https://avatars.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width:100%;"></a>
     <a href="https://github.com/horseeyephil"><img src="https://avatars.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width:100%;"></a>
+    <a href="https://github.com/hamidrezahanafi"><img src="https://avatars.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width:100%;"></a>
   </p>
 </div>
 
