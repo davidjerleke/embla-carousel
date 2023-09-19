@@ -1,7 +1,7 @@
 import { AxisType } from './Axis'
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { isBoolean, WindowType } from './utils'
+import { isBoolean, mathAbs, WindowType } from './utils'
 
 type ResizeHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
@@ -45,7 +45,7 @@ export function ResizeHandler(
         const lastSize = isContainer ? containerSize : slideSizes[slideIndex]
         const newSize = readSize(isContainer ? container : slides[slideIndex])
 
-        if (lastSize !== newSize) {
+        if (mathAbs(newSize - lastSize) >= 0.2) {
           ownerWindow.requestAnimationFrame(() => {
             emblaApi.reInit()
             eventHandler.emit('resize')
