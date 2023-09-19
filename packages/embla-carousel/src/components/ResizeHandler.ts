@@ -44,8 +44,9 @@ export function ResizeHandler(
         const slideIndex = slides.indexOf(<HTMLElement>entry.target)
         const lastSize = isContainer ? containerSize : slideSizes[slideIndex]
         const newSize = readSize(isContainer ? container : slides[slideIndex])
+        const diffSize = mathAbs(newSize - lastSize)
 
-        if (mathAbs(newSize - lastSize) >= 0.2) {
+        if (diffSize >= 0.2) {
           ownerWindow.requestAnimationFrame(() => {
             emblaApi.reInit()
             eventHandler.emit('resize')
