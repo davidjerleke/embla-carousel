@@ -66,5 +66,8 @@
       "pre-push": "npm-run-all test lint"
     }
   },
-  "packageManager": "yarn@3.3.1"
+  "packageManager": "yarn@3.3.1",
+  "dependencies": {
+    "@octokit/types": "^11.1.0"
+  }
 }

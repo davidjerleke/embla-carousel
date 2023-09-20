@@ -2700,6 +2700,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "@octokit/openapi-types@npm:18.0.0"
+  checksum: d487d6c6c1965e583eee417d567e4fe3357a98953fc49bce1a88487e7908e9b5dbb3e98f60dfa340e23b1792725fbc006295aea071c5667a813b9c098185b56f
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "@octokit/types@npm:11.1.0"
+  dependencies:
+    "@octokit/openapi-types": ^18.0.0
+  checksum: 72627a94ddaf7bc14db06572bcde67649aad608cd86548818380db9305f4c0ca9ca078a62dd883858a267e8ec8fd596a0fce416aa04197c439b9548efef609a7
+  languageName: node
+  linkType: hard
+
 "@parcel/bundler-default@npm:2.8.2":
   version: 2.8.2
   resolution: "@parcel/bundler-default@npm:2.8.2"
@@ -7682,6 +7698,7 @@ __metadata:
   resolution: "embla-carousel-monorepo@workspace:."
   dependencies:
     "@babel/core": 7.17.0
+    "@octokit/types": ^11.1.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-node-resolve": 13.1.3
     husky: ^4.3.8

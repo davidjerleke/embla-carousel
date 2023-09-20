@@ -5,8 +5,13 @@ import { CONSOLE_FONT_COLORS, kebabCaseToPascalCase } from '../utils'
 const PACKAGE_NAME_PASCAL_REGEX = /__REPLACE_PACKAGE_PASCAL_NAME__/g
 const PACKAGE_NAME_REGEX = /__REPLACE_PACKAGE_NAME__/g
 const PACKAGE_AUTHOR_REGEX = /__REPLACE_PACKAGE_AUTHOR__/g
+const CONTRIBUTORS_REGEX = /__REPLACE_CONTRIBUTORS__/g
 
-export const createReadme = (template: string, workspace: string): void => {
+export const createReadme = (
+  template: string,
+  workspace: string,
+  contributors: string
+): void => {
   const workspacePath = path.join(process.cwd(), workspace)
   const packageJsonPath = path.join(workspacePath, 'package.json')
   const readmePath = path.join(workspacePath, 'README.md')
@@ -22,6 +27,7 @@ export const createReadme = (template: string, workspace: string): void => {
     .replace(PACKAGE_NAME_REGEX, packageName)
     .replace(PACKAGE_NAME_PASCAL_REGEX, packageNamePascal)
     .replace(PACKAGE_AUTHOR_REGEX, author)
+    .replace(CONTRIBUTORS_REGEX, contributors)
 
   fs.writeFile(readmePath, readme, (error) => {
     if (error) console.log(CONSOLE_FONT_COLORS.RED, error)
