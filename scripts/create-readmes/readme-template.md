@@ -82,30 +82,7 @@
     Thank you to all contributors for making <a href="https://www.embla-carousel.com/">Embla Carousel</a> awesome! <a href="https://github.com/davidjerleke/embla-carousel/blob/master/.github/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
   <p align="center">
-    <a href="https://github.com/nikrowell"><img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/michaelrambeau"><img src="https://avatars0.githubusercontent.com/u/5546996?s=120&v=4" title="michaelrambeau" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/ehellman"><img src="https://avatars3.githubusercontent.com/u/586152?s=120&v=4" title="ehellman" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/afilp"><img src="https://avatars0.githubusercontent.com/u/7850073?s=120&v=4" title="afilp" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/mrksmts"><img src="https://avatars1.githubusercontent.com/u/437794?s=120&v=4" title="mrksmts" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/SLMNBJ"><img src="https://avatars2.githubusercontent.com/u/30017004?s=120&v=4" title="SLMNBJ" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/readeral"><img src="https://avatars0.githubusercontent.com/u/15904136?s=120&v=4" title="readeral" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/romellem"><img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/niubsta"><img src="https://avatars0.githubusercontent.com/u/270320?s=120&v=4" title="niubsta" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/allen-garvey"><img src="https://avatars1.githubusercontent.com/u/9314727?s=120s&v=4" title="allen-garvey" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/sedlukha"><img src="https://avatars3.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/wopian"><img src="https://avatars3.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/msallent"><img src="https://avatars3.githubusercontent.com/u/8879212?s=120&v=4" title="msallent" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/omarkhatibco"><img src="https://avatars1.githubusercontent.com/u/9054278?s=120&v=4" title="omarkhatibco" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/ppromerojr"><img src="https://avatars1.githubusercontent.com/u/15343254?s=120&v=4" title="ppromerojr" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/openscript"><img src="https://avatars3.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/pipisasa"><img src="https://avatars.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/silllli"><img src="https://avatars.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/JoshuaCrewe"><img src="https://avatars.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/th-km"><img src="https://avatars.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/rojadesign"><img src="https://avatars.githubusercontent.com/u/35687281?s=120&v=4" title="th-km"" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/SaizFerri"><img src="https://avatars.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/horseeyephil"><img src="https://avatars.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/hamidrezahanafi"><img src="https://avatars.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width:100%;"></a>
+    __REPLACE_CONTRIBUTORS__
   </p>
 </div>
 
