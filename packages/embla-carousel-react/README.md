@@ -118,8 +118,6 @@
       <img src="https://avatars2.githubusercontent.com/u/35687281?s=120&v=4" title="rojadesign" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/anzbert">
       <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/dependabot[bot]">
-      <img src="https://avatars2.githubusercontent.com/u/49699333?s=120&v=4" title="dependabot[bot]" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/silllli">
       <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width: 100%" />
     </a>

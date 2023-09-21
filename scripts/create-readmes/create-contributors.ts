@@ -1,6 +1,6 @@
 import { Endpoints } from '@octokit/types'
 
-const EXCLUDE_CONTRIBUTORS = ['dependabot-preview[bot]']
+const EXCLUDE_CONTRIBUTORS = ['dependabot[bot]', 'dependabot-preview[bot]']
 
 export type ContributorsResponseType =
   Endpoints['GET /repos/{owner}/{repo}/contributors']['response']['data']
