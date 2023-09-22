@@ -38,6 +38,14 @@ If you're using CSS Grid you can declare your gaps like so:
 
 > **Note!** If you don't have [loop](/api/options/#loop) enabled, Embla Carousel will ignore any gaps at the start and end edge of the carousel.
 
+If you're using the loop option and you want to create a gap at the end of the last slide, you may manually add a margin to the last slide. This can be achieved with CSS using the :last-child pseudo-class. Here's an example:
+
+```css
+.embla__slide:last-child {
+  margin-right: 20px;
+}
+```
+
 ## Variable gaps
 
 Just like [variable](/guides/slide-sizes/#variable-sizes) slide sizes, variable gap sizes is **supported out of the box**. Declare your gap sizes in your CSS to achieve this:
