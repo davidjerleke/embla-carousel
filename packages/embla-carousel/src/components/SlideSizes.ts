@@ -1,5 +1,5 @@
 import { AxisType } from './Axis'
-import { arrayLast, arrayLastIndex, mathAbs, WindowType } from './utils'
+import { arrayIsLastIndex, arrayLast, mathAbs, WindowType } from './utils'
 
 export type SlideSizesType = {
   slideSizes: number[]
@@ -39,7 +39,7 @@ export function SlideSizes(
     return slideRects
       .map((rect, index, rects) => {
         const isFirst = !index
-        const isLast = index === arrayLastIndex(rects)
+        const isLast = arrayIsLastIndex(rects, index)
         if (isFirst) return slideSizes[index] + startGap
         if (isLast) return slideSizes[index] + endGap
         return rects[index + 1][startEdge] - rect[startEdge]
