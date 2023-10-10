@@ -141,10 +141,10 @@ Setting this to `false` will not activate or deactivate the carousel. Useful whe
 
 ### align
 
-Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`string | (viewSize: number, snapSize: number, index: number) => number`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`center`</BrandSecondaryText>
 
-Align the slides relative to the carousel viewport. Use one of the predefined alignments `start`, `center` or `end`. Alternatively, provide a number between `0 - 1` to align the slides, where **0.5 equals 50%**.
+Align the slides relative to the carousel viewport. Use one of the predefined alignments `start`, `center` or `end`. Alternatively, provide your own callback to fully customize the alignment.
 
 ---
 

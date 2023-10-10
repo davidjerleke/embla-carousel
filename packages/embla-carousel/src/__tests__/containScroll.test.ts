@@ -49,7 +49,7 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [0, -200, -350, -600, -660]
@@ -96,7 +96,7 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [0, -30, -250, -420, -690, -840, -860]
@@ -145,7 +145,7 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
@@ -195,7 +195,7 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
@@ -245,7 +245,7 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [0, -200, -350, -600, -660]
@@ -292,7 +292,7 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [0, -30, -250, -420, -690, -840, -860]
@@ -341,7 +341,7 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
@@ -391,7 +391,7 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
@@ -441,7 +441,7 @@ describe('➡️  ContainScroll - Vertical', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [0, -200, -350, -600, -660]
@@ -527,7 +527,7 @@ describe('➡️  ContainScroll - Vertical', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
@@ -577,7 +577,7 @@ describe('➡️  ContainScroll - Vertical', () => {
     })
 
     test('Custom', () => {
-      emblaApi.reInit({ align: 0.1 })
+      emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
 
       const engine = emblaApi.internalEngine()
       const expectedScrollSnaps = [
