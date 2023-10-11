@@ -1,5 +1,6 @@
 import packageJson from './package.json'
 import {
+  PACKAGE_FORMATS,
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
   CONFIG_GLOBALS,
@@ -7,6 +8,7 @@ import {
   typescript,
   resolve,
   terser,
+  createBuildPath,
   kebabToPascalCase
 } from '../../rollup.config'
 
@@ -15,23 +17,23 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: `${packageJson.name}.cjs.js`,
-        format: 'cjs',
+        file: createBuildPath(packageJson, PACKAGE_FORMATS.CJS),
+        format: PACKAGE_FORMATS.CJS,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true,
         exports: 'auto'
       },
       {
-        file: `${packageJson.name}.esm.js`,
-        format: 'esm',
+        file: createBuildPath(packageJson, PACKAGE_FORMATS.ESM),
+        format: PACKAGE_FORMATS.ESM,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true
       },
       {
-        file: `${packageJson.name}.umd.js`,
-        format: 'umd',
+        file: createBuildPath(packageJson, PACKAGE_FORMATS.UMD),
+        format: PACKAGE_FORMATS.UMD,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: false,

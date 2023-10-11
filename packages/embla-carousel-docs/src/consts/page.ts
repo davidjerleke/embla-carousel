@@ -13,7 +13,7 @@ export type PageNotFoundLayoutType = typeof PAGE_LAYOUTS.NOT_FOUND
 export type PageGeneratorLayoutType = typeof PAGE_LAYOUTS.GENERATOR
 export type PageDefaultLayoutType = typeof PAGE_LAYOUTS.DEFAULT
 
-export type PageLayoutType = typeof PAGE_LAYOUTS[keyof typeof PAGE_LAYOUTS]
+export type PageLayoutType = (typeof PAGE_LAYOUTS)[keyof typeof PAGE_LAYOUTS]
 
 export type PageOverviewType = {
   id: GraphQLNodeType['id']

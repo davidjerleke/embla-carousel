@@ -27,10 +27,10 @@ export type SandboxVanillaExtensionType = 'js' | 'ts'
 export type SandboxReactExtensionType = 'jsx' | 'tsx'
 
 export type SandboxPluginNameType =
-  typeof SANDBOX_PLUGINS[keyof typeof SANDBOX_PLUGINS]
+  (typeof SANDBOX_PLUGINS)[keyof typeof SANDBOX_PLUGINS]
 
 export type SandboxLanguageType =
-  typeof SANDBOX_LANGUAGES[keyof typeof SANDBOX_LANGUAGES]
+  (typeof SANDBOX_LANGUAGES)[keyof typeof SANDBOX_LANGUAGES]
 
 export type SandboxPluginsType = {
   [key in SandboxPluginNameType]?: string
@@ -62,7 +62,7 @@ export type SandboxSelectionType<SettingsType = undefined> = {
   createSandbox: (settings?: SettingsType) => Promise<string>
 }
 
-export type SandboxLabelValueType = typeof SANDBOX_LABELS[SandboxLabelKeyType]
+export type SandboxLabelValueType = (typeof SANDBOX_LABELS)[SandboxLabelKeyType]
 export type SandboxLabelKeyType = keyof typeof SANDBOX_LABELS
 export type SandboxCreateFunctionType<SettingsType> =
   SandboxSelectionType<SettingsType>['createSandbox']

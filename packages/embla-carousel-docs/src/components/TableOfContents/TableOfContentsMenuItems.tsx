@@ -5,7 +5,7 @@ import { SPACINGS } from 'consts/spacings'
 import { TableOfContentsMenuItem } from './TableOfContentsMenuItem'
 
 const hasItemsOnly = (item: TableOfContentsItemType): boolean =>
-  !item.url && !item.title && typeof item.items !== undefined
+  !item.url && !item.title && typeof item.items !== 'undefined'
 
 const LEVEL_SPACING = SPACINGS.CUSTOM(() => 1.6)
 
