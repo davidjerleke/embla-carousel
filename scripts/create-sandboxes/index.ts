@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import { tsCompile } from './ts-compile'
-import { readFiles, CONSOLE_FONT_COLORS } from '../utils'
+import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { readFiles } from '../utils/readFiles'
 
 const EXTENSION_REGEX = {
   DECLARATION: /\.d\.ts$/,
@@ -28,7 +29,7 @@ PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
           const jsContent = tsCompile(fileContent)
 
           fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) console.log(CONSOLE_FONT_COLORS.RED, error)
+            if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
           })
         }
 
@@ -37,7 +38,7 @@ PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
           const jsContent = tsCompile(fileContent, { jsx: 1 })
 
           fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) console.log(CONSOLE_FONT_COLORS.RED, error)
+            if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
           })
         }
       },
@@ -47,10 +48,10 @@ PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
     )
 
     console.log(
-      CONSOLE_FONT_COLORS.CYAN,
+      CONSOLE_FONT_COLORS.SUCCESS,
       `SUCCESS: Sandboxes compiled succesfully: ${pathToSandboxFile}.`
     )
   } catch (error) {
-    console.log(CONSOLE_FONT_COLORS.RED, error)
+    console.log(CONSOLE_FONT_COLORS.ERROR, error)
   }
 })

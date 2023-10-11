@@ -1,13 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 import packageJson from '../../package.json'
-import { PackageJson as PackageJsonType } from 'type-fest'
 import { createReadme } from './create-readme'
-import {
-  CONSOLE_FONT_COLORS,
-  escapeRegExp,
-  parseNodeParameters
-} from '../utils'
+import { parseNodeParameters } from '../utils/parseNodeParameters'
+import { escapeRegExp } from '../utils/escapeRegExp'
+import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { WORKSPACE_FILTERS, forEachWorkspace } from '../utils/forEachWorkspace'
 import {
   ContributorsResponseType,
   createContributors
@@ -15,15 +13,13 @@ import {
 
 const REPO_PATH_REGEX = new RegExp(escapeRegExp('git+https://github.com/'))
 const REPO_PATH = packageJson.repository.url.replace(REPO_PATH_REGEX, '')
-const PACKAGES_FOLDER_REGEX = /packages\//
-const WORKSPACES: PackageJsonType['workspaces'] = packageJson?.workspaces || []
 
 try {
   const { templatePath } = parseNodeParameters()
 
   if (!templatePath) {
     console.log(
-      CONSOLE_FONT_COLORS.RED,
+      CONSOLE_FONT_COLORS.ERROR,
       'ERROR: Readme template path not provided.'
     )
     throw new Error()
@@ -39,13 +35,12 @@ try {
 
       createReadme(template, '', contributorMarkup)
 
-      WORKSPACES.forEach((workspace) => {
-        if (!PACKAGES_FOLDER_REGEX.test(workspace)) return
-        createReadme(template, workspace, contributorMarkup)
+      forEachWorkspace(WORKSPACE_FILTERS.PACKAGES, (workspacePath) => {
+        createReadme(template, workspacePath, contributorMarkup)
       })
 
       console.log(
-        CONSOLE_FONT_COLORS.CYAN,
+        CONSOLE_FONT_COLORS.SUCCESS,
         `SUCCESS: README.md's created succesfully for all packages.`
       )
     })
@@ -53,5 +48,5 @@ try {
       throw error
     })
 } catch (error) {
-  console.log(CONSOLE_FONT_COLORS.RED, error)
+  console.log(CONSOLE_FONT_COLORS.ERROR, error)
 }
