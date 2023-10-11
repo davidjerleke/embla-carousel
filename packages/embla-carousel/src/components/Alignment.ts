@@ -1,9 +1,13 @@
-import { isNumber } from './utils'
+import { isString } from './utils'
 
-export type AlignmentOptionType = 'start' | 'center' | 'end' | number
+export type AlignmentOptionType =
+  | 'start'
+  | 'center'
+  | 'end'
+  | ((viewSize: number, snapSize: number, index: number) => number)
 
 export type AlignmentType = {
-  measure: (n: number) => number
+  measure: (n: number, index: number) => number
 }
 
 export function Alignment(
@@ -24,13 +28,9 @@ export function Alignment(
     return viewSize - n
   }
 
-  function percent(): number {
-    return viewSize * Number(align)
-  }
-
-  function measure(n: number): number {
-    if (isNumber(align)) return percent()
-    return predefined[align](n)
+  function measure(n: number, index: number): number {
+    if (isString(align)) return predefined[align](n)
+    return align(viewSize, n, index)
   }
 
   const self: AlignmentType = {
