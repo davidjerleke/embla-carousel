@@ -1,0 +1,40 @@
+{
+  "name": "embla-carousel-angular",
+  "version": "8.0.0-rc14",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "rxjs": "~7.5.0"
+  },
+  "dependencies": {
+    "embla-carousel": "8.0.0-rc14",
+    "embla-carousel-reactive-utils": "8.0.0-rc14",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^14.2.13",
+    "@angular/cli": "~14.2.12",
+    "@angular/common": "^14.2.0",
+    "@angular/compiler": "^14.2.0",
+    "@angular/compiler-cli": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "ng-packagr": "^14.2.0",
+    "rxjs": "~7.5.0",
+    "tslib": "^2.3.0",
+    "typescript": "~4.7.2",
+    "zone.js": "~0.11.4"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  }
+}

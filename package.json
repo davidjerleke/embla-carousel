@@ -18,6 +18,7 @@
     "packages/embla-carousel-react",
     "packages/embla-carousel-vue",
     "packages/embla-carousel-svelte",
+    "packages/embla-carousel-angular",
     "packages/embla-carousel-docs",
     "packages/embla-carousel-autoplay",
     "packages/embla-carousel-auto-height",
