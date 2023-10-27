@@ -6,11 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "echo \"Info: no tests specified\" && exit 0"
+    "test": "echo \"Info: no tests specified\" && exit 0",
+    "release": "cd ./dist && npm publish"
   },
-  "files": [
-    "dist"
-  ],
   "peerDependencies": {
     "@angular/common": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -30,7 +28,6 @@
     "@angular/core": "^14.2.0",
     "ng-packagr": "^14.2.0",
     "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
     "typescript": "~4.7.2",
     "zone.js": "~0.11.4"
   },

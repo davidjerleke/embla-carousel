@@ -25,6 +25,6 @@ jobs:
         run: yarn build
 
       - name: NPM PKG Publish 🎉
-        run: yarn workspaces foreach -t --exclude '{embla-carousel-monorepo,embla-carousel-docs,embla-carousel-playground-vanilla,embla-carousel-playground-react}' npm publish
+        run: yarn workspaces foreach -t --exclude '{embla-carousel-monorepo,embla-carousel-docs,embla-carousel-playground-vanilla,embla-carousel-playground-react}' yarn release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

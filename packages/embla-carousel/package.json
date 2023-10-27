@@ -40,7 +40,8 @@
     "test": "jest --config jest.config.js",
     "build": "rollup --bundleConfigAsCjs -c",
     "start": "rollup --bundleConfigAsCjs -c --watch",
-    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\""
+    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
+    "release": "npm publish"
   },
   "devDependencies": {
     "@types/jest": "^29.5.6",
