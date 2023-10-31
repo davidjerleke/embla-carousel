@@ -65,6 +65,7 @@
     &nbsp;
     <a href="https://www.embla-carousel.com/get-started/vue/">
       <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
+    </a>
     &nbsp;
     <a href="https://www.embla-carousel.com/get-started/svelte/">
       <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
