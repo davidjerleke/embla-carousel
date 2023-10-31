@@ -2,51 +2,96 @@ import fs from 'fs'
 import path from 'path'
 import { PackageJson as PackageJsonType } from 'type-fest'
 import { WORKSPACE_FILTERS, forEachWorkspace } from '../utils/forEachWorkspace'
-import { readFiles } from '../utils/readFiles'
+import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+
+const ESM_FOLDER_NAME = 'esm'
+const CJS_FOLDER_NAME = 'cjs'
 
 try {
-  forEachWorkspace(WORKSPACE_FILTERS.PACKAGES, (workspacePath) => {
-    const packageJsonPath = path.join(workspacePath, 'package.json')
-    const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
+  forEachWorkspace(
+    (workspacePath) => {
+      const packageJsonPath = path.join(workspacePath, 'package.json')
+      const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
 
-    if (!workspacePackageJson) return
+      if (!workspacePackageJson) return
 
-    const packageJson = JSON.parse(workspacePackageJson)
-    const packageJsonMain: PackageJsonType = {
-      ...packageJson,
-      exports: {
-        '.': {
-          import: {
-            default: `./esm/${packageJson.name}.esm.js`,
-            types: './esm/index.d.ts'
-          },
-          require: {
-            default: `./cjs/${packageJson.name}.cjs.js`,
-            types: './cjs/index.d.ts'
+      const esmFolder = path.join(workspacePath, ESM_FOLDER_NAME)
+      const cjsFolder = path.join(workspacePath, CJS_FOLDER_NAME)
+
+      const packageJson = JSON.parse(workspacePackageJson)
+      const packageJsonMain: PackageJsonType = {
+        ...packageJson,
+        exports: {
+          './package.json': './package.json',
+          '.': {
+            import: {
+              types: `./${ESM_FOLDER_NAME}/index.d.ts`,
+              default: `./${ESM_FOLDER_NAME}/${packageJson.name}.${ESM_FOLDER_NAME}.js`
+            },
+            require: {
+              types: `./${CJS_FOLDER_NAME}/index.d.ts`,
+              default: `./${CJS_FOLDER_NAME}/${packageJson.name}.${CJS_FOLDER_NAME}.js`
+            }
           }
         }
       }
-    }
-    const packageJsonEsm: PackageJsonType = {
-      ...packageJson,
-      type: 'module'
-    }
-    const packageJsonCjs: PackageJsonType = {
-      ...packageJson,
-      type: 'commonjs'
-    }
-
-    readFiles(
-      `${workspacePath}/`,
-      (filename, fileContent) => {
-        // Replace package.json at root with packageJsonMain
-        // Move packageJsonEsm <package>.esm.js.map to esm folder
-        // Move packageJsonCjs and <package>.cjs.js.map to cjs folder
-        // Move index.d.ts to esm and cjs folder
-      },
-      (error) => {
-        throw error
+      const files = packageJson.files.filter((file: string) => {
+        return !file.match(ESM_FOLDER_NAME) && !file.match(CJS_FOLDER_NAME)
+      })
+      const packageJsonEsm: PackageJsonType = {
+        ...packageJson,
+        files,
+        type: 'module'
       }
-    )
-  })
-} catch (error) {}
+      const packageJsonCjs: PackageJsonType = {
+        ...packageJson,
+        files,
+        type: 'commonjs'
+      }
+
+      delete packageJsonEsm.exports
+      delete packageJsonEsm.scripts
+
+      delete packageJsonCjs.exports
+      delete packageJsonCjs.scripts
+
+      fs.writeFileSync(
+        packageJsonPath,
+        JSON.stringify(packageJsonMain, null, '\t')
+      )
+
+      if (!fs.existsSync(esmFolder)) fs.mkdirSync(esmFolder)
+      if (!fs.existsSync(cjsFolder)) fs.mkdirSync(cjsFolder)
+
+      fs.writeFileSync(
+        path.join(esmFolder, 'package.json'),
+        JSON.stringify(packageJsonEsm, null, '\t')
+      )
+
+      fs.writeFileSync(
+        path.join(cjsFolder, 'package.json'),
+        JSON.stringify(packageJsonCjs, null, '\t')
+      )
+
+      const esmTypesFilePath = `${esmFolder}/index.d.ts`
+      const esmTypesFile = fs.readFileSync(esmTypesFilePath, 'utf-8')
+      const esmTypesFileWithExtensions = esmTypesFile.replace(
+        /from\s'(.*)';/g,
+        (match) => match.replace(/';/g, `.ts';`)
+      )
+      fs.writeFileSync(esmTypesFilePath, esmTypesFileWithExtensions)
+    },
+    (workspace) => {
+      if (!WORKSPACE_FILTERS.PACKAGES.test(workspace)) return false
+      if (WORKSPACE_FILTERS.DOCS.test(workspace)) return false
+      return true
+    }
+  )
+
+  console.log(
+    CONSOLE_FONT_COLORS.SUCCESS,
+    `SUCCESS: Nodenext support succesfully added to all packages.`
+  )
+} catch (error) {
+  console.log(CONSOLE_FONT_COLORS.ERROR, error)
+}

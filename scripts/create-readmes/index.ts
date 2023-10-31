@@ -35,9 +35,12 @@ try {
 
       createReadme(template, '', contributorMarkup)
 
-      forEachWorkspace(WORKSPACE_FILTERS.PACKAGES, (workspacePath) => {
-        createReadme(template, workspacePath, contributorMarkup)
-      })
+      forEachWorkspace(
+        (workspacePath) => {
+          createReadme(template, workspacePath, contributorMarkup)
+        },
+        (workspace) => WORKSPACE_FILTERS.PACKAGES.test(workspace)
+      )
 
       console.log(
         CONSOLE_FONT_COLORS.SUCCESS,
