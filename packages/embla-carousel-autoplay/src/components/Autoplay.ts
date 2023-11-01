@@ -68,6 +68,11 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       }
     }
 
+    if (options.stopOnFocusIn) {
+      eventStore.add(root, 'focusin', interaction);
+      if (!options.stopOnInteraction) eventStore.add(root, 'focusout', reset);
+    }
+
     eventStore.add(ownerDocument, 'visibilitychange', () => {
       if (ownerDocument.visibilityState === 'hidden') {
         wasPlaying = playing
