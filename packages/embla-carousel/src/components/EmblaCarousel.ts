@@ -155,6 +155,7 @@ function EmblaCarousel(
     engine.slideLooper.clear()
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
+    engine.slidesInView.destroy()
     pluginsHandler.destroy()
     mediaHandlers.clear()
     documentVisibleHandler.clear()
