@@ -3,18 +3,21 @@ import { EmblaCarouselType } from './EmblaCarousel'
 type CallbackType = (emblaApi: EmblaCarouselType, evt: EmblaEventType) => void
 type ListenersType = Partial<{ [key in EmblaEventType]: CallbackType[] }>
 
-export type EmblaEventType =
-  | 'init'
-  | 'pointerDown'
-  | 'pointerUp'
-  | 'slidesChanged'
-  | 'slidesInView'
-  | 'scroll'
-  | 'select'
-  | 'settle'
-  | 'destroy'
-  | 'reInit'
-  | 'resize'
+export type EmblaEventType = EmblaEventListType[keyof EmblaEventListType]
+
+export interface EmblaEventListType {
+  init: 'init'
+  pointerDown: 'pointerDown'
+  pointerUp: 'pointerUp'
+  slidesChanged: 'slidesChanged'
+  slidesInView: 'slidesInView'
+  scroll: 'scroll'
+  select: 'select'
+  settle: 'settle'
+  destroy: 'destroy'
+  reInit: 'reInit'
+  resize: 'resize'
+}
 
 export type EventHandlerType = {
   init: (emblaApi: EmblaCarouselType) => void
