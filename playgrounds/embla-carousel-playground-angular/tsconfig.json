@@ -1,0 +1,41 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES5",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "lib": ["ES2022", "dom"],
+    "esModuleInterop": true,
+    "jsx": "react",
+    "paths": {
+      "@angular/*": ["./node_modules/@angular/*"],
+      "embla-carousel-angular": ["../../packages/embla-carousel-angular/src"],
+      "utils/*": ["../../packages/embla-carousel-docs/src/utils/*"],
+      "consts/*": ["../../packages/embla-carousel-docs/src/consts/*"],
+      "hooks/*": ["../../packages/embla-carousel-docs/src/hooks/*"],
+      "components/*": ["../../packages/embla-carousel-docs/src/components/*"],
+      "assets/*": ["../../packages/embla-carousel-docs/src/assets/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
