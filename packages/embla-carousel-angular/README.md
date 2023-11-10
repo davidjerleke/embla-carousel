@@ -144,7 +144,7 @@
 <h2 align="center">Open Source</h2>
 
 <p align="center">
-  <sup>Copyright © 2019-present, undefined.</sup><br>
+  <sup>Copyright © 2019-present, David Jerleke and Donald Mok.</sup><br>
   Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.
 </p>
 
