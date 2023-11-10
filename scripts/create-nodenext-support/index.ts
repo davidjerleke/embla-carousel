@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 import { PackageJson as PackageJsonType } from 'type-fest'
-import { WORKSPACE_FILTERS, forEachWorkspace } from '../utils/forEachWorkspace'
 import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { WORKSPACE_FILTERS, forEachWorkspace } from '../utils/forEachWorkspace'
 
 const ESM_FOLDER_NAME = 'esm'
 const CJS_FOLDER_NAME = 'cjs'
@@ -83,7 +83,7 @@ try {
     },
     (workspace) => {
       if (!WORKSPACE_FILTERS.PACKAGES.test(workspace)) return false
-      if (WORKSPACE_FILTERS.DOCS.test(workspace)) return false
+      if (WORKSPACE_FILTERS.EXCLUDE.test(workspace)) return false
       return true
     }
   )

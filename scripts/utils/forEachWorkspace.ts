@@ -1,11 +1,11 @@
 import path from 'path'
-import packageJson from '../../package.json'
 import { PackageJson as PackageJsonType } from 'type-fest'
+import packageJson from '../../package.json'
 
 const WORKSPACES: PackageJsonType['workspaces'] = packageJson?.workspaces || []
 export const WORKSPACE_FILTERS = {
   PACKAGES: /packages\//,
-  DOCS: /packages\/embla-carousel-docs/
+  EXCLUDE: /(packages\/embla-carousel-docs)|(embla-carousel-angular)/
 }
 
 export const forEachWorkspace = (
