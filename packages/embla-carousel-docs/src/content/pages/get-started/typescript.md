@@ -1,7 +1,7 @@
 ---
 title: TypeScript
 description: Learn how to setup Embla Carousel using TypeScript.
-order: 4
+order: 5
 date: 2021-02-21
 ---
 

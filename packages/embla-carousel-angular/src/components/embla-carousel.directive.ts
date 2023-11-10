@@ -16,9 +16,9 @@ import EmblaCarousel, {
 import {
   areOptionsEqual,
   arePluginsEqual,
-  canUseDOM,
-  EMBLA_OPTIONS_TOKEN
-} from '../utils'
+  canUseDOM
+} from 'embla-carousel-reactive-utils'
+import { EMBLA_OPTIONS_TOKEN } from '../utils'
 
 @Directive({
   selector: '[ngx-embla]',

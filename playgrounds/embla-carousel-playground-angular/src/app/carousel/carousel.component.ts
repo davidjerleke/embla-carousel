@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, Input, ViewChild } from '@angular/core'
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
-import { EmblaCarouselDirective } from 'embla-carousel-angular'
+import {
+  EmblaCarouselDirective,
+  EmblaCarouselType,
+  EmblaOptionsType
+} from 'embla-carousel-angular'
 
 @Component({
   selector: 'app-carousel',

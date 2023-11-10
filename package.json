@@ -36,6 +36,7 @@
     "watch:package-react": "yarn workspace embla-carousel-react run start",
     "watch:playground-vanilla": "yarn workspace embla-carousel-playground-vanilla run dev",
     "watch:playground-react": "yarn workspace embla-carousel-playground-react run dev",
+    "watch:playground-angular": "yarn workspace embla-carousel-playground-angular run dev",
     "start": "yarn workspace embla-carousel-docs run start",
     "start:vanilla": "npm-run-all --parallel watch:package-vanilla watch:playground-vanilla",
     "start:react": "npm-run-all --parallel watch:package-vanilla watch:package-react watch:playground-react",

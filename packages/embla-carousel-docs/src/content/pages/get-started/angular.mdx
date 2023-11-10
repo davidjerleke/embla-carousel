@@ -1,0 +1,169 @@
+---
+title: Angular
+description: Learn how to setup Embla Carousel using Angular.
+order: 4
+date: 2023-11-10
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+
+# Angular
+
+Start by installing the Embla Carousel Angular **npm package** and add it to your dependencies.
+
+<Tabs groupId="package-manager">
+  <TabsItem label="npm" value="npm">
+
+    ```shell
+    npm install embla-carousel-angular --save
+    ```
+
+  </TabsItem>
+  <TabsItem label="yarn" value="yarn">
+
+    ```shell
+    yarn add embla-carousel-angular
+    ```
+
+  </TabsItem>
+</Tabs>
+
+## Importing
+
+Embla Carousel provides the handy `EmblaCarouselDirective` **standalone** directive and the `EmblaCarouselModule` for seamless integration with Angular.
+
+**Standalone directive**
+```typescript{2,8,10}
+// app.module.ts
+import { EmblaCarouselDirective, provideEmblaGlobalOptions } from 'embla-carousel-angular'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    ...,
+    EmblaCarouselDirective
+  ],
+  providers: [provideEmblaGlobalOptions()],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+**NgModule**
+```typescript{2,8}
+// app.module.ts
+import { EmblaCarouselModule } from 'embla-carousel-angular'
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    ...,
+    EmblaCarouselModule.forRoot()
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+
+## The component structure
+
+A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
+
+```html{1}
+<div class="embla" ngx-embla>
+  <div class="embla__container">
+    <div class="embla__slide">Slide 1</div>
+    <div class="embla__slide">Slide 2</div>
+    <div class="embla__slide">Slide 3</div>
+  </div>
+</div>
+```
+
+## Styling the carousel
+
+The element with the classname `embla` is needed to cover the scroll overflow. Its child element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+
+```css
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+```
+
+## Accessing the carousel API
+
+The `ngx-embla` directive takes the Embla Carousel [options](/api/options/) as part of its inputs. Additionally, you can access the [API](/api/) by using the `@ViewChild` decorator to access the carousel in `AfterViewInit` hook:
+
+```typescript{6,16,21-23}
+import { EmblaCarouselDirective, EmblaCarouselType } from 'embla-carousel-angular'
+
+@Component({
+  selector: 'app-carousel',
+  template: `
+    <div class="embla" ngx-embla [options]="options">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+  `
+})
+export class CarouselComponent implements AfterViewInit {
+  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+  
+  private emblaApi: EmblaCarouselType
+  private options = { loop: false }
+
+  ngAfterViewInit() {
+    this.emblaApi = this.emblaRef.emblaApi
+  }
+}
+
+```
+
+## Adding plugins
+
+The `ngx-embla` directive inputs also accepts [plugins](/plugins/). Note that plugins need to be passed in an array like so:
+
+
+```typescript{2,7,21}
+import { EmblaCarouselDirective, EmblaCarouselType } from 'embla-carousel-angular'
+import Autoplay from 'embla-carousel-autoplay'
+
+@Component({
+  selector: 'app-carousel',
+  template: `
+    <div class="embla" ngx-embla [options]="options" [plugins]="plugins">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+  `
+})
+export class CarouselComponent implements AfterViewInit {
+  @ViewChild(EmblaCarouselDirective) emblaRef: EmblaCarouselDirective
+  
+  private emblaApi: EmblaCarouselType
+  public options = { loop: false }
+  public plugins = [Autoplay()]
+
+  ngAfterViewInit() {
+    this.emblaApi = this.emblaRef.emblaApi
+  }
+}
+
+```
+
+Congratulations! You just created your first Embla Carousel component.

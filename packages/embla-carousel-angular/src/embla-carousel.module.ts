@@ -8,10 +8,10 @@ import { provideEmblaGlobalOptions } from './utils'
   imports: [EmblaCarouselDirective],
   exports: [EmblaCarouselDirective]
 })
-export class EmblCarouselaModule {
+export class EmblaCarouselModule {
   static forRoot(options?: EmblaOptionsType) {
     return {
-      ngModule: EmblCarouselaModule,
+      ngModule: EmblaCarouselModule,
       providers: [provideEmblaGlobalOptions(options)]
     }
   }
