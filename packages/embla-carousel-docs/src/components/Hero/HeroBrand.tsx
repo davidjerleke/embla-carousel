@@ -45,7 +45,11 @@ const HeroLogo = styled(SiteLogo)`
   }
 
   ${MEDIA.MIN_MD} {
-    ${createSquareSizeStyles('28rem')};
+    ${createSquareSizeStyles('32rem')};
+  }
+
+  ${MEDIA.MIN_LG} {
+    ${createSquareSizeStyles('36rem')};
   }
 `
 
@@ -64,7 +68,7 @@ const Content = styled.div`
 
 const H1 = styled.h1`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
-  margin-bottom: ${SPACINGS.THREE};
+  margin-bottom: ${SPACINGS.FOUR};
   font-size: ${FONT_SIZES.CUSTOM(() => 5)};
   line-height: 0.9;
   font-weight: ${FONT_WEIGHTS.BLACK};
@@ -83,6 +87,14 @@ const H1 = styled.h1`
 
   ${MEDIA.MIN_SM} {
     font-size: ${FONT_SIZES.CUSTOM(() => 6.2)};
+  }
+
+  ${MEDIA.MIN_MD} {
+    font-size: ${FONT_SIZES.CUSTOM(() => 8)};
+  }
+
+  ${MEDIA.MIN_LG} {
+    font-size: ${FONT_SIZES.CUSTOM(() => 10)};
   }
 `
 

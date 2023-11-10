@@ -45,6 +45,7 @@ export const TableOfContentsMenuItems = (props: PropType) => {
             key={item.url}
             item={item}
             isActive={isActive}
+            level={level}
           >
             {item.items && (
               <TableOfContentsMenuItems
