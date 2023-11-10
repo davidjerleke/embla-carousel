@@ -16,6 +16,8 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 
 This plugin is used to extend Embla Carousel with **autoplay** functionality. It comes with a useful set of options that allows you to customize it to your liking.
 
+---
+
 ## Installation
 
 First you need to install the **npm package** and save it to your dependencies:
@@ -64,13 +66,15 @@ import Autoplay from 'embla-carousel-autoplay'
 
 const autoplayOptions = {
   delay: 4000,
-  rootNode: (emblaRoot) => emblaRoot.parentElement,
+  rootNode: (emblaRoot) => emblaRoot.parentElement
 }
 
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  Autoplay(autoplayOptions), // Add plugin with options
+  Autoplay(autoplayOptions) // Add plugin with options
 ])
 ```
+
+---
 
 ### delay
 
@@ -79,12 +83,16 @@ Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
 Delay between transitions in milliseconds.
 
+---
+
 ### jump
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 When set to true `true`, autoplay will do instant slide transitions when advancing.
+
+---
 
 ### playOnInit
 
@@ -93,12 +101,16 @@ Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 If set to `false`, you'll have to start autoplay yourself by calling the [play](/plugins/autoplay/#play) method.
 
+---
+
 ### stopOnInteraction
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
 If set to `false`, autoplay will not be disabled after drag interactions, and it will restart every time after the interaction.
+
+---
 
 ### stopOnMouseEnter
 
@@ -107,12 +119,16 @@ Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 When enabled, autoplay will pause when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also enabled, it will stop autoplay entirely instead of pausing it.
 
+---
+
 ### stopOnLastSnap
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 If this parameter is enabled, autoplay will be stopped when it reaches last slide.
+
+---
 
 ### rootNode
 
@@ -129,12 +145,16 @@ The Autoplay plugin exposes a set of **useful methods** which lets you control i
 embla.plugins().autoplay.stop() // Method
 ```
 
+---
+
 ### play
 
 Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Start autoplay. Set the **jump** parameter to `true` when you want autoplay to do instant slide transitions when advancing. Please note that providing a value to this method vill override the [jump](/plugins/autoplay/#jump) option.
+
+---
 
 ### stop
 
@@ -143,9 +163,48 @@ Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Stop autoplay.
 
+---
+
 ### reset
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is set to `false`, this will restart the autoplay timer. If not, this method stops autoplay.
+Resets the timer and starts over. This will only take effect if autoplay is playing. If autoplay is stopped, this method won't trigger anything.
+
+---
+
+### isPlaying
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
+
+Returns a boolean whether autoplay is playing or not.
+
+## Events
+
+Below follows an exhaustive list of all Autoplay plugin events together with information about how they work. Attach event listeners like so:
+
+```ts
+emblaApi.on('autoplay:play', (emblaApi, eventName) => {
+  console.log('Autoplay plugin started playing!')
+})
+```
+
+---
+
+### autoplay:play
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when autoplay starts playing.
+
+---
+
+### autoplay:stop
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when autoplay stops playing.
+
+---

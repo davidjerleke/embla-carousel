@@ -15,6 +15,8 @@ If you haven't read about how to setup your slide [container](/guides/slide-cont
 
 </Admonition>
 
+---
+
 ## Declaring sizes
 
 Slide sizes should in most cases be **declared with CSS**. Embla Carousel **supports any slide size out of the box**, and will pick up whatever size you've declared in your CSS. A very simple setup could look like this:

@@ -29,6 +29,8 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
   </TabsItem>
 </Tabs>
 
+---
+
 ## The component structure
 
 Embla Carousel provides the handy `emblaCarouselVue` function for seamless integration with Vue. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
@@ -51,7 +53,7 @@ Embla Carousel provides the handy `emblaCarouselVue` function for seamless integ
     setup() {
       const [emblaNode] = emblaCarouselVue()
       return { emblaNode }
-    },
+    }
   }
 </script>
 ```

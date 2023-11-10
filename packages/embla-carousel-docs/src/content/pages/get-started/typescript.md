@@ -14,6 +14,8 @@ Before continuing with this guide, make sure to setup a working carousel followi
 
 Embla Carousel and all its related packages are fully typed and has built-in type definitions, because they're written in TypeScript.
 
+---
+
 ## Module usage
 
 The `embla-carousel` package exports a set of useful types that you can import like so:
@@ -23,7 +25,7 @@ import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType,
-  EmblaEventType,
+  EmblaEventType
 } from 'embla-carousel'
 ```
 
@@ -37,7 +39,7 @@ function setupEmblaButtons(embla: EmblaCarouselType): void {
 }
 
 const emblaNodes: HTMLElement[] = Array.from(
-  document.querySelectorAll('.embla'),
+  document.querySelectorAll('.embla')
 )
 
 emblaNodes.forEach((emblaNode) => {
@@ -56,7 +58,7 @@ import useEmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType,
   EmblaEventType,
-  UseEmblaCarouselType,
+  UseEmblaCarouselType
 } from 'embla-carousel-react'
 ```
 
@@ -96,6 +98,6 @@ Plugins also export type definitions. Their type definitions are **prefixed** wi
 ```ts
 import Autoplay, {
   AutoplayType,
-  AutoplayOptionsType,
+  AutoplayOptionsType
 } from 'embla-carousel-autoplay'
 ```
