@@ -22,7 +22,7 @@ const HeroUspsWrapper = styled.ul`
   }
 
   ${MEDIA.MIN_MD} {
-    padding-top: ${SPACINGS.SIXTEEN};
+    padding-top: ${SPACINGS.TWELVE};
     padding-bottom: ${SPACINGS.EIGHT};
   }
 `
