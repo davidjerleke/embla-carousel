@@ -242,6 +242,7 @@ export function Engine(
     viewSize,
     contentSize,
     containSnaps,
+    containScroll,
     scrollContainLimit,
     slidesToScroll,
     slideIndexes

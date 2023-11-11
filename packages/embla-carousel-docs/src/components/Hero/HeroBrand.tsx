@@ -49,7 +49,7 @@ const HeroLogo = styled(SiteLogo)`
   }
 
   ${MEDIA.MIN_LG} {
-    ${createSquareSizeStyles('36rem')};
+    ${createSquareSizeStyles('34rem')};
   }
 `
 
@@ -94,7 +94,7 @@ const H1 = styled.h1`
   }
 
   ${MEDIA.MIN_LG} {
-    font-size: ${FONT_SIZES.CUSTOM(() => 10)};
+    font-size: ${FONT_SIZES.CUSTOM(() => 8.4)};
   }
 `
 
