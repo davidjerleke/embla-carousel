@@ -6,7 +6,7 @@ type FrameSizesType = keyof typeof PAGE_FRAME_SIZES
 
 const PAGE_FRAME_SIZES = {
   DEFAULT: '144rem',
-  MD: '100rem',
+  MD: '110rem',
   SM: '68rem'
 }
 

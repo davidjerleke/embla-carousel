@@ -9,6 +9,8 @@ date: 2021-03-13
 
 Embla Carousel allows you to use **any CSS to stack your slides** in the chosen scroll [axis](/api/options/#axis), whether it's CSS Grid, flexbox, inline-blocks or anything else. It will conveniently **pick up any spacings** between the slides and **automatically adjust the scroll snaps** accordingly.
 
+---
+
 ## Declaring gaps
 
 It's recommended to declare gaps between slides **using CSS**. Any CSS that will render space between the slides is valid. You may add spacing in one direction like so:

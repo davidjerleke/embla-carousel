@@ -12,6 +12,8 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 
 It's possible to **extend** Embla carousel with additional features using **plugins**. The complete list of official plugins can be found [here](/plugins/).
 
+---
+
 ## Usage
 
 The Embla Carousel **constructor** accepts an **array of plugins**. Each plugin has its own [options](/api/plugins/#constructor-options) and [methods](/api/plugins/#calling-methods).
@@ -237,6 +239,85 @@ export const EmblaCarousel = () => {
 
       // ...
     },
+  }
+</script>
+```
+
+</TabsItem>
+</Tabs>
+
+### Adding event listeners
+
+Some plugins fire their own **events**. Plugin events are structured as follows `<plugin-name>:eventname`. [Adding](/api/events/#adding-event-listeners) and [removing](/api/events/#removing-event-listeners) plugin event listeners is done the same way as native Embla events. Here's an example where an event is added to the autoplay plugin:
+
+<Tabs groupId="library">
+<TabsItem label="Vanilla" value="vanilla">
+
+```js{10}
+import EmblaCarousel from 'embla-carousel'
+import Autoplay from 'embla-carousel-autoplay'
+
+const emblaApi = EmblaCarousel(emblaNode, { loop: true }, [Autoplay()])
+
+function logPluginEvent(emblaApi, eventName) {
+  console.log('Autoplay plugin stopped playing!')
+}
+
+emblaApi.on('autoplay:stop', logPluginEvent)
+```
+
+</TabsItem>
+<TabsItem label="React" value="react">
+
+```jsx{15}
+import { useEffect, useCallback } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
+
+  const logAutoplayStopEvent = useCallback(() => {
+    console.log('Autoplay plugin stopped playing!')
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    emblaApi.on('autoplay:stop', logAutoplayStopEvent) // add
+  }, [emblaApi, logAutoplayStopEvent])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem label="Vue" value="vue">
+
+```html{18}
+<script>
+  import { watchEffect, onBeforeUnmount } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+  import Autoplay from 'embla-carousel-autoplay'
+
+  export default {
+    setup() {
+      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true }, [
+        Autoplay()
+      ])
+
+      function logAutoplayStopEvent() {
+        console.log('Autoplay plugin stopped playing!')
+      }
+
+      watchEffect(() => {
+        if (emblaApi.value) {
+          emblaApi.value.on('autoplay:stop', logAutoplayStopEvent) // add
+        }
+      })
+
+      // ...
+    }
   }
 </script>
 ```

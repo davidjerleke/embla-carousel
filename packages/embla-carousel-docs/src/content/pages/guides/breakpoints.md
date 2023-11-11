@@ -9,6 +9,8 @@ date: 2021-03-22
 
 This guide demonstrates how to customize your carousels for different breakpoints using the [flexbox](/guides/slide-container/#using-flexbox) setup. Embla Carousel offers a convenient way to customize your carousels based on different breakpoints including changing [options](/api/options/), using plain CSS.
 
+---
+
 ## Changing slide sizes
 
 Embla Carousel will **automatically pick up** any **changes in slide sizes** when the **window is resized**. It's a walk in the park to change slide sizes based on your breakpoints:
@@ -49,8 +51,8 @@ Here's an example of a carousel that's only active when the screen width is less
 const options = {
   active: true,
   breakpoints: {
-    '(min-width: 768px)': { active: false },
-  },
+    '(min-width: 768px)': { active: false }
+  }
 }
 ```
 
@@ -59,8 +61,8 @@ Because the default [active](/api/options/#active) value is `true`, we can omit 
 ```js
 const options = {
   breakpoints: {
-    '(min-width: 768px)': { active: false },
-  },
+    '(min-width: 768px)': { active: false }
+  }
 }
 ```
 
@@ -71,8 +73,8 @@ const options = {
   loop: false,
   breakpoints: {
     '(min-width: 768px)': { loop: true },
-    '(min-width: 420px)': { loop: false }, // This will override the (min-width: 768px) breakpoint loop option
-  },
+    '(min-width: 420px)': { loop: false } // This will override the (min-width: 768px) breakpoint loop option
+  }
 }
 ```
 
@@ -83,7 +85,7 @@ const options = {
   loop: false, // --> 419px screens and down will apply { loop: false }
   breakpoints: {
     '(min-width: 420px)': { align: 'start' }, // --> 420px screens and up will apply { align: 'start', loop: false }
-    '(min-width: 768px)': { loop: true }, // --> 768px screens and up will apply { align: 'start', loop: true }
-  },
+    '(min-width: 768px)': { loop: true } // --> 768px screens and up will apply { align: 'start', loop: true }
+  }
 }
 ```
