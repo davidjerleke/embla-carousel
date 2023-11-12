@@ -16,6 +16,8 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 
 This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
 
+---
+
 ## Installation
 
 First you need to install the **npm package** and save it to your dependencies:
@@ -82,9 +84,11 @@ import AutoHeight from 'embla-carousel-auto-height'
 const autoHeightOptions = { destroyHeight: 'auto' } // Options
 
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  AutoHeight(autoHeightOptions), // Add plugin with options
+  AutoHeight(autoHeightOptions) // Add plugin with options
 ])
 ```
+
+---
 
 ### destroyHeight
 

@@ -1,7 +1,7 @@
 ---
 title: CDN
 description: Learn how to setup Embla Carousel using a CDN.
-order: 5
+order: 4
 date: 2021-02-21
 ---
 
@@ -46,36 +46,36 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 }
 ```
 
-## Adding JavaScript
+## Accessing the carousel API
 
-Now you're ready to add some **JavaScript** magic to give life to your first Embla Carousel. Make sure to place your script **after** the CDN `script` tag. Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` function.
+Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** the **carousel** and give you **access** to the Embla Carousel [API](/api/).
 
-```html
+```html{6}
 <script type="text/javascript">
   var emblaNode = document.querySelector('.embla')
   var options = { loop: false }
-
   var embla = EmblaCarousel(emblaNode, options)
+
+  console.log(emblaApi.slideNodes()) // Access API
 </script>
 ```
 
 ## Adding plugins
 
-When adding plugins, you need to make sure that the script that activates your carousel is placed **after** the script tag that loads the Embla Carousel core package and the plugins:
+Start by including the plugin you want to use. In this example, we're going to include the [Autoplay](/plugins/autoplay/) plugin:
 
-```html
+```html{2}
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 ```
 
-Plugins included from a CDN will be **prefixed with EmblaCarousel**. Here's an example that shows how to add plugins to your carousel:
+Plugins included from a CDN will be **prefixed** with **EmblaCarousel**. Here's an example that shows how to add the [Autoplay](/plugins/autoplay/) plugin to your carousel:
 
-```html
+```html{4-5}
 <script type="text/javascript">
   var emblaNode = document.querySelector('.embla')
   var options = { loop: false }
-  var plugins = [EmblaCarouselAutoplay()] // Plugins
-
+  var plugins = [EmblaCarouselAutoplay()]
   var embla = EmblaCarousel(emblaNode, options, plugins)
 </script>
 ```

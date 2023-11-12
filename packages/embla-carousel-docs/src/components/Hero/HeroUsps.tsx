@@ -76,12 +76,10 @@ export const HeroUsps = () => {
         </LinkCard>
       </Usp>
       <Usp>
-        <LinkCard to="/get-started/typescript/">
+        <LinkCard to="/examples/generator/">
           <div>
-            <UspHeader>Fully Typed</UspHeader>
-            <UspText>
-              Built-in types because it is written in TypeScript.
-            </UspText>
+            <UspHeader>Carousel generator</UspHeader>
+            <UspText>Create your own customized carousel in no time.</UspText>
           </div>
         </LinkCard>
       </Usp>

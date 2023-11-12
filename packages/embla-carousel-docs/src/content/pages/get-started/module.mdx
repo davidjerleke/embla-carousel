@@ -66,12 +66,11 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 
 Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** the **carousel** and give you **access** to the Embla Carousel [API](/api/).
 
-```js
+```js{7}
 import EmblaCarousel from 'embla-carousel'
 
 const emblaNode = document.querySelector('.embla')
 const options = { loop: false }
-
 const emblaApi = EmblaCarousel(emblaNode, options)
 
 console.log(emblaApi.slideNodes()) // Access API
@@ -79,16 +78,34 @@ console.log(emblaApi.slideNodes()) // Access API
 
 ## Adding plugins
 
+Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/plugins/autoplay/) plugin:
+
+<Tabs groupId="package-manager">
+  <TabsItem label="npm" value="npm">
+
+    ```shell
+    npm install embla-carousel-autoplay --save
+    ```
+
+  </TabsItem>
+  <TabsItem label="yarn" value="yarn">
+
+    ```shell
+    yarn add embla-carousel-autoplay
+    ```
+
+  </TabsItem>
+</Tabs>
+
 Embla Carousel accepts an optional **plugin array** as the thrid argument. Here's a basic example of how to make use of it:
 
-```js
+```js{6-7}
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
 const emblaNode = document.querySelector('.embla')
 const options = { loop: false }
-const plugins = [Autoplay()] // Plugins
-
+const plugins = [Autoplay()]
 const emblaApi = EmblaCarousel(emblaNode, options, plugins)
 ```
 
