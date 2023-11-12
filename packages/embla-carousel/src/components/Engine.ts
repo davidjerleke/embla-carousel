@@ -159,22 +159,10 @@ export function Engine(
     dragHandler,
     scrollBody,
     scrollBounds,
-    eventHandler,
-    animation,
     options: { loop }
   }) => {
-    const pointerDown = dragHandler.pointerDown()
-
-    if (!loop) scrollBounds.constrain(pointerDown)
-
-    const hasSettled = scrollBody.seek().settled()
-
-    if (hasSettled && !pointerDown) {
-      animation.stop()
-      eventHandler.emit('settle')
-    }
-
-    if (!hasSettled) eventHandler.emit('scroll')
+    if (!loop) scrollBounds.constrain(dragHandler.pointerDown())
+    scrollBody.seek()
   }
 
   const render: AnimationRenderType = (
@@ -185,11 +173,20 @@ export function Engine(
       offsetLocation,
       scrollLooper,
       slideLooper,
+      dragHandler,
       options: { loop }
     },
     lagOffset
   ) => {
     const velocity = scrollBody.velocity()
+    const hasSettled = scrollBody.settled()
+
+    if (hasSettled && !dragHandler.pointerDown()) {
+      animation.stop()
+      eventHandler.emit('settle')
+    }
+    if (!hasSettled) eventHandler.emit('scroll')
+
     offsetLocation.set(location.get() - velocity + velocity * lagOffset)
 
     if (loop) {
@@ -213,7 +210,13 @@ export function Engine(
   const location = Vector1D(startLocation)
   const offsetLocation = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const scrollBody = ScrollBody(location, target, duration, friction)
+  const scrollBody = ScrollBody(
+    location,
+    offsetLocation,
+    target,
+    duration,
+    friction
+  )
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
