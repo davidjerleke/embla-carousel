@@ -1,7 +1,6 @@
 import { AnimationType } from './Animations'
 import { CounterType } from './Counter'
 import { EventHandlerType } from './EventHandler'
-import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
 import { Vector1DType } from './Vector1d'
 
