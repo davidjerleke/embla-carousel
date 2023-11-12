@@ -15,7 +15,6 @@ export function ScrollTo(
   indexCurrent: CounterType,
   indexPrevious: CounterType,
   scrollTarget: ScrollTargetType,
-  scrollBody: ScrollBodyType,
   targetVector: Vector1DType,
   eventHandler: EventHandlerType
 ): ScrollToType {
@@ -24,16 +23,7 @@ export function ScrollTo(
     const indexDiff = target.index !== indexCurrent.get()
 
     targetVector.add(distanceDiff)
-
-    if (distanceDiff) {
-      if (scrollBody.duration()) {
-        animation.start()
-      } else {
-        animation.update()
-        animation.render(1)
-        animation.update()
-      }
-    }
+    if (distanceDiff) animation.start()
 
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())

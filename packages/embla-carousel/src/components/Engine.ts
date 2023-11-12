@@ -229,7 +229,6 @@ export function Engine(
     index,
     indexPrevious,
     scrollTarget,
-    scrollBody,
     target,
     eventHandler
   )
