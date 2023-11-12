@@ -117,16 +117,25 @@ If set to `false`, autoplay will not be disabled after drag interactions, and it
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
-When enabled, autoplay will pause when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also enabled, it will stop autoplay entirely instead of pausing it.
+When enabled, autoplay will pause when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also `false`, autoplay will resume when the mouse leaves the carousel container.
 
 ---
+
+### stopOnFocusIn
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+---
+
+When enabled, autoplay will stop when a focusable element inside the carousel recieves focus. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is `false`, autoplay will resume when the user leaves focus.
 
 ### stopOnLastSnap
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
-If this parameter is enabled, autoplay will be stopped when it reaches last slide.
+If this parameter is enabled, autoplay will stop when it reaches last slide.
 
 ---
 
