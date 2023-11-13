@@ -15,11 +15,11 @@ export type ScrollBodyType = {
 
 export function ScrollBody(
   location: Vector1DType,
+  offsetLocation: Vector1DType,
   target: Vector1DType,
   baseDuration: number,
   baseFriction: number
 ): ScrollBodyType {
-  let hasSettled = true
   let bodyVelocity = 0
   let scrollDirection = 0
   let scrollDuration = baseDuration
@@ -48,12 +48,12 @@ export function ScrollBody(
 
     scrollDirection = mathSign(directionDiff)
     rawLocationPrevious = rawLocation
-    hasSettled = mathAbs(diff) < 0.001
     return self
   }
 
   function settled(): boolean {
-    return hasSettled
+    const diff = target.get() - offsetLocation.get()
+    return mathAbs(diff) < 0.001
   }
 
   function duration(): number {

@@ -16,6 +16,8 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 
 This plugin is used to extend Embla Carousel with the ability to use the mouse/trackpad wheel to navigate through the carousel.
 
+---
+
 ## Installation
 
 First you need to install the **npm package** and save it to your dependencies:
@@ -63,13 +65,15 @@ import EmblaCarousel from 'embla-carousel'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
 const wheelGesturesOptions = {
-  wheelDraggingClass: 'my-wheel-class',
+  wheelDraggingClass: 'my-wheel-class'
 }
 
 const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  WheelGesturesPlugin(wheelGesturesOptions), // Add plugin with options
+  WheelGesturesPlugin(wheelGesturesOptions) // Add plugin with options
 ])
 ```
+
+---
 
 ### wheelDraggingClass
 
@@ -78,12 +82,16 @@ Default: <BrandSecondaryText>`is-wheel-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container during a wheel gesture. Pass an empty string to opt-out.
 
+---
+
 ### forceWheelAxis
 
 Type: <BrandPrimaryText>`string | undefined`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
 
 Force an axis on which to listen for wheel events. Choose scroll axis between `x` and `y`. Useful if you want to slide horizontally when scrolling vertically or vice versa.
+
+---
 
 ### target
 

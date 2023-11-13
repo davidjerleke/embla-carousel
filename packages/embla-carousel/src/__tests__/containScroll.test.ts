@@ -26,6 +26,14 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4, 5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -36,6 +44,15 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7, 8, 9]
+      ])
     })
 
     test('End', () => {
@@ -46,6 +63,14 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4, 5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -56,6 +81,14 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
   })
 
@@ -73,6 +106,15 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -83,6 +125,16 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8, 9]
+      ])
     })
 
     test('End', () => {
@@ -93,6 +145,15 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -103,6 +164,16 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7, 8, 9]
+      ])
     })
   })
 
@@ -121,6 +192,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -132,6 +216,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -142,6 +239,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -153,6 +263,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 
@@ -171,6 +294,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -182,6 +318,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -192,6 +341,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -203,6 +365,19 @@ describe('➡️  ContainScroll - Horizontal LTR', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 })
@@ -222,6 +397,14 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4, 5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -232,6 +415,15 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7, 8, 9]
+      ])
     })
 
     test('End', () => {
@@ -242,6 +434,14 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4, 5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -252,6 +452,14 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
   })
 
@@ -269,6 +477,15 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -279,6 +496,16 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8, 9]
+      ])
     })
 
     test('End', () => {
@@ -289,6 +516,15 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -299,6 +535,16 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7, 8, 9]
+      ])
     })
   })
 
@@ -317,6 +563,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -328,6 +587,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -338,6 +610,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -349,6 +634,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 
@@ -367,6 +665,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -378,6 +689,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -388,6 +712,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -399,6 +736,19 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 })
@@ -418,6 +768,14 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4, 5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -428,6 +786,15 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7, 8, 9]
+      ])
     })
 
     test('End', () => {
@@ -438,6 +805,14 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4, 5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -448,6 +823,14 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
   })
 
@@ -465,6 +848,15 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5, 6, 7, 8, 9]
+      ])
     })
 
     test('Center', () => {
@@ -475,6 +867,16 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8, 9]
+      ])
     })
 
     test('End', () => {
@@ -485,7 +887,34 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0, 1, 2, 3, 4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
+
+    emblaApi.reInit({ align: (viewSize) => viewSize * 0.1 })
+
+    const engine = emblaApi.internalEngine()
+    const expectedScrollSnaps = [0, -30, -250, -420, -690, -840, -860]
+
+    expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
+    expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+    expect(engine.slideRegistry).toEqual([
+      [0],
+      [1],
+      [2],
+      [3],
+      [4],
+      [5],
+      [6, 7, 8, 9]
+    ])
   })
 
   describe('"keepSnaps" is correct for slides WITHOUT MARGINS and ALIGN is:', () => {
@@ -503,6 +932,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -514,6 +956,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -524,6 +979,19 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -535,6 +1003,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 
@@ -553,6 +1034,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Center', () => {
@@ -564,6 +1058,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('End', () => {
@@ -574,6 +1081,19 @@ describe('➡️  ContainScroll - Vertical', () => {
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
 
     test('Custom', () => {
@@ -585,6 +1105,19 @@ describe('➡️  ContainScroll - Vertical', () => {
       ]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
     })
   })
 })

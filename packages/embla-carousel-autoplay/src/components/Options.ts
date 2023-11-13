@@ -4,6 +4,7 @@ export type OptionsType = CreateOptionsType<{
   delay: number
   jump: boolean
   playOnInit: boolean
+  stopOnFocusIn: boolean
   stopOnInteraction: boolean
   stopOnMouseEnter: boolean
   stopOnLastSnap: boolean
@@ -16,6 +17,7 @@ export const defaultOptions: OptionsType = {
   delay: 4000,
   jump: false,
   playOnInit: true,
+  stopOnFocusIn: true,
   stopOnInteraction: true,
   stopOnMouseEnter: false,
   stopOnLastSnap: false,

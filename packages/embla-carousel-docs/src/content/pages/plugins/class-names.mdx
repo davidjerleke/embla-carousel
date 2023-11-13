@@ -16,6 +16,8 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 
 Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
 
+---
+
 ## Installation
 
 First you need to install the **npm package** and save it to your dependencies:
@@ -69,12 +71,16 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [
 ])
 ```
 
+---
+
 ### snapped
 
 Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`is-snapped`</BrandSecondaryText>
 
 Choose a classname that will be applied to the snapped slides. Pass an empty string to opt-out.
+
+---
 
 ### inView
 
@@ -88,6 +94,8 @@ Choose a classname that will be applied to slides in view. Pass an empty string 
   option.
 </Admonition>
 
+---
+
 ### draggable
 
 Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
@@ -95,14 +103,11 @@ Default: <BrandSecondaryText>`is-draggable`</BrandSecondaryText>
 
 Choose a classname that will be applied to a draggable carousel container. Pass an empty string to opt-out.
 
+---
+
 ### dragging
 
 Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`is-dragging`</BrandSecondaryText>
 
 Choose a classname that will be applied to the container when dragging. Pass an empty string to opt-out.
-
-snapped: 'is-snapped',
-inView: 'is-in-view',
-draggable: 'is-draggable',
-dragging: 'is-dragging'
