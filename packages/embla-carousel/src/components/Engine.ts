@@ -174,6 +174,8 @@ export function Engine(
       scrollLooper,
       slideLooper,
       dragHandler,
+      animation,
+      eventHandler,
       options: { loop }
     },
     lagOffset
