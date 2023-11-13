@@ -32,6 +32,12 @@ export const codeStyles = css`
     border-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
   }
 
+  ${AdmonitionWrapper} .${PRISM_HIGHLIGHT_CLASS_NAME} {
+    display: inline-grid;
+    margin: 0;
+    width: 100%;
+  }
+
   .${PRISM_HIGHLIGHT_CLASS_NAME} {
     ${pageFrameCollapseStyles};
     position: relative;

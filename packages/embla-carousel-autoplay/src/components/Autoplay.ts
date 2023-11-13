@@ -57,8 +57,9 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const { eventStore, ownerDocument } = emblaApi.internalEngine()
     const emblaRoot = emblaApi.rootNode()
     const root = (options.rootNode && options.rootNode(emblaRoot)) || emblaRoot
+    const container = emblaApi.containerNode()
 
-    emblaApi.on('pointerDown', clearTimer)
+    emblaApi.on('pointerDown', stopTimer)
 
     if (!options.stopOnInteraction) {
       emblaApi.on('pointerUp', startTimer)
@@ -67,7 +68,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     if (options.stopOnMouseEnter) {
       eventStore.add(root, 'mouseenter', () => {
         resume = false
-        clearTimer()
+        stopTimer()
       })
 
       if (!options.stopOnInteraction) {
@@ -79,21 +80,14 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     if (options.stopOnFocusIn) {
-      eventStore.add(root, 'focusin', clearTimer)
+      eventStore.add(container, 'focusin', stopTimer)
 
       if (!options.stopOnInteraction) {
-        eventStore.add(root, 'focusout', startTimer)
+        eventStore.add(container, 'focusout', startTimer)
       }
     }
 
-    eventStore.add(ownerDocument, 'visibilitychange', () => {
-      if (ownerDocument.visibilityState === 'hidden') {
-        resume = playing
-        return clearTimer()
-      }
-
-      if (resume) startTimer()
-    })
+    eventStore.add(ownerDocument, 'visibilitychange', visibilityChange)
 
     if (options.playOnInit) {
       emblaApi.on('init', startTimer).on('reInit', startTimer)
@@ -103,10 +97,12 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   function destroy(): void {
     destroyed = true
     playing = false
-    emblaApi.off('init', startTimer).off('reInit', startTimer)
-    emblaApi.off('pointerDown', clearTimer)
-    if (!options.stopOnInteraction) emblaApi.off('pointerUp', startTimer)
-    clearTimer()
+    emblaApi
+      .off('init', startTimer)
+      .off('reInit', startTimer)
+      .off('pointerDown', stopTimer)
+      .off('pointerUp', startTimer)
+    stopTimer()
     cancelAnimationFrame(animationFrame)
     animationFrame = 0
   }
@@ -121,13 +117,24 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     playing = true
   }
 
-  function clearTimer(): void {
+  function stopTimer(): void {
     if (destroyed) return
     if (playing) emblaApi.emit('autoplay:stop')
     const { ownerWindow } = emblaApi.internalEngine()
     ownerWindow.clearInterval(timer)
     timer = 0
     playing = false
+  }
+
+  function visibilityChange(): void {
+    const { ownerDocument } = emblaApi.internalEngine()
+
+    if (ownerDocument.visibilityState === 'hidden') {
+      resume = playing
+      return stopTimer()
+    }
+
+    if (resume) startTimer()
   }
 
   function play(jumpOverride?: boolean): void {
@@ -137,7 +144,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function stop(): void {
-    if (playing) clearTimer()
+    if (playing) stopTimer()
   }
 
   function reset(): void {
@@ -155,7 +162,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       const lastIndex = emblaApi.scrollSnapList().length - 1
       const kill = options.stopOnLastSnap && nextIndex === lastIndex
 
-      if (kill) clearTimer()
+      if (kill) stopTimer()
 
       if (emblaApi.canScrollNext()) {
         emblaApi.scrollNext(jump)

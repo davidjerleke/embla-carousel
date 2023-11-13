@@ -1,6 +1,6 @@
 ---
 title: Autoplay
-description: Learn how to add this Autoplay plugin to Embla Carousel
+description: Learn how to use the Autoplay plugin for Embla Carousel
 order: 0
 date: 2021-03-13
 ---
@@ -21,9 +21,16 @@ This plugin is used to extend Embla Carousel with **autoplay** functionality. It
 
 ## Installation
 
-First you need to install the **npm package** and save it to your dependencies:
+Start by installing the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    ```
+
+  </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
 
     ```shell
@@ -40,40 +47,13 @@ First you need to install the **npm package** and save it to your dependencies:
   </TabsItem>
 </Tabs>
 
-Alternatively, you can use a **CDN** to include it in your project:
-
-```html
-<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
-```
-
 ## Usage
 
-This plugin accepts a single optional parameter, which is its [options](/plugins/autoplay/#options) object that allows you to configure it. You maybe want to choose a **custom root node** for the autoplay plugin. This can be done with the [rootNode](/plugins/autoplay/#rootnode) options attribute. The root node will respond to interaction events and stop autoplay when a user interacts with the carousel. If this attribute is omitted, the Embla Carousel root node will be used as a default.
-
-```js
-import EmblaCarousel from 'embla-carousel'
-import Autoplay from 'embla-carousel-autoplay'
-
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [Autoplay()]) // Add plugin
-```
+Please read the [plugins](/api/plugins/#usage) page to learn **how to work with plugins**.
 
 ## Options
 
-The Autoplay plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
-
-```js
-import EmblaCarousel from 'embla-carousel'
-import Autoplay from 'embla-carousel-autoplay'
-
-const autoplayOptions = {
-  delay: 4000,
-  rootNode: (emblaRoot) => emblaRoot.parentElement
-}
-
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  Autoplay(autoplayOptions) // Add plugin with options
-])
-```
+Below follows an exhaustive **list of all** `Autoplay` **options** and their default values.
 
 ---
 
@@ -109,7 +89,7 @@ If set to `false`, you'll have to start autoplay yourself by calling the [play](
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
-If set to `false`, autoplay will not be disabled after drag interactions, and it will restart every time after the interaction.
+If set to `false`, autoplay will not be disabled after drag interactions, and it will restart every time after an interaction.
 
 ---
 
@@ -118,7 +98,7 @@ If set to `false`, autoplay will not be disabled after drag interactions, and it
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
-When enabled, autoplay will pause when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also `false`, autoplay will resume when the mouse leaves the carousel container.
+When enabled, autoplay will stop when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/autoplay/#stoponinteraction) is also `false`, autoplay will resume when the mouse leaves the carousel container.
 
 ---
 
@@ -145,17 +125,13 @@ If this parameter is enabled, autoplay will stop when it reaches last slide.
 Type: <BrandPrimaryText>`(emblaRoot: HTMLElement) => HTMLElement | null`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`null`</BrandSecondaryText>
 
-The node that should respond to user interactions like [stopOnMouseEnter](/plugins/autoplay/#stoponmouseenter) and [stopOnInteraction](/plugins/autoplay/#stoponinteraction).
+The **node** that should **respond** to user **interactions** like [stopOnMouseEnter](/plugins/autoplay/#stoponmouseenter) and [stopOnInteraction](/plugins/autoplay/#stoponinteraction). If this is omitted, the node that wraps the Embla Carousel will be used as default.
 
 ---
 
 ## Methods
 
-The Autoplay plugin exposes a set of **useful methods** which lets you control it. Assuming you've passed the plugin to the Embla Carousel constructor, a method is called like demonstrated below:
-
-```js
-embla.plugins().autoplay.stop() // Method
-```
+Below follows an exhaustive **list of all** `Autoplay` **methods** with their respective parameters and return values.
 
 ---
 
@@ -197,13 +173,7 @@ Returns a boolean whether autoplay is playing or not.
 
 ## Events
 
-Below follows an exhaustive list of all Autoplay plugin events together with information about how they work. Attach event listeners like so:
-
-```ts
-emblaApi.on('autoplay:play', (emblaApi, eventName) => {
-  console.log('Autoplay plugin started playing!')
-})
-```
+Below follows an exhaustive **list of all** `Autoplay` **events** together with information about how they work.
 
 ---
 

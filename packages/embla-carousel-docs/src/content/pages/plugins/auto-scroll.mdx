@@ -1,0 +1,190 @@
+---
+title: Auto Scroll
+description: Learn how to use the Auto Scroll plugin for Embla Carousel
+order: 1
+date: 2024-01-13
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+
+# Auto Scroll
+
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-auto-scroll">
+  View plugin on GitHub
+</RepositoryLink>
+
+This plugin is used to extend Embla Carousel with **auto scroll** functionality. It comes with a useful set of options that allows you to customize it to your liking.
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+
+    ```shell
+    npm install embla-carousel-auto-scroll --save
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+
+    ```shell
+    yarn add embla-carousel-auto-scroll
+    ```
+
+  </TabsItem>
+</Tabs>
+
+## Usage
+
+Please read the [plugins](/api/plugins/#usage) page to learn **how to work with plugins**.
+
+## Options
+
+Below follows an exhaustive **list of all** `Auto Scroll` **options** and their default values.
+
+### speed
+
+Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`2`</BrandSecondaryText>
+
+Number of pixels auto scroll should advance per frame.
+
+---
+
+### startDelay
+
+Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`1000`</BrandSecondaryText>
+
+Number of milliseconds auto scroll should **wait before it starts**. This also applies when user interactions end and [stopOnInteraction](/plugins/auto-scroll/#stoponinteraction) is `false`.
+
+---
+
+### direction
+
+Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`forward`</BrandSecondaryText>
+
+This option is used to set the auto scroll direction. Set it to `backward` if you want it to scroll in the opposite direction.
+
+---
+
+### playOnInit
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+If set to `false`, you'll have to start auto scroll yourself by calling the [play](/plugins/auto-scroll/#play) method.
+
+---
+
+### stopOnInteraction
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+If set to `false`, auto scroll will not be disabled after drag interactions, and it will restart every time after an interaction.
+
+---
+
+### stopOnMouseEnter
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`false`</BrandSecondaryText>
+
+When enabled, auto scroll will stop when a mouse pointer enters the Embla Carousel container. If [stopOnInteraction](/plugins/auto-scroll/#stoponinteraction) is also `false`, auto scroll will resume when the mouse leaves the carousel container.
+
+---
+
+### stopOnFocusIn
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+When enabled, auto scroll will stop when a focusable element inside the carousel recieves focus. If [stopOnInteraction](/plugins/auto-scroll/#stoponinteraction) is `false`, auto scroll will resume when the user leaves focus.
+
+---
+
+### rootNode
+
+Type: <BrandPrimaryText>`(emblaRoot: HTMLElement) => HTMLElement | null`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`null`</BrandSecondaryText>
+
+The **node** that should **respond** to user **interactions** like [stopOnMouseEnter](/plugins/auto-scroll/#stoponmouseenter) and [stopOnInteraction](/plugins/auto-scroll/#stoponinteraction). If this is omitted, the node that wraps the Embla Carousel will be used as default.
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Auto Scroll` **methods** with their respective parameters and return values.
+
+---
+
+### play
+
+Parameters: <BrandPrimaryText>`startDelayOverride?: number`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+
+Start auto scroll. Pass a **startDelayOverride** if you want to change the [startDelay](/plugins/auto-scroll/#startdelay) option after the plugin has been initialized.
+
+---
+
+### stop
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+
+Stops auto scroll.
+
+---
+
+### reset
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+
+Stops auto scroll, and starts the timer again using [startDelay](/plugins/auto-scroll/#startdelay) when the carousel has settled. This will only take effect if auto scroll is playing. If auto scroll is stopped, this method won't trigger anything.
+
+---
+
+### isPlaying
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
+
+Returns a boolean whether the carousel is auto scrolling or not.
+
+---
+
+## Events
+
+Below follows an exhaustive **list of all** `Auto Scroll` **events** together with information about how they work.
+
+---
+
+### autoScroll:play
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when auto scroll starts playing.
+
+---
+
+### autoScroll:stop
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when auto scroll stops scrolling.
+
+---
