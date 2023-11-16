@@ -20,17 +20,17 @@ export function mockTestElementDimensions(
   containerNode.innerHTML = ''
   slideNodes.forEach((slideNode) => containerNode.appendChild(slideNode))
 
-  const fixNodeRect = (node: any, rect: DOMRect) => {
+  const mockNodeOffset = (node: any, rect: DOMRect) => {
     Object.defineProperty(node, 'offsetTop', { value: rect.top })
     Object.defineProperty(node, 'offsetLeft', { value: rect.left })
     Object.defineProperty(node, 'offsetWidth', { value: rect.width })
     Object.defineProperty(node, 'offsetHeight', { value: rect.height })
   }
 
-  fixNodeRect(rootNode, containerRect)
-  fixNodeRect(containerNode, containerRect)
+  mockNodeOffset(rootNode, containerRect)
+  mockNodeOffset(containerNode, containerRect)
   slideNodes.forEach((s, i) => {
-    fixNodeRect(s, slideRects[i])
+    mockNodeOffset(s, slideRects[i])
   })
 
   if (!slideNodes.length) return
