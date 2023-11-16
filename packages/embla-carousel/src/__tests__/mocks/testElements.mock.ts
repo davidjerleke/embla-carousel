@@ -21,7 +21,6 @@ export function mockTestElementDimensions(
   slideNodes.forEach((slideNode) => containerNode.appendChild(slideNode))
 
   const fixNodeRect = (node: any, rect: DOMRect) => {
-    node.getBoundingClientRect = () => rect
     Object.defineProperty(node, 'offsetTop', { value: rect.top })
     Object.defineProperty(node, 'offsetLeft', { value: rect.left })
     Object.defineProperty(node, 'offsetWidth', { value: rect.width })
