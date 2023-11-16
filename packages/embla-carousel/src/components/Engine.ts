@@ -27,7 +27,13 @@ import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
-import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
+import {
+  arrayKeys,
+  arrayLast,
+  arrayLastIndex,
+  getNodeRect,
+  WindowType
+} from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import {
   AnimationType,
@@ -104,8 +110,8 @@ export function Engine(
   } = options
 
   // Measurements
-  const containerRect = container.getBoundingClientRect()
-  const slideRects = slides.map((slide) => slide.getBoundingClientRect())
+  const containerRect = getNodeRect(container)
+  const slideRects = slides.map((slide) => getNodeRect(slide))
   const direction = Direction(contentDirection)
   const axis = Axis(scrollAxis, contentDirection)
   const viewSize = axis.measureSize(containerRect)

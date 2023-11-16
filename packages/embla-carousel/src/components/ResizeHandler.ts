@@ -1,7 +1,7 @@
 import { AxisType } from './Axis'
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { isBoolean, mathAbs, WindowType } from './utils'
+import { getNodeRect, isBoolean, mathAbs, WindowType } from './utils'
 
 type ResizeHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
@@ -28,8 +28,8 @@ export function ResizeHandler(
   let slideSizes: number[] = []
   let destroyed = false
 
-  function readSize(node: Element | HTMLElement): number {
-    return axis.measureSize(node.getBoundingClientRect())
+  function readSize(node: HTMLElement): number {
+    return axis.measureSize(getNodeRect(node))
   }
 
   function init(emblaApi: EmblaCarouselType): void {
