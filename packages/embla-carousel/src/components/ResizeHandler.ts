@@ -1,7 +1,8 @@
 import { AxisType } from './Axis'
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { getNodeRect, isBoolean, mathAbs, WindowType } from './utils'
+import { NodeRectsType } from './NodeRects'
+import { isBoolean, mathAbs, WindowType } from './utils'
 
 type ResizeHandlerCallbackType = (
   emblaApi: EmblaCarouselType,
@@ -21,7 +22,8 @@ export function ResizeHandler(
   ownerWindow: WindowType,
   slides: HTMLElement[],
   axis: AxisType,
-  watchResize: ResizeHandlerOptionType
+  watchResize: ResizeHandlerOptionType,
+  nodeRects: NodeRectsType
 ): ResizeHandlerType {
   let resizeObserver: ResizeObserver
   let containerSize: number
@@ -29,7 +31,7 @@ export function ResizeHandler(
   let destroyed = false
 
   function readSize(node: HTMLElement): number {
-    return axis.measureSize(getNodeRect(node))
+    return axis.measureSize(nodeRects.measure(node))
   }
 
   function init(emblaApi: EmblaCarouselType): void {
@@ -46,7 +48,7 @@ export function ResizeHandler(
         const newSize = readSize(isContainer ? container : slides[slideIndex])
         const diffSize = mathAbs(newSize - lastSize)
 
-        if (diffSize >= 0.2) {
+        if (diffSize >= 0.5) {
           ownerWindow.requestAnimationFrame(() => {
             emblaApi.reInit()
             eventHandler.emit('resize')

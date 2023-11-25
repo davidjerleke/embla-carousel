@@ -505,15 +505,16 @@ const IOS_PICKER_STYLES = css`
     min-width: 100%;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    touch-action: pan-x;
   }
 
   .embla__ios-picker__viewport {
-    height: 100%;
+    height: 32px;
     width: 100%;
     position: relative;
-    display: flex;
     perspective: 1000px;
-    align-items: center;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -534,7 +535,7 @@ const IOS_PICKER_STYLES = css`
   }
 
   .embla__ios-picker__container {
-    height: 32px;
+    height: 100%;
     width: 100%;
     position: absolute;
     transform-style: preserve-3d;

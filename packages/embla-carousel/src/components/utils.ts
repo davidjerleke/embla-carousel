@@ -88,23 +88,3 @@ export function isMouseEvent(
     evt instanceof ownerWindow.MouseEvent
   )
 }
-
-export function getNodeRect(node: HTMLElement): DOMRect {
-  const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = node
-
-  const rect = {
-    top: offsetTop,
-    left: offsetLeft,
-    x: offsetLeft,
-    y: offsetTop,
-    width: offsetWidth,
-    height: offsetHeight,
-    bottom: offsetTop + offsetHeight,
-    right: offsetLeft + offsetWidth
-  }
-
-  return {
-    ...rect,
-    toJSON: () => rect
-  }
-}

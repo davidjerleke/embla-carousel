@@ -1,4 +1,5 @@
 import { DirectionOptionType } from './Direction'
+import { NodeRectType } from './NodeRects'
 
 export type AxisOptionType = 'x' | 'y'
 type AxisEdgeType = 'top' | 'right' | 'bottom' | 'left'
@@ -8,7 +9,7 @@ export type AxisType = {
   cross: AxisOptionType
   startEdge: AxisEdgeType
   endEdge: AxisEdgeType
-  measureSize: (rect: DOMRect) => number
+  measureSize: (nodeRect: NodeRectType) => number
 }
 
 export function Axis(
@@ -20,8 +21,8 @@ export function Axis(
   const startEdge = getStartEdge()
   const endEdge = getEndEdge()
 
-  function measureSize(rect: DOMRect): number {
-    const { width, height } = rect
+  function measureSize(nodeRect: NodeRectType): number {
+    const { width, height } = nodeRect
     return scroll === 'x' ? width : height
   }
 

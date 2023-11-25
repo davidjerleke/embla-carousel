@@ -1,4 +1,5 @@
 import { AxisType } from './Axis'
+import { NodeRectType } from './NodeRects'
 import { arrayIsLastIndex, arrayLast, mathAbs, WindowType } from './utils'
 
 export type SlideSizesType = {
@@ -10,8 +11,8 @@ export type SlideSizesType = {
 
 export function SlideSizes(
   axis: AxisType,
-  containerRect: DOMRect,
-  slideRects: DOMRect[],
+  containerRect: NodeRectType,
+  slideRects: NodeRectType[],
   slides: HTMLElement[],
   readEdgeGap: boolean,
   ownerWindow: WindowType

@@ -7,6 +7,13 @@ export type TestElementDimensionsType = {
   }
 }
 
+function mockNodeRects(node: HTMLElement, rect: DOMRect): void {
+  Object.defineProperty(node, 'offsetTop', { value: rect.top })
+  Object.defineProperty(node, 'offsetLeft', { value: rect.left })
+  Object.defineProperty(node, 'offsetWidth', { value: rect.width })
+  Object.defineProperty(node, 'offsetHeight', { value: rect.height })
+}
+
 export function mockTestElementDimensions(
   dimensions: TestElementDimensionsType,
   rootNode: HTMLElement
@@ -20,18 +27,9 @@ export function mockTestElementDimensions(
   containerNode.innerHTML = ''
   slideNodes.forEach((slideNode) => containerNode.appendChild(slideNode))
 
-  const mockNodeOffset = (node: any, rect: DOMRect) => {
-    Object.defineProperty(node, 'offsetTop', { value: rect.top })
-    Object.defineProperty(node, 'offsetLeft', { value: rect.left })
-    Object.defineProperty(node, 'offsetWidth', { value: rect.width })
-    Object.defineProperty(node, 'offsetHeight', { value: rect.height })
-  }
-
-  mockNodeOffset(rootNode, containerRect)
-  mockNodeOffset(containerNode, containerRect)
-  slideNodes.forEach((s, i) => {
-    mockNodeOffset(s, slideRects[i])
-  })
+  mockNodeRects(rootNode, containerRect)
+  mockNodeRects(containerNode, containerRect)
+  slideNodes.forEach((s, i) => mockNodeRects(s, slideRects[i]))
 
   if (!slideNodes.length) return
 

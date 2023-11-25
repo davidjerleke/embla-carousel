@@ -1,5 +1,6 @@
 import { AlignmentType } from './Alignment'
 import { AxisType } from './Axis'
+import { NodeRectType } from './NodeRects'
 import { SlidesToScrollType } from './SlidesToScroll'
 import { arrayLast, mathAbs } from './utils'
 
@@ -11,8 +12,8 @@ export type ScrollSnapsType = {
 export function ScrollSnaps(
   axis: AxisType,
   alignment: AlignmentType,
-  containerRect: DOMRect,
-  slideRects: DOMRect[],
+  containerRect: NodeRectType,
+  slideRects: NodeRectType[],
   slidesToScroll: SlidesToScrollType
 ): ScrollSnapsType {
   const { startEdge, endEdge } = axis
