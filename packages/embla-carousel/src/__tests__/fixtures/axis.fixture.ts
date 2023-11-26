@@ -10,72 +10,42 @@ import { TestElementDimensionsType } from '../mocks/testElements.mock'
   - Slide widths: 800px, 400px, 200px, 500px, 300px
 */
 export const FIXTURE_AXIS_X_LTR: TestElementDimensionsType = {
-  containerRect: {
-    x: 0,
-    y: 0,
-    width: 1000,
-    height: 190,
-    top: 0,
-    right: 1000,
-    bottom: 190,
-    left: 0,
-    toJSON: () => undefined
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
   },
-  slideRects: [
+  slideOffsets: [
     {
-      x: 0,
-      y: 0,
-      width: 800,
-      height: 190,
-      top: 0,
-      right: 800,
-      bottom: 190,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 800,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 0
     },
     {
-      x: 800,
-      y: 0,
-      width: 400,
-      height: 190,
-      top: 0,
-      right: 1200,
-      bottom: 190,
-      left: 800,
-      toJSON: () => undefined
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 800
     },
     {
-      x: 1200,
-      y: 0,
-      width: 200,
-      height: 190,
-      top: 0,
-      right: 1400,
-      bottom: 190,
-      left: 1200,
-      toJSON: () => undefined
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 1200
     },
     {
-      x: 1400,
-      y: 0,
-      width: 500,
-      height: 190,
-      top: 0,
-      right: 1900,
-      bottom: 190,
-      left: 1400,
-      toJSON: () => undefined
+      offsetWidth: 500,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 1400
     },
     {
-      x: 1900,
-      y: 0,
-      width: 300,
-      height: 190,
-      top: 0,
-      right: 2200,
-      bottom: 190,
-      left: 1900,
-      toJSON: () => undefined
+      offsetWidth: 300,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 1900
     }
   ],
   endMargin: {
@@ -94,72 +64,42 @@ Fixture 2
 - Slide widths: 800px, 400px, 200px, 500px, 300px
 */
 export const FIXTURE_AXIS_X_RTL: TestElementDimensionsType = {
-  containerRect: {
-    x: 0,
-    y: 0,
-    width: 1000,
-    height: 190,
-    top: 0,
-    right: 1000,
-    bottom: 190,
-    left: 0,
-    toJSON: () => undefined
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
   },
-  slideRects: [
+  slideOffsets: [
     {
-      x: 200,
-      y: 0,
-      width: 800,
-      height: 190,
-      top: 0,
-      right: 1000,
-      bottom: 190,
-      left: 200,
-      toJSON: () => undefined
+      offsetWidth: 800,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 200
     },
     {
-      x: -200,
-      y: 0,
-      width: 400,
-      height: 190,
-      top: 0,
-      right: 200,
-      bottom: 190,
-      left: -200,
-      toJSON: () => undefined
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -200
     },
     {
-      x: -400,
-      y: 0,
-      width: 200,
-      height: 190,
-      top: 0,
-      right: -200,
-      bottom: 190,
-      left: -400,
-      toJSON: () => undefined
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -400
     },
     {
-      x: -900,
-      y: 0,
-      width: 500,
-      height: 190,
-      top: 0,
-      right: -400,
-      bottom: 190,
-      left: -900,
-      toJSON: () => undefined
+      offsetWidth: 500,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -900
     },
     {
-      x: -1200,
-      y: 0,
-      width: 300,
-      height: 190,
-      top: 0,
-      right: -900,
-      bottom: 190,
-      left: -1200,
-      toJSON: () => undefined
+      offsetWidth: 300,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -1200
     }
   ],
   endMargin: {
@@ -177,72 +117,42 @@ export const FIXTURE_AXIS_X_RTL: TestElementDimensionsType = {
   - Slide heights: 800px, 400px, 200px, 500px, 300px
 */
 export const FIXTURE_AXIS_Y: TestElementDimensionsType = {
-  containerRect: {
-    x: 0,
-    y: 0,
-    width: 1000,
-    height: 1000,
-    top: 0,
-    right: 1000,
-    bottom: 1000,
-    left: 0,
-    toJSON: () => undefined
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 1000,
+    offsetTop: 0,
+    offsetLeft: 0
   },
-  slideRects: [
+  slideOffsets: [
     {
-      x: 0,
-      y: 0,
-      width: 1000,
-      height: 800,
-      top: 0,
-      right: 1000,
-      bottom: 800,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 1000,
+      offsetHeight: 800,
+      offsetTop: 0,
+      offsetLeft: 0
     },
     {
-      x: 0,
-      y: 800,
-      width: 1000,
-      height: 400,
-      top: 800,
-      right: 1000,
-      bottom: 1200,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 1000,
+      offsetHeight: 400,
+      offsetTop: 800,
+      offsetLeft: 0
     },
     {
-      x: 0,
-      y: 1200,
-      width: 1000,
-      height: 200,
-      top: 1200,
-      right: 1000,
-      bottom: 1400,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 1000,
+      offsetHeight: 200,
+      offsetTop: 1200,
+      offsetLeft: 0
     },
     {
-      x: 0,
-      y: 1400,
-      width: 1000,
-      height: 500,
-      top: 1400,
-      right: 1000,
-      bottom: 1900,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 1000,
+      offsetHeight: 500,
+      offsetTop: 1400,
+      offsetLeft: 0
     },
     {
-      x: 0,
-      y: 1900,
-      width: 1000,
-      height: 300,
-      top: 1900,
-      right: 1000,
-      bottom: 2200,
-      left: 0,
-      toJSON: () => undefined
+      offsetWidth: 1000,
+      offsetHeight: 300,
+      offsetTop: 1900,
+      offsetLeft: 0
     }
   ],
   endMargin: {

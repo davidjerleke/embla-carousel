@@ -32,10 +32,10 @@ describe('➡️  ReInit', () => {
     expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
     expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-    const slideRects = FIXTURE_REINIT_1.slideRects
+    const slideOffsets = FIXTURE_REINIT_1.slideOffsets
     const fixtureAllSlidesButFirst = {
       ...FIXTURE_REINIT_1,
-      slideRects: slideRects.slice(0, slideRects.length - 1)
+      slideOffsets: slideOffsets.slice(0, slideOffsets.length - 1)
     }
     mockTestElementDimensions(fixtureAllSlidesButFirst, emblaApi.rootNode())
     emblaApi.reInit()

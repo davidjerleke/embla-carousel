@@ -11,7 +11,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
     const emblaApi = EmblaCarousel(
       mockTestElements(FIXTURE_SELECTED_PREVIOUS_SNAP_LTR)
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_LTR.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_LTR.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
@@ -90,7 +90,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       mockTestElements(FIXTURE_SELECTED_PREVIOUS_SNAP_LTR),
       { loop: true }
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_LTR.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_LTR.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
@@ -171,7 +171,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
       mockTestElements(FIXTURE_SELECTED_PREVIOUS_SNAP_RTL),
       { direction: 'rtl' }
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_RTL.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_RTL.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
@@ -253,7 +253,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
         loop: true
       }
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_RTL.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_RTL.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
@@ -336,7 +336,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Vertical', () => {
         axis: 'y'
       }
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_Y.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_Y.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
@@ -418,7 +418,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Vertical', () => {
         loop: true
       }
     )
-    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_Y.slideRects.length - 1
+    const lastIndex = FIXTURE_SELECTED_PREVIOUS_SNAP_Y.slideOffsets.length - 1
     const firstIndex = 0
 
     beforeEach(() => {
