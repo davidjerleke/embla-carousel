@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-auto-height",
-  "version": "8.0.0-rc14",
+  "version": "8.0.0-rc15",
   "author": "David Jerleke",
   "description": "An auto height plugin for Embla Carousel",
   "repository": {
@@ -58,7 +58,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.0.0-rc14"
+    "embla-carousel": "8.0.0-rc15"
   },
   "exports": {
     "./package.json": "./package.json",
