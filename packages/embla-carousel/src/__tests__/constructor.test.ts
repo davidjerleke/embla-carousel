@@ -29,7 +29,7 @@ describe('➡️  EmblaCarousel', () => {
       expect(() =>
         EmblaCarousel(
           mockTestElements({
-            slideRects: [],
+            slideOffsets: [],
             endMargin: {
               property: 'marginRight',
               value: 0

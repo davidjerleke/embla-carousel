@@ -1,5 +1,6 @@
 import { AxisType } from './Axis'
 import { DirectionType } from './Direction'
+import { NodeRectType } from './NodeRects'
 import {
   arrayKeys,
   arrayLast,
@@ -20,8 +21,8 @@ export function SlidesToScroll(
   viewSize: number,
   slidesToScroll: SlidesToScrollOptionType,
   loop: boolean,
-  containerRect: DOMRect,
-  slideRects: DOMRect[],
+  containerRect: NodeRectType,
+  slideRects: NodeRectType[],
   startGap: number,
   endGap: number
 ): SlidesToScrollType {

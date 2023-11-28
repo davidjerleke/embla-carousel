@@ -1,28 +1,46 @@
+type TestElementOffsetType = {
+  offsetLeft: number
+  offsetTop: number
+  offsetWidth: number
+  offsetHeight: number
+}
+
 export type TestElementDimensionsType = {
-  containerRect?: DOMRect
-  slideRects: DOMRect[]
+  containerOffset?: TestElementOffsetType
+  slideOffsets: TestElementOffsetType[]
   endMargin: {
     property: 'marginLeft' | 'marginRight' | 'marginTop' | 'marginBottom'
     value: number
   }
 }
 
+function mockNodeOffsets(
+  node: HTMLElement,
+  offsets: TestElementOffsetType
+): void {
+  const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = offsets
+  Object.defineProperty(node, 'offsetTop', { value: offsetTop })
+  Object.defineProperty(node, 'offsetLeft', { value: offsetLeft })
+  Object.defineProperty(node, 'offsetWidth', { value: offsetWidth })
+  Object.defineProperty(node, 'offsetHeight', { value: offsetHeight })
+}
+
 export function mockTestElementDimensions(
   dimensions: TestElementDimensionsType,
   rootNode: HTMLElement
 ): void {
-  const { containerRect, slideRects, endMargin } = dimensions
+  const { containerOffset, slideOffsets, endMargin } = dimensions
   const containerNode = <HTMLElement>rootNode.children[0]
-  const slideNodes = slideRects.map(() => document.createElement('div'))
+  const slideNodes = slideOffsets.map(() => document.createElement('div'))
 
-  if (!containerRect) return
+  if (!containerOffset) return
 
   containerNode.innerHTML = ''
   slideNodes.forEach((slideNode) => containerNode.appendChild(slideNode))
 
-  rootNode.getBoundingClientRect = () => containerRect
-  containerNode.getBoundingClientRect = () => containerRect
-  slideNodes.forEach((s, i) => (s.getBoundingClientRect = () => slideRects[i]))
+  mockNodeOffsets(rootNode, containerOffset)
+  mockNodeOffsets(containerNode, containerOffset)
+  slideNodes.forEach((s, i) => mockNodeOffsets(s, slideOffsets[i]))
 
   if (!slideNodes.length) return
 
@@ -33,11 +51,11 @@ export function mockTestElementDimensions(
 export function mockTestElements(
   dimensions: TestElementDimensionsType
 ): HTMLElement {
-  const { containerRect } = dimensions
+  const { containerOffset } = dimensions
   const rootNode = document.createElement('div')
   const containerNode = document.createElement('div')
 
-  if (containerRect) {
+  if (containerOffset) {
     rootNode.appendChild(containerNode)
     mockTestElementDimensions(dimensions, rootNode)
   }

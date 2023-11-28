@@ -7,6 +7,7 @@ import { DragTracker } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
+import { NodeRectType, NodeRects } from './NodeRects'
 import { OptionsType } from './Options'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ResizeHandler, ResizeHandlerType } from './ResizeHandler'
@@ -70,8 +71,8 @@ export type EngineType = {
   slideIndexes: number[]
   slideFocus: SlideFocusType
   slideRegistry: SlideRegistryType['slideRegistry']
-  containerRect: DOMRect
-  slideRects: DOMRect[]
+  containerRect: NodeRectType
+  slideRects: NodeRectType[]
 }
 
 export function Engine(
@@ -104,8 +105,9 @@ export function Engine(
   } = options
 
   // Measurements
-  const containerRect = container.getBoundingClientRect()
-  const slideRects = slides.map((slide) => slide.getBoundingClientRect())
+  const nodeRects = NodeRects()
+  const containerRect = nodeRects.measure(container)
+  const slideRects = slides.map(nodeRects.measure)
   const direction = Direction(contentDirection)
   const axis = Axis(scrollAxis, contentDirection)
   const viewSize = axis.measureSize(containerRect)
@@ -306,7 +308,8 @@ export function Engine(
       ownerWindow,
       slides,
       axis,
-      watchResize
+      watchResize,
+      nodeRects
     ),
     scrollBody,
     scrollBounds: ScrollBounds(
