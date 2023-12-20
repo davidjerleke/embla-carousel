@@ -31,7 +31,8 @@ The documentation is generated using [gatspy](https://github.com/gatsbyjs/gatsby
 
 To develop the docs locally follow these steps:
 
-- Install dependencies with `yarn install`
+- Run `yarn install`in the root directory to install dependencies
+- Run `yarn build` to build the docs (and the other packages)
 - Run `yarn start` to start the dev enviornment of the docs in `localhost:8000`
 - Make sure the `.mdx` file you're working on has a header like this:
 ```
