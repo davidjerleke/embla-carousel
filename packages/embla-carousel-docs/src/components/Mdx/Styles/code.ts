@@ -13,7 +13,7 @@ import { createScrollBarStyles } from 'consts/scrollBars'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME
-} from 'components/Mdx/Components/PrismSyntaxHighlight'
+} from 'consts/prismHighlight'
 
 export const codeStyles = css`
   .${CODE_HIGHLIGHT_CLASS_NAME} {

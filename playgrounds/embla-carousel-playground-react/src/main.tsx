@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { createCarouselArrowsDotsStyles } from 'components/Examples/createCarouselStyles'

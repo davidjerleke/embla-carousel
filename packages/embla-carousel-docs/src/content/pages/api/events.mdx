@@ -23,69 +23,69 @@ You need an **initialized carousel** in order to **make use of events**. Events 
 After initializing a carousel, we're going to **subscribe** to the [select](/api/events/#select) **event** in the following example:
 
 <Tabs groupId="library">
-<TabsItem label="Vanilla" value="vanilla">
+  <TabsItem label="Vanilla" value="vanilla">
 
-```js{9}
-import EmblaCarousel from 'embla-carousel'
+    ```js highlight={9}
+    import EmblaCarousel from 'embla-carousel'
 
-const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
 
-const onSelect = (emblaApi, eventName) => {
-  console.log(`Embla just triggered ${eventName}!`)
-}
+    const onSelect = (emblaApi, eventName) => {
+      console.log(`Embla just triggered ${eventName}!`)
+    }
 
-emblaApi.on('select', onSelect)
-```
+    emblaApi.on('select', onSelect)
+    ```
 
-</TabsItem>
-<TabsItem label="React" value="react">
+  </TabsItem>
+  <TabsItem label="React" value="react">
 
-```jsx{12}
-import { useCallback, useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+    ```jsx highlight={12}
+    import { useCallback, useEffect } from 'react'
+    import useEmblaCarousel from 'embla-carousel-react'
 
-export const EmblaCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+    export const EmblaCarousel = () => {
+      const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const onSelect = useCallback((emblaApi, eventName) => {
-    console.log(`Embla just triggered ${eventName}!`)
-  }, [])
-
-  useEffect(() => {
-    if (emblaApi) emblaApi.on('select', onSelect)
-  }, [emblaApi, onSelect])
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem label="Vue" value="vue">
-
-```html{14}
-<script>
-  import { watchEffect } from 'vue'
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  export default {
-    setup() {
-      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
-
-      const onSelect = (emblaApi, eventName) => {
+      const onSelect = useCallback((emblaApi, eventName) => {
         console.log(`Embla just triggered ${eventName}!`)
-      }
+      }, [])
 
-      watchEffect(() => {
-        if (emblaApi.value) emblaApi.value.on('select', onSelect)
-      })
+      useEffect(() => {
+        if (emblaApi) emblaApi.on('select', onSelect)
+      }, [emblaApi, onSelect])
 
       // ...
-    },
-  }
-</script>
-```
+    }
+    ```
 
-</TabsItem>
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
+
+    ```html highlight={14}
+    <script>
+      import { watchEffect } from 'vue'
+      import emblaCarouselVue from 'embla-carousel-vue'
+
+      export default {
+        setup() {
+          const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+
+          const onSelect = (emblaApi, eventName) => {
+            console.log(`Embla just triggered ${eventName}!`)
+          }
+
+          watchEffect(() => {
+            if (emblaApi.value) emblaApi.value.on('select', onSelect)
+          })
+
+          // ...
+        }
+      }
+    </script>
+    ```
+
+  </TabsItem>
 </Tabs>
 
 ### Removing event listeners
@@ -93,81 +93,175 @@ export const EmblaCarousel = () => {
 In order to remove an event listener, you'll have to call the [off](/api/methods/#off) method and make sure to pass the **same callback reference** you passed to the [on](/api/methods/#off) method:
 
 <Tabs groupId="library">
-<TabsItem label="Vanilla" value="vanilla">
+  <TabsItem label="Vanilla" value="vanilla">
 
-```js{9-11}
-import EmblaCarousel from 'embla-carousel'
+    ```js highlight={9-11}
+    import EmblaCarousel from 'embla-carousel'
 
-const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
 
-const onSelect = (emblaApi, eventName) => {
-  console.log(`Embla just triggered ${eventName}!`)
-}
+    const onSelect = (emblaApi, eventName) => {
+      console.log(`Embla just triggered ${eventName}!`)
+    }
 
-const removeOnSelectListener = () => {
-  emblaApi.off('select', onSelect)
-}
+    const removeOnSelectListener = () => {
+      emblaApi.off('select', onSelect)
+    }
 
-emblaApi.on('select', onSelect)
-```
+    emblaApi.on('select', onSelect)
+    ```
 
-</TabsItem>
-<TabsItem label="React" value="react">
+  </TabsItem>
+  <TabsItem label="React" value="react">
 
-```jsx{11-13}
-import { useCallback, useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+    ```jsx highlight={11-13}
+    import { useCallback, useEffect } from 'react'
+    import useEmblaCarousel from 'embla-carousel-react'
 
-export const EmblaCarousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+    export const EmblaCarousel = () => {
+      const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const onSelect = useCallback((emblaApi, eventName) => {
-    console.log(`Embla just triggered ${eventName}!`)
-  }, [])
+      const onSelect = useCallback((emblaApi, eventName) => {
+        console.log(`Embla just triggered ${eventName}!`)
+      }, [])
 
-  const removeOnSelectListener = useCallback(() => {
-    if (emblaApi) emblaApi.off('select', onSelect)
-  }, [emblaApi, onSelect])
+      const removeOnSelectListener = useCallback(() => {
+        if (emblaApi) emblaApi.off('select', onSelect)
+      }, [emblaApi, onSelect])
 
-  useEffect(() => {
-    if (emblaApi) emblaApi.on('select', onSelect)
-  }, [emblaApi, onSelect])
+      useEffect(() => {
+        if (emblaApi) emblaApi.on('select', onSelect)
+      }, [emblaApi, onSelect])
 
-  // ...
-}
-```
+      // ...
+    }
+    ```
 
-</TabsItem>
-<TabsItem label="Vue" value="vue">
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
 
-```html{13-15}
-<script>
-  import { watchEffect } from 'vue'
-  import emblaCarouselVue from 'embla-carousel-vue'
+    ```html highlight={13-15}
+    <script>
+      import { watchEffect } from 'vue'
+      import emblaCarouselVue from 'embla-carousel-vue'
 
-  export default {
-    setup() {
-      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+      export default {
+        setup() {
+          const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-      const onSelect = (emblaApi, eventName) => {
+          const onSelect = (emblaApi, eventName) => {
+            console.log(`Embla just triggered ${eventName}!`)
+          }
+
+          const removeOnSelectListener = () => {
+            if (emblaApi.value) emblaApi.value.off('select', onSelect)
+          }
+
+          watchEffect(() => {
+            if (emblaApi.value) emblaApi.value.on('select', onSelect)
+          })
+
+          // ...
+        }
+      }
+    </script>
+    ```
+
+  </TabsItem>
+</Tabs>
+
+### TypeScript
+
+The `EmblaEventType` is obtained directly from the **core package** `embla-carousel` and used like so:
+
+<Tabs groupId="library">
+  <TabsItem label="Vanilla" value="vanilla">
+
+    ```ts highlight={3,8}
+    import EmblaCarousel, {
+      EmblaCarouselType,
+      EmblaEventType
+    } from 'embla-carousel'
+
+    function onSlidesInView(
+      emblaApi: EmblaCarouselType,
+      eventName: EmblaEventType
+    ): void {
+      console.log(`Embla just triggered ${eventName}!`)
+    }
+
+    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+    emblaApi.on('slidesInView', onSlidesInView)
+    ```
+
+  </TabsItem>
+  <TabsItem label="React" value="react">
+
+    ```tsx highlight={2,9}
+    import React, { useCallback } from 'react'
+    import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+    import useEmblaCarousel from 'embla-carousel-react'
+
+    export function EmblaCarousel() {
+      const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+
+      const onSlidesInView = useCallback(
+        (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
+          console.log(`Embla just triggered ${eventName}!`)
+        },
+        []
+      )
+
+      useEffect(() => {
+        if (!emblaApi) return
+
+        emblaApi.on('slidesInView', onSlidesInView)
+      }, [onSlidesInView])
+
+      // ...
+    }
+    ```
+
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
+
+    ```html highlight={3,10}
+    <script lang="ts">
+      import { watchEffect } from 'vue'
+      import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+      import emblaCarouselVue from 'embla-carousel-vue'
+
+      const [emblaNode] = emblaCarouselVue({ loop: true })
+
+      function onSlidesInView(
+        emblaApi: EmblaCarouselType,
+        eventName: EmblaEventType
+      ): void {
         console.log(`Embla just triggered ${eventName}!`)
       }
 
-      const removeOnSelectListener = () => {
-        if (emblaApi.value) emblaApi.value.off('select', onSelect)
-      }
-
       watchEffect(() => {
-        if (emblaApi.value) emblaApi.value.on('select', onSelect)
+        if (!emblaApi.value) return
+        emblaApi.value.on('slidesInView', onSlidesInView)
       })
 
       // ...
-    },
-  }
-</script>
-```
+    </script>
+    ```
 
-</TabsItem>
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+
+  </TabsItem>
 </Tabs>
 
 ---

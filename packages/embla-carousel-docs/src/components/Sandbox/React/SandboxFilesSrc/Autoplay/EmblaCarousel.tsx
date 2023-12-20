@@ -1,5 +1,6 @@
 import React from 'react'
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import imageByIndex from '../imageByIndex'
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel, {
-  EmblaCarouselType,
-  EmblaOptionsType
-} from 'embla-carousel-react'
+import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
 import imageByIndex from './imageByIndex'
 

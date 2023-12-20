@@ -1,5 +1,5 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { loadPrettier } from './loadPrettier'
 import {
   SandboxCreateFunctionType,

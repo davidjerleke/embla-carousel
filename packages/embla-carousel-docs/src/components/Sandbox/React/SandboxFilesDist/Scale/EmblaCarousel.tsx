@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel, { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import { flushSync } from 'react-dom'
 import imageByIndex from '../imageByIndex'
 

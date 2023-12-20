@@ -92,10 +92,6 @@ const H1 = styled.h1`
   ${MEDIA.MIN_MD} {
     font-size: ${FONT_SIZES.CUSTOM(() => 8)};
   }
-
-  ${MEDIA.MIN_LG} {
-    font-size: ${FONT_SIZES.CUSTOM(() => 8.4)};
-  }
 `
 
 const H2 = styled.h2`

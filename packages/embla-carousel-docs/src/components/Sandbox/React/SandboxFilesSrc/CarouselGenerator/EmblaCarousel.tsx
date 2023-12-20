@@ -1,10 +1,11 @@
 import React, {
   /*__NAV_AUTOPLAY_REPLACE_START__*/ useCallback /*__NAV_AUTOPLAY_REPLACE_END__*/
 } from 'react'
-import useEmblaCarousel, {
+import {
   EmblaOptionsType,
   /*__NAV_AUTOPLAY_REPLACE_START__*/ EmblaCarouselType /*__NAV_AUTOPLAY_REPLACE_END__*/
-} from 'embla-carousel-react'
+} from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 /*__DOT_BUTTONS_REPLACE_START__*/
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 /*__DOT_BUTTONS_REPLACE_END__*/

@@ -1,5 +1,5 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselAutoplay from 'components/Sandbox/React/SandboxFilesSrc/Autoplay/EmblaCarousel'

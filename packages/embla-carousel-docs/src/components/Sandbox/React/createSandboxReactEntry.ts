@@ -1,4 +1,4 @@
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { SandboxModuleType } from 'consts/sandbox'
 import { sandboxInjectIosPickerLoop, sandboxInjectOptions } from 'utils/sandbox'
 import {

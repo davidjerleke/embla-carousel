@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { EngineType } from 'embla-carousel/components/Engine'
-import useEmblaCarousel, {
-  EmblaCarouselType,
-  EmblaOptionsType
-} from 'embla-carousel-react'
+import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import imageByIndex from '../imageByIndex'
 
 const mockApiCall = (

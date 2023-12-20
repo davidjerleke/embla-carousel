@@ -4,7 +4,7 @@ import CarouselDefault from 'components/Sandbox/React/SandboxFilesSrc/Default/Em
 import { InputRadioDefault } from 'components/Input/InputRadio'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
 import { Admonition } from 'components/Mdx/Components/Admonition'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
