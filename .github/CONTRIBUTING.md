@@ -24,6 +24,26 @@ For any new features it's important to follow this checklist:
 - **`Code style:`** Follow the current code style as described [here](#code-style).
 - **`Create a Pull Request:`** Please make sure the branch name follows this pattern `feature/branchname-goes-here`.
 
+  
+### Documentation
+
+The documentation is generated using [gatspy](https://github.com/gatsbyjs/gatsby). All the content of the docs lives inside `/packages/embla-carousel-docs`. 
+
+To develop the docs locally follow these steps:
+
+- Install dependencies with `yarn install`
+- Run `yarn start` to start the dev enviornment of the docs in `localhost:8000`
+- Make sure the `.mdx` file you're working on has a header like this:
+```
+---
+title: [Page title here]
+description: [Page description here].
+order: [Page order here (a number)]
+date: [Page last updated date (e.g. 2023-12-20)]
+---
+```
+
+
 ### Code style
 
 All code contributions should follow the current `code style`. Please take your time to understand the current setup and don't introduce new styles that clearly deviates from the project `code style`.
