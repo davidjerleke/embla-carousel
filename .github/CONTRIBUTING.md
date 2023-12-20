@@ -29,6 +29,9 @@ For any new features it's important to follow this checklist:
 
 The documentation is generated using [gatspy](https://github.com/gatsbyjs/gatsby). All the content of the docs lives inside `/packages/embla-carousel-docs`. 
 
+> [!IMPORTANT]  
+> Make sure your node version is equal to the one in [.nvmrc](https://github.com/davidjerleke/embla-carousel/blob/master/.nvmrc). You can use [`nvm`](https://github.com/nvm-sh/nvm) to easily install different node versions and switch between them with ease.
+
 To develop the docs locally follow these steps:
 
 - Run `yarn install`in the root directory to install dependencies
