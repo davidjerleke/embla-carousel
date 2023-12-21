@@ -172,6 +172,114 @@ export const FIXTURE_CONTAIN_SCROLL_LTR_2: TestElementDimensionsType = {
    Fixture 3
 
   - Horizontal
+  - LTR
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 501px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_LTR_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 501
+    }
+  ],
+  endMargin: {
+    property: 'marginRight',
+    value: 0
+  }
+}
+
+/*
+   Fixture 4
+
+  - Horizontal
+  - LTR
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 502px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_LTR_4: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 502,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 502
+    }
+  ],
+  endMargin: {
+    property: 'marginRight',
+    value: 0
+  }
+}
+
+/*
+   Fixture 5
+
+  - Horizontal
+  - LTR
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 200px, 200px
+*/
+export const FIXTURE_CONTAIN_SCROLL_LTR_5: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 200
+    }
+  ],
+  endMargin: {
+    property: 'marginRight',
+    value: 0
+  }
+}
+
+/*
+   Fixture 6
+
+  - Horizontal
   - RTL
   - No slide margins
   - Container width: 1000px
@@ -253,7 +361,7 @@ export const FIXTURE_CONTAIN_SCROLL_RTL_1: TestElementDimensionsType = {
 }
 
 /*
-   Fixture 4
+   Fixture 7
 
   - Horizontal
   - RTL
@@ -337,7 +445,115 @@ export const FIXTURE_CONTAIN_SCROLL_RTL_2: TestElementDimensionsType = {
 }
 
 /*
-   Fixture 5
+   Fixture 8
+
+  - Horizontal
+  - RTL
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 501px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_RTL_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 499
+    },
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -2
+    }
+  ],
+  endMargin: {
+    property: 'marginLeft',
+    value: 0
+  }
+}
+
+/*
+   Fixture 9
+
+  - Horizontal
+  - RTL
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 502px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_RTL_4: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 502,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 498
+    },
+    {
+      offsetWidth: 501,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -3
+    }
+  ],
+  endMargin: {
+    property: 'marginLeft',
+    value: 0
+  }
+}
+
+/*
+   Fixture 10
+
+  - Horizontal
+  - RTL
+  - No slide margins
+  - Container width: 1000px
+  - Slide widths: 200px, 200px
+*/
+export const FIXTURE_CONTAIN_SCROLL_RTL_5: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 800
+    },
+    {
+      offsetWidth: 200,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 600
+    }
+  ],
+  endMargin: {
+    property: 'marginLeft',
+    value: 0
+  }
+}
+
+/*
+   Fixture 11
 
   - Vertical
   - No slide margins
@@ -420,7 +636,7 @@ export const FIXTURE_CONTAIN_SCROLL_Y_1: TestElementDimensionsType = {
 }
 
 /*
-   Fixture 6
+   Fixture 12
 
   - Vertical
   - Slide top margin: 10px, Slide bottom margin: 10px 
@@ -499,5 +715,110 @@ export const FIXTURE_CONTAIN_SCROLL_Y_2: TestElementDimensionsType = {
   endMargin: {
     property: 'marginBottom',
     value: 10
+  }
+}
+
+/*
+   Fixture 13
+
+  - Vertical
+  - No slide margins
+  - Container height: 1000px
+  - Slide heights: 501px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_Y_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 1000,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 1000,
+      offsetHeight: 501,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 1000,
+      offsetHeight: 501,
+      offsetTop: 501,
+      offsetLeft: 0
+    }
+  ],
+  endMargin: {
+    property: 'marginBottom',
+    value: 0
+  }
+}
+
+/*
+   Fixture 14
+
+  - Vertical
+  - No slide margins
+  - Container height: 1000px
+  - Slide heights: 502px, 501px
+*/
+export const FIXTURE_CONTAIN_SCROLL_Y_4: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 1000,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 1000,
+      offsetHeight: 502,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 1000,
+      offsetHeight: 501,
+      offsetTop: 502,
+      offsetLeft: 0
+    }
+  ],
+  endMargin: {
+    property: 'marginBottom',
+    value: 0
+  }
+}
+
+/*
+   Fixture 15
+
+  - Vertical
+  - No slide margins
+  - Container height: 1000px
+  - Slide heights: 200px, 200px
+*/
+export const FIXTURE_CONTAIN_SCROLL_Y_5: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 1000,
+    offsetHeight: 1000,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 1000,
+      offsetHeight: 200,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 1000,
+      offsetHeight: 200,
+      offsetTop: 200,
+      offsetLeft: 0
+    }
+  ],
+  endMargin: {
+    property: 'marginBottom',
+    value: 0
   }
 }

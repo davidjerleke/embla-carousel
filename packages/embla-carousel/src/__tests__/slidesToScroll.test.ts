@@ -24,8 +24,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3001]
-
+      const expectedScrollSnaps = [0, -1000, -2000, -3001]
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
@@ -33,8 +32,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -42,7 +40,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       emblaApi.reInit({ containScroll: false })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -51,8 +49,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -60,7 +57,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       emblaApi.reInit({ loop: true })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -69,8 +66,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
   })
@@ -86,7 +82,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1020, -2030, -2780, -3041]
+      const expectedScrollSnaps = [0, -1020, -2030, -3041]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -95,8 +91,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -276,7 +271,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3001]
+      const expectedScrollSnaps = [0, -1000, -2000, -3001]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -285,8 +280,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -294,7 +288,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
       emblaApi.reInit({ containScroll: false })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -303,8 +297,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -312,7 +305,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
       emblaApi.reInit({ loop: true })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -321,8 +314,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
   })
@@ -342,7 +334,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1020, -2030, -2780, -3041]
+      const expectedScrollSnaps = [0, -1020, -2030, -3041]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -351,8 +343,7 @@ describe('➡️  SlidesToScroll - Horizontal RTL', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -536,7 +527,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3001]
+      const expectedScrollSnaps = [0, -1000, -2000, -3001]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -545,8 +536,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -554,7 +544,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
       emblaApi.reInit({ containScroll: false })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -563,8 +553,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
@@ -572,7 +561,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
       emblaApi.reInit({ loop: true })
 
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1000, -2000, -2750, -3250.5]
+      const expectedScrollSnaps = [0, -1000, -2000, -3000.5]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -581,8 +570,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
   })
@@ -598,7 +586,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
 
     test('LOOP:FALSE', () => {
       const engine = emblaApi.internalEngine()
-      const expectedScrollSnaps = [0, -1020, -2030, -2780, -3041]
+      const expectedScrollSnaps = [0, -1020, -2030, -3041]
 
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
@@ -607,8 +595,7 @@ describe('➡️  SlidesToScroll - Vertical', () => {
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
-        [8],
-        [9]
+        [8, 9]
       ])
     })
 
