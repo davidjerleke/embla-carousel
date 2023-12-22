@@ -43,12 +43,13 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     optionsHandler: OptionsHandlerType
   ): void {
     emblaApi = emblaApiInstance
-    if (emblaApi.scrollSnapList().length <= 1) return
 
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, Autoplay.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
     options = optionsAtMedia(allOptions)
+
+    if (emblaApi.scrollSnapList().length <= 1) return
 
     jump = options.jump
     destroyed = false
