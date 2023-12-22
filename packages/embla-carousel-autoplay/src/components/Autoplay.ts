@@ -33,7 +33,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let emblaApi: EmblaCarouselType
   let destroyed: boolean
   let playing = false
-  let wasPlaying = false
+  let resume = true
   let jump = false
   let animationFrame = 0
   let timer = 0
@@ -58,13 +58,22 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const root = (options.rootNode && options.rootNode(emblaRoot)) || emblaRoot
 
     emblaApi.on('pointerDown', clearTimer)
-    if (!options.stopOnInteraction) emblaApi.on('pointerUp', startTimer)
+
+    if (!options.stopOnInteraction) {
+      emblaApi.on('pointerUp', startTimer)
+    }
 
     if (options.stopOnMouseEnter) {
-      eventStore.add(root, 'mouseenter', clearTimer)
+      eventStore.add(root, 'mouseenter', () => {
+        resume = false
+        clearTimer()
+      })
 
       if (!options.stopOnInteraction) {
-        eventStore.add(root, 'mouseleave', startTimer)
+        eventStore.add(root, 'mouseleave', () => {
+          resume = true
+          startTimer()
+        })
       }
     }
 
@@ -78,11 +87,11 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
     eventStore.add(ownerDocument, 'visibilitychange', () => {
       if (ownerDocument.visibilityState === 'hidden') {
-        wasPlaying = playing
+        resume = playing
         return clearTimer()
       }
 
-      if (wasPlaying) startTimer()
+      if (resume) startTimer()
     })
 
     if (options.playOnInit) {
@@ -103,6 +112,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function startTimer(): void {
     if (destroyed) return
+    if (!resume) return
     if (!playing) emblaApi.emit('autoplay:play')
     const { ownerWindow } = emblaApi.internalEngine()
     ownerWindow.clearInterval(timer)
@@ -121,6 +131,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function play(jumpOverride?: boolean): void {
     if (typeof jumpOverride !== 'undefined') jump = jumpOverride
+    resume = true
     startTimer()
   }
 
