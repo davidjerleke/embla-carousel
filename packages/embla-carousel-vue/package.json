@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-vue",
-  "version": "8.0.0-rc15",
+  "version": "8.0.0-rc16",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -59,8 +59,8 @@
     "vue": "^3.2.37"
   },
   "dependencies": {
-    "embla-carousel": "8.0.0-rc15",
-    "embla-carousel-reactive-utils": "8.0.0-rc15"
+    "embla-carousel": "8.0.0-rc16",
+    "embla-carousel-reactive-utils": "8.0.0-rc16"
   },
   "peerDependencies": {
     "vue": "^3.2.37"
