@@ -105,6 +105,7 @@ export function Engine(
   } = options
 
   // Measurements
+  const pixelTolerance = 2
   const nodeRects = NodeRects()
   const containerRect = nodeRects.measure(container)
   const slideRects = slides.map(nodeRects.measure)
@@ -132,7 +133,8 @@ export function Engine(
     containerRect,
     slideRects,
     startGap,
-    endGap
+    endGap,
+    pixelTolerance
   )
   const { snaps, snapsAligned } = ScrollSnaps(
     axis,
@@ -146,7 +148,8 @@ export function Engine(
     viewSize,
     contentSize,
     snapsAligned,
-    containScroll
+    containScroll,
+    pixelTolerance
   )
   const scrollSnaps = containSnaps ? snapsContained : snapsAligned
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
@@ -245,10 +248,9 @@ export function Engine(
     inViewThreshold
   )
   const { slideRegistry } = SlideRegistry(
-    viewSize,
-    contentSize,
     containSnaps,
     containScroll,
+    scrollSnaps,
     scrollContainLimit,
     slidesToScroll,
     slideIndexes

@@ -12,7 +12,8 @@ export function ScrollContain(
   viewSize: number,
   contentSize: number,
   snapsAligned: number[],
-  containScroll: ScrollContainOptionType
+  containScroll: ScrollContainOptionType,
+  pixelTolerance: number
 ): ScrollContainType {
   const scrollBounds = Limit(-contentSize + viewSize, 0)
   const snapsBounded = measureBounded()
@@ -40,7 +41,7 @@ export function ScrollContain(
   }
 
   function measureContained(): number[] {
-    if (contentSize <= viewSize) return [scrollBounds.max]
+    if (contentSize <= viewSize + pixelTolerance) return [scrollBounds.max]
     if (containScroll === 'keepSnaps') return snapsBounded
     const { min, max } = scrollContainLimit
     return snapsBounded.slice(min, max)

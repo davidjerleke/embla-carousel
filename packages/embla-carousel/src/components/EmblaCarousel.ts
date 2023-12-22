@@ -171,18 +171,20 @@ function EmblaCarousel(
 
   function scrollTo(index: number, jump?: boolean, direction?: number): void {
     if (!options.active || destroyed) return
-    engine.scrollBody.useBaseFriction().useDuration(jump ? 0 : options.duration)
+    engine.scrollBody
+      .useBaseFriction()
+      .useDuration(jump === true ? 0 : options.duration)
     engine.scrollTo.index(index, direction || 0)
   }
 
   function scrollNext(jump?: boolean): void {
     const next = engine.index.add(1).get()
-    scrollTo(next, jump === true, -1)
+    scrollTo(next, jump, -1)
   }
 
   function scrollPrev(jump?: boolean): void {
     const prev = engine.index.add(-1).get()
-    scrollTo(prev, jump === true, 1)
+    scrollTo(prev, jump, 1)
   }
 
   function canScrollNext(): boolean {

@@ -11,7 +11,7 @@ export type LimitType = {
   removeOffset: (n: number) => number
 }
 
-export function Limit(min: number, max: number): LimitType {
+export function Limit(min: number = 0, max: number = 0): LimitType {
   const length = mathAbs(min - max)
 
   function reachedMin(n: number): boolean {

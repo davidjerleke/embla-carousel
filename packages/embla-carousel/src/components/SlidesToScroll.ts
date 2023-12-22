@@ -24,7 +24,8 @@ export function SlidesToScroll(
   containerRect: NodeRectType,
   slideRects: NodeRectType[],
   startGap: number,
-  endGap: number
+  endGap: number,
+  pixelTolerance: number
 ): SlidesToScrollType {
   const { startEdge, endEdge } = axis
   const groupByNumber = isNumber(slidesToScroll)
@@ -50,7 +51,7 @@ export function SlidesToScroll(
         const gapB = !loop && isLast ? direction.apply(endGap) : 0
         const chunkSize = mathAbs(edgeB - gapB - (edgeA + gapA))
 
-        if (chunkSize > viewSize) groups.push(rectB)
+        if (chunkSize > viewSize + pixelTolerance) groups.push(rectB)
         if (isLast) groups.push(array.length)
         return groups
       }, [])
