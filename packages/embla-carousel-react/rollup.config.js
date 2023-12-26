@@ -1,6 +1,6 @@
 import packageJson from './package.json'
 import {
-  PACKAGE_FORMATS,
+  FOLDERS,
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
   CONFIG_GLOBALS,
@@ -11,7 +11,8 @@ import {
   resolve,
   terser,
   createBuildPath,
-  kebabToPascalCase
+  kebabToPascalCase,
+  createNodeNextSupport
 } from '../../rollup.config'
 
 const CONFIG_GLOBALS_MODULE = {
@@ -28,8 +29,8 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.CJS),
-        format: PACKAGE_FORMATS.CJS,
+        file: createBuildPath(packageJson, FOLDERS.CJS),
+        format: FOLDERS.CJS,
         globals: CONFIG_GLOBALS_MODULE,
         strict: true,
         sourcemap: true,
@@ -37,8 +38,8 @@ export default [
         plugins: resolve(CONFIG_EXTERNAL_MODULES)
       },
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.ESM),
-        format: PACKAGE_FORMATS.ESM,
+        file: createBuildPath(packageJson, FOLDERS.ESM),
+        format: FOLDERS.ESM,
         globals: CONFIG_GLOBALS_MODULE,
         strict: true,
         sourcemap: true,
@@ -53,8 +54,8 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.UMD),
-        format: PACKAGE_FORMATS.UMD,
+        file: createBuildPath(packageJson, FOLDERS.UMD),
+        format: FOLDERS.UMD,
         globals: CONFIG_GLOBALS_UMD,
         strict: true,
         sourcemap: false,
@@ -63,7 +64,12 @@ export default [
       }
     ],
     onwarn: CONFIG_EXTERNAL_MODULE_SUPPRESS,
-    plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)],
+    plugins: [
+      resolve(),
+      typescript(CONFIG_TYPESCRIPT),
+      babel(CONFIG_BABEL),
+      createNodeNextSupport()
+    ],
     external: Object.keys(CONFIG_GLOBALS_UMD)
   }
 ]
