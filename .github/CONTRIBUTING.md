@@ -4,6 +4,7 @@ Thank you for considering contributing to Embla Carousel, contributions are welc
 
 - [Bug reports](#bug-reports)
 - [New features](#new-features)
+- [Documentation](#documentation)
 - [Code style](#code-style)
 
 ### Bug reports
