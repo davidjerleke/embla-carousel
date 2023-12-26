@@ -2,8 +2,15 @@
 packages/embla-carousel*/index.d.ts
 packages/embla-carousel*/embla-carousel*
 packages/embla-carousel*/components
-packages/embla-carousel*/esm
-packages/embla-carousel*/cjs
+
+packages/embla-carousel*/cjs/index.d.ts
+packages/embla-carousel*/cjs/embla-carousel*
+packages/embla-carousel*/cjs/components
+
+packages/embla-carousel*/esm/index.d.ts
+packages/embla-carousel*/esm/embla-carousel*
+packages/embla-carousel*/esm/components
+
 public
 static
 docs

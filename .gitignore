@@ -6,6 +6,7 @@ packages/embla-carousel*/esm
 packages/embla-carousel*/cjs
 public
 
+
 # yarn
 .yarn/*
 !.yarn/releases

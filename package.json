@@ -37,10 +37,9 @@
     "start": "yarn workspace embla-carousel-docs run start",
     "start:vanilla": "npm-run-all --parallel watch:package-vanilla watch:playground-vanilla",
     "start:react": "npm-run-all --parallel watch:package-vanilla watch:package-react watch:playground-react",
-    "build": "npm-run-all build:packages build:package-readmes build:package-nodenext format",
+    "build": "npm-run-all build:packages build:package-readmes format",
     "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run build",
     "build:package-readmes": "npx ts-node --project scripts/tsconfig.node.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
-    "build:package-nodenext": "npx ts-node --project scripts/tsconfig.node.json scripts/create-nodenext-support/index.ts",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
     "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run eslint:report",
     "prettier:report": "prettier \"**/*.{js,jsx,tsx,ts,scss,json}\" --check",
@@ -65,7 +64,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm-run-all test lint"
+      "pre-push": "npm-run-all format test lint"
     }
   },
   "packageManager": "yarn@3.3.1"

@@ -1,6 +1,6 @@
 import packageJson from './package.json'
 import {
-  PACKAGE_FORMATS,
+  FOLDERS,
   CONFIG_BABEL,
   CONFIG_TYPESCRIPT,
   CONFIG_GLOBALS,
@@ -9,7 +9,8 @@ import {
   resolve,
   terser,
   createBuildPath,
-  kebabToPascalCase
+  kebabToPascalCase,
+  createNodeNextSupport
 } from '../../rollup.config'
 
 export default [
@@ -17,23 +18,23 @@ export default [
     input: 'src/index.ts',
     output: [
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.CJS),
-        format: PACKAGE_FORMATS.CJS,
+        file: createBuildPath(packageJson, FOLDERS.CJS),
+        format: FOLDERS.CJS,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true,
         exports: 'auto'
       },
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.ESM),
-        format: PACKAGE_FORMATS.ESM,
+        file: createBuildPath(packageJson, FOLDERS.ESM),
+        format: FOLDERS.ESM,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: true
       },
       {
-        file: createBuildPath(packageJson, PACKAGE_FORMATS.UMD),
-        format: PACKAGE_FORMATS.UMD,
+        file: createBuildPath(packageJson, FOLDERS.UMD),
+        format: FOLDERS.UMD,
         globals: CONFIG_GLOBALS,
         strict: true,
         sourcemap: false,
@@ -42,6 +43,11 @@ export default [
       }
     ],
     external: Object.keys(CONFIG_GLOBALS),
-    plugins: [resolve(), typescript(CONFIG_TYPESCRIPT), babel(CONFIG_BABEL)]
+    plugins: [
+      resolve(),
+      typescript(CONFIG_TYPESCRIPT),
+      babel(CONFIG_BABEL),
+      createNodeNextSupport()
+    ]
   }
 ]
