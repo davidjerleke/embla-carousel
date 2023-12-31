@@ -1,5 +1,4 @@
 import { Engine, EngineType } from './Engine'
-import { Animations, AnimationsType } from './Animations'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
@@ -42,9 +41,7 @@ function EmblaCarousel(
   const optionsHandler = OptionsHandler(ownerWindow)
   const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
-  const documentVisibleHandler = EventStore()
   const eventHandler = EventHandler()
-  const { animationRealms } = EmblaCarousel
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
   const { on, off, emit } = eventHandler
   const reInit = reActivate
@@ -73,10 +70,7 @@ function EmblaCarousel(
     slides = <HTMLElement[]>[].slice.call(customSlides || container.children)
   }
 
-  function createEngine(
-    options: OptionsType,
-    animations: AnimationsType
-  ): EngineType {
+  function createEngine(options: OptionsType): EngineType {
     const engine = Engine(
       root,
       container,
@@ -84,13 +78,12 @@ function EmblaCarousel(
       ownerDocument,
       ownerWindow,
       options,
-      eventHandler,
-      animations
+      eventHandler
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
       const optionsWithoutLoop = Object.assign({}, options, { loop: false })
-      return createEngine(optionsWithoutLoop, animations)
+      return createEngine(optionsWithoutLoop)
     }
     return engine
   }
@@ -101,17 +94,13 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
-    const animationRealm = animationRealms.find((a) => a.window === ownerWindow)
-    const animations = animationRealm || Animations(ownerWindow)
-    if (!animationRealm) animationRealms.push(animations)
-
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
     pluginList = withPlugins || pluginList
 
     storeElements()
 
-    engine = createEngine(options, animations)
+    engine = createEngine(options)
 
     optionsMediaQueries([
       optionsBase,
@@ -121,15 +110,12 @@ function EmblaCarousel(
     if (!options.active) return
 
     engine.translate.to(engine.location.get())
+    engine.animation.init()
     engine.slidesInView.init()
     engine.slideFocus.init()
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self)
     engine.slidesHandler.init(self)
-
-    documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
-      if (ownerDocument.hidden) animations.reset()
-    })
 
     if (engine.options.loop) engine.slideLooper.loop()
     if (container.offsetParent && slides.length) engine.dragHandler.init(self)
@@ -149,16 +135,15 @@ function EmblaCarousel(
 
   function deActivate(): void {
     engine.dragHandler.destroy()
-    engine.animation.stop()
     engine.eventStore.clear()
     engine.translate.clear()
     engine.slideLooper.clear()
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
     engine.slidesInView.destroy()
+    engine.animation.destroy()
     pluginsHandler.destroy()
     mediaHandlers.clear()
-    documentVisibleHandler.clear()
   }
 
   function destroy(): void {
@@ -270,7 +255,6 @@ function EmblaCarousel(
   return self
 }
 
-EmblaCarousel.animationRealms = <AnimationsType[]>[]
 EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
 
 export default EmblaCarousel

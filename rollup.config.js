@@ -63,12 +63,11 @@ function createNodeNextSupportForPackage() {
   const esmFolder = path.join(workspacePath, FOLDERS.OUT, FOLDERS.ESM)
   const cjsFolder = path.join(workspacePath, FOLDERS.OUT, FOLDERS.CJS)
 
-  const bundleFiles = `${packageJson.name}*`
   const packageJson = JSON.parse(workspacePackageJson)
   const packageJsonMain = {
     ...packageJson,
     files: [
-      bundleFiles,
+      `${packageJson.name}*`,
       'components/**/*',
       'index.d.ts',
       'esm/**/*',
@@ -92,7 +91,7 @@ function createNodeNextSupportForPackage() {
   delete packageJson.scripts
   delete packageJson.exports
 
-  const files = [bundleFiles, 'components/**/*', 'index.d.ts']
+  const files = [`${packageJson.name}*`, 'components/**/*', 'index.d.ts']
   const packageJsonEsm = {
     ...packageJson,
     files,

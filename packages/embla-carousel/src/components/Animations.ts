@@ -1,32 +1,44 @@
 import { EngineType } from './Engine'
+import { EventStore } from './EventStore'
 import { mathAbs, WindowType } from './utils'
 
-export type AnimationUpdateType = (engine: EngineType) => void
-export type AnimationRenderType = (
+export type AnimationsUpdateType = (engine: EngineType) => void
+export type AnimationsRenderType = (
   engine: EngineType,
-  lagFactor: number
+  lagOffset: number
 ) => void
 
-export type AnimationType = {
+export type AnimationsType = {
+  init: () => void
+  destroy: () => void
   start: () => void
   stop: () => void
   update: () => void
-  render: (lagFactor: number) => void
+  render: (lagOffset: number) => void
 }
 
-export type AnimationsType = {
-  start: (engine: EngineType) => void
-  stop: (engine: EngineType) => void
-  reset: () => void
-  window: WindowType
-}
-
-export function Animations(ownerWindow: WindowType): AnimationsType {
+export function Animations(
+  ownerDocument: Document,
+  ownerWindow: WindowType,
+  update: AnimationsType['update'],
+  render: AnimationsType['render']
+): AnimationsType {
+  const documentVisibleHandler = EventStore()
   const timeStep = 1000 / 60
-  let engines: EngineType[] = []
   let lastTimeStamp: number | null = null
   let lag = 0
   let animationFrame = 0
+
+  function init(): void {
+    documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
+      if (ownerDocument.hidden) reset()
+    })
+  }
+
+  function destroy(): void {
+    stop()
+    documentVisibleHandler.clear()
+  }
 
   function animate(timeStamp: DOMHighResTimeStamp): void {
     if (!lastTimeStamp) lastTimeStamp = timeStamp
@@ -36,27 +48,23 @@ export function Animations(ownerWindow: WindowType): AnimationsType {
     lag += elapsed
 
     while (lag >= timeStep) {
-      engines.forEach(({ animation }) => animation.update())
+      update()
       lag -= timeStep
     }
 
     const lagOffset = mathAbs(lag / timeStep)
-    engines.forEach(({ animation }) => animation.render(lagOffset))
+    render(lagOffset)
 
     if (animationFrame) ownerWindow.requestAnimationFrame(animate)
   }
 
-  function start(engine: EngineType): void {
-    if (!engines.includes(engine)) engines.push(engine)
+  function start(): void {
     if (animationFrame) return
 
     animationFrame = ownerWindow.requestAnimationFrame(animate)
   }
 
-  function stop(engine: EngineType): void {
-    engines = engines.filter((e) => e !== engine)
-    if (engines.length) return
-
+  function stop(): void {
     ownerWindow.cancelAnimationFrame(animationFrame)
     lastTimeStamp = null
     lag = 0
@@ -69,10 +77,12 @@ export function Animations(ownerWindow: WindowType): AnimationsType {
   }
 
   const self: AnimationsType = {
+    init,
+    destroy,
     start,
     stop,
-    reset,
-    window: ownerWindow
+    update,
+    render
   }
   return self
 }
