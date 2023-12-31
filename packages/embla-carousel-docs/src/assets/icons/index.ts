@@ -8,6 +8,7 @@ import github from './github-logo.svg'
 import javascript from './javascript-logo.svg'
 import typescript from './typescript-logo.svg'
 import react from './react-logo.svg'
+import solid from './solid-logo.svg'
 import search from './search.svg'
 import cross from './cross.svg'
 import info from './info.svg'
@@ -41,6 +42,7 @@ export const ICONS = {
   javascript: styledSvg(javascript),
   typescript: styledSvg(typescript),
   react: styledSvg(react),
+  solid: styledSvg(solid),
   search: styledSvg(search),
   cross: styledSvg(cross),
   info: styledSvg(info),
