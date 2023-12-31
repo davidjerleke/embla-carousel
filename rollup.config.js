@@ -51,6 +51,8 @@ function createBuildPath(packageJson, format) {
 }
 
 function createNodeNextSupportForPackage() {
+  if (process.env.BUILD === 'development') return
+
   const workspacePath = process.cwd()
   const packageJsonPath = path.join(workspacePath, 'package.json')
   const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
@@ -61,11 +63,12 @@ function createNodeNextSupportForPackage() {
   const esmFolder = path.join(workspacePath, FOLDERS.OUT, FOLDERS.ESM)
   const cjsFolder = path.join(workspacePath, FOLDERS.OUT, FOLDERS.CJS)
 
+  const bundleFiles = `${packageJson.name}*`
   const packageJson = JSON.parse(workspacePackageJson)
   const packageJsonMain = {
     ...packageJson,
     files: [
-      'embla-carousel*',
+      bundleFiles,
       'components/**/*',
       'index.d.ts',
       'esm/**/*',
@@ -89,7 +92,7 @@ function createNodeNextSupportForPackage() {
   delete packageJson.scripts
   delete packageJson.exports
 
-  const files = ['embla-carousel*', 'components/**/*', 'index.d.ts']
+  const files = [bundleFiles, 'components/**/*', 'index.d.ts']
   const packageJsonEsm = {
     ...packageJson,
     files,
