@@ -1,4 +1,4 @@
-import { Ref, ref, isRef, watch, onMounted, onUnmounted } from 'vue'
+import { Ref, ref, isRef, watch, onMounted, onBeforeUnmount } from 'vue'
 import {
   areOptionsEqual,
   arePluginsEqual,
@@ -39,7 +39,7 @@ function emblaCarouselVue(
     )
   })
 
-  onUnmounted(() => {
+  onBeforeUnmount(() => {
     if (emblaApi.value) emblaApi.value.destroy()
   })
 
