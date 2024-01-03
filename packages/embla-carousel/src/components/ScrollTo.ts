@@ -1,4 +1,4 @@
-import { AnimationType } from './Animations'
+import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
 import { EventHandlerType } from './EventHandler'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
@@ -10,7 +10,7 @@ export type ScrollToType = {
 }
 
 export function ScrollTo(
-  animation: AnimationType,
+  animation: AnimationsType,
   indexCurrent: CounterType,
   indexPrevious: CounterType,
   scrollTarget: ScrollTargetType,

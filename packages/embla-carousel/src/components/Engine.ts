@@ -1,4 +1,10 @@
 import { Alignment } from './Alignment'
+import {
+  Animations,
+  AnimationsType,
+  AnimationsUpdateType,
+  AnimationsRenderType
+} from './Animations'
 import { Axis, AxisType } from './Axis'
 import { Counter, CounterType } from './Counter'
 import { Direction, DirectionType } from './Direction'
@@ -30,12 +36,6 @@ import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
-import {
-  AnimationType,
-  AnimationUpdateType,
-  AnimationsType,
-  AnimationRenderType
-} from './Animations'
 
 export type EngineType = {
   ownerDocument: Document
@@ -43,7 +43,7 @@ export type EngineType = {
   eventHandler: EventHandlerType
   axis: AxisType
   direction: DirectionType
-  animation: AnimationType
+  animation: AnimationsType
   scrollBounds: ScrollBoundsType
   scrollLooper: ScrollLooperType
   scrollProgress: ScrollProgressType
@@ -82,8 +82,7 @@ export function Engine(
   ownerDocument: Document,
   ownerWindow: WindowType,
   options: OptionsType,
-  eventHandler: EventHandlerType,
-  animations: AnimationsType
+  eventHandler: EventHandlerType
 ): EngineType {
   // Options
   const {
@@ -160,7 +159,7 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Animation
-  const update: AnimationUpdateType = ({
+  const update: AnimationsUpdateType = ({
     dragHandler,
     scrollBody,
     scrollBounds,
@@ -170,7 +169,7 @@ export function Engine(
     scrollBody.seek()
   }
 
-  const render: AnimationRenderType = (
+  const render: AnimationsRenderType = (
     {
       scrollBody,
       translate,
@@ -203,13 +202,12 @@ export function Engine(
 
     translate.to(offsetLocation.get())
   }
-
-  const animation: AnimationType = {
-    start: () => animations.start(engine),
-    stop: () => animations.stop(engine),
-    update: () => update(engine),
-    render: (lagOffset: number) => render(engine, lagOffset)
-  }
+  const animation = Animations(
+    ownerDocument,
+    ownerWindow,
+    () => update(engine),
+    (lagOffset: number) => render(engine, lagOffset)
+  )
 
   // Shared
   const friction = 0.68

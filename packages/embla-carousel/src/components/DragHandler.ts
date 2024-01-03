@@ -1,5 +1,5 @@
 import { EmblaCarouselType } from './EmblaCarousel'
-import { AnimationType } from './Animations'
+import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
 import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
@@ -44,7 +44,7 @@ export function DragHandler(
   target: Vector1DType,
   dragTracker: DragTrackerType,
   location: Vector1DType,
-  animation: AnimationType,
+  animation: AnimationsType,
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
