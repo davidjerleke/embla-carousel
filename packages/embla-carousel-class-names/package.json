@@ -23,7 +23,8 @@
     "typescript",
     "react",
     "vue",
-    "svelte"
+    "svelte",
+    "solid"
   ],
   "main": "embla-carousel-class-names.umd.js",
   "unpkg": "embla-carousel-class-names.umd.js",

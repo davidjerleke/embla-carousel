@@ -70,6 +70,10 @@
     <a href="https://www.embla-carousel.com/get-started/svelte/">
       <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
     </a>
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/solid/">
+      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
+    </a>
   </p>
 </div>
 

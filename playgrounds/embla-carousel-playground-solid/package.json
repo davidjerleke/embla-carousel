@@ -1,0 +1,20 @@
+{
+  "name": "embla-carousel-playground-solid",
+  "private": true,
+  "version": "8.0.0-rc18",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "test": "echo \"Info: no tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "embla-carousel-autoplay": "8.0.0-rc18",
+    "embla-carousel-solid": "8.0.0-rc18",
+    "solid-js": "^1.8.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.10",
+    "vite-plugin-solid": "^2.8.0"
+  }
+}
