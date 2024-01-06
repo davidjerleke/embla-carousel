@@ -233,6 +233,7 @@ export function Engine(
     animation,
     index,
     indexPrevious,
+    scrollBody,
     scrollTarget,
     target,
     eventHandler
