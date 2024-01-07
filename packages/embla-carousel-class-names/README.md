@@ -70,6 +70,10 @@
     <a href="https://www.embla-carousel.com/get-started/svelte/">
       <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
     </a>
+    &nbsp;
+    <a href="https://www.embla-carousel.com/get-started/solid/">
+      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
+    </a>
   </p>
 </div>
 
@@ -91,44 +95,48 @@
       <img src="https://avatars2.githubusercontent.com/u/615522?s=120&v=4" title="xiel" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/javiergonzalezGenially">
       <img src="https://avatars2.githubusercontent.com/u/78730098?s=120&v=4" title="javiergonzalezGenially" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/hamidrezahanafi">
-      <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/zaaakher">
       <img src="https://avatars2.githubusercontent.com/u/46135573?s=120&v=4" title="zaaakher" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/wopian">
-      <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/nwidynski">
-      <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/openscript">
-      <img src="https://avatars2.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/hamidrezahanafi">
+      <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/th-km">
       <img src="https://avatars2.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/SaizFerri">
-      <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/allen-garvey">
-      <img src="https://avatars2.githubusercontent.com/u/9314727?s=120&v=4" title="allen-garvey" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/sedlukha">
-      <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/fcasibu">
-      <img src="https://avatars2.githubusercontent.com/u/75290989?s=120&v=4" title="fcasibu" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/ishaqibrahimbot">
-      <img src="https://avatars2.githubusercontent.com/u/74908398?s=120&v=4" title="ishaqibrahimbot" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/JoshuaCrewe">
-      <img src="https://avatars2.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/romellem">
-      <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/nikrowell">
-      <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/horseeyephil">
-      <img src="https://avatars2.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/pipisasa">
-      <img src="https://avatars2.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/rojadesign">
-      <img src="https://avatars2.githubusercontent.com/u/35687281?s=120&v=4" title="rojadesign" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/anzbert">
-      <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/openscript">
+      <img src="https://avatars2.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/nwidynski">
+      <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/wopian">
+      <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/silllli">
       <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/anzbert">
+      <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/sadeghbarati">
+      <img src="https://avatars2.githubusercontent.com/u/17789047?s=120&v=4" title="sadeghbarati" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/rojadesign">
+      <img src="https://avatars2.githubusercontent.com/u/35687281?s=120&v=4" title="rojadesign" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/pipisasa">
+      <img src="https://avatars2.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/horseeyephil">
+      <img src="https://avatars2.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/nikrowell">
+      <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/romellem">
+      <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/LiamMartens">
+      <img src="https://avatars2.githubusercontent.com/u/5265324?s=120&v=4" title="LiamMartens" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/JoshuaCrewe">
+      <img src="https://avatars2.githubusercontent.com/u/12238901?s=120&v=4" title="JoshuaCrewe" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/ishaqibrahimbot">
+      <img src="https://avatars2.githubusercontent.com/u/74908398?s=120&v=4" title="ishaqibrahimbot" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/fcasibu">
+      <img src="https://avatars2.githubusercontent.com/u/75290989?s=120&v=4" title="fcasibu" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/sedlukha">
+      <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/allen-garvey">
+      <img src="https://avatars2.githubusercontent.com/u/9314727?s=120&v=4" title="allen-garvey" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/SaizFerri">
+      <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width: 100%" />
     </a>
   </p>
 </div>
