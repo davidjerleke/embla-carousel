@@ -1,23 +1,21 @@
 import React, { useMemo } from 'react'
 import { PrismSyntaxFrame } from './PrismSyntaxFrame'
-import Highlight, {
-  defaultProps,
-  Language as PrismLanguage
-} from 'prism-react-renderer'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import {
+  PRISM_HIGHLIGHT_CLASS_NAME,
+  PRISM_HIGHLIGHT_LINE_CLASS_NAME,
+  PRISM_HIGHLIGHT_PROP_SEPARATOR,
+  PrismCodeBlockPropsType
+} from 'consts/prismHighlight'
 
-export const PRISM_HIGHLIGHT_CLASS_NAME = 'prism-highlight'
-export const PRISM_HIGHLIGHT_LINE_CLASS_NAME = `${PRISM_HIGHLIGHT_CLASS_NAME}-code-line`
-
-const REGEX_HIGHLIGHT_META = /{[^}]+}/
 const REGEX_HIGHLIGHT_RANGE = /\d{1,}-\d{1,}/
 const REGEX_HIGHLIGHT_RANGE_END = /-\d{1,}/
 const REGEX_HIGHLIGHT_RANGE_START = /\d{1,}-/
 const REGEX_LANGUAGE_PREFIX = /language-/gm
 
-const parseHighlightedLines = (className: string): number[] => {
+const parseHighlightedLines = (highlight: string = ''): number[] => {
   const highlightedLines: number[] = []
-  const highlightedLinesMatch = className.match(REGEX_HIGHLIGHT_META) || ['']
-  const matches = highlightedLinesMatch[0].replace(/{|}/g, '').split(',')
+  const matches = highlight.replace(/{|}/g, '').split(',')
 
   return matches.reduce((highlightedLinesArray, match) => {
     if (REGEX_HIGHLIGHT_RANGE.test(match)) {
@@ -32,6 +30,23 @@ const parseHighlightedLines = (className: string): number[] => {
   }, highlightedLines)
 }
 
+const parseCodeBlockProps = (string: string): PrismCodeBlockPropsType => {
+  return string
+    .split(PRISM_HIGHLIGHT_PROP_SEPARATOR)
+    .reduce((props, propString, index) => {
+      if (index === 0) {
+        const language = propString.replace(REGEX_LANGUAGE_PREFIX, '')
+        return { language }
+      }
+
+      const [prop, value] = propString.split('=')
+      return {
+        ...props,
+        [prop]: value
+      }
+    }, {}) as PrismCodeBlockPropsType
+}
+
 type PropType = {
   children: string
   className: string
@@ -39,12 +54,13 @@ type PropType = {
 
 export const PrismSyntaxHighlight = (props: PropType) => {
   const { children, className } = props
-  const language = className
-    .replace(REGEX_LANGUAGE_PREFIX, '')
-    .replace(REGEX_HIGHLIGHT_META, '') as PrismLanguage
 
-  const highlightedLines = useMemo(() => {
-    return parseHighlightedLines(className)
+  const { language, highlightedLines } = useMemo(() => {
+    const { language, highlight } = parseCodeBlockProps(className)
+    return {
+      language,
+      highlightedLines: parseHighlightedLines(highlight)
+    }
   }, [className])
 
   return (

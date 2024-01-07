@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { PRISM_HIGHLIGHT_CLASS_NAME } from '../Components/PrismSyntaxHighlight'
+import { PRISM_HIGHLIGHT_CLASS_NAME } from 'consts/prismHighlight'
 import { TabsWrapper, TabPanel } from 'components/Tabs/Tabs'
 import { AdmonitionWrapper, AdmonitionContent } from '../Components/Admonition'
 import { headingStyles } from './heading'

@@ -1,5 +1,5 @@
 import { CarouselGeneratorFormDataType } from 'consts/carouselGenerator'
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 
 export const createCarouselGeneratorOptions = (
   settings: CarouselGeneratorFormDataType

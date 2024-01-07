@@ -1,8 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel, {
-  EmblaCarouselType,
-  EmblaOptionsType
-} from 'embla-carousel-react'
+import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import { LazyLoadImage } from './EmblaCarouselLazyLoadImage'
 import imageByIndex from '../imageByIndex'
 

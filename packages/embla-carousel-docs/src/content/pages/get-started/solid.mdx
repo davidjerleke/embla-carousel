@@ -74,7 +74,7 @@ The method gives us a **ref** to attach to our wrapping element with the classna
 
 The `createEmblaCarousel` method takes the Embla Carousel [options](/api/options/) as the first argument, which is a Solid accessor. Additionally, you can access the [API](/api/) with a `createEffect` like demonstrated below:
 
-```jsx{5,7-12}
+```jsx highlight={5,7-12}
 import { createEffect } from 'solid-js'
 import createEmblaCarousel from 'embla-carousel-solid'
 
@@ -123,9 +123,7 @@ Start by installing the plugin you want to use. In this example, we're going to 
 
 The `createEmblaCarousel` method accepts [plugins](/plugins/) as the second argument, which is a Solid accessor. Note that plugins need to be passed in an **array** like so:
 
-The config getter can also return a list of plugins, like so:
-
-```jsx{2,7}
+```jsx highlight={2,7}
 import createEmblaCarousel from 'embla-carousel-solid'
 import Autoplay from 'embla-carousel-autoplay'
 

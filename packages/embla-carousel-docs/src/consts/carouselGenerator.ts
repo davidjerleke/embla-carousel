@@ -1,4 +1,4 @@
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { SandboxLabelKeyType } from 'consts/sandbox'
 
 export type CarouselGeneratorFormDataType = {

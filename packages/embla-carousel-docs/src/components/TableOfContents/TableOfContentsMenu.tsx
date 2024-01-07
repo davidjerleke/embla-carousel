@@ -40,6 +40,7 @@ const Heading = styled.div`
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.TWO};
   font-weight: ${FONT_WEIGHTS.BOLD};
+  text-transform: uppercase;
 
   ${MEDIA.COMPACT} {
     padding-top: ${SPACINGS.TWO};

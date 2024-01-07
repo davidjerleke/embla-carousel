@@ -23,43 +23,39 @@ You can customize Embla with the [constructor options](/api/options/#constructor
 The constructor options is the default way of providing options to Embla Carousel. In the following example, the carousel [loop](/api/options/#loop) option is set to `true`:
 
 <Tabs groupId="library">
-<TabsItem label="Vanilla" value="vanilla">
+  <TabsItem label="Vanilla" value="vanilla">
 
-```js{3}
-import EmblaCarousel from 'embla-carousel'
+    ```js highlight={3}
+    import EmblaCarousel from 'embla-carousel'
 
-const emblaApi = EmblaCarousel(emblaNode, { loop: true })
-```
+    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+    ```
 
-</TabsItem>
-<TabsItem label="React" value="react">
+  </TabsItem>
+  <TabsItem label="React" value="react">
 
-```jsx{4}
-import useEmblaCarousel from 'embla-carousel-react'
+    ```jsx highlight={4}
+    import useEmblaCarousel from 'embla-carousel-react'
 
-export const EmblaCarousel = () => {
-  const [emblaRef] = useEmblaCarousel({ loop: true })
-  // ...
-}
-```
+    export const EmblaCarousel = () => {
+      const [emblaRef] = useEmblaCarousel({ loop: true })
+      // ...
+    }
+    ```
 
-</TabsItem>
-<TabsItem label="Vue" value="vue">
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
 
-```html{6}
-<script>
-  import emblaCarouselVue from 'embla-carousel-vue'
+    ```html highlight={4}
+    <script setup>
+      import emblaCarouselVue from 'embla-carousel-vue'
 
-  export default {
-    setup() {
       const [emblaNode] = emblaCarouselVue({ loop: true })
       // ...
-    },
-  }
-</script>
-```
+    </script>
+    ```
 
-</TabsItem>
+  </TabsItem>
 </Tabs>
 
 <Admonition>
@@ -73,49 +69,45 @@ export const EmblaCarousel = () => {
 Setting **global options** will be applied to **all carousels** which will override the Embla default options with your own. In the following example [loop](/api/options/#loop) is set to `true`:
 
 <Tabs groupId="library">
-<TabsItem label="Vanilla" value="vanilla">
+  <TabsItem label="Vanilla" value="vanilla">
 
-```js{3}
-import EmblaCarousel from 'embla-carousel'
+    ```js highlight={3}
+    import EmblaCarousel from 'embla-carousel'
 
-EmblaCarousel.globalOptions = { loop: true }
+    EmblaCarousel.globalOptions = { loop: true }
 
-const emblaApi = EmblaCarousel(emblaNode, { align: 'center' })
-```
+    const emblaApi = EmblaCarousel(emblaNode, { align: 'center' })
+    ```
 
-</TabsItem>
-<TabsItem label="React" value="react">
+  </TabsItem>
+  <TabsItem label="React" value="react">
 
-```jsx{3}
-import useEmblaCarousel from 'embla-carousel-react'
+    ```jsx highlight={3}
+    import useEmblaCarousel from 'embla-carousel-react'
 
-useEmblaCarousel.globalOptions = { loop: true }
+    useEmblaCarousel.globalOptions = { loop: true }
 
-export const EmblaCarousel = () => {
-  const [emblaRef] = useEmblaCarousel({ align: 'center' })
-  // ...
-}
-```
+    export const EmblaCarousel = () => {
+      const [emblaRef] = useEmblaCarousel({ align: 'center' })
+      // ...
+    }
+    ```
 
-</TabsItem>
-<TabsItem label="Vue" value="vue">
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
 
-```html{4}
-<script>
-  import emblaCarouselVue from 'embla-carousel-vue'
+    ```html highlight={4}
+    <script setup>
+      import emblaCarouselVue from 'embla-carousel-vue'
 
-  emblaCarouselVue.globalOptions = { loop: true }
+      emblaCarouselVue.globalOptions = { loop: true }
 
-  export default {
-    setup() {
       const [emblaNode] = emblaCarouselVue({ align: 'center' })
       // ...
-    },
-  }
-</script>
-```
+    </script>
+    ```
 
-</TabsItem>
+  </TabsItem>
 </Tabs>
 
 <Admonition type="warning">
@@ -123,6 +115,67 @@ export const EmblaCarousel = () => {
   **only assign it once**. Re-assigning global options might lead to confusing
   code and unexpected behaviour.
 </Admonition>
+
+### TypeScript
+
+The `EmblaOptionsType` is obtained directly from the **core package** `embla-carousel` and used like so:
+
+<Tabs groupId="library">
+  <TabsItem label="Vanilla" value="vanilla">
+
+    ```ts highlight={1,3}
+    import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+
+    const options: EmblaOptionsType = { loop: true }
+    const emblaApi = EmblaCarousel(emblaNode, options)
+    ```
+
+  </TabsItem>
+  <TabsItem label="React" value="react">
+
+    ```tsx highlight={2,6}
+    import React from 'react'
+    import { EmblaOptionsType } from 'embla-carousel'
+    import useEmblaCarousel from 'embla-carousel-react'
+
+    type PropType = {
+      options?: EmblaOptionsType
+    }
+
+    export function EmblaCarousel(props: PropType) {
+      const [emblaRef, emblaApi] = useEmblaCarousel(props.options)
+      // ...
+    }
+    ```
+
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+
+  </TabsItem>
+  <TabsItem label="Vue" value="vue">
+
+    ```html highlight={2,5}
+    <script lang="ts" setup>
+      import { EmblaOptionsType } from 'embla-carousel'
+      import emblaCarouselVue from 'embla-carousel-vue'
+
+      const options: EmblaOptionsType = { loop: true }
+      const [emblaNode] = emblaCarouselVue(options)
+      // ...
+    </script>
+    ```
+
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+
+  </TabsItem>
+</Tabs>
 
 ---
 

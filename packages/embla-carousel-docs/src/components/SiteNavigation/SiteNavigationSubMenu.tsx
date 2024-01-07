@@ -33,6 +33,7 @@ const SiteNavigationSubMenuWrapper = styled.div`
 `
 
 const Toggle = styled(ButtonBare)<{ $isActive: boolean }>`
+  font-weight: ${FONT_WEIGHTS.BOLD};
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
     calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
@@ -43,9 +44,9 @@ const Toggle = styled(ButtonBare)<{ $isActive: boolean }>`
   align-items: center;
   text-align: left;
   width: 100%;
+  text-transform: uppercase;
 
   ${({ $isActive }) => css`
-    font-weight: ${$isActive && FONT_WEIGHTS.MEDIUM};
     > span {
       ${$isActive && BRAND_GRADIENT_TEXT_STYLES};
     }

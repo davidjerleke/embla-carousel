@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
-import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react'
+import { EmblaCarouselType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 import { flushSync } from 'react-dom'
 
 const CIRCLE_DEGREES = 360

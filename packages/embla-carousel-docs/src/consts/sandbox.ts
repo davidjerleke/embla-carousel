@@ -1,4 +1,4 @@
-import { EmblaOptionsType } from 'embla-carousel-react'
+import { EmblaOptionsType } from 'embla-carousel'
 import { SPACINGS } from './spacings'
 import {
   PackageJson as BasePackageJsonType,
