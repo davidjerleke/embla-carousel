@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "8.0.0-rc18",
+  "version": "8.0.0-rc19",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -29,6 +29,8 @@
     "playgrounds/embla-carousel-playground-solid"
   ],
   "scripts": {
+    "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run eslint:report",
+    "prettier:report": "prettier \"**/*.{js,jsx,tsx,ts,scss,json}\" --check",
     "lint": "npm-run-all prettier:report eslint:report",
     "format": "prettier \"**/*.{js,jsx,tsx,ts,scss,json}\" --write",
     "test": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run test",
@@ -46,8 +48,6 @@
     "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run build",
     "build:package-readmes": "npx ts-node --project scripts/tsconfig.node.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
-    "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react}\" run eslint:report",
-    "prettier:report": "prettier \"**/*.{js,jsx,tsx,ts,scss,json}\" --check",
     "version:patch": "yarn workspaces foreach version patch && yarn version:push",
     "version:minor": "yarn workspaces foreach version minor && yarn version:push",
     "version:major": "yarn workspaces foreach version major && yarn version:push",
