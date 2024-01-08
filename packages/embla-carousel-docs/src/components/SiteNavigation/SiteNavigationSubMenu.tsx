@@ -34,7 +34,7 @@ const SiteNavigationSubMenuWrapper = styled.div`
 
 const Toggle = styled(ButtonBare)<{ $isActive: boolean }>`
   font-weight: ${FONT_WEIGHTS.BOLD};
-  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+  color: ${COLORS.TEXT_BODY};
   padding: ${ITEM_SPACING} 0 ${ITEM_SPACING}
     calc(${TOGGLE_SVG_SIZE} + ${SPACINGS.TWO});
   margin: 0 0;
