@@ -34,6 +34,7 @@ export const createSandboxReactPackageJson = async (
       'react-dom': dependencies['react-dom'],
       'react-scripts': '4.0.0',
       'embla-carousel-react': dependencies['embla-carousel-react'],
+      'embla-carousel': dependencies['embla-carousel'],
       ...(plugins && plugins)
     },
     devDependencies: isJavaScript
