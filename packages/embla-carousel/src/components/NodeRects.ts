@@ -1,7 +1,5 @@
 /**
- * File: NodeRects.ts
- *
- * Description: This file provides functionality to measure and retrieve the bounding rectangle of an HTML element. It defines 'NodeRectType' for the structure of the rectangle data and 'NodeRectsType' for the object that includes the measurement method. The primary function, 'measure', calculates and returns the top, right, bottom, left, width, and height of a given HTML element.
+ * This file provides functionality to measure and retrieve the bounding rectangle of an HTML element. It defines 'NodeRectType' for the structure of the rectangle data and 'NodeRectsType' for the object that includes the measurement method. The primary function, 'measure', calculates and returns the top, right, bottom, left, width, and height of a given HTML element.
  *
  * Functions:
  * - NodeRects(): Creates an object with a 'measure' method.

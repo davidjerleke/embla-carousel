@@ -1,7 +1,5 @@
 /**
- * File: Limit.ts
- *
- * Description: This file defines the 'Limit' functionality for numerical ranges. It provides a 'LimitType' interface and a 'Limit' function to handle constraints within a specified minimum and maximum numerical range. The key functionalities include checking if a number has reached or exceeded these limits and constraining a number within this range. This is useful for scenarios where numeric values need to be kept within certain bounds.
+ * This file defines the 'Limit' functionality for numerical ranges. It provides a 'LimitType' interface and a 'Limit' function to handle constraints within a specified minimum and maximum numerical range. The key functionalities include checking if a number has reached or exceeded these limits and constraining a number within this range. This is useful for scenarios where numeric values need to be kept within certain bounds.
  *
  * Functions:
  * - Limit(min, max): Creates a Limit object with provided minimum and maximum values.

@@ -1,7 +1,5 @@
 /**
- * File: Counter.ts
- *
- * Description: This file implements a 'Counter' functionality which is used to manage and manipulate a numerical value within a specified range. It provides a 'CounterType' interface and a 'Counter' function that allows for getting, setting, adding to, and cloning the counter value. The counter is constrained within a defined limit and can optionally loop from the maximum value back to zero.
+ * This file implements a 'Counter' functionality which is used to manage and manipulate a numerical value within a specified range. It provides a 'CounterType' interface and a 'Counter' function that allows for getting, setting, adding to, and cloning the counter value. The counter is constrained within a defined limit and can optionally loop from the maximum value back to zero.
  *
  * Functions:
  * - Counter(max, start, loop): Initializes a Counter object with a maximum value, a start value, and a boolean indicating whether the counter should loop.
