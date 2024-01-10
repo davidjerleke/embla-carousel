@@ -1,3 +1,22 @@
+/**
+ * File: Counter.ts
+ *
+ * Description: This file implements a 'Counter' functionality which is used to manage and manipulate a numerical value within a specified range. It provides a 'CounterType' interface and a 'Counter' function that allows for getting, setting, adding to, and cloning the counter value. The counter is constrained within a defined limit and can optionally loop from the maximum value back to zero.
+ *
+ * Functions:
+ * - Counter(max, start, loop): Initializes a Counter object with a maximum value, a start value, and a boolean indicating whether the counter should loop.
+ * - Get(): Returns the current value of the counter.
+ * - Set(n): Sets the counter to a specific value within the limit.
+ * - Add(n): Adds a value to the counter, considering the limit and loop behavior.
+ * - Clone(): Creates a clone of the current Counter object.
+ *
+ * Dependencies:
+ * - 'Limit' from './Limit' to enforce numeric boundaries.
+ * - 'mathAbs' from './utils' for absolute value calculations in loop scenarios.
+ *
+ * Note: This module is particularly useful for scenarios where a numeric value needs to be incremented or decremented within a defined range, like in pagination or iterating through slides.
+ */
+
 import { Limit } from './Limit'
 import { mathAbs } from './utils'
 
