@@ -9,7 +9,7 @@ body:
       value: |
         **Thanks :heart: for taking the time to fill out this bug report!**
         We kindly ask that you search to see if an issue [already exists](https://github.com/davidjerleke/embla-carousel/issues?q=is%3Aissue+sort%3Acreated-desc+) for your bug.
-        If you're unsure if this is a bug or not, please create a [new discussion](https://github.com/davidjerleke/embla-carousel/discussions/new?category=q-a) instead.
+        If you're unsure if this is a bug or not, please create a [new discussion](https://github.com/davidjerleke/embla-carousel/discussions/new?category=help) instead.
 
         We are happy to accept contributions from our users. For more details see [here](https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md#bug-reports).
 
