@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Ask a question
-    url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=q-a
+    url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=help
     about: Ask questions and discuss with other community members
   - name: Feature request
     url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=ideas
