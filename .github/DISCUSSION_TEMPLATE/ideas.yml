@@ -50,11 +50,11 @@ body:
     id: terms
     attributes:
       label: Before submitting
-      description: By submitting this issue, you agree to follow our [Contribution Guidelines](https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md).
+      description: By submitting this issue, you agree to follow our [Contributing Guidelines](https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md).
       options:
         - label: I've made research efforts and searched the documentation
           required: true
         - label: I've searched for existing issues
           required: true
-        - label: I agree to follow this project's Contribution Guidelines for feature requests
+        - label: I agree to follow this project's Contributing Guidelines for feature requests
           required: true
