@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-class-names.umd.js",
   "unpkg": "embla-carousel-class-names.umd.js",
-  "module": "embla-carousel-class-names.esm.js",
+  "module": "./esm/embla-carousel-class-names.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [

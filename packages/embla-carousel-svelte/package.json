@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-svelte.umd.js",
   "unpkg": "embla-carousel-svelte.umd.js",
-  "module": "embla-carousel-svelte.esm.js",
+  "module": "./esm/embla-carousel-svelte.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [

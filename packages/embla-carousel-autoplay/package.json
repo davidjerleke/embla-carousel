@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-autoplay.umd.js",
   "unpkg": "embla-carousel-autoplay.umd.js",
-  "module": "embla-carousel-autoplay.esm.js",
+  "module": "./esm/embla-carousel-autoplay.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [

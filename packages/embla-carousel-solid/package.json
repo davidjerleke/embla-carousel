@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-solid.umd.js",
   "unpkg": "embla-carousel-solid.umd.js",
-  "module": "embla-carousel-solid.esm.js",
+  "module": "./esm/embla-carousel-solid.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [
