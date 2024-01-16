@@ -1,5 +1,5 @@
 title: '[Help]: '
-labels: ['demonstration']
+labels: ['question']
 body:
   - type: textarea
     attributes:
