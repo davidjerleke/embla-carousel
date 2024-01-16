@@ -51,8 +51,6 @@ function createBuildPath(packageJson, format) {
 }
 
 function createNodeNextSupportForPackage() {
-  if (process.env.BUILD === 'development') return
-
   const workspacePath = process.cwd()
   const packageJsonPath = path.join(workspacePath, 'package.json')
   const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
@@ -66,6 +64,29 @@ function createNodeNextSupportForPackage() {
   const packageJson = JSON.parse(workspacePackageJson)
   const packageJsonMain = {
     ...packageJson,
+    repository: {
+      type: 'git',
+      url: 'git+https://github.com/davidjerleke/embla-carousel'
+    },
+    bugs: {
+      url: 'https://github.com/davidjerleke/embla-carousel/issues'
+    },
+    homepage: 'https://www.embla-carousel.com',
+    license: 'MIT',
+    keywords: [
+      'slider',
+      'carousel',
+      'slideshow',
+      'gallery',
+      'lightweight',
+      'touch',
+      'javascript',
+      'typescript',
+      'react',
+      'vue',
+      'svelte',
+      'solid'
+    ],
     files: [
       `${packageJson.name}*`,
       'components/**/*',
@@ -73,6 +94,11 @@ function createNodeNextSupportForPackage() {
       'esm/**/*',
       'cjs/**/*'
     ],
+    sideEffects: false,
+    unpkg: `${packageJson.name}.umd.js`,
+    main: `${packageJson.name}.umd.js`,
+    module: `./${FOLDERS.ESM}/${packageJson.name}.${FOLDERS.ESM}.js`,
+    types: 'index.d.ts',
     exports: {
       './package.json': './package.json',
       '.': {
@@ -88,17 +114,19 @@ function createNodeNextSupportForPackage() {
     }
   }
 
-  delete packageJson.scripts
-  delete packageJson.exports
+  const propsToDelete = ['scripts', 'exports', 'main', 'unpkg', 'module']
+  propsToDelete.forEach((prop) => delete packageJson[prop])
 
   const files = [`${packageJson.name}*`, 'components/**/*', 'index.d.ts']
   const packageJsonEsm = {
     ...packageJson,
+    module: `${packageJson.name}.${FOLDERS.ESM}.js`,
     files,
     type: 'module'
   }
   const packageJsonCjs = {
     ...packageJson,
+    main: `${packageJson.name}.${FOLDERS.CJS}.js`,
     files,
     type: 'commonjs'
   }

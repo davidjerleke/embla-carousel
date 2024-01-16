@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-auto-height.umd.js",
   "unpkg": "embla-carousel-auto-height.umd.js",
-  "module": "embla-carousel-auto-height.esm.js",
+  "module": "./esm/embla-carousel-auto-height.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [

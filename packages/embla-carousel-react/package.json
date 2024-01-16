@@ -28,7 +28,7 @@
   ],
   "main": "embla-carousel-react.umd.js",
   "unpkg": "embla-carousel-react.umd.js",
-  "module": "embla-carousel-react.esm.js",
+  "module": "./esm/embla-carousel-react.esm.js",
   "types": "index.d.ts",
   "sideEffects": false,
   "files": [
