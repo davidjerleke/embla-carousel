@@ -12,7 +12,7 @@ body:
   - type: checkboxes
     id: relations
     attributes:
-      label: Which variants of Embla Carousel are relevant to this request?
+      label: Which variants of Embla Carousel are relevant to this feature request?
       description: Check all that apply.
       options:
         - label: embla-carousel **(Core)**

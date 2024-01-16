@@ -1,17 +1,17 @@
-title: '[Help]: '
-labels: ['question']
+title: '[General]: '
+labels: ['discussion']
 body:
   - type: textarea
     attributes:
       label: Summary
-      description: What do you need help with?
+      description: What do you want to start a conversation about?
     validations:
       required: true
 
   - type: checkboxes
     id: relations
     attributes:
-      label: If applicable, which variants of Embla Carousel are relevant to this question?
+      label: If applicable, which variants of Embla Carousel are relevant to this conversation?
       description: Check all that apply.
       options:
         - label: embla-carousel **(Core)**
