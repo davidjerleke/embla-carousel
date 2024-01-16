@@ -23,7 +23,7 @@ With the minimal [HTML setup](/get-started/module/#the-html-structure) in place,
 
 In order to create a **vertical** carousel, we can modify our container by setting the `flex-direction` to `column`. Additionally, a vertical carousel needs a **specified height**:
 
-```css{3-4}
+```css highlight={3-4}
 .embla__container {
   display: flex;
   flex-direction: column;
@@ -53,7 +53,7 @@ Creating a CSS Grid container based on the minimal [HTML setup](/get-started/mod
 
 We can easily modify our CSS Grid container to create a **vertical** carousel by changing our `column` declarations to `row`. Don't forget that a vertical carousel also needs a **specified height**:
 
-```css{3-5}
+```css highlight={3-5}
 .embla__container {
   display: grid;
   grid-auto-flow: row;

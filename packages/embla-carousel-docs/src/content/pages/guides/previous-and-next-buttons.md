@@ -37,7 +37,7 @@ Therefore, it's **not a good idea** to place the previous and next buttons insid
 
 To solve this, we're going to modify the minimal [HTML setup](/get-started/module/#the-html-structure) from the installation guide by creating a **viewport wrapper** around our container like so:
 
-```html{2,8}
+```html highlight={2,8}
 <div class="embla">
   <div class="embla__viewport">
     <div class="embla__container">
@@ -51,7 +51,7 @@ To solve this, we're going to modify the minimal [HTML setup](/get-started/modul
 
 Our new wrapper with the class name `embla__viewport` will act as our **new root element**, which will encapsulate the scroll container and respond to pointer events. Now, we're ready to place our buttons **outside** that wrapper:
 
-```html{9-10}
+```html highlight={9-10}
 <div class="embla">
   <div class="embla__viewport">
     <div class="embla__container">
@@ -83,7 +83,7 @@ const nextButtonNode = rootNode.querySelector('.embla__next')
 
 Now that we have our nodes, let's initialize our carousel and make our previous and next **buttons respond to clicks**. We'll use [scrollPrev](/api/methods/#scrollprev) and [scrollNext](/api/methods/#scrollnext) for this:
 
-```js{5-6}
+```js highlight={5-6}
 // Initialize the carousel
 const embla = EmblaCarousel(viewportNode)
 
@@ -96,7 +96,7 @@ nextButtonNode.addEventListener('click', embla.scrollNext, false)
 
 Modifying the minimal [component setup](/get-started/react/#the-component-structure) from the installation guide, we're going to use the `emblaApi` to create our `scrollPrev` and `scrollNext` functions:
 
-```jsx{7-9,11-13,24,27}
+```jsx highlight={7-9,11-13,24,27}
 import React, { useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 
