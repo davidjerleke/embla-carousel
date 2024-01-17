@@ -38,7 +38,7 @@ The constructor options is the default way of providing options to Embla Carouse
     ```jsx highlight={4}
     import useEmblaCarousel from 'embla-carousel-react'
 
-    export const EmblaCarousel = () => {
+    export function EmblaCarousel() {
       const [emblaRef] = useEmblaCarousel({ loop: true })
       // ...
     }
@@ -88,7 +88,7 @@ Setting **global options** will be applied to **all carousels** which will overr
 
     useEmblaCarousel.globalOptions = { loop: true }
 
-    export const EmblaCarousel = () => {
+    export function EmblaCarousel() {
       const [emblaRef] = useEmblaCarousel({ align: 'center' })
       // ...
     }
@@ -159,7 +159,7 @@ The `EmblaOptionsType` is obtained directly from the **core package** `embla-car
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={2,5}
-    <script lang="ts" setup>
+    <script setup lang="ts">
       import { EmblaOptionsType } from 'embla-carousel'
       import emblaCarouselVue from 'embla-carousel-vue'
 

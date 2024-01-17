@@ -63,26 +63,22 @@ After initializing a carousel, we're going to **subscribe** to the [select](/api
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-    ```html highlight={14}
-    <script>
+    ```html highlight={12}
+    <script setup>
       import { watchEffect } from 'vue'
       import emblaCarouselVue from 'embla-carousel-vue'
 
-      export default {
-        setup() {
-          const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-          const onSelect = (emblaApi, eventName) => {
-            console.log(`Embla just triggered ${eventName}!`)
-          }
-
-          watchEffect(() => {
-            if (emblaApi.value) emblaApi.value.on('select', onSelect)
-          })
-
-          // ...
-        }
+      const onSelect = (emblaApi, eventName) => {
+        console.log(`Embla just triggered ${eventName}!`)
       }
+
+      watchEffect(() => {
+        if (emblaApi.value) emblaApi.value.on('select', onSelect)
+      })
+
+      // ...
     </script>
     ```
 
@@ -141,30 +137,26 @@ In order to remove an event listener, you'll have to call the [off](/api/methods
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-    ```html highlight={13-15}
-    <script>
+    ```html highlight={11-13}
+    <script setup>
       import { watchEffect } from 'vue'
       import emblaCarouselVue from 'embla-carousel-vue'
 
-      export default {
-        setup() {
-          const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-          const onSelect = (emblaApi, eventName) => {
-            console.log(`Embla just triggered ${eventName}!`)
-          }
-
-          const removeOnSelectListener = () => {
-            if (emblaApi.value) emblaApi.value.off('select', onSelect)
-          }
-
-          watchEffect(() => {
-            if (emblaApi.value) emblaApi.value.on('select', onSelect)
-          })
-
-          // ...
-        }
+      const onSelect = (emblaApi, eventName) => {
+        console.log(`Embla just triggered ${eventName}!`)
       }
+
+      const removeOnSelectListener = () => {
+        if (emblaApi.value) emblaApi.value.off('select', onSelect)
+      }
+
+      watchEffect(() => {
+        if (emblaApi.value) emblaApi.value.on('select', onSelect)
+      })
+
+      // ...
     </script>
     ```
 
@@ -233,7 +225,7 @@ The `EmblaEventType` is obtained directly from the **core package** `embla-carou
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={3,10}
-    <script lang="ts">
+    <script setup>
       import { watchEffect } from 'vue'
       import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
       import emblaCarouselVue from 'embla-carousel-vue'

@@ -37,6 +37,12 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 Embla Carousel provides the handy `emblaCarouselVue` function for seamless integration with Vue. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
 
 ```html
+<script setup>
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaNode] = emblaCarouselVue()
+</script>
+
 <template>
   <div class="embla" ref="emblaNode">
     <div class="embla__container">
@@ -46,17 +52,6 @@ Embla Carousel provides the handy `emblaCarouselVue` function for seamless integ
     </div>
   </div>
 </template>
-
-<script>
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  export default {
-    setup() {
-      const [emblaNode] = emblaCarouselVue()
-      return { emblaNode }
-    }
-  }
-</script>
 ```
 
 ## Styling the carousel
@@ -82,7 +77,20 @@ The `emblaCarouselVue` function gives us an **emblaNode** to attach to our wrapp
 
 The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `watchEffect` like demonstrated below:
 
-```html highlight={17,19-23}
+```html highlight={5,7-11}
+<script setup>
+  import { watchEffect } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaNode, emblaApi] = emblaCarouselVue({ loop: false })
+
+  watchEffect(() => {
+    if (emblaApi.value) {
+      console.log(emblaApi.value.slideNodes()) // Access API
+    }
+  })
+</script>
+
 <template>
   <div class="embla" ref="emblaNode">
     <div class="embla__container">
@@ -92,25 +100,6 @@ The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/
     </div>
   </div>
 </template>
-
-<script>
-  import { watchEffect } from 'vue'
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  export default {
-    setup() {
-      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: false })
-
-      watchEffect(() => {
-        if (emblaApi.value) {
-          console.log(emblaApi.value.slideNodes()) // Access API
-        }
-      })
-
-      return { emblaNode, emblaApi }
-    }
-  }
-</script>
 ```
 
 ## Adding plugins
@@ -136,7 +125,14 @@ Start by installing the plugin you want to use. In this example, we're going to 
 
 The `emblaCarouselVue` function accepts [plugins](/plugins/) as the second argument. Note that plugins need to be passed in an **array** like so:
 
-```html highlight={13,17}
+```html highlight={3,5}
+<script setup>
+  import emblaCarouselVue from 'embla-carousel-vue'
+  import Autoplay from 'embla-carousel-autoplay'
+
+  const [emblaNode] = emblaCarouselVue({ loop: false }, [Autoplay()])
+</script>
+
 <template>
   <div class="embla" ref="emblaNode">
     <div class="embla__container">
@@ -146,18 +142,6 @@ The `emblaCarouselVue` function accepts [plugins](/plugins/) as the second argum
     </div>
   </div>
 </template>
-
-<script>
-  import emblaCarouselVue from 'embla-carousel-vue'
-  import Autoplay from 'embla-carousel-autoplay'
-
-  export default {
-    setup() {
-      const [emblaNode] = emblaCarouselVue({ loop: false }, [Autoplay()])
-      return { emblaNode }
-    }
-  }
-</script>
 ```
 
 Congratulations! You just created your first Embla Carousel component.
