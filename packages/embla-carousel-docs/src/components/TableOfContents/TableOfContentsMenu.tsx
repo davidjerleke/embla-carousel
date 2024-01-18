@@ -39,7 +39,7 @@ const Heading = styled.div`
   color: ${COLORS.TEXT_BODY};
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.TWO};
-  font-weight: ${FONT_WEIGHTS.BOLD};
+  font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
   text-transform: uppercase;
 
   ${MEDIA.COMPACT} {

@@ -1,88 +1,27 @@
 import React, {
   PropsWithChildren,
   useCallback,
-  useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState
 } from 'react'
 import uniqueId from 'lodash/uniqueId'
-import styled, { css } from 'styled-components'
-import { isTabsItemProps, PropType as TabsItemPropType } from './TabsItem'
-import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
-import { ButtonBare, ButtonBareText } from 'components/Button/ButtonBare'
-import { SPACINGS } from 'consts/spacings'
-import { BORDER_SIZES } from 'consts/border'
-import { COLORS } from 'consts/themes'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import styled from 'styled-components'
 import { useTabs } from 'hooks/useTabs'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
+import { TabsPanel } from './TabsPanel'
+import { TabsButton } from './TabsButton'
+import { TabsList } from './TabsList'
+import { TabsItemType } from 'consts/tabs'
 import {
-  ActiveText as TabActiveText,
-  InactiveText as TabInactiveText
-} from 'components/Link/LinkNavigation'
-
-const mapChildrenToTabs = (children: React.ReactNode): TabsItemPropType[] => {
-  return React.Children.toArray(children)
-    .map((child) => (React.isValidElement(child) ? child.props : {}))
-    .filter(isTabsItemProps)
-}
-
-const pickDefaultTab = (
-  tabs: TabsItemPropType[],
-  storedTabSelection: string
-): TabsItemPropType => {
-  const storedTab = tabs.find((tab) => tab.value === storedTabSelection)
-  return storedTab || tabs.find((tab) => tab.default) || tabs[0]
-}
-
-const getActiveTabIndex = (
-  tabToFind: TabsItemPropType,
-  tabs: TabsItemPropType[]
-): number => {
-  return tabs.findIndex((tab) => tab.value === tabToFind.value)
-}
+  getDefaultTab,
+  getTabsPosition,
+  getTabsPositionDiff,
+  mapChildrenToTabs
+} from 'utils/tabs'
 
 export const TabsWrapper = styled.div``
-
-export const TabList = styled.div`
-  margin-bottom: ${SPACINGS.FOUR};
-  border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
-  display: flex;
-  overflow-x: auto;
-`
-
-export const TabPanel = styled.section`
-  ${KEY_NAVIGATING_STYLES};
-`
-
-export const Tab = styled(ButtonBare)<{ $selected: boolean }>`
-  padding: ${SPACINGS.TWO} ${SPACINGS.TWO};
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-
-  &:disabled > ${ButtonBareText} > ${TabInactiveText} {
-    color: ${COLORS.DETAIL_HIGH_CONTRAST};
-  }
-
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      &:before {
-        ${BRAND_GRADIENT_BACKGROUND_STYLES};
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: ${BORDER_SIZES.ACCENT_HORIZONTAL};
-        pointer-events: none;
-      }
-    `};
-`
 
 type PropType = PropsWithChildren<{
   groupId?: string
@@ -90,39 +29,28 @@ type PropType = PropsWithChildren<{
 
 export const Tabs = (props: PropType) => {
   const { groupId = '', children, ...restProps } = props
-  const { isKeyNavigating, setIsKeyNavigating } = useKeyNavigating()
+  const { setIsKeyNavigating } = useKeyNavigating()
   const { storedTabSelections, storeTabSelection } = useTabs()
-  const storedTabSelection = storedTabSelections[groupId]
+  const localStorageTab = storedTabSelections[groupId]
   const allTabs = useMemo(() => mapChildrenToTabs(children), [children])
-  const { tabs, tabsId, defaultTab } = useMemo(() => {
-    const enabledTabs = allTabs.filter((tab) => !tab.disabled)
-    return {
-      tabs: enabledTabs,
-      tabsId: uniqueId(),
-      defaultTab: pickDefaultTab(enabledTabs, storedTabSelection)
-    }
-  }, [allTabs, storedTabSelection])
-  const [activeTab, setActiveTab] = useState<TabsItemPropType>(defaultTab)
-  const focusedTab = useRef<HTMLButtonElement>()
+  const tabs = useMemo(() => allTabs.filter((tab) => !tab.disabled), [allTabs])
+  const defaultTab = useMemo(
+    () => getDefaultTab(tabs, localStorageTab),
+    [tabs, localStorageTab]
+  )
+  const [activeTab, setActiveTab] = useState<TabsItemType>(defaultTab)
+  const focusedTab = useRef<HTMLButtonElement | null>(null)
   const tabRefs = useRef(tabs.map(() => React.createRef<HTMLButtonElement>()))
-  const tabRefLoopIndex = useRef(0)
+  const tabsGroupId = useRef(uniqueId())
   const tabsWrapper = useRef<HTMLDivElement>(null)
-  const tabsWrapperRectTop = useRef(0)
-  const activeTabIndex = useRef(getActiveTabIndex(defaultTab, tabs))
+  const tabsActiveIndex = useRef(activeTab.index)
+  const tabsPosition = useRef(getTabsPosition(tabsWrapper.current))
 
-  const readTabsRectTop = useCallback(() => {
-    return tabsWrapper.current?.getBoundingClientRect().top || 0
-  }, [])
-
-  const setActiveTabAndStoreSelection = useCallback(
-    (tab: TabsItemPropType) => {
-      tabsWrapperRectTop.current = readTabsRectTop()
-      activeTabIndex.current = getActiveTabIndex(tab, tabs)
-      setActiveTab(tab)
-
-      if (groupId) storeTabSelection(groupId, tab.value)
+  const storeTabInLocalStorage = useCallback(
+    (tabValue: string) => {
+      if (groupId) storeTabSelection(groupId, tabValue)
     },
-    [tabs, groupId, readTabsRectTop, storeTabSelection]
+    [groupId, storeTabSelection]
   )
 
   const goToTab = useCallback(
@@ -131,19 +59,19 @@ export const Tabs = (props: PropType) => {
       const tabElement = tabRefs.current[index].current
 
       if (tab && tabElement) {
-        setActiveTabAndStoreSelection(tab)
-        setIsKeyNavigating(true)
         focusedTab.current = tabElement
+        setActiveTab(tab)
+        setIsKeyNavigating(true)
         tabElement.focus()
       }
     },
-    [tabs, setActiveTabAndStoreSelection, setIsKeyNavigating]
+    [tabs, setIsKeyNavigating]
   )
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLButtonElement>) => {
       const tabsCount = tabs.length
-      const activeIndex = activeTabIndex.current
+      const activeIndex = tabsActiveIndex.current
 
       const goToNextTab = (): void => {
         goToTab((activeIndex + 1) % tabsCount)
@@ -175,104 +103,67 @@ export const Tabs = (props: PropType) => {
     [tabs, goToTab]
   )
 
-  useEffect(() => {
+  const onClick = useCallback(
+    (tab: TabsItemType, element: EventTarget & HTMLButtonElement) => {
+      focusedTab.current = element
+      setActiveTab(tab)
+    },
+    []
+  )
+
+  useLayoutEffect(() => {
+    tabsActiveIndex.current = activeTab.index
     if (!groupId) return
 
-    const mainContentElement = document.getElementById(MAIN_CONTENT_ID)
-    let storedHeight = mainContentElement?.getBoundingClientRect().height
+    tabsPosition.current = getTabsPosition(tabsWrapper.current)
+    storeTabInLocalStorage(activeTab.value)
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      const autoNavigated = !tabRefs.current.some(
-        (tabRef) => tabRef.current === focusedTab.current
-      )
+    queueMicrotask(() => {
+      const focusedTabId = focusedTab.current?.id || ''
+      const autoNavigated = !focusedTabId.endsWith(tabsGroupId.current)
+      focusedTab.current = null
 
       if (autoNavigated) return
 
-      for (const entry of entries) {
-        if (entry.contentRect.height === storedHeight) return
-        storedHeight = entry.contentRect.height
-        const rectTopDiff = readTabsRectTop() - tabsWrapperRectTop.current
-        if (rectTopDiff) window.scrollBy(0, rectTopDiff)
-      }
+      const newTabsPosition = getTabsPosition(tabsWrapper.current)
+      const diff = getTabsPositionDiff(newTabsPosition, tabsPosition.current)
+      if (diff) window.scrollBy({ top: diff })
+
+      tabsPosition.current = getTabsPosition(tabsWrapper.current)
     })
+  }, [tabs, activeTab])
 
-    if (mainContentElement) resizeObserver.observe(mainContentElement)
-    return () => {
-      if (mainContentElement) resizeObserver.disconnect()
-    }
-  }, [groupId, readTabsRectTop])
-
-  useEffect(() => {
-    const tabToActivate = tabs.find((tab) => tab.value === storedTabSelection)
-    if (tabToActivate?.value === activeTab.value) return
-    if (tabToActivate) setActiveTabAndStoreSelection(tabToActivate)
-  }, [activeTab, storedTabSelection, setActiveTabAndStoreSelection])
-
-  useEffect(() => {
-    const hasActiveTab = tabs.find((tab) => tab.value === activeTab.value)
-    if (hasActiveTab) return
-
-    const newDefaultTab = pickDefaultTab(tabs, storedTabSelection)
-    setActiveTab(newDefaultTab)
-    activeTabIndex.current = getActiveTabIndex(newDefaultTab, tabs)
-  }, [tabs, activeTab, storedTabSelection])
+  useLayoutEffect(() => {
+    const tabToActivate = tabs.find((tab) => tab.value === localStorageTab)
+    if (!tabToActivate) return
+    if (tabToActivate.value === tabs[tabsActiveIndex.current].value) return
+    setActiveTab(tabToActivate)
+  }, [tabs, localStorageTab])
 
   return (
     <TabsWrapper ref={tabsWrapper} {...restProps}>
-      <TabList role="tablist" aria-orientation="horizontal">
-        {allTabs.map((tab) => {
-          const selected = activeTab.value === tab.value
-          const enabled = !tab.disabled
-          const tabRefIndex = tabRefLoopIndex.current
-          const tabElementRef = tabRefs.current[tabRefIndex]
-
-          if (enabled) {
-            const isLastTab = tabRefIndex === tabs.length - 1
-            tabRefLoopIndex.current = isLastTab ? 0 : tabRefIndex + 1
-          }
-
-          return (
-            <Tab
-              role="tab"
-              key={`tab-${tab.value}`}
-              id={`tab-id-${tab.value}-${tabsId}`}
-              tabIndex={selected ? 0 : -1}
-              ref={enabled ? tabElementRef : undefined}
-              aria-controls={`panel-id-${tab.value}-${tabsId}`}
-              aria-selected={selected}
-              onKeyDown={onKeyDown}
-              onClick={() => {
-                const tabElement = tabElementRef.current
-                if (tabElement) focusedTab.current = tabElement
-                setActiveTabAndStoreSelection(tab)
-              }}
-              $selected={selected}
-              disabled={!enabled}
-            >
-              <TabInactiveText $isActive={selected}>
-                {tab.label}
-              </TabInactiveText>
-              <TabActiveText $isActive={selected} aria-hidden="true">
-                {tab.label}
-              </TabActiveText>
-            </Tab>
-          )
-        })}
-      </TabList>
+      <TabsList role="tablist" aria-orientation="horizontal">
+        {allTabs.map((tab) => (
+          <TabsButton
+            key={`${tab.value}-${tabsGroupId.current}`}
+            groupId={tabsGroupId.current}
+            tab={tab}
+            ref={tabRefs.current[tab.index]}
+            activeTab={activeTab}
+            setActiveTab={onClick}
+            onKeyDown={onKeyDown}
+          />
+        ))}
+      </TabsList>
 
       {tabs.map((tab) => (
-        <TabPanel
-          role="tabpanel"
-          key={`tabpanel-${tab.value}`}
-          id={`panel-id-${tab.value}-${tabsId}`}
-          tabIndex={0}
-          aria-labelledby={`tab-id-${tab.value}-${tabsId}`}
-          hidden={activeTab.value !== tab.value}
-          onClick={() => setActiveTabAndStoreSelection(tab)}
-          $isKeyNavigating={isKeyNavigating}
-        >
-          {tab.children}
-        </TabPanel>
+        <TabsPanel
+          key={`${tab.value}-${tabsGroupId.current}`}
+          groupId={tabsGroupId.current}
+          tab={tab}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
       ))}
     </TabsWrapper>
   )

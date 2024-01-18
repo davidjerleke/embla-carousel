@@ -7,10 +7,14 @@ import { HEADER_HEIGHT } from 'components/Header/Header'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { LAYERS } from 'consts/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
+import { TABS_SITE_NAVIGATION } from 'consts/tabs'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { TabsItem } from 'components/Tabs/TabsItem'
-import { Tab, TabList, TabPanel, Tabs } from 'components/Tabs/Tabs'
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsList } from 'components/Tabs/TabsList'
+import { TabsButtonWrapper } from 'components/Tabs/TabsButton'
+import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
 import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { useTheme } from 'hooks/useTheme'
@@ -49,7 +53,7 @@ const MenuTabs = styled(Tabs)<{
 }>`
   height: 100%;
 
-  ${TabList} {
+  ${TabsList} {
     height: ${HEADER_HEIGHT};
     z-index: ${LAYERS.STEP * 2};
     position: absolute;
@@ -65,7 +69,7 @@ const MenuTabs = styled(Tabs)<{
     justify-content: center;
   }
 
-  ${TabPanel} {
+  ${TabsPanelWrapper} {
     position: relative;
     height: 100%;
     outline-offset: -${BORDER_SIZES.OUTLINE};
@@ -95,7 +99,7 @@ const MenuTabs = styled(Tabs)<{
     }
   }
 
-  ${Tab} {
+  ${TabsButtonWrapper} {
     flex-grow: 1;
     justify-content: center;
     max-width: calc(${MAX_WIDTH_COMPACT} / 2);
@@ -164,7 +168,7 @@ export const SiteNavigationMenuCompact = () => {
   return (
     <SiteNavigationMenuCompactWrapper>
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
-        <TabsItem label="Main menu" value="main-menu">
+        <TabsItem tab={TABS_SITE_NAVIGATION.TABS.MAIN_MENU}>
           <ScrollArea>
             <ul>
               <SiteNavigationSubMenus />
@@ -185,8 +189,7 @@ export const SiteNavigationMenuCompact = () => {
         </TabsItem>
 
         <TabsItem
-          label="On this page"
-          value="table-of-contents"
+          tab={TABS_SITE_NAVIGATION.TABS.ON_THIS_PAGE}
           disabled={!showTableOfContents}
         >
           <ScrollArea>

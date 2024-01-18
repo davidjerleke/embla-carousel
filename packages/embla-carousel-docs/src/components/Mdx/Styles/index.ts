@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { PRISM_HIGHLIGHT_CLASS_NAME } from 'consts/prismHighlight'
-import { TabsWrapper, TabPanel } from 'components/Tabs/Tabs'
+import { TabsWrapper } from 'components/Tabs/Tabs'
+import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { AdmonitionWrapper, AdmonitionContent } from '../Components/Admonition'
 import { headingStyles } from './heading'
 import { blockquoteStyles } from './blockquote'
@@ -19,7 +20,7 @@ export const MdxStyles = styled.div`
 
   color: ${COLORS.TEXT_BODY};
 
-  ${TabPanel} >,
+  ${TabsPanelWrapper} >,
   ${AdmonitionContent} >,
   > {
     ${listStyles};
@@ -53,13 +54,13 @@ export const MdxStyles = styled.div`
     }
   }
 
-  ${TabPanel} > *:first-child,
+  ${TabsPanelWrapper} > *:first-child,
   ${AdmonitionContent} > *:first-child,
   > *:first-child {
     margin-top: 0;
   }
 
-  ${TabPanel} > *:last-child, 
+  ${TabsPanelWrapper} > *:last-child, 
   ${AdmonitionContent} > *:last-child, 
   > *:last-child {
     margin-bottom: 0;
