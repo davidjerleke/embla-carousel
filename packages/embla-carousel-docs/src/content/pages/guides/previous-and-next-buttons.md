@@ -67,7 +67,7 @@ Our new wrapper with the class name `embla__viewport` will act as our **new root
 
 ## With vanilla JavaScript
 
-Adding event listeners to our buttons is easy. It just requires som basic JavaScript to get this done. First, we need to **grab our wrappers and buttons**:
+Adding event listeners to our buttons is easy. It just requires some basic JavaScript to get this done. First, we need to **grab our wrappers and buttons**:
 
 ```js
 import EmblaCarousel from 'embla-carousel'
