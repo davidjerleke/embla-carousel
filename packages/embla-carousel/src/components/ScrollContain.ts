@@ -1,5 +1,5 @@
 import { Limit, LimitType } from './Limit'
-import { arrayIsLastIndex, arrayLast } from './utils'
+import { arrayIsLastIndex, arrayLast, deltaAbs } from './utils'
 
 export type ScrollContainOptionType = false | 'trimSnaps' | 'keepSnaps'
 
@@ -20,6 +20,10 @@ export function ScrollContain(
   const scrollContainLimit = findScrollContainLimit()
   const snapsContained = measureContained()
 
+  function usePixelTolerance(bound: number, snap: number): boolean {
+    return deltaAbs(bound, snap) < 1
+  }
+
   function findScrollContainLimit(): LimitType {
     const startSnap = snapsBounded[0]
     const endSnap = arrayLast(snapsBounded)
@@ -31,11 +35,15 @@ export function ScrollContain(
   function measureBounded(): number[] {
     return snapsAligned
       .map((snapAligned, index) => {
+        const { min, max } = scrollBounds
+        const snap = scrollBounds.constrain(snapAligned)
         const isFirst = !index
         const isLast = arrayIsLastIndex(snapsAligned, index)
-        if (isFirst) return scrollBounds.max
-        if (isLast) return scrollBounds.min
-        return scrollBounds.constrain(snapAligned)
+        if (isFirst) return max
+        if (isLast) return min
+        if (usePixelTolerance(min, snap)) return min
+        if (usePixelTolerance(max, snap)) return max
+        return snap
       })
       .map((scrollBound) => parseFloat(scrollBound.toFixed(3)))
   }
