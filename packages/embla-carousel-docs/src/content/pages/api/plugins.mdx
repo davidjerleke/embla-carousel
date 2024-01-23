@@ -7,6 +7,7 @@ date: 2021-11-06
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
 
 # Plugins
 
@@ -22,8 +23,8 @@ The Embla Carousel **constructor** accepts an **array of plugins**. Each plugin 
 
 The constructor plugin array is the default way of providing plugins to Embla Carousel. In the following example, the [Autoplay](/plugins/autoplay/) plugin is added to the carousel:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={4}
     import EmblaCarousel from 'embla-carousel'
@@ -33,7 +34,7 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={5}
     import useEmblaCarousel from 'embla-carousel-react'
@@ -46,7 +47,7 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={7}
     <script>
@@ -75,8 +76,8 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
 
 Plugins have their own specific **options** which is the first argument of the plugin constructor. This allows for configuring the plugin to your liking:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={5}
     import EmblaCarousel from 'embla-carousel'
@@ -88,7 +89,7 @@ Plugins have their own specific **options** which is the first argument of the p
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={6}
     import useEmblaCarousel from 'embla-carousel-react'
@@ -103,7 +104,7 @@ Plugins have their own specific **options** which is the first argument of the p
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={8}
     <script>
@@ -128,8 +129,8 @@ Plugins have their own specific **options** which is the first argument of the p
 
 All [official plugins](/plugins/) allows you to set **global options** that will be applied to all instances. This allows for overriding the default plugin options with your own:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={4}
     import EmblaCarousel from 'embla-carousel'
@@ -141,7 +142,7 @@ All [official plugins](/plugins/) allows you to set **global options** that will
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={4}
     import useEmblaCarousel from 'embla-carousel-react'
@@ -156,7 +157,7 @@ All [official plugins](/plugins/) allows you to set **global options** that will
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={5}
     <script>
@@ -187,8 +188,8 @@ All [official plugins](/plugins/) allows you to set **global options** that will
 
 Additionally, some plugins expose their own **API methods**. You can access plugin methods by calling the [plugin](/api/methods/#plugins) method like demonstrated below:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={6}
     import EmblaCarousel from 'embla-carousel'
@@ -200,7 +201,7 @@ Additionally, some plugins expose their own **API methods**. You can access plug
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={9}
     import { useEffect } from 'react'
@@ -219,7 +220,7 @@ Additionally, some plugins expose their own **API methods**. You can access plug
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={13}
     <script>
@@ -250,8 +251,8 @@ Additionally, some plugins expose their own **API methods**. You can access plug
 
 Some plugins fire their own **events**. Plugin events are structured as follows `<plugin-name>:eventname`. [Adding](/api/events/#adding-event-listeners) and [removing](/api/events/#removing-event-listeners) plugin event listeners is done the same way as native Embla events. Here's an example where an event is added to the autoplay plugin:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={10}
     import EmblaCarousel from 'embla-carousel'
@@ -267,7 +268,7 @@ Some plugins fire their own **events**. Plugin events are structured as follows 
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={15}
     import { useEffect, useCallback } from 'react'
@@ -292,7 +293,7 @@ Some plugins fire their own **events**. Plugin events are structured as follows 
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={18}
     <script>
@@ -329,8 +330,8 @@ Some plugins fire their own **events**. Plugin events are structured as follows 
 
 The `EmblaPluginType` is obtained directly from the **core package** `embla-carousel` and used like so:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```ts highlight={3,8}
     import EmblaCarousel, {
@@ -345,7 +346,7 @@ The `EmblaPluginType` is obtained directly from the **core package** `embla-caro
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```tsx highlight={2,7}
     import React from 'react'
@@ -369,7 +370,7 @@ The `EmblaPluginType` is obtained directly from the **core package** `embla-caro
     </Admonition>
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={2,7}
     <script lang="ts" setup>

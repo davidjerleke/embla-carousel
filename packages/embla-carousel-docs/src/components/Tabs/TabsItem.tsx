@@ -1,14 +1,8 @@
+import { TabsGroupItemType } from 'consts/tabs'
 import React, { PropsWithChildren } from 'react'
 
-export const isTabsItemProps = (
-  props: PropType | PropsWithChildren<{}>
-): props is PropType => {
-  return 'value' in props && 'label' in props
-}
-
 export type PropType = PropsWithChildren<{
-  value: string
-  label: string
+  tab: TabsGroupItemType
   default?: boolean
   disabled?: boolean
 }>

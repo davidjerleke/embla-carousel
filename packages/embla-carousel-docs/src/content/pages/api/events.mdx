@@ -7,6 +7,7 @@ date: 2021-02-21
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
 
 # Events
 
@@ -22,8 +23,8 @@ You need an **initialized carousel** in order to **make use of events**. Events 
 
 After initializing a carousel, we're going to **subscribe** to the [select](/api/events/#select) **event** in the following example:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={9}
     import EmblaCarousel from 'embla-carousel'
@@ -38,7 +39,7 @@ After initializing a carousel, we're going to **subscribe** to the [select](/api
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={12}
     import { useCallback, useEffect } from 'react'
@@ -60,7 +61,7 @@ After initializing a carousel, we're going to **subscribe** to the [select](/api
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={14}
     <script>
@@ -92,8 +93,8 @@ After initializing a carousel, we're going to **subscribe** to the [select](/api
 
 In order to remove an event listener, you'll have to call the [off](/api/methods/#off) method and make sure to pass the **same callback reference** you passed to the [on](/api/methods/#off) method:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={9-11}
     import EmblaCarousel from 'embla-carousel'
@@ -112,7 +113,7 @@ In order to remove an event listener, you'll have to call the [off](/api/methods
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={11-13}
     import { useCallback, useEffect } from 'react'
@@ -138,7 +139,7 @@ In order to remove an event listener, you'll have to call the [off](/api/methods
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={13-15}
     <script>
@@ -174,8 +175,8 @@ In order to remove an event listener, you'll have to call the [off](/api/methods
 
 The `EmblaEventType` is obtained directly from the **core package** `embla-carousel` and used like so:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```ts highlight={3,8}
     import EmblaCarousel, {
@@ -195,7 +196,7 @@ The `EmblaEventType` is obtained directly from the **core package** `embla-carou
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```tsx highlight={2,9}
     import React, { useCallback } from 'react'
@@ -229,7 +230,7 @@ The `EmblaEventType` is obtained directly from the **core package** `embla-carou
     </Admonition>
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={3,10}
     <script lang="ts">

@@ -7,6 +7,7 @@ date: 2021-02-21
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
 
 # Options
 
@@ -22,8 +23,8 @@ You can customize Embla with the [constructor options](/api/options/#constructor
 
 The constructor options is the default way of providing options to Embla Carousel. In the following example, the carousel [loop](/api/options/#loop) option is set to `true`:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={3}
     import EmblaCarousel from 'embla-carousel'
@@ -32,7 +33,7 @@ The constructor options is the default way of providing options to Embla Carouse
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={4}
     import useEmblaCarousel from 'embla-carousel-react'
@@ -44,7 +45,7 @@ The constructor options is the default way of providing options to Embla Carouse
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={4}
     <script setup>
@@ -68,8 +69,8 @@ The constructor options is the default way of providing options to Embla Carouse
 
 Setting **global options** will be applied to **all carousels** which will override the Embla default options with your own. In the following example [loop](/api/options/#loop) is set to `true`:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```js highlight={3}
     import EmblaCarousel from 'embla-carousel'
@@ -80,7 +81,7 @@ Setting **global options** will be applied to **all carousels** which will overr
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```jsx highlight={3}
     import useEmblaCarousel from 'embla-carousel-react'
@@ -94,7 +95,7 @@ Setting **global options** will be applied to **all carousels** which will overr
     ```
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={4}
     <script setup>
@@ -120,8 +121,8 @@ Setting **global options** will be applied to **all carousels** which will overr
 
 The `EmblaOptionsType` is obtained directly from the **core package** `embla-carousel` and used like so:
 
-<Tabs groupId="library">
-  <TabsItem label="Vanilla" value="vanilla">
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
     ```ts highlight={1,3}
     import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
@@ -131,7 +132,7 @@ The `EmblaOptionsType` is obtained directly from the **core package** `embla-car
     ```
 
   </TabsItem>
-  <TabsItem label="React" value="react">
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
     ```tsx highlight={2,6}
     import React from 'react'
@@ -155,7 +156,7 @@ The `EmblaOptionsType` is obtained directly from the **core package** `embla-car
     </Admonition>
 
   </TabsItem>
-  <TabsItem label="Vue" value="vue">
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={2,5}
     <script lang="ts" setup>

@@ -7,20 +7,21 @@ date: 2021-02-21
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 
 # Module
 
 Start by installing the **npm package** and save it to your dependencies:
 
-<Tabs groupId="package-manager">
-  <TabsItem label="npm" value="npm">
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
 
     ```shell
     npm install embla-carousel --save
     ```
 
   </TabsItem>
-  <TabsItem label="yarn" value="yarn">
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
 
     ```shell
     yarn add embla-carousel
@@ -80,15 +81,15 @@ console.log(emblaApi.slideNodes()) // Access API
 
 Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/plugins/autoplay/) plugin:
 
-<Tabs groupId="package-manager">
-  <TabsItem label="npm" value="npm">
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
 
     ```shell
     npm install embla-carousel-autoplay --save
     ```
 
   </TabsItem>
-  <TabsItem label="yarn" value="yarn">
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
 
     ```shell
     yarn add embla-carousel-autoplay
