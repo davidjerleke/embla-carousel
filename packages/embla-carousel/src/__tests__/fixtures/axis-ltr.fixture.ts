@@ -7,7 +7,7 @@ Fixture 1
 - LTR
 - No slide margins
 */
-export const FIXTURE_CONSTRUCTOR_1: TestElementDimensionsType = {
+export const FIXTURE_AXIS_X_LTR: TestElementDimensionsType = {
   containerOffset: {
     offsetWidth: 1000,
     offsetHeight: 190,
@@ -46,28 +46,6 @@ export const FIXTURE_CONSTRUCTOR_1: TestElementDimensionsType = {
       offsetLeft: 1900
     }
   ],
-  endMargin: {
-    property: 'marginRight',
-    value: 0
-  }
-}
-
-/*
-Fixture 2
-
-- Horizontal
-- LTR
-- Container width: 1000px
-- No slides
-*/
-export const FIXTURE_CONSTRUCTOR_2: TestElementDimensionsType = {
-  containerOffset: {
-    offsetWidth: 1000,
-    offsetHeight: 190,
-    offsetTop: 0,
-    offsetLeft: 0
-  },
-  slideOffsets: [],
   endMargin: {
     property: 'marginRight',
     value: 0

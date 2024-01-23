@@ -1,13 +1,11 @@
 import { TestElementDimensionsType } from '../mocks/testElements.mock'
 
 /*
-   Fixture 1
+Fixture 1
 
-  - Horizontal
-  - LTR
-  - No slide margins
-  - Container width: 1000px
-  - Slide widths: 800px, 400px, 200px, 500px, 300px
+- Horizontal
+- LTR
+- No slide margins
 */
 export const FIXTURE_EVENTS: TestElementDimensionsType = {
   containerOffset: {

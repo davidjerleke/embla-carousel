@@ -4,10 +4,10 @@ import { TestElementDimensionsType } from '../mocks/testElements.mock'
 Fixture 1
 
 - Horizontal
-- LTR
+- RTL
 - No slide margins
 */
-export const FIXTURE_CONSTRUCTOR_1: TestElementDimensionsType = {
+export const FIXTURE_SELECTED_PREVIOUS_SNAP_RTL: TestElementDimensionsType = {
   containerOffset: {
     offsetWidth: 1000,
     offsetHeight: 190,
@@ -19,57 +19,35 @@ export const FIXTURE_CONSTRUCTOR_1: TestElementDimensionsType = {
       offsetWidth: 800,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 0
+      offsetLeft: 200
     },
     {
       offsetWidth: 400,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 800
+      offsetLeft: -200
     },
     {
       offsetWidth: 200,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1200
+      offsetLeft: -400
     },
     {
       offsetWidth: 500,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1400
+      offsetLeft: -900
     },
     {
       offsetWidth: 300,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1900
+      offsetLeft: -1200
     }
   ],
   endMargin: {
-    property: 'marginRight',
-    value: 0
-  }
-}
-
-/*
-Fixture 2
-
-- Horizontal
-- LTR
-- Container width: 1000px
-- No slides
-*/
-export const FIXTURE_CONSTRUCTOR_2: TestElementDimensionsType = {
-  containerOffset: {
-    offsetWidth: 1000,
-    offsetHeight: 190,
-    offsetTop: 0,
-    offsetLeft: 0
-  },
-  slideOffsets: [],
-  endMargin: {
-    property: 'marginRight',
+    property: 'marginLeft',
     value: 0
   }
 }

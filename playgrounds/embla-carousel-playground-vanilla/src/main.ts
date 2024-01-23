@@ -33,11 +33,8 @@ const injectBaseStyles = (): void => {
 
 injectBaseStyles()
 
-const SLIDE_COUNT = 10
-const OPTIONS: EmblaOptionsType = {
-  loop: true,
-  align: 'start'
-}
+const SLIDE_COUNT = 6
+const OPTIONS: EmblaOptionsType = {}
 
 const emblaNodes = <HTMLElement[]>(
   Array.from(document.querySelectorAll('.embla'))
