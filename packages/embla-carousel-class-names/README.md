@@ -117,6 +117,8 @@
       <img src="https://avatars2.githubusercontent.com/u/17789047?s=120&v=4" title="sadeghbarati" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/rojadesign">
       <img src="https://avatars2.githubusercontent.com/u/35687281?s=120&v=4" title="rojadesign" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/ruijdacd">
+      <img src="https://avatars2.githubusercontent.com/u/9107610?s=120&v=4" title="ruijdacd" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/pipisasa">
       <img src="https://avatars2.githubusercontent.com/u/54534600?s=120&v=4" title="pipisasa" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/horseeyephil">
@@ -125,6 +127,8 @@
       <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/romellem">
       <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/LucasMariniFalbo">
+      <img src="https://avatars2.githubusercontent.com/u/9245477?s=120&v=4" title="LucasMariniFalbo" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/LiamMartens">
       <img src="https://avatars2.githubusercontent.com/u/5265324?s=120&v=4" title="LiamMartens" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/JoshuaCrewe">
