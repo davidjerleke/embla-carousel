@@ -40,7 +40,7 @@ Embla Carousel provides the handy `useEmblaCarousel` hook for seamless integrati
 import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 
-export const EmblaCarousel = () => {
+export function EmblaCarousel() {
   const [emblaRef] = useEmblaCarousel()
 
   return (
@@ -80,7 +80,7 @@ The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) as
 import React, { useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 
-export const EmblaCarousel = () => {
+export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 
   useEffect(() => {
@@ -129,7 +129,7 @@ import React, { useEffect } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 
-export const EmblaCarousel = () => {
+export function EmblaCarousel() {
   const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])
 
   return (

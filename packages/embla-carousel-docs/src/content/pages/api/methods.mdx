@@ -41,7 +41,7 @@ In the following example, the [slideNodes](/api/methods/#slidenodes) method is c
     import { useEffect } from 'react'
     import useEmblaCarousel from 'embla-carousel-react'
 
-    export const EmblaCarousel = () => {
+    export function EmblaCarousel() {
       const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
       useEffect(() => {
@@ -55,22 +55,18 @@ In the following example, the [slideNodes](/api/methods/#slidenodes) method is c
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-    ```html highlight={10}
-    <script>
+    ```html highlight={8}
+    <script setup>
       import { watchEffect } from 'vue'
       import emblaCarouselVue from 'embla-carousel-vue'
 
-      export default {
-        setup() {
-          const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
+      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
 
-          watchEffect(() => {
-            if (emblaApi.value) console.log(emblaApi.value.slideNodes())
-          })
+      watchEffect(() => {
+        if (emblaApi.value) console.log(emblaApi.value.slideNodes())
+      })
 
-          // ...
-        }
-      }
+      // ...
     </script>
     ```
 
@@ -130,7 +126,7 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
     ```html highlight={3,8}
-    <script lang="ts" setup>
+    <script setup lang="ts">
       import { watchEffect } from 'vue'
       import { EmblaCarouselType } from 'embla-carousel'
       import emblaCarouselVue from 'embla-carousel-vue'
