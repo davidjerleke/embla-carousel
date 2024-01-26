@@ -1,0 +1,20 @@
+title: '[Show]: '
+labels: ['show and tell']
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: What have you built with Embla Carousel?
+      placeholder: |
+        1. Go to '...'
+        2. Scroll to '....'
+        3. See my awesome project
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Project link
+      description: A link to what you've built with Embla Carousel.
+    validations:
+      required: false

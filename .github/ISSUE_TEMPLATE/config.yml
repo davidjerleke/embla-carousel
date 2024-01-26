@@ -3,7 +3,12 @@ contact_links:
   - name: 🚀 Feature request
     url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=ideas
     about: Feature requests should be opened as discussions
-  - name: ❓ Ask a question
+  - name: ❓ Ask for help
     url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=help
-    about: Ask questions and discuss with other community members
-
+    about: Ask questions about how to achieve something
+  - name: ✨ Show something
+    url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=show-and-tell
+    about: Share something you've built with Embla Carousel
+  - name: 💬 Discuss
+    url: https://github.com/davidjerleke/embla-carousel/discussions/new?category=general
+    about: Start conversation or discussion about something
