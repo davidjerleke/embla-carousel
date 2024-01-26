@@ -1,12 +1,12 @@
 import { GraphQLNodeType } from './graphQL'
 import { TableOfContentsType } from 'components/TableOfContents/TableOfContentsContext'
 
-export const PAGE_LAYOUTS = <const>{
+export const PAGE_LAYOUTS = {
   HOME: 'Home',
   NOT_FOUND: '404',
   GENERATOR: 'Generator',
   DEFAULT: 'Default'
-}
+} as const
 
 export type PageHomeLayoutType = typeof PAGE_LAYOUTS.HOME
 export type PageNotFoundLayoutType = typeof PAGE_LAYOUTS.NOT_FOUND

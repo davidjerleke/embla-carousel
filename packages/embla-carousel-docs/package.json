@@ -43,7 +43,7 @@
     "embla-carousel-class-names": "8.0.0-rc21",
     "embla-carousel-react": "8.0.0-rc21",
     "focus-trap-react": "^8.10.0",
-    "gatsby": "^5.5.0",
+    "gatsby": "^5.10.0",
     "gatsby-plugin-layout": "^4.4.0",
     "gatsby-plugin-manifest": "^5.4.0",
     "gatsby-plugin-mdx": "^5.4.0",
