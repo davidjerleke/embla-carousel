@@ -8,6 +8,7 @@ date: 2021-11-06
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_LIBRARY } from 'consts/tabs'
+import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 
 # Plugins
 
@@ -15,9 +16,37 @@ It's possible to **extend** Embla carousel with additional features using **plug
 
 ---
 
+## Installation
+
+All **official plugins** are separate **NPM packages**. They're all **prefixed** with `embla-carousel` followed by its **unique** plugin **name**. For example, the `Autoplay` plugin is installed like so:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+
+    ```shell
+    npm install embla-carousel-autoplay --save
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+
+    ```shell
+    yarn add embla-carousel-autoplay
+    ```
+
+  </TabsItem>
+</Tabs>
+
 ## Usage
 
-The Embla Carousel **constructor** accepts an **array of plugins**. Each plugin has its own [options](/api/plugins/#constructor-options) and [methods](/api/plugins/#calling-methods).
+The Embla Carousel **constructor** accepts an **array of plugins**. Each plugin might have its own [options](/api/plugins/#constructor-options), [methods](/api/plugins/#calling-methods) and [events](/api/plugins/#adding-event-listeners).
 
 ### Adding a plugin
 
@@ -26,7 +55,7 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-    ```js highlight={4}
+    ```js highlight={2,4}
     import EmblaCarousel from 'embla-carousel'
     import Autoplay from 'embla-carousel-autoplay'
 
@@ -36,7 +65,7 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
-    ```jsx highlight={5}
+    ```jsx highlight={2,5}
     import useEmblaCarousel from 'embla-carousel-react'
     import Autoplay from 'embla-carousel-autoplay'
 
@@ -49,7 +78,7 @@ The constructor plugin array is the default way of providing plugins to Embla Ca
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-    ```html highlight={5}
+    ```html highlight={3,5}
     <script setup>
       import emblaCarouselVue from 'embla-carousel-vue'
       import Autoplay from 'embla-carousel-autoplay'

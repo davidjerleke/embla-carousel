@@ -1,7 +1,7 @@
 ---
 title: Wheel Gestures
 description: Learn how to add this Wheel Gesture plugin to Embla Carousel
-order: 3
+order: 4
 date: 2021-11-22
 ---
 
@@ -15,7 +15,7 @@ import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
   View plugin on GitHub
 </RepositoryLink>
 
-This plugin is used to extend Embla Carousel with the ability to use the mouse/trackpad wheel to navigate through the carousel.
+This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to **navigate** the carousel.
 
 ---
 
@@ -24,6 +24,13 @@ This plugin is used to extend Embla Carousel with the ability to use the mouse/t
 First you need to install the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-wheel-gestures/dist/embla-carousel-wheel-gestures.umd.js"></script>
+    ```
+
+  </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
 
     ```shell
@@ -40,12 +47,6 @@ First you need to install the **npm package** and save it to your dependencies:
   </TabsItem>
 </Tabs>
 
-Alternatively, you can use a **CDN** to include it in your project:
-
-```html
-<script src="https://unpkg.com/embla-carousel-wheel-gestures/dist/embla-carousel-wheel-gestures.umd.js"></script>
-```
-
 ## Usage
 
 This plugin accepts a single **optional** parameter, which is its [options](/plugins/wheel-gestures/#options) object that allows you to configure it.
@@ -59,20 +60,7 @@ const embla = EmblaCarousel(emblaRoot, { loop: false }, [WheelGesturesPlugin()])
 
 ## Options
 
-The Wheel Gestures plugin accepts an optional **options** object as the first argument. Here's an example of how to make use of it:
-
-```js
-import EmblaCarousel from 'embla-carousel'
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
-
-const wheelGesturesOptions = {
-  wheelDraggingClass: 'my-wheel-class'
-}
-
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [
-  WheelGesturesPlugin(wheelGesturesOptions) // Add plugin with options
-])
-```
+Below follows an exhaustive **list of all** `Wheel Gestures` **options** and their default values.
 
 ---
 
@@ -100,3 +88,5 @@ Type: <BrandPrimaryText>`Element`</BrandPrimaryText>
 Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
 
 Specify the element that should be observed for wheel events.
+
+---

@@ -8743,6 +8743,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll"
+  dependencies:
+    "@types/jest": ^29.5.6
+    "@typescript-eslint/eslint-plugin": ^6.9.0
+    "@typescript-eslint/parser": ^6.9.0
+    eslint: ^8.52.0
+    eslint-config-prettier: ^9.0.0
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^29.5.0
+    jest-environment-jsdom: ^29.5.0
+    prettier: 2.8.8
+    rollup: ^4.1.5
+    ts-jest: ^29.1.1
+    typescript: ^5.2.2
+  peerDependencies:
+    embla-carousel: 8.0.0-rc20
+  languageName: unknown
+  linkType: soft
+
 "embla-carousel-autoplay@8.0.0-rc20, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"

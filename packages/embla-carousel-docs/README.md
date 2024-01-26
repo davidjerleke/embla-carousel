@@ -125,6 +125,8 @@
       <img src="https://avatars2.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/nikrowell">
       <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/mujahidfa">
+      <img src="https://avatars2.githubusercontent.com/u/17759705?s=120&v=4" title="mujahidfa" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/romellem">
       <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/LucasMariniFalbo">
@@ -141,8 +143,6 @@
       <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/allen-garvey">
       <img src="https://avatars2.githubusercontent.com/u/9314727?s=120&v=4" title="allen-garvey" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/SaizFerri">
-      <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width: 100%" />
     </a>
   </p>
 </div>

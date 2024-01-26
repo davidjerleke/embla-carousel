@@ -21,6 +21,7 @@
     "packages/embla-carousel-svelte",
     "packages/embla-carousel-docs",
     "packages/embla-carousel-autoplay",
+    "packages/embla-carousel-auto-scroll",
     "packages/embla-carousel-auto-height",
     "packages/embla-carousel-class-names",
     "packages/embla-carousel-reactive-utils",

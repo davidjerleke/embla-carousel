@@ -42,6 +42,10 @@ export const TABS_SITE_NAVIGATION: TabsGroupType = {
 export const TABS_PACKAGE_MANAGER: TabsGroupType = {
   GROUP_ID: 'package-manager',
   TABS: {
+    CDN: {
+      LABEL: 'CDN',
+      VALUE: 'cdn'
+    },
     NPM: {
       LABEL: 'npm',
       VALUE: 'npm'
