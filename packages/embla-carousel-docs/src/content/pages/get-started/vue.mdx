@@ -40,11 +40,11 @@ Embla Carousel provides the handy `emblaCarouselVue` function for seamless integ
 <script setup>
   import emblaCarouselVue from 'embla-carousel-vue'
 
-  const [emblaNode] = emblaCarouselVue()
+  const [emblaRef] = emblaCarouselVue()
 </script>
 
 <template>
-  <div class="embla" ref="emblaNode">
+  <div class="embla" ref="emblaRef">
     <div class="embla__container">
       <div class="embla__slide">Slide 1</div>
       <div class="embla__slide">Slide 2</div>
@@ -56,7 +56,7 @@ Embla Carousel provides the handy `emblaCarouselVue` function for seamless integ
 
 ## Styling the carousel
 
-The `emblaCarouselVue` function gives us an **emblaNode** to attach to our wrapping element with the classname `embla`, which is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+The `emblaCarouselVue` function gives us an **emblaRef** to attach to our wrapping element with the classname `embla`, which is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
 
 ```html
 <style scoped>
@@ -82,7 +82,7 @@ The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/
   import { watchEffect } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
 
-  const [emblaNode, emblaApi] = emblaCarouselVue({ loop: false })
+  const [emblaRef, emblaApi] = emblaCarouselVue({ loop: false })
 
   watchEffect(() => {
     if (emblaApi.value) {
@@ -92,7 +92,7 @@ The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/
 </script>
 
 <template>
-  <div class="embla" ref="emblaNode">
+  <div class="embla" ref="emblaRef">
     <div class="embla__container">
       <div class="embla__slide">Slide 1</div>
       <div class="embla__slide">Slide 2</div>
@@ -130,11 +130,11 @@ The `emblaCarouselVue` function accepts [plugins](/plugins/) as the second argum
   import emblaCarouselVue from 'embla-carousel-vue'
   import Autoplay from 'embla-carousel-autoplay'
 
-  const [emblaNode] = emblaCarouselVue({ loop: false }, [Autoplay()])
+  const [emblaRef] = emblaCarouselVue({ loop: false }, [Autoplay()])
 </script>
 
 <template>
-  <div class="embla" ref="emblaNode">
+  <div class="embla" ref="emblaRef">
     <div class="embla__container">
       <div class="embla__slide">Slide 1</div>
       <div class="embla__slide">Slide 2</div>

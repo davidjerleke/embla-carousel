@@ -24,53 +24,91 @@ You need an **initialized carousel** in order to **make use of methods**. They c
 In the following example, the [slideNodes](/api/methods/#slidenodes) method is called and logged to the console as soon as the carousel has been initialized:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-    ```js highlight={5}
-    import EmblaCarousel from 'embla-carousel'
+```js highlight={6}
+import EmblaCarousel from 'embla-carousel'
 
-    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
 
+console.log(emblaApi.slideNodes())
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={8}
+import { useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
+
+  useEffect(() => {
+    if (emblaApi) console.log(emblaApi.slideNodes())
+  }, [emblaApi])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={8}
+<script setup>
+  import { watchEffect } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef, emblaApi] = emblaCarouselVue()
+
+  watchEffect(() => {
+    if (emblaApi.value) console.log(emblaApi.value.slideNodes())
+  })
+
+  // ...
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={9}
+import { createEffect } from 'solid-js'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+
+  createEffect(() => {
+    const api = emblaApi()
+    if (api) console.log(api.slideNodes())
+  })
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={8}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi
+
+  function onInit(event) {
+    emblaApi = event.detail
     console.log(emblaApi.slideNodes())
-    ```
+  }
+</script>
 
-  </TabsItem>
-  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+<div class="embla" use:emblaCarouselSvelte on:emblaInit="{onInit}">...</div>
+```
 
-    ```jsx highlight={8}
-    import { useEffect } from 'react'
-    import useEmblaCarousel from 'embla-carousel-react'
-
-    export function EmblaCarousel() {
-      const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-
-      useEffect(() => {
-        if (emblaApi) console.log(emblaApi.slideNodes())
-      }, [emblaApi])
-
-      // ...
-    }
-    ```
-
-  </TabsItem>
-  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-    ```html highlight={8}
-    <script setup>
-      import { watchEffect } from 'vue'
-      import emblaCarouselVue from 'embla-carousel-vue'
-
-      const [emblaNode, emblaApi] = emblaCarouselVue({ loop: true })
-
-      watchEffect(() => {
-        if (emblaApi.value) console.log(emblaApi.value.slideNodes())
-      })
-
-      // ...
-    </script>
-    ```
-
-  </TabsItem>
+</TabsItem>
 </Tabs>
 
 ### TypeScript
@@ -78,81 +116,147 @@ In the following example, the [slideNodes](/api/methods/#slidenodes) method is c
 The `EmblaCarouselType` is obtained directly from the **core package** `embla-carousel` and used like so:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-    ```ts highlight={1,3}
-    import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel'
+```ts asLanguage=tsx highlight={1,6}
+import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel'
 
-    function onSlidesInView(emblaApi: EmblaCarouselType): void {
-      console.log(emblaApi.slidesInView())
-    }
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
 
-    const emblaApi = EmblaCarousel(emblaNode, { loop: true })
-    emblaApi.on('slidesInView', onSlidesInView)
-    ```
+function logSlidesInView(emblaApi: EmblaCarouselType): void {
+  console.log(emblaApi.slidesInView())
+}
 
-  </TabsItem>
-  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+emblaApi.on('slidesInView', logSlidesInView)
+```
 
-    ```tsx highlight={2,8}
-    import React, { useCallback } from 'react'
-    import { EmblaCarouselType } from 'embla-carousel'
-    import useEmblaCarousel from 'embla-carousel-react'
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
-    export function EmblaCarousel() {
-      const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
+```tsx highlight={2,8}
+import React, { useCallback } from 'react'
+import { EmblaCarouselType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
 
-      const onSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
-        console.log(emblaApi.slidesInView())
-      }, [])
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
 
-      useEffect(() => {
-        if (!emblaApi) return
+  const logSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
+    console.log(emblaApi.slidesInView())
+  }, [])
 
-        emblaApi.on('slidesInView', onSlidesInView)
-      }, [onSlidesInView])
+  useEffect(() => {
+    if (emblaApi) emblaApi.on('slidesInView', logSlidesInView)
+  }, [emblaApi, logSlidesInView])
 
-      // ...
-    }
-    ```
+  // ...
+}
+```
 
-    <Admonition type="warning">
-      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
-      <br />
-      This is because even though `embla-carousel-react` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
-    </Admonition>
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-react` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
 
-  </TabsItem>
-  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-    ```html highlight={3,8}
-    <script setup lang="ts">
-      import { watchEffect } from 'vue'
-      import { EmblaCarouselType } from 'embla-carousel'
-      import emblaCarouselVue from 'embla-carousel-vue'
+```html highlight={3,8}
+<script setup lang="ts">
+  import { watchEffect } from 'vue'
+  import { EmblaCarouselType } from 'embla-carousel'
+  import emblaCarouselVue from 'embla-carousel-vue'
 
-      const [emblaNode] = emblaCarouselVue({ loop: true })
+  const [emblaRef] = emblaCarouselVue()
 
-      function onSlidesInView(emblaApi: EmblaCarouselType): void {
-        console.log(emblaApi.slidesInView())
-      }
+  function logSlidesInView(emblaApi: EmblaCarouselType): void {
+    console.log(emblaApi.slidesInView())
+  }
 
-      watchEffect(() => {
-        if (!emblaApi.value) return
-        emblaApi.value.on('slidesInView', onSlidesInView)
-      })
+  watchEffect(() => {
+    if (emblaApi.value) emblaApi.value.on('slidesInView', logSlidesInView)
+  })
 
-      // ...
-    </script>
-    ```
+  // ...
+</script>
+```
 
-    <Admonition type="warning">
-      If you're using `pnpm`, you need to install `embla-carousel` as a **devDependency** when importing types from it like demonstrated above.
-      <br />
-      This is because even though `embla-carousel-vue` has `embla-carousel` as a dependency, `pnpm` makes nested dependencies inaccessible by design.
-    </Admonition>
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-vue` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
 
-  </TabsItem>
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={2,8}
+import { createEffect } from 'solid-js'
+import { EmblaCarouselType } from 'embla-carousel'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+
+  function logSlidesInView(emblaApi: EmblaCarouselType): void {
+    console.log(emblaApi.slidesInView())
+  }
+
+  createEffect(() => {
+    const api = emblaApi()
+    if (api) api.on('slidesInView', logSlidesInView)
+  })
+
+  // ...
+}
+```
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-solid` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={2,5,7}
+<script>
+  import { EmblaCarouselType } from 'embla-carousel'
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi: EmblaCarouselType
+
+  function logSlidesInView(emblaApi: EmblaCarouselType): void {
+    console.log(emblaApi.slidesInView())
+  }
+
+  function onInit(event): void {
+    emblaApi = event.detail
+    emblaApi.on('slidesInView', logSlidesInView)
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte on:emblaInit="{onInit}">...</div>
+```
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-svelte` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
 </Tabs>
 
 ## Reference

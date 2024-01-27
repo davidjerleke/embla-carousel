@@ -33,7 +33,7 @@ const imageStyles = css`
   z-index: ${LAYERS.STEP};
 `
 
-const LogoImage = styled.img`
+export const LogoImage = styled.img`
   ${imageStyles};
 `
 

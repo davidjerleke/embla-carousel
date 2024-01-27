@@ -6,8 +6,14 @@ import { MEDIA } from 'consts/breakpoints'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
+import { BORDER_SIZES } from 'consts/border'
 import { LinkBare } from 'components/Link/LinkBare'
-import { SiteLogo } from 'components/SiteLogo/SiteLogo'
+import {
+  LogoDarkIcon,
+  LogoImage,
+  LogoLightIcon,
+  SiteLogo
+} from 'components/SiteLogo/SiteLogo'
 
 const HeaderLogoWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
@@ -24,16 +30,19 @@ const HeaderLogoWrapper = styled(LinkBare)`
 `
 
 const HeaderLogoImage = styled(SiteLogo)`
-  ${createSquareSizeStyles('2.8rem')};
+  ${createSquareSizeStyles('4rem')};
+  border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+  border-radius: 50%;
   margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   display: flex;
 
   ${MEDIA.MIN_XXS} {
-    ${createSquareSizeStyles('3rem')};
+    ${createSquareSizeStyles('4.4rem')};
   }
 
-  > img {
+  > ${LogoImage}, > ${LogoLightIcon}, > ${LogoDarkIcon} {
     ${createSquareSizeStyles('100%')};
+    padding: ${SPACINGS.ONE};
   }
 `
 

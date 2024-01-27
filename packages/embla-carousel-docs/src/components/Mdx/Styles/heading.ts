@@ -76,7 +76,7 @@ export const headingStyles = css`
       }
     }
 
-    > .anchor > div {
+    > .anchor > span {
       position: absolute;
       top: 0;
       left: 0;
@@ -102,18 +102,18 @@ export const headingStyles = css`
     }
   }
 
-  h1:hover .anchor > div > svg,
-  h2:hover .anchor > div > svg,
-  h3:hover .anchor > div > svg,
-  h4:hover .anchor > div > svg,
-  h5:hover .anchor > div > svg,
-  h6:hover .anchor > div > svg,
-  h1 .anchor:focus > div > svg,
-  h2 .anchor:focus > div > svg,
-  h3 .anchor:focus > div > svg,
-  h4 .anchor:focus > div > svg,
-  h5 .anchor:focus > div > svg,
-  h6 .anchor:focus > div > svg {
+  h1:hover .anchor > span > svg,
+  h2:hover .anchor > span > svg,
+  h3:hover .anchor > span > svg,
+  h4:hover .anchor > span > svg,
+  h5:hover .anchor > span > svg,
+  h6:hover .anchor > span > svg,
+  h1 .anchor:focus > span > svg,
+  h2 .anchor:focus > span > svg,
+  h3 .anchor:focus > span > svg,
+  h4 .anchor:focus > span > svg,
+  h5 .anchor:focus > span > svg,
+  h6 .anchor:focus > span > svg {
     visibility: visible;
   }
 `

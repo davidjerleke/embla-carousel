@@ -6,6 +6,9 @@ import {
 } from 'styled-components'
 import { BORDER_RADIUSES } from './border'
 import { COLORS } from './themes'
+import { SPACINGS } from './spacings'
+
+export const SCROLLBAR_SIZE = SPACINGS.ONE
 
 type ScrollBarAxisType = 'x' | 'y'
 
@@ -23,7 +26,7 @@ export const createScrollBarStyles = (
       background-color: transparent;
     }
     ::-webkit-scrollbar {
-      ${sizeProperty}: 0.6rem;
+      ${sizeProperty}: ${SCROLLBAR_SIZE};
     }
 
     &:hover {
