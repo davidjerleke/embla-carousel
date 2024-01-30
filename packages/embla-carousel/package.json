@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel",
-  "version": "8.0.0-rc21",
+  "version": "8.0.0-rc22",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {

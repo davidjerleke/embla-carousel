@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-solid",
-  "version": "8.0.0-rc21",
+  "version": "8.0.0-rc22",
   "author": "Liam Martens",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -60,8 +60,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "embla-carousel": "8.0.0-rc21",
-    "embla-carousel-reactive-utils": "8.0.0-rc21"
+    "embla-carousel": "8.0.0-rc22",
+    "embla-carousel-reactive-utils": "8.0.0-rc22"
   },
   "peerDependencies": {
     "solid-js": "^1.0.0"

@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-docs",
-  "version": "8.0.0-rc21",
+  "version": "8.0.0-rc22",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -38,10 +38,10 @@
     "@mdx-js/react": "^2.2.1",
     "babel-plugin-styled-components": "^2.0.2",
     "codesandbox": "^2.2.3",
-    "embla-carousel": "8.0.0-rc21",
-    "embla-carousel-autoplay": "8.0.0-rc21",
-    "embla-carousel-class-names": "8.0.0-rc21",
-    "embla-carousel-react": "8.0.0-rc21",
+    "embla-carousel": "8.0.0-rc22",
+    "embla-carousel-autoplay": "8.0.0-rc22",
+    "embla-carousel-class-names": "8.0.0-rc22",
+    "embla-carousel-react": "8.0.0-rc22",
     "focus-trap-react": "^8.10.0",
     "gatsby": "^5.13.3",
     "gatsby-plugin-layout": "^4.13.1",

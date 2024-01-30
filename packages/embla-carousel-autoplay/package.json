@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-autoplay",
-  "version": "8.0.0-rc21",
+  "version": "8.0.0-rc22",
   "author": "David Jerleke",
   "description": "An autoplay plugin for Embla Carousel",
   "repository": {
@@ -59,7 +59,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.0.0-rc21"
+    "embla-carousel": "8.0.0-rc22"
   },
   "exports": {
     "./package.json": "./package.json",
