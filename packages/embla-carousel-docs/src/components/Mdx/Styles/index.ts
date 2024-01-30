@@ -6,17 +6,11 @@ import { TabsWrapper } from 'components/Tabs/Tabs'
 import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { AdmonitionWrapper, AdmonitionContent } from '../Components/Admonition'
 import { headingStyles } from './heading'
-import { blockquoteStyles } from './blockquote'
 import { listStyles } from './list'
 import { codeStyles } from './code'
-import { linkStyles } from './link'
-import { hrStyles } from './hr'
 
 export const MdxStyles = styled.div`
-  ${blockquoteStyles};
   ${codeStyles};
-  ${hrStyles};
-  ${linkStyles};
 
   color: ${COLORS.TEXT_BODY};
 
@@ -32,20 +26,18 @@ export const MdxStyles = styled.div`
     h4,
     h5,
     h6,
-    hgroup,
     ul,
     ol,
     dl,
-    blockquote,
     p,
+    hgroup,
     address,
     table,
     fieldset,
     figure,
     pre,
-    ul,
-    ol,
     dd,
+    blockquote,
     blockquote code,
     kbd,
     samp,

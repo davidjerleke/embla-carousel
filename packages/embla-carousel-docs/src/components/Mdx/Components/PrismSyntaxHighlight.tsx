@@ -18,10 +18,11 @@ type PropType = {
 export const PrismSyntaxHighlight = (props: PropType) => {
   const { children, className } = props
 
-  const { language, highlightedLines } = useMemo(() => {
-    const { language, highlight } = parseCodeBlockProps(className)
+  const { asLanguage, language, highlightedLines } = useMemo(() => {
+    const { asLanguage, language, highlight } = parseCodeBlockProps(className)
     return {
       language,
+      asLanguage,
       highlightedLines: parseHighlightedLines(highlight)
     }
   }, [className])
@@ -32,7 +33,7 @@ export const PrismSyntaxHighlight = (props: PropType) => {
         <Highlight
           {...defaultProps}
           code={children}
-          language={language}
+          language={asLanguage || language}
           theme={undefined}
         >
           {({ className, tokens, getLineProps, getTokenProps }) => (

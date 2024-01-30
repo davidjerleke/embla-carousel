@@ -2,11 +2,12 @@ import React, { useCallback } from 'react'
 import styled, { css } from 'styled-components'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { SPACINGS } from 'consts/spacings'
-import { TabsItemWithIndexType } from 'consts/tabs'
+import { TabsItemType } from 'consts/tabs'
 import { ButtonBare, ButtonBareText } from 'components/Button/ButtonBare'
 import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
 import { PropType as ButtonPropType } from 'components/Button/ButtonBare'
+import { LAYERS } from 'consts/layers'
 import {
   ActiveText as TabsButtonActiveText,
   InactiveText as TabsButtonInactiveText
@@ -26,8 +27,9 @@ export const TabsButtonWrapper = styled(ButtonBare)<{ $selected: boolean }>`
   ${({ $selected }) =>
     $selected &&
     css`
-      &:before {
+      &:after {
         ${BRAND_GRADIENT_BACKGROUND_STYLES};
+        z-index: ${LAYERS.STEP};
         content: '';
         position: absolute;
         left: 0;
@@ -40,11 +42,11 @@ export const TabsButtonWrapper = styled(ButtonBare)<{ $selected: boolean }>`
 `
 
 type PropType = ButtonPropType & {
-  tab: TabsItemWithIndexType
-  activeTab: TabsItemWithIndexType
+  tab: TabsItemType
+  activeTab: TabsItemType
   groupId: string
   setActiveTab: (
-    tab: TabsItemWithIndexType,
+    tab: TabsItemType,
     element: EventTarget & HTMLButtonElement
   ) => void
 }

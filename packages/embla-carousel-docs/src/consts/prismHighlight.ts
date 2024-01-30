@@ -6,5 +6,6 @@ export const PRISM_HIGHLIGHT_PROP_SEPARATOR = '___'
 
 export type PrismCodeBlockPropsType = {
   language: PrismLanguage
+  asLanguage?: PrismLanguage
   highlight?: string
 }

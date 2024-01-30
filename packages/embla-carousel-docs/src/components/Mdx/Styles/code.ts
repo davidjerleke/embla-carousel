@@ -9,7 +9,7 @@ import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '../Components/Code'
 import { PRISM_FRAME_RADIUS } from '../Components/PrismSyntaxFrame'
 import { AdmonitionWrapper } from '../Components/Admonition'
-import { createScrollBarStyles } from 'consts/scrollBars'
+import { SCROLLBAR_SIZE, createScrollBarStyles } from 'consts/scrollBars'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME
@@ -137,10 +137,17 @@ export const codeStyles = css`
   }
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} pre[class*='language-'] {
-    padding: ${PAGE_FRAME_SPACING} 0;
     background-color: transparent;
     border: 0;
     margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: ${PAGE_FRAME_SPACING};
+    padding-bottom: calc(${PAGE_FRAME_SPACING} - ${SCROLLBAR_SIZE});
+
+    @media (hover: none), (hover: on-demand) {
+      padding-bottom: ${PAGE_FRAME_SPACING};
+    }
   }
 
   .${PRISM_HIGHLIGHT_CLASS_NAME} pre code {
@@ -156,8 +163,12 @@ export const codeStyles = css`
   pre {
     ${createScrollBarStyles('x')};
     color: ${COLORS.TEXT_BODY};
-    overflow: auto;
     white-space: pre;
+    overflow-x: scroll;
+
+    @media (hover: none), (hover: on-demand) {
+      overflow-x: auto;
+    }
   }
 
   .token-line {
@@ -178,7 +189,7 @@ export const codeStyles = css`
   .token.function,
   .token.class-name,
   .token.maybe-class-name:not(.imports),
-  .token.literal-property.property,
+  .token.literal-property.property:not(.parameter),
   .token.unit,
   .token.symbol {
     color: ${COLORS.BRAND_ALTERNATIVE};
@@ -203,7 +214,7 @@ export const codeStyles = css`
 
   .token.attr-value,
   .token.keyword,
-  .token.property,
+  .token.property:not(.parameter),
   .token.control,
   .token.directive,
   .token.selector,

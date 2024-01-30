@@ -52,9 +52,9 @@ Grab the element with the classname `embla` and pass it as the first argument to
 
 ```html highlight={6}
 <script type="text/javascript">
-  var emblaNode = document.querySelector('.embla')
-  var options = { loop: false }
-  var embla = EmblaCarousel(emblaNode, options)
+  const emblaNode = document.querySelector('.embla')
+  const options = { loop: false }
+  const emblaApi = EmblaCarousel(emblaNode, options)
 
   console.log(emblaApi.slideNodes()) // Access API
 </script>
@@ -73,10 +73,10 @@ Plugins included from a CDN will be **prefixed** with **EmblaCarousel**. Here's 
 
 ```html highlight={4-5}
 <script type="text/javascript">
-  var emblaNode = document.querySelector('.embla')
-  var options = { loop: false }
-  var plugins = [EmblaCarouselAutoplay()]
-  var embla = EmblaCarousel(emblaNode, options, plugins)
+  const emblaNode = document.querySelector('.embla')
+  const options = { loop: false }
+  const plugins = [EmblaCarouselAutoplay()]
+  const emblaApi = EmblaCarousel(emblaNode, options, plugins)
 </script>
 ```
 

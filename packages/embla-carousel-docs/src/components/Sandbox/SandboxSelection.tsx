@@ -30,7 +30,7 @@ const SandboxSelectionWrapper = styled.div`
   margin-top: -${SPACINGS.THREE};
 `
 
-const SandboxSelectionButtons = styled(ButtonBare)`
+const SandboxSelectionOpenModalButton = styled(ButtonBare)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-bottom: ${SPACINGS.ONE};
@@ -44,7 +44,7 @@ const SandboxSelectionButtons = styled(ButtonBare)`
   }
 `
 
-const SelectionModal = styled.div`
+const SandboxSelectionModal = styled.div`
   z-index: ${LAYERS.SEARCH + LAYERS.STEP};
   padding: ${PAGE_FRAME_SPACING} 0;
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -68,7 +68,7 @@ const SelectionModal = styled.div`
   }
 `
 
-const SelectionModalOverlay = styled.div`
+const SandboxSelectionModalOverlay = styled.div`
   z-index: ${LAYERS.SEARCH};
   position: fixed;
   top: 0;
@@ -82,7 +82,7 @@ const SelectionModalOverlay = styled.div`
   }
 `
 
-const SelectionModalCloseButton = styled(ButtonBare)`
+const SandboxSelectionModalCloseButton = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   z-index: ${LAYERS.STEP};
   display: flex;
@@ -93,7 +93,7 @@ const SelectionModalCloseButton = styled(ButtonBare)`
   right: 0;
 `
 
-const SelectionModalScrollArea = styled.div`
+const SandboxSelectionScrollArea = styled.div`
   padding: 0 ${PAGE_FRAME_SPACING};
   overflow: auto;
   position: relative;
@@ -119,7 +119,7 @@ export const SandboxSelection = (props: PropType) => {
 
   return (
     <SandboxSelectionWrapper>
-      <SandboxSelectionButtons
+      <SandboxSelectionOpenModalButton
         id={SELECT_CODESANDBOX_DIALOG_ID}
         aria-expanded={selectionOpen}
         aria-label="Show Select CodeSandbox Dialog"
@@ -128,31 +128,33 @@ export const SandboxSelection = (props: PropType) => {
         <IconWithText iconSvg="pen" iconSize="1.4rem">
           Edit Code
         </IconWithText>
-      </SandboxSelectionButtons>
+      </SandboxSelectionOpenModalButton>
 
       {selectionOpen && (
         <Portal>
           <FocusTrap active={true}>
             <div>
-              <SelectionModalOverlay onClick={() => setSelectionOpen(false)} />
+              <SandboxSelectionModalOverlay
+                onClick={() => setSelectionOpen(false)}
+              />
 
-              <SelectionModal
+              <SandboxSelectionModal
                 role="dialog"
                 aria-modal="true"
                 aria-label="Select CodeSandbox Dialog"
                 aria-labelledby={SELECT_CODESANDBOX_DIALOG_ID}
               >
-                <SelectionModalCloseButton
+                <SandboxSelectionModalCloseButton
                   aria-label="Hide Select CodeSandbox Dialog"
                   onClick={() => setSelectionOpen(false)}
                 >
                   <Icon svg="cross" size={ICON_SIZE} />
-                </SelectionModalCloseButton>
+                </SandboxSelectionModalCloseButton>
 
-                <SelectionModalScrollArea>
+                <SandboxSelectionScrollArea>
                   <SandboxSelectionForm sandboxes={sandboxes} />
-                </SelectionModalScrollArea>
-              </SelectionModal>
+                </SandboxSelectionScrollArea>
+              </SandboxSelectionModal>
             </div>
           </FocusTrap>
         </Portal>

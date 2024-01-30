@@ -12,7 +12,7 @@ import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { Tabs } from 'components/Tabs/Tabs'
-import { TabsList } from 'components/Tabs/TabsList'
+import { TabsListScrollArea, TabsListWrapper } from 'components/Tabs/TabsList'
 import { TabsButtonWrapper } from 'components/Tabs/TabsButton'
 import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
@@ -53,7 +53,7 @@ const MenuTabs = styled(Tabs)<{
 }>`
   height: 100%;
 
-  ${TabsList} {
+  ${TabsListWrapper} {
     height: ${HEADER_HEIGHT};
     z-index: ${LAYERS.STEP * 2};
     position: absolute;
@@ -67,6 +67,19 @@ const MenuTabs = styled(Tabs)<{
     border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
     border-bottom: 0;
     justify-content: center;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  ${TabsListScrollArea} {
+    overflow: visible;
+
+    &:before,
+    &:after {
+      display: none;
+    }
   }
 
   ${TabsPanelWrapper} {
