@@ -9,7 +9,7 @@ body:
       value: |
         **Thanks :heart: for taking the time to fill out this bug report!**
         We kindly ask that you search to see if an issue [already exists](https://github.com/davidjerleke/embla-carousel/issues?q=is%3Aissue+sort%3Acreated-desc+) for your bug.
-        If you're unsure if this is a bug or not, please create a [new discussion](https://github.com/davidjerleke/embla-carousel/discussions/new?category=help) instead.
+        If you're unsure if this is a bug or not, please create a [new discussion](https://github.com/davidjerleke/embla-carousel/discussions/new?category=help) instead!
 
         We are happy to accept contributions from our users. For more details see [here](https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md#bug-reports).
 
@@ -26,22 +26,15 @@ body:
     id: codesandbox
     attributes:
       label: CodeSandbox
-      description: A link to a CodeSandbox that reproduces the issue. **Skipping this/providing an invalid link will result in the issue being closed**.
+      description: |
+        A link to a CodeSandbox that clearly reproduces the issue.
+
+        > [!CAUTION]  
+        > Skipping this or providing an invalid link may result in the issue being closed or even deleted without any warning.
+
       placeholder: ex. https://codesandbox.io/s/fancy-example-smu
     validations:
       required: false
-
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
-        - All of the above
 
   - type: textarea
     id: steps-to-reproduce
@@ -66,6 +59,18 @@ body:
     validations:
       required: true
 
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+        - All browsers
+
   - type: textarea
     id: context
     attributes:
@@ -87,6 +92,7 @@ body:
         - label: embla-carousel-vue
         - label: embla-carousel-svelte
         - label: embla-carousel-autoplay
+        - label: embla-carousel-auto-scroll
         - label: embla-carousel-solid
         - label: embla-carousel-auto-height
         - label: embla-carousel-class-names

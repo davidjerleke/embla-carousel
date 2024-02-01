@@ -20,6 +20,7 @@ body:
         - label: embla-carousel-vue
         - label: embla-carousel-svelte
         - label: embla-carousel-autoplay
+        - label: embla-carousel-auto-scroll
         - label: embla-carousel-solid
         - label: embla-carousel-auto-height
         - label: embla-carousel-class-names
