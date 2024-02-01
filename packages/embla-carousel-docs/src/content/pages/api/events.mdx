@@ -294,7 +294,7 @@ export function EmblaCarousel() {
 
   useEffect(() => {
     if (emblaApi) emblaApi.on('slidesInView', logEmblaEvent)
-  }, [logEmblaEvent])
+  }, [emblaApi, logEmblaEvent])
 
   // ...
 }
