@@ -13,28 +13,23 @@ body:
 
         We are happy to accept contributions from our users. For more details see [here](https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md#bug-reports).
 
-  - type: input
-    id: version
+  - type: checkboxes
+    id: relations
     attributes:
-      label: Version
-      description: Which version of Embla Carousel are you using?
-      placeholder: ex. v8.0.0
-    validations:
-      required: false
-
-  - type: input
-    id: codesandbox
-    attributes:
-      label: CodeSandbox
-      description: |
-        A link to a CodeSandbox that clearly reproduces the issue.
-
-        > [!CAUTION]  
-        > Skipping this or providing an invalid link may result in the issue being closed or even deleted without any warning.
-
-      placeholder: ex. https://codesandbox.io/s/fancy-example-smu
-    validations:
-      required: false
+      label: Which variants of Embla Carousel are you using?
+      description: Check all that apply.
+      options:
+        - label: embla-carousel **(Core)**
+        - label: embla-carousel-react
+        - label: embla-carousel-vue
+        - label: embla-carousel-svelte
+        - label: embla-carousel-autoplay
+        - label: embla-carousel-auto-scroll
+        - label: embla-carousel-solid
+        - label: embla-carousel-auto-height
+        - label: embla-carousel-class-names
+        - label: embla-carousel-docs **(Documentation)**
+        - label: embla-carousel-docs **(Generator)**
 
   - type: textarea
     id: steps-to-reproduce
@@ -59,6 +54,16 @@ body:
     validations:
       required: true
 
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here.
+      placeholder: ex. screenshots, stack traces, related issues, suggestions on how to fix, Stack Overflow links, forum links, etc.
+      value: 'I have also tried...'
+    validations:
+      required: false
+
   - type: dropdown
     id: browsers
     attributes:
@@ -71,33 +76,28 @@ body:
         - Microsoft Edge
         - All browsers
 
-  - type: textarea
-    id: context
+  - type: input
+    id: version
     attributes:
-      label: Additional Context
-      description: Add any other context about the problem here.
-      placeholder: ex. screenshots, stack traces, related issues, suggestions on how to fix, Stack Overflow links, forum links, etc.
-      value: 'I have also tried...'
+      label: Version
+      description: Which version of Embla Carousel are you using?
+      placeholder: ex. v8.0.0
     validations:
       required: false
 
-  - type: checkboxes
-    id: relations
+  - type: input
+    id: codesandbox
     attributes:
-      label: Which variants of Embla Carousel are you using?
-      description: Check all that apply.
-      options:
-        - label: embla-carousel **(Core)**
-        - label: embla-carousel-react
-        - label: embla-carousel-vue
-        - label: embla-carousel-svelte
-        - label: embla-carousel-autoplay
-        - label: embla-carousel-auto-scroll
-        - label: embla-carousel-solid
-        - label: embla-carousel-auto-height
-        - label: embla-carousel-class-names
-        - label: embla-carousel-docs **(Documentation)**
-        - label: embla-carousel-docs **(Generator)**
+      label: CodeSandbox
+      description: |
+        A link to a CodeSandbox that clearly reproduces the issue.
+
+        > [!CAUTION]  
+        > Skipping this or providing an invalid link may result in the issue being closed or even deleted without any warning.
+
+      placeholder: ex. https://codesandbox.io/s/fancy-example-smu
+    validations:
+      required: false
 
   - type: checkboxes
     id: terms
