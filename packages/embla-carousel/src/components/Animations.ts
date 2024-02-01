@@ -41,6 +41,7 @@ export function Animations(
   }
 
   function animate(timeStamp: DOMHighResTimeStamp): void {
+    if (!animationFrame) return
     if (!lastTimeStamp) lastTimeStamp = timeStamp
 
     const elapsed = timeStamp - lastTimeStamp
