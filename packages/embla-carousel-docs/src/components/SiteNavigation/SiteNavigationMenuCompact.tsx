@@ -75,6 +75,7 @@ const MenuTabs = styled(Tabs)<{
 
   ${TabsListScrollArea} {
     overflow: visible;
+    padding-bottom: 0;
 
     &:before,
     &:after {

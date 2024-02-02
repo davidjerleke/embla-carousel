@@ -2,11 +2,11 @@ import { TsConfigType } from 'consts/sandbox'
 
 export const createSandboxReactTsConfig = (): TsConfigType => {
   return {
-    include: ['./src/**/*', './declarations.d.ts'],
+    include: ['./src/**/*'],
     compilerOptions: {
       strict: true,
       esModuleInterop: true,
-      lib: ['dom', 'es2015'],
+      lib: ['es6', 'dom'],
       jsx: 'react-jsx'
     }
   }

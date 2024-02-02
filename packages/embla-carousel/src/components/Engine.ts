@@ -315,7 +315,7 @@ export function Engine(
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,
-      location,
+      offsetLocation,
       target,
       scrollBody,
       percentOfView

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import EmblaCarousel from './Default/EmblaCarousel'
+import EmblaCarousel from './Autoplay/EmblaCarousel'
 import { EmblaOptionsType } from 'embla-carousel'
 import Header from './Header'
 import Footer from './Footer'
@@ -13,13 +13,11 @@ const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
 const App: React.FC = () => (
-  <main className="sandbox">
+  <>
     <Header />
-    <section className="sandbox__carousel">
-      <EmblaCarousel slides={SLIDES} options={OPTIONS} />
-    </section>
+    <EmblaCarousel slides={SLIDES} options={OPTIONS} />
     <Footer />
-  </main>
+  </>
 )
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

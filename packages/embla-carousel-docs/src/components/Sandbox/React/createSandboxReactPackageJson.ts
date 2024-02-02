@@ -1,6 +1,6 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
 import { SANDBOX_REACT_FOLDERS } from './sandboxReactFolders'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { sandboxLanguageUtils } from 'utils/sandbox'
 import {
   SandboxLanguageType,

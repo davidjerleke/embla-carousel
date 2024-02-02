@@ -1,21 +1,21 @@
 import React from 'react'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
+import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { CarouselGeneratorFormItem } from './CarouselGeneratorFormItems'
 import {
-  CarouselGeneratorCheckboxType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorCheckboxType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
 
-const INPUT_AUTOPLAY: CarouselGeneratorCheckboxType<'autoplay'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.AUTOPLAY),
+const INPUT_AUTOPLAY: SandboxGeneratorCheckboxType<'autoplay'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.AUTOPLAY),
   LABEL: 'Autoplay'
 }
 
-const INPUT_WHEEL_GESTURES: CarouselGeneratorCheckboxType<'wheelGestures'> = {
-  ...createCarouselGeneratorInputId(
-    CAROUSEL_GENERATOR_FORM_FIELDS.WHEEL_GESTURES
+const INPUT_WHEEL_GESTURES: SandboxGeneratorCheckboxType<'wheelGestures'> = {
+  ...createSandboxGeneratorInputId(
+    SANDBOX_GENERATOR_FORM_FIELDS.WHEEL_GESTURES
   ),
   LABEL: 'Wheel gestures (under development)'
 }

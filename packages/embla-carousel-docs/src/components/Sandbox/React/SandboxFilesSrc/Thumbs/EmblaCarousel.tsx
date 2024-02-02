@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
-import imageByIndex from '../imageByIndex'
 
 type PropType = {
   slides: number[]
@@ -45,14 +44,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">
-                <span>{index + 1}</span>
-              </div>
-              <img
-                className="embla__slide__img"
-                src={imageByIndex(index)}
-                alt="Your alt text"
-              />
+              <div className="embla__slide__number">{index + 1}</div>
             </div>
           ))}
         </div>
@@ -63,11 +55,10 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           <div className="embla-thumbs__container">
             {slides.map((index) => (
               <Thumb
+                key={index}
                 onClick={() => onThumbClick(index)}
                 selected={index === selectedIndex}
                 index={index}
-                imgSrc={imageByIndex(index)}
-                key={index}
               />
             ))}
           </div>

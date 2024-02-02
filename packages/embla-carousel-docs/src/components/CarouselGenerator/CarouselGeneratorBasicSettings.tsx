@@ -2,47 +2,45 @@ import React from 'react'
 import { InputRadioDefault } from 'components/Input/InputRadio'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
+import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
 import {
-  CarouselGeneratorCheckboxType,
-  CarouselGeneratorRadioType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorCheckboxType,
+  SandboxGeneratorRadioType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
 import {
   CarouselGeneratorFormItem,
   CarouselGeneratorFormItems
 } from './CarouselGeneratorFormItems'
 
-const INPUT_AXIS: CarouselGeneratorRadioType<'axis'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.AXIS),
+const INPUT_AXIS: SandboxGeneratorRadioType<'axis'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.AXIS),
   OPTIONS: [
     { LABEL: 'Horizontal', VALUE: 'x' },
     { LABEL: 'Vertical', VALUE: 'y' }
   ]
 }
 
-const INPUT_DIRECTION: CarouselGeneratorRadioType<'direction'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.DIRECTION),
+const INPUT_DIRECTION: SandboxGeneratorRadioType<'direction'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.DIRECTION),
   OPTIONS: [
     { LABEL: 'Left to right', VALUE: 'ltr' },
     { LABEL: 'Right to left', VALUE: 'rtl' }
   ]
 }
 
-const INPUT_LOOP: CarouselGeneratorCheckboxType<'loop'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.LOOP),
+const INPUT_LOOP: SandboxGeneratorCheckboxType<'loop'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.LOOP),
   LABEL: 'Loop'
 }
 
-const INPUT_DRAG_FREE: CarouselGeneratorCheckboxType<'dragFree'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.DRAG_FREE),
+const INPUT_DRAG_FREE: SandboxGeneratorCheckboxType<'dragFree'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.DRAG_FREE),
   LABEL: 'Drag free'
 }
 
-const INPUT_ACCESSIBILITY: CarouselGeneratorCheckboxType<'accessibility'> = {
-  ...createCarouselGeneratorInputId(
-    CAROUSEL_GENERATOR_FORM_FIELDS.ACCESSIBILITY
-  ),
+const INPUT_ACCESSIBILITY: SandboxGeneratorCheckboxType<'accessibility'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.ACCESSIBILITY),
   LABEL: 'Accessibility (under development)'
 }
 

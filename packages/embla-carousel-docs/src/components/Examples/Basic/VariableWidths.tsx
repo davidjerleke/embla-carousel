@@ -2,30 +2,56 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselDefault from 'components/Sandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselVariableWidthStyles } from 'components/Examples/createCarouselStyles'
+import EmblaCarouselExample from 'components/Sandbox/SandboxGeneratorExample'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxGeneratorSettingsType } from 'consts/sandbox'
+import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGeneratorContext'
+import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
+import { examplesCarouselVariableWidthStyles } from '../examplesCarouselStyles'
+import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 
-export const ID = 'embla-carousel-variable-widths'
-export const SLIDES = arrayFromNumber(9)
-export const OPTIONS: EmblaOptionsType = {}
-export const STYLES = createCarouselVariableWidthStyles()
+const ID = 'embla-carousel-variable-widths'
+const SLIDES = arrayFromNumber(9)
+const OPTIONS: EmblaOptionsType = {}
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOX_SETTINGS: SandboxGeneratorSettingsType = {
+  ...CONTEXT_DEFAULT_VALUE.formData,
+  ...OPTIONS,
+  id: ID,
+  slideList: SLIDES,
+  navigationPrevNextButtons: true,
+  selectedSnapDisplay: true,
+  styles: examplesCarouselVariableWidthStyles()
+}
+
+const SANDBOXES = staticGeneratorSandboxes(SANDBOX_SETTINGS)
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
-    ${STYLES};
+    ${sandboxGeneratorCreateStyles(SANDBOX_SETTINGS)};
   }
 `
 
-export const ExampleCarouselVariableWidths = () => {
+export const VariableWidths = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselDefault slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? (
+          <EmblaCarouselExample
+            slides={SLIDES}
+            options={OPTIONS}
+            navigationPrevNextButtons
+            selectedSnapDisplay
+          />
+        ) : null}
+      </Wrapper>
+    </>
   )
 }

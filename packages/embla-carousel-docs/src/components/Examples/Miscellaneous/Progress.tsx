@@ -3,29 +3,44 @@ import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselProgress from 'components/Sandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselProgressStyles } from 'components/Examples/createCarouselStyles'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
+import { examplesCarouselProgressStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
 
-export const ID = 'embla-carousel-progress'
-export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { dragFree: true }
-export const STYLES = createCarouselProgressStyles()
+const ID = 'embla-carousel-progress'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { dragFree: true }
+const STYLES = examplesCarouselProgressStyles('65%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
+  id: ID,
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
+}
+
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'Progress')
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
     ${STYLES};
   }
 `
 
-export const ExampleCarouselProgress = () => {
+export const Progress = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselProgress slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? <CarouselProgress slides={SLIDES} options={OPTIONS} /> : null}
+      </Wrapper>
+    </>
   )
 }

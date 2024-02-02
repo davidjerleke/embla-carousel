@@ -2,7 +2,7 @@ import { THEME_PREFIX } from 'consts/themes'
 import { URLS } from 'consts/urls'
 import { SANDBOX_VANILLA_FOLDERS } from './sandboxVanillaFolders'
 import { getThemeFromDocument } from 'utils/getThemeFromDocument'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { SandboxVanillaExtensionType } from 'consts/sandbox'
 import {
   SANDBOX_REGEX_THEME,

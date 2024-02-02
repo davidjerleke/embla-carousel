@@ -5,25 +5,28 @@ import React, {
   useMemo,
   useState
 } from 'react'
-import { CarouselGeneratorFormDataType } from 'consts/carouselGenerator'
+import { defaultOptions } from '../../../../embla-carousel/src/components/Options'
+import { OptionsType } from 'embla-carousel/components/Options'
+import { SandboxGeneratorSettingsType } from 'consts/sandbox'
 import { numberWithinRange } from 'utils/numberWithinRange'
+import { arrayFromNumber } from 'utils/arrayFromNumber'
 
 export const CONTEXT_DEFAULT_VALUE: CarouselGeneratorContextType = {
   formData: {
+    ...(defaultOptions as OptionsType),
+    id: 'embla-carousel-generator',
     framework: '',
-    loop: false,
-    dragFree: false,
-    axis: 'x',
-    direction: 'ltr',
+    slideList: arrayFromNumber(5),
     accessibility: false,
     slideSize: '100',
     slideGapSize: '10',
     edgeGap: '0',
-    align: 'center',
-    containScroll: true,
+    styles: '',
     navigationPrevNextButtons: false,
     navigationDots: false,
+    selectedSnapDisplay: false,
     autoplay: false,
+    classNames: false,
     wheelGestures: false
   },
   onChange: () => undefined,
@@ -34,10 +37,10 @@ export const CONTEXT_DEFAULT_VALUE: CarouselGeneratorContextType = {
 }
 
 export type CarouselGeneratorContextType = {
-  formData: CarouselGeneratorFormDataType
-  onChange: <Key extends keyof CarouselGeneratorFormDataType>(
+  formData: SandboxGeneratorSettingsType
+  onChange: <Key extends keyof SandboxGeneratorSettingsType>(
     key: Key,
-    value: CarouselGeneratorFormDataType[Key]
+    value: SandboxGeneratorSettingsType[Key]
   ) => void
   onCheckboxChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onRadioChange: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -52,7 +55,7 @@ type PropType = PropsWithChildren<{}>
 
 export const CarouselGeneratorProvider = (props: PropType) => {
   const { children } = props
-  const [formData, setFormData] = useState<CarouselGeneratorFormDataType>(
+  const [formData, setFormData] = useState<SandboxGeneratorSettingsType>(
     CONTEXT_DEFAULT_VALUE.formData
   )
 
@@ -69,7 +72,7 @@ export const CarouselGeneratorProvider = (props: PropType) => {
   const onCheckboxChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, checked } = event.currentTarget
-      const fieldName = name as keyof CarouselGeneratorFormDataType
+      const fieldName = name as keyof SandboxGeneratorSettingsType
 
       onChange(fieldName, checked)
     },
@@ -79,7 +82,7 @@ export const CarouselGeneratorProvider = (props: PropType) => {
   const onRadioChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget
-      const fieldName = name as keyof CarouselGeneratorFormDataType
+      const fieldName = name as keyof SandboxGeneratorSettingsType
 
       onChange(fieldName, value)
     },
@@ -89,7 +92,7 @@ export const CarouselGeneratorProvider = (props: PropType) => {
   const onNumberChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget
-      const fieldName = name as keyof CarouselGeneratorFormDataType
+      const fieldName = name as keyof SandboxGeneratorSettingsType
 
       onChange(fieldName, value)
     },
@@ -99,7 +102,7 @@ export const CarouselGeneratorProvider = (props: PropType) => {
   const onNumberBlur = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const input = event.currentTarget
-      const fieldName = input.name as keyof CarouselGeneratorFormDataType
+      const fieldName = input.name as keyof SandboxGeneratorSettingsType
       const minValue = parseInt(input.getAttribute('min') || '', 10)
       const maxValue = parseInt(input.getAttribute('max') || '', 10)
       const value = numberWithinRange(

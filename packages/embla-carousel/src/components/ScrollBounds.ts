@@ -11,7 +11,7 @@ export type ScrollBoundsType = {
 
 export function ScrollBounds(
   limit: LimitType,
-  location: Vector1DType,
+  offsetLocation: Vector1DType,
   target: Vector1DType,
   scrollBody: ScrollBodyType,
   percentOfView: PercentOfViewType
@@ -24,15 +24,15 @@ export function ScrollBounds(
   function shouldConstrain(): boolean {
     if (disabled) return false
     if (!limit.reachedAny(target.get())) return false
-    if (!limit.reachedAny(location.get())) return false
+    if (!limit.reachedAny(offsetLocation.get())) return false
     return true
   }
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
-    const diffToEdge = mathAbs(limit[edge] - location.get())
-    const diffToTarget = target.get() - location.get()
+    const edge = limit.reachedMin(offsetLocation.get()) ? 'min' : 'max'
+    const diffToEdge = mathAbs(limit[edge] - offsetLocation.get())
+    const diffToTarget = target.get() - offsetLocation.get()
     const friction = frictionLimit.constrain(diffToEdge / edgeOffsetTolerance)
 
     target.subtract(diffToTarget * friction)

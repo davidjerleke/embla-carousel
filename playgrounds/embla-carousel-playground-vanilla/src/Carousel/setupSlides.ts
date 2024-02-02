@@ -1,5 +1,4 @@
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { imageByIndex } from './imageByIndex'
 
 export const createSlides = (
   containerNode: HTMLElement,
@@ -10,9 +9,10 @@ export const createSlides = (
   containerNode.innerHTML = arrayFromNumber(count).reduce(
     (acc, index) =>
       acc +
-      template.innerHTML
-        .replace('__replace_image_src__', imageByIndex(index).toString())
-        .replace('__replace_slide_index__', (index + 1).toString()),
+      template.innerHTML.replace(
+        '__replace_slide_index__',
+        (index + 1).toString()
+      ),
     ''
   )
 

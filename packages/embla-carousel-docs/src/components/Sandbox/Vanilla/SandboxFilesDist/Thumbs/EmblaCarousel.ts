@@ -2,7 +2,7 @@ import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 import {
   addThumbBtnsClickHandlers,
   addToggleThumbBtnsActive
-} from './thumb-buttons'
+} from './EmblaCarouselThumbsButton'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'

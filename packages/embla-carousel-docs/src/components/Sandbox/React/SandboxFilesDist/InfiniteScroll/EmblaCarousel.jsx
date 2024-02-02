@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import imageByIndex from '../imageByIndex'
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons
+} from '../EmblaCarouselArrowButtons'
 
 const mockApiCall = (minWait, maxWait, callback) => {
   const min = Math.ceil(minWait)
@@ -56,6 +60,13 @@ const EmblaCarousel = (props) => {
       }
     }
   })
+
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
 
   const onScroll = useCallback((emblaApi) => {
     if (!listenForScrollRef.current) return
@@ -115,11 +126,6 @@ const EmblaCarousel = (props) => {
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
-              <img
-                className="embla__slide__img"
-                src={imageByIndex(index)}
-                alt="Your alt text"
-              />
             </div>
           ))}
           {hasMoreToLoad && (
@@ -131,6 +137,13 @@ const EmblaCarousel = (props) => {
               <span className="embla-infinite-scroll__spinner" />
             </div>
           )}
+        </div>
+      </div>
+
+      <div className="embla__controls">
+        <div className="embla__buttons">
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
       </div>
     </div>

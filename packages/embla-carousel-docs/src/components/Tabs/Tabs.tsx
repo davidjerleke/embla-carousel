@@ -1,11 +1,11 @@
 import React, {
   PropsWithChildren,
   useCallback,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState
 } from 'react'
+import { useIsomorphicLayoutEffect } from 'utils/useIsomorphicLayoutEffect'
 import uniqueId from 'lodash/uniqueId'
 import styled from 'styled-components'
 import { useTabs } from 'hooks/useTabs'
@@ -111,7 +111,7 @@ export const Tabs = (props: PropType) => {
     []
   )
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     tabsActiveIndex.current = activeTab.index
     if (!groupId) return
 
@@ -133,7 +133,7 @@ export const Tabs = (props: PropType) => {
     })
   }, [tabs, activeTab])
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const tabToActivate = tabs.find((tab) => tab.value === localStorageTab)
     if (!tabToActivate) return
     if (tabToActivate.value === tabs[tabsActiveIndex.current].value) return

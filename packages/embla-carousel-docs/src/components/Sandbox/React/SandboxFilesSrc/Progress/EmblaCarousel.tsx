@@ -1,7 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import imageByIndex from '../imageByIndex'
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons
+} from '../EmblaCarouselArrowButtons'
 
 type PropType = {
   slides: number[]
@@ -12,6 +16,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [scrollProgress, setScrollProgress] = useState(0)
+
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
 
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
@@ -35,20 +46,23 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <div className="embla__slide__number">
                 <span>{index + 1}</span>
               </div>
-              <img
-                className="embla__slide__img"
-                src={imageByIndex(index)}
-                alt="Your alt text"
-              />
             </div>
           ))}
         </div>
       </div>
-      <div className="embla__progress">
-        <div
-          className="embla__progress__bar"
-          style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
-        />
+
+      <div className="embla__controls">
+        <div className="embla__buttons">
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        </div>
+
+        <div className="embla__progress">
+          <div
+            className="embla__progress__bar"
+            style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
+          />
+        </div>
       </div>
     </div>
   )

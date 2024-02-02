@@ -1,4 +1,4 @@
-import { setupIosPicker } from './ios-picker'
+import { setupIosPicker } from './EmblaCarouselIosPicker'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -15,7 +15,6 @@ const iosPickers = iosPickerNodes.map((iosPickerNode) =>
     containScroll: false,
     loop: LOOP,
     axis: 'y',
-    watchResize: false,
     watchSlides: false
   })
 )

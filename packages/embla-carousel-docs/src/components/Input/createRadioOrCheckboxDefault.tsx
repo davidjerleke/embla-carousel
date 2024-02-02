@@ -6,7 +6,7 @@ import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { BORDER_RADIUSES } from 'consts/border'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
-import imageByIndex from './imageByIndex'
 
 type PropType = {
   slides: number[]
@@ -56,33 +55,28 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
           <div className="embla__container">
             {slides.map((index) => (
               <div className="embla__slide" key={index}>
-                <div className="embla__slide__number">
-                  <span>{index + 1}</span>
-                </div>
-                <img
-                  className="embla__slide__img"
-                  src={imageByIndex(index)}
-                  alt="Your alt text"
-                />
+                <div className="embla__slide__number">{index + 1}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="embla__buttons">
-          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-          <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
-        </div>
-      </div>
+        <div className="embla__controls">
+          <div className="embla__buttons">
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+          </div>
 
-      <div className="embla__dots">
-        {scrollSnaps.map((_, index) => (
-          <DotButton
-            key={index}
-            selected={index === selectedIndex}
-            onClick={() => scrollTo(index)}
-          />
-        ))}
+          <div className="embla__dots">
+            {scrollSnaps.map((_, index) => (
+              <DotButton
+                key={index}
+                selected={index === selectedIndex}
+                onClick={() => scrollTo(index)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </>
   )

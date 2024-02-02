@@ -1,10 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
+import React, { useCallback, useEffect, useRef } from 'react'
+import {
+  EmblaCarouselType,
+  EmblaEventType,
+  EmblaOptionsType
+} from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import { flushSync } from 'react-dom'
-import imageByIndex from '../imageByIndex'
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons
+} from '../EmblaCarouselArrowButtons'
+import { DotButton, useDotButton } from '../EmblaCarouselDotButton'
 
-const TWEEN_FACTOR = 3
+const TWEEN_FACTOR_BASE = 0.52
 
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max)
@@ -17,42 +25,83 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
-  const [tweenValues, setTweenValues] = useState<number[]>([])
+  const tweenFactor = useRef(0)
+  const tweenNodes = useRef<HTMLElement[]>([])
 
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
 
-    const engine = emblaApi.internalEngine()
-    const scrollProgress = emblaApi.scrollProgress()
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
 
-    const styles = emblaApi.scrollSnapList().map((scrollSnap, index) => {
-      let diffToTarget = scrollSnap - scrollProgress
-
-      if (engine.options.loop) {
-        engine.slideLooper.loopPoints.forEach((loopItem) => {
-          const target = loopItem.target()
-          if (index === loopItem.index && target !== 0) {
-            const sign = Math.sign(target)
-            if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress)
-            if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress)
-          }
-        })
-      }
-      const tweenValue = 1 - Math.abs(diffToTarget * TWEEN_FACTOR)
-      return numberWithinRange(tweenValue, 0, 1)
+  const setTweenNodes = useCallback((emblaApi: EmblaCarouselType): void => {
+    tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
+      return slideNode.querySelector('.embla__slide__number') as HTMLElement
     })
-    setTweenValues(styles)
-  }, [emblaApi, setTweenValues])
+  }, [])
+
+  const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
+    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
+  }, [])
+
+  const tweenScale = useCallback(
+    (emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => {
+      const engine = emblaApi.internalEngine()
+      const scrollProgress = emblaApi.scrollProgress()
+      const slidesInView = emblaApi.slidesInView()
+      const isScrollEvent = eventName === 'scroll'
+
+      emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+        let diffToTarget = scrollSnap - scrollProgress
+        const slidesInSnap = engine.slideRegistry[snapIndex]
+
+        slidesInSnap.forEach((slideIndex) => {
+          if (isScrollEvent && !slidesInView.includes(slideIndex)) return
+
+          if (engine.options.loop) {
+            engine.slideLooper.loopPoints.forEach((loopItem) => {
+              const target = loopItem.target()
+
+              if (slideIndex === loopItem.index && target !== 0) {
+                const sign = Math.sign(target)
+
+                if (sign === -1) {
+                  diffToTarget = scrollSnap - (1 + scrollProgress)
+                }
+                if (sign === 1) {
+                  diffToTarget = scrollSnap + (1 - scrollProgress)
+                }
+              }
+            })
+          }
+
+          const tweenValue = 1 - Math.abs(diffToTarget * tweenFactor.current)
+          const scale = numberWithinRange(tweenValue, 0, 1).toString()
+          const tweenNode = tweenNodes.current[slideIndex]
+          tweenNode.style.transform = `scale(${scale})`
+        })
+      })
+    },
+    []
+  )
 
   useEffect(() => {
     if (!emblaApi) return
 
-    onScroll()
-    emblaApi.on('scroll', () => {
-      flushSync(() => onScroll())
-    })
-    emblaApi.on('reInit', onScroll)
-  }, [emblaApi, onScroll])
+    setTweenNodes(emblaApi)
+    setTweenFactor(emblaApi)
+    tweenScale(emblaApi)
+
+    emblaApi
+      .on('reInit', setTweenNodes)
+      .on('reInit', setTweenFactor)
+      .on('reInit', tweenScale)
+      .on('scroll', tweenScale)
+  }, [emblaApi, tweenScale])
 
   return (
     <div className="embla">
@@ -60,24 +109,27 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div
-                className="embla__scale"
-                style={{
-                  ...(tweenValues.length && {
-                    transform: `scale(${tweenValues[index]})`
-                  })
-                }}
-              >
-                <div className="embla__slide__number">
-                  <span>{index + 1}</span>
-                </div>
-                <img
-                  className="embla__slide__img"
-                  src={imageByIndex(index)}
-                  alt="A cool cat."
-                />
-              </div>
+              <div className="embla__slide__number">{index + 1}</div>
             </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="embla__controls">
+        <div className="embla__buttons">
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        </div>
+
+        <div className="embla__dots">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
           ))}
         </div>
       </div>

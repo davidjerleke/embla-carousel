@@ -1,23 +1,23 @@
 import React from 'react'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
+import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
 import {
   CarouselGeneratorFormItem,
   CarouselGeneratorInputText
 } from './CarouselGeneratorFormItems'
 import {
-  CarouselGeneratorInputTextType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorInputTextType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
 
-const INPUT_SLIDE_SIZE: CarouselGeneratorInputTextType<'slideSize'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.SLIDE_SIZE),
+const INPUT_SLIDE_SIZE: SandboxGeneratorInputTextType<'slideSize'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_SIZE),
   LABEL: 'Slide size (%)'
 }
 
-const INPUT_SLIDE_GAP_SIZE: CarouselGeneratorInputTextType<'slideGapSize'> = {
-  ...createCarouselGeneratorInputId(
-    CAROUSEL_GENERATOR_FORM_FIELDS.SLIDE_GAP_SIZE
+const INPUT_SLIDE_GAP_SIZE: SandboxGeneratorInputTextType<'slideGapSize'> = {
+  ...createSandboxGeneratorInputId(
+    SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_GAP_SIZE
   ),
   LABEL: 'Slide gaps (px)'
 }

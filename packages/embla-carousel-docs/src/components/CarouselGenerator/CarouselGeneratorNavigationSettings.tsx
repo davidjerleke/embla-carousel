@@ -1,24 +1,24 @@
 import React from 'react'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
+import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
 import { CarouselGeneratorFormItem } from './CarouselGeneratorFormItems'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 import {
-  CarouselGeneratorCheckboxType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorCheckboxType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
 
-const INPUT_PREV_NEXT_BUTTONS: CarouselGeneratorCheckboxType<'navigationPrevNextButtons'> =
+const INPUT_PREV_NEXT_BUTTONS: SandboxGeneratorCheckboxType<'navigationPrevNextButtons'> =
   {
-    ...createCarouselGeneratorInputId(
-      CAROUSEL_GENERATOR_FORM_FIELDS.NAVIGATION_PREV_NEXT_BUTTONS
+    ...createSandboxGeneratorInputId(
+      SANDBOX_GENERATOR_FORM_FIELDS.NAVIGATION_PREV_NEXT_BUTTONS
     ),
     LABEL: 'Previous and next buttons'
   }
 
-const INPUT_DOTS: CarouselGeneratorCheckboxType<'navigationDots'> = {
-  ...createCarouselGeneratorInputId(
-    CAROUSEL_GENERATOR_FORM_FIELDS.NAVIGATION_DOTS
+const INPUT_DOTS: SandboxGeneratorCheckboxType<'navigationDots'> = {
+  ...createSandboxGeneratorInputId(
+    SANDBOX_GENERATOR_FORM_FIELDS.NAVIGATION_DOTS
   ),
   LABEL: 'Dot navigation'
 }

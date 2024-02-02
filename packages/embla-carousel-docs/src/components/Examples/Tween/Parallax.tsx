@@ -3,29 +3,44 @@ import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselParallax from 'components/Sandbox/React/SandboxFilesSrc/Parallax/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselParallaxStyles } from 'components/Examples/createCarouselStyles'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
+import { examplesCarouselParallaxStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
 
-export const ID = 'embla-carousel-parallax'
-export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { dragFree: true }
-export const STYLES = createCarouselParallaxStyles('80%')
+const ID = 'embla-carousel-parallax'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
+const STYLES = examplesCarouselParallaxStyles('80%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
+  id: ID,
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
+}
+
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'Parallax')
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
     ${STYLES};
   }
 `
 
-export const ExampleCarouselParallax = () => {
+export const Parallax = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselParallax slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? <CarouselParallax slides={SLIDES} options={OPTIONS} /> : null}
+      </Wrapper>
+    </>
   )
 }
