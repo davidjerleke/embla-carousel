@@ -95,8 +95,6 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function destroy(): void {
-    destroyed = true
-    playing = false
     emblaApi
       .off('init', startTimer)
       .off('reInit', startTimer)
@@ -105,6 +103,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     stopTimer()
     cancelAnimationFrame(animationFrame)
     animationFrame = 0
+    destroyed = true
+    playing = false
   }
 
   function startTimer(): void {
