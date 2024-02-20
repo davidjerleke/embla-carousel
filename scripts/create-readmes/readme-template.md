@@ -54,25 +54,23 @@
     <a href="https://www.embla-carousel.com/get-started/module/">
       <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" height="40" />
     </a>
-    &nbsp;
     <a href="https://www.embla-carousel.com/get-started/module/">
       <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" height="40" />
     </a>
-    &nbsp;
     <a href="https://www.embla-carousel.com/get-started/react/">
       <img src="https://www.embla-carousel.com/react-logo.svg" width="40" height="40" />
     </a>
-    &nbsp;
     <a href="https://www.embla-carousel.com/get-started/vue/">
       <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
     </a>
-    &nbsp;
     <a href="https://www.embla-carousel.com/get-started/svelte/">
       <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
     </a>
-    &nbsp;
     <a href="https://www.embla-carousel.com/get-started/solid/">
       <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
+    </a>
+    <a href="https://github.com/donaldxdonald/embla-carousel-angular?tab=readme-ov-file#installation">
+      <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" height="40" />
     </a>
   </p>
 </div>
@@ -98,13 +96,25 @@
     <h2 align="center">Special Thanks</h2>
   </strong>
   <p align="center">
-    Special thanks to <a href="https://github.com/gunnarx2">gunnarx2</a> for creating the React wrapper <a href="https://www.embla-carousel.com/get-started/react/">useEmblaCarousel</a>, to <a href="https://github.com/xiel">xiel</a> for creating the <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a> plugin, to <a href="https://github.com/LiamMartens">LiamMartens</a> for creating the Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">createEmblaCarousel</a>, and to <a href="https://github.com/zaaakher">zaaakher</a> for your continuous and awesome contributions.
-  </p>
-  <p align="center">
-    <a href="https://github.com/gunnarx2"><img src="https://avatars2.githubusercontent.com/u/10469652?s=120&v=4" title="gunnarx2" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/xiel"><img src="https://avatars0.githubusercontent.com/u/615522?s=120&v=4" title="xiel" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/LiamMartens"><img src="https://avatars0.githubusercontent.com/u/5265324?s=120&v=4" title="LiamMartens" width="50" height="50" style="max-width:100%;"></a>
-    <a href="https://github.com/zaaakher"><img src="https://avatars0.githubusercontent.com/u/46135573?s=120&v=4" title="zaaakher" width="50" height="50" style="max-width:100%;"></a>
+    <sup>
+      <a href="https://github.com/gunnarx2">gunnarx2</a> - React wrapper <a href="https://www.embla-carousel.com/get-started/react/">useEmblaCarousel</a>.
+    </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">createEmblaCarousel</a>.
+    </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/donaldxdonald">donaldxdonald</a>, <a href="https://github.com/zip-fa">zip-fa</a>, <a href="https://github.com/JeanMeche">JeanMeche</a> - Angular wrapper <a href="https://github.com/donaldxdonald/embla-carousel-angular?tab=readme-ov-file#installation">EmblaCarouselDirective</a>.
+    </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/xiel">xiel</a> - Plugin <a href="https://github.com/xiel/embla-carousel-wheel-gestures">Embla Carousel Wheel Gestures</a>.
+    </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/zaaakher">zaaakher</a> - Contributing <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">guidelines</a>.
+    </sup>
   </p>
 </div>
 
@@ -113,8 +123,9 @@
 <h2 align="center">Open Source</h2>
 
 <p align="center">
-  <sup>Copyright © 2019-present, __REPLACE_PACKAGE_AUTHOR__.</sup><br>
-  Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.
+  Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.<br><br>
+  <sup>Embla Carousel - Copyright © 2019-present.</sup><br />
+  <sup>Package created by __REPLACE_PACKAGE_AUTHOR__.</sup>
 </p>
 
 <p align="center">
