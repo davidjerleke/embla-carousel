@@ -99,8 +99,6 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   }
 
   function destroy(): void {
-    destroyed = true
-    playing = false
     emblaApi
       .off('init', startScroll)
       .off('reInit', startScroll)
@@ -108,6 +106,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       .off('pointerUp', startScrollOnSettle)
       .off('settle', onSettle)
     stopScroll()
+    destroyed = true
+    playing = false
   }
 
   function startScroll(): void {
