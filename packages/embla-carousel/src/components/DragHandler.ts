@@ -132,11 +132,11 @@ export function DragHandler(
   function down(evt: PointerEventType): void {
     const isMouseEvt = isMouseEvent(evt, ownerWindow)
     isMouse = isMouseEvt
-    if (isMouseEvt && evt.button !== 0) return
-    if (isFocusNode(evt.target as Element)) return
-
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
     isMoving = deltaAbs(target.get(), location.get()) >= 2
+
+    if (isMouseEvt && evt.button !== 0) return
+    if (isFocusNode(evt.target as Element)) return
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
@@ -190,6 +190,7 @@ export function DragHandler(
     if (preventClick) {
       evt.stopPropagation()
       evt.preventDefault()
+      preventClick = false
     }
   }
 
