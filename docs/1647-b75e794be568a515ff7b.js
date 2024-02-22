@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[1647],{1647:function(e,s,o){o.r(s),s.default="import EmblaCarousel from 'embla-carousel';\nimport '../css/base.css';\nimport '../css/sandbox.css';\nimport '../css/embla.css';\n\nconst OPTIONS = {};\n\nconst emblaNode = document.querySelector('.embla');\nconst viewportNode = emblaNode.querySelector('.embla__viewport');\n\n// @ts-ignore\nconst emblaApi = EmblaCarousel(viewportNode, OPTIONS);\n"}}]);
-//# sourceMappingURL=1647-b75e794be568a515ff7b.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[8819],{6658:function(e,s,i){i.r(s),s.default="import image1 from 'assets/images/slide-1.jpg'\nimport image2 from 'assets/images/slide-2.jpg'\nimport image3 from 'assets/images/slide-3.jpg'\nimport image4 from 'assets/images/slide-4.jpg'\n\nexport const images: string[] = [image1, image2, image3, image4]\n\nconst imageByIndex = (index: number): string => images[index % images.length]\n\nexport default imageByIndex\n"}}]);
-//# sourceMappingURL=8819-5430408b4e9fdd2a1f91.js.map
