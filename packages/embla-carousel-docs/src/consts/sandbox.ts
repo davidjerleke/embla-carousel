@@ -1,4 +1,5 @@
 import { EmblaOptionsType } from 'embla-carousel'
+import { OptionsType } from 'embla-carousel/components/Options'
 import { SPACINGS } from './spacings'
 import {
   PackageJson as BasePackageJsonType,
@@ -53,7 +54,36 @@ export type SandboxVanillaCreateType = SandboxSharedCreateType & {
 export type SandboxReactCreateType = SandboxSharedCreateType & {
   carouselScript: string
   slides: number[]
-  indexScript?: string
+}
+
+export type SandboxStaticSettingsType = {
+  id: string
+  options: EmblaOptionsType
+  styles: string
+  language?: SandboxLanguageType
+  slides: number[]
+}
+
+export type SandboxGeneratorSettingsType = OptionsType & {
+  id: string
+  framework: SandboxLabelKeyType | ''
+  slideList: number[]
+  accessibility: boolean
+  slideSize: string
+  slideGapSize: string
+  edgeGap: string
+  navigationPrevNextButtons: boolean
+  navigationDots: boolean
+  selectedSnapDisplay: boolean
+  autoplay: boolean
+  classNames: boolean
+  wheelGestures: boolean
+  styles?: string
+}
+
+export type SandboxModuleScriptType = {
+  script: SandboxModuleType
+  name: string
 }
 
 export type SandboxSelectionType<SettingsType = undefined> = {
@@ -67,22 +97,44 @@ export type SandboxLabelKeyType = keyof typeof SANDBOX_LABELS
 export type SandboxCreateFunctionType<SettingsType> =
   SandboxSelectionType<SettingsType>['createSandbox']
 
-export const SANDBOX_LABELS = <const>{
+export const SANDBOX_LABELS = {
   VANILLA_JS: 'Vanilla',
   VANILLA_TS: 'Vanilla + TypeScript',
   REACT_TS: 'React + TypeScript',
   REACT_JS: 'React'
-}
+} as const
 
-export const SANDBOX_LANGUAGES = <const>{
+export const SANDBOX_LANGUAGES = {
   JAVASCRIPT: 'javascript',
   TYPESCRIPT: 'typescript'
-}
+} as const
 
-export const SANDBOX_PLUGINS = <const>{
+export const SANDBOX_PLUGINS = {
   AUTOPLAY: 'embla-carousel-autoplay',
+  AUTO_SCROLL: 'embla-carousel-auto-scroll',
+  AUTO_HEIGHT: 'embla-carousel-auto-height',
   CLASS_NAMES: 'embla-carousel-class-names'
-}
+} as const
+
+export const SANDBOX_GENERATOR_FORM_FIELDS = {
+  FRAMEWORK: 'framework',
+  LOOP: 'loop',
+  DRAG_FREE: 'dragFree',
+  AXIS: 'axis',
+  DIRECTION: 'direction',
+  ACCESSIBILITY: 'accessibility',
+  SLIDE_SIZE: 'slideSize',
+  SLIDE_GAP_SIZE: 'slideGapSize',
+  EDGE_GAP: 'edgeGap',
+  ALIGN: 'align',
+  CONTAIN_SCROLL: 'containScroll',
+  NAVIGATION_PREV_NEXT_BUTTONS: 'navigationPrevNextButtons',
+  NAVIGATION_DOTS: 'navigationDots',
+  AUTOPLAY: 'autoplay',
+  WHEEL_GESTURES: 'wheelGestures'
+} as const
+
+export const SANDBOX_GENERATOR_FORM_PREFIX = 'carousel-generator-form'
 
 export const SANDBOX_SELECTION_SPACING = SPACINGS.ONE
 

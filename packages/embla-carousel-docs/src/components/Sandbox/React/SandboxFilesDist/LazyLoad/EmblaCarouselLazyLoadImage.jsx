@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react'
 const PLACEHOLDER_SRC = `data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D`
 
 export const LazyLoadImage = (props) => {
-  const { imgSrc, inView, index } = props
+  const { imgSrc, inView } = props
   const [hasLoaded, setHasLoaded] = useState(false)
 
   const setLoaded = useCallback(() => {
@@ -18,9 +18,6 @@ export const LazyLoadImage = (props) => {
         )}
       >
         {!hasLoaded && <span className="embla__lazy-load__spinner" />}
-        <div className="embla__slide__number">
-          <span>{index + 1}</span>
-        </div>
         <img
           className="embla__slide__img embla__lazy-load__img"
           onLoad={setLoaded}

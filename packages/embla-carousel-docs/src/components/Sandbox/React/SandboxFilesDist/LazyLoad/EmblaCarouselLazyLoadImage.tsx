@@ -9,7 +9,7 @@ type PropType = {
 }
 
 export const LazyLoadImage: React.FC<PropType> = (props) => {
-  const { imgSrc, inView, index } = props
+  const { imgSrc, inView } = props
   const [hasLoaded, setHasLoaded] = useState(false)
 
   const setLoaded = useCallback(() => {
@@ -24,9 +24,6 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
         )}
       >
         {!hasLoaded && <span className="embla__lazy-load__spinner" />}
-        <div className="embla__slide__number">
-          <span>{index + 1}</span>
-        </div>
         <img
           className="embla__slide__img embla__lazy-load__img"
           onLoad={setLoaded}

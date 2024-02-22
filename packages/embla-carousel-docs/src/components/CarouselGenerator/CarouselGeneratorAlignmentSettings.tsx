@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
-import CarouselDefault from 'components/Sandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
+import Carousel from 'components/Sandbox/SandboxGeneratorExample'
 import { InputRadioDefault } from 'components/Input/InputRadio'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { EmblaOptionsType } from 'embla-carousel'
-import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
+import {
+  CAROUSEL_DEFAULT_HEIGHT,
+  CAROUSEL_SLIDES_SPACING,
+  SLIDE_NUMBER_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
 import { Admonition } from 'components/Mdx/Components/Admonition'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
@@ -13,25 +18,25 @@ import { LAYERS } from 'consts/layers'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { useInView } from 'react-intersection-observer'
 import { SPACINGS } from 'consts/spacings'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
-import { FONT_SIZES } from 'consts/fontSizes'
 import {
-  carouselDefaultWrapperStyles,
-  CAROUSEL_SLIDES_SPACING,
-  CAROUSEL_WRAPPER_SPACING
-} from 'components/Examples/carouselWrapperStyles'
+  SANDBOX_GENERATOR_FORM_FIELDS,
+  SandboxGeneratorSettingsType
+} from 'consts/sandbox'
+import { FONT_SIZES } from 'consts/fontSizes'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import {
   CarouselGeneratorFormItem,
   CarouselGeneratorFormItems
 } from './CarouselGeneratorFormItems'
 import {
-  CarouselGeneratorCheckboxType,
-  CarouselGeneratorRadioType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorCheckboxType,
+  SandboxGeneratorRadioType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 
-const INPUT_ALIGN: CarouselGeneratorRadioType<'align'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.ALIGN),
+const INPUT_ALIGN: SandboxGeneratorRadioType<'align'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.ALIGN),
   OPTIONS: [
     { LABEL: 'Start', VALUE: 'start' },
     { LABEL: 'Center', VALUE: 'center' },
@@ -39,9 +44,9 @@ const INPUT_ALIGN: CarouselGeneratorRadioType<'align'> = {
   ]
 }
 
-const INPUT_CONTAIN_SCROLL: CarouselGeneratorCheckboxType<'containScroll'> = {
-  ...createCarouselGeneratorInputId(
-    CAROUSEL_GENERATOR_FORM_FIELDS.CONTAIN_SCROLL
+const INPUT_CONTAIN_SCROLL: SandboxGeneratorCheckboxType<'containScroll'> = {
+  ...createSandboxGeneratorInputId(
+    SANDBOX_GENERATOR_FORM_FIELDS.CONTAIN_SCROLL
   ),
   LABEL: 'Clear leading and trailing space'
 }
@@ -49,13 +54,23 @@ const INPUT_CONTAIN_SCROLL: CarouselGeneratorCheckboxType<'containScroll'> = {
 const SLIDES = arrayFromNumber(5)
 const CAROUSEL_ALIGN_ID = `${INPUT_ALIGN.ID}-demo`
 
-const CAROUSEL_STYLES = createCarouselDefaultStyles('60%')
+const CAROUSEL_STYLES = examplesCarouselDefaultStyles(
+  '60%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(SLIDE_NUMBER_STYLES)
+)
 
 const CarouselWrapper = styled.div<{
   $showContainScroll: boolean
   $align: EmblaOptionsType['align']
 }>`
-  ${carouselDefaultWrapperStyles};
+  ${examplesDefaultWrapperStyles};
+  min-height: ${CAROUSEL_DEFAULT_HEIGHT};
+
+  .embla {
+    max-width: none !important;
+  }
 
   &.${CAROUSEL_ALIGN_ID} {
     ${CAROUSEL_STYLES};
@@ -114,8 +129,8 @@ const AlignmentMarker = styled.div<{
   &:before {
     ${BRAND_GRADIENT_BACKGROUND_STYLES};
     width: ${BORDER_SIZES.ACCENT_VERTICAL};
-    top: calc(${CAROUSEL_WRAPPER_SPACING} / 2);
-    bottom: calc(${CAROUSEL_WRAPPER_SPACING} / 2);
+    top: 0;
+    bottom: 0;
     z-index: ${LAYERS.STEP};
     opacity: 0.7;
     position: absolute;
@@ -126,12 +141,12 @@ const AlignmentMarker = styled.div<{
     ${({ $align }) => {
       if ($align === 'start') {
         return css`
-          left: ${CAROUSEL_WRAPPER_SPACING};
+          left: 0;
         `
       }
       if ($align === 'end') {
         return css`
-          right: ${CAROUSEL_WRAPPER_SPACING};
+          right: 0;
         `
       }
       return css`
@@ -142,15 +157,13 @@ const AlignmentMarker = styled.div<{
 `
 
 export const CarouselGeneratorAlignmentSettings = () => {
-  const { formData, onCheckboxChange, onRadioChange } = useCarouselGenerator()
+  const { formData, onChange, onRadioChange } = useCarouselGenerator()
   const [inViewRef, inView] = useInView()
-  const slideSize = formData[CAROUSEL_GENERATOR_FORM_FIELDS.SLIDE_SIZE]
-  const loop = formData[CAROUSEL_GENERATOR_FORM_FIELDS.LOOP]
-  const dragFree = formData[CAROUSEL_GENERATOR_FORM_FIELDS.DRAG_FREE]
+  const slideSize = formData[SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_SIZE]
+  const loop = formData[SANDBOX_GENERATOR_FORM_FIELDS.LOOP]
+  const dragFree = formData[SANDBOX_GENERATOR_FORM_FIELDS.DRAG_FREE]
   const align = formData[INPUT_ALIGN.FIELD_NAME]
   const containScroll = formData[INPUT_CONTAIN_SCROLL.FIELD_NAME]
-    ? 'trimSnaps'
-    : false
   const [options, setOptions] = useState<EmblaOptionsType>({
     align,
     containScroll,
@@ -183,7 +196,12 @@ export const CarouselGeneratorAlignmentSettings = () => {
       >
         {inView ? (
           <>
-            <CarouselDefault slides={SLIDES} options={options} />
+            <Carousel
+              slides={SLIDES}
+              options={options}
+              navigationDots={false}
+              navigationPrevNextButtons={false}
+            />
             <AlignmentMarker $align={align} />
           </>
         ) : null}
@@ -191,11 +209,11 @@ export const CarouselGeneratorAlignmentSettings = () => {
 
       <CarouselGeneratorFormItems role="radiogroup" aria-label={INPUT_ALIGN.ID}>
         {INPUT_ALIGN.OPTIONS.map(({ VALUE, LABEL }) => (
-          <div key={VALUE}>
+          <div key={LABEL}>
             <InputRadioDefault
               name={INPUT_ALIGN.FIELD_NAME}
               id={`${INPUT_ALIGN.ID}-${VALUE}`}
-              value={VALUE}
+              value={VALUE as string}
               checked={formData[INPUT_ALIGN.FIELD_NAME] === VALUE}
               onChange={onRadioChange}
             >
@@ -210,8 +228,12 @@ export const CarouselGeneratorAlignmentSettings = () => {
           <InputCheckboxDefault
             name={INPUT_CONTAIN_SCROLL.FIELD_NAME}
             id={INPUT_CONTAIN_SCROLL.ID}
-            checked={formData[INPUT_CONTAIN_SCROLL.FIELD_NAME]}
-            onChange={onCheckboxChange}
+            checked={formData[INPUT_CONTAIN_SCROLL.FIELD_NAME] === 'trimSnaps'}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const { name, checked } = event.currentTarget
+              const fieldName = name as keyof SandboxGeneratorSettingsType
+              onChange(fieldName, checked ? 'trimSnaps' : false)
+            }}
           >
             {INPUT_CONTAIN_SCROLL.LABEL}
           </InputCheckboxDefault>

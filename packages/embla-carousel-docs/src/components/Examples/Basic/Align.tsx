@@ -2,33 +2,55 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselDefault from 'components/Sandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
+import EmblaCarouselExample from 'components/Sandbox/SandboxGeneratorExample'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxGeneratorSettingsType } from 'consts/sandbox'
+import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGeneratorContext'
+import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
+import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 
-export const ID = 'embla-carousel-align'
-export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = {
-  align: 'center',
-  containScroll: false
+const ID = 'embla-carousel-default'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { containScroll: false }
+
+const SANDBOX_SETTINGS: SandboxGeneratorSettingsType = {
+  ...CONTEXT_DEFAULT_VALUE.formData,
+  ...OPTIONS,
+  id: ID,
+  slideSize: '70',
+  slideList: SLIDES,
+  navigationDots: true,
+  navigationPrevNextButtons: true
 }
-export const STYLES = createCarouselDefaultStyles('80%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOXES = staticGeneratorSandboxes(SANDBOX_SETTINGS)
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
-    ${STYLES};
+    ${sandboxGeneratorCreateStyles(SANDBOX_SETTINGS)};
   }
 `
 
-export const ExampleCarouselAlign = () => {
+export const Align = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselDefault slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? (
+          <EmblaCarouselExample
+            slides={SLIDES}
+            options={OPTIONS}
+            navigationPrevNextButtons
+            navigationDots
+          />
+        ) : null}
+      </Wrapper>
+    </>
   )
 }

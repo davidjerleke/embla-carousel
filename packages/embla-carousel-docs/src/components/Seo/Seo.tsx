@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { removeProtocol } from 'utils/removeProtocol'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from 'utils/stringCasing'
 
 type PropType = PropsWithChildren<{
   title: string

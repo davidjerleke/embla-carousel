@@ -2,33 +2,57 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselDefault from 'components/Sandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
+import EmblaCarouselExample from 'components/Sandbox/SandboxGeneratorExample'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxGeneratorSettingsType } from 'consts/sandbox'
+import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGeneratorContext'
+import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
+import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { examplesCarouselDragFreeStyles } from '../examplesCarouselStyles'
 
-export const ID = 'embla-carousel-drag-free'
-export const SLIDES = arrayFromNumber(16)
-export const OPTIONS: EmblaOptionsType = {
-  dragFree: true,
-  containScroll: 'trimSnaps'
+const ID = 'embla-carousel-drag-free'
+const SLIDES = arrayFromNumber(16)
+const OPTIONS: EmblaOptionsType = { dragFree: true }
+
+const SANDBOX_SETTINGS: SandboxGeneratorSettingsType = {
+  ...CONTEXT_DEFAULT_VALUE.formData,
+  ...OPTIONS,
+  id: ID,
+  slideList: SLIDES,
+  slideSize: '50',
+  navigationPrevNextButtons: true,
+  selectedSnapDisplay: true,
+  styles: examplesCarouselDragFreeStyles('50%')
 }
-export const STYLES = createCarouselDefaultStyles('50%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOXES = staticGeneratorSandboxes(SANDBOX_SETTINGS)
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
-    ${STYLES};
+    ${sandboxGeneratorCreateStyles(SANDBOX_SETTINGS)};
   }
 `
 
-export const ExampleCarouselDragFree = () => {
+export const DragFree = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselDefault slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? (
+          <EmblaCarouselExample
+            slides={SLIDES}
+            options={OPTIONS}
+            navigationPrevNextButtons
+            selectedSnapDisplay
+          />
+        ) : null}
+      </Wrapper>
+    </>
   )
 }

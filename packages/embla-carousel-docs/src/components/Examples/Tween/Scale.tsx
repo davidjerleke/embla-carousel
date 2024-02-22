@@ -3,29 +3,44 @@ import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselScale from 'components/Sandbox/React/SandboxFilesSrc/Scale/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselScaleStyles } from 'components/Examples/createCarouselStyles'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
+import { examplesCarouselScaleStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
 
-export const ID = 'embla-carousel-scale'
-export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = { loop: true }
-export const STYLES = createCarouselScaleStyles()
+const ID = 'embla-carousel-scale'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { loop: true }
+const STYLES = examplesCarouselScaleStyles('55%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
+  id: ID,
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
+}
+
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'Scale')
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
     ${STYLES};
   }
 `
 
-export const ExampleCarouselScale = () => {
+export const Scale = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselScale slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? <CarouselScale slides={SLIDES} options={OPTIONS} /> : null}
+      </Wrapper>
+    </>
   )
 }

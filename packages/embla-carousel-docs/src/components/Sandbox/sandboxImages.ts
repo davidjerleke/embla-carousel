@@ -1,24 +1,10 @@
-import { URLS } from 'consts/urls'
-import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxConfigType } from 'consts/sandbox'
+import image1 from 'assets/images/slide-1.jpg'
+import image2 from 'assets/images/slide-2.jpg'
+import image3 from 'assets/images/slide-3.jpg'
+import image4 from 'assets/images/slide-4.jpg'
+import image5 from 'assets/images/slide-5.jpg'
 
-const SANDBOX_IMAGE_URLS: string[] = arrayFromNumber(4).map((index) => {
-  return `${URLS.GITHUB_DOCUMENTATION_RAW}/src/assets/images/slide-${
-    index + 1
-  }.jpg`
-})
+const sandboxImageList: string[] = [image1, image2, image3, image4, image5]
 
-export const createSandboxImages = (
-  pathToImageFolder: string
-): SandboxConfigType['files'] => {
-  return SANDBOX_IMAGE_URLS.reduce(
-    (allImages, imageUrl, index) => ({
-      ...allImages,
-      [`${pathToImageFolder}/slide-${index + 1}.jpg`]: {
-        isBinary: true,
-        content: imageUrl
-      }
-    }),
-    {}
-  )
-}
+export const sandboxImages = (index: number): string =>
+  sandboxImageList[index % sandboxImageList.length]

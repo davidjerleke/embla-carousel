@@ -1,19 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
-import { CAROUSEL_GENERATOR_FORM_FIELDS } from 'consts/carouselGenerator'
-import { SANDBOXES } from 'components/Examples/CarouselGenerator/CarouselGeneratorSandboxes'
+import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
+import { dynamicGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
 import { SandboxSelectionInput } from 'components/Sandbox/SandboxSelectionInput'
-import { snakeCaseToKebabCase } from 'utils/snakeCaseToKebabCase'
+import { snakeCaseToKebabCase } from 'utils/stringCasing'
 import { createGapStyles } from 'utils/createGapStyles'
 import { SANDBOX_SELECTION_SPACING } from 'consts/sandbox'
 import {
-  CarouselGeneratorRadioType,
-  createCarouselGeneratorInputId
-} from 'utils/carouselGenerator'
+  SandboxGeneratorRadioType,
+  createSandboxGeneratorInputId
+} from 'utils/sandbox'
 
-const INPUT_FRAMEWORK: CarouselGeneratorRadioType<'framework'> = {
-  ...createCarouselGeneratorInputId(CAROUSEL_GENERATOR_FORM_FIELDS.FRAMEWORK),
+const INPUT_FRAMEWORK: SandboxGeneratorRadioType<'framework'> = {
+  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.FRAMEWORK),
   OPTIONS: []
 }
 
@@ -33,7 +33,7 @@ export const CarouselGeneratorFrameworkSettings = () => {
   return (
     <div>
       <SandboxSelectionList role="radiogroup" aria-label={INPUT_FRAMEWORK.ID}>
-        {SANDBOXES.map((sandbox) => (
+        {dynamicGeneratorSandboxes.map((sandbox) => (
           <li key={sandbox.key}>
             <SandboxSelectionInput
               framework={sandbox.key}

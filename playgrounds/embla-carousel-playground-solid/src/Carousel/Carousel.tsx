@@ -1,7 +1,6 @@
 import { Component, For, createEffect, createSignal } from 'solid-js'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import createEmblaCarousel from 'embla-carousel-solid'
-import imageByIndex from './imageByIndex'
 import { DotButton, NextButton, PrevButton } from './Buttons'
 
 type PropType = {
@@ -57,37 +56,32 @@ export const EmblaCarousel: Component<PropType> = (props) => {
             <For each={props.slides}>
               {(slide) => (
                 <div class="embla__slide">
-                  <div class="embla__slide__number">
-                    <span>{slide + 1}</span>
-                  </div>
-                  <img
-                    class="embla__slide__img"
-                    src={imageByIndex(slide)}
-                    alt="Your alt text"
-                  />
+                  <div class="embla__slide__number">{slide + 1}</div>
                 </div>
               )}
             </For>
           </div>
         </div>
 
-        <div class="embla__buttons">
-          <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled()} />
-          <NextButton onClick={scrollNext} enabled={nextBtnEnabled()} />
-        </div>
-      </div>
+        <div class="embla__controls">
+          <div class="embla__buttons">
+            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled()} />
+            <NextButton onClick={scrollNext} enabled={nextBtnEnabled()} />
+          </div>
 
-      <div class="embla__dots">
-        <For each={scrollSnaps()}>
-          {(_, index) => {
-            return (
-              <DotButton
-                selected={index() === selectedIndex()}
-                onClick={() => scrollTo(index())}
-              />
-            )
-          }}
-        </For>
+          <div class="embla__dots">
+            <For each={scrollSnaps()}>
+              {(_, index) => {
+                return (
+                  <DotButton
+                    selected={index() === selectedIndex()}
+                    onClick={() => scrollTo(index())}
+                  />
+                )
+              }}
+            </For>
+          </div>
+        </div>
       </div>
     </>
   )

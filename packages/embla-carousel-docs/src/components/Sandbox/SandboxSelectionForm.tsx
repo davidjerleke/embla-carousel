@@ -8,7 +8,7 @@ import { ButtonPrimaryFilledWithLoading } from 'components/Button/ButtonPrimaryF
 import { createGapStyles } from 'utils/createGapStyles'
 import { PropType } from 'components/Sandbox/SandboxSelection'
 import { SandboxLabelKeyType, SANDBOX_SELECTION_SPACING } from 'consts/sandbox'
-import { snakeCaseToKebabCase } from 'utils/snakeCaseToKebabCase'
+import { snakeCaseToKebabCase } from 'utils/stringCasing'
 import { SandboxSelectionInput } from './SandboxSelectionInput'
 
 const INPUT_RADIO_GROUP_NAME = 'choose-sandbox'

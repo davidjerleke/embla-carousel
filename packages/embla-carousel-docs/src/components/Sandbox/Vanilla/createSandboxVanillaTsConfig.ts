@@ -2,7 +2,7 @@ import { TsConfigType } from 'consts/sandbox'
 
 export const createSandboxVanillaTsConfig = (): TsConfigType => {
   return {
-    include: ['./src/**/*', './declarations.d.ts'],
+    include: ['./src/**/*'],
     compilerOptions: {
       strict: true,
       module: 'commonjs',

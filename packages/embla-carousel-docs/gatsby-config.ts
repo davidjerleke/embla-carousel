@@ -1,6 +1,6 @@
 import packageJson from '../embla-carousel/package.json'
 import { GatsbyConfig } from 'gatsby'
-import { kebabCaseToPascalCase } from './src/utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from './src/utils/stringCasing'
 import { SiteMetadataType } from './src/hooks/useSiteMetadata'
 
 type GatsbyConfigType = GatsbyConfig & {
@@ -111,8 +111,8 @@ const gatsbyConfig: GatsbyConfigType = {
     }
   ]
   // flags: {
-  //   DEV_SSR: true,
-  // },
+  //   DEV_SSR: true
+  // }
 }
 
 export default gatsbyConfig

@@ -1,5 +1,5 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
-import { kebabCaseToPascalCase } from 'utils/kebabCaseToPascalCase'
+import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { sandboxLanguageUtils } from 'utils/sandbox'
 import {
   PackageJsonType,

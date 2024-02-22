@@ -1,17 +1,14 @@
 import { getParameters } from 'codesandbox/lib/api/define'
-import { BASE_CSS, SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
+import { SANDBOX_BASE_CSS, SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
 import { SANDBOX_REACT_FOLDERS } from './sandboxReactFolders'
-import { createSandboxImages } from '../sandboxImages'
 import { loadPrettier } from 'utils/loadPrettier'
 import { createSandboxReactPackageJson } from './createSandboxReactPackageJson'
 import { createSandboxReactIndexHtml } from './createSandboxReactIndexHtml'
-import { createSandboxReactDefaultEntry } from './createSandboxReactEntry'
+import { createSandboxReactEntry } from './createSandboxReactEntry'
+import { createSandboxReactImagePaths } from './createSandboxReactImagePaths'
 import { createSandboxReactHeader } from './createSandboxReactHeader'
 import { createSandboxReactFooter } from './createSandboxReactFooter'
-import { createSandboxReactImages } from './createSandboxReactImages'
-import { createSandboxReactImagePath } from './createSandboxReactImagePath'
 import { createSandboxReactTsConfig } from './createSandboxReactTsConfig'
-import { createSandboxReactTsDeclarations } from './createSandboxReactTsDeclarations'
 import { sandboxLanguageUtils } from 'utils/sandbox'
 import {
   SandboxConfigType,
@@ -24,8 +21,7 @@ export const createSandboxReact = async (
 ): Promise<string> => {
   const {
     id,
-    carouselScript: carouselScriptRaw,
-    indexScript,
+    carouselScript,
     slides,
     options,
     styles,
@@ -34,37 +30,23 @@ export const createSandboxReact = async (
     language = SANDBOX_LANGUAGES.JAVASCRIPT
   } = config
   const title = `${id}-react`
-  const sandboxImages = createSandboxImages(SANDBOX_REACT_FOLDERS.IMAGES)
   const { prettierConfig, formatCss } = await loadPrettier()
-  const {
-    isTypeScript,
-    reactScriptExtension,
-    vanillaScriptExtension,
-    formatScript
-  } = await sandboxLanguageUtils(language)
+  const { isTypeScript, reactScriptExtension, formatScript } =
+    await sandboxLanguageUtils(language)
   const packageJson = await createSandboxReactPackageJson(
     language,
     title,
     plugins
   )
   const tsConfig = createSandboxReactTsConfig()
-  const carouselScript = createSandboxReactImagePath(carouselScriptRaw)
-  const [
-    entryHtml,
-    entryScript,
-    headerScript,
-    footerScript,
-    imagesScript,
-    tsDeclarations
-  ] = await Promise.all([
-    createSandboxReactIndexHtml(title),
-    indexScript ||
-      createSandboxReactDefaultEntry(isTypeScript, slides, options),
-    createSandboxReactHeader(isTypeScript, title),
-    createSandboxReactFooter(isTypeScript),
-    createSandboxReactImages(isTypeScript),
-    createSandboxReactTsDeclarations()
-  ])
+  const carouselScriptWithImages = createSandboxReactImagePaths(carouselScript)
+  const [entryHtml, entryScript, headerScript, footerScript] =
+    await Promise.all([
+      createSandboxReactIndexHtml(title),
+      createSandboxReactEntry(reactScriptExtension, slides, options, id),
+      createSandboxReactHeader(reactScriptExtension, title),
+      createSandboxReactFooter(reactScriptExtension)
+    ])
 
   const sandboxConfig: SandboxConfigType['files'] = {
     [`.prettierrc`]: {
@@ -81,7 +63,7 @@ export const createSandboxReact = async (
     },
     [`${SANDBOX_REACT_FOLDERS.CSS}/base.css`]: {
       isBinary: false,
-      content: formatCss(BASE_CSS)
+      content: formatCss(SANDBOX_BASE_CSS)
     },
     [`${SANDBOX_REACT_FOLDERS.CSS}/sandbox.css`]: {
       isBinary: false,
@@ -105,11 +87,7 @@ export const createSandboxReact = async (
     },
     [`${SANDBOX_REACT_FOLDERS.JS}/EmblaCarousel.${reactScriptExtension}`]: {
       isBinary: false,
-      content: formatScript(carouselScript)
-    },
-    [`${SANDBOX_REACT_FOLDERS.JS}/imageByIndex.${vanillaScriptExtension}`]: {
-      isBinary: false,
-      content: formatScript(imagesScript)
+      content: formatScript(carouselScriptWithImages)
     }
   }
 
@@ -118,15 +96,11 @@ export const createSandboxReact = async (
       [`tsconfig.json`]: {
         isBinary: false,
         content: JSON.stringify(tsConfig, null, '\t')
-      },
-      [`declarations.d.ts`]: {
-        isBinary: false,
-        content: tsDeclarations
       }
     })
   }
 
   return getParameters({
-    files: Object.assign({}, sandboxConfig, sandboxImages, sandboxOverrides)
+    files: Object.assign({}, sandboxConfig, sandboxOverrides)
   })
 }

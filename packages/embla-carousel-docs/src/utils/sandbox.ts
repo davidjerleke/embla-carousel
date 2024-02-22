@@ -1,6 +1,7 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
 import { EmblaOptionsType } from 'embla-carousel'
 import { loadPrettier } from './loadPrettier'
+import { camelOrPascalToKebabCase } from './stringCasing'
 import {
   SandboxCreateFunctionType,
   SandboxLabelKeyType,
@@ -11,7 +12,9 @@ import {
   SandboxVanillaExtensionType,
   SANDBOX_LANGUAGES,
   SandboxSharedCreateType,
-  SandboxPluginNameType
+  SandboxPluginNameType,
+  SandboxGeneratorSettingsType,
+  SANDBOX_GENERATOR_FORM_PREFIX
 } from 'consts/sandbox'
 
 type SandboxLanguageUtilsType = {
@@ -89,4 +92,45 @@ export const sandboxInjectIosPickerLoop = (
   loop: boolean = false
 ): ((match: string) => string) => {
   return (match) => match.replace('false', loop.toString())
+}
+
+type SandboxGeneratorInputIdType<
+  Key extends keyof SandboxGeneratorSettingsType
+> = {
+  ID: string
+  FIELD_NAME: Key
+}
+
+export type SandboxGeneratorRadioType<
+  Key extends keyof SandboxGeneratorSettingsType
+> = SandboxGeneratorInputIdType<Key> & {
+  OPTIONS: {
+    LABEL: string
+    VALUE: SandboxGeneratorSettingsType[Key]
+  }[]
+}
+
+export type SandboxGeneratorCheckboxType<
+  Key extends keyof SandboxGeneratorSettingsType
+> = SandboxGeneratorInputIdType<Key> & {
+  LABEL: string
+}
+
+export type SandboxGeneratorInputTextType<
+  Key extends keyof SandboxGeneratorSettingsType
+> = SandboxGeneratorInputIdType<Key> & {
+  LABEL: string
+}
+
+export const createSandboxGeneratorInputId = <
+  Key extends keyof SandboxGeneratorSettingsType
+>(
+  fieldName: Key
+): SandboxGeneratorInputIdType<Key> => {
+  return {
+    FIELD_NAME: fieldName,
+    ID: `${SANDBOX_GENERATOR_FORM_PREFIX}-${camelOrPascalToKebabCase(
+      fieldName
+    )}`
+  }
 }

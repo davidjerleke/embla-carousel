@@ -3,29 +3,44 @@ import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import CarouselAutoplay from 'components/Sandbox/React/SandboxFilesSrc/Autoplay/EmblaCarousel'
-import { carouselDefaultWrapperStyles } from 'components/Examples/carouselWrapperStyles'
-import { createCarouselDefaultStyles } from 'components/Examples/createCarouselStyles'
+import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
+import { examplesCarouselAutoplayStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
 
-export const ID = 'embla-carousel-autoplay'
-export const SLIDES = arrayFromNumber(5)
-export const OPTIONS: EmblaOptionsType = {}
-export const STYLES = createCarouselDefaultStyles()
+const ID = 'embla-carousel-autoplay'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { loop: true }
+const STYLES = examplesCarouselAutoplayStyles('70%')
 
-export const Wrapper = styled.div`
-  ${carouselDefaultWrapperStyles};
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
+  id: ID,
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
+}
+
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'Autoplay')
+
+const Wrapper = styled.div`
+  ${examplesDefaultWrapperStyles};
 
   &.${ID} {
     ${STYLES};
   }
 `
 
-export const ExampleCarouselAutoplay = () => {
+export const Autoplay = () => {
   const [inViewRef, inView] = useInView()
 
   return (
-    <Wrapper className={ID} ref={inViewRef}>
-      {inView ? <CarouselAutoplay slides={SLIDES} options={OPTIONS} /> : null}
-    </Wrapper>
+    <>
+      <SandboxSelection sandboxes={SANDBOXES} />
+      <Wrapper className={ID} ref={inViewRef}>
+        {inView ? <CarouselAutoplay slides={SLIDES} options={OPTIONS} /> : null}
+      </Wrapper>
+    </>
   )
 }

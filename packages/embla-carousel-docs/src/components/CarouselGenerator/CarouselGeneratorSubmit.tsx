@@ -5,8 +5,8 @@ import { createGapStyles } from 'utils/createGapStyles'
 import { ButtonPrimaryFilledWithLoading } from 'components/Button/ButtonPrimaryFilled'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { SandboxLabelKeyType } from 'consts/sandbox'
-import { CarouselGeneratorFormDataType } from 'consts/carouselGenerator'
-import { SANDBOXES } from 'components/Examples/CarouselGenerator/CarouselGeneratorSandboxes'
+import { SandboxGeneratorSettingsType } from 'consts/sandbox'
+import { dynamicGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
 import {
   FORM_ITEM_MAX_WIDTH_STYLES,
   FORM_ITEM_SPACING_X
@@ -30,9 +30,11 @@ export const CarouselGeneratorSubmit = () => {
   const loadSandbox = useCallback(
     async (
       key: SandboxLabelKeyType,
-      settings: CarouselGeneratorFormDataType
+      settings: SandboxGeneratorSettingsType
     ) => {
-      const sandbox = SANDBOXES.find((sandbox) => sandbox.key === key)
+      const sandbox = dynamicGeneratorSandboxes.find(
+        (sandbox) => sandbox.key === key
+      )
       if (sandbox) setSandbox(await sandbox.createSandbox(settings))
     },
     []

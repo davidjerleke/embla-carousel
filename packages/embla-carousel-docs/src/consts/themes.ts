@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { snakeCaseToKebabCase } from 'utils/snakeCaseToKebabCase'
+import { snakeCaseToKebabCase } from 'utils/stringCasing'
 
 export type ThemeKeyType = (typeof THEME_KEYS)[keyof typeof THEME_KEYS]
 
@@ -28,10 +28,10 @@ export const THEME_META_SELECTOR = `meta[name='theme-color']`
 
 export const THEME_PREFIX = 'theme-'
 
-export const THEME_KEYS = <const>{
+export const THEME_KEYS = {
   LIGHT: 'light',
   DARK: 'dark'
-}
+} as const
 
 export const THEME_COLORS = {
   [THEME_KEYS.LIGHT]: {
