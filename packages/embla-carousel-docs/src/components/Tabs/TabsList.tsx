@@ -10,6 +10,7 @@ import {
   createScrollBarShadowStyles,
   createScrollBarStyles
 } from 'consts/scrollBars'
+import { useKeyNavigating } from 'hooks/useKeyNavigating'
 
 export const TabsListWrapper = styled.div`
   display: flex;
@@ -71,10 +72,11 @@ type PropType = { children?: ReactNode | undefined } & PropsWithRef<
 
 export const TabsList = (props: PropType) => {
   const { children, ...restProps } = props
+  const { isKeyNavigating } = useKeyNavigating()
 
   return (
     <TabsListWrapper {...restProps}>
-      <TabsListScrollArea $isKeyNavigating={false}>
+      <TabsListScrollArea $isKeyNavigating={isKeyNavigating}>
         {children}
       </TabsListScrollArea>
     </TabsListWrapper>

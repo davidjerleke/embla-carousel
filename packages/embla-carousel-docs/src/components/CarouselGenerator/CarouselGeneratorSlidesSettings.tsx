@@ -1,14 +1,19 @@
 import React from 'react'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
-import { SANDBOX_GENERATOR_FORM_FIELDS } from 'consts/sandbox'
+import {
+  SANDBOX_GENERATOR_FORM_FIELDS,
+  SandboxGeneratorSettingsType
+} from 'consts/sandbox'
 import {
   CarouselGeneratorFormItem,
   CarouselGeneratorInputText
 } from './CarouselGeneratorFormItems'
 import {
+  SandboxGeneratorCheckboxType,
   SandboxGeneratorInputTextType,
   createSandboxGeneratorInputId
 } from 'utils/sandbox'
+import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 
 const INPUT_SLIDE_SIZE: SandboxGeneratorInputTextType<'slideSize'> = {
   ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_SIZE),
@@ -22,8 +27,16 @@ const INPUT_SLIDE_GAP_SIZE: SandboxGeneratorInputTextType<'slideGapSize'> = {
   LABEL: 'Slide gaps (px)'
 }
 
+const INPUT_SLIDES_TO_SCROLL: SandboxGeneratorCheckboxType<'slidesToScroll'> = {
+  ...createSandboxGeneratorInputId(
+    SANDBOX_GENERATOR_FORM_FIELDS.SLIDES_TO_SCROLL
+  ),
+  LABEL: 'Group slides'
+}
+
 export const CarouselGeneratorSlidesSettings = () => {
-  const { formData, onNumberChange, onNumberBlur } = useCarouselGenerator()
+  const { formData, onNumberChange, onChange, onNumberBlur } =
+    useCarouselGenerator()
 
   return (
     <>
@@ -56,6 +69,23 @@ export const CarouselGeneratorSlidesSettings = () => {
           {INPUT_SLIDE_GAP_SIZE.LABEL}
         </CarouselGeneratorInputText>
       </CarouselGeneratorFormItem>
+
+      {parseInt(formData.slideSize) <= 50 && (
+        <CarouselGeneratorFormItem>
+          <InputCheckboxDefault
+            name={INPUT_SLIDES_TO_SCROLL.FIELD_NAME}
+            id={INPUT_SLIDES_TO_SCROLL.ID}
+            checked={formData[INPUT_SLIDES_TO_SCROLL.FIELD_NAME] === 'auto'}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              const { name, checked } = event.currentTarget
+              const fieldName = name as keyof SandboxGeneratorSettingsType
+              onChange(fieldName, checked ? 'auto' : 1)
+            }}
+          >
+            {INPUT_SLIDES_TO_SCROLL.LABEL}
+          </InputCheckboxDefault>
+        </CarouselGeneratorFormItem>
+      )}
     </>
   )
 }

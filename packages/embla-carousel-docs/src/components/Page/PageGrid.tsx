@@ -9,8 +9,9 @@ import { LAYERS } from 'consts/layers'
 import { SiteNavigation } from 'components/SiteNavigation/SiteNavigation'
 import { TableOfContents } from 'components/TableOfContents/TableOfContents'
 
-const SIDEBAR_LG_UP_WIDTH = '28rem'
-const SIDEBAR_LG_DOWN_WIDTH = '21rem'
+export const SIDEBAR_LG_UP_WIDTH = '28rem'
+export const SIDEBAR_LG_DOWN_WIDTH = '21rem'
+export const MAIN_CONTENT_SPACING = SPACINGS.SEVEN
 
 const sidebarStyles = css`
   min-width: 0;
@@ -46,8 +47,8 @@ const Main = styled.main<{ $isStartPage: boolean }>`
     !$isStartPage &&
     css`
       ${MEDIA.DESKTOP} {
-        padding-right: ${SPACINGS.SEVEN};
-        padding-left: ${SPACINGS.SEVEN};
+        padding-right: ${MAIN_CONTENT_SPACING};
+        padding-left: ${MAIN_CONTENT_SPACING};
       }
     `};
 `

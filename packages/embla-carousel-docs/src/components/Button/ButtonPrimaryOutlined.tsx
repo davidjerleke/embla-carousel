@@ -1,21 +1,21 @@
 import styled, { css } from 'styled-components'
 import { ButtonBare, ButtonBareText } from './ButtonBare'
 import { COLORS } from 'consts/themes'
-import { SPACINGS } from 'consts/spacings'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { BORDER_SIZES } from 'consts/border'
+import { BUTTON_SIZES } from 'consts/buttons'
 import {
   BRAND_GRADIENT_BACKGROUND_STYLES,
   BRAND_GRADIENT_TEXT_STYLES
 } from 'consts/gradients'
 
 export const buttonPrimaryOutlinedStyles = css`
-  padding: ${SPACINGS.CUSTOM(() => 1.4)} ${SPACINGS.CUSTOM(() => 2.6)};
+  ${BUTTON_SIZES.MD};
   line-height: 1.15;
-  border-radius: 3rem;
   font-weight: ${FONT_WEIGHTS.BOLD};
   display: inline-flex;
+  align-items: center;
   position: relative;
 
   &:before,

@@ -1,7 +1,8 @@
 export const BORDER_RADIUSES = {
   LINE: '0.2rem',
-  CARD: '1rem',
   BOX: '0.4rem',
+  CARD: '1rem',
+  SOFT: '1.8rem',
   CIRCLE: '50%'
 }
 

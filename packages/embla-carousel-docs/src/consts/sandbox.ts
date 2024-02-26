@@ -128,6 +128,7 @@ export const SANDBOX_GENERATOR_FORM_FIELDS = {
   EDGE_GAP: 'edgeGap',
   ALIGN: 'align',
   CONTAIN_SCROLL: 'containScroll',
+  SLIDES_TO_SCROLL: 'slidesToScroll',
   NAVIGATION_PREV_NEXT_BUTTONS: 'navigationPrevNextButtons',
   NAVIGATION_DOTS: 'navigationDots',
   AUTOPLAY: 'autoplay',

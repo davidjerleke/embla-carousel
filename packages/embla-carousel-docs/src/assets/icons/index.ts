@@ -14,6 +14,8 @@ import cross from './cross.svg'
 import info from './info.svg'
 import warning from './warning.svg'
 import danger from './danger.svg'
+import shrink from './shrink.svg'
+import expand from './expand.svg'
 import arrowLeft from './arrow-left.svg'
 import arrowRight from './arrow-right.svg'
 import chevronLeft from './chevron-left.svg'
@@ -48,6 +50,8 @@ export const ICONS = {
   info: styledSvg(info),
   warning: styledSvg(warning),
   danger: styledSvg(danger),
+  shrink: styledSvg(shrink),
+  expand: styledSvg(expand),
   arrowLeft: styledSvg(arrowLeft),
   arrowRight: styledSvg(arrowRight),
   chevronLeft: styledSvg(chevronLeft),

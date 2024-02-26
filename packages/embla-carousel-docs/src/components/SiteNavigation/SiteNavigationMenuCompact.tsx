@@ -68,12 +68,14 @@ const MenuTabs = styled(Tabs)<{
     border-bottom: 0;
     justify-content: center;
 
-    &:before {
+    &:before,
+    &:after {
       display: none;
     }
   }
 
   ${TabsListScrollArea} {
+    max-width: ${MAX_WIDTH_COMPACT};
     overflow: visible;
     padding-bottom: 0;
 

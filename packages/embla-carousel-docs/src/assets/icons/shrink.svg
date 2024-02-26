@@ -1,0 +1,8 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+    <path data-name="Right" d="M10 17.7V14H6.3"/>
+    <path d="m3 21 6.2-6.2"/>
+    <path data-name="Right" d="M14 6.3V10h3.7"/>
+    <path d="m21 3-6.2 6.2"/>
+  </g>
+</svg>

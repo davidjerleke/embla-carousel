@@ -24,7 +24,7 @@ type PropType = {
   classNames?: boolean
 }
 
-const EmblaCarouselExample: React.FC<PropType> = (props) => {
+export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
   const {
     slides,
     options,
@@ -118,5 +118,3 @@ const EmblaCarouselExample: React.FC<PropType> = (props) => {
     </div>
   )
 }
-
-export default EmblaCarouselExample

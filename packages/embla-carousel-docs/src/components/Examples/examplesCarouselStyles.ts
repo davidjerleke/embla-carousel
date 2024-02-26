@@ -8,6 +8,7 @@ import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { EmblaOptionsType } from 'embla-carousel'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
+import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 
 const CAROUSEL_MAX_WIDTH = '48rem'
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
@@ -21,16 +22,17 @@ export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 export const CAROUSEL_NAV_BUTTON_SIZE = SPACINGS.SIX
 export const CAROUSEL_CONTROLS_SPACING = SPACINGS.THREE
 
-const CAROUSEL_SLIDE_RADIUS_STYLES = css`
-  border-radius: 1.8rem;
+export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
+  border-radius: ${BORDER_RADIUSES.SOFT};
 `
 
-const CAROUSEL_BORDER_SHADOW_STYLES = css`
+export const CAROUSEL_BORDER_SHADOW_STYLES = css`
   box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE}
     ${COLORS.DETAIL_MEDIUM_CONTRAST};
 `
 
-const CAROUSEL_BUTTON_RESET_STYLES = css`
+export const CAROUSEL_BUTTON_BASE_STYLES = css`
+  ${TAP_HIGHLIGHT_STYLES};
   -webkit-appearance: none;
   appearance: none;
   background-color: transparent;
@@ -204,7 +206,7 @@ export const ARROWS_STYLES = css`
   }
 
   .embla__button {
-    ${CAROUSEL_BUTTON_RESET_STYLES};
+    ${CAROUSEL_BUTTON_BASE_STYLES};
     ${CAROUSEL_BORDER_SHADOW_STYLES};
     ${createSquareSizeStyles(CAROUSEL_NAV_BUTTON_SIZE)}
     z-index: ${LAYERS.STEP};
@@ -234,7 +236,7 @@ export const DOTS_STYLES = css`
   }
 
   .embla__dot {
-    ${CAROUSEL_BUTTON_RESET_STYLES};
+    ${CAROUSEL_BUTTON_BASE_STYLES};
     ${createSquareSizeStyles('2.6rem')}
     display: flex;
     align-items: center;
@@ -267,7 +269,7 @@ export const SNAP_DISPLAY_STYLES = css`
 
 export const PLAY_BUTTON_STYLES = css`
   .embla__play {
-    ${CAROUSEL_BUTTON_RESET_STYLES};
+    ${CAROUSEL_BUTTON_BASE_STYLES};
     ${CAROUSEL_BORDER_SHADOW_STYLES};
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     display: flex;
@@ -313,7 +315,7 @@ export const THUMBS_STYLES = css`
 
   .embla-thumbs__slide__number {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    ${CAROUSEL_BUTTON_RESET_STYLES};
+    ${CAROUSEL_BUTTON_BASE_STYLES};
     ${CAROUSEL_BORDER_SHADOW_STYLES};
     font-size: ${FONT_SIZES.H4};
     font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
@@ -639,22 +641,17 @@ export const examplesCarouselDefaultStyles = (
   const containerHeight = horizontal
     ? ''
     : 'height: calc(var(--slide-spacing) + var(--slide-height));'
-  const slideNumberSpacing = horizontal
-    ? '0.6rem'
-    : 'calc(var(--slide-spacing) + 0.6rem)'
 
   const mergedStyles = baseStyles + customStyles
 
   return mergedStyles
     .replace(/__replace_axis_flex__/gi, flexDirection)
     .replace(/__replace-axis-size__/gi, sizeDimention)
-    .replace(/__replace_axis_arrows__/gi, flexDirection)
     .replace(/__replace-axis-touch_action__/gi, panDirection)
     .replace(/__replace_axis_spacing__/gi, spacingDirection)
     .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
     .replace(/__replace_axis_height__/gi, containerHeight)
     .replace(/__replace_slide_height__/gi, slideHeight)
-    .replace(/__replace_axis_slide_number_spacing__/gi, slideNumberSpacing)
     .replace(/__replace_slide_size__/gi, slideSize)
 }
 

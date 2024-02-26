@@ -107,7 +107,7 @@ export const SandboxSelectionForm = (props: PropType) => {
         disabled={!sandbox}
         type="submit"
       >
-        Create CodeSandbox
+        Create Sandbox
       </ButtonPrimaryFilledWithLoading>
     </SandboxSelectionFormWrapper>
   )

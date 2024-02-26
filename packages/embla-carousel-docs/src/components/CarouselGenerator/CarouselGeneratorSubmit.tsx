@@ -1,25 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { SPACINGS } from 'consts/spacings'
-import { createGapStyles } from 'utils/createGapStyles'
 import { ButtonPrimaryFilledWithLoading } from 'components/Button/ButtonPrimaryFilled'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { SandboxLabelKeyType } from 'consts/sandbox'
 import { SandboxGeneratorSettingsType } from 'consts/sandbox'
 import { dynamicGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
-import {
-  FORM_ITEM_MAX_WIDTH_STYLES,
-  FORM_ITEM_SPACING_X
-} from './CarouselGeneratorFormItems'
-
-const CarouselGeneratorSubmitWrapper = styled.div`
-  ${createGapStyles(FORM_ITEM_SPACING_X, SPACINGS.EIGHT)}
-  margin-top: ${SPACINGS.EIGHT};
-`
-
-const CarouselGeneratorButtonWrapper = styled.div`
-  ${FORM_ITEM_MAX_WIDTH_STYLES};
-`
 
 export const CarouselGeneratorSubmit = () => {
   const { formData } = useCarouselGenerator()
@@ -48,20 +32,16 @@ export const CarouselGeneratorSubmit = () => {
   }, [sandboxKey, formData])
 
   return (
-    <div>
+    <>
       <input type="hidden" name="parameters" value={sandbox} />
 
-      <CarouselGeneratorSubmitWrapper>
-        <CarouselGeneratorButtonWrapper>
-          <ButtonPrimaryFilledWithLoading
-            isLoading={isLoading}
-            disabled={!sandbox}
-            type="submit"
-          >
-            Create CodeSandbox
-          </ButtonPrimaryFilledWithLoading>
-        </CarouselGeneratorButtonWrapper>
-      </CarouselGeneratorSubmitWrapper>
-    </div>
+      <ButtonPrimaryFilledWithLoading
+        isLoading={isLoading}
+        disabled={!sandbox}
+        type="submit"
+      >
+        Create Sandbox
+      </ButtonPrimaryFilledWithLoading>
+    </>
   )
 }

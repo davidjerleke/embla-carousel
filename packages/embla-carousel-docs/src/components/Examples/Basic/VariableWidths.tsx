@@ -2,7 +2,7 @@ import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import EmblaCarouselExample from 'components/Sandbox/SandboxGeneratorExample'
+import { SandboxGeneratorExample } from 'components/Sandbox/SandboxGeneratorExample'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { SandboxGeneratorSettingsType } from 'consts/sandbox'
@@ -44,7 +44,7 @@ export const VariableWidths = () => {
       <SandboxSelection sandboxes={SANDBOXES} />
       <Wrapper className={ID} ref={inViewRef}>
         {inView ? (
-          <EmblaCarouselExample
+          <SandboxGeneratorExample
             slides={SLIDES}
             options={OPTIONS}
             navigationPrevNextButtons

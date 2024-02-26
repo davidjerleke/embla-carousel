@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { InputRadioDefault } from 'components/Input/InputRadio'
 import { InputCheckboxDefault } from 'components/Input/InputCheckbox'
 import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
@@ -45,7 +45,13 @@ const INPUT_ACCESSIBILITY: SandboxGeneratorCheckboxType<'accessibility'> = {
 }
 
 export const CarouselGeneratorBasicSettings = () => {
-  const { formData, onCheckboxChange, onRadioChange } = useCarouselGenerator()
+  const { formData, onCheckboxChange, onRadioChange, onChange } =
+    useCarouselGenerator()
+  const axis = formData[SANDBOX_GENERATOR_FORM_FIELDS.AXIS]
+
+  useEffect(() => {
+    if (axis === 'y') onChange(SANDBOX_GENERATOR_FORM_FIELDS.DIRECTION, 'ltr')
+  }, [axis])
 
   return (
     <>
@@ -65,24 +71,26 @@ export const CarouselGeneratorBasicSettings = () => {
         ))}
       </CarouselGeneratorFormItems>
 
-      <CarouselGeneratorFormItems
-        role="radiogroup"
-        aria-label={INPUT_DIRECTION.ID}
-      >
-        {INPUT_DIRECTION.OPTIONS.map(({ VALUE, LABEL }) => (
-          <div key={VALUE}>
-            <InputRadioDefault
-              name={INPUT_DIRECTION.FIELD_NAME}
-              id={`${INPUT_DIRECTION.ID}-${VALUE}`}
-              value={VALUE}
-              checked={formData[INPUT_DIRECTION.FIELD_NAME] === VALUE}
-              onChange={onRadioChange}
-            >
-              {LABEL}
-            </InputRadioDefault>
-          </div>
-        ))}
-      </CarouselGeneratorFormItems>
+      {axis === 'x' && (
+        <CarouselGeneratorFormItems
+          role="radiogroup"
+          aria-label={INPUT_DIRECTION.ID}
+        >
+          {INPUT_DIRECTION.OPTIONS.map(({ VALUE, LABEL }) => (
+            <div key={VALUE}>
+              <InputRadioDefault
+                name={INPUT_DIRECTION.FIELD_NAME}
+                id={`${INPUT_DIRECTION.ID}-${VALUE}`}
+                value={VALUE}
+                checked={formData[INPUT_DIRECTION.FIELD_NAME] === VALUE}
+                onChange={onRadioChange}
+              >
+                {LABEL}
+              </InputRadioDefault>
+            </div>
+          ))}
+        </CarouselGeneratorFormItems>
+      )}
 
       <CarouselGeneratorFormItem>
         <InputCheckboxDefault

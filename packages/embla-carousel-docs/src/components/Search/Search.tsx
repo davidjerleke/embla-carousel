@@ -67,6 +67,7 @@ const modalStyles = css`
     height: 100vh;
 
     ${MEDIA.DESKTOP} {
+      border-radius: ${BORDER_RADIUSES.SOFT};
       max-width: ${MODAL_MAX_WIDTH};
       margin: ${DESKTOP_END_SPACING} auto;
       height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
