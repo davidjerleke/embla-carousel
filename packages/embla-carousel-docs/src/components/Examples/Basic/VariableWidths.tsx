@@ -11,6 +11,7 @@ import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGenerato
 import { examplesCarouselVariableWidthStyles } from '../examplesCarouselStyles'
 import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-variable-widths'
 const SLIDES = arrayFromNumber(9)
@@ -37,7 +38,7 @@ const Wrapper = styled.div`
 `
 
 export const VariableWidths = () => {
-  const [inViewRef, inView] = useInView()
+  const [inViewRef, inView] = useInView(EXAMPLES_INTERSECTION_OPTIONS)
 
   return (
     <>

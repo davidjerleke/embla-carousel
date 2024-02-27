@@ -10,6 +10,7 @@ import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGene
 import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
 import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-slides-to-scroll'
 const SLIDES = arrayFromNumber(10)
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
   }
 `
 export const SlidesToScroll = () => {
-  const [inViewRef, inView] = useInView()
+  const [inViewRef, inView] = useInView(EXAMPLES_INTERSECTION_OPTIONS)
 
   return (
     <>

@@ -11,6 +11,7 @@ import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGenerato
 import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import { examplesCarouselDragFreeStyles } from '../examplesCarouselStyles'
+import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-drag-free'
 const SLIDES = arrayFromNumber(16)
@@ -38,7 +39,7 @@ const Wrapper = styled.div`
 `
 
 export const DragFree = () => {
-  const [inViewRef, inView] = useInView()
+  const [inViewRef, inView] = useInView(EXAMPLES_INTERSECTION_OPTIONS)
 
   return (
     <>

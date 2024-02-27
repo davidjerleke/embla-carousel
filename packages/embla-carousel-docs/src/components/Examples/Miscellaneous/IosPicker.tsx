@@ -8,6 +8,7 @@ import { examplesCarouselIosPickerStyles } from 'components/Examples/examplesCar
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-ios-style-picker'
 const STYLES = examplesCarouselIosPickerStyles()
@@ -39,7 +40,7 @@ type PropType = {
 }
 
 export const IosPicker = (props: PropType) => {
-  const [inViewRef, inView] = useInView()
+  const [inViewRef, inView] = useInView(EXAMPLES_INTERSECTION_OPTIONS)
   const { loop } = props
 
   return (

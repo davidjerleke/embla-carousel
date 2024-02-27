@@ -9,6 +9,7 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-auto-scroll'
 const SLIDES = arrayFromNumber(8)
@@ -33,7 +34,7 @@ const Wrapper = styled.div`
 `
 
 export const AutoScroll = () => {
-  const [inViewRef, inView] = useInView()
+  const [inViewRef, inView] = useInView(EXAMPLES_INTERSECTION_OPTIONS)
 
   return (
     <>
