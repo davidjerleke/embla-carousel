@@ -14,7 +14,7 @@ import {
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselDefaultStyles
-} from 'components/Examples/createCarouselStyles'
+} from 'components/Examples/examplesCarouselStyles'
 import Carousel from './Carousel/Carousel'
 import './main.css'
 

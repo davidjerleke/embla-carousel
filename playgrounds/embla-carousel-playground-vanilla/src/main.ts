@@ -11,7 +11,7 @@ import {
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselDefaultStyles
-} from 'components/Examples/createCarouselStyles'
+} from 'components/Examples/examplesCarouselStyles'
 import { createSlides } from './Carousel/setupSlides'
 import { addPrevNextBtnsClickHandlers } from './Carousel/setupButtons'
 import {
