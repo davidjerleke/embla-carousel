@@ -332,7 +332,7 @@ export const THUMBS_STYLES = css`
   }
 `
 
-const PROGRESS_STYLES = css`
+export const PROGRESS_STYLES = css`
   .embla__progress {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     ${CAROUSEL_BORDER_SHADOW_STYLES};
@@ -462,6 +462,12 @@ const CLASS_NAMES_STYLES = css`
 
   .embla__slide:not(.is-snapped) {
     opacity: 0.16;
+  }
+`
+
+const FADE_STYLES = css`
+  .embla__slide__img {
+    user-select: none;
   }
 `
 
@@ -850,6 +856,25 @@ export const examplesCarouselClassNamesStyles = (
       ARROWS_STYLES,
       DOTS_STYLES,
       CLASS_NAMES_STYLES
+    )
+  )
+}
+
+export const examplesCarouselFadeStyles = (
+  slideSize?: string,
+  spacingSize?: string,
+  axis?: EmblaOptionsType['axis']
+): string => {
+  return examplesCarouselDefaultStyles(
+    slideSize,
+    spacingSize,
+    axis,
+    styledComponentsStylesToString(
+      IMAGE_STYLES,
+      CONTROLS_STYLES,
+      ARROWS_STYLES,
+      DOTS_STYLES,
+      FADE_STYLES
     )
   )
 }

@@ -55,6 +55,7 @@ export const usePrevNextButtons = (
     onSelect(emblaApi)
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
+    emblaApi.on('slideFocus', onSelect)
   }, [emblaApi, onSelect])
 
   return {

@@ -256,7 +256,8 @@ export function Engine(
     slideRegistry,
     scrollTo,
     scrollBody,
-    eventStore
+    eventStore,
+    eventHandler
   )
 
   // Engine

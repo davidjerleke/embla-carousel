@@ -15,6 +15,7 @@ const FooterLinksWrapper = styled.ul`
   ${createGapStyles(LINK_SPACING, '', 'li')};
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 `
 
 const Link = styled(LinkBare)`

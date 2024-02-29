@@ -1,0 +1,89 @@
+---
+title: Fade
+description: Learn how to use the Fade plugin for Embla Carousel
+order: 4
+date: 2024-05-15
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+import { Fade } from 'components/Examples/Plugins/Fade'
+
+# Fade
+
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-fade">
+  View plugin on GitHub
+</RepositoryLink>
+
+This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
+
+---
+
+## Example
+
+<Fade />
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js"></script>
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+
+    ```shell
+    npm install embla-carousel-fade --save
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+
+    ```shell
+    yarn add embla-carousel-fade
+    ```
+
+  </TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  When the Fade plugin is enabled, the
+  [inViewThreshold](/api/options#inviewthreshold) option no longer has any
+  effect. This is because the Fade plugin stacks any slides with an **opacity
+  higher** than `0` on top of each other, eliminating the concept of scrolling
+  and gradual appearance of slides.
+</Admonition>
+
+<Admonition type="warning">
+
+If your slides are less than 100% of the viewport width, it's recommended to set these options when using the Fade plugin to avoid confusing UX:
+
+<br />
+
+```ts
+const options = {
+  align: 'center',
+  containScroll: false
+}
+```
+
+<br />
+<br />
+
+However, `align: center` is default so you can omit setting the align option and achieve the same thing like so:
+
+<br />
+
+```ts
+const options = {
+  containScroll: false
+}
+```
+
+</Admonition>

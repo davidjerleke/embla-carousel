@@ -152,6 +152,7 @@ function EmblaCarousel(
     mediaHandlers.clear()
     deActivate()
     eventHandler.emit('destroy')
+    eventHandler.clear()
   }
 
   function scrollTo(index: number, jump?: boolean, direction?: number): void {

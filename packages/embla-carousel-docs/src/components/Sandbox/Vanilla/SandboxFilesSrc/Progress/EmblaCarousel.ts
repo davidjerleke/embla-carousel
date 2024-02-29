@@ -31,5 +31,6 @@ emblaApi
   .on('init', applyProgress)
   .on('reInit', applyProgress)
   .on('scroll', applyProgress)
+  .on('slideFocus', applyProgress)
   .on('destroy', removeProgress)
   .on('destroy', removePrevNextBtnsClickHandlers)

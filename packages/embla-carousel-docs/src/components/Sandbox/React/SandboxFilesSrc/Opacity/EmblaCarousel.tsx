@@ -91,6 +91,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       .on('reInit', setTweenFactor)
       .on('reInit', tweenOpacity)
       .on('scroll', tweenOpacity)
+      .on('slideFocus', tweenOpacity)
   }, [emblaApi, tweenOpacity])
 
   return (

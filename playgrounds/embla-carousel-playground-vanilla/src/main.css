@@ -1,22 +1,17 @@
 .playground {
   padding-top: 8rem;
   padding-bottom: 8rem;
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
   width: 67rem;
   max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
-@media (min-width: 768px) {
-  .playground {
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
-  }
-}
-
 .playground__h1 {
   margin-bottom: 4rem;
-  font-size: 3.6rem;
+  font-size: 3.4rem;
   font-weight: 900;
   text-align: center;
 }

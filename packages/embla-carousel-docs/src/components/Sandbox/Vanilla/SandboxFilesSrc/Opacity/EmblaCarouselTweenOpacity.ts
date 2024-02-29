@@ -62,12 +62,9 @@ export const setupTweenOpacity = (
     .on('reInit', setTweenFactor)
     .on('reInit', tweenOpacity)
     .on('scroll', tweenOpacity)
+    .on('slideFocus', tweenOpacity)
 
   return (): void => {
     slideNodes.forEach((slide) => slide.removeAttribute('style'))
-    emblaApi
-      .off('reInit', setTweenFactor)
-      .off('reInit', tweenOpacity)
-      .off('scroll', tweenOpacity)
   }
 }

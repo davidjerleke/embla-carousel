@@ -39,7 +39,7 @@ export function ScrollTarget(
   function shortcut(target: number, direction: number): number {
     const targets = [target, target + contentSize, target - contentSize]
 
-    if (!loop) return targets[0]
+    if (!loop) return target
     if (!direction) return minDistance(targets)
 
     const matchingTargets = targets.filter((t) => mathSign(t) === direction)

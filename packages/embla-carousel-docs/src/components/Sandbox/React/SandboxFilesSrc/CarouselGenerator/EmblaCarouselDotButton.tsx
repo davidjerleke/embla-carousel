@@ -51,6 +51,7 @@ export const useDotButton = (
     emblaApi.on('reInit', onInit)
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
+    emblaApi.on('slideFocus', onSelect)
   }, [emblaApi, onInit, onSelect])
 
   return {

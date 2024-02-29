@@ -10,7 +10,7 @@ export const createSlides = (
     (acc, index) =>
       acc +
       template.innerHTML.replace(
-        '__replace_slide_index__',
+        /__replace_slide_index__/g,
         (index + 1).toString()
       ),
     ''
