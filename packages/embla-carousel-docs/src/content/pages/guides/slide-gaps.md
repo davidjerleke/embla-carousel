@@ -30,6 +30,15 @@ It's also valid to add gaps in both directions:
 }
 ```
 
+If you want to accomodate for RTL languages, you can use [`margin-inline-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end) and [`margin-inline-start`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start) instead:
+
+```css
+.embla__slide {
+  margin-inline-end: 20px; /* Space after the slide */
+  margin-inline-start: 10px; /* Space before the slide */
+}
+```
+
 If you're using CSS Grid you can declare your gaps like so:
 
 ```css
