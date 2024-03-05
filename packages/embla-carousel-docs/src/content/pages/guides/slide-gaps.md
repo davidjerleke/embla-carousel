@@ -30,13 +30,24 @@ It's also valid to add gaps in both directions:
 }
 ```
 
+If you want to accomodate for RTL languages, you can use [`margin-inline-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end) and [`margin-inline-start`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start) instead:
+
+```css
+.embla__slide {
+  margin-inline-end: 20px; //Space after the slide
+  margin-inline-start: 10px; //Space before the slide
+}
+```
+
+````css
+
 If you're using CSS Grid you can declare your gaps like so:
 
 ```css
 .embla__container {
   grid-column-gap: 20px;
 }
-```
+````
 
 > **Note!** If you don't have [loop](/api/options/#loop) enabled, Embla Carousel will ignore any gaps at the start and end edge of the carousel.
 
