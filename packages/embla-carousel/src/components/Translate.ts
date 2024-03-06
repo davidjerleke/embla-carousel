@@ -1,5 +1,4 @@
 import { AxisType } from './Axis'
-import { DirectionType } from './Direction'
 
 export type TranslateType = {
   clear: () => void
@@ -9,7 +8,6 @@ export type TranslateType = {
 
 export function Translate(
   axis: AxisType,
-  direction: DirectionType,
   container: HTMLElement
 ): TranslateType {
   const translate = axis.scroll === 'x' ? x : y
@@ -26,7 +24,7 @@ export function Translate(
 
   function to(target: number): void {
     if (disabled) return
-    containerStyle.transform = translate(direction.apply(target))
+    containerStyle.transform = translate(axis.direction(target))
   }
 
   function toggleActive(active: boolean): void {

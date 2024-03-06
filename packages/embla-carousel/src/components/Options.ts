@@ -1,7 +1,6 @@
 import { AlignmentOptionType } from './Alignment'
-import { AxisOptionType } from './Axis'
+import { AxisDirectionOptionType, AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
-import { DirectionOptionType } from './Direction'
 import { ScrollContainOptionType } from './ScrollContain'
 import { DragHandlerOptionType } from './DragHandler'
 import { ResizeHandlerOptionType } from './ResizeHandler'
@@ -25,7 +24,7 @@ export type OptionsType = CreateOptionsType<{
   container: string | HTMLElement | null
   slides: string | HTMLElement[] | NodeListOf<HTMLElement> | null
   containScroll: ScrollContainOptionType
-  direction: DirectionOptionType
+  direction: AxisDirectionOptionType
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
   dragThreshold: number

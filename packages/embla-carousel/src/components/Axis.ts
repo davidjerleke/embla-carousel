@@ -1,7 +1,7 @@
-import { DirectionOptionType } from './Direction'
 import { NodeRectType } from './NodeRects'
 
 export type AxisOptionType = 'x' | 'y'
+export type AxisDirectionOptionType = 'ltr' | 'rtl'
 type AxisEdgeType = 'top' | 'right' | 'bottom' | 'left'
 
 export type AxisType = {
@@ -10,30 +10,38 @@ export type AxisType = {
   startEdge: AxisEdgeType
   endEdge: AxisEdgeType
   measureSize: (nodeRect: NodeRectType) => number
+  direction: (n: number) => number
 }
 
 export function Axis(
   axis: AxisOptionType,
-  direction: DirectionOptionType
+  contentDirection: AxisDirectionOptionType
 ): AxisType {
-  const scroll = axis === 'y' ? 'y' : 'x'
-  const cross = axis === 'y' ? 'x' : 'y'
+  const isRightToLeft = contentDirection === 'rtl'
+  const isVertical = axis === 'y'
+  const scroll = isVertical ? 'y' : 'x'
+  const cross = isVertical ? 'x' : 'y'
+  const sign = !isVertical && isRightToLeft ? -1 : 1
   const startEdge = getStartEdge()
   const endEdge = getEndEdge()
 
   function measureSize(nodeRect: NodeRectType): number {
-    const { width, height } = nodeRect
-    return scroll === 'x' ? width : height
+    const { height, width } = nodeRect
+    return isVertical ? height : width
   }
 
   function getStartEdge(): AxisEdgeType {
-    if (scroll === 'y') return 'top'
-    return direction === 'rtl' ? 'right' : 'left'
+    if (isVertical) return 'top'
+    return isRightToLeft ? 'right' : 'left'
   }
 
   function getEndEdge(): AxisEdgeType {
-    if (scroll === 'y') return 'bottom'
-    return direction === 'rtl' ? 'left' : 'right'
+    if (isVertical) return 'bottom'
+    return isRightToLeft ? 'left' : 'right'
+  }
+
+  function direction(n: number): number {
+    return n * sign
   }
 
   const self: AxisType = {
@@ -41,7 +49,8 @@ export function Axis(
     cross,
     startEdge,
     endEdge,
-    measureSize
+    measureSize,
+    direction
   }
   return self
 }
