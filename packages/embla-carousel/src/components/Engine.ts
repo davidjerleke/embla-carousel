@@ -7,7 +7,6 @@ import {
 } from './Animations'
 import { Axis, AxisType } from './Axis'
 import { Counter, CounterType } from './Counter'
-import { Direction, DirectionType } from './Direction'
 import { DragHandler, DragHandlerType } from './DragHandler'
 import { DragTracker } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
@@ -42,7 +41,6 @@ export type EngineType = {
   ownerWindow: WindowType
   eventHandler: EventHandlerType
   axis: AxisType
-  direction: DirectionType
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
   scrollLooper: ScrollLooperType
@@ -88,7 +86,7 @@ export function Engine(
   const {
     align,
     axis: scrollAxis,
-    direction: contentDirection,
+    direction,
     startIndex,
     loop,
     duration,
@@ -108,8 +106,7 @@ export function Engine(
   const nodeRects = NodeRects()
   const containerRect = nodeRects.measure(container)
   const slideRects = slides.map(nodeRects.measure)
-  const direction = Direction(contentDirection)
-  const axis = Axis(scrollAxis, contentDirection)
+  const axis = Axis(scrollAxis, direction)
   const viewSize = axis.measureSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
@@ -125,7 +122,6 @@ export function Engine(
   )
   const slidesToScroll = SlidesToScroll(
     axis,
-    direction,
     viewSize,
     groupSlides,
     loop,
@@ -272,10 +268,8 @@ export function Engine(
     slideRects,
     animation,
     axis,
-    direction,
     dragHandler: DragHandler(
       axis,
-      direction,
       root,
       ownerDocument,
       ownerWindow,
@@ -332,7 +326,6 @@ export function Engine(
     scrollTo,
     slideLooper: SlideLooper(
       axis,
-      direction,
       viewSize,
       contentSize,
       slideSizes,
@@ -349,7 +342,7 @@ export function Engine(
     slideRegistry,
     slidesToScroll,
     target,
-    translate: Translate(axis, direction, container)
+    translate: Translate(axis, container)
   }
 
   return engine

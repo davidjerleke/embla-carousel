@@ -1,5 +1,4 @@
 import { AxisType } from './Axis'
-import { DirectionType } from './Direction'
 import { NodeRectType } from './NodeRects'
 import {
   arrayKeys,
@@ -17,7 +16,6 @@ export type SlidesToScrollType = {
 
 export function SlidesToScroll(
   axis: AxisType,
-  direction: DirectionType,
   viewSize: number,
   slidesToScroll: SlidesToScrollOptionType,
   loop: boolean,
@@ -27,7 +25,7 @@ export function SlidesToScroll(
   endGap: number,
   pixelTolerance: number
 ): SlidesToScrollType {
-  const { startEdge, endEdge } = axis
+  const { startEdge, endEdge, direction } = axis
   const groupByNumber = isNumber(slidesToScroll)
 
   function byNumber<Type>(array: Type[], groupSize: number): Type[][] {
@@ -47,8 +45,8 @@ export function SlidesToScroll(
 
         const edgeA = containerRect[startEdge] - slideRects[rectA][startEdge]
         const edgeB = containerRect[startEdge] - slideRects[rectB][endEdge]
-        const gapA = !loop && isFirst ? direction.apply(startGap) : 0
-        const gapB = !loop && isLast ? direction.apply(endGap) : 0
+        const gapA = !loop && isFirst ? direction(startGap) : 0
+        const gapB = !loop && isLast ? direction(endGap) : 0
         const chunkSize = mathAbs(edgeB - gapB - (edgeA + gapA))
 
         if (chunkSize > viewSize + pixelTolerance) groups.push(rectB)

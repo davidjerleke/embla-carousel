@@ -18,7 +18,7 @@ export const sandboxGeneratorCreateOptions = (
     ...(axis !== 'x' && { axis }),
     ...(align !== 'center' && { align }),
     ...(dragFree && { dragFree }),
-    ...(direction !== 'ltr' && axis === 'x' && { direction }),
+    ...(direction !== 'ltr' && { direction }),
     ...(!loop && !containScroll && { containScroll: false }),
     ...(loop && { loop }),
     ...(slidesToScroll !== 1 && { slidesToScroll })

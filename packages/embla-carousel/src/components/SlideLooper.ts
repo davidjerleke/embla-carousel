@@ -2,7 +2,6 @@ import { AxisType } from './Axis'
 import { arrayKeys } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { Translate, TranslateType } from './Translate'
-import { DirectionType } from './Direction'
 
 type SlideBoundType = {
   start: number
@@ -26,7 +25,6 @@ export type SlideLooperType = {
 
 export function SlideLooper(
   axis: AxisType,
-  direction: DirectionType,
   viewSize: number,
   contentSize: number,
   slideSizes: number[],
@@ -78,7 +76,7 @@ export function SlideLooper(
         index,
         loopPoint,
         slideLocation: Vector1D(-1),
-        translate: Translate(axis, direction, slides[index]),
+        translate: Translate(axis, slides[index]),
         target: () => (offsetLocation.get() > loopPoint ? initial : altered)
       }
     })

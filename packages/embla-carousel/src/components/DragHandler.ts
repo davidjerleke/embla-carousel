@@ -1,7 +1,6 @@
 import { EmblaCarouselType } from './EmblaCarousel'
 import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
-import { DirectionType } from './Direction'
 import { DragTrackerType, PointerEventType } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
 import { AxisType } from './Axis'
@@ -37,7 +36,6 @@ export type DragHandlerType = {
 
 export function DragHandler(
   axis: AxisType,
-  direction: DirectionType,
   rootNode: HTMLElement,
   ownerDocument: Document,
   ownerWindow: WindowType,
@@ -57,7 +55,7 @@ export function DragHandler(
   baseFriction: number,
   watchDrag: DragHandlerOptionType
 ): DragHandlerType {
-  const { cross: crossAxis } = axis
+  const { cross: crossAxis, direction } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const nonPassiveEvent = { passive: false }
   const initEvents = EventStore()
@@ -164,7 +162,7 @@ export function DragHandler(
 
     scrollBody.useFriction(0.3).useDuration(1)
     animation.start()
-    target.add(direction.apply(diff))
+    target.add(direction(diff))
     evt.preventDefault()
   }
 
@@ -172,7 +170,7 @@ export function DragHandler(
     const currentLocation = scrollTarget.byDistance(0, false)
     const targetChanged = currentLocation.index !== index.get()
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
-    const force = allowedForce(direction.apply(rawForce), targetChanged)
+    const force = allowedForce(direction(rawForce), targetChanged)
     const forceFactor = factorAbs(rawForce, force)
     const speed = baseSpeed - 10 * forceFactor
     const friction = baseFriction + forceFactor / 50
