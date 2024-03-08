@@ -39,15 +39,13 @@ If you want to accomodate for RTL languages, you can use [`margin-inline-end`](h
 }
 ```
 
-````css
-
 If you're using CSS Grid you can declare your gaps like so:
 
 ```css
 .embla__container {
   grid-column-gap: 20px;
 }
-````
+```
 
 > **Note!** If you don't have [loop](/api/options/#loop) enabled, Embla Carousel will ignore any gaps at the start and end edge of the carousel.
 
