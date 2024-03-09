@@ -34,8 +34,8 @@ If you want to accomodate for RTL languages, you can use [`margin-inline-end`](h
 
 ```css
 .embla__slide {
-  margin-inline-end: 20px; //Space after the slide
-  margin-inline-start: 10px; //Space before the slide
+  margin-inline-end: 20px; /* Space after the slide */
+  margin-inline-start: 10px; /* Space before the slide */
 }
 ```
 
