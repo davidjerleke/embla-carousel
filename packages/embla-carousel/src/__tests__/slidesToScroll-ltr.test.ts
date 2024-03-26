@@ -8,6 +8,47 @@ import {
 
 const FIRST_SNAP_INDEX = 0
 
+describe('➡️  SlidesToScroll - Horizontal LTR - Wide slides', () => {
+  describe('"auto" is correct for wide slides WITHOUT MARGINS and:', () => {
+    const emblaApi = EmblaCarousel(
+      mockTestElements({
+        ...FIXTURE_SLIDES_TO_SCROLL_LTR_1,
+        containerOffset: {
+          offsetWidth: 250,
+          offsetHeight: 190,
+          offsetTop: 0,
+          offsetLeft: 0
+        }
+      })
+    )
+
+    beforeEach(() => {
+      emblaApi.reInit({ ...defaultOptions, slidesToScroll: 'auto' })
+    })
+
+    test('LOOP:FALSE', () => {
+      const engine = emblaApi.internalEngine()
+      const expectedScrollSnaps = [
+        0, -625, -1000, -1250, -1500, -1750, -2125, -2625, -3125, -3751
+      ]
+      expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
+      expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+      expect(engine.slideRegistry).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7],
+        [8],
+        [9]
+      ])
+    })
+  })
+})
+
 describe('➡️  SlidesToScroll - Horizontal LTR', () => {
   describe('"auto" is correct for slides WITHOUT MARGINS and:', () => {
     const emblaApi = EmblaCarousel(
