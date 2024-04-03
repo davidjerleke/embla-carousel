@@ -35,7 +35,6 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let playing = false
   let resume = true
   let jump = false
-  let animationFrame = 0
   let timer = 0
 
   function init(
@@ -89,20 +88,12 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
     eventStore.add(ownerDocument, 'visibilitychange', visibilityChange)
 
-    if (options.playOnInit) {
-      emblaApi.on('init', startTimer).on('reInit', startTimer)
-    }
+    if (options.playOnInit && !documentIsHidden()) startTimer()
   }
 
   function destroy(): void {
-    emblaApi
-      .off('init', startTimer)
-      .off('reInit', startTimer)
-      .off('pointerDown', stopTimer)
-      .off('pointerUp', startTimer)
+    emblaApi.off('pointerDown', stopTimer).off('pointerUp', startTimer)
     stopTimer()
-    cancelAnimationFrame(animationFrame)
-    animationFrame = 0
     destroyed = true
     playing = false
   }
@@ -127,14 +118,17 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function visibilityChange(): void {
-    const { ownerDocument } = emblaApi.internalEngine()
-
-    if (ownerDocument.visibilityState === 'hidden') {
+    if (documentIsHidden()) {
       resume = playing
       return stopTimer()
     }
 
     if (resume) startTimer()
+  }
+
+  function documentIsHidden(): boolean {
+    const { ownerDocument } = emblaApi.internalEngine()
+    return ownerDocument.visibilityState === 'hidden'
   }
 
   function play(jumpOverride?: boolean): void {
@@ -156,20 +150,18 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function next(): void {
-    animationFrame = requestAnimationFrame(() => {
-      const { index } = emblaApi.internalEngine()
-      const nextIndex = index.clone().add(1).get()
-      const lastIndex = emblaApi.scrollSnapList().length - 1
-      const kill = options.stopOnLastSnap && nextIndex === lastIndex
+    const { index } = emblaApi.internalEngine()
+    const nextIndex = index.clone().add(1).get()
+    const lastIndex = emblaApi.scrollSnapList().length - 1
+    const kill = options.stopOnLastSnap && nextIndex === lastIndex
 
-      if (kill) stopTimer()
+    if (kill) stopTimer()
 
-      if (emblaApi.canScrollNext()) {
-        emblaApi.scrollNext(jump)
-      } else {
-        emblaApi.scrollTo(0, jump)
-      }
-    })
+    if (emblaApi.canScrollNext()) {
+      emblaApi.scrollNext(jump)
+    } else {
+      emblaApi.scrollTo(0, jump)
+    }
   }
 
   const self: AutoplayType = {

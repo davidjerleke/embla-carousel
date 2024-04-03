@@ -93,15 +93,11 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       }
     }
 
-    if (options.playOnInit) {
-      emblaApi.on('init', startScroll).on('reInit', startScroll)
-    }
+    if (options.playOnInit) startScroll()
   }
 
   function destroy(): void {
     emblaApi
-      .off('init', startScroll)
-      .off('reInit', startScroll)
       .off('pointerDown', stopScroll)
       .off('pointerUp', startScrollOnSettle)
       .off('settle', onSettle)
