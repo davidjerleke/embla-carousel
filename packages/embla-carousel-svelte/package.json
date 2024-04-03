@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-svelte",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -60,8 +60,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "embla-carousel": "8.0.0",
-    "embla-carousel-reactive-utils": "8.0.0"
+    "embla-carousel": "8.0.1",
+    "embla-carousel-reactive-utils": "8.0.1"
   },
   "peerDependencies": {
     "svelte": "^3.49.0 || ^4.0.0"
