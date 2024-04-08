@@ -38,7 +38,7 @@ export function SlidesToScroll(
     if (!array.length) return []
 
     return arrayKeys(array)
-      .reduce((groups: number[], rectB) => {
+      .reduce((groups: number[], rectB, index) => {
         const rectA = arrayLast(groups) || 0
         const isFirst = rectA === 0
         const isLast = rectB === arrayLastIndex(array)
@@ -49,7 +49,7 @@ export function SlidesToScroll(
         const gapB = !loop && isLast ? direction(endGap) : 0
         const chunkSize = mathAbs(edgeB - gapB - (edgeA + gapA))
 
-        if (chunkSize > viewSize + pixelTolerance) groups.push(rectB)
+        if (index && chunkSize > viewSize + pixelTolerance) groups.push(rectB)
         if (isLast) groups.push(array.length)
         return groups
       }, [])

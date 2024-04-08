@@ -163,3 +163,86 @@ export const FIXTURE_SLIDES_TO_SCROLL_LTR_2: TestElementDimensionsType = {
     value: 20
   }
 }
+
+/*
+Fixture 3
+
+- Horizontal
+- LTR
+- No slide margins
+- Slides are wider than viewport
+*/
+export const FIXTURE_SLIDES_TO_SCROLL_LTR_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 250,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 500,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 500,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 500
+    },
+    {
+      offsetWidth: 250,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 1000
+    },
+    {
+      offsetWidth: 250,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 1250
+    },
+    {
+      offsetWidth: 250,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 1500
+    },
+    {
+      offsetWidth: 250,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 1750
+    },
+    {
+      offsetWidth: 500,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 2000
+    },
+    {
+      offsetWidth: 500,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 2500
+    },
+    {
+      offsetWidth: 500,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 3000
+    },
+    {
+      offsetWidth: 501,
+      offsetHeight: 0,
+      offsetTop: 0,
+      offsetLeft: 3500
+    }
+  ],
+  endMargin: {
+    property: 'marginRight',
+    value: 0
+  }
+}
