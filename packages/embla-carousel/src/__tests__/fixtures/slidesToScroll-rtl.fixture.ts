@@ -163,3 +163,62 @@ export const FIXTURE_SLIDES_TO_SCROLL_RTL_2: TestElementDimensionsType = {
     value: 20
   }
 }
+
+/*
+Fixture 3
+
+- Horizontal
+- RTL
+- No slide margins
+- Slides are wider than viewport
+*/
+export const FIXTURE_SLIDES_TO_SCROLL_RTL_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 480,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -96
+    },
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -672
+    },
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -1248
+    },
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -1824
+    },
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -2400
+    },
+    {
+      offsetWidth: 576,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -2976
+    }
+  ],
+  endMargin: {
+    property: 'marginLeft',
+    value: 0
+  }
+}
