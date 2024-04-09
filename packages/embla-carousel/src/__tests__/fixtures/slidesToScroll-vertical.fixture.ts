@@ -161,3 +161,61 @@ export const FIXTURE_SLIDES_TO_SCROLL_Y_2: TestElementDimensionsType = {
     value: 20
   }
 }
+
+/*
+Fixture 3
+
+- Vertical
+- No slide margins
+- Slides are taller than viewport
+*/
+export const FIXTURE_SLIDES_TO_SCROLL_Y_3: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 480,
+    offsetHeight: 190,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 228,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 456,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 684,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 912,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 480,
+      offsetHeight: 228,
+      offsetTop: 1140,
+      offsetLeft: 0
+    }
+  ],
+  endMargin: {
+    property: 'marginBottom',
+    value: 0
+  }
+}
