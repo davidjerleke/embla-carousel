@@ -128,7 +128,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
   })
 
   describe('"auto" is correct for slides WITHOUT MARGINS and:', () => {
-    describe('edge cases when slide is greater than viewport and:', () => {
+    describe('edge cases when slide width is greater than viewport and:', () => {
       const emblaApi = EmblaCarousel(
         mockTestElements(FIXTURE_SLIDES_TO_SCROLL_LTR_3)
       )
