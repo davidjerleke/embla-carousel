@@ -28,7 +28,7 @@ try {
   const templateFilePath = path.join(process.cwd(), templatePath)
   const template = fs.readFileSync(templateFilePath, 'utf-8')
 
-  fetch(`https://api.github.com/repos/${REPO_PATH}/contributors`)
+  fetch(`https://api.github.com/repos/${REPO_PATH}/contributors?per_page=100`)
     .then((response) => response.json())
     .then((contributors?: ContributorsResponseType) => {
       const contributorMarkup = createContributors(contributors)

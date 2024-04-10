@@ -69,7 +69,7 @@
     <a href="https://www.embla-carousel.com/get-started/solid/">
       <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://github.com/donaldxdonald/embla-carousel-angular?tab=readme-ov-file#installation">
+    <a href="https://github.com/donaldxdonald/embla-carousel-angular">
       <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" height="40" />
     </a>
   </p>
