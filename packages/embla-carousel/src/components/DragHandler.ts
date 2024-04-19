@@ -147,6 +147,13 @@ export function DragHandler(
   }
 
   function move(evt: PointerEventType): void {
+	if (
+      window.TouchEvent &&
+      evt instanceof TouchEvent &&
+      evt.touches.length >= 2
+	) {
+      return;
+	}
     const lastScroll = dragTracker.readPoint(evt)
     const lastCross = dragTracker.readPoint(evt, crossAxis)
     const diffScroll = deltaAbs(lastScroll, startScroll)
