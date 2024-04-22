@@ -11,6 +11,8 @@ import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 
 # Vue
 
+Embla Carousel provides a wrapper for [Vue](https://vuejs.org/) that ensures seamless integration of the carousel into your Vue project and automatic cleanup on component unmount.
+
 Start by installing the Embla Carousel **npm package** and add it to your dependencies.
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
@@ -31,9 +33,11 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 </Tabs>
 
 <Admonition type="note">
-**Note:** `embla-carousel-vue` only supports `Vue 3` and up.
-However, you can use the [vanilla version](/module/) and re-create the behaviour of `embla-carousel-vue`.
-[Here's an example](https://github.com/meirroth/embla-carousel-vue2) of how you can use Embla Carousel with `Vue 2` Options API.
+  **Note:** `embla-carousel-vue` only supports `Vue 3` and up. However, you can
+  use the [core package](/get-started/module/) that `embla-carousel-vue` is
+  using under the hood, and re-create the behaviour of `embla-carousel-vue`.
+  Here's an [example](https://github.com/meirroth/embla-carousel-vue2) of how
+  you can use Embla Carousel with `Vue 2` Options API.
 </Admonition>
 
 ---
@@ -81,16 +85,16 @@ The `emblaCarouselVue` function gives us an **emblaRef** to attach to our wrappi
 
 ## Accessing the carousel API
 
-The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `watchEffect` like demonstrated below:
+The `emblaCarouselVue` function takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with an `onMounted` like demonstrated below:
 
 ```html highlight={5,7-11}
 <script setup>
-  import { watchEffect } from 'vue'
+  import { onMounted } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
 
   const [emblaRef, emblaApi] = emblaCarouselVue({ loop: false })
 
-  watchEffect(() => {
+  onMounted(() => {
     if (emblaApi.value) {
       console.log(emblaApi.value.slideNodes()) // Access API
     }

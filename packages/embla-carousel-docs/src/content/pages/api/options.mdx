@@ -88,12 +88,6 @@ export function EmblaCarousel() {
 </TabsItem>
 </Tabs>
 
-<Admonition>
-  Note that it's possible to **change options** passed to the Embla Carousel
-  constructor **after initialization** with the [reInit](/api/methods/#reinit)
-  method.
-</Admonition>
-
 ### Global options
 
 Setting **global options** will be applied to **all carousels** which will override the Embla default options with your own. In the following example [loop](/api/options/#loop) is set to `true`:
@@ -178,6 +172,112 @@ export function EmblaCarousel() {
   **only assign it once**. Re-assigning global options might lead to confusing
   code and unexpected behaviour.
 </Admonition>
+
+### Changing options
+
+It's possible to **change options** passed to the Embla Carousel constructor **after initialization** with the [reInit](/api/methods/#reinit) method.
+
+In [React](/get-started/react/), [Vue](/get-started/vue/), [Solid](/get-started/solid/) and [Svelte](/get-started/svelte/) wrappers you can pass **reactive options** and the carousel will automatically reinitialize when they change. Here are some examples:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={6}
+import EmblaCarousel from 'embla-carousel'
+
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode, { loop: true })
+
+emblaApi.reInit({ loop: false })
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={5,9-12}
+import { useState, useCallback } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [options, setOptions] = useState({ loop: true })
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+
+  const toggleLoop = useCallback(() => {
+    setOptions((currentOptions) => ({
+      ...currentOptions,
+      loop: !currentOptions.loop
+    }))
+  }, [])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={4,8-11}
+<script setup>
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const options = ref({ loop: true })
+  const [emblaRef, emblaApi] = emblaCarouselVue(options)
+
+  function toggleLoop() {
+    options.value = {
+      ...options.value,
+      loop: !options.value.loop
+    }
+  }
+
+  // ...
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={5,9-12}
+import { createSignal } from 'solid-js'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [options, setOptions] = createSignal({ loop: true })
+  const [emblaRef] = createEmblaCarousel(() => options())
+
+  function toggleLoop() {
+    setOptions((currentOptions) => ({
+      ...currentOptions,
+      loop: !currentOptions.loop
+    }))
+  }
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={7-10}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let options = { loop: true }
+
+  function toggleLoop() {
+    options = {
+      ...options,
+      loop: !options.loop
+    }
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte="{{ options }}">...</div>
+```
+
+</TabsItem>
+</Tabs>
 
 ### TypeScript
 

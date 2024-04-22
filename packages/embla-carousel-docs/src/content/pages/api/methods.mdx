@@ -58,12 +58,12 @@ export function EmblaCarousel() {
 
 ```html highlight={8}
 <script setup>
-  import { watchEffect } from 'vue'
+  import { onMounted } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
 
   const [emblaRef, emblaApi] = emblaCarouselVue()
 
-  watchEffect(() => {
+  onMounted(() => {
     if (emblaApi.value) console.log(emblaApi.value.slideNodes())
   })
 
@@ -75,13 +75,13 @@ export function EmblaCarousel() {
 <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
 
 ```jsx highlight={9}
-import { createEffect } from 'solid-js'
+import { onMount } from 'solid-js'
 import createEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = createEmblaCarousel()
 
-  createEffect(() => {
+  onMount(() => {
     const api = emblaApi()
     if (api) console.log(api.slideNodes())
   })
@@ -167,7 +167,7 @@ export function EmblaCarousel() {
 
 ```html highlight={3,8}
 <script setup lang="ts">
-  import { watchEffect } from 'vue'
+  import { onMounted } from 'vue'
   import { EmblaCarouselType } from 'embla-carousel'
   import emblaCarouselVue from 'embla-carousel-vue'
 
@@ -177,7 +177,7 @@ export function EmblaCarousel() {
     console.log(emblaApi.slidesInView())
   }
 
-  watchEffect(() => {
+  onMounted(() => {
     if (emblaApi.value) emblaApi.value.on('slidesInView', logSlidesInView)
   })
 
@@ -197,7 +197,7 @@ export function EmblaCarousel() {
 <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
 
 ```jsx highlight={2,8}
-import { createEffect } from 'solid-js'
+import { onMount } from 'solid-js'
 import { EmblaCarouselType } from 'embla-carousel'
 import createEmblaCarousel from 'embla-carousel-solid'
 
@@ -208,7 +208,7 @@ export function EmblaCarousel() {
     console.log(emblaApi.slidesInView())
   }
 
-  createEffect(() => {
+  onMount(() => {
     const api = emblaApi()
     if (api) api.on('slidesInView', logSlidesInView)
   })
