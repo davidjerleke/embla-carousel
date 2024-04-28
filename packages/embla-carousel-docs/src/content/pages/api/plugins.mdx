@@ -348,13 +348,13 @@ export function EmblaCarousel() {
 
 ```html highlight={9}
 <script setup>
-  import { watchEffect } from 'vue'
+  import { onMounted } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
   import Autoplay from 'embla-carousel-autoplay'
 
   const [emblaRef, emblaApi] = emblaCarouselVue({ loop: true }, [Autoplay()])
 
-  watchEffect(() => {
+  onMounted(() => {
     if (emblaApi.value) emblaApi.value.plugins().autoplay.stop()
   })
 
@@ -367,7 +367,7 @@ export function EmblaCarousel() {
 <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
 
 ```jsx highlight={12}
-import { createEffect } from 'solid-js'
+import { onMount } from 'solid-js'
 import createEmblaCarousel from 'embla-carousel-solid'
 import Autoplay from 'embla-carousel-autoplay'
 
@@ -377,7 +377,7 @@ export function EmblaCarousel() {
     () => [AutoPlay()]
   )
 
-  createEffect(() => {
+  onMount(() => {
     const api = emblaApi()
     if (api) api.plugins().autoplay.stop()
   })
@@ -464,7 +464,7 @@ export function EmblaCarousel() {
 
 ```html highlight={13}
 <script setup>
-  import { watchEffect } from 'vue'
+  import { onMounted } from 'vue'
   import emblaCarouselVue from 'embla-carousel-vue'
   import Autoplay from 'embla-carousel-autoplay'
 
@@ -474,7 +474,7 @@ export function EmblaCarousel() {
     console.log(`Autoplay just triggered ${eventName}!`)
   }
 
-  watchEffect(() => {
+  onMounted(() => {
     if (emblaApi.value) emblaApi.value.on('autoplay:stop', logPluginEvent)
   })
 
@@ -486,7 +486,7 @@ export function EmblaCarousel() {
 <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
 
 ```jsx highlight={17}
-import { createEffect } from 'solid-js'
+import { onMount } from 'solid-js'
 import createEmblaCarousel from 'embla-carousel-solid'
 import Autoplay from 'embla-carousel-autoplay'
 
@@ -500,7 +500,7 @@ export function EmblaCarousel() {
     console.log(`Autoplay just triggered ${eventName}!`)
   }
 
-  createEffect(() => {
+  onMount(() => {
     const api = emblaApi()
     if (api) api.on('autoplay:stop', logPluginEvent)
   })
