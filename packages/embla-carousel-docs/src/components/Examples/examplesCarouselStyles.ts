@@ -635,7 +635,7 @@ export const examplesCarouselDefaultStyles = (
   const horizontal = axis === 'x'
   const flexDirection = horizontal ? '' : 'flex-direction: column;'
   const spacingDirection = horizontal ? 'left' : 'top'
-  const panDirection = `pan-${horizontal ? 'y' : 'x'}`
+  const panDirection = `pan-${horizontal ? 'y' : 'x'} pinch-zoom`
   const sizeDimention = horizontal ? 'width' : 'height'
   const slideHeight = horizontal ? 'var(--slide-height)' : '100%'
   const containerHeight = horizontal
