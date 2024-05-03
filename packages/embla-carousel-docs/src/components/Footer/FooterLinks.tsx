@@ -14,6 +14,7 @@ const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
 const FooterLinksWrapper = styled.ul`
   ${createGapStyles(LINK_SPACING, '', 'li')};
   display: flex;
+  flex-wrap: wrap;
 `
 
 const Link = styled(LinkBare)`
@@ -43,6 +44,13 @@ export const FooterLinks = (props: PropType) => {
         <Link to={URLS.GITHUB_ROOT}>
           <IconWithText iconSvg="github" spacing={ICON_SPACING}>
             GitHub
+          </IconWithText>
+        </Link>
+      </li>
+      <li>
+        <Link to={URLS.GITHUB_SPONSORS_PAGE}>
+          <IconWithText iconSvg="heartOutlined" spacing={ICON_SPACING}>
+            Sponsor
           </IconWithText>
         </Link>
       </li>

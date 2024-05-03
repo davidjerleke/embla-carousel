@@ -13,6 +13,20 @@ import { ALGOLIA_SEARCH_CONFIG } from './src/consts/algoliaSearch'
 import { FONT_FACE_STYLES } from './src/consts/fontFace'
 import { styledComponentsStylesToString } from './src/utils/styledComponentStylesToString'
 import { removeProtocol } from './src/utils/removeProtocol'
+import logoLightThemeDefaultUrl from './src/assets/images/embla-logo-light-theme.svg'
+import logoDarkThemeDefaultUrl from './src/assets/images/embla-logo-dark-theme.svg'
+import logoLightThemeBlurUrl from './src/assets/images/embla-logo-light-theme-blur.svg'
+import logoDarkThemeBlurUrl from './src/assets/images/embla-logo-dark-theme-blur.svg'
+import interRomanVar from 'assets/fonts/Inter-roman.var.woff2'
+
+const fontsToPreload: string[] = [interRomanVar]
+
+const imagesToPreload: string[] = [
+  logoLightThemeDefaultUrl,
+  logoDarkThemeDefaultUrl,
+  logoLightThemeBlurUrl,
+  logoDarkThemeBlurUrl
+]
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setHtmlAttributes,
@@ -123,7 +137,19 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       rel="preconnect"
       href={`https://${ALGOLIA_SEARCH_CONFIG.APP_ID}-dsn.algolia.net`}
       crossOrigin="anonymous"
-    />
+    />,
+    fontsToPreload.map((font) => (
+      <link rel="preload" as="font" type="font/woff2" href={font} key={font} />
+    )),
+    imagesToPreload.map((image) => (
+      <link
+        rel="preload"
+        as="image"
+        type="image/svg+xml"
+        href={image}
+        key={image}
+      />
+    ))
   ])
 
   setPreBodyComponents([

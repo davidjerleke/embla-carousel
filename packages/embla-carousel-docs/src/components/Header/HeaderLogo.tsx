@@ -15,9 +15,12 @@ import {
   SiteLogo
 } from 'components/SiteLogo/SiteLogo'
 
+const LOGO_WIDTH = '20.6rem'
+
 const HeaderLogoWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   font-size: ${FONT_SIZES.H4};
+  width: ${LOGO_WIDTH};
   display: flex;
   align-items: center;
   text-decoration: none;
