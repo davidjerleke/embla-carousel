@@ -20,6 +20,7 @@ import arrowLeft from './arrow-left.svg'
 import arrowRight from './arrow-right.svg'
 import chevronLeft from './chevron-left.svg'
 import chevronRight from './chevron-right.svg'
+import heartOutlined from './heart-outlined.svg'
 import emblaLightDefault from './embla-logo-light-theme.svg'
 import emblaDarkDefault from './embla-logo-dark-theme.svg'
 import emblaLightBlur from './embla-logo-light-theme-blur.svg'
@@ -52,6 +53,7 @@ export const ICONS = {
   danger: styledSvg(danger),
   shrink: styledSvg(shrink),
   expand: styledSvg(expand),
+  heartOutlined: styledSvg(heartOutlined),
   arrowLeft: styledSvg(arrowLeft),
   arrowRight: styledSvg(arrowRight),
   chevronLeft: styledSvg(chevronLeft),

@@ -5,6 +5,9 @@ order: 1
 date: 2023-06-01
 ---
 
+import { URLS } from 'consts/urls'
+import { LinkButtonPrimaryOutlined } from 'components/Link/LinkButton'
+
 import { CarouselGeneratorFrameworkSettings } from 'components/CarouselGenerator/CarouselGeneratorFrameworkSettings'
 import { CarouselGeneratorBasicSettings } from 'components/CarouselGenerator/CarouselGeneratorBasicSettings'
 import { CarouselGeneratorSlidesSettings } from 'components/CarouselGenerator/CarouselGeneratorSlidesSettings'
@@ -13,7 +16,6 @@ import { CarouselGeneratorNavigationSettings } from 'components/CarouselGenerato
 import { CarouselGeneratorPlugins } from 'components/CarouselGenerator/CarouselGeneratorPlugins'
 
 import { CarouselGeneratorPreview } from 'components/CarouselGenerator/CarouselGeneratorPreview'
-import { CarouselGeneratorSupport } from 'components/CarouselGenerator/CarouselGeneratorSupport'
 
 # Carousel generator
 
@@ -51,6 +53,8 @@ Just follow the instructions and create your own customized carousel setup in no
 
 Did this save you time? Don't say thank you! **Share** it, **star** it or **support** this project:
 
-<CarouselGeneratorSupport />
+<LinkButtonPrimaryOutlined to={URLS.GITHUB_SPONSORS_PAGE}>
+  Sponsor
+</LinkButtonPrimaryOutlined>
 
 <CarouselGeneratorPreview />

@@ -9,11 +9,9 @@ export const FONT_STYLES = css`
     letter-spacing: -0.02rem;
   }
 
-  @supports (font-variation-settings: normal) {
-    html {
-      font-family: ${FONT_FAMILY}, 'system-ui', -apple-system,
-        BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
-        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    }
+  html {
+    font-family: ${FONT_FAMILY}, 'system-ui', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 `

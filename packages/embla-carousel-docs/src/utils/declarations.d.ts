@@ -9,6 +9,16 @@ declare module 'assets/images/*.svg' {
   export default content
 }
 
+declare module './src/assets/images/*.svg' {
+  const content: string
+  export default content
+}
+
+declare module 'assets/fonts/*.woff2' {
+  const content: string
+  export default content
+}
+
 declare module '*.jpg' {
   const content: string
   export default content
