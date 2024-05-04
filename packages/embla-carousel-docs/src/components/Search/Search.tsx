@@ -489,6 +489,10 @@ const inputStyles = css`
   .DocSearch-Input::-webkit-search-results-decoration {
     display: none;
   }
+
+  .DocSearch-VisuallyHiddenForAccessibility {
+    ${visuallyHiddenStyles};
+  }
 `
 
 const toggleButtonStyles = css`
