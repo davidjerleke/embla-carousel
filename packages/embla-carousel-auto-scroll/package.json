@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-auto-scroll",
-  "version": "8.0.2",
+  "version": "8.0.3",
   "author": "David Jerleke",
   "description": "An auto scroll plugin for Embla Carousel",
   "repository": {
@@ -59,7 +59,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.0.2"
+    "embla-carousel": "8.0.3"
   },
   "exports": {
     "./package.json": "./package.json",
