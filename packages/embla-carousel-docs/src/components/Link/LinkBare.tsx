@@ -14,6 +14,7 @@ export const linkBareStyles = css<{ $isKeyNavigating: boolean }>`
   ${KEY_NAVIGATING_STYLES};
   ${TAP_HIGHLIGHT_STYLES};
   text-decoration: none;
+  touch-action: manipulation;
 `
 
 const InternalLink = styled(Link)`
