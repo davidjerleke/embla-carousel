@@ -1,14 +1,14 @@
-import { useRef, useEffect, useState, useCallback } from 'react'
-import {
-  areOptionsEqual,
-  arePluginsEqual,
-  canUseDOM
-} from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType
 } from 'embla-carousel'
+import {
+  areOptionsEqual,
+  arePluginsEqual,
+  canUseDOM
+} from 'embla-carousel-reactive-utils'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
   instance: ViewportElement | null

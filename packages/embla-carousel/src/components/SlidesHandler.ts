@@ -1,6 +1,6 @@
-import { EmblaCarouselType } from './EmblaCarousel'
-import { EventHandlerType } from './EventHandler'
-import { isBoolean } from './utils'
+import { EmblaCarouselType } from './EmblaCarousel.js'
+import { EventHandlerType } from './EventHandler.js'
+import { isBoolean } from './utils.js'
 
 type SlidesHandlerCallbackType = (
   emblaApi: EmblaCarouselType,

@@ -1,11 +1,11 @@
-import { AlignmentOptionType } from './Alignment'
-import { AxisDirectionOptionType, AxisOptionType } from './Axis'
-import { SlidesToScrollOptionType } from './SlidesToScroll'
-import { ScrollContainOptionType } from './ScrollContain'
-import { DragHandlerOptionType } from './DragHandler'
-import { ResizeHandlerOptionType } from './ResizeHandler'
-import { SlidesHandlerOptionType } from './SlidesHandler'
-import { SlidesInViewOptionsType } from './SlidesInView'
+import { AlignmentOptionType } from './Alignment.js'
+import { AxisDirectionOptionType, AxisOptionType } from './Axis.js'
+import { DragHandlerOptionType } from './DragHandler.js'
+import { ResizeHandlerOptionType } from './ResizeHandler.js'
+import { ScrollContainOptionType } from './ScrollContain.js'
+import { SlidesHandlerOptionType } from './SlidesHandler.js'
+import { SlidesInViewOptionsType } from './SlidesInView.js'
+import { SlidesToScrollOptionType } from './SlidesToScroll.js'
 
 export type LooseOptionsType = {
   [key: string]: unknown

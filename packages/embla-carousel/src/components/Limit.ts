@@ -1,4 +1,4 @@
-import { mathAbs } from './utils'
+import { mathAbs } from './utils.js'
 
 export type LimitType = {
   min: number

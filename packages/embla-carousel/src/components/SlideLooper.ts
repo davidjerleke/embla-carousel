@@ -1,7 +1,7 @@
-import { AxisType } from './Axis'
-import { arrayKeys } from './utils'
-import { Vector1D, Vector1DType } from './Vector1d'
-import { Translate, TranslateType } from './Translate'
+import { AxisType } from './Axis.js'
+import { Translate, TranslateType } from './Translate.js'
+import { Vector1D, Vector1DType } from './Vector1d.js'
+import { arrayKeys } from './utils.js'
 
 type SlideBoundType = {
   start: number

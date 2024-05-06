@@ -1,5 +1,5 @@
-import { Limit } from './Limit'
-import { mathAbs } from './utils'
+import { Limit } from './Limit.js'
+import { mathAbs } from './utils.js'
 
 export type CounterType = {
   get: () => number

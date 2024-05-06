@@ -1,6 +1,6 @@
-import { LimitType } from './Limit'
-import { Vector1DType } from './Vector1d'
-import { arrayLast, mathAbs, mathSign } from './utils'
+import { LimitType } from './Limit.js'
+import { Vector1DType } from './Vector1d.js'
+import { arrayLast, mathAbs, mathSign } from './utils.js'
 
 export type TargetType = {
   distance: number

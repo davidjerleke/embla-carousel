@@ -1,5 +1,5 @@
-import { Limit, LimitType } from './Limit'
-import { arrayIsLastIndex, arrayLast, deltaAbs } from './utils'
+import { Limit, LimitType } from './Limit.js'
+import { arrayIsLastIndex, arrayLast, deltaAbs } from './utils.js'
 
 export type ScrollContainOptionType = false | 'trimSnaps' | 'keepSnaps'
 

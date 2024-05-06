@@ -1,6 +1,6 @@
-import { AxisType } from './Axis'
-import { NodeRectType } from './NodeRects'
-import { arrayIsLastIndex, arrayLast, mathAbs, WindowType } from './utils'
+import { AxisType } from './Axis.js'
+import { NodeRectType } from './NodeRects.js'
+import { arrayIsLastIndex, arrayLast, mathAbs, WindowType } from './utils.js'
 
 export type SlideSizesType = {
   slideSizes: number[]

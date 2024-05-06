@@ -1,6 +1,6 @@
-import { EmblaCarouselType } from './EmblaCarousel'
-import { OptionsHandlerType } from './OptionsHandler'
-import { EmblaPluginsType, EmblaPluginType } from './Plugins'
+import { EmblaCarouselType } from './EmblaCarousel.js'
+import { OptionsHandlerType } from './OptionsHandler.js'
+import { EmblaPluginsType, EmblaPluginType } from './Plugins.js'
 
 export type PluginsHandlerType = {
   init: (

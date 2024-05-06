@@ -1,5 +1,5 @@
-import { AxisOptionType, AxisType } from './Axis'
-import { isMouseEvent, mathAbs, WindowType } from './utils'
+import { AxisOptionType, AxisType } from './Axis.js'
+import { WindowType, isMouseEvent, mathAbs } from './utils.js'
 
 type PointerCoordType = keyof Touch | keyof MouseEvent
 export type PointerEventType = TouchEvent | MouseEvent

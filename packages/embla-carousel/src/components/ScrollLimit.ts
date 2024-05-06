@@ -1,5 +1,5 @@
-import { Limit, LimitType } from './Limit'
-import { arrayLast } from './utils'
+import { Limit, LimitType } from './Limit.js'
+import { arrayLast } from './utils.js'
 
 export type ScrollLimitType = {
   limit: LimitType

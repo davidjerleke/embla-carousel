@@ -1,12 +1,12 @@
-import { LimitType } from './Limit'
-import { ScrollContainOptionType } from './ScrollContain'
-import { SlidesToScrollType } from './SlidesToScroll'
+import { LimitType } from './Limit.js'
+import { ScrollContainOptionType } from './ScrollContain.js'
+import { SlidesToScrollType } from './SlidesToScroll.js'
 import {
   arrayFromNumber,
   arrayIsLastIndex,
   arrayLast,
   arrayLastIndex
-} from './utils'
+} from './utils.js'
 
 export type SlideRegistryType = {
   slideRegistry: number[][]

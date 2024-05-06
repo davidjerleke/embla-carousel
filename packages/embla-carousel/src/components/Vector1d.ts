@@ -1,4 +1,4 @@
-import { isNumber } from './utils'
+import { isNumber } from './utils.js'
 
 export type Vector1DType = {
   get: () => number

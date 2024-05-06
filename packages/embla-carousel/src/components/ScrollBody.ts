@@ -1,5 +1,5 @@
-import { mathSign, mathAbs } from './utils'
-import { Vector1DType } from './Vector1d'
+import { mathAbs, mathSign } from './utils.js'
+import { Vector1DType } from './Vector1d.js'
 
 export type ScrollBodyType = {
   direction: () => number

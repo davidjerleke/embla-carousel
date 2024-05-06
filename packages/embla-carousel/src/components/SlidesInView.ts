@@ -1,5 +1,5 @@
-import { EventHandlerType } from './EventHandler'
-import { objectKeys } from './utils'
+import { EventHandlerType } from './EventHandler.js'
+import { objectKeys } from './utils.js'
 
 type IntersectionEntryMapType = {
   [key: number]: IntersectionObserverEntry

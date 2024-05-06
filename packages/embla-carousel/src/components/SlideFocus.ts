@@ -1,8 +1,8 @@
-import { EventStoreType } from './EventStore'
-import { ScrollBodyType } from './ScrollBody'
-import { ScrollToType } from './ScrollTo'
-import { SlideRegistryType } from './SlideRegistry'
-import { isNumber } from './utils'
+import { EventStoreType } from './EventStore.js'
+import { ScrollBodyType } from './ScrollBody.js'
+import { ScrollToType } from './ScrollTo.js'
+import { SlideRegistryType } from './SlideRegistry.js'
+import { isNumber } from './utils.js'
 
 export type SlideFocusType = {
   init: () => void

@@ -1,25 +1,25 @@
-import { EmblaCarouselType } from './EmblaCarousel'
-import { AnimationsType } from './Animations'
-import { CounterType } from './Counter'
-import { DragTrackerType, PointerEventType } from './DragTracker'
-import { EventHandlerType } from './EventHandler'
-import { AxisType } from './Axis'
-import { EventStore } from './EventStore'
-import { ScrollBodyType } from './ScrollBody'
-import { ScrollTargetType } from './ScrollTarget'
-import { ScrollToType } from './ScrollTo'
-import { Vector1DType } from './Vector1d'
-import { PercentOfViewType } from './PercentOfView'
-import { Limit } from './Limit'
+import { AnimationsType } from './Animations.js'
+import { AxisType } from './Axis.js'
+import { CounterType } from './Counter.js'
+import { DragTrackerType, PointerEventType } from './DragTracker.js'
+import { EmblaCarouselType } from './EmblaCarousel.js'
+import { EventHandlerType } from './EventHandler.js'
+import { EventStore } from './EventStore.js'
+import { Limit } from './Limit.js'
+import { PercentOfViewType } from './PercentOfView.js'
+import { ScrollBodyType } from './ScrollBody.js'
+import { ScrollTargetType } from './ScrollTarget.js'
+import { ScrollToType } from './ScrollTo.js'
+import { Vector1DType } from './Vector1d.js'
 import {
+  WindowType,
   deltaAbs,
   factorAbs,
   isBoolean,
   isMouseEvent,
   mathAbs,
-  mathSign,
-  WindowType
-} from './utils'
+  mathSign
+} from './utils.js'
 
 type DragHandlerCallbackType = (
   emblaApi: EmblaCarouselType,

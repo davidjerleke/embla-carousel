@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "module": "nodenext",
     "esModuleInterop": true,
     "strict": true,
     "declaration": true,
     "declarationDir": "./",
-    "moduleResolution": "node",
     "noEmit": true
   },
   "include": ["src/index.ts", "src/components"],

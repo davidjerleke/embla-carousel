@@ -1,4 +1,4 @@
-import { PointerEventType } from './DragTracker'
+import { PointerEventType } from './DragTracker.js'
 
 export type WindowType = Window & typeof globalThis
 

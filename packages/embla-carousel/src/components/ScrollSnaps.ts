@@ -1,8 +1,8 @@
-import { AlignmentType } from './Alignment'
-import { AxisType } from './Axis'
-import { NodeRectType } from './NodeRects'
-import { SlidesToScrollType } from './SlidesToScroll'
-import { arrayLast, mathAbs } from './utils'
+import { AlignmentType } from './Alignment.js'
+import { AxisType } from './Axis.js'
+import { NodeRectType } from './NodeRects.js'
+import { SlidesToScrollType } from './SlidesToScroll.js'
+import { arrayLast, mathAbs } from './utils.js'
 
 export type ScrollSnapsType = {
   snaps: number[]

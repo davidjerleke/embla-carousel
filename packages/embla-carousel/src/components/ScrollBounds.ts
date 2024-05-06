@@ -1,8 +1,8 @@
-import { Limit, LimitType } from './Limit'
-import { ScrollBodyType } from './ScrollBody'
-import { Vector1DType } from './Vector1d'
-import { mathAbs } from './utils'
-import { PercentOfViewType } from './PercentOfView'
+import { Limit, LimitType } from './Limit.js'
+import { PercentOfViewType } from './PercentOfView.js'
+import { ScrollBodyType } from './ScrollBody.js'
+import { Vector1DType } from './Vector1d.js'
+import { mathAbs } from './utils.js'
 
 export type ScrollBoundsType = {
   constrain: (pointerDown: boolean) => void

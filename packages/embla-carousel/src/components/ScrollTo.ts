@@ -1,9 +1,9 @@
-import { AnimationsType } from './Animations'
-import { CounterType } from './Counter'
-import { EventHandlerType } from './EventHandler'
-import { ScrollBodyType } from './ScrollBody'
-import { ScrollTargetType, TargetType } from './ScrollTarget'
-import { Vector1DType } from './Vector1d'
+import { AnimationsType } from './Animations.js'
+import { CounterType } from './Counter.js'
+import { EventHandlerType } from './EventHandler.js'
+import { ScrollBodyType } from './ScrollBody.js'
+import { ScrollTargetType, TargetType } from './ScrollTarget.js'
+import { Vector1DType } from './Vector1d.js'
 
 export type ScrollToType = {
   distance: (n: number, snap: boolean) => void

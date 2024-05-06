@@ -1,5 +1,5 @@
-import { Limit, LimitType } from './Limit'
-import { Vector1DType } from './Vector1d'
+import { Limit, LimitType } from './Limit.js'
+import { Vector1DType } from './Vector1d.js'
 
 export type ScrollLooperType = {
   loop: (direction: number) => void

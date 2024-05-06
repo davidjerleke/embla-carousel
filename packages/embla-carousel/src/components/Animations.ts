@@ -1,6 +1,6 @@
-import { EngineType } from './Engine'
-import { EventStore } from './EventStore'
-import { mathAbs, WindowType } from './utils'
+import { EngineType } from './Engine.js'
+import { EventStore } from './EventStore.js'
+import { mathAbs, WindowType } from './utils.js'
 
 export type AnimationsUpdateType = (engine: EngineType) => void
 export type AnimationsRenderType = (

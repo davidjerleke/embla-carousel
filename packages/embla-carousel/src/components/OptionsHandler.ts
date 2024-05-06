@@ -1,5 +1,5 @@
-import { LooseOptionsType, CreateOptionsType } from './Options'
-import { objectKeys, objectsMergeDeep, WindowType } from './utils'
+import { CreateOptionsType, LooseOptionsType } from './Options.js'
+import { WindowType, objectKeys, objectsMergeDeep } from './utils.js'
 
 type OptionsType = Partial<CreateOptionsType<LooseOptionsType>>
 

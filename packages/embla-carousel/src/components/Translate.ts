@@ -1,4 +1,4 @@
-import { AxisType } from './Axis'
+import { AxisType } from './Axis.js'
 
 export type TranslateType = {
   clear: () => void

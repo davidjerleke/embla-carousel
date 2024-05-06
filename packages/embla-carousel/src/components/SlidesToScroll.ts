@@ -1,12 +1,12 @@
-import { AxisType } from './Axis'
-import { NodeRectType } from './NodeRects'
+import { AxisType } from './Axis.js'
+import { NodeRectType } from './NodeRects.js'
 import {
   arrayKeys,
   arrayLast,
   arrayLastIndex,
   isNumber,
   mathAbs
-} from './utils'
+} from './utils.js'
 
 export type SlidesToScrollOptionType = 'auto' | number
 

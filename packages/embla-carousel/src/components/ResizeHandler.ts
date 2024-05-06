@@ -1,8 +1,8 @@
-import { AxisType } from './Axis'
-import { EmblaCarouselType } from './EmblaCarousel'
-import { EventHandlerType } from './EventHandler'
-import { NodeRectsType } from './NodeRects'
-import { isBoolean, mathAbs, WindowType } from './utils'
+import { AxisType } from './Axis.js'
+import { EmblaCarouselType } from './EmblaCarousel.js'
+import { EventHandlerType } from './EventHandler.js'
+import { NodeRectsType } from './NodeRects.js'
+import { isBoolean, mathAbs, WindowType } from './utils.js'
 
 type ResizeHandlerCallbackType = (
   emblaApi: EmblaCarouselType,

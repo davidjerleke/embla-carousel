@@ -1,11 +1,11 @@
-import { Engine, EngineType } from './Engine'
-import { EventStore } from './EventStore'
-import { EventHandler, EventHandlerType } from './EventHandler'
-import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
-import { OptionsHandler } from './OptionsHandler'
-import { PluginsHandler } from './PluginsHandler'
-import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString, WindowType } from './utils'
+import { Engine, EngineType } from './Engine.js'
+import { EventHandler, EventHandlerType } from './EventHandler.js'
+import { EventStore } from './EventStore.js'
+import { EmblaOptionsType, OptionsType, defaultOptions } from './Options.js'
+import { OptionsHandler } from './OptionsHandler.js'
+import { EmblaPluginType, EmblaPluginsType } from './Plugins.js'
+import { PluginsHandler } from './PluginsHandler.js'
+import { WindowType, isString } from './utils.js'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean

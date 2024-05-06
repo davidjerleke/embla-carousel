@@ -29,3 +29,8 @@ jobs:
 
       - name: Test 🚨
         run: yarn test
+
+      - name: Publish
+        run: yarn workspaces foreach -t --include 'embla-carousel,embla-carousel-react' npm publish --access=public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

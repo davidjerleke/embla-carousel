@@ -1,4 +1,4 @@
-import { LimitType } from './Limit'
+import { LimitType } from './Limit.js'
 
 export type ScrollProgressType = {
   get: (n: number) => number
