@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const Header = () => (<header>
+const Header = () => (
+  <header>
     <h1 className="header">__replace_sandbox_title__</h1>
-  </header>);
+  </header>
+)
 
-export default Header;
+export default Header
