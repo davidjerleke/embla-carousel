@@ -1,11 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+import React from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
+import Fade from 'embla-carousel-fade'
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons
 } from '../EmblaCarouselArrowButtons'
+import { DotButton, useDotButton } from '../EmblaCarouselDotButton'
+import { sandboxImages } from 'components/Sandbox/sandboxImages'
 
 type PropType = {
   slides: number[]
@@ -14,8 +17,10 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
-  const [scrollProgress, setScrollProgress] = useState(0)
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()])
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
 
   const {
     prevBtnDisabled,
@@ -24,30 +29,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
 
-  const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
-    const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
-    setScrollProgress(progress * 100)
-  }, [])
-
-  useEffect(() => {
-    if (!emblaApi) return
-
-    onScroll(emblaApi)
-    emblaApi
-      .on('reInit', onScroll)
-      .on('scroll', onScroll)
-      .on('slideFocus', onScroll)
-  }, [emblaApi, onScroll])
-
   return (
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">
-                <span>{index + 1}</span>
-              </div>
+              <img
+                className="embla__slide__img"
+                src={sandboxImages(index)}
+                alt="Your alt text"
+              />
             </div>
           ))}
         </div>
@@ -59,11 +51,16 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
 
-        <div className="embla__progress">
-          <div
-            className="embla__progress__bar"
-            style={{ transform: `translate3d(${scrollProgress}%,0px,0px)` }}
-          />
+        <div className="embla__dots">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
         </div>
       </div>
     </div>

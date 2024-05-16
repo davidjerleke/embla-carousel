@@ -1,3 +1,4 @@
+import { EventHandlerType } from './EventHandler'
 import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
@@ -14,7 +15,8 @@ export function SlideFocus(
   slideRegistry: SlideRegistryType['slideRegistry'],
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
-  eventStore: EventStoreType
+  eventStore: EventStoreType,
+  eventHandler: EventHandlerType
 ): SlideFocusType {
   let lastTabPressTime = 0
 
@@ -42,6 +44,7 @@ export function SlideFocus(
 
       scrollBody.useDuration(0)
       scrollTo.index(group, 0)
+      eventHandler.emit('slideFocus')
     }
 
     eventStore.add(slide, 'focus', focus, {

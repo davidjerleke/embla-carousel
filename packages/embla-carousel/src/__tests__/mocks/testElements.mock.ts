@@ -1,3 +1,22 @@
+/*
+Get offsets in console to create fixtures
+-----------------------------------------
+
+function mapToOffsets({ offsetWidth, offsetHeight, offsetTop, offsetLeft }) {
+  return {
+    offsetWidth,
+    offsetHeight,
+    offsetTop,
+    offsetLeft
+  }
+}
+
+[
+  mapToOffsets(emblaApi.containerNode()),
+  emblaApi.slideNodes().map(mapToOffsets)
+]
+*/
+
 type TestElementOffsetType = {
   offsetLeft: number
   offsetTop: number

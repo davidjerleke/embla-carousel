@@ -29,6 +29,14 @@ describe('➡️  Events', () => {
       expect(callback2).toHaveBeenCalledTimes(1)
     })
 
+    test('Calls the provided callback when emit() is triggered by the user', () => {
+      const callback = jest.fn()
+
+      emblaApi.on('select', callback)
+      emblaApi.emit('select')
+      expect(callback).toHaveBeenCalledTimes(1)
+    })
+
     test('Will NOT fire a callback when a different event is emitted', () => {
       const callback = jest.fn()
 
@@ -49,12 +57,15 @@ describe('➡️  Events', () => {
       expect(callback).toHaveBeenCalledTimes(1)
     })
 
-    test('Calls the provided callback when emit() is triggered by the user', () => {
+    test('Will NOT fire any callback anymore when event store is destroyed', () => {
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
+      emblaApi.on('scroll', callback)
+      emblaApi.destroy()
       emblaApi.emit('select')
-      expect(callback).toHaveBeenCalledTimes(1)
+      emblaApi.emit('scroll')
+      expect(callback).toHaveBeenCalledTimes(0)
     })
   })
 })

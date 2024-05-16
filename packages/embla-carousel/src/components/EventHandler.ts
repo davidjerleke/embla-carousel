@@ -17,6 +17,7 @@ export interface EmblaEventListType {
   destroy: 'destroy'
   reInit: 'reInit'
   resize: 'resize'
+  slideFocus: 'slideFocus'
 }
 
 export type EventHandlerType = {
@@ -24,10 +25,11 @@ export type EventHandlerType = {
   emit: (evt: EmblaEventType) => EventHandlerType
   on: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
   off: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
+  clear: () => void
 }
 
 export function EventHandler(): EventHandlerType {
-  const listeners: ListenersType = {}
+  let listeners: ListenersType = {}
   let api: EmblaCarouselType
 
   function init(emblaApi: EmblaCarouselType): void {
@@ -53,11 +55,16 @@ export function EventHandler(): EventHandlerType {
     return self
   }
 
+  function clear(): void {
+    listeners = {}
+  }
+
   const self: EventHandlerType = {
     init,
     emit,
     off,
-    on
+    on,
+    clear
   }
   return self
 }

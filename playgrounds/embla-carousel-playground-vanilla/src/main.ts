@@ -80,8 +80,10 @@ emblaNodes.forEach((emblaNode) => {
   addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
   addDotBtnsClickHandlers(emblaApi, dotNodes)
 
-  emblaApi.on('select', toggleDotButtonsActive)
-  emblaApi.on('init', toggleDotButtonsActive)
+  emblaApi
+    .on('init', toggleDotButtonsActive)
+    .on('select', toggleDotButtonsActive)
+    .on('slideFocus', toggleDotButtonsActive)
 
   //@ts-ignore
   window.embla = emblaApi

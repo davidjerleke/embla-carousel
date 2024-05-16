@@ -3,7 +3,7 @@ import { EmblaCarouselType } from 'embla-carousel'
 export const updateSelectedSnapDisplay = (
   emblaApi: EmblaCarouselType,
   snapDisplay: HTMLElement
-): (() => void) => {
+): void => {
   const updateSnapDisplay = (emblaApi: EmblaCarouselType) => {
     const selectedSnap = emblaApi.selectedScrollSnap()
     const snapCount = emblaApi.scrollSnapList().length
@@ -11,9 +11,6 @@ export const updateSelectedSnapDisplay = (
   }
 
   emblaApi.on('select', updateSnapDisplay).on('reInit', updateSnapDisplay)
-  updateSnapDisplay(emblaApi)
 
-  return () => {
-    emblaApi.off('select', updateSnapDisplay).off('reInit', updateSnapDisplay)
-  }
+  updateSnapDisplay(emblaApi)
 }
