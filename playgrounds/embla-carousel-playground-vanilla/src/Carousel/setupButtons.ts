@@ -17,7 +17,6 @@ const addTogglePrevNextBtnsActive = (
     .on('select', togglePrevNextBtnsState)
     .on('init', togglePrevNextBtnsState)
     .on('reInit', togglePrevNextBtnsState)
-    .on('slideFocus', togglePrevNextBtnsState)
 
   return (): void => {
     prevBtn.removeAttribute('disabled')
