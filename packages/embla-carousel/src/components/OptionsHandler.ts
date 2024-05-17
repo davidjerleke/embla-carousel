@@ -31,6 +31,9 @@ export function OptionsHandler(ownerWindow: WindowType): OptionsHandlerType {
   }
 
   function optionsMediaQueries(optionsList: OptionsType[]): MediaQueryList[] {
+    if (!('matchMedia' in ownerWindow)) {
+      throw new Error('matchMedia does not exist on window, mock it if running tests')
+    }
     return optionsList
       .map((options) => objectKeys(options.breakpoints || {}))
       .reduce((acc, mediaQueries) => acc.concat(mediaQueries), [])
