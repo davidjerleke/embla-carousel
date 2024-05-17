@@ -83,7 +83,6 @@ emblaNodes.forEach((emblaNode) => {
   emblaApi
     .on('init', toggleDotButtonsActive)
     .on('select', toggleDotButtonsActive)
-    .on('slideFocus', toggleDotButtonsActive)
 
   //@ts-ignore
   window.embla = emblaApi

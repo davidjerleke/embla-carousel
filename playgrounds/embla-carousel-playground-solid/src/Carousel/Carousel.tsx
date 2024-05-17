@@ -43,11 +43,7 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
     onInit(api)
     onSelect(api)
-    api
-      .on('reInit', onInit)
-      .on('reInit', onSelect)
-      .on('select', onSelect)
-      .on('slideFocus', onSelect)
+    api.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect)
   })
 
   return (
