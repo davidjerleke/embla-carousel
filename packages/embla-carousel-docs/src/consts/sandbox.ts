@@ -113,7 +113,8 @@ export const SANDBOX_PLUGINS = {
   AUTOPLAY: 'embla-carousel-autoplay',
   AUTO_SCROLL: 'embla-carousel-auto-scroll',
   AUTO_HEIGHT: 'embla-carousel-auto-height',
-  CLASS_NAMES: 'embla-carousel-class-names'
+  CLASS_NAMES: 'embla-carousel-class-names',
+  FADE: 'embla-carousel-fade'
 } as const
 
 export const SANDBOX_GENERATOR_FORM_FIELDS = {
