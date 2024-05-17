@@ -28,6 +28,7 @@ body:
         - label: embla-carousel-solid
         - label: embla-carousel-auto-height
         - label: embla-carousel-class-names
+        - label: embla-carousel-fade
         - label: embla-carousel-docs **(Documentation)**
         - label: embla-carousel-docs **(Generator)**
 

@@ -13,7 +13,7 @@ import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
 
 const ID = 'embla-carousel-fade'
 const SLIDES = arrayFromNumber(5)
-const OPTIONS: EmblaOptionsType = { loop: true, duration: 40 }
+const OPTIONS: EmblaOptionsType = { loop: true, duration: 30 }
 const STYLES = examplesCarouselFadeStyles()
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {

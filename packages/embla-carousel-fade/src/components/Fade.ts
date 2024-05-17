@@ -25,6 +25,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   let distanceFromPointerDown = 0
   let fadeVelocity = 0
   let progress = 0
+  let shouldFadePair = false
   let defaultSettledBehaviour: ScrollBodyType['settled']
   let defaultProgressBehaviour: EmblaCarouselType['scrollProgress']
 
@@ -53,6 +54,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       .on('select', select)
       .on('slideFocus', fadeToSelectedSnapInstantly)
       .on('pointerDown', pointerDown)
+      .on('pointerUp', pointerUp)
   }
 
   function destroy(): void {
@@ -64,6 +66,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       .off('select', select)
       .off('slideFocus', fadeToSelectedSnapInstantly)
       .off('pointerDown', pointerDown)
+      .off('pointerUp', pointerUp)
 
     emblaApi.slideNodes().forEach((slideNode) => {
       const slideStyle = slideNode.style
@@ -79,7 +82,12 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     setOpacities(selectedSnap, fullOpacity)
   }
 
+  function pointerUp(): void {
+    shouldFadePair = false
+  }
+
   function pointerDown(): void {
+    shouldFadePair = false
     distanceFromPointerDown = 0
     fadeVelocity = 0
   }
@@ -87,6 +95,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   function select(): void {
     const duration = emblaApi.internalEngine().scrollBody.duration()
     fadeVelocity = duration ? 0 : fullOpacity
+    shouldFadePair = true
     if (!duration) fadeToSelectedSnapInstantly()
   }
 
@@ -119,20 +128,25 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   function setOpacities(fadeIndex: number, velocity: number): void {
     const scrollSnaps = emblaApi.scrollSnapList()
 
-    scrollSnaps.forEach((_, index) => {
+    scrollSnaps.forEach((_, indexA) => {
       const absVelocity = Math.abs(velocity)
-      const currentOpacity = opacities[index]
-      const isFadeIndex = index === fadeIndex
+      const currentOpacity = opacities[indexA]
+      const isFadeIndex = indexA === fadeIndex
 
       const nextOpacity = isFadeIndex
         ? currentOpacity + absVelocity
         : currentOpacity - absVelocity
 
       const clampedOpacity = clampNumber(nextOpacity, noOpacity, fullOpacity)
-      opacities[index] = clampedOpacity
+      opacities[indexA] = clampedOpacity
 
+      const fadePair = isFadeIndex && shouldFadePair
+      const indexB = emblaApi.previousScrollSnap()
+
+      if (fadePair) opacities[indexB] = 1 - clampedOpacity
       if (isFadeIndex) setProgress(fadeIndex, clampedOpacity)
-      setOpacity(index)
+
+      setOpacity(indexA)
     })
   }
 
