@@ -6,9 +6,6 @@ export const updateSelectedSnapDisplay = (emblaApi, snapDisplay) => {
   }
 
   emblaApi.on('select', updateSnapDisplay).on('reInit', updateSnapDisplay)
-  updateSnapDisplay(emblaApi)
 
-  return () => {
-    emblaApi.off('select', updateSnapDisplay).off('reInit', updateSnapDisplay)
-  }
+  updateSnapDisplay(emblaApi)
 }

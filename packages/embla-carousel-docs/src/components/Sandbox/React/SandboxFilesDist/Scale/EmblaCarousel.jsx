@@ -88,6 +88,7 @@ const EmblaCarousel = (props) => {
       .on('reInit', setTweenFactor)
       .on('reInit', tweenScale)
       .on('scroll', tweenScale)
+      .on('slideFocus', tweenScale)
   }, [emblaApi, tweenScale])
 
   return (

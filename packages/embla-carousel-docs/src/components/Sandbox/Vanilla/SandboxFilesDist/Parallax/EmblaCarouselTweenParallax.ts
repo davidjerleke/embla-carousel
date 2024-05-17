@@ -66,13 +66,9 @@ export const setupTweenParallax = (
     .on('reInit', setTweenFactor)
     .on('reInit', tweenParallax)
     .on('scroll', tweenParallax)
+    .on('slideFocus', tweenParallax)
 
   return (): void => {
     tweenNodes.forEach((slide) => slide.removeAttribute('style'))
-    emblaApi
-      .off('reInit', setTweenNodes)
-      .off('reInit', setTweenFactor)
-      .off('reInit', tweenParallax)
-      .off('scroll', tweenParallax)
   }
 }

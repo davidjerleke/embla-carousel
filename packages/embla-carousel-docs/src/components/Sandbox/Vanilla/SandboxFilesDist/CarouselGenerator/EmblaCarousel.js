@@ -79,10 +79,7 @@ const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
 )
 /*__DOT_BUTTONS_REPLACE_END__*/
 /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
-const stopSelectedSnapDisplay = updateSelectedSnapDisplay(
-  emblaApi,
-  snapDisplayNode
-)
+updateSelectedSnapDisplay(emblaApi, snapDisplayNode)
 /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
 
 /*__PREV_NEXT_BUTTONS_REPLACE_START__*/
@@ -91,6 +88,3 @@ emblaApi.on('destroy', removePrevNextBtnsClickHandlers)
 /*__DOT_BUTTONS_REPLACE_START__*/
 emblaApi.on('destroy', removeDotBtnsAndClickHandlers)
 /*__DOT_BUTTONS_REPLACE_END__*/
-/*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
-emblaApi.on('destroy', stopSelectedSnapDisplay)
-/*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/

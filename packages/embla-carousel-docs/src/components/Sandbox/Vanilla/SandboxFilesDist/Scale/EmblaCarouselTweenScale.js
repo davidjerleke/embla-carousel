@@ -63,13 +63,9 @@ export const setupTweenScale = (emblaApi) => {
     .on('reInit', setTweenFactor)
     .on('reInit', tweenScale)
     .on('scroll', tweenScale)
+    .on('slideFocus', tweenScale)
 
   return () => {
     tweenNodes.forEach((slide) => slide.removeAttribute('style'))
-    emblaApi
-      .off('reInit', setTweenNodes)
-      .off('reInit', setTweenFactor)
-      .off('reInit', tweenScale)
-      .off('scroll', tweenScale)
   }
 }

@@ -34,8 +34,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   useEffect(() => {
     if (!emblaMainApi) return
     onSelect()
-    emblaMainApi.on('select', onSelect)
-    emblaMainApi.on('reInit', onSelect)
+
+    emblaMainApi.on('select', onSelect).on('reInit', onSelect)
   }, [emblaMainApi, onSelect])
 
   return (

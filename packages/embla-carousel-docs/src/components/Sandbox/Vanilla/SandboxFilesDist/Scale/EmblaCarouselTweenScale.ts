@@ -68,13 +68,9 @@ export const setupTweenScale = (emblaApi: EmblaCarouselType): (() => void) => {
     .on('reInit', setTweenFactor)
     .on('reInit', tweenScale)
     .on('scroll', tweenScale)
+    .on('slideFocus', tweenScale)
 
   return (): void => {
     tweenNodes.forEach((slide) => slide.removeAttribute('style'))
-    emblaApi
-      .off('reInit', setTweenNodes)
-      .off('reInit', setTweenFactor)
-      .off('reInit', tweenScale)
-      .off('scroll', tweenScale)
   }
 }
