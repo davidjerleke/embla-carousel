@@ -7,7 +7,7 @@ Fixture 1
 - LTR
 - No slide margins
 */
-export const FIXTURE_SCROLL_PROGRESS_LTR_1: TestElementDimensionsType = {
+export const SCROLL_BOUNDS_LTR_1: TestElementDimensionsType = {
   containerOffset: {
     offsetWidth: 1000,
     offsetHeight: 190,
@@ -16,65 +16,37 @@ export const FIXTURE_SCROLL_PROGRESS_LTR_1: TestElementDimensionsType = {
   },
   slideOffsets: [
     {
-      offsetWidth: 800,
+      offsetWidth: 100,
       offsetHeight: 190,
       offsetTop: 0,
       offsetLeft: 0
     },
     {
-      offsetWidth: 400,
-      offsetHeight: 190,
-      offsetTop: 0,
-      offsetLeft: 800
-    },
-    {
       offsetWidth: 200,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1200
+      offsetLeft: 100
     },
     {
-      offsetWidth: 500,
+      offsetWidth: 150,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1400
+      offsetLeft: 300
     },
     {
-      offsetWidth: 300,
+      offsetWidth: 250,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1900
-    }
-  ],
-  endMargin: {
-    property: 'marginRight',
-    value: 0
-  }
-}
-
-/*
-Fixture 2
-
-- Horizontal
-- LTR
-- Slide left margin: 10px, Slide right margin: 10px 
-*/
-export const FIXTURE_SCROLL_PROGRESS_LTR_2: TestElementDimensionsType = {
-  containerOffset: {
-    offsetWidth: 1000,
-    offsetHeight: 190,
-    offsetTop: 0,
-    offsetLeft: 0
-  },
-  slideOffsets: [
-    {
-      offsetWidth: 800,
-      offsetHeight: 190,
-      offsetTop: 0,
-      offsetLeft: 10
+      offsetLeft: 450
     },
     {
-      offsetWidth: 400,
+      offsetWidth: 130,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 700
+    },
+    {
+      offsetWidth: 100,
       offsetHeight: 190,
       offsetTop: 0,
       offsetLeft: 830
@@ -83,23 +55,29 @@ export const FIXTURE_SCROLL_PROGRESS_LTR_2: TestElementDimensionsType = {
       offsetWidth: 200,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1250
+      offsetLeft: 930
     },
     {
-      offsetWidth: 500,
+      offsetWidth: 150,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1470
+      offsetLeft: 1130
     },
     {
-      offsetWidth: 300,
+      offsetWidth: 250,
       offsetHeight: 190,
       offsetTop: 0,
-      offsetLeft: 1990
+      offsetLeft: 1280
+    },
+    {
+      offsetWidth: 130,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 1530
     }
   ],
   endMargin: {
     property: 'marginRight',
-    value: 10
+    value: 0
   }
 }

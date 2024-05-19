@@ -5,6 +5,7 @@ import { mathAbs } from './utils'
 import { PercentOfViewType } from './PercentOfView'
 
 export type ScrollBoundsType = {
+  shouldConstrain: () => boolean
   constrain: (pointerDown: boolean) => void
   toggleActive: (active: boolean) => void
 }
@@ -48,6 +49,7 @@ export function ScrollBounds(
   }
 
   const self: ScrollBoundsType = {
+    shouldConstrain,
     constrain,
     toggleActive
   }
