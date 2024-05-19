@@ -35,14 +35,13 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     const selectedSnap = emblaApi.selectedScrollSnap()
     const { scrollBody, containerRect, axis } = emblaApi.internalEngine()
     const containerSize = axis.measureSize(containerRect)
+
     fadeToNextDistance = clampNumber(containerSize * 0.75, 200, 500)
+    shouldFadePair = false
 
     opacities = emblaApi
       .scrollSnapList()
       .map((_, index) => (index === selectedSnap ? fullOpacity : noOpacity))
-
-    disableScroll()
-    fadeToSelectedSnapInstantly()
 
     defaultSettledBehaviour = scrollBody.settled
     defaultProgressBehaviour = emblaApi.scrollProgress
@@ -55,6 +54,9 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       .on('slideFocus', fadeToSelectedSnapInstantly)
       .on('pointerDown', pointerDown)
       .on('pointerUp', pointerUp)
+
+    disableScroll()
+    fadeToSelectedSnapInstantly()
   }
 
   function destroy(): void {
