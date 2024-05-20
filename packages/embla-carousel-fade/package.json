@@ -59,7 +59,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.0.2"
+    "embla-carousel": "8.1.2"
   },
   "exports": {
     "./package.json": "./package.json",
