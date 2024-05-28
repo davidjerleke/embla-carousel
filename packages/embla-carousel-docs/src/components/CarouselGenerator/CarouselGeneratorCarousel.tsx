@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { SandboxGeneratorExample } from 'components/Sandbox/SandboxGeneratorExample'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
@@ -130,16 +130,18 @@ const CarouselGeneratorCarouselWrapper = styled.div<{
   }
 `
 
-const CarouselWrapper = styled.div`
-  pointer-events: auto;
-`
-
-type PropType = {
-  previewLarge: boolean
-}
+type PropType = PropsWithRef<
+  React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > & {
+    previewLarge: boolean
+  }
+>
 
 export const CarouselGeneratorCarousel = (props: PropType) => {
-  const { previewLarge } = props
+  const { previewLarge, className, ...restProps } = props
+  const classNames = [className, CAROUSEL_ID].filter(Boolean).join(' ')
   const { formData } = useCarouselGenerator()
   const slideSize = formData[SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_SIZE]
   const slideGapSize = formData[SANDBOX_GENERATOR_FORM_FIELDS.SLIDE_GAP_SIZE]
@@ -171,25 +173,24 @@ export const CarouselGeneratorCarousel = (props: PropType) => {
       $slideSize={slideSize}
       $previewLarge={previewLarge}
       $axis={axis}
-      className={CAROUSEL_ID}
+      className={classNames}
+      {...restProps}
     >
-      <CarouselWrapper>
-        <SandboxGeneratorExample
-          options={{
-            loop: formData.loop,
-            dragFree: formData.dragFree,
-            containScroll: formData.containScroll,
-            align: formData.align,
-            direction: formData.direction,
-            axis: formData.axis,
-            slidesToScroll: formData.slidesToScroll
-          }}
-          slides={slides.current}
-          navigationPrevNextButtons={navigationPrevNextButtons}
-          navigationDots={navigationDots}
-          autoplay={formData.autoplay}
-        />
-      </CarouselWrapper>
+      <SandboxGeneratorExample
+        options={{
+          loop: formData.loop,
+          dragFree: formData.dragFree,
+          containScroll: formData.containScroll,
+          align: formData.align,
+          direction: formData.direction,
+          axis: formData.axis,
+          slidesToScroll: formData.slidesToScroll
+        }}
+        slides={slides.current}
+        navigationPrevNextButtons={navigationPrevNextButtons}
+        navigationDots={navigationDots}
+        autoplay={formData.autoplay}
+      />
     </CarouselGeneratorCarouselWrapper>
   )
 }

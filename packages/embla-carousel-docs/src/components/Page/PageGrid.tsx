@@ -13,7 +13,7 @@ export const SIDEBAR_LG_UP_WIDTH = '28rem'
 export const SIDEBAR_LG_DOWN_WIDTH = '21rem'
 export const MAIN_CONTENT_SPACING = SPACINGS.SEVEN
 
-const sidebarStyles = css`
+export const sidebarStyles = css`
   min-width: 0;
   flex: 0 0 auto;
 

@@ -4,8 +4,9 @@ import { useCarouselGenerator } from 'hooks/useCarouselGenerator'
 import { SandboxLabelKeyType } from 'consts/sandbox'
 import { SandboxGeneratorSettingsType } from 'consts/sandbox'
 import { dynamicGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { PropType } from 'components/Button/ButtonBare'
 
-export const CarouselGeneratorSubmit = () => {
+export const CarouselGeneratorSubmit = (props: PropType) => {
   const { formData } = useCarouselGenerator()
   const [sandbox, setSandbox] = useState('')
   const sandboxKey = formData.framework
@@ -39,6 +40,7 @@ export const CarouselGeneratorSubmit = () => {
         isLoading={isLoading}
         disabled={!sandbox}
         type="submit"
+        {...props}
       >
         Create Sandbox
       </ButtonPrimaryFilledWithLoading>

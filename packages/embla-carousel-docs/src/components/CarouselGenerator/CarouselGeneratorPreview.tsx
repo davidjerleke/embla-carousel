@@ -6,48 +6,52 @@ import { Icon } from 'components/Icon/Icon'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import { LAYERS } from 'consts/layers'
 import { MEDIA } from 'consts/breakpoints'
-import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
+import { PageFrame } from 'components/Page/PageFrame'
 import { SPACINGS } from 'consts/spacings'
 import { COLORS } from 'consts/themes'
 import { BUTTON_SIZES } from 'consts/buttons'
 import { BORDER_SIZES } from 'consts/border'
 import { ButtonBare, ButtonBareText } from 'components/Button/ButtonBare'
-import {
-  MAIN_CONTENT_SPACING,
-  SIDEBAR_LG_DOWN_WIDTH,
-  SIDEBAR_LG_UP_WIDTH
-} from 'components/Page/PageGrid'
+import { MAIN_CONTENT_SPACING, sidebarStyles } from 'components/Page/PageGrid'
 
 const PREVIEW_WRAPPER_MAX_WIDTH = '52rem'
 
-const CarouselGeneratorPreviewWrapper = styled.div<{
+const CarouselGeneratorPreviewWrapper = styled(PageFrame)<{
   $previewLarge: boolean
 }>`
   position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: ${LAYERS.HEADER};
+  display: flex;
+  justify-content: flex-end;
+  pointer-events: none;
+`
+
+const Preview = styled.div`
+  width: ${PREVIEW_WRAPPER_MAX_WIDTH};
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  bottom: 0;
-  z-index: ${LAYERS.HEADER};
-  width: ${PREVIEW_WRAPPER_MAX_WIDTH};
-  pointer-events: none;
-  right: ${PAGE_FRAME_SPACING};
-  max-width: calc(100% - ${PAGE_FRAME_SPACING} * 2);
 
   ${MEDIA.DESKTOP} {
-    right: calc(
-      ${SIDEBAR_LG_DOWN_WIDTH} + ${MAIN_CONTENT_SPACING} + ${PAGE_FRAME_SPACING}
-    );
-    max-width: calc(
-      100% - ${SIDEBAR_LG_DOWN_WIDTH} * 2 - ${MAIN_CONTENT_SPACING} * 2 -
-        ${PAGE_FRAME_SPACING} * 2
-    );
+    margin-right: ${MAIN_CONTENT_SPACING};
   }
-  ${MEDIA.MIN_LG} {
-    right: calc(
-      ${SIDEBAR_LG_UP_WIDTH} + ${MAIN_CONTENT_SPACING} + ${PAGE_FRAME_SPACING}
-    );
+`
+
+const SidebarPlaceholder = styled.div`
+  ${sidebarStyles};
+  flex: 0 0 auto;
+
+  ${MEDIA.COMPACT} {
+    display: none;
   }
+`
+
+const PreviewCarousel = styled(CarouselGeneratorCarousel)`
+  pointer-events: auto;
 `
 
 const ButtonsWrapper = styled.ul<{
@@ -70,6 +74,7 @@ const PreviewSizeButton = styled(ButtonBare)`
   display: inline-flex;
   align-items: center;
   margin-right: ${SPACINGS.TWO};
+  pointer-events: auto;
 
   ${ButtonBareText} {
     display: flex;
@@ -81,6 +86,10 @@ const PreviewSizeButtonText = styled.span`
   ${visuallyHiddenStyles};
 `
 
+const SubmitButton = styled(CarouselGeneratorSubmit)`
+  pointer-events: auto;
+`
+
 export const CarouselGeneratorPreview = () => {
   const [previewLarge, setPreviewLarge] = useState(false)
 
@@ -90,24 +99,28 @@ export const CarouselGeneratorPreview = () => {
 
   return (
     <CarouselGeneratorPreviewWrapper $previewLarge={previewLarge}>
-      <CarouselGeneratorCarousel previewLarge={previewLarge} />
+      <Preview>
+        <PreviewCarousel previewLarge={previewLarge} />
 
-      <ButtonsWrapper $previewLarge={previewLarge}>
-        <li>
-          <PreviewSizeButton type="button" onClick={togglePreviewSize}>
-            <Icon
-              svg={previewLarge ? 'shrink' : 'expand'}
-              size={SPACINGS.THREE}
-            />
-            <PreviewSizeButtonText>
-              {previewLarge ? 'Shrink' : 'Expand'} carousel preview
-            </PreviewSizeButtonText>
-          </PreviewSizeButton>
-        </li>
-        <li>
-          <CarouselGeneratorSubmit />
-        </li>
-      </ButtonsWrapper>
+        <ButtonsWrapper $previewLarge={previewLarge}>
+          <li>
+            <PreviewSizeButton type="button" onClick={togglePreviewSize}>
+              <Icon
+                svg={previewLarge ? 'shrink' : 'expand'}
+                size={SPACINGS.THREE}
+              />
+              <PreviewSizeButtonText>
+                {previewLarge ? 'Shrink' : 'Expand'} carousel preview
+              </PreviewSizeButtonText>
+            </PreviewSizeButton>
+          </li>
+          <li>
+            <SubmitButton />
+          </li>
+        </ButtonsWrapper>
+      </Preview>
+
+      <SidebarPlaceholder />
     </CarouselGeneratorPreviewWrapper>
   )
 }
