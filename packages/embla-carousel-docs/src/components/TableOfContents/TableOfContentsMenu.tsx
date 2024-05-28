@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectTableOfContents } from './tableOfContentsReducer'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
-import { useTableOfContents } from 'hooks/useTableOfContents'
-import { TableOfContentsItemType } from './TableOfContentsContext'
 import { TableOfContentsMenuItems } from './TableOfContentsMenuItems'
+import { TableOfContentsItemType } from 'consts/tableOfContents'
 import { createScrollBarStyles } from 'consts/scrollBars'
 
 const extractHeadingIds = (
@@ -51,7 +52,7 @@ const Heading = styled.div`
 
 export const TableOfContentsMenu = () => {
   const [activeId, setActiveId] = useState('')
-  const { items = [] } = useTableOfContents()
+  const { items = [] } = useAppSelector(selectTableOfContents)
   const headingIds = useMemo(() => extractHeadingIds(items), [items])
 
   useEffect(() => {

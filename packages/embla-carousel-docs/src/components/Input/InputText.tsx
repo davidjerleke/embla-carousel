@@ -1,14 +1,15 @@
 import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { COLORS } from 'consts/themes'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { SPACINGS } from 'consts/spacings'
 import { FONT_SIZES } from 'consts/fontSizes'
 import { LAYERS } from 'consts/layers'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
 
 const HEIGHT = SPACINGS.EIGHT
 const SIDES_PADDING = SPACINGS.THREE
@@ -134,7 +135,7 @@ type PropType = PropsWithRef<
 
 export const InputText = (props: PropType) => {
   const { children, className, ...restProps } = props
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <InputTextWrapper className={className}>

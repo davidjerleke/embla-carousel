@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
-import { useRoutes } from 'hooks/useRoutes'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectRoutesLoading } from 'components/Routes/routesReducer'
 import { PageFrame, PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
@@ -88,7 +89,7 @@ type PropType = PropsWithChildren<{
 
 export const PageGrid = (props: PropType) => {
   const { children, layout } = props
-  const { isLoading } = useRoutes()
+  const routesIsLoading = useAppSelector(selectRoutesLoading)
   const isStartPage = layout === PAGE_LAYOUTS.HOME
   const frameSize = isStartPage ? 'MD' : undefined
 
@@ -102,7 +103,7 @@ export const PageGrid = (props: PropType) => {
         role="main"
         aria-live="polite"
         $isStartPage={isStartPage}
-        aria-busy={isLoading}
+        aria-busy={routesIsLoading}
       >
         {children}
       </Main>

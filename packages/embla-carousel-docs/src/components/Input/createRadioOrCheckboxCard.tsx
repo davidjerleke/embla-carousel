@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { CARD_STYLES } from 'consts/card'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { PropType } from './createRadioOrCheckboxDefault'
@@ -10,7 +11,7 @@ import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
 
 const RadioOrCheckboxCardWrapper = styled.label`
   ${TAP_HIGHLIGHT_STYLES};
@@ -98,7 +99,7 @@ export const createRadioOrCheckboxCard = (
 
   const InputSelectionComponent = (props: PropType) => {
     const { children, ...restProps } = props
-    const { isKeyNavigating } = useKeyNavigating()
+    const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
     return (
       <RadioOrCheckboxCardWrapper htmlFor={restProps.id}>

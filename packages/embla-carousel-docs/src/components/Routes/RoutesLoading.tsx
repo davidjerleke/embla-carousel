@@ -1,21 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { HEADER_HEIGHT } from 'components/Header/Header'
-import { useRoutes } from 'hooks/useRoutes'
-import { useNavigation } from 'hooks/useNavigation'
 import { LAYERS } from 'consts/layers'
 import { MEDIA } from 'consts/breakpoints'
-import { SPACINGS } from 'consts/spacings'
 import { useCallback } from 'react'
 import { useEventListener } from 'hooks/useEventListener'
-
-const PROGRESS_BAR_HEIGHT = SPACINGS.CUSTOM(({ ONE }) => ONE / 2)
+import { ROUTES_LOADING_BAR_HEIGHT } from 'consts/routes'
+import { MODALS } from 'consts/modal'
+import {
+  selectIsModalOpen,
+  setModalClosed
+} from 'components/Modal/modalReducer'
+import {
+  selectRoutesLoading,
+  setRoutesLoading
+} from 'components/Routes/routesReducer'
 
 const RoutesLoadingWrapper = styled.div`
   z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
   top: ${HEADER_HEIGHT};
-  height: ${PROGRESS_BAR_HEIGHT};
+  height: ${ROUTES_LOADING_BAR_HEIGHT};
   left: 0;
   right: 0;
   position: fixed;
@@ -30,7 +36,7 @@ const RoutesLoadingWrapper = styled.div`
 const ProgressBar = styled.div<{ $loading: boolean; $animating: boolean }>`
   ${BRAND_GRADIENT_BACKGROUND_STYLES};
   z-index: ${LAYERS.STEP};
-  height: ${PROGRESS_BAR_HEIGHT};
+  height: ${ROUTES_LOADING_BAR_HEIGHT};
   width: 100%;
   opacity: 1;
   animation-duration: ${({ $loading }) => ($loading ? '15s' : '1s')};
@@ -54,19 +60,20 @@ type PropType = { pageId: string }
 
 export const RoutesLoading = (props: PropType) => {
   const { pageId } = props
-  const { isLoading, setIsLoading } = useRoutes()
-  const { isOpen, closeNavigation } = useNavigation()
+  const isRoutesLoading = useAppSelector(selectRoutesLoading)
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
   const [animating, setAnimating] = useState(true)
   const lastPageId = useRef<PropType['pageId']>(pageId)
   const progressElement = useRef<HTMLDivElement>(null)
   const animationRaf = useRef(0)
   const animationTimeout = useRef(0)
+  const dispatch = useAppDispatch()
 
   const onAnimationEnd = useCallback(() => setAnimating(false), [])
   useEventListener('animationend', onAnimationEnd, progressElement)
 
   useEffect(() => {
-    if (!isLoading) return
+    if (!isRoutesLoading) return
 
     const progress = progressElement.current
     if (!progress) return
@@ -81,10 +88,10 @@ export const RoutesLoading = (props: PropType) => {
         progress.style.opacity = '1'
       }, 0)
     })
-  }, [isLoading])
+  }, [isRoutesLoading])
 
   useEffect(() => {
-    if (isLoading) return
+    if (isRoutesLoading) return
 
     const raf = animationRaf.current
     const timeout = animationTimeout.current
@@ -92,13 +99,15 @@ export const RoutesLoading = (props: PropType) => {
     if (timeout) clearTimeout(timeout)
 
     if (progressElement.current) progressElement.current.style.opacity = '0'
-  }, [isLoading])
+  }, [isRoutesLoading])
 
   useEffect(() => {
-    if (pageId !== lastPageId.current && isOpen) closeNavigation()
+    if (pageId !== lastPageId.current && isOpen) {
+      dispatch(setModalClosed(MODALS.SITE_NAVIGATION))
+    }
     lastPageId.current = pageId
-    setIsLoading(false)
-  }, [pageId, isOpen, closeNavigation, setIsLoading])
+    dispatch(setRoutesLoading(false))
+  }, [pageId, isOpen, dispatch])
 
   useEffect(() => {
     return () => {
@@ -113,7 +122,7 @@ export const RoutesLoading = (props: PropType) => {
     <RoutesLoadingWrapper>
       <ProgressBar
         ref={progressElement}
-        $loading={isLoading}
+        $loading={isRoutesLoading}
         $animating={animating}
       />
     </RoutesLoadingWrapper>

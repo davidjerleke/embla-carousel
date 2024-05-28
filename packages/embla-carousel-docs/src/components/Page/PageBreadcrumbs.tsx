@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { LinkBare } from 'components/Link/LinkBare'
-import { useRouteBreadcrumbs } from 'hooks/useRouteBreadcrumbs'
+import { useRouteBreadcrumbs } from 'hooks/useRoutes'
 import { Icon } from 'components/Icon/Icon'
 import { COLORS } from 'consts/themes'
 import { FONT_SIZES } from 'consts/fontSizes'

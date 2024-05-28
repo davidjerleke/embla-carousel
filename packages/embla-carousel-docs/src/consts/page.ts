@@ -1,5 +1,7 @@
-import { GraphQLNodeType } from './graphQL'
-import { TableOfContentsType } from 'components/TableOfContents/TableOfContentsContext'
+import { GraphQLNodeType } from 'consts/graphQL'
+import { TableOfContentsType } from 'consts/tableOfContents'
+
+export const MAIN_CONTENT_ID = 'main-content'
 
 export const PAGE_LAYOUTS = {
   HOME: 'Home',

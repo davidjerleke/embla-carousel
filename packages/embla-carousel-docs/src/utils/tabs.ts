@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import { TabsItemType, TabsPositionType } from 'consts/tabs'
+import { TabsItemType } from 'consts/tabs'
 import { PropType as TabsItemPropType } from 'components/Tabs/TabsItem'
 
 export const mapChildrenToTabs = (
@@ -34,27 +34,8 @@ export const isTabsItemProps = (
 
 export const getDefaultTab = (
   tabs: TabsItemType[],
-  storedTabSelection: string
+  storedTab: string
 ): TabsItemType => {
-  const storedTab = tabs.find((tab) => tab.value === storedTabSelection)
-  return storedTab || tabs.find((tab) => tab.default) || tabs[0]
-}
-
-export const getTabsPosition = <ElementType extends HTMLElement>(
-  element: ElementType | null
-): TabsPositionType => {
-  if (!element) return { offsetTop: 0, rectTop: 0 }
-  return {
-    offsetTop: element.offsetTop,
-    rectTop: element.getBoundingClientRect().top
-  }
-}
-
-export const getTabsPositionDiff = (
-  currentScroll: TabsPositionType,
-  previousScroll: TabsPositionType
-): number => {
-  const offsetDiff = currentScroll.offsetTop - previousScroll.offsetTop
-  const rectDiff = currentScroll.rectTop - previousScroll.rectTop
-  return Math.abs(offsetDiff - rectDiff) > 1 ? rectDiff : offsetDiff
+  const stored = tabs.find((tab) => tab.value === storedTab)
+  return stored || tabs.find((tab) => tab.default) || tabs[0]
 }

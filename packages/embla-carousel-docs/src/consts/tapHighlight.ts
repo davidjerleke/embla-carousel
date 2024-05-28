@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { COLORS } from './themes'
+import { COLORS } from 'consts/themes'
 
 export const TAP_HIGHLIGHT_STYLES = css`
   -webkit-tap-highlight-color: rgba(

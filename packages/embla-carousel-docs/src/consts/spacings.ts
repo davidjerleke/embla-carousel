@@ -1,4 +1,4 @@
-import { sizeWithUnit } from './unit'
+import { sizeWithUnit } from 'consts/unit'
 
 type SpacingCustomType = (spacings: typeof SPACING_VALUES) => number
 

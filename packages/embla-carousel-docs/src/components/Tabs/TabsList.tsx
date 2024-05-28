@@ -1,5 +1,7 @@
 import React, { PropsWithRef, ReactNode } from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { BORDER_SIZES } from 'consts/border'
 import { SPACINGS } from 'consts/spacings'
 import { COLORS } from 'consts/themes'
@@ -10,7 +12,6 @@ import {
   createScrollBarShadowStyles,
   createScrollBarStyles
 } from 'consts/scrollBars'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 
 export const TabsListWrapper = styled.div`
   display: flex;
@@ -72,7 +73,7 @@ type PropType = { children?: ReactNode | undefined } & PropsWithRef<
 
 export const TabsList = (props: PropType) => {
   const { children, ...restProps } = props
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <TabsListWrapper {...restProps}>

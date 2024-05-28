@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { HEADER_HEIGHT } from 'components/Header/Header'
 import { SPACINGS } from 'consts/spacings'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TableOfContentsMenu } from './TableOfContentsMenu'
 import {
   createScrollBarShadowStyles,
@@ -55,7 +56,7 @@ const MenuWrapper = styled.div<{
 `
 
 export const TableOfContents = () => {
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <TableOfContentsWrapper aria-label="table of contents">

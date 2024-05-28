@@ -1,10 +1,13 @@
-import { RouteType } from 'components/Routes/RoutesContext'
+import { RouteType } from 'consts/routes'
 import { GraphQLAllDataType } from 'consts/graphQL'
 
 export const addRouteChildren = (
-  parent: RouteType,
+  parentWithoutChildren: RouteType,
   routes: RouteType[]
 ): RouteType => {
+  if (!parentWithoutChildren) return parentWithoutChildren
+
+  const parent = { ...parentWithoutChildren }
   parent.children = routes
     .filter(({ slug }) => isRoutePartiallyActive(parent.slug, slug))
     .filter(({ level }) => level - 1 === parent.level)

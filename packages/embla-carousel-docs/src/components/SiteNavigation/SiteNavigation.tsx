@@ -1,16 +1,34 @@
-import React, { PropsWithChildren, useCallback, useEffect } from 'react'
+import React, {
+  PropsWithChildren,
+  Suspense,
+  lazy,
+  useCallback,
+  useEffect
+} from 'react'
 import styled, { css } from 'styled-components'
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import FocusTrap from 'focus-trap-react'
-import { useNavigation } from 'hooks/useNavigation'
 import { useEventListener } from 'hooks/useEventListener'
 import { useBreakpoints } from 'hooks/useBreakpoints'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
+import { MODALS } from 'consts/modal'
 import { SPACINGS } from 'consts/spacings'
 import { isBrowser } from 'utils/isBrowser'
-import { SiteNavigationMenuDesktop } from './SiteNavigationMenuDesktop'
-import { SiteNavigationMenuCompact } from './SiteNavigationMenuCompact'
+import { ModalLoadingTrigger } from 'components/Modal/ModalLoadingTrigger'
+import { SiteNavigationMenuDesktop } from 'components/SiteNavigation/SiteNavigationMenuDesktop'
+import {
+  selectIsModalOpen,
+  setModalClosed
+} from 'components/Modal/modalReducer'
+
+const SiteNavigationMenuCompactLazy = lazy(async () => {
+  const module = await import(
+    'components/SiteNavigation/SiteNavigationMenuCompact'
+  )
+  return { default: module.SiteNavigationMenuCompact }
+})
 
 export const NAVIGATION_ID = 'main-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
@@ -47,7 +65,12 @@ export type PropType = PropsWithChildren<{}>
 
 export const SiteNavigation = (props: PropType) => {
   const { isCompact } = useBreakpoints()
-  const { isOpen, closeNavigation } = useNavigation()
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
+  const dispatch = useAppDispatch()
+
+  const closeNavigation = useCallback(() => {
+    dispatch(setModalClosed(MODALS.SITE_NAVIGATION))
+  }, [dispatch])
 
   const getFocusTrapElements = useCallback((): HTMLElement[] => {
     if (!isBrowser) return []
@@ -67,7 +90,10 @@ export const SiteNavigation = (props: PropType) => {
 
   useEffect(() => {
     if (!isCompact) closeNavigation()
-    return () => closeNavigation()
+
+    return () => {
+      closeNavigation()
+    }
   }, [isCompact, closeNavigation])
 
   return (
@@ -82,7 +108,12 @@ export const SiteNavigation = (props: PropType) => {
         {...props}
       >
         <SiteNavigationMenuDesktop />
-        <SiteNavigationMenuCompact />
+
+        {isOpen && (
+          <Suspense fallback={<ModalLoadingTrigger />}>
+            <SiteNavigationMenuCompactLazy />
+          </Suspense>
+        )}
       </SiteNavigationWrapper>
     </FocusTrap>
   )

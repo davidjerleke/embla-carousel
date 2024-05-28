@@ -9,7 +9,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { createGapStyles } from 'utils/createGapStyles'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
+import { MAIN_CONTENT_ID } from 'consts/page'
 import {
   LinkButtonPrimaryFilled,
   LinkButtonPrimaryOutlined

@@ -4,9 +4,9 @@ import {
   FlattenSimpleInterpolation,
   ThemedStyledProps
 } from 'styled-components'
-import { BORDER_RADIUSES } from './border'
-import { COLORS } from './themes'
-import { SPACINGS } from './spacings'
+import { BORDER_RADIUSES } from 'consts/border'
+import { COLORS } from 'consts/themes'
+import { SPACINGS } from 'consts/spacings'
 
 export const SCROLLBAR_SIZE = SPACINGS.ONE
 

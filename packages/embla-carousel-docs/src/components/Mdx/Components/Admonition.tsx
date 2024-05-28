@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectTheme } from 'components/Theme/themeReducer'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { IconType } from 'assets/icons'
-import { useTheme } from 'hooks/useTheme'
 import { IconWithText, IconWithTextIcon } from 'components/Icon/IconWithText'
 
 type AdmonitionType = 'note' | 'warning' | 'danger'
@@ -69,7 +70,8 @@ type PropType = PropsWithChildren<{
 export const Admonition = (props: PropType) => {
   const { children, type = 'note' } = props
   const admonition = admonitions[type]
-  const opacity = useTheme().theme === THEME_KEYS.LIGHT ? 0.07 : 0.1
+  const theme = useAppSelector(selectTheme)
+  const opacity = theme === THEME_KEYS.LIGHT ? 0.07 : 0.1
 
   return (
     <AdmonitionWrapper

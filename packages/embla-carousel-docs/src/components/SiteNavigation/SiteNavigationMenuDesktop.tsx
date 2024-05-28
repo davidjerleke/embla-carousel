@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
@@ -7,7 +9,6 @@ import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { LAYERS } from 'consts/layers'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
@@ -59,7 +60,7 @@ const MiscLinks = styled(FooterLinks)`
 `
 
 export const SiteNavigationMenuDesktop = () => {
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <SiteNavigationMenuDesktopWrapper $isKeyNavigating={isKeyNavigating}>

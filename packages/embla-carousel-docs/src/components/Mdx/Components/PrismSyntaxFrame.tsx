@@ -6,6 +6,8 @@ import React, {
   useState
 } from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { ButtonBare } from 'components/Button/ButtonBare'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { COLORS } from 'consts/themes'
@@ -16,7 +18,6 @@ import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
 import { MEDIA } from 'consts/breakpoints'
 import { copyToClipboard } from 'utils/copyToClipboard'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import {
   createScrollBarShadowStyles,
@@ -122,7 +123,7 @@ type PropType = PropsWithChildren<{ code: string }>
 
 export const PrismSyntaxFrame = (props: PropType) => {
   const { children, code } = props
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const [isCopied, setIsCopied] = useState(false)
   const timeout = useRef(0)
 

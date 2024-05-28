@@ -1,5 +1,5 @@
 import { ThemeKeyType, THEME_KEYS, THEME_PREFIX } from 'consts/themes'
-import { isBrowser } from './isBrowser'
+import { isBrowser } from 'utils/isBrowser'
 
 export const getThemeFromDocument = (): ThemeKeyType => {
   if (!isBrowser) return THEME_KEYS.LIGHT
