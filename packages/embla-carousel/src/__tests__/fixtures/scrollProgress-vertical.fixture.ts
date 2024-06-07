@@ -18,7 +18,6 @@ export const FIXTURE_SCROLL_PROGRESS_Y_1: TestElementDimensionsType = {
       offsetWidth: 1000,
       offsetHeight: 800,
       offsetTop: 0,
-
       offsetLeft: 0
     },
     {
@@ -32,21 +31,18 @@ export const FIXTURE_SCROLL_PROGRESS_Y_1: TestElementDimensionsType = {
       offsetWidth: 1000,
       offsetHeight: 200,
       offsetTop: 1200,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 500,
       offsetTop: 1400,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 300,
       offsetTop: 1900,
-
       offsetLeft: 0
     }
   ],
@@ -74,35 +70,30 @@ export const FIXTURE_SCROLL_PROGRESS_Y_2: TestElementDimensionsType = {
       offsetWidth: 1000,
       offsetHeight: 800,
       offsetTop: 10,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 400,
       offsetTop: 830,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 200,
       offsetTop: 1250,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 500,
       offsetTop: 1470,
-
       offsetLeft: 0
     },
     {
       offsetWidth: 1000,
       offsetHeight: 300,
       offsetTop: 1990,
-
       offsetLeft: 0
     }
   ],

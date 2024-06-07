@@ -176,12 +176,15 @@ export function Engine(
       dragHandler,
       animation,
       eventHandler,
+      scrollBounds,
       options: { loop }
     },
     lagOffset
   ) => {
     const velocity = scrollBody.velocity()
-    const hasSettled = scrollBody.settled()
+    const shouldSettle = scrollBody.settled()
+    const withinBounds = !scrollBounds.shouldConstrain()
+    const hasSettled = loop ? shouldSettle : shouldSettle && withinBounds
 
     if (hasSettled && !dragHandler.pointerDown()) {
       animation.stop()
