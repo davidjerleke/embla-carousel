@@ -1,17 +1,17 @@
 import { OptionsType, defaultOptions } from './Options'
-import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
-import { EmblaCarouselType } from 'embla-carousel'
-import { EngineType } from 'embla-carousel/components/Engine'
-import { ScrollBodyType } from 'embla-carousel/components/ScrollBody'
+import {
+  CreatePluginType,
+  OptionsHandlerType,
+  EmblaCarouselType,
+  EngineType,
+  ScrollBodyType
+} from 'embla-carousel'
 
-declare module 'embla-carousel/components/Plugins' {
+declare module 'embla-carousel' {
   interface EmblaPluginsType {
     autoScroll?: AutoScrollType
   }
-}
 
-declare module 'embla-carousel/components/EventHandler' {
   interface EmblaEventListType {
     autoScrollPlay: 'autoScroll:play'
     autoScrollStop: 'autoScroll:stop'

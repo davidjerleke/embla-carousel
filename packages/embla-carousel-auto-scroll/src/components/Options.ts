@@ -1,4 +1,4 @@
-import { CreateOptionsType } from 'embla-carousel/components/Options'
+import { CreateOptionsType } from 'embla-carousel'
 
 export type OptionsType = CreateOptionsType<{
   direction: 'forward' | 'backward'

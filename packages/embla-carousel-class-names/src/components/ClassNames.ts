@@ -1,10 +1,13 @@
 import { defaultOptions, OptionsType } from './Options'
 import { nodeListToArray, addClass, removeClass } from './utils'
-import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
-import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
+import {
+  CreatePluginType,
+  OptionsHandlerType,
+  EmblaCarouselType,
+  EmblaEventType
+} from 'embla-carousel'
 
-declare module 'embla-carousel/components/Plugins' {
+declare module 'embla-carousel' {
   interface EmblaPluginsType {
     classNames?: ClassNamesType
   }

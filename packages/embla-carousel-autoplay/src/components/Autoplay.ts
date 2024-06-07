@@ -1,15 +1,15 @@
 import { OptionsType, defaultOptions } from './Options'
-import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import { OptionsHandlerType } from 'embla-carousel/components/OptionsHandler'
-import { EmblaCarouselType } from 'embla-carousel'
+import {
+  CreatePluginType,
+  OptionsHandlerType,
+  EmblaCarouselType
+} from 'embla-carousel'
 
-declare module 'embla-carousel/components/Plugins' {
+declare module 'embla-carousel' {
   interface EmblaPluginsType {
     autoplay?: AutoplayType
   }
-}
 
-declare module 'embla-carousel/components/EventHandler' {
   interface EmblaEventListType {
     autoplayPlay: 'autoplay:play'
     autoplayStop: 'autoplay:stop'
