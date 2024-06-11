@@ -62,6 +62,10 @@ function emblaCarouselVue(
   return [emblaNode, emblaApi]
 }
 
-emblaCarouselVue.globalOptions = <EmblaOptionsType | undefined>undefined
+declare namespace emblaCarouselVue {
+  let globalOptions: EmblaOptionsType | undefined
+}
+
+emblaCarouselVue.globalOptions = undefined
 
 export default emblaCarouselVue

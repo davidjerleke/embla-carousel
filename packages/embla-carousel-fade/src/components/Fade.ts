@@ -8,7 +8,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    fade?: FadeType
+    fade: FadeType
   }
 }
 
@@ -267,6 +267,10 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   return self
 }
 
-Fade.globalOptions = <FadeOptionsType | undefined>undefined
+declare namespace Fade {
+  let globalOptions: FadeOptionsType | undefined
+}
+
+Fade.globalOptions = undefined
 
 export default Fade

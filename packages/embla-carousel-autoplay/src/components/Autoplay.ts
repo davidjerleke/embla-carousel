@@ -7,7 +7,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoplay?: AutoplayType
+    autoplay: AutoplayType
   }
 
   interface EmblaEventListType {
@@ -177,6 +177,10 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   return self
 }
 
-Autoplay.globalOptions = <AutoplayOptionsType | undefined>undefined
+declare namespace Autoplay {
+  let globalOptions: AutoplayOptionsType | undefined
+}
+
+Autoplay.globalOptions = undefined
 
 export default Autoplay

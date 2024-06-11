@@ -9,7 +9,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    classNames?: ClassNamesType
+    classNames: ClassNamesType
   }
 }
 
@@ -102,6 +102,10 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   return self
 }
 
-ClassNames.globalOptions = <ClassNamesOptionsType | undefined>undefined
+declare namespace ClassNames {
+  let globalOptions: ClassNamesOptionsType | undefined
+}
+
+ClassNames.globalOptions = undefined
 
 export default ClassNames

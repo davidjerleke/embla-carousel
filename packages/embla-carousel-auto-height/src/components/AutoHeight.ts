@@ -7,7 +7,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoHeight?: AutoHeightType
+    autoHeight: AutoHeightType
   }
 }
 
@@ -65,6 +65,10 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   return self
 }
 
-AutoHeight.globalOptions = <AutoHeightOptionsType | undefined>undefined
+declare namespace AutoHeight {
+  let globalOptions: AutoHeightOptionsType | undefined
+}
+
+AutoHeight.globalOptions = undefined
 
 export default AutoHeight

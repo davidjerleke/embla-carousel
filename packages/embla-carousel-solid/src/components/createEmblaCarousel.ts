@@ -72,6 +72,10 @@ function createEmblaCarousel(
   return [setViewport, emblaApi]
 }
 
-createEmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
+declare namespace createEmblaCarousel {
+  let globalOptions: EmblaOptionsType | undefined
+}
+
+createEmblaCarousel.globalOptions = undefined
 
 export default createEmblaCarousel

@@ -69,6 +69,10 @@ function emblaCarouselSvelte(
   }
 }
 
-emblaCarouselSvelte.globalOptions = <EmblaOptionsType | undefined>undefined
+declare namespace emblaCarouselSvelte {
+  let globalOptions: EmblaOptionsType | undefined
+}
+
+emblaCarouselSvelte.globalOptions = undefined
 
 export default emblaCarouselSvelte
