@@ -1,10 +1,12 @@
 import { OptionsType } from './Options'
-import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import { EmblaCarouselType } from 'embla-carousel'
 import { isNumber, clampNumber } from './utils'
-import { ScrollBodyType } from 'embla-carousel/components/ScrollBody'
+import {
+  CreatePluginType,
+  EmblaCarouselType,
+  ScrollBodyType
+} from 'embla-carousel'
 
-declare module 'embla-carousel/components/Plugins' {
+declare module 'embla-carousel' {
   interface EmblaPluginsType {
     fade?: FadeType
   }

@@ -1,8 +1,11 @@
 import { OptionsType } from './Options'
-import { CreatePluginType } from 'embla-carousel/components/Plugins'
-import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import {
+  EmblaEventType,
+  CreatePluginType,
+  EmblaCarouselType
+} from 'embla-carousel'
 
-declare module 'embla-carousel/components/Plugins' {
+declare module 'embla-carousel' {
   interface EmblaPluginsType {
     autoHeight?: AutoHeightType
   }
