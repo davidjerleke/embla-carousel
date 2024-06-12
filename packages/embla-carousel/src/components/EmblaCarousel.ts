@@ -256,6 +256,10 @@ function EmblaCarousel(
   return self
 }
 
-EmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
+declare namespace EmblaCarousel {
+  let globalOptions: EmblaOptionsType | undefined
+}
+
+EmblaCarousel.globalOptions = undefined
 
 export default EmblaCarousel

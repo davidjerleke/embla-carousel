@@ -62,6 +62,10 @@ function useEmblaCarousel(
   return [<EmblaViewportRefType>setViewport, emblaApi]
 }
 
-useEmblaCarousel.globalOptions = <EmblaOptionsType | undefined>undefined
+declare namespace useEmblaCarousel {
+  let globalOptions: EmblaOptionsType | undefined
+}
+
+useEmblaCarousel.globalOptions = undefined
 
 export default useEmblaCarousel

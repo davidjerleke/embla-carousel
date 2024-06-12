@@ -44,6 +44,25 @@ function kebabToPascalCase(string = '') {
   )
 }
 
+function addImportExtensions(content, extension = 'js') {
+  return content.replace(/from\s'.\/(.*)';/g, (match) =>
+    match.replace(/';/g, `.${extension}';`)
+  )
+}
+
+function readFiles(dirname, onFileContent, onError) {
+  fs.readdirSync(dirname, { withFileTypes: true }).forEach((entry) => {
+    if (entry.isDirectory()) {
+      return readFiles(dirname + entry.name + '/', onFileContent, onError)
+    }
+
+    fs.readFile(dirname + entry.name, 'utf-8', (error, content) => {
+      if (error) return onError(error)
+      onFileContent(dirname + entry.name, content)
+    })
+  })
+}
+
 function createBuildPath(packageJson, format) {
   const fileName = `${packageJson.name}.${format}.js`
   if (format === 'umd') return path.join(FOLDERS.OUT, fileName)
@@ -150,13 +169,16 @@ function createNodeNextSupportForPackage() {
     JSON.stringify(packageJsonCjs, null, '\t')
   )
 
-  const esmTypesFilePath = `${esmFolder}/index.d.ts`
+  const esmTypesFilePath = path.join(esmFolder, 'index.d.ts')
   const esmTypesFile = fs.readFileSync(esmTypesFilePath, 'utf-8')
-  const esmTypesFileWithExtensions = esmTypesFile.replace(
-    /from\s'(.*)';/g,
-    (match) => match.replace(/';/g, `.ts';`)
-  )
-  fs.writeFileSync(esmTypesFilePath, esmTypesFileWithExtensions)
+  const esmTypesFileWithImportExtensions = addImportExtensions(esmTypesFile)
+
+  fs.writeFileSync(esmTypesFilePath, esmTypesFileWithImportExtensions)
+
+  readFiles(path.join(esmFolder, 'components/'), (filename, fileContent) => {
+    const fileContentWithImportExtensions = addImportExtensions(fileContent)
+    fs.writeFile(filename, fileContentWithImportExtensions, (error) => {})
+  })
 }
 
 function createNodeNextSupport() {

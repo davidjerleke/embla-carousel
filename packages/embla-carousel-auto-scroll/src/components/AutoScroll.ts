@@ -9,7 +9,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoScroll?: AutoScrollType
+    autoScroll: AutoScrollType
   }
 
   interface EmblaEventListType {
@@ -250,6 +250,10 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   return self
 }
 
-AutoScroll.globalOptions = <AutoScrollOptionsType | undefined>undefined
+declare namespace AutoScroll {
+  let globalOptions: AutoScrollOptionsType | undefined
+}
+
+AutoScroll.globalOptions = undefined
 
 export default AutoScroll
