@@ -95,6 +95,8 @@
       <img src="https://avatars2.githubusercontent.com/u/615522?s=120&v=4" title="xiel" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/javiergonzalezGenially">
       <img src="https://avatars2.githubusercontent.com/u/78730098?s=120&v=4" title="javiergonzalezGenially" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/meirroth">
+      <img src="https://avatars2.githubusercontent.com/u/12494197?s=120&v=4" title="meirroth" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/hamidrezahanafi">
       <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/th-km">
@@ -103,8 +105,6 @@
       <img src="https://avatars2.githubusercontent.com/u/1105080?s=120&v=4" title="openscript" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/nwidynski">
       <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/meirroth">
-      <img src="https://avatars2.githubusercontent.com/u/12494197?s=120&v=4" title="meirroth" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/wopian">
       <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/silllli">
