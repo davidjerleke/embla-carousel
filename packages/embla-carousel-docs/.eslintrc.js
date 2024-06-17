@@ -36,6 +36,10 @@ module.exports = {
       }
     },
     {
+      files: ['src/consts/redux.ts'],
+      rules: { '@typescript-eslint/explicit-module-boundary-types': 'off' }
+    },
+    {
       files: ['src/components/Page/Mdx.tsx'],
       rules: {
         'react/display-name': 'off'

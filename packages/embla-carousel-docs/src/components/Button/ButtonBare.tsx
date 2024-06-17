@@ -2,9 +2,10 @@ import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 
 export const buttonBareStyles = css<{
   $isKeyNavigating: boolean
@@ -53,7 +54,7 @@ export const ButtonBare = React.forwardRef(function ButtonBare(
   ref: React.ForwardedRef<HTMLButtonElement>
 ) {
   const { children, ...restProps } = props
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <ButtonBareWrapper

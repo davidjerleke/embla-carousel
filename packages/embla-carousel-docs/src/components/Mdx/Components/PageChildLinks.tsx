@@ -1,6 +1,6 @@
 import React from 'react'
-import { useRouteChildren } from 'hooks/useRouteChildren'
-import { useRouteCurrent } from 'hooks/useRouteCurrent'
+import { useRouteChildren } from 'hooks/useRoutes'
+import { useRouteCurrent } from 'hooks/useRoutes'
 import { LinkCard } from 'components/Link/LinkCard'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'

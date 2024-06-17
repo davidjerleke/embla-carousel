@@ -1,12 +1,13 @@
 import React, { PropsWithChildren, useMemo, useState } from 'react'
 import styled, { css } from 'styled-components'
+import { selectTheme } from 'components/Theme/themeReducer'
+import { useAppSelector } from 'hooks/useRedux'
 import logoLightThemeDefaultUrl from 'assets/images/embla-logo-light-theme.svg'
 import logoDarkThemeDefaultUrl from 'assets/images/embla-logo-dark-theme.svg'
 import logoLightThemeBlurUrl from 'assets/images/embla-logo-light-theme-blur.svg'
 import logoDarkThemeBlurUrl from 'assets/images/embla-logo-dark-theme-blur.svg'
 import { useInView } from 'react-intersection-observer'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
-import { useTheme } from 'hooks/useTheme'
 import { THEME_KEYS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
 import { Icon } from 'components/Icon/Icon'
@@ -97,7 +98,7 @@ export const SiteLogo = (props: PropType) => {
   const { appearance = 'default' } = props
   const [inViewRef, inView] = useInView({ triggerOnce: true })
   const [hasLoaded, setHasLoaded] = useState(false)
-  const { theme } = useTheme()
+  const theme = useAppSelector(selectTheme)
   const { title } = useSiteMetadata()
   const lightSvg = LOGO_SVGS[appearance].light
   const darkSvg = LOGO_SVGS[appearance].dark

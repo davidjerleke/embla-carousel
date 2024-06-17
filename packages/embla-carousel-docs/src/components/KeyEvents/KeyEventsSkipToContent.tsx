@@ -4,11 +4,10 @@ import { LinkButtonPrimaryOutlined } from 'components/Link/LinkButton'
 import { navigate } from '@reach/router'
 import { isBrowser } from 'utils/isBrowser'
 import { LAYERS } from 'consts/layers'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
+import { MAIN_CONTENT_ID } from 'consts/page'
 
-export const MAIN_CONTENT_ID = 'main-content'
-
-const KeyNavigatingSkipToContentWrapper = styled(LinkButtonPrimaryOutlined)`
+const KeyEventsSkipToContentWrapper = styled(LinkButtonPrimaryOutlined)`
   z-index: ${LAYERS.SEARCH + 1};
   top: 1rem;
   left: 1rem;
@@ -23,7 +22,7 @@ const KeyNavigatingSkipToContentWrapper = styled(LinkButtonPrimaryOutlined)`
   }
 `
 
-export const KeyNavigatingSkipToContent = () => {
+export const KeyEventsSkipToContent = () => {
   const [contentElement, setContentElement] = useState<HTMLElement | null>(null)
 
   const onClick = useCallback(
@@ -44,12 +43,12 @@ export const KeyNavigatingSkipToContent = () => {
   if (!contentElement) return null
 
   return (
-    <KeyNavigatingSkipToContentWrapper
+    <KeyEventsSkipToContentWrapper
       to={`#${MAIN_CONTENT_ID}`}
       onClick={onClick}
       $isKeyNavigating
     >
       Skip to content
-    </KeyNavigatingSkipToContentWrapper>
+    </KeyEventsSkipToContentWrapper>
   )
 }

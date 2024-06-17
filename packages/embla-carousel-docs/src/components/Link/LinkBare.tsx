@@ -1,12 +1,14 @@
 import React, { PropsWithChildren, useCallback, useRef } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
+import { setRoutesLoading } from 'components/Routes/routesReducer'
 import { useLocation } from '@reach/router'
 import styled, { css } from 'styled-components'
 import { GatsbyLinkProps, Link } from 'gatsby'
-import { useNavigation } from 'hooks/useNavigation'
-import { useRoutes } from 'hooks/useRoutes'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
+import { setModalClosed } from 'components/Modal/modalReducer'
+import { MODALS } from 'consts/modal'
 
 const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
 
@@ -37,10 +39,13 @@ export const LinkBare = (props: PropType) => {
   const { to, id, ariaLabel, tabIndex, children, onClick, ...restProps } = props
   const linkElement = useRef<HTMLAnchorElement | null>(null)
   const isInternal = INTERNAL_LINK_REGEX.test(to)
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const { pathname } = useLocation()
-  const { setIsLoading } = useRoutes()
-  const { closeNavigation } = useNavigation()
+  const dispatch = useAppDispatch()
+
+  const closeNavigation = useCallback(() => {
+    dispatch(setModalClosed(MODALS.SITE_NAVIGATION))
+  }, [dispatch])
 
   const onClickInternalLink = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -53,14 +58,18 @@ export const LinkBare = (props: PropType) => {
       linkElement.current.href = to
       const targetIsCurrentUrl = pathname === linkElement.current.pathname
 
-      if (targetIsCurrentUrl) {
-        if (linkElement.current.hash) setTimeout(() => closeNavigation(), 0)
-        else closeNavigation()
+      if (!targetIsCurrentUrl) {
+        dispatch(setRoutesLoading(true))
+        return
+      }
+
+      if (linkElement.current.hash) {
+        setTimeout(() => closeNavigation(), 0)
       } else {
-        setIsLoading(true)
+        closeNavigation()
       }
     },
-    [pathname, to, closeNavigation, setIsLoading, onClick]
+    [pathname, to, closeNavigation, dispatch, onClick]
   )
 
   if (isInternal) {

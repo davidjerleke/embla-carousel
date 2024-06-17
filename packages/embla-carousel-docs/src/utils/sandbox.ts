@@ -1,7 +1,7 @@
 import docsPackageJson from 'embla-carousel-docs/package.json'
 import { EmblaOptionsType } from 'embla-carousel'
-import { loadPrettier } from './loadPrettier'
-import { camelOrPascalToKebabCase } from './stringCasing'
+import { loadPrettier } from 'utils/loadPrettier'
+import { camelOrPascalToKebabCase } from 'utils/stringCasing'
 import {
   SandboxCreateFunctionType,
   SandboxLabelKeyType,

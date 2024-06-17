@@ -1,4 +1,4 @@
-import { sizeWithUnit } from './unit'
+import { sizeWithUnit } from 'consts/unit'
 
 type FontSizeCustomType = (fontSizes: typeof FONT_SIZE_VALUES) => number
 

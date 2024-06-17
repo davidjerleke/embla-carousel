@@ -1,14 +1,15 @@
 import React, { PropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { BORDER_RADIUSES } from 'consts/border'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 import { kebabCaseToPascalCase } from 'utils/stringCasing'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
 
 const INPUT_SIZE = '2.5rem'
 const CHECK_SIZE = '1.2rem'
@@ -134,7 +135,7 @@ export const createRadioOrCheckboxDefault = (
 
   const InputSelectionComponent = (props: PropType) => {
     const { children, ...restProps } = props
-    const { isKeyNavigating } = useKeyNavigating()
+    const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
     return (
       <RadioOrCheckboxDefaultWrapper>

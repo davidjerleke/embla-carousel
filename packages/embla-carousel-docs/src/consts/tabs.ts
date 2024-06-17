@@ -20,11 +20,6 @@ export type TabsItemType = PropsWithChildren<{
   disabled?: boolean
 }>
 
-export type TabsPositionType = {
-  offsetTop: number
-  rectTop: number
-}
-
 export const TABS_SITE_NAVIGATION: TabsGroupType = {
   GROUP_ID: '',
   TABS: {

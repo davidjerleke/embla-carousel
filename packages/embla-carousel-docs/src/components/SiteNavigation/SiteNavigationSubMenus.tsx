@@ -1,6 +1,7 @@
 import React from 'react'
-import { useRoutes } from 'hooks/useRoutes'
 import { SiteNavigationSubMenu } from './SiteNavigationSubMenu'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectHierarchalRoutes } from 'components/Routes/routesReducer'
 
 type PropType = {
   isDesktopMenu?: boolean
@@ -8,11 +9,11 @@ type PropType = {
 
 export const SiteNavigationSubMenus = (props: PropType) => {
   const { isDesktopMenu = false } = props
-  const { hierarchical: routes } = useRoutes()
+  const hierarchicalRoutes = useAppSelector(selectHierarchalRoutes)
 
   return (
     <>
-      {routes.map((route) => (
+      {hierarchicalRoutes.map((route) => (
         <li key={route.id}>
           <SiteNavigationSubMenu route={route} isDesktopMenu={isDesktopMenu} />
         </li>

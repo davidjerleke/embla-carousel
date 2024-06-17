@@ -1,37 +1,58 @@
 import { RefObject, useEffect, useRef } from 'react'
 
-export function useEventListener<K extends keyof WindowEventMap>(
+// MediaQueryList Event based useEventListener interface
+function useEventListener<K extends keyof MediaQueryListEventMap>(
+  eventName: K,
+  handler: (event: MediaQueryListEventMap[K]) => void,
+  element: RefObject<MediaQueryList>,
+  options?: boolean | AddEventListenerOptions
+): void
+
+// Window Event based useEventListener interface
+function useEventListener<K extends keyof WindowEventMap>(
   eventName: K,
   handler: (event: WindowEventMap[K]) => void,
   element?: undefined,
   options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<
-  K extends keyof HTMLElementEventMap,
-  T extends HTMLElement = HTMLDivElement
+// Element Event based useEventListener interface
+function useEventListener<
+  K extends keyof HTMLElementEventMap & keyof SVGElementEventMap,
+  T extends Element = K extends keyof HTMLElementEventMap
+    ? HTMLDivElement
+    : SVGElement
 >(
   eventName: K,
-  handler: (event: HTMLElementEventMap[K]) => void,
+  handler:
+    | ((event: HTMLElementEventMap[K]) => void)
+    | ((event: SVGElementEventMap[K]) => void),
   element: RefObject<T>,
   options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<K extends keyof DocumentEventMap>(
+// Document Event based useEventListener interface
+function useEventListener<K extends keyof DocumentEventMap>(
   eventName: K,
   handler: (event: DocumentEventMap[K]) => void,
   element: RefObject<Document>,
   options?: boolean | AddEventListenerOptions
 ): void
 
-export function useEventListener<
+function useEventListener<
   KW extends keyof WindowEventMap,
-  KH extends keyof HTMLElementEventMap,
-  T extends HTMLElement | void = void
+  KH extends keyof HTMLElementEventMap & keyof SVGElementEventMap,
+  KM extends keyof MediaQueryListEventMap,
+  T extends HTMLElement | SVGAElement | MediaQueryList = HTMLElement
 >(
-  eventName: KW | KH,
+  eventName: KW | KH | KM,
   handler: (
-    event: WindowEventMap[KW] | HTMLElementEventMap[KH] | Event
+    event:
+      | WindowEventMap[KW]
+      | HTMLElementEventMap[KH]
+      | SVGElementEventMap[KH]
+      | MediaQueryListEventMap[KM]
+      | Event
   ) => void,
   element?: RefObject<T>,
   options?: boolean | AddEventListenerOptions
@@ -43,7 +64,7 @@ export function useEventListener<
   }, [handler])
 
   useEffect(() => {
-    const targetElement: T | Window = element?.current || window
+    const targetElement: T | Window = element?.current ?? window
     if (!(targetElement && targetElement.addEventListener)) return
 
     const eventListener: typeof handler = (event) => savedHandler.current(event)
@@ -55,3 +76,5 @@ export function useEventListener<
     }
   }, [eventName, element, options])
 }
+
+export { useEventListener }

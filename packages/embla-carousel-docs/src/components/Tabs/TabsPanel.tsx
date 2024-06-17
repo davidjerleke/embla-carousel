@@ -1,23 +1,24 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import { KEY_NAVIGATING_STYLES } from 'consts/keyNavigatingStyles'
-import { TabsItemWithIndexType } from 'consts/tabs'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
+import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
+import { TabsItemType } from 'consts/tabs'
 
 export const TabsPanelWrapper = styled.section`
   ${KEY_NAVIGATING_STYLES};
 `
 
 type PropType = {
-  tab: TabsItemWithIndexType
-  activeTab: TabsItemWithIndexType
+  tab: TabsItemType
+  activeTab: TabsItemType
   groupId: string
-  setActiveTab: (tab: TabsItemWithIndexType) => void
+  setActiveTab: (tab: TabsItemType) => void
 }
 
 export const TabsPanel = (props: PropType) => {
   const { tab, activeTab, groupId, setActiveTab } = props
-  const { isKeyNavigating } = useKeyNavigating()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const isHidden = tab.value !== activeTab.value
 
   const setTab = useCallback(() => {

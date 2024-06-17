@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import styled, { css } from 'styled-components'
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { NAVIGATION_ID } from './SiteNavigation'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { BORDER_RADIUSES } from 'consts/border'
-import { useNavigation } from 'hooks/useNavigation'
+import { MODALS } from 'consts/modal'
 import { ButtonBare } from 'components/Button/ButtonBare'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
+import { useEventListener } from 'hooks/useEventListener'
+import {
+  selectIsModalOpen,
+  setAllModalsClosed,
+  setModalClosed,
+  setModalOpen
+} from 'components/Modal/modalReducer'
 
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
@@ -65,15 +73,42 @@ const Burger = styled.div<{ $isOpen: boolean }>`
 `
 
 export const SiteNavigationToggle = () => {
-  const { isOpen, toggleNavigation } = useNavigation()
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
   const toggleAction = isOpen ? 'Hide' : 'Show'
+  const toggleElement = useRef<HTMLButtonElement>(null)
+  const dispatch = useAppDispatch()
+
+  const onClick = useCallback(() => {
+    const toggleModal = isOpen ? setModalClosed : setModalOpen
+
+    if (toggleModal === setModalOpen) {
+      dispatch(setAllModalsClosed())
+    }
+
+    dispatch(toggleModal(MODALS.SITE_NAVIGATION))
+  }, [dispatch, isOpen])
+
+  const loadSiteNavigationMenu = useCallback(async () => {
+    const module = await import(
+      'components/SiteNavigation/SiteNavigationMenuCompact'
+    )
+    return { default: module.SiteNavigationMenuCompact }
+  }, [])
+
+  useEventListener('mouseenter', loadSiteNavigationMenu, toggleElement, {
+    passive: true
+  })
+  useEventListener('touchstart', loadSiteNavigationMenu, toggleElement, {
+    passive: true
+  })
 
   return (
     <SiteNavigationToggleWrapper
       id={NAVIGATION_ID}
-      onClick={toggleNavigation}
+      onClick={onClick}
       aria-expanded={isOpen}
       aria-label={`${toggleAction} Main Navigation Menu`}
+      ref={toggleElement}
     >
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />

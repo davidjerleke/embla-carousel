@@ -1,5 +1,5 @@
 import { BREAKPOINTS } from 'consts/breakpoints'
-import { useWindowSize } from './useWindowSize'
+import { useWindowSize } from 'hooks/useWindowSize'
 
 type UseBreakpointsType = {
   isCompact: boolean

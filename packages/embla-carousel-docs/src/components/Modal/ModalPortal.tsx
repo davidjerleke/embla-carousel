@@ -18,7 +18,7 @@ const PORTAL_ELEMENT_ID = 'portal-root'
 
 type PropType = PropsWithChildren<{}>
 
-export const Portal = (props: PropType) => {
+export const ModalPortal = (props: PropType) => {
   const { children } = props
   const portalWrapper = useRef(getExistingOrCreatePortalWrapper())
   const portalContent = useRef<HTMLDivElement>(

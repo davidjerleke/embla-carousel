@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectTheme } from 'components/Theme/themeReducer'
+import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
+import { selectTableOfContents } from 'components/TableOfContents/tableOfContentsReducer'
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
@@ -16,10 +20,8 @@ import { TabsListScrollArea, TabsListWrapper } from 'components/Tabs/TabsList'
 import { TabsButtonWrapper } from 'components/Tabs/TabsButton'
 import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
-import { useTheme } from 'hooks/useTheme'
-import { useNavigation } from 'hooks/useNavigation'
-import { useTableOfContents } from 'hooks/useTableOfContents'
+import { selectIsModalOpen } from 'components/Modal/modalReducer'
+import { MODALS } from 'consts/modal'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
@@ -164,11 +166,11 @@ const MiscLinks = styled(FooterLinks)`
 `
 
 export const SiteNavigationMenuCompact = () => {
-  const { theme } = useTheme()
-  const { isKeyNavigating } = useKeyNavigating()
-  const { isOpen } = useNavigation()
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
+  const theme = useAppSelector(selectTheme)
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
   const isOpenRef = useRef(isOpen)
-  const tableOfContents = useTableOfContents()
+  const tableOfContents = useAppSelector(selectTableOfContents)
   const [showTableOfContents, setShowTableOfContents] = useState(true)
   const isLightTheme = theme === THEME_KEYS.LIGHT
   const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT

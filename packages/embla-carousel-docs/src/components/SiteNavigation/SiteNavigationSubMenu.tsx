@@ -7,10 +7,10 @@ import { MEDIA } from 'consts/breakpoints'
 import { BORDER_SIZES } from 'consts/border'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
-import { RouteType } from 'components/Routes/RoutesContext'
+import { RouteType } from 'consts/routes'
 import { ButtonBare } from 'components/Button/ButtonBare'
 import { InactiveText, LinkNavigation } from 'components/Link/LinkNavigation'
-import { useRouteActive } from 'hooks/useRouteActive'
+import { useRouteActive } from 'hooks/useRoutes'
 import { Icon } from 'components/Icon/Icon'
 
 const createMenuId = (title: string = '', isDesktopMenu: boolean): string => {

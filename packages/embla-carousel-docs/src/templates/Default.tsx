@@ -6,7 +6,7 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { PageEditThisPage } from 'components/Page/PageEditThisPage'
 import { PagePagination } from 'components/Page/PagePagination'
 import { PageBreadcrumbs } from 'components/Page/PageBreadcrumbs'
-import { MAIN_CONTENT_ID } from 'components/KeyNavigating/KeyNavigatingSkipToContent'
+import { MAIN_CONTENT_ID } from 'consts/page'
 import { removeProtocol } from 'utils/removeProtocol'
 import { Mdx } from 'components/Mdx/Mdx'
 import {

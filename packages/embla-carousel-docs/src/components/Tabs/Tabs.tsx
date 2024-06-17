@@ -5,21 +5,24 @@ import React, {
   useRef,
   useState
 } from 'react'
+import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
+import { setIsKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
 import { useIsomorphicLayoutEffect } from 'utils/useIsomorphicLayoutEffect'
+import {
+  selectTabSelections,
+  setTabSelection
+} from 'components/Tabs/tabsReducer'
 import uniqueId from 'lodash/uniqueId'
 import styled from 'styled-components'
-import { useTabs } from 'hooks/useTabs'
-import { useKeyNavigating } from 'hooks/useKeyNavigating'
 import { TabsPanel } from './TabsPanel'
 import { TabsButton } from './TabsButton'
 import { TabsList } from './TabsList'
 import { TabsItemType } from 'consts/tabs'
+import { getDefaultTab, mapChildrenToTabs } from 'utils/tabs'
 import {
-  getDefaultTab,
-  getTabsPosition,
-  getTabsPositionDiff,
-  mapChildrenToTabs
-} from 'utils/tabs'
+  getScrollPosition,
+  getScrollPositionDiff
+} from 'utils/getScrollPosition'
 
 export const TabsWrapper = styled.div``
 
@@ -29,29 +32,17 @@ type PropType = PropsWithChildren<{
 
 export const Tabs = (props: PropType) => {
   const { groupId = '', children, ...restProps } = props
-  const { setIsKeyNavigating } = useKeyNavigating()
-  const { storedTabSelections, storeTabSelection } = useTabs()
-  const localStorageTab = storedTabSelections[groupId]
+  const dispatch = useAppDispatch()
+  const storedTab = useAppSelector(selectTabSelections)[groupId]
   const allTabs = useMemo(() => mapChildrenToTabs(children), [children])
   const tabs = useMemo(() => allTabs.filter((tab) => !tab.disabled), [allTabs])
-  const defaultTab = useMemo(
-    () => getDefaultTab(tabs, localStorageTab),
-    [tabs, localStorageTab]
-  )
-  const [activeTab, setActiveTab] = useState<TabsItemType>(defaultTab)
+  const [activeTab, setActiveTab] = useState(getDefaultTab(tabs, storedTab))
   const focusedTab = useRef<HTMLButtonElement | null>(null)
   const tabRefs = useRef(tabs.map(() => React.createRef<HTMLButtonElement>()))
   const tabsGroupId = useRef(uniqueId())
   const tabsWrapper = useRef<HTMLDivElement>(null)
   const tabsActiveIndex = useRef(activeTab.index)
-  const tabsPosition = useRef(getTabsPosition(tabsWrapper.current))
-
-  const storeTabInLocalStorage = useCallback(
-    (tabValue: string) => {
-      if (groupId) storeTabSelection(groupId, tabValue)
-    },
-    [groupId, storeTabSelection]
-  )
+  const tabsPosition = useRef(getScrollPosition(tabsWrapper.current))
 
   const goToTab = useCallback(
     (index: number): void => {
@@ -61,11 +52,11 @@ export const Tabs = (props: PropType) => {
       if (tab && tabElement) {
         focusedTab.current = tabElement
         setActiveTab(tab)
-        setIsKeyNavigating(true)
+        dispatch(setIsKeyNavigating(true))
         tabElement.focus()
       }
     },
-    [tabs, setIsKeyNavigating]
+    [tabs, dispatch]
   )
 
   const onKeyDown = useCallback(
@@ -115,30 +106,31 @@ export const Tabs = (props: PropType) => {
     tabsActiveIndex.current = activeTab.index
     if (!groupId) return
 
-    tabsPosition.current = getTabsPosition(tabsWrapper.current)
-    storeTabInLocalStorage(activeTab.value)
+    tabsPosition.current = getScrollPosition(tabsWrapper.current)
+    dispatch(setTabSelection({ key: groupId, value: activeTab.value }))
 
     queueMicrotask(() => {
-      const focusedTabId = focusedTab.current?.id || ''
-      const autoNavigated = !focusedTabId.endsWith(tabsGroupId.current)
-      focusedTab.current = null
+      const autoNavigated = !focusedTab.current
 
       if (autoNavigated) return
+      focusedTab.current = null
 
-      const newTabsPosition = getTabsPosition(tabsWrapper.current)
-      const diff = getTabsPositionDiff(newTabsPosition, tabsPosition.current)
+      const newTabsPosition = getScrollPosition(tabsWrapper.current)
+      const diff = getScrollPositionDiff(newTabsPosition, tabsPosition.current)
       if (diff) window.scrollBy({ top: diff })
 
-      tabsPosition.current = getTabsPosition(tabsWrapper.current)
+      tabsPosition.current = getScrollPosition(tabsWrapper.current)
     })
   }, [tabs, activeTab])
 
   useIsomorphicLayoutEffect(() => {
-    const tabToActivate = tabs.find((tab) => tab.value === localStorageTab)
+    if (!groupId) return
+
+    const tabToActivate = tabs.find((tab) => tab.value === storedTab)
     if (!tabToActivate) return
     if (tabToActivate.value === tabs[tabsActiveIndex.current].value) return
     setActiveTab(tabToActivate)
-  }, [tabs, localStorageTab])
+  }, [tabs, storedTab])
 
   return (
     <TabsWrapper ref={tabsWrapper} {...restProps}>

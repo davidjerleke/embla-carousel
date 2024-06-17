@@ -1,4 +1,7 @@
 import { GatsbyBrowser } from 'gatsby'
+import { ReduxProvider } from './src/components/Redux/ReduxProvider'
+
+export const wrapRootElement = ReduxProvider
 
 export const onRouteUpdate: GatsbyBrowser['onRouteUpdate'] = ({ location }) => {
   const { hash } = location

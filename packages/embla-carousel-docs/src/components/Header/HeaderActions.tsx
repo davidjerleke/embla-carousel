@@ -1,11 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { useAppSelector } from 'hooks/useRedux'
+import { selectHierarchalRoutes } from 'components/Routes/routesReducer'
 import { ThemeToggle } from 'components/Theme/ThemeToggle'
 import { LinkNavigation } from 'components/Link/LinkNavigation'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { useRoutes } from 'hooks/useRoutes'
 import { Search } from 'components/Search/Search'
 import { createGapStyles } from 'utils/createGapStyles'
 
@@ -42,14 +43,14 @@ const Link = styled(LinkNavigation)`
 `
 
 export const HeaderActions = () => {
-  const { hierarchical: routes } = useRoutes()
+  const hierarchicalRoutes = useAppSelector(selectHierarchalRoutes)
 
   return (
     <HeaderActionsWrapper>
       <Item $hiddenAtCompact>
         <nav aria-label="Quick Navigation Menu">
           <HeaderActionsWrapper>
-            {routes.map((route) => (
+            {hierarchicalRoutes.map((route) => (
               <Item key={route.id}>
                 <Link slug={route.slug}>{route.title}</Link>
               </Item>

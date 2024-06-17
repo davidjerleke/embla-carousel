@@ -1,6 +1,6 @@
 import { EmblaOptionsType } from 'embla-carousel'
 import { OptionsType } from 'embla-carousel/components/Options'
-import { SPACINGS } from './spacings'
+import { SPACINGS } from 'consts/spacings'
 import {
   PackageJson as BasePackageJsonType,
   TsConfigJson as TsConfigType
