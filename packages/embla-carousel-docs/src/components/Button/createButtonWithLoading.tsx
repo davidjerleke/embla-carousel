@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { ButtonBare, PropType as ButtonBarePropType } from './ButtonBare'
+import { PropType as ButtonBarePropType } from './ButtonBare'
+import { ButtonPrimaryFilled } from './ButtonPrimaryFilled'
 import {
   LoadSpinner,
   PropType as LoadSpinnerPropType
@@ -35,7 +36,7 @@ type PropType = ButtonBarePropType & {
 }
 
 export const createButtonWithLoading = (
-  ButtonComponent: typeof ButtonBare,
+  ButtonComponent: typeof ButtonPrimaryFilled,
   size?: LoadSpinnerPropType['size'],
   color?: LoadSpinnerPropType['color']
 ): ((props: PropType) => JSX.Element) => {

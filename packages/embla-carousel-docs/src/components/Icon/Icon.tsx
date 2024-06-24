@@ -1,11 +1,9 @@
-import React, { PropsWithRef } from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 import { ICONS, IconType } from 'assets/icons'
 import { css } from 'styled-components'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 
-type PropType = PropsWithRef<
-  React.DetailedHTMLProps<React.SVGAttributes<SVGSVGElement>, SVGSVGElement>
-> & {
+type PropType = ComponentPropsWithRef<'svg'> & {
   svg: IconType
   color?: string
   size?: string

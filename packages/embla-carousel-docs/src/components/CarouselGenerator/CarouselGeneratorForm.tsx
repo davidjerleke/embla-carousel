@@ -1,12 +1,7 @@
-import React, { PropsWithRef } from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 import { URLS } from 'consts/urls'
 
-type PropType = PropsWithRef<
-  React.DetailedHTMLProps<
-    React.FormHTMLAttributes<HTMLFormElement>,
-    HTMLFormElement
-  >
->
+type PropType = ComponentPropsWithRef<'form'>
 
 export const CarouselGeneratorForm = (props: PropType) => {
   const { children, ...restProps } = props

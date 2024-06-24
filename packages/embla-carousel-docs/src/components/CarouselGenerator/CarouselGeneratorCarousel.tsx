@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, PropsWithRef } from 'react'
+import React, { useMemo, useRef, ComponentPropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { SandboxGeneratorExample } from 'components/Sandbox/SandboxGeneratorExample'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
@@ -130,14 +130,9 @@ const CarouselGeneratorCarouselWrapper = styled.div<{
   }
 `
 
-type PropType = PropsWithRef<
-  React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > & {
-    previewLarge: boolean
-  }
->
+type PropType = ComponentPropsWithRef<'div'> & {
+  previewLarge: boolean
+}
 
 export const CarouselGeneratorCarousel = (props: PropType) => {
   const { previewLarge, className, ...restProps } = props

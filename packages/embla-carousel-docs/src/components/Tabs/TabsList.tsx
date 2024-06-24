@@ -1,4 +1,4 @@
-import React, { PropsWithRef, ReactNode } from 'react'
+import React, { ComponentPropsWithRef, ReactNode } from 'react'
 import styled from 'styled-components'
 import { useAppSelector } from 'hooks/useRedux'
 import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
@@ -67,9 +67,9 @@ export const TabsListScrollArea = styled.div`
   }
 `
 
-type PropType = { children?: ReactNode | undefined } & PropsWithRef<
-  React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>
->
+type PropType = ComponentPropsWithRef<'div'> & {
+  children?: ReactNode | undefined
+}
 
 export const TabsList = (props: PropType) => {
   const { children, ...restProps } = props

@@ -1,4 +1,4 @@
-import React, { PropsWithRef } from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppSelector } from 'hooks/useRedux'
 import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
@@ -120,12 +120,7 @@ const Label = styled.label<{ $disabled?: boolean }>`
     `};
 `
 
-export type PropType = PropsWithRef<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
->
+export type PropType = ComponentPropsWithRef<'input'>
 
 export const createRadioOrCheckboxDefault = (
   type: 'radio' | 'checkbox'

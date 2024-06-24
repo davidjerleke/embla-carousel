@@ -1,4 +1,4 @@
-import React, { PropsWithRef } from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppSelector } from 'hooks/useRedux'
 import { selectKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
@@ -126,12 +126,7 @@ const Input = styled.input<{
     `};
 `
 
-type PropType = PropsWithRef<
-  React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
->
+type PropType = ComponentPropsWithRef<'input'>
 
 export const InputText = (props: PropType) => {
   const { children, className, ...restProps } = props

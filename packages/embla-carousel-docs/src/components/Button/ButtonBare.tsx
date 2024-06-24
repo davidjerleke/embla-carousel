@@ -1,4 +1,4 @@
-import React, { PropsWithRef } from 'react'
+import React, { ComponentPropsWithRef } from 'react'
 import styled, { css } from 'styled-components'
 import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
@@ -42,28 +42,19 @@ const ButtonBareWrapper = styled.button`
 
 export const ButtonBareText = styled.span``
 
-export type PropType = PropsWithRef<
-  React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >
->
+export type PropType = ComponentPropsWithRef<'button'>
 
-export const ButtonBare = React.forwardRef(function ButtonBare(
-  props: PropType,
-  ref: React.ForwardedRef<HTMLButtonElement>
-) {
+export const ButtonBare = (props: PropType) => {
   const { children, ...restProps } = props
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <ButtonBareWrapper
       $isKeyNavigating={isKeyNavigating}
-      ref={ref}
       $isButton
       {...restProps}
     >
       <ButtonBareText>{children}</ButtonBareText>
     </ButtonBareWrapper>
   )
-})
+}

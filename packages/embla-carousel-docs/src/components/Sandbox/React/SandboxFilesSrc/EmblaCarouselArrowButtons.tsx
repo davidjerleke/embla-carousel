@@ -1,5 +1,5 @@
 import React, {
-  PropsWithChildren,
+  ComponentPropsWithRef,
   useCallback,
   useEffect,
   useState
@@ -52,12 +52,7 @@ export const usePrevNextButtons = (
   }
 }
 
-type PropType = PropsWithChildren<
-  React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >
->
+type PropType = ComponentPropsWithRef<'button'>
 
 export const PrevButton: React.FC<PropType> = (props) => {
   const { children, ...restProps } = props
