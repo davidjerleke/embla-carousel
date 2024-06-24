@@ -1,12 +1,9 @@
-import React, { PropsWithChildren, useMemo, useState } from 'react'
+import React, { PropsWithChildren, useEffect, useRef, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { selectTheme } from 'components/Theme/themeReducer'
-import { useAppSelector } from 'hooks/useRedux'
 import logoLightThemeDefaultUrl from 'assets/images/embla-logo-light-theme.svg'
 import logoDarkThemeDefaultUrl from 'assets/images/embla-logo-dark-theme.svg'
 import logoLightThemeBlurUrl from 'assets/images/embla-logo-light-theme-blur.svg'
 import logoDarkThemeBlurUrl from 'assets/images/embla-logo-dark-theme-blur.svg'
-import { useInView } from 'react-intersection-observer'
 import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { THEME_KEYS } from 'consts/themes'
 import { LAYERS } from 'consts/layers'
@@ -31,19 +28,33 @@ const imageStyles = css`
   bottom: 0;
   width: 100%;
   height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
   z-index: ${LAYERS.STEP};
 `
 
-export const LogoImage = styled.img`
+const imageIconStyles = css<{ $opacity: string }>`
+  opacity: ${({ $opacity }) => $opacity};
+  transition: opacity 1s;
+`
+
+export const LogoLightImage = styled.img`
+  ${imageStyles};
+`
+
+export const LogoDarkImage = styled.img`
   ${imageStyles};
 `
 
 export const LogoLightIcon = styled(Icon)`
   ${imageStyles};
+  ${imageIconStyles};
 `
 
 export const LogoDarkIcon = styled(Icon)`
   ${imageStyles};
+  ${imageIconStyles};
 `
 
 type LogoImagesType = {
@@ -95,33 +106,41 @@ type PropType = PropsWithChildren<{
 }>
 
 export const SiteLogo = (props: PropType) => {
-  const { appearance = 'default' } = props
-  const [inViewRef, inView] = useInView({ triggerOnce: true })
-  const [hasLoaded, setHasLoaded] = useState(false)
-  const theme = useAppSelector(selectTheme)
   const { title } = useSiteMetadata()
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const appearance = props.appearance || 'default'
   const lightSvg = LOGO_SVGS[appearance].light
   const darkSvg = LOGO_SVGS[appearance].dark
+  const svgOpacity = hasLoaded ? '0' : '1'
+  const imageLightRef = useRef<HTMLImageElement>(null)
+  const imageDarkRef = useRef<HTMLImageElement>(null)
+  const alt = `An illustrated atom like body which is the logotype of ${title}`
 
-  const { src, alt } = useMemo(
-    () => ({
-      src: LOGO_IMAGES[appearance][theme],
-      alt: `An illustrated atom like body which is the logotype of ${title}`
-    }),
-    [theme, appearance, title]
-  )
+  useEffect(() => {
+    const imageLight = imageLightRef.current
+    const imageDark = imageDarkRef.current
+    const imagesHaveLoaded = imageLight?.complete && imageDark?.complete
+
+    if (imagesHaveLoaded) setHasLoaded(true)
+  }, [])
 
   return (
-    <SiteLogoWrapper ref={inViewRef} {...props}>
-      {!hasLoaded && (
-        <>
-          <LogoLightIcon svg={lightSvg} fill={undefined} />
-          <LogoDarkIcon svg={darkSvg} fill={undefined} />
-        </>
-      )}
-      {inView && (
-        <LogoImage src={src} alt={alt} onLoad={() => setHasLoaded(true)} />
-      )}
+    <SiteLogoWrapper {...props}>
+      <LogoLightIcon svg={lightSvg} fill={undefined} $opacity={svgOpacity} />
+      <LogoDarkIcon svg={darkSvg} fill={undefined} $opacity={svgOpacity} />
+
+      <LogoLightImage
+        ref={imageLightRef}
+        src={LOGO_IMAGES[appearance].light}
+        alt={alt}
+        onLoad={() => setHasLoaded(true)}
+      />
+      <LogoDarkImage
+        ref={imageDarkRef}
+        src={LOGO_IMAGES[appearance].dark}
+        alt={alt}
+        onLoad={() => setHasLoaded(true)}
+      />
     </SiteLogoWrapper>
   )
 }

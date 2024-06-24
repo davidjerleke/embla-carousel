@@ -10,8 +10,9 @@ import { BORDER_SIZES } from 'consts/border'
 import { LinkBare } from 'components/Link/LinkBare'
 import {
   LogoDarkIcon,
-  LogoImage,
+  LogoDarkImage,
   LogoLightIcon,
+  LogoLightImage,
   SiteLogo
 } from 'components/SiteLogo/SiteLogo'
 
@@ -40,10 +41,17 @@ const HeaderLogoImage = styled(SiteLogo)`
     ${createSquareSizeStyles('4.4rem')};
   }
 
-  > ${LogoImage}, > ${LogoLightIcon}, > ${LogoDarkIcon} {
+  > ${LogoLightImage},
+    > ${LogoDarkImage},
+    > ${LogoLightIcon},
+    > ${LogoDarkIcon} {
     ${createSquareSizeStyles('100%')};
     padding: ${SPACINGS.ONE};
   }
+`
+
+const HeaderLogoText = styled.span`
+  display: flex;
 `
 
 export const HeaderLogo = () => {
@@ -52,7 +60,7 @@ export const HeaderLogo = () => {
   return (
     <HeaderLogoWrapper aria-label="Permalink to home page" to="/">
       <HeaderLogoImage />
-      <span>{title}</span>
+      <HeaderLogoText>{title}</HeaderLogoText>
     </HeaderLogoWrapper>
   )
 }
