@@ -15,7 +15,6 @@ import { MODALS } from 'consts/modal'
 import uniqueId from 'lodash/uniqueId'
 import {
   selectIsModalOpen,
-  setAllModalsClosed,
   setModalClosed,
   setModalOpen
 } from 'components/Modal/modalReducer'
@@ -58,7 +57,6 @@ export const SandboxSelection = (props: PropType) => {
   const dispatch = useAppDispatch()
 
   const openModal = useCallback(() => {
-    dispatch(setAllModalsClosed())
     dispatch(setModalOpen(modalId.current))
   }, [dispatch])
 
@@ -102,7 +100,7 @@ export const SandboxSelection = (props: PropType) => {
       </SandboxSelectionOpenModalButton>
 
       {isOpen && (
-        <Suspense fallback={<ModalLoadingTrigger />}>
+        <Suspense fallback={<ModalLoadingTrigger modal={modalId.current} />}>
           <SandboxSelectionModalLazy
             sandboxes={sandboxes}
             closeModal={closeModal}

@@ -1,17 +1,26 @@
 import { useEffect } from 'react'
 import { useAppDispatch } from 'hooks/useRedux'
-import { setModalIsLoading } from 'components/Modal/modalReducer'
+import { ModalsType } from 'consts/modal'
+import {
+  removeModalIsLoading,
+  setModalIsLoading
+} from 'components/Modal/modalReducer'
 
-export const ModalLoadingTrigger = () => {
+type PropType = {
+  modal: ModalsType
+}
+
+export const ModalLoadingTrigger = (props: PropType) => {
+  const { modal } = props
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setModalIsLoading(true))
+    dispatch(setModalIsLoading(modal))
 
     return () => {
-      dispatch(setModalIsLoading(false))
+      dispatch(removeModalIsLoading(modal))
     }
-  }, [dispatch])
+  }, [modal, dispatch])
 
   return null
 }

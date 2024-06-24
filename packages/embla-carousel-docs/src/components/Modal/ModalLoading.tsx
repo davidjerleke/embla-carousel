@@ -33,7 +33,7 @@ const ModalLoadingWrapper = styled.div<{ $opacity: number }>`
   align-items: center;
   justify-content: center;
   opacity: ${({ $opacity }) => $opacity};
-  transition: opacity 0.6s;
+  transition: ${({ $opacity }) => `opacity ${$opacity === 1 ? 0 : 0.6}s`};
 `
 
 export const ModalLoading = () => {

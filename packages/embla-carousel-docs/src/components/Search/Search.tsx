@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { MODALS } from 'consts/modal'
 import {
   selectIsModalOpen,
-  setAllModalsClosed,
   setModalClosed,
   setModalOpen
 } from 'components/Modal/modalReducer'
@@ -22,10 +21,6 @@ export const Search = () => {
 
   const toggleSearch = useCallback(() => {
     const toggleModal = isSearchOpenRef.current ? setModalClosed : setModalOpen
-
-    if (toggleModal === setModalOpen) {
-      dispatch(setAllModalsClosed())
-    }
     dispatch(toggleModal(MODALS.SITE_SEARCH))
   }, [dispatch])
 
@@ -54,7 +49,7 @@ export const Search = () => {
             toggleSearch={toggleSearch}
             closeSearch={closeSearch}
           />
-          <ModalLoadingTrigger />
+          <ModalLoadingTrigger modal={MODALS.SITE_SEARCH} />
         </>
       }
     >

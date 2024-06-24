@@ -22,7 +22,6 @@ import { KEY_NAVIGATING_STYLES } from 'consts/keyEvents'
 import { isBrowser } from 'utils/isBrowser'
 import {
   selectIsModalOpen,
-  setAllModalsClosed,
   setModalClosed,
   setModalOpen
 } from 'components/Modal/modalReducer'
@@ -621,7 +620,6 @@ export const SearchAlgolia = () => {
   const dispatch = useAppDispatch()
 
   const openSearch = useCallback(() => {
-    dispatch(setAllModalsClosed())
     dispatch(setModalOpen(MODALS.SITE_SEARCH))
   }, [dispatch])
 

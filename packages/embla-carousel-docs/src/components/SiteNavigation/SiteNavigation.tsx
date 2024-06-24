@@ -110,7 +110,9 @@ export const SiteNavigation = (props: PropType) => {
         <SiteNavigationMenuDesktop />
 
         {isOpen && (
-          <Suspense fallback={<ModalLoadingTrigger />}>
+          <Suspense
+            fallback={<ModalLoadingTrigger modal={MODALS.SITE_NAVIGATION} />}
+          >
             <SiteNavigationMenuCompactLazy />
           </Suspense>
         )}

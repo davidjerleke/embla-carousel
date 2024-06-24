@@ -3,12 +3,12 @@ import { ModalsType } from 'consts/modal'
 import { AppStateType } from 'consts/redux'
 
 export type ModalsStateType = {
-  isLoading: boolean
+  loadingModals: ModalsType[]
   openModals: ModalsType[]
 }
 
 const initialState: ModalsStateType = {
-  isLoading: false,
+  loadingModals: [],
   openModals: []
 }
 
@@ -16,24 +16,25 @@ const modalsSlice = createSlice({
   name: 'modal',
   initialState,
   reducers: {
-    setModalIsLoading: (
-      state,
-      action: PayloadAction<ModalsStateType['isLoading']>
-    ): void => {
-      state.isLoading = action.payload
+    setModalIsLoading: (state, action: PayloadAction<ModalsType>): void => {
+      const modal = action.payload
+      if (state.loadingModals.includes(modal)) return
+      state.loadingModals = state.loadingModals.concat(action.payload)
+    },
+    removeModalIsLoading: (state, action: PayloadAction<ModalsType>): void => {
+      const modal = action.payload
+      if (!state.loadingModals.includes(modal)) return
+      state.loadingModals = state.loadingModals.filter((key) => key !== modal)
     },
     setModalOpen: (state, action: PayloadAction<ModalsType>): void => {
-      const modalToOpen = action.payload
-      if (state.openModals.includes(modalToOpen)) return
+      const modal = action.payload
+      if (state.openModals.includes(modal)) return
       state.openModals = state.openModals.concat(action.payload)
     },
     setModalClosed: (state, action: PayloadAction<ModalsType>): void => {
-      const modalToClose = action.payload
-      if (!state.openModals.includes(modalToClose)) return
-      state.openModals = state.openModals.filter((key) => key !== modalToClose)
-    },
-    setAllModalsClosed: (state): void => {
-      state.openModals = []
+      const modal = action.payload
+      if (!state.openModals.includes(modal)) return
+      state.openModals = state.openModals.filter((key) => key !== modal)
     }
   }
 })
@@ -43,13 +44,13 @@ export { name as modalName, reducer as modalReducer }
 
 export const {
   setModalIsLoading,
+  removeModalIsLoading,
   setModalOpen,
-  setModalClosed,
-  setAllModalsClosed
+  setModalClosed
 } = modalsSlice.actions
 
 export const selectModalLoading = (state: AppStateType): boolean =>
-  state.modal.isLoading
+  state.modal.loadingModals.length > 0
 
 export const selectIsModalOpen =
   (key: ModalsType) =>

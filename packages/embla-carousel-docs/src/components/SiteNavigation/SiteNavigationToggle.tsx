@@ -11,7 +11,6 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { useEventListener } from 'hooks/useEventListener'
 import {
   selectIsModalOpen,
-  setAllModalsClosed,
   setModalClosed,
   setModalOpen
 } from 'components/Modal/modalReducer'
@@ -80,11 +79,6 @@ export const SiteNavigationToggle = () => {
 
   const onClick = useCallback(() => {
     const toggleModal = isOpen ? setModalClosed : setModalOpen
-
-    if (toggleModal === setModalOpen) {
-      dispatch(setAllModalsClosed())
-    }
-
     dispatch(toggleModal(MODALS.SITE_NAVIGATION))
   }, [dispatch, isOpen])
 
