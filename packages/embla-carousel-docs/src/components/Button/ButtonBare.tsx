@@ -44,17 +44,21 @@ export const ButtonBareText = styled.span``
 
 export type PropType = ComponentPropsWithRef<'button'>
 
-export const ButtonBare = (props: PropType) => {
+export const ButtonBare = React.forwardRef(function ButtonBare(
+  props: PropType,
+  ref: React.ForwardedRef<HTMLButtonElement>
+) {
   const { children, ...restProps } = props
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
     <ButtonBareWrapper
       $isKeyNavigating={isKeyNavigating}
+      ref={ref}
       $isButton
       {...restProps}
     >
       <ButtonBareText>{children}</ButtonBareText>
     </ButtonBareWrapper>
   )
-}
+})

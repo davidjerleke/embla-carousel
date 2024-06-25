@@ -4,12 +4,12 @@ import { AppStateType } from 'consts/redux'
 
 export type ModalsStateType = {
   loadingModals: ModalsType[]
-  openModals: ModalsType[]
+  openModal: ModalsType | null
 }
 
 const initialState: ModalsStateType = {
   loadingModals: [],
-  openModals: []
+  openModal: null
 }
 
 const modalsSlice = createSlice({
@@ -28,13 +28,12 @@ const modalsSlice = createSlice({
     },
     setModalOpen: (state, action: PayloadAction<ModalsType>): void => {
       const modal = action.payload
-      if (state.openModals.includes(modal)) return
-      state.openModals = state.openModals.concat(action.payload)
+      state.openModal = modal
     },
     setModalClosed: (state, action: PayloadAction<ModalsType>): void => {
       const modal = action.payload
-      if (!state.openModals.includes(modal)) return
-      state.openModals = state.openModals.filter((key) => key !== modal)
+      if (state.openModal !== modal) return
+      state.openModal = null
     }
   }
 })
@@ -53,6 +52,6 @@ export const selectModalLoading = (state: AppStateType): boolean =>
   state.modal.loadingModals.length > 0
 
 export const selectIsModalOpen =
-  (key: ModalsType) =>
+  (modal: ModalsType) =>
   (state: AppStateType): boolean =>
-    state.modal.openModals.includes(key)
+    state.modal.openModal === modal
