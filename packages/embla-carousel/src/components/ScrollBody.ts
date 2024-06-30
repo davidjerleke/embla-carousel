@@ -15,7 +15,6 @@ export type ScrollBodyType = {
 
 export function ScrollBody(
   location: Vector1DType,
-  offsetLocation: Vector1DType,
   target: Vector1DType,
   baseDuration: number,
   baseFriction: number
@@ -52,7 +51,7 @@ export function ScrollBody(
   }
 
   function settled(): boolean {
-    const diff = target.get() - offsetLocation.get()
+    const diff = target.get() - location.get()
     return mathAbs(diff) < 0.001
   }
 
