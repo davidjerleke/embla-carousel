@@ -13,7 +13,6 @@ export const scrollToLocationInstant = (
   engine.target.set(location)
   engine.scrollBody.useDuration(0)
   engine.animation.update()
-  engine.animation.render(1)
 }
 
 describe('➡️  Loop - Horizontal LTR', () => {
