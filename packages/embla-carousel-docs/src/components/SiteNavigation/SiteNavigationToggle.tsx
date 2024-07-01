@@ -103,6 +103,7 @@ export const SiteNavigationToggle = () => {
       aria-expanded={isOpen}
       aria-label={`${toggleAction} Main Navigation Menu`}
       ref={toggleElement}
+      type="button"
     >
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />

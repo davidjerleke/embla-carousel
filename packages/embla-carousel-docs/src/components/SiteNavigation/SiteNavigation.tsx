@@ -1,10 +1,4 @@
-import React, {
-  PropsWithChildren,
-  Suspense,
-  lazy,
-  useCallback,
-  useEffect
-} from 'react'
+import React, { PropsWithChildren, lazy, useCallback, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import FocusTrap from 'focus-trap-react'
@@ -12,12 +6,12 @@ import { useEventListener } from 'hooks/useEventListener'
 import { useBreakpoints } from 'hooks/useBreakpoints'
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
-import { HEADER_HEIGHT, HEADER_ID } from 'components/Header/Header'
 import { MODALS } from 'consts/modal'
 import { SPACINGS } from 'consts/spacings'
+import { HEADER_HEIGHT, HEADER_ID } from 'consts/header'
 import { isBrowser } from 'utils/isBrowser'
-import { ModalLoadingTrigger } from 'components/Modal/ModalLoadingTrigger'
 import { SiteNavigationMenuDesktop } from 'components/SiteNavigation/SiteNavigationMenuDesktop'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
 import {
   selectIsModalOpen,
   setModalClosed
@@ -110,11 +104,9 @@ export const SiteNavigation = (props: PropType) => {
         <SiteNavigationMenuDesktop />
 
         {isOpen && (
-          <Suspense
-            fallback={<ModalLoadingTrigger modal={MODALS.SITE_NAVIGATION} />}
-          >
+          <LoadSpinnerWithSuspense>
             <SiteNavigationMenuCompactLazy />
-          </Suspense>
+          </LoadSpinnerWithSuspense>
         )}
       </SiteNavigationWrapper>
     </FocusTrap>

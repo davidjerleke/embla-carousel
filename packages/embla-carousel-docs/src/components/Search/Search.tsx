@@ -1,7 +1,7 @@
-import React, { lazy, Suspense, useCallback, useEffect, useRef } from 'react'
+import React, { lazy, useCallback, useEffect, useRef } from 'react'
 import { SearchAlgoliaToggle } from 'components/Search/SearchAlgoliaToggle'
-import { ModalLoadingTrigger } from 'components/Modal/ModalLoadingTrigger'
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
 import { MODALS } from 'consts/modal'
 import {
   selectIsModalOpen,
@@ -42,18 +42,15 @@ export const Search = () => {
   }
 
   return (
-    <Suspense
+    <LoadSpinnerWithSuspense
       fallback={
-        <>
-          <SearchAlgoliaToggle
-            toggleSearch={toggleSearch}
-            closeSearch={closeSearch}
-          />
-          <ModalLoadingTrigger modal={MODALS.SITE_SEARCH} />
-        </>
+        <SearchAlgoliaToggle
+          toggleSearch={toggleSearch}
+          closeSearch={closeSearch}
+        />
       }
     >
       <SearchAlgoliaLazy />
-    </Suspense>
+    </LoadSpinnerWithSuspense>
   )
 }

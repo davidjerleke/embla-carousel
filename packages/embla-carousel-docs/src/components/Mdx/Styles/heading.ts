@@ -5,7 +5,7 @@ import { COLORS } from 'consts/themes'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
-import { HEADER_HEIGHT } from 'components/Header/Header'
+import { HEADER_HEIGHT } from 'consts/header'
 
 export const HEADING_TOP_SPACING = SPACINGS.EIGHT
 const ANCHOR_SVG_SIZE = SPACINGS.CUSTOM(({ THREE }) => THREE - 0.2)

@@ -7,7 +7,7 @@ import { selectTableOfContents } from 'components/TableOfContents/tableOfContent
 import { COLORS, THEME_KEYS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { MEDIA } from 'consts/breakpoints'
-import { HEADER_HEIGHT } from 'components/Header/Header'
+import { HEADER_HEIGHT } from 'consts/header'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { LAYERS } from 'consts/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'

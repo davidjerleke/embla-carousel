@@ -10,7 +10,6 @@ import { RoutesInit } from 'components/Routes/RoutesInit'
 import { ThemeInit } from 'components/Theme/ThemeInit'
 import { KeyEventsInit } from 'components/KeyEvents/KeyEventsInit'
 import { TableOfContentsInit } from 'components/TableOfContents/TableOfContentsInit'
-import { ModalLoading } from 'components/Modal/ModalLoading'
 
 type PropType = PropsWithChildren<PagePropType>
 
@@ -39,7 +38,6 @@ export const Layout = (props: PropType) => {
           <KeyEventsSkipToContent />
           <Header />
           <RoutesLoading pageId={id} />
-          <ModalLoading />
           <PageGrid layout={layout}>{children}</PageGrid>
           <Footer />
         </>

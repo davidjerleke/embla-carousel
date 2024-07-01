@@ -5,13 +5,10 @@ import { SiteNavigationToggle } from 'components/SiteNavigation/SiteNavigationTo
 import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
-import { SPACINGS } from 'consts/spacings'
+import { HEADER_HEIGHT, HEADER_ID } from 'consts/header'
 import { BORDER_SIZES } from 'consts/border'
-import { HeaderActions } from './HeaderActions'
-import { HeaderLogo } from './HeaderLogo'
-
-export const HEADER_HEIGHT = SPACINGS.TEN
-export const HEADER_ID = 'site-header'
+import { HeaderActions } from 'components/Header/HeaderActions'
+import { HeaderLogo } from 'components/Header/HeaderLogo'
 
 const HEIGHT = css`
   height: ${HEADER_HEIGHT};

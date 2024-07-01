@@ -2,12 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
-import { HEADER_HEIGHT } from 'components/Header/Header'
 import { LAYERS } from 'consts/layers'
 import { MEDIA } from 'consts/breakpoints'
 import { useCallback } from 'react'
 import { useEventListener } from 'hooks/useEventListener'
 import { ROUTES_LOADING_BAR_HEIGHT } from 'consts/routes'
+import { HEADER_HEIGHT } from 'consts/header'
 import { MODALS } from 'consts/modal'
 import {
   selectIsModalOpen,

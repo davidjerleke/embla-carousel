@@ -17,7 +17,6 @@ import { BORDER_RADIUSES } from 'consts/border'
 export const SELECT_CODESANDBOX_DIALOG_ID = 'select-codesandbox-dialog'
 const MODAL_MAX_WIDTH = '36rem'
 const DESKTOP_END_SPACING = SPACINGS.TEN
-
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '1.8rem'
 

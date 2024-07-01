@@ -79,6 +79,8 @@ export const SearchAlgoliaToggle = (props: PropType) => {
       ref={toggleElement}
       $isKeyNavigating={isKeyNavigating}
       onClick={toggleSearch}
+      aria-label="Search"
+      type="button"
     >
       <SearchButtonIcon svg="search" />
     </SearchButton>

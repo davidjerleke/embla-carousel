@@ -1,6 +1,7 @@
-import React, { Suspense, lazy, useCallback, useRef } from 'react'
+import React, { lazy, useCallback, useRef } from 'react'
 import styled from 'styled-components'
 import { SandboxSelectionType } from 'consts/sandbox'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
 import { ButtonBare } from 'components/Button/ButtonBare'
 import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { IconWithText, IconWithTextText } from 'components/Icon/IconWithText'
@@ -8,7 +9,6 @@ import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_RADIUSES } from 'consts/border'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
-import { ModalLoadingTrigger } from 'components/Modal/ModalLoadingTrigger'
 import { useEventListener } from 'hooks/useEventListener'
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { MODALS } from 'consts/modal'
@@ -93,6 +93,7 @@ export const SandboxSelection = (props: PropType) => {
         aria-expanded={isOpen}
         aria-label="Show Select CodeSandbox Dialog"
         onClick={openModal}
+        type="button"
       >
         <IconWithText iconSvg="pen" iconSize="1.4rem">
           Edit Code
@@ -100,12 +101,12 @@ export const SandboxSelection = (props: PropType) => {
       </SandboxSelectionOpenModalButton>
 
       {isOpen && (
-        <Suspense fallback={<ModalLoadingTrigger modal={modalId.current} />}>
+        <LoadSpinnerWithSuspense>
           <SandboxSelectionModalLazy
             sandboxes={sandboxes}
             closeModal={closeModal}
           />
-        </Suspense>
+        </LoadSpinnerWithSuspense>
       )}
     </SandboxSelectionWrapper>
   )
