@@ -1,4 +1,4 @@
-import { Ref, ref, isRef, watch, onMounted, onBeforeUnmount } from 'vue'
+import { Ref, isRef, watch, onMounted, onBeforeUnmount, shallowRef } from 'vue'
 import {
   areOptionsEqual,
   arePluginsEqual,
@@ -19,10 +19,10 @@ function emblaCarouselVue(
   options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
   plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = []
 ): EmblaCarouselVueType {
-  const storedOptions = ref(isRef(options) ? options.value : options)
-  const storedPlugins = ref(isRef(plugins) ? plugins.value : plugins)
-  const emblaNode = ref<HTMLElement>()
-  const emblaApi = ref<EmblaCarouselType>()
+  const storedOptions = shallowRef(isRef(options) ? options.value : options)
+  const storedPlugins = shallowRef(isRef(plugins) ? plugins.value : plugins)
+  const emblaNode = shallowRef<HTMLElement>()
+  const emblaApi = shallowRef<EmblaCarouselType>()
 
   function reInit() {
     if (!emblaApi.value) return
