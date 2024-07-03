@@ -19,14 +19,18 @@ function emblaCarouselVue(
   options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
   plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = []
 ): EmblaCarouselVueType {
-  const storedOptions = shallowRef(isRef(options) ? options.value : options)
-  const storedPlugins = shallowRef(isRef(plugins) ? plugins.value : plugins)
+  const isRefOptions = isRef(options)
+  const isRefPlugins = isRef(plugins)
+
+  let storedOptions = isRefOptions ? options.value : options
+  let storedPlugins = isRefPlugins ? plugins.value : plugins
+
   const emblaNode = shallowRef<HTMLElement>()
   const emblaApi = shallowRef<EmblaCarouselType>()
 
   function reInit() {
     if (!emblaApi.value) return
-    emblaApi.value.reInit(storedOptions.value, storedPlugins.value)
+    emblaApi.value.reInit(storedOptions, storedPlugins)
   }
 
   onMounted(() => {
@@ -34,8 +38,8 @@ function emblaCarouselVue(
     EmblaCarousel.globalOptions = emblaCarouselVue.globalOptions
     emblaApi.value = EmblaCarousel(
       emblaNode.value,
-      storedOptions.value,
-      storedPlugins.value
+      storedOptions,
+      storedPlugins
     )
   })
 
@@ -43,18 +47,18 @@ function emblaCarouselVue(
     if (emblaApi.value) emblaApi.value.destroy()
   })
 
-  if (isRef(options)) {
+  if (isRefOptions) {
     watch(options, (newOptions) => {
-      if (areOptionsEqual(storedOptions.value, newOptions)) return
-      storedOptions.value = newOptions
+      if (areOptionsEqual(storedOptions, newOptions)) return
+      storedOptions = newOptions
       reInit()
     })
   }
 
-  if (isRef(plugins)) {
+  if (isRefPlugins) {
     watch(plugins, (newPlugins) => {
-      if (arePluginsEqual(storedPlugins.value, newPlugins)) return
-      storedPlugins.value = newPlugins
+      if (arePluginsEqual(storedPlugins, newPlugins)) return
+      storedPlugins = newPlugins
       reInit()
     })
   }
