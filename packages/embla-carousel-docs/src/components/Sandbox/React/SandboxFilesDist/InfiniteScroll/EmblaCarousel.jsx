@@ -30,7 +30,13 @@ const EmblaCarousel = (props) => {
 
         emblaApi.reInit()
         const newEngine = emblaApi.internalEngine()
-        const copyEngineModules = ['location', 'target', 'scrollBody']
+        const copyEngineModules = [
+          'scrollBody',
+          'location',
+          'offsetLocation',
+          'previousLocation',
+          'target'
+        ]
         copyEngineModules.forEach((engineModule) => {
           Object.assign(newEngine[engineModule], oldEngine[engineModule])
         })

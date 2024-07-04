@@ -24,7 +24,7 @@ import './main.css'
 const injectBaseStyles = (): void => {
   const styleElement = document.createElement('style')
   const carouselStyles = examplesCarouselDefaultStyles(
-    '100%',
+    '70%',
     '1rem',
     'x',
     styledComponentsStylesToString(

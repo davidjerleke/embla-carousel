@@ -5,7 +5,7 @@ export type ScrollBodyType = {
   direction: () => number
   duration: () => number
   velocity: () => number
-  seek: () => ScrollBodyType
+  seek: (timeStep: number) => ScrollBodyType
   settled: () => boolean
   useBaseFriction: () => ScrollBodyType
   useBaseDuration: () => ScrollBodyType
@@ -15,6 +15,8 @@ export type ScrollBodyType = {
 
 export function ScrollBody(
   location: Vector1DType,
+  offsetLocation: Vector1DType,
+  previousLocation: Vector1DType,
   target: Vector1DType,
   baseDuration: number,
   baseFriction: number
@@ -26,21 +28,26 @@ export function ScrollBody(
   let rawLocation = location.get()
   let rawLocationPrevious = 0
 
-  function seek(): ScrollBodyType {
+  function seek(timeStep: number): ScrollBodyType {
+    const fixedDeltaTimeSeconds = timeStep / 1000
+    const duration = scrollDuration * fixedDeltaTimeSeconds
     const diff = target.get() - location.get()
     const isInstant = !scrollDuration
     let directionDiff = 0
 
     if (isInstant) {
       bodyVelocity = 0
+      previousLocation.set(target)
       location.set(target)
 
       directionDiff = diff
     } else {
-      bodyVelocity += diff / scrollDuration
+      previousLocation.set(location)
+
+      bodyVelocity += diff / duration
       bodyVelocity *= scrollFriction
       rawLocation += bodyVelocity
-      location.add(bodyVelocity)
+      location.add(bodyVelocity * fixedDeltaTimeSeconds)
 
       directionDiff = rawLocation - rawLocationPrevious
     }
@@ -51,7 +58,7 @@ export function ScrollBody(
   }
 
   function settled(): boolean {
-    const diff = target.get() - location.get()
+    const diff = target.get() - offsetLocation.get()
     return mathAbs(diff) < 0.001
   }
 

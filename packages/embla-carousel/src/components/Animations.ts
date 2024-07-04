@@ -2,7 +2,14 @@ import { EngineType } from './Engine'
 import { EventStore } from './EventStore'
 import { WindowType } from './utils'
 
-export type AnimationsUpdateType = (engine: EngineType) => void
+export type AnimationsUpdateType = (
+  engine: EngineType,
+  timeStep: number
+) => void
+export type AnimationsRenderType = (
+  engine: EngineType,
+  lagOffset: number
+) => void
 
 export type AnimationsType = {
   init: () => void
@@ -10,18 +17,20 @@ export type AnimationsType = {
   start: () => void
   stop: () => void
   update: () => void
+  render: (lagOffset: number) => void
 }
 
 export function Animations(
   ownerDocument: Document,
   ownerWindow: WindowType,
-  update: AnimationsType['update']
+  update: (timeStep: number) => void,
+  render: (lagOffset: number) => void
 ): AnimationsType {
   const documentVisibleHandler = EventStore()
   const timeStep = 1000 / 60
   let lastTimeStamp: number | null = null
-  let animationFrame = 0
   let lag = 0
+  let animationFrame = 0
 
   function init(): void {
     documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
@@ -38,14 +47,17 @@ export function Animations(
     if (!animationFrame) return
     if (!lastTimeStamp) lastTimeStamp = timeStamp
 
-    const timeElapsed = timeStamp - lastTimeStamp
+    const elapsed = timeStamp - lastTimeStamp
     lastTimeStamp = timeStamp
-    lag += timeElapsed
+    lag += elapsed
 
     while (lag >= timeStep) {
-      update()
+      update(timeStep)
       lag -= timeStep
     }
+
+    const lagOffset = lag / timeStep
+    render(lagOffset)
 
     if (animationFrame) ownerWindow.requestAnimationFrame(animate)
   }
@@ -73,7 +85,8 @@ export function Animations(
     destroy,
     start,
     stop,
-    update
+    update: () => update(timeStep),
+    render
   }
   return self
 }

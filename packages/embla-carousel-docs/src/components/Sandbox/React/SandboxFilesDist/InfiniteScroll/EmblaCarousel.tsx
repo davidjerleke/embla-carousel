@@ -42,9 +42,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         emblaApi.reInit()
         const newEngine = emblaApi.internalEngine()
         const copyEngineModules: (keyof EngineType)[] = [
+          'scrollBody',
           'location',
-          'target',
-          'scrollBody'
+          'offsetLocation',
+          'previousLocation',
+          'target'
         ]
         copyEngineModules.forEach((engineModule) => {
           Object.assign(newEngine[engineModule], oldEngine[engineModule])

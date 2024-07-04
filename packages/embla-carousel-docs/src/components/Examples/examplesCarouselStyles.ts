@@ -144,6 +144,7 @@ export const SLIDE_NUMBER_STYLES = css`
     align-items: center;
     justify-content: center;
     height: __replace_slide_height__;
+    user-select: none;
   }
 `
 

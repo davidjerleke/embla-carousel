@@ -7,6 +7,7 @@ export const setLocationOutOfBounds = (
   engine: EngineType,
   outOfBoundsLocation: number
 ): void => {
+  engine.offsetLocation.set(outOfBoundsLocation)
   engine.location.set(outOfBoundsLocation)
   engine.target.set(outOfBoundsLocation)
 }
@@ -23,7 +24,7 @@ describe('➡️  ScrollBounds - Horizontal RTL', () => {
       emblaApi.on('settle', settleCallback)
 
       setLocationOutOfBounds(engine, engine.limit.max + 1)
-      engine.animation.update()
+      engine.animation.render(1)
 
       expect(settleCallback).toHaveBeenCalledTimes(0)
     })
@@ -52,7 +53,7 @@ describe('➡️  ScrollBounds - Horizontal RTL', () => {
       emblaApi.on('settle', settleCallback)
 
       setLocationOutOfBounds(engine, engine.limit.min - 1)
-      engine.animation.update()
+      engine.animation.render(1)
 
       expect(settleCallback).toHaveBeenCalledTimes(0)
     })
