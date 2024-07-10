@@ -83,10 +83,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     }
 
     if (options.stopOnFocusIn) {
-      eventStore.add(container, 'focusin', () => {
-        stopScroll()
-        emblaApi.scrollTo(emblaApi.selectedScrollSnap(), true)
-      })
+      emblaApi.on('slideFocusStart', stopScroll)
 
       if (!options.stopOnInteraction) {
         eventStore.add(container, 'focusout', startScroll)
@@ -100,6 +97,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     emblaApi
       .off('pointerDown', stopScroll)
       .off('pointerUp', startScrollOnSettle)
+      .off('slideFocusStart', stopScroll)
       .off('settle', onSettle)
     stopScroll()
     destroyed = true

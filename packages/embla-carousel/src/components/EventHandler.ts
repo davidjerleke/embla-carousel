@@ -17,6 +17,7 @@ export interface EmblaEventListType {
   destroy: 'destroy'
   reInit: 'reInit'
   resize: 'resize'
+  slideFocusStart: 'slideFocusStart'
   slideFocus: 'slideFocus'
 }
 

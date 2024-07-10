@@ -112,7 +112,7 @@ function EmblaCarousel(
     engine.translate.to(engine.location.get())
     engine.animation.init()
     engine.slidesInView.init()
-    engine.slideFocus.init()
+    engine.slideFocus.init(self)
     engine.eventHandler.init(self)
     engine.resizeHandler.init(self)
     engine.slidesHandler.init(self)
