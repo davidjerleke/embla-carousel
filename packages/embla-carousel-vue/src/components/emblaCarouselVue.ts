@@ -1,4 +1,12 @@
-import { Ref, isRef, watch, onMounted, onBeforeUnmount, shallowRef } from 'vue'
+import {
+  Ref,
+  MaybeRef,
+  isRef,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  shallowRef
+} from 'vue'
 import {
   areOptionsEqual,
   arePluginsEqual,
@@ -16,8 +24,8 @@ export type EmblaCarouselVueType = [
 ]
 
 function emblaCarouselVue(
-  options: EmblaOptionsType | Ref<EmblaOptionsType> = {},
-  plugins: EmblaPluginType[] | Ref<EmblaPluginType[]> = []
+  options: MaybeRef<EmblaOptionsType> = {},
+  plugins: MaybeRef<EmblaPluginType[]> = []
 ): EmblaCarouselVueType {
   const isRefOptions = isRef(options)
   const isRefPlugins = isRef(plugins)
