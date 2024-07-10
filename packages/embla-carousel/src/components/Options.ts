@@ -6,6 +6,7 @@ import { DragHandlerOptionType } from './DragHandler'
 import { ResizeHandlerOptionType } from './ResizeHandler'
 import { SlidesHandlerOptionType } from './SlidesHandler'
 import { SlidesInViewOptionsType } from './SlidesInView'
+import { FocusHandlerOptionType } from './SlideFocus'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -36,6 +37,7 @@ export type OptionsType = CreateOptionsType<{
   watchDrag: DragHandlerOptionType
   watchResize: ResizeHandlerOptionType
   watchSlides: SlidesHandlerOptionType
+  watchFocus: FocusHandlerOptionType
 }>
 
 export const defaultOptions: OptionsType = {
@@ -57,7 +59,8 @@ export const defaultOptions: OptionsType = {
   active: true,
   watchDrag: true,
   watchResize: true,
-  watchSlides: true
+  watchSlides: true,
+  watchFocus: true
 }
 
 export type EmblaOptionsType = Partial<OptionsType>
