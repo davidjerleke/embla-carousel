@@ -99,6 +99,8 @@
       <img src="https://avatars2.githubusercontent.com/u/12494197?s=120&v=4" title="meirroth" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/hamidrezahanafi">
       <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/negezor">
+      <img src="https://avatars2.githubusercontent.com/u/9392723?s=120&v=4" title="negezor" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/th-km">
       <img src="https://avatars2.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/openscript">
