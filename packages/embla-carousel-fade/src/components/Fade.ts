@@ -20,6 +20,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   const fullOpacity = 1
   const noOpacity = 0
   const fadeFriction = 0.68
+  const timeStep = 1000 / 60
 
   let emblaApi: EmblaCarouselType
   let opacities: number[] = []
@@ -28,6 +29,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   let fadeVelocity = 0
   let progress = 0
   let shouldFadePair = false
+
   let defaultSettledBehaviour: ScrollBodyType['settled']
   let defaultProgressBehaviour: EmblaCarouselType['scrollProgress']
 
@@ -214,10 +216,11 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     return distanceSign === directionSign ? nextSnap : selectedSnap
   }
 
-  const fade = (emblaApi: EmblaCarouselType): void => {
+  function fade(emblaApi: EmblaCarouselType): void {
     const { dragHandler, scrollBody } = emblaApi.internalEngine()
+    const fixedDeltaTimeSeconds = timeStep / 1000
     const pointerDown = dragHandler.pointerDown()
-    const velocity = scrollBody.velocity()
+    const velocity = scrollBody.velocity() * fixedDeltaTimeSeconds
     const duration = scrollBody.duration()
     const fadeIndex = getFadeIndex()
     const noFadeIndex = !isNumber(fadeIndex)

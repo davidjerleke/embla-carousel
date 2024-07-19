@@ -66,6 +66,8 @@ export const setupInfiniteScroll = (
     const copyEngineModules: (keyof EngineType)[] = [
       'scrollBody',
       'location',
+      'offsetLocation',
+      'previousLocation',
       'target'
     ]
     copyEngineModules.forEach((engineModule) =>

@@ -394,7 +394,7 @@ export function EmblaCarousel() {
     console.log(`Embla just triggered ${eventName}!`)
   }
 
-  function onInit(event): void {
+  function onInit(event: CustomEvent<EmblaCarouselType>): void {
     emblaApi = event.detail
     emblaApi.on('slidesInView', logEmblaEvent)
   }

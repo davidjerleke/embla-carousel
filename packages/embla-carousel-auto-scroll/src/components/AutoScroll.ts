@@ -148,6 +148,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   function createAutoScrollBehaviour(engine: EngineType): ScrollBodyType {
     const {
       location,
+      previousLocation,
+      offsetLocation,
       target,
       scrollTarget,
       index,
@@ -164,12 +166,15 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     let rawLocationPrevious = 0
     let hasSettled = false
 
-    function seek(): ScrollBodyType {
+    function seek(timeStep: number): ScrollBodyType {
+      const fixedDeltaTimeSeconds = timeStep / 1000
       let directionDiff = 0
 
-      bodyVelocity = directionSign * options.speed
+      previousLocation.set(location)
+
+      bodyVelocity = directionSign * options.speed * 55
       rawLocation += bodyVelocity
-      location.add(bodyVelocity)
+      location.add(bodyVelocity * fixedDeltaTimeSeconds)
       target.set(location)
 
       directionDiff = rawLocation - rawLocationPrevious
@@ -186,8 +191,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
       const reachedEnd =
         options.direction === 'forward'
-          ? reachedMin(location.get())
-          : reachedMax(location.get())
+          ? reachedMin(offsetLocation.get())
+          : reachedMax(offsetLocation.get())
 
       if (!loop && reachedEnd) {
         hasSettled = true

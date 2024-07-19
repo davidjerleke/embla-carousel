@@ -47,7 +47,13 @@ export const setupInfiniteScroll = (emblaApi, loadMoreCallback) => {
 
     emblaApi.reInit()
     const newEngine = emblaApi.internalEngine()
-    const copyEngineModules = ['scrollBody', 'location', 'target']
+    const copyEngineModules = [
+      'scrollBody',
+      'location',
+      'offsetLocation',
+      'previousLocation',
+      'target'
+    ]
     copyEngineModules.forEach((engineModule) =>
       Object.assign(newEngine[engineModule], oldEngine[engineModule])
     )

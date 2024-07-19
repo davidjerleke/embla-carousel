@@ -1,5 +1,10 @@
 import { Alignment } from './Alignment'
-import { Animations, AnimationsType, AnimationsUpdateType } from './Animations'
+import {
+  Animations,
+  AnimationsType,
+  AnimationsUpdateType,
+  AnimationsRenderType
+} from './Animations'
 import { Axis, AxisType } from './Axis'
 import { Counter, CounterType } from './Counter'
 import { DragHandler, DragHandlerType } from './DragHandler'
@@ -44,6 +49,8 @@ export type EngineType = {
   indexPrevious: CounterType
   limit: LimitType
   location: Vector1DType
+  offsetLocation: Vector1DType
+  previousLocation: Vector1DType
   options: OptionsType
   percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
@@ -149,21 +156,30 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Animation
-  const update: AnimationsUpdateType = ({
-    dragHandler,
-    eventHandler,
-    scrollBody,
-    scrollBounds,
-    scrollLooper,
-    slideLooper,
-    translate,
-    location,
-    animation,
-    options: { loop }
-  }) => {
+  const update: AnimationsUpdateType = (
+    { dragHandler, scrollBody, scrollBounds, options: { loop } },
+    timeStep
+  ) => {
     if (!loop) scrollBounds.constrain(dragHandler.pointerDown())
-    scrollBody.seek()
+    scrollBody.seek(timeStep)
+  }
 
+  const render: AnimationsRenderType = (
+    {
+      scrollBody,
+      translate,
+      location,
+      offsetLocation,
+      scrollLooper,
+      slideLooper,
+      dragHandler,
+      animation,
+      eventHandler,
+      scrollBounds,
+      options: { loop }
+    },
+    lagOffset
+  ) => {
     const shouldSettle = scrollBody.settled()
     const withinBounds = !scrollBounds.shouldConstrain()
     const hasSettled = loop ? shouldSettle : shouldSettle && withinBounds
@@ -174,22 +190,40 @@ export function Engine(
     }
     if (!hasSettled) eventHandler.emit('scroll')
 
+    const interpolatedLocation =
+      location.get() * lagOffset + previousLocation.get() * (1 - lagOffset)
+
+    offsetLocation.set(interpolatedLocation)
+
     if (loop) {
       scrollLooper.loop(scrollBody.direction())
       slideLooper.loop()
     }
 
-    translate.to(location.get())
+    translate.to(offsetLocation.get())
   }
-
-  const animation = Animations(ownerDocument, ownerWindow, () => update(engine))
+  const animation = Animations(
+    ownerDocument,
+    ownerWindow,
+    (timeStep) => update(engine, timeStep),
+    (lagOffset: number) => render(engine, lagOffset)
+  )
 
   // Shared
   const friction = 0.68
   const startLocation = scrollSnaps[index.get()]
   const location = Vector1D(startLocation)
+  const previousLocation = Vector1D(startLocation)
+  const offsetLocation = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const scrollBody = ScrollBody(location, target, duration, friction)
+  const scrollBody = ScrollBody(
+    location,
+    offsetLocation,
+    previousLocation,
+    target,
+    duration,
+    friction
+  )
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
@@ -201,6 +235,7 @@ export function Engine(
     animation,
     index,
     indexPrevious,
+    scrollBody,
     scrollTarget,
     target,
     eventHandler
@@ -267,6 +302,8 @@ export function Engine(
     indexPrevious,
     limit,
     location,
+    offsetLocation,
+    previousLocation,
     options,
     resizeHandler: ResizeHandler(
       container,
@@ -280,13 +317,15 @@ export function Engine(
     scrollBody,
     scrollBounds: ScrollBounds(
       limit,
-      location,
+      offsetLocation,
       target,
       scrollBody,
       percentOfView
     ),
-    scrollLooper: ScrollLooper(contentSize, limit, location, [
+    scrollLooper: ScrollLooper(contentSize, limit, offsetLocation, [
       location,
+      offsetLocation,
+      previousLocation,
       target
     ]),
     scrollProgress,
@@ -302,7 +341,7 @@ export function Engine(
       slideSizesWithGaps,
       snaps,
       scrollSnaps,
-      location,
+      offsetLocation,
       slides
     ),
     slideFocus,
