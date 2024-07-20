@@ -10,7 +10,7 @@ import EmblaCarousel, {
   EmblaPluginType
 } from 'embla-carousel'
 
-type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
+export type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
   instance: ViewportElement | null
 ) => void
 
