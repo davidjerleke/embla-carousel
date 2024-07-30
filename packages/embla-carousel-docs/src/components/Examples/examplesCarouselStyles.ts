@@ -60,7 +60,6 @@ export const BASE_STYLES = css`
   }
 
   .embla__container {
-    backface-visibility: hidden;
     display: flex;
     touch-action: __replace-axis-touch_action__;
     margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
@@ -69,6 +68,7 @@ export const BASE_STYLES = css`
   }
 
   .embla__slide {
+    transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
