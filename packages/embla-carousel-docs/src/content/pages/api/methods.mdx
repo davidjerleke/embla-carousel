@@ -5,6 +5,7 @@ order: 1
 date: 2021-02-21
 ---
 
+import { ButtonBare } from 'components/Button/ButtonBare'
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_LIBRARY } from 'consts/tabs'
@@ -312,10 +313,30 @@ Scroll to the previous snap point if possible. When [loop](/api/options/#loop) i
 
 ### scrollTo
 
-Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`, `direction?: number`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
 Scroll to a snap point by its unique index. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target snap point. Set the **jump** parameter to `true` when you want to go to the desired slide instantly.
+
+The **direction** parameter is used internally to control which way the carousel scrolls. By default, (`undefined` or `0`), Embla Carousel will choose the closest way to the target snap point. It can be set to `-1` or `1` to force the carousel to scroll in a specific direction (forward or backward, respectively).
+
+<Admonition type="note">
+  **Note:** The **direction** parameter is likely opposite of what you might expect. `-1` is actually forward because when the carousel scrolls forward, it translates it negatively. For a horizontal carousel the container with the slides moves to the left when it scrolls forward. And for vertical carousels, it moves upwards. `1`, then, is backward.
+
+  <br />
+
+  ```js
+  // Always scrolls forward
+  emblaApi.scrollTo(nextScrollSnap, false, -1)
+
+  // Always scrolls backward
+  emblaApi.scrollTo(nextScrollSnap, false, 1)
+
+  // Scrolls in the given direction
+  const direction = nextScrollSnap > emblaApi.selectedScrollSnap() ? -1 : 1
+  emblaApi.scrollTo(nextScrollSnap, false, direction)
+  ```
+</Admonition>
 
 ---
 
