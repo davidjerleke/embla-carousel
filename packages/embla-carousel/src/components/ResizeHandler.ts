@@ -25,6 +25,7 @@ export function ResizeHandler(
   watchResize: ResizeHandlerOptionType,
   nodeRects: NodeRectsType
 ): ResizeHandlerType {
+  const observeNodes = [container].concat(slides)
   let resizeObserver: ResizeObserver
   let containerSize: number
   let slideSizes: number[] = []
@@ -42,6 +43,8 @@ export function ResizeHandler(
 
     function defaultCallback(entries: ResizeObserverEntry[]): void {
       for (const entry of entries) {
+        if (destroyed) return
+
         const isContainer = entry.target === container
         const slideIndex = slides.indexOf(<HTMLElement>entry.target)
         const lastSize = isContainer ? containerSize : slideSizes[slideIndex]
@@ -49,29 +52,28 @@ export function ResizeHandler(
         const diffSize = mathAbs(newSize - lastSize)
 
         if (diffSize >= 0.5) {
-          ownerWindow.requestAnimationFrame(() => {
-            emblaApi.reInit()
-            eventHandler.emit('resize')
-          })
+          emblaApi.reInit()
+          eventHandler.emit('resize')
+
           break
         }
       }
     }
 
     resizeObserver = new ResizeObserver((entries) => {
-      if (destroyed) return
       if (isBoolean(watchResize) || watchResize(emblaApi, entries)) {
         defaultCallback(entries)
       }
     })
 
-    const observeNodes = [container].concat(slides)
-    observeNodes.forEach((node) => resizeObserver.observe(node))
+    ownerWindow.requestAnimationFrame(() => {
+      observeNodes.forEach((node) => resizeObserver.observe(node))
+    })
   }
 
   function destroy(): void {
-    if (resizeObserver) resizeObserver.disconnect()
     destroyed = true
+    if (resizeObserver) resizeObserver.disconnect()
   }
 
   const self: ResizeHandlerType = {
