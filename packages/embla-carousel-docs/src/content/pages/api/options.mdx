@@ -640,3 +640,12 @@ Embla automatically watches the [container](/api/methods/#containernode/) for **
 </Admonition>
 
 ---
+
+### watchFocus
+
+Type: <BrandPrimaryText>`boolean | () => void`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slideFocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour or pass a custom callback to add your own focus logic.
+
+---

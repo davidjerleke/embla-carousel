@@ -3,7 +3,11 @@ import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
 import { SlideRegistryType } from './SlideRegistry'
-import { isNumber } from './utils'
+import { isBoolean, isNumber } from './utils'
+
+type FocusHandlerCallbackType = () => void
+
+export type FocusHandlerOptionType = boolean | FocusHandlerCallbackType
 
 export type SlideFocusType = {
   init: () => void
@@ -16,11 +20,14 @@ export function SlideFocus(
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   eventStore: EventStoreType,
-  eventHandler: EventHandlerType
+  eventHandler: EventHandlerType,
+  watchFocus: FocusHandlerOptionType
 ): SlideFocusType {
   let lastTabPressTime = 0
 
   function init(): void {
+    if (!watchFocus) return
+
     eventStore.add(document, 'keydown', registerTabPress, false)
     slides.forEach(addSlideFocusEvent)
   }
@@ -30,7 +37,7 @@ export function SlideFocus(
   }
 
   function addSlideFocusEvent(slide: HTMLElement): void {
-    const focus = (): void => {
+    const defaultFocusHandler = (): void => {
       const nowTime = new Date().getTime()
       const diffTime = nowTime - lastTabPressTime
 
@@ -46,6 +53,8 @@ export function SlideFocus(
       scrollTo.index(group, 0)
       eventHandler.emit('slideFocus')
     }
+
+    const focus = isBoolean(watchFocus) ? defaultFocusHandler : watchFocus
 
     eventStore.add(slide, 'focus', focus, {
       passive: true,
