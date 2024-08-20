@@ -113,14 +113,14 @@
       <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/sarussss">
       <img src="https://avatars2.githubusercontent.com/u/15656996?s=120&v=4" title="sarussss" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/realwagyu">
-      <img src="https://avatars2.githubusercontent.com/u/91921591?s=120&v=4" title="realwagyu" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/anzbert">
       <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/tlo-johnson">
       <img src="https://avatars2.githubusercontent.com/u/8763144?s=120&v=4" title="tlo-johnson" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/smultar">
       <img src="https://avatars2.githubusercontent.com/u/6223536?s=120&v=4" title="smultar" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/S-Shingler">
+      <img src="https://avatars2.githubusercontent.com/u/48463809?s=120&v=4" title="S-Shingler" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/sadeghbarati">
       <img src="https://avatars2.githubusercontent.com/u/17789047?s=120&v=4" title="sadeghbarati" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/rojadesign">
@@ -139,6 +139,8 @@
       <img src="https://avatars2.githubusercontent.com/u/17759705?s=120&v=4" title="mujahidfa" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/romellem">
       <img src="https://avatars2.githubusercontent.com/u/8504000?s=120&v=4" title="romellem" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/junlarsen">
+      <img src="https://avatars2.githubusercontent.com/u/42585241?s=120&v=4" title="junlarsen" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/LucasMariniFalbo">
       <img src="https://avatars2.githubusercontent.com/u/9245477?s=120&v=4" title="LucasMariniFalbo" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/LiamMartens">
