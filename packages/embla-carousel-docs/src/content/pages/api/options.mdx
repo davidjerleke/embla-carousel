@@ -604,7 +604,23 @@ Enables for scrolling the carousel with mouse and touch interactions. Set this t
   **Note:** When passing a custom callback it will run **before** the default
   Embla drag behaviour. Return `true` in your callback if you want Embla to run
   its default drag behaviour after your callback, or return `false` if you want
-  to disable it.
+  to skip it.
+</Admonition>
+
+---
+
+### watchFocus
+
+Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, event: FocusEvent) => boolean | void`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slideFocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour or pass a custom callback to add your own focus logic.
+
+<Admonition type="note">
+  **Note:** When passing a custom callback it will run **before** the default
+  Embla focus behaviour. Return `true` in your callback if you want Embla to run
+  its default focus behaviour after your callback, or return `false` if you want
+  to skip it.
 </Admonition>
 
 ---
@@ -620,7 +636,7 @@ Embla automatically watches the [container](/api/methods/#containernode/) and [s
   **Note:** When passing a custom callback it will run **before** the default
   Embla resize behaviour. Return `true` in your callback if you want Embla to
   run its default resize behaviour after your callback, or return `false` if you
-  want to disable it.
+  want to skip it.
 </Admonition>
 
 ---
@@ -636,7 +652,7 @@ Embla automatically watches the [container](/api/methods/#containernode/) for **
   **Note:** When passing a custom callback it will run **before** the default
   Embla mutation behaviour. Return `true` in your callback if you want Embla to
   run its default mutation behaviour after your callback, or return `false` if
-  you want to disable it.
+  you want to skip it.
 </Admonition>
 
 ---

@@ -79,7 +79,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     if (options.stopOnFocusIn) {
-      eventStore.add(container, 'focusin', stopTimer)
+      emblaApi.on('slideFocusStart', stopTimer)
 
       if (!options.stopOnInteraction) {
         eventStore.add(container, 'focusout', startTimer)
@@ -92,7 +92,10 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function destroy(): void {
-    emblaApi.off('pointerDown', stopTimer).off('pointerUp', startTimer)
+    emblaApi
+      .off('pointerDown', stopTimer)
+      .off('pointerUp', startTimer)
+      .off('slideFocusStart', stopTimer)
     stopTimer()
     destroyed = true
     playing = false

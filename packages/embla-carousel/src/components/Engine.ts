@@ -99,7 +99,8 @@ export function Engine(
     containScroll,
     watchResize,
     watchSlides,
-    watchDrag
+    watchDrag,
+    watchFocus
   } = options
 
   // Measurements
@@ -263,7 +264,8 @@ export function Engine(
     scrollTo,
     scrollBody,
     eventStore,
-    eventHandler
+    eventHandler,
+    watchFocus
   )
 
   // Engine
