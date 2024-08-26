@@ -33,6 +33,18 @@ function useEmblaCarousel(
   }, [emblaApi])
 
   useEffect(() => {
+    if (areOptionsEqual(storedOptions.current, options)) return
+    storedOptions.current = options
+    reInit()
+  }, [options, reInit])
+
+  useEffect(() => {
+    if (arePluginsEqual(storedPlugins.current, plugins)) return
+    storedPlugins.current = plugins
+    reInit()
+  }, [plugins, reInit])
+
+  useEffect(() => {
     if (canUseDOM() && viewport) {
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
       const newEmblaApi = EmblaCarousel(
@@ -46,18 +58,6 @@ function useEmblaCarousel(
       setEmblaApi(undefined)
     }
   }, [viewport, setEmblaApi])
-
-  useEffect(() => {
-    if (areOptionsEqual(storedOptions.current, options)) return
-    storedOptions.current = options
-    reInit()
-  }, [options, reInit])
-
-  useEffect(() => {
-    if (arePluginsEqual(storedPlugins.current, plugins)) return
-    storedPlugins.current = plugins
-    reInit()
-  }, [plugins, reInit])
 
   return [<EmblaViewportRefType>setViewport, emblaApi]
 }
