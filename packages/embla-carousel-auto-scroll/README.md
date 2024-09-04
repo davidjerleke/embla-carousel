@@ -157,6 +157,8 @@
       <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/allen-garvey">
       <img src="https://avatars2.githubusercontent.com/u/9314727?s=120&v=4" title="allen-garvey" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/lesha1201">
+      <img src="https://avatars2.githubusercontent.com/u/10157660?s=120&v=4" title="lesha1201" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/SaizFerri">
       <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" height="50" style="max-width: 100%" />
     </a>
@@ -188,6 +190,10 @@
     <br>
     <sup>
       <a href="https://github.com/zaaakher">zaaakher</a> - Contributing <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">guidelines</a>.
+    </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/sarussss">sarussss</a> - Answering questions.
     </sup>
   </p>
 </div>
