@@ -115,6 +115,10 @@
     <sup>
       <a href="https://github.com/zaaakher">zaaakher</a> - Contributing <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">guidelines</a>.
     </sup>
+    <br>
+    <sup>
+      <a href="https://github.com/sarussss">sarussss</a> - Answering questions.
+    </sup>
   </p>
 </div>
 
