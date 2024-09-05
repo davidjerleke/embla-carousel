@@ -91,7 +91,7 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
 <div
   class="embla"
   use:emblaCarouselSvelte="{{ options }}"
-  on:emblaInit="{onInit}"
+  onemblaInit="{onInit}"
 >
   <div class="embla__container">
     <div class="embla__slide">Slide 1</div>
@@ -100,6 +100,9 @@ The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options
   </div>
 </div>
 ```
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
 
 ## Adding plugins
 
