@@ -64,7 +64,7 @@
     "embla-carousel-reactive-utils": "8.2.1"
   },
   "peerDependencies": {
-    "svelte": "^3.49.0 || ^4.0.0"
+    "svelte": "^3.49.0 || ^4.0.0 || ^5.0.0"
   },
   "exports": {
     "./package.json": "./package.json",
