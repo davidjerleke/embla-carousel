@@ -17,6 +17,7 @@ type EmblaCarouselParameterType = {
 
 type EmblaCarouselAttributesType = {
   'on:emblaInit'?: (evt: CustomEvent<EmblaCarouselType>) => void
+  onemblaInit?: (evt: CustomEvent<EmblaCarouselType>) => void
 }
 
 export type EmblaCarouselSvelteType = ActionReturn<

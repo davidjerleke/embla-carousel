@@ -105,8 +105,12 @@ export function EmblaCarousel() {
   }
 </script>
 
-<div class="embla" use:emblaCarouselSvelte on:emblaInit="{onInit}">...</div>
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
 ```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
 
 </TabsItem>
 </Tabs>
@@ -245,8 +249,12 @@ export function EmblaCarousel() {
   }
 </script>
 
-<div class="embla" use:emblaCarouselSvelte on:emblaInit="{onInit}">...</div>
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
 ```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
 
 <Admonition type="warning">
   If you're using `pnpm`, you need to install `embla-carousel` as a

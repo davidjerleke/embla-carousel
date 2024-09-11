@@ -406,11 +406,15 @@ export function EmblaCarousel() {
 <div
   class="embla"
   use:emblaCarouselSvelte="{{ plugins }}"
-  on:emblaInit="{onInit}"
+  onemblaInit="{onInit}"
 >
   ...
 </div>
 ```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
 
 </TabsItem>
 </Tabs>
@@ -533,11 +537,15 @@ export function EmblaCarousel() {
 <div
   class="embla"
   use:emblaCarouselSvelte="{{ plugins }}"
-  on:emblaInit="{onInit}"
+  onemblaInit="{onInit}"
 >
   ...
 </div>
 ```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
 
 </TabsItem>
 </Tabs>
