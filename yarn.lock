@@ -8525,7 +8525,7 @@ __metadata:
     react-dom: ^18.2.0
     react-router-dom: ^6.4.3
     typescript: ^4.6.4
-    vite: ^3.2.10
+    vite: ^3.2.11
   languageName: unknown
   linkType: soft
 
@@ -8536,7 +8536,7 @@ __metadata:
     embla-carousel-autoplay: 8.3.0
     embla-carousel-solid: 8.3.0
     solid-js: ^1.8.0
-    vite: ^3.2.10
+    vite: ^3.2.11
     vite-plugin-solid: ^2.8.0
   languageName: unknown
   linkType: soft
@@ -8547,7 +8547,7 @@ __metadata:
   dependencies:
     embla-carousel: 8.3.0
     typescript: ^4.6.4
-    vite: ^3.2.10
+    vite: ^3.2.11
   languageName: unknown
   linkType: soft
 
@@ -21231,9 +21231,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.2.10":
-  version: 3.2.10
-  resolution: "vite@npm:3.2.10"
+"vite@npm:^3.2.11":
+  version: 3.2.11
+  resolution: "vite@npm:3.2.11"
   dependencies:
     esbuild: ^0.15.9
     fsevents: ~2.3.2
@@ -21265,7 +21265,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 6772a0fce62d56d2d4480439a63a43a33ccb111aba981633947c7991bbba5414ad54711d835af464f851a176c3b0a93d8b07952d52fa52bcd5507220f83df443
+  checksum: ed548985faef2dfd3c2fa9cf9c70c5369a4f68aa054605a9d2c1783780df7a7e63adcb96af86e14c6c83c66d2db0f64ec05d5ea1d6b9aebce66a479d050bb7d5
   languageName: node
   linkType: hard
 
