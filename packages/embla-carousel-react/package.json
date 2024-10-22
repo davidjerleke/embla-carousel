@@ -64,7 +64,7 @@
     "embla-carousel-reactive-utils": "8.3.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.1 || ^18.0.0"
+    "react": "^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc"
   },
   "exports": {
     "./package.json": "./package.json",
