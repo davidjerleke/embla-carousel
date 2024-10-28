@@ -157,12 +157,14 @@ export function Engine(
   const slideIndexes = arrayKeys(slides)
 
   // Animation
-  const update: AnimationsUpdateType = (
-    { dragHandler, scrollBody, scrollBounds, options: { loop } },
-    timeStep
-  ) => {
+  const update: AnimationsUpdateType = ({
+    dragHandler,
+    scrollBody,
+    scrollBounds,
+    options: { loop }
+  }) => {
     if (!loop) scrollBounds.constrain(dragHandler.pointerDown())
-    scrollBody.seek(timeStep)
+    scrollBody.seek()
   }
 
   const render: AnimationsRenderType = (
@@ -171,6 +173,7 @@ export function Engine(
       translate,
       location,
       offsetLocation,
+      previousLocation,
       scrollLooper,
       slideLooper,
       dragHandler,
@@ -203,10 +206,11 @@ export function Engine(
 
     translate.to(offsetLocation.get())
   }
+
   const animation = Animations(
     ownerDocument,
     ownerWindow,
-    (timeStep) => update(engine, timeStep),
+    () => update(engine),
     (lagOffset: number) => render(engine, lagOffset)
   )
 
