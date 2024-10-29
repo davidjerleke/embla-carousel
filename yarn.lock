@@ -8529,7 +8529,6 @@ __metadata:
     husky: ^4.3.8
     npm-run-all: ^4.1.5
     prettier: 2.8.8
-    rollup: ^4.22.4
     typescript: ^5.2.2
   languageName: unknown
   linkType: soft
