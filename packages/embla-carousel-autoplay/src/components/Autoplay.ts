@@ -13,6 +13,7 @@ declare module 'embla-carousel' {
   interface EmblaEventListType {
     autoplayPlay: 'autoplay:play'
     autoplayStop: 'autoplay:stop'
+    autoplaySelect: 'autoplay:select'
   }
 }
 
@@ -165,6 +166,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     } else {
       emblaApi.scrollTo(0, jump)
     }
+
+    emblaApi.emit('autoplay:select')
   }
 
   const self: AutoplayType = {
