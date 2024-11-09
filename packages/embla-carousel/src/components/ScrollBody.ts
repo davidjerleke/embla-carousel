@@ -5,7 +5,7 @@ export type ScrollBodyType = {
   direction: () => number
   duration: () => number
   velocity: () => number
-  seek: (timeStep: number) => ScrollBodyType
+  seek: () => ScrollBodyType
   settled: () => boolean
   useBaseFriction: () => ScrollBodyType
   useBaseDuration: () => ScrollBodyType
@@ -21,38 +21,36 @@ export function ScrollBody(
   baseDuration: number,
   baseFriction: number
 ): ScrollBodyType {
-  let bodyVelocity = 0
+  let scrollVelocity = 0
   let scrollDirection = 0
   let scrollDuration = baseDuration
   let scrollFriction = baseFriction
   let rawLocation = location.get()
   let rawLocationPrevious = 0
 
-  function seek(timeStep: number): ScrollBodyType {
-    const fixedDeltaTimeSeconds = timeStep / 1000
-    const duration = scrollDuration * fixedDeltaTimeSeconds
-    const diff = target.get() - location.get()
+  function seek(): ScrollBodyType {
+    const displacement = target.get() - location.get()
     const isInstant = !scrollDuration
-    let directionDiff = 0
+    let scrollDistance = 0
 
     if (isInstant) {
-      bodyVelocity = 0
+      scrollVelocity = 0
       previousLocation.set(target)
       location.set(target)
 
-      directionDiff = diff
+      scrollDistance = displacement
     } else {
       previousLocation.set(location)
 
-      bodyVelocity += diff / duration
-      bodyVelocity *= scrollFriction
-      rawLocation += bodyVelocity
-      location.add(bodyVelocity * fixedDeltaTimeSeconds)
+      scrollVelocity += displacement / scrollDuration
+      scrollVelocity *= scrollFriction
+      rawLocation += scrollVelocity
+      location.add(scrollVelocity)
 
-      directionDiff = rawLocation - rawLocationPrevious
+      scrollDistance = rawLocation - rawLocationPrevious
     }
 
-    scrollDirection = mathSign(directionDiff)
+    scrollDirection = mathSign(scrollDistance)
     rawLocationPrevious = rawLocation
     return self
   }
@@ -71,7 +69,7 @@ export function ScrollBody(
   }
 
   function velocity(): number {
-    return bodyVelocity
+    return scrollVelocity
   }
 
   function useBaseDuration(): ScrollBodyType {

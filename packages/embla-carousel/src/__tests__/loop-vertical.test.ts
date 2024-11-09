@@ -41,7 +41,7 @@ describe('➡️  Loop - Vertical', () => {
         )
 
         expect(emblaApi.containerNode().style.transform).toBe(
-          'translate3d(0px,0.09000000000000001px,0px)'
+          'translate3d(0px,0.09px,0px)'
         )
       })
     })
@@ -267,7 +267,7 @@ describe('➡️  Loop - Vertical', () => {
         )
 
         expect(emblaApi.containerNode().style.transform).toBe(
-          'translate3d(0px,-1209.8899999999999px,0px)'
+          'translate3d(0px,-1209.89px,0px)'
         )
       })
 
@@ -278,7 +278,7 @@ describe('➡️  Loop - Vertical', () => {
         )
 
         expect(emblaApi.containerNode().style.transform).toBe(
-          'translate3d(0px,450.09000000000003px,0px)'
+          'translate3d(0px,450.09px,0px)'
         )
       })
     })
@@ -939,7 +939,7 @@ describe('➡️  Loop - Vertical', () => {
         )
 
         expect(emblaApi.containerNode().style.transform).toBe(
-          'translate3d(0px,-1419.8899999999999px,0px)'
+          'translate3d(0px,-1419.89px,0px)'
         )
       })
 
@@ -950,7 +950,7 @@ describe('➡️  Loop - Vertical', () => {
         )
 
         expect(emblaApi.containerNode().style.transform).toBe(
-          'translate3d(0px,440.09000000000003px,0px)'
+          'translate3d(0px,440.09px,0px)'
         )
       })
     })

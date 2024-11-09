@@ -1,4 +1,5 @@
 import { AxisType } from './Axis'
+import { roundToTwoDecimals } from './utils'
 
 export type TranslateType = {
   clear: () => void
@@ -12,6 +13,7 @@ export function Translate(
 ): TranslateType {
   const translate = axis.scroll === 'x' ? x : y
   const containerStyle = container.style
+  let previousTarget: number | null = null
   let disabled = false
 
   function x(n: number): string {
@@ -24,7 +26,12 @@ export function Translate(
 
   function to(target: number): void {
     if (disabled) return
-    containerStyle.transform = translate(axis.direction(target))
+
+    const newTarget = roundToTwoDecimals(axis.direction(target))
+    if (newTarget === previousTarget) return
+
+    containerStyle.transform = translate(newTarget)
+    previousTarget = newTarget
   }
 
   function toggleActive(active: boolean): void {
