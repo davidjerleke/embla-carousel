@@ -37,6 +37,10 @@ export function factorAbs(valueB: number, valueA: number): number {
   return mathAbs(diff / valueB)
 }
 
+export function roundToTwoDecimals(num: number): number {
+  return Math.round(num * 100) / 100
+}
+
 export function arrayKeys<Type>(array: Type[]): number[] {
   return objectKeys(array).map(Number)
 }

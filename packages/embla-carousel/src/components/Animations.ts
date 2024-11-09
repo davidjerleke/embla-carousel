@@ -2,10 +2,7 @@ import { EngineType } from './Engine'
 import { EventStore } from './EventStore'
 import { WindowType } from './utils'
 
-export type AnimationsUpdateType = (
-  engine: EngineType,
-  timeStep: number
-) => void
+export type AnimationsUpdateType = (engine: EngineType) => void
 export type AnimationsRenderType = (
   engine: EngineType,
   lagOffset: number
@@ -23,14 +20,14 @@ export type AnimationsType = {
 export function Animations(
   ownerDocument: Document,
   ownerWindow: WindowType,
-  update: (timeStep: number) => void,
+  update: () => void,
   render: (lagOffset: number) => void
 ): AnimationsType {
   const documentVisibleHandler = EventStore()
-  const timeStep = 1000 / 60
+  const fixedTimeStep = 1000 / 60
   let lastTimeStamp: number | null = null
-  let lag = 0
-  let animationFrame = 0
+  let accumulatedTime = 0
+  let animationId = 0
 
   function init(): void {
     documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
@@ -43,41 +40,57 @@ export function Animations(
     documentVisibleHandler.clear()
   }
 
+  function shouldUpdate(): boolean {
+    return accumulatedTime >= fixedTimeStep
+  }
+
+  function updateAndRemoveAccumulatedTime(): void {
+    update()
+    accumulatedTime -= fixedTimeStep
+    if (shouldUpdate()) updateAndRemoveAccumulatedTime()
+  }
+
+  function renderWithAlpha(): void {
+    const alpha = accumulatedTime / fixedTimeStep
+    render(alpha)
+  }
+
   function animate(timeStamp: DOMHighResTimeStamp): void {
-    if (!animationFrame) return
-    if (!lastTimeStamp) lastTimeStamp = timeStamp
+    if (!animationId) return
 
-    const elapsed = timeStamp - lastTimeStamp
-    lastTimeStamp = timeStamp
-    lag += elapsed
-
-    while (lag >= timeStep) {
-      update(timeStep)
-      lag -= timeStep
+    if (!lastTimeStamp) {
+      lastTimeStamp = timeStamp
+      update()
+      renderWithAlpha()
     }
 
-    const lagOffset = lag / timeStep
-    render(lagOffset)
+    const timeElapsed = timeStamp - lastTimeStamp
+    lastTimeStamp = timeStamp
+    accumulatedTime += timeElapsed
 
-    if (animationFrame) ownerWindow.requestAnimationFrame(animate)
+    if (shouldUpdate()) updateAndRemoveAccumulatedTime()
+    renderWithAlpha()
+
+    if (animationId) {
+      animationId = ownerWindow.requestAnimationFrame(animate)
+    }
   }
 
   function start(): void {
-    if (animationFrame) return
-
-    animationFrame = ownerWindow.requestAnimationFrame(animate)
+    if (animationId) return
+    animationId = ownerWindow.requestAnimationFrame(animate)
   }
 
   function stop(): void {
-    ownerWindow.cancelAnimationFrame(animationFrame)
+    ownerWindow.cancelAnimationFrame(animationId)
     lastTimeStamp = null
-    lag = 0
-    animationFrame = 0
+    accumulatedTime = 0
+    animationId = 0
   }
 
   function reset(): void {
     lastTimeStamp = null
-    lag = 0
+    accumulatedTime = 0
   }
 
   const self: AnimationsType = {
@@ -85,7 +98,7 @@ export function Animations(
     destroy,
     start,
     stop,
-    update: () => update(timeStep),
+    update,
     render
   }
   return self
