@@ -1,15 +1,16 @@
-export function removeClass(node: HTMLElement, className: string): void {
-  if (!node || !className) return
-  const { classList } = node
-  if (classList.contains(className)) classList.remove(className)
+import { ClassNameOptionType } from './Options'
+
+export function normalizeClassNames(classNames: ClassNameOptionType): string[] {
+  const normalized = Array.isArray(classNames) ? classNames : [classNames]
+  return normalized.filter(Boolean)
 }
 
-export function addClass(node: HTMLElement, className: string): void {
-  if (!node || !className) return
-  const { classList } = node
-  if (!classList.contains(className)) classList.add(className)
+export function removeClass(node: HTMLElement, classNames: string[]): void {
+  if (!node || !classNames.length) return
+  node.classList.remove(...classNames)
 }
 
-export function nodeListToArray(nodeList: NodeListOf<Element>): HTMLElement[] {
-  return <HTMLElement[]>Array.from(nodeList)
+export function addClass(node: HTMLElement, classNames: string[]): void {
+  if (!node || !classNames.length) return
+  node.classList.add(...classNames)
 }

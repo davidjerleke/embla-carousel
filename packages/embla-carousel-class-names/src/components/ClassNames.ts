@@ -1,5 +1,5 @@
-import { defaultOptions, OptionsType } from './Options'
-import { nodeListToArray, addClass, removeClass } from './utils'
+import { defaultOptions, OptionsType, ClassNamesListType } from './Options'
+import { addClass, normalizeClassNames, removeClass } from './utils'
 import {
   CreatePluginType,
   OptionsHandlerType,
@@ -22,9 +22,19 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let emblaApi: EmblaCarouselType
   let root: HTMLElement
   let slides: HTMLElement[]
+  let snappedIndexes: number[] = []
+  let inViewIndexes: number[] = []
+
   const selectedEvents: EmblaEventType[] = ['select']
   const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
   const inViewEvents: EmblaEventType[] = ['slidesInView']
+  const classNames: ClassNamesListType = {
+    snapped: [],
+    inView: [],
+    draggable: [],
+    dragging: [],
+    loop: []
+  }
 
   function init(
     emblaApiInstance: EmblaCarouselType,
@@ -39,58 +49,96 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
 
     root = emblaApi.rootNode()
     slides = emblaApi.slideNodes()
-    const isDraggable = !!emblaApi.internalEngine().options.watchDrag
 
-    if (isDraggable) {
-      addClass(root, options.draggable)
+    const { watchDrag, loop } = emblaApi.internalEngine().options
+    const isDraggable = !!watchDrag
+
+    if (options.loop && loop) {
+      classNames.loop = normalizeClassNames(options.loop)
+      addClass(root, classNames.loop)
     }
+
+    if (options.draggable && isDraggable) {
+      classNames.draggable = normalizeClassNames(options.draggable)
+      addClass(root, classNames.draggable)
+    }
+
     if (options.dragging) {
+      classNames.dragging = normalizeClassNames(options.dragging)
       draggingEvents.forEach((evt) => emblaApi.on(evt, toggleDraggingClass))
     }
+
     if (options.snapped) {
+      classNames.snapped = normalizeClassNames(options.snapped)
       selectedEvents.forEach((evt) => emblaApi.on(evt, toggleSnappedClasses))
       toggleSnappedClasses()
     }
+
     if (options.inView) {
+      classNames.inView = normalizeClassNames(options.inView)
       inViewEvents.forEach((evt) => emblaApi.on(evt, toggleInViewClasses))
       toggleInViewClasses()
     }
   }
 
   function destroy(): void {
-    removeClass(root, options.draggable)
     draggingEvents.forEach((evt) => emblaApi.off(evt, toggleDraggingClass))
     selectedEvents.forEach((evt) => emblaApi.off(evt, toggleSnappedClasses))
     inViewEvents.forEach((evt) => emblaApi.off(evt, toggleInViewClasses))
-    slides.forEach((slide) => removeClass(slide, options.snapped))
+
+    removeClass(root, classNames.loop)
+    removeClass(root, classNames.draggable)
+    removeClass(root, classNames.dragging)
+    toggleSlideClasses([], snappedIndexes, classNames.snapped)
+    toggleSlideClasses([], inViewIndexes, classNames.inView)
+
+    Object.keys(classNames).forEach((classNameKey) => {
+      const key = <keyof ClassNamesListType>classNameKey
+      classNames[key] = []
+    })
   }
 
   function toggleDraggingClass(
     _: EmblaCarouselType,
     evt: EmblaEventType
   ): void {
-    if (evt === 'pointerDown') addClass(root, options.dragging)
-    else removeClass(root, options.dragging)
+    const toggleClass = evt === 'pointerDown' ? addClass : removeClass
+    toggleClass(root, classNames.dragging)
   }
 
-  function toggleSlideClasses(slideIndexes: number[], className: string): void {
-    const container = emblaApi.containerNode()
-    const slideNodeList = container.querySelectorAll(`.${className}`)
-    const removeClassSlides = nodeListToArray(slideNodeList)
+  function toggleSlideClasses(
+    addClassIndexes: number[] = [],
+    removeClassIndexes: number[] = [],
+    classNames: string[]
+  ): number[] {
+    const removeClassSlides = removeClassIndexes.map((index) => slides[index])
+    const addClassSlides = addClassIndexes.map((index) => slides[index])
 
-    removeClassSlides.forEach((slide) => removeClass(slide, className))
-    slideIndexes.forEach((index) => addClass(slides[index], className))
+    removeClassSlides.forEach((slide) => removeClass(slide, classNames))
+    addClassSlides.forEach((slide) => addClass(slide, classNames))
+
+    return addClassIndexes
   }
 
   function toggleSnappedClasses(): void {
     const { slideRegistry } = emblaApi.internalEngine()
-    const slideIndexes = slideRegistry[emblaApi.selectedScrollSnap()]
-    toggleSlideClasses(slideIndexes, options.snapped)
+    const newSnappedIndexes = slideRegistry[emblaApi.selectedScrollSnap()]
+
+    snappedIndexes = toggleSlideClasses(
+      newSnappedIndexes,
+      snappedIndexes,
+      classNames.snapped
+    )
   }
 
   function toggleInViewClasses(): void {
-    const slideIndexes = emblaApi.slidesInView()
-    toggleSlideClasses(slideIndexes, options.inView)
+    const newInViewIndexes = emblaApi.slidesInView()
+
+    inViewIndexes = toggleSlideClasses(
+      newInViewIndexes,
+      inViewIndexes,
+      classNames.inView
+    )
   }
 
   const self: ClassNamesType = {
