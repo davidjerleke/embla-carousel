@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-class-names",
-  "version": "8.3.1",
+  "version": "8.4.0",
   "author": "David Jerleke",
   "description": "A class name toggle plugin for Embla Carousel",
   "repository": {
@@ -59,7 +59,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.3.1"
+    "embla-carousel": "8.4.0"
   },
   "exports": {
     "./package.json": "./package.json",
