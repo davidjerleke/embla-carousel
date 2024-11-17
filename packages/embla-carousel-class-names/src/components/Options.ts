@@ -1,10 +1,17 @@
 import { CreateOptionsType } from 'embla-carousel'
 
+export type ClassNameOptionType = string | string[]
+
+export type ClassNamesListType = {
+  snapped: string[]
+  inView: string[]
+  draggable: string[]
+  dragging: string[]
+  loop: string[]
+}
+
 export type OptionsType = CreateOptionsType<{
-  snapped: string
-  inView: string
-  draggable: string
-  dragging: string
+  [Key in keyof ClassNamesListType]: ClassNameOptionType
 }>
 
 export const defaultOptions: OptionsType = {
@@ -13,5 +20,6 @@ export const defaultOptions: OptionsType = {
   snapped: 'is-snapped',
   inView: 'is-in-view',
   draggable: 'is-draggable',
-  dragging: 'is-dragging'
+  dragging: 'is-dragging',
+  loop: 'is-loop'
 }
