@@ -164,15 +164,14 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     let rawLocationPrevious = 0
     let hasSettled = false
 
-    function seek(timeStep: number): ScrollBodyType {
-      const fixedDeltaTimeSeconds = timeStep / 1000
+    function seek(): ScrollBodyType {
       let directionDiff = 0
 
       previousLocation.set(location)
 
-      bodyVelocity = directionSign * options.speed * 55
+      bodyVelocity = directionSign * options.speed
       rawLocation += bodyVelocity
-      location.add(bodyVelocity * fixedDeltaTimeSeconds)
+      location.add(bodyVelocity)
       target.set(location)
 
       directionDiff = rawLocation - rawLocationPrevious
