@@ -1,4 +1,7 @@
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+import EmblaCarousel, {
+  EmblaOptionsType,
+  EmblaPluginType
+} from 'embla-carousel'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
 import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
@@ -52,6 +55,7 @@ injectBaseStyles()
 
 const SLIDE_COUNT = 6
 const OPTIONS: EmblaOptionsType = {}
+const PLUGINS: EmblaPluginType[] = []
 
 const emblaNodes = <HTMLElement[]>(
   Array.from(document.querySelectorAll('.embla'))
@@ -74,7 +78,7 @@ emblaNodes.forEach((emblaNode) => {
 
   createSlides(containerNode, SLIDE_COUNT)
 
-  const emblaApi = EmblaCarousel(viewPortNode, OPTIONS)
+  const emblaApi = EmblaCarousel(viewPortNode, OPTIONS, PLUGINS)
   const dotNodes = createDotBtns(emblaApi, dotsNode)
   const toggleDotButtonsActive = toggleDotBtnsActive(emblaApi, dotNodes)
   addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)

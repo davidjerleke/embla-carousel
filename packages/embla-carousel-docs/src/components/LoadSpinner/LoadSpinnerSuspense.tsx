@@ -34,8 +34,8 @@ const LoadSpinnerSuspenseWrapper = styled.div<{ $opacity: number }>`
   opacity: ${({ $opacity }) => $opacity};
   transition: ${({ $opacity }) => `opacity ${$opacity === 1 ? 0 : 0.6}s`};
   box-shadow: 0 0 0 ${BORDER_SIZES.DETAIL} ${COLORS.DETAIL_LOW_CONTRAST};
+  pointer-events: none;
 `
-// pointer-events: none;
 
 type PropType = {
   isVisible: boolean

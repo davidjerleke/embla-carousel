@@ -333,6 +333,41 @@ export const THUMBS_STYLES = css`
   }
 `
 
+export const AUTOPLAY_STYLES = css`
+  .embla__controls {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .embla__progress {
+    justify-self: center;
+    transition: opacity 0.3s ease-in-out;
+    width: 8rem;
+  }
+
+  .embla__progress--hidden {
+    opacity: 0;
+  }
+
+  .embla__progress__bar {
+    animation-name: autoplay-progress;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+
+  .embla__progress--hidden .embla__progress__bar {
+    animation-play-state: paused;
+  }
+
+  @keyframes autoplay-progress {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+`
+
 export const PROGRESS_STYLES = css`
   .embla__progress {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
@@ -818,7 +853,9 @@ export const examplesCarouselAutoplayStyles = (
       SLIDE_NUMBER_STYLES,
       CONTROLS_STYLES,
       ARROWS_STYLES,
-      PLAY_BUTTON_STYLES
+      PLAY_BUTTON_STYLES,
+      PROGRESS_STYLES,
+      AUTOPLAY_STYLES
     )
   )
 }

@@ -60,10 +60,10 @@ Below follows an exhaustive **list of all** `Autoplay` **options** and their def
 
 ### delay
 
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`number | (scrollSnapList: number[], emblaApi: EmblaCarouselType) => number[]`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
-Delay between transitions in milliseconds.
+Choose a delay between transitions in milliseconds. If you pass a number, the same delay will be **applied to all transitions**. If you pass a function, you can return an array of numbers based on the `scrollSnapList` parameter and set **different delays for each scroll snap**.
 
 ---
 
@@ -81,7 +81,7 @@ When set to true `true`, autoplay will do instant slide transitions when advanci
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
-If set to `false`, you'll have to start autoplay yourself by calling the [play](/plugins/autoplay/#play) method.
+If set to `false`, you'll have to start autoplay manually by calling the [play](/plugins/autoplay/#play) method. It's useful to set this to `false` when you want full control over the timing. For example, when building an autoplay progress bar.
 
 ---
 
@@ -159,7 +159,7 @@ Stop autoplay.
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Resets the timer and starts over. This will only take effect if autoplay is playing. If autoplay is stopped, this method won't trigger anything.
+Resets the timer and starts over. This will only take effect if autoplay is already active. If autoplay is stopped, this method won't do anything.
 
 ---
 
@@ -169,6 +169,25 @@ Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>
 Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
 
 Returns a boolean whether autoplay is playing or not.
+
+---
+
+### timeUntilNext
+
+Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`number | null`</BrandSecondaryText>
+
+If the autoplay timer is active, this will return a number representing the time left until the autoplay scrolls to the next snap. If the timer is not active, this will return `null`. Use this together with the [autoplay:timerset](/plugins/autoplay/#autoplaytimerset) and [autoplay:timerstopped](/plugins/autoplay/#autoplaytimerstopped) events to create a custom progress bar for autoplay.
+
+<Admonition type="note">
+  If you're using a reactive wrapper for Embla Carousel like
+  `embla-carousel-react` and building an autoplay progress bar, you probably
+  want to set [playOnInit](/plugins/autoplay/#playoninit) to `false` and call
+  the `play` method manually to fully control the timing.
+  <br />
+  This is because the autoplay plugin will start playing as soon as it's
+  initialized, which might not be what you want in these cases.
+</Admonition>
 
 ---
 
@@ -182,7 +201,7 @@ Below follows an exhaustive **list of all** `Autoplay` **events** together with 
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
-Fires when autoplay starts playing.
+Fires when autoplay starts playing. When this event is triggered, the **autoplay timer is active**, and autoplay will select the next scroll snap and start scrolling to it when the [delay](/plugins/autoplay/#delay) has passed.
 
 ---
 
@@ -190,7 +209,7 @@ Fires when autoplay starts playing.
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
-Fires when autoplay stops playing.
+Fires when autoplay stops playing. When this event is triggered, the **autoplay timer is not active anymore**.
 
 ---
 
@@ -198,6 +217,22 @@ Fires when autoplay stops playing.
 
 Once: <BrandPrimaryText>`no`</BrandPrimaryText>
 
-Fires directly after autoplay selects a new index.
+Fires directly after autoplay selects the next scroll snap and starts scrolling to it.
+
+---
+
+### autoplay:timerset
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when the autoplay timer is set. As soon as the timer is set, countdown to autoplay to the next scroll snap will begin.
+
+---
+
+### autoplay:timerstopped
+
+Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+
+Fires when the autoplay timer is stopped.
 
 ---

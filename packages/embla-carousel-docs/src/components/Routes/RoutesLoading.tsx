@@ -18,6 +18,8 @@ import {
   setRoutesLoading
 } from 'components/Routes/routesReducer'
 
+const ANIMATION_NAME = 'routes-loading-progress'
+
 const RoutesLoadingWrapper = styled.div`
   z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
   top: ${HEADER_HEIGHT};
@@ -40,13 +42,13 @@ const ProgressBar = styled.div<{ $loading: boolean; $animating: boolean }>`
   width: 100%;
   opacity: 1;
   animation-duration: ${({ $loading }) => ($loading ? '15s' : '1s')};
-  animation-name: ${({ $animating }) => ($animating ? 'progress' : 'none')};
+  animation-name: ${({ $animating }) => ($animating ? ANIMATION_NAME : 'none')};
   animation-fill-mode: forwards;
   animation-timing-function: linear;
   transition: opacity 0.6s;
   pointer-events: none;
 
-  @keyframes progress {
+  @keyframes ${ANIMATION_NAME} {
     0% {
       transform: translateX(-100%);
     }

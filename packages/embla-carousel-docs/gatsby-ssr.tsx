@@ -150,7 +150,14 @@ export const onRenderBody: GatsbySSR['onRenderBody'] = ({
       crossOrigin="anonymous"
     />,
     fontsToPreload.map((font) => (
-      <link rel="preload" as="font" type="font/woff2" href={font} key={font} />
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href={font}
+        key={font}
+        crossOrigin="anonymous"
+      />
     )),
     imagesToPreload.map((image) => (
       <link
