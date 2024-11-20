@@ -3,10 +3,7 @@ import { EventStore } from './EventStore'
 import { WindowType } from './utils'
 
 export type AnimationsUpdateType = (engine: EngineType) => void
-export type AnimationsRenderType = (
-  engine: EngineType,
-  lagOffset: number
-) => void
+export type AnimationsRenderType = (engine: EngineType, alpha: number) => void
 
 export type AnimationsType = {
   init: () => void
@@ -14,17 +11,18 @@ export type AnimationsType = {
   start: () => void
   stop: () => void
   update: () => void
-  render: (lagOffset: number) => void
+  render: (alpha: number) => void
 }
 
 export function Animations(
   ownerDocument: Document,
   ownerWindow: WindowType,
   update: () => void,
-  render: (lagOffset: number) => void
+  render: (alpha: number) => void
 ): AnimationsType {
   const documentVisibleHandler = EventStore()
   const fixedTimeStep = 1000 / 60
+
   let lastTimeStamp: number | null = null
   let accumulatedTime = 0
   let animationId = 0
@@ -40,36 +38,21 @@ export function Animations(
     documentVisibleHandler.clear()
   }
 
-  function shouldUpdate(): boolean {
-    return accumulatedTime >= fixedTimeStep
-  }
-
-  function updateAndRemoveAccumulatedTime(): void {
-    update()
-    accumulatedTime -= fixedTimeStep
-    if (shouldUpdate()) updateAndRemoveAccumulatedTime()
-  }
-
-  function renderWithAlpha(): void {
-    const alpha = accumulatedTime / fixedTimeStep
-    render(alpha)
-  }
-
   function animate(timeStamp: DOMHighResTimeStamp): void {
     if (!animationId) return
-
-    if (!lastTimeStamp) {
-      lastTimeStamp = timeStamp
-      update()
-      renderWithAlpha()
-    }
+    if (!lastTimeStamp) lastTimeStamp = timeStamp
 
     const timeElapsed = timeStamp - lastTimeStamp
     lastTimeStamp = timeStamp
     accumulatedTime += timeElapsed
 
-    if (shouldUpdate()) updateAndRemoveAccumulatedTime()
-    renderWithAlpha()
+    while (accumulatedTime >= fixedTimeStep) {
+      update()
+      accumulatedTime -= fixedTimeStep
+    }
+
+    const alpha = accumulatedTime / fixedTimeStep
+    render(alpha)
 
     if (animationId) {
       animationId = ownerWindow.requestAnimationFrame(animate)
