@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-reactive-utils",
-  "version": "8.5.0",
+  "version": "8.5.1",
   "author": "David Jerleke",
   "description": "Reactive utilities for Embla Carousel",
   "repository": {
@@ -59,7 +59,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "8.5.0"
+    "embla-carousel": "8.5.1"
   },
   "exports": {
     "./package.json": "./package.json",
