@@ -40,7 +40,11 @@ export function Animations(
 
   function animate(timeStamp: DOMHighResTimeStamp): void {
     if (!animationId) return
-    if (!lastTimeStamp) lastTimeStamp = timeStamp
+    if (!lastTimeStamp) {
+      lastTimeStamp = timeStamp
+      update()
+      update()
+    }
 
     const timeElapsed = timeStamp - lastTimeStamp
     lastTimeStamp = timeStamp
