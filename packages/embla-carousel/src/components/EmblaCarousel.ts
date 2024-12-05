@@ -1,5 +1,6 @@
 import { Engine, EngineType } from './Engine'
 import { EventStore } from './EventStore'
+import { WatchHandler, WatchHandlerType } from './WatchHandler'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
@@ -13,6 +14,8 @@ export type EmblaCarouselType = {
   containerNode: () => HTMLElement
   internalEngine: () => EngineType
   destroy: () => void
+  onWatch: WatchHandlerType['on']
+  offWatch: WatchHandlerType['off']
   off: EventHandlerType['off']
   on: EventHandlerType['on']
   emit: EventHandlerType['emit']
@@ -41,9 +44,11 @@ function EmblaCarousel(
   const optionsHandler = OptionsHandler(ownerWindow)
   const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
+  const watchHandler = WatchHandler()
   const eventHandler = EventHandler()
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
   const { on, off, emit } = eventHandler
+  const { on: onWatch, off: offWatch } = watchHandler
   const reInit = reActivate
 
   let destroyed = false
@@ -78,7 +83,8 @@ function EmblaCarousel(
       ownerDocument,
       ownerWindow,
       options,
-      eventHandler
+      eventHandler,
+      watchHandler
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
@@ -112,13 +118,14 @@ function EmblaCarousel(
     engine.translate.to(engine.location.get())
     engine.animation.init()
     engine.slidesInView.init()
-    engine.slideFocus.init(self)
+    engine.slideFocus.init()
+    engine.resizeHandler.init()
+    engine.slidesHandler.init()
     engine.eventHandler.init(self)
-    engine.resizeHandler.init(self)
-    engine.slidesHandler.init(self)
+    engine.watchHandler.init(self)
 
     if (engine.options.loop) engine.slideLooper.loop()
-    if (container.offsetParent && slides.length) engine.dragHandler.init(self)
+    if (container.offsetParent && slides.length) engine.dragHandler.init()
 
     pluginApis = pluginsHandler.init(self, pluginList)
   }
@@ -153,6 +160,7 @@ function EmblaCarousel(
     deActivate()
     eventHandler.emit('destroy')
     eventHandler.clear()
+    watchHandler.clear()
   }
 
   function scrollTo(index: number, jump?: boolean, direction?: number): void {
@@ -234,7 +242,9 @@ function EmblaCarousel(
     internalEngine,
     destroy,
     off,
+    offWatch,
     on,
+    onWatch,
     emit,
     plugins,
     previousScrollSnap,

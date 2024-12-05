@@ -1,0 +1,652 @@
+---
+title: Watchers
+description: Learn how to listen to Embla Carousel watchers and how to make use of them.
+order: 3
+date: 2024-12-04
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+
+# Watchers
+
+Embla Carousel exposes **watchers** which you can use to **intercept** and **cancel** events before they happen, and run your own logic **before** the internal event logic runs.
+
+---
+
+## Usage
+
+You need an **initialized carousel** in order to **make use of watchers**. Watchers will only be fired during the lifecycle of a carousel and added watch listeners will persist even when you hard reset the carousel with the [reInit](/api/methods/#reinit) method.
+
+### Adding watch listeners
+
+After initializing a carousel, we're going to **watch** the [focus](/api/events/#slideFocus) **event** in the following example:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={11}
+import EmblaCarousel from 'embla-carousel'
+
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
+
+function logPointerDown(emblaApi, eventName, context) {
+  console.log(context)
+  return true
+}
+
+emblaApi.onWatch('pointerDown', logPointerDown)
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={13}
+import { useCallback, useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
+
+  const logPointerDown = useCallback((emblaApi, eventName, context) => {
+    console.log(context)
+    return true
+  }, [])
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDown)
+  }, [emblaApi, logPointerDown])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={13}
+<script setup>
+  import { onMounted } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef, emblaApi] = emblaCarouselVue()
+
+  function logPointerDown(emblaApi, eventName, context) {
+    console.log(context)
+    return true
+  }
+
+  onMounted(() => {
+    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', logPointerDown)
+  })
+
+  // ...
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={14}
+import { onMount } from 'solid-js'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+
+  function logPointerDown(emblaApi, eventName, context) {
+    console.log(context)
+    return true
+  }
+
+  onMount(() => {
+    const api = emblaApi()
+    if (api) api.onWatch('pointerDown', logPointerDown)
+  })
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={13}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi
+
+  function logPointerDown(emblaApi, eventName, context) {
+    console.log(context)
+    return true
+  }
+
+  function onInit(event) {
+    emblaApi = event.detail
+    emblaApi.onWatch('pointerDown', logPointerDown)
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
+```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
+
+</TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  **Note:** In contrast to regular Embla [events](/api/events), you can only add
+  a **single watcher per event**. If you add multiple watch handlers to the same
+  event, only the last one will be executed.
+</Admonition>
+
+### Removing watch listeners
+
+In order to remove an event listener, you'll have to call the [off](/api/methods/#off) method and make sure to pass the **same callback reference** you passed to the [on](/api/methods/#off) method:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={8}
+import EmblaCarousel from 'embla-carousel'
+
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
+
+function logPointerDownOnce(emblaApi, eventName, context) {
+  console.log(context)
+  emblaApi.offWatch('pointerDown')
+  return true
+}
+
+emblaApi.onWatch('pointerDown', logPointerDownOnce)
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={9}
+import { useCallback, useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
+
+  const logPointerDownOnce = useCallback((emblaApi, eventName, context) => {
+    console.log(context)
+    emblaApi.offWatch('pointerDown')
+    return true
+  }, [])
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDownOnce)
+  }, [emblaApi, logPointerDownOnce])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={9}
+<script setup>
+  import { onMounted } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef, emblaApi] = emblaCarouselVue()
+
+  function logPointerDownOnce(emblaApi, eventName, context) {
+    console.log(context)
+    emblaApi.offWatch('pointerDown')
+    return true
+  }
+
+  onMounted(() => {
+    if (emblaApi.value) {
+      emblaApi.value.onWatch('pointerDown', logPointerDownOnce)
+    }
+  })
+
+  // ...
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={9}
+import { onMount } from 'solid-js'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+
+  function logPointerDownOnce(emblaApi, eventName, context) {
+    console.log(context)
+    emblaApi.offWatch('pointerDown')
+    return true
+  }
+
+  onMount(() => {
+    const api = emblaApi()
+    if (api) api.onWatch('pointerDown', logPointerDownOnce)
+  })
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={8}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi
+
+  function logPointerDownOnce(emblaApi, eventName, context) {
+    console.log(context)
+    emblaApi.offWatch('pointerDown')
+    return true
+  }
+
+  function onInit(event) {
+    emblaApi = event.detail
+    emblaApi.onWatch('pointerDown', logPointerDownOnce)
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
+```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
+
+</TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  **Note:** In contrast to regular Embla [events](/api/events), you **don't
+  pass** the **callback reference** to the `offWatch()` method when removing a
+  watcher because watchers only accept a single listener per event.
+</Admonition>
+
+### Cancelling events
+
+A watcher can cancel the internal event logic by returning `false` from the callback. In this example, we're going to **prevent pointer down** from doing anything:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={10}
+import EmblaCarousel from 'embla-carousel'
+
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
+
+let shouldAllowDraggingForNow = false
+
+function onPointerDown(emblaApi, eventName, context) {
+  // If shouldAllowDraggingForNow is false, the internal event logic will be cancelled
+  return shouldAllowDraggingForNow
+}
+
+emblaApi.onWatch('pointerDown', onPointerDown)
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={10}
+import { useCallback, useEffect, useRef } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
+  const shouldAllowDraggingForNow = useRef(false)
+
+  const onPointerDown = useCallback((emblaApi, eventName, context) => {
+    // If shouldAllowDraggingForNow is false, the internal event logic will be cancelled
+    return shouldAllowDraggingForNow.current
+  }, [])
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.onWatch('pointerDown', onPointerDown)
+  }, [emblaApi, onPointerDown])
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={10}
+<script setup>
+  import { onMounted } from 'vue'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef, emblaApi] = emblaCarouselVue()
+  let shouldAllowDraggingForNow = false
+
+  function onPointerDown(emblaApi, eventName, context) {
+    // If shouldAllowDraggingForNow is false, the internal event logic will be cancelled
+    return shouldAllowDraggingForNow
+  }
+
+  onMounted(() => {
+    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', onPointerDown)
+  })
+
+  // ...
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={10}
+import { onMount } from 'solid-js'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+  let shouldAllowDraggingForNow = false
+
+  function onPointerDown(emblaApi, eventName, context) {
+    // If shouldAllowDraggingForNow is false, the internal event logic will be cancelled
+    return shouldAllowDraggingForNow
+  }
+
+  onMount(() => {
+    const api = emblaApi()
+    if (api) api.onWatch('pointerDown', onPointerDown)
+  })
+
+  // ...
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={9}
+<script>
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi
+  let shouldAllowDraggingForNow = false
+
+  function onPointerDown(emblaApi, eventName, context) {
+    // If shouldAllowDraggingForNow is false, the internal event logic will be cancelled
+    return shouldAllowDraggingForNow
+  }
+
+  function onInit(event) {
+    emblaApi = event.detail
+    emblaApi.onWatch('pointerDown', onPointerDown)
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
+```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
+
+</TabsItem>
+</Tabs>
+
+However, if you toggle the `shouldAllowDraggingForNow` variable to `true`, the internal event logic will run as usual. This allows for **conditionally cancelling** events based on your own logic.
+
+### TypeScript
+
+The `EmblaWatchType` and `EmblaWatchContextType` is obtained directly from the **core package** `embla-carousel` and used like so:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```ts asLanguage=tsx highlight={3-4,12-13}
+import EmblaCarousel, {
+  EmblaCarouselType,
+  EmblaWatchType,
+  EmblaWatchContextType
+} from 'embla-carousel'
+
+const emblaNode = document.querySelector('.embla')
+const emblaApi = EmblaCarousel(emblaNode)
+
+function logPointerDown(
+  emblaApi: EmblaCarouselType,
+  eventName: EmblaWatchType,
+  context: EmblaWatchContextType<'pointerDown'>
+): void {
+  console.log(context)
+  return true
+}
+
+emblaApi.onWatch('pointerDown', logPointerDown)
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```tsx highlight={4-5,15-16}
+import React, { useCallback } from 'react'
+import {
+  EmblaCarouselType,
+  EmblaWatchType,
+  EmblaWatchContextType
+} from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel()
+
+  const logPointerDown = useCallback(
+    (
+      emblaApi: EmblaCarouselType,
+      eventName: EmblaWatchType,
+      context: EmblaWatchContextType<'pointerDown'>
+    ) => {
+      console.log(context)
+      return true
+    },
+    []
+  )
+
+  useEffect(() => {
+    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDown)
+  }, [emblaApi, logPointerDown])
+
+  // ...
+}
+```
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-react` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html highlight={5-6,14-15}
+<script setup>
+  import { onMounted } from 'vue'
+  import {
+    EmblaCarouselType,
+    EmblaWatchType,
+    EmblaWatchContextType
+  } from 'embla-carousel'
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef] = emblaCarouselVue()
+
+  function logPointerDown(
+    emblaApi: EmblaCarouselType,
+    eventName: EmblaWatchType,
+    context: EmblaWatchContextType<'pointerDown'>
+  ): void {
+    console.log(context)
+    return true
+  }
+
+  onMounted(() => {
+    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', logPointerDown)
+  })
+
+  // ...
+</script>
+```
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-vue` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={4-5,14-15}
+import { onMount } from 'solid-js'
+import {
+  EmblaCarouselType,
+  EmblaWatchType,
+  EmblaWatchContextType
+} from 'embla-carousel'
+import createEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = createEmblaCarousel()
+
+  function logPointerDown(
+    emblaApi: EmblaCarouselType,
+    eventName: EmblaWatchType,
+    context: EmblaWatchContextType<'pointerDown'>
+  ): void {
+    console.log(context)
+    return true
+  }
+
+  onMount(() => {
+    const api = emblaApi()
+    if (api) api.onWatch('pointerDown', logPointerDown)
+  })
+
+  // ...
+}
+```
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-solid` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html highlight={4-5,13-14}
+<script>
+  import {
+    EmblaCarouselType,
+    EmblaWatchType,
+    EmblaWatchContextType
+  } from 'embla-carousel'
+  import emblaCarouselSvelte from 'embla-carousel-svelte'
+
+  let emblaApi: EmblaCarouselType
+
+  function logPointerDown(
+    emblaApi: EmblaCarouselType,
+    eventName: EmblaWatchType,
+    context: EmblaWatchContextType<'pointerDown'>
+  ): void {
+    console.log(context)
+    return true
+  }
+
+  function onInit(event: CustomEvent<EmblaCarouselType>): void {
+    emblaApi = event.detail
+    emblaApi.onWatch('pointerDown', logPointerDown)
+  }
+</script>
+
+<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
+```
+
+<Admonition type="note">
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
+</Admonition>
+
+<Admonition type="warning">
+  If you're using `pnpm`, you need to install `embla-carousel` as a
+  **devDependency** when importing types from it like demonstrated above.
+  <br />
+  This is because even though `embla-carousel-svelte` has `embla-carousel` as a
+  dependency, `pnpm` makes nested dependencies inaccessible by design.
+</Admonition>
+
+</TabsItem>
+</Tabs>
+
+## Reference
+
+Below follows an exhaustive **list of all** Embla Carousel **watchers** together with information about how they work.
+
+---
+
+### resize
+
+Context: <BrandPrimaryText>`ResizeObserverEntry[]`</BrandPrimaryText>
+
+Runs when the carousel container or the slide sizes change. It's using [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) under the hood.
+
+---
+
+### slidesChanged
+
+Context: <BrandPrimaryText>`MutationRecord[]`</BrandPrimaryText>
+
+Runs when slides are added to, or removed from the carousel [container](/api/options/#container). It's using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood.
+
+---
+
+### slideFocus
+
+Context: <BrandPrimaryText>`FocusEvent`</BrandPrimaryText>
+
+Runs when a slide receives focus. For example, when a focusable element like a button, link or input receives focus inside a slide.
+
+---
+
+### pointerDown
+
+Context: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
+
+Runs when the user has a pointer down on the carousel. It's triggered by a `touchstart` or a `mousedown` event.
+
+---

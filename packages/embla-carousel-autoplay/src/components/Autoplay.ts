@@ -63,25 +63,25 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     delay = normalizeDelay(emblaApi, options.delay)
 
     const { eventStore, ownerDocument } = emblaApi.internalEngine()
-    const isDraggable = !!emblaApi.internalEngine().options.watchDrag
+    const isDraggable = emblaApi.internalEngine().options.draggable
     const root = getAutoplayRootNode(emblaApi, options.rootNode)
 
-    eventStore.add(ownerDocument, 'visibilitychange', visibilityChange)
+    eventStore.add(ownerDocument, 'visibilitychange', onVisibilityChange)
 
     if (isDraggable) {
-      emblaApi.on('pointerDown', pointerDown)
+      emblaApi.on('pointerDown', onPointerDown)
     }
 
     if (isDraggable && !options.stopOnInteraction) {
-      emblaApi.on('pointerUp', pointerUp)
+      emblaApi.on('pointerUp', onPointerUp)
     }
 
     if (options.stopOnMouseEnter) {
-      eventStore.add(root, 'mouseenter', mouseEnter)
+      eventStore.add(root, 'mouseenter', onMouseEnter)
     }
 
     if (options.stopOnMouseEnter && !options.stopOnInteraction) {
-      eventStore.add(root, 'mouseleave', mouseLeave)
+      eventStore.add(root, 'mouseleave', onMouseLeave)
     }
 
     if (options.stopOnFocusIn) {
@@ -97,8 +97,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function destroy(): void {
     emblaApi
-      .off('pointerDown', pointerDown)
-      .off('pointerUp', pointerUp)
+      .off('pointerDown', onPointerDown)
+      .off('pointerUp', onPointerUp)
       .off('slideFocusStart', stopAutoplay)
 
     stopAutoplay()
@@ -138,7 +138,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     autoplayActive = false
   }
 
-  function visibilityChange(): void {
+  function onVisibilityChange(): void {
     if (documentIsHidden()) {
       playOnDocumentVisible = autoplayActive
       return stopAutoplay()
@@ -152,20 +152,20 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     return ownerDocument.visibilityState === 'hidden'
   }
 
-  function pointerDown(): void {
+  function onPointerDown(): void {
     if (!mouseIsOver) stopAutoplay()
   }
 
-  function pointerUp(): void {
+  function onPointerUp(): void {
     if (!mouseIsOver) startAutoplay()
   }
 
-  function mouseEnter(): void {
+  function onMouseEnter(): void {
     mouseIsOver = true
     stopAutoplay()
   }
 
-  function mouseLeave(): void {
+  function onMouseLeave(): void {
     mouseIsOver = false
     startAutoplay()
   }
