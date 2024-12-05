@@ -1,8 +1,8 @@
-import { EmblaCarouselType } from './EmblaCarousel'
 import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
 import { DragTrackerType, PointerEventType } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
+import { WatchHandlerType } from './WatchHandler'
 import { AxisType } from './Axis'
 import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
@@ -14,27 +14,20 @@ import { Limit } from './Limit'
 import {
   deltaAbs,
   factorAbs,
-  isBoolean,
   isMouseEvent,
   mathAbs,
   mathSign,
   WindowType
 } from './utils'
 
-type DragHandlerCallbackType = (
-  emblaApi: EmblaCarouselType,
-  evt: PointerEventType
-) => boolean | void
-
-export type DragHandlerOptionType = boolean | DragHandlerCallbackType
-
 export type DragHandlerType = {
-  init: (emblaApi: EmblaCarouselType) => void
+  init: () => void
   destroy: () => void
   pointerDown: () => boolean
 }
 
 export function DragHandler(
+  active: boolean,
   axis: AxisType,
   rootNode: HTMLElement,
   ownerDocument: Document,
@@ -48,12 +41,12 @@ export function DragHandler(
   scrollTarget: ScrollTargetType,
   index: CounterType,
   eventHandler: EventHandlerType,
+  watchHandler: WatchHandlerType,
   percentOfView: PercentOfViewType,
   dragFree: boolean,
   dragThreshold: number,
   skipSnaps: boolean,
-  baseFriction: number,
-  watchDrag: DragHandlerOptionType
+  baseFriction: number
 ): DragHandlerType {
   const { cross: crossAxis, direction } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
@@ -73,20 +66,16 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function init(emblaApi: EmblaCarouselType): void {
-    if (!watchDrag) return
-
-    function downIfAllowed(evt: PointerEventType): void {
-      if (isBoolean(watchDrag) || watchDrag(emblaApi, evt)) down(evt)
-    }
+  function init(): void {
+    if (!active) return
 
     const node = rootNode
     initEvents
       .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
-      .add(node, 'touchstart', downIfAllowed)
-      .add(node, 'mousedown', downIfAllowed)
+      .add(node, 'touchstart', onPointerDown)
+      .add(node, 'mousedown', onPointerDown)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
@@ -127,6 +116,10 @@ export function DragHandler(
     return scrollTarget.byIndex(next.get(), 0).distance
   }
 
+  function onPointerDown(evt: PointerEventType): void {
+    watchHandler.emit('pointerDown', evt, down)
+  }
+
   function down(evt: PointerEventType): void {
     const isMouseEvt = isMouseEvent(evt, ownerWindow)
     isMouse = isMouseEvt
@@ -143,7 +136,7 @@ export function DragHandler(
     addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    eventHandler.emit('pointerDown')
+    eventHandler.emit('pointerDown', evt)
   }
 
   function move(evt: PointerEventType): void {
@@ -184,7 +177,7 @@ export function DragHandler(
     scrollBody.useDuration(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
-    eventHandler.emit('pointerUp')
+    eventHandler.emit('pointerUp', evt)
   }
 
   function click(evt: MouseEvent): void {

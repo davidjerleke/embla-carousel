@@ -50,15 +50,14 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     root = emblaApi.rootNode()
     slides = emblaApi.slideNodes()
 
-    const { watchDrag, loop } = emblaApi.internalEngine().options
-    const isDraggable = !!watchDrag
+    const coreOptions = emblaApi.internalEngine().options
 
-    if (options.loop && loop) {
+    if (options.loop && coreOptions.loop) {
       classNames.loop = normalizeClassNames(options.loop)
       addClass(root, classNames.loop)
     }
 
-    if (options.draggable && isDraggable) {
+    if (options.draggable && coreOptions.draggable) {
       classNames.draggable = normalizeClassNames(options.draggable)
       addClass(root, classNames.draggable)
     }

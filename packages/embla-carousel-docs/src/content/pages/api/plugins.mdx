@@ -1,7 +1,7 @@
 ---
 title: Plugins
 description: Learn how to add plugins to Embla Carousel and extend it.
-order: 3
+order: 4
 date: 2021-11-06
 ---
 
@@ -60,7 +60,7 @@ import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
 const emblaNode = document.querySelector('.embla')
-const embla = EmblaCarousel(emblaNode, { loop: true }, [Autoplay()])
+const emblaApi = EmblaCarousel(emblaNode, { loop: true }, [Autoplay()])
 ```
 
 </TabsItem>
@@ -143,7 +143,7 @@ import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
 const emblaNode = document.querySelector('.embla')
-const embla = EmblaCarousel(emblaNode, { loop: true }, [
+const emblaApi = EmblaCarousel(emblaNode, { loop: true }, [
   Autoplay({ delay: 4000 })
 ])
 ```
@@ -228,7 +228,7 @@ import Autoplay from 'embla-carousel-autoplay'
 Autoplay.globalOptions = { delay: 4000 }
 
 const emblaNode = document.querySelector('.embla')
-const embla = EmblaCarousel(emblaNode, { loop: true }, [Autoplay()])
+const emblaApi = EmblaCarousel(emblaNode, { loop: true }, [Autoplay()])
 ```
 
 </TabsItem>
@@ -413,7 +413,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 </TabsItem>
@@ -544,7 +545,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 </TabsItem>
