@@ -35,11 +35,13 @@ import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
+import { WatchHandlerType } from './WatchHandler'
 
 export type EngineType = {
   ownerDocument: Document
   ownerWindow: WindowType
   eventHandler: EventHandlerType
+  watchHandler: WatchHandlerType
   axis: AxisType
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
@@ -81,7 +83,8 @@ export function Engine(
   ownerDocument: Document,
   ownerWindow: WindowType,
   options: OptionsType,
-  eventHandler: EventHandlerType
+  eventHandler: EventHandlerType,
+  watchHandler: WatchHandlerType
 ): EngineType {
   // Options
   const {
@@ -97,10 +100,10 @@ export function Engine(
     slidesToScroll: groupSlides,
     skipSnaps,
     containScroll,
-    watchResize,
-    watchSlides,
-    watchDrag,
-    watchFocus
+    draggable,
+    resize,
+    slideChanges,
+    focus
   } = options
 
   // Measurements
@@ -203,8 +206,8 @@ export function Engine(
 
     translate.to(offsetLocation.get())
 
-    if (hasSettledAndIdle) eventHandler.emit('settle')
-    if (!hasSettled) eventHandler.emit('scroll')
+    if (hasSettledAndIdle) eventHandler.emit('settle', null)
+    if (!hasSettled) eventHandler.emit('scroll', null)
   }
 
   const animation = Animations(
@@ -262,6 +265,7 @@ export function Engine(
     slideIndexes
   )
   const slideFocus = SlideFocus(
+    focus,
     root,
     slides,
     slideRegistry,
@@ -269,7 +273,7 @@ export function Engine(
     scrollBody,
     eventStore,
     eventHandler,
-    watchFocus
+    watchHandler
   )
 
   // Engine
@@ -282,6 +286,7 @@ export function Engine(
     animation,
     axis,
     dragHandler: DragHandler(
+      draggable,
       axis,
       root,
       ownerDocument,
@@ -295,12 +300,12 @@ export function Engine(
       scrollTarget,
       index,
       eventHandler,
+      watchHandler,
       percentOfView,
       dragFree,
       dragThreshold,
       skipSnaps,
-      friction,
-      watchDrag
+      friction
     ),
     eventStore,
     percentOfView,
@@ -312,12 +317,13 @@ export function Engine(
     previousLocation,
     options,
     resizeHandler: ResizeHandler(
+      resize,
       container,
       eventHandler,
+      watchHandler,
       ownerWindow,
       slides,
       axis,
-      watchResize,
       nodeRects
     ),
     scrollBody,
@@ -351,13 +357,19 @@ export function Engine(
       slides
     ),
     slideFocus,
-    slidesHandler: SlidesHandler(container, eventHandler, watchSlides),
+    slidesHandler: SlidesHandler(
+      slideChanges,
+      container,
+      eventHandler,
+      watchHandler
+    ),
     slidesInView,
     slideIndexes,
     slideRegistry,
     slidesToScroll,
     target,
-    translate: Translate(axis, container)
+    translate: Translate(axis, container),
+    watchHandler
   }
 
   return engine

@@ -493,6 +493,15 @@ Enables momentum scrolling. The duration of the continued scrolling is proportio
 
 ---
 
+### draggable
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Enables for scrolling the carousel with mouse and touch interactions. Set this to `false` to disable drag events.
+
+---
+
 ### dragThreshold
 
 Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
@@ -523,6 +532,15 @@ Set scroll duration when triggered by any of the API methods. Higher numbers ena
 
 ---
 
+### focus
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slideFocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour.
+
+---
+
 ### inViewThreshold
 
 Type: <BrandPrimaryText>`IntersectionObserverInit.threshold`</BrandPrimaryText>  
@@ -546,12 +564,30 @@ Enables **infinite looping**. Embla will apply `translateX` or `translateY` to t
 
 ---
 
+### resize
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reInit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
+
+---
+
 ### skipSnaps
 
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`false`</BrandSecondaryText>
 
 Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [dragFree](/api/options/#dragfree) option is set to `true`.
+
+---
+
+### slideChanges
+
+Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
+Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+
+Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reInit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
 
 ---
 
@@ -596,69 +632,5 @@ Type: <BrandPrimaryText>`number`</BrandPrimaryText>
 Default: <BrandSecondaryText>`0`</BrandSecondaryText>
 
 Set the initial scroll snap to the given number. First snap index starts at `0`. Please note that this is not necessarily equal to the number of slides when used together with the [slidesToScroll](/api/options/#slidestoscroll) option.
-
----
-
-### watchDrag
-
-Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, event: MouseEvent | TouchEvent) => boolean | void`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
-
-Enables for scrolling the carousel with mouse and touch interactions. Set this to `false` to disable drag events or pass a custom callback to add your own drag logic.
-
-<Admonition type="note">
-  **Note:** When passing a custom callback it will run **before** the default
-  Embla drag behaviour. Return `true` in your callback if you want Embla to run
-  its default drag behaviour after your callback, or return `false` if you want
-  to skip it.
-</Admonition>
-
----
-
-### watchFocus
-
-Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, event: FocusEvent) => boolean | void`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
-
-Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slideFocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour or pass a custom callback to add your own focus logic.
-
-<Admonition type="note">
-  **Note:** When passing a custom callback it will run **before** the default
-  Embla focus behaviour. Return `true` in your callback if you want Embla to run
-  its default focus behaviour after your callback, or return `false` if you want
-  to skip it.
-</Admonition>
-
----
-
-### watchResize
-
-Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, entries: ResizeObserverEntry[]) => boolean | void`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
-
-Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reInit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.
-
-<Admonition type="note">
-  **Note:** When passing a custom callback it will run **before** the default
-  Embla resize behaviour. Return `true` in your callback if you want Embla to
-  run its default resize behaviour after your callback, or return `false` if you
-  want to skip it.
-</Admonition>
-
----
-
-### watchSlides
-
-Type: <BrandPrimaryText>`boolean | (emblaApi: EmblaCarouselType, mutations: MutationRecord[]) => boolean | void`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
-
-Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reInit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.
-
-<Admonition type="note">
-  **Note:** When passing a custom callback it will run **before** the default
-  Embla mutation behaviour. Return `true` in your callback if you want Embla to
-  run its default mutation behaviour after your callback, or return `false` if
-  you want to skip it.
-</Admonition>
 
 ---
