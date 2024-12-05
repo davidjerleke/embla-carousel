@@ -32,7 +32,7 @@ import EmblaCarousel from 'embla-carousel'
 const emblaNode = document.querySelector('.embla')
 const emblaApi = EmblaCarousel(emblaNode)
 
-function logSlidesInView(emblaApi) {
+function logSlidesInView(emblaApi, eventName, detail) {
   console.log(emblaApi.slidesInView())
 }
 
@@ -49,7 +49,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel()
 
-  const logSlidesInView = useCallback((emblaApi) => {
+  const logSlidesInView = useCallback((emblaApi, eventName, detail) => {
     console.log(emblaApi.slidesInView())
   }, [])
 
@@ -71,7 +71,7 @@ export function EmblaCarousel() {
 
   const [emblaRef, emblaApi] = emblaCarouselVue()
 
-  function logSlidesInView(emblaApi) {
+  function logSlidesInView(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
   }
 
@@ -93,7 +93,7 @@ import createEmblaCarousel from 'embla-carousel-solid'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = createEmblaCarousel()
 
-  function logSlidesInView(emblaApi) {
+  function logSlidesInView(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
   }
 
@@ -115,7 +115,7 @@ export function EmblaCarousel() {
 
   let emblaApi
 
-  function logSlidesInView(emblaApi) {
+  function logSlidesInView(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
   }
 
@@ -129,7 +129,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 </TabsItem>
@@ -148,7 +149,7 @@ import EmblaCarousel from 'embla-carousel'
 const emblaNode = document.querySelector('.embla')
 const emblaApi = EmblaCarousel(emblaNode)
 
-function logSlidesInViewOnce(emblaApi) {
+function logSlidesInViewOnce(emblaApi, eventName, detail) {
   console.log(emblaApi.slidesInView())
   emblaApi.off('slidesInView', logSlidesInViewOnce)
 }
@@ -166,7 +167,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel()
 
-  const logSlidesInViewOnce = useCallback((emblaApi) => {
+  const logSlidesInViewOnce = useCallback((emblaApi, eventName, detail) => {
     console.log(emblaApi.slidesInView())
     emblaApi.off('slidesInView', logSlidesInViewOnce)
   }, [])
@@ -189,7 +190,7 @@ export function EmblaCarousel() {
 
   const [emblaRef, emblaApi] = emblaCarouselVue()
 
-  function logSlidesInViewOnce(emblaApi) {
+  function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
     emblaApi.off('slidesInView', logSlidesInViewOnce)
   }
@@ -212,7 +213,7 @@ import createEmblaCarousel from 'embla-carousel-solid'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = createEmblaCarousel()
 
-  function logSlidesInViewOnce(emblaApi) {
+  function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
     emblaApi.off('slidesInView', logSlidesInViewOnce)
   }
@@ -235,7 +236,7 @@ export function EmblaCarousel() {
 
   let emblaApi
 
-  function logSlidesInViewOnce(emblaApi) {
+  function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
     emblaApi.off('slidesInView', logSlidesInViewOnce)
   }
@@ -250,7 +251,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 </TabsItem>
@@ -258,15 +260,16 @@ export function EmblaCarousel() {
 
 ### TypeScript
 
-The `EmblaEventType` is obtained directly from the **core package** `embla-carousel` and used like so:
+The `EmblaEventType` is obtained directly from the **core package** `embla-carousel` and used like below to **type the arguments** of the callback function:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-```ts asLanguage=tsx highlight={3,11}
+```ts asLanguage=tsx highlight={3-4,12-13}
 import EmblaCarousel, {
   EmblaCarouselType,
-  EmblaEventType
+  EmblaEventType,
+  EmblaEventDetailType
 } from 'embla-carousel'
 
 const emblaNode = document.querySelector('.embla')
@@ -274,34 +277,43 @@ const emblaApi = EmblaCarousel(emblaNode)
 
 function logEmblaEvent(
   emblaApi: EmblaCarouselType,
-  eventName: EmblaEventType
+  eventName: EmblaEventType,
+  detail: EmblaEventDetailType['pointerDown']
 ): void {
-  console.log(`Embla just triggered ${eventName}!`)
+  console.log(detail)
 }
 
-emblaApi.on('slidesInView', logEmblaEvent)
+emblaApi.on('pointerDown', logEmblaEvent)
 ```
 
 </TabsItem>
 <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
 
-```tsx highlight={2,9}
+```tsx highlight={4-5,15-16}
 import React, { useCallback } from 'react'
-import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import {
+  EmblaCarouselType,
+  EmblaEventType,
+  EmblaEventDetailType
+} from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel()
 
   const logEmblaEvent = useCallback(
-    (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => {
-      console.log(`Embla just triggered ${eventName}!`)
+    (
+      emblaApi: EmblaCarouselType,
+      eventName: EmblaEventType,
+      detail: EmblaEventDetailType['pointerDown']
+    ) => {
+      console.log(detail)
     },
     []
   )
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logEmblaEvent)
+    if (emblaApi) emblaApi.on('pointerDown', logEmblaEvent)
   }, [emblaApi, logEmblaEvent])
 
   // ...
@@ -319,23 +331,28 @@ export function EmblaCarousel() {
 </TabsItem>
 <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
 
-```html highlight={3,10}
+```html highlight={5-6,14-15}
 <script setup>
   import { onMounted } from 'vue'
-  import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+  import {
+    EmblaCarouselType,
+    EmblaEventType,
+    EmblaEventDetailType
+  } from 'embla-carousel'
   import emblaCarouselVue from 'embla-carousel-vue'
 
   const [emblaRef] = emblaCarouselVue()
 
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
-    eventName: EmblaEventType
+    eventName: EmblaEventType,
+    detail: EmblaEventDetailType['pointerDown']
   ): void {
-    console.log(`Embla just triggered ${eventName}!`)
+    console.log(detail)
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('slidesInView', logEmblaEvent)
+    if (emblaApi.value) emblaApi.value.on('pointerDown', logEmblaEvent)
   })
 
   // ...
@@ -353,9 +370,13 @@ export function EmblaCarousel() {
 </TabsItem>
 <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
 
-```jsx highlight={2,10}
+```jsx highlight={4-5,14-15}
 import { onMount } from 'solid-js'
-import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import {
+  EmblaCarouselType,
+  EmblaEventType,
+  EmblaEventDetailType
+} from 'embla-carousel'
 import createEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
@@ -363,14 +384,15 @@ export function EmblaCarousel() {
 
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
-    eventName: EmblaEventType
+    eventName: EmblaEventType,
+    detail: EmblaEventDetailType['pointerDown']
   ): void {
-    console.log(`Embla just triggered ${eventName}!`)
+    console.log(detail)
   }
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.on('slidesInView', logEmblaEvent)
+    if (api) api.on('pointerDown', logEmblaEvent)
   })
 
   // ...
@@ -388,23 +410,28 @@ export function EmblaCarousel() {
 </TabsItem>
 <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
 
-```html highlight={2,9}
+```html highlight={4-5,13-14}
 <script>
-  import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+  import {
+    EmblaCarouselType,
+    EmblaEventType,
+    EmblaEventDetailType
+  } from 'embla-carousel'
   import emblaCarouselSvelte from 'embla-carousel-svelte'
 
   let emblaApi: EmblaCarouselType
 
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
-    eventName: EmblaEventType
+    eventName: EmblaEventType,
+    detail: EmblaEventDetailType['pointerDown']
   ): void {
-    console.log(`Embla just triggered ${eventName}!`)
+    console.log(detail)
   }
 
   function onInit(event: CustomEvent<EmblaCarouselType>): void {
     emblaApi = event.detail
-    emblaApi.on('slidesInView', logEmblaEvent)
+    emblaApi.on('pointerDown', logEmblaEvent)
   }
 </script>
 
@@ -412,7 +439,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 <Admonition type="warning">
@@ -426,6 +454,28 @@ export function EmblaCarousel() {
 </TabsItem>
 </Tabs>
 
+Alternatively, you can use the `EmblaEventCallbackType` and **assign** your callback to a **constant** to get the correct types:
+
+```ts asLanguage=tsx highlight={1,3}
+import { EmblaEventCallbackType } from 'embla-carousel'
+
+const logPointerDown: EmblaEventCallbackType<'pointerDown'> = (
+  emblaApi,
+  eventName,
+  detail
+) => {
+  console.log(detail)
+}
+```
+
+If you pass the callback **directly** to the [on](/api/methods/#on) method, TypeScript will **infer** the types for you:
+
+```ts asLanguage=tsx
+emblaApi.on('pointerDown', (emblaApi, eventName, detail) => {
+  console.log(detail)
+})
+```
+
 ## Reference
 
 Below follows an exhaustive **list of all** Embla Carousel **events** together with information about how they work.
@@ -434,7 +484,7 @@ Below follows an exhaustive **list of all** Embla Carousel **events** together w
 
 ### init
 
-Once: <BrandPrimaryText>`yes`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the carousel mounts for the first time. This only fires once which means that it won't fire when the carousel is re-initialized using the [reInit](/api/methods/#reinit) method.
 
@@ -442,7 +492,7 @@ Runs when the carousel mounts for the first time. This only fires once which mea
 
 ### reInit
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the [reInit](/api/methods/#reinit) method is called. When the window is resized, Embla Carousel automatically calls the [reInit](/api/methods/#reinit) method which will also fire this event.
 
@@ -450,7 +500,7 @@ Runs when the [reInit](/api/methods/#reinit) method is called. When the window i
 
 ### destroy
 
-Once: <BrandPrimaryText>`yes`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the carousel has been destroyed using the [destroy](/api/methods/#destroy) method. This only fires once and will be the last event the carousel fires.
 
@@ -458,7 +508,7 @@ Runs when the carousel has been destroyed using the [destroy](/api/methods/#dest
 
 ### select
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the selected scroll snap changes. The select event is triggered by drag interactions or the [scrollNext](/api/methods/#scrollnext), [scrollPrev](/api/methods/#scrollPrev) or [scrollTo](/api/methods/#scrollto) methods.
 
@@ -466,7 +516,7 @@ Runs when the selected scroll snap changes. The select event is triggered by dra
 
 ### scroll
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the carousel is scrolling. It might be a good idea to throttle this if you're doing expensive stuff in your callback function.
 
@@ -474,7 +524,7 @@ Runs when the carousel is scrolling. It might be a good idea to throttle this if
 
 ### settle
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when the carousel has settled after scroll has been triggered. Please note that this can take longer than you think when [dragFree](/api/options/#dragfree) is enabled or when using slow [transitions](/api/options/#duration).
 
@@ -482,7 +532,7 @@ Runs when the carousel has settled after scroll has been triggered. Please note 
 
 ### resize
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`ResizeObserverEntry[]`</BrandPrimaryText>
 
 Runs when the carousel container or the slide sizes change. It's using [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) under the hood.
 
@@ -490,7 +540,7 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
 
 ### slidesInView
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
 Runs when any slide has **entered** or **exited** the viewport. This event is intended to be used together with the [slidesInView](/api/methods/#slidesinview) and/or [slidesNotInView](/api/methods/#slidesnotinview) methods.
 
@@ -498,7 +548,7 @@ Runs when any slide has **entered** or **exited** the viewport. This event is in
 
 ### slidesChanged
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`MutationRecord[]`</BrandPrimaryText>
 
 Runs when slides are added to, or removed from the carousel [container](/api/options/#container). It's using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood.
 
@@ -506,7 +556,7 @@ Runs when slides are added to, or removed from the carousel [container](/api/opt
 
 ### slideFocus
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`FocusEvent`</BrandPrimaryText>
 
 Runs when a slide receives focus. For example, when a focusable element like a button, link or input receives focus inside a slide.
 
@@ -514,7 +564,7 @@ Runs when a slide receives focus. For example, when a focusable element like a b
 
 ### pointerDown
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
 
 Runs when the user has a pointer down on the carousel. It's triggered by a `touchstart` or a `mousedown` event.
 
@@ -522,7 +572,7 @@ Runs when the user has a pointer down on the carousel. It's triggered by a `touc
 
 ### pointerUp
 
-Once: <BrandPrimaryText>`no`</BrandPrimaryText>
+Detail: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
 
 Runs when the user has released the pointer from the carousel. It's triggered by a `touchend` or a `mouseup` event.
 

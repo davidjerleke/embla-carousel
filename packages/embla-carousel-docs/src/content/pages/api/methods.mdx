@@ -109,7 +109,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 </TabsItem>
@@ -253,7 +254,8 @@ export function EmblaCarousel() {
 ```
 
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblaInit` will remain for backward compatibility.
 </Admonition>
 
 <Admonition type="warning">
@@ -448,27 +450,36 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 
 ### on
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => void`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => void`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-**Subscribe** to an Embla specific [event](/api/events/) with a **callback**. Added event listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
+**Subscribe** to an Embla [event](/api/events/) with a **callback**. Added event listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
 
 ---
 
 ### off
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType) => void`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, EmblaEventDetailType[EmblaEventType]) => void`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-**Unsubscribe** from an Embla specific [event](/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [on](/api/methods/#on) method.
+**Unsubscribe** from an Embla [event](/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [on](/api/methods/#on) method.
 
 ---
 
-### emit
+### onWatch
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Emits an embla [event](/api/events/). This doesn't trigger any internal Embla functionality.
+**Subscribe** to an Embla [watcher](/api/watchers/) with a **callback**. Added watch listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [offWatch](/api/methods/#offwatch) method.
+
+---
+
+### offWatch
+
+Parameters: <BrandPrimaryText>` event: EmblaEventType`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+
+**Unsubscribe** from an Embla [watcher](/api/watchers/). There is **no need** to pass the **callback reference** when removing a watcher because only a single watch listener can be added per event.
 
 ---

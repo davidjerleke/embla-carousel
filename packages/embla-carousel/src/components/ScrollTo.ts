@@ -38,7 +38,7 @@ export function ScrollTo(
     if (indexDiff) {
       indexPrevious.set(indexCurrent.get())
       indexCurrent.set(target.index)
-      eventHandler.emit('select')
+      eventHandler.emit('select', null)
     }
   }
 
