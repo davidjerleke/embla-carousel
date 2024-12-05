@@ -1,7 +1,7 @@
 import { EmblaCarouselType } from './EmblaCarousel'
 
 type CallbackType = (emblaApi: EmblaCarouselType, evt: EmblaEventType) => void
-type ListenersType = Partial<{ [key in EmblaEventType]: CallbackType[] }>
+type StoreType = Partial<{ [key in EmblaEventType]: CallbackType[] }>
 
 export type EmblaEventType = EmblaEventListType[keyof EmblaEventListType]
 
@@ -23,14 +23,14 @@ export interface EmblaEventListType {
 
 export type EventHandlerType = {
   init: (emblaApi: EmblaCarouselType) => void
-  emit: (evt: EmblaEventType) => EventHandlerType
-  on: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
-  off: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
   clear: () => void
+  emit: (evt: EmblaEventType) => EventHandlerType
+  on: (evt: EmblaEventType, callback: CallbackType) => EventHandlerType
+  off: (evt: EmblaEventType, callback: CallbackType) => EventHandlerType
 }
 
 export function EventHandler(): EventHandlerType {
-  let listeners: ListenersType = {}
+  let store: StoreType = {}
   let api: EmblaCarouselType
 
   function init(emblaApi: EmblaCarouselType): void {
@@ -38,7 +38,7 @@ export function EventHandler(): EventHandlerType {
   }
 
   function getListeners(evt: EmblaEventType): CallbackType[] {
-    return listeners[evt] || []
+    return store[evt] || []
   }
 
   function emit(evt: EmblaEventType): EventHandlerType {
@@ -46,18 +46,18 @@ export function EventHandler(): EventHandlerType {
     return self
   }
 
-  function on(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
-    listeners[evt] = getListeners(evt).concat([cb])
+  function on(evt: EmblaEventType, callback: CallbackType): EventHandlerType {
+    store[evt] = getListeners(evt).concat([callback])
     return self
   }
 
-  function off(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
-    listeners[evt] = getListeners(evt).filter((e) => e !== cb)
+  function off(evt: EmblaEventType, callback: CallbackType): EventHandlerType {
+    store[evt] = getListeners(evt).filter((e) => e !== callback)
     return self
   }
 
   function clear(): void {
-    listeners = {}
+    store = {}
   }
 
   const self: EventHandlerType = {

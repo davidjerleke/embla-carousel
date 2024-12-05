@@ -59,23 +59,23 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     defaultScrollBehaviour = emblaApi.internalEngine().scrollBody
 
     const { eventStore } = emblaApi.internalEngine()
-    const isDraggable = !!emblaApi.internalEngine().options.watchDrag
+    const isDraggable = emblaApi.internalEngine().options.draggable
     const root = getAutoScrollRootNode(emblaApi, options.rootNode)
 
     if (isDraggable) {
-      emblaApi.on('pointerDown', pointerDown)
+      emblaApi.on('pointerDown', onPointerDown)
     }
 
     if (isDraggable && !options.stopOnInteraction) {
-      emblaApi.on('pointerUp', pointerUp)
+      emblaApi.on('pointerUp', onPointerUp)
     }
 
     if (options.stopOnMouseEnter) {
-      eventStore.add(root, 'mouseenter', mouseEnter)
+      eventStore.add(root, 'mouseenter', onMouseEnter)
     }
 
     if (options.stopOnMouseEnter && !options.stopOnInteraction) {
-      eventStore.add(root, 'mouseleave', mouseLeave)
+      eventStore.add(root, 'mouseleave', onMouseLeave)
     }
 
     if (options.stopOnFocusIn) {
@@ -91,8 +91,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
   function destroy(): void {
     emblaApi
-      .off('pointerDown', pointerDown)
-      .off('pointerUp', pointerUp)
+      .off('pointerDown', onPointerDown)
+      .off('pointerUp', onPointerUp)
       .off('slideFocusStart', stopAutoScroll)
       .off('settle', settle)
 
@@ -205,20 +205,20 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     return self
   }
 
-  function pointerDown(): void {
+  function onPointerDown(): void {
     if (!mouseIsOver) stopAutoScroll()
   }
 
-  function pointerUp(): void {
+  function onPointerUp(): void {
     if (!mouseIsOver) startAutoScrollOnSettle()
   }
 
-  function mouseEnter(): void {
+  function onMouseEnter(): void {
     mouseIsOver = true
     stopAutoScroll()
   }
 
-  function mouseLeave(): void {
+  function onMouseLeave(): void {
     mouseIsOver = false
     startAutoScroll()
   }
