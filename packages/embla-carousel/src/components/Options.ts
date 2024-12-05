@@ -2,11 +2,7 @@ import { AlignmentOptionType } from './Alignment'
 import { AxisDirectionOptionType, AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
 import { ScrollContainOptionType } from './ScrollContain'
-import { DragHandlerOptionType } from './DragHandler'
-import { ResizeHandlerOptionType } from './ResizeHandler'
-import { SlidesHandlerOptionType } from './SlidesHandler'
 import { SlidesInViewOptionsType } from './SlidesInView'
-import { FocusHandlerOptionType } from './SlideFocus'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -34,10 +30,10 @@ export type OptionsType = CreateOptionsType<{
   skipSnaps: boolean
   duration: number
   startIndex: number
-  watchDrag: DragHandlerOptionType
-  watchResize: ResizeHandlerOptionType
-  watchSlides: SlidesHandlerOptionType
-  watchFocus: FocusHandlerOptionType
+  draggable: boolean
+  resize: boolean
+  focus: boolean
+  slideChanges: boolean
 }>
 
 export const defaultOptions: OptionsType = {
@@ -57,10 +53,10 @@ export const defaultOptions: OptionsType = {
   duration: 25,
   startIndex: 0,
   active: true,
-  watchDrag: true,
-  watchResize: true,
-  watchSlides: true,
-  watchFocus: true
+  draggable: true,
+  resize: true,
+  focus: true,
+  slideChanges: true
 }
 
 export type EmblaOptionsType = Partial<OptionsType>

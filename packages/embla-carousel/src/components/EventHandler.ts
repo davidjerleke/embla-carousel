@@ -1,9 +1,18 @@
 import { EmblaCarouselType } from './EmblaCarousel'
-
-type CallbackType = (emblaApi: EmblaCarouselType, evt: EmblaEventType) => void
-type ListenersType = Partial<{ [key in EmblaEventType]: CallbackType[] }>
+import { PointerEventType } from './DragTracker'
 
 export type EmblaEventType = EmblaEventListType[keyof EmblaEventListType]
+
+export type EmblaEventCallbackType<EventType extends keyof EmblaEventListType> =
+  (
+    emblaApi: EmblaCarouselType,
+    eventName: EventType,
+    detail: EmblaEventDetailType[EventType]
+  ) => void
+
+type EventStoreType = Partial<{
+  [EventType in EmblaEventType]: EmblaEventCallbackType<EventType>[]
+}>
 
 export interface EmblaEventListType {
   init: 'init'
@@ -21,51 +30,93 @@ export interface EmblaEventListType {
   slideFocus: 'slideFocus'
 }
 
+export interface EmblaEventDetailType {
+  init: null
+  pointerDown: PointerEventType
+  pointerUp: PointerEventType
+  slidesChanged: MutationRecord[]
+  slidesInView: null
+  scroll: null
+  select: null
+  settle: null
+  destroy: null
+  reInit: null
+  resize: ResizeObserverEntry[]
+  slideFocusStart: FocusEvent
+  slideFocus: FocusEvent
+}
+
 export type EventHandlerType = {
   init: (emblaApi: EmblaCarouselType) => void
-  emit: (evt: EmblaEventType) => EventHandlerType
-  on: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
-  off: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
   clear: () => void
+  emit: <EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    detail: EmblaEventDetailType[EventType]
+  ) => EventHandlerType
+  on: <EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    callback: EmblaEventCallbackType<EventType>
+  ) => EventHandlerType
+  off: <EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    callback: EmblaEventCallbackType<EventType>
+  ) => EventHandlerType
 }
 
 export function EventHandler(): EventHandlerType {
-  let listeners: ListenersType = {}
+  let store: EventStoreType = {}
   let api: EmblaCarouselType
 
   function init(emblaApi: EmblaCarouselType): void {
     api = emblaApi
   }
 
-  function getListeners(evt: EmblaEventType): CallbackType[] {
-    return listeners[evt] || []
+  function getListeners<EventType extends keyof EmblaEventListType>(
+    eventName: EventType
+  ): EmblaEventCallbackType<EventType>[] {
+    return store[eventName] || []
   }
 
-  function emit(evt: EmblaEventType): EventHandlerType {
-    getListeners(evt).forEach((e) => e(api, evt))
+  function emit<EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    detail: EmblaEventDetailType[EventType]
+  ): EventHandlerType {
+    getListeners(eventName).forEach((e) => e(api, eventName, detail))
     return self
   }
 
-  function on(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
-    listeners[evt] = getListeners(evt).concat([cb])
+  function on<EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    callback: EmblaEventCallbackType<EventType>
+  ): EventHandlerType {
+    store = {
+      ...store,
+      [eventName]: getListeners(eventName).concat([callback])
+    }
     return self
   }
 
-  function off(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
-    listeners[evt] = getListeners(evt).filter((e) => e !== cb)
+  function off<EventType extends keyof EmblaEventListType>(
+    eventName: EventType,
+    callback: EmblaEventCallbackType<EventType>
+  ): EventHandlerType {
+    store = {
+      ...store,
+      [eventName]: getListeners(eventName).filter((e) => e !== callback)
+    }
     return self
   }
 
   function clear(): void {
-    listeners = {}
+    store = {}
   }
 
   const self: EventHandlerType = {
     init,
+    clear,
     emit,
-    off,
     on,
-    clear
+    off
   }
   return self
 }
