@@ -1,6 +1,8 @@
 import './matchMedia.mock'
 import './intersectionObserver.mock'
 import './resizeObserver.mock'
+import './mutationObserver.mock'
+import './requestAnimationFrame.mock'
 
 export {
   mockTestElementDimensions,

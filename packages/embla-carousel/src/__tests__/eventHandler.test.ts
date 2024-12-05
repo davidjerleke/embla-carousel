@@ -1,12 +1,11 @@
 import EmblaCarousel from '../components/EmblaCarousel'
 import { mockTestElements } from './mocks'
-import { FIXTURE_EVENTS } from './fixtures/events.fixture'
+import { FIXTURE_EVENTS } from './fixtures/eventHandler'
 
-describe('➡️  Events', () => {
-  const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
-
+describe('➡️  EventHandler', () => {
   describe('Events added with on():', () => {
-    test('Calls the provided callback when its associated event are emitted', () => {
+    test('Calls the provided callback when its associated event is emitted', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
@@ -19,6 +18,7 @@ describe('➡️  Events', () => {
     })
 
     test('Calls all callbacks associated with a specific event', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback1 = jest.fn()
       const callback2 = jest.fn()
 
@@ -30,14 +30,16 @@ describe('➡️  Events', () => {
     })
 
     test('Calls the provided callback when emit() is triggered by the user', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
-      emblaApi.emit('select')
+      emblaApi.emit('select', null)
       expect(callback).toHaveBeenCalledTimes(1)
     })
 
     test('Will NOT fire a callback when a different event is emitted', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback = jest.fn()
 
       emblaApi.on('reInit', callback)
@@ -46,6 +48,7 @@ describe('➡️  Events', () => {
     })
 
     test('Will NOT fire a callback anymore when it has been removed with off()', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
@@ -58,14 +61,22 @@ describe('➡️  Events', () => {
     })
 
     test('Will NOT fire any callback anymore when event store is destroyed', () => {
-      const callback = jest.fn()
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
+      const callback1 = jest.fn()
+      const callback2 = jest.fn()
 
-      emblaApi.on('select', callback)
-      emblaApi.on('scroll', callback)
+      emblaApi.on('select', callback1)
+      emblaApi.on('scroll', callback2)
+      emblaApi.emit('select', null)
+      emblaApi.emit('scroll', null)
+      expect(callback1).toHaveBeenCalledTimes(1)
+      expect(callback2).toHaveBeenCalledTimes(1)
+
       emblaApi.destroy()
-      emblaApi.emit('select')
-      emblaApi.emit('scroll')
-      expect(callback).toHaveBeenCalledTimes(0)
+      emblaApi.emit('select', null)
+      emblaApi.emit('scroll', null)
+      expect(callback1).toHaveBeenCalledTimes(1)
+      expect(callback2).toHaveBeenCalledTimes(1)
     })
   })
 })

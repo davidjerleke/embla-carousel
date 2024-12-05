@@ -189,7 +189,6 @@ export const codeStyles = css`
   .token.function,
   .token.class-name,
   .token.maybe-class-name:not(.imports),
-  .token.literal-property.property:not(.parameter),
   .token.unit,
   .token.symbol {
     color: ${COLORS.BRAND_ALTERNATIVE};
@@ -228,6 +227,7 @@ export const codeStyles = css`
   .token.console,
   .token.punctuation,
   .token.tag.script:not(.punctuation):not(.function),
+  .token.literal-property.property,
   .token.plain-text {
     color: ${COLORS.TEXT_HIGH_CONTRAST};
   }

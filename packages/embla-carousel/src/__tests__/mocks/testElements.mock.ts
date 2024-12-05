@@ -38,10 +38,22 @@ function mockNodeOffsets(
   offsets: TestElementOffsetType
 ): void {
   const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = offsets
-  Object.defineProperty(node, 'offsetTop', { value: offsetTop })
-  Object.defineProperty(node, 'offsetLeft', { value: offsetLeft })
-  Object.defineProperty(node, 'offsetWidth', { value: offsetWidth })
-  Object.defineProperty(node, 'offsetHeight', { value: offsetHeight })
+  Object.defineProperty(node, 'offsetTop', {
+    value: offsetTop,
+    configurable: true
+  })
+  Object.defineProperty(node, 'offsetLeft', {
+    value: offsetLeft,
+    configurable: true
+  })
+  Object.defineProperty(node, 'offsetWidth', {
+    value: offsetWidth,
+    configurable: true
+  })
+  Object.defineProperty(node, 'offsetHeight', {
+    value: offsetHeight,
+    configurable: true
+  })
 }
 
 export function mockTestElementDimensions(
@@ -49,7 +61,7 @@ export function mockTestElementDimensions(
   rootNode: HTMLElement
 ): void {
   const { containerOffset, slideOffsets, endMargin } = dimensions
-  const containerNode = <HTMLElement>rootNode.children[0]
+  const containerNode = <HTMLElement>rootNode.firstElementChild
   const slideNodes = slideOffsets.map(() => document.createElement('div'))
 
   if (!containerOffset) return

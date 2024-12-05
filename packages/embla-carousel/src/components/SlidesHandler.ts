@@ -1,45 +1,26 @@
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { isBoolean } from './utils'
-
-type SlidesHandlerCallbackType = (
-  emblaApi: EmblaCarouselType,
-  mutations: MutationRecord[]
-) => boolean | void
-
-export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
+import { WatchHandlerType } from './WatchHandler'
 
 export type SlidesHandlerType = {
-  init: (emblaApi: EmblaCarouselType) => void
+  init: () => void
   destroy: () => void
 }
 
 export function SlidesHandler(
+  active: boolean,
   container: HTMLElement,
   eventHandler: EventHandlerType,
-  watchSlides: SlidesHandlerOptionType
+  watchHandler: WatchHandlerType
 ): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init(emblaApi: EmblaCarouselType): void {
-    if (!watchSlides) return
-
-    function defaultCallback(mutations: MutationRecord[]): void {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList') {
-          emblaApi.reInit()
-          eventHandler.emit('slidesChanged')
-          break
-        }
-      }
-    }
+  function init(): void {
+    if (!active) return
 
     mutationObserver = new MutationObserver((mutations) => {
-      if (destroyed) return
-      if (isBoolean(watchSlides) || watchSlides(emblaApi, mutations)) {
-        defaultCallback(mutations)
-      }
+      watchHandler.emit('slidesChanged', mutations, onSlidesChange)
     })
 
     mutationObserver.observe(container, { childList: true })
@@ -48,6 +29,21 @@ export function SlidesHandler(
   function destroy(): void {
     if (mutationObserver) mutationObserver.disconnect()
     destroyed = true
+  }
+
+  function onSlidesChange(
+    mutations: MutationRecord[],
+    emblaApi: EmblaCarouselType
+  ): void {
+    for (const mutation of mutations) {
+      if (destroyed) return
+
+      if (mutation.type === 'childList') {
+        emblaApi.reInit()
+        eventHandler.emit('slidesChanged', mutations)
+        break
+      }
+    }
   }
 
   const self: SlidesHandlerType = {
