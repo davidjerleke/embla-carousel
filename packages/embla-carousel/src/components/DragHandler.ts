@@ -117,7 +117,7 @@ export function DragHandler(
   }
 
   function onPointerDown(evt: PointerEventType): void {
-    watchHandler.emit('pointerDown', evt, down)
+    watchHandler.emit('pointerdown', evt, down)
   }
 
   function down(evt: PointerEventType): void {
@@ -136,7 +136,7 @@ export function DragHandler(
     addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    eventHandler.emit('pointerDown', evt)
+    eventHandler.emit('pointerdown', evt)
   }
 
   function move(evt: PointerEventType): void {
@@ -177,7 +177,7 @@ export function DragHandler(
     scrollBody.useDuration(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
-    eventHandler.emit('pointerUp', evt)
+    eventHandler.emit('pointerup', evt)
   }
 
   function click(evt: MouseEvent): void {

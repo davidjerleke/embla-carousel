@@ -29,7 +29,7 @@ const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
 
 emblaApi
   .on('init', loadImagesInView)
-  .on('reInit', loadImagesInView)
-  .on('slidesInView', loadImagesInView)
+  .on('reinit', loadImagesInView)
+  .on('slidesinview', loadImagesInView)
   .on('destroy', removePrevNextBtnsClickHandlers)
   .on('destroy', removeDotBtnsAndClickHandlers)

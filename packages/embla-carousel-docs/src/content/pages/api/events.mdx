@@ -17,11 +17,11 @@ Embla Carousel exposes **events** that you can listen to in order to **react** t
 
 ## Usage
 
-You need an **initialized carousel** in order to **make use of events**. Events will only be fired during the lifecycle of a carousel and added event listeners will persist even when you hard reset the carousel with the [reInit](/api/methods/#reinit) method.
+You need an **initialized carousel** in order to **make use of events**. Events will only be fired during the lifecycle of a carousel and added event listeners will persist even when you hard reset the carousel with the [reinit](/api/methods/#reinit) method.
 
 ### Adding event listeners
 
-After initializing a carousel, we're going to **subscribe** to the [slidesInView](/api/events/#slidesinview) **event** in the following example:
+After initializing a carousel, we're going to **subscribe** to the [slidesinview](/api/events/#slidesinview) **event** in the following example:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
@@ -36,7 +36,7 @@ function logSlidesInView(emblaApi, eventName, detail) {
   console.log(emblaApi.slidesInView())
 }
 
-emblaApi.on('slidesInView', logSlidesInView)
+emblaApi.on('slidesinview', logSlidesInView)
 ```
 
 </TabsItem>
@@ -54,7 +54,7 @@ export function EmblaCarousel() {
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logSlidesInView)
+    if (emblaApi) emblaApi.on('slidesinview', logSlidesInView)
   }, [emblaApi, logSlidesInView])
 
   // ...
@@ -76,7 +76,7 @@ export function EmblaCarousel() {
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('slidesInView', logSlidesInView)
+    if (emblaApi.value) emblaApi.value.on('slidesinview', logSlidesInView)
   })
 
   // ...
@@ -99,7 +99,7 @@ export function EmblaCarousel() {
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.on('slidesInView', logSlidesInView)
+    if (api) api.on('slidesinview', logSlidesInView)
   })
 
   // ...
@@ -121,7 +121,7 @@ export function EmblaCarousel() {
 
   function onInit(event) {
     emblaApi = event.detail
-    emblaApi.on('slidesInView', logSlidesInView)
+    emblaApi.on('slidesinview', logSlidesInView)
   }
 </script>
 
@@ -151,10 +151,10 @@ const emblaApi = EmblaCarousel(emblaNode)
 
 function logSlidesInViewOnce(emblaApi, eventName, detail) {
   console.log(emblaApi.slidesInView())
-  emblaApi.off('slidesInView', logSlidesInViewOnce)
+  emblaApi.off('slidesinview', logSlidesInViewOnce)
 }
 
-emblaApi.on('slidesInView', logSlidesInViewOnce)
+emblaApi.on('slidesinview', logSlidesInViewOnce)
 ```
 
 </TabsItem>
@@ -169,11 +169,11 @@ export function EmblaCarousel() {
 
   const logSlidesInViewOnce = useCallback((emblaApi, eventName, detail) => {
     console.log(emblaApi.slidesInView())
-    emblaApi.off('slidesInView', logSlidesInViewOnce)
+    emblaApi.off('slidesinview', logSlidesInViewOnce)
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logSlidesInViewOnce)
+    if (emblaApi) emblaApi.on('slidesinview', logSlidesInViewOnce)
   }, [emblaApi, logSlidesInViewOnce])
 
   // ...
@@ -192,11 +192,11 @@ export function EmblaCarousel() {
 
   function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
-    emblaApi.off('slidesInView', logSlidesInViewOnce)
+    emblaApi.off('slidesinview', logSlidesInViewOnce)
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('slidesInView', logSlidesInViewOnce)
+    if (emblaApi.value) emblaApi.value.on('slidesinview', logSlidesInViewOnce)
   })
 
   // ...
@@ -215,12 +215,12 @@ export function EmblaCarousel() {
 
   function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
-    emblaApi.off('slidesInView', logSlidesInViewOnce)
+    emblaApi.off('slidesinview', logSlidesInViewOnce)
   }
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.on('slidesInView', logSlidesInViewOnce)
+    if (api) api.on('slidesinview', logSlidesInViewOnce)
   })
 
   // ...
@@ -238,12 +238,12 @@ export function EmblaCarousel() {
 
   function logSlidesInViewOnce(emblaApi, eventName, detail) {
     console.log(emblaApi.slidesInView())
-    emblaApi.off('slidesInView', logSlidesInViewOnce)
+    emblaApi.off('slidesinview', logSlidesInViewOnce)
   }
 
   function onInit(event) {
     emblaApi = event.detail
-    emblaApi.on('slidesInView', logSlidesInViewOnce)
+    emblaApi.on('slidesinview', logSlidesInViewOnce)
   }
 </script>
 
@@ -278,12 +278,12 @@ const emblaApi = EmblaCarousel(emblaNode)
 function logEmblaEvent(
   emblaApi: EmblaCarouselType,
   eventName: EmblaEventType,
-  detail: EmblaEventDetailType['pointerDown']
+  detail: EmblaEventDetailType['pointerdown']
 ): void {
   console.log(detail)
 }
 
-emblaApi.on('pointerDown', logEmblaEvent)
+emblaApi.on('pointerdown', logEmblaEvent)
 ```
 
 </TabsItem>
@@ -305,7 +305,7 @@ export function EmblaCarousel() {
     (
       emblaApi: EmblaCarouselType,
       eventName: EmblaEventType,
-      detail: EmblaEventDetailType['pointerDown']
+      detail: EmblaEventDetailType['pointerdown']
     ) => {
       console.log(detail)
     },
@@ -313,7 +313,7 @@ export function EmblaCarousel() {
   )
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('pointerDown', logEmblaEvent)
+    if (emblaApi) emblaApi.on('pointerdown', logEmblaEvent)
   }, [emblaApi, logEmblaEvent])
 
   // ...
@@ -346,13 +346,13 @@ export function EmblaCarousel() {
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
     eventName: EmblaEventType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('pointerDown', logEmblaEvent)
+    if (emblaApi.value) emblaApi.value.on('pointerdown', logEmblaEvent)
   })
 
   // ...
@@ -385,14 +385,14 @@ export function EmblaCarousel() {
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
     eventName: EmblaEventType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
   }
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.on('pointerDown', logEmblaEvent)
+    if (api) api.on('pointerdown', logEmblaEvent)
   })
 
   // ...
@@ -424,14 +424,14 @@ export function EmblaCarousel() {
   function logEmblaEvent(
     emblaApi: EmblaCarouselType,
     eventName: EmblaEventType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
   }
 
   function onInit(event: CustomEvent<EmblaCarouselType>): void {
     emblaApi = event.detail
-    emblaApi.on('pointerDown', logEmblaEvent)
+    emblaApi.on('pointerdown', logEmblaEvent)
   }
 </script>
 
@@ -459,7 +459,7 @@ Alternatively, you can use the `EmblaEventCallbackType` and **assign** your call
 ```ts asLanguage=tsx highlight={1,3}
 import { EmblaEventCallbackType } from 'embla-carousel'
 
-const logPointerDown: EmblaEventCallbackType<'pointerDown'> = (
+const logPointerDown: EmblaEventCallbackType<'pointerdown'> = (
   emblaApi,
   eventName,
   detail
@@ -471,7 +471,7 @@ const logPointerDown: EmblaEventCallbackType<'pointerDown'> = (
 If you pass the callback **directly** to the [on](/api/methods/#on) method, TypeScript will **infer** the types for you:
 
 ```ts asLanguage=tsx
-emblaApi.on('pointerDown', (emblaApi, eventName, detail) => {
+emblaApi.on('pointerdown', (emblaApi, eventName, detail) => {
   console.log(detail)
 })
 ```
@@ -486,15 +486,15 @@ Below follows an exhaustive **list of all** Embla Carousel **events** together w
 
 Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
-Runs when the carousel mounts for the first time. This only fires once which means that it won't fire when the carousel is re-initialized using the [reInit](/api/methods/#reinit) method.
+Runs when the carousel mounts for the first time. This only fires once which means that it won't fire when the carousel is re-initialized using the [reinit](/api/methods/#reinit) method.
 
 ---
 
-### reInit
+### reinit
 
 Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
-Runs when the [reInit](/api/methods/#reinit) method is called. When the window is resized, Embla Carousel automatically calls the [reInit](/api/methods/#reinit) method which will also fire this event.
+Runs when the [reinit](/api/methods/#reinit) method is called. When the window is resized, Embla Carousel automatically calls the [reinit](/api/methods/#reinit) method which will also fire this event.
 
 ---
 
@@ -538,15 +538,15 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
 
 ---
 
-### slidesInView
+### slidesinview
 
 Detail: <BrandPrimaryText>`null`</BrandPrimaryText>
 
-Runs when any slide has **entered** or **exited** the viewport. This event is intended to be used together with the [slidesInView](/api/methods/#slidesinview) and/or [slidesNotInView](/api/methods/#slidesnotinview) methods.
+Runs when any slide has **entered** or **exited** the viewport. This event is intended to be used together with the [slidesinview](/api/methods/#slidesinview) and/or [slidesNotInView](/api/methods/#slidesnotinview) methods.
 
 ---
 
-### slidesChanged
+### slideschanged
 
 Detail: <BrandPrimaryText>`MutationRecord[]`</BrandPrimaryText>
 
@@ -554,7 +554,7 @@ Runs when slides are added to, or removed from the carousel [container](/api/opt
 
 ---
 
-### slideFocus
+### slidefocus
 
 Detail: <BrandPrimaryText>`FocusEvent`</BrandPrimaryText>
 
@@ -562,7 +562,7 @@ Runs when a slide receives focus. For example, when a focusable element like a b
 
 ---
 
-### pointerDown
+### pointerdown
 
 Detail: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
 
@@ -570,7 +570,7 @@ Runs when the user has a pointer down on the carousel. It's triggered by a `touc
 
 ---
 
-### pointerUp
+### pointerup
 
 Detail: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
 

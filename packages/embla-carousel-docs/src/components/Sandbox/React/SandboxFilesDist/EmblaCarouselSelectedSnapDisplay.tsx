@@ -22,7 +22,7 @@ export const useSelectedSnapDisplay = (
 
     updateScrollSnapState(emblaApi)
     emblaApi.on('select', updateScrollSnapState)
-    emblaApi.on('reInit', updateScrollSnapState)
+    emblaApi.on('reinit', updateScrollSnapState)
   }, [emblaApi, updateScrollSnapState])
 
   return {

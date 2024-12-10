@@ -54,9 +54,9 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
     emblaApi
       .on('select', select)
-      .on('slideFocus', fadeToSelectedSnapInstantly)
-      .on('pointerDown', pointerDown)
-      .on('pointerUp', pointerUp)
+      .on('slidefocus', fadeToSelectedSnapInstantly)
+      .on('pointerdown', pointerDown)
+      .on('pointerup', pointerUp)
 
     disableScroll()
     fadeToSelectedSnapInstantly()
@@ -69,9 +69,9 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
     emblaApi
       .off('select', select)
-      .off('slideFocus', fadeToSelectedSnapInstantly)
-      .off('pointerDown', pointerDown)
-      .off('pointerUp', pointerUp)
+      .off('slidefocus', fadeToSelectedSnapInstantly)
+      .off('pointerdown', pointerDown)
+      .off('pointerup', pointerUp)
 
     emblaApi.slideNodes().forEach((slideNode) => {
       const slideStyle = slideNode.style

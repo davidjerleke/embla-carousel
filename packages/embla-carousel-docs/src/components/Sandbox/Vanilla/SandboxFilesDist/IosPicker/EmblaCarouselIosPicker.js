@@ -90,7 +90,7 @@ export const setupIosPicker = (iosPickerNode, options) => {
     rotateSlidesFunc()
   }
 
-  emblaApi.on('pointerUp', () => {
+  emblaApi.on('pointerup', () => {
     const { scrollTo, target, location } = emblaApi.internalEngine()
     const diffToTarget = target.get() - location.get()
     const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
@@ -100,7 +100,7 @@ export const setupIosPicker = (iosPickerNode, options) => {
 
   emblaApi.on('scroll', rotate)
 
-  emblaApi.on('reInit', () => {
+  emblaApi.on('reinit', () => {
     inactivateEmblaTransform(emblaApi)
     rotate()
   })
