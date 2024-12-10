@@ -51,7 +51,7 @@ const EmblaCarousel = (props) => {
       }
 
       const reloadAfterPointerUp = () => {
-        emblaApi.off('pointerUp', reloadAfterPointerUp)
+        emblaApi.off('pointerup', reloadAfterPointerUp)
         reloadEmbla()
       }
 
@@ -60,7 +60,7 @@ const EmblaCarousel = (props) => {
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
         const boundsActive = engine.limit.reachedMax(engine.target.get())
         engine.scrollBounds.toggleActive(boundsActive)
-        emblaApi.on('pointerUp', reloadAfterPointerUp)
+        emblaApi.on('pointerup', reloadAfterPointerUp)
       } else {
         reloadEmbla()
       }

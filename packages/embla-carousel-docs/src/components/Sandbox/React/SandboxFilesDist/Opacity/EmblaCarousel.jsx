@@ -75,10 +75,10 @@ const EmblaCarousel = (props) => {
     setTweenFactor(emblaApi)
     tweenOpacity(emblaApi)
     emblaApi
-      .on('reInit', setTweenFactor)
-      .on('reInit', tweenOpacity)
+      .on('reinit', setTweenFactor)
+      .on('reinit', tweenOpacity)
       .on('scroll', tweenOpacity)
-      .on('slideFocus', tweenOpacity)
+      .on('slidefocus', tweenOpacity)
   }, [emblaApi, tweenOpacity])
 
   return (

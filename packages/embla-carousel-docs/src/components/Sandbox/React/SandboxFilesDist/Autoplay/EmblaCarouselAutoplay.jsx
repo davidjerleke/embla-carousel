@@ -35,7 +35,7 @@ export const useAutoplay = (emblaApi) => {
     emblaApi
       .on('autoplay:play', () => setAutoplayIsPlaying(true))
       .on('autoplay:stop', () => setAutoplayIsPlaying(false))
-      .on('reInit', () => setAutoplayIsPlaying(autoplay.isPlaying()))
+      .on('reinit', () => setAutoplayIsPlaying(autoplay.isPlaying()))
   }, [emblaApi])
 
   return {

@@ -34,9 +34,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     onScroll(emblaApi)
     emblaApi
-      .on('reInit', onScroll)
+      .on('reinit', onScroll)
       .on('scroll', onScroll)
-      .on('slideFocus', onScroll)
+      .on('slidefocus', onScroll)
   }, [emblaApi, onScroll])
 
   return (

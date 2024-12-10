@@ -10,7 +10,7 @@ export const updateSelectedSnapDisplay = (
     snapDisplay.innerHTML = `${selectedSnap + 1} / ${snapCount}`
   }
 
-  emblaApi.on('select', updateSnapDisplay).on('reInit', updateSnapDisplay)
+  emblaApi.on('select', updateSnapDisplay).on('reinit', updateSnapDisplay)
 
   updateSnapDisplay(emblaApi)
 }

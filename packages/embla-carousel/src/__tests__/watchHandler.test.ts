@@ -14,7 +14,7 @@ describe('➡️  WatchHandler', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_WATCH_HANDLER))
       const callback = jest.fn(() => true)
 
-      emblaApi.onWatch('slidesChanged', callback)
+      emblaApi.onWatch('slideschanged', callback)
       triggerMutationObserver(mutationRecord)
       expect(callback).toHaveBeenCalledTimes(1)
     })
@@ -31,11 +31,11 @@ describe('➡️  WatchHandler', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_WATCH_HANDLER))
       const callback = jest.fn()
 
-      emblaApi.onWatch('slidesChanged', callback)
+      emblaApi.onWatch('slideschanged', callback)
       triggerMutationObserver(mutationRecord)
       expect(callback).toHaveBeenCalledTimes(1)
 
-      emblaApi.offWatch('slidesChanged')
+      emblaApi.offWatch('slideschanged')
       triggerMutationObserver(mutationRecord)
       expect(callback).toHaveBeenCalledTimes(1)
     })
@@ -43,7 +43,7 @@ describe('➡️  WatchHandler', () => {
     test('Will NOT fire any callback anymore when watch store is destroyed', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_WATCH_HANDLER))
       const callback = jest.fn()
-      emblaApi.onWatch('slidesChanged', callback)
+      emblaApi.onWatch('slideschanged', callback)
       triggerMutationObserver(mutationRecord)
       expect(callback).toHaveBeenCalledTimes(1)
 
@@ -57,8 +57,8 @@ describe('➡️  WatchHandler', () => {
       const reInit = jest.spyOn(emblaApi, 'reInit')
       const eventCallback = jest.fn()
 
-      emblaApi.on('slidesChanged', eventCallback)
-      emblaApi.onWatch('slidesChanged', () => true)
+      emblaApi.on('slideschanged', eventCallback)
+      emblaApi.onWatch('slideschanged', () => true)
       triggerMutationObserver(mutationRecord)
 
       expect(reInit).toHaveBeenCalledTimes(1)
@@ -70,8 +70,8 @@ describe('➡️  WatchHandler', () => {
       const reInit = jest.spyOn(emblaApi, 'reInit')
       const eventCallback = jest.fn()
 
-      emblaApi.on('slidesChanged', eventCallback)
-      emblaApi.onWatch('slidesChanged', () => false)
+      emblaApi.on('slideschanged', eventCallback)
+      emblaApi.onWatch('slideschanged', () => false)
       triggerMutationObserver(mutationRecord)
 
       expect(reInit).toHaveBeenCalledTimes(0)

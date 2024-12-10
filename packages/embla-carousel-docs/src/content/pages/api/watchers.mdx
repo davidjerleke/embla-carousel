@@ -17,11 +17,11 @@ Embla Carousel exposes **watchers** which you can use to **intercept** and **can
 
 ## Usage
 
-You need an **initialized carousel** in order to **make use of watchers**. Watchers will only be fired during the lifecycle of a carousel and added watch listeners will persist even when you hard reset the carousel with the [reInit](/api/methods/#reinit) method.
+You need an **initialized carousel** in order to **make use of watchers**. Watchers will only be fired during the lifecycle of a carousel and added watch listeners will persist even when you hard reset the carousel with the [reinit](/api/methods/#reinit) method.
 
 ### Adding watch listeners
 
-After initializing a carousel, we're going to **watch** the [pointerDown](/api/events/#pointerdown) **event** in the following example:
+After initializing a carousel, we're going to **watch** the [pointerdown](/api/events/#pointerdown) **event** in the following example:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
@@ -37,7 +37,7 @@ function logPointerDown(emblaApi, eventName, detail) {
   return true
 }
 
-emblaApi.onWatch('pointerDown', logPointerDown)
+emblaApi.onWatch('pointerdown', logPointerDown)
 ```
 
 </TabsItem>
@@ -56,7 +56,7 @@ export function EmblaCarousel() {
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDown)
+    if (emblaApi) emblaApi.onWatch('pointerdown', logPointerDown)
   }, [emblaApi, logPointerDown])
 
   // ...
@@ -79,7 +79,7 @@ export function EmblaCarousel() {
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', logPointerDown)
+    if (emblaApi.value) emblaApi.value.onWatch('pointerdown', logPointerDown)
   })
 
   // ...
@@ -103,7 +103,7 @@ export function EmblaCarousel() {
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.onWatch('pointerDown', logPointerDown)
+    if (api) api.onWatch('pointerdown', logPointerDown)
   })
 
   // ...
@@ -126,7 +126,7 @@ export function EmblaCarousel() {
 
   function onInit(event) {
     emblaApi = event.detail
-    emblaApi.onWatch('pointerDown', logPointerDown)
+    emblaApi.onWatch('pointerdown', logPointerDown)
   }
 </script>
 
@@ -162,11 +162,11 @@ const emblaApi = EmblaCarousel(emblaNode)
 
 function logPointerDownOnce(emblaApi, eventName, detail) {
   console.log(detail)
-  emblaApi.offWatch('pointerDown')
+  emblaApi.offWatch('pointerdown')
   return true
 }
 
-emblaApi.onWatch('pointerDown', logPointerDownOnce)
+emblaApi.onWatch('pointerdown', logPointerDownOnce)
 ```
 
 </TabsItem>
@@ -181,12 +181,12 @@ export function EmblaCarousel() {
 
   const logPointerDownOnce = useCallback((emblaApi, eventName, detail) => {
     console.log(detail)
-    emblaApi.offWatch('pointerDown')
+    emblaApi.offWatch('pointerdown')
     return true
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDownOnce)
+    if (emblaApi) emblaApi.onWatch('pointerdown', logPointerDownOnce)
   }, [emblaApi, logPointerDownOnce])
 
   // ...
@@ -205,13 +205,13 @@ export function EmblaCarousel() {
 
   function logPointerDownOnce(emblaApi, eventName, detail) {
     console.log(detail)
-    emblaApi.offWatch('pointerDown')
+    emblaApi.offWatch('pointerdown')
     return true
   }
 
   onMounted(() => {
     if (emblaApi.value) {
-      emblaApi.value.onWatch('pointerDown', logPointerDownOnce)
+      emblaApi.value.onWatch('pointerdown', logPointerDownOnce)
     }
   })
 
@@ -231,13 +231,13 @@ export function EmblaCarousel() {
 
   function logPointerDownOnce(emblaApi, eventName, detail) {
     console.log(detail)
-    emblaApi.offWatch('pointerDown')
+    emblaApi.offWatch('pointerdown')
     return true
   }
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.onWatch('pointerDown', logPointerDownOnce)
+    if (api) api.onWatch('pointerdown', logPointerDownOnce)
   })
 
   // ...
@@ -255,13 +255,13 @@ export function EmblaCarousel() {
 
   function logPointerDownOnce(emblaApi, eventName, detail) {
     console.log(detail)
-    emblaApi.offWatch('pointerDown')
+    emblaApi.offWatch('pointerdown')
     return true
   }
 
   function onInit(event) {
     emblaApi = event.detail
-    emblaApi.onWatch('pointerDown', logPointerDownOnce)
+    emblaApi.onWatch('pointerdown', logPointerDownOnce)
   }
 </script>
 
@@ -302,7 +302,7 @@ function onPointerDown(emblaApi, eventName, detail) {
   return shouldAllowDraggingForNow
 }
 
-emblaApi.onWatch('pointerDown', onPointerDown)
+emblaApi.onWatch('pointerdown', onPointerDown)
 ```
 
 </TabsItem>
@@ -322,7 +322,7 @@ export function EmblaCarousel() {
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.onWatch('pointerDown', onPointerDown)
+    if (emblaApi) emblaApi.onWatch('pointerdown', onPointerDown)
   }, [emblaApi, onPointerDown])
 
   // ...
@@ -346,7 +346,7 @@ export function EmblaCarousel() {
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', onPointerDown)
+    if (emblaApi.value) emblaApi.value.onWatch('pointerdown', onPointerDown)
   })
 
   // ...
@@ -371,7 +371,7 @@ export function EmblaCarousel() {
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.onWatch('pointerDown', onPointerDown)
+    if (api) api.onWatch('pointerdown', onPointerDown)
   })
 
   // ...
@@ -395,7 +395,7 @@ export function EmblaCarousel() {
 
   function onInit(event) {
     emblaApi = event.detail
-    emblaApi.onWatch('pointerDown', onPointerDown)
+    emblaApi.onWatch('pointerdown', onPointerDown)
   }
 </script>
 
@@ -432,13 +432,13 @@ const emblaApi = EmblaCarousel(emblaNode)
 function logPointerDown(
   emblaApi: EmblaCarouselType,
   eventName: EmblaWatchType,
-  detail: EmblaEventDetailType['pointerDown']
+  detail: EmblaEventDetailType['pointerdown']
 ): void {
   console.log(detail)
   return true
 }
 
-emblaApi.onWatch('pointerDown', logPointerDown)
+emblaApi.onWatch('pointerdown', logPointerDown)
 ```
 
 </TabsItem>
@@ -460,7 +460,7 @@ export function EmblaCarousel() {
     (
       emblaApi: EmblaCarouselType,
       eventName: EmblaWatchType,
-      detail: EmblaEventDetailType['pointerDown']
+      detail: EmblaEventDetailType['pointerdown']
     ) => {
       console.log(detail)
       return true
@@ -469,7 +469,7 @@ export function EmblaCarousel() {
   )
 
   useEffect(() => {
-    if (emblaApi) emblaApi.onWatch('pointerDown', logPointerDown)
+    if (emblaApi) emblaApi.onWatch('pointerdown', logPointerDown)
   }, [emblaApi, logPointerDown])
 
   // ...
@@ -502,14 +502,14 @@ export function EmblaCarousel() {
   function logPointerDown(
     emblaApi: EmblaCarouselType,
     eventName: EmblaWatchType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
     return true
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.onWatch('pointerDown', logPointerDown)
+    if (emblaApi.value) emblaApi.value.onWatch('pointerdown', logPointerDown)
   })
 
   // ...
@@ -542,7 +542,7 @@ export function EmblaCarousel() {
   function logPointerDown(
     emblaApi: EmblaCarouselType,
     eventName: EmblaWatchType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
     return true
@@ -550,7 +550,7 @@ export function EmblaCarousel() {
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.onWatch('pointerDown', logPointerDown)
+    if (api) api.onWatch('pointerdown', logPointerDown)
   })
 
   // ...
@@ -582,7 +582,7 @@ export function EmblaCarousel() {
   function logPointerDown(
     emblaApi: EmblaCarouselType,
     eventName: EmblaWatchType,
-    detail: EmblaEventDetailType['pointerDown']
+    detail: EmblaEventDetailType['pointerdown']
   ): void {
     console.log(detail)
     return true
@@ -590,7 +590,7 @@ export function EmblaCarousel() {
 
   function onInit(event: CustomEvent<EmblaCarouselType>): void {
     emblaApi = event.detail
-    emblaApi.onWatch('pointerDown', logPointerDown)
+    emblaApi.onWatch('pointerdown', logPointerDown)
   }
 </script>
 
@@ -618,7 +618,7 @@ Alternatively, you can use the `EmblaWatchCallbackType` and **assign** your call
 ```ts asLanguage=tsx highlight={1,3}
 import { EmblaWatchCallbackType } from 'embla-carousel'
 
-const logPointerDown: EmblaWatchCallbackType<'pointerDown'> = (
+const logPointerDown: EmblaWatchCallbackType<'pointerdown'> = (
   emblaApi,
   eventName,
   detail
@@ -631,7 +631,7 @@ const logPointerDown: EmblaWatchCallbackType<'pointerDown'> = (
 If you pass the callback **directly** to the [onWatch](/api/methods/#onwatch) method, TypeScript will **infer** the types for you:
 
 ```ts asLanguage=tsx
-emblaApi.onWatch('pointerDown', (emblaApi, eventName, detail) => {
+emblaApi.onWatch('pointerdown', (emblaApi, eventName, detail) => {
   console.log(detail)
   return true
 })
@@ -656,7 +656,7 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
 
 ---
 
-### slidesChanged
+### slideschanged
 
 Detail: <BrandPrimaryText>`MutationRecord[]`</BrandPrimaryText>
 
@@ -669,7 +669,7 @@ Runs when slides are added to, or removed from the carousel [container](/api/opt
 
 ---
 
-### slideFocus
+### slidefocus
 
 Detail: <BrandPrimaryText>`FocusEvent`</BrandPrimaryText>
 
@@ -682,7 +682,7 @@ Runs when a slide receives focus. For example, when a focusable element like a b
 
 ---
 
-### pointerDown
+### pointerdown
 
 Detail: <BrandPrimaryText>`TouchEvent | MouseEvent`</BrandPrimaryText>
 

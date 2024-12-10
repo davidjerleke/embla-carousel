@@ -20,7 +20,7 @@ export function SlidesHandler(
     if (!active) return
 
     mutationObserver = new MutationObserver((mutations) => {
-      watchHandler.emit('slidesChanged', mutations, onSlidesChange)
+      watchHandler.emit('slideschanged', mutations, onSlidesChange)
     })
 
     mutationObserver.observe(container, { childList: true })
@@ -40,7 +40,7 @@ export function SlidesHandler(
 
       if (mutation.type === 'childList') {
         emblaApi.reInit()
-        eventHandler.emit('slidesChanged', mutations)
+        eventHandler.emit('slideschanged', mutations)
         break
       }
     }

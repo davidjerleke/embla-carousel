@@ -77,11 +77,11 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     eventStore.add(ownerDocument, 'visibilitychange', onVisibilityChange)
 
     if (isDraggable) {
-      emblaApi.on('pointerDown', onPointerDown)
+      emblaApi.on('pointerdown', onPointerDown)
     }
 
     if (isDraggable && !options.stopOnInteraction) {
-      emblaApi.on('pointerUp', onPointerUp)
+      emblaApi.on('pointerup', onPointerUp)
     }
 
     if (options.stopOnMouseEnter) {
@@ -93,7 +93,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     if (options.stopOnFocusIn) {
-      emblaApi.on('slideFocusStart', stopAutoplay)
+      emblaApi.on('slidefocusstart', stopAutoplay)
     }
 
     if (options.stopOnFocusIn && !options.stopOnInteraction) {
@@ -105,9 +105,9 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function destroy(): void {
     emblaApi
-      .off('pointerDown', onPointerDown)
-      .off('pointerUp', onPointerUp)
-      .off('slideFocusStart', stopAutoplay)
+      .off('pointerdown', onPointerDown)
+      .off('pointerup', onPointerUp)
+      .off('slidefocusstart', stopAutoplay)
 
     stopAutoplay()
     destroyed = true

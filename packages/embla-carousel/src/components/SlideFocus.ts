@@ -34,7 +34,7 @@ export function SlideFocus(
         slide,
         'focus',
         (evt: FocusEvent) => {
-          watchHandler.emit('slideFocus', evt, () => onFocus(evt, slideIndex))
+          watchHandler.emit('slidefocus', evt, () => onFocus(evt, slideIndex))
         },
         focusListenerOptions
       )
@@ -47,7 +47,7 @@ export function SlideFocus(
 
     if (diffTime > 10) return
 
-    eventHandler.emit('slideFocusStart', evt)
+    eventHandler.emit('slidefocusstart', evt)
     root.scrollLeft = 0
 
     const group = slideRegistry.findIndex((group) => group.includes(index))
@@ -57,7 +57,7 @@ export function SlideFocus(
     scrollBody.useDuration(0)
     scrollTo.index(group, 0)
 
-    eventHandler.emit('slideFocus', evt)
+    eventHandler.emit('slidefocus', evt)
   }
 
   function onKeyDown(event: KeyboardEvent): void {
