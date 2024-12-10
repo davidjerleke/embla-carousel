@@ -26,8 +26,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let inViewIndexes: number[] = []
 
   const selectedEvents: EmblaEventType[] = ['select']
-  const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
-  const inViewEvents: EmblaEventType[] = ['slidesInView']
+  const draggingEvents: EmblaEventType[] = ['pointerdown', 'pointerup']
+  const inViewEvents: EmblaEventType[] = ['slidesinview']
   const classNames: ClassNamesListType = {
     snapped: [],
     inView: [],
@@ -101,7 +101,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     _: EmblaCarouselType,
     evt: EmblaEventType
   ): void {
-    const toggleClass = evt === 'pointerDown' ? addClass : removeClass
+    const toggleClass = evt === 'pointerdown' ? addClass : removeClass
     toggleClass(root, classNames.dragging)
   }
 

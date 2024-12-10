@@ -14,13 +14,13 @@ declare module 'embla-carousel' {
   }
 
   interface EmblaEventListType {
-    'autoScroll:play': 'autoScroll:play'
-    'autoScroll:stop': 'autoScroll:stop'
+    'autoscroll:play': 'autoscroll:play'
+    'autoscroll:stop': 'autoscroll:stop'
   }
 
   interface EmblaEventDetailType {
-    'autoScroll:play': null
-    'autoScroll:stop': null
+    'autoscroll:play': null
+    'autoscroll:stop': null
   }
 }
 
@@ -68,11 +68,11 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     const root = getAutoScrollRootNode(emblaApi, options.rootNode)
 
     if (isDraggable) {
-      emblaApi.on('pointerDown', onPointerDown)
+      emblaApi.on('pointerdown', onPointerDown)
     }
 
     if (isDraggable && !options.stopOnInteraction) {
-      emblaApi.on('pointerUp', onPointerUp)
+      emblaApi.on('pointerup', onPointerUp)
     }
 
     if (options.stopOnMouseEnter) {
@@ -84,7 +84,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     }
 
     if (options.stopOnFocusIn) {
-      emblaApi.on('slideFocusStart', stopAutoScroll)
+      emblaApi.on('slidefocusstart', stopAutoScroll)
     }
 
     if (options.stopOnFocusIn && !options.stopOnInteraction) {
@@ -96,9 +96,9 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
   function destroy(): void {
     emblaApi
-      .off('pointerDown', onPointerDown)
-      .off('pointerUp', onPointerUp)
-      .off('slideFocusStart', stopAutoScroll)
+      .off('pointerdown', onPointerDown)
+      .off('pointerup', onPointerUp)
+      .off('slidefocusstart', stopAutoScroll)
       .off('settle', settle)
 
     stopAutoScroll()
@@ -109,7 +109,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   function startAutoScroll(): void {
     if (destroyed) return
     if (autoScrollActive) return
-    emblaApi.emit('autoScroll:play', null)
+    emblaApi.emit('autoscroll:play', null)
 
     const engine = emblaApi.internalEngine()
     const { ownerWindow } = engine
@@ -125,7 +125,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   function stopAutoScroll(): void {
     if (destroyed) return
     if (!autoScrollActive) return
-    emblaApi.emit('autoScroll:stop', null)
+    emblaApi.emit('autoscroll:stop', null)
 
     const engine = emblaApi.internalEngine()
     const { ownerWindow } = engine

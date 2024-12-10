@@ -98,13 +98,13 @@ export const setupInfiniteScroll = (emblaApi, loadMoreCallback) => {
   }
 
   const addInfiniteScroll = () => {
-    emblaApi.on('pointerUp', reloadEngine)
+    emblaApi.on('pointerup', reloadEngine)
     emblaApi.on('scroll', onScroll)
     slideCount = emblaApi.slideNodes().length - 1
   }
 
   const removeInfiniteScroll = () => {
-    emblaApi.off('pointerUp', reloadEngine)
+    emblaApi.off('pointerup', reloadEngine)
     emblaApi.off('scroll', onScroll)
   }
 

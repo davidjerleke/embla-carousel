@@ -21,7 +21,7 @@ type WatchStoreType = Partial<{
 export interface EmblaWatchListType
   extends Pick<
     EmblaEventListType,
-    'pointerDown' | 'slidesChanged' | 'resize' | 'slideFocus'
+    'pointerdown' | 'slideschanged' | 'resize' | 'slidefocus'
   > {}
 
 type IntenalCallbackType<EventType extends keyof EmblaWatchListType> = (

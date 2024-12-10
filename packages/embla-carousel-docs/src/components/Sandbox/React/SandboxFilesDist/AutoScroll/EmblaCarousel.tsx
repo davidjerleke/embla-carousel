@@ -59,9 +59,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
     setIsPlaying(autoScroll.isPlaying())
     emblaApi
-      .on('autoScroll:play', () => setIsPlaying(true))
-      .on('autoScroll:stop', () => setIsPlaying(false))
-      .on('reInit', () => setIsPlaying(autoScroll.isPlaying()))
+      .on('autoscroll:play', () => setIsPlaying(true))
+      .on('autoscroll:stop', () => setIsPlaying(false))
+      .on('reinit', () => setIsPlaying(autoScroll.isPlaying()))
   }, [emblaApi])
 
   return (

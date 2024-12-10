@@ -37,7 +37,7 @@ export function SlidesInView(
 
         inViewCache = null
         notInViewCache = null
-        eventHandler.emit('slidesInView', null)
+        eventHandler.emit('slidesinview', null)
       },
       {
         root: container.parentElement,

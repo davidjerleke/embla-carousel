@@ -27,8 +27,8 @@ const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
 
 emblaApi
   .on('init', applyProgress)
-  .on('reInit', applyProgress)
+  .on('reinit', applyProgress)
   .on('scroll', applyProgress)
-  .on('slideFocus', applyProgress)
+  .on('slidefocus', applyProgress)
   .on('destroy', removeProgress)
   .on('destroy', removePrevNextBtnsClickHandlers)
