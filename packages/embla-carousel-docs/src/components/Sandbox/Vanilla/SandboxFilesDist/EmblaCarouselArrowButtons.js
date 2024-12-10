@@ -10,7 +10,7 @@ const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
   emblaApi
     .on('select', togglePrevNextBtnsState)
     .on('init', togglePrevNextBtnsState)
-    .on('reInit', togglePrevNextBtnsState)
+    .on('reinit', togglePrevNextBtnsState)
 
   return () => {
     prevBtn.removeAttribute('disabled')

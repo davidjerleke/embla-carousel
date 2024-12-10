@@ -26,7 +26,7 @@ const EmblaCarousel = (props) => {
   const updateSlidesInView = useCallback((emblaApi) => {
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('slidesInView', updateSlidesInView)
+        emblaApi.off('slidesinview', updateSlidesInView)
       }
       const inView = emblaApi
         .slidesInView()
@@ -39,8 +39,8 @@ const EmblaCarousel = (props) => {
     if (!emblaApi) return
 
     updateSlidesInView(emblaApi)
-    emblaApi.on('slidesInView', updateSlidesInView)
-    emblaApi.on('reInit', updateSlidesInView)
+    emblaApi.on('slidesinview', updateSlidesInView)
+    emblaApi.on('reinit', updateSlidesInView)
   }, [emblaApi, updateSlidesInView])
 
   return (

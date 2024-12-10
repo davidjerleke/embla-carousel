@@ -81,11 +81,11 @@ const EmblaCarousel = (props) => {
     tweenParallax(emblaApi)
 
     emblaApi
-      .on('reInit', setTweenNodes)
-      .on('reInit', setTweenFactor)
-      .on('reInit', tweenParallax)
+      .on('reinit', setTweenNodes)
+      .on('reinit', setTweenFactor)
+      .on('reinit', tweenParallax)
       .on('scroll', tweenParallax)
-      .on('slideFocus', tweenParallax)
+      .on('slidefocus', tweenParallax)
   }, [emblaApi, tweenParallax])
 
   return (

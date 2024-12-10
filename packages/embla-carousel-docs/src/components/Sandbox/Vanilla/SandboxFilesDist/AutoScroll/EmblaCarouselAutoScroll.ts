@@ -24,16 +24,16 @@ export const addPlayBtnListeners = (
 
   playBtn.addEventListener('click', onPlayBtnClick)
   emblaApi
-    .on('autoScroll:play', togglePlayBtnState)
-    .on('autoScroll:stop', togglePlayBtnState)
-    .on('reInit', togglePlayBtnState)
+    .on('autoscroll:play', togglePlayBtnState)
+    .on('autoscroll:stop', togglePlayBtnState)
+    .on('reinit', togglePlayBtnState)
 
   return () => {
     playBtn.removeEventListener('click', onPlayBtnClick)
     emblaApi
-      .off('autoScroll:play', togglePlayBtnState)
-      .off('autoScroll:stop', togglePlayBtnState)
-      .off('reInit', togglePlayBtnState)
+      .off('autoscroll:play', togglePlayBtnState)
+      .off('autoscroll:stop', togglePlayBtnState)
+      .off('reinit', togglePlayBtnState)
   }
 }
 
