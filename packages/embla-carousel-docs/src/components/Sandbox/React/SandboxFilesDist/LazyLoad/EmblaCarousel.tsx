@@ -32,7 +32,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('slidesInView', updateSlidesInView)
+        emblaApi.off('slidesinview', updateSlidesInView)
       }
       const inView = emblaApi
         .slidesInView()
@@ -45,8 +45,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     if (!emblaApi) return
 
     updateSlidesInView(emblaApi)
-    emblaApi.on('slidesInView', updateSlidesInView)
-    emblaApi.on('reInit', updateSlidesInView)
+    emblaApi.on('slidesinview', updateSlidesInView)
+    emblaApi.on('reinit', updateSlidesInView)
   }, [emblaApi, updateSlidesInView])
 
   return (

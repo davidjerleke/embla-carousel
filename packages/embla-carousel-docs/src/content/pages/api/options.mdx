@@ -175,7 +175,7 @@ export function EmblaCarousel() {
 
 ### Changing options
 
-It's possible to **change options** passed to the Embla Carousel constructor **after initialization** with the [reInit](/api/methods/#reinit) method.
+It's possible to **change options** passed to the Embla Carousel constructor **after initialization** with the [reinit](/api/methods/#reinit) method.
 
 In [React](/get-started/react/), [Vue](/get-started/vue/), [Solid](/get-started/solid/) and [Svelte](/get-started/svelte/) wrappers you can pass **reactive options** and the carousel will automatically reinitialize when they change. Here are some examples:
 
@@ -537,7 +537,7 @@ Set scroll duration when triggered by any of the API methods. Higher numbers ena
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
-Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slideFocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour.
+Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slidefocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour.
 
 ---
 
@@ -569,7 +569,7 @@ Enables **infinite looping**. Embla will apply `translateX` or `translateY` to t
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
-Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reInit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
+Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reinit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
 
 ---
 
@@ -587,7 +587,7 @@ Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that th
 Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`true`</BrandSecondaryText>
 
-Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reInit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
+Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reinit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
 
 ---
 

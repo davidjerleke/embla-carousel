@@ -24,14 +24,14 @@ export const addPlayBtnListeners = (
   emblaApi
     .on('autoplay:play', togglePlayBtnState)
     .on('autoplay:stop', togglePlayBtnState)
-    .on('reInit', togglePlayBtnState)
+    .on('reinit', togglePlayBtnState)
 
   return () => {
     playBtn.removeEventListener('click', onPlayBtnClick)
     emblaApi
       .off('autoplay:play', togglePlayBtnState)
       .off('autoplay:stop', togglePlayBtnState)
-      .off('reInit', togglePlayBtnState)
+      .off('reinit', togglePlayBtnState)
   }
 }
 

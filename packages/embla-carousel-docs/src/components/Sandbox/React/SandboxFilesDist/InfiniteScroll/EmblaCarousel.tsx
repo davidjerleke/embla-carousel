@@ -62,7 +62,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       }
 
       const reloadAfterPointerUp = (): void => {
-        emblaApi.off('pointerUp', reloadAfterPointerUp)
+        emblaApi.off('pointerup', reloadAfterPointerUp)
         reloadEmbla()
       }
 
@@ -71,7 +71,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
         const boundsActive = engine.limit.reachedMax(engine.target.get())
         engine.scrollBounds.toggleActive(boundsActive)
-        emblaApi.on('pointerUp', reloadAfterPointerUp)
+        emblaApi.on('pointerup', reloadAfterPointerUp)
       } else {
         reloadEmbla()
       }

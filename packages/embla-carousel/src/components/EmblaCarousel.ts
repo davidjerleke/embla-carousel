@@ -138,7 +138,7 @@ function EmblaCarousel(
     const startIndex = selectedScrollSnap()
     deActivate()
     activate(mergeOptions({ startIndex }, withOptions), withPlugins)
-    eventHandler.emit('reInit', null)
+    eventHandler.emit('reinit', null)
   }
 
   function deActivate(): void {

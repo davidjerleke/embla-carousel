@@ -29,7 +29,7 @@ const EmblaCarousel = (props) => {
     if (!emblaMainApi) return
     onSelect()
 
-    emblaMainApi.on('select', onSelect).on('reInit', onSelect)
+    emblaMainApi.on('select', onSelect).on('reinit', onSelect)
   }, [emblaMainApi, onSelect])
 
   return (
