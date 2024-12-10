@@ -26,9 +26,9 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
 
   emblaApi
     .on('init', addDotBtnsWithClickHandlers)
-    .on('reInit', addDotBtnsWithClickHandlers)
+    .on('reinit', addDotBtnsWithClickHandlers)
     .on('init', toggleDotBtnsActive)
-    .on('reInit', toggleDotBtnsActive)
+    .on('reinit', toggleDotBtnsActive)
     .on('select', toggleDotBtnsActive)
 
   return () => {

@@ -114,7 +114,7 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
   useEffect(() => {
     if (!emblaApi) return
 
-    emblaApi.on('pointerUp', (emblaApi) => {
+    emblaApi.on('pointerup', (emblaApi) => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
       const diffToTarget = target.get() - location.get()
       const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
@@ -124,7 +124,7 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
 
     emblaApi.on('scroll', rotateWheel)
 
-    emblaApi.on('reInit', (emblaApi) => {
+    emblaApi.on('reinit', (emblaApi) => {
       inactivateEmblaTransform(emblaApi)
       rotateWheel(emblaApi)
     })

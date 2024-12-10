@@ -18,7 +18,7 @@ export type AutoHeightOptionsType = AutoHeightType['options']
 function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   let emblaApi: EmblaCarouselType
   let slideHeights: number[] = []
-  const heightEvents: EmblaEventType[] = ['select', 'slideFocus']
+  const heightEvents: EmblaEventType[] = ['select', 'slidefocus']
 
   function init(emblaApiInstance: EmblaCarouselType): void {
     emblaApi = emblaApiInstance

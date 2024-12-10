@@ -133,7 +133,7 @@ function logSlidesInView(emblaApi: EmblaCarouselType): void {
   console.log(emblaApi.slidesInView())
 }
 
-emblaApi.on('slidesInView', logSlidesInView)
+emblaApi.on('slidesinview', logSlidesInView)
 ```
 
 </TabsItem>
@@ -152,7 +152,7 @@ export function EmblaCarousel() {
   }, [])
 
   useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesInView', logSlidesInView)
+    if (emblaApi) emblaApi.on('slidesinview', logSlidesInView)
   }, [emblaApi, logSlidesInView])
 
   // ...
@@ -183,7 +183,7 @@ export function EmblaCarousel() {
   }
 
   onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('slidesInView', logSlidesInView)
+    if (emblaApi.value) emblaApi.value.on('slidesinview', logSlidesInView)
   })
 
   // ...
@@ -215,7 +215,7 @@ export function EmblaCarousel() {
 
   onMount(() => {
     const api = emblaApi()
-    if (api) api.on('slidesInView', logSlidesInView)
+    if (api) api.on('slidesinview', logSlidesInView)
   })
 
   // ...
@@ -246,7 +246,7 @@ export function EmblaCarousel() {
 
   function onInit(event: CustomEvent<EmblaCarouselType>): void {
     emblaApi = event.detail
-    emblaApi.on('slidesInView', logSlidesInView)
+    emblaApi.on('slidesinview', logSlidesInView)
   }
 </script>
 
@@ -453,7 +453,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => void`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-**Subscribe** to an Embla [event](/api/events/) with a **callback**. Added event listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
+**Subscribe** to an Embla [event](/api/events/) with a **callback**. Added event listeners will persist even if [reinit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
 
 ---
 
@@ -471,7 +471,7 @@ Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-**Subscribe** to an Embla [watcher](/api/watchers/) with a **callback**. Added watch listeners will persist even if [reInit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [offWatch](/api/methods/#offwatch) method.
+**Subscribe** to an Embla [watcher](/api/watchers/) with a **callback**. Added watch listeners will persist even if [reinit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [offWatch](/api/methods/#offwatch) method.
 
 ---
 

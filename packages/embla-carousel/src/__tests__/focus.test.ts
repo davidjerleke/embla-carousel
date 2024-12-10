@@ -13,7 +13,7 @@ describe('➡️  Focus', () => {
       const container = emblaApi.containerNode()
       const callback = jest.fn()
 
-      emblaApi.on('slideFocus', callback)
+      emblaApi.on('slidefocus', callback)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -46,7 +46,7 @@ describe('➡️  Focus', () => {
       const callback = jest.fn()
       const fifthSlide = emblaApi.slideNodes()[4]
 
-      emblaApi.on('slideFocus', callback)
+      emblaApi.on('slidefocus', callback)
       emblaApi.destroy()
 
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
@@ -65,7 +65,7 @@ describe('➡️  Focus', () => {
 
       const fifthSlide = emblaApi.slideNodes()[4]
 
-      emblaApi.onWatch('slideFocus', () => true)
+      emblaApi.onWatch('slidefocus', () => true)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -79,7 +79,7 @@ describe('➡️  Focus', () => {
 
       const fifthSlide = emblaApi.slideNodes()[4]
 
-      emblaApi.onWatch('slideFocus', () => false)
+      emblaApi.onWatch('slidefocus', () => false)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -96,7 +96,7 @@ describe('➡️  Focus', () => {
       const firstSlide = emblaApi.slideNodes()[0]
       const callback = jest.fn()
 
-      emblaApi.on('slideFocus', callback)
+      emblaApi.on('slidefocus', callback)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       firstSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -125,7 +125,7 @@ describe('➡️  Focus', () => {
       const fifthSlide = emblaApi.slideNodes()[4]
       const callback = jest.fn(() => true)
 
-      emblaApi.onWatch('slideFocus', callback)
+      emblaApi.onWatch('slidefocus', callback)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
