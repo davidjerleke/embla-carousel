@@ -1,6 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { EngineType } from 'embla-carousel/components/Engine'
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+import {
+  EmblaCarouselType,
+  EmblaOptionsType,
+  EmblaWatchCallbackType
+} from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
   NextButton,
@@ -32,10 +36,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [slides, setSlides] = useState(propSlides)
   const [hasMoreToLoad, setHasMoreToLoad] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    ...options,
-    watchSlides: (emblaApi) => {
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
+
+  const onSlideChanges: EmblaWatchCallbackType<'slideschanged'> = useCallback(
+    (emblaApi: EmblaCarouselType) => {
       const reloadEmbla = (): void => {
         const oldEngine = emblaApi.internalEngine()
 
@@ -75,15 +86,11 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       } else {
         reloadEmbla()
       }
-    }
-  })
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
+      return false
+    },
+    []
+  )
 
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     if (!listenForScrollRef.current) return
@@ -128,7 +135,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const onResize = () => emblaApi.reInit()
     window.addEventListener('resize', onResize)
     emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
-  }, [emblaApi, addScrollListener])
+    emblaApi.onWatch('slideschanged', onSlideChanges)
+  }, [emblaApi, addScrollListener, onSlideChanges])
 
   useEffect(() => {
     hasMoreToLoadRef.current = hasMoreToLoad

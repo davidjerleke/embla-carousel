@@ -13,7 +13,7 @@ export const addDotBtnsAndClickHandlers = (
       .join('')
 
     const scrollTo = (index: number): void => {
-      emblaApi.scrollTo(index)
+      emblaApi.scrollToSnap(index)
     }
 
     dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'))

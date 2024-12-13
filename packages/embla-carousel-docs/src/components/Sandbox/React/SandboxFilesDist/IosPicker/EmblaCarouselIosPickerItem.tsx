@@ -78,7 +78,7 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
     axis: 'y',
     dragFree: true,
     containScroll: false,
-    watchSlides: false
+    slideChanges: false
   })
   const rootNodeRef = useRef<HTMLDivElement>(null)
   const totalRadius = slideCount * WHEEL_ITEM_RADIUS

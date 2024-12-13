@@ -61,7 +61,7 @@ export const IosPickerItem = (props) => {
     axis: 'y',
     dragFree: true,
     containScroll: false,
-    watchSlides: false
+    slideChanges: false
   })
   const rootNodeRef = useRef(null)
   const totalRadius = slideCount * WHEEL_ITEM_RADIUS

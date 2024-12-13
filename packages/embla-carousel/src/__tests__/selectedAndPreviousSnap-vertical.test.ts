@@ -44,15 +44,15 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Vertical', () => {
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index more than last index', () => {
-      emblaApi.scrollTo(lastIndex + 1)
+    test('User tries to scrollToSnap() an index more than last index', () => {
+      emblaApi.scrollToSnap(lastIndex + 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index less than first index', () => {
-      emblaApi.scrollTo(firstIndex - 1)
+    test('User tries to scrollToSnap() an index less than first index', () => {
+      emblaApi.scrollToSnap(firstIndex - 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
@@ -126,15 +126,15 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Vertical', () => {
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index more than last index', () => {
-      emblaApi.scrollTo(lastIndex + 1)
+    test('User tries to scrollToSnap() an index more than last index', () => {
+      emblaApi.scrollToSnap(lastIndex + 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index less than first index', () => {
-      emblaApi.scrollTo(firstIndex - 1)
+    test('User tries to scrollToSnap() an index less than first index', () => {
+      emblaApi.scrollToSnap(firstIndex - 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)

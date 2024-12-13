@@ -20,7 +20,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const onThumbClick = useCallback(
     (index: number) => {
       if (!emblaMainApi || !emblaThumbsApi) return
-      emblaMainApi.scrollTo(index)
+      emblaMainApi.scrollToSnap(index)
     },
     [emblaMainApi, emblaThumbsApi]
   )
@@ -28,7 +28,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
     setSelectedIndex(emblaMainApi.selectedScrollSnap())
-    emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
+    emblaThumbsApi.scrollToSnap(emblaMainApi.selectedScrollSnap())
   }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
 
   useEffect(() => {
