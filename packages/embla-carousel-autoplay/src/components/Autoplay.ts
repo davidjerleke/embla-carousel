@@ -208,7 +208,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     if (emblaApi.canScrollNext()) {
       emblaApi.scrollNext(jump)
     } else {
-      emblaApi.scrollTo(0, jump)
+      emblaApi.scrollToSnap(0, jump)
     }
 
     emblaApi.emit('autoplay:select', null)

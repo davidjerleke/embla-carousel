@@ -24,7 +24,7 @@ export const EmblaCarousel: Component<PropType> = (props) => {
   }
 
   function scrollTo(index: number): void {
-    emblaApi()?.scrollTo(index)
+    emblaApi()?.scrollToSnap(index)
   }
 
   function onInit(emblaApi: EmblaCarouselType): void {

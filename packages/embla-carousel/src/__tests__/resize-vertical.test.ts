@@ -3,10 +3,8 @@ import { mockTestElements } from './mocks'
 import { triggerResizeObserver } from './mocks/resizeObserver.mock'
 import { FIXTURE_RESIZE_Y } from './fixtures/resize-vertical.fixture'
 
-import {
-  BELOW_RESIZE_TRIGGER_THRESHOLD,
-  RESIZE_TRIGGER_THRESHOLD
-} from './resize-ltr.test'
+export const RESIZE_TRIGGER_THRESHOLD = 0.5
+export const BELOW_RESIZE_TRIGGER_THRESHOLD = 0.49
 
 describe('➡️  Resize - Vertical', () => {
   describe('When a slide is resized and the RESIZE option is set to TRUE', () => {

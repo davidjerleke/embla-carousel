@@ -6,7 +6,7 @@ import {
   FIXTURE_LOOP_LTR_2
 } from './fixtures/loop-ltr.fixture'
 
-export const scrollToLocationInstant = (
+const scrollToLocationInstant = (
   engine: EngineType,
   location: number
 ): void => {
