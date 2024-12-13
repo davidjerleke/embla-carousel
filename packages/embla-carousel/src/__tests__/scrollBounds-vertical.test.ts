@@ -3,7 +3,7 @@ import { mockTestElements } from './mocks'
 import { SCROLL_BOUNDS_Y_1 } from './fixtures/scrollBounds-vertical.fixture'
 import { EngineType } from '../components/Engine'
 
-export const setLocationOutOfBounds = (
+const setLocationOutOfBounds = (
   engine: EngineType,
   outOfBoundsLocation: number
 ): void => {

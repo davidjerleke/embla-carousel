@@ -16,7 +16,7 @@ export const addDotBtnsAndClickHandlers = (
       .join('')
 
     const scrollTo = (index: number): void => {
-      emblaApi.scrollTo(index)
+      emblaApi.scrollToSnap(index)
       /*__NAV_AUTOPLAY_REPLACE_START__*/
       if (onButtonClick) onButtonClick(emblaApi)
       /*__NAV_AUTOPLAY_REPLACE_END__*/

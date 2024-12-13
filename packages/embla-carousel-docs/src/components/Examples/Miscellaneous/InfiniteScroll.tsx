@@ -16,8 +16,8 @@ const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = {
   dragFree: true,
   containScroll: 'keepSnaps',
-  watchSlides: false,
-  watchResize: false
+  slideChanges: true,
+  resize: false
 }
 const STYLES = examplesCarouselInfiniteScrollStyles()
 
