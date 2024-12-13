@@ -26,7 +26,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       expect(emblaApi.previousScrollSnap()).toBe(2)
     })
 
-    test('User tries to scrollNext() past the last slide', () => {
+    test('User tries to scrollNext() past the last scroll snap', () => {
       emblaApi.reInit({ startIndex: lastIndex })
       emblaApi.scrollNext()
 
@@ -34,22 +34,22 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       expect(emblaApi.previousScrollSnap()).toBe(lastIndex)
     })
 
-    test('User tries to scrollPrev before the first slide', () => {
+    test('User tries to scrollPrev() before the first scroll snap', () => {
       emblaApi.scrollPrev()
 
       expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index more than last index', () => {
-      emblaApi.scrollTo(lastIndex + 1)
+    test('User tries to scrollToSnap() an index more than last index', () => {
+      emblaApi.scrollToSnap(lastIndex + 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index less than first index', () => {
-      emblaApi.scrollTo(firstIndex - 1)
+    test('User tries to scrollToSnap() an index less than first index', () => {
+      emblaApi.scrollToSnap(firstIndex - 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
@@ -105,7 +105,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       expect(emblaApi.previousScrollSnap()).toBe(2)
     })
 
-    test('User tries to scrollNext() past the last slide', () => {
+    test('User tries to scrollNext() past the last scroll snap', () => {
       emblaApi.reInit({ startIndex: lastIndex })
       emblaApi.scrollNext()
 
@@ -113,22 +113,22 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       expect(emblaApi.previousScrollSnap()).toBe(lastIndex)
     })
 
-    test('User tries to scrollPrev before the first slide', () => {
+    test('User tries to scrollPrev() before the first scroll snap', () => {
       emblaApi.scrollPrev()
 
       expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index more than last index', () => {
-      emblaApi.scrollTo(lastIndex + 1)
+    test('User tries to scrollToSnap() an index more than last index', () => {
+      emblaApi.scrollToSnap(lastIndex + 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollTo() an index less than first index', () => {
-      emblaApi.scrollTo(firstIndex - 1)
+    test('User tries to scrollToSnap() an index less than first index', () => {
+      emblaApi.scrollToSnap(firstIndex - 1)
 
       expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
       expect(emblaApi.previousScrollSnap()).toBe(firstIndex)

@@ -6,7 +6,7 @@ import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString, WindowType } from './utils'
+import { isNumber, isString, WindowType } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -28,7 +28,8 @@ export type EmblaCarouselType = {
   scrollPrev: (jump?: boolean) => void
   scrollProgress: () => number
   scrollSnapList: () => number[]
-  scrollTo: (index: number, jump?: boolean) => void
+  scrollToSnap: (index: number, jump?: boolean) => void
+  scrollToSlide: (subject: number | HTMLElement, jump?: boolean) => void
   selectedScrollSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: () => number[]
@@ -164,7 +165,11 @@ function EmblaCarousel(
     watchHandler.clear()
   }
 
-  function scrollTo(index: number, jump?: boolean, direction?: number): void {
+  function scrollToSnap(
+    index: number,
+    jump?: boolean,
+    direction?: number
+  ): void {
     if (!options.active || destroyed) return
     engine.scrollBody
       .useBaseFriction()
@@ -172,14 +177,25 @@ function EmblaCarousel(
     engine.scrollTo.index(index, direction || 0)
   }
 
+  function scrollToSlide(
+    subject: number | HTMLElement,
+    jump?: boolean,
+    direction?: number
+  ): void {
+    const index = isNumber(subject) ? subject : slides.indexOf(subject)
+    const snapIndex = engine.slideRegistry.findIndex((g) => g.includes(index))
+
+    if (isNumber(snapIndex)) scrollToSnap(snapIndex, jump, direction)
+  }
+
   function scrollNext(jump?: boolean): void {
     const next = engine.index.add(1).get()
-    scrollTo(next, jump, -1)
+    scrollToSnap(next, jump, -1)
   }
 
   function scrollPrev(jump?: boolean): void {
     const prev = engine.index.add(-1).get()
-    scrollTo(prev, jump, 1)
+    scrollToSnap(prev, jump, 1)
   }
 
   function canScrollNext(): boolean {
@@ -256,7 +272,8 @@ function EmblaCarousel(
     scrollPrev,
     scrollProgress,
     scrollSnapList,
-    scrollTo,
+    scrollToSnap,
+    scrollToSlide,
     selectedScrollSnap,
     slideNodes,
     slidesInView,

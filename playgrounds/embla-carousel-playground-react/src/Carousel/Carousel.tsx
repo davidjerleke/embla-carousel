@@ -25,7 +25,7 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
     [emblaApi]
   )
   const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    (index: number) => emblaApi && emblaApi.scrollToSnap(index),
     [emblaApi]
   )
 
