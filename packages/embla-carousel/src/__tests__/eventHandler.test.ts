@@ -12,7 +12,7 @@ describe('➡️  EventHandler', () => {
       emblaApi.scrollNext()
       expect(callback).toHaveBeenCalledTimes(1)
 
-      emblaApi.on('reInit', callback)
+      emblaApi.on('reinit', callback)
       emblaApi.reInit()
       expect(callback).toHaveBeenCalledTimes(2)
     })
@@ -42,7 +42,7 @@ describe('➡️  EventHandler', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const callback = jest.fn()
 
-      emblaApi.on('reInit', callback)
+      emblaApi.on('reinit', callback)
       emblaApi.scrollNext()
       expect(callback).toHaveBeenCalledTimes(0)
     })

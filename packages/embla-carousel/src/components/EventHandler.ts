@@ -16,34 +16,34 @@ type EventStoreType = Partial<{
 
 export interface EmblaEventListType {
   init: 'init'
-  pointerDown: 'pointerDown'
-  pointerUp: 'pointerUp'
-  slidesChanged: 'slidesChanged'
-  slidesInView: 'slidesInView'
+  pointerdown: 'pointerdown'
+  pointerup: 'pointerup'
+  slideschanged: 'slideschanged'
+  slidesinview: 'slidesinview'
   scroll: 'scroll'
   select: 'select'
   settle: 'settle'
   destroy: 'destroy'
-  reInit: 'reInit'
+  reinit: 'reinit'
   resize: 'resize'
-  slideFocusStart: 'slideFocusStart'
-  slideFocus: 'slideFocus'
+  slidefocusstart: 'slidefocusstart'
+  slidefocus: 'slidefocus'
 }
 
 export interface EmblaEventDetailType {
   init: null
-  pointerDown: PointerEventType
-  pointerUp: PointerEventType
-  slidesChanged: MutationRecord[]
-  slidesInView: null
+  pointerdown: PointerEventType
+  pointerup: PointerEventType
+  slideschanged: MutationRecord[]
+  slidesinview: null
   scroll: null
   select: null
   settle: null
   destroy: null
-  reInit: null
+  reinit: null
   resize: ResizeObserverEntry[]
-  slideFocusStart: FocusEvent
-  slideFocus: FocusEvent
+  slidefocusstart: FocusEvent
+  slidefocus: FocusEvent
 }
 
 export type EventHandlerType = {
