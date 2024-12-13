@@ -7,7 +7,7 @@ export const useDotButton = (emblaApi, onButtonClick) => {
   const onDotButtonClick = useCallback(
     (index) => {
       if (!emblaApi) return
-      emblaApi.scrollTo(index)
+      emblaApi.scrollToSnap(index)
       if (onButtonClick) onButtonClick(emblaApi)
     },
     [emblaApi, onButtonClick]

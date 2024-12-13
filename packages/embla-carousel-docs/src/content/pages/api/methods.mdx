@@ -307,7 +307,7 @@ Get all the slide nodes inside the container. This method can be useful when you
 Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to the next snap point if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the last snap point, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the next slide instantly.
+Scroll to the next scroll snap if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the last scroll snap, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the next scroll snap instantly.
 
 ---
 
@@ -316,16 +316,33 @@ Scroll to the next snap point if possible. When [loop](/api/options/#loop) is di
 Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to the previous snap point if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the first snap point, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the previous slide instantly.
+Scroll to the previous scroll snap if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the first scroll snap, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the previous scroll snap instantly.
 
 ---
 
-### scrollTo
+### scrollToSnap
 
 Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to a snap point by its unique index. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target snap point. Set the **jump** parameter to `true` when you want to go to the desired slide instantly.
+Scroll to a scroll snap by its unique index. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
+
+<Admonition type="note">
+  **Note:** A scroll snap isn't equvialent to a slide. A scroll snap can hold
+  multiple slides based on what options are set. For example, if
+  [slideToScroll](/api/options/#slidetoscroll) is set to anything more than `1`
+  or `auto` and multiple slides fit inside the viewport, a scroll snap will hold
+  multiple slides.
+</Admonition>
+
+---
+
+### scrollToSlide
+
+Parameters: <BrandPrimaryText>`subject: number | HTMLElement`, `jump?: boolean`</BrandPrimaryText>  
+Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+
+Scroll to a scroll snap by providing a slide index or a slide element. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
 
 ---
 
@@ -334,7 +351,7 @@ Scroll to a snap point by its unique index. If [loop](/api/options/#loop) is ena
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
 
-Check the possiblity to scroll to a next snap point. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
+Check the possiblity to scroll to the next scroll snap. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 
 ---
 
@@ -343,7 +360,7 @@ Check the possiblity to scroll to a next snap point. If [loop](/api/options/#loo
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
 
-Check the possiblity to scroll to a previous snap point. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
+Check the possiblity to scroll to the previous scroll snap. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 
 ---
 
@@ -352,7 +369,7 @@ Check the possiblity to scroll to a previous snap point. If [loop](/api/options/
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
 
-Get the index of the selected snap point.
+Get the index of the selected scroll snap.
 
 ---
 
@@ -361,7 +378,7 @@ Get the index of the selected snap point.
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
 
-Get the index of the previously selected snap point.
+Get the index of the previously selected scroll snap.
 
 ---
 
@@ -370,7 +387,7 @@ Get the index of the previously selected snap point.
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number[]`</BrandSecondaryText>
 
-Get an array containing all the snap point positions. Each position represents how far the carousel needs to progress in order to reach this position.
+Get an array containing all the scroll snap positions. Each position represents how far the carousel needs to progress in order to reach this position.
 
 ---
 

@@ -7,7 +7,7 @@ export const addThumbBtnsClickHandlers = (
   const slidesThumbs = emblaApiThumb.slideNodes()
 
   const scrollToIndex = slidesThumbs.map(
-    (_, index) => (): void => emblaApiMain.scrollTo(index)
+    (_, index) => (): void => emblaApiMain.scrollToSnap(index)
   )
 
   slidesThumbs.forEach((slideNode, index) => {
@@ -28,7 +28,7 @@ export const addToggleThumbBtnsActive = (
   const slidesThumbs = emblaApiThumb.slideNodes()
 
   const toggleThumbBtnsState = (): void => {
-    emblaApiThumb.scrollTo(emblaApiMain.selectedScrollSnap())
+    emblaApiThumb.scrollToSnap(emblaApiMain.selectedScrollSnap())
     const previous = emblaApiMain.previousScrollSnap()
     const selected = emblaApiMain.selectedScrollSnap()
     slidesThumbs[previous].classList.remove('embla-thumbs__slide--selected')
