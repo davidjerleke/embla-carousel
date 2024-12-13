@@ -1,10 +1,20 @@
 import EmblaCarousel from '../components/EmblaCarousel'
+import { EngineType } from '../components/Engine'
 import { mockTestElements } from './mocks'
-import { scrollToLocationInstant } from './loop-ltr.test'
 import {
   FIXTURE_LOOP_Y_1,
   FIXTURE_LOOP_Y_2
 } from './fixtures/loop-vertical.fixture'
+
+const scrollToLocationInstant = (
+  engine: EngineType,
+  location: number
+): void => {
+  engine.target.set(location)
+  engine.scrollBody.useDuration(0)
+  engine.animation.update()
+  engine.animation.render(1)
+}
 
 describe('➡️  Loop - Vertical', () => {
   const WRAP_AROUND_JOINT_SAFETY = 0.1
