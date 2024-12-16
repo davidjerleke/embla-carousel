@@ -322,10 +322,10 @@ Scroll to the previous scroll snap if possible. When [loop](/api/options/#loop) 
 
 ### scrollToSnap
 
-Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`, `direction?: 'forward' | 'backward'`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to a scroll snap by its unique index. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
+Scroll to a scroll snap by its unique index. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly. If [loop](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
 
 <Admonition type="note">
   **Note:** A scroll snap isn't equvialent to a slide. A scroll snap can hold
@@ -339,10 +339,10 @@ Scroll to a scroll snap by its unique index. If [loop](/api/options/#loop) is en
 
 ### scrollToSlide
 
-Parameters: <BrandPrimaryText>`subject: number | HTMLElement`, `jump?: boolean`</BrandPrimaryText>  
+Parameters: <BrandPrimaryText>`subject: number | HTMLElement`, `jump?: boolean`, `direction?: 'forward' | 'backward'`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to a scroll snap by providing a slide index or a slide element. The carousel will scroll to the scroll snap that holds the provided slide. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
+Scroll to a scroll snap by providing a slide index or a slide element. The carousel will scroll to the scroll snap that holds the provided slide. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly. If [loop](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
 
 ---
 
