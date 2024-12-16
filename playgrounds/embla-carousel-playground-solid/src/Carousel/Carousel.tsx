@@ -28,11 +28,11 @@ export const EmblaCarousel: Component<PropType> = (props) => {
   }
 
   function onInit(emblaApi: EmblaCarouselType): void {
-    setScrollSnaps(emblaApi.scrollSnapList())
+    setScrollSnaps(emblaApi.snapList())
   }
 
   function onSelect(emblaApi: EmblaCarouselType): void {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
+    setSelectedIndex(emblaApi.selectedSnap())
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
   }

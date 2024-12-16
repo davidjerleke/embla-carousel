@@ -35,7 +35,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   function init(emblaApiInstance: EmblaCarouselType): void {
     emblaApi = emblaApiInstance
 
-    const selectedSnap = emblaApi.selectedScrollSnap()
+    const selectedSnap = emblaApi.selectedSnap()
     const { scrollBody, containerRect, axis } = emblaApi.internalEngine()
     const containerSize = axis.measureSize(containerRect)
 
@@ -43,7 +43,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     shouldFadePair = false
 
     opacities = emblaApi
-      .scrollSnapList()
+      .snapList()
       .map((_, index) => (index === selectedSnap ? fullOpacity : noOpacity))
 
     defaultSettledBehaviour = scrollBody.settled
@@ -83,7 +83,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function fadeToSelectedSnapInstantly(): void {
-    const selectedSnap = emblaApi.selectedScrollSnap()
+    const selectedSnap = emblaApi.selectedSnap()
     setOpacities(selectedSnap, fullOpacity)
   }
 
@@ -131,7 +131,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function setOpacities(fadeIndex: number, velocity: number): void {
-    const scrollSnaps = emblaApi.scrollSnapList()
+    const scrollSnaps = emblaApi.snapList()
 
     scrollSnaps.forEach((_, indexA) => {
       const absVelocity = Math.abs(velocity)
@@ -146,7 +146,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       opacities[indexA] = clampedOpacity
 
       const fadePair = isFadeIndex && shouldFadePair
-      const indexB = emblaApi.previousScrollSnap()
+      const indexB = emblaApi.previousSnap()
 
       if (fadePair) opacities[indexB] = 1 - clampedOpacity
       if (isFadeIndex) setProgress(fadeIndex, clampedOpacity)
@@ -182,9 +182,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     const snapFraction = 1 / (scrollSnaps.length - 1)
 
     let indexA = fadeIndex
-    let indexB = pointerDown
-      ? emblaApi.selectedScrollSnap()
-      : emblaApi.previousScrollSnap()
+    let indexB = pointerDown ? emblaApi.selectedSnap() : emblaApi.previousSnap()
 
     if (pointerDown && indexA === indexB) {
       const reverseSign = Math.sign(distanceFromPointerDown) * -1
@@ -199,7 +197,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
   function getFadeIndex(): number | null {
     const { dragHandler, index, scrollBody } = emblaApi.internalEngine()
-    const selectedSnap = emblaApi.selectedScrollSnap()
+    const selectedSnap = emblaApi.selectedSnap()
 
     if (!dragHandler.pointerDown()) return selectedSnap
 

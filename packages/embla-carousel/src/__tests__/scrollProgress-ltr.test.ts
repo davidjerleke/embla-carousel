@@ -14,16 +14,16 @@ describe('➡️  ScrollProgress - Horizontal LTR', () => {
 
       expect(emblaApi.scrollProgress()).toBe(-0)
 
-      emblaApi.reInit({ startIndex: 1 })
+      emblaApi.reInit({ startSnap: 1 })
       expect(emblaApi.scrollProgress()).toBe(0.4166666666666667)
 
-      emblaApi.reInit({ startIndex: 2 })
+      emblaApi.reInit({ startSnap: 2 })
       expect(emblaApi.scrollProgress()).toBe(0.6666666666666666)
 
-      emblaApi.reInit({ startIndex: 3 })
+      emblaApi.reInit({ startSnap: 3 })
       expect(emblaApi.scrollProgress()).toBe(0.9583333333333334)
 
-      emblaApi.reInit({ startIndex: 4 })
+      emblaApi.reInit({ startSnap: 4 })
       expect(emblaApi.scrollProgress()).toBe(1)
     })
 
@@ -34,16 +34,16 @@ describe('➡️  ScrollProgress - Horizontal LTR', () => {
 
       expect(emblaApi.scrollProgress()).toBe(-0)
 
-      emblaApi.reInit({ startIndex: 1 })
+      emblaApi.reInit({ startSnap: 1 })
       expect(emblaApi.scrollProgress()).toBe(0.4076923076923077)
 
-      emblaApi.reInit({ startIndex: 2 })
+      emblaApi.reInit({ startSnap: 2 })
       expect(emblaApi.scrollProgress()).toBe(0.6538461538461539)
 
-      emblaApi.reInit({ startIndex: 3 })
+      emblaApi.reInit({ startSnap: 3 })
       expect(emblaApi.scrollProgress()).toBe(0.9384615384615385)
 
-      emblaApi.reInit({ startIndex: 4 })
+      emblaApi.reInit({ startSnap: 4 })
       expect(emblaApi.scrollProgress()).toBe(1)
     })
   })

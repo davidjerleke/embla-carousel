@@ -59,7 +59,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     const allOptions = mergeOptions(optionsBase, userOptions)
     options = optionsAtMedia(allOptions)
 
-    if (emblaApi.scrollSnapList().length <= 1) return
+    if (emblaApi.snapList().length <= 1) return
 
     speed = options.speed
     startDelay = options.startDelay
