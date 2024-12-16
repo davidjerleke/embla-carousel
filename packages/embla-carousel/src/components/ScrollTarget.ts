@@ -1,4 +1,5 @@
 import { LimitType } from './Limit'
+import { DirectionType } from './ScrollTo'
 import { Vector1DType } from './Vector1d'
 import { arrayLast, mathAbs, mathSign } from './utils'
 
@@ -8,9 +9,9 @@ export type TargetType = {
 }
 
 export type ScrollTargetType = {
-  byIndex: (target: number, direction: number) => TargetType
+  byIndex: (target: number, direction: DirectionType) => TargetType
   byDistance: (force: number, snap: boolean) => TargetType
-  shortcut: (target: number, direction: number) => number
+  shortcut: (target: number, direction: DirectionType) => number
 }
 
 export function ScrollTarget(
@@ -36,7 +37,7 @@ export function ScrollTarget(
     return { index, distance }
   }
 
-  function shortcut(target: number, direction: number): number {
+  function shortcut(target: number, direction: DirectionType): number {
     const targets = [target, target + contentSize, target - contentSize]
 
     if (!loop) return target
@@ -47,7 +48,7 @@ export function ScrollTarget(
     return arrayLast(targets) - contentSize
   }
 
-  function byIndex(index: number, direction: number): TargetType {
+  function byIndex(index: number, direction: DirectionType): TargetType {
     const diffToSnap = scrollSnaps[index] - targetVector.get()
     const distance = shortcut(diffToSnap, direction)
     return { index, distance }
