@@ -11,7 +11,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       )
       const { scrollSnaps } = emblaApi.internalEngine()
       const firstIndex = 0
-      const lastIndex = emblaApi.scrollSnapList().length - 1
+      const lastIndex = emblaApi.snapList().length - 1
       const animationStart = jest.spyOn(
         emblaApi.internalEngine().animation,
         'start'
@@ -21,7 +21,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
 
       while (snapIndex !== lastIndex) {
         emblaApi.scrollToSnap(snapIndex)
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -39,7 +39,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       )
       const { scrollSnaps } = emblaApi.internalEngine()
       const firstIndex = 0
-      const lastIndex = emblaApi.scrollSnapList().length - 1
+      const lastIndex = emblaApi.snapList().length - 1
       const animationStart = jest.spyOn(
         emblaApi.internalEngine().animation,
         'start'
@@ -49,7 +49,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
 
       while (snapIndex !== lastIndex) {
         emblaApi.scrollToSnap(snapIndex)
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -69,14 +69,14 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       )
       const { scrollSnaps } = emblaApi.internalEngine()
       const firstIndex = 0
-      const lastIndex = emblaApi.scrollSnapList().length - 1
+      const lastIndex = emblaApi.snapList().length - 1
       const container = emblaApi.containerNode()
 
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
         emblaApi.scrollToSnap(snapIndex, true)
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -96,14 +96,14 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       )
       const { scrollSnaps } = emblaApi.internalEngine()
       const firstIndex = 0
-      const lastIndex = emblaApi.scrollSnapList().length - 1
+      const lastIndex = emblaApi.snapList().length - 1
       const container = emblaApi.containerNode()
 
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
         emblaApi.scrollToSnap(snapIndex, true)
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )

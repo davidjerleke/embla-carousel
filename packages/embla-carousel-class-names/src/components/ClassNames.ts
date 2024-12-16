@@ -121,7 +121,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
 
   function toggleSnappedClasses(): void {
     const { slideRegistry } = emblaApi.internalEngine()
-    const newSnappedIndexes = slideRegistry[emblaApi.selectedScrollSnap()]
+    const newSnappedIndexes = slideRegistry[emblaApi.selectedSnap()]
 
     snappedIndexes = toggleSlideClasses(
       newSnappedIndexes,

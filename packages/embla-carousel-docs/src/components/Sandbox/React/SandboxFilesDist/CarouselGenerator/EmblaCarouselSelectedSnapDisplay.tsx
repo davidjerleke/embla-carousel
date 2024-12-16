@@ -13,8 +13,8 @@ export const useSelectedSnapDisplay = (
   const [snapCount, setSnapCount] = useState(0)
 
   const updateScrollSnapState = useCallback((emblaApi: EmblaCarouselType) => {
-    setSnapCount(emblaApi.scrollSnapList().length)
-    setSelectedSnap(emblaApi.selectedScrollSnap())
+    setSnapCount(emblaApi.snapList().length)
+    setSelectedSnap(emblaApi.selectedSnap())
   }, [])
 
   useEffect(() => {
