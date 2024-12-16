@@ -4,10 +4,14 @@ import { EventHandlerType } from './EventHandler'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
 import { Vector1DType } from './Vector1d'
+import { isNumber } from './utils'
+
+export type DirectionType = 0 | 1 | -1
+export type ScrollToDirectionType = 'forward' | 'backward' | DirectionType
 
 export type ScrollToType = {
   distance: (n: number, snap: boolean) => void
-  index: (n: number, direction: number) => void
+  index: (n: number, direction?: ScrollToDirectionType) => void
 }
 
 export function ScrollTo(
@@ -47,10 +51,16 @@ export function ScrollTo(
     scrollTo(target)
   }
 
-  function index(n: number, direction: number): void {
-    const targetIndex = indexCurrent.clone().set(n)
-    const target = scrollTarget.byIndex(targetIndex.get(), direction)
+  function index(n: number, direction?: ScrollToDirectionType): void {
+    const targetIndex = indexCurrent.clone().set(n).get()
+    const target = scrollTarget.byIndex(targetIndex, getDirection(direction))
     scrollTo(target)
+  }
+
+  function getDirection(direction?: ScrollToDirectionType): DirectionType {
+    if (!direction) return 0
+    if (isNumber(direction)) return direction
+    return direction === 'forward' ? -1 : 1
   }
 
   const self: ScrollToType = {
