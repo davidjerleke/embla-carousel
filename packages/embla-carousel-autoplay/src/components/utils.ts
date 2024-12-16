@@ -5,7 +5,7 @@ export function normalizeDelay(
   emblaApi: EmblaCarouselType,
   delay: DelayOptionType
 ): number[] {
-  const scrollSnaps = emblaApi.scrollSnapList()
+  const scrollSnaps = emblaApi.snapList()
 
   if (typeof delay === 'number') {
     return scrollSnaps.map(() => delay)

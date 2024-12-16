@@ -67,7 +67,7 @@ export type EngineType = {
   slidesHandler: SlidesHandlerType
   scrollTo: ScrollToType
   scrollTarget: ScrollTargetType
-  scrollSnapList: number[]
+  snapList: number[]
   scrollSnaps: number[]
   slideIndexes: number[]
   slideFocus: SlideFocusType
@@ -91,7 +91,7 @@ export function Engine(
     align,
     axis: scrollAxis,
     direction,
-    startIndex,
+    startSnap,
     loop,
     duration,
     dragFree,
@@ -155,7 +155,7 @@ export function Engine(
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
-  const index = Counter(arrayLastIndex(scrollSnaps), startIndex, loop)
+  const index = Counter(arrayLastIndex(scrollSnaps), startSnap, loop)
   const indexPrevious = index.clone()
   const slideIndexes = arrayKeys(slides)
 
@@ -341,7 +341,7 @@ export function Engine(
       target
     ]),
     scrollProgress,
-    scrollSnapList: scrollSnaps.map(scrollProgress.get),
+    snapList: scrollSnaps.map(scrollProgress.get),
     scrollSnaps,
     scrollTarget,
     scrollTo,

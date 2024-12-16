@@ -21,16 +21,16 @@ export type EmblaCarouselType = {
   emit: EventHandlerType['emit']
   emitWatch: WatchHandlerType['emit']
   plugins: () => EmblaPluginsType
-  previousScrollSnap: () => number
+  previousSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
   rootNode: () => HTMLElement
   scrollNext: (jump?: boolean) => void
   scrollPrev: (jump?: boolean) => void
   scrollProgress: () => number
-  scrollSnapList: () => number[]
+  snapList: () => number[]
   scrollToSnap: (index: number, jump?: boolean) => void
   scrollToSlide: (subject: number | HTMLElement, jump?: boolean) => void
-  selectedScrollSnap: () => number
+  selectedSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: () => number[]
   slidesNotInView: () => number[]
@@ -136,9 +136,9 @@ function EmblaCarousel(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[]
   ): void {
-    const startIndex = selectedScrollSnap()
+    const startSnap = selectedSnap()
     deActivate()
-    activate(mergeOptions({ startIndex }, withOptions), withPlugins)
+    activate(mergeOptions({ startSnap }, withOptions), withPlugins)
     eventHandler.emit('reinit', null)
   }
 
@@ -200,27 +200,27 @@ function EmblaCarousel(
 
   function canScrollNext(): boolean {
     const next = engine.index.add(1).get()
-    return next !== selectedScrollSnap()
+    return next !== selectedSnap()
   }
 
   function canScrollPrev(): boolean {
     const prev = engine.index.add(-1).get()
-    return prev !== selectedScrollSnap()
+    return prev !== selectedSnap()
   }
 
-  function scrollSnapList(): number[] {
-    return engine.scrollSnapList
+  function snapList(): number[] {
+    return engine.snapList
   }
 
   function scrollProgress(): number {
     return engine.scrollProgress.get(engine.location.get())
   }
 
-  function selectedScrollSnap(): number {
+  function selectedSnap(): number {
     return engine.index.get()
   }
 
-  function previousScrollSnap(): number {
+  function previousSnap(): number {
     return engine.indexPrevious.get()
   }
 
@@ -265,19 +265,19 @@ function EmblaCarousel(
     emit,
     emitWatch,
     plugins,
-    previousScrollSnap,
+    previousSnap,
     reInit,
     rootNode,
     scrollNext,
     scrollPrev,
     scrollProgress,
-    scrollSnapList,
     scrollToSnap,
     scrollToSlide,
-    selectedScrollSnap,
+    selectedSnap,
     slideNodes,
     slidesInView,
-    slidesNotInView
+    slidesNotInView,
+    snapList
   }
 
   activate(userOptions, userPlugins)
