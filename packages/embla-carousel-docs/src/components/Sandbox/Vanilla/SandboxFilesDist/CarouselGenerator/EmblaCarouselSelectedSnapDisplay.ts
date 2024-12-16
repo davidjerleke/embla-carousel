@@ -5,8 +5,8 @@ export const updateSelectedSnapDisplay = (
   snapDisplay: HTMLElement
 ): void => {
   const updateSnapDisplay = (emblaApi: EmblaCarouselType) => {
-    const selectedSnap = emblaApi.selectedScrollSnap()
-    const snapCount = emblaApi.scrollSnapList().length
+    const selectedSnap = emblaApi.selectedSnap()
+    const snapCount = emblaApi.snapList().length
     snapDisplay.innerHTML = `${selectedSnap + 1} / ${snapCount}`
   }
 

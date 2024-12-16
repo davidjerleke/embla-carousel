@@ -45,7 +45,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
 
   function highestInView(): number | null {
     const { slideRegistry } = emblaApi.internalEngine()
-    const selectedIndexes = slideRegistry[emblaApi.selectedScrollSnap()]
+    const selectedIndexes = slideRegistry[emblaApi.selectedSnap()]
 
     if (!selectedIndexes) return null
 

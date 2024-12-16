@@ -45,7 +45,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let options: OptionsType
   let emblaApi: EmblaCarouselType
   let destroyed: boolean
-  let delay: ReturnType<EmblaCarouselType['scrollSnapList']>
+  let delay: ReturnType<EmblaCarouselType['snapList']>
   let timerStartTime: null | number = null
   let timerId = 0
   let autoplayActive = false
@@ -64,7 +64,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const allOptions = mergeOptions(optionsBase, userOptions)
     options = optionsAtMedia(allOptions)
 
-    if (emblaApi.scrollSnapList().length <= 1) return
+    if (emblaApi.snapList().length <= 1) return
 
     jump = options.jump
     destroyed = false
@@ -117,7 +117,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   function setTimer(): void {
     const { ownerWindow } = emblaApi.internalEngine()
     ownerWindow.clearTimeout(timerId)
-    timerId = ownerWindow.setTimeout(next, delay[emblaApi.selectedScrollSnap()])
+    timerId = ownerWindow.setTimeout(next, delay[emblaApi.selectedSnap()])
     timerStartTime = new Date().getTime()
     emblaApi.emit('autoplay:timerset', null)
   }
@@ -198,7 +198,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   function next(): void {
     const { index } = emblaApi.internalEngine()
     const nextIndex = index.clone().add(1).get()
-    const lastIndex = emblaApi.scrollSnapList().length - 1
+    const lastIndex = emblaApi.snapList().length - 1
     const kill = options.stopOnLastSnap && nextIndex === lastIndex
 
     if (emblaApi.canScrollNext()) {
@@ -215,7 +215,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function timeUntilNext(): number | null {
     if (!timerStartTime) return null
-    const currentDelay = delay[emblaApi.selectedScrollSnap()]
+    const currentDelay = delay[emblaApi.selectedSnap()]
     const timePastSinceStart = new Date().getTime() - timerStartTime
     return currentDelay - timePastSinceStart
   }
