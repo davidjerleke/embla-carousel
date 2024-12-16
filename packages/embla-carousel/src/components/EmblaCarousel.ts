@@ -7,6 +7,7 @@ import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 import { isNumber, isString, WindowType } from './utils'
+import { ScrollToDirectionType } from './ScrollTo'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -28,12 +29,20 @@ export type EmblaCarouselType = {
   scrollPrev: (jump?: boolean) => void
   scrollProgress: () => number
   snapList: () => number[]
-  scrollToSnap: (index: number, jump?: boolean) => void
-  scrollToSlide: (subject: number | HTMLElement, jump?: boolean) => void
   selectedSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: () => number[]
   slidesNotInView: () => number[]
+  scrollToSnap: (
+    index: number,
+    jump?: boolean,
+    direction?: ScrollToDirectionType
+  ) => void
+  scrollToSlide: (
+    subject: number | HTMLElement,
+    jump?: boolean,
+    direction?: ScrollToDirectionType
+  ) => void
 }
 
 function EmblaCarousel(
@@ -168,19 +177,19 @@ function EmblaCarousel(
   function scrollToSnap(
     index: number,
     jump?: boolean,
-    direction?: number
+    direction?: ScrollToDirectionType
   ): void {
     if (!options.active || destroyed) return
     engine.scrollBody
       .useBaseFriction()
       .useDuration(jump === true ? 0 : options.duration)
-    engine.scrollTo.index(index, direction || 0)
+    engine.scrollTo.index(index, direction)
   }
 
   function scrollToSlide(
     subject: number | HTMLElement,
     jump?: boolean,
-    direction?: number
+    direction?: ScrollToDirectionType
   ): void {
     const index = isNumber(subject) ? subject : slides.indexOf(subject)
     const snapIndex = engine.slideRegistry.findIndex((g) => g.includes(index))
