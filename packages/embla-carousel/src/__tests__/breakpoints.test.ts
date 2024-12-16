@@ -15,7 +15,7 @@ describe('➡️  Breakpoints', () => {
     breakpoints: {
       [MEDIA_QUERY_EXTRA_LARGE]: {
         align: 'center',
-        startIndex: 1
+        startSnap: 1
       },
       [MEDIA_QUERY_EXTRA_SMALL]: {
         align: 'end'
@@ -65,7 +65,7 @@ describe('➡️  Breakpoints', () => {
 
     expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
     expect(engine.location.get()).toBe(
-      expectedScrollSnaps[engine.options.startIndex]
+      expectedScrollSnaps[engine.options.startSnap]
     )
   })
 })

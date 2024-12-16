@@ -34,7 +34,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
 
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideIndex)
-        expect(emblaApi.selectedScrollSnap()).toBe(slideIndex)
+        expect(emblaApi.selectedSnap()).toBe(slideIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[slideIndex]
         )
@@ -63,7 +63,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
 
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideNodes[slideIndex])
-        expect(emblaApi.selectedScrollSnap()).toBe(slideIndex)
+        expect(emblaApi.selectedSnap()).toBe(slideIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[slideIndex]
         )
@@ -92,7 +92,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideIndex)
         const snapIndex = SLIDE_TO_SNAP_INDEX_MAP[slideIndex]
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -122,7 +122,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideNodes[slideIndex])
         const snapIndex = SLIDE_TO_SNAP_INDEX_MAP[slideIndex]
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -149,7 +149,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
 
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideIndex, true)
-        expect(emblaApi.selectedScrollSnap()).toBe(slideIndex)
+        expect(emblaApi.selectedSnap()).toBe(slideIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[slideIndex]
         )
@@ -177,7 +177,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
 
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideNodes[slideIndex], true)
-        expect(emblaApi.selectedScrollSnap()).toBe(slideIndex)
+        expect(emblaApi.selectedSnap()).toBe(slideIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[slideIndex]
         )
@@ -205,7 +205,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideIndex, true)
         const snapIndex = SLIDE_TO_SNAP_INDEX_MAP[slideIndex]
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )
@@ -234,7 +234,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
       while (slideIndex !== lastIndex) {
         emblaApi.scrollToSlide(slideNodes[slideIndex], true)
         const snapIndex = SLIDE_TO_SNAP_INDEX_MAP[slideIndex]
-        expect(emblaApi.selectedScrollSnap()).toBe(snapIndex)
+        expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
         )

@@ -11,48 +11,48 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
     const firstIndex = 0
 
     beforeEach(() => {
-      emblaApi.reInit({ startIndex: firstIndex })
+      emblaApi.reInit({ startSnap: firstIndex })
     })
 
-    test('startIndex is NOT set', () => {
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+    test('startSnap is NOT set', () => {
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('startIndex is set', () => {
-      emblaApi.reInit({ startIndex: 2 })
+    test('startSnap is set', () => {
+      emblaApi.reInit({ startSnap: 2 })
 
-      expect(emblaApi.selectedScrollSnap()).toBe(2)
-      expect(emblaApi.previousScrollSnap()).toBe(2)
+      expect(emblaApi.selectedSnap()).toBe(2)
+      expect(emblaApi.previousSnap()).toBe(2)
     })
 
     test('User tries to scrollNext() past the last scroll snap', () => {
-      emblaApi.reInit({ startIndex: lastIndex })
+      emblaApi.reInit({ startSnap: lastIndex })
       emblaApi.scrollNext()
 
-      expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(lastIndex)
+      expect(emblaApi.selectedSnap()).toBe(lastIndex)
+      expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev() before the first scroll snap', () => {
       emblaApi.scrollPrev()
 
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('User tries to scrollToSnap() an index more than last index', () => {
       emblaApi.scrollToSnap(lastIndex + 1)
 
-      expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(lastIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('User tries to scrollToSnap() an index less than first index', () => {
       emblaApi.scrollToSnap(firstIndex - 1)
 
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('Stepping forward one snap at a time from the beginning', (done) => {
@@ -60,22 +60,22 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
 
       while (i !== lastIndex) {
         emblaApi.scrollNext()
-        expect(emblaApi.previousScrollSnap()).toBe(i)
+        expect(emblaApi.previousSnap()).toBe(i)
         i += 1
-        expect(emblaApi.selectedScrollSnap()).toBe(i)
+        expect(emblaApi.selectedSnap()).toBe(i)
       }
       done()
     })
 
     test('Stepping backward one snap at a time from the end', (done) => {
-      emblaApi.reInit({ startIndex: lastIndex })
+      emblaApi.reInit({ startSnap: lastIndex })
       let i = lastIndex
 
       while (i !== firstIndex) {
         emblaApi.scrollPrev()
-        expect(emblaApi.previousScrollSnap()).toBe(i)
+        expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
-        expect(emblaApi.selectedScrollSnap()).toBe(i)
+        expect(emblaApi.selectedSnap()).toBe(i)
       }
       done()
     })
@@ -90,48 +90,48 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
     const firstIndex = 0
 
     beforeEach(() => {
-      emblaApi.reInit({ startIndex: firstIndex })
+      emblaApi.reInit({ startSnap: firstIndex })
     })
 
-    test('startIndex is NOT set', () => {
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+    test('startSnap is NOT set', () => {
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('startIndex is set', () => {
-      emblaApi.reInit({ startIndex: 2 })
+    test('startSnap is set', () => {
+      emblaApi.reInit({ startSnap: 2 })
 
-      expect(emblaApi.selectedScrollSnap()).toBe(2)
-      expect(emblaApi.previousScrollSnap()).toBe(2)
+      expect(emblaApi.selectedSnap()).toBe(2)
+      expect(emblaApi.previousSnap()).toBe(2)
     })
 
     test('User tries to scrollNext() past the last scroll snap', () => {
-      emblaApi.reInit({ startIndex: lastIndex })
+      emblaApi.reInit({ startSnap: lastIndex })
       emblaApi.scrollNext()
 
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(lastIndex)
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev() before the first scroll snap', () => {
       emblaApi.scrollPrev()
 
-      expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(lastIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('User tries to scrollToSnap() an index more than last index', () => {
       emblaApi.scrollToSnap(lastIndex + 1)
 
-      expect(emblaApi.selectedScrollSnap()).toBe(firstIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(firstIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('User tries to scrollToSnap() an index less than first index', () => {
       emblaApi.scrollToSnap(firstIndex - 1)
 
-      expect(emblaApi.selectedScrollSnap()).toBe(lastIndex)
-      expect(emblaApi.previousScrollSnap()).toBe(firstIndex)
+      expect(emblaApi.selectedSnap()).toBe(lastIndex)
+      expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
     test('Stepping forward one snap at a time from the beginning', (done) => {
@@ -139,22 +139,22 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
 
       while (i !== lastIndex) {
         emblaApi.scrollNext()
-        expect(emblaApi.previousScrollSnap()).toBe(i)
+        expect(emblaApi.previousSnap()).toBe(i)
         i += 1
-        expect(emblaApi.selectedScrollSnap()).toBe(i)
+        expect(emblaApi.selectedSnap()).toBe(i)
       }
       done()
     })
 
     test('Stepping backward one snap at a time from the end', (done) => {
-      emblaApi.reInit({ startIndex: lastIndex })
+      emblaApi.reInit({ startSnap: lastIndex })
       let i = lastIndex
 
       while (i !== firstIndex) {
         emblaApi.scrollPrev()
-        expect(emblaApi.previousScrollSnap()).toBe(i)
+        expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
-        expect(emblaApi.selectedScrollSnap()).toBe(i)
+        expect(emblaApi.selectedSnap()).toBe(i)
       }
       done()
     })

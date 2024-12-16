@@ -342,7 +342,7 @@ Scroll to a scroll snap by its unique index. If [loop](/api/options/#loop) is en
 Parameters: <BrandPrimaryText>`subject: number | HTMLElement`, `jump?: boolean`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
 
-Scroll to a scroll snap by providing a slide index or a slide element. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
+Scroll to a scroll snap by providing a slide index or a slide element. The carousel will scroll to the scroll snap that holds the provided slide. If [loop](/api/options/#loop) is enabled, Embla Carousel will choose the closest way to the target scroll snap. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly.
 
 ---
 
@@ -364,25 +364,25 @@ Check the possiblity to scroll to the previous scroll snap. If [loop](/api/optio
 
 ---
 
-### selectedScrollSnap
+### selectedSnap
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
 
-Get the index of the selected scroll snap.
+Get the index of the selected scroll snap. This method can be useful when you need to know which scroll snap is currently selected.
 
 ---
 
-### previousScrollSnap
+### previousSnap
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
 
-Get the index of the previously selected scroll snap.
+Get the index of the previously selected scroll snap. This method can be useful when you need to know which scroll snap was previously selected.
 
 ---
 
-### scrollSnapList
+### snapList
 
 Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
 Returns: <BrandSecondaryText>`number[]`</BrandSecondaryText>

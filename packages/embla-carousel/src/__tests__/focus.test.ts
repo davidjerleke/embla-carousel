@@ -35,7 +35,7 @@ describe('➡️  Focus', () => {
 
       expect(emblaApi.internalEngine().location.get()).toBe(0)
       expect(emblaApi.internalEngine().target.get()).toBe(0)
-      expect(emblaApi.selectedScrollSnap()).toBe(0)
+      expect(emblaApi.selectedSnap()).toBe(0)
     })
 
     test('The carousel will NOT fire any callback or scroll to snap anymore when destroyed', () => {
@@ -54,7 +54,7 @@ describe('➡️  Focus', () => {
 
       expect(emblaApi.internalEngine().location.get()).toBe(0)
       expect(emblaApi.internalEngine().target.get()).toBe(0)
-      expect(emblaApi.selectedScrollSnap()).toBe(0)
+      expect(emblaApi.selectedSnap()).toBe(0)
       expect(callback).toHaveBeenCalledTimes(0)
     })
 
@@ -69,7 +69,7 @@ describe('➡️  Focus', () => {
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
-      expect(emblaApi.selectedScrollSnap()).toBe(4)
+      expect(emblaApi.selectedSnap()).toBe(4)
     })
 
     test('An onWatch callback that returns FALSE blocks the internal default callback', () => {
@@ -83,7 +83,7 @@ describe('➡️  Focus', () => {
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
-      expect(emblaApi.selectedScrollSnap()).toBe(0)
+      expect(emblaApi.selectedSnap()).toBe(0)
     })
   })
 
@@ -114,7 +114,7 @@ describe('➡️  Focus', () => {
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
       expect(emblaApi.internalEngine().target.get()).toBe(0)
-      expect(emblaApi.selectedScrollSnap()).toBe(0)
+      expect(emblaApi.selectedSnap()).toBe(0)
     })
 
     test('An onWatch callback does NOT run at all', () => {

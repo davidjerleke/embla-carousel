@@ -16,7 +16,7 @@ export const createDotBtns = (
   const template = <HTMLElement>document.getElementById('embla-dot-template')
 
   dotsNode.innerHTML = emblaApi
-    .scrollSnapList()
+    .snapList()
     .reduce((acc) => acc + template.innerHTML, '')
 
   return Array.from(dotsNode.querySelectorAll('.embla__dot'))
@@ -25,8 +25,8 @@ export const createDotBtns = (
 export const toggleDotBtnsActive =
   (emblaApi: EmblaCarouselType, dotNodes: HTMLElement[]) => (): void => {
     if (!dotNodes.length) return
-    const previous = emblaApi.previousScrollSnap()
-    const selected = emblaApi.selectedScrollSnap()
+    const previous = emblaApi.previousSnap()
+    const selected = emblaApi.selectedSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')
     dotNodes[selected].classList.add('embla__dot--selected')
   }

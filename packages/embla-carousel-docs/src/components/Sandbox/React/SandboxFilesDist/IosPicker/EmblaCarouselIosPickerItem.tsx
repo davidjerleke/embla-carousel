@@ -25,7 +25,7 @@ const setSlideStyles = (
 ): void => {
   const slideNode = emblaApi.slideNodes()[index]
   const wheelLocation = emblaApi.scrollProgress() * totalRadius
-  const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
+  const positionDefault = emblaApi.snapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
 
