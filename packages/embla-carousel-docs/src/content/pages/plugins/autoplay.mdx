@@ -60,10 +60,10 @@ Below follows an exhaustive **list of all** `Autoplay` **options** and their def
 
 ### delay
 
-Type: <BrandPrimaryText>`number | (scrollSnapList: number[], emblaApi: EmblaCarouselType) => number[]`</BrandPrimaryText>  
+Type: <BrandPrimaryText>`number | (snapList: number[], emblaApi: EmblaCarouselType) => number[]`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`4000`</BrandSecondaryText>
 
-Choose a delay between transitions in milliseconds. If you pass a number, the same delay will be **applied to all transitions**. If you pass a function, you can return an array of numbers based on the `scrollSnapList` parameter and set **different delays for each scroll snap**.
+Choose a delay between transitions in milliseconds. If you pass a number, the same delay will be **applied to all transitions**. If you pass a function, you can return an array of numbers based on the `snapList` parameter and set **different delays for each scroll snap**.
 
 ---
 

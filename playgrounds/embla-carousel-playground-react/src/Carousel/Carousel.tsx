@@ -30,11 +30,11 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
   )
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
+    setScrollSnaps(emblaApi.snapList())
   }, [])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
+    setSelectedIndex(emblaApi.selectedSnap())
     setPrevBtnEnabled(emblaApi.canScrollPrev())
     setNextBtnEnabled(emblaApi.canScrollNext())
   }, [])
