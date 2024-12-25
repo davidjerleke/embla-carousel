@@ -3,11 +3,13 @@ import { EventStore } from './EventStore'
 import { WatchHandler, WatchHandlerType } from './WatchHandler'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
+import { NodeHandler, NodeHandlerType } from './NodeHandler'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
+import { SsrHandler, SsrHandlerType } from './SsrHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isNumber, isString, WindowType } from './utils'
 import { ScrollToDirectionType } from './ScrollTo'
+import { isNumber } from './utils'
 
 export type EmblaCarouselType = {
   canScrollNext: () => boolean
@@ -24,6 +26,7 @@ export type EmblaCarouselType = {
   plugins: () => EmblaPluginsType
   previousSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
+  ssrStyles: (container: string, slides: string) => string
   rootNode: () => HTMLElement
   scrollNext: (jump?: boolean) => void
   scrollPrev: (jump?: boolean) => void
@@ -48,11 +51,11 @@ export type EmblaCarouselType = {
 function EmblaCarousel(
   root: HTMLElement,
   userOptions?: EmblaOptionsType,
-  userPlugins?: EmblaPluginType[]
+  userPlugins?: EmblaPluginType[],
+  serverMode?: boolean
 ): EmblaCarouselType {
-  const ownerDocument = root.ownerDocument
-  const ownerWindow = <WindowType>ownerDocument.defaultView
-  const optionsHandler = OptionsHandler(ownerWindow)
+  const isSsr = !!serverMode
+  const optionsHandler = OptionsHandler()
   const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
   const watchHandler = WatchHandler()
@@ -64,43 +67,36 @@ function EmblaCarousel(
 
   let destroyed = false
   let engine: EngineType
+  let nodeHandler: NodeHandlerType
+  let ssrHandler: SsrHandlerType
   let optionsBase = mergeOptions(defaultOptions, EmblaCarousel.globalOptions)
   let options = mergeOptions(optionsBase)
   let pluginList: EmblaPluginType[] = []
   let pluginApis: EmblaPluginsType
-
   let container: HTMLElement
   let slides: HTMLElement[]
 
-  function storeElements(): void {
-    const { container: userContainer, slides: userSlides } = options
+  function createEngine(
+    options: OptionsType,
+    container: HTMLElement,
+    slides: HTMLElement[]
+  ): EngineType {
+    nodeHandler.clearOffsets(container, ...slides)
 
-    const customContainer = isString(userContainer)
-      ? root.querySelector(userContainer)
-      : userContainer
-    container = <HTMLElement>(customContainer || root.children[0])
-
-    const customSlides = isString(userSlides)
-      ? container.querySelectorAll(userSlides)
-      : userSlides
-    slides = <HTMLElement[]>[].slice.call(customSlides || container.children)
-  }
-
-  function createEngine(options: OptionsType): EngineType {
+    // TODO: Pass pixelTolerance, should be 0 when SSR
     const engine = Engine(
       root,
       container,
       slides,
-      ownerDocument,
-      ownerWindow,
       options,
+      nodeHandler,
       eventHandler,
       watchHandler
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
       const optionsWithoutLoop = Object.assign({}, options, { loop: false })
-      return createEngine(optionsWithoutLoop)
+      return createEngine(optionsWithoutLoop, container, slides)
     }
     return engine
   }
@@ -111,13 +107,28 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
+    nodeHandler = NodeHandler(root, isSsr)
+    const { ownerWindow } = nodeHandler
+
+    optionsHandler.init(ownerWindow)
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
     pluginList = withPlugins || pluginList
 
-    storeElements()
+    const nodes = nodeHandler.getNodes(options)
+    container = nodes.container
+    slides = nodes.slides
+    engine = createEngine(options, container, slides)
 
-    engine = createEngine(options)
+    ssrHandler = SsrHandler(
+      isSsr,
+      container,
+      engine.axis,
+      nodeHandler,
+      optionsBase,
+      mergeOptions,
+      createEngine
+    )
 
     optionsMediaQueries([
       optionsBase,
@@ -125,18 +136,22 @@ function EmblaCarousel(
     ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
 
     if (!options.active) return
+    if (!ownerWindow) return
+    if (isSsr) return
 
     engine.translate.to(engine.location.get())
-    engine.animation.init()
-    engine.slidesInView.init()
-    engine.slideFocus.init()
-    engine.resizeHandler.init()
-    engine.slidesHandler.init()
+    engine.animation.init(ownerWindow)
+    engine.resizeHandler.init(ownerWindow)
+    engine.slidesInView.init(ownerWindow)
+    engine.slidesHandler.init(ownerWindow)
     engine.eventHandler.init(self)
     engine.watchHandler.init(self)
+    engine.slideFocus.init()
 
     if (engine.options.loop) engine.slideLooper.loop()
-    if (container.offsetParent && slides.length) engine.dragHandler.init()
+    if (container.offsetParent && slides.length) {
+      engine.dragHandler.init(ownerWindow)
+    }
 
     pluginApis = pluginsHandler.init(self, pluginList)
   }
@@ -166,6 +181,8 @@ function EmblaCarousel(
 
   function destroy(): void {
     if (destroyed) return
+    if (isSsr) return
+
     destroyed = true
     mediaHandlers.clear()
     deActivate()
@@ -179,7 +196,10 @@ function EmblaCarousel(
     jump?: boolean,
     direction?: ScrollToDirectionType
   ): void {
-    if (!options.active || destroyed) return
+    if (destroyed) return
+    if (isSsr) return
+    if (!options.active) return
+
     engine.scrollBody
       .useBaseFriction()
       .useDuration(jump === true ? 0 : options.duration)
@@ -215,6 +235,10 @@ function EmblaCarousel(
   function canScrollPrev(): boolean {
     const prev = engine.index.add(-1).get()
     return prev !== selectedSnap()
+  }
+
+  function ssrStyles(container: string, slides: string): string {
+    return ssrHandler.getStyles(container, slides)
   }
 
   function snapList(): number[] {
@@ -286,11 +310,12 @@ function EmblaCarousel(
     slideNodes,
     slidesInView,
     slidesNotInView,
-    snapList
+    snapList,
+    ssrStyles
   }
 
   activate(userOptions, userPlugins)
-  setTimeout(() => eventHandler.emit('init', null), 0)
+  setTimeout(() => eventHandler.emit('init', null), 0) // TODO: Won't work in SSR
   return self
 }
 

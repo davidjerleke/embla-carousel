@@ -20,9 +20,9 @@ export const addToggleThumbBtnsActive = (emblaApiMain, emblaApiThumb) => {
   const slidesThumbs = emblaApiThumb.slideNodes()
 
   const toggleThumbBtnsState = () => {
-    emblaApiThumb.scrollToSnap(emblaApiMain.selectedScrollSnap())
-    const previous = emblaApiMain.previousScrollSnap()
-    const selected = emblaApiMain.selectedScrollSnap()
+    emblaApiThumb.scrollToSnap(emblaApiMain.selectedSnap())
+    const previous = emblaApiMain.previousSnap()
+    const selected = emblaApiMain.selectedSnap()
     slidesThumbs[previous].classList.remove('embla-thumbs__slide--selected')
     slidesThumbs[selected].classList.add('embla-thumbs__slide--selected')
   }
@@ -31,7 +31,7 @@ export const addToggleThumbBtnsActive = (emblaApiMain, emblaApiThumb) => {
   emblaApiThumb.on('init', toggleThumbBtnsState)
 
   return () => {
-    const selected = emblaApiMain.selectedScrollSnap()
+    const selected = emblaApiMain.selectedSnap()
     slidesThumbs[selected].classList.remove('embla-thumbs__slide--selected')
   }
 }

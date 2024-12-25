@@ -3,7 +3,7 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
 
   const addDotBtnsWithClickHandlers = () => {
     dotsNode.innerHTML = emblaApi
-      .scrollSnapList()
+      .snapList()
       .map(() => '<button class="embla__dot" type="button"></button>')
       .join('')
 
@@ -18,8 +18,8 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
   }
 
   const toggleDotBtnsActive = () => {
-    const previous = emblaApi.previousScrollSnap()
-    const selected = emblaApi.selectedScrollSnap()
+    const previous = emblaApi.previousSnap()
+    const selected = emblaApi.selectedSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')
     dotNodes[selected].classList.add('embla__dot--selected')
   }

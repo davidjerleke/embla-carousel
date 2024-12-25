@@ -21,7 +21,7 @@ import {
 } from './utils'
 
 export type DragHandlerType = {
-  init: () => void
+  init: (windowInstance: WindowType) => void
   destroy: () => void
   pointerDown: () => boolean
 }
@@ -30,8 +30,6 @@ export function DragHandler(
   active: boolean,
   axis: AxisType,
   rootNode: HTMLElement,
-  ownerDocument: Document,
-  ownerWindow: WindowType,
   target: Vector1DType,
   dragTracker: DragTrackerType,
   location: Vector1DType,
@@ -58,6 +56,8 @@ export function DragHandler(
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseSpeed = dragFree ? 43 : 25
 
+  let ownerDocument: Document
+  let ownerWindow: WindowType
   let isMoving = false
   let startScroll = 0
   let startCross = 0
@@ -66,8 +66,13 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function init(): void {
+  function init(windowInstance: WindowType): void {
     if (!active) return
+
+    ownerDocument = windowInstance.document
+    ownerWindow = windowInstance
+
+    dragTracker.init(windowInstance)
 
     const node = rootNode
     initEvents
