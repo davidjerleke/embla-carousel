@@ -1,8 +1,9 @@
-import { OptionsType } from './Options'
+import { defaultOptions, OptionsType } from './Options'
 import {
   EmblaEventType,
   CreatePluginType,
-  EmblaCarouselType
+  EmblaCarouselType,
+  OptionsHandlerType
 } from 'embla-carousel'
 
 declare module 'embla-carousel' {
@@ -16,18 +17,40 @@ export type AutoHeightType = CreatePluginType<{}, OptionsType>
 export type AutoHeightOptionsType = AutoHeightType['options']
 
 function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
+  let options: OptionsType
   let emblaApi: EmblaCarouselType
+  let isSsr = false
+  let destroyed = false
+
   let slideHeights: number[] = []
   const heightEvents: EmblaEventType[] = ['select', 'slidefocus']
 
-  function init(emblaApiInstance: EmblaCarouselType): void {
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
+  }
+
+  function init(
+    emblaApiInstance: EmblaCarouselType,
+    optionsHandler: OptionsHandlerType
+  ): void {
     emblaApi = emblaApiInstance
+
+    const { mergeOptions, optionsAtMedia } = optionsHandler
+    const optionsBase = mergeOptions(defaultOptions, AutoHeight.globalOptions)
+    const allOptions = mergeOptions(optionsBase, userOptions)
+
+    destroyed = false
+    options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
 
     const {
       options: { axis },
       slideRects
     } = emblaApi.internalEngine()
 
+    if (!pluginIsActive()) return
     if (axis === 'y') return
 
     slideHeights = slideRects.map((slideRect) => slideRect.height)
@@ -37,10 +60,13 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   }
 
   function destroy(): void {
+    if (!pluginIsActive()) return
+
     heightEvents.forEach((evt) => emblaApi.off(evt, setContainerHeight))
     const container = emblaApi.containerNode()
     container.style.height = ''
-    if (!container.getAttribute('style')) container.removeAttribute('style')
+
+    destroyed = true
   }
 
   function highestInView(): number | null {

@@ -1,36 +1,38 @@
 import { useRef, useEffect, useState, useCallback } from 'react'
-import {
-  areOptionsEqual,
-  arePluginsEqual,
-  canUseDOM
-} from 'embla-carousel-reactive-utils'
+import { areOptionsEqual, arePluginsEqual } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType
 } from 'embla-carousel'
 
-export type EmblaViewportRefType = <ViewportElement extends HTMLElement>(
-  instance: ViewportElement | null
+export type EmblaRootNodeRefType = <RootNode extends HTMLElement>(
+  instance: RootNode | null
 ) => void
 
 export type UseEmblaCarouselType = [
-  EmblaViewportRefType,
-  EmblaCarouselType | undefined
+  EmblaRootNodeRefType,
+  EmblaCarouselType | undefined,
+  EmblaCarouselType
 ]
 
 function useEmblaCarousel(
   options: EmblaOptionsType = {},
   plugins: EmblaPluginType[] = []
 ): UseEmblaCarouselType {
+  EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
+
   const storedOptions = useRef(options)
   const storedPlugins = useRef(plugins)
-  const [emblaApi, setEmblaApi] = useState<EmblaCarouselType>()
-  const [viewport, setViewport] = useState<HTMLElement>()
+
+  const serverApi = useRef(EmblaCarousel(null, options, plugins))
+  const [clientApi, setClientApi] = useState<EmblaCarouselType>()
+  const [rootNode, setRootNode] = useState<HTMLElement>()
 
   const reInit = useCallback(() => {
-    if (emblaApi) emblaApi.reInit(storedOptions.current, storedPlugins.current)
-  }, [emblaApi])
+    if (!clientApi) return
+    clientApi.reInit(storedOptions.current, storedPlugins.current)
+  }, [clientApi])
 
   useEffect(() => {
     if (areOptionsEqual(storedOptions.current, options)) return
@@ -45,21 +47,21 @@ function useEmblaCarousel(
   }, [plugins, reInit])
 
   useEffect(() => {
-    if (canUseDOM() && viewport) {
+    if (rootNode) {
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-      const newEmblaApi = EmblaCarousel(
-        viewport,
+      const newClientApi = EmblaCarousel(
+        rootNode,
         storedOptions.current,
         storedPlugins.current
       )
-      setEmblaApi(newEmblaApi)
-      return () => newEmblaApi.destroy()
+      setClientApi(newClientApi)
+      return () => newClientApi.destroy()
     } else {
-      setEmblaApi(undefined)
+      setClientApi(undefined)
     }
-  }, [viewport, setEmblaApi])
+  }, [rootNode])
 
-  return [<EmblaViewportRefType>setViewport, emblaApi]
+  return [<EmblaRootNodeRefType>setRootNode, clientApi, serverApi.current]
 }
 
 declare namespace useEmblaCarousel {

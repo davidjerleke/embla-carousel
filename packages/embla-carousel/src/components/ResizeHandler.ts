@@ -2,11 +2,11 @@ import { AxisType } from './Axis'
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
 import { WatchHandlerType } from './WatchHandler'
-import { NodeRectsType } from './NodeRects'
+import { NodeHandlerType } from './NodeHandler'
 import { mathAbs, WindowType } from './utils'
 
 export type ResizeHandlerType = {
-  init: () => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
 }
 
@@ -15,10 +15,9 @@ export function ResizeHandler(
   container: HTMLElement,
   eventHandler: EventHandlerType,
   watchHandler: WatchHandlerType,
-  ownerWindow: WindowType,
   slides: HTMLElement[],
   axis: AxisType,
-  nodeRects: NodeRectsType
+  nodeHandler: NodeHandlerType
 ): ResizeHandlerType {
   const observeNodes = [container].concat(slides)
   let resizeObserver: ResizeObserver
@@ -27,16 +26,16 @@ export function ResizeHandler(
   let destroyed = false
 
   function readSize(node: HTMLElement): number {
-    return axis.measureSize(nodeRects.measure(node))
+    return axis.measureSize(nodeHandler.getRect(node))
   }
 
-  function init(): void {
+  function init(ownerWindow: WindowType): void {
     if (!active) return
 
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 
-    resizeObserver = new ResizeObserver((entries) => {
+    resizeObserver = new ownerWindow.ResizeObserver((entries) => {
       watchHandler.emit('resize', entries, onResize)
     })
 

@@ -46,8 +46,9 @@ const startInfiniteScroll = setupInfiniteScroll(
   }
 )
 
+startInfiniteScroll()
+
 emblaApi
-  .on('init', startInfiniteScroll)
   .on('destroy', () => {
     window.removeEventListener('resize', onResize)
   })

@@ -1,5 +1,5 @@
 import { EventHandlerType } from './EventHandler'
-import { objectKeys } from './utils'
+import { objectKeys, WindowType } from './utils'
 
 type IntersectionEntryMapType = {
   [key: number]: IntersectionObserverEntry
@@ -8,7 +8,7 @@ type IntersectionEntryMapType = {
 export type SlidesInViewOptionsType = IntersectionObserverInit['threshold']
 
 export type SlidesInViewType = {
-  init: () => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
   get: (inView?: boolean) => number[]
 }
@@ -25,8 +25,8 @@ export function SlidesInView(
   let intersectionObserver: IntersectionObserver
   let destroyed = false
 
-  function init(): void {
-    intersectionObserver = new IntersectionObserver(
+  function init(ownerWindow: WindowType): void {
+    intersectionObserver = new ownerWindow.IntersectionObserver(
       (entries) => {
         if (destroyed) return
 

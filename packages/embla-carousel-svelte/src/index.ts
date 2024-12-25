@@ -1,2 +1,2 @@
-export { EmblaCarouselSvelteType } from './components/emblaCarouselSvelte'
-export { default } from './components/emblaCarouselSvelte'
+export { UseEmblaCarouselType } from './components/useEmblaCarousel'
+export { default } from './components/useEmblaCarousel'

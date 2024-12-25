@@ -12,7 +12,10 @@ export type CreatePluginType<
 > = TypeA & {
   name: string
   options: Partial<CreateOptionsType<TypeB>>
-  init: (embla: EmblaCarouselType, OptionsHandler: OptionsHandlerType) => void
+  init: (
+    emblaApi: EmblaCarouselType,
+    OptionsHandler: OptionsHandlerType
+  ) => void
   destroy: () => void
 }
 

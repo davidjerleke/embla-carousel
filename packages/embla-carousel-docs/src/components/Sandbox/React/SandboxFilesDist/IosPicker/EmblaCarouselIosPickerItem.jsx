@@ -18,7 +18,7 @@ const isInView = (wheelLocation, slidePosition) =>
 const setSlideStyles = (emblaApi, index, loop, slideCount, totalRadius) => {
   const slideNode = emblaApi.slideNodes()[index]
   const wheelLocation = emblaApi.scrollProgress() * totalRadius
-  const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
+  const positionDefault = emblaApi.snapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
 
@@ -70,10 +70,11 @@ export const IosPickerItem = (props) => {
 
   const inactivateEmblaTransform = useCallback((emblaApi) => {
     if (!emblaApi) return
-    const { translate, slideLooper } = emblaApi.internalEngine()
-    translate.clear()
-    translate.toggleActive(false)
-    slideLooper.loopPoints.forEach(({ translate }) => {
+
+    const { translate, slideTranslates } = emblaApi.internalEngine()
+    const translates = [translate, ...slideTranslates]
+
+    translates.forEach((translate) => {
       translate.clear()
       translate.toggleActive(false)
     })

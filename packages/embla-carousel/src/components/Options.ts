@@ -34,6 +34,7 @@ export type OptionsType = CreateOptionsType<{
   resize: boolean
   focus: boolean
   slideChanges: boolean
+  ssr: number[]
 }>
 
 export const defaultOptions: OptionsType = {
@@ -56,7 +57,8 @@ export const defaultOptions: OptionsType = {
   draggable: true,
   resize: true,
   focus: true,
-  slideChanges: true
+  slideChanges: true,
+  ssr: []
 }
 
 export type EmblaOptionsType = Partial<OptionsType>

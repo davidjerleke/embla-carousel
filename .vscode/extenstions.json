@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "unifiedjs.vscode-mdx",
+    "Vue.volar",
+    "svelte.svelte-vscode"
+  ]
+}

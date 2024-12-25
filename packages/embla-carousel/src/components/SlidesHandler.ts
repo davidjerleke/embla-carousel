@@ -1,9 +1,10 @@
 import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
 import { WatchHandlerType } from './WatchHandler'
+import { WindowType } from './utils'
 
 export type SlidesHandlerType = {
-  init: () => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
 }
 
@@ -16,10 +17,10 @@ export function SlidesHandler(
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init(): void {
+  function init(ownerWindow: WindowType): void {
     if (!active) return
 
-    mutationObserver = new MutationObserver((mutations) => {
+    mutationObserver = new ownerWindow.MutationObserver((mutations) => {
       watchHandler.emit('slideschanged', mutations, onSlidesChange)
     })
 

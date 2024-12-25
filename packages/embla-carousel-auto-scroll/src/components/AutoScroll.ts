@@ -40,13 +40,21 @@ export type AutoScrollOptionsType = AutoScrollType['options']
 function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   let options: OptionsType
   let emblaApi: EmblaCarouselType
-  let destroyed: boolean
+  let isSsr = false
+  let destroyed = false
+
   let startDelay: number
   let speed = 0
   let timerId = 0
-  let autoScrollActive = false
+  let autoScrollRunning = false
   let mouseIsOver = false
   let defaultScrollBehaviour: ScrollBodyType
+
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
+  }
 
   function init(
     emblaApiInstance: EmblaCarouselType,
@@ -57,8 +65,12 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, AutoScroll.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
-    options = optionsAtMedia(allOptions)
 
+    destroyed = false
+    options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
+
+    if (!pluginIsActive()) return
     if (emblaApi.snapList().length <= 1) return
 
     speed = options.speed
@@ -98,6 +110,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   }
 
   function destroy(): void {
+    if (!pluginIsActive()) return
+
     emblaApi
       .off('pointerdown', onPointerDown)
       .off('pointerup', onPointerUp)
@@ -106,38 +120,42 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
     stopAutoScroll()
     destroyed = true
-    autoScrollActive = false
+    autoScrollRunning = false
   }
 
   function startAutoScroll(): void {
-    if (destroyed) return
-    if (autoScrollActive) return
-    emblaApi.emit('autoscroll:play', null)
+    if (!pluginIsActive()) return
 
     const engine = emblaApi.internalEngine()
-    const { ownerWindow } = engine
+    const { ownerWindow } = engine.nodeHandler
+
+    if (!ownerWindow) return
+    if (autoScrollRunning) return
+    emblaApi.emit('autoscroll:play', null)
 
     timerId = ownerWindow.setTimeout(() => {
       engine.scrollBody = createAutoScrollBehaviour(engine)
       engine.animation.start()
     }, startDelay)
 
-    autoScrollActive = true
+    autoScrollRunning = true
   }
 
   function stopAutoScroll(): void {
-    if (destroyed) return
-    if (!autoScrollActive) return
-    emblaApi.emit('autoscroll:stop', null)
+    if (!pluginIsActive()) return
 
     const engine = emblaApi.internalEngine()
-    const { ownerWindow } = engine
+    const { ownerWindow } = engine.nodeHandler
+
+    if (!ownerWindow) return
+    if (!autoScrollRunning) return
+    emblaApi.emit('autoscroll:stop', null)
 
     engine.scrollBody = defaultScrollBehaviour
     ownerWindow.clearTimeout(timerId)
     timerId = 0
 
-    autoScrollActive = false
+    autoScrollRunning = false
   }
 
   function createAutoScrollBehaviour(engine: EngineType): ScrollBodyType {
@@ -248,18 +266,18 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   }
 
   function stop(): void {
-    if (autoScrollActive) stopAutoScroll()
+    if (autoScrollRunning) stopAutoScroll()
   }
 
   function reset(): void {
-    if (autoScrollActive) {
+    if (autoScrollRunning) {
       stopAutoScroll()
       startAutoScrollOnSettle()
     }
   }
 
   function isPlaying(): boolean {
-    return autoScrollActive
+    return autoScrollRunning
   }
 
   function setSpeed(newSpeed: (initialSpeed: number) => number): void {

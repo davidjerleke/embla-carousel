@@ -1,7 +1,6 @@
-import { AxisType } from './Axis'
 import { arrayKeys } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { Translate, TranslateType } from './Translate'
+import { TranslateType } from './Translate'
 
 type SlideBoundType = {
   start: number
@@ -18,13 +17,11 @@ type LoopPointType = {
 
 export type SlideLooperType = {
   canLoop: () => boolean
-  clear: () => void
   loop: () => void
   loopPoints: LoopPointType[]
 }
 
 export function SlideLooper(
-  axis: AxisType,
   viewSize: number,
   contentSize: number,
   slideSizes: number[],
@@ -32,7 +29,7 @@ export function SlideLooper(
   snaps: number[],
   scrollSnaps: number[],
   location: Vector1DType,
-  slides: HTMLElement[]
+  slideTranslates: TranslateType[]
 ): SlideLooperType {
   const roundingSafety = 0.5
   const ascItems = arrayKeys(slideSizesWithGaps)
@@ -76,7 +73,7 @@ export function SlideLooper(
         index,
         loopPoint,
         slideLocation: Vector1D(-1),
-        translate: Translate(axis, slides[index]),
+        translate: slideTranslates[index],
         target: () => (location.get() > loopPoint ? initial : altered)
       }
     })
@@ -111,13 +108,8 @@ export function SlideLooper(
     })
   }
 
-  function clear(): void {
-    loopPoints.forEach((loopPoint) => loopPoint.translate.clear())
-  }
-
   const self: SlideLooperType = {
     canLoop,
-    clear,
     loop,
     loopPoints
   }
