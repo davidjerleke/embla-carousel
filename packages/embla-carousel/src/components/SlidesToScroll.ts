@@ -1,5 +1,5 @@
 import { AxisType } from './Axis'
-import { NodeRectType } from './NodeRects'
+import { NodeRectType } from './NodeHandler'
 import {
   arrayKeys,
   arrayLast,
