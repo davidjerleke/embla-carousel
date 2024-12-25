@@ -34,8 +34,11 @@ export const setupLazyLoadImage = (emblaApi) => {
   }
 
   const loadImagesInViewAndDestroyIfDone = (emblaApi, eventName) => {
-    const loadedAll = loadImagesInView()
-    if (loadedAll) emblaApi.off(eventName, loadImagesInViewAndDestroyIfDone)
+    const hasLoadedAll = loadImagesInView()
+
+    if (hasLoadedAll && eventName) {
+      emblaApi.off(eventName, loadImagesInViewAndDestroyIfDone)
+    }
   }
 
   return loadImagesInViewAndDestroyIfDone

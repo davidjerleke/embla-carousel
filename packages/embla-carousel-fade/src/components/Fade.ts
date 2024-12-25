@@ -1,8 +1,9 @@
-import { OptionsType } from './Options'
+import { defaultOptions, OptionsType } from './Options'
 import { isNumber, clampNumber } from './utils'
 import {
   CreatePluginType,
   EmblaCarouselType,
+  OptionsHandlerType,
   ScrollBodyType
 } from 'embla-carousel'
 
@@ -12,7 +13,12 @@ declare module 'embla-carousel' {
   }
 }
 
-export type FadeType = CreatePluginType<{}, OptionsType>
+export type FadeType = CreatePluginType<
+  {
+    ssrStyles: (containerSelector: string, slidesSelector?: string) => string
+  },
+  OptionsType
+>
 
 export type FadeOptionsType = FadeType['options']
 
@@ -21,7 +27,11 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   const noOpacity = 0
   const fadeFriction = 0.68
 
+  let options: OptionsType
   let emblaApi: EmblaCarouselType
+  let isSsr = false
+  let destroyed = false
+
   let opacities: number[] = []
   let fadeToNextDistance: number
   let distanceFromPointerDown = 0
@@ -32,8 +42,27 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   let defaultSettledBehaviour: ScrollBodyType['settled']
   let defaultProgressBehaviour: EmblaCarouselType['scrollProgress']
 
-  function init(emblaApiInstance: EmblaCarouselType): void {
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
+  }
+
+  function init(
+    emblaApiInstance: EmblaCarouselType,
+    optionsHandler: OptionsHandlerType
+  ): void {
     emblaApi = emblaApiInstance
+
+    const { mergeOptions, optionsAtMedia } = optionsHandler
+    const optionsBase = mergeOptions(defaultOptions, Fade.globalOptions)
+    const allOptions = mergeOptions(optionsBase, userOptions)
+
+    destroyed = false
+    options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
+
+    if (!pluginIsActive()) return
 
     const selectedSnap = emblaApi.selectedSnap()
     const { scrollBody, containerRect, axis } = emblaApi.internalEngine()
@@ -49,8 +78,8 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     defaultSettledBehaviour = scrollBody.settled
     defaultProgressBehaviour = emblaApi.scrollProgress
 
-    scrollBody.settled = settled
-    emblaApi.scrollProgress = scrollProgress
+    scrollBody.settled = fadeSettled
+    emblaApi.scrollProgress = fadeScrollProgress
 
     emblaApi
       .on('select', select)
@@ -60,9 +89,12 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
     disableScroll()
     fadeToSelectedSnapInstantly()
+    emblaApi.containerNode().style.transform = 'none'
   }
 
   function destroy(): void {
+    if (!pluginIsActive()) return
+
     const { scrollBody } = emblaApi.internalEngine()
     scrollBody.settled = defaultSettledBehaviour
     emblaApi.scrollProgress = defaultProgressBehaviour
@@ -78,13 +110,18 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       slideStyle.opacity = ''
       slideStyle.transform = ''
       slideStyle.pointerEvents = ''
-      if (!slideNode.getAttribute('style')) slideNode.removeAttribute('style')
     })
+
+    destroyed = true
   }
 
   function fadeToSelectedSnapInstantly(): void {
     const selectedSnap = emblaApi.selectedSnap()
     setOpacities(selectedSnap, fullOpacity)
+  }
+
+  function fadeScrollProgress(): number {
+    return progress
   }
 
   function pointerUp(): void {
@@ -240,7 +277,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     setOpacities(fadeIndex, fadeVelocity)
   }
 
-  function settled(): boolean {
+  function fadeSettled(): boolean {
     const { target, location } = emblaApi.internalEngine()
     const diffToTarget = target.get() - location.get()
     const notReachedTarget = Math.abs(diffToTarget) >= 1
@@ -253,15 +290,67 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     return opacities[fadeIndex] > 0.999
   }
 
-  function scrollProgress(): number {
-    return progress
+  function createFadeSsrStyles(
+    options: FadeOptionsType,
+    containerSelector: string,
+    slidesSelector: string
+  ): string {
+    const { active } = options
+    const { slideRegistry } = emblaApi.internalEngine()
+
+    return `
+      ${slideRegistry.reduce((acc, group, groupIndex) => {
+        const isSelectedSnap = groupIndex === emblaApi.selectedSnap()
+        const opacity = !active || isSelectedSnap ? fullOpacity : noOpacity
+        const pointerEvents = !active || isSelectedSnap ? 'auto' : 'none'
+
+        return `
+          ${acc}
+          ${group.reduce((acc, index) => {
+            return `
+              ${acc}
+              ${containerSelector} ${slidesSelector}:nth-child(${index + 1}) {
+                opacity: ${opacity};
+                pointer-events: ${pointerEvents};
+              }
+          `
+          }, '')}
+        `
+      }, '')}
+    `
+  }
+
+  function ssrStyles(
+    containerSelector: string,
+    slidesSelector: string = '> *'
+  ): string {
+    if (!isSsr) return ''
+    const optionBreakpoints = userOptions.breakpoints || {}
+
+    return `
+      ${createFadeSsrStyles(userOptions, containerSelector, slidesSelector)}
+
+      ${Object.keys(optionBreakpoints).reduce((acc, key) => {
+        return `
+          ${acc}
+          @media ${key} {
+            ${createFadeSsrStyles(
+              optionBreakpoints[key],
+              containerSelector,
+              slidesSelector
+            )}
+          }
+        `
+      }, '')}
+    `
   }
 
   const self: FadeType = {
     name: 'fade',
     options: userOptions,
     init,
-    destroy
+    destroy,
+    ssrStyles
   }
   return self
 }

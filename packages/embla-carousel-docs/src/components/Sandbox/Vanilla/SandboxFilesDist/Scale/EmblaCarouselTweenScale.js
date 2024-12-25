@@ -12,7 +12,7 @@ const setTweenNodes = (emblaApi) => {
 }
 
 const setTweenFactor = (emblaApi) => {
-  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
+  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
 }
 
 const tweenScale = (emblaApi, eventName) => {
@@ -21,7 +21,7 @@ const tweenScale = (emblaApi, eventName) => {
   const slidesInView = emblaApi.slidesInView()
   const isScrollEvent = eventName === 'scroll'
 
-  emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+  emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
     const slidesInSnap = engine.slideRegistry[snapIndex]
 

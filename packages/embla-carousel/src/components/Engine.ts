@@ -12,7 +12,7 @@ import { DragTracker } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
-import { NodeRectType, NodeRects } from './NodeRects'
+import { NodeRectType } from './NodeHandler'
 import { OptionsType } from './Options'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ResizeHandler, ResizeHandlerType } from './ResizeHandler'
@@ -33,15 +33,16 @@ import { SlidesInView, SlidesInViewType } from './SlidesInView'
 import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
-import { arrayKeys, arrayLast, arrayLastIndex, WindowType } from './utils'
+import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { WatchHandlerType } from './WatchHandler'
+import { NodeHandlerType } from './NodeHandler'
 
 export type EngineType = {
-  ownerDocument: Document
-  ownerWindow: WindowType
+  isSsr: boolean
   eventHandler: EventHandlerType
   watchHandler: WatchHandlerType
+  contentSize: number
   axis: AxisType
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
@@ -65,6 +66,7 @@ export type EngineType = {
   translate: TranslateType
   resizeHandler: ResizeHandlerType
   slidesHandler: SlidesHandlerType
+  nodeHandler: NodeHandlerType
   scrollTo: ScrollToType
   scrollTarget: ScrollTargetType
   snapList: number[]
@@ -80,11 +82,11 @@ export function Engine(
   root: HTMLElement,
   container: HTMLElement,
   slides: HTMLElement[],
-  ownerDocument: Document,
-  ownerWindow: WindowType,
   options: OptionsType,
+  nodeHandler: NodeHandlerType,
   eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType
+  watchHandler: WatchHandlerType,
+  isSsr: boolean
 ): EngineType {
   // Options
   const {
@@ -107,10 +109,9 @@ export function Engine(
   } = options
 
   // Measurements
-  const pixelTolerance = 2
-  const nodeRects = NodeRects()
-  const containerRect = nodeRects.measure(container)
-  const slideRects = slides.map(nodeRects.measure)
+  const pixelTolerance = isSsr ? 0 : 2
+  const containerRect = nodeHandler.getRect(container)
+  const slideRects = slides.map(nodeHandler.getRect)
   const axis = Axis(scrollAxis, direction)
   const viewSize = axis.measureSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
@@ -123,7 +124,7 @@ export function Engine(
     slideRects,
     slides,
     readEdgeGap,
-    ownerWindow
+    nodeHandler
   )
   const slidesToScroll = SlidesToScroll(
     axis,
@@ -211,8 +212,6 @@ export function Engine(
   }
 
   const animation = Animations(
-    ownerDocument,
-    ownerWindow,
     () => update(engine),
     (alpha: number) => render(engine, alpha)
   )
@@ -278,21 +277,20 @@ export function Engine(
 
   // Engine
   const engine: EngineType = {
-    ownerDocument,
-    ownerWindow,
     eventHandler,
     containerRect,
+    contentSize,
     slideRects,
+    nodeHandler,
     animation,
+    isSsr,
     axis,
     dragHandler: DragHandler(
       draggable,
       axis,
       root,
-      ownerDocument,
-      ownerWindow,
       target,
-      DragTracker(axis, ownerWindow),
+      DragTracker(axis),
       location,
       animation,
       scrollTo,
@@ -321,10 +319,9 @@ export function Engine(
       container,
       eventHandler,
       watchHandler,
-      ownerWindow,
       slides,
       axis,
-      nodeRects
+      nodeHandler
     ),
     scrollBody,
     scrollBounds: ScrollBounds(

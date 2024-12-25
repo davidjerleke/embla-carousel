@@ -6,7 +6,7 @@ export type AnimationsUpdateType = (engine: EngineType) => void
 export type AnimationsRenderType = (engine: EngineType, alpha: number) => void
 
 export type AnimationsType = {
-  init: () => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
   start: () => void
   stop: () => void
@@ -15,19 +15,21 @@ export type AnimationsType = {
 }
 
 export function Animations(
-  ownerDocument: Document,
-  ownerWindow: WindowType,
   update: () => void,
   render: (alpha: number) => void
 ): AnimationsType {
   const documentVisibleHandler = EventStore()
   const fixedTimeStep = 1000 / 60
 
+  let windowInstance: WindowType
   let lastTimeStamp: number | null = null
   let accumulatedTime = 0
   let animationId = 0
 
-  function init(): void {
+  function init(ownerWindow: WindowType): void {
+    const ownerDocument = ownerWindow.document
+    windowInstance = ownerWindow
+
     documentVisibleHandler.add(ownerDocument, 'visibilitychange', () => {
       if (ownerDocument.hidden) reset()
     })
@@ -59,17 +61,17 @@ export function Animations(
     render(alpha)
 
     if (animationId) {
-      animationId = ownerWindow.requestAnimationFrame(animate)
+      animationId = windowInstance.requestAnimationFrame(animate)
     }
   }
 
   function start(): void {
     if (animationId) return
-    animationId = ownerWindow.requestAnimationFrame(animate)
+    animationId = windowInstance.requestAnimationFrame(animate)
   }
 
   function stop(): void {
-    ownerWindow.cancelAnimationFrame(animationId)
+    windowInstance.cancelAnimationFrame(animationId)
     lastTimeStamp = null
     accumulatedTime = 0
     animationId = 0

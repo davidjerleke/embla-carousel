@@ -21,8 +21,8 @@ const EmblaCarousel = (props) => {
 
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
-    setSelectedIndex(emblaMainApi.selectedScrollSnap())
-    emblaThumbsApi.scrollToSnap(emblaMainApi.selectedScrollSnap())
+    setSelectedIndex(emblaMainApi.selectedSnap())
+    emblaThumbsApi.scrollToSnap(emblaMainApi.selectedSnap())
   }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
 
   useEffect(() => {

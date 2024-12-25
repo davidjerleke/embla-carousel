@@ -44,14 +44,22 @@ export type AutoplayOptionsType = AutoplayType['options']
 function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let options: OptionsType
   let emblaApi: EmblaCarouselType
-  let destroyed: boolean
+  let isSsr = false
+  let destroyed = false
+
   let delay: ReturnType<EmblaCarouselType['snapList']>
   let timerStartTime: null | number = null
   let timerId = 0
-  let autoplayActive = false
+  let autoplayRunning = false
   let mouseIsOver = false
   let playOnDocumentVisible = false
   let jump = false
+
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
+  }
 
   function init(
     emblaApiInstance: EmblaCarouselType,
@@ -62,19 +70,25 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, Autoplay.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
-    options = optionsAtMedia(allOptions)
 
+    destroyed = false
+    options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
+
+    if (!pluginIsActive()) return
     if (emblaApi.snapList().length <= 1) return
 
     jump = options.jump
-    destroyed = false
     delay = normalizeDelay(emblaApi, options.delay)
 
-    const { eventStore, ownerDocument } = emblaApi.internalEngine()
+    const { eventStore, nodeHandler } = emblaApi.internalEngine()
+    const { ownerDocument } = nodeHandler
     const isDraggable = emblaApi.internalEngine().options.draggable
     const root = getAutoplayRootNode(emblaApi, options.rootNode)
 
-    eventStore.add(ownerDocument, 'visibilitychange', onVisibilityChange)
+    if (ownerDocument) {
+      eventStore.add(ownerDocument, 'visibilitychange', onVisibilityChange)
+    }
 
     if (isDraggable) {
       emblaApi.on('pointerdown', onPointerDown)
@@ -104,6 +118,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function destroy(): void {
+    if (!pluginIsActive()) return
+
     emblaApi
       .off('pointerdown', onPointerDown)
       .off('pointerup', onPointerUp)
@@ -111,11 +127,13 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
     stopAutoplay()
     destroyed = true
-    autoplayActive = false
+    autoplayRunning = false
   }
 
   function setTimer(): void {
-    const { ownerWindow } = emblaApi.internalEngine()
+    const { ownerWindow } = emblaApi.internalEngine().nodeHandler
+    if (!ownerWindow) return
+
     ownerWindow.clearTimeout(timerId)
     timerId = ownerWindow.setTimeout(next, delay[emblaApi.selectedSnap()])
     timerStartTime = new Date().getTime()
@@ -123,7 +141,9 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function clearTimer(): void {
-    const { ownerWindow } = emblaApi.internalEngine()
+    const { ownerWindow } = emblaApi.internalEngine().nodeHandler
+    if (!ownerWindow) return
+
     ownerWindow.clearTimeout(timerId)
     timerId = 0
     timerStartTime = null
@@ -131,28 +151,28 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function startAutoplay(): void {
-    if (destroyed) return
+    if (!pluginIsActive()) return
     if (documentIsHidden()) {
       playOnDocumentVisible = true
       return
     }
-    if (!autoplayActive) emblaApi.emit('autoplay:play', null)
+    if (!autoplayRunning) emblaApi.emit('autoplay:play', null)
 
     setTimer()
-    autoplayActive = true
+    autoplayRunning = true
   }
 
   function stopAutoplay(): void {
-    if (destroyed) return
-    if (autoplayActive) emblaApi.emit('autoplay:stop', null)
+    if (!pluginIsActive()) return
+    if (autoplayRunning) emblaApi.emit('autoplay:stop', null)
 
     clearTimer()
-    autoplayActive = false
+    autoplayRunning = false
   }
 
   function onVisibilityChange(): void {
     if (documentIsHidden()) {
-      playOnDocumentVisible = autoplayActive
+      playOnDocumentVisible = autoplayRunning
       return stopAutoplay()
     }
 
@@ -160,7 +180,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function documentIsHidden(): boolean {
-    const { ownerDocument } = emblaApi.internalEngine()
+    const { ownerDocument } = emblaApi.internalEngine().nodeHandler
+    if (!ownerDocument) return false
     return ownerDocument.visibilityState === 'hidden'
   }
 
@@ -188,15 +209,15 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function stop(): void {
-    if (autoplayActive) stopAutoplay()
+    if (autoplayRunning) stopAutoplay()
   }
 
   function reset(): void {
-    if (autoplayActive) startAutoplay()
+    if (autoplayRunning) startAutoplay()
   }
 
   function isPlaying(): boolean {
-    return autoplayActive
+    return autoplayRunning
   }
 
   function next(): void {
@@ -218,6 +239,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function timeUntilNext(): number | null {
+    if (!pluginIsActive()) return null
     if (!timerStartTime) return null
     const currentDelay = delay[emblaApi.selectedSnap()]
     const timePastSinceStart = new Date().getTime() - timerStartTime

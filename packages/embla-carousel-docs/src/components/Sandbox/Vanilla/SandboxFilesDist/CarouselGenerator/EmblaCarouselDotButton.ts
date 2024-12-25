@@ -35,10 +35,11 @@ export const addDotBtnsAndClickHandlers = (
     dotNodes[selected].classList.add('embla__dot--selected')
   }
 
+  addDotBtnsWithClickHandlers()
+  toggleDotBtnsActive()
+
   emblaApi
-    .on('init', addDotBtnsWithClickHandlers)
     .on('reinit', addDotBtnsWithClickHandlers)
-    .on('init', toggleDotBtnsActive)
     .on('reinit', toggleDotBtnsActive)
     .on('select', toggleDotBtnsActive)
 

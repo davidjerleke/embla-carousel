@@ -2,7 +2,7 @@ import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
 export const setupLazyLoadImage = (
   emblaApi: EmblaCarouselType
-): ((emblaApi: EmblaCarouselType, eventName: EmblaEventType) => void) => {
+): ((emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => void) => {
   const imagesInView: number[] = []
   const slideNodes = emblaApi.slideNodes()
   const spinnerNodes = slideNodes.map(
@@ -41,10 +41,13 @@ export const setupLazyLoadImage = (
 
   const loadImagesInViewAndDestroyIfDone = (
     emblaApi: EmblaCarouselType,
-    eventName: EmblaEventType
+    eventName?: EmblaEventType
   ): void => {
-    const loadedAll = loadImagesInView()
-    if (loadedAll) emblaApi.off(eventName, loadImagesInViewAndDestroyIfDone)
+    const hasLoadedAll = loadImagesInView()
+
+    if (hasLoadedAll && eventName) {
+      emblaApi.off(eventName, loadImagesInViewAndDestroyIfDone)
+    }
   }
 
   return loadImagesInViewAndDestroyIfDone

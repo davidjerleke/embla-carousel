@@ -20,6 +20,9 @@ export type ClassNamesOptionsType = ClassNamesType['options']
 function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let options: OptionsType
   let emblaApi: EmblaCarouselType
+  let isSsr = false
+  let destroyed = false
+
   let root: HTMLElement
   let slides: HTMLElement[]
   let snappedIndexes: number[] = []
@@ -36,6 +39,12 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     loop: []
   }
 
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
+  }
+
   function init(
     emblaApiInstance: EmblaCarouselType,
     optionsHandler: OptionsHandlerType
@@ -45,7 +54,12 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, ClassNames.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
+
+    destroyed = false
     options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
+
+    if (!pluginIsActive()) return
 
     root = emblaApi.rootNode()
     slides = emblaApi.slideNodes()
@@ -81,6 +95,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function destroy(): void {
+    if (!pluginIsActive()) return
+
     draggingEvents.forEach((evt) => emblaApi.off(evt, toggleDraggingClass))
     selectedEvents.forEach((evt) => emblaApi.off(evt, toggleSnappedClasses))
     inViewEvents.forEach((evt) => emblaApi.off(evt, toggleInViewClasses))
@@ -95,6 +111,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
       const key = <keyof ClassNamesListType>classNameKey
       classNames[key] = []
     })
+
+    destroyed = true
   }
 
   function toggleDraggingClass(
