@@ -1,11 +1,9 @@
-import React from 'react'
-
 type DotButtonPropType = {
   selected: boolean
   onClick: () => void
 }
 
-export const DotButton: React.FC<DotButtonPropType> = (props) => {
+export const DotButton = (props: DotButtonPropType) => {
   const { selected, onClick } = props
 
   return (
@@ -22,7 +20,7 @@ type PrevNextButtonPropType = {
   onClick: () => void
 }
 
-export const PrevButton: React.FC<PrevNextButtonPropType> = (props) => {
+export const PrevButton = (props: PrevNextButtonPropType) => {
   const { enabled, onClick } = props
 
   return (
@@ -42,7 +40,7 @@ export const PrevButton: React.FC<PrevNextButtonPropType> = (props) => {
   )
 }
 
-export const NextButton: React.FC<PrevNextButtonPropType> = (props) => {
+export const NextButton = (props: PrevNextButtonPropType) => {
   const { enabled, onClick } = props
 
   return (

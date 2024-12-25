@@ -17,7 +17,7 @@ const slideIsInView = (wheelLocation, slidePosition) =>
 const rotateSlide = (emblaApi, index, loop, slideCount, totalRadius) => {
   const slideNode = emblaApi.slideNodes()[index]
   const wheelLocation = emblaApi.scrollProgress() * totalRadius
-  const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
+  const positionDefault = emblaApi.snapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
 

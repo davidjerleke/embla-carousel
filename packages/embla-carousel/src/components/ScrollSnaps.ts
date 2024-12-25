@@ -1,6 +1,6 @@
 import { AlignmentType } from './Alignment'
 import { AxisType } from './Axis'
-import { NodeRectType } from './NodeRects'
+import { NodeRectType } from './NodeHandler'
 import { SlidesToScrollType } from './SlidesToScroll'
 import { arrayLast, mathAbs } from './utils'
 

@@ -4,10 +4,10 @@ import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
 import { SlideRegistryType } from './SlideRegistry'
-import { isNumber } from './utils'
+import { isNumber, WindowType } from './utils'
 
 export type SlideFocusType = {
-  init: () => void
+  init: (ownerWindow: WindowType) => void
 }
 
 export function SlideFocus(
@@ -24,10 +24,10 @@ export function SlideFocus(
   const focusListenerOptions = { passive: true, capture: true }
   let lastTabPressTime = 0
 
-  function init(): void {
+  function init(ownerWindow: WindowType): void {
     if (!active) return
 
-    eventStore.add(document, 'keydown', onKeyDown, false)
+    eventStore.add(ownerWindow.document, 'keydown', onKeyDown, false)
 
     slides.forEach((slide, slideIndex) => {
       eventStore.add(
