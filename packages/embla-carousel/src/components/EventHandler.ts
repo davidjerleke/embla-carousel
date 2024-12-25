@@ -15,7 +15,6 @@ type EventStoreType = Partial<{
 }>
 
 export interface EmblaEventListType {
-  init: 'init'
   pointerdown: 'pointerdown'
   pointerup: 'pointerup'
   slideschanged: 'slideschanged'

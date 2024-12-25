@@ -15,3 +15,8 @@
   font-weight: 900;
   text-align: center;
 }
+
+.playground__ssr-text {
+  text-align: center;
+  margin-bottom: 5rem;
+}

@@ -18,13 +18,13 @@ describe('➡️  EmblaCarousel', () => {
         EmblaCarousel(mockTestElements(FIXTURE_CONSTRUCTOR_2))
       ).not.toThrow()
     })
+
+    test('SSR mode is trigged when the root node parameter is omitted', () => {
+      expect(() => EmblaCarousel(undefined)).not.toThrow()
+    })
   })
 
   describe('Does TRHOW when initialized and', () => {
-    test('The root node parameter is omitted', () => {
-      expect(() => EmblaCarousel(undefined as any)).toThrow()
-    })
-
     test('The container node is omitted', () => {
       expect(() =>
         EmblaCarousel(

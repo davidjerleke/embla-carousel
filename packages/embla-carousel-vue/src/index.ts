@@ -1,2 +1,2 @@
-export { EmblaCarouselVueType } from './components/emblaCarouselVue'
-export { default } from './components/emblaCarouselVue'
+export { UseEmblaCarouselType } from './components/useEmblaCarousel'
+export { default } from './components/useEmblaCarousel'

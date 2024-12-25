@@ -10,14 +10,6 @@ export function isRecord(
   return isObject(subject) || Array.isArray(subject)
 }
 
-export function canUseDOM(): boolean {
-  return !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  )
-}
-
 export function areOptionsEqual(
   optionsA: Record<string, unknown>,
   optionsB: Record<string, unknown>

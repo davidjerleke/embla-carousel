@@ -1,5 +1,4 @@
 export {
-  canUseDOM,
   areOptionsEqual,
   sortAndMapPluginToOptions,
   arePluginsEqual

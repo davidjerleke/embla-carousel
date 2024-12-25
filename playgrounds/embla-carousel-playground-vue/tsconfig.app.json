@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    /* Paths */
+    "paths": {
+      "utils/*": ["../../packages/embla-carousel-docs/src/utils/*"],
+      "consts/*": ["../../packages/embla-carousel-docs/src/consts/*"],
+      "hooks/*": ["../../packages/embla-carousel-docs/src/hooks/*"],
+      "components/*": ["../../packages/embla-carousel-docs/src/components/*"],
+      "assets/*": ["../../packages/embla-carousel-docs/src/assets/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+}

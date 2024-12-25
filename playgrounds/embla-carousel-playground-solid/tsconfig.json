@@ -1,17 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "esModuleInterop": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "paths": {
-      "utils/*": ["../../packages/embla-carousel-docs/src/utils/*"],
-      "consts/*": ["../../packages/embla-carousel-docs/src/consts/*"],
-      "hooks/*": ["../../packages/embla-carousel-docs/src/hooks/*"],
-      "components/*": ["../../packages/embla-carousel-docs/src/components/*"],
-      "assets/*": ["../../packages/embla-carousel-docs/src/assets/*"]
-    }
-  },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

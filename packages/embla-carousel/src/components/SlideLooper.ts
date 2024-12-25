@@ -112,7 +112,7 @@ export function SlideLooper(
   }
 
   function clear(): void {
-    loopPoints.forEach((loopPoint) => loopPoint.translate.clear())
+    slides.forEach((slide) => Translate(axis, slide).clear())
   }
 
   const self: SlideLooperType = {
