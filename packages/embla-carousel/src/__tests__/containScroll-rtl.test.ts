@@ -7,7 +7,8 @@ import {
   FIXTURE_CONTAIN_SCROLL_RTL_4,
   FIXTURE_CONTAIN_SCROLL_RTL_5,
   FIXTURE_CONTAIN_SCROLL_RTL_6,
-  FIXTURE_CONTAIN_SCROLL_RTL_7
+  FIXTURE_CONTAIN_SCROLL_RTL_7,
+  FIXTURE_CONTAIN_SCROLL_RTL_8
 } from './fixtures/containScroll-rtl.fixture'
 
 const FIRST_SNAP_INDEX = 0
@@ -254,6 +255,20 @@ describe('➡️  ContainScroll - Horizontal RTL', () => {
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
       expect(engine.slideRegistry).toEqual([[0, 1], [2], [3], [4, 5]])
+    })
+
+    test('Unexpected 1 pixel snaps are NOT present at the end of the carousel', () => {
+      const emblaApi = EmblaCarousel(
+        mockTestElements(FIXTURE_CONTAIN_SCROLL_RTL_8),
+        { direction: 'rtl', align: 'start' }
+      )
+
+      const engine = emblaApi.internalEngine()
+      const expectedScrollSnaps = [0, -399, -799]
+      expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
+      expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
+
+      expect(engine.slideRegistry).toEqual([[0], [1], [2, 3]])
     })
   })
 
