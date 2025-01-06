@@ -405,3 +405,49 @@ export const FIXTURE_CONTAIN_SCROLL_RTL_7: TestElementDimensionsType = {
     value: 0
   }
 }
+
+/*
+Fixture 8
+
+- Horizontal
+- RTL
+- No slide margins
+*/
+export const FIXTURE_CONTAIN_SCROLL_RTL_8: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 799,
+    offsetHeight: 190,
+    offsetTop: 176,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 400
+    },
+    {
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -399
+    },
+    {
+      offsetWidth: 400,
+      offsetHeight: 190,
+      offsetTop: 0,
+      offsetLeft: -799
+    }
+  ],
+  endMargin: {
+    property: 'marginLeft',
+    value: 0
+  }
+}

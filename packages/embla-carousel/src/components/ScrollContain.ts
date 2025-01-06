@@ -21,7 +21,7 @@ export function ScrollContain(
   const snapsContained = measureContained()
 
   function usePixelTolerance(bound: number, snap: number): boolean {
-    return deltaAbs(bound, snap) < 1
+    return deltaAbs(bound, snap) <= 1
   }
 
   function findScrollContainLimit(): LimitType {

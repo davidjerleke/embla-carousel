@@ -398,3 +398,48 @@ export const FIXTURE_CONTAIN_SCROLL_Y_7: TestElementDimensionsType = {
     value: 0
   }
 }
+
+/*
+Fixture 8
+
+- Vertical
+- No slide margins
+*/
+export const FIXTURE_CONTAIN_SCROLL_Y_8: TestElementDimensionsType = {
+  containerOffset: {
+    offsetWidth: 799,
+    offsetHeight: 799,
+    offsetTop: 0,
+    offsetLeft: 0
+  },
+  slideOffsets: [
+    {
+      offsetWidth: 799,
+      offsetHeight: 400,
+      offsetTop: 0,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 799,
+      offsetHeight: 400,
+      offsetTop: 400,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 799,
+      offsetHeight: 400,
+      offsetTop: 799,
+      offsetLeft: 0
+    },
+    {
+      offsetWidth: 799,
+      offsetHeight: 400,
+      offsetTop: 1199,
+      offsetLeft: 0
+    }
+  ],
+  endMargin: {
+    property: 'marginBottom',
+    value: 0
+  }
+}
