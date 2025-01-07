@@ -109,8 +109,6 @@
       <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/wopian">
       <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" height="50" style="max-width: 100%" />
-    </a><a href="https://github.com/nikrowell">
-      <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/horseeyephil">
       <img src="https://avatars2.githubusercontent.com/u/32337092?s=120&v=4" title="horseeyephil" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/pipisasa">
@@ -133,12 +131,16 @@
       <img src="https://avatars2.githubusercontent.com/u/184739775?s=120&v=4" title="dev-suraj-kumar" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/tlo-johnson">
       <img src="https://avatars2.githubusercontent.com/u/8763144?s=120&v=4" title="tlo-johnson" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/yasuhiro-yamamoto">
+      <img src="https://avatars2.githubusercontent.com/u/25109330?s=120&v=4" title="yasuhiro-yamamoto" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/anzbert">
       <img src="https://avatars2.githubusercontent.com/u/38823700?s=120&v=4" title="anzbert" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/sarussss">
       <img src="https://avatars2.githubusercontent.com/u/15656996?s=120&v=4" title="sarussss" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/silllli">
       <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" height="50" style="max-width: 100%" />
+    </a><a href="https://github.com/nikrowell">
+      <img src="https://avatars2.githubusercontent.com/u/260039?s=120&v=4" title="nikrowell" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/mujahidfa">
       <img src="https://avatars2.githubusercontent.com/u/17759705?s=120&v=4" title="mujahidfa" width="50" height="50" style="max-width: 100%" />
     </a><a href="https://github.com/Mitch-At-Work">
