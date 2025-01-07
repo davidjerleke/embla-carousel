@@ -5,23 +5,27 @@ export type TranslateType = {
   clear: () => void
   to: (target: number) => void
   toggleActive: (active: boolean) => void
+  get: (n: number) => string
 }
 
 export function Translate(
   axis: AxisType,
-  container: HTMLElement
+  container: HTMLElement,
+  unit?: 'px' | '%'
 ): TranslateType {
-  const translate = axis.scroll === 'x' ? x : y
+  const getTranslate = axis.scroll === 'x' ? x : y
   const containerStyle = container.style
+  const transformUnit = unit || 'px'
+
   let previousTarget: number | null = null
   let disabled = false
 
   function x(n: number): string {
-    return `translate3d(${n}px,0px,0px)`
+    return `translate3d(${n}${transformUnit},0px,0px)`
   }
 
   function y(n: number): string {
-    return `translate3d(0px,${n}px,0px)`
+    return `translate3d(0px,${n}${transformUnit},0px)`
   }
 
   function to(target: number): void {
@@ -30,7 +34,7 @@ export function Translate(
     const newTarget = roundToTwoDecimals(axis.direction(target))
     if (newTarget === previousTarget) return
 
-    containerStyle.transform = translate(newTarget)
+    containerStyle.transform = getTranslate(newTarget)
     previousTarget = newTarget
   }
 
@@ -47,7 +51,8 @@ export function Translate(
   const self: TranslateType = {
     clear,
     to,
-    toggleActive
+    toggleActive,
+    get: getTranslate
   }
   return self
 }
