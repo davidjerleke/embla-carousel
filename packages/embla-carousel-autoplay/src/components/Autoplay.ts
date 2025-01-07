@@ -92,7 +92,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       eventStore.add(emblaApi.containerNode(), 'focusout', startAutoplay)
     }
 
-    if (options.playOnInit && !documentIsHidden()) startAutoplay()
+    if (options.playOnInit) startAutoplay()
   }
 
   function destroy(): void {
@@ -124,6 +124,10 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function startAutoplay(): void {
     if (destroyed) return
+    if (documentIsHidden()) {
+      playOnDocumentVisible = true
+      return
+    }
     if (!autoplayActive) emblaApi.emit('autoplay:play')
 
     setTimer()
