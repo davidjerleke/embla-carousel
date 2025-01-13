@@ -28,7 +28,7 @@ export const addToggleThumbBtnsActive = (emblaApiMain, emblaApiThumb) => {
   }
 
   emblaApiMain.on('select', toggleThumbBtnsState)
-  emblaApiThumb.on('init', toggleThumbBtnsState)
+  toggleThumbBtnsState()
 
   return () => {
     const selected = emblaApiMain.selectedSnap()

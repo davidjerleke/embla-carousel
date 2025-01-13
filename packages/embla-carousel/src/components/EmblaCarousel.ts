@@ -315,7 +315,6 @@ function EmblaCarousel(
   }
 
   activate(userOptions, userPlugins)
-  setTimeout(() => eventHandler.emit('init', null), 0) // TODO: Won't work in SSR
   return self
 }
 

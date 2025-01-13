@@ -7,8 +7,8 @@ import { Translate } from './Translate'
 import { mathSign } from './utils'
 
 // TODO: Enable SSR for library wrappers like React, Vue etc.
-// TODO: Remove init event with timeout in EmblaCarousel.ts which won't work with SSR (deprecated)
 // TODO: Enable SSR for plugins?
+// TODO: Fix pixeltolerance in packages/embla-carousel/src/components/EmblaCarousel.ts
 
 export type SsrHandlerType = {
   getStyles: (container: string, slides: string) => string
