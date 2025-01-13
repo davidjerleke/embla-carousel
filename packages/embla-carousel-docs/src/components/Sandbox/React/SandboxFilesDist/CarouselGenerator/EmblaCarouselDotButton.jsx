@@ -24,11 +24,11 @@ export const useDotButton = (
   )
 
   const onInit = useCallback((emblaApi) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
+    setScrollSnaps(emblaApi.snapList())
   }, [])
 
   const onSelect = useCallback((emblaApi) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
+    setSelectedIndex(emblaApi.selectedSnap())
   }, [])
 
   useEffect(() => {

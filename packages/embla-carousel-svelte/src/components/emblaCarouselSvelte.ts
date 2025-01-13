@@ -39,11 +39,8 @@ function emblaCarouselSvelte(
       storedEmblaConfig.options,
       storedEmblaConfig.plugins
     )
-    emblaApi.on('init', () =>
-      emblaNode.dispatchEvent(
-        new CustomEvent('emblaInit', { detail: emblaApi })
-      )
-    )
+
+    emblaNode.dispatchEvent(new CustomEvent('emblaInit', { detail: emblaApi }))
   }
 
   return {

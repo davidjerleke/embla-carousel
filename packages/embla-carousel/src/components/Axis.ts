@@ -1,4 +1,4 @@
-import { NodeRectType } from './NodeRects'
+import { NodeRectType } from './NodeHandler'
 
 export type AxisOptionType = 'x' | 'y'
 export type AxisDirectionOptionType = 'ltr' | 'rtl'
