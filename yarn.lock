@@ -8556,7 +8556,7 @@ __metadata:
   dependencies:
     embla-carousel-autoplay: 8.5.2
     embla-carousel-solid: 8.5.2
-    solid-js: ^1.8.0
+    solid-js: ^1.9.4
     vite: ^3.2.11
     vite-plugin-solid: ^2.8.0
   languageName: unknown
@@ -8633,7 +8633,7 @@ __metadata:
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.22.4
-    solid-js: ^1.8.7
+    solid-js: ^1.9.4
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
@@ -19241,14 +19241,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"solid-js@npm:^1.8.0, solid-js@npm:^1.8.7":
-  version: 1.8.22
-  resolution: "solid-js@npm:1.8.22"
+"solid-js@npm:^1.9.4":
+  version: 1.9.5
+  resolution: "solid-js@npm:1.9.5"
   dependencies:
     csstype: ^3.1.0
     seroval: ^1.1.0
     seroval-plugins: ^1.1.0
-  checksum: ba5f95f36b1ec7c6b46dd415a997fc97e7ed827d6ca051e48d0b88a698367425c612fdbd3279ac1dd8d612fe107b812a502f08fad4a6e91ea5d0e9592358b517
+  checksum: 08319db84ff5f879e6a76bd2e77dc9f38ccb5b14e108d1c8f7b6263591c49ba5ca9382418f16b8bf714a54903263b1ac7ee459495a9926f828080be6fb044076
   languageName: node
   linkType: hard
 
