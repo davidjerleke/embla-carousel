@@ -188,7 +188,7 @@ function EmblaCarousel(
   }
 
   function scrollProgress(): number {
-    return engine.scrollProgress.get(engine.location.get())
+    return engine.scrollProgress.get(engine.offsetLocation.get())
   }
 
   function selectedScrollSnap(): number {
