@@ -89,7 +89,6 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
     disableScroll()
     fadeToSelectedSnapInstantly()
-    emblaApi.containerNode().style.transform = 'none'
   }
 
   function destroy(): void {
@@ -108,7 +107,6 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     emblaApi.slideNodes().forEach((slideNode) => {
       const slideStyle = slideNode.style
       slideStyle.opacity = ''
-      slideStyle.transform = ''
       slideStyle.pointerEvents = ''
     })
 
@@ -148,15 +146,15 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function disableScroll(): void {
-    const { translate, slideLooper } = emblaApi.internalEngine()
+    const { translate, slideTranslates } = emblaApi.internalEngine()
+    const translates = [translate, ...slideTranslates]
 
-    translate.clear()
-    translate.toggleActive(false)
-
-    slideLooper.loopPoints.forEach(({ translate }) => {
+    translates.forEach((translate) => {
       translate.clear()
       translate.toggleActive(false)
     })
+
+    emblaApi.containerNode().style.transform = 'translate(0px,0px)'
   }
 
   function lockExcessiveScroll(fadeIndex: number | null): void {

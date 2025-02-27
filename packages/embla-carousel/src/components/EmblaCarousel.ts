@@ -81,11 +81,8 @@ function EmblaCarousel(
     container: HTMLElement,
     slides: HTMLElement[]
   ): EngineType {
-    nodeHandler.clearOffsets(container, ...slides)
-
     const ssrOptions = isSsr ? { direction: 'ltr' } : {}
     const engineOptions = mergeOptions(options, ssrOptions)
-
     const engine = Engine(
       root,
       container,
@@ -101,6 +98,7 @@ function EmblaCarousel(
       const optionsWithoutLoop = mergeOptions(options, { loop: false })
       return createEngine(optionsWithoutLoop, container, slides)
     }
+
     return engine
   }
 
@@ -142,6 +140,8 @@ function EmblaCarousel(
 
     if (!isSsr && ownerWindow) {
       engine.translate.to(engine.location.get())
+      if (engine.options.loop) engine.slideLooper.loop()
+
       engine.animation.init(ownerWindow)
       engine.resizeHandler.init(ownerWindow)
       engine.slidesInView.init(ownerWindow)
@@ -150,7 +150,6 @@ function EmblaCarousel(
       engine.eventHandler.init(self)
       engine.watchHandler.init(self)
 
-      if (engine.options.loop) engine.slideLooper.loop()
       if (container.offsetParent && slides.length) {
         engine.dragHandler.init(ownerWindow)
       }
@@ -176,10 +175,10 @@ function EmblaCarousel(
     engine.slidesInView.destroy()
     engine.animation.destroy()
     pluginsHandler.destroy()
-    engine.translate.clear()
-    engine.slideLooper.clear()
     engine.eventStore.clear()
     mediaHandlers.clear()
+    engine.translate.clear()
+    engine.slideTranslates.forEach((translate) => translate.clear())
   }
 
   function destroy(): void {
@@ -244,12 +243,12 @@ function EmblaCarousel(
     return isSsr ? ssrHandler.getStyles(container, slides) : ''
   }
 
-  function snapList(): number[] {
-    return engine.snapList
-  }
-
   function scrollProgress(): number {
     return engine.scrollProgress.get(engine.offsetLocation.get())
+  }
+
+  function snapList(): number[] {
+    return engine.snapList
   }
 
   function selectedSnap(): number {

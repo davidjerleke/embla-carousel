@@ -16,12 +16,17 @@ type NodesType = {
   slides: HTMLElement[]
 }
 
+type NodeRectsType = {
+  containerRect: NodeRectType
+  slideRects: NodeRectType[]
+}
+
 export type NodeHandlerType = {
   ownerDocument: Document | null
   ownerWindow: WindowType | null
-  clearOffsets: (...nodes: HTMLElement[]) => void
   getNodes: (options: OptionsType) => NodesType
   getRect: (node: HTMLElement) => NodeRectType
+  getRects: (container: HTMLElement, slides: HTMLElement[]) => NodeRectsType
 }
 
 export function NodeHandler(root: HTMLElement): NodeHandlerType {
@@ -30,26 +35,33 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
     ? <WindowType>ownerDocument.defaultView
     : null
 
-  function clearOffsets(...nodes: HTMLElement[]): void {
-    if (!root) return
-
-    nodes.forEach((node) => {
-      const style = node.style
-      if (!style.transform) style.transform = 'none'
-    })
-  }
-
   function getRect(node: HTMLElement): NodeRectType {
-    const { offsetTop, offsetLeft, offsetWidth, offsetHeight } = node
+    const { offsetTop: top, offsetLeft: left, offsetWidth, offsetHeight } = node
     const offset: NodeRectType = {
-      top: offsetTop,
-      right: offsetLeft + offsetWidth,
-      bottom: offsetTop + offsetHeight,
-      left: offsetLeft,
+      top,
+      right: left + offsetWidth,
+      bottom: top + offsetHeight,
+      left,
       width: offsetWidth,
       height: offsetHeight
     }
+
     return offset
+  }
+
+  function getRects(
+    container: HTMLElement,
+    slides: HTMLElement[]
+  ): NodeRectsType {
+    const containerStyle = root ? container.style : { transform: '' }
+    const previousTransform = containerStyle.transform
+    containerStyle.transform = 'none'
+
+    const containerRect = getRect(container)
+    const slideRects = slides.map(getRect)
+
+    containerStyle.transform = previousTransform
+    return { containerRect, slideRects }
   }
 
   function createSsrNode(
@@ -99,9 +111,9 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
   const self: NodeHandlerType = {
     ownerDocument,
     ownerWindow,
-    clearOffsets,
     getNodes,
-    getRect
+    getRect,
+    getRects
   }
   return self
 }

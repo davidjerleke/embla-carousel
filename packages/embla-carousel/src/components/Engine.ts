@@ -64,6 +64,7 @@ export type EngineType = {
   slidesToScroll: SlidesToScrollType
   target: Vector1DType
   translate: TranslateType
+  slideTranslates: TranslateType[]
   resizeHandler: ResizeHandlerType
   slidesHandler: SlidesHandlerType
   nodeHandler: NodeHandlerType
@@ -110,9 +111,8 @@ export function Engine(
 
   // Measurements
   const pixelTolerance = isSsr ? 0 : 2
-  const containerRect = nodeHandler.getRect(container)
-  const slideRects = slides.map(nodeHandler.getRect)
   const axis = Axis(scrollAxis, direction)
+  const { containerRect, slideRects } = nodeHandler.getRects(container, slides)
   const viewSize = axis.measureSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
@@ -223,6 +223,9 @@ export function Engine(
   const previousLocation = Vector1D(startLocation)
   const offsetLocation = Vector1D(startLocation)
   const target = Vector1D(startLocation)
+  const translate = Translate(axis, container)
+  const slideTranslates = slides.map((slide) => Translate(axis, slide))
+
   const scrollBody = ScrollBody(
     location,
     offsetLocation,
@@ -343,7 +346,6 @@ export function Engine(
     scrollTarget,
     scrollTo,
     slideLooper: SlideLooper(
-      axis,
       viewSize,
       contentSize,
       slideSizes,
@@ -351,7 +353,7 @@ export function Engine(
       snaps,
       scrollSnaps,
       offsetLocation,
-      slides
+      slideTranslates
     ),
     slideFocus,
     slidesHandler: SlidesHandler(
@@ -364,8 +366,9 @@ export function Engine(
     slideIndexes,
     slideRegistry,
     slidesToScroll,
+    slideTranslates,
+    translate,
     target,
-    translate: Translate(axis, container),
     watchHandler
   }
 

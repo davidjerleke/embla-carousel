@@ -66,10 +66,10 @@ const rotateWheel = (emblaApi, slideCount, rotationOffset) => {
 }
 
 const inactivateEmblaTransform = (emblaApi) => {
-  const { translate, slideLooper } = emblaApi.internalEngine()
-  translate.clear()
-  translate.toggleActive(false)
-  slideLooper.loopPoints.forEach(({ translate }) => {
+  const { translate, slideTranslates } = emblaApi.internalEngine()
+  const translates = [translate, ...slideTranslates]
+
+  translates.forEach((translate) => {
     translate.clear()
     translate.toggleActive(false)
   })
