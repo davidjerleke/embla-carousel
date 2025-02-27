@@ -70,10 +70,11 @@ export const IosPickerItem = (props) => {
 
   const inactivateEmblaTransform = useCallback((emblaApi) => {
     if (!emblaApi) return
-    const { translate, slideLooper } = emblaApi.internalEngine()
-    translate.clear()
-    translate.toggleActive(false)
-    slideLooper.loopPoints.forEach(({ translate }) => {
+
+    const { translate, slideTranslates } = emblaApi.internalEngine()
+    const translates = [translate, ...slideTranslates]
+
+    translates.forEach((translate) => {
       translate.clear()
       translate.toggleActive(false)
     })

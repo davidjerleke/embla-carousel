@@ -71,6 +71,7 @@ export function Animations(
   }
 
   function stop(): void {
+    if (!animationId) return
     windowInstance.cancelAnimationFrame(animationId)
     lastTimeStamp = null
     accumulatedTime = 0
