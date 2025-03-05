@@ -187,12 +187,9 @@ export function Engine(
     const shouldSettle = scrollBody.settled()
     const withinBounds = !scrollBounds.shouldConstrain()
     const hasSettled = loop ? shouldSettle : shouldSettle && withinBounds
+    const hasSettledAndIdle = hasSettled && !dragHandler.pointerDown()
 
-    if (hasSettled && !dragHandler.pointerDown()) {
-      animation.stop()
-      eventHandler.emit('settle')
-    }
-    if (!hasSettled) eventHandler.emit('scroll')
+    if (hasSettledAndIdle) animation.stop()
 
     const interpolatedLocation =
       location.get() * alpha + previousLocation.get() * (1 - alpha)
@@ -205,6 +202,9 @@ export function Engine(
     }
 
     translate.to(offsetLocation.get())
+
+    if (hasSettledAndIdle) eventHandler.emit('settle')
+    if (!hasSettled) eventHandler.emit('scroll')
   }
 
   const animation = Animations(
