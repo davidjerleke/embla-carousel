@@ -11,7 +11,7 @@
   "dependencies": {
     "embla-carousel-autoplay": "8.5.2",
     "embla-carousel-solid": "8.5.2",
-    "solid-js": "^1.8.0"
+    "solid-js": "^1.9.4"
   },
   "devDependencies": {
     "vite": "^3.2.11",
