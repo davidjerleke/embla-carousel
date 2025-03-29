@@ -130,3 +130,37 @@ export const EmblaCarousel = () => {
   )
 }
 ```
+
+## With Vue
+
+Adding next and prev buttons is easy with Vue. First, ensure you’ve initialized the carousel using `emblaCarouselVue()` and exposed the API. Then, bind click handlers to your buttons, calling scrollNext() and scrollPrev() methods.
+
+```html highlight={4,7,11}
+<script setup>
+  import emblaCarouselVue from 'embla-carousel-vue'
+
+  const [emblaRef, emblaApi] = emblaCarouselVue()
+
+  function scrollNext() {
+    emblaApi.value?.scrollNext()
+  }
+
+  function scrollPrev() {
+    emblaApi.value?.scrollPrev()
+  }
+</script>
+
+<template>
+  <div class="embla">
+    <div class="embla__viewport" ref="emblaRef">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+    <button class="embla__prev" @click="scrollPrev">Prev</button>
+    <button class="embla__next" @click="scrollNext">Next</button>
+  </div>
+</template>
+```
