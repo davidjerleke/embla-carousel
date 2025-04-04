@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-react",
-  "version": "8.5.2",
+  "version": "8.6.0",
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
   "repository": {
@@ -60,8 +60,8 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "embla-carousel": "8.5.2",
-    "embla-carousel-reactive-utils": "8.5.2"
+    "embla-carousel": "8.6.0",
+    "embla-carousel-reactive-utils": "8.6.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc"
