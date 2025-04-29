@@ -1,6 +1,5 @@
 import { Engine, EngineType } from './Engine'
 import { EventStore } from './EventStore'
-import { WatchHandler, WatchHandlerType } from './WatchHandler'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
 import { NodeHandler, NodeHandlerType } from './NodeHandler'
@@ -15,14 +14,13 @@ export type EmblaCarouselType = {
   canScrollNext: () => boolean
   canScrollPrev: () => boolean
   containerNode: () => HTMLElement
+  createEvent: EventHandlerType['createEvent']
   internalEngine: () => EngineType
   destroy: () => void
-  onWatch: WatchHandlerType['on']
-  offWatch: WatchHandlerType['off']
-  off: EventHandlerType['off']
-  on: EventHandlerType['on']
-  emit: EventHandlerType['emit']
-  emitWatch: WatchHandlerType['emit']
+  offBefore: EventHandlerType['offBefore']
+  onBefore: EventHandlerType['onBefore']
+  offAfter: EventHandlerType['offAfter']
+  onAfter: EventHandlerType['onAfter']
   plugins: () => EmblaPluginsType
   previousSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
@@ -57,11 +55,9 @@ function EmblaCarousel(
   const optionsHandler = OptionsHandler()
   const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
-  const watchHandler = WatchHandler()
   const eventHandler = EventHandler()
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
-  const { on, off, emit } = eventHandler
-  const { on: onWatch, off: offWatch, emit: emitWatch } = watchHandler
+  const { onBefore, offBefore, onAfter, offAfter, createEvent } = eventHandler
   const reInit = reActivate
 
   let destroyed = false
@@ -90,7 +86,6 @@ function EmblaCarousel(
       engineOptions,
       nodeHandler,
       eventHandler,
-      watchHandler,
       isSsr
     )
 
@@ -148,7 +143,6 @@ function EmblaCarousel(
       engine.slidesHandler.init(ownerWindow)
       engine.slideFocus.init(ownerWindow)
       engine.eventHandler.init(self)
-      engine.watchHandler.init(self)
 
       if (container.offsetParent && slides.length) {
         engine.dragHandler.init(ownerWindow)
@@ -162,10 +156,15 @@ function EmblaCarousel(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[]
   ): void {
+    // TODO: Add newOptions and newPlugins to the event detail
+    const event = eventHandler.createEvent('reinit', null)
+    event.emitBefore()
+
     const startSnap = selectedSnap()
     deActivate()
     activate(mergeOptions({ startSnap }, withOptions), withPlugins)
-    eventHandler.emit('reinit', null)
+
+    event.emitAfter()
   }
 
   function deActivate(): void {
@@ -185,12 +184,14 @@ function EmblaCarousel(
     if (destroyed) return
     if (isSsr) return
 
+    const event = eventHandler.createEvent('destroy', null)
+    event.emitBefore()
+
     destroyed = true
     mediaHandlers.clear()
     deActivate()
-    eventHandler.emit('destroy', null)
+    event.emitAfter()
     eventHandler.clear()
-    watchHandler.clear()
   }
 
   function scrollToSnap(
@@ -219,23 +220,27 @@ function EmblaCarousel(
     if (isNumber(snapIndex)) scrollToSnap(snapIndex, jump, direction)
   }
 
+  // TODO: Rename to scrollToNext
   function scrollNext(jump?: boolean): void {
-    const next = engine.index.add(1).get()
+    const next = engine.indexCurrent.add(1).get()
     scrollToSnap(next, jump, -1)
   }
 
+  // TODO: Rename to scrollToPrev
   function scrollPrev(jump?: boolean): void {
-    const prev = engine.index.add(-1).get()
+    const prev = engine.indexCurrent.add(-1).get()
     scrollToSnap(prev, jump, 1)
   }
 
+  // TODO: Rename to canScrollToNext
   function canScrollNext(): boolean {
-    const next = engine.index.add(1).get()
+    const next = engine.indexCurrent.add(1).get()
     return next !== selectedSnap()
   }
 
+  // TODO: Rename to canScrollToPrev
   function canScrollPrev(): boolean {
-    const prev = engine.index.add(-1).get()
+    const prev = engine.indexCurrent.add(-1).get()
     return prev !== selectedSnap()
   }
 
@@ -252,7 +257,7 @@ function EmblaCarousel(
   }
 
   function selectedSnap(): number {
-    return engine.index.get()
+    return engine.indexCurrent.get()
   }
 
   function previousSnap(): number {
@@ -291,14 +296,13 @@ function EmblaCarousel(
     canScrollNext,
     canScrollPrev,
     containerNode,
+    createEvent,
     internalEngine,
     destroy,
-    off,
-    offWatch,
-    on,
-    onWatch,
-    emit,
-    emitWatch,
+    onBefore,
+    offBefore,
+    onAfter,
+    offAfter,
     plugins,
     previousSnap,
     reInit,

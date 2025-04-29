@@ -1,5 +1,4 @@
 import { EventHandlerType } from './EventHandler'
-import { WatchHandlerType } from './WatchHandler'
 import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
@@ -18,8 +17,7 @@ export function SlideFocus(
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   eventStore: EventStoreType,
-  eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType
+  eventHandler: EventHandlerType
 ): SlideFocusType {
   const focusListenerOptions = { passive: true, capture: true }
   let lastTabPressTime = 0
@@ -33,9 +31,7 @@ export function SlideFocus(
       eventStore.add(
         slide,
         'focus',
-        (evt: FocusEvent) => {
-          watchHandler.emit('slidefocus', evt, () => onFocus(evt, slideIndex))
-        },
+        (evt: FocusEvent) => onFocus(evt, slideIndex),
         focusListenerOptions
       )
     })
@@ -47,7 +43,11 @@ export function SlideFocus(
 
     if (diffTime > 10) return
 
-    eventHandler.emit('slidefocusstart', evt)
+    const event = eventHandler.createEvent('slidefocus', evt)
+    const preventDefault = !event.emitBefore()
+    if (preventDefault) return
+
+    // eventHandler.emit('slidefocusstart', evt) // TODO: Update fade plugin
     root.scrollLeft = 0
 
     const group = slideRegistry.findIndex((group) => group.includes(index))
@@ -57,7 +57,7 @@ export function SlideFocus(
     scrollBody.useDuration(0)
     scrollTo.index(group, 0)
 
-    eventHandler.emit('slidefocus', evt)
+    event.emitAfter()
   }
 
   function onKeyDown(event: KeyboardEvent): void {
