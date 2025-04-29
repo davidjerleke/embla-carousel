@@ -27,5 +27,7 @@ export const addPrevNextBtnsClickHandlers = (
 
   toggleButtonsState()
 
-  emblaApi.on('select', toggleButtonsState).on('reinit', toggleButtonsState)
+  emblaApi
+    .onAfter('select', toggleButtonsState)
+    .onAfter('reinit', toggleButtonsState)
 }

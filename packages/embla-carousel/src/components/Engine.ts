@@ -1,10 +1,5 @@
 import { Alignment } from './Alignment'
-import {
-  Animations,
-  AnimationsType,
-  AnimationsUpdateType,
-  AnimationsRenderType
-} from './Animations'
+import { Animations, AnimationsType } from './Animations'
 import { Axis, AxisType } from './Axis'
 import { Counter, CounterType } from './Counter'
 import { DragHandler, DragHandlerType } from './DragHandler'
@@ -16,6 +11,7 @@ import { NodeRectType } from './NodeHandler'
 import { OptionsType } from './Options'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ResizeHandler, ResizeHandlerType } from './ResizeHandler'
+import { ScrollAnimator } from './ScrollAnimator'
 import { ScrollBody, ScrollBodyType } from './ScrollBody'
 import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
@@ -35,20 +31,18 @@ import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { WatchHandlerType } from './WatchHandler'
 import { NodeHandlerType } from './NodeHandler'
 
 export type EngineType = {
   isSsr: boolean
   eventHandler: EventHandlerType
-  watchHandler: WatchHandlerType
   contentSize: number
   axis: AxisType
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
   scrollLooper: ScrollLooperType
   scrollProgress: ScrollProgressType
-  index: CounterType
+  indexCurrent: CounterType
   indexPrevious: CounterType
   limit: LimitType
   location: Vector1DType
@@ -86,7 +80,6 @@ export function Engine(
   options: OptionsType,
   nodeHandler: NodeHandlerType,
   eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType,
   isSsr: boolean
 ): EngineType {
   // Options
@@ -156,69 +149,20 @@ export function Engine(
   const { limit } = ScrollLimit(contentSize, scrollSnaps, loop)
 
   // Indexes
-  const index = Counter(arrayLastIndex(scrollSnaps), startSnap, loop)
-  const indexPrevious = index.clone()
+  const indexCurrent = Counter(arrayLastIndex(scrollSnaps), startSnap, loop)
+  const indexPrevious = indexCurrent.clone()
   const slideIndexes = arrayKeys(slides)
 
   // Animation
-  const update: AnimationsUpdateType = ({
-    dragHandler,
-    scrollBody,
-    scrollBounds,
-    options: { loop }
-  }) => {
-    if (!loop) scrollBounds.constrain(dragHandler.pointerDown())
-    scrollBody.seek()
-  }
-
-  const render: AnimationsRenderType = (
-    {
-      scrollBody,
-      translate,
-      location,
-      offsetLocation,
-      previousLocation,
-      scrollLooper,
-      slideLooper,
-      dragHandler,
-      animation,
-      eventHandler,
-      scrollBounds,
-      options: { loop }
-    },
-    alpha
-  ) => {
-    const shouldSettle = scrollBody.settled()
-    const withinBounds = !scrollBounds.shouldConstrain()
-    const hasSettled = loop ? shouldSettle : shouldSettle && withinBounds
-    const hasSettledAndIdle = hasSettled && !dragHandler.pointerDown()
-
-    if (hasSettledAndIdle) animation.stop()
-
-    const interpolatedLocation =
-      location.get() * alpha + previousLocation.get() * (1 - alpha)
-
-    offsetLocation.set(interpolatedLocation)
-
-    if (loop) {
-      scrollLooper.loop(scrollBody.direction())
-      slideLooper.loop()
-    }
-
-    translate.to(offsetLocation.get())
-
-    if (hasSettledAndIdle) eventHandler.emit('settle', null)
-    if (!hasSettled) eventHandler.emit('scroll', null)
-  }
-
+  const scrollAnimator = ScrollAnimator()
   const animation = Animations(
-    () => update(engine),
-    (alpha: number) => render(engine, alpha)
+    () => scrollAnimator.update(engine),
+    (alpha: number) => scrollAnimator.render(engine, alpha)
   )
 
   // Shared
   const friction = 0.68
-  const startLocation = scrollSnaps[index.get()]
+  const startLocation = scrollSnaps[indexCurrent.get()]
   const location = Vector1D(startLocation)
   const previousLocation = Vector1D(startLocation)
   const offsetLocation = Vector1D(startLocation)
@@ -243,7 +187,7 @@ export function Engine(
   )
   const scrollTo = ScrollTo(
     animation,
-    index,
+    indexCurrent,
     indexPrevious,
     scrollBody,
     scrollTarget,
@@ -274,8 +218,7 @@ export function Engine(
     scrollTo,
     scrollBody,
     eventStore,
-    eventHandler,
-    watchHandler
+    eventHandler
   )
 
   // Engine
@@ -299,9 +242,8 @@ export function Engine(
       scrollTo,
       scrollBody,
       scrollTarget,
-      index,
+      indexCurrent,
       eventHandler,
-      watchHandler,
       percentOfView,
       dragFree,
       dragThreshold,
@@ -310,7 +252,7 @@ export function Engine(
     ),
     eventStore,
     percentOfView,
-    index,
+    indexCurrent,
     indexPrevious,
     limit,
     location,
@@ -321,7 +263,6 @@ export function Engine(
       resize,
       container,
       eventHandler,
-      watchHandler,
       slides,
       axis,
       nodeHandler
@@ -356,20 +297,14 @@ export function Engine(
       slideTranslates
     ),
     slideFocus,
-    slidesHandler: SlidesHandler(
-      slideChanges,
-      container,
-      eventHandler,
-      watchHandler
-    ),
+    slidesHandler: SlidesHandler(slideChanges, container, eventHandler),
     slidesInView,
     slideIndexes,
     slideRegistry,
     slidesToScroll,
     slideTranslates,
     translate,
-    target,
-    watchHandler
+    target
   }
 
   return engine

@@ -8,6 +8,7 @@ import { isNumber } from './utils'
 
 export type DirectionType = 0 | 1 | -1
 export type ScrollToDirectionType = 'forward' | 'backward' | DirectionType
+export type SelectEventType = { targetSnap: number; currentSnap: number }
 
 export type ScrollToType = {
   distance: (n: number, snap: boolean) => void
@@ -24,12 +25,21 @@ export function ScrollTo(
   eventHandler: EventHandlerType
 ): ScrollToType {
   function scrollTo(target: TargetType): void {
-    const distanceDiff = target.distance
-    const indexDiff = target.index !== indexCurrent.get()
+    const { index: targetSnap, distance: targetDisplacement } = target
+    const currentSnap = indexCurrent.get()
+    const hasIndexChanged = targetSnap !== currentSnap
+    const event = eventHandler.createEvent('select', {
+      targetSnap,
+      currentSnap
+    })
 
-    targetVector.add(distanceDiff)
+    if (hasIndexChanged) {
+      event.emitBefore()
+    }
 
-    if (distanceDiff) {
+    if (targetDisplacement) {
+      targetVector.add(targetDisplacement)
+
       if (scrollBody.duration()) {
         animation.start()
       } else {
@@ -39,10 +49,10 @@ export function ScrollTo(
       }
     }
 
-    if (indexDiff) {
-      indexPrevious.set(indexCurrent.get())
-      indexCurrent.set(target.index)
-      eventHandler.emit('select', null)
+    if (hasIndexChanged) {
+      indexPrevious.set(currentSnap)
+      indexCurrent.set(targetSnap)
+      event.emitAfter()
     }
   }
 

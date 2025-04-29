@@ -2,6 +2,8 @@ import EmblaCarousel from '../components/EmblaCarousel'
 import { mockTestElements } from './mocks'
 import { FIXTURE_EVENTS } from './fixtures/eventHandler'
 
+// TODO: Fix this test
+
 describe('➡️  EventHandler', () => {
   describe('Events added with on():', () => {
     test('Calls the provided callback when its associated event is emitted', () => {
