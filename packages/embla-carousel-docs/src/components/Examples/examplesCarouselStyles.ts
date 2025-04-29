@@ -68,7 +68,6 @@ export const BASE_STYLES = css`
   }
 
   .embla__slide {
-    transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
@@ -243,19 +242,30 @@ export const DOTS_STYLES = css`
     align-items: center;
     justify-content: center;
     border-radius: ${BORDER_RADIUSES.CIRCLE};
+    position: relative;
   }
 
+  .embla__dot:before,
   .embla__dot:after {
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
     ${createSquareSizeStyles('1.4rem')}
     border-radius: ${BORDER_RADIUSES.CIRCLE};
+    position: absolute;
     display: flex;
     align-items: center;
     content: '';
   }
 
+  .embla__dot:before {
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+  }
+
+  .embla__dot:after {
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.TEXT_BODY};
+    opacity: 0;
+  }
+
   .embla__dot--selected:after {
-    box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE} ${COLORS.TEXT_BODY};
+    opacity: 1;
   }
 `
 

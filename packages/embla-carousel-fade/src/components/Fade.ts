@@ -191,8 +191,9 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function setOpacity(index: number): void {
-    const slidesInSnap = emblaApi.internalEngine().slideRegistry[index]
-    const { scrollSnaps, containerRect } = emblaApi.internalEngine()
+    const { scrollSnaps, containerRect, scrollSnapList } =
+      emblaApi.internalEngine()
+    const slidesInSnap = scrollSnapList.slideGroupBySnap[index]
     const opacity = opacities[index]
 
     slidesInSnap.forEach((slideIndex) => {
@@ -212,7 +213,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function setProgress(fadeIndex: number, opacity: number): void {
-    const { index, dragHandler, scrollSnaps } = emblaApi.internalEngine()
+    const { indexCurrent, dragHandler, scrollSnaps } = emblaApi.internalEngine()
     const pointerDown = dragHandler.pointerDown()
     const snapFraction = 1 / (scrollSnaps.length - 1)
 
@@ -222,7 +223,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     if (pointerDown && indexA === indexB) {
       const reverseSign = Math.sign(distanceFromPointerDown) * -1
       indexA = indexB
-      indexB = index.clone().set(indexB).add(reverseSign).get()
+      indexB = indexCurrent.clone().set(indexB).add(reverseSign).get()
     }
 
     const currentPosition = indexB * snapFraction
@@ -231,14 +232,14 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   }
 
   function getFadeIndex(): number | null {
-    const { dragHandler, index, scrollBody } = emblaApi.internalEngine()
+    const { dragHandler, indexCurrent, scrollBody } = emblaApi.internalEngine()
     const selectedSnap = emblaApi.selectedSnap()
 
     if (!dragHandler.pointerDown()) return selectedSnap
 
     const directionSign = Math.sign(scrollBody.velocity())
     const distanceSign = Math.sign(distanceFromPointerDown)
-    const nextSnap = index
+    const nextSnap = indexCurrent
       .clone()
       .set(selectedSnap)
       .add(directionSign * -1)
@@ -294,28 +295,22 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     slidesSelector: string
   ): string {
     const { active } = options
-    const { slideRegistry } = emblaApi.internalEngine()
+    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
+    const selectedSnap = emblaApi.selectedSnap()
+    const opacity = active ? 0 : 1
+    const pointerEvents = active ? 'none' : 'auto'
+    const baseStyles = `${containerSelector} ${slidesSelector}{opacity:${opacity};pointer-events:${pointerEvents};}`
+    const slideStyles = slideGroupBySnap[selectedSnap].reduce((acc, index) => {
+      return (
+        acc +
+        `${containerSelector} ${slidesSelector}:nth-child(${
+          index + 1
+        }){opacity:1;pointer-events:auto;}`
+      )
+    }, '')
 
-    return `
-      ${slideRegistry.reduce((acc, group, groupIndex) => {
-        const isSelectedSnap = groupIndex === emblaApi.selectedSnap()
-        const opacity = !active || isSelectedSnap ? fullOpacity : noOpacity
-        const pointerEvents = !active || isSelectedSnap ? 'auto' : 'none'
-
-        return `
-          ${acc}
-          ${group.reduce((acc, index) => {
-            return `
-              ${acc}
-              ${containerSelector} ${slidesSelector}:nth-child(${index + 1}) {
-                opacity: ${opacity};
-                pointer-events: ${pointerEvents};
-              }
-          `
-          }, '')}
-        `
-      }, '')}
-    `
+    if (active) return baseStyles + slideStyles
+    return baseStyles
   }
 
   function ssrStyles(
@@ -323,24 +318,25 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     slidesSelector: string = '> *'
   ): string {
     if (!isSsr) return ''
+
     const optionBreakpoints = userOptions.breakpoints || {}
+    const baseStyles = createFadeSsrStyles(
+      options,
+      containerSelector,
+      slidesSelector
+    )
+    const mediaStyles = Object.keys(optionBreakpoints).reduce((acc, key) => {
+      return (
+        acc +
+        `@media ${key}{${createFadeSsrStyles(
+          optionBreakpoints[key],
+          containerSelector,
+          slidesSelector
+        )}}`
+      )
+    }, '')
 
-    return `
-      ${createFadeSsrStyles(userOptions, containerSelector, slidesSelector)}
-
-      ${Object.keys(optionBreakpoints).reduce((acc, key) => {
-        return `
-          ${acc}
-          @media ${key} {
-            ${createFadeSsrStyles(
-              optionBreakpoints[key],
-              containerSelector,
-              slidesSelector
-            )}
-          }
-        `
-      }, '')}
-    `
+    return baseStyles + mediaStyles
   }
 
   const self: FadeType = {

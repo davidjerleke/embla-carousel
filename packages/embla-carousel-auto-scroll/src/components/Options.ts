@@ -8,10 +8,7 @@ export type OptionsType = CreateOptionsType<{
   direction: 'forward' | 'backward'
   speed: number
   startDelay: number
-  playOnInit: boolean
-  stopOnFocusIn: boolean
-  stopOnInteraction: boolean
-  stopOnMouseEnter: boolean
+  defaultInteraction: boolean
   rootNode: RootNodeType
 }>
 
@@ -21,9 +18,6 @@ export const defaultOptions: OptionsType = {
   startDelay: 1000,
   active: true,
   breakpoints: {},
-  playOnInit: true,
-  stopOnFocusIn: true,
-  stopOnInteraction: true,
-  stopOnMouseEnter: false,
+  defaultInteraction: true,
   rootNode: null
 }

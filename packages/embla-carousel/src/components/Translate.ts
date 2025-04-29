@@ -2,10 +2,12 @@ import { AxisType } from './Axis'
 import { roundToTwoDecimals } from './utils'
 
 export type TranslateType = {
+  set: (translate: string) => void
   get: (n: number) => string
   to: (target: number) => void
   toggleActive: (active: boolean) => void
   clear: () => void
+  setIsScrolling: (active: boolean) => void
 }
 
 export function Translate(
@@ -14,6 +16,7 @@ export function Translate(
   unit: 'px' | '%' = 'px'
 ): TranslateType {
   const getTranslate = axis.scroll === 'x' ? x : y
+  let isScrolling = false
 
   let previousTarget: number | null = null
   let disabled = false
@@ -30,11 +33,21 @@ export function Translate(
     return `translate3d(0px,${n}${unit},0px)`
   }
 
+  function setIsScrolling(active: boolean): void {
+    if (disabled) return
+    if (isScrolling === active) return
+
+    isScrolling = active
+    const transform = active ? getTranslate(0) : ''
+    set(transform)
+  }
+
   function to(target: number): void {
     if (disabled) return
 
     const newTarget = roundToTwoDecimals(axis.direction(target))
     if (newTarget === previousTarget) return
+    if (!isScrolling) setIsScrolling(true)
 
     set(getTranslate(newTarget))
     previousTarget = newTarget
@@ -50,10 +63,12 @@ export function Translate(
   }
 
   const self: TranslateType = {
+    set,
     clear,
     to,
     toggleActive,
-    get: getTranslate
+    get: getTranslate,
+    setIsScrolling
   }
   return self
 }

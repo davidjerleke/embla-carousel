@@ -27,18 +27,7 @@ export function SlidesInView(
 
   function init(ownerWindow: WindowType): void {
     intersectionObserver = new ownerWindow.IntersectionObserver(
-      (entries) => {
-        if (destroyed) return
-
-        entries.forEach((entry) => {
-          const index = slides.indexOf(<HTMLElement>entry.target)
-          intersectionEntryMap[index] = entry
-        })
-
-        inViewCache = null
-        notInViewCache = null
-        eventHandler.emit('slidesinview', null)
-      },
+      onIntersection,
       {
         root: container.parentElement,
         threshold
@@ -51,6 +40,21 @@ export function SlidesInView(
   function destroy(): void {
     if (intersectionObserver) intersectionObserver.disconnect()
     destroyed = true
+  }
+
+  function onIntersection(entries: IntersectionObserverEntry[]): void {
+    const event = eventHandler.createEvent('slidesinview', entries)
+
+    for (const entry of entries) {
+      if (destroyed) return
+
+      const index = slides.indexOf(<HTMLElement>entry.target)
+      intersectionEntryMap[index] = entry
+    }
+
+    inViewCache = null
+    notInViewCache = null
+    event.emit()
   }
 
   function createInViewList(inView: boolean): number[] {

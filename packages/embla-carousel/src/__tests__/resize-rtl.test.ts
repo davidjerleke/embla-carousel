@@ -78,7 +78,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       expect(reInit).toHaveBeenCalledTimes(0)
     })
 
-    test('An onWatch callback that returns TRUE allows the internal default callback to run', () => {
+    test('A before callback that returns TRUE allows the internal default callback to run', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_RTL), {
         resize: true,
         direction: 'rtl'
@@ -88,7 +88,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       const firstSlideWidth = emblaApi.internalEngine().slideRects[0].width
       const reInit = jest.spyOn(emblaApi, 'reInit')
 
-      emblaApi.onWatch('resize', () => true)
+      emblaApi.on('resize', () => true)
       Object.defineProperty(firstSlide, 'offsetWidth', {
         value: firstSlideWidth + RESIZE_TRIGGER_THRESHOLD,
         configurable: true
@@ -98,7 +98,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       expect(reInit).toHaveBeenCalledTimes(1)
     })
 
-    test('An onWatch callback that returns FALSE blocks the internal default callback', () => {
+    test('A before callback that returns FALSE blocks the internal default callback', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_RTL), {
         resize: true,
         direction: 'rtl'
@@ -108,7 +108,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       const firstSlideWidth = emblaApi.internalEngine().slideRects[0].width
       const reInit = jest.spyOn(emblaApi, 'reInit')
 
-      emblaApi.onWatch('resize', () => false)
+      emblaApi.on('resize', () => false)
       Object.defineProperty(firstSlide, 'offsetWidth', {
         value: firstSlideWidth + RESIZE_TRIGGER_THRESHOLD,
         configurable: true
@@ -141,7 +141,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       expect(reInit).toHaveBeenCalledTimes(0)
     })
 
-    test('An onWatch callback does NOT run at all', () => {
+    test('A before callback does NOT run at all', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_RTL), {
         resize: false
       })
@@ -150,7 +150,7 @@ describe('➡️  Resize - Horizontal RTL', () => {
       const firstSlideWidth = emblaApi.internalEngine().slideRects[0].width
       const callback = jest.fn(() => true)
 
-      emblaApi.onWatch('resize', callback)
+      emblaApi.on('resize', callback)
       Object.defineProperty(firstSlide, 'offsetWidth', {
         value: firstSlideWidth + RESIZE_TRIGGER_THRESHOLD,
         configurable: true

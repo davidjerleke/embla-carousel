@@ -1,7 +1,5 @@
 import { AxisType } from './Axis'
-import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { WatchHandlerType } from './WatchHandler'
 import { NodeHandlerType } from './NodeHandler'
 import { mathAbs, WindowType } from './utils'
 
@@ -14,7 +12,6 @@ export function ResizeHandler(
   active: boolean,
   container: HTMLElement,
   eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType,
   slides: HTMLElement[],
   axis: AxisType,
   nodeHandler: NodeHandlerType
@@ -35,10 +32,7 @@ export function ResizeHandler(
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 
-    resizeObserver = new ownerWindow.ResizeObserver((entries) => {
-      watchHandler.emit('resize', entries, onResize)
-    })
-
+    resizeObserver = new ownerWindow.ResizeObserver(onResize)
     ownerWindow.requestAnimationFrame(() => {
       observeNodes.forEach((node) => resizeObserver.observe(node))
     })
@@ -49,10 +43,11 @@ export function ResizeHandler(
     if (resizeObserver) resizeObserver.disconnect()
   }
 
-  function onResize(
-    entries: ResizeObserverEntry[],
-    emblaApi: EmblaCarouselType
-  ): void {
+  function onResize(entries: ResizeObserverEntry[]): void {
+    const event = eventHandler.createEvent('resize', entries)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
     for (const entry of entries) {
       if (destroyed) return
 
@@ -64,8 +59,7 @@ export function ResizeHandler(
       const diffSize = mathAbs(newSize - lastSize)
 
       if (diffSize >= 0.5) {
-        emblaApi.reInit()
-        eventHandler.emit('resize', entries)
+        event.api.reInit()
         break
       }
     }

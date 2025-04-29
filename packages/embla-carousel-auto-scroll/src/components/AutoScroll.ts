@@ -5,8 +5,27 @@ import {
   OptionsHandlerType,
   EmblaCarouselType,
   EngineType,
-  ScrollBodyType
+  ScrollBodyType,
+  EmblaEventModelType
 } from 'embla-carousel'
+
+type AutoScrollInteractionType = {
+  interaction:
+    | 'pointerdown'
+    | 'pointerup'
+    | 'mouseenter'
+    | 'mouseleave'
+    | 'slidefocus'
+    | 'slidefocusout'
+  originalEvent:
+    | EmblaEventModelType<'pointerdown'>
+    | EmblaEventModelType<'pointerup'>
+    | EmblaEventModelType<'slidefocus'>
+    | MouseEvent
+    | FocusEvent
+  isMouseOver: boolean
+  isPointerDown: boolean
+}
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
@@ -14,13 +33,9 @@ declare module 'embla-carousel' {
   }
 
   interface EmblaEventListType {
-    'autoscroll:play': 'autoscroll:play'
-    'autoscroll:stop': 'autoscroll:stop'
-  }
-
-  interface EmblaEventDetailType {
     'autoscroll:play': null
     'autoscroll:stop': null
+    'autoscroll:interaction': AutoScrollInteractionType
   }
 }
 
@@ -47,8 +62,10 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   let speed = 0
   let timerId = 0
   let autoScrollRunning = false
-  let mouseIsOver = false
   let defaultScrollBehaviour: ScrollBodyType
+  let isMouseOver = false
+  let isPointerDown = false
+  let onInteraction = onDefaultInteraction
 
   function pluginIsActive(): boolean {
     if (isSsr) return false
@@ -77,45 +94,30 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     startDelay = options.startDelay
     destroyed = false
     defaultScrollBehaviour = emblaApi.internalEngine().scrollBody
+    onInteraction = options.defaultInteraction
+      ? onDefaultInteraction
+      : onCustomInteraction
 
     const { eventStore } = emblaApi.internalEngine()
-    const isDraggable = emblaApi.internalEngine().options.draggable
     const root = getAutoScrollRootNode(emblaApi, options.rootNode)
 
-    if (isDraggable) {
-      emblaApi.on('pointerdown', onPointerDown)
-    }
-
-    if (isDraggable && !options.stopOnInteraction) {
-      emblaApi.on('pointerup', onPointerUp)
-    }
-
-    if (options.stopOnMouseEnter) {
-      eventStore.add(root, 'mouseenter', onMouseEnter)
-    }
-
-    if (options.stopOnMouseEnter && !options.stopOnInteraction) {
-      eventStore.add(root, 'mouseleave', onMouseLeave)
-    }
-
-    if (options.stopOnFocusIn) {
-      emblaApi.on('slidefocusstart', stopAutoScroll)
-    }
-
-    if (options.stopOnFocusIn && !options.stopOnInteraction) {
-      eventStore.add(emblaApi.containerNode(), 'focusout', startAutoScroll)
-    }
-
-    if (options.playOnInit) startAutoScroll()
+    emblaApi.on('pointerdown', onInteraction)
+    emblaApi.on('pointerup', onInteraction)
+    emblaApi.on('slidefocus', onInteraction)
+    eventStore.add(root, 'mouseenter', onInteraction)
+    eventStore.add(root, 'mouseleave', onInteraction)
+    eventStore.add(emblaApi.containerNode(), 'focusout', (event) =>
+      onInteraction(event, 'slidefocusout')
+    )
   }
 
   function destroy(): void {
     if (!pluginIsActive()) return
 
     emblaApi
-      .off('pointerdown', onPointerDown)
-      .off('pointerup', onPointerUp)
-      .off('slidefocusstart', stopAutoScroll)
+      .off('pointerdown', onInteraction)
+      .off('pointerup', onInteraction)
+      .off('slidefocus', onInteraction)
       .off('settle', settle)
 
     stopAutoScroll()
@@ -131,7 +133,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
     if (!ownerWindow) return
     if (autoScrollRunning) return
-    emblaApi.emit('autoscroll:play', null)
+    const event = emblaApi.createEvent('autoscroll:play', null)
+    event.emit()
 
     timerId = ownerWindow.setTimeout(() => {
       engine.scrollBody = createAutoScrollBehaviour(engine)
@@ -149,7 +152,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
     if (!ownerWindow) return
     if (!autoScrollRunning) return
-    emblaApi.emit('autoscroll:stop', null)
+    const event = emblaApi.createEvent('autoscroll:stop', null)
+    event.emit()
 
     engine.scrollBody = defaultScrollBehaviour
     ownerWindow.clearTimeout(timerId)
@@ -165,7 +169,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       offsetLocation,
       target,
       scrollTarget,
-      index,
+      indexCurrent,
       indexPrevious,
       limit: { reachedMin, reachedMax, constrain },
       options: { loop }
@@ -193,12 +197,18 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       scrollDirection = Math.sign(directionDiff)
       rawLocationPrevious = rawLocation
 
-      const currentIndex = scrollTarget.byDistance(0, false).index
+      const sourceSnap = indexCurrent.get()
+      const targetSnap = scrollTarget.byDistance(0, false).index
 
-      if (index.get() !== currentIndex) {
-        indexPrevious.set(index.get())
-        index.set(currentIndex)
-        emblaApi.emit('select', null)
+      if (sourceSnap !== targetSnap) {
+        indexPrevious.set(sourceSnap)
+        indexCurrent.set(targetSnap)
+
+        const event = emblaApi.createEvent('select', {
+          sourceSnap,
+          targetSnap
+        })
+        event.emit()
       }
 
       const reachedEnd =
@@ -231,22 +241,36 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     return self
   }
 
-  function onPointerDown(): void {
-    if (!mouseIsOver) stopAutoScroll()
+  function onDefaultInteraction(
+    originalEvent: AutoScrollInteractionType['originalEvent'],
+    customType?: AutoScrollInteractionType['interaction']
+  ): void {
+    const type = <AutoScrollInteractionType['interaction']>originalEvent.type
+    const interaction = customType || type
+
+    if (interaction === 'slidefocus') stopAutoScroll()
+    if (interaction === 'pointerdown') stopAutoScroll()
   }
 
-  function onPointerUp(): void {
-    if (!mouseIsOver) startAutoScrollOnSettle()
-  }
+  function onCustomInteraction(
+    originalEvent: AutoScrollInteractionType['originalEvent'],
+    customType?: AutoScrollInteractionType['interaction']
+  ): void {
+    const type = <AutoScrollInteractionType['interaction']>originalEvent.type
+    const interaction = customType || type
+    if (interaction === 'mouseenter') isMouseOver = true
+    if (interaction === 'mouseleave') isMouseOver = false
+    if (interaction === 'pointerdown') isPointerDown = true
+    if (interaction === 'pointerup') isPointerDown = false
 
-  function onMouseEnter(): void {
-    mouseIsOver = true
-    stopAutoScroll()
-  }
+    const event = emblaApi.createEvent('autoscroll:interaction', {
+      interaction,
+      originalEvent,
+      isMouseOver,
+      isPointerDown
+    })
 
-  function onMouseLeave(): void {
-    mouseIsOver = false
-    startAutoScroll()
+    event.emit()
   }
 
   function settle(): void {

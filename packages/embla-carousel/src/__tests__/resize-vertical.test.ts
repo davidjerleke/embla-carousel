@@ -78,7 +78,7 @@ describe('➡️  Resize - Vertical', () => {
       expect(reInit).toHaveBeenCalledTimes(0)
     })
 
-    test('An onWatch callback that returns TRUE allows the internal default callback to run', () => {
+    test('A before callback that returns TRUE allows the internal default callback to run', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_Y), {
         resize: true,
         axis: 'y'
@@ -88,7 +88,7 @@ describe('➡️  Resize - Vertical', () => {
       const firstSlideHeight = emblaApi.internalEngine().slideRects[0].height
       const reInit = jest.spyOn(emblaApi, 'reInit')
 
-      emblaApi.onWatch('resize', () => true)
+      emblaApi.on('resize', () => true)
       Object.defineProperty(firstSlide, 'offsetHeight', {
         value: firstSlideHeight + RESIZE_TRIGGER_THRESHOLD,
         configurable: true
@@ -98,7 +98,7 @@ describe('➡️  Resize - Vertical', () => {
       expect(reInit).toHaveBeenCalledTimes(1)
     })
 
-    test('An onWatch callback that returns FALSE blocks the internal default callback', () => {
+    test('A before callback that returns FALSE blocks the internal default callback', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_Y), {
         resize: true,
         axis: 'y'
@@ -108,7 +108,7 @@ describe('➡️  Resize - Vertical', () => {
       const firstSlideHeight = emblaApi.internalEngine().slideRects[0].height
       const reInit = jest.spyOn(emblaApi, 'reInit')
 
-      emblaApi.onWatch('resize', () => false)
+      emblaApi.on('resize', () => false)
       Object.defineProperty(firstSlide, 'offsetHeight', {
         value: firstSlideHeight + RESIZE_TRIGGER_THRESHOLD,
         configurable: true
@@ -141,7 +141,7 @@ describe('➡️  Resize - Vertical', () => {
       expect(reInit).toHaveBeenCalledTimes(0)
     })
 
-    test('An onWatch callback does NOT run at all', () => {
+    test('A before callback does NOT run at all', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_RESIZE_Y), {
         resize: false
       })
@@ -150,7 +150,7 @@ describe('➡️  Resize - Vertical', () => {
       const firstSlideHeight = emblaApi.internalEngine().slideRects[0].height
       const callback = jest.fn(() => true)
 
-      emblaApi.onWatch('resize', callback)
+      emblaApi.on('resize', callback)
       Object.defineProperty(firstSlide, 'offsetHeight', {
         value: firstSlideHeight + RESIZE_TRIGGER_THRESHOLD,
         configurable: true

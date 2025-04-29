@@ -1,9 +1,8 @@
 import { EventHandlerType } from './EventHandler'
-import { WatchHandlerType } from './WatchHandler'
 import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
-import { SlideRegistryType } from './SlideRegistry'
+import { ScrollSnapListType } from './ScrollSnapList'
 import { isNumber, WindowType } from './utils'
 
 export type SlideFocusType = {
@@ -14,12 +13,11 @@ export function SlideFocus(
   active: boolean,
   root: HTMLElement,
   slides: HTMLElement[],
-  slideRegistry: SlideRegistryType['slideRegistry'],
+  scrollSnapList: ScrollSnapListType,
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   eventStore: EventStoreType,
-  eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType
+  eventHandler: EventHandlerType
 ): SlideFocusType {
   const focusListenerOptions = { passive: true, capture: true }
   let lastTabPressTime = 0
@@ -33,31 +31,31 @@ export function SlideFocus(
       eventStore.add(
         slide,
         'focus',
-        (evt: FocusEvent) => {
-          watchHandler.emit('slidefocus', evt, () => onFocus(evt, slideIndex))
-        },
+        (evt: FocusEvent) => onFocus(evt, slideIndex),
         focusListenerOptions
       )
     })
   }
 
-  function onFocus(evt: FocusEvent, index: number): void {
+  function onFocus(evt: FocusEvent, slideIndex: number): void {
     const nowTime = new Date().getTime()
     const diffTime = nowTime - lastTabPressTime
 
     if (diffTime > 10) return
 
-    eventHandler.emit('slidefocusstart', evt)
+    const event = eventHandler.createEvent('slidefocus', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
+    // eventHandler.emit('slidefocusstart', evt) // TODO: Update fade plugin
     root.scrollLeft = 0
 
-    const group = slideRegistry.findIndex((group) => group.includes(index))
+    const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
 
-    if (!isNumber(group)) return
+    if (!isNumber(snapIndex)) return
 
     scrollBody.useDuration(0)
-    scrollTo.index(group, 0)
-
-    eventHandler.emit('slidefocus', evt)
+    scrollTo.index(snapIndex, 0)
   }
 
   function onKeyDown(event: KeyboardEvent): void {

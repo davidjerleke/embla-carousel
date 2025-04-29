@@ -2,7 +2,6 @@ import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
 import { DragTrackerType, PointerEventType } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
-import { WatchHandlerType } from './WatchHandler'
 import { AxisType } from './Axis'
 import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
@@ -37,9 +36,8 @@ export function DragHandler(
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
-  index: CounterType,
+  indexCurrent: CounterType,
   eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType,
   percentOfView: PercentOfViewType,
   dragFree: boolean,
   dragThreshold: number,
@@ -79,8 +77,8 @@ export function DragHandler(
       .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
       .add(node, 'touchmove', () => undefined, nonPassiveEvent)
       .add(node, 'touchend', () => undefined)
-      .add(node, 'touchstart', onPointerDown)
-      .add(node, 'mousedown', onPointerDown)
+      .add(node, 'touchstart', down)
+      .add(node, 'mousedown', down)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
@@ -112,7 +110,7 @@ export function DragHandler(
   }
 
   function allowedForce(force: number, targetChanged: boolean): number {
-    const next = index.add(mathSign(force) * -1)
+    const next = indexCurrent.add(mathSign(force) * -1)
     const baseForce = scrollTarget.byDistance(force, !dragFree).distance
 
     if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
@@ -121,11 +119,11 @@ export function DragHandler(
     return scrollTarget.byIndex(next.get(), 0).distance
   }
 
-  function onPointerDown(evt: PointerEventType): void {
-    watchHandler.emit('pointerdown', evt, down)
-  }
-
   function down(evt: PointerEventType): void {
+    const event = eventHandler.createEvent('pointerdown', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
     const isMouseEvt = isMouseEvent(evt, ownerWindow)
     isMouse = isMouseEvt
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
@@ -141,10 +139,13 @@ export function DragHandler(
     addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    eventHandler.emit('pointerdown', evt)
   }
 
   function move(evt: PointerEventType): void {
+    const event = eventHandler.createEvent('pointermove', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return up(evt)
+
     const isTouchEvt = !isMouseEvent(evt, ownerWindow)
     if (isTouchEvt && evt.touches.length >= 2) return up(evt)
 
@@ -169,8 +170,10 @@ export function DragHandler(
   }
 
   function up(evt: PointerEventType): void {
+    const event = eventHandler.createEvent('pointerup', evt)
+
     const currentLocation = scrollTarget.byDistance(0, false)
-    const targetChanged = currentLocation.index !== index.get()
+    const targetChanged = currentLocation.index !== indexCurrent.get()
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
     const force = allowedForce(direction(rawForce), targetChanged)
     const forceFactor = factorAbs(rawForce, force)
@@ -183,7 +186,7 @@ export function DragHandler(
     scrollBody.useDuration(speed).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
-    eventHandler.emit('pointerup', evt)
+    event.emit()
   }
 
   function click(evt: MouseEvent): void {

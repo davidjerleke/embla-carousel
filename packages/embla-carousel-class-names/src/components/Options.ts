@@ -6,7 +6,7 @@ export type ClassNamesListType = {
   snapped: string[]
   inView: string[]
   draggable: string[]
-  dragging: string[]
+  pointerDown: string[]
   loop: string[]
 }
 
@@ -20,6 +20,6 @@ export const defaultOptions: OptionsType = {
   snapped: 'is-snapped',
   inView: 'is-in-view',
   draggable: 'is-draggable',
-  dragging: 'is-dragging',
+  pointerDown: 'is-pointer-down',
   loop: 'is-loop'
 }

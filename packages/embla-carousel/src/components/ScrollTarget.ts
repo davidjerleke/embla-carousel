@@ -1,6 +1,8 @@
 import { LimitType } from './Limit'
+import { ScrollOptimizerType } from './ScrollOptimizer'
 import { DirectionType } from './ScrollTo'
-import { Vector1DType } from './Vector1d'
+import { ScrollSnapListType } from './ScrollSnapList'
+import { Vector1D, Vector1DType } from './Vector1d'
 import { arrayLast, mathAbs, mathSign } from './utils'
 
 export type TargetType = {
@@ -17,20 +19,31 @@ export type ScrollTargetType = {
 export function ScrollTarget(
   loop: boolean,
   scrollSnaps: number[],
+  scrollOptimizer: ScrollOptimizerType,
   contentSize: number,
   limit: LimitType,
-  targetVector: Vector1DType
+  targetVector: Vector1DType,
+  offsetLocation: Vector1DType,
+  scrollSnapList: ScrollSnapListType
 ): ScrollTargetType {
+  const { getSlidesInViewRange } = scrollOptimizer
   const { reachedAny, removeOffset, constrain } = limit
 
   function minDistance(distances: number[]): number {
-    return distances.concat().sort((a, b) => mathAbs(a) - mathAbs(b))[0]
+    return distances.sort((a, b) => mathAbs(a) - mathAbs(b))[0]
   }
 
   function findTargetSnap(target: number): TargetType {
+    const slidesInRange = getSlidesInViewRange(offsetLocation, Vector1D(target))
     const distance = loop ? removeOffset(target) : constrain(target)
-    const ascDiffsToSnaps = scrollSnaps
-      .map((snap, index) => ({ diff: shortcut(snap - distance, 0), index }))
+    const ascDiffsToSnaps = slidesInRange
+      .map((slideIndex) => {
+        const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
+        return {
+          diff: shortcut(scrollSnaps[snapIndex] - distance, 0),
+          index: snapIndex
+        }
+      })
       .sort((d1, d2) => mathAbs(d1.diff) - mathAbs(d2.diff))
 
     const { index } = ascDiffsToSnaps[0]
@@ -38,9 +51,9 @@ export function ScrollTarget(
   }
 
   function shortcut(target: number, direction: DirectionType): number {
-    const targets = [target, target + contentSize, target - contentSize]
-
     if (!loop) return target
+
+    const targets = [target, target + contentSize, target - contentSize]
     if (!direction) return minDistance(targets)
 
     const matchingTargets = targets.filter((t) => mathSign(t) === direction)

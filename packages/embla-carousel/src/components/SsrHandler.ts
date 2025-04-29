@@ -38,28 +38,28 @@ export function SsrHandler(
     )
 
     const loopPoints = options.loop ? slideLooper.loopPoints : []
-    const containerSsr = direction(location.get())
+    const containerLocation = direction(location.get())
+    const containerSsr = translate.get(containerLocation)
+    const baseStyles = `${containerSelector}{transform:${containerSsr};}`
 
-    return `
-      ${containerSelector} {
-        transform: ${translate.get(containerSsr)};
-      }
-      ${loopPoints.reduce((acc, loopPoint) => {
-        const { index } = loopPoint
-        const sign = mathSign(loopPoint.target())
-        const size = options.ssr[index]
+    const loopStyles = loopPoints.reduce((acc, loopPoint) => {
+      const { index } = loopPoint
+      const sign = mathSign(loopPoint.target())
+      const size = options.ssr[index]
 
-        if (!sign || !size) return acc
-        const slideSsr = direction((contentSize / size) * 100 * sign)
+      if (!sign || !size) return acc
+      const slideLocation = direction((contentSize / size) * 100 * sign)
+      const slideSsr = translate.get(slideLocation)
 
-        return `
-          ${acc}
-          ${containerSelector} ${slidesSelector}:nth-child(${index + 1}) {
-            transform: ${translate.get(slideSsr)};
-          }
-        `
-      }, '')}
-    `
+      return (
+        acc +
+        `${containerSelector} ${slidesSelector}:nth-child(${
+          index + 1
+        }){transform:${slideSsr};}`
+      )
+    }, '')
+
+    return baseStyles + loopStyles
   }
 
   function getStyles(
@@ -67,22 +67,22 @@ export function SsrHandler(
     slidesSelector: string = '> *'
   ): string {
     if (!options.ssr.length) return ''
-    const optionBreakpoints = options.breakpoints
 
-    return `
-      ${createStyles(options, containerSelector, slidesSelector)}
+    const optionBreakpoints = options.breakpoints || {}
+    const baseStyles = createStyles(options, containerSelector, slidesSelector)
+    const mediaStyles = Object.keys(optionBreakpoints).reduce((acc, key) => {
+      const optionsAtMedia = mergeOptions(options, optionBreakpoints[key])
+      return (
+        acc +
+        `@media ${key}{${createStyles(
+          optionsAtMedia,
+          containerSelector,
+          slidesSelector
+        )}}`
+      )
+    }, '')
 
-      ${Object.keys(optionBreakpoints).reduce((acc, key) => {
-        const optionsAtMedia = mergeOptions(options, optionBreakpoints[key])
-
-        return `
-          ${acc}
-          @media ${key} {
-            ${createStyles(optionsAtMedia, containerSelector, slidesSelector)}
-          }
-        `
-      }, '')}
-    `
+    return baseStyles + mediaStyles
   }
 
   const self: SsrHandlerType = {

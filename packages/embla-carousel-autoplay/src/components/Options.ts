@@ -11,10 +11,7 @@ export type RootNodeType =
 export type OptionsType = CreateOptionsType<{
   delay: DelayOptionType
   jump: boolean
-  playOnInit: boolean
-  stopOnFocusIn: boolean
-  stopOnInteraction: boolean
-  stopOnMouseEnter: boolean
+  defaultInteraction: boolean
   stopOnLastSnap: boolean
   rootNode: RootNodeType
 }>
@@ -24,10 +21,7 @@ export const defaultOptions: OptionsType = {
   breakpoints: {},
   delay: 4000,
   jump: false,
-  playOnInit: true,
-  stopOnFocusIn: true,
-  stopOnInteraction: true,
-  stopOnMouseEnter: false,
+  defaultInteraction: true,
   stopOnLastSnap: false,
   rootNode: null
 }

@@ -71,7 +71,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -82,7 +82,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -93,7 +100,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -104,7 +111,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -115,7 +129,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -126,7 +140,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -137,7 +158,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -148,7 +169,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 4', () => {
@@ -159,7 +187,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -170,7 +198,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 5', () => {
@@ -181,7 +216,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -192,7 +227,14 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0, 1], [2], [3], [4], [5], [6, 7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0, 1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6, 7]
+      ])
     })
   })
 
@@ -205,7 +247,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -216,7 +258,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -227,7 +278,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -238,7 +289,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -249,7 +309,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -260,7 +320,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -271,7 +340,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -282,7 +351,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 4', () => {
@@ -293,7 +371,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -304,7 +382,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 5', () => {
@@ -315,7 +402,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -326,7 +413,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 6', () => {
@@ -337,7 +433,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -348,7 +444,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
 
     test('SSR styles are correct at startSnap 7', () => {
@@ -359,7 +464,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -370,7 +475,16 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3], [4], [5], [6], [7]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
+        [0],
+        [1],
+        [2],
+        [3],
+        [4],
+        [5],
+        [6],
+        [7]
+      ])
     })
   })
 
@@ -383,7 +497,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -394,7 +508,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -405,7 +519,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -416,7 +530,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -427,7 +541,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -438,7 +552,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -449,7 +563,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -460,7 +574,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 
@@ -473,7 +587,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -484,7 +598,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -499,7 +613,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -510,7 +624,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -525,7 +639,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(8, 30)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -536,7 +650,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([
+      expect(scrollSnapList.slideGroupBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -553,7 +667,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -568,7 +682,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -579,7 +693,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -590,7 +704,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -601,7 +715,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -612,7 +726,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -623,7 +737,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -638,7 +752,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 
@@ -651,7 +765,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -662,7 +776,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -673,7 +787,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -684,7 +798,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -695,7 +809,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -706,7 +820,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -717,7 +831,7 @@ describe('➡️  SSR - Vertical', () => {
         ssr: createSlideSizes(4, 50)
       })
 
-      const { slideRegistry } = emblaApi.internalEngine()
+      const { scrollSnapList } = emblaApi.internalEngine()
       const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
 
       expect(ssrStyles).toBe(
@@ -728,7 +842,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(slideRegistry).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 })

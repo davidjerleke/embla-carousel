@@ -7,7 +7,7 @@ Fixture 1
 - LTR
 - No slide margins
 */
-export const FIXTURE_WATCH_HANDLER: TestElementDimensionsType = {
+export const FIXTURE_SLIDES_CHANGED: TestElementDimensionsType = {
   containerOffset: {
     offsetWidth: 1000,
     offsetHeight: 190,

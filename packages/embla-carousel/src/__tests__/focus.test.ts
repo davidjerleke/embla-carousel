@@ -65,7 +65,7 @@ describe('➡️  Focus', () => {
 
       const fifthSlide = emblaApi.slideNodes()[4]
 
-      emblaApi.onWatch('slidefocus', () => true)
+      emblaApi.on('slidefocus', () => true)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -79,7 +79,7 @@ describe('➡️  Focus', () => {
 
       const fifthSlide = emblaApi.slideNodes()[4]
 
-      emblaApi.onWatch('slidefocus', () => false)
+      emblaApi.on('slidefocus', () => false)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
@@ -125,7 +125,7 @@ describe('➡️  Focus', () => {
       const fifthSlide = emblaApi.slideNodes()[4]
       const callback = jest.fn(() => true)
 
-      emblaApi.onWatch('slidefocus', callback)
+      emblaApi.on('slidefocus', callback)
       document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 

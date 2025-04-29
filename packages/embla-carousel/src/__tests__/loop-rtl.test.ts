@@ -72,7 +72,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1660px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -113,7 +113,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[2].style.transform).toBe('translate3d(-1660px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(-1660px,0px,0px)')
 
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -128,7 +128,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[4].style.transform).toBe('translate3d(-1660px,0px,0px)')
 
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[6].style.transform).toBe('')
         })
 
         test('5', () => {
@@ -164,7 +164,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -208,7 +208,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[2].style.transform).toBe('translate3d(-1660px,0px,0px)')
 
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -224,7 +224,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[6].style.transform).toBe('')
         })
 
         test('5', () => {
@@ -323,7 +323,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -347,7 +347,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1660px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -417,7 +417,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
 
           expect(slides[8].style.transform).toBe('translate3d(1660px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -443,7 +443,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -568,7 +568,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           scrollToLocationInstant(engine, LOOP_POINTS_END[2])
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
 
@@ -582,7 +582,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[5].style.transform).toBe('')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
 
@@ -597,7 +597,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -663,7 +663,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           scrollToLocationInstant(engine, LOOP_POINTS_END[2] + 0.01)
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[6].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -678,7 +678,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[5].style.transform).toBe('')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[7].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -694,7 +694,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
 
           expect(slides[8].style.transform).toBe('translate3d(1660px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(1660px,0px,0px)')
@@ -783,7 +783,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -795,8 +795,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
+          expect(slides[3].style.transform).toBe('')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -809,7 +809,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[2].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
         })
 
@@ -821,8 +821,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[2].style.transform).toBe('translate3d(-1860px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
+          expect(slides[5].style.transform).toBe('')
         })
 
         test('4', () => {
@@ -856,7 +856,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -869,8 +869,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
+          expect(slides[3].style.transform).toBe('')
           expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -884,7 +884,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
         })
 
@@ -897,8 +897,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[2].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[4].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[4].style.transform).toBe('')
+          expect(slides[5].style.transform).toBe('')
         })
 
         test('4', () => {
@@ -995,7 +995,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1008,7 +1008,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -1019,7 +1019,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -1032,7 +1032,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -1089,7 +1089,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
 
           expect(slides[8].style.transform).toBe('translate3d(1860px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1103,7 +1103,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1115,7 +1115,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -1129,7 +1129,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(-1860px,0px,0px)')
 
           expect(slides[1].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[2].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[2].style.transform).toBe('')
           expect(slides[3].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
@@ -1238,7 +1238,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           scrollToLocationInstant(engine, LOOP_POINTS_END[2])
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[5].style.transform).toBe('')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
 
@@ -1251,8 +1251,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[6].style.transform).toBe('')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1264,7 +1264,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(0px,0px,0px)')
         })
@@ -1314,7 +1314,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           scrollToLocationInstant(engine, LOOP_POINTS_END[2] + 0.01)
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[5].style.transform).toBe('')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[7].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1328,8 +1328,8 @@ describe('➡️  Loop - Horizontal RTL', () => {
 
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[6].style.transform).toBe('')
+          expect(slides[7].style.transform).toBe('')
 
           expect(slides[8].style.transform).toBe('translate3d(1860px,0px,0px)')
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')
@@ -1342,7 +1342,7 @@ describe('➡️  Loop - Horizontal RTL', () => {
           expect(slides[0].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[5].style.transform).toBe('translate3d(0px,0px,0px)')
           expect(slides[6].style.transform).toBe('translate3d(0px,0px,0px)')
-          expect(slides[7].style.transform).toBe('translate3d(0px,0px,0px)')
+          expect(slides[7].style.transform).toBe('')
           expect(slides[8].style.transform).toBe('translate3d(0px,0px,0px)')
 
           expect(slides[9].style.transform).toBe('translate3d(1860px,0px,0px)')

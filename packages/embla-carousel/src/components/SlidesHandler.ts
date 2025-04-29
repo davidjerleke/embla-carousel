@@ -1,6 +1,4 @@
-import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { WatchHandlerType } from './WatchHandler'
 import { WindowType } from './utils'
 
 export type SlidesHandlerType = {
@@ -11,8 +9,7 @@ export type SlidesHandlerType = {
 export function SlidesHandler(
   active: boolean,
   container: HTMLElement,
-  eventHandler: EventHandlerType,
-  watchHandler: WatchHandlerType
+  eventHandler: EventHandlerType
 ): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
@@ -20,9 +17,7 @@ export function SlidesHandler(
   function init(ownerWindow: WindowType): void {
     if (!active) return
 
-    mutationObserver = new ownerWindow.MutationObserver((mutations) => {
-      watchHandler.emit('slideschanged', mutations, onSlidesChange)
-    })
+    mutationObserver = new ownerWindow.MutationObserver(onSlidesChange)
 
     mutationObserver.observe(container, { childList: true })
   }
@@ -32,16 +27,16 @@ export function SlidesHandler(
     destroyed = true
   }
 
-  function onSlidesChange(
-    mutations: MutationRecord[],
-    emblaApi: EmblaCarouselType
-  ): void {
+  function onSlidesChange(mutations: MutationRecord[]): void {
+    const event = eventHandler.createEvent('slideschanged', mutations)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
     for (const mutation of mutations) {
       if (destroyed) return
 
       if (mutation.type === 'childList') {
-        emblaApi.reInit()
-        eventHandler.emit('slideschanged', mutations)
+        event.api.reInit()
         break
       }
     }

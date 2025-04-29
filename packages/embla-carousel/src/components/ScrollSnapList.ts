@@ -8,23 +8,27 @@ import {
   arrayLastIndex
 } from './utils'
 
-export type SlideRegistryType = {
-  slideRegistry: number[][]
+type SnapBySlideIndexType = { [key: number]: number }
+
+export type ScrollSnapListType = {
+  slideGroupBySnap: number[][]
+  snapBySlideIndex: SnapBySlideIndexType
 }
 
-export function SlideRegistry(
+export function ScrollSnapList(
   containSnaps: boolean,
   containScroll: ScrollContainOptionType,
   scrollSnaps: number[],
   scrollContainLimit: LimitType,
   slidesToScroll: SlidesToScrollType,
   slideIndexes: number[]
-): SlideRegistryType {
+): ScrollSnapListType {
   const { groupSlides } = slidesToScroll
   const { min, max } = scrollContainLimit
-  const slideRegistry = createSlideRegistry()
+  const slideGroupBySnap = createScrollSnapList()
+  const snapBySlideIndex = createSnapBySlideIndex()
 
-  function createSlideRegistry(): number[][] {
+  function createScrollSnapList(): number[][] {
     const groupedSlideIndexes = groupSlides(slideIndexes)
     const doNotContain = !containSnaps || containScroll === 'keepSnaps'
 
@@ -47,8 +51,20 @@ export function SlideRegistry(
     })
   }
 
-  const self: SlideRegistryType = {
-    slideRegistry
+  function createSnapBySlideIndex(): SnapBySlideIndexType {
+    const snapBySlideIndex: SnapBySlideIndexType = {}
+
+    slideGroupBySnap.forEach((slideGroup, snapIndex) => {
+      slideGroup.forEach((slideIndex) => {
+        snapBySlideIndex[slideIndex] = snapIndex
+      })
+    })
+    return snapBySlideIndex
+  }
+
+  const self: ScrollSnapListType = {
+    slideGroupBySnap,
+    snapBySlideIndex
   }
   return self
 }
