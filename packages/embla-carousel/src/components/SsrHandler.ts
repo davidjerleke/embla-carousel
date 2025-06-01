@@ -37,20 +37,62 @@ export function SsrHandler(
       slides
     )
 
-    const loopPoints = options.loop ? slideLooper.loopPoints : []
-    const containerSsr = direction(location.get())
+    // const loopPoints = options.loop ? slideLooper.loopPoints : []
+    // const containerSsr = location.get()
+
+    // TODO: Fix broken SSR after changing transform approach
+    // ${containerSelector} {
+    //   transform: ${translate.get(containerSsr)};
+    // }
+    console.log(location.get(), 'containerSsr')
 
     return `
-      ${containerSelector} {
-        transform: ${translate.get(containerSsr)};
-      }
-      ${loopPoints.reduce((acc, loopPoint) => {
-        const { index } = loopPoint
-        const sign = mathSign(loopPoint.target())
-        const size = options.ssr[index]
+      ${slides.reduce((acc, slide, index) => {
+        const loopSlide = slideLooper.loopPoints[index]
+        const slideSizeFactor = options.ssr[index] / 100
+        const transformFactor = location.get() / (slideSizeFactor * 100)
+        // const { index } = loopPoint
+        if (!options.loop || !loopSlide) {
+          // const sign = mathSign(location.get())
+          // const size = options.ssr[index]
+          // const slideSsr = direction((location.get() * 100) / size)
+          const slideSsr = direction(transformFactor * 100)
+          // console.log(transformFactor, 'transformFactor')
 
-        if (!sign || !size) return acc
-        const slideSsr = direction((contentSize / size) * 100 * sign)
+          // console.log(
+          //   slideSsr,
+          //   index,
+          //   `
+          //   ${acc}
+          //   ${containerSelector} ${slidesSelector}:nth-child(${index + 1}) {
+          //     transform: ${translate.get(slideSsr)};
+          //   }
+          //   `
+          // )
+
+          return `
+            ${acc}
+            ${containerSelector} ${slidesSelector}:nth-child(${index + 1}) {
+              transform: ${translate.get(slideSsr)};
+            }
+            `
+        }
+
+        const sign = mathSign(loopSlide.target())
+        const size = options.ssr[index]
+        const baseSlideSsr = transformFactor * 100
+
+        console.log(
+          index,
+          baseSlideSsr * sign + (contentSize / size) * 100,
+          loopSlide.target()
+        )
+        const slideSsr = loopSlide.target()
+          ? direction((baseSlideSsr * sign + (contentSize / size) * 100) * sign)
+          : direction(baseSlideSsr)
+
+        // if (!sign || !size) return acc
+        // const slideSsr = direction((contentSize / size) * 100 * sign)
 
         return `
           ${acc}

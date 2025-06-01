@@ -24,7 +24,8 @@ export function ScrollAnimator(): ScrollAnimatorType {
   function render(engine: EngineType, alpha: number) {
     const {
       scrollBody,
-      translate,
+      // translate,
+      slideTranslates,
       location,
       offsetLocation,
       previousLocation,
@@ -69,7 +70,12 @@ export function ScrollAnimator(): ScrollAnimatorType {
       slideLooper.loop()
     }
 
-    translate.to(offsetLocation.get())
+    // translate.to(offsetLocation.get())
+    slideTranslates.forEach((translate, index) => {
+      const loopSlide = engine.slideLooper.loopPoints[index]
+      const loopOffset = loop && loopSlide ? loopSlide.target() : 0
+      translate.to(engine.offsetLocation.get() + loopOffset)
+    })
 
     if (isScrolling) {
       scrollEvent.emitAfter()

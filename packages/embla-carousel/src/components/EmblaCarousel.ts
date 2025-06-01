@@ -134,8 +134,14 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
-      engine.translate.to(engine.location.get())
-      if (engine.options.loop) engine.slideLooper.loop()
+      // engine.translate.to(engine.location.get())
+      // if (engine.options.loop) engine.slideLooper.loop()
+
+      engine.slideTranslates.forEach((translate, index) => {
+        const loopSlide = engine.slideLooper.loopPoints[index]
+        const loopOffset = options.loop && loopSlide ? loopSlide.target() : 0
+        translate.to(engine.offsetLocation.get() + loopOffset)
+      })
 
       engine.animation.init(ownerWindow)
       engine.resizeHandler.init(ownerWindow)

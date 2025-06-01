@@ -293,8 +293,8 @@ export function Engine(
       slideSizesWithGaps,
       snaps,
       scrollSnaps,
-      offsetLocation,
-      slideTranslates
+      offsetLocation
+      // slideTranslates
     ),
     slideFocus,
     slidesHandler: SlidesHandler(slideChanges, container, eventHandler),

@@ -14,6 +14,7 @@ export type AnimationsType = {
   render: (alpha: number) => void
 }
 
+// TODO: Rename to animationLoop
 export function Animations(
   update: () => void,
   render: (alpha: number) => void

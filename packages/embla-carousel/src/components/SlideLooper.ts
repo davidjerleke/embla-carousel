@@ -1,6 +1,5 @@
 import { arrayKeys } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
-import { TranslateType } from './Translate'
 
 type SlideBoundType = {
   start: number
@@ -10,15 +9,19 @@ type SlideBoundType = {
 type LoopPointType = {
   loopPoint: number
   index: number
-  translate: TranslateType
   slideLocation: Vector1DType
   target: () => number
+}
+
+type LoopPointsType = {
+  [key: number]: LoopPointType
 }
 
 export type SlideLooperType = {
   canLoop: () => boolean
   loop: () => void
-  loopPoints: LoopPointType[]
+  loopPoints: LoopPointsType
+  loopPointList: LoopPointType[]
 }
 
 export function SlideLooper(
@@ -28,13 +31,13 @@ export function SlideLooper(
   slideSizesWithGaps: number[],
   snaps: number[],
   scrollSnaps: number[],
-  location: Vector1DType,
-  slideTranslates: TranslateType[]
+  location: Vector1DType
 ): SlideLooperType {
   const roundingSafety = 0.5
   const ascItems = arrayKeys(slideSizesWithGaps)
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
-  const loopPoints = startPoints().concat(endPoints())
+  const loopPoints: LoopPointsType = { ...startPoints(), ...endPoints() }
+  const loopPointList = Object.values(loopPoints)
 
   function removeSlideSizes(indexes: number[], from: number): number {
     return indexes.reduce((a: number, i) => {
@@ -60,50 +63,50 @@ export function SlideLooper(
     indexes: number[],
     offset: number,
     isEndEdge: boolean
-  ): LoopPointType[] {
+  ): LoopPointsType {
     const slideBounds = findSlideBounds(offset)
 
-    return indexes.map((index) => {
+    return indexes.reduce((acc: LoopPointsType, index) => {
       const initial = isEndEdge ? 0 : -contentSize
       const altered = isEndEdge ? contentSize : 0
       const boundEdge = isEndEdge ? 'end' : 'start'
       const loopPoint = slideBounds[index][boundEdge]
 
       return {
-        index,
-        loopPoint,
-        slideLocation: Vector1D(-1),
-        translate: slideTranslates[index],
-        target: () => (location.get() > loopPoint ? initial : altered)
+        ...acc,
+        [index]: {
+          index,
+          loopPoint,
+          slideLocation: Vector1D(-1),
+          target: () => (location.get() > loopPoint ? initial : altered)
+        }
       }
-    })
+    }, {})
   }
 
-  function startPoints(): LoopPointType[] {
+  function startPoints(): LoopPointsType {
     const gap = scrollSnaps[0]
     const indexes = slidesInGap(descItems, gap)
     return findLoopPoints(indexes, contentSize, false)
   }
 
-  function endPoints(): LoopPointType[] {
+  function endPoints(): LoopPointsType {
     const gap = viewSize - scrollSnaps[0] - 1
     const indexes = slidesInGap(ascItems, gap)
     return findLoopPoints(indexes, -contentSize, true)
   }
 
   function canLoop(): boolean {
-    return loopPoints.every(({ index }) => {
+    return loopPointList.every(({ index }) => {
       const otherIndexes = ascItems.filter((i) => i !== index)
       return removeSlideSizes(otherIndexes, viewSize) <= 0.1
     })
   }
 
   function loop(): void {
-    loopPoints.forEach((loopPoint) => {
-      const { target, translate, slideLocation } = loopPoint
+    loopPointList.forEach((loopPoint) => {
+      const { target, slideLocation } = loopPoint
       const shiftLocation = target()
-      if (shiftLocation === slideLocation.get()) return
-      translate.to(shiftLocation)
       slideLocation.set(shiftLocation)
     })
   }
@@ -111,7 +114,8 @@ export function SlideLooper(
   const self: SlideLooperType = {
     canLoop,
     loop,
-    loopPoints
+    loopPoints,
+    loopPointList
   }
   return self
 }
