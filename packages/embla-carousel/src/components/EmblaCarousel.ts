@@ -51,7 +51,7 @@ function EmblaCarousel(
   let optionsBase = mergeOptions(defaultOptions, EmblaCarousel.globalOptions)
   let options = mergeOptions(optionsBase)
   let pluginList: EmblaPluginType[] = []
-  let pluginApis: EmblaPluginsType
+  let pluginApis: EmblaPluginsType = {}
 
   let container: HTMLElement
   let slides: HTMLElement[]
