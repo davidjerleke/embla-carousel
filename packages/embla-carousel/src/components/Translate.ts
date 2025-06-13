@@ -2,6 +2,7 @@ import { AxisType } from './Axis'
 import { roundToTwoDecimals } from './utils'
 
 export type TranslateType = {
+  set: (translate: string) => void
   get: (n: number) => string
   to: (target: number) => void
   toggleActive: (active: boolean) => void
@@ -53,6 +54,7 @@ export function Translate(
     clear,
     to,
     toggleActive,
+    set,
     get: getTranslate
   }
   return self

@@ -17,6 +17,7 @@ import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
 import { ScrollLimit } from './ScrollLimit'
 import { ScrollLooper, ScrollLooperType } from './ScrollLooper'
+import { ScrollOptimizer, ScrollOptimizerType } from './ScrollOptimizer'
 import { ScrollProgress, ScrollProgressType } from './ScrollProgress'
 import { ScrollSnaps } from './ScrollSnaps'
 import { SlideRegistry, SlideRegistryType } from './SlideRegistry'
@@ -41,6 +42,7 @@ export type EngineType = {
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
   scrollLooper: ScrollLooperType
+  scrollOptimizer: ScrollOptimizerType
   scrollProgress: ScrollProgressType
   indexCurrent: CounterType
   indexPrevious: CounterType
@@ -220,6 +222,30 @@ export function Engine(
     eventStore,
     eventHandler
   )
+  const slideLooper = SlideLooper(
+    viewSize,
+    contentSize,
+    slideSizes,
+    slideSizesWithGaps,
+    snaps,
+    scrollSnaps,
+    offsetLocation
+  )
+
+  // TODO: Cleanup
+  const scrollOptimizer = ScrollOptimizer(
+    viewSize,
+    contentSize,
+    slideSizes,
+    snaps,
+    limit,
+    loop,
+    indexCurrent,
+    slideRegistry,
+    offsetLocation,
+    target
+  )
+  // TODO: Cleanup ends
 
   // Engine
   const engine: EngineType = {
@@ -281,21 +307,13 @@ export function Engine(
       previousLocation,
       target
     ]),
+    scrollOptimizer,
     scrollProgress,
     snapList: scrollSnaps.map(scrollProgress.get),
     scrollSnaps,
     scrollTarget,
     scrollTo,
-    slideLooper: SlideLooper(
-      viewSize,
-      contentSize,
-      slideSizes,
-      slideSizesWithGaps,
-      snaps,
-      scrollSnaps,
-      offsetLocation
-      // slideTranslates
-    ),
+    slideLooper,
     slideFocus,
     slidesHandler: SlidesHandler(slideChanges, container, eventHandler),
     slidesInView,

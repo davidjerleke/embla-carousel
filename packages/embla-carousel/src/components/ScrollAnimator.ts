@@ -35,6 +35,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       animation,
       eventHandler,
       scrollBounds,
+      scrollOptimizer,
       options: { loop }
     } = engine
 
@@ -70,12 +71,26 @@ export function ScrollAnimator(): ScrollAnimatorType {
       slideLooper.loop()
     }
 
-    // translate.to(offsetLocation.get())
-    slideTranslates.forEach((translate, index) => {
+    // TODO: Cleanup
+    const { slidesInView, slidesLeftView } = scrollOptimizer.getSlides()
+    slidesLeftView.forEach((index) => {
+      const translate = slideTranslates[index]
+      translate.set('translateY(-400px)')
+    })
+    slidesInView.forEach((index) => {
+      const translate = slideTranslates[index]
       const loopSlide = engine.slideLooper.loopPoints[index]
       const loopOffset = loop && loopSlide ? loopSlide.target() : 0
       translate.to(engine.offsetLocation.get() + loopOffset)
     })
+    // TODO: Cleanup
+
+    // translate.to(offsetLocation.get())
+    // slideTranslates.forEach((translate, index) => {
+    //   const loopSlide = engine.slideLooper.loopPoints[index]
+    //   const loopOffset = loop && loopSlide ? loopSlide.target() : 0
+    //   translate.to(engine.offsetLocation.get() + loopOffset)
+    // })
 
     if (isScrolling) {
       scrollEvent.emitAfter()
