@@ -68,12 +68,11 @@ export const BASE_STYLES = css`
   }
 
   .embla__slide {
-    transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-__replace-axis-size__: 0;
     padding-__replace_axis_spacing__: var(--slide-spacing);
-  }
-`
+    }
+    `
 
 export const SLIDES_PER_VIEW_STYLES = css`
   .embla {

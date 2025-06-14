@@ -24,8 +24,6 @@ export function ScrollAnimator(): ScrollAnimatorType {
   function render(engine: EngineType, alpha: number) {
     const {
       scrollBody,
-      // translate,
-      slideTranslates,
       location,
       offsetLocation,
       previousLocation,
@@ -35,7 +33,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       animation,
       eventHandler,
       scrollBounds,
-      scrollOptimizer,
+      slideScroller,
       options: { loop }
     } = engine
 
@@ -71,26 +69,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       slideLooper.loop()
     }
 
-    // TODO: Cleanup
-    const { slidesInView, slidesLeftView } = scrollOptimizer.getSlides()
-    slidesLeftView.forEach((index) => {
-      const translate = slideTranslates[index]
-      translate.set('translateY(-400px)')
-    })
-    slidesInView.forEach((index) => {
-      const translate = slideTranslates[index]
-      const loopSlide = engine.slideLooper.loopPoints[index]
-      const loopOffset = loop && loopSlide ? loopSlide.target() : 0
-      translate.to(engine.offsetLocation.get() + loopOffset)
-    })
-    // TODO: Cleanup
-
-    // translate.to(offsetLocation.get())
-    // slideTranslates.forEach((translate, index) => {
-    //   const loopSlide = engine.slideLooper.loopPoints[index]
-    //   const loopOffset = loop && loopSlide ? loopSlide.target() : 0
-    //   translate.to(engine.offsetLocation.get() + loopOffset)
-    // })
+    slideScroller.scroll()
 
     if (isScrolling) {
       scrollEvent.emitAfter()

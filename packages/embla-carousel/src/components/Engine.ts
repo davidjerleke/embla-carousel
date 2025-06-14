@@ -234,6 +234,7 @@ export function Engine(
     contentSize,
     slideSizes,
     snaps,
+    slideIndexes,
     loop,
     indexCurrent,
     slideRegistry,

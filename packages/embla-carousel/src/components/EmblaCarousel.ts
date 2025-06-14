@@ -134,31 +134,9 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
-      // engine.translate.to(engine.location.get())
-      // if (engine.options.loop) engine.slideLooper.loop()
+      if (engine.options.loop) engine.slideLooper.loop()
 
-      const { slidesInView, slidesLeftView } =
-        engine.scrollOptimizer.getSlides()
-
-      slidesInView.forEach((index) => {
-        const translate = engine.slideTranslates[index]
-        const loopSlide = engine.slideLooper.loopPoints[index]
-        const loopOffset = options.loop && loopSlide ? loopSlide.target() : 0
-        translate.to(engine.offsetLocation.get() + loopOffset)
-      })
-      slidesLeftView.forEach((index) => {
-        const translate = engine.slideTranslates[index]
-        translate.set('translateY(-400px)')
-      })
-
-      // engine.slideTranslates.forEach((translate, index) => {
-      //   const loopSlide = engine.slideLooper.loopPoints[index]
-      //   const loopOffset = options.loop && loopSlide ? loopSlide.target() : 0
-      //   translate.to(engine.offsetLocation.get() + loopOffset)
-      // })
-
-      // engine.scrollOptimizer.getSlides()
-
+      engine.slideScroller.scroll()
       engine.animation.init(ownerWindow)
       engine.resizeHandler.init(ownerWindow)
       engine.slidesInView.init(ownerWindow)
@@ -198,7 +176,6 @@ function EmblaCarousel(
     pluginsHandler.destroy()
     engine.eventStore.clear()
     mediaHandlers.clear()
-    engine.translate.clear()
     engine.slideTranslates.forEach((translate) => translate.clear())
   }
 
