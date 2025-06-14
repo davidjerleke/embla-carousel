@@ -17,7 +17,7 @@ import { ScrollBounds, ScrollBoundsType } from './ScrollBounds'
 import { ScrollContain } from './ScrollContain'
 import { ScrollLimit } from './ScrollLimit'
 import { ScrollLooper, ScrollLooperType } from './ScrollLooper'
-import { ScrollOptimizer, ScrollOptimizerType } from './ScrollOptimizer'
+import { SlideScroller, SlideScrollerType } from './SlideScroller'
 import { ScrollProgress, ScrollProgressType } from './ScrollProgress'
 import { ScrollSnaps } from './ScrollSnaps'
 import { SlideRegistry, SlideRegistryType } from './SlideRegistry'
@@ -42,7 +42,7 @@ export type EngineType = {
   animation: AnimationsType
   scrollBounds: ScrollBoundsType
   scrollLooper: ScrollLooperType
-  scrollOptimizer: ScrollOptimizerType
+  slideScroller: SlideScrollerType
   scrollProgress: ScrollProgressType
   indexCurrent: CounterType
   indexPrevious: CounterType
@@ -59,7 +59,6 @@ export type EngineType = {
   slidesInView: SlidesInViewType
   slidesToScroll: SlidesToScrollType
   target: Vector1DType
-  translate: TranslateType
   slideTranslates: TranslateType[]
   resizeHandler: ResizeHandlerType
   slidesHandler: SlidesHandlerType
@@ -169,7 +168,6 @@ export function Engine(
   const previousLocation = Vector1D(startLocation)
   const offsetLocation = Vector1D(startLocation)
   const target = Vector1D(startLocation)
-  const translate = Translate(axis, container)
   const slideTranslates = slides.map((slide) => Translate(axis, slide))
 
   const scrollBody = ScrollBody(
@@ -231,21 +229,19 @@ export function Engine(
     scrollSnaps,
     offsetLocation
   )
-
-  // TODO: Cleanup
-  const scrollOptimizer = ScrollOptimizer(
+  const slideScroller = SlideScroller(
     viewSize,
     contentSize,
     slideSizes,
     snaps,
-    limit,
     loop,
     indexCurrent,
     slideRegistry,
     offsetLocation,
-    target
+    target,
+    slideTranslates,
+    slideLooper
   )
-  // TODO: Cleanup ends
 
   // Engine
   const engine: EngineType = {
@@ -307,7 +303,6 @@ export function Engine(
       previousLocation,
       target
     ]),
-    scrollOptimizer,
     scrollProgress,
     snapList: scrollSnaps.map(scrollProgress.get),
     scrollSnaps,
@@ -320,8 +315,8 @@ export function Engine(
     slideIndexes,
     slideRegistry,
     slidesToScroll,
+    slideScroller,
     slideTranslates,
-    translate,
     target
   }
 
