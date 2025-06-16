@@ -48,7 +48,7 @@ export function SlideFocus(
     if (preventDefault) return
 
     // eventHandler.emit('slidefocusstart', evt) // TODO: Update fade plugin
-    root.scrollLeft = 0
+    root.scrollLeft = 0 // TODO: Make axis aware
 
     const group = slideRegistry.findIndex((group) => group.includes(index))
 

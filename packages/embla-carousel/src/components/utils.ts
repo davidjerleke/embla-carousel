@@ -92,3 +92,10 @@ export function isMouseEvent(
     evt instanceof ownerWindow.MouseEvent
   )
 }
+
+export function setNodeStyle(
+  node: HTMLElement,
+  property: string
+): (value: string) => void {
+  return (value: string): void => node.style.setProperty(property, value)
+}

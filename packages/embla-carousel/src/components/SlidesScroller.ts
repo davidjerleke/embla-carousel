@@ -4,12 +4,10 @@ import { SlideRegistryType } from './SlideRegistry'
 import { TranslateType } from './Translate'
 import { Vector1DType } from './Vector1d'
 
-// TODO: Remove translate.set()?
 // TODO: Fix resize problem with slides overlapping
 // TODO: Cleanup and optimize this file
-// TODO: In Translate file, add support for cross axis translation
-// TODO: In Translate file, add support for resting translate meaning translateX and translateY
-// without GPU acceleration when carousel is off screen
+// TODO: CLeanup and test SSR
+// TODO: Change all root node references to container
 
 type SlideBoundType = {
   start: number
@@ -20,11 +18,11 @@ type SlideBoundMapType = {
   [key: number]: SlideBoundType[]
 }
 
-export type SlideScrollerType = {
-  scroll: () => void
+export type SlidesScrollerType = {
+  scroll: (settle?: boolean) => void
 }
 
-export function SlideScroller(
+export function SlidesScroller(
   viewSize: number,
   contentSize: number,
   slideSizes: number[],
@@ -37,7 +35,7 @@ export function SlideScroller(
   target: Vector1DType,
   slideTranslates: TranslateType[],
   slideLooper: SlideLooperType
-): SlideScrollerType {
+): SlidesScrollerType {
   const inViewThreshold = -200
   const inViewOffsets = loop ? [0, contentSize, -contentSize] : [0]
   const inViewBounds = createSlideBounds()
@@ -96,8 +94,6 @@ export function SlideScroller(
   }
 
   function getSlidesInViewRange(): number[] {
-    const start = performance.now() // TODO: Remove
-
     const location = offsetlocation.get()
     const destination = target.get()
     const snap = slideRegistry[indexCurrent.get()]
@@ -111,13 +107,12 @@ export function SlideScroller(
     collectSlidesInView(inViewList, startIndex, 1)
     collectSlidesInView(inViewList, startIndex, -1)
 
-    console.log(`getSlidesInViewRange took ${performance.now() - start}ms`)
     return inViewList
   }
 
-  function updateSlideVisibility(): void {
+  function updateSlideVisibility(settle?: boolean): void {
     const newTarget = target.get()
-    if (newTarget === previousTarget) return
+    if (!settle && newTarget === previousTarget) return
 
     inViewSlides = getSlidesInViewRange()
     leftViewSlides = filterNotIncluded(inViewSlidesPrevious, inViewSlides)
@@ -125,8 +120,8 @@ export function SlideScroller(
     previousTarget = newTarget
   }
 
-  function scroll(): void {
-    updateSlideVisibility()
+  function scroll(settle?: boolean): void {
+    updateSlideVisibility(settle)
 
     inViewSlides.forEach((index) => {
       const translate = slideTranslates[index]
@@ -136,11 +131,11 @@ export function SlideScroller(
     })
     leftViewSlides.forEach((index) => {
       const translate = slideTranslates[index]
-      translate.set('translateY(-400px)')
+      translate.setIsScrolling(false)
     })
   }
 
-  const self: SlideScrollerType = {
+  const self: SlidesScrollerType = {
     scroll
   }
   return self

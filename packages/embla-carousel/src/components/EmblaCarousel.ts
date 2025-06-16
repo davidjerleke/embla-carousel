@@ -136,7 +136,7 @@ function EmblaCarousel(
     if (!isSsr && ownerWindow) {
       if (engine.options.loop) engine.slideLooper.loop()
 
-      engine.slideScroller.scroll()
+      engine.slidesScroller.scroll()
       engine.animation.init(ownerWindow)
       engine.resizeHandler.init(ownerWindow)
       engine.slidesInView.init(ownerWindow)

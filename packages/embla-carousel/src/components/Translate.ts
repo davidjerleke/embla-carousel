@@ -1,27 +1,27 @@
 import { AxisType } from './Axis'
-import { roundToTwoDecimals } from './utils'
+import { roundToTwoDecimals, setNodeStyle } from './utils'
 
 export type TranslateType = {
-  set: (translate: string) => void
   get: (n: number) => string
   to: (target: number) => void
-  toggleActive: (active: boolean) => void
+  setIsActive: (active: boolean) => void
   clear: () => void
+  setIsScrolling: (active: boolean) => void
 }
 
 export function Translate(
   axis: AxisType,
-  node: HTMLElement,
+  slide: HTMLElement,
   unit: 'px' | '%' = 'px'
 ): TranslateType {
+  const setTransform = setNodeStyle(slide, 'transform')
+  const setPointerEvents = setNodeStyle(slide, 'pointer-events')
+  const setVisibility = setNodeStyle(slide, 'visibility')
   const getTranslate = axis.scroll === 'x' ? x : y
 
   let previousTarget: number | null = null
+  let isScrolling = false
   let disabled = false
-
-  function set(translate: string): void {
-    node.style.transform = translate
-  }
 
   function x(n: number): string {
     return `translate3d(${n}${unit},0px,0px)`
@@ -36,26 +36,37 @@ export function Translate(
 
     const newTarget = roundToTwoDecimals(axis.direction(target))
     if (newTarget === previousTarget) return
+    if (!isScrolling) setIsScrolling(true)
 
-    set(getTranslate(newTarget))
+    setTransform(getTranslate(newTarget))
     previousTarget = newTarget
   }
 
-  function toggleActive(active: boolean): void {
+  function setIsScrolling(active: boolean): void {
+    if (disabled) return
+    isScrolling = active
+    setPointerEvents(active ? '' : 'none')
+    setVisibility(active ? '' : 'hidden')
+    if (!active) setTransform('')
+  }
+
+  function setIsActive(active: boolean): void {
     disabled = !active
   }
 
   function clear(): void {
-    set('')
-    if (!node.getAttribute('style')) node.removeAttribute('style')
+    setTransform('')
+    setPointerEvents('')
+    setVisibility('')
+    if (!slide.getAttribute('style')) slide.removeAttribute('style')
   }
 
   const self: TranslateType = {
     clear,
     to,
-    toggleActive,
-    set,
-    get: getTranslate
+    setIsActive,
+    get: getTranslate,
+    setIsScrolling
   }
   return self
 }

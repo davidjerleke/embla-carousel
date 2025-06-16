@@ -33,7 +33,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       animation,
       eventHandler,
       scrollBounds,
-      slideScroller,
+      slidesScroller,
       options: { loop }
     } = engine
 
@@ -55,6 +55,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       scrollEvent.emitBefore()
     }
     if (isSettled) {
+      slidesScroller.scroll(isSettled)
       settleEvent.emitBefore()
       animation.stop()
     }
@@ -69,7 +70,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       slideLooper.loop()
     }
 
-    slideScroller.scroll()
+    slidesScroller.scroll()
 
     if (isScrolling) {
       scrollEvent.emitAfter()
