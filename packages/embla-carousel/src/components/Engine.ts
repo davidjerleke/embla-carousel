@@ -32,6 +32,7 @@ import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { Vector1D, Vector1DType } from './Vector1d'
 import { NodeHandlerType } from './NodeHandler'
+import { ScrollOptimizer, ScrollOptimizerType } from './ScrollOptimizer'
 
 export type EngineType = {
   isSsr: boolean
@@ -67,6 +68,8 @@ export type EngineType = {
   snapList: number[]
   scrollSnaps: number[]
   slideIndexes: number[]
+  scrollOptimizer: ScrollOptimizerType
+  slideSizes: number[]
   slideFocus: SlideFocusType
   slideRegistry: SlideRegistryType['slideRegistry']
   containerRect: NodeRectType
@@ -178,12 +181,46 @@ export function Engine(
     duration,
     friction
   )
+  const { slideRegistry } = SlideRegistry(
+    containSnaps,
+    containScroll,
+    scrollSnaps,
+    scrollContainLimit,
+    slidesToScroll,
+    slideIndexes
+  )
+  const slideLooper = SlideLooper(
+    viewSize,
+    contentSize,
+    slideSizes,
+    slideSizesWithGaps,
+    snaps,
+    scrollSnaps,
+    offsetLocation,
+    slideTranslates
+  )
+  const scrollOptimizer = ScrollOptimizer(
+    viewSize,
+    contentSize,
+    slideSizesWithGaps,
+    snaps,
+    loop,
+    indexCurrent,
+    slideRegistry,
+    offsetLocation,
+    target,
+    slideTranslates,
+    slideLooper
+  )
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
+    scrollOptimizer,
     contentSize,
     limit,
-    target
+    target,
+    offsetLocation,
+    slideRegistry
   )
   const scrollTo = ScrollTo(
     animation,
@@ -201,14 +238,6 @@ export function Engine(
     slides,
     eventHandler,
     inViewThreshold
-  )
-  const { slideRegistry } = SlideRegistry(
-    containSnaps,
-    containScroll,
-    scrollSnaps,
-    scrollContainLimit,
-    slidesToScroll,
-    slideIndexes
   )
   const slideFocus = SlideFocus(
     focus,
@@ -229,6 +258,7 @@ export function Engine(
     slideRects,
     nodeHandler,
     animation,
+    slideSizes,
     isSsr,
     axis,
     dragHandler: DragHandler(
@@ -286,16 +316,7 @@ export function Engine(
     scrollSnaps,
     scrollTarget,
     scrollTo,
-    slideLooper: SlideLooper(
-      viewSize,
-      contentSize,
-      slideSizes,
-      slideSizesWithGaps,
-      snaps,
-      scrollSnaps,
-      offsetLocation,
-      slideTranslates
-    ),
+    slideLooper,
     slideFocus,
     slidesHandler: SlidesHandler(slideChanges, container, eventHandler),
     slidesInView,
@@ -303,6 +324,7 @@ export function Engine(
     slideRegistry,
     slidesToScroll,
     slideTranslates,
+    scrollOptimizer,
     translate,
     target
   }

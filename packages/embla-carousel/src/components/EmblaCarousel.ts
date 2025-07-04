@@ -135,6 +135,7 @@ function EmblaCarousel(
 
     if (!isSsr && ownerWindow) {
       engine.translate.to(engine.location.get())
+      engine.scrollOptimizer.optimize()
       if (engine.options.loop) engine.slideLooper.loop()
 
       engine.animation.init(ownerWindow)
@@ -156,7 +157,7 @@ function EmblaCarousel(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[]
   ): void {
-    // TODO: Add newOptions and newPlugins to the event detail
+    // TODO: Add reInit reason and maybe newOptions and newPlugins to the event detail
     const event = eventHandler.createEvent('reinit', null)
     event.emitBefore()
 

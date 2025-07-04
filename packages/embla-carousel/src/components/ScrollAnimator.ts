@@ -34,6 +34,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       animation,
       eventHandler,
       scrollBounds,
+      scrollOptimizer,
       options: { loop }
     } = engine
 
@@ -55,6 +56,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       scrollEvent.emitBefore()
     }
     if (isSettled) {
+      scrollOptimizer.optimize(isSettled)
       settleEvent.emitBefore()
       animation.stop()
     }
@@ -70,6 +72,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
     }
 
     translate.to(offsetLocation.get())
+    scrollOptimizer.optimize()
 
     if (isScrolling) {
       scrollEvent.emitAfter()
