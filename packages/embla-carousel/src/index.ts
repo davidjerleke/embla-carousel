@@ -4,6 +4,7 @@ export {
   EmblaEventBeforeCallbackType,
   EmblaEventAfterCallbackType,
   EmblaCreatedEventType,
+  EmblaEventOptionsType,
   EmblaEventModel,
   EmblaEventListType
 } from './components/EventHandler'

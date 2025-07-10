@@ -17,6 +17,10 @@ export type EmblaCreatedEventType = {
   emitAfter: () => void
 }
 
+export type EmblaEventOptionsType = {
+  phase?: 'before' | 'after'
+}
+
 export type EmblaEventAfterCallbackType<
   EventType extends keyof EmblaEventListType
 > = (event: EmblaEventModel<EventType>) => void
@@ -24,6 +28,10 @@ export type EmblaEventAfterCallbackType<
 export type EmblaEventBeforeCallbackType<
   EventType extends keyof EmblaEventListType
 > = (event: EmblaEventModel<EventType>) => boolean
+
+type EmblaEventCallbackType<EventType extends keyof EmblaEventListType> =
+  | EmblaEventBeforeCallbackType<EventType>
+  | EmblaEventAfterCallbackType<EventType>
 
 type EventAfterStoreType = Partial<{
   [EventType in keyof EmblaEventListType]: EmblaEventAfterCallbackType<EventType>[]
@@ -56,22 +64,26 @@ export type EventHandlerType = {
     type: EventType,
     detail: EmblaEventListType[EventType]
   ) => EmblaCreatedEventType
-  onBefore: <EventType extends keyof EmblaEventListType>(
+  on<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventBeforeCallbackType<EventType>
-  ) => EventHandlerType
-  offBefore: <EventType extends keyof EmblaEventListType>(
+    callback: EmblaEventBeforeCallbackType<EventType>,
+    options: EmblaEventOptionsType & { phase: 'before' }
+  ): EventHandlerType
+  on<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventBeforeCallbackType<EventType>
-  ) => EventHandlerType
-  onAfter: <EventType extends keyof EmblaEventListType>(
+    callback: EmblaEventAfterCallbackType<EventType>,
+    options?: EmblaEventOptionsType & { phase?: 'after' }
+  ): EventHandlerType
+  off<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventAfterCallbackType<EventType>
-  ) => EventHandlerType
-  offAfter: <EventType extends keyof EmblaEventListType>(
+    callback: EmblaEventBeforeCallbackType<EventType>,
+    options: EmblaEventOptionsType & { phase: 'before' }
+  ): EventHandlerType
+  off<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventAfterCallbackType<EventType>
-  ) => EventHandlerType
+    callback: EmblaEventAfterCallbackType<EventType>,
+    options?: EmblaEventOptionsType & { phase?: 'after' }
+  ): EventHandlerType
 }
 
 export function EventHandler(): EventHandlerType {
@@ -81,6 +93,25 @@ export function EventHandler(): EventHandlerType {
 
   function init(emblaApi: EmblaCarouselType): void {
     api = emblaApi
+  }
+
+  function updateEventStore<EventType extends keyof EmblaEventListType>(
+    type: EventType,
+    update: (
+      listeners: EmblaEventCallbackType<EventType>[]
+    ) => EmblaEventCallbackType<EventType>[],
+    options?: EmblaEventOptionsType
+  ): EventHandlerType {
+    const eventOptions = options || {}
+
+    if (eventOptions.phase === 'before') {
+      const listeners = getBeforeListeners(type)
+      beforeStore = { ...beforeStore, [type]: update(listeners) }
+    } else {
+      const listeners = getAfterListeners(type)
+      afterStore = { ...afterStore, [type]: update(listeners) }
+    }
+    return self
   }
 
   function createEventModel<EventType extends keyof EmblaEventListType>(
@@ -117,28 +148,6 @@ export function EventHandler(): EventHandlerType {
     return listeners.every((listener) => listener(eventModel))
   }
 
-  function onBefore<EventType extends keyof EmblaEventListType>(
-    type: EventType,
-    callback: EmblaEventBeforeCallbackType<EventType>
-  ): EventHandlerType {
-    beforeStore = {
-      ...beforeStore,
-      [type]: getBeforeListeners(type).concat([callback])
-    }
-    return self
-  }
-
-  function offBefore<EventType extends keyof EmblaEventListType>(
-    type: EventType,
-    callback: EmblaEventBeforeCallbackType<EventType>
-  ): EventHandlerType {
-    beforeStore = {
-      ...beforeStore,
-      [type]: getBeforeListeners(type).filter((e) => e !== callback)
-    }
-    return self
-  }
-
   function getAfterListeners<EventType extends keyof EmblaEventListType>(
     type: EventType
   ): EmblaEventAfterCallbackType<EventType>[] {
@@ -154,26 +163,28 @@ export function EventHandler(): EventHandlerType {
     return listeners.forEach((listener) => listener(eventModel))
   }
 
-  function onAfter<EventType extends keyof EmblaEventListType>(
+  function on<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventAfterCallbackType<EventType>
+    callback: EmblaEventCallbackType<EventType>,
+    options?: EmblaEventOptionsType
   ): EventHandlerType {
-    afterStore = {
-      ...afterStore,
-      [type]: getAfterListeners(type).concat([callback])
-    }
-    return self
+    return updateEventStore(
+      type,
+      (currentListeners) => [...currentListeners, callback],
+      options
+    )
   }
 
-  function offAfter<EventType extends keyof EmblaEventListType>(
+  function off<EventType extends keyof EmblaEventListType>(
     type: EventType,
-    callback: EmblaEventAfterCallbackType<EventType>
+    callback: EmblaEventCallbackType<EventType>,
+    options?: EmblaEventOptionsType
   ): EventHandlerType {
-    afterStore = {
-      ...afterStore,
-      [type]: getAfterListeners(type).filter((e) => e !== callback)
-    }
-    return self
+    return updateEventStore(
+      type,
+      (currentListeners) => currentListeners.filter((cb) => cb !== callback),
+      options
+    )
   }
 
   function clear(): void {
@@ -185,10 +196,8 @@ export function EventHandler(): EventHandlerType {
     init,
     clear,
     createEvent,
-    onBefore,
-    offBefore,
-    onAfter,
-    offAfter
+    on,
+    off
   }
   return self
 }

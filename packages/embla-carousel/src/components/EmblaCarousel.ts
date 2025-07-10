@@ -17,10 +17,8 @@ export type EmblaCarouselType = {
   createEvent: EventHandlerType['createEvent']
   internalEngine: () => EngineType
   destroy: () => void
-  offBefore: EventHandlerType['offBefore']
-  onBefore: EventHandlerType['onBefore']
-  offAfter: EventHandlerType['offAfter']
-  onAfter: EventHandlerType['onAfter']
+  on: EventHandlerType['on']
+  off: EventHandlerType['off']
   plugins: () => EmblaPluginsType
   previousSnap: () => number
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
@@ -57,7 +55,7 @@ function EmblaCarousel(
   const mediaHandlers = EventStore()
   const eventHandler = EventHandler()
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
-  const { onBefore, offBefore, onAfter, offAfter, createEvent } = eventHandler
+  const { on, off, createEvent } = eventHandler
   const reInit = reActivate
 
   let destroyed = false
@@ -158,6 +156,7 @@ function EmblaCarousel(
     withPlugins?: EmblaPluginType[]
   ): void {
     // TODO: Add reInit reason and maybe newOptions and newPlugins to the event detail
+    // Make this cancelable
     const event = eventHandler.createEvent('reinit', null)
     event.emitBefore()
 
@@ -300,10 +299,8 @@ function EmblaCarousel(
     createEvent,
     internalEngine,
     destroy,
-    onBefore,
-    offBefore,
-    onAfter,
-    offAfter,
+    on,
+    off,
     plugins,
     previousSnap,
     reInit,
