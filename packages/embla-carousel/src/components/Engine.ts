@@ -241,6 +241,7 @@ export function Engine(
     inViewThreshold
   )
   const slideFocus = SlideFocus(
+    axis,
     focus,
     root,
     slides,

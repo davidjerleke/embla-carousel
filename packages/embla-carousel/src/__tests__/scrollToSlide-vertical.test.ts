@@ -16,7 +16,7 @@ const SLIDE_TO_SNAP_INDEX_MAP: { [key: number]: number } = {
 }
 
 describe('➡️  ScrollToSlide - Vertical', () => {
-  describe('Starts scrolling to correct snap when jump parameter is FALSE and slidesToScroll is:', () => {
+  describe('Starts scrolling to correct snap when INSTANT parameter is FALSE and slidesToScroll is:', () => {
     test('Default (1), and slide index is provided', (done) => {
       const emblaApi = EmblaCarousel(
         mockTestElements(FIXTURE_SCROLL_TO_SNAP_Y),
@@ -134,7 +134,7 @@ describe('➡️  ScrollToSlide - Vertical', () => {
     })
   })
 
-  describe('Instantly scrolls to correct snap when jump parameter is TRUE and slidesToScroll is:', () => {
+  describe('Instantly scrolls to correct snap when INSTANT parameter is TRUE and slidesToScroll is:', () => {
     test('Default (1), and slide index is provided', (done) => {
       const emblaApi = EmblaCarousel(
         mockTestElements(FIXTURE_SCROLL_TO_SNAP_Y),

@@ -1,6 +1,7 @@
 import EmblaCarousel from '../components/EmblaCarousel'
 import { mockTestElements } from './mocks'
 import { FIXTURE_FOCUS } from './fixtures/focus.fixture'
+import { FIXTURE_AXIS_Y } from './fixtures/axis-vertical.fixture'
 
 describe('➡️  Focus', () => {
   describe('When a slide receives focus and the FOCUS option is set to TRUE', () => {
@@ -58,7 +59,7 @@ describe('➡️  Focus', () => {
       expect(callback).toHaveBeenCalledTimes(0)
     })
 
-    test('An onWatch callback that returns TRUE allows the internal default callback to run', () => {
+    test('An event callback that returns TRUE allows the internal default callback to run', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_FOCUS), {
         focus: true
       })
@@ -72,7 +73,7 @@ describe('➡️  Focus', () => {
       expect(emblaApi.selectedSnap()).toBe(4)
     })
 
-    test('An onWatch callback that returns FALSE blocks the internal default callback', () => {
+    test('An event callback that returns FALSE blocks the internal default callback', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_FOCUS), {
         focus: true
       })
@@ -117,7 +118,7 @@ describe('➡️  Focus', () => {
       expect(emblaApi.selectedSnap()).toBe(0)
     })
 
-    test('An onWatch callback does NOT run at all', () => {
+    test('An event callback does NOT run at all', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_FOCUS), {
         focus: false
       })
@@ -130,6 +131,137 @@ describe('➡️  Focus', () => {
       fifthSlide.dispatchEvent(new FocusEvent('focus'))
 
       expect(callback).toHaveBeenCalledTimes(0)
+    })
+  })
+})
+
+describe('➡️  Focus - ScrollLeft/ScrollTop Properties', () => {
+  describe('When axis is set to x (horizontal)', () => {
+    test('The rootNode scrollLeft property is set to 0 when focus event happens', async () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_FOCUS), {
+        focus: true,
+        axis: 'x'
+      })
+
+      const fifthSlide = emblaApi.slideNodes()[4]
+      const rootNode = emblaApi.rootNode()
+
+      Object.defineProperty(rootNode, 'scrollLeft', {
+        value: 100,
+        writable: true,
+        configurable: true
+      })
+
+      expect(rootNode.scrollLeft).toBe(100)
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
+      fifthSlide.dispatchEvent(new FocusEvent('focus'))
+
+      await new Promise((resolve) => process.nextTick(resolve))
+
+      expect(rootNode.scrollLeft).toBe(0)
+    })
+
+    test('The rootNode scrollLeft property is NOT set when focus option is disabled', async () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_FOCUS), {
+        focus: false,
+        axis: 'x'
+      })
+
+      const fifthSlide = emblaApi.slideNodes()[4]
+      const rootNode = emblaApi.rootNode()
+
+      Object.defineProperty(rootNode, 'scrollLeft', {
+        value: 100,
+        writable: true,
+        configurable: true
+      })
+
+      expect(rootNode.scrollLeft).toBe(100)
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
+      fifthSlide.dispatchEvent(new FocusEvent('focus'))
+
+      await new Promise((resolve) => process.nextTick(resolve))
+
+      expect(rootNode.scrollLeft).toBe(100)
+    })
+  })
+
+  describe('When axis is set to y (vertical)', () => {
+    test('The rootNode scrollTop property is set to 0 when focus option is enabled and axis is y', async () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_AXIS_Y), {
+        focus: true,
+        axis: 'y'
+      })
+
+      const fifthSlide = emblaApi.slideNodes()[4]
+      const rootNode = emblaApi.rootNode()
+
+      Object.defineProperty(rootNode, 'scrollTop', {
+        value: 100,
+        writable: true,
+        configurable: true
+      })
+
+      expect(rootNode.scrollTop).toBe(100)
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
+      fifthSlide.dispatchEvent(new FocusEvent('focus'))
+
+      await new Promise((resolve) => process.nextTick(resolve))
+
+      expect(rootNode.scrollTop).toBe(0)
+    })
+
+    test('The rootNode scrollTop property is NOT set when focus option is disabled', async () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_AXIS_Y), {
+        focus: false,
+        axis: 'y'
+      })
+
+      const fifthSlide = emblaApi.slideNodes()[4]
+      const rootNode = emblaApi.rootNode()
+
+      Object.defineProperty(rootNode, 'scrollTop', {
+        value: 100,
+        writable: true,
+        configurable: true
+      })
+
+      expect(rootNode.scrollTop).toBe(100)
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
+      fifthSlide.dispatchEvent(new FocusEvent('focus'))
+
+      await new Promise((resolve) => process.nextTick(resolve))
+
+      expect(rootNode.scrollTop).toBe(100)
+    })
+
+    test('The rootNode scrollLeft property is NOT affected when axis is y', async () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_AXIS_Y), {
+        focus: true,
+        axis: 'y'
+      })
+
+      const fifthSlide = emblaApi.slideNodes()[4]
+      const rootNode = emblaApi.rootNode()
+
+      Object.defineProperty(rootNode, 'scrollLeft', {
+        value: 100,
+        writable: true,
+        configurable: true
+      })
+
+      expect(rootNode.scrollLeft).toBe(100)
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }))
+      fifthSlide.dispatchEvent(new FocusEvent('focus'))
+
+      await new Promise((resolve) => process.nextTick(resolve))
+
+      expect(rootNode.scrollLeft).toBe(100)
     })
   })
 })

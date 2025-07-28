@@ -24,8 +24,8 @@ export type EmblaCarouselType = {
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
   ssrStyles: (container: string, slides?: string) => string
   rootNode: () => HTMLElement
-  scrollNext: (jump?: boolean) => void
-  scrollPrev: (jump?: boolean) => void
+  scrollNext: (instant?: boolean) => void
+  scrollPrev: (instant?: boolean) => void
   scrollProgress: () => number
   snapList: () => number[]
   selectedSnap: () => number
@@ -34,12 +34,12 @@ export type EmblaCarouselType = {
   slidesNotInView: () => number[]
   scrollToSnap: (
     index: number,
-    jump?: boolean,
+    instant?: boolean,
     direction?: ScrollToDirectionType
   ) => void
   scrollToSlide: (
     subject: number | HTMLElement,
-    jump?: boolean,
+    instant?: boolean,
     direction?: ScrollToDirectionType
   ) => void
 }
@@ -190,7 +190,7 @@ function EmblaCarousel(
 
   function scrollToSnap(
     index: number,
-    jump?: boolean,
+    instant?: boolean,
     direction?: ScrollToDirectionType
   ): void {
     if (destroyed) return
@@ -199,31 +199,31 @@ function EmblaCarousel(
 
     engine.scrollBody
       .useBaseFriction()
-      .useDuration(jump === true ? 0 : options.duration)
+      .useDuration(instant === true ? 0 : options.duration)
     engine.scrollTo.index(index, direction)
   }
 
   function scrollToSlide(
     subject: number | HTMLElement,
-    jump?: boolean,
+    instant?: boolean,
     direction?: ScrollToDirectionType
   ): void {
     const slideIndex = isNumber(subject) ? subject : slides.indexOf(subject)
     const snapIndex = engine.scrollSnapList.snapBySlideIndex[slideIndex]
 
-    if (isNumber(snapIndex)) scrollToSnap(snapIndex, jump, direction)
+    if (isNumber(snapIndex)) scrollToSnap(snapIndex, instant, direction)
   }
 
   // TODO: Rename to scrollToNext
-  function scrollNext(jump?: boolean): void {
+  function scrollNext(instant?: boolean): void {
     const next = engine.indexCurrent.add(1).get()
-    scrollToSnap(next, jump, -1)
+    scrollToSnap(next, instant, -1)
   }
 
   // TODO: Rename to scrollToPrev
-  function scrollPrev(jump?: boolean): void {
+  function scrollPrev(instant?: boolean): void {
     const prev = engine.indexCurrent.add(-1).get()
-    scrollToSnap(prev, jump, 1)
+    scrollToSnap(prev, instant, 1)
   }
 
   // TODO: Rename to canScrollToNext

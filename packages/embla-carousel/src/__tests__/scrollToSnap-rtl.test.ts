@@ -3,7 +3,7 @@ import { mockTestElements } from './mocks'
 import { FIXTURE_SCROLL_TO_SNAP_RTL } from './fixtures/scrollToSnap-rtl.fixture'
 
 describe('➡️  ScrollToSnap - Horizontal RTL', () => {
-  describe('Starts scrolling to correct snap when jump parameter is FALSE and slidesToScroll is:', () => {
+  describe('Starts scrolling to correct snap when INSTANT parameter is FALSE and slidesToScroll is:', () => {
     test('Default (1)', (done) => {
       const emblaApi = EmblaCarousel(
         mockTestElements(FIXTURE_SCROLL_TO_SNAP_RTL),
@@ -61,7 +61,7 @@ describe('➡️  ScrollToSnap - Horizontal RTL', () => {
     })
   })
 
-  describe('Instantly scrolls to correct snap when jump parameter is TRUE and slidesToScroll is:', () => {
+  describe('Instantly scrolls to correct snap when INSTANT parameter is TRUE and slidesToScroll is:', () => {
     test('Default (1)', (done) => {
       const emblaApi = EmblaCarousel(
         mockTestElements(FIXTURE_SCROLL_TO_SNAP_RTL),

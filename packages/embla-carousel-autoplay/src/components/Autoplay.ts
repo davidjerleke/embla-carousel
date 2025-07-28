@@ -64,7 +64,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let timerId = 0
   let autoplayRunning = false
   let playOnDocumentVisible = false
-  let jump = false
+  let instant = false
   let isMouseOver = false
   let isPointerDown = false
   let onInteraction = onDefaultInteraction
@@ -92,7 +92,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     if (!pluginIsActive()) return
     if (emblaApi.snapList().length <= 1) return
 
-    jump = options.jump
+    instant = options.instant
     delay = normalizeDelay(emblaApi, options.delay)
     onInteraction = options.defaultInteraction
       ? onDefaultInteraction
@@ -230,8 +230,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     event.emit()
   }
 
-  function play(jumpOverride?: boolean): void {
-    if (typeof jumpOverride !== 'undefined') jump = jumpOverride
+  function play(instantOverride?: boolean): void {
+    if (typeof instantOverride !== 'undefined') instant = instantOverride
     startAutoplay()
   }
 
@@ -258,9 +258,9 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     })
 
     if (emblaApi.canScrollNext()) {
-      emblaApi.scrollNext(jump)
+      emblaApi.scrollNext(instant)
     } else {
-      emblaApi.scrollToSnap(0, jump)
+      emblaApi.scrollToSnap(0, instant)
     }
 
     event.emit()

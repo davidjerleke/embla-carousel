@@ -9,6 +9,7 @@ export type AxisType = {
   cross: AxisOptionType
   startEdge: AxisEdgeType
   endEdge: AxisEdgeType
+  nativeScroll: 'scrollLeft' | 'scrollTop'
   measureSize: (nodeRect: NodeRectType) => number
   direction: (n: number) => number
 }
@@ -24,6 +25,7 @@ export function Axis(
   const sign = !isVertical && isRightToLeft ? -1 : 1
   const startEdge = getStartEdge()
   const endEdge = getEndEdge()
+  const nativeScroll = isVertical ? 'scrollTop' : 'scrollLeft'
 
   function measureSize(nodeRect: NodeRectType): number {
     const { height, width } = nodeRect
@@ -49,6 +51,7 @@ export function Axis(
     cross,
     startEdge,
     endEdge,
+    nativeScroll,
     measureSize,
     direction
   }

@@ -1,3 +1,4 @@
+import { AxisType } from './Axis'
 import { EventHandlerType } from './EventHandler'
 import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
@@ -10,6 +11,7 @@ export type SlideFocusType = {
 }
 
 export function SlideFocus(
+  axis: AxisType,
   active: boolean,
   root: HTMLElement,
   slides: HTMLElement[],
@@ -47,8 +49,7 @@ export function SlideFocus(
     const preventDefault = !event.emit()
     if (preventDefault) return
 
-    // eventHandler.emit('slidefocusstart', evt) // TODO: Update fade plugin
-    root.scrollLeft = 0
+    root[axis.nativeScroll] = 0
 
     const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
 
