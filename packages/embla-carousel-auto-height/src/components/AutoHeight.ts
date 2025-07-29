@@ -23,7 +23,8 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   let destroyed = false
 
   let slideHeights: number[] = []
-  const heightEvents: EmblaEventType[] = ['select', 'slidefocus']
+  let heightEvents: EmblaEventType[] = []
+  let isEventSelect = true
 
   function pluginIsActive(): boolean {
     if (isSsr) return false
@@ -53,38 +54,49 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     if (!pluginIsActive()) return
     if (axis === 'y') return
 
+    isEventSelect = options.heightEvent === 'select'
+    heightEvents = getHeightEvents()
     slideHeights = slideRects.map((slideRect) => slideRect.height)
 
-    heightEvents.forEach((evt) => emblaApi.on(evt, setContainerHeight))
-    setContainerHeight()
+    heightEvents.forEach((evt) => emblaApi.on(evt, setRootNodeHeight))
+    setRootNodeHeight()
   }
 
   function destroy(): void {
     if (!pluginIsActive()) return
 
-    heightEvents.forEach((evt) => emblaApi.off(evt, setContainerHeight))
-    const container = emblaApi.containerNode()
-    container.style.height = ''
+    heightEvents.forEach((evt) => emblaApi.off(evt, setRootNodeHeight))
+    const rootNode = emblaApi.rootNode()
+    rootNode.style.height = ''
 
     destroyed = true
   }
 
   function highestInView(): number | null {
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
-    const selectedIndexes = slideGroupBySnap[emblaApi.selectedSnap()]
+    const slideIndexes = getSlideIndexes()
+    if (!slideIndexes) return null
 
-    if (!selectedIndexes) return null
-
-    return selectedIndexes
+    return slideIndexes
       .map((index) => slideHeights[index])
       .reduce((a, b) => Math.max(a, b), 0)
   }
 
-  function setContainerHeight(): void {
+  function setRootNodeHeight(): void {
     const height = highestInView()
     if (height === null) return
 
-    emblaApi.containerNode().style.height = `${highestInView()}px`
+    emblaApi.rootNode().style.height = `${highestInView()}px`
+  }
+
+  function getHeightEvents(): EmblaEventType[] {
+    if (isEventSelect) return ['select', 'slidefocus']
+    return ['slidesinview']
+  }
+
+  function getSlideIndexes(): number[] {
+    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
+    if (isEventSelect) return slideGroupBySnap[emblaApi.selectedSnap()]
+    return emblaApi.slidesInView()
   }
 
   const self: AutoHeightType = {
