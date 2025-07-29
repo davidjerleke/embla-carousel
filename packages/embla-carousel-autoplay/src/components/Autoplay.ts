@@ -45,6 +45,7 @@ export type AutoplayType = CreatePluginType<
     play: (jump?: boolean) => void
     stop: () => void
     reset: () => void
+    pause: () => void
     isPlaying: () => boolean
     timeUntilNext: () => number | null
   },
@@ -60,6 +61,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let destroyed = false
 
   let delay: ReturnType<EmblaCarouselType['snapList']>
+  let pauseDelay: null | number = null
   let timerStartTime: null | number = null
   let timerId = 0
   let autoplayRunning = false
@@ -137,7 +139,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const event = emblaApi.createEvent('autoplay:timerset', { startTime })
 
     ownerWindow.clearTimeout(timerId)
-    timerId = ownerWindow.setTimeout(next, delay[emblaApi.selectedSnap()])
+    timerId = ownerWindow.setTimeout(next, getDelay())
     timerStartTime = startTime
     event.emit()
   }
@@ -231,7 +233,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function play(instantOverride?: boolean): void {
-    if (typeof instantOverride !== 'undefined') instant = instantOverride
+    instant = instantOverride ?? instant
     startAutoplay()
   }
 
@@ -243,6 +245,12 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     if (autoplayRunning) startAutoplay()
   }
 
+  function pause(): void {
+    if (!autoplayRunning) return
+    pauseDelay = timeUntilNext()
+    stopAutoplay()
+  }
+
   function isPlaying(): boolean {
     return autoplayRunning
   }
@@ -252,6 +260,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const nextIndex = indexCurrent.clone().add(1).get()
     const lastIndex = emblaApi.snapList().length - 1
     const kill = options.stopOnLastSnap && nextIndex === lastIndex
+
     const event = emblaApi.createEvent('autoplay:select', {
       targetSnap: emblaApi.canScrollNext() ? nextIndex : 0,
       sourceSnap: indexCurrent.get()
@@ -264,17 +273,21 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     event.emit()
+    pauseDelay = null
 
     if (kill) return stopAutoplay()
     startAutoplay()
   }
 
+  function getDelay(): number {
+    return pauseDelay || delay[emblaApi.selectedSnap()]
+  }
+
   function timeUntilNext(): number | null {
     if (!pluginIsActive()) return null
     if (!timerStartTime) return null
-    const currentDelay = delay[emblaApi.selectedSnap()]
     const timePastSinceStart = new Date().getTime() - timerStartTime
-    return currentDelay - timePastSinceStart
+    return getDelay() - timePastSinceStart
   }
 
   const self: AutoplayType = {
@@ -285,6 +298,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     play,
     stop,
     reset,
+    pause,
     isPlaying,
     timeUntilNext
   }
