@@ -3,7 +3,8 @@ import {
   EmblaEventType,
   CreatePluginType,
   EmblaCarouselType,
-  OptionsHandlerType
+  OptionsHandlerType,
+  EmblaEventModelType
 } from 'embla-carousel'
 
 declare module 'embla-carousel' {
@@ -58,6 +59,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     heightEvents = getHeightEvents()
     slideHeights = slideRects.map((slideRect) => slideRect.height)
 
+    emblaApi.on('resize', onResize)
     heightEvents.forEach((evt) => emblaApi.on(evt, setRootNodeHeight))
     setRootNodeHeight()
   }
@@ -65,6 +67,7 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   function destroy(): void {
     if (!pluginIsActive()) return
 
+    emblaApi.off('resize', onResize)
     heightEvents.forEach((evt) => emblaApi.off(evt, setRootNodeHeight))
     const rootNode = emblaApi.rootNode()
     rootNode.style.height = ''
@@ -97,6 +100,29 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
     if (isEventSelect) return slideGroupBySnap[emblaApi.selectedSnap()]
     return emblaApi.slidesInView()
+  }
+
+  function onResize(event: EmblaEventModelType<'resize'>): void | boolean {
+    const entries = event.detail
+
+    for (const entry of entries) {
+      if (!pluginIsActive()) return
+
+      const node = <HTMLElement>entry.target
+      if (node === emblaApi.containerNode()) continue
+
+      const index = emblaApi.slideNodes().indexOf(node)
+      if (index < 0) continue
+
+      const currentHeight = slideHeights[index]
+      const newHeight = node.offsetHeight
+      const diffHeight = Math.abs(newHeight - currentHeight)
+
+      if (diffHeight >= 0.5) {
+        emblaApi.reInit()
+        return false
+      }
+    }
   }
 
   const self: AutoHeightType = {
