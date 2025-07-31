@@ -35,10 +35,7 @@
 
     onInit(emblaApi)
     onSelect(emblaApi)
-    emblaApi
-      .on('reinit', (event) => onInit(event.api))
-      .on('reinit', (event) => onSelect(event.api))
-      .on('select', (event) => onSelect(event.api))
+    emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
   }
 
   function onSelect(emblaApi: EmblaCarouselType): void {

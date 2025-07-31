@@ -31,6 +31,7 @@ function scrollPrev(): void {
 function scrollNext(): void {
   return emblaApi.value?.scrollToNext()
 }
+
 function scrollTo(index: number): void {
   return emblaApi.value?.scrollToSnap(index)
 }
@@ -54,9 +55,9 @@ watch(
     onSelect(emblaApi.value)
 
     emblaApi.value
-      .on('reinit', (event) => onInit(event.api))
-      .on('reinit', (event) => onSelect(event.api))
-      .on('select', (event) => onSelect(event.api))
+      .on('reinit', onInit)
+      .on('reinit', onSelect)
+      .on('select', onSelect)
   },
   { immediate: true }
 )

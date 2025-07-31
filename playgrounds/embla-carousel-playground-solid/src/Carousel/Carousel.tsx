@@ -54,10 +54,7 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
     onInit(api)
     onSelect(api)
-    api
-      .on('reinit', (event) => onInit(event.api))
-      .on('reinit', (event) => onSelect(event.api))
-      .on('select', (event) => onSelect(event.api))
+    api.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
   })
 
   setTimeout(

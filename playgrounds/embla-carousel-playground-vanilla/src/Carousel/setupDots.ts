@@ -41,10 +41,10 @@ export const createDotBtns = (
   addDotBtnsClickHandlers(emblaApi, dotNodes)
   toggleDotBtnsActive(emblaApi, dotNodes)
 
-  emblaApi.on('select', ({ api }) => toggleDotBtnsActive(api, dotNodes))
-  emblaApi.on('reinit', ({ api }) => {
-    dotNodes = generateDotButtonHTML(api, dotsNode)
-    addDotBtnsClickHandlers(api, dotNodes)
-    toggleDotBtnsActive(api, dotNodes)
+  emblaApi.on('select', (emblaApi) => toggleDotBtnsActive(emblaApi, dotNodes))
+  emblaApi.on('reinit', (emblaApi) => {
+    dotNodes = generateDotButtonHTML(emblaApi, dotsNode)
+    addDotBtnsClickHandlers(emblaApi, dotNodes)
+    toggleDotBtnsActive(emblaApi, dotNodes)
   })
 }

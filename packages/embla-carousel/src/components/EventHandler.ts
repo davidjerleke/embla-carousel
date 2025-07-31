@@ -18,7 +18,10 @@ export type EmblaCreatedEventType = {
 }
 
 export type EmblaEventCallbackType<EventType extends keyof EmblaEventListType> =
-  (event: EmblaEventModelType<EventType>) => boolean | void
+  (
+    api: EmblaCarouselType,
+    event: EmblaEventModelType<EventType>
+  ) => boolean | void
 
 type EventStoreType = Partial<{
   [EventType in keyof EmblaEventListType]: EmblaEventCallbackType<EventType>[]
@@ -104,7 +107,7 @@ export function EventHandler(): EventHandlerType {
     detail: EmblaEventListType[EventType]
   ): boolean {
     const event = createEventModel(type, detail)
-    return getStore(type).every((listener) => listener(event) !== false)
+    return getStore(type).every((listener) => listener(api, event) !== false)
   }
 
   function on<EventType extends keyof EmblaEventListType>(
