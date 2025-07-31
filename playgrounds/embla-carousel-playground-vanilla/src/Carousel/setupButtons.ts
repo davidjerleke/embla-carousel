@@ -5,10 +5,10 @@ export const togglePrevNextBtnsState = (
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
 ): void => {
-  if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+  if (emblaApi.canScrollToPrev()) prevBtn.removeAttribute('disabled')
   else prevBtn.setAttribute('disabled', 'disabled')
 
-  if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+  if (emblaApi.canScrollToNext()) nextBtn.removeAttribute('disabled')
   else nextBtn.setAttribute('disabled', 'disabled')
 }
 
@@ -17,8 +17,8 @@ export const addPrevNextBtnsClickHandlers = (
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
 ): void => {
-  const scrollPrev = () => emblaApi.scrollPrev()
-  const scrollNext = () => emblaApi.scrollNext()
+  const scrollPrev = () => emblaApi.scrollToPrev()
+  const scrollNext = () => emblaApi.scrollToNext()
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)
 

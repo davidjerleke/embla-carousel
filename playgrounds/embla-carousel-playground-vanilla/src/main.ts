@@ -30,7 +30,7 @@ const SLIDE_COUNT = 4
 const OPTIONS: EmblaOptionsType = {
   loop: true,
   direction: 'ltr',
-  startSnap: 3,
+  startSnap: 0,
   axis: 'x',
   ssr: Array.from(Array(SLIDE_COUNT).keys()).map(() => SLIDE_SIZE)
 }
@@ -87,6 +87,7 @@ emblaNodes.forEach((emblaNode) => {
   const ssrStyleNode = <HTMLElement>document.getElementById('embla-ssr-styles')
   const ssrApi = EmblaCarousel(null, OPTIONS, PLUGINS)
 
+  ssrTextNode.innerHTML = `${SSR_ACTIVE}`
   createSlides(containerNode, SLIDE_COUNT)
 
   if (SSR_ACTIVE) {

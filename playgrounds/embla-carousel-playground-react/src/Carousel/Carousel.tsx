@@ -14,10 +14,10 @@ export const EmblaCarousel = (props: PropType) => {
   const [refAttached, setRefAttached] = useState(false)
   const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(options)
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(
-    emblaServerApi.canScrollPrev()
+    emblaServerApi.canScrollToPrev()
   )
   const [nextBtnEnabled, setNextBtnEnabled] = useState(
-    emblaServerApi.canScrollNext()
+    emblaServerApi.canScrollToNext()
   )
   const [selectedIndex, setSelectedIndex] = useState(
     emblaServerApi.selectedSnap()
@@ -26,11 +26,11 @@ export const EmblaCarousel = (props: PropType) => {
   const showSsr = isSsr && !emblaApi
 
   const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
+    () => emblaApi && emblaApi.scrollToPrev(),
     [emblaApi]
   )
   const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
+    () => emblaApi && emblaApi.scrollToNext(),
     [emblaApi]
   )
   const scrollTo = useCallback(
@@ -44,8 +44,8 @@ export const EmblaCarousel = (props: PropType) => {
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedSnap())
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
+    setPrevBtnEnabled(emblaApi.canScrollToPrev())
+    setNextBtnEnabled(emblaApi.canScrollToNext())
   }, [])
 
   useEffect(() => {
@@ -54,7 +54,10 @@ export const EmblaCarousel = (props: PropType) => {
     onInit(emblaApi)
     onSelect(emblaApi)
 
-    emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
+    emblaApi
+      .on('reinit', (event) => onInit(event.api))
+      .on('reinit', (event) => onSelect(event.api))
+      .on('select', (event) => onSelect(event.api))
   }, [emblaApi, onInit, onSelect])
 
   useEffect(() => {

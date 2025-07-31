@@ -14,8 +14,8 @@ const props = defineProps<{
 
 const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(props.options)
 const refAttached = ref(false)
-const prevBtnEnabled = ref(emblaServerApi.canScrollPrev())
-const nextBtnEnabled = ref(emblaServerApi.canScrollNext())
+const prevBtnEnabled = ref(emblaServerApi.canScrollToPrev())
+const nextBtnEnabled = ref(emblaServerApi.canScrollToNext())
 const selectedIndex = ref(emblaServerApi.selectedSnap())
 const scrollSnaps = ref<number[]>([])
 const showSsr = computed(() => props.isSsr && !emblaApi.value)
@@ -25,11 +25,11 @@ const ssrStyles = `<style>${emblaServerApi.ssrStyles(
 )}</style>`
 
 function scrollPrev(): void {
-  return emblaApi.value?.scrollPrev()
+  return emblaApi.value?.scrollToPrev()
 }
 
 function scrollNext(): void {
-  return emblaApi.value?.scrollNext()
+  return emblaApi.value?.scrollToNext()
 }
 function scrollTo(index: number): void {
   return emblaApi.value?.scrollToSnap(index)
@@ -41,8 +41,8 @@ function onInit(emblaApi: EmblaCarouselType): void {
 
 function onSelect(emblaApi: EmblaCarouselType): void {
   selectedIndex.value = emblaApi.selectedSnap()
-  prevBtnEnabled.value = emblaApi.canScrollPrev()
-  nextBtnEnabled.value = emblaApi.canScrollNext()
+  prevBtnEnabled.value = emblaApi.canScrollToPrev()
+  nextBtnEnabled.value = emblaApi.canScrollToNext()
 }
 
 watch(
@@ -54,9 +54,9 @@ watch(
     onSelect(emblaApi.value)
 
     emblaApi.value
-      .on('reinit', onInit)
-      .on('reinit', onSelect)
-      .on('select', onSelect)
+      .on('reinit', (event) => onInit(event.api))
+      .on('reinit', (event) => onSelect(event.api))
+      .on('select', (event) => onSelect(event.api))
   },
   { immediate: true }
 )

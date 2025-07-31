@@ -11,8 +11,8 @@ import { ScrollToDirectionType } from './ScrollTo'
 import { isNumber } from './utils'
 
 export type EmblaCarouselType = {
-  canScrollNext: () => boolean
-  canScrollPrev: () => boolean
+  canScrollToNext: () => boolean
+  canScrollToPrev: () => boolean
   containerNode: () => HTMLElement
   createEvent: EventHandlerType['createEvent']
   internalEngine: () => EngineType
@@ -24,9 +24,10 @@ export type EmblaCarouselType = {
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
   ssrStyles: (container: string, slides?: string) => string
   rootNode: () => HTMLElement
-  scrollNext: (instant?: boolean) => void
-  scrollPrev: (instant?: boolean) => void
+  scrollToNext: (instant?: boolean) => void
+  scrollToPrev: (instant?: boolean) => void
   scrollProgress: () => number
+  snapIndex: (offset: number) => number
   snapList: () => number[]
   selectedSnap: () => number
   slideNodes: () => HTMLElement[]
@@ -214,28 +215,20 @@ function EmblaCarousel(
     if (isNumber(snapIndex)) scrollToSnap(snapIndex, instant, direction)
   }
 
-  // TODO: Rename to scrollToNext
-  function scrollNext(instant?: boolean): void {
-    const next = engine.indexCurrent.add(1).get()
-    scrollToSnap(next, instant, -1)
+  function scrollToNext(instant?: boolean): void {
+    scrollToSnap(snapIndex(1), instant, -1)
   }
 
-  // TODO: Rename to scrollToPrev
-  function scrollPrev(instant?: boolean): void {
-    const prev = engine.indexCurrent.add(-1).get()
-    scrollToSnap(prev, instant, 1)
+  function scrollToPrev(instant?: boolean): void {
+    scrollToSnap(snapIndex(-1), instant, 1)
   }
 
-  // TODO: Rename to canScrollToNext
-  function canScrollNext(): boolean {
-    const next = engine.indexCurrent.add(1).get()
-    return next !== selectedSnap()
+  function canScrollToNext(): boolean {
+    return snapIndex(1) !== selectedSnap()
   }
 
-  // TODO: Rename to canScrollToPrev
-  function canScrollPrev(): boolean {
-    const prev = engine.indexCurrent.add(-1).get()
-    return prev !== selectedSnap()
+  function canScrollToPrev(): boolean {
+    return snapIndex(-1) !== selectedSnap()
   }
 
   function ssrStyles(container: string, slides?: string): string {
@@ -246,12 +239,16 @@ function EmblaCarousel(
     return engine.scrollProgress.get(engine.offsetLocation.get())
   }
 
+  function snapIndex(offset: number): number {
+    return engine.indexCurrent.add(offset).get()
+  }
+
   function snapList(): number[] {
     return engine.snapList
   }
 
   function selectedSnap(): number {
-    return engine.indexCurrent.get()
+    return snapIndex(0)
   }
 
   function previousSnap(): number {
@@ -287,8 +284,8 @@ function EmblaCarousel(
   }
 
   const self: EmblaCarouselType = {
-    canScrollNext,
-    canScrollPrev,
+    canScrollToNext,
+    canScrollToPrev,
     containerNode,
     createEvent,
     internalEngine,
@@ -299,8 +296,8 @@ function EmblaCarousel(
     previousSnap,
     reInit,
     rootNode,
-    scrollNext,
-    scrollPrev,
+    scrollToNext,
+    scrollToPrev,
     scrollProgress,
     scrollToSnap,
     scrollToSlide,
@@ -308,6 +305,7 @@ function EmblaCarousel(
     slideNodes,
     slidesInView,
     slidesNotInView,
+    snapIndex,
     snapList,
     ssrStyles
   }

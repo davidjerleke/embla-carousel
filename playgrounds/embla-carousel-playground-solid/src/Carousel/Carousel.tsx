@@ -15,10 +15,10 @@ export const EmblaCarousel: Component<PropType> = (props) => {
     () => props.options
   )
   const [prevBtnEnabled, setPrevBtnEnabled] = createSignal(
-    emblaServerApi.canScrollPrev()
+    emblaServerApi.canScrollToPrev()
   )
   const [nextBtnEnabled, setNextBtnEnabled] = createSignal(
-    emblaServerApi.canScrollNext()
+    emblaServerApi.canScrollToNext()
   )
   const [selectedIndex, setSelectedIndex] = createSignal(
     emblaServerApi.selectedSnap()
@@ -27,11 +27,11 @@ export const EmblaCarousel: Component<PropType> = (props) => {
   const [showSsr, setShowSsr] = createSignal(props.isSsr && !emblaApi())
 
   function scrollPrev(): void {
-    emblaApi()?.scrollPrev()
+    emblaApi()?.scrollToPrev()
   }
 
   function scrollNext(): void {
-    emblaApi()?.scrollNext()
+    emblaApi()?.scrollToNext()
   }
 
   function scrollTo(index: number): void {
@@ -44,8 +44,8 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
   function onSelect(emblaApi: EmblaCarouselType): void {
     setSelectedIndex(emblaApi.selectedSnap())
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
+    setPrevBtnEnabled(emblaApi.canScrollToPrev())
+    setNextBtnEnabled(emblaApi.canScrollToNext())
   }
 
   createEffect(() => {
@@ -54,7 +54,10 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
     onInit(api)
     onSelect(api)
-    api.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
+    api
+      .on('reinit', (event) => onInit(event.api))
+      .on('reinit', (event) => onSelect(event.api))
+      .on('select', (event) => onSelect(event.api))
   })
 
   setTimeout(

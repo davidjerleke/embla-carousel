@@ -9370,7 +9370,7 @@ __metadata:
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^5.0.3
     "@tsconfig/svelte": ^5.0.4
-    embla-carousel-svelte: 8.5.2
+    embla-carousel-svelte: 8.6.0
     svelte: ^5.15.0
     svelte-check: ^4.1.1
     typescript: ~5.6.2
@@ -9394,7 +9394,7 @@ __metadata:
   dependencies:
     "@vitejs/plugin-vue": ^5.2.1
     "@vue/tsconfig": ^0.7.0
-    embla-carousel-vue: 8.5.2
+    embla-carousel-vue: 8.6.0
     typescript: ~5.6.2
     vite: ^6.0.5
     vue: ^3.5.13
@@ -9447,15 +9447,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-reactive-utils@npm:8.5.2":
-  version: 8.5.2
-  resolution: "embla-carousel-reactive-utils@npm:8.5.2"
-  peerDependencies:
-    embla-carousel: 8.5.2
-  checksum: b2111b11ac41aed1910286ef9105c509ca531580d87d8e3531b3d73ab6adbfd58afd91542bce0440ac50ba3e0c2e7f6267b53c9554ed740cd105174d11598afd
-  languageName: node
-  linkType: hard
-
 "embla-carousel-solid@8.6.0, embla-carousel-solid@workspace:packages/embla-carousel-solid":
   version: 0.0.0-use.local
   resolution: "embla-carousel-solid@workspace:packages/embla-carousel-solid"
@@ -9480,19 +9471,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-svelte@npm:8.5.2":
-  version: 8.5.2
-  resolution: "embla-carousel-svelte@npm:8.5.2"
-  dependencies:
-    embla-carousel: 8.5.2
-    embla-carousel-reactive-utils: 8.5.2
-  peerDependencies:
-    svelte: ^3.49.0 || ^4.0.0 || ^5.0.0
-  checksum: a5b3a0c2fcfaad5bee80f7d32001693ca642c412a1e39e0aed876068d2988bc9faa2c27d91243496c8d06b5e409bb286152505dec3320f38e6caec0b51d84bdc
-  languageName: node
-  linkType: hard
-
-"embla-carousel-svelte@workspace:packages/embla-carousel-svelte":
+"embla-carousel-svelte@8.6.0, embla-carousel-svelte@workspace:packages/embla-carousel-svelte":
   version: 0.0.0-use.local
   resolution: "embla-carousel-svelte@workspace:packages/embla-carousel-svelte"
   dependencies:
@@ -9516,19 +9495,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-vue@npm:8.5.2":
-  version: 8.5.2
-  resolution: "embla-carousel-vue@npm:8.5.2"
-  dependencies:
-    embla-carousel: 8.5.2
-    embla-carousel-reactive-utils: 8.5.2
-  peerDependencies:
-    vue: ^3.2.37
-  checksum: a14b6447e44fb2b2fdd2ac08db9ec0dad83d7f20771d38e64cdb2ccb583082cb13f0e2da8db95191c03ac6bb521f5719d33ec4a09a84bfdb87994db00306617c
-  languageName: node
-  linkType: hard
-
-"embla-carousel-vue@workspace:packages/embla-carousel-vue":
+"embla-carousel-vue@8.6.0, embla-carousel-vue@workspace:packages/embla-carousel-vue":
   version: 0.0.0-use.local
   resolution: "embla-carousel-vue@workspace:packages/embla-carousel-vue"
   dependencies:
@@ -9570,13 +9537,6 @@ __metadata:
     typescript: ^5.2.2
   languageName: unknown
   linkType: soft
-
-"embla-carousel@npm:8.5.2":
-  version: 8.5.2
-  resolution: "embla-carousel@npm:8.5.2"
-  checksum: fd994984c846818ba466b0c62f4a3c2d386146705fa2082b7adeee7cf49b3b41f5c87c4f0009cb1439891ede7c5e5c854358bf4476164aa72b8b0ef45f6270bc
-  languageName: node
-  linkType: hard
 
 "emittery@npm:^0.13.1":
   version: 0.13.1
