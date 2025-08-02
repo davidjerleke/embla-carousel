@@ -117,6 +117,7 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function togglePointerDownClass(
+    _: EmblaCarouselType,
     event: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'>
   ): void {
     const toggleClass = event.type === 'pointerdown' ? addClass : removeClass

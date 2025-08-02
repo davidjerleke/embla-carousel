@@ -8,15 +8,15 @@ const setTweenFactor = (emblaApi) => {
   tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
 }
 
-const tweenOpacity = (emblaApi, eventName) => {
+const tweenOpacity = (emblaApi, event) => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
   const slidesInView = emblaApi.slidesInView()
-  const isScrollEvent = eventName === 'scroll'
+  const isScrollEvent = event?.type === 'scroll'
 
   emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.slideRegistry[snapIndex]
+    const slidesInSnap = engine.scrollSnapList.slideGroupBySnap[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -46,8 +46,6 @@ const tweenOpacity = (emblaApi, eventName) => {
 }
 
 export const setupTweenOpacity = (emblaApi) => {
-  const slideNodes = emblaApi.slideNodes()
-
   setTweenFactor(emblaApi)
   tweenOpacity(emblaApi)
 
@@ -56,8 +54,4 @@ export const setupTweenOpacity = (emblaApi) => {
     .on('reinit', tweenOpacity)
     .on('scroll', tweenOpacity)
     .on('slidefocus', tweenOpacity)
-
-  return () => {
-    slideNodes.forEach((slide) => slide.removeAttribute('style'))
-  }
 }

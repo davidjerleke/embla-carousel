@@ -15,9 +15,7 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    AutoScroll({ playOnInit: false })
-  ])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [AutoScroll()])
   const [isPlaying, setIsPlaying] = useState(false)
 
   const {
@@ -32,12 +30,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       const autoScroll = emblaApi?.plugins()?.autoScroll
       if (!autoScroll) return
 
-      const resetOrStop =
-        autoScroll.options.stopOnInteraction === false
-          ? autoScroll.reset
-          : autoScroll.stop
-
-      resetOrStop()
+      autoScroll.stop()
       callback()
     },
     [emblaApi]

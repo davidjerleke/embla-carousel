@@ -1,43 +1,28 @@
-const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
-  const togglePrevNextBtnsState = () => {
-    if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+const addTogglePrevNextButtonsActive = (emblaApi, prevBtn, nextBtn) => {
+  const togglePrevNextButtonsState = () => {
+    if (emblaApi.canScrollToPrev()) prevBtn.removeAttribute('disabled')
     else prevBtn.setAttribute('disabled', 'disabled')
 
-    if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+    if (emblaApi.canScrollToNext()) nextBtn.removeAttribute('disabled')
     else nextBtn.setAttribute('disabled', 'disabled')
   }
 
-  togglePrevNextBtnsState()
+  togglePrevNextButtonsState()
 
   emblaApi
-    .on('select', togglePrevNextBtnsState)
-    .on('reinit', togglePrevNextBtnsState)
-
-  return () => {
-    prevBtn.removeAttribute('disabled')
-    nextBtn.removeAttribute('disabled')
-  }
+    .on('select', togglePrevNextButtonsState)
+    .on('reinit', togglePrevNextButtonsState)
 }
 
-export const addPrevNextBtnsClickHandlers = (emblaApi, prevBtn, nextBtn) => {
+export const addPrevNextButtonClickHandlers = (emblaApi, prevBtn, nextBtn) => {
   const scrollPrev = () => {
-    emblaApi.scrollPrev()
+    emblaApi.scrollToPrev()
   }
   const scrollNext = () => {
-    emblaApi.scrollNext()
+    emblaApi.scrollToNext()
   }
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)
 
-  const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
-    emblaApi,
-    prevBtn,
-    nextBtn
-  )
-
-  return () => {
-    removeTogglePrevNextBtnsActive()
-    prevBtn.removeEventListener('click', scrollPrev, false)
-    nextBtn.removeEventListener('click', scrollNext, false)
-  }
+  addTogglePrevNextButtonsActive(emblaApi, prevBtn, nextBtn)
 }

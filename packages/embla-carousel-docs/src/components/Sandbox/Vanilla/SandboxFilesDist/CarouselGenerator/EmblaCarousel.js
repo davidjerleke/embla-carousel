@@ -1,9 +1,9 @@
 import EmblaCarousel from 'embla-carousel'
 /*__PREV_NEXT_BUTTONS_REPLACE_START__*/
-import { addPrevNextBtnsClickHandlers } from './EmblaCarouselArrowButtons'
+import { addPrevNextButtonClickHandlers } from './EmblaCarouselArrowButtons'
 /*__PREV_NEXT_BUTTONS_REPLACE_END__*/
 /*__DOT_BUTTONS_REPLACE_START__*/
-import { addDotBtnsAndClickHandlers } from './EmblaCarouselDotButton'
+import { addDotButtonsAndClickHandlers } from './EmblaCarouselDotButton'
 /*__DOT_BUTTONS_REPLACE_END__*/
 /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
 import { updateSelectedSnapDisplay } from './EmblaCarouselSelectedSnapDisplay'
@@ -53,18 +53,12 @@ const emblaApi = EmblaCarousel(
 const onNavButtonClick = (emblaApi) => {
   const autoplay = emblaApi?.plugins()?.autoplay
   if (!autoplay) return
-
-  const resetOrStop =
-    autoplay.options.stopOnInteraction === false
-      ? autoplay.reset
-      : autoplay.stop
-
-  resetOrStop()
+  autoplay.stop()
 }
 /*__NAV_AUTOPLAY_REPLACE_END__*/
 
 /*__PREV_NEXT_BUTTONS_REPLACE_START__*/
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
+addPrevNextButtonClickHandlers(
   emblaApi,
   prevBtnNode,
   nextBtnNode,
@@ -72,7 +66,7 @@ const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
 )
 /*__PREV_NEXT_BUTTONS_REPLACE_END__*/
 /*__DOT_BUTTONS_REPLACE_START__*/
-const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
+addDotButtonsAndClickHandlers(
   emblaApi,
   dotsNode,
   /*__NAV_AUTOPLAY_REPLACE_START__*/ onNavButtonClick /*__NAV_AUTOPLAY_REPLACE_END__*/
@@ -81,10 +75,3 @@ const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
 /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
 updateSelectedSnapDisplay(emblaApi, snapDisplayNode)
 /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
-
-/*__PREV_NEXT_BUTTONS_REPLACE_START__*/
-emblaApi.on('destroy', removePrevNextBtnsClickHandlers)
-/*__PREV_NEXT_BUTTONS_REPLACE_END__*/
-/*__DOT_BUTTONS_REPLACE_START__*/
-emblaApi.on('destroy', removeDotBtnsAndClickHandlers)
-/*__DOT_BUTTONS_REPLACE_END__*/

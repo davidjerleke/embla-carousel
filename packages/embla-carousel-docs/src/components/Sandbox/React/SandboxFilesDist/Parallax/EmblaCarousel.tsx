@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import {
   EmblaCarouselType,
-  EmblaEventType,
+  EmblaEventListType,
+  EmblaEventModelType,
   EmblaOptionsType
 } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -47,15 +48,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [])
 
   const tweenParallax = useCallback(
-    (emblaApi: EmblaCarouselType, eventName?: EmblaEventType) => {
+    <EventType extends keyof EmblaEventListType>(
+      emblaApi: EmblaCarouselType,
+      event?: EmblaEventModelType<EventType>
+    ) => {
       const engine = emblaApi.internalEngine()
       const scrollProgress = emblaApi.scrollProgress()
       const slidesInView = emblaApi.slidesInView()
-      const isScrollEvent = eventName === 'scroll'
+      const isScrollEvent = event?.type === 'scroll'
 
       emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
         let diffToTarget = scrollSnap - scrollProgress
-        const slidesInSnap = engine.slideRegistry[snapIndex]
+        const slidesInSnap = engine.scrollSnapList.slideGroupBySnap[snapIndex]
 
         slidesInSnap.forEach((slideIndex) => {
           if (isScrollEvent && !slidesInView.includes(slideIndex)) return

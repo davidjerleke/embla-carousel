@@ -1,5 +1,6 @@
 import React, {
-  /*__NAV_AUTOPLAY_REPLACE_START__*/ useCallback /*__NAV_AUTOPLAY_REPLACE_END__*/
+  /*__NAV_AUTOPLAY_REPLACE_START__*/ useCallback /*__NAV_AUTOPLAY_REPLACE_END__*/,
+  /*__AUTOPLAY_REPLACE_START__*/ useEffect /*__AUTOPLAY_REPLACE_END__*/
 } from 'react'
 /*__DOT_BUTTONS_REPLACE_START__*/
 import { DotButton, useDotButton } from './EmblaCarouselDotButton'
@@ -47,12 +48,7 @@ const EmblaCarousel = (props) => {
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
 
-    const resetOrStop =
-      autoplay.options.stopOnInteraction === false
-        ? autoplay.reset
-        : autoplay.stop
-
-    resetOrStop()
+    autoplay.stop()
   }, [])
   /*__NAV_AUTOPLAY_REPLACE_END__*/
 
@@ -78,6 +74,15 @@ const EmblaCarousel = (props) => {
   /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
   const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
   /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
+
+  /*__AUTOPLAY_REPLACE_START__*/
+  useEffect(() => {
+    const autoplay = emblaApi?.plugins()?.autoplay
+    if (!autoplay) return
+
+    autoplay.play()
+  }, [emblaApi])
+  /*__AUTOPLAY_REPLACE_END__*/
 
   return (
     <section

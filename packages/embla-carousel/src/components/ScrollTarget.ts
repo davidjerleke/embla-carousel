@@ -26,6 +26,7 @@ export function ScrollTarget(
   offsetLocation: Vector1DType,
   scrollSnapList: ScrollSnapListType
 ): ScrollTargetType {
+  const { snapBySlideIndex } = scrollSnapList
   const { getSlidesInViewRange } = scrollOptimizer
   const { reachedAny, removeOffset, constrain } = limit
 
@@ -36,13 +37,12 @@ export function ScrollTarget(
   function findTargetSnap(target: number): TargetType {
     const slidesInRange = getSlidesInViewRange(offsetLocation, Vector1D(target))
     const distance = loop ? removeOffset(target) : constrain(target)
-    const ascDiffsToSnaps = slidesInRange
-      .map((slideIndex) => {
-        const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
-        return {
-          diff: shortcut(scrollSnaps[snapIndex] - distance, 0),
-          index: snapIndex
-        }
+    const slideSnaps = slidesInRange.map((index) => snapBySlideIndex[index])
+    const snapTargets = slideSnaps.length ? slideSnaps : scrollSnaps
+    const ascDiffsToSnaps = snapTargets
+      .map((index) => {
+        const scrollSnap = scrollSnaps[index]
+        return { diff: shortcut(scrollSnap - distance, 0), index }
       })
       .sort((d1, d2) => mathAbs(d1.diff) - mathAbs(d2.diff))
 

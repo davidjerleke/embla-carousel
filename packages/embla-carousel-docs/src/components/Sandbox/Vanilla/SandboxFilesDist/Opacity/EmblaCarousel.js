@@ -1,7 +1,7 @@
 import EmblaCarousel from 'embla-carousel'
 import { setupTweenOpacity } from './EmblaCarouselTweenOpacity'
-import { addDotBtnsAndClickHandlers } from '../EmblaCarouselDotButton'
-import { addPrevNextBtnsClickHandlers } from '../EmblaCarouselArrowButtons'
+import { addDotButtonAndClickHandlers } from '../EmblaCarouselDotButton'
+import { addPrevNextButtonClickHandlers } from '../EmblaCarouselArrowButtons'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -15,19 +15,7 @@ const nextBtn = emblaNode.querySelector('.embla__button--next')
 const dotsNode = document.querySelector('.embla__dots')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
-const removeTweenOpacity = setupTweenOpacity(emblaApi)
 
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtn,
-  nextBtn
-)
-const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
-  emblaApi,
-  dotsNode
-)
-
-emblaApi
-  .on('destroy', removeTweenOpacity)
-  .on('destroy', removePrevNextBtnsClickHandlers)
-  .on('destroy', removeDotBtnsAndClickHandlers)
+setupTweenOpacity(emblaApi)
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
+addDotButtonAndClickHandlers(emblaApi, dotsNode)

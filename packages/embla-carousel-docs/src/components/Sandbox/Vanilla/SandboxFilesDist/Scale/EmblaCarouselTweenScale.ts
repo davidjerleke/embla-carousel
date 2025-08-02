@@ -1,4 +1,8 @@
-import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
+import {
+  EmblaCarouselType,
+  EmblaEventListType,
+  EmblaEventModelType
+} from 'embla-carousel'
 
 const TWEEN_FACTOR_BASE = 0.52
 let tweenFactor = 0
@@ -17,18 +21,18 @@ const setTweenFactor = (emblaApi: EmblaCarouselType): void => {
   tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
 }
 
-const tweenScale = (
+const tweenScale = <EventType extends keyof EmblaEventListType>(
   emblaApi: EmblaCarouselType,
-  eventName?: EmblaEventType
+  event?: EmblaEventModelType<EventType>
 ): void => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
   const slidesInView = emblaApi.slidesInView()
-  const isScrollEvent = eventName === 'scroll'
+  const isScrollEvent = event?.type === 'scroll'
 
   emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.slideRegistry[snapIndex]
+    const slidesInSnap = engine.scrollSnapList.slideGroupBySnap[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -58,7 +62,7 @@ const tweenScale = (
   })
 }
 
-export const setupTweenScale = (emblaApi: EmblaCarouselType): (() => void) => {
+export const setupTweenScale = (emblaApi: EmblaCarouselType): void => {
   setTweenNodes(emblaApi)
   setTweenFactor(emblaApi)
   tweenScale(emblaApi)
@@ -69,8 +73,4 @@ export const setupTweenScale = (emblaApi: EmblaCarouselType): (() => void) => {
     .on('reinit', tweenScale)
     .on('scroll', tweenScale)
     .on('slidefocus', tweenScale)
-
-  return (): void => {
-    tweenNodes.forEach((slide) => slide.removeAttribute('style'))
-  }
 }

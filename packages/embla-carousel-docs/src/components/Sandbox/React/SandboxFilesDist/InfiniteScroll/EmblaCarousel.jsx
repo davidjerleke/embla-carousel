@@ -49,7 +49,7 @@ const EmblaCarousel = (props) => {
 
       newEngine.translate.to(oldEngine.location.get())
       const { index } = newEngine.scrollTarget.byDistance(0, false)
-      newEngine.index.set(index)
+      newEngine.indexCurrent.set(index)
       newEngine.animation.start()
 
       setLoadingMore(false)
@@ -117,7 +117,7 @@ const EmblaCarousel = (props) => {
     const onResize = () => emblaApi.reInit()
     window.addEventListener('resize', onResize)
     emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
-    emblaApi.onWatch('slideschanged', onSlideChanges)
+    emblaApi.on('slideschanged', onSlideChanges)
   }, [emblaApi, addScrollListener, onSlideChanges])
 
   useEffect(() => {

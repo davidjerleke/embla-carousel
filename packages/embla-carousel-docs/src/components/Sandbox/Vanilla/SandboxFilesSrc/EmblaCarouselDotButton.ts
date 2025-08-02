@@ -1,9 +1,9 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
-export const addDotBtnsAndClickHandlers = (
+export const addDotButtonAndClickHandlers = (
   emblaApi: EmblaCarouselType,
   dotsNode: HTMLElement
-): (() => void) => {
+): void => {
   let dotNodes: HTMLElement[] = []
 
   const addDotBtnsWithClickHandlers = (): void => {
@@ -22,7 +22,7 @@ export const addDotBtnsAndClickHandlers = (
     })
   }
 
-  const toggleDotBtnsActive = (): void => {
+  const toggleDotButtonsActive = (): void => {
     const previous = emblaApi.previousSnap()
     const selected = emblaApi.selectedSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')
@@ -30,14 +30,10 @@ export const addDotBtnsAndClickHandlers = (
   }
 
   addDotBtnsWithClickHandlers()
-  toggleDotBtnsActive()
+  toggleDotButtonsActive()
 
   emblaApi
     .on('reinit', addDotBtnsWithClickHandlers)
-    .on('reinit', toggleDotBtnsActive)
-    .on('select', toggleDotBtnsActive)
-
-  return (): void => {
-    dotsNode.innerHTML = ''
-  }
+    .on('reinit', toggleDotButtonsActive)
+    .on('select', toggleDotButtonsActive)
 }

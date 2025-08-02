@@ -1,9 +1,9 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
-export const addPlayBtnListeners = (
+export const addPlayButtonListeners = (
   emblaApi: EmblaCarouselType,
   playBtn: HTMLElement
-): (() => void) => {
+): void => {
   const togglePlayBtnState = (emblaApi: EmblaCarouselType): void => {
     const autoScroll = emblaApi?.plugins()?.autoScroll
     if (!autoScroll) return
@@ -27,39 +27,19 @@ export const addPlayBtnListeners = (
     .on('autoscroll:play', togglePlayBtnState)
     .on('autoscroll:stop', togglePlayBtnState)
     .on('reinit', togglePlayBtnState)
-
-  return () => {
-    playBtn.removeEventListener('click', onPlayBtnClick)
-    emblaApi
-      .off('autoscroll:play', togglePlayBtnState)
-      .off('autoscroll:stop', togglePlayBtnState)
-      .off('reinit', togglePlayBtnState)
-  }
 }
 
-export const addNavBtnListeners = (
+export const addNavButtonListeners = (
   emblaApi: EmblaCarouselType,
   ...navButtons: HTMLElement[]
-): (() => void) => {
+): void => {
   const onNavClick = () => {
     const autoScroll = emblaApi?.plugins()?.autoScroll
     if (!autoScroll) return
-
-    const resetOrStop =
-      autoScroll.options.stopOnInteraction === false
-        ? autoScroll.reset
-        : autoScroll.stop
-
-    resetOrStop()
+    autoScroll.stop()
   }
 
   navButtons.forEach((navButton) =>
     navButton.addEventListener('click', onNavClick, true)
   )
-
-  return () => {
-    navButtons.forEach((navButton) =>
-      navButton.removeEventListener('click', onNavClick, true)
-    )
-  }
 }

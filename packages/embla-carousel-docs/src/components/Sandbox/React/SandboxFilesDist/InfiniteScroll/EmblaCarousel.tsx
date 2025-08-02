@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { EngineType } from 'embla-carousel/components/Engine'
 import {
   EmblaCarouselType,
-  EmblaOptionsType,
-  EmblaWatchCallbackType
+  EmblaEventCallbackType,
+  EmblaOptionsType
 } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
@@ -45,7 +45,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
 
-  const onSlideChanges: EmblaWatchCallbackType<'slideschanged'> = useCallback(
+  const onSlideChanges: EmblaEventCallbackType<'slideschanged'> = useCallback(
     (emblaApi: EmblaCarouselType) => {
       const reloadEmbla = (): void => {
         const oldEngine = emblaApi.internalEngine()
@@ -65,7 +65,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
         newEngine.translate.to(oldEngine.location.get())
         const { index } = newEngine.scrollTarget.byDistance(0, false)
-        newEngine.index.set(index)
+        newEngine.indexCurrent.set(index)
         newEngine.animation.start()
 
         setLoadingMore(false)
@@ -135,7 +135,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     const onResize = () => emblaApi.reInit()
     window.addEventListener('resize', onResize)
     emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
-    emblaApi.onWatch('slideschanged', onSlideChanges)
+    emblaApi.on('slideschanged', onSlideChanges)
   }, [emblaApi, addScrollListener, onSlideChanges])
 
   useEffect(() => {

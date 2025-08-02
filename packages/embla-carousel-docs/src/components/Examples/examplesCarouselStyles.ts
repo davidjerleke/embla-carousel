@@ -26,9 +26,8 @@ export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
   border-radius: ${BORDER_RADIUSES.SOFT};
 `
 
-export const CAROUSEL_BORDER_SHADOW_STYLES = css`
-  box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE}
-    ${COLORS.DETAIL_MEDIUM_CONTRAST};
+export const CAROUSEL_BORDER_STYLES = css`
+  border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
 `
 
 export const CAROUSEL_BUTTON_BASE_STYLES = css`
@@ -135,7 +134,7 @@ export const SLIDES_PER_VIEW_STYLES = css`
 
 export const SLIDE_NUMBER_STYLES = css`
   .embla__slide__number {
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     font-size: ${FONT_SIZES.CUSTOM(() => 4)};
     font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
@@ -207,7 +206,7 @@ export const ARROWS_STYLES = css`
 
   .embla__button {
     ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     ${createSquareSizeStyles(CAROUSEL_NAV_BUTTON_SIZE)}
     z-index: ${LAYERS.STEP};
     border-radius: ${BORDER_RADIUSES.CIRCLE};
@@ -281,7 +280,7 @@ export const SNAP_DISPLAY_STYLES = css`
 export const PLAY_BUTTON_STYLES = css`
   .embla__play {
     ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     display: flex;
     align-items: center;
@@ -327,7 +326,7 @@ export const THUMBS_STYLES = css`
   .embla-thumbs__slide__number {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     font-size: ${FONT_SIZES.H4};
     font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
     color: ${COLORS.DETAIL_HIGH_CONTRAST};
@@ -381,7 +380,8 @@ export const AUTOPLAY_STYLES = css`
 export const PROGRESS_STYLES = css`
   .embla__progress {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE}
+      ${COLORS.DETAIL_MEDIUM_CONTRAST};
     background-color: ${COLORS.BACKGROUND_SITE};
     position: relative;
     height: 0.6rem;

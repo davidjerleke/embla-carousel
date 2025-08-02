@@ -1,7 +1,7 @@
 import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 import { setupTweenParallax } from './EmblaCarouselTweenParallax'
-import { addDotBtnsAndClickHandlers } from '../EmblaCarouselDotButton'
-import { addPrevNextBtnsClickHandlers } from '../EmblaCarouselArrowButtons'
+import { addDotButtonAndClickHandlers } from '../EmblaCarouselDotButton'
+import { addPrevNextButtonClickHandlers } from '../EmblaCarouselArrowButtons'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -15,19 +15,7 @@ const nextBtn = <HTMLElement>emblaNode.querySelector('.embla__button--next')
 const dotsNode = <HTMLElement>document.querySelector('.embla__dots')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
-const removeTweenParallax = setupTweenParallax(emblaApi)
 
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtn,
-  nextBtn
-)
-const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
-  emblaApi,
-  dotsNode
-)
-
-emblaApi
-  .on('destroy', removeTweenParallax)
-  .on('destroy', removePrevNextBtnsClickHandlers)
-  .on('destroy', removeDotBtnsAndClickHandlers)
+setupTweenParallax(emblaApi)
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
+addDotButtonAndClickHandlers(emblaApi, dotsNode)

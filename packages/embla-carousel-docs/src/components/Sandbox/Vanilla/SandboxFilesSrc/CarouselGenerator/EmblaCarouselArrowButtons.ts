@@ -1,15 +1,15 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
-const addTogglePrevNextBtnsActive = (
+const addTogglePrevNextButtonsActive = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
-): (() => void) => {
+): void => {
   const togglePrevNextBtnsState = (): void => {
-    if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+    if (emblaApi.canScrollToPrev()) prevBtn.removeAttribute('disabled')
     else prevBtn.setAttribute('disabled', 'disabled')
 
-    if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+    if (emblaApi.canScrollToNext()) nextBtn.removeAttribute('disabled')
     else nextBtn.setAttribute('disabled', 'disabled')
   }
 
@@ -18,29 +18,24 @@ const addTogglePrevNextBtnsActive = (
   emblaApi
     .on('select', togglePrevNextBtnsState)
     .on('reinit', togglePrevNextBtnsState)
-
-  return (): void => {
-    prevBtn.removeAttribute('disabled')
-    nextBtn.removeAttribute('disabled')
-  }
 }
 
-export const addPrevNextBtnsClickHandlers = (
+export const addPrevNextButtonClickHandlers = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
   nextBtn: HTMLElement,
   /*__NAV_AUTOPLAY_REPLACE_START__*/
   onButtonClick?: (emblaApi: EmblaCarouselType) => void
   /*__NAV_AUTOPLAY_REPLACE_END__*/
-): (() => void) => {
+): void => {
   const scrollPrev = (): void => {
-    emblaApi.scrollPrev()
+    emblaApi.scrollToPrev()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
   }
   const scrollNext = (): void => {
-    emblaApi.scrollNext()
+    emblaApi.scrollToNext()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
@@ -48,15 +43,5 @@ export const addPrevNextBtnsClickHandlers = (
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)
 
-  const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
-    emblaApi,
-    prevBtn,
-    nextBtn
-  )
-
-  return (): void => {
-    removeTogglePrevNextBtnsActive()
-    prevBtn.removeEventListener('click', scrollPrev, false)
-    nextBtn.removeEventListener('click', scrollNext, false)
-  }
+  addTogglePrevNextButtonsActive(emblaApi, prevBtn, nextBtn)
 }

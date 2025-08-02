@@ -1,4 +1,4 @@
-export const addPlayBtnListeners = (emblaApi, playBtn) => {
+export const addPlayButtonListeners = (emblaApi, playBtn) => {
   const togglePlayBtnState = (emblaApi) => {
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
@@ -20,36 +20,16 @@ export const addPlayBtnListeners = (emblaApi, playBtn) => {
     .on('autoplay:play', togglePlayBtnState)
     .on('autoplay:stop', togglePlayBtnState)
     .on('reinit', togglePlayBtnState)
-
-  return () => {
-    playBtn.removeEventListener('click', onPlayBtnClick)
-    emblaApi
-      .off('autoplay:play', togglePlayBtnState)
-      .off('autoplay:stop', togglePlayBtnState)
-      .off('reinit', togglePlayBtnState)
-  }
 }
 
-export const addNavBtnListeners = (emblaApi, ...navButtons) => {
+export const addNavButtonListeners = (emblaApi, ...navButtons) => {
   const onNavClick = () => {
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
-
-    const resetOrStop =
-      autoplay.options.stopOnInteraction === false
-        ? autoplay.reset
-        : autoplay.stop
-
-    resetOrStop()
+    autoplay.stop()
   }
 
   navButtons.forEach((navButton) =>
     navButton.addEventListener('click', onNavClick, true)
   )
-
-  return () => {
-    navButtons.forEach((navButton) =>
-      navButton.removeEventListener('click', onNavClick, true)
-    )
-  }
 }

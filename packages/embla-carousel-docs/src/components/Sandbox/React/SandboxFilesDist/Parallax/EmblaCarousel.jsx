@@ -36,15 +36,15 @@ const EmblaCarousel = (props) => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.snapList().length
   }, [])
 
-  const tweenParallax = useCallback((emblaApi, eventName) => {
+  const tweenParallax = useCallback((emblaApi, event) => {
     const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
     const slidesInView = emblaApi.slidesInView()
-    const isScrollEvent = eventName === 'scroll'
+    const isScrollEvent = event?.type === 'scroll'
 
     emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
       let diffToTarget = scrollSnap - scrollProgress
-      const slidesInSnap = engine.slideRegistry[snapIndex]
+      const slidesInSnap = engine.scrollSnapList.slideGroupBySnap[snapIndex]
 
       slidesInSnap.forEach((slideIndex) => {
         if (isScrollEvent && !slidesInView.includes(slideIndex)) return

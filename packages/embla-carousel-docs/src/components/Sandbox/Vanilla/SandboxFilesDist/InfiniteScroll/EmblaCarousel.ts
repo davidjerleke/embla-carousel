@@ -5,7 +5,7 @@ import {
   SLIDE_TEMPLATE,
   createHTMLFromString
 } from './EmblaCarouselInfiniteScroll'
-import { addPrevNextBtnsClickHandlers } from '../EmblaCarouselArrowButtons'
+import { addPrevNextButtonClickHandlers } from '../EmblaCarouselArrowButtons'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -18,12 +18,6 @@ const prevBtn = <HTMLElement>emblaNode.querySelector('.embla__button--prev')
 const nextBtn = <HTMLElement>emblaNode.querySelector('.embla__button--next')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
-
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtn,
-  nextBtn
-)
 
 const onResize = () => emblaApi.reInit()
 const startInfiniteScroll = setupInfiniteScroll(
@@ -46,12 +40,6 @@ const startInfiniteScroll = setupInfiniteScroll(
   }
 )
 
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 startInfiniteScroll()
-
-emblaApi
-  .on('destroy', () => {
-    window.removeEventListener('resize', onResize)
-  })
-  .on('destroy', removePrevNextBtnsClickHandlers)
-
 window.addEventListener('resize', onResize)

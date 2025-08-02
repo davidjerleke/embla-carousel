@@ -1,7 +1,7 @@
 import EmblaCarousel from 'embla-carousel'
 import {
-  addThumbBtnsClickHandlers,
-  addToggleThumbBtnsActive
+  addThumbButtonClickHandlers,
+  addToggleThumbButtonsActive
 } from './EmblaCarouselThumbsButton'
 import '../css/base.css'
 import '../css/sandbox.css'
@@ -20,19 +20,5 @@ const viewportNodeThumbCarousel = document.querySelector(
 const emblaApiMain = EmblaCarousel(viewportNodeMainCarousel, OPTIONS)
 const emblaApiThumb = EmblaCarousel(viewportNodeThumbCarousel, OPTIONS_THUMBS)
 
-const removeThumbBtnsClickHandlers = addThumbBtnsClickHandlers(
-  emblaApiMain,
-  emblaApiThumb
-)
-const removeToggleThumbBtnsActive = addToggleThumbBtnsActive(
-  emblaApiMain,
-  emblaApiThumb
-)
-
-emblaApiMain
-  .on('destroy', removeThumbBtnsClickHandlers)
-  .on('destroy', removeToggleThumbBtnsActive)
-
-emblaApiThumb
-  .on('destroy', removeThumbBtnsClickHandlers)
-  .on('destroy', removeToggleThumbBtnsActive)
+addThumbButtonClickHandlers(emblaApiMain, emblaApiThumb)
+addToggleThumbButtonsActive(emblaApiMain, emblaApiThumb)

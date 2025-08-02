@@ -104,10 +104,15 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     emblaApi.on('pointerdown', onInteraction)
     emblaApi.on('pointerup', onInteraction)
     emblaApi.on('slidefocus', onInteraction)
-    eventStore.add(root, 'mouseenter', onInteraction)
-    eventStore.add(root, 'mouseleave', onInteraction)
+
+    eventStore.add(root, 'mouseenter', (event) =>
+      onInteraction(emblaApi, event, event.type)
+    )
+    eventStore.add(root, 'mouseleave', (event) =>
+      onInteraction(emblaApi, event, event.type)
+    )
     eventStore.add(emblaApi.containerNode(), 'focusout', (event) =>
-      onInteraction(event, 'slidefocusout')
+      onInteraction(emblaApi, event, 'slidefocusout')
     )
   }
 
@@ -242,6 +247,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   }
 
   function onDefaultInteraction(
+    _: EmblaCarouselType,
     originalEvent: AutoScrollInteractionType['originalEvent'],
     customType?: AutoScrollInteractionType['interaction']
   ): void {
@@ -253,6 +259,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   }
 
   function onCustomInteraction(
+    _: EmblaCarouselType,
     originalEvent: AutoScrollInteractionType['originalEvent'],
     customType?: AutoScrollInteractionType['interaction']
   ): void {

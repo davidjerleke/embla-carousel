@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, useDotButton } from './SandboxGeneratorExampleDotButton'
@@ -45,7 +45,7 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
   const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
     const { autoplay } = emblaApi.plugins()
     if (!autoplay) return
-    if (autoplay.options.stopOnInteraction !== false) autoplay.stop()
+    autoplay.stop()
   }, [])
 
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
@@ -61,6 +61,11 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi, onButtonClick)
 
   const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
+
+  useEffect(() => {
+    if (!autoplay) return
+    emblaApi?.plugins()?.autoplay?.play()
+  }, [emblaApi, autoplay])
 
   return (
     <div className="embla" dir={isRightToLeft ? 'rtl' : undefined}>

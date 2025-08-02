@@ -1,9 +1,9 @@
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
-import { addPrevNextBtnsClickHandlers } from '../EmblaCarouselArrowButtons'
+import { addPrevNextButtonClickHandlers } from '../EmblaCarouselArrowButtons'
 import {
-  addPlayBtnListeners,
-  addNavBtnListeners
+  addPlayButtonListeners,
+  addNavButtonListeners
 } from './EmblaCarouselAutoplay'
 import { addAutoplayProgressListeners } from './EmblaCarouselAutoplayProgress'
 import '../css/base.css'
@@ -20,25 +20,12 @@ const playBtn = document.querySelector('.embla__play')
 const progressNode = document.querySelector('.embla__progress')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
-  Autoplay({ playOnInit: false, delay: 3000 })
+  Autoplay({ delay: 3000 })
 ])
 
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtn,
-  nextBtn
-)
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
+addPlayButtonListeners(emblaApi, playBtn)
+addNavButtonListeners(emblaApi, prevBtn, nextBtn)
+addAutoplayProgressListeners(emblaApi, progressNode)
 
-const removePlayBtnListeners = addPlayBtnListeners(emblaApi, playBtn)
-const removeNavBtnListeners = addNavBtnListeners(emblaApi, prevBtn, nextBtn)
-
-const removeProgressListeners = addAutoplayProgressListeners(
-  emblaApi,
-  progressNode
-)
-
-emblaApi
-  .on('destroy', removePrevNextBtnsClickHandlers)
-  .on('destroy', removePlayBtnListeners)
-  .on('destroy', removeNavBtnListeners)
-  .on('destroy', removeProgressListeners)
+emblaApi.plugins().autoplay?.play()

@@ -4,12 +4,5 @@ export const setupProgressBar = (emblaApi, progressNode) => {
     progressNode.style.transform = `translate3d(${progress * 100}%,0px,0px)`
   }
 
-  const removeProgress = () => {
-    progressNode.removeAttribute('style')
-  }
-
-  return {
-    applyProgress,
-    removeProgress
-  }
+  return applyProgress
 }

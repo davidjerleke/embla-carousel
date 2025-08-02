@@ -102,7 +102,10 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
     return emblaApi.slidesInView()
   }
 
-  function onResize(event: EmblaEventModelType<'resize'>): void | boolean {
+  function onResize(
+    _: EmblaCarouselType,
+    event: EmblaEventModelType<'resize'>
+  ): void | boolean {
     const entries = event.detail
 
     for (const entry of entries) {

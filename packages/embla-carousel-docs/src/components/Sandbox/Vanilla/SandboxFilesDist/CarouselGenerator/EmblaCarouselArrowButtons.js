@@ -1,9 +1,9 @@
-const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
+const addTogglePrevNextButtonsActive = (emblaApi, prevBtn, nextBtn) => {
   const togglePrevNextBtnsState = () => {
-    if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
+    if (emblaApi.canScrollToPrev()) prevBtn.removeAttribute('disabled')
     else prevBtn.setAttribute('disabled', 'disabled')
 
-    if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
+    if (emblaApi.canScrollToNext()) nextBtn.removeAttribute('disabled')
     else nextBtn.setAttribute('disabled', 'disabled')
   }
 
@@ -12,14 +12,9 @@ const addTogglePrevNextBtnsActive = (emblaApi, prevBtn, nextBtn) => {
   emblaApi
     .on('select', togglePrevNextBtnsState)
     .on('reinit', togglePrevNextBtnsState)
-
-  return () => {
-    prevBtn.removeAttribute('disabled')
-    nextBtn.removeAttribute('disabled')
-  }
 }
 
-export const addPrevNextBtnsClickHandlers = (
+export const addPrevNextButtonClickHandlers = (
   emblaApi,
   prevBtn,
   nextBtn,
@@ -28,13 +23,13 @@ export const addPrevNextBtnsClickHandlers = (
   /*__NAV_AUTOPLAY_REPLACE_END__*/
 ) => {
   const scrollPrev = () => {
-    emblaApi.scrollPrev()
+    emblaApi.scrollToPrev()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
   }
   const scrollNext = () => {
-    emblaApi.scrollNext()
+    emblaApi.scrollToNext()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
@@ -42,15 +37,5 @@ export const addPrevNextBtnsClickHandlers = (
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)
 
-  const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
-    emblaApi,
-    prevBtn,
-    nextBtn
-  )
-
-  return () => {
-    removeTogglePrevNextBtnsActive()
-    prevBtn.removeEventListener('click', scrollPrev, false)
-    nextBtn.removeEventListener('click', scrollNext, false)
-  }
+  addTogglePrevNextButtonsActive(emblaApi, prevBtn, nextBtn)
 }

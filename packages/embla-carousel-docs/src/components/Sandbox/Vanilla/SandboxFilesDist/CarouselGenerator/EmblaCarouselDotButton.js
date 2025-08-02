@@ -1,4 +1,4 @@
-export const addDotBtnsAndClickHandlers = (
+export const addDotButtonsAndClickHandlers = (
   emblaApi,
   dotsNode,
   /*__NAV_AUTOPLAY_REPLACE_START__*/
@@ -40,8 +40,4 @@ export const addDotBtnsAndClickHandlers = (
     .on('reinit', addDotBtnsWithClickHandlers)
     .on('reinit', toggleDotBtnsActive)
     .on('select', toggleDotBtnsActive)
-
-  return () => {
-    dotsNode.innerHTML = ''
-  }
 }

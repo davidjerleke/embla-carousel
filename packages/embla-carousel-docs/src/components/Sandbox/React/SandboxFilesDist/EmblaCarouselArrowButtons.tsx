@@ -22,19 +22,19 @@ export const usePrevNextButtons = (
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollPrev()
+    emblaApi.scrollToPrev()
     if (onButtonClick) onButtonClick(emblaApi)
   }, [emblaApi, onButtonClick])
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollNext()
+    emblaApi.scrollToNext()
     if (onButtonClick) onButtonClick(emblaApi)
   }, [emblaApi, onButtonClick])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev())
-    setNextBtnDisabled(!emblaApi.canScrollNext())
+    setPrevBtnDisabled(!emblaApi.canScrollToPrev())
+    setNextBtnDisabled(!emblaApi.canScrollToNext())
   }, [])
 
   useEffect(() => {

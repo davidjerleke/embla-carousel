@@ -3,7 +3,7 @@ import { EmblaCarouselType } from 'embla-carousel'
 export const addAutoplayProgressListeners = (
   emblaApi: EmblaCarouselType,
   progressNode: HTMLElement
-): (() => void) => {
+): void => {
   const progressBarNode = <HTMLElement>(
     progressNode.querySelector('.embla__progress__bar')
   )
@@ -47,10 +47,4 @@ export const addAutoplayProgressListeners = (
   emblaApi
     .on('autoplay:timerset', startProgress)
     .on('autoplay:timerstopped', stopProgress)
-
-  return () => {
-    emblaApi
-      .off('autoplay:timerset', startProgress)
-      .off('autoplay:timerstopped', stopProgress)
-  }
 }

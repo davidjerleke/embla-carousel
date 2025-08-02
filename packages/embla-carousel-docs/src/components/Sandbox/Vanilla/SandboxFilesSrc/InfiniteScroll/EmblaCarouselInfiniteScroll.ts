@@ -76,7 +76,7 @@ export const setupInfiniteScroll = (
 
     newEngine.translate.to(oldEngine.location.get())
     const { index } = newEngine.scrollTarget.byDistance(0, false)
-    newEngine.index.set(index)
+    newEngine.indexCurrent.set(index)
     newEngine.animation.start()
 
     if (!hasMoreToLoad) removeInfiniteScroll()

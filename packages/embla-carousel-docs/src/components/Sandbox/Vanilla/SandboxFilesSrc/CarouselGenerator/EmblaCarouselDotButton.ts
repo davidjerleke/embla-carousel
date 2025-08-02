@@ -1,12 +1,12 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
-export const addDotBtnsAndClickHandlers = (
+export const addDotButtonsAndClickHandlers = (
   emblaApi: EmblaCarouselType,
   dotsNode: HTMLElement,
   /*__NAV_AUTOPLAY_REPLACE_START__*/
   onButtonClick?: (emblaApi: EmblaCarouselType) => void
   /*__NAV_AUTOPLAY_REPLACE_END__*/
-): (() => void) => {
+): void => {
   let dotNodes: HTMLElement[] = []
 
   const addDotBtnsWithClickHandlers = (): void => {
@@ -42,8 +42,4 @@ export const addDotBtnsAndClickHandlers = (
     .on('reinit', addDotBtnsWithClickHandlers)
     .on('reinit', toggleDotBtnsActive)
     .on('select', toggleDotBtnsActive)
-
-  return (): void => {
-    dotsNode.innerHTML = ''
-  }
 }

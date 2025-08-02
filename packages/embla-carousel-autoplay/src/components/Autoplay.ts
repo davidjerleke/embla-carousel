@@ -111,10 +111,15 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     emblaApi.on('pointerdown', onInteraction)
     emblaApi.on('pointerup', onInteraction)
     emblaApi.on('slidefocus', onInteraction)
-    eventStore.add(root, 'mouseenter', onInteraction)
-    eventStore.add(root, 'mouseleave', onInteraction)
+
+    eventStore.add(root, 'mouseenter', (event) =>
+      onInteraction(emblaApi, event, event.type)
+    )
+    eventStore.add(root, 'mouseleave', (event) =>
+      onInteraction(emblaApi, event, event.type)
+    )
     eventStore.add(emblaApi.containerNode(), 'focusout', (event) =>
-      onInteraction(event, 'slidefocusout')
+      onInteraction(emblaApi, event, 'slidefocusout')
     )
   }
 
@@ -201,6 +206,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function onDefaultInteraction(
+    _: EmblaCarouselType,
     originalEvent: AutoplayInteractionType['originalEvent'],
     customType?: AutoplayInteractionType['interaction']
   ): void {
@@ -212,6 +218,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function onCustomInteraction(
+    _: EmblaCarouselType,
     originalEvent: AutoplayInteractionType['originalEvent'],
     customType?: AutoplayInteractionType['interaction']
   ): void {
@@ -262,12 +269,12 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const kill = options.stopOnLastSnap && nextIndex === lastIndex
 
     const event = emblaApi.createEvent('autoplay:select', {
-      targetSnap: emblaApi.canScrollNext() ? nextIndex : 0,
+      targetSnap: emblaApi.canScrollToNext() ? nextIndex : 0,
       sourceSnap: indexCurrent.get()
     })
 
-    if (emblaApi.canScrollNext()) {
-      emblaApi.scrollNext(instant)
+    if (emblaApi.canScrollToNext()) {
+      emblaApi.scrollToNext(instant)
     } else {
       emblaApi.scrollToSnap(0, instant)
     }

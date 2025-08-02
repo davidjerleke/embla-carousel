@@ -1,4 +1,4 @@
-export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
+export const addDotButtonAndClickHandlers = (emblaApi, dotsNode) => {
   let dotNodes = []
 
   const addDotBtnsWithClickHandlers = () => {
@@ -17,7 +17,7 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
     })
   }
 
-  const toggleDotBtnsActive = () => {
+  const toggleDotButtonsActive = () => {
     const previous = emblaApi.previousSnap()
     const selected = emblaApi.selectedSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')
@@ -25,14 +25,10 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
   }
 
   addDotBtnsWithClickHandlers()
-  toggleDotBtnsActive()
+  toggleDotButtonsActive()
 
   emblaApi
     .on('reinit', addDotBtnsWithClickHandlers)
-    .on('reinit', toggleDotBtnsActive)
-    .on('select', toggleDotBtnsActive)
-
-  return () => {
-    dotsNode.innerHTML = ''
-  }
+    .on('reinit', toggleDotButtonsActive)
+    .on('select', toggleDotButtonsActive)
 }

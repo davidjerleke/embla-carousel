@@ -40,10 +40,4 @@ export const addAutoplayProgressListeners = (emblaApi, progressNode) => {
   emblaApi
     .on('autoplay:timerset', startProgress)
     .on('autoplay:timerstopped', stopProgress)
-
-  return () => {
-    emblaApi
-      .off('autoplay:timerset', startProgress)
-      .off('autoplay:timerstopped', stopProgress)
-  }
 }

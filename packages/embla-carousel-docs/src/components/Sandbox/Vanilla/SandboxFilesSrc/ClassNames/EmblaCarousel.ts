@@ -1,7 +1,7 @@
 import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 import ClassNames from 'embla-carousel-class-names'
-import { addDotBtnsAndClickHandlers } from '../EmblaCarouselDotButton'
-import { addPrevNextBtnsClickHandlers } from '../EmblaCarouselArrowButtons'
+import { addDotButtonAndClickHandlers } from '../EmblaCarouselDotButton'
+import { addPrevNextButtonClickHandlers } from '../EmblaCarouselArrowButtons'
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -16,16 +16,5 @@ const dotsNode = <HTMLElement>document.querySelector('.embla__dots')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [ClassNames()])
 
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtn,
-  nextBtn
-)
-const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
-  emblaApi,
-  dotsNode
-)
-
-emblaApi
-  .on('destroy', removePrevNextBtnsClickHandlers)
-  .on('destroy', removeDotBtnsAndClickHandlers)
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
+addDotButtonAndClickHandlers(emblaApi, dotsNode)
