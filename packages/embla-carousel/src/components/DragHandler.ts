@@ -52,7 +52,7 @@ export function DragHandler(
   const goToNextThreshold = Limit(50, 225).constrain(percentOfView.measure(20))
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
-  const baseSpeed = dragFree ? 43 : 25
+  const baseDuration = dragFree ? 43 : 25
 
   let ownerDocument: Document
   let ownerWindow: WindowType
@@ -109,12 +109,20 @@ export function DragHandler(
     return boost[type]
   }
 
-  function allowedForce(force: number, targetChanged: boolean): number {
-    const next = indexCurrent.add(mathSign(force) * -1)
-    const baseForce = scrollTarget.byDistance(force, !dragFree).distance
+  function indexChanged(): boolean {
+    const currentLocation = scrollTarget.byDistance(0, false)
+    return currentLocation.index !== indexCurrent.get()
+  }
 
-    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
-    if (skipSnaps && targetChanged) return baseForce * 0.5
+  function baseForce(force: number): number {
+    return scrollTarget.byDistance(force, !dragFree).distance
+  }
+
+  function allowedForce(force: number): number {
+    const next = indexCurrent.add(mathSign(force) * -1)
+
+    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce(force)
+    if (skipSnaps && indexChanged()) return baseForce(force) * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
   }
@@ -172,18 +180,16 @@ export function DragHandler(
   function up(evt: PointerEventType): void {
     const event = eventHandler.createEvent('pointerup', evt)
 
-    const currentLocation = scrollTarget.byDistance(0, false)
-    const targetChanged = currentLocation.index !== indexCurrent.get()
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
-    const force = allowedForce(direction(rawForce), targetChanged)
+    const force = allowedForce(direction(rawForce))
     const forceFactor = factorAbs(rawForce, force)
-    const speed = baseSpeed - 10 * forceFactor
+    const duration = baseDuration - 10 * forceFactor
     const friction = baseFriction + forceFactor / 50
 
     preventScroll = false
     pointerIsDown = false
     dragEvents.clear()
-    scrollBody.useDuration(speed).useFriction(friction)
+    scrollBody.useDuration(duration).useFriction(friction)
     scrollTo.distance(force, !dragFree)
     isMouse = false
     event.emit()

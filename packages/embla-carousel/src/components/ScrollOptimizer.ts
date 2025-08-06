@@ -50,7 +50,8 @@ export function ScrollOptimizer(
   let leftViewSlides: number[] = []
 
   function filterNotIncluded(source: number[], exclusion: number[]): number[] {
-    return source.filter((item) => !exclusion.includes(item))
+    const exclusionSet = new Set(exclusion)
+    return source.filter((item) => !exclusionSet.has(item))
   }
 
   function createSlideBound(index: number, snap: number): SlideBoundType[] {
@@ -88,16 +89,19 @@ export function ScrollOptimizer(
     direction: 1 | -1,
     isSlideInView: (index: number) => boolean
   ): void {
-    const slideIndex = slideIndexCounter.clone().set(startIndex)
+    const hasSlidesInView = inViewList.length > 0
+    const firstIndex = hasSlidesInView ? inViewList[0] : startIndex
+    const slideIndex = slideIndexCounter.clone().set(firstIndex)
     const getNextIndex = (): number => slideIndex.add(direction).get()
 
     slideIndex.set(getNextIndex())
 
-    while (slideIndex.get() !== startIndex) {
+    while (slideIndex.get() !== firstIndex) {
       const index = slideIndex.get()
+      const isInView = isSlideInView(index)
 
-      if (!isSlideInView(index)) break
-      inViewList.push(index)
+      if (!isInView && hasSlidesInView) break
+      if (isInView) inViewList.push(index)
 
       const nextIndex = getNextIndex()
       slideIndex.set(nextIndex)

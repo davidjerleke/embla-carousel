@@ -16,12 +16,14 @@ export function Translate(
   unit: 'px' | '%' = 'px'
 ): TranslateType {
   const getTranslate = axis.scroll === 'x' ? x : y
-  let isScrolling = false
 
-  let previousTarget: number | null = null
+  let lastTranslate: string | null = null
+  let isScrolling = false
   let disabled = false
 
   function set(translate: string): void {
+    if (lastTranslate === translate) return
+    lastTranslate = translate
     node.style.transform = translate
   }
 
@@ -44,13 +46,10 @@ export function Translate(
 
   function to(target: number): void {
     if (disabled) return
-
-    const newTarget = roundToTwoDecimals(axis.direction(target))
-    if (newTarget === previousTarget) return
     if (!isScrolling) setIsScrolling(true)
 
+    const newTarget = roundToTwoDecimals(axis.direction(target))
     set(getTranslate(newTarget))
-    previousTarget = newTarget
   }
 
   function toggleActive(active: boolean): void {

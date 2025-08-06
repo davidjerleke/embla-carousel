@@ -28,14 +28,14 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
 
     test('User tries to scrollNext() past the last scroll snap', () => {
       emblaApi.reInit({ startSnap: lastIndex })
-      emblaApi.scrollNext()
+      emblaApi.scrollToNext()
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev() before the first scroll snap', () => {
-      emblaApi.scrollPrev()
+      emblaApi.scrollToPrev()
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
@@ -59,7 +59,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       let i = firstIndex
 
       while (i !== lastIndex) {
-        emblaApi.scrollNext()
+        emblaApi.scrollToNext()
         expect(emblaApi.previousSnap()).toBe(i)
         i += 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -72,7 +72,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       let i = lastIndex
 
       while (i !== firstIndex) {
-        emblaApi.scrollPrev()
+        emblaApi.scrollToPrev()
         expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -107,14 +107,14 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
 
     test('User tries to scrollNext() past the last scroll snap', () => {
       emblaApi.reInit({ startSnap: lastIndex })
-      emblaApi.scrollNext()
+      emblaApi.scrollToNext()
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev() before the first scroll snap', () => {
-      emblaApi.scrollPrev()
+      emblaApi.scrollToPrev()
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
@@ -138,7 +138,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       let i = firstIndex
 
       while (i !== lastIndex) {
-        emblaApi.scrollNext()
+        emblaApi.scrollToNext()
         expect(emblaApi.previousSnap()).toBe(i)
         i += 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -151,7 +151,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal LTR', () 
       let i = lastIndex
 
       while (i !== firstIndex) {
-        emblaApi.scrollPrev()
+        emblaApi.scrollToPrev()
         expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
         expect(emblaApi.selectedSnap()).toBe(i)

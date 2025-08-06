@@ -37,10 +37,9 @@ export function ScrollTarget(
   function findTargetSnap(target: number): TargetType {
     const slidesInRange = getSlidesInViewRange(offsetLocation, Vector1D(target))
     const distance = loop ? removeOffset(target) : constrain(target)
-    const slideSnaps = slidesInRange.map((index) => snapBySlideIndex[index])
-    const snapTargets = slideSnaps.length ? slideSnaps : scrollSnaps
-    const ascDiffsToSnaps = snapTargets
-      .map((index) => {
+    const ascDiffsToSnaps = slidesInRange
+      .map((slideIndex) => {
+        const index = snapBySlideIndex[slideIndex]
         const scrollSnap = scrollSnaps[index]
         return { diff: shortcut(scrollSnap - distance, 0), index }
       })
