@@ -54,7 +54,7 @@
     "start:solid": "npm-run-all --parallel watch:package-vanilla watch:package-solid watch:playground-solid",
     "start:vue": "npm-run-all --parallel watch:package-vanilla watch:package-vue watch:playground-vue",
     "start:svelte": "npm-run-all --parallel watch:package-vanilla watch:package-svelte watch:playground-svelte",
-    "build": "npm-run-all build:packages build:package-readmes format",
+    "build": "npm-run-all build:packages format",
     "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte}\" run build",
     "build:package-readmes": "npx ts-node --project scripts/tsconfig.node.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
     "build:docs": "yarn workspace embla-carousel-docs run predeploy",
@@ -62,7 +62,7 @@
     "version:minor": "yarn workspaces foreach version minor && yarn version:push",
     "version:major": "yarn workspaces foreach version major && yarn version:push",
     "version:create": "git add -A && git commit -m \"$npm_package_version\" && git tag v$npm_package_version",
-    "version:push": "yarn install && yarn build && yarn version:create && git add -A && git push && git push --tags"
+    "version:push": "yarn install && yarn build && yarn build:package-readmes && yarn format && yarn version:create && git add -A && git push && git push --tags"
   },
   "devDependencies": {
     "@babel/core": "7.23.2",
@@ -71,16 +71,16 @@
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
-    "husky": "^4.3.8",
+    "@types/dotenv": "^8.2.3",
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
     "rollup": "^4.22.4",
     "typescript": "^5.2.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm-run-all format test lint"
-    }
+  "dependencies": {
+    "@octokit/graphql": "^9.0.1",
+    "@octokit/rest": "^22.0.0",
+    "dotenv": "^17.2.1"
   },
   "packageManager": "yarn@3.3.1"
 }

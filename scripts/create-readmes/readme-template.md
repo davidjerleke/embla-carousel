@@ -19,7 +19,7 @@
   </strong>
 
   <p align="center">
-    <strong>Embla Carousel</strong> is a bare bones carousel library with great fluid motion and awesome swipe precision. It's library agnostic, dependency free and 100% open source.
+    <strong>Embla Carousel</strong> is a lightweight, dependency-free carousel library built for smooth, fluid motion and precision swiping. It’s framework-agnostic, fully open source, and designed to give you complete control without unnecessary bloat.
   </p>
 
   <br>
@@ -28,15 +28,6 @@
     <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/examples/predefined/">Examples</a>&nbsp;</code>
     </strong>
-  </p>
-
-  <p align="center">
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
-    </strong>
-  </p>
-
-  <p align="center">
     <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
     </strong>
@@ -79,10 +70,28 @@
 
 <div align="center">
   <strong>
+    <h2 align="center">✨ Sponsors ✨</h2>
+  </strong>
+  <p align="center">
+    Thanks to all the amazing <strong>Embla Carousel</strong> sponsors for making this project possible! [Become a sponsor](https://github.com/sponsors/davidjerleke) and help it keep rolling forward.
+  </p>
+  <p align="center">
+    __REPLACE_CURRENT_SPONSORS__
+  </p>
+  <p>Thanks to all our <strong>past sponsors</strong> for helping <strong>Embla Carousel</strong> get to where it is today.</p>
+  <p align="center">
+    __REPLACE_PAST_SPONSORS__
+  </p>
+</div>
+
+<br>
+
+<div align="center">
+  <strong>
     <h2 align="center">Contributors</h2>
   </strong>
   <p align="center">
-    Thank you to all contributors for making <a href="https://www.embla-carousel.com/">Embla Carousel</a> awesome! <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
+    Thank you to all contributors for making <strong>Embla Carousel</strong> awesome! <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">Contributions</a> are welcome.
   </p>
   <p align="center">
     __REPLACE_CONTRIBUTORS__
@@ -129,7 +138,7 @@
 <p align="center">
   Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.<br><br>
   <sup>Embla Carousel - Copyright © 2019-present.</sup><br />
-  <sup>Package created by __REPLACE_PACKAGE_AUTHOR__.</sup>
+  <sup>Library created by __REPLACE_PACKAGE_AUTHOR__.</sup>
 </p>
 
 <p align="center">
@@ -137,11 +146,16 @@
 </p>
 
 <p align="center">
-  Thanks <a href="https://www.browserstack.com">BrowserStack</a>.
+  Thanks <a href="https://www.browserstack.com">BrowserStack</a>, <a href="https://www.algolia.com/">Algolia</a>.
 </p>
 
 <p align="center">
   <a href="https://www.browserstack.com">
     <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
-    </a>
+  </a>
+</p>
+<p align="center">
+  <a href="https://www.algolia.com/">
+    <img src="https://www.embla-carousel.com/algolia-logo.svg" width="120" height="30" />
+  </a>
 </p>
