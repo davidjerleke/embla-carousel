@@ -290,7 +290,7 @@ export const PLAY_BUTTON_STYLES = css`
     font-weight: ${FONT_WEIGHTS.BOLD};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
     padding: 0 ${SPACINGS.FOUR};
-    min-width: ${SPACINGS.FOURTEEN};
+    min-width: ${SPACINGS.FIFTEEN};
   }
 `
 
@@ -424,13 +424,13 @@ export const PARALLAX_STYLES = css`
   }
 `
 
-const SCALE_STYLES = css`
+export const SCALE_STYLES = css`
   .embla__slide__number {
     backface-visibility: hidden;
   }
 `
 
-const LAZY_LOAD_STYLES = css`
+export const LAZY_LOAD_STYLES = css`
   .embla__lazy-load {
     position: relative;
     height: 100%;
@@ -501,7 +501,7 @@ export const AUTO_HEIGHT_STYLES = css`
   }
 `
 
-const CLASS_NAMES_STYLES = css`
+export const CLASS_NAMES_STYLES = css`
   .embla__slide {
     transition: opacity 0.2s ease-in-out;
   }
@@ -511,7 +511,7 @@ const CLASS_NAMES_STYLES = css`
   }
 `
 
-const FADE_STYLES = css`
+export const FADE_STYLES = css`
   .embla__slide__img {
     user-select: none;
   }
@@ -705,266 +705,4 @@ export const examplesCarouselDefaultStyles = (
     .replace(/__replace_axis_height__/gi, containerHeight)
     .replace(/__replace_slide_height__/gi, slideHeight)
     .replace(/__replace_slide_size__/gi, slideSize)
-}
-
-export const examplesCarouselDragFreeStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselVariableWidthStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      VARIABLE_WIDTH_STYLES,
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselSlidesPerViewStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES
-    ),
-    styledComponentsStylesToString(SLIDES_PER_VIEW_STYLES)
-  )
-}
-
-export const examplesCarouselThumbsStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(SLIDE_NUMBER_STYLES, THUMBS_STYLES)
-  )
-}
-
-export const examplesCarouselProgressStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      PROGRESS_STYLES
-    )
-  )
-}
-
-export const examplesCarouselParallaxStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      PARALLAX_STYLES
-    )
-  )
-}
-
-export const examplesCarouselScaleStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      SCALE_STYLES
-    )
-  )
-}
-
-export const examplesCarouselOpacityStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES
-    )
-  )
-}
-
-export const examplesCarouselAutoplayStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      PLAY_BUTTON_STYLES,
-      PROGRESS_STYLES,
-      AUTOPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselAutoHeightStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      AUTO_HEIGHT_STYLES
-    )
-  )
-}
-
-export const examplesCarouselClassNamesStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      CLASS_NAMES_STYLES
-    )
-  )
-}
-
-export const examplesCarouselFadeStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      FADE_STYLES
-    )
-  )
-}
-
-export const examplesCarouselLazyLoadStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      LAZY_LOAD_STYLES
-    )
-  )
-}
-
-export const examplesCarouselInfiniteScrollStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES,
-      INFINITE_SCROLL_STYLES
-    )
-  )
-}
-
-export const examplesCarouselIosPickerStyles = (): string => {
-  return styledComponentsStylesToString(IOS_PICKER_STYLES)
 }

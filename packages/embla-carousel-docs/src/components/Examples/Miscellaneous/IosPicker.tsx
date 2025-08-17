@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselIosPicker from 'components/Sandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
 import { examplesIosPickerWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselIosPickerStyles } from 'components/Examples/examplesCarouselStyles'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import { IOS_PICKER_STYLES } from 'components/Examples/examplesCarouselStyles'
+
+const CarouselIosPicker = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-ios-style-picker'
-const STYLES = examplesCarouselIosPickerStyles()
+const STYLES = styledComponentsStylesToString(IOS_PICKER_STYLES)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -46,8 +53,13 @@ export const IosPicker = (props: PropType) => {
   return (
     <>
       <SandboxSelection sandboxes={loop ? SANDBOXES_LOOP : SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselIosPicker loop={loop} /> : null}
+        {inView ? (
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselIosPicker loop={loop} />
+          </LoadSpinnerWithSuspense>
+        ) : null}
       </Wrapper>
     </>
   )

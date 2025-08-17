@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselProgress from 'components/Sandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselProgressStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  PROGRESS_STYLES,
+  SLIDE_NUMBER_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselProgress = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-progress'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { dragFree: true }
-const STYLES = examplesCarouselProgressStyles('65%')
+const STYLES = examplesCarouselDefaultStyles(
+  '65%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    PROGRESS_STYLES
+  )
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -39,8 +62,13 @@ export const Progress = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselProgress slides={SLIDES} options={OPTIONS} /> : null}
+        {inView ? (
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselProgress slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
+        ) : null}
       </Wrapper>
     </>
   )

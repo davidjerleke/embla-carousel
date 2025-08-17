@@ -39,7 +39,7 @@ const TableOfContentsMenuWrapper = styled.div`
 const Heading = styled.div`
   color: ${COLORS.TEXT_BODY};
   padding-top: ${SPACINGS.ONE};
-  padding-bottom: ${SPACINGS.TWO};
+  padding-bottom: ${SPACINGS.ONE};
   font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
   text-transform: uppercase;
 

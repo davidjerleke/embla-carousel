@@ -1,20 +1,43 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselOpacity from 'components/Sandbox/React/SandboxFilesSrc/Opacity/EmblaCarousel'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselOpacityStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  DOTS_STYLES,
+  IMAGE_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselOpacity = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/Opacity/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-opacity'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
-const STYLES = examplesCarouselOpacityStyles('70%')
+const STYLES = examplesCarouselDefaultStyles(
+  '70%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    IMAGE_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    DOTS_STYLES
+  )
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -39,8 +62,13 @@ export const Opacity = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselOpacity slides={SLIDES} options={OPTIONS} /> : null}
+        {inView ? (
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselOpacity slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
+        ) : null}
       </Wrapper>
     </>
   )

@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselInfiniteScroll from 'components/Sandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselInfiniteScrollStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  INFINITE_SCROLL_STYLES,
+  SLIDE_NUMBER_STYLES,
+  SNAP_DISPLAY_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselInfiniteScroll = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/InfiniteScroll/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-infinite-scroll'
 const SLIDES = arrayFromNumber(5)
@@ -19,7 +33,18 @@ const OPTIONS: EmblaOptionsType = {
   slideChanges: true,
   resize: false
 }
-const STYLES = examplesCarouselInfiniteScrollStyles()
+const STYLES = examplesCarouselDefaultStyles(
+  '100%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    SNAP_DISPLAY_STYLES,
+    INFINITE_SCROLL_STYLES
+  )
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -44,9 +69,12 @@ export const InfiniteScroll = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
         {inView ? (
-          <CarouselInfiniteScroll slides={SLIDES} options={OPTIONS} />
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselInfiniteScroll slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
         ) : null}
       </Wrapper>
     </>

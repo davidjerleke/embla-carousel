@@ -1,39 +1,60 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import { SandboxGeneratorExample } from 'components/Sandbox/SandboxGeneratorExample'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxGeneratorSettingsType } from 'consts/sandbox'
-import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGeneratorContext'
-import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
-import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { examplesCarouselSlidesPerViewStyles } from '../examplesCarouselStyles'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  DOTS_STYLES,
+  SLIDE_NUMBER_STYLES,
+  SLIDES_PER_VIEW_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselDefault = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/Default/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-slides-per-view'
 const SLIDES = arrayFromNumber(6)
 const OPTIONS: EmblaOptionsType = { align: 'start' }
+const STYLES = examplesCarouselDefaultStyles(
+  '100%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    DOTS_STYLES,
+    SLIDES_PER_VIEW_STYLES
+  )
+)
 
-const SANDBOX_SETTINGS: SandboxGeneratorSettingsType = {
-  ...CONTEXT_DEFAULT_VALUE.formData,
-  ...OPTIONS,
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
-  slideList: SLIDES,
-  navigationPrevNextButtons: true,
-  navigationDots: true,
-  styles: examplesCarouselSlidesPerViewStyles()
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
 }
 
-const SANDBOXES = staticGeneratorSandboxes(SANDBOX_SETTINGS)
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'Default')
 
 const Wrapper = styled.div`
   ${examplesDefaultWrapperStyles};
 
   &.${ID} {
-    ${sandboxGeneratorCreateStyles(SANDBOX_SETTINGS)};
+    ${STYLES};
   }
 `
 
@@ -43,14 +64,12 @@ export const SlidesPerView = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
         {inView ? (
-          <SandboxGeneratorExample
-            slides={SLIDES}
-            options={OPTIONS}
-            navigationPrevNextButtons
-            navigationDots
-          />
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselDefault slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
         ) : null}
       </Wrapper>
     </>

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { TableOfContentsItemType } from './TableOfContentsContext'
+import { TableOfContentsItemType } from 'consts/tableOfContents'
 import { SPACINGS } from 'consts/spacings'
 import { TableOfContentsMenuItem } from './TableOfContentsMenuItem'
 

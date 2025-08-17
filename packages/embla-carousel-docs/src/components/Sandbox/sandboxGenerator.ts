@@ -139,16 +139,6 @@ const sandboxReact = async (
   })
 }
 
-export const staticGeneratorSandboxes = (
-  settings?: SandboxGeneratorSettingsType
-): SandboxSelectionType[] =>
-  createSandboxFunctionsWithLabels({
-    VANILLA_JS: () => sandboxVanilla(settings, SANDBOX_LANGUAGES.JAVASCRIPT),
-    VANILLA_TS: () => sandboxVanilla(settings, SANDBOX_LANGUAGES.TYPESCRIPT),
-    REACT_JS: () => sandboxReact(settings, SANDBOX_LANGUAGES.JAVASCRIPT),
-    REACT_TS: () => sandboxReact(settings, SANDBOX_LANGUAGES.TYPESCRIPT)
-  })
-
 export const dynamicGeneratorSandboxes: SandboxSelectionType<SandboxGeneratorSettingsType>[] =
   createSandboxFunctionsWithLabels({
     VANILLA_JS: (settings?: SandboxGeneratorSettingsType) =>

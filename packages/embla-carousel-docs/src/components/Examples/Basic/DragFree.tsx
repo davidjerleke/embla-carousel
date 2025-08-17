@@ -1,40 +1,58 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import { SandboxGeneratorExample } from 'components/Sandbox/SandboxGeneratorExample'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxGeneratorSettingsType } from 'consts/sandbox'
-import { CONTEXT_DEFAULT_VALUE } from 'components/CarouselGenerator/CarouselGeneratorContext'
-import { sandboxGeneratorCreateStyles } from 'components/Sandbox/sandboxGeneratorCreateStyles'
-import { staticGeneratorSandboxes } from 'components/Sandbox/sandboxGenerator'
+import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { examplesCarouselDragFreeStyles } from '../examplesCarouselStyles'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  SLIDE_NUMBER_STYLES,
+  SNAP_DISPLAY_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselDragFree = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/DragFree/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-drag-free'
 const SLIDES = arrayFromNumber(16)
 const OPTIONS: EmblaOptionsType = { dragFree: true }
+const STYLES = examplesCarouselDefaultStyles(
+  '50%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    SNAP_DISPLAY_STYLES
+  )
+)
 
-const SANDBOX_SETTINGS: SandboxGeneratorSettingsType = {
-  ...CONTEXT_DEFAULT_VALUE.formData,
-  ...OPTIONS,
+const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
-  slideList: SLIDES,
-  slideSize: '50',
-  navigationPrevNextButtons: true,
-  selectedSnapDisplay: true,
-  styles: examplesCarouselDragFreeStyles('50%')
+  slides: SLIDES,
+  options: OPTIONS,
+  styles: STYLES
 }
 
-const SANDBOXES = staticGeneratorSandboxes(SANDBOX_SETTINGS)
+const SANDBOXES = sandboxStaticSandboxes(SANDBOX_CONFIG, 'DragFree')
 
 const Wrapper = styled.div`
   ${examplesDefaultWrapperStyles};
 
   &.${ID} {
-    ${sandboxGeneratorCreateStyles(SANDBOX_SETTINGS)};
+    ${STYLES};
   }
 `
 
@@ -46,12 +64,9 @@ export const DragFree = () => {
       <SandboxSelection sandboxes={SANDBOXES} />
       <Wrapper className={ID} ref={inViewRef}>
         {inView ? (
-          <SandboxGeneratorExample
-            slides={SLIDES}
-            options={OPTIONS}
-            navigationPrevNextButtons
-            selectedSnapDisplay
-          />
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselDragFree slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
         ) : null}
       </Wrapper>
     </>

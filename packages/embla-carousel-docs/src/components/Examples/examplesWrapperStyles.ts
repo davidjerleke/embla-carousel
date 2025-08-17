@@ -13,6 +13,7 @@ import {
 const baseWrapperStyles = css`
   margin-top: ${SPACINGS.FOUR};
   margin-bottom: ${SPACINGS.FOUR};
+  position: relative;
 `
 
 export const examplesDefaultWrapperStyles = css`
@@ -35,4 +36,5 @@ export const examplesIosPickerWrapperStyles = css`
   ${pageFrameCollapseStyles};
   min-height: ${CAROUSEL_IOS_PICKER_HEIGHT};
   touch-action: none;
+  position: relative;
 `

@@ -5,15 +5,16 @@ import { LoadSpinnerSuspenseTrigger } from 'components/LoadSpinner/LoadSpinnerSu
 type PropType = {
   children: React.ReactNode
   fallback?: React.ReactNode
+  usePortal?: boolean
 }
 
 export const LoadSpinnerWithSuspense = (props: PropType) => {
   const [isLoading, setIsLoading] = useState(false)
-  const { children, fallback } = props
+  const { children, fallback, usePortal } = props
 
   return (
     <>
-      <LoadSpinnerSuspense isVisible={isLoading} />
+      <LoadSpinnerSuspense isVisible={isLoading} usePortal={usePortal} />
       <Suspense
         fallback={
           <>

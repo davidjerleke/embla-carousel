@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselAutoHeight from 'components/Sandbox/React/SandboxFilesSrc/AutoHeight/EmblaCarousel'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselAutoHeightStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  AUTO_HEIGHT_STYLES,
+  CONTROLS_STYLES,
+  DOTS_STYLES,
+  examplesCarouselDefaultStyles,
+  SLIDE_NUMBER_STYLES
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselAutoHeight = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/AutoHeight/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-auto-height'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselAutoHeightStyles()
+const STYLES = examplesCarouselDefaultStyles(
+  '100%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    DOTS_STYLES,
+    AUTO_HEIGHT_STYLES
+  )
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -39,9 +64,12 @@ export const AutoHeight = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
         {inView ? (
-          <CarouselAutoHeight slides={SLIDES} options={OPTIONS} />
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselAutoHeight slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
         ) : null}
       </Wrapper>
     </>

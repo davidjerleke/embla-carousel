@@ -25,6 +25,7 @@ const Link = styled(LinkBare)`
 
 const ActiveTitle = styled.span`
   ${itemStyles};
+  color: ${COLORS.TEXT_BODY};
 `
 
 const Separator = styled(Icon)`
@@ -47,7 +48,7 @@ export const PageBreadcrumbs = (props: PropType) => {
           <Fragment key={id}>
             <Link to={slug}>{title}</Link>
             <Separator
-              size="0.6rem"
+              size="0.8rem"
               svg="chevronRight"
               role="presentation"
               aria-hidden="false"

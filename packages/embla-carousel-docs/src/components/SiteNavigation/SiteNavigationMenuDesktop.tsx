@@ -6,6 +6,7 @@ import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
+import { FONT_SIZES } from 'consts/fontSizes'
 import { FooterLinks } from 'components/Footer/FooterLinks'
 import { LAYERS } from 'consts/layers'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
@@ -19,6 +20,7 @@ const SiteNavigationMenuDesktopWrapper = styled.div<{
   $isKeyNavigating: boolean
 }>`
   background-color: ${COLORS.BACKGROUND_SITE};
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
   position: relative;
   height: 100%;
 

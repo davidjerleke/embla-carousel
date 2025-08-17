@@ -1,20 +1,34 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselThumbs from 'components/Sandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel'
 import { examplesThumbsWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselThumbsStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  SLIDE_NUMBER_STYLES,
+  THUMBS_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselThumbs = lazy(() => {
+  return import('components/Sandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel')
+})
 
 const ID = 'embla-carousel-thumbs'
 const SLIDES = arrayFromNumber(10)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselThumbsStyles()
+const STYLES = examplesCarouselDefaultStyles(
+  '100%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(SLIDE_NUMBER_STYLES, THUMBS_STYLES)
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -39,8 +53,13 @@ export const Thumbs = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselThumbs slides={SLIDES} options={OPTIONS} /> : null}
+        {inView ? (
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselThumbs slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
+        ) : null}
       </Wrapper>
     </>
   )

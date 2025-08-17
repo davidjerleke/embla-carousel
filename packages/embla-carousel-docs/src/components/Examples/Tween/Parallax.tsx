@@ -1,20 +1,45 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import styled from 'styled-components'
 import { useInView } from 'react-intersection-observer'
-import CarouselParallax from 'components/Sandbox/React/SandboxFilesSrc/Parallax/EmblaCarousel'
 import { examplesDefaultWrapperStyles } from 'components/Examples/examplesWrapperStyles'
-import { examplesCarouselParallaxStyles } from 'components/Examples/examplesCarouselStyles'
 import { arrayFromNumber } from 'utils/arrayFromNumber'
-import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
-import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
+import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
+import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { EXAMPLES_INTERSECTION_OPTIONS } from 'consts/examples'
+import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithSuspense'
+import {
+  ARROWS_STYLES,
+  CONTROLS_STYLES,
+  DOTS_STYLES,
+  IMAGE_STYLES,
+  PARALLAX_STYLES,
+  examplesCarouselDefaultStyles
+} from 'components/Examples/examplesCarouselStyles'
+
+const CarouselParallax = lazy(() => {
+  return import(
+    'components/Sandbox/React/SandboxFilesSrc/Parallax/EmblaCarousel'
+  )
+})
 
 const ID = 'embla-carousel-parallax'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
-const STYLES = examplesCarouselParallaxStyles('80%')
+const STYLES = examplesCarouselDefaultStyles(
+  '80%',
+  '1rem',
+  'x',
+  styledComponentsStylesToString(
+    IMAGE_STYLES,
+    CONTROLS_STYLES,
+    ARROWS_STYLES,
+    DOTS_STYLES,
+    PARALLAX_STYLES
+  )
+)
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {
   id: ID,
@@ -39,8 +64,13 @@ export const Parallax = () => {
   return (
     <>
       <SandboxSelection sandboxes={SANDBOXES} />
+
       <Wrapper className={ID} ref={inViewRef}>
-        {inView ? <CarouselParallax slides={SLIDES} options={OPTIONS} /> : null}
+        {inView ? (
+          <LoadSpinnerWithSuspense usePortal={false}>
+            <CarouselParallax slides={SLIDES} options={OPTIONS} />
+          </LoadSpinnerWithSuspense>
+        ) : null}
       </Wrapper>
     </>
   )
