@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   IMAGE_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselOpacity = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselOpacity = lazy(() => {
 const ID = 'embla-carousel-opacity'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '70%',
   '1rem',
   'x',

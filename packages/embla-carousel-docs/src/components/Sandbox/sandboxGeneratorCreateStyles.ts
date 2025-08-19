@@ -2,7 +2,7 @@ import { FlattenSimpleInterpolation } from 'styled-components'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { SandboxGeneratorSettingsType } from 'consts/sandbox'
 import {
-  examplesCarouselDefaultStyles,
+  examplesCarouselStyles,
   SLIDE_NUMBER_STYLES,
   CONTROLS_STYLES,
   ARROWS_STYLES,
@@ -30,7 +30,7 @@ export const sandboxGeneratorCreateStyles = (
   if (navigationPrevNextButtons) styleList.push(ARROWS_STYLES)
   if (navigationDots) styleList.push(DOTS_STYLES)
 
-  return examplesCarouselDefaultStyles(
+  return examplesCarouselStyles(
     `${slideSize}%`,
     `${parseFloat(slideGapSize) / 10}rem`,
     axis,

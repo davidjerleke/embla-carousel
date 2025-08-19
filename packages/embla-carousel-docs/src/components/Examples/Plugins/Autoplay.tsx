@@ -14,7 +14,7 @@ import {
   ARROWS_STYLES,
   AUTOPLAY_STYLES,
   CONTROLS_STYLES,
-  examplesCarouselDefaultStyles,
+  examplesCarouselStyles,
   PLAY_BUTTON_STYLES,
   PROGRESS_STYLES,
   SLIDE_NUMBER_STYLES
@@ -29,7 +29,7 @@ const CarouselAutoplay = lazy(() => {
 const ID = 'embla-carousel-autoplay'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '70%',
   '1rem',
   'x',

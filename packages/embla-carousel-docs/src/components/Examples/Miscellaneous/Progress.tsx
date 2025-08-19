@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   PROGRESS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselProgress = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselProgress = lazy(() => {
 const ID = 'embla-carousel-progress'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { dragFree: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '65%',
   '1rem',
   'x',

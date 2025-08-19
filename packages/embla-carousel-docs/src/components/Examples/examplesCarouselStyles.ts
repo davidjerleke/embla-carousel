@@ -48,28 +48,55 @@ export const BASE_STYLES = css`
   .embla {
     max-width: ${CAROUSEL_MAX_WIDTH};
     margin: auto;
-    
+
     --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
-    --slide-spacing: __replace_axis_spacing_amount__;
-    --slide-size: __replace_slide_size__;
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
   }
-  
+
   .embla__viewport {
     overflow: hidden;
   }
 
   .embla__container {
     display: flex;
-    touch-action: __replace-axis-touch_action__;
-    margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
-    __replace_axis_height__
-    __replace_axis_flex__
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
   }
 
   .embla__slide {
     flex: 0 0 var(--slide-size);
-    min-__replace-axis-size__: 0;
-    padding-__replace_axis_spacing__: var(--slide-spacing);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+  }
+`
+
+export const BASE_STYLES_VERTICAL = css`
+  .embla {
+    max-width: ${CAROUSEL_MAX_WIDTH};
+    margin: auto;
+
+    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
+  }
+
+  .embla__viewport {
+    overflow: hidden;
+  }
+
+  .embla__container {
+    display: flex;
+    touch-action: pan-x pinch-zoom;
+    margin-top: calc(var(--slide-spacing) * -1);
+    height: calc(var(--slide-spacing) + var(--slide-height));
+    flex-direction: column;
+  }
+
+  .embla__slide {
+    flex: 0 0 var(--slide-size);
+    min-height: 0;
+    padding-top: var(--slide-spacing);
   }
 `
 
@@ -92,42 +119,38 @@ export const SLIDES_PER_VIEW_STYLES = css`
   }
 
   .embla__container {
-    backface-visibility: hidden;
     display: flex;
-    touch-action: __replace-axis-touch_action__;
-    margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
-    __replace_axis_height__
-    __replace_axis_flex__
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
   }
 
   ${MEDIA.MIN_SM} {
     .embla__container {
-      margin-__replace_axis_spacing__: calc(var(--slide-spacing-sm) * -1);
+      margin-left: calc(var(--slide-spacing-sm) * -1);
     }
   }
   ${MEDIA.MIN_LG} {
     .embla__container {
-      margin-__replace_axis_spacing__: calc(var(--slide-spacing-lg) * -1);
+      margin-left: calc(var(--slide-spacing-lg) * -1);
     }
   }
 
-
   .embla__slide {
-    min-__replace-axis-size__: 0;
+    min-width: 0;
     flex: 0 0 var(--slide-size);
-    padding-__replace_axis_spacing__: var(--slide-spacing);
+    padding-left: var(--slide-spacing);
   }
 
   ${MEDIA.MIN_SM} {
     .embla__slide {
       flex: 0 0 var(--slide-size-sm);
-      padding-__replace_axis_spacing__: var(--slide-spacing-sm);
+      padding-left: var(--slide-spacing-sm);
     }
   }
   ${MEDIA.MIN_LG} {
     .embla__slide {
       flex: 0 0 var(--slide-size-lg);
-      padding-__replace_axis_spacing__: var(--slide-spacing-lg);
+      padding-left: var(--slide-spacing-lg);
     }
   }
 `
@@ -141,7 +164,7 @@ export const SLIDE_NUMBER_STYLES = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: __replace_slide_height__;
+    height: var(--slide-height);
     user-select: none;
   }
 `
@@ -150,7 +173,7 @@ export const IMAGE_STYLES = css`
   .embla__slide__img {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     display: block;
-    height: __replace_slide_height__;
+    height: var(--slide-height);
     width: 100%;
     object-fit: cover;
   }
@@ -214,6 +237,7 @@ export const ARROWS_STYLES = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: rotate(0deg);
   }
 
   .embla__button:disabled {
@@ -313,7 +337,7 @@ export const THUMBS_STYLES = css`
 
   .embla-thumbs__slide {
     flex: 0 0 22%;
-    min-__replace-axis-size__: 0;
+    min-width: 0;
     padding-left: var(--thumbs-slide-spacing);
   }
 
@@ -521,7 +545,7 @@ export const INFINITE_SCROLL_STYLES = css`
   .embla-infinite-scroll {
     position: relative;
     flex: 0 0 15rem;
-    min-__replace-axis-size__: 0;
+    min-width: 0;
     height: var(--slide-height);
     display: flex;
     align-items: center;
@@ -677,32 +701,40 @@ export const IOS_PICKER_STYLES = css`
   }
 `
 
-export const examplesCarouselDefaultStyles = (
+const SLIDE_SIZE_REGEX = /--slide-size:\s*100%;/gi
+const SPACING_SIZE_REGEX = /--slide-spacing:\s*1rem;/gi
+const SLIDE_HEIGHT_REGEX = /height\s*:\s*var\(\s*--slide-height\s*\)\s*;?/
+const BUTTON_TRANSFORM_VALUE_REGEX = /transform\s*:\s*rotate\(0deg\)\s*;?/
+
+const SLIDE_NUMBER_HEIGHT_REGEX =
+  /\.embla__slide__number\s*\{[\s\S]*?\bheight\s*:\s*var\(\s*--slide-height\s*\)\s*;?[\s\S]*?\}/
+
+const BUTTON_TRANSFORM_REGEX =
+  /\.embla__button\s*\{[\s\S]*?\btransform\s*:\s*rotate\(0deg\)\s*;?[\s\S]*?\}/
+
+export const examplesCarouselStyles = (
   slideSize: string = '100%',
   spacingSize: string = CAROUSEL_SLIDES_SPACING,
   axis: EmblaOptionsType['axis'] = 'x',
   customStyles: string = '',
-  baseStyles: string = styledComponentsStylesToString(BASE_STYLES)
+  baseStyles: string = ''
 ): string => {
-  const horizontal = axis === 'x'
-  const flexDirection = horizontal ? '' : 'flex-direction: column;'
-  const spacingDirection = horizontal ? 'left' : 'top'
-  const panDirection = `pan-${horizontal ? 'y' : 'x'} pinch-zoom`
-  const sizeDimention = horizontal ? 'width' : 'height'
-  const slideHeight = horizontal ? 'var(--slide-height)' : '100%'
-  const containerHeight = horizontal
-    ? ''
-    : 'height: calc(var(--slide-spacing) + var(--slide-height));'
+  const isHorizontal = axis === 'x'
+  const baseFallback = isHorizontal ? BASE_STYLES : BASE_STYLES_VERTICAL
+  const rootStyles = baseStyles || styledComponentsStylesToString(baseFallback)
+  const allStyles = rootStyles + customStyles
 
-  const mergedStyles = baseStyles + customStyles
-
-  return mergedStyles
-    .replace(/__replace_axis_flex__/gi, flexDirection)
-    .replace(/__replace-axis-size__/gi, sizeDimention)
-    .replace(/__replace-axis-touch_action__/gi, panDirection)
-    .replace(/__replace_axis_spacing__/gi, spacingDirection)
-    .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
-    .replace(/__replace_axis_height__/gi, containerHeight)
-    .replace(/__replace_slide_height__/gi, slideHeight)
-    .replace(/__replace_slide_size__/gi, slideSize)
+  return allStyles
+    .replace(SLIDE_SIZE_REGEX, `--slide-size: ${slideSize};`)
+    .replace(SPACING_SIZE_REGEX, `--slide-spacing: ${spacingSize};`)
+    .replace(SLIDE_NUMBER_HEIGHT_REGEX, (match) => {
+      const slideHeight = isHorizontal ? 'var(--slide-height)' : '100%'
+      const value = `height: ${slideHeight};`
+      return match.replace(SLIDE_HEIGHT_REGEX, value)
+    })
+    .replace(BUTTON_TRANSFORM_REGEX, (match) => {
+      const buttonDirection = isHorizontal ? '' : 'rotate(90deg)'
+      const value = buttonDirection ? `transform: ${buttonDirection};` : ''
+      return match.replace(BUTTON_TRANSFORM_VALUE_REGEX, value)
+    })
 }

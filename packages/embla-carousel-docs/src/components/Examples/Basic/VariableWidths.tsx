@@ -16,7 +16,7 @@ import {
   SNAP_DISPLAY_STYLES,
   SLIDE_NUMBER_STYLES,
   VARIABLE_WIDTH_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselDragFree = lazy(() => {
@@ -28,7 +28,7 @@ const CarouselDragFree = lazy(() => {
 const ID = 'embla-carousel-variable-widths'
 const SLIDES = arrayFromNumber(9)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

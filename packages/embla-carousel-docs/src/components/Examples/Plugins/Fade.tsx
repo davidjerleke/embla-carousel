@@ -16,7 +16,7 @@ import {
   DOTS_STYLES,
   FADE_STYLES,
   IMAGE_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselFade = lazy(() => {
@@ -26,7 +26,7 @@ const CarouselFade = lazy(() => {
 const ID = 'embla-carousel-fade'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true, duration: 30 }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

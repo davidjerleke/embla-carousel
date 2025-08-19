@@ -13,7 +13,7 @@ import { LoadSpinnerWithSuspense } from 'components/LoadSpinner/LoadSpinnerWithS
 import {
   SLIDE_NUMBER_STYLES,
   THUMBS_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselThumbs = lazy(() => {
@@ -23,7 +23,7 @@ const CarouselThumbs = lazy(() => {
 const ID = 'embla-carousel-thumbs'
 const SLIDES = arrayFromNumber(10)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

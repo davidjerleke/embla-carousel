@@ -16,7 +16,7 @@ import {
   DOTS_STYLES,
   IMAGE_STYLES,
   PARALLAX_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselParallax = lazy(() => {
@@ -28,7 +28,7 @@ const CarouselParallax = lazy(() => {
 const ID = 'embla-carousel-parallax'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '80%',
   '1rem',
   'x',

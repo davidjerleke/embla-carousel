@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselDefault = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselDefault = lazy(() => {
 const ID = 'embla-carousel-loop'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '70%',
   '1rem',
   'x',

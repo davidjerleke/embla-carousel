@@ -16,7 +16,7 @@ import {
   DOTS_STYLES,
   SCALE_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselScale = lazy(() => {
@@ -26,7 +26,7 @@ const CarouselScale = lazy(() => {
 const ID = 'embla-carousel-scale'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '55%',
   '1rem',
   'x',

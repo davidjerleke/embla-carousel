@@ -15,7 +15,7 @@ import {
   AUTO_HEIGHT_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
-  examplesCarouselDefaultStyles,
+  examplesCarouselStyles,
   SLIDE_NUMBER_STYLES
 } from 'components/Examples/examplesCarouselStyles'
 
@@ -28,7 +28,7 @@ const CarouselAutoHeight = lazy(() => {
 const ID = 'embla-carousel-auto-height'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

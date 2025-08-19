@@ -13,7 +13,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 import { createSlides } from './Carousel/setupSlides'
 import {
@@ -39,7 +39,7 @@ const PLUGINS: EmblaPluginType[] = []
 const injectBaseStyles = (): void => {
   const styleElement = document.createElement('style')
   styleElement.id = 'embla-base-styles'
-  const carouselStyles = examplesCarouselDefaultStyles(
+  const carouselStyles = examplesCarouselStyles(
     `${SLIDE_SIZE}%`,
     '1rem',
     'x',

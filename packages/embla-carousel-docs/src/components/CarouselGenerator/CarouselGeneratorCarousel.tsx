@@ -16,7 +16,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CAROUSEL_ID = 'carousel-generator-carousel'
@@ -147,7 +147,7 @@ export const CarouselGeneratorCarousel = (props: PropType) => {
   const slides = useRef(arrayFromNumber(5))
 
   const carouselStyles = useMemo(() => {
-    return examplesCarouselDefaultStyles(
+    return examplesCarouselStyles(
       `${slideSize}%`,
       `${parseInt(slideGapSize) / 10}rem`,
       axis,

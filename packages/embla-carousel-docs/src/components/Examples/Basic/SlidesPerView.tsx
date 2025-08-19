@@ -16,7 +16,7 @@ import {
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   SLIDES_PER_VIEW_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselDefault = lazy(() => {
@@ -28,7 +28,7 @@ const CarouselDefault = lazy(() => {
 const ID = 'embla-carousel-slides-per-view'
 const SLIDES = arrayFromNumber(6)
 const OPTIONS: EmblaOptionsType = { align: 'start' }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',
@@ -36,9 +36,9 @@ const STYLES = examplesCarouselDefaultStyles(
     SLIDE_NUMBER_STYLES,
     CONTROLS_STYLES,
     ARROWS_STYLES,
-    DOTS_STYLES,
-    SLIDES_PER_VIEW_STYLES
-  )
+    DOTS_STYLES
+  ),
+  styledComponentsStylesToString(SLIDES_PER_VIEW_STYLES)
 )
 
 const SANDBOX_CONFIG: SandboxStaticSettingsType = {

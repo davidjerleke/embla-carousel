@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselRightToLeft = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselRightToLeft = lazy(() => {
 const ID = 'embla-carousel-right-to-left'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { direction: 'rtl' }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

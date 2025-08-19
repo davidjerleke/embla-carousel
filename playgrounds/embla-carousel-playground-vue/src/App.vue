@@ -12,7 +12,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 import Carousel from './Carousel/Carousel.vue'
 import './main.css'
@@ -31,7 +31,7 @@ const OPTIONS: EmblaOptionsType = {
 
 const injectBaseStyles = (): void => {
   const styleElement = document.createElement('style')
-  const carouselStyles = examplesCarouselDefaultStyles(
+  const carouselStyles = examplesCarouselStyles(
     `${SLIDE_SIZE}%`,
     '1rem',
     'x',

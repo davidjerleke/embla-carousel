@@ -16,7 +16,7 @@ import {
   INFINITE_SCROLL_STYLES,
   SLIDE_NUMBER_STYLES,
   SNAP_DISPLAY_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselInfiniteScroll = lazy(() => {
@@ -33,7 +33,7 @@ const OPTIONS: EmblaOptionsType = {
   slideChanges: true,
   resize: false
 }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

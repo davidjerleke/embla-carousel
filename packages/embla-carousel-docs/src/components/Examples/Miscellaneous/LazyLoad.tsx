@@ -16,7 +16,7 @@ import {
   DOTS_STYLES,
   IMAGE_STYLES,
   LAZY_LOAD_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselLazyLoad = lazy(() => {
@@ -28,7 +28,7 @@ const CarouselLazyLoad = lazy(() => {
 const ID = 'embla-carousel-lazy-load'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = {}
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '100%',
   '1rem',
   'x',

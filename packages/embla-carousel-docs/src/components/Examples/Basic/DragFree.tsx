@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   SLIDE_NUMBER_STYLES,
   SNAP_DISPLAY_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselDragFree = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselDragFree = lazy(() => {
 const ID = 'embla-carousel-drag-free'
 const SLIDES = arrayFromNumber(16)
 const OPTIONS: EmblaOptionsType = { dragFree: true }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '50%',
   '1rem',
   'x',

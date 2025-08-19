@@ -15,7 +15,7 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
 const CarouselDefault = lazy(() => {
@@ -27,7 +27,7 @@ const CarouselDefault = lazy(() => {
 const ID = 'embla-carousel-slides-to-scroll'
 const SLIDES = arrayFromNumber(10)
 const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' }
-const STYLES = examplesCarouselDefaultStyles(
+const STYLES = examplesCarouselStyles(
   '50%',
   '1rem',
   'x',
