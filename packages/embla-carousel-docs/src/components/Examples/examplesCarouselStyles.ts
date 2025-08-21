@@ -11,6 +11,7 @@ import { styledComponentsStylesToString } from 'utils/styledComponentStylesToStr
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 
 const CAROUSEL_MAX_WIDTH = '48rem'
+
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
 export const CAROUSEL_SLIDES_SPACING = '1rem'
 
@@ -21,6 +22,10 @@ export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 
 export const CAROUSEL_NAV_BUTTON_SIZE = SPACINGS.SIX
 export const CAROUSEL_CONTROLS_SPACING = SPACINGS.THREE
+
+export const CAROUSEL_SCROLLBAR_HEIGHT = '1.6rem'
+export const CAROUSEL_SCROLLBAR_TRACK_HEIGHT = '0.6rem'
+export const CAROUSEL_SCROLLBAR_SPACING = CAROUSEL_CONTROLS_SPACING
 
 export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
   border-radius: ${BORDER_RADIUSES.SOFT};
@@ -298,6 +303,56 @@ export const SNAP_DISPLAY_STYLES = css`
     align-self: center;
     color: ${COLORS.TEXT_LOW_CONTRAST};
     font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+  }
+`
+
+export const SCROLL_BAR_STYLES = css`
+  .embla__scrollbar {
+    ${CAROUSEL_BUTTON_BASE_STYLES};
+    display: flex;
+    margin-top: ${CAROUSEL_CONTROLS_SPACING};
+    width: 100%;
+    padding: calc(
+        (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2
+      )
+      0;
+  }
+
+  .embla__scrollbar::-webkit-slider-runnable-track {
+    ${CAROUSEL_SLIDE_RADIUS_STYLES}
+    background: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    height: ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT};
+  }
+
+  .embla__scrollbar::-moz-range-track {
+    ${CAROUSEL_SLIDE_RADIUS_STYLES}
+    background: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    height: ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT};
+  }
+
+  .embla__scrollbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: ${CAROUSEL_SCROLLBAR_HEIGHT};
+    height: ${CAROUSEL_SCROLLBAR_HEIGHT};
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
+    border: 0;
+    background: ${COLORS.TEXT_BODY};
+    margin-top: calc(
+      (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2 *
+        -1
+    );
+  }
+
+  .embla__scrollbar::-moz-range-thumb {
+    width: ${CAROUSEL_SCROLLBAR_HEIGHT};
+    height: ${CAROUSEL_SCROLLBAR_HEIGHT};
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
+    border: 0;
+    background: ${COLORS.TEXT_BODY};
+    margin-top: calc(
+      (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2 *
+        -1
+    );
   }
 `
 

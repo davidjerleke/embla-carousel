@@ -6,6 +6,8 @@ import {
   CAROUSEL_DEFAULT_HEIGHT,
   CAROUSEL_IOS_PICKER_HEIGHT,
   CAROUSEL_NAV_BUTTON_SIZE,
+  CAROUSEL_SCROLLBAR_HEIGHT,
+  CAROUSEL_SCROLLBAR_SPACING,
   CAROUSEL_THUMB_SLIDES_HEIGHT,
   CAROUSEL_THUMB_SLIDES_SPACING
 } from './examplesCarouselStyles'
@@ -29,6 +31,15 @@ export const examplesThumbsWrapperStyles = css`
   min-height: calc(
     ${CAROUSEL_DEFAULT_HEIGHT} + ${CAROUSEL_THUMB_SLIDES_HEIGHT} +
       ${CAROUSEL_THUMB_SLIDES_SPACING}
+  );
+`
+
+export const examplesScrollBarWrapperStyles = css`
+  ${baseWrapperStyles};
+  min-height: calc(
+    ${CAROUSEL_DEFAULT_HEIGHT} + ${CAROUSEL_NAV_BUTTON_SIZE} +
+      ${CAROUSEL_CONTROLS_SPACING} + ${CAROUSEL_SCROLLBAR_HEIGHT} +
+      ${CAROUSEL_SCROLLBAR_SPACING}
   );
 `
 
