@@ -25,6 +25,7 @@ export type AutoScrollType = CreatePluginType<
     stop: () => void
     reset: () => void
     isPlaying: () => boolean
+    setSpeed: (newSpeed: (initialSpeed: number) => number) => void
   },
   OptionsType
 >
@@ -36,6 +37,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   let emblaApi: EmblaCarouselType
   let destroyed: boolean
   let startDelay: number
+  let speed = 0
   let timerId = 0
   let autoScrollActive = false
   let mouseIsOver = false
@@ -54,6 +56,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
     if (emblaApi.scrollSnapList().length <= 1) return
 
+    speed = options.speed
     startDelay = options.startDelay
     destroyed = false
     defaultScrollBehaviour = emblaApi.internalEngine().scrollBody
@@ -158,7 +161,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
       previousLocation.set(location)
 
-      bodyVelocity = directionSign * options.speed
+      bodyVelocity = directionSign * speed
       rawLocation += bodyVelocity
       location.add(bodyVelocity)
       target.set(location)
@@ -254,6 +257,10 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     return autoScrollActive
   }
 
+  function setSpeed(newSpeed: (initialSpeed: number) => number): void {
+    speed = newSpeed(options.speed)
+  }
+
   const self: AutoScrollType = {
     name: 'autoScroll',
     options: userOptions,
@@ -262,7 +269,8 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     play,
     stop,
     reset,
-    isPlaying
+    isPlaying,
+    setSpeed
   }
   return self
 }
