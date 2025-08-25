@@ -166,7 +166,8 @@ export function DragHandler(
     scrollBody.useFriction(0.3).useDuration(0.75)
     animation.start()
     target.add(direction(diff))
-    evt.preventDefault()
+
+    if (evt.cancelable) evt.preventDefault()
   }
 
   function up(evt: PointerEventType): void {
