@@ -3,9 +3,9 @@ import { CreateOptionsType } from 'embla-carousel'
 export type ClassNameOptionType = string | string[]
 
 export type ClassNamesListType = {
-  pointerDown: string[]
   snapped: string[]
   inView: string[]
+  pointerDown: string[]
   draggable: string[]
   dragging: string[]
   loop: string[]
