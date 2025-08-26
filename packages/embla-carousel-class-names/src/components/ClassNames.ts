@@ -26,11 +26,13 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let inViewIndexes: number[] = []
 
   const selectedEvents: EmblaEventType[] = ['select']
-  const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
+  const pointerEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
+  const draggingEvents: EmblaEventType[] = ['scroll', 'pointerUp']
   const inViewEvents: EmblaEventType[] = ['slidesInView']
   const classNames: ClassNamesListType = {
     snapped: [],
     inView: [],
+    pointerDown: [],
     draggable: [],
     dragging: [],
     loop: []
@@ -63,6 +65,11 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
       addClass(root, classNames.draggable)
     }
 
+    if (options.pointerDown) {
+      classNames.pointerDown = normalizeClassNames(options.pointerDown)
+      pointerEvents.forEach((evt) => emblaApi.on(evt, togglePointerClass))
+    }
+
     if (options.dragging) {
       classNames.dragging = normalizeClassNames(options.dragging)
       draggingEvents.forEach((evt) => emblaApi.on(evt, toggleDraggingClass))
@@ -82,11 +89,13 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function destroy(): void {
+    pointerEvents.forEach((evt) => emblaApi.off(evt, togglePointerClass))
     draggingEvents.forEach((evt) => emblaApi.off(evt, toggleDraggingClass))
     selectedEvents.forEach((evt) => emblaApi.off(evt, toggleSnappedClasses))
     inViewEvents.forEach((evt) => emblaApi.off(evt, toggleInViewClasses))
 
     removeClass(root, classNames.loop)
+    removeClass(root, classNames.pointerDown)
     removeClass(root, classNames.draggable)
     removeClass(root, classNames.dragging)
     toggleSlideClasses([], snappedIndexes, classNames.snapped)
@@ -98,11 +107,20 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     })
   }
 
-  function toggleDraggingClass(
+  function togglePointerClass(
     _: EmblaCarouselType,
     evt: EmblaEventType
   ): void {
     const toggleClass = evt === 'pointerDown' ? addClass : removeClass
+    toggleClass(root, classNames.pointerDown)
+  }
+
+  function toggleDraggingClass(
+    _: EmblaCarouselType,
+    evt: EmblaEventType
+  ): void {
+    const isDragging = evt === 'scroll' ? emblaApi.internalEngine().dragHandler.isDragging() : false;
+    const toggleClass = isDragging ? addClass : removeClass
     toggleClass(root, classNames.dragging)
   }
 

@@ -19,6 +19,7 @@ export const defaultOptions: OptionsType = {
   breakpoints: {},
   snapped: 'is-snapped',
   inView: 'is-in-view',
+  pointerDown: 'is-pointer-down',
   draggable: 'is-draggable',
   dragging: 'is-dragging',
   loop: 'is-loop'
