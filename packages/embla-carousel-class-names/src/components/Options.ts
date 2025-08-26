@@ -5,6 +5,7 @@ export type ClassNameOptionType = string | string[]
 export type ClassNamesListType = {
   snapped: string[]
   inView: string[]
+  pointerDown: string[]
   draggable: string[]
   dragging: string[]
   loop: string[]
