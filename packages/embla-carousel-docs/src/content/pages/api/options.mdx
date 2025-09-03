@@ -580,7 +580,13 @@ Enables using custom slide elements. By **default**, Embla will choose **all dir
 Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>  
 Default: <BrandSecondaryText>`1`</BrandSecondaryText>
 
-Group slides together. Drag interactions, dot navigation, and previous/next buttons are mapped to group slides into the given number, which has to be an integer. Set it to `auto` if you want Embla to group slides automatically.
+Control the grouping of slides used for navigation interactions (next/prev buttons, dots, and dragging). By default, a single slide will be scrolled per interaction.
+
+Set an integer value to scroll by a fixed number of slides on each interaction. For example, value `2` will treat every two slides as a single navigational unit.
+
+Set to `auto` to dynamically create groups that match the number of slides visible in the viewport. For example, if 3 slides are currently visible, an `auto` setting would cause those 3 slides to be scrolled.
+
+If using `auto` with slides of variable width, the group size will be calculated and adjusted dynamically based on how many slides fit into the viewport width at any given moment; not all groups will necessarily contain the same number of slides.
 
 ---
 
