@@ -100,7 +100,8 @@ export function Engine(
     watchResize,
     watchSlides,
     watchDrag,
-    watchFocus
+    watchFocus,
+    settledThreshold
   } = options
 
   // Measurements
@@ -227,7 +228,8 @@ export function Engine(
     previousLocation,
     target,
     duration,
-    friction
+    friction,
+    settledThreshold
   )
   const scrollTarget = ScrollTarget(
     loop,

@@ -19,12 +19,14 @@ export function ScrollBody(
   previousLocation: Vector1DType,
   target: Vector1DType,
   baseDuration: number,
-  baseFriction: number
+  baseFriction: number,
+  settledThreshold: number
 ): ScrollBodyType {
   let scrollVelocity = 0
   let scrollDirection = 0
   let scrollDuration = baseDuration
   let scrollFriction = baseFriction
+  let scrollThreshold = settledThreshold
   let rawLocation = location.get()
   let rawLocationPrevious = 0
 
@@ -57,7 +59,7 @@ export function ScrollBody(
 
   function settled(): boolean {
     const diff = target.get() - offsetLocation.get()
-    return mathAbs(diff) < 0.001
+    return mathAbs(diff) < scrollThreshold
   }
 
   function duration(): number {

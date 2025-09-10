@@ -38,6 +38,7 @@ export type OptionsType = CreateOptionsType<{
   watchResize: ResizeHandlerOptionType
   watchSlides: SlidesHandlerOptionType
   watchFocus: FocusHandlerOptionType
+  settledThreshold: number
 }>
 
 export const defaultOptions: OptionsType = {
@@ -60,7 +61,8 @@ export const defaultOptions: OptionsType = {
   watchDrag: true,
   watchResize: true,
   watchSlides: true,
-  watchFocus: true
+  watchFocus: true,
+  settledThreshold: 0.001
 }
 
 export type EmblaOptionsType = Partial<OptionsType>
