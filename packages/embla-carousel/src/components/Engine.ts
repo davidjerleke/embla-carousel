@@ -177,7 +177,6 @@ export function Engine(
       previousLocation,
       scrollLooper,
       slideLooper,
-      dragHandler,
       animation,
       eventHandler,
       scrollBounds,
