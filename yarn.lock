@@ -9290,6 +9290,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility":
+  version: 0.0.0-use.local
+  resolution: "embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility"
+  dependencies:
+    "@types/jest": ^29.5.6
+    "@typescript-eslint/eslint-plugin": ^6.9.0
+    "@typescript-eslint/parser": ^6.9.0
+    eslint: ^8.52.0
+    eslint-config-prettier: ^9.0.0
+    eslint-plugin-prettier: ^4.0.0
+    jest: ^29.5.0
+    jest-environment-jsdom: ^29.5.0
+    prettier: 2.8.8
+    rollup: ^4.22.4
+    ts-jest: ^29.1.1
+    typescript: ^5.2.2
+  peerDependencies:
+    embla-carousel: 8.6.0
+  languageName: unknown
+  linkType: soft
+
 "embla-carousel-auto-height@8.6.0, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
   version: 0.0.0-use.local
   resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"

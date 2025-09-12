@@ -25,6 +25,7 @@
     "packages/embla-carousel-auto-height",
     "packages/embla-carousel-class-names",
     "packages/embla-carousel-fade",
+    "packages/embla-carousel-accessibility",
     "packages/embla-carousel-reactive-utils",
     "playgrounds/embla-carousel-playground-vanilla",
     "playgrounds/embla-carousel-playground-react",
