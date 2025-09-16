@@ -57,8 +57,8 @@ export function arrayIsLastIndex<Type>(array: Type[], index: number): boolean {
   return index === arrayLastIndex(array)
 }
 
-export function arrayFromNumber(n: number, startAt: number = 0): number[] {
-  return Array.from(Array(n), (_, i) => startAt + i)
+export function arrayFromRange(end: number, start: number = 0): number[] {
+  return Array.from(Array(end - start + 1), (_, index) => start + index)
 }
 
 export function objectKeys<Type extends object>(object: Type): string[] {

@@ -2,7 +2,7 @@ import { LimitType } from './Limit'
 import { ScrollContainOptionType } from './ScrollContain'
 import { SlidesToScrollType } from './SlidesToScroll'
 import {
-  arrayFromNumber,
+  arrayFromRange,
   arrayIsLastIndex,
   arrayLast,
   arrayLastIndex
@@ -40,12 +40,12 @@ export function ScrollSnapList(
       const isLast = arrayIsLastIndex(groups, index)
 
       if (isFirst) {
-        const range = arrayLast(groups[0]) + 1
-        return arrayFromNumber(range)
+        const rangeEnd = arrayLast(group)
+        return arrayFromRange(rangeEnd)
       }
       if (isLast) {
-        const range = arrayLastIndex(slideIndexes) - arrayLast(groups)[0] + 1
-        return arrayFromNumber(range, arrayLast(groups)[0])
+        const rangeEnd = arrayLastIndex(slideIndexes)
+        return arrayFromRange(rangeEnd, group[0])
       }
       return group
     })
