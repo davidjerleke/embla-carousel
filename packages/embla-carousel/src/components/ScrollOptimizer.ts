@@ -21,7 +21,6 @@ type SlideBoundMapType = {
 }
 
 export type ScrollOptimizerType = {
-  getSlidesInViewRange: (from?: Vector1DType, to?: Vector1DType) => number[]
   optimize: (settle?: boolean) => void
 }
 
@@ -115,20 +114,17 @@ export function ScrollOptimizer(
     }
   }
 
-  function getSlidesInViewRange(
-    from: Vector1DType = offsetlocation,
-    to: Vector1DType = target
-  ): number[] {
+  function getSlidesInViewRange(): number[] {
     const inViewList: number[] = []
     const snap = scrollSnapList.slideGroupBySnap[indexCurrent.get()]
     if (!snap) return inViewList
     if (!snaps.length) return inViewList
 
-    const location = from.get()
-    const destination = to.get()
+    const from = offsetlocation.get()
+    const to = target.get()
     const startIndex = snap[Math.floor(snap.length / 2)]
-    const rangeStart = Math.max(location, destination)
-    const rangeEnd = Math.min(location, destination)
+    const rangeStart = Math.max(from, to)
+    const rangeEnd = Math.min(from, to)
     const isSlideInView = getIsSlideInView(rangeStart, rangeEnd)
 
     if (isSlideInView(startIndex)) inViewList.push(startIndex)
@@ -172,7 +168,6 @@ export function ScrollOptimizer(
   }
 
   const self: ScrollOptimizerType = {
-    getSlidesInViewRange,
     optimize
   }
   return self

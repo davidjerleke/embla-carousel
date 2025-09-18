@@ -216,12 +216,9 @@ export function Engine(
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
-    scrollOptimizer,
     contentSize,
     limit,
-    target,
-    offsetLocation,
-    scrollSnapList
+    target
   )
   const scrollTo = ScrollTo(
     animation,
