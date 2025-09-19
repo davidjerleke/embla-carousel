@@ -15,9 +15,9 @@ export function Counter(
 ): CounterType {
   const { constrain } = Limit(0, max)
   const loopEnd = max + 1
-  let counter = withinLimit(start)
+  let counter = normalize(start)
 
-  function withinLimit(n: number): number {
+  function normalize(n: number): number {
     return !loop ? constrain(n) : mathAbs((loopEnd + n) % loopEnd)
   }
 
@@ -26,7 +26,7 @@ export function Counter(
   }
 
   function set(n: number): CounterType {
-    counter = withinLimit(n)
+    counter = normalize(n)
     return self
   }
 
