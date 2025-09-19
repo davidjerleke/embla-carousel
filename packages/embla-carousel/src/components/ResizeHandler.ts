@@ -23,7 +23,7 @@ export function ResizeHandler(
   let destroyed = false
 
   function readSize(node: HTMLElement): number {
-    return axis.measureSize(nodeHandler.getRect(node))
+    return axis.getSize(nodeHandler.getRect(node))
   }
 
   function init(ownerWindow: WindowType): void {

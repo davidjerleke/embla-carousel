@@ -66,7 +66,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
     const selectedSnap = emblaApi.selectedSnap()
     const { scrollBody, containerRect, axis } = emblaApi.internalEngine()
-    const containerSize = axis.measureSize(containerRect)
+    const containerSize = axis.getSize(containerRect)
 
     fadeToNextDistance = clampNumber(containerSize * 0.75, 200, 500)
     shouldFadePair = false

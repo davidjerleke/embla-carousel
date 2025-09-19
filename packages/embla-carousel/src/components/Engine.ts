@@ -109,7 +109,7 @@ export function Engine(
   const pixelTolerance = isSsr ? 0 : 2
   const axis = Axis(scrollAxis, direction)
   const { containerRect, slideRects } = nodeHandler.getRects(container, slides)
-  const viewSize = axis.measureSize(containerRect)
+  const viewSize = axis.getSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)
   const containSnaps = !loop && !!containScroll
