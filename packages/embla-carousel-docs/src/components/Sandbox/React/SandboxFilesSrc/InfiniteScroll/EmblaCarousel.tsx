@@ -80,7 +80,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       const engine = emblaApi.internalEngine()
 
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
-        const boundsActive = engine.limit.reachedMax(engine.target.get())
+        const boundsActive = engine.limit.pastMaxBound(engine.target.get())
         engine.scrollBounds.toggleActive(boundsActive)
         emblaApi.on('pointerup', reloadAfterPointerUp)
       } else {

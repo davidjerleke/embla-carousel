@@ -13,12 +13,12 @@ export function Counter(
   start: number,
   loop: boolean
 ): CounterType {
-  const { constrain } = Limit(0, max)
+  const { clamp } = Limit(0, max)
   const loopEnd = max + 1
   let counter = normalize(start)
 
   function normalize(n: number): number {
-    return !loop ? constrain(n) : mathAbs((loopEnd + n) % loopEnd)
+    return !loop ? clamp(n) : mathAbs((loopEnd + n) % loopEnd)
   }
 
   function get(): number {

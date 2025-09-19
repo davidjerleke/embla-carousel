@@ -49,7 +49,7 @@ export function DragHandler(
   const nonPassiveEvent = { passive: false }
   const initEvents = EventStore()
   const dragEvents = EventStore()
-  const goToNextThreshold = Limit(50, 225).constrain(percentOfView.measure(20))
+  const goToNextThreshold = Limit(50, 225).clamp(percentOfView.measure(20))
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseDuration = dragFree ? 43 : 25

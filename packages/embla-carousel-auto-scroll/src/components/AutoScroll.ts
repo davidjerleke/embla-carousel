@@ -176,7 +176,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       scrollTarget,
       indexCurrent,
       indexPrevious,
-      limit: { reachedMin, reachedMax, constrain },
+      limit: { pastMinBound, pastMaxBound, clamp },
       options: { loop }
     } = engine
     const directionSign = options.direction === 'forward' ? -1 : 1
@@ -218,13 +218,13 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
       const reachedEnd =
         options.direction === 'forward'
-          ? reachedMin(offsetLocation.get())
-          : reachedMax(offsetLocation.get())
+          ? pastMinBound(offsetLocation.get())
+          : pastMaxBound(offsetLocation.get())
 
       if (!loop && reachedEnd) {
         hasSettled = true
-        const constrainedLocation = constrain(location.get())
-        location.set(constrainedLocation)
+        const clampedLocation = clamp(location.get())
+        location.set(clampedLocation)
         target.set(location)
         stopAutoScroll()
       }

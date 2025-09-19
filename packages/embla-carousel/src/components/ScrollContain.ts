@@ -36,7 +36,7 @@ export function ScrollContain(
     return snapsAligned
       .map((snapAligned, index) => {
         const { min, max } = scrollBounds
-        const snap = scrollBounds.constrain(snapAligned)
+        const snap = scrollBounds.clamp(snapAligned)
         const isFirst = !index
         const isLast = arrayIsLastIndex(snapsAligned, index)
         if (isFirst) return max

@@ -10,7 +10,7 @@ export type TargetType = {
 
 export type ScrollTargetType = {
   byIndex: (target: number, direction: DirectionType) => TargetType
-  byDistance: (force: number, snap: boolean) => TargetType
+  byDistance: (force: number, snapToClosest: boolean) => TargetType
   shortcut: (target: number, direction: DirectionType) => number
 }
 
@@ -21,14 +21,14 @@ export function ScrollTarget(
   limit: LimitType,
   targetVector: Vector1DType
 ): ScrollTargetType {
-  const { reachedAny, removeOffset, constrain } = limit
+  const { pastAnyBound, removeOffset, clamp } = limit
 
   function minDistance(distances: number[]): number {
     return distances.sort((a, b) => mathAbs(a) - mathAbs(b))[0]
   }
 
   function findClosestSnap(target: number): TargetType {
-    const distance = loop ? removeOffset(target) : constrain(target)
+    const distance = loop ? removeOffset(target) : clamp(target)
     const { index } = scrollSnaps.reduce(
       (acc, snap, snapIndex) => {
         const displacementAbs = mathAbs(shortcut(snap - distance, 0))
@@ -58,12 +58,12 @@ export function ScrollTarget(
     return { index, distance }
   }
 
-  function byDistance(distance: number, snap: boolean): TargetType {
+  function byDistance(distance: number, snapToClosest: boolean): TargetType {
     const target = targetVector.get() + distance
     const { index, distance: targetSnapDistance } = findClosestSnap(target)
-    const reachedBound = !loop && reachedAny(target)
+    const isPastAnyBound = !loop && pastAnyBound(target)
 
-    if (!snap || reachedBound) return { index, distance }
+    if (!snapToClosest || isPastAnyBound) return { index, distance }
 
     const diffToSnap = scrollSnaps[index] - targetSnapDistance
     const snapDistance = distance + shortcut(diffToSnap, 0)

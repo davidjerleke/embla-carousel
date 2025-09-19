@@ -17,6 +17,7 @@ export function ScrollBounds(
   scrollBody: ScrollBodyType,
   percentOfView: PercentOfViewType
 ): ScrollBoundsType {
+  const { pastAnyBound, pastMinBound, clamp } = limit
   const pullBackThreshold = percentOfView.measure(10)
   const edgeOffsetTolerance = percentOfView.measure(50)
   const frictionLimit = Limit(0.1, 0.99)
@@ -24,22 +25,22 @@ export function ScrollBounds(
 
   function shouldConstrain(): boolean {
     if (disabled) return false
-    if (!limit.reachedAny(target.get())) return false
-    if (!limit.reachedAny(location.get())) return false
+    if (!pastAnyBound(target.get())) return false
+    if (!pastAnyBound(location.get())) return false
     return true
   }
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
+    const edge = pastMinBound(location.get()) ? 'min' : 'max'
     const diffToEdge = mathAbs(limit[edge] - location.get())
     const diffToTarget = target.get() - location.get()
-    const friction = frictionLimit.constrain(diffToEdge / edgeOffsetTolerance)
+    const friction = frictionLimit.clamp(diffToEdge / edgeOffsetTolerance)
 
     target.subtract(diffToTarget * friction)
 
     if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
-      target.set(limit.constrain(target.get()))
+      target.set(clamp(target.get()))
       scrollBody.useDuration(25).useBaseFriction()
     }
   }
