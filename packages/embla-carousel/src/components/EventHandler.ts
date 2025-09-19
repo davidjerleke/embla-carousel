@@ -24,7 +24,11 @@ export interface EmblaEventListType {
 export type EventHandlerType = {
   init: (emblaApi: EmblaCarouselType) => void
   emit: (evt: EmblaEventType) => EventHandlerType
-  on: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
+  on: (
+    evt: EmblaEventType,
+    cb: CallbackType,
+    options?: { signal?: AbortSignal }
+  ) => EventHandlerType
   off: (evt: EmblaEventType, cb: CallbackType) => EventHandlerType
   clear: () => void
 }
@@ -46,13 +50,22 @@ export function EventHandler(): EventHandlerType {
     return self
   }
 
-  function on(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
+  function on(
+    evt: EmblaEventType,
+    cb: CallbackType,
+    options?: { signal?: AbortSignal }
+  ): EventHandlerType {
     listeners[evt] = getListeners(evt).concat([cb])
+
+    options?.signal?.addEventListener('abort', () => {
+      off(evt, cb)
+    })
+
     return self
   }
 
   function off(evt: EmblaEventType, cb: CallbackType): EventHandlerType {
-    listeners[evt] = getListeners(evt).filter((e) => e !== cb)
+    listeners[evt] = getListeners(evt).filter((callback) => callback !== cb)
     return self
   }
 
