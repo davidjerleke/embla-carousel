@@ -278,8 +278,8 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
 
   function fadeSettled(): boolean {
     const { target, location } = emblaApi.internalEngine()
-    const diffToTarget = target.get() - location.get()
-    const notReachedTarget = Math.abs(diffToTarget) >= 1
+    const displacement = target.minus(location)
+    const notReachedTarget = Math.abs(displacement) >= 1
     const fadeIndex = getFadeIndex()
     const noFadeIndex = !isNumber(fadeIndex)
 
@@ -300,14 +300,17 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     const opacity = active ? 0 : 1
     const pointerEvents = active ? 'none' : 'auto'
     const baseStyles = `${containerSelector} ${slidesSelector}{opacity:${opacity};pointer-events:${pointerEvents};}`
-    const slideStyles = slideGroupBySnap[selectedSnap].reduce((acc, index) => {
-      return (
-        acc +
-        `${containerSelector} ${slidesSelector}:nth-child(${
-          index + 1
-        }){opacity:1;pointer-events:auto;}`
-      )
-    }, '')
+    const slideStyles = slideGroupBySnap[selectedSnap].reduce(
+      (styles, index) => {
+        return (
+          styles +
+          `${containerSelector} ${slidesSelector}:nth-child(${
+            index + 1
+          }){opacity:1;pointer-events:auto;}`
+        )
+      },
+      ''
+    )
 
     if (active) return baseStyles + slideStyles
     return baseStyles
@@ -325,9 +328,9 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
       containerSelector,
       slidesSelector
     )
-    const mediaStyles = Object.keys(optionBreakpoints).reduce((acc, key) => {
+    const mediaStyles = Object.keys(optionBreakpoints).reduce((styles, key) => {
       return (
-        acc +
+        styles +
         `@media ${key}{${createFadeSsrStyles(
           optionBreakpoints[key],
           containerSelector,

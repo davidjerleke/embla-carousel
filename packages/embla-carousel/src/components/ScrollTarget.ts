@@ -27,12 +27,12 @@ export function ScrollTarget(
     return distances.sort((a, b) => mathAbs(a) - mathAbs(b))[0]
   }
 
-  function findClosestSnap(target: number): TargetType {
+  function getClosestSnap(target: number): TargetType {
     const distance = loop ? removeOffset(target) : clamp(target)
     const { index } = scrollSnaps.reduce(
-      (acc, snap, snapIndex) => {
+      (result, snap, snapIndex) => {
         const displacementAbs = mathAbs(shortcut(snap - distance, 0))
-        if (displacementAbs >= acc.smallestDisplacement) return acc
+        if (displacementAbs >= result.smallestDisplacement) return result
         return { smallestDisplacement: displacementAbs, index: snapIndex }
       },
       { smallestDisplacement: Infinity, index: 0 }
@@ -60,7 +60,7 @@ export function ScrollTarget(
 
   function byDistance(distance: number, snapToClosest: boolean): TargetType {
     const target = targetVector.get() + distance
-    const { index, distance: targetSnapDistance } = findClosestSnap(target)
+    const { index, distance: targetSnapDistance } = getClosestSnap(target)
     const isPastAnyBound = !loop && pastAnyBound(target)
 
     if (!snapToClosest || isPastAnyBound) return { index, distance }

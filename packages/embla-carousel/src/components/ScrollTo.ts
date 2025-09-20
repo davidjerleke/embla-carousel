@@ -11,8 +11,8 @@ export type ScrollToDirectionType = 'forward' | 'backward' | DirectionType
 export type SelectEventType = { targetSnap: number; sourceSnap: number }
 
 export type ScrollToType = {
-  distance: (n: number, snap: boolean) => void
-  index: (n: number, direction?: ScrollToDirectionType) => void
+  distance: (input: number, snapToClosest: boolean) => void
+  index: (input: number, direction?: ScrollToDirectionType) => void
 }
 
 export function ScrollTo(
@@ -53,13 +53,13 @@ export function ScrollTo(
     }
   }
 
-  function distance(n: number, snap: boolean): void {
-    const target = scrollTarget.byDistance(n, snap)
+  function distance(input: number, snapToClosest: boolean): void {
+    const target = scrollTarget.byDistance(input, snapToClosest)
     scrollTo(target)
   }
 
-  function index(n: number, direction?: ScrollToDirectionType): void {
-    const targetIndex = indexCurrent.clone().set(n).get()
+  function index(input: number, direction?: ScrollToDirectionType): void {
+    const targetIndex = indexCurrent.clone().set(input).get()
     const target = scrollTarget.byIndex(targetIndex, getDirection(direction))
     scrollTo(target)
   }

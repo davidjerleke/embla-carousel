@@ -1,4 +1,5 @@
 import { NodeRectType } from './NodeHandler'
+import { VectorOrNumberType, mapVectorToNumber } from './utils'
 
 export type AxisOptionType = 'x' | 'y'
 export type AxisDirectionOptionType = 'ltr' | 'rtl'
@@ -11,7 +12,7 @@ export type AxisType = {
   endEdge: AxisEdgeType
   nativeScroll: 'scrollLeft' | 'scrollTop'
   getSize: (nodeRect: NodeRectType) => number
-  direction: (n: number) => number
+  direction: (input: VectorOrNumberType) => number
 }
 
 export function Axis(
@@ -42,8 +43,8 @@ export function Axis(
     return isRightToLeft ? 'left' : 'right'
   }
 
-  function direction(position: number): number {
-    return position * sign
+  function direction(input: number): number {
+    return input * sign
   }
 
   const self: AxisType = {
@@ -53,7 +54,7 @@ export function Axis(
     endEdge,
     nativeScroll,
     getSize,
-    direction
+    direction: mapVectorToNumber(direction)
   }
   return self
 }

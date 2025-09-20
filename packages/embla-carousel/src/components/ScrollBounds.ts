@@ -25,22 +25,22 @@ export function ScrollBounds(
 
   function shouldConstrain(): boolean {
     if (disabled) return false
-    if (!pastAnyBound(target.get())) return false
-    if (!pastAnyBound(location.get())) return false
+    if (!pastAnyBound(target)) return false
+    if (!pastAnyBound(location)) return false
     return true
   }
 
   function constrain(pointerDown: boolean): void {
     if (!shouldConstrain()) return
-    const edge = pastMinBound(location.get()) ? 'min' : 'max'
+    const edge = pastMinBound(location) ? 'min' : 'max'
     const diffToEdge = mathAbs(limit[edge] - location.get())
-    const diffToTarget = target.get() - location.get()
+    const displacement = target.minus(location)
     const friction = frictionLimit.clamp(diffToEdge / edgeOffsetTolerance)
 
-    target.subtract(diffToTarget * friction)
+    target.subtract(displacement * friction)
 
-    if (!pointerDown && mathAbs(diffToTarget) < pullBackThreshold) {
-      target.set(clamp(target.get()))
+    if (!pointerDown && mathAbs(displacement) < pullBackThreshold) {
+      target.set(clamp(target))
       scrollBody.useDuration(25).useBaseFriction()
     }
   }

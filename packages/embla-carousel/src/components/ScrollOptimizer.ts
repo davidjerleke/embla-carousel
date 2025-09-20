@@ -63,9 +63,9 @@ export function ScrollOptimizer(
   }
 
   function createSlideBounds(): SlideBoundMapType {
-    return snaps.reduce((acc, snap, index) => {
+    return snaps.reduce((slideBounds, snap, index) => {
       return {
-        ...acc,
+        ...slideBounds,
         [index]: createSlideBound(index, snap)
       }
     }, {})

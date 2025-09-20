@@ -21,9 +21,9 @@ export function PluginsHandler(
   ): EmblaPluginsType {
     activePlugins = plugins
 
-    return plugins.reduce((acc, plugin) => {
+    return plugins.reduce((pluginList, plugin) => {
       plugin.init(emblaApi, optionsHandler)
-      return { ...acc, [plugin.name]: plugin }
+      return { ...pluginList, [plugin.name]: plugin }
     }, {})
   }
 

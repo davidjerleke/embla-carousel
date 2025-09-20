@@ -9,8 +9,8 @@ export type ScrollBodyType = {
   settled: () => boolean
   useBaseFriction: () => ScrollBodyType
   useBaseDuration: () => ScrollBodyType
-  useFriction: (n: number) => ScrollBodyType
-  useDuration: (n: number) => ScrollBodyType
+  useFriction: (input: number) => ScrollBodyType
+  useDuration: (input: number) => ScrollBodyType
 }
 
 export function ScrollBody(
@@ -29,7 +29,7 @@ export function ScrollBody(
   let rawLocationPrevious = 0
 
   function seek(): ScrollBodyType {
-    const displacement = target.get() - location.get()
+    const displacement = target.minus(location)
     const isInstant = !scrollDuration
     let scrollDistance = 0
 
@@ -56,8 +56,8 @@ export function ScrollBody(
   }
 
   function settled(): boolean {
-    const diff = target.get() - offsetLocation.get()
-    return mathAbs(diff) < 0.001
+    const displacement = target.minus(offsetLocation)
+    return mathAbs(displacement) < 0.001
   }
 
   function duration(): number {
@@ -80,13 +80,13 @@ export function ScrollBody(
     return useFriction(baseFriction)
   }
 
-  function useDuration(n: number): ScrollBodyType {
-    scrollDuration = n
+  function useDuration(input: number): ScrollBodyType {
+    scrollDuration = input
     return self
   }
 
-  function useFriction(n: number): ScrollBodyType {
-    scrollFriction = n
+  function useFriction(input: number): ScrollBodyType {
+    scrollFriction = input
     return self
   }
 

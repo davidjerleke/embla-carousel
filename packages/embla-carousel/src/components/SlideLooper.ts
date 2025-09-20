@@ -36,32 +36,32 @@ export function SlideLooper(
   const descItems = arrayKeys(slideSizesWithGaps).reverse()
   const loopPoints = startPoints().concat(endPoints())
 
-  function removeSlideSizes(indexes: number[], from: number): number {
-    return indexes.reduce((a: number, i) => {
-      return a - slideSizesWithGaps[i]
+  function getRemainingGapAfterSlides(indexes: number[], from: number): number {
+    return indexes.reduce((remainingGap: number, index) => {
+      return remainingGap - slideSizesWithGaps[index]
     }, from)
   }
 
-  function slidesInGap(indexes: number[], gap: number): number[] {
-    return indexes.reduce((a: number[], i) => {
-      const remainingGap = removeSlideSizes(a, gap)
-      return remainingGap > 0 ? a.concat([i]) : a
+  function getSlidesThatFitGap(indexes: number[], gap: number): number[] {
+    return indexes.reduce((slidesThatFit: number[], index) => {
+      const remainingGap = getRemainingGapAfterSlides(slidesThatFit, gap)
+      return remainingGap > 0 ? [...slidesThatFit, index] : slidesThatFit
     }, [])
   }
 
-  function findSlideBounds(offset: number): SlideBoundType[] {
+  function getSlideBounds(offset: number): SlideBoundType[] {
     return snaps.map((snap, index) => ({
       start: snap - slideSizes[index] + roundingSafety + offset,
       end: snap + viewSize - roundingSafety + offset
     }))
   }
 
-  function findLoopPoints(
+  function getLoopPoints(
     indexes: number[],
     offset: number,
     isEndEdge: boolean
   ): LoopPointType[] {
-    const slideBounds = findSlideBounds(offset)
+    const slideBounds = getSlideBounds(offset)
 
     return indexes.map((index) => {
       const initial = isEndEdge ? 0 : -contentSize
@@ -81,20 +81,20 @@ export function SlideLooper(
 
   function startPoints(): LoopPointType[] {
     const gap = scrollSnaps[0]
-    const indexes = slidesInGap(descItems, gap)
-    return findLoopPoints(indexes, contentSize, false)
+    const indexes = getSlidesThatFitGap(descItems, gap)
+    return getLoopPoints(indexes, contentSize, false)
   }
 
   function endPoints(): LoopPointType[] {
     const gap = viewSize - scrollSnaps[0] - 1
-    const indexes = slidesInGap(ascItems, gap)
-    return findLoopPoints(indexes, -contentSize, true)
+    const indexes = getSlidesThatFitGap(ascItems, gap)
+    return getLoopPoints(indexes, -contentSize, true)
   }
 
   function canLoop(): boolean {
     return loopPoints.every(({ index }) => {
       const otherIndexes = ascItems.filter((i) => i !== index)
-      return removeSlideSizes(otherIndexes, viewSize) <= 0.1
+      return getRemainingGapAfterSlides(otherIndexes, viewSize) <= 0.1
     })
   }
 

@@ -11,7 +11,7 @@ export const useScrollBar = (emblaApi) => {
 
       animation.stop()
 
-      const currentProgress = scrollProgress.get(target.get())
+      const currentProgress = scrollProgress.get(target)
       const allowedProgress = Math.min(Math.max(progress, 0), 1)
       const progressToTarget = allowedProgress - currentProgress
       const distance = progressToTarget * limit.length * -1

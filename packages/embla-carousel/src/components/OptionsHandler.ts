@@ -5,7 +5,7 @@ import { objectKeys, objectsMergeDeep, WindowType } from './utils'
 type OptionsType = Partial<CreateOptionsType<LooseOptionsType>>
 
 export type OptionsHandlerType = {
-  init: (windowInstance: NodeHandlerType['ownerWindow']) => void
+  init: (ownerWindow: NodeHandlerType['ownerWindow']) => void
   mergeOptions: <TypeA extends OptionsType, TypeB extends OptionsType>(
     optionsA: TypeA,
     optionsB?: TypeB
@@ -18,8 +18,7 @@ export function OptionsHandler(): OptionsHandlerType {
   let windowInstance: WindowType
 
   function init(ownerWindow: NodeHandlerType['ownerWindow']): void {
-    if (!ownerWindow) return
-    windowInstance = ownerWindow
+    if (ownerWindow) windowInstance = ownerWindow
   }
 
   function mergeOptions<TypeA extends OptionsType, TypeB extends OptionsType>(
@@ -36,7 +35,10 @@ export function OptionsHandler(): OptionsHandlerType {
     const matchedMediaOptions = objectKeys(optionsAtMedia)
       .filter((media) => windowInstance.matchMedia(media).matches)
       .map((media) => optionsAtMedia[media])
-      .reduce((a, mediaOption) => mergeOptions(a, mediaOption), {})
+      .reduce(
+        (mediaOptions, mediaOption) => mergeOptions(mediaOptions, mediaOption),
+        {}
+      )
 
     return mergeOptions(options, matchedMediaOptions)
   }
@@ -46,7 +48,7 @@ export function OptionsHandler(): OptionsHandlerType {
 
     return optionsList
       .map((options) => objectKeys(options.breakpoints || {}))
-      .reduce((acc, mediaQueries) => acc.concat(mediaQueries), [])
+      .reduce((mediaQueries, mediaQuery) => mediaQueries.concat(mediaQuery), [])
       .map(windowInstance.matchMedia)
   }
 

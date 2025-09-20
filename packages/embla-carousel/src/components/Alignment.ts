@@ -7,7 +7,7 @@ export type AlignmentOptionType =
   | ((viewSize: number, snapSize: number, index: number) => number)
 
 export type AlignmentType = {
-  measure: (n: number, index: number) => number
+  measure: (input: number, index: number) => number
 }
 
 export function Alignment(
@@ -20,17 +20,17 @@ export function Alignment(
     return 0
   }
 
-  function center(n: number): number {
-    return end(n) / 2
+  function center(input: number): number {
+    return end(input) / 2
   }
 
-  function end(n: number): number {
-    return viewSize - n
+  function end(input: number): number {
+    return viewSize - input
   }
 
-  function measure(n: number, index: number): number {
-    if (isString(align)) return predefined[align](n)
-    return align(viewSize, n, index)
+  function measure(input: number, index: number): number {
+    if (isString(align)) return predefined[align](input)
+    return align(viewSize, input, index)
   }
 
   const self: AlignmentType = {

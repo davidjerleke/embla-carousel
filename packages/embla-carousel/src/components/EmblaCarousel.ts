@@ -133,7 +133,7 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
-      engine.translate.to(engine.location.get())
+      engine.translate.to(engine.location)
       engine.scrollOptimizer.optimize(true)
       if (engine.options.loop) engine.slideLooper.loop()
 
@@ -236,7 +236,7 @@ function EmblaCarousel(
   }
 
   function scrollProgress(): number {
-    return engine.scrollProgress.get(engine.offsetLocation.get())
+    return engine.scrollProgress.get(engine.offsetLocation)
   }
 
   function snapIndex(offset: number): number {

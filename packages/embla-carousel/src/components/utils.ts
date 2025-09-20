@@ -1,6 +1,17 @@
 import { PointerEventType } from './DragTracker'
+import { Vector1DType } from './Vector1d'
 
 export type WindowType = Window & typeof globalThis
+
+export type VectorOrNumberType = Vector1DType | number
+
+export function mapVectorToNumber<ReturnType>(
+  callback: (input: number) => ReturnType
+): (input: VectorOrNumberType) => ReturnType {
+  return (input: VectorOrNumberType): ReturnType => {
+    return callback(isNumber(input) ? input : input.get())
+  }
+}
 
 export function isNumber(subject: unknown): subject is number {
   return typeof subject === 'number'
@@ -18,27 +29,27 @@ export function isObject(subject: unknown): subject is Record<string, unknown> {
   return Object.prototype.toString.call(subject) === '[object Object]'
 }
 
-export function mathAbs(n: number): number {
-  return Math.abs(n)
+export function mathAbs(input: number): number {
+  return Math.abs(input)
 }
 
-export function mathSign(n: number): number {
-  return Math.sign(n)
+export function mathSign(input: number): number {
+  return Math.sign(input)
 }
 
-export function deltaAbs(valueB: number, valueA: number): number {
-  return mathAbs(valueB - valueA)
+export function deltaAbs(inputB: number, inputA: number): number {
+  return mathAbs(inputB - inputA)
 }
 
-export function factorAbs(valueB: number, valueA: number): number {
-  if (valueB === 0 || valueA === 0) return 0
-  if (mathAbs(valueB) <= mathAbs(valueA)) return 0
-  const diff = deltaAbs(mathAbs(valueB), mathAbs(valueA))
-  return mathAbs(diff / valueB)
+export function factorAbs(inputB: number, inputA: number): number {
+  if (inputB === 0 || inputA === 0) return 0
+  if (mathAbs(inputB) <= mathAbs(inputA)) return 0
+  const diff = deltaAbs(mathAbs(inputB), mathAbs(inputA))
+  return mathAbs(diff / inputB)
 }
 
-export function roundToTwoDecimals(num: number): number {
-  return Math.round(num * 100) / 100
+export function roundToTwoDecimals(input: number): number {
+  return Math.round(input * 100) / 100
 }
 
 export function arrayKeys<Type>(array: Type[]): number[] {

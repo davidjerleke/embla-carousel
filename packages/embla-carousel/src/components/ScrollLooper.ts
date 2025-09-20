@@ -17,8 +17,8 @@ export function ScrollLooper(
   const { pastMinBound, pastMaxBound } = Limit(min, max)
 
   function shouldLoop(direction: number): boolean {
-    if (direction === 1) return pastMaxBound(location.get())
-    if (direction === -1) return pastMinBound(location.get())
+    if (direction === 1) return pastMaxBound(location)
+    if (direction === -1) return pastMinBound(location)
     return false
   }
 
@@ -26,7 +26,7 @@ export function ScrollLooper(
     if (!shouldLoop(direction)) return
 
     const loopDistance = contentSize * (direction * -1)
-    vectors.forEach((v) => v.add(loopDistance))
+    vectors.forEach((vector) => vector.add(loopDistance))
   }
 
   const self: ScrollLooperType = {

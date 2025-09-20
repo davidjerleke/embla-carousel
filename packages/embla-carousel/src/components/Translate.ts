@@ -1,13 +1,17 @@
 import { AxisType } from './Axis'
-import { roundToTwoDecimals } from './utils'
+import {
+  roundToTwoDecimals,
+  VectorOrNumberType,
+  mapVectorToNumber
+} from './utils'
 
 export type TranslateType = {
   set: (translate: string) => void
-  get: (n: number) => string
-  to: (target: number) => void
+  get: (input: VectorOrNumberType) => string
+  to: (input: VectorOrNumberType) => void
+  setIsScrolling: (active: boolean) => void
   toggleActive: (active: boolean) => void
   clear: () => void
-  setIsScrolling: (active: boolean) => void
 }
 
 export function Translate(
@@ -27,12 +31,12 @@ export function Translate(
     node.style.transform = translate
   }
 
-  function x(n: number): string {
-    return `translate3d(${n}${unit},0px,0px)`
+  function x(input: number): string {
+    return `translate3d(${input}${unit},0px,0px)`
   }
 
-  function y(n: number): string {
-    return `translate3d(0px,${n}${unit},0px)`
+  function y(input: number): string {
+    return `translate3d(0px,${input}${unit},0px)`
   }
 
   function setIsScrolling(active: boolean): void {
@@ -44,11 +48,11 @@ export function Translate(
     set(transform)
   }
 
-  function to(target: number): void {
+  function to(input: number): void {
     if (disabled) return
     if (!isScrolling) setIsScrolling(true)
 
-    const newTarget = roundToTwoDecimals(axis.direction(target))
+    const newTarget = roundToTwoDecimals(axis.direction(input))
     set(getTranslate(newTarget))
   }
 
@@ -64,9 +68,9 @@ export function Translate(
   const self: TranslateType = {
     set,
     clear,
-    to,
+    to: mapVectorToNumber(to),
+    get: mapVectorToNumber(getTranslate),
     toggleActive,
-    get: getTranslate,
     setIsScrolling
   }
   return self

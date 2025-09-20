@@ -21,24 +21,24 @@ export function SlideSizes(
   const { ownerWindow } = nodeHandler
   const { getSize, startEdge, endEdge } = axis
   const withEdgeGap = slideRects[0] && readEdgeGap && ownerWindow
-  const startGap = measureStartGap()
-  const endGap = measureEndGap()
+  const startGap = getStartGap()
+  const endGap = getEndGap()
   const slideSizes = slideRects.map(getSize)
-  const slideSizesWithGaps = measureWithGaps()
+  const slideSizesWithGaps = getSlideSizesWithGaps()
 
-  function measureStartGap(): number {
+  function getStartGap(): number {
     if (!withEdgeGap) return 0
     const slideRect = slideRects[0]
     return mathAbs(containerRect[startEdge] - slideRect[startEdge])
   }
 
-  function measureEndGap(): number {
+  function getEndGap(): number {
     if (!withEdgeGap) return 0
     const style = ownerWindow.getComputedStyle(arrayLast(slides))
     return parseFloat(style.getPropertyValue(`margin-${endEdge}`))
   }
 
-  function measureWithGaps(): number[] {
+  function getSlideSizesWithGaps(): number[] {
     return slideRects
       .map((rect, index, rects) => {
         const isFirst = !index

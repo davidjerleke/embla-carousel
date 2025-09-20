@@ -218,12 +218,12 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
 
       const reachedEnd =
         options.direction === 'forward'
-          ? pastMinBound(offsetLocation.get())
-          : pastMaxBound(offsetLocation.get())
+          ? pastMinBound(offsetLocation)
+          : pastMaxBound(offsetLocation)
 
       if (!loop && reachedEnd) {
         hasSettled = true
-        const clampedLocation = clamp(location.get())
+        const clampedLocation = clamp(location)
         location.set(clampedLocation)
         target.set(location)
         stopAutoScroll()

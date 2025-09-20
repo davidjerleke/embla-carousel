@@ -1,50 +1,50 @@
-import { mathAbs } from './utils'
+import { mathAbs, VectorOrNumberType, mapVectorToNumber } from './utils'
 
 export type LimitType = {
   min: number
   max: number
   length: number
-  clamp: (n: number) => number
-  pastAnyBound: (n: number) => boolean
-  pastMaxBound: (n: number) => boolean
-  pastMinBound: (n: number) => boolean
-  removeOffset: (n: number) => number
+  clamp: (input: VectorOrNumberType) => number
+  pastAnyBound: (input: VectorOrNumberType) => boolean
+  pastMaxBound: (input: VectorOrNumberType) => boolean
+  pastMinBound: (input: VectorOrNumberType) => boolean
+  removeOffset: (input: VectorOrNumberType) => number
 }
 
 export function Limit(min: number = 0, max: number = 0): LimitType {
   const length = mathAbs(min - max)
 
-  function pastMinBound(value: number): boolean {
-    return value < min
+  function pastMinBound(input: number): boolean {
+    return input < min
   }
 
-  function pastMaxBound(value: number): boolean {
-    return value > max
+  function pastMaxBound(input: number): boolean {
+    return input > max
   }
 
-  function pastAnyBound(value: number): boolean {
-    return pastMinBound(value) || pastMaxBound(value)
+  function pastAnyBound(input: number): boolean {
+    return pastMinBound(input) || pastMaxBound(input)
   }
 
-  function clamp(value: number): number {
-    if (!pastAnyBound(value)) return value
-    return pastMinBound(value) ? min : max
+  function clamp(input: number): number {
+    if (!pastAnyBound(input)) return input
+    return pastMinBound(input) ? min : max
   }
 
-  function removeOffset(value: number): number {
-    if (!length) return value
-    return value - length * Math.ceil((value - max) / length)
+  function removeOffset(input: number): number {
+    if (!length) return input
+    return input - length * Math.ceil((input - max) / length)
   }
 
   const self: LimitType = {
     length,
     max,
     min,
-    clamp,
-    pastAnyBound,
-    pastMaxBound,
-    pastMinBound,
-    removeOffset
+    clamp: mapVectorToNumber(clamp),
+    pastAnyBound: mapVectorToNumber(pastAnyBound),
+    pastMaxBound: mapVectorToNumber(pastMaxBound),
+    pastMinBound: mapVectorToNumber(pastMinBound),
+    removeOffset: mapVectorToNumber(removeOffset)
   }
   return self
 }

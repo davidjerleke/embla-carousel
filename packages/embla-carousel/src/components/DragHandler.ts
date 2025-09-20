@@ -20,7 +20,7 @@ import {
 } from './utils'
 
 export type DragHandlerType = {
-  init: (windowInstance: WindowType) => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
   pointerDown: () => boolean
 }
@@ -54,8 +54,8 @@ export function DragHandler(
   const freeForceBoost = { mouse: 500, touch: 600 }
   const baseDuration = dragFree ? 43 : 25
 
-  let ownerDocument: Document
-  let ownerWindow: WindowType
+  let documentInstance: Document
+  let windowInstance: WindowType
   let isMoving = false
   let startScroll = 0
   let startCross = 0
@@ -64,13 +64,13 @@ export function DragHandler(
   let preventClick = false
   let isMouse = false
 
-  function init(windowInstance: WindowType): void {
+  function init(ownerWindow: WindowType): void {
     if (!active) return
 
-    ownerDocument = windowInstance.document
-    ownerWindow = windowInstance
+    documentInstance = ownerWindow.document
+    windowInstance = ownerWindow
 
-    dragTracker.init(windowInstance)
+    dragTracker.init(ownerWindow)
 
     const node = rootNode
     initEvents
@@ -90,7 +90,7 @@ export function DragHandler(
   }
 
   function addDragEvents(): void {
-    const node = isMouse ? ownerDocument : rootNode
+    const node = isMouse ? documentInstance : rootNode
     dragEvents
       .add(node, 'touchmove', move, nonPassiveEvent)
       .add(node, 'touchend', up)
@@ -132,7 +132,7 @@ export function DragHandler(
     const preventDefault = !event.emit()
     if (preventDefault) return
 
-    const isMouseEvt = isMouseEvent(evt, ownerWindow)
+    const isMouseEvt = isMouseEvent(evt, windowInstance)
     isMouse = isMouseEvt
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
     isMoving = deltaAbs(target.get(), location.get()) >= 2
@@ -154,7 +154,7 @@ export function DragHandler(
     const preventDefault = !event.emit()
     if (preventDefault) return up(evt)
 
-    const isTouchEvt = !isMouseEvent(evt, ownerWindow)
+    const isTouchEvt = !isMouseEvent(evt, windowInstance)
     if (isTouchEvt && evt.touches.length >= 2) return up(evt)
 
     const lastScroll = dragTracker.readPoint(evt)

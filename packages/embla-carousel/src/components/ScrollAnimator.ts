@@ -64,7 +64,7 @@ export function ScrollAnimator(): ScrollAnimatorType {
       slideLooper.loop()
     }
 
-    translate.to(offsetLocation.get())
+    translate.to(offsetLocation)
     scrollOptimizer.optimize()
 
     if (isSettled) {

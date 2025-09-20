@@ -16,7 +16,7 @@ export function ResizeHandler(
   axis: AxisType,
   nodeHandler: NodeHandlerType
 ): ResizeHandlerType {
-  const observeNodes = [container].concat(slides)
+  const observeNodes = [container, ...slides]
   let resizeObserver: ResizeObserver
   let containerSize: number
   let slideSizes: number[] = []

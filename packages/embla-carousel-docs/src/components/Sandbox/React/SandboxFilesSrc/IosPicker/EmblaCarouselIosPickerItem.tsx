@@ -117,9 +117,9 @@ export const IosPickerItem: React.FC<PropType> = (props) => {
 
     emblaApi.on('pointerup', (emblaApi) => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
-      const diffToTarget = target.get() - location.get()
-      const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
-      const distance = diffToTarget * factor
+      const displacement = target.minus(location)
+      const factor = Math.abs(displacement) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
+      const distance = displacement * factor
       scrollTo.distance(distance, true)
     })
 

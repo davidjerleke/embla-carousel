@@ -38,21 +38,21 @@ export function SsrHandler(
     )
 
     const loopPoints = options.loop ? slideLooper.loopPoints : []
-    const containerLocation = direction(location.get())
+    const containerLocation = direction(location)
     const containerSsr = translate.get(containerLocation)
     const baseStyles = `${containerSelector}{transform:${containerSsr};}`
 
-    const loopStyles = loopPoints.reduce((acc, loopPoint) => {
+    const loopStyles = loopPoints.reduce((styles, loopPoint) => {
       const { index } = loopPoint
       const sign = mathSign(loopPoint.target())
       const size = options.ssr[index]
 
-      if (!sign || !size) return acc
+      if (!sign || !size) return styles
       const slideLocation = direction((contentSize / size) * 100 * sign)
       const slideSsr = translate.get(slideLocation)
 
       return (
-        acc +
+        styles +
         `${containerSelector} ${slidesSelector}:nth-child(${
           index + 1
         }){transform:${slideSsr};}`
@@ -70,10 +70,10 @@ export function SsrHandler(
 
     const optionBreakpoints = options.breakpoints || {}
     const baseStyles = createStyles(options, containerSelector, slidesSelector)
-    const mediaStyles = Object.keys(optionBreakpoints).reduce((acc, key) => {
+    const mediaStyles = Object.keys(optionBreakpoints).reduce((styles, key) => {
       const optionsAtMedia = mergeOptions(options, optionBreakpoints[key])
       return (
-        acc +
+        styles +
         `@media ${key}{${createStyles(
           optionsAtMedia,
           containerSelector,
