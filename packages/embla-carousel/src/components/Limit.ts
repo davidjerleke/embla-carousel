@@ -1,14 +1,14 @@
-import { mathAbs, VectorOrNumberType, mapVectorToNumber } from './utils'
+import { mathAbs, NumberStoreInputType, mapStoreToNumber } from './utils'
 
 export type LimitType = {
   min: number
   max: number
   length: number
-  clamp: (input: VectorOrNumberType) => number
-  pastAnyBound: (input: VectorOrNumberType) => boolean
-  pastMaxBound: (input: VectorOrNumberType) => boolean
-  pastMinBound: (input: VectorOrNumberType) => boolean
-  removeOffset: (input: VectorOrNumberType) => number
+  clamp: (input: NumberStoreInputType) => number
+  pastAnyBound: (input: NumberStoreInputType) => boolean
+  pastMaxBound: (input: NumberStoreInputType) => boolean
+  pastMinBound: (input: NumberStoreInputType) => boolean
+  removeOffset: (input: NumberStoreInputType) => number
 }
 
 export function Limit(min: number = 0, max: number = 0): LimitType {
@@ -40,11 +40,11 @@ export function Limit(min: number = 0, max: number = 0): LimitType {
     length,
     max,
     min,
-    clamp: mapVectorToNumber(clamp),
-    pastAnyBound: mapVectorToNumber(pastAnyBound),
-    pastMaxBound: mapVectorToNumber(pastMaxBound),
-    pastMinBound: mapVectorToNumber(pastMinBound),
-    removeOffset: mapVectorToNumber(removeOffset)
+    clamp: mapStoreToNumber(clamp),
+    pastAnyBound: mapStoreToNumber(pastAnyBound),
+    pastMaxBound: mapStoreToNumber(pastMaxBound),
+    pastMinBound: mapStoreToNumber(pastMinBound),
+    removeOffset: mapStoreToNumber(removeOffset)
   }
   return self
 }

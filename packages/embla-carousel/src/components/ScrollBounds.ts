@@ -1,6 +1,6 @@
 import { Limit, LimitType } from './Limit'
 import { ScrollBodyType } from './ScrollBody'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { mathAbs } from './utils'
 import { PercentOfViewType } from './PercentOfView'
 
@@ -12,8 +12,8 @@ export type ScrollBoundsType = {
 
 export function ScrollBounds(
   limit: LimitType,
-  location: Vector1DType,
-  target: Vector1DType,
+  location: NumberStoreType,
+  target: NumberStoreType,
   scrollBody: ScrollBodyType,
   percentOfView: PercentOfViewType
 ): ScrollBoundsType {

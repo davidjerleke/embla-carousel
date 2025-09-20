@@ -1,14 +1,14 @@
 import { AxisType } from './Axis'
 import {
   roundToTwoDecimals,
-  VectorOrNumberType,
-  mapVectorToNumber
+  NumberStoreInputType,
+  mapStoreToNumber
 } from './utils'
 
 export type TranslateType = {
   set: (translate: string) => void
-  get: (input: VectorOrNumberType) => string
-  to: (input: VectorOrNumberType) => void
+  get: (input: NumberStoreInputType) => string
+  to: (input: NumberStoreInputType) => void
   setIsScrolling: (active: boolean) => void
   toggleActive: (active: boolean) => void
   clear: () => void
@@ -68,8 +68,8 @@ export function Translate(
   const self: TranslateType = {
     set,
     clear,
-    to: mapVectorToNumber(to),
-    get: mapVectorToNumber(getTranslate),
+    to: mapStoreToNumber(to),
+    get: mapStoreToNumber(getTranslate),
     toggleActive,
     setIsScrolling
   }

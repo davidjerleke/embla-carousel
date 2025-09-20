@@ -1,6 +1,6 @@
 import { LimitType } from './Limit'
 import { DirectionType } from './ScrollTo'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { arrayLast, mathAbs, mathSign } from './utils'
 
 export type TargetType = {
@@ -19,7 +19,7 @@ export function ScrollTarget(
   scrollSnaps: number[],
   contentSize: number,
   limit: LimitType,
-  targetVector: Vector1DType
+  targetVector: NumberStoreType
 ): ScrollTargetType {
   const { pastAnyBound, removeOffset, clamp } = limit
 
@@ -47,8 +47,8 @@ export function ScrollTarget(
     const targets = [target, target + contentSize, target - contentSize]
     if (!direction) return minDistance(targets)
 
-    const matchingTargets = targets.filter((t) => mathSign(t) === direction)
-    if (matchingTargets.length) return minDistance(matchingTargets)
+    const validTargets = targets.filter((t) => mathSign(t) === direction)
+    if (validTargets.length) return minDistance(validTargets)
     return arrayLast(targets) - contentSize
   }
 
@@ -59,7 +59,7 @@ export function ScrollTarget(
   }
 
   function byDistance(distance: number, snapToClosest: boolean): TargetType {
-    const target = targetVector.get() + distance
+    const target = targetVector.plus(distance)
     const { index, distance: targetSnapDistance } = getClosestSnap(target)
     const isPastAnyBound = !loop && pastAnyBound(target)
 

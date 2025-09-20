@@ -3,7 +3,7 @@ import { CounterType } from './Counter'
 import { EventHandlerType } from './EventHandler'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType, TargetType } from './ScrollTarget'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { isNumber } from './utils'
 
 export type DirectionType = 0 | 1 | -1
@@ -21,7 +21,7 @@ export function ScrollTo(
   indexPrevious: CounterType,
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
-  targetVector: Vector1DType,
+  targetVector: NumberStoreType,
   eventHandler: EventHandlerType
 ): ScrollToType {
   function scrollTo(target: TargetType): void {

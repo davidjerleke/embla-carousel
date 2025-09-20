@@ -1,5 +1,5 @@
 import { arrayKeys } from './utils'
-import { Vector1D, Vector1DType } from './Vector1d'
+import { NumberStore, NumberStoreType } from './NumberStore'
 import { TranslateType } from './Translate'
 
 type SlideBoundType = {
@@ -11,7 +11,7 @@ type LoopPointType = {
   loopPoint: number
   index: number
   translate: TranslateType
-  slideLocation: Vector1DType
+  slideLocation: NumberStoreType
   target: () => number
 }
 
@@ -28,7 +28,7 @@ export function SlideLooper(
   slideSizesWithGaps: number[],
   snaps: number[],
   scrollSnaps: number[],
-  location: Vector1DType,
+  location: NumberStoreType,
   slideTranslates: TranslateType[]
 ): SlideLooperType {
   const roundingSafety = 0.5
@@ -72,7 +72,7 @@ export function SlideLooper(
       return {
         index,
         loopPoint,
-        slideLocation: Vector1D(-1),
+        slideLocation: NumberStore(-1),
         translate: slideTranslates[index],
         target: () => (location.get() > loopPoint ? initial : altered)
       }

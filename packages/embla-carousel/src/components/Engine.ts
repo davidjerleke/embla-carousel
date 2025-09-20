@@ -30,7 +30,7 @@ import { SlideSizes } from './SlideSizes'
 import { SlidesToScroll, SlidesToScrollType } from './SlidesToScroll'
 import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
-import { Vector1D, Vector1DType } from './Vector1d'
+import { NumberStore, NumberStoreType } from './NumberStore'
 import { NodeHandlerType } from './NodeHandler'
 import { ScrollOptimizer, ScrollOptimizerType } from './ScrollOptimizer'
 
@@ -46,9 +46,9 @@ export type EngineType = {
   indexCurrent: CounterType
   indexPrevious: CounterType
   limit: LimitType
-  location: Vector1DType
-  offsetLocation: Vector1DType
-  previousLocation: Vector1DType
+  location: NumberStoreType
+  offsetLocation: NumberStoreType
+  previousLocation: NumberStoreType
   options: OptionsType
   percentOfView: PercentOfViewType
   scrollBody: ScrollBodyType
@@ -57,7 +57,7 @@ export type EngineType = {
   slideLooper: SlideLooperType
   slidesInView: SlidesInViewType
   slidesToScroll: SlidesToScrollType
-  target: Vector1DType
+  target: NumberStoreType
   translate: TranslateType
   slideTranslates: TranslateType[]
   resizeHandler: ResizeHandlerType
@@ -166,10 +166,10 @@ export function Engine(
   // Shared
   const friction = 0.68
   const startLocation = scrollSnaps[indexCurrent.get()]
-  const location = Vector1D(startLocation)
-  const previousLocation = Vector1D(startLocation)
-  const offsetLocation = Vector1D(startLocation)
-  const target = Vector1D(startLocation)
+  const location = NumberStore(startLocation)
+  const previousLocation = NumberStore(startLocation)
+  const offsetLocation = NumberStore(startLocation)
+  const target = NumberStore(startLocation)
   const translate = Translate(axis, container)
   const slideTranslates = slides.map((slide) => Translate(axis, slide))
 

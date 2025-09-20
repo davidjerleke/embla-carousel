@@ -1,8 +1,8 @@
 import { LimitType } from './Limit'
-import { VectorOrNumberType, mapVectorToNumber } from './utils'
+import { NumberStoreInputType, mapStoreToNumber } from './utils'
 
 export type ScrollProgressType = {
-  get: (input: VectorOrNumberType) => number
+  get: (input: NumberStoreInputType) => number
 }
 
 export function ScrollProgress(limit: LimitType): ScrollProgressType {
@@ -14,7 +14,7 @@ export function ScrollProgress(limit: LimitType): ScrollProgressType {
   }
 
   const self: ScrollProgressType = {
-    get: mapVectorToNumber(get)
+    get: mapStoreToNumber(get)
   }
   return self
 }

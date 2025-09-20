@@ -3,7 +3,7 @@ import { SlideLooperType } from './SlideLooper'
 import { ScrollSnapListType } from './ScrollSnapList'
 import { TranslateType } from './Translate'
 import { arrayIsLastIndex } from './utils'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { EventHandlerType } from './EventHandler'
 
 export type ScrollOptimizeEventType = {
@@ -32,8 +32,8 @@ export function ScrollOptimizer(
   loop: boolean,
   indexCurrent: CounterType,
   scrollSnapList: ScrollSnapListType,
-  offsetlocation: Vector1DType,
-  target: Vector1DType,
+  offsetlocation: NumberStoreType,
+  target: NumberStoreType,
   slideTranslates: TranslateType[],
   slideLooper: SlideLooperType,
   eventHandler: EventHandlerType

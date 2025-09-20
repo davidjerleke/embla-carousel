@@ -1,5 +1,5 @@
 import { mathSign, mathAbs } from './utils'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 
 export type ScrollBodyType = {
   direction: () => number
@@ -14,10 +14,10 @@ export type ScrollBodyType = {
 }
 
 export function ScrollBody(
-  location: Vector1DType,
-  offsetLocation: Vector1DType,
-  previousLocation: Vector1DType,
-  target: Vector1DType,
+  location: NumberStoreType,
+  offsetLocation: NumberStoreType,
+  previousLocation: NumberStoreType,
+  target: NumberStoreType,
   baseDuration: number,
   baseFriction: number
 ): ScrollBodyType {

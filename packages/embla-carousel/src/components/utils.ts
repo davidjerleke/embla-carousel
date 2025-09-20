@@ -1,14 +1,14 @@
 import { PointerEventType } from './DragTracker'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 
 export type WindowType = Window & typeof globalThis
 
-export type VectorOrNumberType = Vector1DType | number
+export type NumberStoreInputType = NumberStoreType | number
 
-export function mapVectorToNumber<ReturnType>(
+export function mapStoreToNumber<ReturnType>(
   callback: (input: number) => ReturnType
-): (input: VectorOrNumberType) => ReturnType {
-  return (input: VectorOrNumberType): ReturnType => {
+): (input: NumberStoreInputType) => ReturnType {
+  return (input: NumberStoreInputType): ReturnType => {
     return callback(isNumber(input) ? input : input.get())
   }
 }

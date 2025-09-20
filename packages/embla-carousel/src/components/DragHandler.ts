@@ -7,7 +7,7 @@ import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
 import {
@@ -29,9 +29,9 @@ export function DragHandler(
   active: boolean,
   axis: AxisType,
   rootNode: HTMLElement,
-  target: Vector1DType,
+  target: NumberStoreType,
   dragTracker: DragTrackerType,
-  location: Vector1DType,
+  location: NumberStoreType,
   animation: AnimationsType,
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
