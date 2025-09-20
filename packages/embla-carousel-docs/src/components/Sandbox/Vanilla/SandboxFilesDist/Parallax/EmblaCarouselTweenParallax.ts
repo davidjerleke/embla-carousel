@@ -29,7 +29,7 @@ const tweenParallax = <EventType extends keyof EmblaEventListType>(
 
   emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.scrollSnapList.slideGroupBySnap[snapIndex]
+    const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return

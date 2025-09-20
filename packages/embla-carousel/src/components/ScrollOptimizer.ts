@@ -116,7 +116,7 @@ export function ScrollOptimizer(
 
   function getSlidesInViewRange(): number[] {
     const inViewList: number[] = []
-    const snap = scrollSnapList.slideGroupBySnap[indexCurrent.get()]
+    const snap = scrollSnapList.slidesBySnap[indexCurrent.get()]
     if (!snap) return inViewList
     if (!snaps.length) return inViewList
 

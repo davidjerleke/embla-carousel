@@ -29,7 +29,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -47,7 +47,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3],
         [4],
@@ -66,7 +66,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2, 3, 4, 5],
         [6],
         [7],
@@ -84,7 +84,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -109,7 +109,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -128,7 +128,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3],
         [4],
@@ -148,7 +148,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2, 3, 4],
         [5],
         [6],
@@ -166,7 +166,7 @@ describe('➡️  ContainScroll - Vertical', () => {
     expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
     expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-    expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+    expect(engine.scrollSnapList.slidesBySnap).toEqual([
       [0],
       [1],
       [2],
@@ -189,7 +189,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0, 1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0, 1]])
     })
 
     test('Content size is 3 pixels wider than viewport', () => {
@@ -203,7 +203,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0], [1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0], [1]])
     })
 
     test('Content size is less than viewport', () => {
@@ -217,7 +217,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0, 1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0, 1]])
     })
 
     test('Snaps at the START diff less than 1 pixel', () => {
@@ -231,7 +231,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3],
         [4],
@@ -252,7 +252,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -271,7 +271,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2, 3]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0], [1], [2, 3]])
     })
   })
 
@@ -291,7 +291,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -315,7 +315,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -338,7 +338,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -362,7 +362,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -393,7 +393,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -417,7 +417,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -440,7 +440,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -464,7 +464,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -491,7 +491,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0, 1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0, 1]])
     })
 
     test('3 pixels wider than viewport', () => {
@@ -505,7 +505,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0], [1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0], [1]])
     })
 
     test('Less than viewport', () => {
@@ -519,7 +519,7 @@ describe('➡️  ContainScroll - Vertical', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([[0, 1]])
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([[0, 1]])
     })
   })
 })

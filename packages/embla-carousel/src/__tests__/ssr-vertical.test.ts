@@ -82,7 +82,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -111,7 +111,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -140,7 +140,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -169,7 +169,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -198,7 +198,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -227,7 +227,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2],
         [3],
@@ -258,7 +258,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -289,7 +289,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -320,7 +320,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -351,7 +351,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -382,7 +382,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -413,7 +413,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -444,7 +444,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -475,7 +475,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -508,7 +508,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -530,7 +530,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -552,7 +552,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -574,7 +574,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 
@@ -598,7 +598,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -624,7 +624,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -650,7 +650,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([
+      expect(scrollSnapList.slidesBySnap).toEqual([
         [0, 1, 2],
         [3, 4, 5],
         [6, 7]
@@ -682,7 +682,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -704,7 +704,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -726,7 +726,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -752,7 +752,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 
@@ -776,7 +776,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 1', () => {
@@ -798,7 +798,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 2', () => {
@@ -820,7 +820,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
 
     test('SSR styles are correct at startSnap 3', () => {
@@ -842,7 +842,7 @@ describe('➡️  SSR - Vertical', () => {
         `)
       )
 
-      expect(scrollSnapList.slideGroupBySnap).toEqual([[0], [1], [2], [3]])
+      expect(scrollSnapList.slidesBySnap).toEqual([[0], [1], [2], [3]])
     })
   })
 })

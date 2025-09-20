@@ -1,5 +1,6 @@
 import { LimitType } from './Limit'
 import { ScrollContainOptionType } from './ScrollContain'
+import { ScrollProgressType } from './ScrollProgress'
 import { SlidesToScrollType } from './SlidesToScroll'
 import {
   arrayFromRange,
@@ -8,11 +9,13 @@ import {
   arrayLastIndex
 } from './utils'
 
-type SnapBySlideIndexType = { [key: number]: number }
+type SnapBySlideType = { [key: number]: number }
 
 export type ScrollSnapListType = {
-  slideGroupBySnap: number[][]
-  snapBySlideIndex: SnapBySlideIndexType
+  slidesBySnap: number[][]
+  snapBySlide: SnapBySlideType
+  progressBySnap: number[]
+  length: number
 }
 
 export function ScrollSnapList(
@@ -21,14 +24,17 @@ export function ScrollSnapList(
   scrollSnaps: number[],
   scrollContainLimit: LimitType,
   slidesToScroll: SlidesToScrollType,
-  slideIndexes: number[]
+  slideIndexes: number[],
+  scrollProgress: ScrollProgressType
 ): ScrollSnapListType {
   const { groupSlides } = slidesToScroll
   const { min, max } = scrollContainLimit
-  const slideGroupBySnap = createScrollSnapList()
-  const snapBySlideIndex = createSnapBySlideIndex()
+  const slidesBySnap = getSlidesBySnap()
+  const snapBySlide = getSnapsBySlide()
+  const progressBySnap = scrollSnaps.map(scrollProgress.get)
+  const length = scrollSnaps.length
 
-  function createScrollSnapList(): number[][] {
+  function getSlidesBySnap(): number[][] {
     const groupedSlideIndexes = groupSlides(slideIndexes)
     const doNotContain = !containSnaps || containScroll === 'keepSnaps'
 
@@ -51,20 +57,22 @@ export function ScrollSnapList(
     })
   }
 
-  function createSnapBySlideIndex(): SnapBySlideIndexType {
-    const snapBySlideIndex: SnapBySlideIndexType = {}
+  function getSnapsBySlide(): SnapBySlideType {
+    const snapBySlide: SnapBySlideType = {}
 
-    slideGroupBySnap.forEach((slideGroup, snapIndex) => {
+    slidesBySnap.forEach((slideGroup, snapIndex) => {
       slideGroup.forEach((slideIndex) => {
-        snapBySlideIndex[slideIndex] = snapIndex
+        snapBySlide[slideIndex] = snapIndex
       })
     })
-    return snapBySlideIndex
+    return snapBySlide
   }
 
   const self: ScrollSnapListType = {
-    slideGroupBySnap,
-    snapBySlideIndex
+    slidesBySnap,
+    snapBySlide,
+    progressBySnap,
+    length
   }
   return self
 }

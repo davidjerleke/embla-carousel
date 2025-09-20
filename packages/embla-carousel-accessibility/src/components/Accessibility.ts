@@ -166,16 +166,16 @@ function Accessibility(
   function onSlideFocusIn(slideIndex: number): () => void {
     return () => {
       lastFocusedSlide = slideIndex
-      const { snapBySlideIndex } = emblaApi.internalEngine().scrollSnapList
-      const snapIndex = snapBySlideIndex[lastFocusedSlide]
+      const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
+      const snapIndex = snapBySlide[lastFocusedSlide]
       updateSlides([snapIndex])
     }
   }
 
   function onSlideFocusOut(): void {
     if (lastFocusedSlide === null || lastFocusedSlide < 0) return
-    const { snapBySlideIndex } = emblaApi.internalEngine().scrollSnapList
-    const snapIndex = snapBySlideIndex[lastFocusedSlide]
+    const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
+    const snapIndex = snapBySlide[lastFocusedSlide]
     updateSlides([snapIndex])
     lastFocusedSlide = null
   }
@@ -188,7 +188,7 @@ function Accessibility(
     const focusOptions = { capture: true }
 
     emblaApi.slideNodes().forEach((slideNode, slideIndex) => {
-      const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
+      const snapIndex = scrollSnapList.snapBySlide[slideIndex]
       const label = getAriaText(snapIndex, slideAriaLabel)
       const slideAttributes = slidesAttributes[slideIndex]
       const slideFocusNodes = getChildNodes(slideNode, focusSelector)
@@ -304,10 +304,10 @@ function Accessibility(
   }
 
   function updateSlides(snaps: number[] = allSnaps): void {
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
 
     snaps.forEach((snapIndex) => {
-      const slidesInSnap = slideGroupBySnap[snapIndex]
+      const slidesInSnap = slidesBySnap[snapIndex]
       const isActive = snapIndex === emblaApi.selectedSnap()
 
       slidesInSnap.forEach((slideIndex) => {
@@ -334,9 +334,9 @@ function Accessibility(
     if (!allSnaps.length) return ''
     if (!ariaTextCallback) return ''
 
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
-    const slidesInSnap = slideGroupBySnap[snapIndex]
-    const hasSlideGroups = slideGroupBySnap.some((group) => group.length > 1)
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
+    const slidesInSnap = slidesBySnap[snapIndex]
+    const hasSlideGroups = slidesBySnap.some((group) => group.length > 1)
     const slideCount = emblaApi.slideNodes().length
     const snapCount = allSnaps.length
 

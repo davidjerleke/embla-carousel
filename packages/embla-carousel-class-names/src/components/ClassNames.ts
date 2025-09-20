@@ -139,8 +139,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function toggleSnappedClasses(): void {
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
-    const newSnappedIndexes = slideGroupBySnap[emblaApi.selectedSnap()]
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
+    const newSnappedIndexes = slidesBySnap[emblaApi.selectedSnap()]
 
     snappedIndexes = toggleSlideClasses(
       newSnappedIndexes,

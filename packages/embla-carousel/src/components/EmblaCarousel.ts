@@ -210,7 +210,7 @@ function EmblaCarousel(
     direction?: ScrollToDirectionType
   ): void {
     const slideIndex = isNumber(subject) ? subject : slides.indexOf(subject)
-    const snapIndex = engine.scrollSnapList.snapBySlideIndex[slideIndex]
+    const snapIndex = engine.scrollSnapList.snapBySlide[slideIndex]
 
     if (isNumber(snapIndex)) scrollToSnap(snapIndex, instant, direction)
   }
@@ -244,7 +244,7 @@ function EmblaCarousel(
   }
 
   function snapList(): number[] {
-    return engine.snapList
+    return engine.scrollSnapList.progressBySnap
   }
 
   function selectedSnap(): number {

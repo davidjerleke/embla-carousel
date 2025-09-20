@@ -193,7 +193,7 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
   function setOpacity(index: number): void {
     const { scrollSnaps, containerRect, scrollSnapList } =
       emblaApi.internalEngine()
-    const slidesInSnap = scrollSnapList.slideGroupBySnap[index]
+    const slidesInSnap = scrollSnapList.slidesBySnap[index]
     const opacity = opacities[index]
 
     slidesInSnap.forEach((slideIndex) => {
@@ -295,22 +295,19 @@ function Fade(userOptions: FadeOptionsType = {}): FadeType {
     slidesSelector: string
   ): string {
     const { active } = options
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
     const selectedSnap = emblaApi.selectedSnap()
     const opacity = active ? 0 : 1
     const pointerEvents = active ? 'none' : 'auto'
     const baseStyles = `${containerSelector} ${slidesSelector}{opacity:${opacity};pointer-events:${pointerEvents};}`
-    const slideStyles = slideGroupBySnap[selectedSnap].reduce(
-      (styles, index) => {
-        return (
-          styles +
-          `${containerSelector} ${slidesSelector}:nth-child(${
-            index + 1
-          }){opacity:1;pointer-events:auto;}`
-        )
-      },
-      ''
-    )
+    const slideStyles = slidesBySnap[selectedSnap].reduce((styles, index) => {
+      return (
+        styles +
+        `${containerSelector} ${slidesSelector}:nth-child(${
+          index + 1
+        }){opacity:1;pointer-events:auto;}`
+      )
+    }, '')
 
     if (active) return baseStyles + slideStyles
     return baseStyles

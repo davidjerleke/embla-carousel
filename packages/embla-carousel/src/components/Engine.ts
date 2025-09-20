@@ -65,7 +65,6 @@ export type EngineType = {
   nodeHandler: NodeHandlerType
   scrollTo: ScrollToType
   scrollTarget: ScrollTargetType
-  snapList: number[]
   scrollSnaps: number[]
   slideIndexes: number[]
   scrollOptimizer: ScrollOptimizerType
@@ -173,6 +172,7 @@ export function Engine(
   const translate = Translate(axis, container)
   const slideTranslates = slides.map((slide) => Translate(axis, slide))
 
+  const scrollProgress = ScrollProgress(limit)
   const scrollBody = ScrollBody(
     location,
     offsetLocation,
@@ -187,7 +187,8 @@ export function Engine(
     scrollSnaps,
     scrollContainLimit,
     slidesToScroll,
-    slideIndexes
+    slideIndexes,
+    scrollProgress
   )
   const slideLooper = SlideLooper(
     viewSize,
@@ -229,7 +230,6 @@ export function Engine(
     target,
     eventHandler
   )
-  const scrollProgress = ScrollProgress(limit)
   const eventStore = EventStore()
   const slidesInView = SlidesInView(
     container,
@@ -311,7 +311,6 @@ export function Engine(
       target
     ]),
     scrollProgress,
-    snapList: scrollSnaps.map(scrollProgress.get),
     scrollSnaps,
     scrollTarget,
     scrollTo,

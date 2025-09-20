@@ -51,7 +51,7 @@ export function SlideFocus(
 
     root[axis.nativeScroll] = 0
 
-    const snapIndex = scrollSnapList.snapBySlideIndex[slideIndex]
+    const snapIndex = scrollSnapList.snapBySlide[slideIndex]
 
     if (!isNumber(snapIndex)) return
 

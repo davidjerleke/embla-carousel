@@ -25,7 +25,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -42,7 +42,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -59,7 +59,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -84,7 +84,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -101,7 +101,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -118,7 +118,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3, 4, 5],
         [6, 7],
@@ -143,7 +143,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -162,7 +162,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -181,7 +181,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0],
         [1],
         [2],
@@ -208,7 +208,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],
@@ -226,7 +226,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],
@@ -244,7 +244,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],
@@ -270,7 +270,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],
@@ -288,7 +288,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],
@@ -306,7 +306,7 @@ describe('➡️  SlidesToScroll - Horizontal LTR', () => {
       expect(engine.scrollSnaps).toEqual(expectedScrollSnaps)
       expect(engine.location.get()).toBe(expectedScrollSnaps[FIRST_SNAP_INDEX])
 
-      expect(engine.scrollSnapList.slideGroupBySnap).toEqual([
+      expect(engine.scrollSnapList.slidesBySnap).toEqual([
         [0, 1],
         [2, 3],
         [4, 5],

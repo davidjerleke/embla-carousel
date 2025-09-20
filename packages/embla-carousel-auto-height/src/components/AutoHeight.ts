@@ -97,8 +97,8 @@ function AutoHeight(userOptions: AutoHeightOptionsType = {}): AutoHeightType {
   }
 
   function getSlideIndexes(): number[] {
-    const { slideGroupBySnap } = emblaApi.internalEngine().scrollSnapList
-    if (isEventSelect) return slideGroupBySnap[emblaApi.selectedSnap()]
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
+    if (isEventSelect) return slidesBySnap[emblaApi.selectedSnap()]
     return emblaApi.slidesInView()
   }
 
