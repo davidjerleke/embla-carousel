@@ -8,7 +8,7 @@ date: 2021-03-13
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
-import { Autoplay } from 'components/Examples/Plugins/Autoplay'
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 
 # Autoplay
 
@@ -22,7 +22,9 @@ This plugin is used to extend Embla Carousel with **autoplay** functionality.
 
 ## Example
 
-<Autoplay />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Autoplay')}
+/>
 
 ## Installation
 

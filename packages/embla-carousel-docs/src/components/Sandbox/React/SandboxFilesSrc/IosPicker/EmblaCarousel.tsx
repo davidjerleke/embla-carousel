@@ -3,11 +3,11 @@ import { EmblaOptionsType } from 'embla-carousel'
 import { IosPickerItem } from './EmblaCarouselIosPickerItem'
 
 type PropType = {
-  loop?: EmblaOptionsType['loop']
+  options: EmblaOptionsType
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { loop } = props
+  const { loop } = props.options
 
   return (
     <div className="embla">

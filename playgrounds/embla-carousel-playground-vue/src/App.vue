@@ -34,7 +34,7 @@ const injectBaseStyles = (): void => {
   const carouselStyles = examplesCarouselStyles(
     `${SLIDE_SIZE}%`,
     '1rem',
-    'x',
+    OPTIONS,
     styledComponentsStylesToString(
       CONTROLS_STYLES,
       SLIDE_NUMBER_STYLES,

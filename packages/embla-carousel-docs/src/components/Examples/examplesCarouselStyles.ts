@@ -770,12 +770,13 @@ const BUTTON_TRANSFORM_REGEX =
 export const examplesCarouselStyles = (
   slideSize: string = '100%',
   spacingSize: string = CAROUSEL_SLIDES_SPACING,
-  axis: EmblaOptionsType['axis'] = 'x',
+  options: EmblaOptionsType = {},
   customStyles: string = '',
   baseStyles: string = ''
 ): string => {
-  const isHorizontal = axis === 'x'
+  const isHorizontal = options.axis !== 'y'
   const baseFallback = isHorizontal ? BASE_STYLES : BASE_STYLES_VERTICAL
+  const isRightToLeft = options.direction === 'rtl'
   const rootStyles = baseStyles || styledComponentsStylesToString(baseFallback)
   const allStyles = rootStyles + customStyles
 
@@ -788,7 +789,8 @@ export const examplesCarouselStyles = (
       return match.replace(SLIDE_HEIGHT_REGEX, value)
     })
     .replace(BUTTON_TRANSFORM_REGEX, (match) => {
-      const buttonDirection = isHorizontal ? '' : 'rotate(90deg)'
+      const baseDirection = isRightToLeft ? 'rotate(180deg)' : ''
+      const buttonDirection = isHorizontal ? baseDirection : 'rotate(90deg)'
       const value = buttonDirection ? `transform: ${buttonDirection};` : ''
       return match.replace(BUTTON_TRANSFORM_VALUE_REGEX, value)
     })

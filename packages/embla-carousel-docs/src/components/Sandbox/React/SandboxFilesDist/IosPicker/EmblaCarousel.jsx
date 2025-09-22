@@ -2,7 +2,7 @@ import React from 'react'
 import { IosPickerItem } from './EmblaCarouselIosPickerItem'
 
 const EmblaCarousel = (props) => {
-  const { loop } = props
+  const { loop } = props.options
 
   return (
     <div className="embla">
