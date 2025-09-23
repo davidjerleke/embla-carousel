@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselAutoplay from 'components/Sandbox/React/SandboxFilesSrc/Autoplay/EmblaCarousel'
+import CarouselAutoplay from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Autoplay/EmblaCarousel'
 import {
   ARROWS_STYLES,
   AUTOPLAY_STYLES,
@@ -37,7 +37,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Autoplay')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Autoplay')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselAutoplay as ExamplesSetupType['Carousel'],

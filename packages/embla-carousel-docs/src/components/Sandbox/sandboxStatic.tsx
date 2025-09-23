@@ -53,7 +53,7 @@ const sandboxVanilla = async (
     language,
     plugins: sandboxStaticExtractPlugins(carouselScript.default),
     carouselScript: carouselScript.default.replace(
-      /from\s'..\/EmblaCarousel/g,
+      /from\s'..(.*)\/EmblaCarousel/g,
       "from './EmblaCarousel"
     ),
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
@@ -101,7 +101,7 @@ const sandboxReact = async (
     language,
     plugins: sandboxStaticExtractPlugins(carouselScript.default),
     carouselScript: carouselScript.default.replace(
-      /from\s'..\/EmblaCarousel/g,
+      /from\s'..(.*)\/EmblaCarousel/g,
       "from './EmblaCarousel"
     ),
     sandboxOverrides: {

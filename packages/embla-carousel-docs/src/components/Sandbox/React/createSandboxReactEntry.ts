@@ -1,10 +1,7 @@
 import { EmblaOptionsType } from 'embla-carousel'
 import { SandboxModuleType, SandboxReactExtensionType } from 'consts/sandbox'
-import { sandboxInjectIosPickerLoop, sandboxInjectOptions } from 'utils/sandbox'
-import {
-  SANDBOX_REGEX_IOS_PICKER_LOOP,
-  SANDBOX_REGEX_OPTIONS
-} from 'consts/sandbox'
+import { sandboxInjectOptions } from 'utils/sandbox'
+import { SANDBOX_REGEX_OPTIONS } from 'consts/sandbox'
 
 const CAROUSEL_IMPORT_REGEX = /import\sEmblaCarousel\sfrom\s'(.*)'/
 const SLIDE_COUNT_REGEX = /const\sSLIDE_COUNT\s=\s\d{1,}/
@@ -27,14 +24,14 @@ export const createSandboxReactDefaultEntry = async (
 
 export const createSandboxReactIosPickerEntry = async (
   reactScriptExtension: SandboxReactExtensionType,
-  loop: boolean
+  options: EmblaOptionsType
 ): Promise<string> => {
   const entry: SandboxModuleType = await import(
     `!!raw-loader!components/Sandbox/React/SandboxFilesDist/CarouselIosPickerEntry.${reactScriptExtension}`
   )
   return entry.default
     .replace(CAROUSEL_IMPORT_REGEX, CAROUSEL_IMPORT_REPLACE)
-    .replace(SANDBOX_REGEX_IOS_PICKER_LOOP, sandboxInjectIosPickerLoop(loop))
+    .replace(SANDBOX_REGEX_OPTIONS, sandboxInjectOptions(options))
 }
 
 export const createSandboxReactEntry = async (
@@ -43,11 +40,11 @@ export const createSandboxReactEntry = async (
   options: EmblaOptionsType,
   id: string
 ): Promise<string> => {
-  if (id === 'embla-carousel-ios-style-picker') {
-    return createSandboxReactIosPickerEntry(
-      reactScriptExtension,
-      !!options.loop
-    )
+  if (
+    id === 'embla-carousel-ios-style-picker' ||
+    id === 'embla-carousel-ios-style-picker-loop'
+  ) {
+    return createSandboxReactIosPickerEntry(reactScriptExtension, options)
   }
   return createSandboxReactDefaultEntry(reactScriptExtension, slides, options)
 }

@@ -32,7 +32,7 @@ const DEFAULT_SETTINGS = CONTEXT_DEFAULT_VALUE.formData
 const sandboxVanilla = async (
   settings: SandboxGeneratorSettingsType = DEFAULT_SETTINGS,
   language: SandboxLanguageType,
-  path: string = 'CarouselGenerator'
+  path: string = 'Generator'
 ): Promise<string> => {
   const { vanillaScriptExtension, formatScript } = await sandboxLanguageUtils(
     language
@@ -56,12 +56,13 @@ const sandboxVanilla = async (
       carouselScriptWithFeatures,
       path
     )
+  const options = sandboxGeneratorCreateOptions(settings)
 
   return createSandboxVanilla({
     id: settings.id,
     language,
-    options: sandboxGeneratorCreateOptions(settings),
-    styles: sandboxGeneratorCreateStyles(settings),
+    options,
+    styles: sandboxGeneratorCreateStyles({ ...settings, ...options }),
     carouselScript: carouselScriptWithFeatures,
     plugins: sandboxStaticExtractPlugins(carouselScriptWithFeatures),
     carouselHtml: createSandboxVanillaSlidesHtml(
@@ -92,7 +93,7 @@ const sandboxVanilla = async (
 const sandboxReact = async (
   settings: SandboxGeneratorSettingsType = DEFAULT_SETTINGS,
   language: SandboxLanguageType,
-  path: string = 'CarouselGenerator'
+  path: string = 'Generator'
 ): Promise<string> => {
   const { reactScriptExtension, formatScript } = await sandboxLanguageUtils(
     language
@@ -110,13 +111,14 @@ const sandboxReact = async (
       carouselScriptWithFeatures,
       path
     )
+  const options = sandboxGeneratorCreateOptions(settings)
 
   return createSandboxReact({
     id: settings.id,
     language,
     slides: settings.slideList,
-    options: sandboxGeneratorCreateOptions(settings),
-    styles: sandboxGeneratorCreateStyles(settings),
+    options,
+    styles: sandboxGeneratorCreateStyles({ ...settings, ...options }),
     carouselScript: carouselScriptWithFeatures,
     plugins: sandboxStaticExtractPlugins(carouselScriptWithFeatures),
     sandboxOverrides: {

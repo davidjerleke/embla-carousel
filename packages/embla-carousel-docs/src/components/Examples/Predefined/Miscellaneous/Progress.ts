@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselProgress from 'components/Sandbox/React/SandboxFilesSrc/Progress/EmblaCarousel'
+import CarouselProgress from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Progress/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -33,7 +33,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Progress')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Progress')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselProgress as ExamplesSetupType['Carousel'],

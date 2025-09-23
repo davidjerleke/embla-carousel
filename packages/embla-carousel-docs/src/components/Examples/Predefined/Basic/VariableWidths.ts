@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselDragFree from 'components/Sandbox/React/SandboxFilesSrc/DragFree/EmblaCarousel'
+import CarouselDragFree from 'components/Sandbox/React/SandboxFilesSrc/Predefined/DragFree/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'DragFree')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/DragFree')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselDragFree as ExamplesSetupType['Carousel'],

@@ -9290,7 +9290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility":
+"embla-carousel-accessibility@8.6.0, embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility":
   version: 0.0.0-use.local
   resolution: "embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility"
   dependencies:
@@ -9416,6 +9416,7 @@ __metadata:
     babel-plugin-styled-components: ^2.0.2
     codesandbox: ^2.2.3
     embla-carousel: 8.6.0
+    embla-carousel-accessibility: 8.6.0
     embla-carousel-auto-height: 8.6.0
     embla-carousel-auto-scroll: 8.6.0
     embla-carousel-autoplay: 8.6.0

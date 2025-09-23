@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselRightToLeft from 'components/Sandbox/React/SandboxFilesSrc/RightToLeft/EmblaCarousel'
+import CarouselRightToLeft from 'components/Sandbox/React/SandboxFilesSrc/Predefined/RightToLeft/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -33,7 +33,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'RightToLeft')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/RightToLeft')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselRightToLeft as ExamplesSetupType['Carousel'],

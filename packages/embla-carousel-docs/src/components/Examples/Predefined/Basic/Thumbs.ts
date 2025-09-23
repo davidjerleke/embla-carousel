@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselThumbs from 'components/Sandbox/React/SandboxFilesSrc/Thumbs/EmblaCarousel'
+import CarouselThumbs from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Thumbs/EmblaCarousel'
 import {
   SLIDE_NUMBER_STYLES,
   THUMBS_STYLES,
@@ -26,7 +26,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Thumbs')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Thumbs')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselThumbs as ExamplesSetupType['Carousel'],

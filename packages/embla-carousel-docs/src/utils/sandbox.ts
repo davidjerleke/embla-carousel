@@ -88,12 +88,6 @@ export const sandboxInjectOptions = (
   return (match: string) => match.replace('{}', JSON.stringify(options))
 }
 
-export const sandboxInjectIosPickerLoop = (
-  loop: boolean = false
-): ((match: string) => string) => {
-  return (match) => match.replace('false', loop.toString())
-}
-
 type SandboxGeneratorInputIdType<
   Key extends keyof SandboxGeneratorSettingsType
 > = {

@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselParallax from 'components/Sandbox/React/SandboxFilesSrc/Parallax/EmblaCarousel'
+import CarouselParallax from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Parallax/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Parallax')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Parallax')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselParallax as ExamplesSetupType['Carousel'],

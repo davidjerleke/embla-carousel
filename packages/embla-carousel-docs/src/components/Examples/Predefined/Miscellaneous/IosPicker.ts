@@ -3,7 +3,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselIosPicker from 'components/Sandbox/React/SandboxFilesSrc/IosPicker/EmblaCarousel'
+import CarouselIosPicker from 'components/Sandbox/React/SandboxFilesSrc/Predefined/IosPicker/EmblaCarousel'
 import { IOS_PICKER_STYLES } from 'components/Examples/examplesCarouselStyles'
 
 const ID = 'embla-carousel-ios-style-picker'
@@ -15,7 +15,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'IosPicker')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/IosPicker')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselIosPicker as ExamplesSetupType['Carousel'],

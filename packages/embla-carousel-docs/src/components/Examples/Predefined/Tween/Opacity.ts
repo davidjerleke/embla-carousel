@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselOpacity from 'components/Sandbox/React/SandboxFilesSrc/Opacity/EmblaCarousel'
+import CarouselOpacity from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Opacity/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -33,7 +33,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Opacity')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Opacity')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselOpacity as ExamplesSetupType['Carousel'],

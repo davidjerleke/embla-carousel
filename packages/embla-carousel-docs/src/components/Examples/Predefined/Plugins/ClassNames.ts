@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselClassNames from 'components/Sandbox/React/SandboxFilesSrc/ClassNames/EmblaCarousel'
+import CarouselClassNames from 'components/Sandbox/React/SandboxFilesSrc/Predefined/ClassNames/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CLASS_NAMES_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'ClassNames')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/ClassNames')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselClassNames as ExamplesSetupType['Carousel'],

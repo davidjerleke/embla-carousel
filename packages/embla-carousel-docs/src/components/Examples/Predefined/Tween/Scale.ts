@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselScale from 'components/Sandbox/React/SandboxFilesSrc/Scale/EmblaCarousel'
+import CarouselScale from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Scale/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Scale')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Scale')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselScale as ExamplesSetupType['Carousel'],

@@ -110,6 +110,7 @@ export const SANDBOX_LANGUAGES = {
 } as const
 
 export const SANDBOX_PLUGINS = {
+  ACCESSIBILITY: 'embla-carousel-accessibility',
   AUTOPLAY: 'embla-carousel-autoplay',
   AUTO_SCROLL: 'embla-carousel-auto-scroll',
   AUTO_HEIGHT: 'embla-carousel-auto-height',
@@ -148,5 +149,3 @@ export const SANDBOX_REGEX_TITLE = /__replace_sandbox_title__/g
 export const SANDBOX_REGEX_THEME = /__replace_sandbox_theme__/g
 
 export const SANDBOX_REGEX_OPTIONS = /const\sOPTIONS(.*)/
-
-export const SANDBOX_REGEX_IOS_PICKER_LOOP = /const\sLOOP\s=\sfalse/

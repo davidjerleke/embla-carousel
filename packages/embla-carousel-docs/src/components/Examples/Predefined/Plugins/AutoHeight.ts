@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselAutoHeight from 'components/Sandbox/React/SandboxFilesSrc/AutoHeight/EmblaCarousel'
+import CarouselAutoHeight from 'components/Sandbox/React/SandboxFilesSrc/Predefined/AutoHeight/EmblaCarousel'
 import {
   ARROWS_STYLES,
   AUTO_HEIGHT_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'AutoHeight')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/AutoHeight')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselAutoHeight as ExamplesSetupType['Carousel'],

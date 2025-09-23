@@ -3,8 +3,8 @@ import { arrayFromNumber } from 'utils/arrayFromNumber'
 import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { EXAMPLES_WRAPPERS, ExamplesSetupType } from 'consts/examples'
-import CarouselScrollBar from 'components/Sandbox/React/SandboxFilesSrc/ScrollBar/EmblaCarousel'
+import { ExamplesSetupType } from 'consts/examples'
+import CarouselScrollBar from 'components/Sandbox/React/SandboxFilesSrc/Predefined/ScrollBar/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'ScrollBar')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/ScrollBar')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselScrollBar as ExamplesSetupType['Carousel'],

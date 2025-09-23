@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselFade from 'components/Sandbox/React/SandboxFilesSrc/Fade/EmblaCarousel'
+import CarouselFade from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Fade/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Fade')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/Fade')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselFade as ExamplesSetupType['Carousel'],

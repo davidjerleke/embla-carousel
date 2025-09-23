@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselLazyLoad from 'components/Sandbox/React/SandboxFilesSrc/LazyLoad/EmblaCarousel'
+import CarouselLazyLoad from 'components/Sandbox/React/SandboxFilesSrc/Predefined/LazyLoad/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -35,7 +35,7 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'LazyLoad')
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Predefined/LazyLoad')
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselLazyLoad as ExamplesSetupType['Carousel'],

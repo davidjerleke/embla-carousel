@@ -18,6 +18,7 @@ export const sandboxGeneratorCreateStyles = (
     slideSize,
     slideGapSize,
     axis,
+    direction,
     styles
   } = settings
 
@@ -33,7 +34,7 @@ export const sandboxGeneratorCreateStyles = (
   return examplesCarouselStyles(
     `${slideSize}%`,
     `${parseFloat(slideGapSize) / 10}rem`,
-    axis,
+    { axis, direction },
     styledComponentsStylesToString(...styleList)
   )
 }

@@ -42,6 +42,7 @@
     "babel-plugin-styled-components": "^2.0.2",
     "codesandbox": "^2.2.3",
     "embla-carousel": "8.6.0",
+    "embla-carousel-accessibility": "8.6.0",
     "embla-carousel-auto-height": "8.6.0",
     "embla-carousel-auto-scroll": "8.6.0",
     "embla-carousel-autoplay": "8.6.0",
