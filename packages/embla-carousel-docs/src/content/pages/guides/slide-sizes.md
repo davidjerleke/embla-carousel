@@ -1,7 +1,7 @@
 ---
 title: Slide Sizes
 description: This guide demonstrates how Embla Carousel handles slide sizes and how to customize them.
-order: 1
+order: 3
 date: 2021-03-13
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Slide Container
 description: This guide demonstrates how to setup the Embla Carousel slide container correctly.
-order: 0
+order: 2
 date: 2021-03-13
 ---
 

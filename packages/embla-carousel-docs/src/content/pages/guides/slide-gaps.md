@@ -1,7 +1,7 @@
 ---
 title: Slide Gaps
 description: This guide demonstrates how Embla Carousel handles slide gaps and how to customize them.
-order: 2
+order: 4
 date: 2021-03-13
 ---
 
