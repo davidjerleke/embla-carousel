@@ -1,0 +1,104 @@
+---
+title: How Embla Carousel Works
+description: This guide covers how Embla Carousel manipulates the DOM to create smooth scrolling.
+order: 1
+date: 2025-09-29
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+
+# How Embla Carousel Works
+
+This guide covers how **Embla Carousel** manipulates the **DOM** to create **smooth scrolling**.
+
+---
+
+## Minimal DOM Manipulation
+
+Embla takes a **minimal, low-level approach** and only modifies the DOM in two ways:
+
+- **Carousel container** - applies `translate3d` to create the scroll effect.
+- **Carousel slides** - applies `translate3d` to slides to both shift slide positions for looping and improve scroll performance.
+
+Open the example in the **developer tools** of your choice:
+
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/Loop')}
+/>
+
+You will see an inline style `transform` applied on the container element:
+
+```html
+<div class="embla">
+  <div class="embla__viewport">
+    <div
+      class="embla__container"
+      style="transform: translate3d(73.5px, 0px, 0px);"
+    >
+      <!-- slides -->
+    </div>
+  </div>
+</div>
+```
+
+And an inline style `transform` on some slide elements:
+
+```html
+<div class="embla__slide" style="transform: translate3d(0px, 0px, 0px);">
+  <div class="embla__slide__number">
+    <span>1</span>
+  </div>
+</div>
+<div class="embla__slide" style="transform: translate3d(0px, 0px, 0px);">
+  <div class="embla__slide__number">
+    <span>2</span>
+  </div>
+</div>
+
+<!-- ...and so on -->
+```
+
+That's it — nothing else is added to the DOM. **Embla does not encapsulate or wrap any elements**, so you retain full control over your markup, structure, and styling. This behavior applies to the core library as well as the official framework wrappers. Plugins, however, **may modify the DOM further**, so check individual [plugin pages](/plugins) for details.
+
+## Important: Styling Gotchas
+
+Before adding custom styles, remember how **Embla manipulates the DOM** — applying styles incorrectly can break its functionality.
+
+<Admonition type="warning">
+  **Warning:** Do **not** apply custom **`transform`** or **`transition`**
+  styles directly to the **carousel container** or **slides**. Embla applies
+  transforms via inline styles and animates them using a spring-based system
+  with `requestAnimationFrame`; adding your own will conflict and **break the
+  carousel's behavior**.
+</Admonition>
+
+Instead, apply custom transforms and transitions to an element that wraps the container:
+
+```html
+<div
+  class="embla"
+  style="transform: scale(0.9); transition: transform 0.3s ease;"
+>
+  <div class="embla__viewport">
+    <div class="embla__container">
+      <!-- slides -->
+    </div>
+  </div>
+</div>
+```
+
+When transforming slides, create an inner element within each slide that you can apply transforms and/or transitions to:
+
+```html
+<div class="embla__slide">
+  <div
+    class="embla__slide__inner"
+    style="transform: rotate(5deg); transition: transform 0.3s ease;"
+  >
+    <!-- slide content -->
+  </div>
+</div>
+```
+
+Applying transforms and transitions to wrapping elements or inner slide elements keeps full control over styling while preserving Embla's smooth animations.
