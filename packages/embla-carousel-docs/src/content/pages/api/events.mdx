@@ -265,7 +265,7 @@ The `EmblaEventType` is obtained directly from the **core package** `embla-carou
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-```ts asLanguage=tsx highlight={3-4,12-13}
+```tsx asLanguage=ts highlight={3-4,12-13}
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaEventType,
@@ -456,7 +456,7 @@ export function EmblaCarousel() {
 
 Alternatively, you can use the `EmblaEventCallbackType` and **assign** your callback to a **constant** to get the correct types:
 
-```ts asLanguage=tsx highlight={1,3}
+```tsx asLanguage=ts highlight={1,3}
 import { EmblaEventCallbackType } from 'embla-carousel'
 
 const logPointerDown: EmblaEventCallbackType<'pointerdown'> = (
@@ -470,7 +470,7 @@ const logPointerDown: EmblaEventCallbackType<'pointerdown'> = (
 
 If you pass the callback **directly** to the [on](/api/methods/#on) method, TypeScript will **infer** the types for you:
 
-```ts asLanguage=tsx
+```tsx asLanguage=ts
 emblaApi.on('pointerdown', (emblaApi, eventName, detail) => {
   console.log(detail)
 })

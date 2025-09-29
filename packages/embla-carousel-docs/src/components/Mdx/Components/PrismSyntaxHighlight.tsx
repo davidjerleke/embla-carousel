@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react'
 import { PrismSyntaxFrame } from './PrismSyntaxFrame'
 import Highlight, { defaultProps } from 'prism-react-renderer'
+import { capitalizeFirstLetter } from 'utils/stringCasing'
 import {
   parseCodeBlockProps,
   parseHighlightedLines
 } from 'utils/prismHighlight'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
+  PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME
 } from 'consts/prismHighlight'
 
@@ -18,22 +20,36 @@ type PropType = {
 export const PrismSyntaxHighlight = (props: PropType) => {
   const { children, className } = props
 
-  const { asLanguage, language, highlightedLines } = useMemo(() => {
-    const { asLanguage, language, highlight } = parseCodeBlockProps(className)
-    return {
-      language,
-      asLanguage,
-      highlightedLines: parseHighlightedLines(highlight)
-    }
-  }, [className])
+  const { displayLanguage, ariaLabelLanguage, language, highlightedLines } =
+    useMemo(() => {
+      const { asLanguage, language, highlight } = parseCodeBlockProps(className)
+      const displayLanguage = asLanguage || language
+      const ariaLabelLanguage = `Code block language: ${capitalizeFirstLetter(
+        displayLanguage
+      )}`
+      return {
+        language,
+        displayLanguage,
+        ariaLabelLanguage,
+        highlightedLines: parseHighlightedLines(highlight)
+      }
+    }, [className])
 
   return (
-    <div className={PRISM_HIGHLIGHT_CLASS_NAME} data-language={language}>
+    <div className={PRISM_HIGHLIGHT_CLASS_NAME}>
+      <span
+        className={PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME}
+        data-display-language={displayLanguage}
+        aria-label={ariaLabelLanguage}
+      >
+        <span aria-hidden>{displayLanguage}</span>
+      </span>
+
       <PrismSyntaxFrame code={children}>
         <Highlight
           {...defaultProps}
           code={children}
-          language={asLanguage || language}
+          language={language}
           theme={undefined}
         >
           {({ className, tokens, getLineProps, getTokenProps }) => (

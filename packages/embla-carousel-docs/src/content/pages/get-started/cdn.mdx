@@ -17,24 +17,29 @@ Start by including the Embla Carousel script from a CDN with a `script` tag:
 
 ## The HTML structure
 
-A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following **HTML** structure to your carousel:
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following **HTML** structure to your carousel:
 
 ```html
 <div class="embla">
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
+  <div class="embla__viewport">
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
   </div>
+
+  <button class="embla__prev">Scroll to prev</button>
+  <button class="embla__next">Scroll to next</button>
 </div>
 ```
 
 ## Styling the carousel
 
-The wrapping element with the classname `embla` is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
 ```css
-.embla {
+.embla__viewport {
   overflow: hidden;
 }
 .embla__container {
@@ -48,35 +53,53 @@ The wrapping element with the classname `embla` is needed to cover the scroll ov
 
 ## Accessing the carousel API
 
-Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** the **carousel** and give you **access** to the Embla Carousel [API](/api/).
+Select the element with the classname `embla__viewport` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** your carousel and provide full **access** to the Embla Carousel [API](/api/).
 
 ```html highlight={6}
 <script type="text/javascript">
-  const emblaNode = document.querySelector('.embla')
-  const options = { loop: false }
-  const emblaApi = EmblaCarousel(emblaNode, options)
+  const viewportNode = document.querySelector('.embla__viewport')
+  const prevButtonNode = document.querySelector('.embla__prev')
+  const nextButtonNode = document.querySelector('.embla__next')
 
-  console.log(emblaApi.slideNodes()) // Access API
+  const emblaApi = EmblaCarousel(viewportNode, { loop: false })
+
+  prevButtonNode.addEventListener('click', emblaApi.scrollToPrev, false)
+  nextButtonNode.addEventListener('click', emblaApi.scrollToNext, false)
 </script>
 ```
 
 ## Adding plugins
 
-Start by including the plugin you want to use. In this example, we're going to include the [Autoplay](/plugins/autoplay/) plugin:
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
 
 ```html highlight={2}
 <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
 <script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
 ```
 
-Plugins included from a CDN will be **prefixed** with **EmblaCarousel**. Here's an example that shows how to add the [Autoplay](/plugins/autoplay/) plugin to your carousel:
+<Admonition type="note">
+  **Note:** Plugins loaded from a CDN will be **prefixed** with `EmblaCarousel`.
+  For example, the full plugin name becomes
+  `EmblaCarousel<PluginNameInPascalCase>`, and the Autoplay plugin specifically is
+  `EmblaCarouselAutoplay`.
+</Admonition>
 
-```html highlight={4-5}
+You can pass an **optional plugin array** as the third argument when initializing Embla Carousel. Here's how to extend the carousel from the previous example with Autoplay:
+
+```html highlight={7,13}
 <script type="text/javascript">
-  const emblaNode = document.querySelector('.embla')
-  const options = { loop: false }
-  const plugins = [EmblaCarouselAutoplay()]
-  const emblaApi = EmblaCarousel(emblaNode, options, plugins)
+  const viewportNode = document.querySelector('.embla__viewport')
+  const prevButtonNode = document.querySelector('.embla__prev')
+  const nextButtonNode = document.querySelector('.embla__next')
+
+  const emblaApi = EmblaCarousel(viewportNode, { loop: false }, [
+    EmblaCarouselAutoplay()
+  ])
+
+  prevButtonNode.addEventListener('click', emblaApi.scrollToPrev, false)
+  nextButtonNode.addEventListener('click', emblaApi.scrollToNext, false)
+
+  emblaApi.plugins().autoplay?.play()
 </script>
 ```
 

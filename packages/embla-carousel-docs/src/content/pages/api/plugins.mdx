@@ -101,7 +101,7 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [emblaRef] = createEmblaCarousel(
     () => ({ loop: true }),
-    () => [AutoPlay()]
+    () => [Autoplay()]
   )
 
   // ...
@@ -190,7 +190,7 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [emblaRef] = createEmblaCarousel(
     () => ({ loop: true }),
-    () => [AutoPlay({ delay: 4000 })]
+    () => [Autoplay({ delay: 4000 })]
   )
 
   // ...
@@ -275,7 +275,7 @@ Autoplay.globalOptions = { delay: 4000 }
 export function EmblaCarousel() {
   const [emblaRef] = createEmblaCarousel(
     () => ({ loop: true }),
-    () => [AutoPlay()]
+    () => [Autoplay()]
   )
 
   // ...
@@ -374,7 +374,7 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = createEmblaCarousel(
     () => ({ loop: true }),
-    () => [AutoPlay()]
+    () => [Autoplay()]
   )
 
   onMount(() => {
@@ -498,7 +498,7 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = createEmblaCarousel(
     () => ({ loop: true }),
-    () => [AutoPlay()]
+    () => [Autoplay()]
   )
 
   function logPluginEvent(emblaApi, eventName) {
@@ -559,7 +559,7 @@ The `EmblaPluginType` is obtained directly from the **core package** `embla-caro
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
-```ts asLanguage=tsx highlight={1,5}
+```tsx asLanguage=ts highlight={1,5}
 import EmblaCarousel, { EmblaPluginType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 

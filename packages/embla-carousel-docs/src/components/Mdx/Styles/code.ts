@@ -12,6 +12,7 @@ import { AdmonitionWrapper } from '../Components/Admonition'
 import { SCROLLBAR_SIZE, createScrollBarStyles } from 'consts/scrollBars'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
+  PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME,
   PRISM_HIGHLIGHT_LINE_CLASS_NAME
 } from 'consts/prismHighlight'
 
@@ -41,64 +42,59 @@ export const codeStyles = css`
   .${PRISM_HIGHLIGHT_CLASS_NAME} {
     ${pageFrameCollapseStyles};
     position: relative;
+  }
 
-    &:before {
-      z-index: ${LAYERS.STEP};
-      display: block;
-      content: attr(data-language);
-      line-height: 1;
-      font-size: ${FONT_SIZES.DETAIL};
-      text-transform: uppercase;
-      position: absolute;
-      top: 0.1rem;
-      left: ${PAGE_FRAME_SPACING};
-      padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
-        ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
-      border-bottom-left-radius: ${PRISM_FRAME_RADIUS};
-      border-bottom-right-radius: ${PRISM_FRAME_RADIUS};
-    }
+  .${PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME} {
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+    z-index: ${LAYERS.STEP};
+    display: block;
+    content: attr(data-display-language);
+    line-height: 1;
+    font-size: ${FONT_SIZES.DETAIL};
+    text-transform: uppercase;
+    position: absolute;
+    top: 0.1rem;
+    left: ${PAGE_FRAME_SPACING};
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)}
+      ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+    border-bottom-left-radius: ${PRISM_FRAME_RADIUS};
+    border-bottom-right-radius: ${PRISM_FRAME_RADIUS};
 
-    &[data-language='jsx'] {
-      &:before {
-        background-color: #61dafb;
-        color: #000000;
-      }
+    &[data-display-language='jsx'] {
+      background-color: #61dafb;
+      color: #000000;
     }
-    &[data-language='js'] {
-      &:before {
-        background-color: #f7de1e;
-        color: #000000;
-      }
+    &[data-display-language='js'] {
+      background-color: #f7de1e;
+      color: #000000;
     }
-    &[data-language='ts'] {
-      &:before {
-        background-color: #007acc;
-        color: #ffffff;
-      }
+    &[data-display-language='ts'] {
+      background-color: #007acc;
+      color: #ffffff;
     }
-    &[data-language='tsx'] {
-      &:before {
-        background-color: #294f80;
-        color: #ffffff;
-      }
+    &[data-display-language='tsx'] {
+      background-color: #294f80;
+      color: #ffffff;
     }
-    &[data-language='html'] {
-      &:before {
-        background-color: #005b9c;
-        color: #ffffff;
-      }
+    &[data-display-language='html'] {
+      background-color: #005b9c;
+      color: #ffffff;
     }
-    &[data-language='css'] {
-      &:before {
-        background-color: #2965f1;
-        color: #ffffff;
-      }
+    &[data-display-language='vue'] {
+      background-color: #42b883;
+      color: #000000;
     }
-    &[data-language='shell'] {
-      &:before {
-        background-color: #d9d7e0;
-        color: #232129;
-      }
+    &[data-display-language='css'] {
+      background-color: #2965f1;
+      color: #ffffff;
+    }
+    &[data-display-language='svelte'] {
+      background-color: #ff3e00;
+      color: #ffffff;
+    }
+    &[data-display-language='shell'] {
+      background-color: #d9d7e0;
+      color: #232129;
     }
   }
 

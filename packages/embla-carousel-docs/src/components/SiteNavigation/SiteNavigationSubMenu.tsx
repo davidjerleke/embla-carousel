@@ -143,7 +143,7 @@ export const SiteNavigationSubMenu = (props: PropType) => {
       <Menu $isOpen={isOpen}>
         <li>
           <Link slug={route.slug} isActive={isActive}>
-            Introduction
+            Intro
           </Link>
         </li>
         {children.map((child) => (

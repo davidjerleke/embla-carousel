@@ -57,8 +57,9 @@ export const LinkBare = (props: PropType) => {
 
       linkElement.current.href = to
       const targetIsCurrentUrl = pathname === linkElement.current.pathname
+      const isNewTabClick = event.metaKey || event.ctrlKey
 
-      if (!targetIsCurrentUrl) {
+      if (!targetIsCurrentUrl && !isNewTabClick) {
         dispatch(setRoutesLoading(true))
         return
       }
