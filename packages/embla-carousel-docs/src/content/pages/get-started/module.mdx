@@ -75,9 +75,10 @@ Select the element with the classname `embla__viewport` and pass it as the first
 ```js highlight={7}
 import EmblaCarousel from 'embla-carousel'
 
-const viewportNode = document.querySelector('.embla__viewport')
-const prevButtonNode = document.querySelector('.embla__prev')
-const nextButtonNode = document.querySelector('.embla__next')
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const prevButtonNode = wrapperNode.querySelector('.embla__prev')
+const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: false })
 
@@ -112,9 +113,10 @@ You can pass an **optional plugin array** as the third argument when initializin
 import EmblaCarousel from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 
-const viewportNode = document.querySelector('.embla__viewport')
-const prevButtonNode = document.querySelector('.embla__prev')
-const nextButtonNode = document.querySelector('.embla__next')
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const prevButtonNode = wrapperNode.querySelector('.embla__prev')
+const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: false }, [Autoplay()])
 

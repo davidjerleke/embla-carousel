@@ -57,9 +57,10 @@ Select the element with the classname `embla__viewport` and pass it as the first
 
 ```html highlight={6}
 <script type="text/javascript">
-  const viewportNode = document.querySelector('.embla__viewport')
-  const prevButtonNode = document.querySelector('.embla__prev')
-  const nextButtonNode = document.querySelector('.embla__next')
+  const wrapperNode = document.querySelector('.embla')
+  const viewportNode = wrapperNode.querySelector('.embla__viewport')
+  const prevButtonNode = wrapperNode.querySelector('.embla__prev')
+  const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
   const emblaApi = EmblaCarousel(viewportNode, { loop: false })
 
@@ -88,9 +89,10 @@ You can pass an **optional plugin array** as the third argument when initializin
 
 ```html highlight={7,13}
 <script type="text/javascript">
-  const viewportNode = document.querySelector('.embla__viewport')
-  const prevButtonNode = document.querySelector('.embla__prev')
-  const nextButtonNode = document.querySelector('.embla__next')
+  const wrapperNode = document.querySelector('.embla')
+  const viewportNode = wrapperNode.querySelector('.embla__viewport')
+  const prevButtonNode = wrapperNode.querySelector('.embla__prev')
+  const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
   const emblaApi = EmblaCarousel(viewportNode, { loop: false }, [
     EmblaCarouselAutoplay()
