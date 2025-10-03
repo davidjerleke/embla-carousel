@@ -7,10 +7,8 @@ import { ExamplesSetupType } from 'consts/examples'
 import CarouselAutoScroll from 'components/Sandbox/React/SandboxFilesSrc/Predefined/AutoScroll/EmblaCarousel'
 import {
   ARROWS_STYLES,
-  AUTOPLAY_STYLES,
   CONTROLS_STYLES,
   PLAY_BUTTON_STYLES,
-  PROGRESS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
@@ -26,9 +24,7 @@ const STYLES = examplesCarouselStyles(
     SLIDE_NUMBER_STYLES,
     CONTROLS_STYLES,
     ARROWS_STYLES,
-    PLAY_BUTTON_STYLES,
-    PROGRESS_STYLES,
-    AUTOPLAY_STYLES
+    PLAY_BUTTON_STYLES
   )
 )
 const CONFIG: SandboxStaticSettingsType = {

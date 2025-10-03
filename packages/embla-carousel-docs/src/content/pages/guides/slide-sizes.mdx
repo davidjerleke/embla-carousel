@@ -1,0 +1,117 @@
+---
+title: Slide Sizes
+description: Learn how Embla Carousel calculates and customizes slide sizes using CSS.
+order: 30
+date: 2025-09-29
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+
+# Slide Sizes
+
+This guide shows you how to control and customize the sizes of your slides in Embla Carousel.
+
+All examples use **flexbox** to size and align slides, but you can use any layout method (flexbox, grid, or other CSS techniques). The only requirement is that your slides stack along the carousel's scroll axis — **horizontally** for a horizontal carousel, or **vertically** for a vertical carousel.
+
+## Declaring sizes
+
+Embla Carousel doesn't assign slide sizes itself. Instead, it **measures the computed dimensions of your slides** — the final sizes that result from your CSS — and uses those values to calculate scrolling.
+
+The beauty of this approach is that you can define **any slide sizes you want**, mix sizes for variable-size slides, and use **any unit you prefer**. This applies to both horizontal and vertical carousels.
+
+## Interactive example
+
+You can adjust the `--slide-size` variable in your CSS to change slide sizes:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/SlideSizes/SlideSizesInteractive')
+  }
+  wrapper={EXAMPLES_WRAPPERS.INTERACTIVE_SIZE}
+/>
+
+```css highlight={2,15}
+.embla {
+  --slide-size: 100%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+}
+```
+
+## Breakpoints
+
+To make **slide sizes responsive**, simply use CSS **media queries**. Embla uses a `ResizeObserver` under the hood, so whenever a slide's **computed dimensions** change, the carousel will automatically recalculate the scroll snaps.
+
+```css highlight={3,13}
+.embla {
+  --slide-size: 100%;
+  --slide-size-md-up: 50%;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 var(--slide-size-md-up);
+  }
+}
+```
+
+## Variable widths
+
+To create slides with **variable widths**, set different sizes for each slide using CSS. Embla will measure the computed sizes and adjust the scrolling automatically.
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/SlideSizes/SlideSizesVariableWidths')
+  }
+/>
+
+```css
+.embla__slide:nth-child(1) {
+  flex: 0 0 60%;
+}
+
+.embla__slide:nth-child(2) {
+  flex: 0 0 40%;
+}
+
+.embla__slide:nth-child(3) {
+  flex: 0 0 80%;
+}
+
+.embla__slide:nth-child(4) {
+  flex: 0 0 25%;
+}
+
+.embla__slide:nth-child(5) {
+  flex: 0 0 70%;
+}
+```
+
+## Notes
+
+- You are in full control of slide sizes via CSS. Adjust widths, heights, or layout methods to achieve the layout you want.
+- Slides must stack along the carousel's scroll axis — horizontally for horizontal carousels, vertically for vertical ones.
+
+<Admonition type="warning">
+  **Warning:** Embla may work if you define slide sizes larger than the viewport
+  (greater than 100%), but this is **not officially supported** and could lead
+  to unexpected behavior. Use with caution.
+</Admonition>

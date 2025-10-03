@@ -66,9 +66,12 @@ The element with the classname `embla__viewport` acts as an overflow wrapper, en
   .embla__viewport {
     overflow: hidden;
   }
+
   .embla__container {
     display: flex;
+    touch-action: pan-y pinch-zoom;
   }
+
   .embla__slide {
     flex: 0 0 100%;
     min-width: 0;

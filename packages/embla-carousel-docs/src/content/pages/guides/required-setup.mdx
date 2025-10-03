@@ -1,0 +1,183 @@
+---
+title: Required Setup
+description: The minimal HTML and CSS structure you need to initialize and use Embla Carousel.
+order: 20
+date: 2025-09-29
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+
+# Required Setup
+
+Embla Carousel works by controlling a **scrollable container** within a **viewport** element. To get started, you'll need a minimal HTML and CSS setup.
+
+## Core structure
+
+Your markup must follow this pattern:
+
+- An **overflow wrapper** (`embla__viewport` below) that hides overflowing content.
+- A **scroll container** (`embla__container`) that holds and scrolls the slides.
+- One or more **slides** (`embla__slide`). Embla also supports an empty state with no slides.
+
+## Base CSS
+
+```css
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+```
+
+## Markup and script
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```html
+<div class="embla">
+  <div class="embla__viewport">
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
+  </div>
+
+  <!-- Optional: Add navigation controls here -->
+</div>
+```
+
+```js
+import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode)
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx
+import React from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel()
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      {/* Optional: Add navigation controls here */}
+    </div>
+  )
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html asLanguage=vue
+<script setup>
+  import useEmblaCarousel from 'embla-carousel-vue'
+
+  const [emblaRef] = useEmblaCarousel()
+</script>
+
+<template>
+  <div class="embla">
+    <div class="embla__viewport" ref="emblaRef">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+
+    <!-- Optional: Add navigation controls here -->
+  </div>
+</template>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel()
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      {/* Optional: Add navigation controls here */}
+    </div>
+  )
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html asLanguage=svelte
+<script>
+  import useEmblaCarousel from 'embla-carousel-svelte'
+</script>
+
+<div class="embla">
+  <div class="embla__viewport" use:useEmblaCarousel>
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
+  </div>
+
+  <!-- Optional: Add navigation controls here -->
+</div>
+```
+
+</TabsItem>
+</Tabs>
+
+## Notes
+
+- **Class names** are just examples — use any naming scheme you prefer, as long as the **HTML structure** and **CSS rules** stay the same.
+- You can use other semantic elements instead of `<div>` (e.g. `<section>`, `<article>`).
+- The example uses **flexbox** for horizontal slides, but **CSS Grid** or other layout methods also work.
+- `flex: 0 0 100%` makes each slide take up the full carousel width. Adjust this for multi-slide layouts or custom designs.
+- The outer `.embla` wrapper shown in the examples is **optional**. You can use it as a convenient container for navigation controls or styling, but Embla only requires the **viewport → container → slides** hierarchy.
+
+<Admonition type="warning">
+
+**Important**: The `overflow: hidden` on the viewport element is **mandatory**.
+Without it, slides will overflow outside the viewport and Embla cannot guarantee
+correct scrolling behavior.
+
+</Admonition>

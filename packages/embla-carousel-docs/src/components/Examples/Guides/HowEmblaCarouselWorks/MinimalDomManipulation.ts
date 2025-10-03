@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselDomManipulation from 'components/Sandbox/React/SandboxFilesSrc/Guides/DomManipulation/EmblaCarousel'
+import CarouselDomManipulation from 'components/Sandbox/React/SandboxFilesSrc/Guides/MinimalDomManipulation/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -13,7 +13,7 @@ import {
   examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
-const ID = 'embla-carousel-dom-manipulation'
+const ID = 'embla-carousel-minimal-dom-manipulation'
 const SLIDES = arrayFromNumber(5)
 const OPTIONS: EmblaOptionsType = { loop: true }
 const STYLES = examplesCarouselStyles(
@@ -33,7 +33,10 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Guides/DomManipulation')
+const SANDBOXES = sandboxStaticSandboxes(
+  CONFIG,
+  'Guides/MinimalDomManipulation'
+)
 
 export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselDomManipulation as ExamplesSetupType['Carousel'],

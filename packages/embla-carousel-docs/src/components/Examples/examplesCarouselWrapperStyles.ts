@@ -18,6 +18,7 @@ const baseWrapperStyles = css`
   position: relative;
 `
 
+// EXAMPLES/PREDEFINED
 export const examplesDefaultWrapperStyles = css`
   ${baseWrapperStyles};
   min-height: calc(
@@ -48,4 +49,13 @@ export const examplesIosPickerWrapperStyles = css`
   min-height: ${CAROUSEL_IOS_PICKER_HEIGHT};
   touch-action: none;
   position: relative;
+`
+
+// EXAMPLES/GUIDES
+export const examplesInteractiveSizeWrapperStyles = css`
+  ${baseWrapperStyles};
+  min-height: calc(
+    ${CAROUSEL_DEFAULT_HEIGHT} + (${CAROUSEL_NAV_BUTTON_SIZE} * 2) +
+      (${CAROUSEL_CONTROLS_SPACING} * 2)
+  );
 `

@@ -1,12 +1,11 @@
 ---
 title: How Embla Carousel Works
-description: This guide explains the minimal setup required to get started with Embla Carousel and how it manipulates the DOM to create smooth scrolling.
-order: 1
+description: Learn how Embla Carousel applies minimal DOM manipulation to create smooth, performant scrolling.
+order: 10
 date: 2025-09-29
 ---
 
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
-import { EXAMPLES_WRAPPERS } from 'consts/examples'
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
@@ -14,189 +13,26 @@ import { TABS_LIBRARY } from 'consts/tabs'
 
 # How Embla Carousel Works
 
-This guide explains the **required setup** for Embla Carousel and how it manipulates the **DOM** to provide smooth, performant scrolling.
+Embla Carousel uses **minimal DOM manipulation** to deliver smooth, high-performance scrolling.
 
-## Required setup
+## Minimal DOM manipulation
 
-To get Embla Carousel running, your markup must follow a simple structure:
-
-- An **overflow wrapper** (`embla__viewport` below) that hides overflowing content.
-- A **scroll container** (`embla__container`) that holds and scrolls the slides.
-- One or more **slides** (`embla__slide`), although Embla can also handle an empty state with zero slides.
-
-### Base CSS
-
-```css
-.embla__viewport {
-  overflow: hidden;
-}
-.embla__container {
-  display: flex;
-}
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-```
-
-### Markup and script
-
-<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
-
-```html
-<div class="embla">
-  <div class="embla__viewport">
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <!-- Add your navigation controls here -->
-</div>
-```
-
-```js
-import EmblaCarousel from 'embla-carousel'
-
-const wrapperNode = document.querySelector('.embla')
-const viewportNode = wrapperNode.querySelector('.embla__viewport')
-const emblaApi = EmblaCarousel(viewportNode)
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
-
-```jsx
-import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel()
-
-  return (
-    <div class="embla">
-      <div class="embla__viewport" ref={emblaRef}>
-        <div class="embla__container">
-          <div class="embla__slide">Slide 1</div>
-          <div class="embla__slide">Slide 2</div>
-          <div class="embla__slide">Slide 3</div>
-        </div>
-      </div>
-
-      {/* Add your navigation controls here */}
-    </div>
-  )
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html asLanguage=vue
-<script setup>
-  import useEmblaCarousel from 'embla-carousel-vue'
-
-  const [emblaRef] = useEmblaCarousel()
-</script>
-
-<template>
-  <div class="embla">
-    <div class="embla__viewport" ref="emblaRef">
-      <div class="embla__container">
-        <div class="embla__slide">Slide 1</div>
-        <div class="embla__slide">Slide 2</div>
-        <div class="embla__slide">Slide 3</div>
-      </div>
-    </div>
-
-    <!-- Add your navigation controls here -->
-  </div>
-</template>
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx
-import useEmblaCarousel from 'embla-carousel-solid'
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel()
-
-  return (
-    <div class="embla">
-      <div class="embla__viewport" ref={emblaRef}>
-        <div class="embla__container">
-          <div class="embla__slide">Slide 1</div>
-          <div class="embla__slide">Slide 2</div>
-          <div class="embla__slide">Slide 3</div>
-        </div>
-      </div>
-
-      {/* Add your navigation controls here */}
-    </div>
-  )
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html asLanguage=svelte
-<script>
-  import useEmblaCarousel from 'embla-carousel-svelte'
-</script>
-
-<div class="embla">
-  <div class="embla__viewport" use:useEmblaCarousel>
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <!-- Add your navigation controls here -->
-</div>
-```
-
-</TabsItem>
-</Tabs>
-
-### Notes: Required setup
-
-- The class names shown are just for clarity. You can use your own naming scheme, as long as the **HTML structure** and **CSS layout** remain the same.
-- The examples use `<div>` elements, but you can use **any element type** you prefer — such as `<section>`, `<article>`, or similar.
-- This example uses **flexbox** to arrange slides horizontally, but you can achieve the same result with **CSS Grid** or other layout methods.
-- Each slide is set to `flex: 0 0 100%` to make it span the full width of the carousel by default. Adjust this to create multi-slide views or custom layouts.
-
-<Admonition type="warning">
-  **Warning**: The `overflow: hidden` on the **viewport element** is **not
-  optional**. Some developers omit it, which causes the carousel to break (e.g.
-  slides overflowing outside the viewport). Without this rule, Embla cannot
-  guarantee correct scrolling behavior. Always ensure your `.embla__viewport`
-  (or equivalent) has `overflow: hidden` set.
-</Admonition>
-
-## DOM manipulation
-
-Embla takes a **minimal, low-level approach** and only modifies the DOM in two ways:
+Embla changes the DOM in only two ways:
 
 - **Carousel container** - applies `translate3d` to create the scroll effect.
-- **Carousel slides** - applies `translate3d` to slides to both shift slide positions for looping and improve scroll performance.
+- **Carousel slides** - applies `translate3d` to adjust slide positions (for looping) and improve scroll performance.
 
-Open the example in the **developer tools** of your choice:
+You can see this in action by inspecting the following example in your browser's developer tools:
 
 <ExamplesLazy
   loader={() =>
-    import('components/Examples/Guides/HowEmblaCarouselWorks/DomManipulation')
+    import(
+      'components/Examples/Guides/HowEmblaCarouselWorks/MinimalDomManipulation'
+    )
   }
 />
 
-You will see an inline style `transform` applied on the container element:
+The container receives an inline `transform`:
 
 ```html
 <div class="embla">
@@ -211,7 +47,7 @@ You will see an inline style `transform` applied on the container element:
 </div>
 ```
 
-And an inline style `transform` on some slide elements:
+And slides may also receive inline `transform` styles:
 
 ```html
 <div class="embla__slide" style="transform: translate3d(0px, 0px, 0px);">
@@ -230,7 +66,7 @@ And an inline style `transform` on some slide elements:
 
 That's it — nothing else is added to the DOM. **Embla does not encapsulate or wrap any elements**, so you retain full control over your markup, structure, and styling. This behavior applies to the core library as well as the official framework wrappers. Plugins, however, **may modify the DOM further**, so check individual [plugin pages](/plugins) for details.
 
-### Notes: DOM manipulation
+## Notes
 
 Before adding custom styles, remember how **Embla manipulates the DOM** — applying styles incorrectly can break its functionality.
 
@@ -242,7 +78,7 @@ Before adding custom styles, remember how **Embla manipulates the DOM** — appl
   carousel's behavior**.
 </Admonition>
 
-Instead, apply custom transforms and transitions to an element that wraps the container:
+Instead, apply transforms/transitions to a **wrapper element** around the carousel:
 
 ```html
 <div
@@ -257,7 +93,7 @@ Instead, apply custom transforms and transitions to an element that wraps the co
 </div>
 ```
 
-When transforming slides, create an inner element within each slide that you can apply transforms and/or transitions to:
+When applying transforms/transitions to slides, create an **inner element** within each slide:
 
 ```html
 <div class="embla__slide">
@@ -270,4 +106,4 @@ When transforming slides, create an inner element within each slide that you can
 </div>
 ```
 
-Applying transforms and transitions to wrapping elements or inner slide elements keeps full control over styling while preserving Embla's smooth animations.
+This approach keeps Embla's animations intact while giving you full flexibility to style and animate around them.

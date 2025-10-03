@@ -1,7 +1,7 @@
 ---
 title: Prev & Next Buttons
 description: This guide demonstrates how to setup previous and next buttons using the Embla Carousel API.
-order: 6
+order: 1000
 date: 2021-03-15
 ---
 

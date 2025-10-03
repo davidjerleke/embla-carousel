@@ -5,14 +5,20 @@ import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
 import CarouselScale from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Scale/EmblaCarousel'
+import { css } from 'styled-components'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
-  SCALE_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
+
+const SCALE_STYLES = css`
+  .embla__slide__number {
+    backface-visibility: hidden;
+  }
+`
 
 const ID = 'embla-carousel-scale'
 const SLIDES = arrayFromNumber(5)

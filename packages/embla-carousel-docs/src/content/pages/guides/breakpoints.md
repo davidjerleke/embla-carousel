@@ -1,7 +1,7 @@
 ---
 title: Breakpoints
 description: This guide demonstrates how to customize Embla Carousel based on different breakpoints.
-order: 5
+order: 1000
 date: 2021-03-22
 ---
 

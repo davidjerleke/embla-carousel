@@ -9,7 +9,7 @@ import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
-  IMAGE_STYLES,
+  IMAGE_ROUNDED_STYLES,
   examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 
@@ -21,7 +21,7 @@ const STYLES = examplesCarouselStyles(
   '1rem',
   OPTIONS,
   styledComponentsStylesToString(
-    IMAGE_STYLES,
+    IMAGE_ROUNDED_STYLES,
     CONTROLS_STYLES,
     ARROWS_STYLES,
     DOTS_STYLES

@@ -3,14 +3,13 @@ import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
-import { MEDIA } from 'consts/breakpoints'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { EmblaOptionsType } from 'embla-carousel'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 
-const CAROUSEL_MAX_WIDTH = '48rem'
+export const CAROUSEL_MAX_WIDTH = '48rem'
 
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
 export const CAROUSEL_SLIDES_SPACING = '1rem'
@@ -20,8 +19,8 @@ export const CAROUSEL_THUMB_SLIDES_SPACING = '0.8rem'
 
 export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 
-export const CAROUSEL_NAV_BUTTON_SIZE = SPACINGS.SIX
-export const CAROUSEL_CONTROLS_SPACING = SPACINGS.THREE
+export const CAROUSEL_NAV_BUTTON_SIZE = '3.6rem'
+export const CAROUSEL_CONTROLS_SPACING = '1.8rem'
 
 export const CAROUSEL_SCROLLBAR_HEIGHT = '1.6rem'
 export const CAROUSEL_SCROLLBAR_TRACK_HEIGHT = '0.6rem'
@@ -33,6 +32,13 @@ export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
 
 export const CAROUSEL_BORDER_STYLES = css`
   border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+`
+
+export const CAROUSEL_BASE_IMAGE_STYLES = css`
+  display: block;
+  height: var(--slide-height);
+  width: 100%;
+  object-fit: cover;
 `
 
 export const CAROUSEL_BUTTON_BASE_STYLES = css`
@@ -47,6 +53,47 @@ export const CAROUSEL_BUTTON_BASE_STYLES = css`
   border: 0;
   padding: 0;
   margin: 0;
+`
+
+export const DEFAULT_BUTTON_STYLES = css`
+  ${TAP_HIGHLIGHT_STYLES};
+  ${CAROUSEL_BUTTON_BASE_STYLES};
+  ${CAROUSEL_BORDER_STYLES};
+  ${CAROUSEL_SLIDE_RADIUS_STYLES};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.TEXT_BODY};
+  font-weight: ${FONT_WEIGHTS.BOLD};
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
+  padding: 0 ${SPACINGS.FOUR};
+  min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+`
+
+export const INPUT_STYLES = css`
+  .embla__input {
+    ${TAP_HIGHLIGHT_STYLES};
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    color: ${COLORS.TEXT_BODY};
+    background-color: ${COLORS.BACKGROUND_CODE};
+    border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+    padding: ${SPACINGS.ONE} ${SPACINGS.TWO};
+    font-size: ${FONT_SIZES.BODY};
+    min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+    text-align: center;
+  }
+
+  .embla__input {
+    -moz-appearance: textfield;
+  }
+
+  .embla__input::-webkit-inner-spin-button,
+  .embla__input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `
 
 export const BASE_STYLES = css`
@@ -105,61 +152,6 @@ export const BASE_STYLES_VERTICAL = css`
   }
 `
 
-export const SLIDES_PER_VIEW_STYLES = css`
-  .embla {
-    max-width: 70rem;
-    margin: auto;
-
-    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
-    --slide-spacing: 1rem;
-    --slide-size: 100%;
-    --slide-spacing-sm: 1.6rem;
-    --slide-size-sm: 50%;
-    --slide-spacing-lg: 2rem;
-    --slide-size-lg: calc(100% / 3);
-  }
-
-  .embla__viewport {
-    overflow: hidden;
-  }
-
-  .embla__container {
-    display: flex;
-    touch-action: pan-y pinch-zoom;
-    margin-left: calc(var(--slide-spacing) * -1);
-  }
-
-  ${MEDIA.MIN_SM} {
-    .embla__container {
-      margin-left: calc(var(--slide-spacing-sm) * -1);
-    }
-  }
-  ${MEDIA.MIN_LG} {
-    .embla__container {
-      margin-left: calc(var(--slide-spacing-lg) * -1);
-    }
-  }
-
-  .embla__slide {
-    min-width: 0;
-    flex: 0 0 var(--slide-size);
-    padding-left: var(--slide-spacing);
-  }
-
-  ${MEDIA.MIN_SM} {
-    .embla__slide {
-      flex: 0 0 var(--slide-size-sm);
-      padding-left: var(--slide-spacing-sm);
-    }
-  }
-  ${MEDIA.MIN_LG} {
-    .embla__slide {
-      flex: 0 0 var(--slide-size-lg);
-      padding-left: var(--slide-spacing-lg);
-    }
-  }
-`
-
 export const SLIDE_NUMBER_STYLES = css`
   .embla__slide__number {
     ${CAROUSEL_BORDER_STYLES};
@@ -176,41 +168,14 @@ export const SLIDE_NUMBER_STYLES = css`
 
 export const IMAGE_STYLES = css`
   .embla__slide__img {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    display: block;
-    height: var(--slide-height);
-    width: 100%;
-    object-fit: cover;
+    ${CAROUSEL_BASE_IMAGE_STYLES};
   }
 `
 
-export const VARIABLE_WIDTH_STYLES = css`
-  .embla__slide:nth-child(1) {
-    flex: 0 0 60%;
-  }
-  .embla__slide:nth-child(2) {
-    flex: 0 0 40%;
-  }
-  .embla__slide:nth-child(3) {
-    flex: 0 0 30%;
-  }
-  .embla__slide:nth-child(4) {
-    flex: 0 0 90%;
-  }
-  .embla__slide:nth-child(5) {
-    flex: 0 0 35%;
-  }
-  .embla__slide:nth-child(6) {
-    flex: 0 0 55%;
-  }
-  .embla__slide:nth-child(7) {
-    flex: 0 0 85%;
-  }
-  .embla__slide:nth-child(8) {
-    flex: 0 0 50%;
-  }
-  .embla__slide:nth-child(9) {
-    flex: 0 0 35%;
+export const IMAGE_ROUNDED_STYLES = css`
+  .embla__slide__img {
+    ${CAROUSEL_BASE_IMAGE_STYLES};
+    ${CAROUSEL_SLIDE_RADIUS_STYLES};
   }
 `
 
@@ -306,153 +271,11 @@ export const SNAP_DISPLAY_STYLES = css`
   }
 `
 
-export const SCROLL_BAR_STYLES = css`
-  .embla__scrollbar {
-    ${CAROUSEL_BUTTON_BASE_STYLES};
-    display: flex;
-    margin-top: ${CAROUSEL_CONTROLS_SPACING};
-    width: 100%;
-    padding: calc(
-        (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2
-      )
-      0;
-  }
-
-  .embla__scrollbar::-webkit-slider-runnable-track {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES}
-    background: ${COLORS.DETAIL_MEDIUM_CONTRAST};
-    height: ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT};
-  }
-
-  .embla__scrollbar::-moz-range-track {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES}
-    background: ${COLORS.DETAIL_MEDIUM_CONTRAST};
-    height: ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT};
-  }
-
-  .embla__scrollbar::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: ${CAROUSEL_SCROLLBAR_HEIGHT};
-    height: ${CAROUSEL_SCROLLBAR_HEIGHT};
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    border: 0;
-    background: ${COLORS.TEXT_BODY};
-    margin-top: calc(
-      (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2 *
-        -1
-    );
-  }
-
-  .embla__scrollbar::-moz-range-thumb {
-    width: ${CAROUSEL_SCROLLBAR_HEIGHT};
-    height: ${CAROUSEL_SCROLLBAR_HEIGHT};
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    border: 0;
-    background: ${COLORS.TEXT_BODY};
-    margin-top: calc(
-      (${CAROUSEL_SCROLLBAR_HEIGHT} - ${CAROUSEL_SCROLLBAR_TRACK_HEIGHT}) / 2 *
-        -1
-    );
-  }
-`
-
 export const PLAY_BUTTON_STYLES = css`
   .embla__play {
-    ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_STYLES};
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-self: flex-end;
-    color: ${COLORS.TEXT_BODY};
-    font-weight: ${FONT_WEIGHTS.BOLD};
-    font-size: ${FONT_SIZES.COMPLEMENTARY};
-    padding: 0 ${SPACINGS.FOUR};
+    ${DEFAULT_BUTTON_STYLES};
     min-width: ${SPACINGS.FIFTEEN};
-  }
-`
-
-export const THUMBS_STYLES = css`
-  .embla-thumbs {
-    --thumbs-slide-spacing: ${CAROUSEL_THUMB_SLIDES_SPACING};
-    --thumbs-slide-height: ${CAROUSEL_THUMB_SLIDES_HEIGHT};
-    margin-top: var(--thumbs-slide-spacing);
-  }
-
-  .embla-thumbs__viewport {
-    overflow: hidden;
-  }
-
-  .embla-thumbs__container {
-    display: flex;
-    flex-direction: row;
-    margin-left: calc(var(--thumbs-slide-spacing) * -1);
-  }
-
-  .embla-thumbs__slide {
-    flex: 0 0 22%;
-    min-width: 0;
-    padding-left: var(--thumbs-slide-spacing);
-  }
-
-  ${MEDIA.MIN_XS} {
-    .embla-thumbs__slide {
-      flex: 0 0 15%;
-    }
-  }
-
-  .embla-thumbs__slide__number {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_STYLES};
-    font-size: ${FONT_SIZES.H4};
-    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
-    color: ${COLORS.DETAIL_HIGH_CONTRAST};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--thumbs-slide-height);
-    width: 100%;
-  }
-
-  .embla-thumbs__slide--selected .embla-thumbs__slide__number {
-    color: ${COLORS.TEXT_BODY};
-  }
-`
-
-export const AUTOPLAY_STYLES = css`
-  .embla__controls {
-    grid-template-columns: auto 1fr auto;
-  }
-
-  .embla__progress {
-    justify-self: center;
-    transition: opacity 0.3s ease-in-out;
-    width: 8rem;
-  }
-
-  .embla__progress--hidden {
-    opacity: 0;
-  }
-
-  .embla__progress__bar {
-    animation-name: autoplay-progress;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-  }
-
-  .embla__progress--hidden .embla__progress__bar {
-    animation-play-state: paused;
-  }
-
-  @keyframes autoplay-progress {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(100%, 0, 0);
-    }
+    justify-self: flex-end;
   }
 `
 
@@ -478,170 +301,6 @@ export const PROGRESS_STYLES = css`
     top: 0;
     bottom: 0;
     left: -100%;
-  }
-`
-
-export const PARALLAX_STYLES = css`
-  .embla__parallax {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .embla__parallax__layer {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .embla__parallax__img {
-    max-width: none;
-    flex: 0 0 calc(115% + (var(--slide-spacing) * 2));
-    object-fit: cover;
-  }
-`
-
-export const SCALE_STYLES = css`
-  .embla__slide__number {
-    backface-visibility: hidden;
-  }
-`
-
-export const LAZY_LOAD_STYLES = css`
-  .embla__lazy-load {
-    position: relative;
-    height: 100%;
-  }
-
-  .embla__lazy-load__spinner {
-    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      ${COLORS.TEXT_HIGH_CONTRAST};
-    font-size: 1rem;
-    display: inline-flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    text-indent: -9999em;
-    animation: loading 1.1s infinite linear;
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla__lazy-load__spinner:after {
-    border-radius: inherit;
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla__lazy-load__img {
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .embla__lazy-load--has-loaded .embla__lazy-load__img {
-    opacity: 1;
-  }
-
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`
-
-export const AUTO_HEIGHT_STYLES = css`
-  .embla__container {
-    align-items: flex-start;
-  }
-
-  .embla__slide:nth-child(1) > .embla__slide__number {
-    height: ${CAROUSEL_DEFAULT_HEIGHT};
-  }
-  .embla__slide:nth-child(2) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} + 4rem);
-  }
-  .embla__slide:nth-child(3) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} - 2rem);
-  }
-  .embla__slide:nth-child(4) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} + 2rem);
-  }
-  .embla__slide:nth-child(5) > .embla__slide__number {
-    height: ${CAROUSEL_DEFAULT_HEIGHT};
-  }
-`
-
-export const CLASS_NAMES_STYLES = css`
-  .embla__slide {
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .embla__slide:not(.is-snapped) {
-    opacity: 0.16;
-  }
-`
-
-export const FADE_STYLES = css`
-  .embla__slide__img {
-    user-select: none;
-  }
-`
-
-export const INFINITE_SCROLL_STYLES = css`
-  .embla-infinite-scroll {
-    position: relative;
-    flex: 0 0 15rem;
-    min-width: 0;
-    height: var(--slide-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .embla-infinite-scroll__spinner {
-    display: none;
-    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      ${COLORS.TEXT_HIGH_CONTRAST};
-    font-size: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    text-indent: -9999em;
-    animation: loading 1.1s infinite linear;
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla-infinite-scroll__spinner:after {
-    border-radius: inherit;
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla-infinite-scroll--loading-more > .embla-infinite-scroll__spinner {
-    display: inline-flex;
-  }
-
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 `
 
