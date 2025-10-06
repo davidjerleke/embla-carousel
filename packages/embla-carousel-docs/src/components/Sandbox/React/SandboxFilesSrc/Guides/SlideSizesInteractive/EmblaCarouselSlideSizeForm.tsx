@@ -3,6 +3,8 @@ import { EmblaCarouselType } from 'embla-carousel'
 
 const SLIDE_SIZE_MIN = 30
 const SLIDE_SIZE_MAX = 100
+const SIZE_PROPERTY = '--slide-size'
+const SIZE_UNIT = '%'
 
 const getClampedSlideSize = (size: number): number => {
   return Math.min(Math.max(size, SLIDE_SIZE_MIN), SLIDE_SIZE_MAX)
@@ -34,7 +36,7 @@ const SlideSizeForm: React.FC<PropType> = (props) => {
 
       const clampedSize = getClampedSlideSize(slideSize)
       setSlideSize(clampedSize)
-      emblaNode.style.setProperty('--slide-size', `${clampedSize}%`)
+      emblaNode.style.setProperty(SIZE_PROPERTY, `${clampedSize}${SIZE_UNIT}`)
     },
     [emblaApi, slideSize]
   )
@@ -42,17 +44,18 @@ const SlideSizeForm: React.FC<PropType> = (props) => {
   return (
     <form className="embla__form" onSubmit={onSubmit}>
       <label className="embla__label">
-        <span>--slide-size:</span>
+        <span>{SIZE_PROPERTY}:</span>
         <input
           className="embla__input"
           type="number"
+          name="slide-size"
           min={SLIDE_SIZE_MIN}
           max={SLIDE_SIZE_MAX}
           value={slideSize}
           onChange={onChange}
           onBlur={onBlur}
         />
-        <span>%</span>
+        <span>{SIZE_UNIT}</span>
       </label>
 
       <button className="embla__submit" type="submit">

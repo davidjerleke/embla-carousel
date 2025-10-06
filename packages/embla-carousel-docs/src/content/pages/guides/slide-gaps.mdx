@@ -1,0 +1,171 @@
+---
+title: Slide Gaps
+description: Learn how to add spacing between slides in Embla Carousel using CSS.
+order: 40
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+
+# Slide Gaps
+
+This guide shows you how to add **spacing between slides** in Embla Carousel.
+
+All examples use the **padding approach** to create gaps between slides. Although you can also use other CSS techniques like `margin` or `gap` on the container, this guide will explain **why padding is often easier to work with**, with minimal hassle compared to its alternatives.
+
+---
+
+## Declaring gaps
+
+The recommended way to create spacing between slides is to use **padding on the slides themselves** combined with a corresponding **negative margin on the container**.
+
+To make padding predictable and included in the element's width (so it doesn't add extra size), you should apply `box-sizing: border-box` globally, which is standard practice on most sites (and often included in `reset.css` or similar):
+
+```css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+```
+
+## Preferred method
+
+With `box-sizing: border-box` in place, you can adjust the `--slide-spacing:` variable in your CSS to change slide gap sizes:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/SlideGaps/SlideGapsInteractive')
+  }
+  wrapper={EXAMPLES_WRAPPERS.INTERACTIVE_SIZE}
+/>
+
+```css highlight={3,13,19}
+.embla {
+  --slide-size: 100%;
+  --slide-spacing: 10px;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1); /* Renders -10px */
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+```
+
+The **benefits** of the **padding approach** include:
+
+- **Keeps spacing consistent:** If slide sizes change, the gaps remain correct and the carousel continues to work as expected.
+- **Automatic updates:** Embla uses `ResizeObserver` to track slide sizes, so changes to gap sizes are picked up automatically because the padding is included in the slide size.
+- **Supports variable-width slides:** Each slide can have a different width, and the spacing still works without additional configuration.
+- **RTL-friendly:** The approach works even if the carousel is flipped to right-to-left, without any modifications.
+- **Compatible with Embla SSR feature:** This method works when Embla is configured with server-side rendering, helping to avoid layout shifts for looped carousels and other scenarios.
+
+## Breakpoints
+
+To make **slide gaps responsive** with the **padding approach**, use CSS **media queries**.
+
+Because Embla relies on a `ResizeObserver` to track each slide's **computed dimensions**, it automatically recalculates scroll snaps whenever a slide's size changes. Since the padding is included in each slide's computed size, any gap adjustments made via media queries are detected automatically — no extra code required.
+
+```css highlight={4,21,25}
+.embla {
+  --slide-size: 100%;
+  --slide-spacing: 10px;
+  --slide-spacing-md-up: 20px;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  margin-left: calc(var(--slide-spacing) * -1); /* Renders -10px */
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+@media (min-width: 768px) {
+  .embla__container {
+    margin-left: calc(var(--slide-spacing-md-up) * -1); /* Renders -20px */
+  }
+
+  .embla__slide {
+    padding-left: var(--slide-spacing-md-up);
+  }
+}
+```
+
+## Other methods
+
+If you still prefer **not to use the padding approach**, there are a few things to be aware of.
+Embla will work with other CSS techniques such as `gap` or `margin`, but the trade-offs stem from how **CSS spacing properties behave**, not from any limitation in Embla itself.
+
+### Gap or margin
+
+<Admonition type="warning">
+  **Warning:** When using `margin` or `gap`, it's important to get your CSS
+  calculations right, because these properties **add to the total slide size**.
+</Admonition>
+
+For example, to achieve **two slides per view** with a `gap` or `margin` of `20px` between each slide, you need to account for the extra space added by these properties:
+
+- Slide 1: `50% + 20px`
+- Slide 2: `50% + 20px`
+- **Total:** `100% + 40px` → exceeds the viewport
+
+Embla reads the **computed slide dimensions**, so scroll snaps are based on these expanded sizes. To achieve an exact fit, you need to adjust the `flex-basis` or use `calc()`:
+
+```css
+.embla__slide {
+  margin-right: 20px;
+  flex: 0 0 calc(50% - 10px);
+}
+```
+
+If slide sizes change dynamically, you must also remember to update the **margin** or **gap** values, which can create maintenance overhead.
+
+<Admonition type="warning">
+  **Warning:** Unlike padding, changes in `margin` or `gap` **do not affect the slide's computed size**, so Embla's `ResizeObserver` **won't detect them automatically**. If you update the gap or margin dynamically (e.g., via media queries or JavaScript), you must manually call:
+
+<br />
+
+```ts
+emblaApi.reInit()
+```
+
+</Admonition>
+
+### Gap with loop enabled
+
+When using **gap** and **loop: true**, there **won't be a gap between the last and first slide**.
+This happens because **Embla only reads the computed distances between slides**, and CSS **gap** only adds spacing **between items**, not before the first or after the last.
+
+A simple workaround is to add a **margin** to the last slide:
+
+```css
+.embla__slide:last-child {
+  margin-right: 20px;
+}
+```
+
+### Caveats
+
+- **Margins** and **gaps** add to slide width, which can **easily break layouts** if not accounted for.
+- Requires **manual math adjustments** (often with `calc()`) for precise alignment.
+- More **error-prone** for **responsive** or **variable-width** carousels unless all slide sizes and spacing are carefully calculated.
+- **Gap** will not apply between the first and last slide in **loop: true** unless additional **margin** is added.
+
+While both **gap** and **margin** can work, **padding on slides combined with a negative margin on the container** remains the most **robust, predictable, and maintenance-friendly approach**, which supports **looped**, **responsive**, and **SSR-enabled** carousels without the need for additional modifications.

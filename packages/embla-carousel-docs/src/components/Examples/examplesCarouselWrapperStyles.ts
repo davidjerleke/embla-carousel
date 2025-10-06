@@ -52,10 +52,18 @@ export const examplesIosPickerWrapperStyles = css`
 `
 
 // EXAMPLES/GUIDES
-export const examplesInteractiveSizeWrapperStyles = css`
+export const examplesInteractiveSlideSizeWrapperStyles = css`
   ${baseWrapperStyles};
   min-height: calc(
     ${CAROUSEL_DEFAULT_HEIGHT} + (${CAROUSEL_NAV_BUTTON_SIZE} * 2) +
       (${CAROUSEL_CONTROLS_SPACING} * 2)
+  );
+`
+
+export const examplesInteractiveSizeWrapperStyles = css`
+  ${baseWrapperStyles};
+  min-height: calc(
+    ${CAROUSEL_DEFAULT_HEIGHT} + (${CAROUSEL_NAV_BUTTON_SIZE} * 3) +
+      (${CAROUSEL_CONTROLS_SPACING} * 3)
   );
 `

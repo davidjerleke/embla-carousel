@@ -1,29 +1,29 @@
 import React, { useCallback, useState } from 'react'
 import { EmblaCarouselType } from 'embla-carousel'
 
-const SLIDE_SIZE_MIN = 30
-const SLIDE_SIZE_MAX = 100
-const SIZE_PROPERTY = '--slide-size'
-const SIZE_UNIT = '%'
-
-const getClampedSlideSize = (size: number): number => {
-  return Math.min(Math.max(size, SLIDE_SIZE_MIN), SLIDE_SIZE_MAX)
+const getClampedSlideGap = (size: number, min: number, max: number): number => {
+  return Math.min(Math.max(size, min), max)
 }
 
 type PropType = {
   emblaApi: EmblaCarouselType | undefined
+  property: string
+  min: number
+  max: number
+  unit: string
+  initalValue: number
 }
 
-const SlideSizeForm: React.FC<PropType> = (props) => {
-  const { emblaApi } = props
-  const [slideSize, setSlideSize] = useState(70)
+const SizeForm: React.FC<PropType> = (props) => {
+  const { emblaApi, property, min, max, unit, initalValue } = props
+  const [slideSize, setSlideSize] = useState(initalValue)
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSlideSize(Number(event.target.value))
   }, [])
 
   const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(getClampedSlideSize(Number(event.target.value)))
+    setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
   }, [])
 
   const onSubmit = useCallback(
@@ -34,28 +34,31 @@ const SlideSizeForm: React.FC<PropType> = (props) => {
       const emblaNode = emblaApi.rootNode().parentElement
       if (!emblaNode) return
 
-      const clampedSize = getClampedSlideSize(slideSize)
+      const clampedSize = getClampedSlideGap(slideSize, min, max)
       setSlideSize(clampedSize)
-      emblaNode.style.setProperty(SIZE_PROPERTY, `${clampedSize}${SIZE_UNIT}`)
+      emblaNode.style.setProperty(property, `${clampedSize}${unit}`)
     },
-    [emblaApi, slideSize]
+    [emblaApi, slideSize, property, min, max, unit]
   )
 
   return (
-    <form className="embla__form" onSubmit={onSubmit}>
+    <form
+      className={'embla__form'.concat(` embla__form${property}`)}
+      onSubmit={onSubmit}
+    >
       <label className="embla__label">
-        <span>{SIZE_PROPERTY}:</span>
+        <span>{property}:</span>
         <input
           className="embla__input"
           type="number"
-          name="slide-size"
-          min={SLIDE_SIZE_MIN}
-          max={SLIDE_SIZE_MAX}
+          name="slide-gap"
+          min={min}
+          max={max}
           value={slideSize}
           onChange={onChange}
           onBlur={onBlur}
         />
-        <span>{SIZE_UNIT}</span>
+        <span>{unit}</span>
       </label>
 
       <button className="embla__submit" type="submit">
@@ -65,4 +68,4 @@ const SlideSizeForm: React.FC<PropType> = (props) => {
   )
 }
 
-export default SlideSizeForm
+export default SizeForm
