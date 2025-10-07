@@ -43,13 +43,13 @@ const SizeForm: React.FC<PropType> = (props) => {
 
   return (
     <form
-      className={'embla__form'.concat(` embla__form${property}`)}
+      className={'embla__text-form'.concat(` embla__text-form${property}`)}
       onSubmit={onSubmit}
     >
-      <label className="embla__label">
+      <label className="embla__text-form__label">
         <span>{property}:</span>
         <input
-          className="embla__input"
+          className="embla__text-input"
           type="number"
           name="slide-gap"
           min={min}
@@ -61,8 +61,8 @@ const SizeForm: React.FC<PropType> = (props) => {
         <span>{unit}</span>
       </label>
 
-      <button className="embla__submit" type="submit">
-        Apply
+      <button className="embla__text-form__submit" type="submit">
+        Go
       </button>
     </form>
   )

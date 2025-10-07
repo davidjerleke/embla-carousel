@@ -5,8 +5,8 @@ import {
   examplesThumbsWrapperStyles,
   examplesScrollBarWrapperStyles,
   examplesIosPickerWrapperStyles,
-  examplesInteractiveSizeWrapperStyles,
-  examplesInteractiveSlideSizeWrapperStyles
+  examplesTwoFormRows,
+  examplesOneFormRow
 } from 'components/Examples/examplesCarouselWrapperStyles'
 
 const ROOT_MARGIN_VERTICAL = 190
@@ -20,8 +20,8 @@ export const EXAMPLES_WRAPPERS = {
   THUMBS: 'thumbs',
   SCROLL_BAR: 'scrollBar',
   IOS_PICKER: 'iosPicker',
-  INTERACTIVE_SIZE: 'interactiveSize',
-  INTERACTIVE_SLIDE_SIZE: 'interactiveSlideSize'
+  ONE_FORM_ROW: 'oneFormRow',
+  TWO_FORM_ROWS: 'twoFormRows'
 } as const
 
 export const EXAMPLES_WRAPPER_STYLES = {
@@ -29,9 +29,8 @@ export const EXAMPLES_WRAPPER_STYLES = {
   [EXAMPLES_WRAPPERS.THUMBS]: examplesThumbsWrapperStyles,
   [EXAMPLES_WRAPPERS.SCROLL_BAR]: examplesScrollBarWrapperStyles,
   [EXAMPLES_WRAPPERS.IOS_PICKER]: examplesIosPickerWrapperStyles,
-  [EXAMPLES_WRAPPERS.INTERACTIVE_SIZE]: examplesInteractiveSizeWrapperStyles,
-  [EXAMPLES_WRAPPERS.INTERACTIVE_SLIDE_SIZE]:
-    examplesInteractiveSlideSizeWrapperStyles
+  [EXAMPLES_WRAPPERS.ONE_FORM_ROW]: examplesOneFormRow,
+  [EXAMPLES_WRAPPERS.TWO_FORM_ROWS]: examplesTwoFormRows
 } as const
 
 export type ExamplesWrapperType =

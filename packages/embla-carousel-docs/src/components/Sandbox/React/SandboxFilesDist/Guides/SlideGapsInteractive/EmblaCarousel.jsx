@@ -5,7 +5,11 @@ import {
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
-import SizeForm from './EmblaCarouselSizeForm'
+import SizeForm from '../../EmblaCarouselSizeForm'
+import {
+  SelectedSnapDisplay,
+  useSelectedSnapDisplay
+} from '../../EmblaCarouselSelectedSnapDisplay'
 import { sandboxImages } from 'components/Sandbox/sandboxImages'
 
 const EmblaCarousel = (props) => {
@@ -18,6 +22,8 @@ const EmblaCarousel = (props) => {
     onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
+
+  const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
 
   return (
     <div className="embla">
@@ -58,6 +64,11 @@ const EmblaCarousel = (props) => {
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
+
+        <SelectedSnapDisplay
+          selectedSnap={selectedSnap}
+          snapCount={snapCount}
+        />
       </div>
     </div>
   )

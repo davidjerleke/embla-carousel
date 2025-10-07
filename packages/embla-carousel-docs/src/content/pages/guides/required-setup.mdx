@@ -44,6 +44,14 @@ Your markup must follow this pattern:
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
 <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
 
+```js
+import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode)
+```
+
 ```html
 <div class="embla">
   <div class="embla__viewport">
@@ -56,14 +64,6 @@ Your markup must follow this pattern:
 
   <!-- Optional: Add navigation controls here -->
 </div>
-```
-
-```js
-import EmblaCarousel from 'embla-carousel'
-
-const wrapperNode = document.querySelector('.embla')
-const viewportNode = wrapperNode.querySelector('.embla__viewport')
-const emblaApi = EmblaCarousel(viewportNode)
 ```
 
 </TabsItem>

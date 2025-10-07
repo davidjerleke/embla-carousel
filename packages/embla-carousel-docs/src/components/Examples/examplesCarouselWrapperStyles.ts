@@ -52,7 +52,7 @@ export const examplesIosPickerWrapperStyles = css`
 `
 
 // EXAMPLES/GUIDES
-export const examplesInteractiveSlideSizeWrapperStyles = css`
+export const examplesOneFormRow = css`
   ${baseWrapperStyles};
   min-height: calc(
     ${CAROUSEL_DEFAULT_HEIGHT} + (${CAROUSEL_NAV_BUTTON_SIZE} * 2) +
@@ -60,7 +60,7 @@ export const examplesInteractiveSlideSizeWrapperStyles = css`
   );
 `
 
-export const examplesInteractiveSizeWrapperStyles = css`
+export const examplesTwoFormRows = css`
   ${baseWrapperStyles};
   min-height: calc(
     ${CAROUSEL_DEFAULT_HEIGHT} + (${CAROUSEL_NAV_BUTTON_SIZE} * 3) +

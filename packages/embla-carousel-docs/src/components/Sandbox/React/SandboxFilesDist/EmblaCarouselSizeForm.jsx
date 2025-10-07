@@ -1,33 +1,23 @@
 import React, { useCallback, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
 
-const getClampedSlideGap = (size: number, min: number, max: number): number => {
+const getClampedSlideGap = (size, min, max) => {
   return Math.min(Math.max(size, min), max)
 }
 
-type PropType = {
-  emblaApi: EmblaCarouselType | undefined
-  property: string
-  min: number
-  max: number
-  unit: string
-  initalValue: number
-}
-
-const SizeForm: React.FC<PropType> = (props) => {
+const SizeForm = (props) => {
   const { emblaApi, property, min, max, unit, initalValue } = props
   const [slideSize, setSlideSize] = useState(initalValue)
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((event) => {
     setSlideSize(Number(event.target.value))
   }, [])
 
-  const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onBlur = useCallback((event) => {
     setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
   }, [])
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event) => {
       if (!emblaApi) return
       event.preventDefault()
 
@@ -43,13 +33,13 @@ const SizeForm: React.FC<PropType> = (props) => {
 
   return (
     <form
-      className={'embla__form'.concat(` embla__form${property}`)}
+      className={'embla__text-form'.concat(` embla__text-form${property}`)}
       onSubmit={onSubmit}
     >
-      <label className="embla__label">
+      <label className="embla__text-form__label">
         <span>{property}:</span>
         <input
-          className="embla__input"
+          className="embla__text-input"
           type="number"
           name="slide-gap"
           min={min}
@@ -61,8 +51,8 @@ const SizeForm: React.FC<PropType> = (props) => {
         <span>{unit}</span>
       </label>
 
-      <button className="embla__submit" type="submit">
-        Apply
+      <button className="embla__text-form__submit" type="submit">
+        Go
       </button>
     </form>
   )

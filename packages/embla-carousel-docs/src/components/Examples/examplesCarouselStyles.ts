@@ -8,6 +8,7 @@ import { EmblaOptionsType } from 'embla-carousel'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
 
 export const CAROUSEL_MAX_WIDTH = '48rem'
 
@@ -21,6 +22,9 @@ export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 
 export const CAROUSEL_NAV_BUTTON_SIZE = '3.6rem'
 export const CAROUSEL_CONTROLS_SPACING = '1.8rem'
+
+export const CAROUSEL_RADIO_SIZE = '2.5rem'
+export const CAROUSEL_RADIO_CHECK_SIZE = '1.2rem'
 
 export const CAROUSEL_SCROLLBAR_HEIGHT = '1.6rem'
 export const CAROUSEL_SCROLLBAR_TRACK_HEIGHT = '0.6rem'
@@ -55,7 +59,7 @@ export const CAROUSEL_BUTTON_BASE_STYLES = css`
   margin: 0;
 `
 
-export const DEFAULT_BUTTON_STYLES = css`
+export const BASE_BUTTON_STYLES = css`
   ${TAP_HIGHLIGHT_STYLES};
   ${CAROUSEL_BUTTON_BASE_STYLES};
   ${CAROUSEL_BORDER_STYLES};
@@ -70,8 +74,8 @@ export const DEFAULT_BUTTON_STYLES = css`
   min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
 `
 
-export const INPUT_STYLES = css`
-  .embla__input {
+const TEXT_INPUT_STYLES = css`
+  .embla__text-input {
     ${TAP_HIGHLIGHT_STYLES};
     -webkit-appearance: none;
     appearance: none;
@@ -79,20 +83,193 @@ export const INPUT_STYLES = css`
     color: ${COLORS.TEXT_BODY};
     background-color: ${COLORS.BACKGROUND_CODE};
     border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
-    padding: ${SPACINGS.ONE} ${SPACINGS.TWO};
+    padding: ${SPACINGS.ONE} ${SPACINGS.ONE};
     font-size: ${FONT_SIZES.BODY};
     min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
     text-align: center;
   }
 
-  .embla__input {
+  .embla__text-input {
     -moz-appearance: textfield;
   }
 
-  .embla__input::-webkit-inner-spin-button,
-  .embla__input::-webkit-outer-spin-button {
+  .embla__text-input::-webkit-inner-spin-button,
+  .embla__text-input::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+`
+
+export const TEXT_INPUT_FORM_STYLES = css`
+  ${TEXT_INPUT_STYLES};
+
+  .embla__text-form {
+    display: flex;
+    justify-content: space-between;
+    gap: ${SPACINGS.TWO};
+    margin-bottom: ${CAROUSEL_CONTROLS_SPACING};
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+  }
+
+  .embla__text-form__label {
+    display: flex;
+    align-items: center;
+    gap: ${SPACINGS.ONE};
+  }
+
+  .embla__text-form__submit {
+    ${BASE_BUTTON_STYLES};
+  }
+`
+
+const RADIO_INPUT_STYLES = css`
+  .embla__radio-form {
+    min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+  }
+
+  .embla__radio-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .embla__radio-input__wrapper {
+    flex: 0 0 ${CAROUSEL_RADIO_SIZE};
+    position: relative;
+    min-width: 0;
+    margin-right: ${SPACINGS.ONE};
+  }
+
+  .embla__radio-input__line-height {
+    color: ${COLORS.BACKGROUND_SITE};
+    width: ${CAROUSEL_RADIO_SIZE};
+    display: inline-block;
+    line-height: inherit;
+  }
+
+  .embla__radio-form__label {
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+    gap: ${SPACINGS.ONE};
+  }
+
+  .embla__radio-wrapper input {
+    ${TAP_HIGHLIGHT_STYLES};
+    ${createSquareSizeStyles(CAROUSEL_RADIO_SIZE)};
+    ${TAP_HIGHLIGHT_STYLES};
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    cursor: pointer;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
+
+    &:before,
+    &:after {
+      border-radius: ${BORDER_RADIUSES.CIRCLE};
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:before {
+      ${createSquareSizeStyles('2rem')};
+      background-color: ${COLORS.BACKGROUND_CODE};
+    }
+
+    &:after {
+      ${createSquareSizeStyles(CAROUSEL_RADIO_CHECK_SIZE)};
+    }
+
+    &:checked {
+      &:after {
+        ${BRAND_GRADIENT_BACKGROUND_STYLES};
+      }
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+    &[disabled]:checked {
+      &:after {
+        background-image: none;
+        background-color: ${COLORS.DETAIL_HIGH_CONTRAST};
+      }
+    }
+  }
+`
+
+export const RADIO_INPUT_FORM_STYLES = css`
+  ${RADIO_INPUT_STYLES};
+
+  .embla__radio-form {
+    display: flex;
+    gap: ${SPACINGS.TWO};
+    margin-bottom: ${CAROUSEL_CONTROLS_SPACING};
+  }
+
+  .embla__text-form__label {
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+    gap: ${SPACINGS.ONE};
+  }
+`
+
+export const ALIGNMENT_INDICATOR_STYLES = css`
+  .embla__viewport {
+    position: relative;
+  }
+
+  .embla__align-indicator {
+    position: absolute;
+    pointer-events: none;
+    top: 10%;
+    bottom: 10%;
+    width: 0.8rem;
+    opacity: 0.8;
+    border-radius: ${BORDER_RADIUSES.CARD};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES};
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.BACKGROUND_SITE};
+
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      border-radius: ${BORDER_RADIUSES.CARD};
+      border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.TEXT_BODY};
+      top: -${BORDER_SIZES.ACCENT_VERTICAL};
+      bottom: -${BORDER_SIZES.ACCENT_VERTICAL};
+      left: -${BORDER_SIZES.ACCENT_VERTICAL};
+      right: -${BORDER_SIZES.ACCENT_VERTICAL};
+    }
+  }
+
+  .embla__align-indicator--start {
+    left: ${BORDER_SIZES.OUTLINE};
+  }
+
+  .embla__align-indicator--center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .embla__align-indicator--end {
+    right: ${BORDER_SIZES.OUTLINE};
   }
 `
 
@@ -273,7 +450,7 @@ export const SNAP_DISPLAY_STYLES = css`
 
 export const PLAY_BUTTON_STYLES = css`
   .embla__play {
-    ${DEFAULT_BUTTON_STYLES};
+    ${BASE_BUTTON_STYLES};
     min-width: ${SPACINGS.FIFTEEN};
     justify-self: flex-end;
   }
