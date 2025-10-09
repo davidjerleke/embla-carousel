@@ -5,7 +5,7 @@ type PropType = {
   property: keyof EmblaOptionsType
   values: string[]
   options: EmblaOptionsType
-  setOptions: (event: React.ChangeEvent<HTMLInputElement>) => void
+  setOptions: (value: string) => void
 }
 
 const RadioForm: React.FC<PropType> = (props) => {
@@ -25,7 +25,7 @@ const RadioForm: React.FC<PropType> = (props) => {
               type="radio"
               value={value}
               checked={value === options[property]?.toString()}
-              onChange={setOptions}
+              onChange={(event) => setOptions(event.target.value)}
               name={property}
             />
           </span>

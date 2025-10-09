@@ -1,0 +1,271 @@
+---
+title: Alignments
+description: This guide shows you how to control and customize carousel alignment in Embla Carousel.
+order: 50
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+
+# Alignments
+
+This guide explains how to control and customize **carousel alignment** in Embla Carousel.
+
+## Declaring alignment
+
+Embla calculates scroll offsets based on each slide's **actual layout position and size** — the values the browser computes after rendering. It then applies the chosen [align](/api/options/#align) option (`start`, `center`, or `end`) to determine where each snap point should land.
+
+The `align` option only affects carousels where slides are **less than 100% of the viewport width**, since full-width slides already occupy the entire scroll area.
+
+## Preferred method
+
+You can **configure the alignment** using the [align](/api/options/#align) option when initializing Embla:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/Alignments/AlignmentsInteractive')
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={5}
+import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode, { align: 'center' })
+```
+
+```html
+<div class="embla">
+  <div class="embla__viewport">
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
+  </div>
+</div>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={5}
+import React from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({ align: 'center' })
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html asLanguage=vue highlight={4}
+<script setup>
+  import useEmblaCarousel from 'embla-carousel-vue'
+
+  const [emblaRef] = useEmblaCarousel({ align: 'center' })
+</script>
+
+<template>
+  <div class="embla">
+    <div class="embla__viewport" ref="emblaRef">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+  </div>
+</template>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={4}
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({ align: 'center' })
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html asLanguage=svelte highlight={4}
+<script>
+  import useEmblaCarousel from 'embla-carousel-svelte'
+
+  let options = { align: 'center' }
+</script>
+
+<div class="embla">
+  <div class="embla__viewport" use:useEmblaCarousel="{{ options }}">
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
+  </div>
+</div>
+```
+
+</TabsItem>
+</Tabs>
+
+The `align` option defines how slides align **relative to the viewport**:
+
+- **`start`** — Aligns the slide's **start edge** (left in LTR, right in RTL, top for vertical).
+- **`center`** _(default)_ — Aligns the slide's **center** with the viewport center.
+- **`end`** — Aligns the slide's **end edge** (right in LTR, left in RTL, bottom for vertical).
+
+<Admonition type="warning">
+  **Warning:** Do **not** use CSS layout properties (like `justify-content`,
+  `align-items`) or CSS transforms on the **carousel container** to change
+  alignment along the scroll axis. Those rules change the position of slides in
+  ways that change the computed offsets Embla measures, which breaks snapping
+  and can produce unexpected scroll behavior.
+</Admonition>
+
+## Breakpoints
+
+You can make carousel alignment **responsive** by defining different `align` values for specific viewport sizes using the [breakpoints](/api/options/#breakpoints) option.
+Embla automatically re-evaluates slide positions when breakpoints change, ensuring that scroll snaps stay accurate as layouts adapt.
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={7-9}
+import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode, {
+  align: 'center',
+  breakpoints: {
+    '(min-width: 768px)': { align: 'start' }
+  }
+})
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={7-9}
+import React from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({
+    align: 'center',
+    breakpoints: {
+      '(min-width: 768px)': { align: 'start' }
+    }
+  })
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html asLanguage=vue highlight={6-8}
+<script setup>
+  import useEmblaCarousel from 'embla-carousel-vue'
+
+  const [emblaRef] = useEmblaCarousel({
+    align: 'center',
+    breakpoints: {
+      '(min-width: 768px)': { align: 'start' }
+    }
+  })
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={6-8}
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({
+    align: 'center',
+    breakpoints: {
+      '(min-width: 768px)': { align: 'start' }
+    }
+  })
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html asLanguage=svelte highlight={6-8}
+<script>
+  import useEmblaCarousel from 'embla-carousel-svelte'
+
+  let options = {
+    align: 'center',
+    breakpoints: {
+      '(min-width: 768px)': { align: 'start' }
+    }
+  }
+</script>
+```
+
+</TabsItem>
+</Tabs>
+
+## Contain scroll
+
+For non-looping carousels, Embla adjusts the alignment to prevent **empty space** from appearing at the start or end of the scroll area.
+This can make the first and last slides appear slightly off-alignment — but once you scroll, the slides in between align as expected.
+
+This behavior is controlled by the [`containScroll`](/api/options/#containscroll) option, which is **enabled by default**.
+If you prefer to keep a **consistent alignment** at all times (even if that means extra space at the edges), set `containScroll: false`.
+
+Try it out below:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/Alignments/AlignmentsContainScroll')
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>

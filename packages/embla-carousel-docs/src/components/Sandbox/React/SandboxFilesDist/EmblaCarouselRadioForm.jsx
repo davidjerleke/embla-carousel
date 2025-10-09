@@ -17,7 +17,7 @@ const RadioForm = (props) => {
               type="radio"
               value={value}
               checked={value === options[property]?.toString()}
-              onChange={setOptions}
+              onChange={(event) => setOptions(event.target.value)}
               name={property}
             />
           </span>
