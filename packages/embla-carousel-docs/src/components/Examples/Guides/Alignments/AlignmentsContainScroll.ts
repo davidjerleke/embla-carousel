@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselAlignmentsInteractive from 'components/Sandbox/React/SandboxFilesSrc/Guides/AlignmentsContainScroll/EmblaCarousel'
+import CarouselAlignmentsContainScroll from 'components/Sandbox/React/SandboxFilesSrc/Guides/AlignmentsContainScroll/EmblaCarousel'
 import {
   ALIGNMENT_INDICATOR_STYLES,
   ARROWS_STYLES,
@@ -47,7 +47,7 @@ const SANDBOXES = sandboxStaticSandboxes(
 )
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselAlignmentsInteractive as ExamplesSetupType['Carousel'],
+  Carousel: CarouselAlignmentsContainScroll as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
 }

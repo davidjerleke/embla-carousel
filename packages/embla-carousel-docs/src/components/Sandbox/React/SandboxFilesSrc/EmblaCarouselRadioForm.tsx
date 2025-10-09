@@ -1,15 +1,14 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
 
 type PropType = {
-  property: keyof EmblaOptionsType
+  property: string
   values: string[]
-  options: EmblaOptionsType
-  setOptions: (value: string) => void
+  selected?: string | undefined
+  onChange: (value: string) => void
 }
 
 const RadioForm: React.FC<PropType> = (props) => {
-  const { options, property, values, setOptions } = props
+  const { selected, property, values, onChange } = props
 
   return (
     <form
@@ -24,8 +23,8 @@ const RadioForm: React.FC<PropType> = (props) => {
             <input
               type="radio"
               value={value}
-              checked={value === options[property]?.toString()}
-              onChange={(event) => setOptions(event.target.value)}
+              checked={value === selected}
+              onChange={(event) => onChange(event.target.value)}
               name={property}
             />
           </span>

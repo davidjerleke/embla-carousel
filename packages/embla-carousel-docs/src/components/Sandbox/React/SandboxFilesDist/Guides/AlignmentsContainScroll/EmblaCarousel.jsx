@@ -39,8 +39,8 @@ const EmblaCarousel = (props) => {
       <RadioForm
         property="align"
         values={ALIGNMENTS}
-        options={dynamicOptions}
-        setOptions={(value) => {
+        selected={dynamicOptions.align?.toString()}
+        onChange={(value) => {
           setDynamicOptions((currentOptions) => ({
             ...currentOptions,
             align: value
@@ -51,8 +51,8 @@ const EmblaCarousel = (props) => {
       <RadioForm
         property="containScroll"
         values={CONTAIN_SCROLL}
-        options={dynamicOptions}
-        setOptions={(value) => {
+        selected={dynamicOptions.containScroll?.toString()}
+        onChange={(value) => {
           setDynamicOptions((currentOptions) => ({
             ...currentOptions,
             containScroll: value === 'false' ? false : value

@@ -39,8 +39,8 @@ const EmblaCarousel = (props) => {
       <RadioForm
         property="align"
         values={ALIGNMENTS}
-        options={dynamicOptions}
-        setOptions={(value) => {
+        selected={dynamicOptions.align?.toString()}
+        onChange={(value) => {
           setDynamicOptions((currentOptions) => ({
             ...currentOptions,
             align: value
@@ -51,8 +51,8 @@ const EmblaCarousel = (props) => {
       <RadioForm
         property="loop"
         values={LOOP}
-        options={dynamicOptions}
-        setOptions={(value) => {
+        selected={dynamicOptions.loop?.toString()}
+        onChange={(value) => {
           setDynamicOptions((currentOptions) => ({
             ...currentOptions,
             loop: value === 'true'

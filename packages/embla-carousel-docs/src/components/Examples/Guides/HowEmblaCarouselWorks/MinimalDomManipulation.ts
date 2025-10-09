@@ -4,7 +4,7 @@ import { SandboxStaticSettingsType } from 'consts/sandbox'
 import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
-import CarouselDomManipulation from 'components/Sandbox/React/SandboxFilesSrc/Guides/MinimalDomManipulation/EmblaCarousel'
+import CarouselMinimalDomManipulation from 'components/Sandbox/React/SandboxFilesSrc/Guides/MinimalDomManipulation/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
@@ -39,7 +39,7 @@ const SANDBOXES = sandboxStaticSandboxes(
 )
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselDomManipulation as ExamplesSetupType['Carousel'],
+  Carousel: CarouselMinimalDomManipulation as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
 }

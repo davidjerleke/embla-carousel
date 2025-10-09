@@ -16,13 +16,13 @@ import { TABS_LIBRARY } from 'consts/tabs'
 
 This guide explains how to control and customize **carousel alignment** in Embla Carousel.
 
-## Declaring alignment
+## Understanding alignment
 
 Embla calculates scroll offsets based on each slide's **actual layout position and size** — the values the browser computes after rendering. It then applies the chosen [align](/api/options/#align) option (`start`, `center`, or `end`) to determine where each snap point should land.
 
 The `align` option only affects carousels where slides are **less than 100% of the viewport width**, since full-width slides already occupy the entire scroll area.
 
-## Preferred method
+## Setting alignment
 
 You can **configure the alignment** using the [align](/api/options/#align) option when initializing Embla:
 
@@ -150,7 +150,7 @@ export function EmblaCarousel() {
 </TabsItem>
 </Tabs>
 
-The `align` option defines how slides align **relative to the viewport**:
+The [`align`](/api/options/#align) option defines how slides align **relative to the viewport**:
 
 - **`start`** — Aligns the slide's **start edge** (left in LTR, right in RTL, top for vertical).
 - **`center`** _(default)_ — Aligns the slide's **center** with the viewport center.
@@ -269,3 +269,9 @@ Try it out below:
   }
   wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
 />
+
+The [`containScroll`](/api/options/#containscroll) option controls how Embla handles **empty space at the start and end of the scroll area**:
+
+- **`trimSnaps`** _(default)_ — Prevents empty space at the beginning and end by adjusting alignment when necessary.
+- **`keepSnaps`** — Similar to `trimSnaps`, but ensures that **each slide is a separate snap point**, even when trimming space.
+- **`false`** — Disables this behavior entirely, allowing **empty space at the edges** to maintain consistent alignment — just like looping carousels align.
