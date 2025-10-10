@@ -40,18 +40,14 @@ const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
 addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 updateSelectedSnapDisplay(emblaApi, snapDisplayNode)
 addAlignIndicatorHandler(emblaApi, alignIndicatorNode)
-addRadioFormHandler(alignFormNode, alignRadioNodes, (event) => {
-  const value = (event.target as HTMLInputElement).value
-
+addRadioFormHandler(alignFormNode, alignRadioNodes, (value) => {
   dynamicOptions = {
     ...dynamicOptions,
     align: <EmblaOptionsType['align']>value
   }
   emblaApi.reInit(dynamicOptions)
 })
-addRadioFormHandler(containScrollFormNode, containScrollRadioNodes, (event) => {
-  const value = (event.target as HTMLInputElement).value
-
+addRadioFormHandler(containScrollFormNode, containScrollRadioNodes, (value) => {
   dynamicOptions = {
     ...dynamicOptions,
     containScroll: <EmblaOptionsType['containScroll']>(

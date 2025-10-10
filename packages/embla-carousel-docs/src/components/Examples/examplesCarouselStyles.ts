@@ -30,6 +30,9 @@ export const CAROUSEL_SCROLLBAR_HEIGHT = '1.6rem'
 export const CAROUSEL_SCROLLBAR_TRACK_HEIGHT = '0.6rem'
 export const CAROUSEL_SCROLLBAR_SPACING = CAROUSEL_CONTROLS_SPACING
 
+export const GROUP_INDICATOR_SIZE = '0.6rem'
+export const GROUP_INDICATOR_COLOR = COLORS.BRAND_PRIMARY
+
 export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
   border-radius: ${BORDER_RADIUSES.SOFT};
 `
@@ -270,6 +273,53 @@ export const ALIGNMENT_INDICATOR_STYLES = css`
 
   .embla__align-indicator--end {
     right: ${BORDER_SIZES.OUTLINE};
+  }
+`
+
+export const GROUP_INDICATOR_STYLES = css`
+  .embla__slide {
+    position: relative;
+  }
+
+  .embla__group__indicator {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .embla__group__indicator--start {
+    left: var(--slide-spacing);
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-left: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--end {
+    left: 0;
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-right: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--center {
+    left: 0;
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--single {
+    left: var(--slide-spacing);
+    right: 0px;
+    border: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla--group-indicator-hidden .embla__group__indicator {
+    display: none;
   }
 `
 

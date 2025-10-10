@@ -18,13 +18,13 @@ This guide explains how to control and customize **carousel alignment** in Embla
 
 ## Understanding alignment
 
-Embla calculates scroll offsets based on each slide's **actual layout position and size** — the values the browser computes after rendering. It then applies the chosen [align](/api/options/#align) option (`start`, `center`, or `end`) to determine where each snap point should land.
+Embla calculates scroll offsets based on each slide's **actual layout position and size** — the values the browser computes after rendering. It then applies the chosen [`align`](/api/options/#align) option (`start`, `center`, or `end`) to determine where each snap point should land.
 
 The `align` option only affects carousels where slides are **less than 100% of the viewport width**, since full-width slides already occupy the entire scroll area.
 
 ## Setting alignment
 
-You can **configure the alignment** using the [align](/api/options/#align) option when initializing Embla:
+You can **configure the alignment** using the [`align`](/api/options/#align) option when initializing Embla:
 
 <ExamplesLazy
   loader={() =>
@@ -166,7 +166,7 @@ The [`align`](/api/options/#align) option defines how slides align **relative to
 
 ## Breakpoints
 
-You can make carousel alignment **responsive** by defining different `align` values for specific viewport sizes using the [breakpoints](/api/options/#breakpoints) option.
+You can make carousel alignment **responsive** by defining different [`align`](/api/options/#align) values for specific viewport sizes using the [`breakpoints`](/api/options/#breakpoints) option.
 Embla automatically re-evaluates slide positions when breakpoints change, ensuring that scroll snaps stay accurate as layouts adapt.
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>

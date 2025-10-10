@@ -1,11 +1,14 @@
 export const addRadioFormHandler = (
   formNode: HTMLFormElement,
   radioNodes: HTMLInputElement[],
-  onChange: (event: Event) => void
+  onChange: (value: string) => void
 ): void => {
   if (!formNode || !radioNodes.length) return
 
   radioNodes.forEach((radioNode) => {
-    radioNode.addEventListener('change', onChange)
+    radioNode.addEventListener('change', (event) => {
+      const value = (event.target as HTMLInputElement).value
+      return onChange(value)
+    })
   })
 }

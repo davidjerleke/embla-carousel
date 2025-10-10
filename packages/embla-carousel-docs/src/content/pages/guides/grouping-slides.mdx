@@ -1,0 +1,154 @@
+---
+title: Grouping Slides
+description: This guide shows you how to control and customize carousel slide grouping in Embla Carousel.
+order: 60
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+
+# Grouping Slides
+
+This guide shows you how to **group multiple slides so they behave as a single slide** in Embla Carousel.
+
+## Understanding grouping
+
+Grouping slides changes how the carousel measures and snaps — instead of treating each slide individually, Embla treats each **group of slides as one scroll unit (slide)**. This is especially useful when building **multi-slide layouts** (multiple slides visible per view) and when you want to **scroll several slides at once**, creating a paged scrolling effect.
+
+<Admonition type="note">
+  **Tip:** Grouping slides doesn't visually combine them — it only changes how
+  Embla calculates snapping and scroll distances. You can still size and space
+  slides freely using your CSS.
+</Admonition>
+
+## Setting groups
+
+You can **configure the grouping** using the [`slidesToScroll`](/api/options/#slidestoscroll) option:
+
+<ExamplesLazy
+  loader={() =>
+    import(
+      'components/Examples/Guides/GroupingSlides/GroupingSlidesInteractive'
+    )
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
+
+Take a look at the **snap count** in the bottom-right corner of the example — it updates when you change the `slidesToScroll` option.
+That's because Embla recalculates the number of **snap points** based on how slides are grouped.
+
+The [`slidesToScroll`](/api/options/#slidestoscroll) option defines **how many slides move per scroll**:
+
+- **`auto`** — Automatically groups slides based on how many **fit inside the viewport**, using each slide's **computed size**. This means the grouping adapts automatically to responsive layouts — each scroll moves one “page” of visible slides until the end of the list.
+- **`number`** _(default: `1`)_ — Moves the specified number of slides per scroll, regardless of their size or how many fit in view.
+
+## Breakpoints
+
+You can make carousel grouping **responsive** by setting different [`slidesToScroll`](/api/options/#slidestoscroll) values for specific viewport sizes using the [`breakpoints`](/api/options/#breakpoints) option.
+Embla automatically recalculates slide groups and snap positions when breakpoints change, keeping scrolling behavior accurate as layouts adapt.
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+
+```js highlight={7-9}
+import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const emblaApi = EmblaCarousel(viewportNode, {
+  slidesToScroll: 1,
+  breakpoints: {
+    '(min-width: 768px)': { slidesToScroll: 'auto' }
+  }
+})
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+
+```jsx highlight={7-9}
+import React from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': { slidesToScroll: 'auto' }
+    }
+  })
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+
+```html asLanguage=vue highlight={6-8}
+<script setup>
+  import useEmblaCarousel from 'embla-carousel-vue'
+
+  const [emblaRef] = useEmblaCarousel({
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': { slidesToScroll: 'auto' }
+    }
+  })
+</script>
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+
+```jsx highlight={6-8}
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef] = useEmblaCarousel({
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': { slidesToScroll: 'auto' }
+    }
+  })
+}
+```
+
+</TabsItem>
+<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+
+```html asLanguage=svelte highlight={6-8}
+<script>
+  import useEmblaCarousel from 'embla-carousel-svelte'
+
+  let options = {
+    slidesToScroll: 1,
+    breakpoints: {
+      '(min-width: 768px)': { slidesToScroll: 'auto' }
+    }
+  }
+</script>
+```
+
+</TabsItem>
+</Tabs>
+
+## Variable widths
+
+The `auto` option is useful when you want to "page" slides regardless of whether 2, 3, or 4 fit in the viewport — you can keep the same configuration without changing `slidesToScroll`.
+
+It's also handy for variable-width slides: Embla automatically groups slides based on how many **fit inside the viewport**, using each slide's **computed size**. This grouping adapts to responsive layouts, so each scroll moves one “page” of visible slides until the end.
+
+Set [`slidesToScroll`](/api/options/#slidestoscroll) to `auto` and see it in action below:
+
+<ExamplesLazy
+  loader={() =>
+    import(
+      'components/Examples/Guides/GroupingSlides/GroupingSlidesVariableWidths'
+    )
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
