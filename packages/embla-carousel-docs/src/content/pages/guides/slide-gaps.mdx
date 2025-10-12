@@ -8,6 +8,14 @@ date: 2025-10-03
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 import { EXAMPLES_WRAPPERS } from 'consts/examples'
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import understandingGaps_01 from '!!raw-loader!content/code-snippets/guides/slide-gaps/understanding-gaps-01.css'
+import settingGaps_01 from '!!raw-loader!content/code-snippets/guides/slide-gaps/setting-gaps-01.css'
+import breakpoints_01 from '!!raw-loader!content/code-snippets/guides/slide-gaps/breakpoints-01.css'
+import gapOrMargin_01 from '!!raw-loader!content/code-snippets/guides/slide-gaps/gap-or-margin-01.css'
+import gapOrMargin_02 from '!!raw-loader!content/code-snippets/guides/slide-gaps/gap-or-margin-02.js'
+import gapWithLoopEnabled from '!!raw-loader!content/code-snippets/guides/slide-gaps/gap-with-loop-enabled-01.css'
+
 # Slide Gaps
 
 This guide shows you how to add **spacing between slides** in Embla Carousel.
@@ -16,19 +24,21 @@ All examples use the **padding approach** to create gaps between slides. Althoug
 
 ---
 
+## Prerequisites
+
+Before continuing with this guide, make sure you've completed the following:
+
+- [How Embla Carousel Works](/guides/how-embla-carousel-works)
+- [Required Setup](/guides/required-setup)
+- [Slide Sizes](/guides/slide-sizes)
+
 ## Understanding gaps
 
 The recommended way to create spacing between slides is to use **padding on the slides themselves** combined with a corresponding **negative margin on the container**.
 
 To make padding predictable and included in the element's width (so it doesn't add extra size), you should apply `box-sizing: border-box` globally, which is standard practice on most sites (and often included in `reset.css` or similar):
 
-```css
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-```
+<PrismHighlight language="css" code={understandingGaps_01} />
 
 ## Setting gaps
 
@@ -41,28 +51,7 @@ With `box-sizing: border-box` in place, you can adjust the `--slide-spacing:` va
   wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
 />
 
-```css highlight={3,13,19}
-.embla {
-  --slide-size: 100%;
-  --slide-spacing: 10px;
-}
-
-.embla__viewport {
-  overflow: hidden;
-}
-
-.embla__container {
-  display: flex;
-  touch-action: pan-y pinch-zoom;
-  margin-left: calc(var(--slide-spacing) * -1); /* Renders -10px */
-}
-
-.embla__slide {
-  flex: 0 0 var(--slide-size);
-  min-width: 0;
-  padding-left: var(--slide-spacing);
-}
-```
+<PrismHighlight language="css" code={settingGaps_01} highlight="3,13,19" />
 
 The **benefits** of the **padding approach** include:
 
@@ -78,35 +67,7 @@ To make **slide gaps responsive** with the **padding approach**, use CSS **media
 
 Because Embla relies on a `ResizeObserver` to track each slide's **computed dimensions**, it automatically recalculates scroll snaps whenever a slide's size changes. Since the padding is included in each slide's computed size, any gap adjustments made via media queries are detected automatically — no extra code required.
 
-```css highlight={4,21,25}
-.embla {
-  --slide-size: 100%;
-  --slide-spacing: 10px;
-  --slide-spacing-md-up: 20px;
-}
-
-.embla__container {
-  display: flex;
-  touch-action: pan-y pinch-zoom;
-  margin-left: calc(var(--slide-spacing) * -1); /* Renders -10px */
-}
-
-.embla__slide {
-  flex: 0 0 var(--slide-size);
-  min-width: 0;
-  padding-left: var(--slide-spacing);
-}
-
-@media (min-width: 768px) {
-  .embla__container {
-    margin-left: calc(var(--slide-spacing-md-up) * -1); /* Renders -20px */
-  }
-
-  .embla__slide {
-    padding-left: var(--slide-spacing-md-up);
-  }
-}
-```
+<PrismHighlight language="css" code={breakpoints_01} highlight="4,21,25" />
 
 ## Other methods
 
@@ -128,12 +89,7 @@ For example, to achieve **two slides per view** with a `gap` or `margin` of `20p
 
 Embla reads the **computed slide dimensions**, so scroll snaps are based on these expanded sizes. To achieve an exact fit, you need to adjust the `flex-basis` or use `calc()`:
 
-```css
-.embla__slide {
-  margin-right: 20px;
-  flex: 0 0 calc(50% - 10px);
-}
-```
+<PrismHighlight language="css" code={gapOrMargin_01} />
 
 If slide sizes change dynamically, you must also remember to update the **margin** or **gap** values, which can create maintenance overhead.
 
@@ -142,9 +98,7 @@ If slide sizes change dynamically, you must also remember to update the **margin
 
 <br />
 
-```ts
-emblaApi.reInit()
-```
+<PrismHighlight language="js" code={gapOrMargin_02} />
 
 </Admonition>
 
@@ -155,11 +109,7 @@ This happens because **Embla only reads the computed distances between slides**,
 
 A simple workaround is to add a **margin** to the last slide:
 
-```css
-.embla__slide:last-child {
-  margin-right: 20px;
-}
-```
+<PrismHighlight language="css" code={gapWithLoopEnabled} />
 
 ### Caveats
 

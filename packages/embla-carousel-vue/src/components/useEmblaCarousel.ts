@@ -35,16 +35,15 @@ function useEmblaCarousel(
 
   watch(
     () => rootNode.value,
-    () => {
-      if (rootNode.value) {
-        EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-        clientApi.value = EmblaCarousel(
-          rootNode.value,
-          storedOptions,
-          storedPlugins
-        )
-      } else {
+    (node) => {
+      if (clientApi.value) {
+        clientApi.value.destroy()
         clientApi.value = undefined
+      }
+
+      if (node) {
+        EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
+        clientApi.value = EmblaCarousel(node, storedOptions, storedPlugins)
       }
     },
     { immediate: true }

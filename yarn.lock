@@ -4986,6 +4986,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/prismjs@npm:^1.26.5":
+  version: 1.26.5
+  resolution: "@types/prismjs@npm:1.26.5"
+  checksum: d208b04ee9b6de6b2dc916439a81baa47e64ab3659a66d3d34bc3e42faccba9d4b26f590d76f97f7978d1dfaafa0861f81172b1e3c68696dd7a42d73aaaf5b7b
+  languageName: node
+  linkType: hard
+
 "@types/prop-types@npm:*":
   version: 15.7.12
   resolution: "@types/prop-types@npm:15.7.12"
@@ -9408,6 +9415,7 @@ __metadata:
     "@types/mdx-js__react": ^1.5.5
     "@types/node": ^17.0.15
     "@types/prettier": 2.7.3
+    "@types/prismjs": ^1.26.5
     "@types/react": ^18.0.8
     "@types/react-dom": ^18.0.0
     "@types/styled-components": ^5.1.22

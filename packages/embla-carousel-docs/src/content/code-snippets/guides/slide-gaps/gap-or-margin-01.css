@@ -1,0 +1,4 @@
+.embla__slide {
+  margin-right: 20px;
+  flex: 0 0 calc(50% - 10px);
+}

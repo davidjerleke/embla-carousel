@@ -9,6 +9,12 @@ import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-started/svelte/the-component-structure-01.svelte'
+import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/svelte/styling-the-carousel-01.svelte'
+import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/svelte/accessing-the-carousel-api-01.svelte'
+import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-01.svelte'
+
 # Svelte
 
 Embla Carousel provides a wrapper for [Svelte](https://svelte.dev/) that ensures seamless integration of the carousel into your Svelte project and automatic cleanup on component unmount.
@@ -38,83 +44,23 @@ yarn add embla-carousel-svelte
 
 A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following structure to your carousel:
 
-```html asLanguage=svelte
-<script>
-  import useEmblaCarousel from 'embla-carousel-svelte'
-</script>
-
-<div class="embla">
-  <div class="embla__viewport" use:useEmblaCarousel>
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <button class="embla__prev">Scroll to prev</button>
-  <button class="embla__next">Scroll to next</button>
-</div>
-```
+<PrismHighlight language="svelte" code={theComponentStructure_01} />
 
 ## Styling the carousel
 
 The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
-```html asLanguage=svelte
-<style>
-  .embla__viewport {
-    overflow: hidden;
-  }
-
-  .embla__container {
-    display: flex;
-    touch-action: pan-y pinch-zoom;
-  }
-
-  .embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-  }
-</style>
-```
+<PrismHighlight language="svelte" code={stylingTheCarousel_01} />
 
 ## Accessing the carousel API
 
 Use the `useEmblaCarousel` Svelte action and pass your options as the first argument. You can access the [API](/api/) by capturing the Embla API from the carousel's `on:emblainit` event, and use it to control the carousel or respond to user actions, as shown below:
 
-```html asLanguage=svelte highlight={11}
-<script>
-  import useEmblaCarousel from 'embla-carousel-svelte'
-
-  let emblaApi
-  let options = { loop: false }
-
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
-
-  function onInit(event) {
-    emblaApi = event.detail
-  }
-</script>
-
-<div class="embla">
-  <div
-    class="embla__viewport"
-    on:emblainit="{onInit}"
-    use:useEmblaCarousel="{{ options }}"
-  >
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <button class="embla__prev" on:click="{scrollToPrev}">Scroll to prev</button>
-  <button class="embla__next" on:click="{scrollToNext}">Scroll to next</button>
-</div>
-```
+<PrismHighlight
+  language="svelte"
+  code={accessingTheCarouselApi_01}
+  highlight="11"
+/>
 
 <Admonition type="note">
   **Note:** Starting with Svelte 5, the `on:` event handlers have been
@@ -144,39 +90,6 @@ yarn add embla-carousel-autoplay
 
 You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` Svelte action. Here's how to extend the carousel from the previous example with Autoplay:
 
-```html asLanguage=svelte highlight={3,6,13}
-<script>
-  import useEmblaCarousel from 'embla-carousel-svelte'
-  import Autoplay from 'embla-carousel-autoplay'
-
-  let options = { loop: false }
-  let plugins = [Autoplay()]
-
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
-
-  function onInit(event) {
-    emblaApi = event.detail
-    emblaApi.plugins().autoplay?.play()
-  }
-</script>
-
-<div class="embla">
-  <div
-    class="embla__viewport"
-    on:emblainit="{onInit}"
-    use:useEmblaCarousel="{{ options, plugins }}"
-  >
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <button class="embla__prev" on:click="{scrollToPrev}">Scroll to prev</button>
-  <button class="embla__next" on:click="{scrollToNext}">Scroll to next</button>
-</div>
-```
+<PrismHighlight language="svelte" code={addingPlugins_01} highlight="3,6,13" />
 
 Congratulations! You just created your first Embla Carousel component.

@@ -5,6 +5,13 @@ order: 5
 date: 2021-02-21
 ---
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import theHtmlStructure_01 from '!!raw-loader!content/code-snippets/get-started/module/the-html-structure-01.html'
+import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/module/styling-the-carousel-01.css'
+import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/cdn/accessing-the-carousel-api-01.html'
+import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/cdn/adding-plugins-01.html'
+import addingPlugins_02 from '!!raw-loader!content/code-snippets/get-started/cdn/adding-plugins-02.html'
+
 # CDN
 
 Start by including the Embla Carousel script from a CDN with a `script` tag:
@@ -19,67 +26,29 @@ Start by including the Embla Carousel script from a CDN with a `script` tag:
 
 A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following **HTML** structure to your carousel:
 
-```html
-<div class="embla">
-  <div class="embla__viewport">
-    <div class="embla__container">
-      <div class="embla__slide">Slide 1</div>
-      <div class="embla__slide">Slide 2</div>
-      <div class="embla__slide">Slide 3</div>
-    </div>
-  </div>
-
-  <button class="embla__prev">Scroll to prev</button>
-  <button class="embla__next">Scroll to next</button>
-</div>
-```
+<PrismHighlight language="html" code={theHtmlStructure_01} />
 
 ## Styling the carousel
 
 The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
-```css
-.embla__viewport {
-  overflow: hidden;
-}
-
-.embla__container {
-  display: flex;
-  touch-action: pan-y pinch-zoom;
-}
-
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-```
+<PrismHighlight language="css" code={stylingTheCarousel_01} />
 
 ## Accessing the carousel API
 
 Select the element with the classname `embla__viewport` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** your carousel and provide full **access** to the Embla Carousel [API](/api/).
 
-```html highlight={6}
-<script type="text/javascript">
-  const wrapperNode = document.querySelector('.embla')
-  const viewportNode = wrapperNode.querySelector('.embla__viewport')
-  const prevButtonNode = wrapperNode.querySelector('.embla__prev')
-  const nextButtonNode = wrapperNode.querySelector('.embla__next')
-
-  const emblaApi = EmblaCarousel(viewportNode, { loop: false })
-
-  prevButtonNode.addEventListener('click', emblaApi.scrollToPrev, false)
-  nextButtonNode.addEventListener('click', emblaApi.scrollToNext, false)
-</script>
-```
+<PrismHighlight
+  language="html"
+  code={accessingTheCarouselApi_01}
+  highlight="7"
+/>
 
 ## Adding plugins
 
 Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
 
-```html highlight={2}
-<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
-<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
-```
+<PrismHighlight language="html" code={addingPlugins_01} highlight="2" />
 
 <Admonition type="note">
   **Note:** Plugins loaded from a CDN will be **prefixed** with `EmblaCarousel`.
@@ -90,22 +59,6 @@ Plugins let you **extend your carousel** with additional features beyond the bui
 
 You can pass an **optional plugin array** as the third argument when initializing Embla Carousel. Here's how to extend the carousel from the previous example with Autoplay:
 
-```html highlight={7,13}
-<script type="text/javascript">
-  const wrapperNode = document.querySelector('.embla')
-  const viewportNode = wrapperNode.querySelector('.embla__viewport')
-  const prevButtonNode = wrapperNode.querySelector('.embla__prev')
-  const nextButtonNode = wrapperNode.querySelector('.embla__next')
-
-  const emblaApi = EmblaCarousel(viewportNode, { loop: false }, [
-    EmblaCarouselAutoplay()
-  ])
-
-  prevButtonNode.addEventListener('click', emblaApi.scrollToPrev, false)
-  nextButtonNode.addEventListener('click', emblaApi.scrollToNext, false)
-
-  emblaApi.plugins().autoplay?.play()
-</script>
-```
+<PrismHighlight language="html" code={addingPlugins_02} highlight="8,14" />
 
 Congratulations! You just created your first Embla Carousel.

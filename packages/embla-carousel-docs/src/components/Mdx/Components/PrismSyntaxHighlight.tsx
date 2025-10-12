@@ -12,6 +12,8 @@ import {
   PRISM_HIGHLIGHT_LINE_CLASS_NAME
 } from 'consts/prismHighlight'
 
+// TODO: REMOVE FILE, PrismHighlight USED INSTEAD
+
 type PropType = {
   children: string
   className: string
