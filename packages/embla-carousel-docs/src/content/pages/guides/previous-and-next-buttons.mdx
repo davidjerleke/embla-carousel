@@ -93,15 +93,6 @@ Adding navigation buttons is simple. Create your button elements and connect the
 
 These methods let you scroll the carousel programmatically when users click the buttons, giving them an intuitive way to move between slides.
 
-<ExamplesLazy
-  loader={() =>
-    import(
-      'components/Examples/Guides/PreviousAndNextButtons/PreviousAndNextButtons'
-    )
-  }
-  wrapper={EXAMPLES_WRAPPERS.DEFAULT}
-/>
-
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
     <PrismHighlight
@@ -148,7 +139,7 @@ These methods let you scroll the carousel programmatically when users click the 
 
 ## Buttons state
 
-Like the example in the previous section, we'll enhance the user experience by **disabling the navigation buttons** when the carousel can't scroll any further.
+We'll enhance the user experience by **disabling the navigation buttons** when the carousel can't scroll any further.
 
 For non-looping carousels, it's good UX to indicate when the navigation buttons can't be used — for example, when you're already at the first or last slide.
 
@@ -156,6 +147,15 @@ We'll handle this by toggling each button's state between **enabled** and **disa
 
 - The [`select`](/api/events/#select) event fires — when the selected scroll snap changes.
 - The [`reinit`](/api/events/#reinit) event fires — when the carousel resets.
+
+<ExamplesLazy
+  loader={() =>
+    import(
+      'components/Examples/Guides/PreviousAndNextButtons/PreviousAndNextButtons'
+    )
+  }
+  wrapper={EXAMPLES_WRAPPERS.ONE_FORM_ROW}
+/>
 
 <PrismHighlight language="css" code={buttonsState_css_01} />
 
@@ -203,4 +203,4 @@ We'll handle this by toggling each button's state between **enabled** and **disa
 
 - **Button placement:** Place the prev/next buttons **outside** the Embla root element (the one passed to the initializer, e.g. `.embla__viewport`) to prevent accidental drag interactions.
 - **Looping carousels:** In **looping** carousels with enough slides to wrap around, the prev/next methods always trigger scrolling — buttons are never disabled.
-- **No-op behavior:** On **non-looping** carousels, calling `scrollToPrev` or `scrollToNext` when already at the first or last slide has no effect. This is normal and ensures consistent, predictable behavior.
+- **No-op behavior:** On **non-looping** carousels, calling [`scrollToPrev`](/api/methods/#scrolltoprev) or [`scrollToNext`](/api/methods/#scrolltonext) when already at the first or last slide has no effect. This is normal and ensures consistent, predictable behavior.

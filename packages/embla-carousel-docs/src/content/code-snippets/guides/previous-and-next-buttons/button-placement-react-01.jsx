@@ -14,7 +14,7 @@ export function EmblaCarousel() {
         </div>
       </div>
 
-      {/* Place your previous and next buttons here */}
+      {/* Place your navigation buttons here */}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
-import { updateSelectedSnapDisplay } from '../../EmblaCarouselSelectedSnapDisplay'
 import { addRadioFormHandler } from '../../EmblaCarouselRadioForm'
 import '../css/base.css'
 import '../css/sandbox.css'
@@ -13,9 +13,7 @@ const emblaNode = <HTMLElement>document.querySelector('.embla')
 const viewportNode = <HTMLElement>emblaNode.querySelector('.embla__viewport')
 const prevBtn = <HTMLElement>emblaNode.querySelector('.embla__button--prev')
 const nextBtn = <HTMLElement>emblaNode.querySelector('.embla__button--next')
-const snapDisplayNode = <HTMLElement>(
-  emblaNode.querySelector('.embla__selected-snap-display')
-)
+const dotsNode = <HTMLElement>document.querySelector('.embla__dots')
 
 const loopFormNode = <HTMLFormElement>(
   emblaNode.querySelector('.embla__radio-form--loop')
@@ -27,7 +25,7 @@ const loopRadioNodes = <HTMLInputElement[]>(
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
 
 addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
-updateSelectedSnapDisplay(emblaApi, snapDisplayNode)
+addDotButtonAndClickHandlers(emblaApi, dotsNode)
 addRadioFormHandler(loopFormNode, loopRadioNodes, (value) => {
   dynamicOptions = {
     ...dynamicOptions,

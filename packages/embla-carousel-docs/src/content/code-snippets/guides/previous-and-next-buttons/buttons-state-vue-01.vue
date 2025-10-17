@@ -16,12 +16,12 @@ function toggleButtonsDisabled(emblaApi) {
 
 watch(
   () => emblaApi.value,
-  () => {
-    if (!emblaApi.value) return
+  (api) => {
+    if (!api) return
 
-    toggleButtonsDisabled(emblaApi.value)
-    emblaApi.value.on('reinit', toggleButtonsDisabled)
-    emblaApi.value.on('select', toggleButtonsDisabled)
+    toggleButtonsDisabled(api)
+    api.on('reinit', toggleButtonsDisabled)
+    api.on('select', toggleButtonsDisabled)
   },
   { immediate: true }
 )

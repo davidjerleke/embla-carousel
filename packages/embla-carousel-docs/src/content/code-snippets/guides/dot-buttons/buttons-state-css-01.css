@@ -1,0 +1,7 @@
+.embla__dot {
+  opacity: 0.5;
+}
+
+.embla__dot--selected {
+  opacity: 1;
+}

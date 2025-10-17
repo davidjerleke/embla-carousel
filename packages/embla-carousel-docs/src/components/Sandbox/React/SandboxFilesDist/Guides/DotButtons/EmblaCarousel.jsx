@@ -6,10 +6,7 @@ import {
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
 import RadioForm from '../../EmblaCarouselRadioForm'
-import {
-  SelectedSnapDisplay,
-  useSelectedSnapDisplay
-} from '../../EmblaCarouselSelectedSnapDisplay'
+import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
 import { sandboxImages } from 'components/Sandbox/sandboxImages'
 
 const LOOP = ['true', 'false']
@@ -24,14 +21,15 @@ const EmblaCarousel = (props) => {
     ...dynamicOptions
   })
 
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
+
   const {
     prevBtnDisabled,
     nextBtnDisabled,
     onPrevButtonClick,
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
-
-  const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
 
   return (
     <div className="embla">
@@ -67,10 +65,17 @@ const EmblaCarousel = (props) => {
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
 
-        <SelectedSnapDisplay
-          selectedSnap={selectedSnap}
-          snapCount={snapCount}
-        />
+        <div className="embla__dots">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

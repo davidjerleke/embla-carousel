@@ -1,11 +1,5 @@
-<script>
-  import useEmblaCarousel from 'embla-carousel-svelte'
-
-  let options = { loop: false }
-</script>
-
 <div class="embla">
-  <div class="embla__viewport" use:useEmblaCarousel={{ options }}>
+  <div class="embla__viewport">
     <div class="embla__container">
       <div class="embla__slide">Slide 1</div>
       <div class="embla__slide">Slide 2</div>
@@ -13,5 +7,11 @@
     </div>
   </div>
 
-  <!-- Place your navigation buttons here -->
+  <div class="embla__dots"></div>
+
+  <script type="text/template" id="embla-dot-template">
+    <button class="embla__dot">
+      <!-- Button content -->
+    </button>
+  </script>
 </div>

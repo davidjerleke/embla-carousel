@@ -14,6 +14,6 @@ const [emblaRef] = useEmblaCarousel({ loop: false })
       </div>
     </div>
 
-    <!-- Place your previous and next buttons here -->
+    <!-- Place your navigation buttons here -->
   </div>
 </template>

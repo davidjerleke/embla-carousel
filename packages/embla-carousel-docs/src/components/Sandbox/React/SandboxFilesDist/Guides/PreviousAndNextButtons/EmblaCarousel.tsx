@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
@@ -6,11 +6,14 @@ import {
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
+import RadioForm from '../../EmblaCarouselRadioForm'
 import {
   SelectedSnapDisplay,
   useSelectedSnapDisplay
 } from '../../EmblaCarouselSelectedSnapDisplay'
 import { sandboxImages } from 'components/Sandbox/sandboxImages'
+
+const LOOP = ['true', 'false']
 
 type PropType = {
   slides: number[]
@@ -19,7 +22,13 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [dynamicOptions, setDynamicOptions] = useState<EmblaOptionsType>({
+    ...options
+  })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...options,
+    ...dynamicOptions
+  })
 
   const {
     prevBtnDisabled,
@@ -32,6 +41,18 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   return (
     <div className="embla">
+      <RadioForm
+        property="loop"
+        values={LOOP}
+        selected={dynamicOptions.loop?.toString()}
+        onChange={(value) => {
+          setDynamicOptions((currentOptions) => ({
+            ...currentOptions,
+            loop: (value === 'true') as EmblaOptionsType['loop']
+          }))
+        }}
+      />
+
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((index) => (
