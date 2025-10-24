@@ -43,3 +43,15 @@ export const parseCodeBlockProps = (
       }
     }, {}) as PrismCodeBlockPropsType
 }
+
+export const removeUnwantedStrings = (code: string): string => {
+  const unwantedStrings = ['/** @jsxImportSource solid-js */']
+
+  return unwantedStrings
+    .reduce((acc, string) => {
+      const escaped = string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+      const regex = new RegExp(`^.*${escaped}.*(?:\\r?\\n)?`, 'gm')
+      return acc.replace(regex, '')
+    }, code)
+    .trim()
+}

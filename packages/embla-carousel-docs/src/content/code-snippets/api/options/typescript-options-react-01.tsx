@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
 export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel()
+  const [options, setOptions] = useState<EmblaOptionsType>({ loop: true })
+  const [emblaRef] = useEmblaCarousel(options)
 
   return (
     <div className="embla">
@@ -13,9 +15,6 @@ export function EmblaCarousel() {
           <div className="embla__slide">Slide 3</div>
         </div>
       </div>
-
-      <button className="embla__prev">Scroll to prev</button>
-      <button className="embla__next">Scroll to next</button>
     </div>
   )
 }

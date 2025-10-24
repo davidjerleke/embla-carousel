@@ -10,6 +10,9 @@ import { Blockquote } from './Components/Blockquote'
 import { RepositoryLink } from 'components/Mdx/Components/RepositoryLink'
 import { PageChildLinks } from 'components/Mdx/Components/PageChildLinks'
 import { Admonition } from 'components/Mdx/Components/Admonition'
+import { ApiMetaData } from './Components/ApiMetaData'
+
+// TODO: Remove these colored text components when no longer used
 import {
   BrandAlternativeText,
   BrandPrimaryText,
@@ -31,6 +34,7 @@ export const Mdx = (props: PropType) => {
           h1: H1,
           RepositoryLink,
           PageChildLinks,
+          ApiMetaData,
           BrandPrimaryText,
           BrandSecondaryText,
           BrandAlternativeText,

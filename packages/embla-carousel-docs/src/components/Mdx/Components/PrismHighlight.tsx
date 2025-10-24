@@ -2,7 +2,10 @@ import React, { useMemo } from 'react'
 import { PrismSyntaxFrame } from './PrismSyntaxFrame'
 import Highlight, { Prism, defaultProps, Language } from 'prism-react-renderer'
 import { capitalizeFirstLetter } from 'utils/stringCasing'
-import { parseHighlightedLines } from 'utils/prismHighlight'
+import {
+  parseHighlightedLines,
+  removeUnwantedStrings
+} from 'utils/prismHighlight'
 import { addPrismSvelteSupport } from 'utils/prismSvelteSupport'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
@@ -17,10 +20,11 @@ type PropType = {
   language: string
   asLanguage?: string
   highlight?: string
+  hideLabel?: boolean
 }
 
 export const PrismHighlight = (props: PropType) => {
-  const { language, asLanguage, code, highlight } = props
+  const { language, asLanguage, code, highlight, hideLabel } = props
   const displayLanguage = asLanguage || language
   const ariaLabelLanguage = `Code block language: ${capitalizeFirstLetter(
     displayLanguage
@@ -30,20 +34,26 @@ export const PrismHighlight = (props: PropType) => {
     return parseHighlightedLines(`{${highlight}}`)
   }, [highlight])
 
+  const cleanedCode = useMemo(() => {
+    return removeUnwantedStrings(code)
+  }, [code])
+
   return (
     <div className={PRISM_HIGHLIGHT_CLASS_NAME}>
-      <span
-        className={PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME}
-        data-display-language={displayLanguage}
-        aria-label={ariaLabelLanguage}
-      >
-        <span aria-hidden>{displayLanguage}</span>
-      </span>
+      {!hideLabel && (
+        <span
+          className={PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME}
+          data-display-language={displayLanguage}
+          aria-label={ariaLabelLanguage}
+        >
+          <span aria-hidden>{displayLanguage}</span>
+        </span>
+      )}
 
-      <PrismSyntaxFrame code={code}>
+      <PrismSyntaxFrame code={cleanedCode}>
         <Highlight
           {...defaultProps}
-          code={code}
+          code={cleanedCode}
           language={language as Language}
           theme={undefined}
         >

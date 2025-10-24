@@ -1,0 +1,23 @@
+const defaultOptions = {
+  active: true,
+  align: 'center',
+  axis: 'x',
+  breakpoints: {},
+  container: null,
+  containScroll: 'trimSnaps',
+  direction: 'ltr',
+  dragFree: false,
+  draggable: true,
+  dragThreshold: 10,
+  duration: 25,
+  focus: true,
+  inViewThreshold: 0,
+  loop: false,
+  resize: true,
+  skipSnaps: false,
+  slideChanges: true,
+  slides: null,
+  slidesToScroll: 1,
+  ssr: [],
+  startSnap: 0
+}

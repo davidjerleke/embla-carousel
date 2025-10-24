@@ -1,6 +1,6 @@
 ---
 title: Options
-description: Discover how to customize Embla Carousel with its available options.
+description: Learn how to configure and fine-tune Embla Carousel using its rich set of customization options.
 order: 0
 date: 2021-02-21
 ---
@@ -9,390 +9,253 @@ import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_LIBRARY } from 'consts/tabs'
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import defaultOptions_module_01 from '!!raw-loader!content/code-snippets/api/options/default-options-vanilla-01.js'
+import constructorOptions_module_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-vanilla-01.js'
+import constructorOptions_html_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-vanilla-01.html'
+import constructorOptions_react_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-react-01.jsx'
+import constructorOptions_vue_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-vue-01.vue'
+import constructorOptions_solid_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-solid-01.jsx'
+import constructorOptions_svelte_01 from '!!raw-loader!content/code-snippets/api/options/constructor-options-svelte-01.svelte'
+import globalOptions_module_01 from '!!raw-loader!content/code-snippets/api/options/global-options-vanilla-01.js'
+import globalOptions_react_01 from '!!raw-loader!content/code-snippets/api/options/global-options-react-01.jsx'
+import globalOptions_vue_01 from '!!raw-loader!content/code-snippets/api/options/global-options-vue-01.vue'
+import globalOptions_solid_01 from '!!raw-loader!content/code-snippets/api/options/global-options-solid-01.jsx'
+import globalOptions_svelte_01 from '!!raw-loader!content/code-snippets/api/options/global-options-svelte-01.svelte'
+import changingOptions_module_01 from '!!raw-loader!content/code-snippets/api/options/changing-options-vanilla-01.js'
+import changingOptions_react_01 from '!!raw-loader!content/code-snippets/api/options/changing-options-react-01.jsx'
+import changingOptions_vue_01 from '!!raw-loader!content/code-snippets/api/options/changing-options-vue-01.vue'
+import changingOptions_solid_01 from '!!raw-loader!content/code-snippets/api/options/changing-options-solid-01.jsx'
+import changingOptions_svelte_01 from '!!raw-loader!content/code-snippets/api/options/changing-options-svelte-01.svelte'
+import typeScriptOptions_module_01 from '!!raw-loader!content/code-snippets/api/options/typescript-options-vanilla-01.ts'
+import typeScriptOptions_react_01 from '!!raw-loader!content/code-snippets/api/options/typescript-options-react-01.tsx'
+import typeScriptOptions_vue_01 from '!!raw-loader!content/code-snippets/api/options/typescript-options-vue-01.vue'
+import typeScriptOptions_solid_01 from '!!raw-loader!content/code-snippets/api/options/typescript-options-solid-01.tsx'
+import typeScriptOptions_svelte_01 from '!!raw-loader!content/code-snippets/api/options/typescript-options-svelte-01.svelte'
+
 # Options
 
-Embla Carousel takes various **options** in order to customize how the carousel works.
+Embla Carousel provides a range of configuration **options** that let you control its behavior.
 
 ---
 
 ## Usage
 
-You can provide **options** in **two different ways**: With the [constructor options](/api/options/#constructor-options) and/or [global options](/api/options/#global-options). If both are provided, they will be merged, and if any options are in conflict, the **constructor option** has precedence and will **override global options**.
+Options can be set via the [`constructor`](/api/options/#constructor-options) or as [`global defaults`](/api/options/#global-options). If both are present, they're merged, and the **constructor options** override any conflicting **global options**.
+
+### Default options
+
+Here's a list of all available options and their default values:
+
+<PrismHighlight language="js" hideLabel code={defaultOptions_module_01} />
 
 ### Constructor options
 
-The constructor options is the default way of providing options to Embla Carousel. In the following example, the carousel [loop](/api/options/#loop) option is set to `true`:
+The **constructor options** are the primary way to configure Embla Carousel. In the example below, the [`loop`](/api/options/#loop) option is set to `true`:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
-
-```js highlight={4}
-import EmblaCarousel from 'embla-carousel'
-
-const emblaNode = document.querySelector('.embla')
-const emblaApi = EmblaCarousel(emblaNode, { loop: true })
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
-
-```jsx highlight={4}
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel({ loop: true })
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={4}
-<script setup>
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const [emblaRef] = emblaCarouselVue({ loop: true })
-
-  // ...
-</script>
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx highlight={4}
-import createEmblaCarousel from 'embla-carousel-solid'
-
-export function EmblaCarousel() {
-  const [emblaRef] = createEmblaCarousel(() => ({ loop: true }))
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={4,7}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  let options = { loop: true }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte="{{ options }}">...</div>
-```
-
-</TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={constructorOptions_module_01}
+      highlight="6"
+    />
+    <PrismHighlight language="html" code={constructorOptions_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={constructorOptions_react_01}
+      highlight="5"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={constructorOptions_vue_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={constructorOptions_solid_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={constructorOptions_svelte_01}
+      highlight="4,8"
+    />
+  </TabsItem>
 </Tabs>
 
 ### Global options
 
-Setting **global options** will be applied to **all carousels** which will override the Embla default options with your own. In the following example [loop](/api/options/#loop) is set to `true`:
+Setting **global options** applies them to **all carousels**, overriding Embla's default options with your own. In the example below, the [`loop`](/api/options/#loop) option is set to `true`:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
-
-```js highlight={3}
-import EmblaCarousel from 'embla-carousel'
-
-EmblaCarousel.globalOptions = { loop: true }
-
-const emblaNode = document.querySelector('.embla')
-const emblaApi = EmblaCarousel(emblaNode, { align: 'start' })
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
-
-```jsx highlight={3}
-import useEmblaCarousel from 'embla-carousel-react'
-
-useEmblaCarousel.globalOptions = { loop: true }
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel({ align: 'start' })
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={4}
-<script setup>
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  emblaCarouselVue.globalOptions = { loop: true }
-
-  const [emblaRef] = emblaCarouselVue({ align: 'start' })
-
-  // ...
-</script>
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx highlight={3}
-import createEmblaCarousel from 'embla-carousel-solid'
-
-createEmblaCarousel.globalOptions = { loop: true }
-
-export function EmblaCarousel() {
-  const [emblaRef] = createEmblaCarousel(() => ({ align: 'start' }))
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={4}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  emblaCarouselSvelte.globalOptions = { loop: true }
-
-  let options = { align: 'start' }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte="{{ options }}">...</div>
-```
-
-</TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={globalOptions_module_01}
+      highlight="3"
+    />
+    <PrismHighlight language="html" code={constructorOptions_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={globalOptions_react_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight language="html" code={globalOptions_vue_01} highlight="4" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={globalOptions_solid_01}
+      highlight="3"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={globalOptions_svelte_01}
+      highlight="4"
+    />
+  </TabsItem>
 </Tabs>
 
 <Admonition type="warning">
-  Make sure to assign global options **before** initializing any carousel and
-  **only assign it once**. Re-assigning global options might lead to confusing
-  code and unexpected behaviour.
+  Assign global options **before** initializing any carousel and **only once**.
+  Re-assigning them can lead to confusing code and unexpected behavior.
 </Admonition>
 
 ### Changing options
 
-It's possible to **change options** passed to the Embla Carousel constructor **after initialization** with the [reinit](/api/methods/#reinit) method.
+It's possible to **update the options** passed to the Embla Carousel constructor **after initialization** using the [`reInit`](/api/methods/#reinit) method.
 
-In [React](/get-started/react/), [Vue](/get-started/vue/), [Solid](/get-started/solid/) and [Svelte](/get-started/svelte/) wrappers you can pass **reactive options** and the carousel will automatically reinitialize when they change. Here are some examples:
+In the [React](/get-started/react/), [Vue](/get-started/vue/), [Solid](/get-started/solid/), and [Svelte](/get-started/svelte/) wrappers, you can provide **reactive options**, and the carousel will automatically reinitialize whenever they change.
+Here are some examples:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
-
-```js highlight={6}
-import EmblaCarousel from 'embla-carousel'
-
-const emblaNode = document.querySelector('.embla')
-const emblaApi = EmblaCarousel(emblaNode, { loop: true })
-
-emblaApi.reInit({ loop: false })
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
-
-```jsx highlight={5,9-12}
-import { useState, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [options, setOptions] = useState({ loop: true })
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
-
-  const toggleLoop = useCallback(() => {
-    setOptions((currentOptions) => ({
-      ...currentOptions,
-      loop: !currentOptions.loop
-    }))
-  }, [])
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={4,8-11}
-<script setup>
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const options = ref({ loop: true })
-  const [emblaRef, emblaApi] = emblaCarouselVue(options)
-
-  function toggleLoop() {
-    options.value = {
-      ...options.value,
-      loop: !options.value.loop
-    }
-  }
-
-  // ...
-</script>
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx highlight={5,9-12}
-import { createSignal } from 'solid-js'
-import createEmblaCarousel from 'embla-carousel-solid'
-
-export function EmblaCarousel() {
-  const [options, setOptions] = createSignal({ loop: true })
-  const [emblaRef] = createEmblaCarousel(() => options())
-
-  function toggleLoop() {
-    setOptions((currentOptions) => ({
-      ...currentOptions,
-      loop: !currentOptions.loop
-    }))
-  }
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={7-10}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  let options = { loop: true }
-
-  function toggleLoop() {
-    options = {
-      ...options,
-      loop: !options.loop
-    }
-  }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte="{{ options }}">...</div>
-```
-
-</TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={changingOptions_module_01}
+      highlight="6,10-11"
+    />
+    <PrismHighlight language="html" code={constructorOptions_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={changingOptions_react_01}
+      highlight="5,9-12"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={changingOptions_vue_01}
+      highlight="5,9-12"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={changingOptions_solid_01}
+      highlight="5,9-12"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={changingOptions_svelte_01}
+      highlight="4,7-10"
+    />
+  </TabsItem>
 </Tabs>
 
 ### TypeScript
 
-The `EmblaOptionsType` is obtained directly from the **core package** `embla-carousel` and used like so:
+The `EmblaOptionsType` comes directly from the **core package** `embla-carousel` and can be used as follows:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="ts"
+      code={typeScriptOptions_module_01}
+      highlight="1,6"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptOptions_react_01}
+      highlight="2,6"
+    />
+    
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={typeScriptOptions_vue_01}
+      highlight="3,6"
+    />
 
-```tsx asLanguage=ts highlight={1,4}
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a
+      dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
 
-const emblaNode = document.querySelector('.embla')
-const options: EmblaOptionsType = { loop: true }
-const emblaApi = EmblaCarousel(emblaNode, options)
-```
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptOptions_solid_01}
+      highlight="2,6"
+    />
+    
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-solid` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={typeScriptOptions_svelte_01}
+      highlight="2,5"
+    />
 
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-svelte` has `embla-carousel`
+      as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
 
-```tsx highlight={2,6}
-import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
-
-type PropType = {
-  options?: EmblaOptionsType
-}
-
-export function EmblaCarousel(props: PropType) {
-  const [emblaRef, emblaApi] = useEmblaCarousel(props.options)
-
-  // ...
-}
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-react` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={2,5}
-<script setup lang="ts">
-  import { EmblaOptionsType } from 'embla-carousel'
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const options: EmblaOptionsType = { loop: true }
-  const [emblaRef] = emblaCarouselVue(options)
-
-  // ...
-</script>
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-vue` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```tsx highlight={1,5}
-import { EmblaOptionsType } from 'embla-carousel'
-import createEmblaCarousel from 'embla-carousel-solid'
-
-type PropType = {
-  options?: EmblaOptionsType
-}
-
-export function EmblaCarousel(props) {
-  const [emblaRef] = createEmblaCarousel(props.options)
-
-  // ...
-}
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-solid` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={2,5}
-<script>
-  import { EmblaOptionsType } from 'embla-carousel'
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  let options: EmblaOptionsType = { loop: true }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte="{{ options }}">...</div>
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-svelte` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
+  </TabsItem>
 </Tabs>
 
 ## Reference
@@ -403,17 +266,24 @@ Below follows an exhaustive **list of all** Embla Carousel **options** and their
 
 ### active
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
 
-Setting this to `false` will not activate or deactivate the carousel. Useful when used together with the [breakpoints](/api/options/#breakpoints) option to toggle the carousel active/inactive depending on media queries.
+Setting this to `false` will not activate or deactivate the carousel. Useful when used together with the [`breakpoints`](/api/options/#breakpoints) option to toggle the carousel active/inactive depending on media queries.
 
 ---
 
 ### align
 
-Type: <BrandPrimaryText>`string | (viewSize: number, snapSize: number, index: number) => number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`center`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | function']}
+  secondRow={['Default', 'center']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ align: 'start' | 'center' | 'end' | (viewSize, snapSize, index) => 40 }`}
+/>
 
 Align the slides relative to the carousel viewport. Use one of the predefined alignments `start`, `center` or `end`. Alternatively, provide your own callback to fully customize the alignment.
 
@@ -421,8 +291,8 @@ Align the slides relative to the carousel viewport. Use one of the predefined al
 
 ### axis
 
-Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`x`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'x']} />
+<PrismHighlight language="ts" hideLabel code={`{ axis: 'x' | 'y' }`} />
 
 Choose scroll axis between `x` and `y`. Remember to stack your slides horizontally or vertically using CSS to match this option.
 
@@ -430,10 +300,20 @@ Choose scroll axis between `x` and `y`. Remember to stack your slides horizontal
 
 ### breakpoints
 
-Type: <BrandPrimaryText>`EmblaOptionsType`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`{}`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'EmblaOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+  loop: true,
+  '(min-width: 768px)': { loop: false }
+}`}
+/>
 
-An object with options that will be applied for a given breakpoint by overriding the options at the root level. Example: `'(min-width: 768px)': { loop: false }`.
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
 
 <Admonition type="note">
   **Note:** If multiple queries match, they will be merged. And when breakpoint
@@ -444,8 +324,15 @@ An object with options that will be applied for a given breakpoint by overriding
 
 ### container
 
-Type: <BrandPrimaryText>`string | HTMLElement | null`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`null`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | HTMLElement | null']}
+  secondRow={['Default', 'null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ container: '.embla__container' | document.querySelector('.embla__container') }`}
+/>
 
 Enables choosing a custom container element which holds the slides. By **default**, Embla will choose the **first direct child element** of the **root element**. Provide either a valid `CSS selector string` or a `HTML element`.
 
@@ -453,14 +340,21 @@ Enables choosing a custom container element which holds the slides. By **default
 
 ### containScroll
 
-Type: <BrandPrimaryText>`false` | `string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`'trimSnaps'`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'false | string']}
+  secondRow={['Default', 'trimSnaps']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ containScroll: false | 'trimSnaps' | 'keepSnaps' }`}
+/>
 
 Clear leading and trailing empty space that causes excessive scrolling. Use `trimSnaps` to only use snap points that trigger scrolling or `keepSnaps` to keep them.
 
 <Admonition type="note">
   **Note:** When this is active, it will **override alignments** applied by the
-  [align](#align) option for enough slides at the **start** and the **end** of
+  [`align`](#align) option for enough slides at the **start** and the **end** of
   the carousel, in order to **cover** the **leading** and **trailing space**.
 </Admonition>
 
@@ -468,26 +362,23 @@ Clear leading and trailing empty space that causes excessive scrolling. Use `tri
 
 ### direction
 
-Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`ltr`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'ltr']} />
+<PrismHighlight language="ts" hideLabel code={`{ direction: 'ltr' | 'rtl' }`} />
 
 Choose content direction between `ltr` and `rtl`.
 
 <Admonition type="note">
-  **Note:** When using `rtl`, the content direction also has to be set to RTL,
-  either by using the [HTML dir
-  attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir)
-  or the [CSS
-  direction](https://developer.mozilla.org/en-US/docs/Web/CSS/direction)
-  property.
+  **Note:** When using `rtl`, the content direction also has to be set to RTL
+  using the [HTML dir
+  attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/dir).
 </Admonition>
 
 ---
 
 ### dragFree
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`false`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight language="ts" hideLabel code={`{ dragFree: true | false }`} />
 
 Enables momentum scrolling. The duration of the continued scrolling is proportional to how vigorous the drag gesture is.
 
@@ -495,8 +386,8 @@ Enables momentum scrolling. The duration of the continued scrolling is proportio
 
 ### draggable
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ draggable: true | false }`} />
 
 Enables for scrolling the carousel with mouse and touch interactions. Set this to `false` to disable drag events.
 
@@ -504,8 +395,8 @@ Enables for scrolling the carousel with mouse and touch interactions. Set this t
 
 ### dragThreshold
 
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`10`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'number']} secondRow={['Default', '10']} />
+<PrismHighlight language="ts" hideLabel code={`{ dragThreshold: 10 }`} />
 
 Drag threshold in pixels. This only affects **when** clicks are fired and not. In contrast to other carousel libraries, it will **not affect when dragging** of the carousel **starts**.
 
@@ -519,8 +410,8 @@ Drag threshold in pixels. This only affects **when** clicks are fired and not. I
 
 ### duration
 
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`25`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'number']} secondRow={['Default', '25']} />
+<PrismHighlight language="ts" hideLabel code={`{ duration: 25 }`} />
 
 Set scroll duration when triggered by any of the API methods. Higher numbers enables slower scrolling. Drag interactions are not affected because duration is then determined by the drag force.
 
@@ -534,17 +425,20 @@ Set scroll duration when triggered by any of the API methods. Higher numbers ena
 
 ### focus
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ focus: true | false }`} />
 
-Embla automatically watches the [slides](api/options/#slides) for focus events. The default callback fires the [slidefocus](/api/events/#slidefocus/) event and [scrolls](/api/methods/#scrollto/) to the focused element. Set this to `false` to disable this behaviour.
+Embla automatically watches the slides for focus events. The default callback fires the [`slidefocus`](/api/events/#slidefocus/) event and scrolls to the focused element. Set this to `false` to disable this behaviour.
 
 ---
 
 ### inViewThreshold
 
-Type: <BrandPrimaryText>`IntersectionObserverInit.threshold`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`0`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'IntersectionObserverInit.threshold']}
+  secondRow={['Default', '0']}
+/>
+<PrismHighlight language="ts" hideLabel code={`{ inViewThreshold: 0 }`} />
 
 This is the Intersection Observer [threshold](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer) option that will be applied to all slides.
 
@@ -552,8 +446,8 @@ This is the Intersection Observer [threshold](https://developer.mozilla.org/en-U
 
 ### loop
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`false`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight language="ts" hideLabel code={`{ loop: true | false }`} />
 
 Enables **infinite looping**. Embla will apply `translateX` or `translateY` to the slides that need to change position in order to create the loop effect.
 
@@ -566,37 +460,48 @@ Enables **infinite looping**. Embla will apply `translateX` or `translateY` to t
 
 ### resize
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ resize: true | false }`} />
 
-Embla automatically watches the [container](/api/methods/#containernode/) and [slides](/api/methods/#slidenodes/) for size changes and runs [reinit](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
+Embla automatically watches the container and slides for size changes and runs [`reinit`](/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
 
 ---
 
 ### skipSnaps
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`false`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight language="ts" hideLabel code={`{ skipSnaps: true | false }`} />
 
-Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [dragFree](/api/options/#dragfree) option is set to `true`.
+Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [`dragFree`](/api/options/#dragfree) option is set to `true`.
 
 ---
 
 ### slideChanges
 
-Type: <BrandPrimaryText>`boolean`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`true`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ slideChanges: true | false }`}
+/>
 
-Embla automatically watches the [container](/api/methods/#containernode/) for **added** and/or **removed** slides and runs [reinit](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
+Embla automatically watches the container for **added** and/or **removed** slides and runs [`reinit`](/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
 
 ---
 
 ### slides
 
-Type: <BrandPrimaryText>`string | HTMLElement[] | NodeListOf<HTMLElement> | null`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`null`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | HTMLElement[] | NodeListOf<HTMLElement> | null']}
+  secondRow={['Default', 'null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ slides: '.embla__slide' | Array.from(document.querySelectorAll('.embla__slide')) }`}
+/>
 
-Enables using custom slide elements. By **default**, Embla will choose **all direct child elements** of its [container](/api/options/#container). Provide either a valid `CSS selector string` or a `nodeList/array` containing `HTML elements`.
+Enables using custom slide elements. By **default**, Embla will choose **all direct child elements** of its container. Provide either a valid `CSS selector string` or a `nodeList/array` containing `HTML elements`.
 
 <Admonition type="note">
   **Note:** Even though it's possible to provide custom slide elements, they
@@ -613,24 +518,40 @@ Enables using custom slide elements. By **default**, Embla will choose **all dir
 
 ### slidesToScroll
 
-Type: <BrandPrimaryText>`string | number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`1`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | number']}
+  secondRow={['Default', '1']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ slidesToScroll: 1 | 2 | 'auto' }`}
+/>
 
-Control the grouping of slides used for navigation interactions (next/prev buttons, dots, and dragging). By default, a single slide will be scrolled per interaction.
+Specifies how many slides advance per navigation action (buttons, dots, or drag).
 
-Set an integer value to scroll by a fixed number of slides on each interaction. For example, value `2` will treat every two slides as a single navigational unit.
+- **Number** — scrolls a fixed number of slides (e.g. `2` → two slides per move).
+- **`auto`** — scrolls the number of slides currently visible in the viewport.
 
-Set to `auto` to dynamically create groups that match the number of slides visible in the viewport. For example, if 3 slides are currently visible, an `auto` setting would cause those 3 slides to be scrolled.
+With variable-width slides and `auto`, the group size updates dynamically based on the slides that fit within the viewport.
 
-If using `auto` with slides of variable width, the group size will be calculated and adjusted dynamically based on how many slides fit into the viewport width at any given moment; not all groups will necessarily contain the same number of slides.
+---
+
+### ssr
+
+<ApiMetaData firstRow={['Type', 'number[]']} secondRow={['Default', '[]']} />
+<PrismHighlight language="ts" hideLabel code={`{ ssr: [80, 80, 80, 40] }`} />
+
+Defines slide sizes (as percentages) for server-side rendering (SSR), allowing Embla to calculate scroll snaps without client-side measurements.
+Each value corresponds to a slide's size in order — percentage of viewport **width** for horizontal carousels, or **height** for vertical ones.
 
 ---
 
 ### startSnap
 
-Type: <BrandPrimaryText>`number`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`0`</BrandSecondaryText>
+<ApiMetaData firstRow={['Type', 'number']} secondRow={['Default', '0']} />
+<PrismHighlight language="ts" hideLabel code={`{ startSnap: 0 }`} />
 
-Set the initial scroll snap to the given number. First snap index starts at `0`. Please note that this is not necessarily equal to the number of slides when used together with the [slidesToScroll](/api/options/#slidestoscroll) option.
+Set the initial scroll snap to the given number. First snap index starts at `0`. Please note that this is not necessarily equal to the number of slides when used together with the [`slidesToScroll`](/api/options/#slidestoscroll) option.
 
 ---
