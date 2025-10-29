@@ -1,6 +1,6 @@
 ---
 title: Methods
-description: Explore Embla Carousel methods useful for extending the carousel beyond its native functionality.
+description: Learn how to use Embla Carousel methods to build custom controls and extend functionality.
 order: 1
 date: 2021-02-21
 ---
@@ -9,111 +9,77 @@ import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_LIBRARY } from 'consts/tabs'
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import callingMethods_module_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-vanilla-01.js'
+import callingMethods_html_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-vanilla-01.html'
+import callingMethods_react_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-react-01.jsx'
+import callingMethods_vue_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-vue-01.vue'
+import callingMethods_solid_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-solid-01.jsx'
+import callingMethods_svelte_01 from '!!raw-loader!content/code-snippets/api/methods/calling-methods-svelte-01.svelte'
+import typeScriptMethods_module_01 from '!!raw-loader!content/code-snippets/api/methods/typescript-methods-vanilla-01.ts'
+import typeScriptMethods_react_01 from '!!raw-loader!content/code-snippets/api/methods/typescript-methods-react-01.tsx'
+import typeScriptMethods_vue_01 from '!!raw-loader!content/code-snippets/api/methods/typescript-methods-vue-01.vue'
+import typeScriptMethods_solid_01 from '!!raw-loader!content/code-snippets/api/methods/typescript-methods-solid-01.tsx'
+import typeScriptMethods_svelte_01 from '!!raw-loader!content/code-snippets/api/methods/typescript-methods-svelte-01.svelte'
+
 # Methods
 
-Embla Carousel exposes a set of **useful methods** which makes it very **extensible**.
+Embla Carousel provides a set of methods that let you **extend** and **control** the carousel **programmatically**.
 
 ---
 
 ## Usage
 
-You need an **initialized carousel** in order to **make use of methods**. They can be accessed during the lifecycle of a carousel and won't do anything after a carousel instance has been destroyed with the [destroy](/api/methods/#destroy) method.
+Methods require an **initialized carousel instance**. They remain accessible while the instance is active and are invalid after calling [`destroy`](/api/methods/#destroy).
 
 ### Calling methods
 
-In the following example, the [slideNodes](/api/methods/#slidenodes) method is called and logged to the console as soon as the carousel has been initialized:
+In the following example, the [`slideNodes`](/api/methods/#slidenodes) method is called and logged to the console as soon as the carousel has been initialized:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={callingMethods_module_01}
+      highlight="8"
+    />
+    <PrismHighlight language="html" code={callingMethods_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={callingMethods_react_01}
+      highlight="9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={callingMethods_vue_01}
+      highlight="11"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={callingMethods_solid_01}
+      highlight="10"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={callingMethods_svelte_01}
+      highlight="8"
+    />
 
-```js highlight={6}
-import EmblaCarousel from 'embla-carousel'
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblaInit` will remain for backward
+      compatibility.
+    </Admonition>
 
-const emblaNode = document.querySelector('.embla')
-const emblaApi = EmblaCarousel(emblaNode)
-
-console.log(emblaApi.slideNodes())
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
-
-```jsx highlight={8}
-import { useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel()
-
-  useEffect(() => {
-    if (emblaApi) console.log(emblaApi.slideNodes())
-  }, [emblaApi])
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={8}
-<script setup>
-  import { onMounted } from 'vue'
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const [emblaRef, emblaApi] = emblaCarouselVue()
-
-  onMounted(() => {
-    if (emblaApi.value) console.log(emblaApi.value.slideNodes())
-  })
-
-  // ...
-</script>
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx highlight={9}
-import { onMount } from 'solid-js'
-import createEmblaCarousel from 'embla-carousel-solid'
-
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = createEmblaCarousel()
-
-  onMount(() => {
-    const api = emblaApi()
-    if (api) console.log(api.slideNodes())
-  })
-
-  // ...
-}
-```
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={8}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  let emblaApi
-
-  function onInit(event) {
-    emblaApi = event.detail
-    console.log(emblaApi.slideNodes())
-  }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
-```
-
-<Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been
-  deprecated. However, `on:emblaInit` will remain for backward compatibility.
-</Admonition>
-
-</TabsItem>
+  </TabsItem>
 </Tabs>
 
 ### TypeScript
@@ -121,152 +87,83 @@ export function EmblaCarousel() {
 The `EmblaCarouselType` is obtained directly from the **core package** `embla-carousel` and used like so:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
-<TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={typeScriptMethods_module_01}
+      highlight="1,8"
+    />
+    <PrismHighlight language="html" code={callingMethods_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptMethods_react_01}
+      highlight="2,8"
+    />
 
-```tsx asLanguage=ts highlight={1,6}
-import EmblaCarousel, { EmblaCarouselType } from 'embla-carousel'
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
 
-const emblaNode = document.querySelector('.embla')
-const emblaApi = EmblaCarousel(emblaNode)
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={typeScriptMethods_vue_01}
+      highlight="3,8"
+    />
+    
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a
+      dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptMethods_solid_01}
+      highlight="2,8"
+    />
 
-function logSlidesInView(emblaApi: EmblaCarouselType): void {
-  console.log(emblaApi.slidesInView())
-}
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-solid` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
 
-emblaApi.on('slidesinview', logSlidesInView)
-```
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={typeScriptMethods_svelte_01}
+      highlight="2,5,8"
+    />
 
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblaInit` will remain for backward
+      compatibility.
+    </Admonition>
 
-```tsx highlight={2,8}
-import React, { useCallback } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-svelte` has `embla-carousel`
+      as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
 
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel()
-
-  const logSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
-    console.log(emblaApi.slidesInView())
-  }, [])
-
-  useEffect(() => {
-    if (emblaApi) emblaApi.on('slidesinview', logSlidesInView)
-  }, [emblaApi, logSlidesInView])
-
-  // ...
-}
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-react` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.VUE}>
-
-```html highlight={3,8}
-<script setup lang="ts">
-  import { onMounted } from 'vue'
-  import { EmblaCarouselType } from 'embla-carousel'
-  import emblaCarouselVue from 'embla-carousel-vue'
-
-  const [emblaRef] = emblaCarouselVue()
-
-  function logSlidesInView(emblaApi: EmblaCarouselType): void {
-    console.log(emblaApi.slidesInView())
-  }
-
-  onMounted(() => {
-    if (emblaApi.value) emblaApi.value.on('slidesinview', logSlidesInView)
-  })
-
-  // ...
-</script>
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-vue` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
-
-```jsx highlight={2,8}
-import { onMount } from 'solid-js'
-import { EmblaCarouselType } from 'embla-carousel'
-import createEmblaCarousel from 'embla-carousel-solid'
-
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = createEmblaCarousel()
-
-  function logSlidesInView(emblaApi: EmblaCarouselType): void {
-    console.log(emblaApi.slidesInView())
-  }
-
-  onMount(() => {
-    const api = emblaApi()
-    if (api) api.on('slidesinview', logSlidesInView)
-  })
-
-  // ...
-}
-```
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-solid` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
-<TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
-
-```html highlight={2,5,7}
-<script>
-  import { EmblaCarouselType } from 'embla-carousel'
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-
-  let emblaApi: EmblaCarouselType
-
-  function logSlidesInView(emblaApi: EmblaCarouselType): void {
-    console.log(emblaApi.slidesInView())
-  }
-
-  function onInit(event: CustomEvent<EmblaCarouselType>): void {
-    emblaApi = event.detail
-    emblaApi.on('slidesinview', logSlidesInView)
-  }
-</script>
-
-<div class="embla" use:emblaCarouselSvelte onemblaInit="{onInit}">...</div>
-```
-
-<Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been
-  deprecated. However, `on:emblaInit` will remain for backward compatibility.
-</Admonition>
-
-<Admonition type="warning">
-  If you're using `pnpm`, you need to install `embla-carousel` as a
-  **devDependency** when importing types from it like demonstrated above.
-  <br />
-  This is because even though `embla-carousel-svelte` has `embla-carousel` as a
-  dependency, `pnpm` makes nested dependencies inaccessible by design.
-</Admonition>
-
-</TabsItem>
+  </TabsItem>
 </Tabs>
 
 ## Reference
@@ -277,8 +174,11 @@ Below follows an exhaustive **list of all** Embla Carousel **methods** with thei
 
 ### rootNode
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`HTMLElement`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'HTMLElement']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.rootNode()`} />
 
 Get the root node that holds the scroll container with slides inside. This method can be useful when you need to manipulate the root element dynamically or similar.
 
@@ -286,8 +186,11 @@ Get the root node that holds the scroll container with slides inside. This metho
 
 ### containerNode
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`HTMLElement`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'HTMLElement']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.containerNode()`} />
 
 Get the container node that holds the slides. This method can be useful when you need to manipulate the container element dynamically or similar.
 
@@ -295,79 +198,106 @@ Get the container node that holds the slides. This method can be useful when you
 
 ### slideNodes
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`HTMLElement[]`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'HTMLElement[]']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.slideNodes()`} />
 
 Get all the slide nodes inside the container. This method can be useful when you need to manipulate the slide elements dynamically or similar.
 
 ---
 
-### scrollNext
+### scrollToNext
 
-Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'instant?: boolean']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.scrollToNext(true | false)`}
+/>
 
-Scroll to the next scroll snap if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the last scroll snap, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the next scroll snap instantly.
+Scroll to the next scroll snap if possible. When [`loop`](/api/options/#loop) is disabled and the carousel has reached the last scroll snap, this method won't do anything. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation).
 
 ---
 
-### scrollPrev
+### scrollToPrev
 
-Parameters: <BrandPrimaryText>`jump?: boolean`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'instant?: boolean']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.scrollToPrev(true | false)`}
+/>
 
-Scroll to the previous scroll snap if possible. When [loop](/api/options/#loop) is disabled and the carousel has reached the first scroll snap, this method won't do anything. Set the **jump** parameter to `true` when you want to go to the previous scroll snap instantly.
+Scroll to the previous scroll snap if possible. When [`loop`](/api/options/#loop) is disabled and the carousel has reached the first scroll snap, this method won't do anything. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation).
 
 ---
 
 ### scrollToSnap
 
-Parameters: <BrandPrimaryText>`index: number`, `jump?: boolean`, `direction?: 'forward' | 'backward'`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    "index: number, instant?: boolean, direction?: 'forward' | 'backward'"
+  ]}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.scrollToSnap(0, true | false, 'forward' | 'backward')`}
+/>
 
-Scroll to a scroll snap by its unique index. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly. If [loop](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
+Scroll to a scroll snap by its unique index. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation). If [`loop`](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
 
 <Admonition type="note">
   **Note:** A scroll snap isn't equvialent to a slide. A scroll snap can hold
   multiple slides based on what options are set. For example, if
-  [slideToScroll](/api/options/#slidetoscroll) is set to anything more than `1`
-  or `auto` and multiple slides fit inside the viewport, a scroll snap will hold
-  multiple slides.
+  [`slideToScroll`](/api/options/#slidetoscroll) is set to anything more than
+  `1` or `auto` and multiple slides fit inside the viewport, a scroll snap will
+  hold multiple slides.
 </Admonition>
 
 ---
 
-### scrollToSlide
+### canScrollToNext
 
-Parameters: <BrandPrimaryText>`subject: number | HTMLElement`, `jump?: boolean`, `direction?: 'forward' | 'backward'`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'boolean']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.canScrollToNext()`} />
 
-Scroll to a scroll snap by providing a slide index or a slide element. The carousel will scroll to the scroll snap that holds the provided slide. Set the **jump** parameter to `true` when you want to go to the desired scroll snap instantly. If [loop](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
-
----
-
-### canScrollNext
-
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
-
-Check the possiblity to scroll to the next scroll snap. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
+Check the possibility to scroll to the next scroll snap. If [`loop`](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 
 ---
 
-### canScrollPrev
+### canScrollToPrev
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`boolean`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'boolean']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.canScrollToPrev()`} />
 
-Check the possiblity to scroll to the previous scroll snap. If [loop](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
+Check the possibility to scroll to the previous scroll snap. If [`loop`](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 
 ---
 
 ### selectedSnap
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.selectedSnap()`} />
 
 Get the index of the selected scroll snap. This method can be useful when you need to know which scroll snap is currently selected.
 
@@ -375,8 +305,11 @@ Get the index of the selected scroll snap. This method can be useful when you ne
 
 ### previousSnap
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.previousSnap()`} />
 
 Get the index of the previously selected scroll snap. This method can be useful when you need to know which scroll snap was previously selected.
 
@@ -384,17 +317,52 @@ Get the index of the previously selected scroll snap. This method can be useful 
 
 ### snapList
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number[]`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number[]']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.snapList()`} />
 
-Get an array containing all the scroll snap positions. Each position represents how far the carousel needs to progress in order to reach this position.
+Returns an array of all scroll snap positions.
+Each value represents the carousel's progress required to reach that position, where `0` is the start and `1` is the end (for example, `0.5` = 50% progress).
+
+---
+
+### snapIndex
+
+<ApiMetaData
+  firstRow={['Parameters', 'offset: number']}
+  secondRow={['Returns', 'number']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.snapIndex(0)`} />
+
+Get the selected scroll snap index. Provide a positive or negative `offset` to compute a different index (for example, `1` for the next snap or `-1` for the previous snap).
+
+---
+
+### ssrStyles
+
+<ApiMetaData
+  firstRow={['Parameters', 'container: string, slides?: string']}
+  secondRow={['Returns', 'string']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.ssrStyles('.embla__container', '.embla__slide')`}
+/>
+
+Generate CSS styles used for server-side rendering (SSR). This helper emits minimal styles for the provided container and slides selectors so you can render a non-shifting layout on the server. Returns an empty string when called on a client-initialized instance. Wrap it in a `<style>` tag.
 
 ---
 
 ### scrollProgress
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.scrollProgress()`} />
 
 Check how far the carousel has scrolled of its scrollable length from 0 - 1. For example, **0.5 equals 50%**. For example, this can be useful when creating a scroll progress bar.
 
@@ -402,26 +370,35 @@ Check how far the carousel has scrolled of its scrollable length from 0 - 1. For
 
 ### slidesInView
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number[]`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number[]']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.slidesInView()`} />
 
-Get slide indexes **visible** in the carousel viewport. Honors the [inViewThreshold](/api/options/#inviewthreshold) option.
+Get slide indexes **visible** in the carousel viewport. Honors the [`inViewThreshold`](/api/options/#inviewthreshold) option.
 
 ---
 
 ### slidesNotInView
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`number[]`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number[]']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.slidesNotInView()`} />
 
-Get slide indexes **not visible** in the carousel viewport. Honors the [inViewThreshold](/api/options/#inviewthreshold) option.
+Get slide indexes **not visible** in the carousel viewport. Honors the [`inViewThreshold`](/api/options/#inviewthreshold) option.
 
 ---
 
 ### internalEngine
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`EmblaEngineType`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'EmblaEngineType']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.internalEngine()`} />
 
 Exposes almost all internal functionality used by Embla. Useful when creating plugins or similar.
 
@@ -435,8 +412,18 @@ Exposes almost all internal functionality used by Embla. Useful when creating pl
 
 ### reInit
 
-Parameters: <BrandPrimaryText>`options?: EmblaOptionsType`, `plugins?: EmblaPluginType[]`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    'options?: EmblaOptionsType, plugins?: EmblaPluginType[]'
+  ]}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.reInit({ loop: false }, [Autoplay()])`}
+/>
 
 Hard reset the carousel after it has been initialized. This method allows for changing [options](/api/options/) and [plugins](/api/plugins/) after initializing a carousel.
 
@@ -449,8 +436,11 @@ Hard reset the carousel after it has been initialized. This method allows for ch
 
 ### plugins
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`EmblaPluginsType`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'EmblaPluginsType']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.plugins()`} />
 
 Returns an object with key value pairs where the keys are the plugin names, and the plugin API:s are the values.
 
@@ -458,8 +448,11 @@ Returns an object with key value pairs where the keys are the plugin names, and 
 
 ### destroy
 
-Parameters: <BrandPrimaryText>`none`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight language="ts" hideLabel code={`emblaApi.destroy()`} />
 
 Destroy the carousel instance permanently. This is a one way operation and is intended to be used as a cleanup measure when the carousel instance isn't needed anymore.
 
@@ -467,36 +460,57 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 
 ### on
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => void`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    'type: EventType, callback: EmblaEventCallbackType<EventType>'
+  ]}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('select', (emblaApi, event) => {})`}
+/>
 
-**Subscribe** to an Embla [event](/api/events/) with a **callback**. Added event listeners will persist even if [reinit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [off](/api/methods/#off) method.
+**Subscribe** to an Embla [`event`](/api/events/) with a **callback**. Added event listeners will persist even if [`reinit`](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [`off`](/api/methods/#off) method.
 
 ---
 
 ### off
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, EmblaEventDetailType[EmblaEventType]) => void`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    'type: EventType, callback: EmblaEventCallbackType<EventType>'
+  ]}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.off('select', (emblaApi, event) => {})`}
+/>
 
-**Unsubscribe** from an Embla [event](/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [on](/api/methods/#on) method.
+**Unsubscribe** from an Embla [`event`](/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [`on`](/api/methods/#on) method.
 
 ---
 
-### onWatch
+### createEvent
 
-Parameters: <BrandPrimaryText>`event: EmblaEventType`, `callback: (emblaApi: EmblaCarouselType, eventName: EmblaEventType, detail: EmblaEventDetailType[EmblaEventType]) => boolean`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    'type: EventType, detail: EmblaEventListType[EventType]'
+  ]}
+  secondRow={['Returns', 'EmblaCreatedEventType']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.createEvent('select', { targetSnap: 1, sourceSnap: 0 })`}
+/>
 
-**Subscribe** to an Embla [watcher](/api/watchers/) with a **callback**. Added watch listeners will persist even if [reinit](/api/methods/#reinit) is called, either until the carousel is destroyed or the event is removed with the [offWatch](/api/methods/#offwatch) method.
-
----
-
-### offWatch
-
-Parameters: <BrandPrimaryText>` event: EmblaEventType`</BrandPrimaryText>  
-Returns: <BrandSecondaryText>`void`</BrandSecondaryText>
-
-**Unsubscribe** from an Embla [watcher](/api/watchers/). There is **no need** to pass the **callback reference** when removing a watcher because only a single watch listener can be added per event.
+Create an event object that can be emitted at a later time. This is useful if you want to trigger an event programmatically or build plugins. The returned object exposes an `emit()` method that will notify all registered listeners for the given event.
 
 ---

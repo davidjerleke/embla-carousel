@@ -9,7 +9,7 @@ const scrollToSnap = (index) => emblaApi.value?.scrollToSnap(index)
 const setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.snapList())
 
 watch(
-  () => emblaApi.value,
+  emblaApi,
   (api) => {
     if (!api) return
 

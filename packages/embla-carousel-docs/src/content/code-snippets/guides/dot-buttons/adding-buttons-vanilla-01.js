@@ -7,20 +7,20 @@ const emblaApi = EmblaCarousel(viewportNode, { loop: false })
 
 let dotNodes = []
 
-function createDotButtonHtml(emblaApi, dotsNode) {
+const createDotButtonHtml = (emblaApi, dotsNode) => {
   const dotTemplate = document.getElementById('embla-dot-template')
   const snapList = emblaApi.snapList()
   dotsNode.innerHTML = snapList.reduce((acc) => acc + dotTemplate.innerHTML, '')
   return Array.from(dotsNode.querySelectorAll('.embla__dot'))
 }
 
-function addDotButtonClickHandlers(emblaApi, dotNodes) {
+const addDotButtonClickHandlers = (emblaApi, dotNodes) => {
   dotNodes.forEach((dotNode, index) => {
     dotNode.addEventListener('click', () => emblaApi.scrollToSnap(index), false)
   })
 }
 
-function createAndSetupDotButtons(emblaApi, dotsNode) {
+const createAndSetupDotButtons = (emblaApi, dotsNode) => {
   dotNodes = createDotButtonHtml(emblaApi, dotsNode)
   addDotButtonClickHandlers(emblaApi, dotNodes)
 }

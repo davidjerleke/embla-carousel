@@ -10,7 +10,7 @@
   const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())
   const setActiveSnap = (emblaApi) => (selectedSnap = emblaApi.selectedSnap())
 
-  function onInit(event) {
+  const onInit = (event) => {
     emblaApi = event.detail
 
     setupSnaps(emblaApi)

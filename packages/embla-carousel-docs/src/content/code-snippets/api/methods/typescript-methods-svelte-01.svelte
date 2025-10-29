@@ -1,14 +1,17 @@
-<script>
+<script lang="ts">
+  import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
 
-  let emblaApi
-  let options = { loop: false }
+  let emblaApi: EmblaCarouselType
+  let options: EmblaOptionsType = { loop: true }
 
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
+  const logSlidesInView = (emblaApi: EmblaCarouselType): void => {
+    console.log(emblaApi.slidesInView())
+  }
 
-  const onInit = (event) => {
+  const onInit = (event: CustomEvent<EmblaCarouselType>) => {
     emblaApi = event.detail
+    emblaApi.on('slidesinview', logSlidesInView)
   }
 </script>
 
@@ -24,7 +27,4 @@
       <div class="embla__slide">Slide 3</div>
     </div>
   </div>
-
-  <button class="embla__prev" on:click={scrollToPrev}>Scroll to prev</button>
-  <button class="embla__next" on:click={scrollToNext}>Scroll to next</button>
 </div>

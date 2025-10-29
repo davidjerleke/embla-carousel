@@ -10,7 +10,7 @@ const emblaApi = EmblaCarousel(viewportNode, { loop: false })
 prevButtonNode.addEventListener('click', () => emblaApi.scrollToPrev(), false)
 nextButtonNode.addEventListener('click', () => emblaApi.scrollToNext(), false)
 
-function toggleButtonsDisabled(emblaApi) {
+const toggleButtonsDisabled = (emblaApi) => {
   const setButtonState = (button, enabled) => {
     button.toggleAttribute('disabled', !enabled)
   }

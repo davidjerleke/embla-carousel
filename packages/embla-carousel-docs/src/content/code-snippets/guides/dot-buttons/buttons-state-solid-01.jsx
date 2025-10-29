@@ -1,4 +1,4 @@
-import { createSignal, createEffect, For } from 'solid-js'
+import { createSignal, createEffect, on, For } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
@@ -12,16 +12,18 @@ export function EmblaCarousel() {
   const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
   const setActiveSnap = (emblaApi) => setSelectedSnap(emblaApi.selectedSnap())
 
-  createEffect(() => {
-    if (!emblaApi()) return
+  createEffect(
+    on(emblaApi, (api) => {
+      if (!api) return
 
-    setupSnaps(emblaApi())
-    setActiveSnap(emblaApi())
+      setupSnaps(api)
+      setActiveSnap(api)
 
-    emblaApi().on('reinit', setupSnaps)
-    emblaApi().on('reinit', setActiveSnap)
-    emblaApi().on('select', setActiveSnap)
-  })
+      api.on('reinit', setupSnaps)
+      api.on('reinit', setActiveSnap)
+      api.on('select', setActiveSnap)
+    })
+  )
 
   return (
     <div class="embla">

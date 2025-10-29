@@ -1,4 +1,4 @@
-import { createSignal, createEffect } from 'solid-js'
+import { createSignal, createEffect, on } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
@@ -9,18 +9,20 @@ export function EmblaCarousel() {
   const scrollToPrev = () => emblaApi()?.scrollToPrev()
   const scrollToNext = () => emblaApi()?.scrollToNext()
 
-  function toggleButtonsDisabled(emblaApi) {
+  const toggleButtonsDisabled = (emblaApi) => {
     setPrevButtonDisabled(!emblaApi.canScrollToPrev())
     setNextButtonDisabled(!emblaApi.canScrollToNext())
   }
 
-  createEffect(() => {
-    if (!emblaApi()) return
+  createEffect(
+    on(emblaApi, (api) => {
+      if (!api) return
 
-    toggleButtonsDisabled(emblaApi())
-    emblaApi().on('reinit', toggleButtonsDisabled)
-    emblaApi().on('select', toggleButtonsDisabled)
-  })
+      toggleButtonsDisabled(api)
+      api.on('reinit', toggleButtonsDisabled)
+      api.on('select', toggleButtonsDisabled)
+    })
+  )
 
   return (
     <div class="embla">

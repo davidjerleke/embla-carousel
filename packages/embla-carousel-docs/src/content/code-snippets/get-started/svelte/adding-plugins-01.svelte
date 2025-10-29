@@ -8,7 +8,7 @@
   const scrollToPrev = () => emblaApi?.scrollToPrev()
   const scrollToNext = () => emblaApi?.scrollToNext()
 
-  function onInit(event) {
+  const onInit = (event) => {
     emblaApi = event.detail
     emblaApi.plugins().autoplay?.play()
   }

@@ -12,7 +12,7 @@ const setActiveSnap = (emblaApi) =>
   (selectedSnap.value = emblaApi.selectedSnap())
 
 watch(
-  () => emblaApi.value,
+  emblaApi,
   (api) => {
     if (!api) return
 

@@ -9,13 +9,13 @@ const nextButtonDisabled = ref(true)
 const scrollToPrev = () => emblaApi.value?.scrollToPrev()
 const scrollToNext = () => emblaApi.value?.scrollToNext()
 
-function toggleButtonsDisabled(emblaApi) {
+const toggleButtonsDisabled = (emblaApi) => {
   prevButtonDisabled.value = !emblaApi.canScrollToPrev()
   nextButtonDisabled.value = !emblaApi.canScrollToNext()
 }
 
 watch(
-  () => emblaApi.value,
+  emblaApi,
   (api) => {
     if (!api) return
 

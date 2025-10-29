@@ -9,12 +9,12 @@
   const scrollToPrev = () => emblaApi?.scrollToPrev()
   const scrollToNext = () => emblaApi?.scrollToNext()
 
-  function toggleButtonsDisabled(emblaApi) {
+  const toggleButtonsDisabled = (emblaApi) => {
     prevButtonDisabled = !emblaApi.canScrollToPrev()
     nextButtonDisabled = !emblaApi.canScrollToNext()
   }
 
-  function onInit(event) {
+  const onInit = (event) => {
     emblaApi = event.detail
 
     toggleButtonsDisabled(emblaApi)

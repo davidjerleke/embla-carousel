@@ -1,18 +1,19 @@
-<script setup>
+<script setup lang="ts">
 import { watch } from 'vue'
+import { EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-vue'
-import Autoplay from 'embla-carousel-autoplay'
 
-const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
+const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-const scrollToPrev = () => emblaApi.value?.scrollToPrev()
-const scrollToNext = () => emblaApi.value?.scrollToNext()
+const logSlidesInView = (emblaApi: EmblaCarouselType) => {
+  console.log(emblaApi.slidesInView())
+}
 
 watch(
   emblaApi,
   (api) => {
     if (!api) return
-    api.plugins().autoplay?.play()
+    api.on('slidesinview', logSlidesInView)
   },
   { immediate: true }
 )
@@ -27,8 +28,5 @@ watch(
         <div class="embla__slide">Slide 3</div>
       </div>
     </div>
-
-    <button class="embla__prev" @click="scrollToPrev">Scroll to prev</button>
-    <button class="embla__next" @click="scrollToNext">Scroll to next</button>
   </div>
 </template>
