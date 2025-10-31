@@ -90,6 +90,7 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
     <PrismHighlight
       language="js"
+      asLanguage="ts"
       code={typeScriptMethods_module_01}
       highlight="1,8"
     />
@@ -101,7 +102,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       code={typeScriptMethods_react_01}
       highlight="2,8"
     />
-
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -109,7 +109,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       This is because even though `embla-carousel-react` has `embla-carousel` as
       a dependency, `pnpm` makes nested dependencies inaccessible by design.
     </Admonition>
-
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
     <PrismHighlight
@@ -117,7 +116,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       code={typeScriptMethods_vue_01}
       highlight="3,8"
     />
-    
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -132,7 +130,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       code={typeScriptMethods_solid_01}
       highlight="2,8"
     />
-
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -140,7 +137,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       This is because even though `embla-carousel-solid` has `embla-carousel` as
       a dependency, `pnpm` makes nested dependencies inaccessible by design.
     </Admonition>
-
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
     <PrismHighlight
@@ -148,13 +144,11 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       code={typeScriptMethods_svelte_01}
       highlight="2,5,8"
     />
-
     <Admonition type="note">
       **Note:** Starting with Svelte 5, the `on:` event handlers have been
       deprecated. However, `on:emblaInit` will remain for backward
       compatibility.
     </Admonition>
-
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -162,7 +156,6 @@ The `EmblaCarouselType` is obtained directly from the **core package** `embla-ca
       This is because even though `embla-carousel-svelte` has `embla-carousel`
       as a dependency, `pnpm` makes nested dependencies inaccessible by design.
     </Admonition>
-
   </TabsItem>
 </Tabs>
 

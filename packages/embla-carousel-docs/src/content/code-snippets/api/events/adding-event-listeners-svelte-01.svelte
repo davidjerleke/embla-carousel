@@ -1,15 +1,14 @@
-<script lang="ts">
-  import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+<script>
   import useEmblaCarousel from 'embla-carousel-svelte'
 
-  let emblaApi: EmblaCarouselType
-  let options: EmblaOptionsType = { loop: true }
+  let emblaApi
+  let options = { loop: true }
 
-  const logSlidesInView = (emblaApi: EmblaCarouselType): void => {
-    console.log(emblaApi.slidesInView())
+  const logSlidesInView = (emblaApi, event) => {
+    console.log(`${event.type}: ${emblaApi.slidesInView()}`)
   }
 
-  const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
+  const onInit = (event) => {
     emblaApi = event.detail
     emblaApi.on('slidesinview', logSlidesInView)
   }

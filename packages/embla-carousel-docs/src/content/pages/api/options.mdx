@@ -189,10 +189,12 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
     <PrismHighlight
-      language="ts"
+      language="js"
+      asLanguage="ts"
       code={typeScriptOptions_module_01}
       highlight="1,6"
     />
+    <PrismHighlight language="html" code={constructorOptions_html_01} />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
     <PrismHighlight
@@ -200,7 +202,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       code={typeScriptOptions_react_01}
       highlight="2,6"
     />
-    
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -215,7 +216,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       code={typeScriptOptions_vue_01}
       highlight="3,6"
     />
-
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -223,7 +223,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       This is because even though `embla-carousel-vue` has `embla-carousel` as a
       dependency, `pnpm` makes nested dependencies inaccessible by design.
     </Admonition>
-
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
     <PrismHighlight
@@ -231,7 +230,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       code={typeScriptOptions_solid_01}
       highlight="2,6"
     />
-    
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -246,7 +244,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       code={typeScriptOptions_svelte_01}
       highlight="2,5"
     />
-
     <Admonition type="warning">
       If you're using `pnpm`, you need to install `embla-carousel` as a
       **devDependency** when importing types from it like demonstrated above.
@@ -254,7 +251,6 @@ The `EmblaOptionsType` comes directly from the **core package** `embla-carousel`
       This is because even though `embla-carousel-svelte` has `embla-carousel`
       as a dependency, `pnpm` makes nested dependencies inaccessible by design.
     </Admonition>
-
   </TabsItem>
 </Tabs>
 

@@ -1,17 +1,23 @@
 <script lang="ts">
-  import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
+  import { EmblaCarouselType, EmblaEventModelType } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
 
-  let emblaApi: EmblaCarouselType
-  let options: EmblaOptionsType = { loop: true }
+  let emblaApi
+  let options = { loop: true }
 
-  const logSlidesInView = (emblaApi: EmblaCarouselType): void => {
-    console.log(emblaApi.slidesInView())
+  const logSelectEvent = (
+    emblaApi: EmblaCarouselType,
+    event: EmblaEventModelType<'select'>
+  ): void => {
+    const { sourceSnap, targetSnap } = event.detail
+
+    console.log('Previous snap index: ', sourceSnap)
+    console.log('Current snap index: ', targetSnap)
   }
 
   const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
     emblaApi = event.detail
-    emblaApi.on('slidesinview', logSlidesInView)
+    emblaApi.on('select', logSelectEvent)
   }
 </script>
 
