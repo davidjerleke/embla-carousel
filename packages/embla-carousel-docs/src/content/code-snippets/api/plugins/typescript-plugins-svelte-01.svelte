@@ -1,27 +1,19 @@
 <script lang="ts">
   import {
     EmblaCarouselType,
-    EmblaEventModelType,
-    EmblaOptionsType
+    EmblaOptionsType,
+    EmblaPluginType
   } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
+  import Autoplay from 'embla-carousel-autoplay'
 
   let emblaApi: EmblaCarouselType
   let options: EmblaOptionsType = { loop: true }
-
-  const logSelectEvent = (
-    emblaApi: EmblaCarouselType,
-    event: EmblaEventModelType<'select'>
-  ): void => {
-    const { sourceSnap, targetSnap } = event.detail
-
-    console.log('Previous snap index: ', sourceSnap)
-    console.log('Current snap index: ', targetSnap)
-  }
+  let plugins: EmblaPluginType[] = [Autoplay()]
 
   const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
     emblaApi = event.detail
-    emblaApi.on('select', logSelectEvent)
+    emblaApi.plugins().autoplay?.play()
   }
 </script>
 
@@ -29,7 +21,7 @@
   <div
     class="embla__viewport"
     on:emblainit={onInit}
-    use:useEmblaCarousel={{ options }}
+    use:useEmblaCarousel={{ options, plugins }}
   >
     <div class="embla__container">
       <div class="embla__slide">Slide 1</div>

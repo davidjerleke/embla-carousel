@@ -4,12 +4,9 @@ import Autoplay from 'embla-carousel-autoplay'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    () => ({ loop: false }),
-    () => [Autoplay()]
+    () => ({ loop: true }),
+    () => [Autoplay({ delay: 4000 })]
   )
-
-  const scrollToPrev = () => emblaApi()?.scrollToPrev()
-  const scrollToNext = () => emblaApi()?.scrollToNext()
 
   createEffect(
     on(emblaApi, (api) => {
@@ -27,13 +24,6 @@ export function EmblaCarousel() {
           <div class="embla__slide">Slide 3</div>
         </div>
       </div>
-
-      <button class="embla__prev" onClick={scrollToPrev}>
-        Scroll to prev
-      </button>
-      <button class="embla__next" onClick={scrollToNext}>
-        Scroll to next
-      </button>
     </div>
   )
 }

@@ -110,7 +110,7 @@
     </sup>
     <br>
     <sup>
-      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">createEmblaCarousel</a>.
+      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">useEmblaCarousel</a>.
     </sup>
     <br>
     <sup>

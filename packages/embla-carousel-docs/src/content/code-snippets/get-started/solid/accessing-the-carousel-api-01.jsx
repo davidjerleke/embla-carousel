@@ -1,7 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }))
+  const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: false }))
 
   const scrollToPrev = () => emblaApi()?.scrollToPrev()
   const scrollToNext = () => emblaApi()?.scrollToNext()

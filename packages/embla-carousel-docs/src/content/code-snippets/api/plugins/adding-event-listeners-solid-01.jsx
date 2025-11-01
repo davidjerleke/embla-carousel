@@ -4,16 +4,19 @@ import Autoplay from 'embla-carousel-autoplay'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
-    () => ({ loop: false }),
+    () => ({ loop: true }),
     () => [Autoplay()]
   )
 
-  const scrollToPrev = () => emblaApi()?.scrollToPrev()
-  const scrollToNext = () => emblaApi()?.scrollToNext()
+  const logAutoplayStart = (emblaApi, event) => {
+    console.log(`${event.type} fired`)
+  }
 
   createEffect(
     on(emblaApi, (api) => {
       if (!api) return
+
+      api.on('autoplay:play', logAutoplayStart)
       api.plugins().autoplay?.play()
     })
   )
@@ -27,13 +30,6 @@ export function EmblaCarousel() {
           <div class="embla__slide">Slide 3</div>
         </div>
       </div>
-
-      <button class="embla__prev" onClick={scrollToPrev}>
-        Scroll to prev
-      </button>
-      <button class="embla__next" onClick={scrollToNext}>
-        Scroll to next
-      </button>
     </div>
   )
 }

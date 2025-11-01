@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { EmblaPluginType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 
 export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
-
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
+  const [plugins, setPlugins] = useState<EmblaPluginType[]>([Autoplay()])
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, plugins)
 
   useEffect(() => {
     if (!emblaApi) return
@@ -22,13 +21,6 @@ export function EmblaCarousel() {
           <div className="embla__slide">Slide 3</div>
         </div>
       </div>
-
-      <button className="embla__prev" onClick={scrollToPrev}>
-        Scroll to prev
-      </button>
-      <button className="embla__next" onClick={scrollToNext}>
-        Scroll to next
-      </button>
     </div>
   )
 }
