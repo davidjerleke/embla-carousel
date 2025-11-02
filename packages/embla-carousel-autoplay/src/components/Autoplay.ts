@@ -42,7 +42,7 @@ declare module 'embla-carousel' {
 
 export type AutoplayType = CreatePluginType<
   {
-    play: (jump?: boolean) => void
+    play: (instant?: boolean) => void
     stop: () => void
     reset: () => void
     pause: () => void
