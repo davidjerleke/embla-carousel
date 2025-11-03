@@ -57,7 +57,7 @@ Start by installing the **npm package** and save it to your dependencies:
 </Tabs>
 
 <Admonition type="note">
-  **Note:** You need to call the `play()` method  to start autoplay:
+  **Note:** You need to call the `play()` method to start autoplay:
   <br />
 
 <PrismHighlight
@@ -171,7 +171,7 @@ If this parameter is enabled, autoplay will stop when it reaches the last scroll
 <PrismHighlight
   language="ts"
   hideLabel
-  code={`{ rootNode: (emblaRoot) => emblaRoot.parentElement }`}
+  code={`{ rootNode: null | (emblaRoot) => emblaRoot.parentElement }`}
 />
 
 The **node** that should **respond** to `mouseenter` and `mouseleave` events. If this is omitted, the node that wraps the Embla Carousel will be used as default.
