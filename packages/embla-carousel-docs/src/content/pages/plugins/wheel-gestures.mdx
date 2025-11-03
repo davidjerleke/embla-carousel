@@ -1,13 +1,15 @@
 ---
 title: Wheel Gestures
-description: Learn how to add this Wheel Gesture plugin to Embla Carousel
+description: Learn how to add the Wheel Gesture plugin to enable scrolling the carousel with mouse wheel or touchpad gestures in Embla Carousel.
 order: 5
-date: 2021-11-22
+date: 2025-11-02
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
 
 # Wheel Gestures
 
@@ -15,7 +17,7 @@ import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
   View plugin on GitHub
 </RepositoryLink>
 
-This plugin is used to extend Embla Carousel with the ability to **use the mouse/trackpad wheel** to **navigate** the carousel.
+This plugin adds **mouse and trackpad wheel support** to Embla Carousel, allowing users to navigate slides using scroll gestures.
 
 ---
 
@@ -47,17 +49,6 @@ First you need to install the **npm package** and save it to your dependencies:
   </TabsItem>
 </Tabs>
 
-## Usage
-
-This plugin accepts a single **optional** parameter, which is its [options](/plugins/wheel-gestures/#options) object that allows you to configure it.
-
-```js
-import EmblaCarousel from 'embla-carousel'
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
-
-const embla = EmblaCarousel(emblaRoot, { loop: false }, [WheelGesturesPlugin()]) // Add plugin
-```
-
 ## Options
 
 Below follows an exhaustive **list of all** `Wheel Gestures` **options** and their default values.
@@ -66,8 +57,15 @@ Below follows an exhaustive **list of all** `Wheel Gestures` **options** and the
 
 ### wheelDraggingClass
 
-Type: <BrandPrimaryText>`string`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-wheel-dragging`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'is-wheel-dragging']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ wheelDraggingClass: 'is-wheel-dragging' }`}
+/>
 
 Choose a classname that will be applied to the container during a wheel gesture. Pass an empty string to opt-out.
 
@@ -75,8 +73,15 @@ Choose a classname that will be applied to the container during a wheel gesture.
 
 ### forceWheelAxis
 
-Type: <BrandPrimaryText>`string | undefined`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'undefined']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ forceWheelAxis: 'x' | 'y' }`}
+/>
 
 Force an axis on which to listen for wheel events. Choose scroll axis between `x` and `y`. Useful if you want to slide horizontally when scrolling vertically or vice versa.
 
@@ -84,8 +89,15 @@ Force an axis on which to listen for wheel events. Choose scroll axis between `x
 
 ### target
 
-Type: <BrandPrimaryText>`Element`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`undefined`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'Element']}
+  secondRow={['Default', 'undefined']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ target: document.querySelector('.embla__viewport') }`}
+/>
 
 Specify the element that should be observed for wheel events.
 
