@@ -62,11 +62,13 @@ You can make use of CSS transitions to **transition height** changes. But beware
 
 <br />
 
-```css
-.embla__container {
+<PrismHighlight
+  language="css"
+  hideLabel
+  code={`.embla__container {
   transition: height 0.2s;
-}
-```
+}`}
+/>
 
 </Admonition>
 
@@ -76,12 +78,15 @@ You want to make sure that each **slide height** is **determined** by the **cont
 
 <br />
 
-```css highlight={3}
-.embla__container {
+<PrismHighlight
+  language="css"
+  hideLabel
+  highlight="3"
+  code={`.embla__container {
   display: flex;
   align-items: flex-start; /* Add this */
-}
-```
+}`}
+/>
 
 </Admonition>
 

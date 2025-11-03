@@ -345,7 +345,12 @@ Get the selected scroll snap index. Provide a positive or negative `offset` to c
   code={`emblaApi.ssrStyles('.embla__container', '.embla__slide')`}
 />
 
-Generate CSS styles used for server-side rendering (SSR). This helper emits minimal styles for the provided container and slides selectors so you can render a non-shifting layout on the server. Returns an empty string when called on a client-initialized instance. Wrap it in a `<style>` tag.
+Generate CSS for **server-side rendering (SSR)**. This helper outputs minimal styles for the specified container and slide selectors, ensuring a **stable, non-shifting layout** when rendered on the server. When called on a client-initialized instance, it returns an empty string. Wrap the output in a `<style>` tag.
+
+<Admonition type="note">
+  **Note:** Make sure to choose a unique selector for your container to avoid
+  affecting other Embla Carousels on the same page.
+</Admonition>
 
 ---
 

@@ -15,7 +15,7 @@ declare module 'embla-carousel' {
 
 export type FadeType = CreatePluginType<
   {
-    ssrStyles: (containerSelector: string, slidesSelector?: string) => string
+    ssrStyles: (container: string, slides?: string) => string
   },
   OptionsType
 >
