@@ -1,8 +1,8 @@
 ---
 title: Class Names
-description: Learn how to use the Class Names plugin for Embla Carousel
+description: Learn how to use the Class Names plugin to manage and toggle CSS classes in Embla Carousel.
 order: 3
-date: 2021-11-22
+date: 2025-11-02
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
@@ -10,13 +10,15 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+
 # Class Names
 
 <RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-class-names">
   View plugin on GitHub
 </RepositoryLink>
 
-Class Names is a **class name toggle** utility plugin for Embla Carousel that enables you to automate the toggling of class names on your carousel.
+The Class Names plugin is a utility for Embla Carousel that automatically adds and removes CSS class names based on the carousel's state, making it easy to style active, in-view, or selected slides.
 
 ---
 
@@ -54,34 +56,77 @@ First you need to install the **npm package** and save it to your dependencies:
   </TabsItem>
 </Tabs>
 
-## Usage
-
-Please read the [plugins](/api/plugins/#usage) page to learn **how to work with plugins**.
-
 ## Options
 
 Below follows an exhaustive **list of all** `Class Names` **options** and their default values.
 
 ---
 
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/class-names/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'ClassNamesOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+  active: false,
+  '(min-width: 768px)': { active: true }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
 ### snapped
 
-Type: <BrandPrimaryText>`string | string[]`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-snapped`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | string[]']}
+  secondRow={['Default', 'is-snapped']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ snapped: 'is-snapped' | ['is-snapped', 'is-snapped-2'] }`}
+/>
 
-Choose a class name that will be applied to the **snapped slides**. It's also possible to pass an array of class names. Pass an empty string to opt-out.
+Choose a class name that will be applied to the **snapped slides**, meaning the canoncically selected slides. It's also possible to pass an array of class names. Pass an empty string `''` to opt-out.
 
 ---
 
 ### inView
 
-Type: <BrandPrimaryText>`string | string[]`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-in-view`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | string[]']}
+  secondRow={['Default', 'is-in-view']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ inView: 'is-in-view' | ['is-in-view', 'is-in-view-2'] }`}
+/>
 
-Choose a class name that will be applied to **slides in view**. It's also possible to pass an array of class names. Pass an empty string to opt-out.
+Choose a class name that will be applied to **slides in view**. It's also possible to pass an array of class names. Pass an empty string `''` to opt-out.
 
 <Admonition type="note">
-  This feature will honor the [inViewThreshold](/api/options/#inviewthreshold)
+  This feature will honor the [`inViewThreshold`](/api/options/#inviewthreshold)
   option.
 </Admonition>
 
@@ -89,27 +134,48 @@ Choose a class name that will be applied to **slides in view**. It's also possib
 
 ### draggable
 
-Type: <BrandPrimaryText>`string | string[]`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-draggable`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | string[]']}
+  secondRow={['Default', 'is-draggable']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ draggable: 'is-draggable' | ['is-draggable', 'is-draggable-2'] }`}
+/>
 
-Choose a class name that will be applied to a **draggable carousel**. It's also possible to pass an array of class names. Pass an empty string to opt-out.
+Choose a class name that will be applied to a **draggable carousel**. It's also possible to pass an array of class names. Pass an empty string `''` to opt-out.
 
 ---
 
-### dragging
+### pointerDown
 
-Type: <BrandPrimaryText>`string | string[]`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-dragging`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | string[]']}
+  secondRow={['Default', 'is-pointer-down']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ pointerDown: 'is-pointer-down' | ['is-pointer-down', 'is-pointer-down-2'] }`}
+/>
 
-Choose a class name that will be applied to the container **when dragging**. It's also possible to pass an array of class names. Pass an empty string to opt-out.
+Choose a class name that will be applied to the container **when pointer is down on the carousel**. It's also possible to pass an array of class names. Pass an empty string `''` to opt-out.
 
 ---
 
 ### loop
 
-Type: <BrandPrimaryText>`string | string[]`</BrandPrimaryText>  
-Default: <BrandSecondaryText>`is-loop`</BrandSecondaryText>
+<ApiMetaData
+  firstRow={['Type', 'string | string[]']}
+  secondRow={['Default', 'is-loop']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ loop: 'is-loop' | ['is-loop', 'is-loop-2'] }`}
+/>
 
-Choose a class name that will be applied to a carousel with **loop activated**. It's also possible to pass an array of class names. Pass an empty string to opt-out.
+Choose a class name that will be applied to a carousel with **loop activated**. It's also possible to pass an array of class names. Pass an empty string `''` to opt-out.
 
 ---
