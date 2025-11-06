@@ -1,13 +1,14 @@
 import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import AutoScroll from 'embla-carousel-auto-scroll'
-import { useAutoScroll } from './EmblaCarouselAutoScroll'
+import Accessibility from 'embla-carousel-accessibility'
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
+import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
+import { useAccessibility } from './EmblaCarouselAccessibility'
 
 type PropType = {
   slides: number[]
@@ -16,7 +17,15 @@ type PropType = {
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [AutoScroll()])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    Accessibility({
+      announceChanges: true,
+      rootNode: (emblaRoot) => emblaRoot.parentElement
+    })
+  ])
+
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi)
 
   const {
     prevBtnDisabled,
@@ -25,8 +34,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
 
-  const { autoScrollIsPlaying, toggleAutoScroll, onAutoScrollButtonClick } =
-    useAutoScroll(emblaApi)
+  useAccessibility(emblaApi)
 
   return (
     <div className="embla">
@@ -44,24 +52,24 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
       <div className="embla__controls">
         <div className="embla__buttons">
-          <PrevButton
-            onClick={() => onAutoScrollButtonClick(onPrevButtonClick)}
-            disabled={prevBtnDisabled}
-          />
-          <NextButton
-            onClick={() => onAutoScrollButtonClick(onNextButtonClick)}
-            disabled={nextBtnDisabled}
-          />
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
 
-        <button
-          className="embla__play"
-          onClick={toggleAutoScroll}
-          type="button"
-        >
-          {autoScrollIsPlaying ? 'Stop' : 'Start'}
-        </button>
+        <div className="embla__dots">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected' : ''
+              )}
+            />
+          ))}
+        </div>
       </div>
+
+      <div className="embla__live-region" />
     </div>
   )
 }

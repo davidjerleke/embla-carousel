@@ -15,12 +15,11 @@ export type AriaTextCallbackType = (
 
 export type OptionsType = CreateOptionsType<{
   announceChanges: boolean
-  carouselId: string
-  carouselRole: string
   carouselAriaLabel: string
+  carouselAriaRoleDescription: string
+  carouselRole: string
   previousButtonAriaLabel: string
   nextButtonAriaLabel: string
-  carouselAriaRoleDescription: string
   slideAriaRoleDescription: string
   slideRole: string
   rootNode: RootNodeType
@@ -33,12 +32,11 @@ export const defaultOptions: OptionsType = {
   active: true,
   breakpoints: {},
   announceChanges: false,
-  carouselId: '',
-  carouselRole: 'region',
   carouselAriaLabel: 'Carousel',
+  carouselAriaRoleDescription: 'carousel',
+  carouselRole: 'region',
   previousButtonAriaLabel: 'Go to previous Slide',
   nextButtonAriaLabel: 'Go to next Slide',
-  carouselAriaRoleDescription: 'carousel',
   slideAriaRoleDescription: 'slide',
   slideRole: 'group',
   rootNode: null,

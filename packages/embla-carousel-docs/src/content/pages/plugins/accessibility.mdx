@@ -1,0 +1,454 @@
+---
+title: Accessibility
+description: Learn how to use the Accessibility plugin to make Embla Carousel more accessible and improve the user experience for assistive technologies.
+order: 10
+date: 2025-11-02
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+
+# Accessibility
+
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-accessibility">
+  View plugin on GitHub
+</RepositoryLink>
+
+The Accessibility plugin enhances Embla Carousel with **ARIA support**, helping ensure a more inclusive experience for users relying on **assistive technologies**.
+
+---
+
+## Example
+
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Accessibility')}
+/>
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+
+    ```html
+    <script src="https://unpkg.com/embla-carousel-accessibility/embla-carousel-accessibility.umd.js"></script>
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+
+    ```shell
+    npm install embla-carousel-accessibility --save
+    ```
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+
+    ```shell
+    yarn add embla-carousel-accessibility
+    ```
+
+  </TabsItem>
+</Tabs>
+
+## Options
+
+Below follows an exhaustive **list of all** `Accessibility` **options** and their default values.
+
+---
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/accessibility/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'AccessibilityOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+  active: false,
+  '(min-width: 768px)': { active: true }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### rootNode
+
+<ApiMetaData
+  firstRow={['Type', '(emblaRoot: HTMLElement) => HTMLElement | null']}
+  secondRow={['Default', 'null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ rootNode: null | (emblaRoot) => emblaRoot.parentElement }`}
+/>
+
+The **node** from which the carousel should look for previous and next buttons, dots, and the live region. This affects [`setupPrevAndNextButtons`](#setupprevandnextbuttons), [`setupDotButtons`](#setupdotbuttons), and [`setupLiveRegion`](#setupliveregion) methods. By default, the plugin will use the carousel root node as the starting point.
+
+---
+
+### announceChanges
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ announceChanges: false | true }`}
+/>
+
+When set to `true`, the plugin will announce slide changes to assistive technologies using an ARIA live region. Note that you need to provide a live region element using the [`setupLiveRegion`](#setupliveregion) method for this to work.
+
+---
+
+### carouselAriaLabel
+
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'Carousel']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ carouselAriaLabel: 'Carousel' }`}
+/>
+
+Provides an accessible label for the carousel container, which is read by screen readers to describe the carousel's purpose.
+
+---
+
+### carouselAriaRoleDescription
+
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'carousel']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ carouselAriaRoleDescription: 'carousel' }`}
+/>
+
+Gives a brief description of the carousel's role, which is read by screen readers to provide additional context about the carousel component.
+
+---
+
+### carouselRole
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'region']} />
+<PrismHighlight language="ts" hideLabel code={`{ carouselRole: 'region' }`} />
+
+Defines the ARIA role for the carousel container. The default value is `region`, which indicates that the carousel is a significant section of the page.
+
+---
+
+### previousButtonAriaLabel
+
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'Go to previous Slide']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ previousButtonAriaLabel: 'Go to previous Slide' }`}
+/>
+
+Provides an accessible label for the previous button, which is read by screen readers to describe its purpose. For this to apply, you have to register your previous and next buttons using the [`setupPrevAndNextButtons`](#setupprevandnextbuttons) method.
+
+---
+
+### nextButtonAriaLabel
+
+<ApiMetaData
+  firstRow={['Type', 'string']}
+  secondRow={['Default', 'Go to next Slide']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ nextButtonAriaLabel: 'Go to next Slide' }`}
+/>
+
+Provides an accessible label for the next button, which is read by screen readers to describe its purpose. For this to apply, you have to register your previous and next buttons using the [`setupPrevAndNextButtons`](#setupprevandnextbuttons) method.
+
+---
+
+### slideAriaRoleDescription
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'slide']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ slideAriaRoleDescription: 'slide' }`}
+/>
+
+Gives a brief description of each slide's role, which is read by screen readers to provide additional context about the slide component.
+
+---
+
+### slideRole
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'group']} />
+<PrismHighlight language="ts" hideLabel code={`{ slideRole: 'group' }`} />
+
+Defines the ARIA role for each slide. The default value is `group`, which indicates that the slide is a collection of related elements.
+
+---
+
+### slideAriaLabel
+
+<ApiMetaData
+  firstRow={['Type', 'AriaTextCallbackType']}
+  secondRow={[
+    'Default',
+    '() => `Slide ${slide} of ${totalSlides}` | `Slide ${slide} of ${totalSlides} (group ${snap} of ${totalSnaps}) | `Slide ${slide}-${lastSlide} of ${totalSlides} (group ${snap} of ${totalSnaps})`'
+  ]}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{
+  slideAriaLabel: (
+    hasAnyGroupedSlides, 
+    firstSlideIndex, 
+    lastSlideIndex, 
+    totalSlides, 
+    selectedSnapIndex,
+    totalSnaps
+  ) => \`Slide \${firstSlideIndex + 1} of \${totalSlides}\`
+}`}
+/>
+
+A callback function that generates an accessible label for each slide, providing context about its position and group within the carousel. The function receives parameters that help determine the appropriate label based on the slide's index and grouping.
+
+---
+
+### dotButtonAriaLabel
+
+<ApiMetaData
+  firstRow={['Type', 'AriaTextCallbackType']}
+  secondRow={[
+    'Default',
+    '() => `Go to slide ${slide} of ${totalSlides}` | `Go to slide ${slide} of ${totalSlides} (group ${snap} of ${totalSnaps}) | `Go to slides ${slide}-${lastSlide} of ${totalSlides} (group ${snap} of ${totalSnaps})`'
+  ]}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{
+  dotButtonAriaLabel: (
+    hasAnyGroupedSlides, 
+    firstSlideIndex, 
+    lastSlideIndex, 
+    totalSlides, 
+    selectedSnapIndex,
+    totalSnaps
+  ) => \`Go to slide \${firstSlideIndex + 1} of \${totalSlides}\`
+}`}
+/>
+
+Provides an accessible label for each dot button, which is read by screen readers to describe its purpose. The function receives parameters that help determine the appropriate label based on the slide's index and grouping.
+
+---
+
+### liveRegionContent
+
+<ApiMetaData
+  firstRow={['Type', 'AriaTextCallbackType']}
+  secondRow={[
+    'Default',
+    '() => `Showing slide ${slide} of ${totalSlides}` | `Showing slide ${slide} of ${totalSlides} (group ${snap} of ${totalSnaps}) | `Showing slide ${slide}-${lastSlide} of ${totalSlides} (group ${snap} of ${totalSnaps})`'
+  ]}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{
+  liveRegionContent: (
+    hasAnyGroupedSlides, 
+    firstSlideIndex, 
+    lastSlideIndex, 
+    totalSlides, 
+    selectedSnapIndex,
+    totalSnaps
+  ) => \`Showing slide \${firstSlideIndex + 1} of \${totalSlides}\`
+}`}
+/>
+
+Generates the content for the ARIA live region, which is announced to assistive technologies when the slide changes. The function receives parameters that help determine the appropriate content based on the slide's index and grouping.
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Accessibility` **methods** with their respective parameters and return values.
+
+---
+
+### setupPrevAndNextButtons
+
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    'prevButton: HTMLElement | string, nextButton: HTMLElement | string'
+  ]}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.setupPrevAndNextButtons(
+  document.querySelector('.embla__prev-button') | '.embla__prev-button',
+  document.querySelector('.embla__next-button') | '.embla__next-button'
+)`}
+/>
+
+Registers the previous and next buttons for the carousel, allowing the Accessibility plugin to add appropriate ARIA attributes and labels to them. Provide an element or a selector string for each button.
+
+---
+
+### setupDotButtons
+
+<ApiMetaData
+  firstRow={['Parameters', 'dotsWrapper: HTMLElement | string']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.setupDotButtons(
+  document.querySelector('.embla__dots') | '.embla__dots'
+)`}
+/>
+
+Registers the dot buttons wrapper for the carousel, allowing the Accessibility plugin to add appropriate ARIA attributes and labels to each dot button. Provide an element or a selector string for the dots wrapper.
+
+---
+
+### setupLiveRegion
+
+<ApiMetaData
+  firstRow={['Parameters', 'liveRegion: HTMLElement | string']}
+  secondRow={['Returns', 'void']}
+/>
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.setupLiveRegion(
+  document.querySelector('.embla__live-region') | '.embla__live-region'
+)`}
+/>
+
+Registers the live region element for the carousel, allowing the Accessibility plugin to announce slide changes to assistive technologies. Provide an element or a selector string for the live region.
+
+<Admonition type="note">
+  **Note:** The [`announceChanges`](#announcechanges) option must be set to
+  `true` for this to work.
+</Admonition>
+
+---
+
+### setUpdateLiveRegion
+
+<ApiMetaData
+  firstRow={['Parameters', 'enable: boolean']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.setUpdateLiveRegion(true | false)`}
+/>
+
+Controls whether the live region should be updated when the slide changes. This can be useful for preventing unnecessary announcements when autoplay or auto scroll is active.
+
+---
+
+### updatePrevAndNextButtons
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.updatePrevAndNextButtons()`}
+/>
+
+Programmatically updates the ARIA attributes and labels for the previous and next buttons. By default, this is handled automatically on mount, when the selected snap changes.
+
+---
+
+### updateLiveRegion
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.updateLiveRegion()`}
+/>
+
+Programmatically updates the content of the live region. By default, this is handled automatically on mount and when the selected snap changes.
+
+---
+
+### updateSlides
+
+<ApiMetaData
+  firstRow={['Parameters', 'snaps?: number[]']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.updateSlides([0, 1, 2])`}
+/>
+
+Programmatically updates the ARIA attributes and labels for all slides. Optionally, you can provide an array of snap indices to update slides that belong to these snaps only. By default, this is handled automatically on mount, when the selected snap changes, on focus in and out.
+
+---
+
+### updateDotButtons
+
+<ApiMetaData
+  firstRow={['Parameters', 'snaps?: number[]']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().accessibility?.updateDotButtons([0, 1, 2])`}
+/>
+
+Programmatically updates the ARIA attributes and labels for all dot buttons. Optionally, you can provide an array of snap indices to update dots that belong to these snaps only. By default, this is handled automatically on mount, when the selected snap changes, on focus in and out.
+
+---

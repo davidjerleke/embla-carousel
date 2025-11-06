@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React from 'react'
 import { EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import AutoScroll from 'embla-carousel-auto-scroll'
+import { useAutoScroll } from './EmblaCarouselAutoScroll'
 import {
   NextButton,
   PrevButton,
@@ -16,7 +17,6 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [AutoScroll()])
-  const [isPlaying, setIsPlaying] = useState(false)
 
   const {
     prevBtnDisabled,
@@ -25,37 +25,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onNextButtonClick
   } = usePrevNextButtons(emblaApi)
 
-  const onButtonAutoplayClick = useCallback(
-    (callback: () => void) => {
-      const autoScroll = emblaApi?.plugins()?.autoScroll
-      if (!autoScroll) return
-
-      autoScroll.stop()
-      callback()
-    },
-    [emblaApi]
-  )
-
-  const toggleAutoplay = useCallback(() => {
-    const autoScroll = emblaApi?.plugins()?.autoScroll
-    if (!autoScroll) return
-
-    const playOrStop = autoScroll.isPlaying()
-      ? autoScroll.stop
-      : autoScroll.play
-    playOrStop()
-  }, [emblaApi])
-
-  useEffect(() => {
-    const autoScroll = emblaApi?.plugins()?.autoScroll
-    if (!autoScroll) return
-
-    setIsPlaying(autoScroll.isPlaying())
-    emblaApi
-      .on('autoscroll:play', () => setIsPlaying(true))
-      .on('autoscroll:stop', () => setIsPlaying(false))
-      .on('reinit', () => setIsPlaying(autoScroll.isPlaying()))
-  }, [emblaApi])
+  const { autoScrollIsPlaying, toggleAutoScroll, onAutoScrollButtonClick } =
+    useAutoScroll(emblaApi)
 
   return (
     <div className="embla">
@@ -74,17 +45,21 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       <div className="embla__controls">
         <div className="embla__buttons">
           <PrevButton
-            onClick={() => onButtonAutoplayClick(onPrevButtonClick)}
+            onClick={() => onAutoScrollButtonClick(onPrevButtonClick)}
             disabled={prevBtnDisabled}
           />
           <NextButton
-            onClick={() => onButtonAutoplayClick(onNextButtonClick)}
+            onClick={() => onAutoScrollButtonClick(onNextButtonClick)}
             disabled={nextBtnDisabled}
           />
         </div>
 
-        <button className="embla__play" onClick={toggleAutoplay} type="button">
-          {isPlaying ? 'Stop' : 'Start'}
+        <button
+          className="embla__play"
+          onClick={toggleAutoScroll}
+          type="button"
+        >
+          {autoScrollIsPlaying ? 'Stop' : 'Start'}
         </button>
       </div>
     </div>

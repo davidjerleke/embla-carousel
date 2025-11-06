@@ -437,7 +437,7 @@ export const ARROWS_STYLES = css`
     transform: rotate(0deg);
   }
 
-  .embla__button:disabled {
+  .embla__button--disabled {
     color: ${COLORS.DETAIL_HIGH_CONTRAST};
   }
 

@@ -14,8 +14,7 @@ type UsePrevNextButtonsType = {
 }
 
 export const usePrevNextButtons = (
-  emblaApi: EmblaCarouselType | undefined,
-  onButtonClick?: (emblaApi: EmblaCarouselType) => void
+  emblaApi: EmblaCarouselType | undefined
 ): UsePrevNextButtonsType => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
@@ -23,14 +22,12 @@ export const usePrevNextButtons = (
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
     emblaApi.scrollToPrev()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+  }, [emblaApi])
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
     emblaApi.scrollToNext()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+  }, [emblaApi])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setPrevBtnDisabled(!emblaApi.canScrollToPrev())
@@ -55,11 +52,13 @@ export const usePrevNextButtons = (
 type PropType = ComponentPropsWithRef<'button'>
 
 export const PrevButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className={'embla__button embla__button--prev'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >
@@ -75,11 +74,13 @@ export const PrevButton: React.FC<PropType> = (props) => {
 }
 
 export const NextButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--next"
+      className={'embla__button embla__button--next'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >

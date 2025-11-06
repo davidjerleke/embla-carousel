@@ -1,7 +1,6 @@
 import { AriaTextCallbackType, defaultOptions, OptionsType } from './Options'
 import { AttributeHandler, AttributeHandlerType } from './AttributeHandler'
 import {
-  ChildNodesSubjectType,
   ChildNodeSubjectType,
   FocusNodesBySlideType,
   getAccessibilityRootNode,
@@ -30,9 +29,9 @@ export type AccessibilityType = CreatePluginType<
       prevButton: ChildNodeSubjectType,
       nextButton: ChildNodeSubjectType
     ) => void
-    setupDotButtons: (dotButtons: ChildNodesSubjectType) => void
+    setupDotButtons: (dotsWrapper: ChildNodeSubjectType) => void
     setupLiveRegion: (liveRegion: ChildNodeSubjectType) => void
-    setShouldUpdateLiveRegion: (enable: boolean) => void
+    setUpdateLiveRegion: (enable: boolean) => void
     updateSlides: (snaps?: number[]) => void
     updateDotButtons: (snaps?: number[]) => void
     updatePrevAndNextButtons: () => void
@@ -72,8 +71,8 @@ function Accessibility(
   let isSsr = false
   let destroyed = false
   let rootNode: HTMLElement
-  let dotNodes: Element[] = []
   let liveRegionNode: Element | null = null
+  let dotsObserver: MutationObserver | null = null
   let allSnaps: number[] = []
   let isUpdatingLiveRegion = false
   let lastFocusedSlide: null | number = null
@@ -149,15 +148,11 @@ function Accessibility(
   function setupCarousel(): void {
     if (!pluginIsActive()) return
 
-    const {
-      carouselId,
-      carouselRole,
-      carouselAriaLabel,
-      carouselAriaRoleDescription
-    } = options
+    const { carouselRole, carouselAriaLabel, carouselAriaRoleDescription } =
+      options
 
+    if (dotsObserver) dotsObserver.disconnect()
     rootAttributes.connect(emblaApi.rootNode())
-    rootAttributes.set('id', carouselId)
     rootAttributes.set('role', carouselRole)
     rootAttributes.set('aria-label', carouselAriaLabel)
     rootAttributes.set('aria-roledescription', carouselAriaRoleDescription)
@@ -215,12 +210,15 @@ function Accessibility(
     updateSlides()
   }
 
-  function setupDotButtons(dotButtons: ChildNodesSubjectType): void {
+  function setupDotButtons(dotsWrapper: ChildNodeSubjectType): void {
     if (!pluginIsActive()) return
 
     const { dotButtonAriaLabel } = options
 
-    dotNodes = getChildNodes(rootNode, dotButtons)
+    const wrapper = getChildNode(rootNode, dotsWrapper)
+    const dotNodes = getChildNodes(wrapper, wrapper.children)
+    dotsAttributes = dotNodes.map(() => AttributeHandler())
+
     dotNodes.forEach((dotNode, snapIndex) => {
       const label = getAriaText(snapIndex, dotButtonAriaLabel)
       const dotAttributes = dotsAttributes[snapIndex]
@@ -228,6 +226,12 @@ function Accessibility(
       dotAttributes.connect(dotNode)
       dotAttributes.set('aria-label', label)
     })
+
+    if (wrapper) {
+      if (dotsObserver) dotsObserver.disconnect()
+      dotsObserver = new MutationObserver(() => setupDotButtons(dotsWrapper))
+      dotsObserver.observe(wrapper, { childList: true })
+    }
 
     updateDotButtons()
   }
@@ -271,7 +275,7 @@ function Accessibility(
     updateLiveRegion()
   }
 
-  function setShouldUpdateLiveRegion(enable: boolean): void {
+  function setUpdateLiveRegion(enable: boolean): void {
     isUpdatingLiveRegion = enable
     updateLiveRegion()
   }
@@ -299,6 +303,8 @@ function Accessibility(
     snaps.forEach((snapIndex) => {
       const isActive = snapIndex === emblaApi.selectedSnap()
       const dotAttributes = dotsAttributes[snapIndex]
+
+      if (!dotAttributes) return
       dotAttributes.toggle('aria-current', isActive)
     })
   }
@@ -331,11 +337,13 @@ function Accessibility(
     snapIndex: number,
     ariaTextCallback: AriaTextCallbackType
   ): string {
-    if (!allSnaps.length) return ''
-    if (!ariaTextCallback) return ''
-
     const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
     const slidesInSnap = slidesBySnap[snapIndex]
+
+    if (!ariaTextCallback) return ''
+    if (!allSnaps.length) return ''
+    if (!slidesInSnap) return ''
+
     const hasSlideGroups = slidesBySnap.some((group) => group.length > 1)
     const slideCount = emblaApi.slideNodes().length
     const snapCount = allSnaps.length
@@ -358,7 +366,7 @@ function Accessibility(
     setupPrevAndNextButtons,
     setupDotButtons,
     setupLiveRegion,
-    setShouldUpdateLiveRegion,
+    setUpdateLiveRegion,
     updateSlides,
     updateDotButtons,
     updatePrevAndNextButtons,

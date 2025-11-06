@@ -14,17 +14,17 @@ function isString(value: unknown): value is string {
 export type ChildNodeSubjectType = Element | string
 
 export function getChildNode(
-  root: HTMLElement,
+  root: Element,
   subject: ChildNodeSubjectType
 ): Element {
   const node = isString(subject) ? root.querySelector(subject) : subject
   return <Element>node
 }
 
-export type ChildNodesSubjectType = Element[] | HTMLCollection | string
+type ChildNodesSubjectType = Element[] | HTMLCollection | string
 
 export function getChildNodes(
-  root: HTMLElement,
+  root: Element,
   subject: ChildNodesSubjectType
 ): Element[] {
   const node = isString(subject) ? root.querySelectorAll(subject) : subject
