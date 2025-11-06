@@ -8,7 +8,6 @@ import { PluginsHandler } from './PluginsHandler'
 import { SsrHandler, SsrHandlerType } from './SsrHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 import { ScrollToDirectionType } from './ScrollTo'
-import { isNumber } from './utils'
 
 export type EmblaCarouselType = {
   canScrollToNext: () => boolean
@@ -35,11 +34,6 @@ export type EmblaCarouselType = {
   slidesNotInView: () => number[]
   scrollToSnap: (
     index: number,
-    instant?: boolean,
-    direction?: ScrollToDirectionType
-  ) => void
-  scrollToSlide: (
-    subject: number | HTMLElement,
     instant?: boolean,
     direction?: ScrollToDirectionType
   ) => void
@@ -204,17 +198,6 @@ function EmblaCarousel(
     engine.scrollTo.index(index, direction)
   }
 
-  function scrollToSlide(
-    subject: number | HTMLElement,
-    instant?: boolean,
-    direction?: ScrollToDirectionType
-  ): void {
-    const slideIndex = isNumber(subject) ? subject : slides.indexOf(subject)
-    const snapIndex = engine.scrollSnapList.snapBySlide[slideIndex]
-
-    if (isNumber(snapIndex)) scrollToSnap(snapIndex, instant, direction)
-  }
-
   function scrollToNext(instant?: boolean): void {
     scrollToSnap(snapIndex(1), instant, -1)
   }
@@ -300,7 +283,6 @@ function EmblaCarousel(
     scrollToPrev,
     scrollProgress,
     scrollToSnap,
-    scrollToSlide,
     selectedSnap,
     slideNodes,
     slidesInView,
