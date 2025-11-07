@@ -3,6 +3,7 @@ import { PointerEventType } from './DragTracker'
 import { SelectEventType } from './ScrollTo'
 import { ScrollEventType } from './ScrollAnimator'
 import { ScrollOptimizeEventType } from './ScrollOptimizer'
+import { SlidesInViewEventType } from './SlidesInView'
 
 export type EmblaEventType = keyof EmblaEventListType
 
@@ -32,7 +33,7 @@ export interface EmblaEventListType {
   pointermove: PointerEventType
   pointerup: PointerEventType
   slideschanged: MutationRecord[]
-  slidesinview: IntersectionObserverEntry[]
+  slidesinview: SlidesInViewEventType
   scrolloptimize: ScrollOptimizeEventType
   select: SelectEventType
   scroll: ScrollEventType

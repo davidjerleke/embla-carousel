@@ -5,13 +5,13 @@
   let emblaApi: EmblaCarouselType
   let options: EmblaOptionsType = { loop: true }
 
-  const logSlidesInView = (emblaApi: EmblaCarouselType): void => {
-    console.log(emblaApi.slidesInView())
+  const logSelectedSnap = (emblaApi: EmblaCarouselType): void => {
+    console.log(emblaApi.selectedSnap())
   }
 
   const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
     emblaApi = event.detail
-    emblaApi.on('slidesinview', logSlidesInView)
+    emblaApi.on('select', logSelectedSnap)
   }
 </script>
 

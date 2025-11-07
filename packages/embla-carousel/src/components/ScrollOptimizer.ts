@@ -7,8 +7,8 @@ import { NumberStoreType } from './NumberStore'
 import { EventHandlerType } from './EventHandler'
 
 export type ScrollOptimizeEventType = {
-  inViewSlides: number[]
-  leftViewSlides: number[]
+  slidesInView: number[]
+  slidesLeftView: number[]
 }
 
 type SlideBoundType = {
@@ -44,9 +44,9 @@ export function ScrollOptimizer(
   const slideIndexCounter = Counter(snaps.length - 1, 0, loop)
 
   let previousTarget = target.get()
-  let inViewSlides: number[] = getSlidesInViewRange()
-  let inViewSlidesPrevious: number[] = inViewSlides
-  let leftViewSlides: number[] = []
+  let slidesInView: number[] = getSlidesInViewRange()
+  let slidesInViewPrevious: number[] = slidesInView
+  let slidesLeftView: number[] = []
 
   function filterNotIncluded(source: number[], exclusion: number[]): number[] {
     const exclusionSet = new Set(exclusion)
@@ -135,9 +135,9 @@ export function ScrollOptimizer(
   }
 
   function updateSlideVisibility(newTarget: number): void {
-    inViewSlides = getSlidesInViewRange()
-    leftViewSlides = filterNotIncluded(inViewSlidesPrevious, inViewSlides)
-    inViewSlidesPrevious = inViewSlides
+    slidesInView = getSlidesInViewRange()
+    slidesLeftView = filterNotIncluded(slidesInViewPrevious, slidesInView)
+    slidesInViewPrevious = slidesInView
     previousTarget = newTarget
   }
 
@@ -157,14 +157,14 @@ export function ScrollOptimizer(
     updateSlideVisibility(newTarget)
 
     const event = eventHandler.createEvent('scrolloptimize', {
-      inViewSlides,
-      leftViewSlides
+      slidesInView,
+      slidesLeftView
     })
     const preventDefault = !event.emit()
     if (preventDefault) return
 
-    toggleGpuLayer(true, inViewSlides)
-    toggleGpuLayer(false, leftViewSlides)
+    toggleGpuLayer(true, slidesInView)
+    toggleGpuLayer(false, slidesLeftView)
   }
 
   const self: ScrollOptimizerType = {

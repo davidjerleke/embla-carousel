@@ -5,8 +5,8 @@ const viewportNode = <HTMLElement>wrapperNode.querySelector('.embla__viewport')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: true })
 
-const logSlidesInView = (emblaApi: EmblaCarouselType): void => {
-  console.log(emblaApi.slidesInView())
+const logSelectedSnap = (emblaApi: EmblaCarouselType): void => {
+  console.log(emblaApi.selectedSnap())
 }
 
-emblaApi.on('slidesinview', logSlidesInView)
+emblaApi.on('select', logSelectedSnap)

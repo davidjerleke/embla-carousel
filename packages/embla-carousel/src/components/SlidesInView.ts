@@ -1,16 +1,18 @@
 import { EventHandlerType } from './EventHandler'
-import { objectKeys, WindowType } from './utils'
-
-type IntersectionEntryMapType = {
-  [key: number]: IntersectionObserverEntry
-}
+import { WindowType } from './utils'
 
 export type SlidesInViewOptionsType = IntersectionObserverInit['threshold']
+
+export type SlidesInViewEventType = {
+  slidesInView: number[]
+  slidesLeftView: number[]
+  slidesEnterView: number[]
+}
 
 export type SlidesInViewType = {
   init: (ownerWindow: WindowType) => void
   destroy: () => void
-  get: (inView?: boolean) => number[]
+  get: () => number[]
 }
 
 export function SlidesInView(
@@ -19,9 +21,7 @@ export function SlidesInView(
   eventHandler: EventHandlerType,
   threshold: SlidesInViewOptionsType
 ): SlidesInViewType {
-  const intersectionEntryMap: IntersectionEntryMapType = {}
-  let inViewCache: number[] | null = null
-  let notInViewCache: number[] | null = null
+  const slidesInView = new Set<number>()
   let intersectionObserver: IntersectionObserver
   let destroyed = false
 
@@ -43,45 +43,32 @@ export function SlidesInView(
   }
 
   function onIntersection(entries: IntersectionObserverEntry[]): void {
-    const event = eventHandler.createEvent('slidesinview', entries)
+    const slidesEnterView: number[] = []
+    const slidesLeftView: number[] = []
 
     for (const entry of entries) {
       if (destroyed) return
-
       const index = slides.indexOf(<HTMLElement>entry.target)
-      intersectionEntryMap[index] = entry
+
+      if (entry.isIntersecting) {
+        slidesInView.add(index)
+        slidesEnterView.push(index)
+      } else {
+        slidesInView.delete(index)
+        slidesLeftView.push(index)
+      }
     }
 
-    inViewCache = null
-    notInViewCache = null
+    const event = eventHandler.createEvent('slidesinview', {
+      slidesInView: get(),
+      slidesLeftView,
+      slidesEnterView
+    })
     event.emit()
   }
 
-  function createInViewList(inView: boolean): number[] {
-    return objectKeys(intersectionEntryMap).reduce(
-      (list: number[], slideIndex) => {
-        const index = parseInt(slideIndex)
-        const { isIntersecting } = intersectionEntryMap[index]
-        const inViewMatch = inView && isIntersecting
-        const notInViewMatch = !inView && !isIntersecting
-
-        if (inViewMatch || notInViewMatch) list.push(index)
-        return list
-      },
-      []
-    )
-  }
-
-  function get(inView: boolean = true): number[] {
-    if (inView && inViewCache) return inViewCache
-    if (!inView && notInViewCache) return notInViewCache
-
-    const slideIndexes = createInViewList(inView)
-
-    if (inView) inViewCache = slideIndexes
-    if (!inView) notInViewCache = slideIndexes
-
-    return slideIndexes
+  function get(): number[] {
+    return [...slidesInView]
   }
 
   const self: SlidesInViewType = {

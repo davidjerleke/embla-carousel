@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-vue'
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
 const logSlidesInView = (emblaApi, event) => {
-  console.log(`${event.type}: ${emblaApi.slidesInView()}`)
+  console.log(`${event.type}: ${event.detail.slidesInView}`)
 }
 
 watch(

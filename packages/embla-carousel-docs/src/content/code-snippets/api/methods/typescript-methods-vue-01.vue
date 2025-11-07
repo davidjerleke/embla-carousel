@@ -5,15 +5,15 @@ import useEmblaCarousel from 'embla-carousel-vue'
 
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-const logSlidesInView = (emblaApi: EmblaCarouselType) => {
-  console.log(emblaApi.slidesInView())
+const logSelectedSnap = (emblaApi: EmblaCarouselType) => {
+  console.log(emblaApi.selectedSnap())
 }
 
 watch(
   emblaApi,
   (api) => {
     if (!api) return
-    api.on('slidesinview', logSlidesInView)
+    api.on('select', logSelectedSnap)
   },
   { immediate: true }
 )

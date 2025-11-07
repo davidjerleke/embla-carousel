@@ -5,7 +5,7 @@ export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }))
 
   const logSlidesInViewOnce = (emblaApi, event) => {
-    console.log(`${event.type}: ${emblaApi.slidesInView()}`)
+    console.log(`${event.type}: ${event.detail.slidesInView}`)
     emblaApi.off('slidesinview', logSlidesInViewOnce)
   }
 

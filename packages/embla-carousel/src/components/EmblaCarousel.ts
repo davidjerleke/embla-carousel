@@ -31,7 +31,6 @@ export type EmblaCarouselType = {
   selectedSnap: () => number
   slideNodes: () => HTMLElement[]
   slidesInView: () => number[]
-  slidesNotInView: () => number[]
   scrollToSnap: (
     index: number,
     instant?: boolean,
@@ -242,10 +241,6 @@ function EmblaCarousel(
     return engine.slidesInView.get()
   }
 
-  function slidesNotInView(): number[] {
-    return engine.slidesInView.get(false)
-  }
-
   function plugins(): EmblaPluginsType {
     return pluginApis
   }
@@ -286,7 +281,6 @@ function EmblaCarousel(
     selectedSnap,
     slideNodes,
     slidesInView,
-    slidesNotInView,
     snapIndex,
     snapList,
     ssrStyles

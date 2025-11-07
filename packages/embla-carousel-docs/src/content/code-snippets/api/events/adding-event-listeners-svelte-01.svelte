@@ -5,7 +5,7 @@
   let options = { loop: true }
 
   const logSlidesInView = (emblaApi, event) => {
-    console.log(`${event.type}: ${emblaApi.slidesInView()}`)
+    console.log(`${event.type}: ${event.detail.slidesInView}`)
   }
 
   const onInit = (event) => {

@@ -398,18 +398,21 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
 ### slidesinview
 
 <ApiMetaData
-  firstRow={['Detail', 'IntersectionObserverEntry[]']}
+  firstRow={[
+    'Detail',
+    'slidesInView: number[], slidesLeftView: number[], slidesEnterView: number[]'
+  ]}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
   language="ts"
   hideLabel
   code={`emblaApi.on('slidesinview', (emblaApi, event) => {
-  const entries = event.detail
+  const { slidesInView, slidesLeftView, slidesEnterView } = event.detail
 })`}
 />
 
-Runs when any slide has **entered** or **exited** the viewport. This event is intended to be used together with the [`slidesInView`](/api/methods/#slidesinview) and/or [`slidesNotInView`](/api/methods/#slidesnotinview) methods.
+Runs when any slide has **entered** or **exited** the viewport. `slidesInView` contains the indexes of **all slides** currently in view, `slidesLeftView` contains the indexes of slides that have just **exited the viewport**, and `slidesEnterView` contains the indexes of slides that have just **entered the viewport**.
 
 ---
 
@@ -506,15 +509,15 @@ Runs when the user has released the pointer from the carousel. It's triggered by
 ### scrolloptimize
 
 <ApiMetaData
-  firstRow={['Detail', 'inViewSlides: number[], leftViewSlides: number[]']}
+  firstRow={['Detail', 'slidesInView: number[], slidesLeftView: number[]']}
   secondRow={['Cancellable', 'yes']}
 />
 <PrismHighlight
   language="ts"
   hideLabel
   code={`emblaApi.on('scrolloptimize', (emblaApi, event) => {
-  const { inViewSlides, leftViewSlides } = event.detail
+  const { slidesInView, slidesLeftView } = event.detail
 })`}
 />
 
-Runs when the carousel shifts GPU acceleration to optimize scrolling performance. This event is triggered with an in view offset to ensure smooth scrolling performance when slides are entering or leaving the viewport.
+Runs when the carousel applies or removes **GPU acceleration** to slides to **optimize scrolling performance**. This event is triggered with an in view offset to ensure smooth scrolling performance when slides are entering or leaving the viewport.

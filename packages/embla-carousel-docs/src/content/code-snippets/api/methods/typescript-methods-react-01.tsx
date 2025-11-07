@@ -5,13 +5,13 @@ import useEmblaCarousel from 'embla-carousel-react'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const logSlidesInView = (emblaApi: EmblaCarouselType) => {
-    console.log(emblaApi.slidesInView())
+  const logSelectedSnap = (emblaApi: EmblaCarouselType) => {
+    console.log(emblaApi.selectedSnap())
   }
 
   useEffect(() => {
     if (!emblaApi) return
-    emblaApi.on('slidesinview', logSlidesInView)
+    emblaApi.on('select', logSelectedSnap)
   }, [emblaApi])
 
   return (
