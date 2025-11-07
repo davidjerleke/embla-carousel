@@ -78,7 +78,7 @@ export function EventHandler(): EventHandlerType {
   function setStore<EventType extends keyof EmblaEventListType>(
     type: EventType,
     update: (
-      listeners: EmblaEventCallbackType<EventType>[]
+      handlers: EmblaEventCallbackType<EventType>[]
     ) => EmblaEventCallbackType<EventType>[]
   ): EventHandlerType {
     eventStore = { ...eventStore, [type]: update(getStore(type)) }
@@ -108,14 +108,16 @@ export function EventHandler(): EventHandlerType {
     detail: EmblaEventListType[EventType]
   ): boolean {
     const event = createEventModel(type, detail)
-    return getStore(type).every((listener) => listener(api, event) !== false)
+    return getStore(type).every((handler) => handler(api, event) !== false)
   }
 
   function on<EventType extends keyof EmblaEventListType>(
     type: EventType,
     callback: EmblaEventCallbackType<EventType>
   ): EventHandlerType {
-    setStore(type, (listeners) => [...listeners, callback])
+    setStore(type, (handlers) => {
+      return handlers.includes(callback) ? handlers : [...handlers, callback]
+    })
     return self
   }
 
@@ -123,7 +125,9 @@ export function EventHandler(): EventHandlerType {
     type: EventType,
     callback: EmblaEventCallbackType<EventType>
   ): EventHandlerType {
-    setStore(type, (listeners) => listeners.filter((cb) => cb !== callback))
+    setStore(type, (handlers) => {
+      return handlers.filter((handler) => handler !== callback)
+    })
     return self
   }
 

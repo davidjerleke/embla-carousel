@@ -103,6 +103,16 @@ describe('➡️  EventHandler', () => {
       expect(callback3).toHaveBeenCalledTimes(0) // Should not be called due to false return
     })
 
+    test('Will NOT add a duplicate callback if it is already registered', () => {
+      const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
+      const callback = jest.fn()
+
+      emblaApi.on('select', callback)
+      emblaApi.on('select', callback)
+      emblaApi.scrollToNext()
+      expect(callback).toHaveBeenCalledTimes(1)
+    })
+
     test('Will NOT throw when emitting event with no registered callbacks ', () => {
       const emblaApi = EmblaCarousel(mockTestElements(FIXTURE_EVENTS))
       const event = emblaApi.createEvent('select', {
