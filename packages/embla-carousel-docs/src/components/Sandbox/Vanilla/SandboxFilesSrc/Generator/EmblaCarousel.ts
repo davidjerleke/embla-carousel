@@ -11,12 +11,18 @@ import { addDotButtonsAndClickHandlers } from './EmblaCarouselDotButton'
 /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
 import { updateSelectedSnapDisplay } from './EmblaCarouselSelectedSnapDisplay'
 /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
+/*__ACCESSIBILITY_REPLACE_START__*/
+import { addAccessibility } from './EmblaCarouselAccessibility'
+/*__ACCESSIBILITY_REPLACE_END__*/
 /*__AUTOPLAY_REPLACE_START__*/
 import Autoplay from 'embla-carousel-autoplay'
 /*__AUTOPLAY_REPLACE_END__*/
 /*__CLASS_NAMES_REPLACE_START__*/
 import ClassNames from 'embla-carousel-class-names'
 /*__CLASS_NAMES_REPLACE_END__*/
+/*__ACCESSIBILITY_REPLACE_START__*/
+import Accessiblity from 'embla-carousel-accessibility'
+/*__ACCESSIBILITY_REPLACE_END__*/
 import '../css/base.css'
 import '../css/sandbox.css'
 import '../css/embla.css'
@@ -48,8 +54,15 @@ const emblaApi = EmblaCarousel(
     /*__AUTOPLAY_REPLACE_END__*/
 
     /*__CLASS_NAMES_REPLACE_START__*/
-    ClassNames()
+    ClassNames(),
     /*__CLASS_NAMES_REPLACE_END__*/
+
+    /*__ACCESSIBILITY_REPLACE_START__*/
+    Accessiblity({
+      announceChanges: true,
+      rootNode: (emblaRoot) => emblaRoot.parentElement
+    })
+    /*__ACCESSIBILITY_REPLACE_END__*/
   ]
   /*__PLUGINS_REPLACE_END__*/
 )
@@ -80,3 +93,6 @@ addDotButtonsAndClickHandlers(
 /*__SELECTED_SNAP_DISPLAY_REPLACE_START__*/
 updateSelectedSnapDisplay(emblaApi, snapDisplayNode)
 /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
+/*__ACCESSIBILITY_REPLACE_START__*/
+addAccessibility(emblaApi)
+/*__ACCESSIBILITY_REPLACE_END__*/

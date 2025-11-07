@@ -5,19 +5,25 @@ const addTogglePrevNextButtonsActive = (
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
 ): void => {
-  const togglePrevNextBtnsState = (): void => {
-    if (emblaApi.canScrollToPrev()) prevBtn.removeAttribute('disabled')
-    else prevBtn.setAttribute('disabled', 'disabled')
+  const togglePrevNextButtonsState = (): void => {
+    if (emblaApi.canScrollToPrev()) {
+      prevBtn.classList.remove('embla__button--disabled')
+    } else {
+      prevBtn.classList.add('embla__button--disabled')
+    }
 
-    if (emblaApi.canScrollToNext()) nextBtn.removeAttribute('disabled')
-    else nextBtn.setAttribute('disabled', 'disabled')
+    if (emblaApi.canScrollToNext()) {
+      nextBtn.classList.remove('embla__button--disabled')
+    } else {
+      nextBtn.classList.add('embla__button--disabled')
+    }
   }
 
-  togglePrevNextBtnsState()
+  togglePrevNextButtonsState()
 
   emblaApi
-    .on('select', togglePrevNextBtnsState)
-    .on('reinit', togglePrevNextBtnsState)
+    .on('select', togglePrevNextButtonsState)
+    .on('reinit', togglePrevNextButtonsState)
 }
 
 export const addPrevNextButtonClickHandlers = (

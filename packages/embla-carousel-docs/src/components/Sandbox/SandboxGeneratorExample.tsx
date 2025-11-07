@@ -13,6 +13,8 @@ import {
 } from './SandboxGeneratorExampleSelectedSnapDisplay'
 import Autoplay from 'embla-carousel-autoplay'
 import ClassNames from 'embla-carousel-class-names'
+import Accessiblity from 'embla-carousel-accessibility'
+import { useAccessibility } from './SandboxGeneratorExampleAccessibility'
 
 type PropType = {
   slides: number[]
@@ -22,6 +24,7 @@ type PropType = {
   selectedSnapDisplay?: boolean
   autoplay?: boolean
   classNames?: boolean
+  accessibility?: boolean
 }
 
 export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
@@ -32,14 +35,22 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
     navigationDots,
     selectedSnapDisplay,
     autoplay,
-    classNames
+    classNames,
+    accessibility
   } = props
   const isRightToLeft = options?.direction === 'rtl'
-  const isVertical = options?.axis === 'y'
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     ...(autoplay ? [Autoplay()] : []),
-    ...(classNames ? [ClassNames()] : [])
+    ...(classNames ? [ClassNames()] : []),
+    ...(accessibility
+      ? [
+          Accessiblity({
+            announceChanges: true,
+            rootNode: (emblaRoot) => emblaRoot.parentElement
+          })
+        ]
+      : [])
   ])
 
   const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
@@ -61,6 +72,8 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
   } = usePrevNextButtons(emblaApi, onButtonClick)
 
   const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
+
+  useAccessibility(accessibility ? emblaApi : undefined)
 
   useEffect(() => {
     if (!autoplay) return
@@ -86,14 +99,10 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
               <PrevButton
                 onClick={onPrevButtonClick}
                 disabled={prevBtnDisabled}
-                isRightToLeft={isRightToLeft}
-                isVertical={isVertical}
               />
               <NextButton
                 onClick={onNextButtonClick}
                 disabled={nextBtnDisabled}
-                isRightToLeft={isRightToLeft}
-                isVertical={isVertical}
               />
             </div>
           )}
@@ -120,6 +129,8 @@ export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
           )}
         </div>
       )}
+
+      {accessibility && <div className="embla__live-region" />}
     </div>
   )
 }

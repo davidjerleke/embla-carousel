@@ -39,11 +39,6 @@ const INPUT_DRAG_FREE: SandboxGeneratorCheckboxType<'dragFree'> = {
   LABEL: 'Drag free'
 }
 
-const INPUT_ACCESSIBILITY: SandboxGeneratorCheckboxType<'accessibility'> = {
-  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.ACCESSIBILITY),
-  LABEL: 'Accessibility (under development)'
-}
-
 export const CarouselGeneratorBasicSettings = () => {
   const { formData, onCheckboxChange, onRadioChange } = useCarouselGenerator()
 
@@ -103,18 +98,6 @@ export const CarouselGeneratorBasicSettings = () => {
           onChange={onCheckboxChange}
         >
           {INPUT_DRAG_FREE.LABEL}
-        </InputCheckboxDefault>
-      </CarouselGeneratorFormItem>
-
-      <CarouselGeneratorFormItem>
-        <InputCheckboxDefault
-          name={INPUT_ACCESSIBILITY.FIELD_NAME}
-          id={INPUT_ACCESSIBILITY.ID}
-          checked={formData[INPUT_ACCESSIBILITY.FIELD_NAME]}
-          onChange={onCheckboxChange}
-          disabled
-        >
-          {INPUT_ACCESSIBILITY.LABEL}
         </InputCheckboxDefault>
       </CarouselGeneratorFormItem>
     </>

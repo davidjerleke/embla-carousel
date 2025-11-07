@@ -5,21 +5,14 @@ import { sandboxStaticSandboxes } from 'components/Sandbox/sandboxStatic'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { ExamplesSetupType } from 'consts/examples'
 import CarouselAccessibility from 'components/Sandbox/React/SandboxFilesSrc/Predefined/Accessibility/EmblaCarousel'
-import { css } from 'styled-components'
-import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 import {
+  ACCESSIBILITY_STYLES,
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
-
-const ACCESSIBILITY_STYLES = css`
-  .embla__live-region {
-    ${visuallyHiddenStyles};
-  }
-`
 
 const ID = 'embla-carousel-accessibility'
 const SLIDES = arrayFromNumber(6)

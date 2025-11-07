@@ -124,7 +124,6 @@ export const SANDBOX_GENERATOR_FORM_FIELDS = {
   DRAG_FREE: 'dragFree',
   AXIS: 'axis',
   DIRECTION: 'direction',
-  ACCESSIBILITY: 'accessibility',
   SLIDE_SIZE: 'slideSize',
   SLIDE_GAP_SIZE: 'slideGapSize',
   EDGE_GAP: 'edgeGap',
@@ -133,6 +132,8 @@ export const SANDBOX_GENERATOR_FORM_FIELDS = {
   SLIDES_TO_SCROLL: 'slidesToScroll',
   NAVIGATION_PREV_NEXT_BUTTONS: 'navigationPrevNextButtons',
   NAVIGATION_DOTS: 'navigationDots',
+  CLASS_NAMES: 'classNames',
+  ACCESSIBILITY: 'accessibility',
   AUTOPLAY: 'autoplay',
   WHEEL_GESTURES: 'wheelGestures'
 } as const

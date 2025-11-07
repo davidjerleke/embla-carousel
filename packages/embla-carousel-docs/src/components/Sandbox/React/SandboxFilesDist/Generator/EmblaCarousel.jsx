@@ -22,12 +22,18 @@ import {
   useSelectedSnapDisplay
 } from './EmblaCarouselSelectedSnapDisplay'
 /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
+/*__ACCESSIBILITY_REPLACE_START__*/
+import { useAccessibility } from './EmblaCarouselAccessibility'
+/*__ACCESSIBILITY_REPLACE_END__*/
 /*__AUTOPLAY_REPLACE_START__*/
 import Autoplay from 'embla-carousel-autoplay'
 /*__AUTOPLAY_REPLACE_END__*/
 /*__CLASS_NAMES_REPLACE_START__*/
 import ClassNames from 'embla-carousel-class-names'
 /*__CLASS_NAMES_REPLACE_END__*/
+/*__ACCESSIBILITY_REPLACE_START__*/
+import Accessiblity from 'embla-carousel-accessibility'
+/*__ACCESSIBILITY_REPLACE_END__*/
 import useEmblaCarousel from 'embla-carousel-react'
 
 const EmblaCarousel = (props) => {
@@ -41,8 +47,15 @@ const EmblaCarousel = (props) => {
       /*__AUTOPLAY_REPLACE_END__*/
 
       /*__CLASS_NAMES_REPLACE_START__*/
-      ClassNames()
+      ClassNames(),
       /*__CLASS_NAMES_REPLACE_END__*/
+
+      /*__ACCESSIBILITY_REPLACE_START__*/
+      Accessiblity({
+        announceChanges: true,
+        rootNode: (emblaRoot) => emblaRoot.parentElement
+      })
+      /*__ACCESSIBILITY_REPLACE_END__*/
     ]
     /*__PLUGINS_REPLACE_END__*/
   )
@@ -79,8 +92,13 @@ const EmblaCarousel = (props) => {
   const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
   /*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/
 
+  /*__ACCESSIBILITY_REPLACE_START__*/
+  useAccessibility(emblaApi)
+  /*__ACCESSIBILITY_REPLACE_END__*/
+
   /*__AUTOPLAY_REPLACE_START__*/
   useEffect(() => {
+    if (!emblaApi) return
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
 
@@ -134,6 +152,10 @@ const EmblaCarousel = (props) => {
         {/*__SELECTED_SNAP_DISPLAY_REPLACE_END__*/}
       </div>
       {/*__CONTROLS_REPLACE_END__*/}
+
+      {/*__ACCESSIBILITY_REPLACE_START__*/}
+      <div className="embla__live-region" />
+      {/*__ACCESSIBILITY_REPLACE_END__*/}
     </section>
   )
 }

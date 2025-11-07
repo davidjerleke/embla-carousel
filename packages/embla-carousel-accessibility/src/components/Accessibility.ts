@@ -216,7 +216,7 @@ function Accessibility(
     const { dotButtonAriaLabel } = options
 
     const wrapper = getChildNode(rootNode, dotsWrapper)
-    const dotNodes = getChildNodes(wrapper, wrapper.children)
+    const dotNodes = getChildNodes(wrapper, wrapper?.children)
     dotsAttributes = dotNodes.map(() => AttributeHandler())
 
     dotNodes.forEach((dotNode, snapIndex) => {

@@ -6,7 +6,8 @@ import {
   SLIDE_NUMBER_STYLES,
   CONTROLS_STYLES,
   ARROWS_STYLES,
-  DOTS_STYLES
+  DOTS_STYLES,
+  ACCESSIBILITY_STYLES
 } from 'components/Examples/examplesCarouselStyles'
 
 export const sandboxGeneratorCreateStyles = (
@@ -19,7 +20,8 @@ export const sandboxGeneratorCreateStyles = (
     slideGapSize,
     axis,
     direction,
-    styles
+    styles,
+    accessibility
   } = settings
 
   if (styles) return styles
@@ -30,6 +32,7 @@ export const sandboxGeneratorCreateStyles = (
   if (hasControls) styleList.push(CONTROLS_STYLES)
   if (navigationPrevNextButtons) styleList.push(ARROWS_STYLES)
   if (navigationDots) styleList.push(DOTS_STYLES)
+  if (accessibility) styleList.push(ACCESSIBILITY_STYLES)
 
   return examplesCarouselStyles(
     `${slideSize}%`,

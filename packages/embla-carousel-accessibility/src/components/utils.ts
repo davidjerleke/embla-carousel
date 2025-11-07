@@ -28,7 +28,7 @@ export function getChildNodes(
   subject: ChildNodesSubjectType
 ): Element[] {
   const node = isString(subject) ? root.querySelectorAll(subject) : subject
-  return <Element[]>Array.from(node)
+  return node ? <Element[]>Array.from(node) : []
 }
 
 export function getAccessibilityRootNode(

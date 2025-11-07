@@ -9,6 +9,7 @@ import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 
 export const CAROUSEL_MAX_WIDTH = '48rem'
 
@@ -489,6 +490,12 @@ export const DOTS_STYLES = css`
   }
 `
 
+export const ACCESSIBILITY_STYLES = css`
+  .embla__live-region {
+    ${visuallyHiddenStyles};
+  }
+`
+
 export const SNAP_DISPLAY_STYLES = css`
   .embla__selected-snap-display {
     justify-self: flex-end;
@@ -675,8 +682,15 @@ export const examplesCarouselStyles = (
       return match.replace(SLIDE_HEIGHT_REGEX, value)
     })
     .replace(BUTTON_TRANSFORM_REGEX, (match) => {
-      const baseDirection = isRightToLeft ? 'rotate(180deg)' : ''
-      const buttonDirection = isHorizontal ? baseDirection : 'rotate(90deg)'
+      let buttonDirection = ''
+
+      if (isHorizontal) {
+        buttonDirection = isRightToLeft ? 'rotate(-180deg)' : 'rotate(0deg)'
+      }
+      if (!isHorizontal) {
+        buttonDirection = isRightToLeft ? 'rotate(90deg)' : 'rotate(90deg)'
+      }
+
       const value = buttonDirection ? `transform: ${buttonDirection};` : ''
       return match.replace(BUTTON_TRANSFORM_VALUE_REGEX, value)
     })

@@ -34,7 +34,8 @@ export const sandboxGeneratorToggleFeatures = (
     navigationDots,
     selectedSnapDisplay,
     autoplay,
-    classNames
+    classNames,
+    accessibility
   } = settings
   const hasNavigation = navigationPrevNextButtons || navigationDots
   const hasAutoplayAndNavigation = autoplay && hasNavigation
@@ -94,7 +95,7 @@ export const sandboxGeneratorToggleFeatures = (
   )
   carouselScriptWithFeatures = sandboxGeneratorToggleFeature(
     'PLUGINS',
-    autoplay || classNames,
+    autoplay || classNames || accessibility,
     carouselScriptWithFeatures
   )
   carouselScriptWithFeatures = sandboxGeneratorToggleFeature(
@@ -105,6 +106,11 @@ export const sandboxGeneratorToggleFeatures = (
   carouselScriptWithFeatures = sandboxGeneratorToggleFeature(
     'CLASS_NAMES',
     classNames,
+    carouselScriptWithFeatures
+  )
+  carouselScriptWithFeatures = sandboxGeneratorToggleFeature(
+    'ACCESSIBILITY',
+    accessibility,
     carouselScriptWithFeatures
   )
 

@@ -12,6 +12,7 @@ import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import {
+  ACCESSIBILITY_STYLES,
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
@@ -144,21 +145,23 @@ export const CarouselGeneratorCarousel = (props: PropType) => {
   const navigationPrevNextButtons =
     formData[SANDBOX_GENERATOR_FORM_FIELDS.NAVIGATION_PREV_NEXT_BUTTONS]
   const axis = formData[SANDBOX_GENERATOR_FORM_FIELDS.AXIS]
+  const direction = formData[SANDBOX_GENERATOR_FORM_FIELDS.DIRECTION]
   const slides = useRef(arrayFromNumber(5))
 
   const carouselStyles = useMemo(() => {
     return examplesCarouselStyles(
       `${slideSize}%`,
       `${parseInt(slideGapSize) / 10}rem`,
-      axis,
+      { axis, direction },
       styledComponentsStylesToString(
         SLIDE_NUMBER_STYLES,
         CONTROLS_STYLES,
         ARROWS_STYLES,
-        DOTS_STYLES
+        DOTS_STYLES,
+        ACCESSIBILITY_STYLES
       )
     )
-  }, [slideSize, slideGapSize, axis])
+  }, [slideSize, slideGapSize, axis, direction])
 
   return (
     <CarouselGeneratorCarouselWrapper
@@ -185,6 +188,8 @@ export const CarouselGeneratorCarousel = (props: PropType) => {
         navigationPrevNextButtons={navigationPrevNextButtons}
         navigationDots={navigationDots}
         autoplay={formData.autoplay}
+        classNames={formData.classNames}
+        accessibility={formData.accessibility}
       />
     </CarouselGeneratorCarouselWrapper>
   )
