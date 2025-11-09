@@ -13,6 +13,10 @@ import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-sta
 import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/svelte/styling-the-carousel-01.svelte'
 import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/svelte/accessing-the-carousel-api-01.svelte'
 import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-01.svelte'
+import svelteInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/installation-npm-01.sh'
+import svelteInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/svelte/installation-yarn-01.sh'
+import svelteAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-npm-01.sh'
+import svelteAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-yarn-01.sh'
 
 # Svelte
 
@@ -22,18 +26,10 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-svelte --save
-```
-
+    <PrismHighlight language="shell" code={svelteInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-svelte
-```
-
+    <PrismHighlight language="shell" code={svelteInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -72,18 +68,10 @@ Plugins let you **extend your carousel** with additional features beyond the bui
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-autoplay --save
-```
-
+    <PrismHighlight language="shell" code={svelteAddingPlugins_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-autoplay
-```
-
+    <PrismHighlight language="shell" code={svelteAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 

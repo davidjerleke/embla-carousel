@@ -14,6 +14,10 @@ import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-sta
 import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/vue/styling-the-carousel-01.vue'
 import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/vue/accessing-the-carousel-api-01.vue'
 import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/vue/adding-plugins-01.vue'
+import vueInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/vue/installation-npm-01.sh'
+import vueInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/vue/installation-yarn-01.sh'
+import vueAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/vue/adding-plugins-npm-01.sh'
+import vueAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/vue/adding-plugins-yarn-01.sh'
 
 # Vue
 
@@ -23,18 +27,10 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-vue --save
-    ```
-
+    <PrismHighlight language="shell" code={vueInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-vue
-    ```
-
+    <PrismHighlight language="shell" code={vueInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -81,18 +77,10 @@ Start by installing the plugin you want to use. In this example, we're going to 
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-autoplay --save
-    ```
-
+    <PrismHighlight language="shell" code={vueAddingPlugins_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-autoplay
-    ```
-
+    <PrismHighlight language="shell" code={vueAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 

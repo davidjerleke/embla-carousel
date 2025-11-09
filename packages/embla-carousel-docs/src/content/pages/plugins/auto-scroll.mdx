@@ -10,6 +10,9 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import autoScrollInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-cdn-01.html'
+import autoScrollInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-npm-01.sh'
+import autoScrollInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-yarn-01.sh'
 
 # Auto Scroll
 
@@ -33,25 +36,13 @@ Start by installing the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
-
-    ```html
-    <script src="https://unpkg.com/embla-carousel-auto-scroll/embla-carousel-auto-scroll.umd.js"></script>
-    ```
-
+    <PrismHighlight language="html" code={autoScrollInstallation_cdn_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-auto-scroll --save
-    ```
-
+    <PrismHighlight language="shell" code={autoScrollInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-auto-scroll
-    ```
-
+    <PrismHighlight language="shell" code={autoScrollInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -272,7 +263,7 @@ Fires when auto scroll stops scrolling.
 <ApiMetaData
   firstRow={[
     'Detail',
-    `interaction: 'pointerdown' | 'pointerup' | 'mouseenter' | 'mouseleave' | 'slidefocus' | 'slidefocusout', originalEvent: | EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'> | EmblaEventModelType<'slidefocus'> | MouseEvent | FocusEvent, isMouseOver: boolean, isPointerDown: boolean`
+    `interaction: 'pointerdown' | 'pointerup' | 'mouseenter' | 'mouseleave' | 'slidefocus' | 'slidefocusout', originalEvent: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'> | EmblaEventModelType<'slidefocus'> | MouseEvent | FocusEvent, isMouseOver: boolean, isPointerDown: boolean`
   ]}
   secondRow={['Cancellable', 'no']}
 />

@@ -10,6 +10,9 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import fadeInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-cdn-01.html'
+import fadeInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-npm-01.sh'
+import fadeInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-yarn-01.sh'
 
 # Fade
 
@@ -33,25 +36,13 @@ Start by installing the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
-
-    ```html
-    <script src="https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js"></script>
-    ```
-
+    <PrismHighlight language="html" code={fadeInstallation_cdn_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-fade --save
-    ```
-
+    <PrismHighlight language="shell" code={fadeInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-fade
-    ```
-
+    <PrismHighlight language="shell" code={fadeInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -113,7 +104,7 @@ Setting this to `false` will not activate or deactivate the plugin. Useful when 
 ### breakpoints
 
 <ApiMetaData
-  firstRow={['Type', 'AutoplayOptionsType']}
+  firstRow={['Type', 'FadeOptionsType']}
   secondRow={['Default', '{}']}
 />
 <PrismHighlight

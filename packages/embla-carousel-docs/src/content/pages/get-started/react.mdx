@@ -13,6 +13,10 @@ import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-sta
 import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/module/styling-the-carousel-01.css'
 import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/react/accessing-the-carousel-api-01.jsx'
 import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-01.jsx'
+import reactInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/react/installation-npm-01.sh'
+import reactInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/react/installation-yarn-01.sh'
+import reactAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-npm-01.sh'
+import reactAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-yarn-01.sh'
 
 # React
 
@@ -22,18 +26,10 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-react --save
-```
-
+    <PrismHighlight language="shell" code={reactInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-react
-```
-
+    <PrismHighlight language="shell" code={reactInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -67,18 +63,10 @@ Plugins let you **extend your carousel** with additional features beyond the bui
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-autoplay --save
-```
-
+    <PrismHighlight language="shell" code={reactAddingPlugins_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-autoplay
-```
-
+    <PrismHighlight language="shell" code={reactAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 

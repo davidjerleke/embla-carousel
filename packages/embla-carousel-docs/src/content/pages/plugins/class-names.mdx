@@ -10,6 +10,9 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
 import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import classNamesInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/class-names/installation-cdn-01.html'
+import classNamesInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/class-names/installation-npm-01.sh'
+import classNamesInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/class-names/installation-yarn-01.sh'
 
 # Class Names
 
@@ -33,25 +36,13 @@ First you need to install the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
-
-    ```html
-    <script src="https://unpkg.com/embla-carousel-class-names/embla-carousel-class-names.umd.js"></script>
-    ```
-
+    <PrismHighlight language="html" code={classNamesInstallation_cdn_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-class-names --save
-    ```
-
+    <PrismHighlight language="shell" code={classNamesInstallation_npm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-class-names
-    ```
-
+    <PrismHighlight language="shell" code={classNamesInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
