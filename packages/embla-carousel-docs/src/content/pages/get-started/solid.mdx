@@ -54,7 +54,7 @@ The element with the classname `embla__viewport` acts as an overflow wrapper, en
 
 ## Accessing the carousel API
 
-Use the `useEmblaCarousel` hook and pass your options as the first argument. You can access the [API](/api/) directly from the hook, and use it to control the carousel or respond to user actions, as shown below:
+Use the `useEmblaCarousel` primitive and pass your options as the first argument. You can access the [API](/api/) directly from the primitive, and use it to control the carousel or respond to user actions, as shown below:
 
 <PrismHighlight
   language="jsx"
@@ -83,7 +83,7 @@ yarn add embla-carousel-autoplay
   </TabsItem>
 </Tabs>
 
-You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` hook. Here's how to extend the carousel from the previous example with Autoplay:
+You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` primitive. Here's how to extend the carousel from the previous example with Autoplay:
 
 <PrismHighlight language="jsx" code={addingPlugins_01} highlight="3,8,17" />
 

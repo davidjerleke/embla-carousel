@@ -10,11 +10,9 @@ import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_LIBRARY } from 'consts/tabs'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
 import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
-
 import pluginsInstallation_cdn_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-cdn-01.html'
 import pluginsInstallation_npm_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-npm-01.sh'
 import pluginsInstallation_yarn_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-yarn-01.sh'
-
 import addingPlugin_html_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-vanilla-01.html'
 import addingPlugin_module_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-vanilla-01.js'
 import addingPlugin_react_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-react-01.jsx'
@@ -192,7 +190,7 @@ All [official plugins](/plugins/) allow you to set **global options** that apply
 
 ### Calling methods
 
-Some plugins also provide their own **API methods**. You can access these plugin methods using the [`plugin`](/api/methods/#plugins) method, as shown in the example below:
+Some plugins also provide their own **API methods**. You can access these plugin methods using the [`plugins`](/api/methods/#plugins) method, as shown in the example below:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
@@ -224,7 +222,7 @@ Some plugins also provide their own **API methods**. You can access these plugin
     />
     <Admonition type="note">
       **Note:** Starting with Svelte 5, the `on:` event handlers have been
-      deprecated. However, `on:emblaInit` will remain for backward
+      deprecated. However, `on:emblainit` will remain for backward
       compatibility.
     </Admonition>
   </TabsItem>
@@ -274,7 +272,7 @@ The example below shows how to add an event listener to the Autoplay plugin:
     />
     <Admonition type="note">
       **Note:** Starting with Svelte 5, the `on:` event handlers have been
-      deprecated. However, `on:emblaInit` will remain for backward
+      deprecated. However, `on:emblainit` will remain for backward
       compatibility.
     </Admonition>
   </TabsItem>
