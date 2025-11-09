@@ -13,6 +13,7 @@ import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
 import fadeInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-cdn-01.html'
 import fadeInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-npm-01.sh'
 import fadeInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-yarn-01.sh'
+import fadeInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-pnpm-01.sh'
 
 # Fade
 
@@ -40,6 +41,9 @@ Start by installing the **npm package** and save it to your dependencies:
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
     <PrismHighlight language="shell" code={fadeInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={fadeInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
     <PrismHighlight language="shell" code={fadeInstallation_yarn_01} />

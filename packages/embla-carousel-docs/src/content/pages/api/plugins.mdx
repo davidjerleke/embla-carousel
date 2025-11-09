@@ -13,6 +13,7 @@ import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
 import pluginsInstallation_cdn_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-cdn-01.html'
 import pluginsInstallation_npm_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-npm-01.sh'
 import pluginsInstallation_yarn_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-yarn-01.sh'
+import pluginsInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/api/plugins/installation-pnpm-01.sh'
 import addingPlugin_html_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-vanilla-01.html'
 import addingPlugin_module_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-vanilla-01.js'
 import addingPlugin_react_01 from '!!raw-loader!content/code-snippets/api/plugins/adding-plugin-react-01.jsx'
@@ -57,6 +58,9 @@ For example, to install the `Autoplay` plugin:
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
     <PrismHighlight language="shell" code={pluginsInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={pluginsInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
     <PrismHighlight language="shell" code={pluginsInstallation_yarn_01} />

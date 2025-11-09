@@ -119,6 +119,7 @@ export const TEXT_INPUT_FORM_STYLES = css`
     display: flex;
     align-items: center;
     gap: ${SPACINGS.ONE};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
   }
 
   .embla__text-form__submit {
@@ -158,6 +159,7 @@ const RADIO_INPUT_STYLES = css`
     display: flex;
     align-items: center;
     font-size: ${FONT_SIZES.COMPLEMENTARY};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
     gap: ${SPACINGS.ONE};
   }
 
@@ -230,6 +232,7 @@ export const RADIO_INPUT_FORM_STYLES = css`
     display: flex;
     align-items: center;
     font-size: ${FONT_SIZES.COMPLEMENTARY};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
     gap: ${SPACINGS.ONE};
   }
 `

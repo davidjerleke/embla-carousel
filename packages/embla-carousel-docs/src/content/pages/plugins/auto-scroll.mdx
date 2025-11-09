@@ -13,6 +13,7 @@ import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
 import autoScrollInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-cdn-01.html'
 import autoScrollInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-npm-01.sh'
 import autoScrollInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-yarn-01.sh'
+import autoScrollInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/plugins/auto-scroll/installation-pnpm-01.sh'
 
 # Auto Scroll
 
@@ -40,6 +41,9 @@ Start by installing the **npm package** and save it to your dependencies:
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
     <PrismHighlight language="shell" code={autoScrollInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={autoScrollInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
     <PrismHighlight language="shell" code={autoScrollInstallation_yarn_01} />
