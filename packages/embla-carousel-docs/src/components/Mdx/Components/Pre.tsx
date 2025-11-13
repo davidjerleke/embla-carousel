@@ -1,5 +1,5 @@
 import React, { DetailedHTMLProps, HTMLAttributes, isValidElement } from 'react'
-import { PrismSyntaxHighlight } from './PrismSyntaxHighlight'
+import { PrismHighlight } from './PrismHighlight'
 
 type PropType = DetailedHTMLProps<
   HTMLAttributes<HTMLPreElement>,
@@ -11,7 +11,7 @@ export const Pre = (props: PropType) => {
   const isValidReactElement = isValidElement(children)
 
   if (isValidReactElement && children.props.className.includes('language')) {
-    return <PrismSyntaxHighlight {...children.props} />
+    return <PrismHighlight {...children.props} />
   }
   return <pre {...props} />
 }

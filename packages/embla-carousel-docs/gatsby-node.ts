@@ -2,7 +2,6 @@ import path from 'path'
 import { GatsbyNode } from 'gatsby'
 import { createFilePath } from 'gatsby-source-filesystem'
 import { GraphQLAllDataType, GraphQLNodeType } from './src/consts/graphQL'
-import { PRISM_HIGHLIGHT_PROP_SEPARATOR } from './src/consts/prismHighlight'
 import {
   PAGE_LAYOUTS,
   PageOverviewType,
@@ -15,8 +14,6 @@ import {
 } from './src/consts/page'
 
 const PAGE_LAYOUTS_ROOT = './src/templates'
-const CODE_BLOCK_START_REGEX = /```.*/g
-const EMPTY_SPACE_REGEX = /\s/g
 
 const PAGE_TEMPLATES = {
   HOME: path.resolve(`${PAGE_LAYOUTS_ROOT}/${PAGE_LAYOUTS.HOME}.tsx`),
@@ -69,21 +66,12 @@ const createPageListWithChildren = (
     )
 }
 
-const addPrismCodeBlockPropsSupport = (body: string): string => {
-  return body.replace(CODE_BLOCK_START_REGEX, (match) =>
-    match.replace(EMPTY_SPACE_REGEX, PRISM_HIGHLIGHT_PROP_SEPARATOR)
-  )
-}
-
 export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   node,
   actions: { createNodeField },
   getNode
 }) => {
   if (node.internal.type === 'Mdx') {
-    const body = <string>node.body
-    node.body = addPrismCodeBlockPropsSupport(body)
-
     const value = createFilePath({ node, getNode })
     createNodeField({ node, value, name: 'slug' })
   }
