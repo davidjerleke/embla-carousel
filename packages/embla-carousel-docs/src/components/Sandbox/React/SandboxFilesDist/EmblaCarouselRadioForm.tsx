@@ -7,7 +7,7 @@ type PropType = {
   onChange: (value: string) => void
 }
 
-const RadioForm: React.FC<PropType> = (props) => {
+const RadioForm = (props: PropType) => {
   const { selected, property, values, onChange } = props
 
   return (

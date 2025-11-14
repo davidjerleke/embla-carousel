@@ -14,7 +14,7 @@ type PropType = {
   initialValue: number
 }
 
-const SizeForm: React.FC<PropType> = (props) => {
+const SizeForm = (props: PropType) => {
   const { emblaApi, property, min, max, unit, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 

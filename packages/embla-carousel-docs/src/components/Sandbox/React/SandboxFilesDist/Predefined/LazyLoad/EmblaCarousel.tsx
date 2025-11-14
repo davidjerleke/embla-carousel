@@ -14,7 +14,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel = (props: PropType) => {
   const { slides, options } = props
   const [emblaRed, emblaApi] = useEmblaCarousel(options)
   const [slidesInView, setSlidesInView] = useState<number[]>([])

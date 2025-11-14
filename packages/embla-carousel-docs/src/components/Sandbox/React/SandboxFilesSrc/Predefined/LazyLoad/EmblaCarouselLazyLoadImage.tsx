@@ -8,7 +8,7 @@ type PropType = {
   index: number
 }
 
-export const LazyLoadImage: React.FC<PropType> = (props) => {
+export const LazyLoadImage = (props: PropType) => {
   const { imgSrc, inView } = props
   const [hasLoaded, setHasLoaded] = useState(false)
 

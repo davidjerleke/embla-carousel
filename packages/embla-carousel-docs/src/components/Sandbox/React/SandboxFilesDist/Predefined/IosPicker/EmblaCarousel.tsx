@@ -6,7 +6,7 @@ type PropType = {
   options: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel = (props: PropType) => {
   const { loop } = props.options
 
   return (

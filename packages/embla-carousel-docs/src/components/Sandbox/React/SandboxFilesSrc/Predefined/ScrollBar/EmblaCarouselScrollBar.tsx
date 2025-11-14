@@ -62,7 +62,7 @@ type PropType = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const ScrollBar: React.FC<PropType> = (props) => {
+export const ScrollBar = (props: PropType) => {
   const { value, onChange } = props
 
   return (

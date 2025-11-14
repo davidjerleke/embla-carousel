@@ -6,7 +6,7 @@ type PropType = {
   onClick: () => void
 }
 
-export const Thumb: React.FC<PropType> = (props) => {
+export const Thumb = (props: PropType) => {
   const { selected, index, onClick } = props
 
   return (

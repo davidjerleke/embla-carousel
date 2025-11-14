@@ -51,7 +51,7 @@ export const usePrevNextButtons = (
 
 type PropType = ComponentPropsWithRef<'button'>
 
-export const PrevButton: React.FC<PropType> = (props) => {
+export const PrevButton = (props: PropType) => {
   const { children, disabled, ...restProps } = props
 
   return (
@@ -73,7 +73,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
   )
 }
 
-export const NextButton: React.FC<PropType> = (props) => {
+export const NextButton = (props: PropType) => {
   const { children, disabled, ...restProps } = props
 
   return (

@@ -60,7 +60,7 @@ export const useDotButton = (
 
 type PropType = ComponentPropsWithRef<'button'>
 
-export const DotButton: React.FC<PropType> = (props) => {
+export const DotButton = (props: PropType) => {
   const { children, ...restProps } = props
 
   return (

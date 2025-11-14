@@ -36,7 +36,7 @@ type PropType = {
   snapCount: number
 }
 
-export const SelectedSnapDisplay: React.FC<PropType> = (props) => {
+export const SelectedSnapDisplay = (props: PropType) => {
   const { selectedSnap, snapCount } = props
 
   return (

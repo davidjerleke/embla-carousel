@@ -27,7 +27,7 @@ type PropType = {
   accessibility?: boolean
 }
 
-export const SandboxGeneratorExample: React.FC<PropType> = (props) => {
+export const SandboxGeneratorExample = (props: PropType) => {
   const {
     slides,
     options,

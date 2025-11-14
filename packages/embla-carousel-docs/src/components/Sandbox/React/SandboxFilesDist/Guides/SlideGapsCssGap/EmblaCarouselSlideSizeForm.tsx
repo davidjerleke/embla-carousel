@@ -7,7 +7,7 @@ type PropType = {
   initialValue: string
 }
 
-const SlideSizeForm: React.FC<PropType> = (props) => {
+const SlideSizeForm = (props: PropType) => {
   const { emblaApi, property, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 

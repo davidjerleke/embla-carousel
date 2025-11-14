@@ -14,7 +14,7 @@ type PropType = {
   initialValue: number
 }
 
-const GapSizeForm: React.FC<PropType> = (props) => {
+const GapSizeForm = (props: PropType) => {
   const { emblaApi, property, min, max, unit, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 
