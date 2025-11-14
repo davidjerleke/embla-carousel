@@ -331,7 +331,7 @@ Runs when the carousel has been destroyed using the [`destroy`](/api/methods/#de
 ### select
 
 <ApiMetaData
-  firstRow={['Detail', 'targetSnap: number, sourceSnap: number']}
+  firstRow={['Detail', '{ targetSnap: number, sourceSnap: number }']}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
@@ -349,7 +349,7 @@ Runs when the selected scroll snap changes. The select event is triggered by dra
 ### scroll
 
 <ApiMetaData
-  firstRow={['Detail', 'isDragging: boolean']}
+  firstRow={['Detail', '{ isDragging: boolean }']}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
@@ -400,7 +400,7 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
 <ApiMetaData
   firstRow={[
     'Detail',
-    'slidesInView: number[], slidesLeftView: number[], slidesEnterView: number[]'
+    '{ slidesInView: number[], slidesLeftView: number[], slidesEnterView: number[] }'
   ]}
   secondRow={['Cancellable', 'no']}
 />
@@ -509,7 +509,7 @@ Runs when the user has released the pointer from the carousel. It's triggered by
 ### scrolloptimize
 
 <ApiMetaData
-  firstRow={['Detail', 'slidesInView: number[], slidesLeftView: number[]']}
+  firstRow={['Detail', '{ slidesInView: number[], slidesLeftView: number[] }']}
   secondRow={['Cancellable', 'yes']}
 />
 <PrismHighlight

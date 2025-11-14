@@ -203,7 +203,7 @@ Get all the slide nodes inside the container. This method can be useful when you
 ### scrollToNext
 
 <ApiMetaData
-  firstRow={['Parameters', 'instant?: boolean']}
+  firstRow={['Parameters', '(instant?: boolean)']}
   secondRow={['Returns', 'void']}
 />
 <PrismHighlight
@@ -219,7 +219,7 @@ Scroll to the next scroll snap if possible. When [`loop`](/api/options/#loop) is
 ### scrollToPrev
 
 <ApiMetaData
-  firstRow={['Parameters', 'instant?: boolean']}
+  firstRow={['Parameters', '(instant?: boolean)']}
   secondRow={['Returns', 'void']}
 />
 <PrismHighlight
@@ -237,7 +237,7 @@ Scroll to the previous scroll snap if possible. When [`loop`](/api/options/#loop
 <ApiMetaData
   firstRow={[
     'Parameters',
-    "index: number, instant?: boolean, direction?: 'forward' | 'backward'"
+    "(index: number, instant?: boolean, direction?: 'forward' | 'backward')"
   ]}
   secondRow={['Returns', 'void']}
 />
@@ -323,7 +323,7 @@ Each value represents the carousel's progress required to reach that position, w
 ### snapIndex
 
 <ApiMetaData
-  firstRow={['Parameters', 'offset: number']}
+  firstRow={['Parameters', '(offset: number)']}
   secondRow={['Returns', 'number']}
 />
 <PrismHighlight language="ts" hideLabel code={`emblaApi.snapIndex(0)`} />
@@ -335,7 +335,7 @@ Get the selected scroll snap index. Provide a positive or negative `offset` to c
 ### ssrStyles
 
 <ApiMetaData
-  firstRow={['Parameters', 'container: string, slides?: string']}
+  firstRow={['Parameters', '(container: string, slides?: string)']}
   secondRow={['Returns', 'string']}
 />
 <PrismHighlight
@@ -400,7 +400,7 @@ Exposes almost all internal functionality used by Embla. Useful when creating pl
 <ApiMetaData
   firstRow={[
     'Parameters',
-    'options?: EmblaOptionsType, plugins?: EmblaPluginType[]'
+    '(options?: EmblaOptionsType, plugins?: EmblaPluginType[])'
   ]}
   secondRow={['Returns', 'void']}
 />
@@ -448,7 +448,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 <ApiMetaData
   firstRow={[
     'Parameters',
-    'type: EventType, callback: EmblaEventCallbackType<EventType>'
+    '(type: EventType, callback: EmblaEventCallbackType<EventType>)'
   ]}
   secondRow={['Returns', 'void']}
 />
@@ -467,7 +467,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 <ApiMetaData
   firstRow={[
     'Parameters',
-    'type: EventType, callback: EmblaEventCallbackType<EventType>'
+    '(type: EventType, callback: EmblaEventCallbackType<EventType>)'
   ]}
   secondRow={['Returns', 'void']}
 />
@@ -486,7 +486,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
 <ApiMetaData
   firstRow={[
     'Parameters',
-    'type: EventType, detail: EmblaEventListType[EventType]'
+    '(type: EventType, detail: EmblaEventListType[EventType])'
   ]}
   secondRow={['Returns', 'EmblaCreatedEventType']}
 />

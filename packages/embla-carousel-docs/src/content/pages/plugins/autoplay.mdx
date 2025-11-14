@@ -181,7 +181,7 @@ Below follows an exhaustive **list of all** `Autoplay` **methods** with their re
 ### play
 
 <ApiMetaData
-  firstRow={['Parameters', 'instant?: boolean']}
+  firstRow={['Parameters', '(instant?: boolean)']}
   secondRow={['Returns', 'void']}
 />
 <PrismHighlight
@@ -310,7 +310,7 @@ Fires when autoplay stops playing. When this event is triggered, the **autoplay 
 ### autoplay:select
 
 <ApiMetaData
-  firstRow={['Detail', 'targetSnap: number, sourceSnap: number']}
+  firstRow={['Detail', '{ targetSnap: number, sourceSnap: number }']}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
@@ -328,7 +328,7 @@ Fires directly after autoplay selects the next scroll snap target and just befor
 ### autoplay:timerset
 
 <ApiMetaData
-  firstRow={['Detail', 'startTime: number']}
+  firstRow={['Detail', '{ startTime: number }']}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
@@ -346,7 +346,7 @@ Fires when the autoplay timer is set. As soon as the timer is set, countdown to 
 ### autoplay:timerstopped
 
 <ApiMetaData
-  firstRow={['Detail', 'stopTime: number']}
+  firstRow={['Detail', '{ stopTime: number }']}
   secondRow={['Cancellable', 'no']}
 />
 <PrismHighlight
@@ -366,7 +366,7 @@ Fires when the autoplay timer is stopped.
 <ApiMetaData
   firstRow={[
     'Detail',
-    `interaction: 'pointerdown' | 'pointerup' | 'mouseenter' | 'mouseleave' | 'slidefocus' | 'slidefocusout', originalEvent: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'> | EmblaEventModelType<'slidefocus'> | MouseEvent | FocusEvent, isMouseOver: boolean, isPointerDown: boolean`
+    `{ interaction: 'pointerdown' | 'pointerup' | 'mouseenter' | 'mouseleave' | 'slidefocus' | 'slidefocusout', originalEvent: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'> | EmblaEventModelType<'slidefocus'> | MouseEvent | FocusEvent, isMouseOver: boolean, isPointerDown: boolean }`
   ]}
   secondRow={['Cancellable', 'no']}
 />
