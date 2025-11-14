@@ -5,7 +5,8 @@ import {
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
-import SizeForm from '../../EmblaCarouselSizeForm'
+import GapSizeForm from './EmblaCarouselGapSizeForm'
+import SlideSizeForm from './EmblaCarouselSlideSizeForm'
 import {
   SelectedSnapDisplay,
   useSelectedSnapDisplay
@@ -27,13 +28,19 @@ const EmblaCarousel = (props) => {
 
   return (
     <div className="embla">
-      <SizeForm
+      <SlideSizeForm
         emblaApi={emblaApi}
         property="--slide-size"
-        min={30}
-        max={100}
-        initialValue={70}
-        unit="%"
+        initialValue="100%"
+      />
+
+      <GapSizeForm
+        emblaApi={emblaApi}
+        property="--slide-gap"
+        min={0}
+        max={50}
+        initialValue={0}
+        unit="px"
       />
 
       <div className="embla__viewport" ref={emblaRef}>

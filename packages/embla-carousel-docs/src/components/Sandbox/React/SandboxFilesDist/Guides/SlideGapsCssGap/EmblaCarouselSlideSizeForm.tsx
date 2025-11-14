@@ -1,30 +1,31 @@
 import React, { useCallback, useState } from 'react'
 import { EmblaCarouselType } from 'embla-carousel'
 
-const getClampedSlideGap = (size: number, min: number, max: number): number => {
-  return Math.min(Math.max(size, min), max)
-}
-
 type PropType = {
   emblaApi: EmblaCarouselType | undefined
   property: string
-  min: number
-  max: number
-  unit: string
-  initialValue: number
+  initialValue: string
 }
 
-const SizeForm: React.FC<PropType> = (props) => {
-  const { emblaApi, property, min, max, unit, initialValue } = props
+const SlideSizeForm: React.FC<PropType> = (props) => {
+  const { emblaApi, property, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(Number(event.target.value))
-  }, [])
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSlideSize(event.target.value)
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
-  const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
-  }, [])
+  const onBlur = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSlideSize(event.target.value)
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
   const onSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -34,11 +35,11 @@ const SizeForm: React.FC<PropType> = (props) => {
       const emblaNode = emblaApi.rootNode().parentElement
       if (!emblaNode) return
 
-      const clampedSize = getClampedSlideGap(slideSize, min, max)
-      setSlideSize(clampedSize)
-      emblaNode.style.setProperty(property, `${clampedSize}${unit}`)
+      setSlideSize(slideSize)
+      emblaNode.style.setProperty(property, `calc(${slideSize})`)
+      emblaApi.reInit()
     },
-    [emblaApi, slideSize, property, min, max, unit]
+    [emblaApi, slideSize, property]
   )
 
   return (
@@ -50,15 +51,14 @@ const SizeForm: React.FC<PropType> = (props) => {
         <span>{property}:</span>
         <input
           className="embla__text-input"
-          type="number"
+          type="text"
           name="slide-gap"
-          min={min}
-          max={max}
           value={slideSize}
           onChange={onChange}
           onBlur={onBlur}
+          autoComplete="off"
         />
-        <span>{unit}</span>
+        <span></span>
       </label>
 
       <button className="embla__text-form__submit" type="submit">
@@ -68,4 +68,4 @@ const SizeForm: React.FC<PropType> = (props) => {
   )
 }
 
-export default SizeForm
+export default SlideSizeForm

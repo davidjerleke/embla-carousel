@@ -38,7 +38,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         property="--slide-size"
         min={30}
         max={100}
-        initalValue={70}
+        initialValue={70}
         unit="%"
       />
 

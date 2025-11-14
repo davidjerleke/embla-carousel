@@ -11,12 +11,12 @@ type PropType = {
   min: number
   max: number
   unit: string
-  initalValue: number
+  initialValue: number
 }
 
 const SizeForm: React.FC<PropType> = (props) => {
-  const { emblaApi, property, min, max, unit, initalValue } = props
-  const [slideSize, setSlideSize] = useState(initalValue)
+  const { emblaApi, property, min, max, unit, initialValue } = props
+  const [slideSize, setSlideSize] = useState(initialValue)
 
   const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSlideSize(Number(event.target.value))

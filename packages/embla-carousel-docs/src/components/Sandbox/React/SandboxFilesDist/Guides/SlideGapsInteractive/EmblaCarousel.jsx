@@ -32,7 +32,7 @@ const EmblaCarousel = (props) => {
         property="--slide-size"
         min={30}
         max={100}
-        initalValue={70}
+        initialValue={70}
         unit="%"
       />
 
@@ -41,7 +41,7 @@ const EmblaCarousel = (props) => {
         property="--slide-spacing"
         min={0}
         max={50}
-        initalValue={10}
+        initialValue={10}
         unit="px"
       />
 

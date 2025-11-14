@@ -1,20 +1,24 @@
 import React, { useCallback, useState } from 'react'
 
-const getClampedSlideGap = (size, min, max) => {
-  return Math.min(Math.max(size, min), max)
-}
-
-const SizeForm = (props) => {
-  const { emblaApi, property, min, max, unit, initialValue } = props
+const SlideSizeForm = (props) => {
+  const { emblaApi, property, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 
-  const onChange = useCallback((event) => {
-    setSlideSize(Number(event.target.value))
-  }, [])
+  const onChange = useCallback(
+    (event) => {
+      setSlideSize(event.target.value)
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
-  const onBlur = useCallback((event) => {
-    setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
-  }, [])
+  const onBlur = useCallback(
+    (event) => {
+      setSlideSize(event.target.value)
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
   const onSubmit = useCallback(
     (event) => {
@@ -24,11 +28,11 @@ const SizeForm = (props) => {
       const emblaNode = emblaApi.rootNode().parentElement
       if (!emblaNode) return
 
-      const clampedSize = getClampedSlideGap(slideSize, min, max)
-      setSlideSize(clampedSize)
-      emblaNode.style.setProperty(property, `${clampedSize}${unit}`)
+      setSlideSize(slideSize)
+      emblaNode.style.setProperty(property, `calc(${slideSize})`)
+      emblaApi.reInit()
     },
-    [emblaApi, slideSize, property, min, max, unit]
+    [emblaApi, slideSize, property]
   )
 
   return (
@@ -40,15 +44,14 @@ const SizeForm = (props) => {
         <span>{property}:</span>
         <input
           className="embla__text-input"
-          type="number"
+          type="text"
           name="slide-gap"
-          min={min}
-          max={max}
           value={slideSize}
           onChange={onChange}
           onBlur={onBlur}
+          autoComplete="off"
         />
-        <span>{unit}</span>
+        <span></span>
       </label>
 
       <button className="embla__text-form__submit" type="submit">
@@ -58,4 +61,4 @@ const SizeForm = (props) => {
   )
 }
 
-export default SizeForm
+export default SlideSizeForm

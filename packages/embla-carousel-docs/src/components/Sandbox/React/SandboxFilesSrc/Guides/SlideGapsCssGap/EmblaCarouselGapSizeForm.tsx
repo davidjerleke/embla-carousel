@@ -14,17 +14,25 @@ type PropType = {
   initialValue: number
 }
 
-const SizeForm: React.FC<PropType> = (props) => {
+const GapSizeForm: React.FC<PropType> = (props) => {
   const { emblaApi, property, min, max, unit, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(Number(event.target.value))
-  }, [])
+  const onChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSlideSize(Number(event.target.value))
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
-  const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
-  }, [])
+  const onBlur = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
   const onSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,6 +45,7 @@ const SizeForm: React.FC<PropType> = (props) => {
       const clampedSize = getClampedSlideGap(slideSize, min, max)
       setSlideSize(clampedSize)
       emblaNode.style.setProperty(property, `${clampedSize}${unit}`)
+      emblaApi.reInit()
     },
     [emblaApi, slideSize, property, min, max, unit]
   )
@@ -68,4 +77,4 @@ const SizeForm: React.FC<PropType> = (props) => {
   )
 }
 
-export default SizeForm
+export default GapSizeForm

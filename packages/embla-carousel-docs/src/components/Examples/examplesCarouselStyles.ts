@@ -124,6 +124,7 @@ export const TEXT_INPUT_FORM_STYLES = css`
 
   .embla__text-form__submit {
     ${BASE_BUTTON_STYLES};
+    padding: 0 ${SPACINGS.THREE};
   }
 `
 

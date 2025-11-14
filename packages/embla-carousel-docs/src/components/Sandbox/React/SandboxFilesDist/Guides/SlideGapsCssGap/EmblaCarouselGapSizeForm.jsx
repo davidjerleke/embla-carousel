@@ -1,33 +1,31 @@
 import React, { useCallback, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
 
-const getClampedSlideGap = (size: number, min: number, max: number): number => {
+const getClampedSlideGap = (size, min, max) => {
   return Math.min(Math.max(size, min), max)
 }
 
-type PropType = {
-  emblaApi: EmblaCarouselType | undefined
-  property: string
-  min: number
-  max: number
-  unit: string
-  initialValue: number
-}
-
-const SizeForm: React.FC<PropType> = (props) => {
+const GapSizeForm = (props) => {
   const { emblaApi, property, min, max, unit, initialValue } = props
   const [slideSize, setSlideSize] = useState(initialValue)
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(Number(event.target.value))
-  }, [])
+  const onChange = useCallback(
+    (event) => {
+      setSlideSize(Number(event.target.value))
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
-  const onBlur = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
-  }, [])
+  const onBlur = useCallback(
+    (event) => {
+      setSlideSize(getClampedSlideGap(Number(event.target.value), min, max))
+      emblaApi?.reInit()
+    },
+    [emblaApi]
+  )
 
   const onSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    (event) => {
       if (!emblaApi) return
       event.preventDefault()
 
@@ -37,6 +35,7 @@ const SizeForm: React.FC<PropType> = (props) => {
       const clampedSize = getClampedSlideGap(slideSize, min, max)
       setSlideSize(clampedSize)
       emblaNode.style.setProperty(property, `${clampedSize}${unit}`)
+      emblaApi.reInit()
     },
     [emblaApi, slideSize, property, min, max, unit]
   )
@@ -68,4 +67,4 @@ const SizeForm: React.FC<PropType> = (props) => {
   )
 }
 
-export default SizeForm
+export default GapSizeForm

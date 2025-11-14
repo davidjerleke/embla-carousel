@@ -82,18 +82,25 @@ Embla will work with other CSS techniques such as `gap` or `margin`, but the tra
 
 For example, to achieve **two slides per view** with a `gap` or `margin` of `20px` between each slide, you need to account for the extra space added by these properties:
 
-- Slide 1: `50% + 20px`
-- Slide 2: `50% + 20px`
-- **Total:** `100% + 40px` → exceeds the viewport
+- Total gap per view is `20px`, because we have two slides (one gap between them).
+- If you set `gap: 20px` and each slide to `50%`, the total width becomes `50% + 50% + 20px`, which exceeds the viewport width of `100%`.
+- Each slide needs to be `50%` of the viewport width minus half the total gap per view — in this case, `10px` — to align correctly.
 
-Embla reads the **computed slide dimensions**, so scroll snaps are based on these expanded sizes. To achieve an exact fit, you need to adjust the `flex-basis` or use `calc()`:
+Embla reads the **computed slide dimensions**, so scroll snaps are based on these expanded sizes. To achieve an exact fit for two slides per view, you need to adjust the `flex-basis` and use `calc()`:
 
 <PrismHighlight language="css" code={gapOrMargin_01} />
 
 If slide sizes change dynamically, you must also remember to update the **margin** or **gap** values, which can create maintenance overhead.
 
+Try adjusting the slide size and gap below to display **multiple slides per view** — for example, three per view. The `--slide-size` variable is wrapped in a `calc()`, allowing you to write expressions directly.
+
+<ExamplesLazy
+  loader={() => import('components/Examples/Guides/SlideGaps/SlideGapsCssGap')}
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
+
 <Admonition type="warning">
-  **Warning:** Unlike padding, changes in `margin` or `gap` **do not affect the slide's computed size**, so Embla's `ResizeObserver` **won't detect them automatically**. If you update the gap or margin dynamically (e.g., via media queries or JavaScript), you must manually call:
+  **Warning:** Unlike padding, changes in `margin` or `gap` **do not affect a slide's computed size**, so Embla's `ResizeObserver` **won't detect them automatically**. If you update the gap or margin dynamically (e.g., via media queries or JavaScript), you must manually call:
 
 <br />
 
@@ -103,10 +110,9 @@ If slide sizes change dynamically, you must also remember to update the **margin
 
 ### Gap with loop enabled
 
-When using **gap** and **loop: true**, there **won't be a gap between the last and first slide**.
-This happens because **Embla only reads the computed distances between slides**, and CSS **gap** only adds spacing **between items**, not before the first or after the last.
+When using **gap** with **loop: true**, there will be **no gap between the last and first slide**. This is because CSS `gap` only applies **between items**, and Embla uses the computed spacing between slides to calculate distances.
 
-A simple workaround is to add a **margin** to the last slide:
+A simple workaround is to add a **margin** to the last slide that matches the **gap size**.
 
 <PrismHighlight language="css" code={gapWithLoopEnabled} />
 
