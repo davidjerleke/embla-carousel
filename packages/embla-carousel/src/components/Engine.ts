@@ -95,6 +95,7 @@ export function Engine(
     dragFree,
     dragThreshold,
     inViewThreshold,
+    inViewMargin,
     slidesToScroll: groupSlides,
     skipSnaps,
     containScroll,
@@ -235,7 +236,8 @@ export function Engine(
     container,
     slides,
     eventHandler,
-    inViewThreshold
+    inViewThreshold,
+    inViewMargin
   )
   const slideFocus = SlideFocus(
     axis,

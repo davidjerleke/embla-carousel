@@ -2,7 +2,10 @@ import { AlignmentOptionType } from './Alignment'
 import { AxisDirectionOptionType, AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
 import { ScrollContainOptionType } from './ScrollContain'
-import { SlidesInViewOptionsType } from './SlidesInView'
+import {
+  SlidesInViewMarginOptionsType,
+  SlidesInViewThresholdOptionsType
+} from './SlidesInView'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -25,7 +28,8 @@ export type OptionsType = CreateOptionsType<{
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
   dragThreshold: number
-  inViewThreshold: SlidesInViewOptionsType
+  inViewThreshold: SlidesInViewThresholdOptionsType
+  inViewMargin: SlidesInViewMarginOptionsType
   loop: boolean
   skipSnaps: boolean
   duration: number
@@ -46,6 +50,7 @@ export const defaultOptions: OptionsType = {
   direction: 'ltr',
   slidesToScroll: 1,
   inViewThreshold: 0,
+  inViewMargin: '0px',
   breakpoints: {},
   dragFree: false,
   dragThreshold: 10,

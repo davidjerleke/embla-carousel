@@ -12,6 +12,7 @@ const defaultOptions = {
   duration: 25,
   focus: true,
   inViewThreshold: 0,
+  inViewMargin: '0px',
   loop: false,
   resize: true,
   skipSnaps: false,

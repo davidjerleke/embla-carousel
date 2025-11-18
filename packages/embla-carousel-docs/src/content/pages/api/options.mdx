@@ -42,7 +42,7 @@ Embla Carousel provides a range of configuration **options** that let you contro
 
 Options can be set via the [`constructor`](/api/options/#constructor-options) or as [`global defaults`](/api/options/#global-options). If both are present, they're merged, and the **constructor options** override any conflicting **global options**.
 
-### Available options
+### Default options
 
 Here's a list of all available options and their **default** values:
 
@@ -436,6 +436,30 @@ Embla automatically watches the slides for focus events. The default callback fi
 <PrismHighlight language="ts" hideLabel code={`{ inViewThreshold: 0 }`} />
 
 This is the Intersection Observer [threshold](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer) option that will be applied to all slides.
+
+---
+
+### inViewMargin
+
+<ApiMetaData
+  firstRow={['Type', 'IntersectionObserverInit.rootMargin']}
+  secondRow={['Default', '0px']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ inViewMargin: '0px -10px 0px 0px' }`}
+/>
+
+Sets the Intersection Observer's [rootMargin](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver#rootmargin) value, which is applied to **all slides**.
+
+<Admonition type="note">
+  **Note:** When `loop` is enabled, expanding the observer's rectangle with
+  `rootMargin` may not behave as expected for some slides because their
+  positions shift to create the looping effect. This option is primarily
+  intended to **offset padding-based spacing** between slides, as shown in the
+  [Slide Gaps](/guides/slide-gaps/#in-view-configuration) guide.
+</Admonition>
 
 ---
 

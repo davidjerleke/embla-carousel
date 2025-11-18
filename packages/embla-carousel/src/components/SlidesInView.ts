@@ -1,7 +1,11 @@
 import { EventHandlerType } from './EventHandler'
 import { WindowType } from './utils'
 
-export type SlidesInViewOptionsType = IntersectionObserverInit['threshold']
+export type SlidesInViewThresholdOptionsType =
+  IntersectionObserverInit['threshold']
+
+export type SlidesInViewMarginOptionsType =
+  IntersectionObserverInit['rootMargin']
 
 export type SlidesInViewEventType = {
   slidesInView: number[]
@@ -19,7 +23,8 @@ export function SlidesInView(
   container: HTMLElement,
   slides: HTMLElement[],
   eventHandler: EventHandlerType,
-  threshold: SlidesInViewOptionsType
+  threshold: SlidesInViewThresholdOptionsType,
+  rootMargin: SlidesInViewMarginOptionsType
 ): SlidesInViewType {
   const slidesInView = new Set<number>()
   let intersectionObserver: IntersectionObserver
@@ -30,7 +35,8 @@ export function SlidesInView(
       onIntersection,
       {
         root: container.parentElement,
-        threshold
+        threshold,
+        rootMargin
       }
     )
 
