@@ -1,0 +1,19 @@
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+
+.embla__slide {
+  flex: 0 0 50%; /* Each slide is 50% of the viewport width */
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 70%; /* Each slide is 70% of the viewport width */
+  }
+}
