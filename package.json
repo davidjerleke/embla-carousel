@@ -83,5 +83,37 @@
     "@octokit/rest": "^22.0.0",
     "dotenv": "^17.2.1"
   },
+  "dependenciesMeta": {
+    "core-js": {
+      "built": true
+    },
+    "core-js-pure": {
+      "built": true
+    },
+    "es5-ext": {
+      "built": true
+    },
+    "esbuild": {
+      "built": true
+    },
+    "gatsby": {
+      "built": true
+    },
+    "gatsby-cli": {
+      "built": true
+    },
+    "gatsby-telemetry": {
+      "built": true
+    },
+    "lmdb": {
+      "built": true
+    },
+    "msgpackr-extract": {
+      "built": true
+    },
+    "sharp": {
+      "built": true
+    }
+  },
   "packageManager": "yarn@3.3.1"
 }

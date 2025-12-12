@@ -9505,6 +9505,27 @@ __metadata:
     prettier: 2.8.8
     rollup: ^4.22.4
     typescript: ^5.2.2
+  dependenciesMeta:
+    core-js:
+      built: true
+    core-js-pure:
+      built: true
+    es5-ext:
+      built: true
+    esbuild:
+      built: true
+    gatsby:
+      built: true
+    gatsby-cli:
+      built: true
+    gatsby-telemetry:
+      built: true
+    lmdb:
+      built: true
+    msgpackr-extract:
+      built: true
+    sharp:
+      built: true
   languageName: unknown
   linkType: soft
 
