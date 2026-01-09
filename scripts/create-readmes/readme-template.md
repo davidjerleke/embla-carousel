@@ -8,8 +8,6 @@
   <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/npm/l/embla-carousel?color=%238ab4f8"></a>
     <a href="https://www.npmjs.com/package/__REPLACE_PACKAGE_NAME__"><img src="https://img.shields.io/npm/v/__REPLACE_PACKAGE_NAME__.svg?color=%23c1a8e2"></a>
-    <a href="https://github.com/davidjerleke/embla-carousel/actions?query=workflow%3A%22Continuous+Integration%22"><img src="https://img.shields.io/github/actions/workflow/status/davidjerleke/embla-carousel/cd.yml?color=%238ab4f8"></a>
-    <a href="https://prettier.io"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?color=%23c1a8e2"></a>
     <a href="https://bundlephobia.com/result?p=__REPLACE_PACKAGE_NAME__@latest"><img src="https://img.shields.io/bundlephobia/minzip/__REPLACE_PACKAGE_NAME__?color=%238ab4f8&label=gzip%20size">
     </a>
   </p>
@@ -43,25 +41,25 @@
   
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="30" height="30" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="30" height="30" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/react/">
-      <img src="https://www.embla-carousel.com/react-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/react-logo.svg" width="30" height="30" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/vue/">
-      <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="30" height="30" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/svelte/">
-      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="30" height="30" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/solid/">
-      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/solid-logo.svg" width="30" height="30" />
     </a>
     <a href="https://github.com/donaldxdonald/embla-carousel-angular">
-      <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/angular-logo.svg" width="30" height="30" />
     </a>
   </p>
 </div>

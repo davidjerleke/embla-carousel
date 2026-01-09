@@ -38,14 +38,16 @@ const fetchSponsors = async (owner: string): Promise<SponsorsResponseType> => {
   let cursor: string | null = null
 
   while (true) {
-    const { user } = await client<{
+    const {
+      user
+    }: {
       user: {
         sponsorshipsAsMaintainer: {
           nodes: SponsorsResponseType
           pageInfo: { hasNextPage: boolean; endCursor: string }
         }
       }
-    }>(
+    } = await client(
       `
       query ($login: String!, $cursor: String) {
         user(login: $login) {
