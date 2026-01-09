@@ -4,6 +4,7 @@ import { useAppSelector } from 'hooks/useRedux'
 import { selectHierarchalRoutes } from 'components/Routes/routesReducer'
 import { ThemeToggle } from 'components/Theme/ThemeToggle'
 import { LinkNavigation } from 'components/Link/LinkNavigation'
+import { VersionBadge } from 'components/VersionBadge/VersionBadge'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
@@ -60,9 +61,15 @@ export const HeaderActions = () => {
           </HeaderActionsWrapper>
         </nav>
       </Item>
+
+      <Item $hiddenAtCompact>
+        <VersionBadge />
+      </Item>
+
       <Item>
         <Search />
       </Item>
+
       <Item $hiddenAtCompact>
         <ThemeToggle />
       </Item>

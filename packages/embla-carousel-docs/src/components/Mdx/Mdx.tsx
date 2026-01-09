@@ -12,13 +12,6 @@ import { PageChildLinks } from 'components/Mdx/Components/PageChildLinks'
 import { Admonition } from 'components/Mdx/Components/Admonition'
 import { ApiMetaData } from './Components/ApiMetaData'
 
-// TODO: Remove these colored text components when no longer used
-import {
-  BrandAlternativeText,
-  BrandPrimaryText,
-  BrandSecondaryText
-} from 'components/Mdx/Components/ColoredText'
-
 type PropType = PropsWithChildren<{}>
 
 export const Mdx = (props: PropType) => {
@@ -35,9 +28,6 @@ export const Mdx = (props: PropType) => {
           RepositoryLink,
           PageChildLinks,
           ApiMetaData,
-          BrandPrimaryText,
-          BrandSecondaryText,
-          BrandAlternativeText,
           Admonition,
           hr: Hr,
           blockquote: Blockquote
