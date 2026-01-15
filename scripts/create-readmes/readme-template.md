@@ -65,9 +65,11 @@
 
 <br>
 
-<p align="center">
-  <strong>· · ·</strong>
-</p>
+<div>
+  <p align="center">
+    <strong>· · ·</strong>
+  </p>
+</div>
 
 <br>
 
