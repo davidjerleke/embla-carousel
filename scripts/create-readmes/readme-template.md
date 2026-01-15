@@ -40,25 +40,25 @@
 <div align="center">
   <p align="center">
     <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="34" height="34" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/module/">
-      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="34" height="34" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/react/">
-      <img src="https://www.embla-carousel.com/react-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/react-logo.svg" width="34" height="34" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/vue/">
-      <img src="https://www.embla-carousel.com/vue-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="34" height="34" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/svelte/">
-      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="34" height="34" />
     </a>
     <a href="https://www.embla-carousel.com/get-started/solid/">
-      <img src="https://www.embla-carousel.com/solid-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/solid-logo.svg" width="34" height="34" />
     </a>
     <a href="https://github.com/donaldxdonald/embla-carousel-angular">
-      <img src="https://www.embla-carousel.com/angular-logo.svg" width="30" height="30" />
+      <img src="https://www.embla-carousel.com/angular-logo.svg" width="34" height="34" />
     </a>
   </p>
 </div>

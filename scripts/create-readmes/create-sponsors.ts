@@ -53,7 +53,7 @@ const fetchSponsors = async (owner: string): Promise<SponsorsResponseType> => {
         user(login: $login) {
           sponsorshipsAsMaintainer(
             first: 100,
-            after: $cursor,                 # ← use the cursor here
+            after: $cursor,
             includePrivate: true,
             orderBy: {field: CREATED_AT, direction: ASC},
             activeOnly: false
