@@ -10,15 +10,15 @@ export type NodeRectType = {
   height: number
 }
 
+export type NodeRectsType = {
+  containerRect: NodeRectType
+  slideRects: NodeRectType[]
+}
+
 type NodesType = {
   root: HTMLElement
   container: HTMLElement
   slides: HTMLElement[]
-}
-
-type NodeRectsType = {
-  containerRect: NodeRectType
-  slideRects: NodeRectType[]
 }
 
 export type NodeHandlerType = {
@@ -26,7 +26,11 @@ export type NodeHandlerType = {
   ownerWindow: WindowType | null
   getNodes: (options: OptionsType) => NodesType
   getRect: (node: HTMLElement) => NodeRectType
-  getRects: (container: HTMLElement, slides: HTMLElement[]) => NodeRectsType
+  getRects: (
+    container: HTMLElement,
+    slides: HTMLElement[],
+    fromCache?: boolean
+  ) => NodeRectsType
 }
 
 export function NodeHandler(root: HTMLElement): NodeHandlerType {
@@ -34,6 +38,8 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
   const ownerWindow = ownerDocument
     ? <WindowType>ownerDocument.defaultView
     : null
+
+  let rects: NodeRectsType
 
   function getRect(node: HTMLElement): NodeRectType {
     const { offsetTop: top, offsetLeft: left, offsetWidth, offsetHeight } = node
@@ -51,8 +57,11 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
 
   function getRects(
     container: HTMLElement,
-    slides: HTMLElement[]
+    slides: HTMLElement[],
+    fromCache?: boolean
   ): NodeRectsType {
+    if (fromCache && rects) return rects
+
     const containerStyle = root ? container.style : { transform: '' }
     const previousTransform = containerStyle.transform
     containerStyle.transform = 'none'
@@ -61,7 +70,8 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
     const slideRects = slides.map(getRect)
 
     containerStyle.transform = previousTransform
-    return { containerRect, slideRects }
+    rects = { containerRect, slideRects }
+    return rects
   }
 
   function createSsrNode(

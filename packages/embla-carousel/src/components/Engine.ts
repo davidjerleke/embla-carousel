@@ -7,7 +7,7 @@ import { DragTracker } from './DragTracker'
 import { EventHandlerType } from './EventHandler'
 import { EventStore, EventStoreType } from './EventStore'
 import { LimitType } from './Limit'
-import { NodeRectType } from './NodeHandler'
+import { NodeRectsType, NodeRectType } from './NodeHandler'
 import { OptionsType } from './Options'
 import { PercentOfView, PercentOfViewType } from './PercentOfView'
 import { ResizeHandler, ResizeHandlerType } from './ResizeHandler'
@@ -82,6 +82,7 @@ export function Engine(
   options: OptionsType,
   nodeHandler: NodeHandlerType,
   eventHandler: EventHandlerType,
+  rects: NodeRectsType,
   isSsr: boolean
 ): EngineType {
   // Options
@@ -108,7 +109,7 @@ export function Engine(
   // Measurements
   const pixelTolerance = isSsr ? 0 : 2
   const axis = Axis(scrollAxis, direction)
-  const { containerRect, slideRects } = nodeHandler.getRects(container, slides)
+  const { containerRect, slideRects } = rects
   const viewSize = axis.getSize(containerRect)
   const percentOfView = PercentOfView(viewSize)
   const alignment = Alignment(align, viewSize)

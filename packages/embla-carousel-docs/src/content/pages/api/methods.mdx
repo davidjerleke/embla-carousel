@@ -377,6 +377,30 @@ Get slide indexes **visible** in the carousel viewport. Honors the [`inViewThres
 
 ---
 
+### cloneEngine
+
+<ApiMetaData
+  firstRow={['Parameters', '(options?: EmblaOptionsType)']}
+  secondRow={['Returns', 'EmblaEngineType']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.cloneEngine({ slidesToScroll: 'auto' })`}
+/>
+
+This method creates and returns a **new Embla engine instance** that acts as a **passive copy** of the original. The cloned engine has **no event listeners attached**, such as resize or slide change handlers.
+
+You may optionally provide new options to **override the existing configuration** for the cloned instance. This is particularly useful when building plugins or handling more advanced use cases where a non-reactive engine is required.
+
+<Admonition type="note">
+  **Note:** Please **refrain** from creating **bug reports** related to this
+  method. If you're using this and running into problems, it's a 99.8% chance
+  that you don't understand how this works. Use at your own risk.
+</Admonition>
+
+---
+
 ### internalEngine
 
 <ApiMetaData
@@ -385,7 +409,7 @@ Get slide indexes **visible** in the carousel viewport. Honors the [`inViewThres
 />
 <PrismHighlight language="ts" hideLabel code={`emblaApi.internalEngine()`} />
 
-Exposes almost all internal functionality used by Embla. Useful when creating plugins or similar.
+Exposes most of Embla's internal functionality. This is primarily intended for plugin development or other advanced use cases where deeper access to the engine is required.
 
 <Admonition type="note">
   **Note:** Please **refrain** from creating **bug reports** related to this

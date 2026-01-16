@@ -14,6 +14,7 @@ export type EmblaCarouselType = {
   canScrollToPrev: () => boolean
   containerNode: () => HTMLElement
   createEvent: EventHandlerType['createEvent']
+  cloneEngine: (userOptions?: EmblaOptionsType) => EngineType
   internalEngine: () => EngineType
   destroy: () => void
   on: EventHandlerType['on']
@@ -64,13 +65,20 @@ function EmblaCarousel(
   let container: HTMLElement
   let slides: HTMLElement[]
 
+  function cloneEngine(userOptions?: EmblaOptionsType): EngineType {
+    const engineOptions = mergeOptions(options, userOptions)
+    return createEngine(engineOptions, container, slides, true)
+  }
+
   function createEngine(
     options: OptionsType,
     container: HTMLElement,
-    slides: HTMLElement[]
+    slides: HTMLElement[],
+    useCachedRects?: boolean
   ): EngineType {
     const ssrOptions = isSsr ? { direction: 'ltr' } : {}
     const engineOptions = mergeOptions(options, ssrOptions)
+    const rects = nodeHandler.getRects(container, slides, useCachedRects)
     const engine = Engine(
       root,
       container,
@@ -78,12 +86,13 @@ function EmblaCarousel(
       engineOptions,
       nodeHandler,
       eventHandler,
+      rects,
       isSsr
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
-      const optionsWithoutLoop = mergeOptions(options, { loop: false })
-      return createEngine(optionsWithoutLoop, container, slides)
+      const optionsWithNoLoop = mergeOptions(options, { loop: false })
+      return createEngine(optionsWithNoLoop, container, slides, true)
     }
 
     return engine
@@ -264,6 +273,7 @@ function EmblaCarousel(
   const self: EmblaCarouselType = {
     canScrollToNext,
     canScrollToPrev,
+    cloneEngine,
     containerNode,
     createEvent,
     internalEngine,
