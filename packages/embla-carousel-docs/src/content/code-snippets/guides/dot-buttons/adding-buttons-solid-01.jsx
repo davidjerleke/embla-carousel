@@ -7,7 +7,7 @@ export function EmblaCarousel() {
   }))
   const [scrollSnaps, setScrollSnaps] = createSignal([])
 
-  const scrollToSnap = (index) => emblaApi()?.scrollToSnap(index)
+  const goTo = (index) => emblaApi()?.goTo(index)
   const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
 
   createEffect(
@@ -32,7 +32,7 @@ export function EmblaCarousel() {
       <div class="embla__dots">
         <For each={scrollSnaps()}>
           {(_, index) => (
-            <button class="embla__dot" onClick={() => scrollToSnap(index())}>
+            <button class="embla__dot" onClick={() => goTo(index())}>
               {/* Button content */}
             </button>
           )}

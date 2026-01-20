@@ -90,7 +90,7 @@ If your carousel is [`draggable`](/api/options/#draggable), the **root node** �
 
 Embla Carousel exposes the total number of **snap points** — one for each group of slides — through the [`snapList`](/api/methods/#snaplist) method. You can use this to **generate a dot button for each snap** dynamically.
 
-Each button should be connected to Embla's [`scrollToSnap`](/api/methods/#scrolltosnap) method, which scrolls the carousel to a specific snap index. When users click a dot, the carousel will smoothly move to the corresponding slide group, providing an intuitive navigation experience.
+Each button should be connected to Embla's [`goTo`](/api/methods/#goTo) method, which scrolls the carousel to a specific snap index. When users click a dot, the carousel will smoothly move to the corresponding slide group, providing an intuitive navigation experience.
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
@@ -195,5 +195,5 @@ You can achieve this by toggling each button's state between **selected** and **
 ## Notes
 
 - **Button placement:** Place the previous/next buttons **outside** the Embla root element (the one passed to the initializer, e.g., `.embla__viewport`) to avoid accidental drag interactions when users click them.
-- **Loop behavior:** When the carousel has `loop` enabled, [`scrollToSnap`](/api/methods/#scrolltosnap) will automatically choose the **shortest path** to the target snap, scrolling forward or backward as needed.
-- **No-op behavior:** Calling [`scrollToSnap`](/api/methods/#scrolltosnap) when the carousel is already at the given snap has **no effect**. This is expected and ensures navigation remains predictable and consistent.
+- **Loop behavior:** When the carousel has `loop` enabled, [`goTo`](/api/methods/#goTo) will automatically choose the **shortest path** to the target snap, scrolling forward or backward as needed.
+- **No-op behavior:** Calling [`goTo`](/api/methods/#goTo) when the carousel is already at the given snap has **no effect**. This is expected and ensures navigation remains predictable and consistent.

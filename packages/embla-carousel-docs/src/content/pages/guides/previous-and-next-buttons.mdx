@@ -87,7 +87,7 @@ If your carousel is [`draggable`](/api/options/#draggable), the **root node** �
 
 ## Adding buttons
 
-Adding navigation buttons is simple. Create your button elements and connect them to Embla's navigation methods — [`scrollToPrev`](/api/methods/#scrolltoprev) and [`scrollToNext`](/api/methods/#scrolltonext).
+Adding navigation buttons is simple. Create your button elements and connect them to Embla's navigation methods — [`goToPrev`](/api/methods/#goToPrev) and [`goToNext`](/api/methods/#goToNext).
 
 These methods let you scroll the carousel programmatically when users click the buttons, giving them an intuitive way to move between slides.
 
@@ -201,4 +201,4 @@ We'll handle this by toggling each button's state between **enabled** and **disa
 
 - **Button placement:** Place the prev/next buttons **outside** the Embla root element (the one passed to the initializer, e.g. `.embla__viewport`) to prevent accidental drag interactions.
 - **Looping carousels:** In **looping** carousels with enough slides to wrap around, the prev/next methods always trigger scrolling — buttons are never disabled.
-- **No-op behavior:** On **non-looping** carousels, calling [`scrollToPrev`](/api/methods/#scrolltoprev) or [`scrollToNext`](/api/methods/#scrolltonext) when already at the first or last slide has no effect. This is normal and ensures consistent, predictable behavior.
+- **No-op behavior:** On **non-looping** carousels, calling [`goToPrev`](/api/methods/#goToPrev) or [`goToNext`](/api/methods/#goToNext) when already at the first or last slide has no effect. This is normal and ensures consistent, predictable behavior.

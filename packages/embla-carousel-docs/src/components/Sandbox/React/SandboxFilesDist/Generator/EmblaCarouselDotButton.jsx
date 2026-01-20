@@ -12,7 +12,7 @@ export const useDotButton = (
   const onDotButtonClick = useCallback(
     (index) => {
       if (!emblaApi) return
-      emblaApi.scrollToSnap(index)
+      emblaApi.goTo(index)
       /*__NAV_AUTOPLAY_REPLACE_START__*/
       if (onButtonClick) onButtonClick(emblaApi)
       /*__NAV_AUTOPLAY_REPLACE_END__*/

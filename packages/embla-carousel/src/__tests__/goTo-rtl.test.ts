@@ -1,8 +1,8 @@
 import EmblaCarousel from '../components/EmblaCarousel'
 import { mockTestElements } from './mocks'
-import { FIXTURE_SCROLL_TO_SNAP_RTL } from './fixtures/scrollToSnap-rtl.fixture'
+import { FIXTURE_SCROLL_TO_SNAP_RTL } from './fixtures/goTo-rtl.fixture'
 
-describe('➡️  ScrollToSnap - Horizontal RTL', () => {
+describe('➡️  goTo - Horizontal RTL', () => {
   describe('Starts scrolling to correct snap when INSTANT parameter is FALSE and slidesToScroll is:', () => {
     test('Default (1)', (done) => {
       const emblaApi = EmblaCarousel(
@@ -20,7 +20,7 @@ describe('➡️  ScrollToSnap - Horizontal RTL', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex)
+        emblaApi.goTo(snapIndex)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -48,7 +48,7 @@ describe('➡️  ScrollToSnap - Horizontal RTL', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex)
+        emblaApi.goTo(snapIndex)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -75,7 +75,7 @@ describe('➡️  ScrollToSnap - Horizontal RTL', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex, true)
+        emblaApi.goTo(snapIndex, true)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -102,7 +102,7 @@ describe('➡️  ScrollToSnap - Horizontal RTL', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex, true)
+        emblaApi.goTo(snapIndex, true)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]

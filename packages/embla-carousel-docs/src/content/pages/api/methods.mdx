@@ -200,7 +200,7 @@ Get all the slide nodes inside the container. This method can be useful when you
 
 ---
 
-### scrollToNext
+### goToNext
 
 <ApiMetaData
   firstRow={['Parameters', '(instant?: boolean)']}
@@ -209,14 +209,14 @@ Get all the slide nodes inside the container. This method can be useful when you
 <PrismHighlight
   language="ts"
   hideLabel
-  code={`emblaApi.scrollToNext(true | false)`}
+  code={`emblaApi.goToNext(true | false)`}
 />
 
 Scroll to the next scroll snap if possible. When [`loop`](/api/options/#loop) is disabled and the carousel has reached the last scroll snap, this method won't do anything. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation).
 
 ---
 
-### scrollToPrev
+### goToPrev
 
 <ApiMetaData
   firstRow={['Parameters', '(instant?: boolean)']}
@@ -225,14 +225,14 @@ Scroll to the next scroll snap if possible. When [`loop`](/api/options/#loop) is
 <PrismHighlight
   language="ts"
   hideLabel
-  code={`emblaApi.scrollToPrev(true | false)`}
+  code={`emblaApi.goToPrev(true | false)`}
 />
 
 Scroll to the previous scroll snap if possible. When [`loop`](/api/options/#loop) is disabled and the carousel has reached the first scroll snap, this method won't do anything. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation).
 
 ---
 
-### scrollToSnap
+### goTo
 
 <ApiMetaData
   firstRow={[
@@ -244,7 +244,7 @@ Scroll to the previous scroll snap if possible. When [`loop`](/api/options/#loop
 <PrismHighlight
   language="ts"
   hideLabel
-  code={`emblaApi.scrollToSnap(0, true | false, 'forward' | 'backward')`}
+  code={`emblaApi.goTo(0, true | false, 'forward' | 'backward')`}
 />
 
 Scroll to a scroll snap by its unique index. Set the **instant** parameter to `true` when you want the scroll to happen instantly (no scroll animation). If [`loop`](/api/options/#loop) is enabled and the **direction** parameter is omitted, Embla Carousel will choose the closest way to the target scroll snap.
@@ -259,25 +259,25 @@ Scroll to a scroll snap by its unique index. Set the **instant** parameter to `t
 
 ---
 
-### canScrollToNext
+### canGoToNext
 
 <ApiMetaData
   firstRow={['Parameters', 'none']}
   secondRow={['Returns', 'boolean']}
 />
-<PrismHighlight language="ts" hideLabel code={`emblaApi.canScrollToNext()`} />
+<PrismHighlight language="ts" hideLabel code={`emblaApi.canGoToNext()`} />
 
 Check the possibility to scroll to the next scroll snap. If [`loop`](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 
 ---
 
-### canScrollToPrev
+### canGoToPrev
 
 <ApiMetaData
   firstRow={['Parameters', 'none']}
   secondRow={['Returns', 'boolean']}
 />
-<PrismHighlight language="ts" hideLabel code={`emblaApi.canScrollToPrev()`} />
+<PrismHighlight language="ts" hideLabel code={`emblaApi.canGoToPrev()`} />
 
 Check the possibility to scroll to the previous scroll snap. If [`loop`](/api/options/#loop) is enabled and the container holds any slides, this will always return `true`.
 

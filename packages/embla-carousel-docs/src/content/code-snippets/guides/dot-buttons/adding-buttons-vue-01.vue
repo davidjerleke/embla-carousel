@@ -5,7 +5,7 @@ import useEmblaCarousel from 'embla-carousel-vue'
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 const scrollSnaps = ref([])
 
-const scrollToSnap = (index) => emblaApi.value?.scrollToSnap(index)
+const goTo = (index) => emblaApi.value?.goTo(index)
 const setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.snapList())
 
 watch(
@@ -35,7 +35,7 @@ watch(
         class="embla__dot"
         :key="index"
         v-for="(_, index) in scrollSnaps"
-        @click="scrollToSnap(index)"
+        @click="goTo(index)"
       >
         <!-- Button content -->
       </button>

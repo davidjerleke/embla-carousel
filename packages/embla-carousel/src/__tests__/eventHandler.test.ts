@@ -9,7 +9,7 @@ describe('➡️  EventHandler', () => {
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback).toHaveBeenCalledTimes(1)
 
       emblaApi.on('reinit', callback)
@@ -24,7 +24,7 @@ describe('➡️  EventHandler', () => {
 
       emblaApi.on('select', callback1)
       emblaApi.on('select', callback2)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback1).toHaveBeenCalledTimes(1)
       expect(callback2).toHaveBeenCalledTimes(1)
     })
@@ -39,7 +39,7 @@ describe('➡️  EventHandler', () => {
       emblaApi.on('select', callback2)
       emblaApi.on('select', callback3)
 
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
 
       expect(callback1).toHaveBeenCalledTimes(1)
       expect(callback2).toHaveBeenCalledTimes(1)
@@ -109,7 +109,7 @@ describe('➡️  EventHandler', () => {
 
       emblaApi.on('select', callback)
       emblaApi.on('select', callback)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback).toHaveBeenCalledTimes(1)
     })
 
@@ -142,7 +142,7 @@ describe('➡️  EventHandler', () => {
       emblaApi.on('select', selectCallback)
       emblaApi.on('scroll', scrollCallback)
 
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
 
       expect(selectCallback).toHaveBeenCalled()
       expect(scrollCallback).not.toHaveBeenCalled()
@@ -157,7 +157,7 @@ describe('➡️  EventHandler', () => {
       emblaApi.on('select', callback2)
       emblaApi.off('select', callback1)
 
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
 
       expect(callback1).toHaveBeenCalledTimes(0)
       expect(callback2).toHaveBeenCalledTimes(1)
@@ -170,7 +170,7 @@ describe('➡️  EventHandler', () => {
 
       emblaApi.on('select', callback1)
       emblaApi.on('select', callback2)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback1).toHaveBeenCalledTimes(1)
       expect(callback2).toHaveBeenCalledTimes(0)
     })
@@ -180,7 +180,7 @@ describe('➡️  EventHandler', () => {
       const callback = jest.fn()
 
       emblaApi.on('reinit', callback)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback).toHaveBeenCalledTimes(0)
     })
 
@@ -189,11 +189,11 @@ describe('➡️  EventHandler', () => {
       const callback = jest.fn()
 
       emblaApi.on('select', callback)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback).toHaveBeenCalledTimes(1)
 
       emblaApi.off('select', callback)
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
       expect(callback).toHaveBeenCalledTimes(1)
     })
 

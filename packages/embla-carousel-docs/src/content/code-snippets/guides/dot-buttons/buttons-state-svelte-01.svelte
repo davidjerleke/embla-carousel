@@ -6,7 +6,7 @@
   let scrollSnaps = []
   let selectedSnap = 0
 
-  const scrollToSnap = (index) => emblaApi?.scrollToSnap(index)
+  const goTo = (index) => emblaApi?.goTo(index)
   const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())
   const setActiveSnap = (emblaApi) => (selectedSnap = emblaApi.selectedSnap())
 
@@ -40,7 +40,7 @@
       <button
         class="embla__dot"
         class:embla__dot--selected={index === selectedSnap}
-        on:click={() => scrollToSnap(index)}
+        on:click={() => goTo(index)}
       >
         <!-- Button content -->
       </button>

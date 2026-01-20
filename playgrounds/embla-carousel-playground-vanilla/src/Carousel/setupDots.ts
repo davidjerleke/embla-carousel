@@ -17,7 +17,7 @@ const addDotBtnsClickHandlers = (
   dotNodes: HTMLElement[]
 ): void => {
   dotNodes.forEach((dotNode, index) => {
-    dotNode.addEventListener('click', () => emblaApi.scrollToSnap(index), false)
+    dotNode.addEventListener('click', () => emblaApi.goTo(index), false)
   })
 }
 

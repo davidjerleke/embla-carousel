@@ -29,28 +29,28 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
 
     test('User tries to scrollNext() past the last slide', () => {
       emblaApi.reInit({ startSnap: lastIndex })
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev before the first slide', () => {
-      emblaApi.scrollToPrev()
+      emblaApi.goToPrev()
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollToSnap() an index more than last index', () => {
-      emblaApi.scrollToSnap(lastIndex + 1)
+    test('User tries to goTo() an index more than last index', () => {
+      emblaApi.goTo(lastIndex + 1)
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollToSnap() an index less than first index', () => {
-      emblaApi.scrollToSnap(firstIndex - 1)
+    test('User tries to goTo() an index less than first index', () => {
+      emblaApi.goTo(firstIndex - 1)
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
@@ -60,7 +60,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
       let i = firstIndex
 
       while (i !== lastIndex) {
-        emblaApi.scrollToNext()
+        emblaApi.goToNext()
         expect(emblaApi.previousSnap()).toBe(i)
         i += 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -73,7 +73,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
       let i = lastIndex
 
       while (i !== firstIndex) {
-        emblaApi.scrollToPrev()
+        emblaApi.goToPrev()
         expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -111,28 +111,28 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
 
     test('User tries to scrollNext() past the last slide', () => {
       emblaApi.reInit({ startSnap: lastIndex })
-      emblaApi.scrollToNext()
+      emblaApi.goToNext()
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(lastIndex)
     })
 
     test('User tries to scrollPrev before the first slide', () => {
-      emblaApi.scrollToPrev()
+      emblaApi.goToPrev()
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollToSnap() an index more than last index', () => {
-      emblaApi.scrollToSnap(lastIndex + 1)
+    test('User tries to goTo() an index more than last index', () => {
+      emblaApi.goTo(lastIndex + 1)
 
       expect(emblaApi.selectedSnap()).toBe(firstIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
     })
 
-    test('User tries to scrollToSnap() an index less than first index', () => {
-      emblaApi.scrollToSnap(firstIndex - 1)
+    test('User tries to goTo() an index less than first index', () => {
+      emblaApi.goTo(firstIndex - 1)
 
       expect(emblaApi.selectedSnap()).toBe(lastIndex)
       expect(emblaApi.previousSnap()).toBe(firstIndex)
@@ -142,7 +142,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
       let i = firstIndex
 
       while (i !== lastIndex) {
-        emblaApi.scrollToNext()
+        emblaApi.goToNext()
         expect(emblaApi.previousSnap()).toBe(i)
         i += 1
         expect(emblaApi.selectedSnap()).toBe(i)
@@ -155,7 +155,7 @@ describe('➡️  SelectedScrollSnap & PreviousScrollSnap - Horizontal RTL', () 
       let i = lastIndex
 
       while (i !== firstIndex) {
-        emblaApi.scrollToPrev()
+        emblaApi.goToPrev()
         expect(emblaApi.previousSnap()).toBe(i)
         i -= 1
         expect(emblaApi.selectedSnap()).toBe(i)

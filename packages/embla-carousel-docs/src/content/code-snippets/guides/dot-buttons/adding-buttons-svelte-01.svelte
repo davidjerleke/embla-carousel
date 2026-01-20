@@ -5,7 +5,7 @@
   let options = { loop: false }
   let scrollSnaps = []
 
-  const scrollToSnap = (index) => emblaApi?.scrollToSnap(index)
+  const goTo = (index) => emblaApi?.goTo(index)
   const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())
 
   const onInit = (event) => {
@@ -31,7 +31,7 @@
 
   <div class="embla__dots">
     {#each scrollSnaps as _, index}
-      <button class="embla__dot" on:click={() => scrollToSnap(index)}>
+      <button class="embla__dot" on:click={() => goTo(index)}>
         <!-- Button content -->
       </button>
     {/each}

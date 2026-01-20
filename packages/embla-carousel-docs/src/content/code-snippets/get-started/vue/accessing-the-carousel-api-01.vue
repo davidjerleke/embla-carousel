@@ -3,8 +3,8 @@ import useEmblaCarousel from 'embla-carousel-vue'
 
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 
-const scrollToPrev = () => emblaApi.value?.scrollToPrev()
-const scrollToNext = () => emblaApi.value?.scrollToNext()
+const goToPrev = () => emblaApi.value?.goToPrev()
+const goToNext = () => emblaApi.value?.goToNext()
 </script>
 
 <template>
@@ -17,7 +17,7 @@ const scrollToNext = () => emblaApi.value?.scrollToNext()
       </div>
     </div>
 
-    <button class="embla__prev" @click="scrollToPrev">Scroll to prev</button>
-    <button class="embla__next" @click="scrollToNext">Scroll to next</button>
+    <button class="embla__prev" @click="goToPrev">Scroll to prev</button>
+    <button class="embla__next" @click="goToNext">Scroll to next</button>
   </div>
 </template>

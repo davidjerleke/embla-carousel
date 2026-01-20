@@ -8,7 +8,7 @@ export function EmblaCarousel() {
   const [scrollSnaps, setScrollSnaps] = createSignal([])
   const [selectedSnap, setSelectedSnap] = createSignal(0)
 
-  const scrollToSnap = (index) => emblaApi()?.scrollToSnap(index)
+  const goTo = (index) => emblaApi()?.goTo(index)
   const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
   const setActiveSnap = (emblaApi) => setSelectedSnap(emblaApi.selectedSnap())
 
@@ -42,7 +42,7 @@ export function EmblaCarousel() {
               class={'embla__dot'.concat(
                 index() === selectedSnap() ? ' embla__dot--selected' : ''
               )}
-              onClick={() => scrollToSnap(index())}
+              onClick={() => goTo(index())}
             >
               {/* Button content */}
             </button>

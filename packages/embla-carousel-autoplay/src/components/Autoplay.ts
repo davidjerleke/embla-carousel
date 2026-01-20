@@ -269,14 +269,14 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     const kill = options.stopOnLastSnap && nextIndex === lastIndex
 
     const event = emblaApi.createEvent('autoplay:select', {
-      targetSnap: emblaApi.canScrollToNext() ? nextIndex : 0,
+      targetSnap: emblaApi.canGoToNext() ? nextIndex : 0,
       sourceSnap: indexCurrent.get()
     })
 
-    if (emblaApi.canScrollToNext()) {
-      emblaApi.scrollToNext(instant)
+    if (emblaApi.canGoToNext()) {
+      emblaApi.goToNext(instant)
     } else {
-      emblaApi.scrollToSnap(0, instant)
+      emblaApi.goTo(0, instant)
     }
 
     event.emit()

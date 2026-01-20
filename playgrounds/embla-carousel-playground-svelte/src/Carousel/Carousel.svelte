@@ -15,8 +15,8 @@
   let emblaApi: EmblaCarouselType | null = $state(null)
 
   let actionAttached = $state(false)
-  let prevBtnEnabled = $state(emblaServerApi.canScrollToPrev())
-  let nextBtnEnabled = $state(emblaServerApi.canScrollToNext())
+  let prevBtnEnabled = $state(emblaServerApi.canGoToPrev())
+  let nextBtnEnabled = $state(emblaServerApi.canGoToNext())
   let scrollSnaps = $state<number[]>([])
   let selectedIndex = $state(emblaServerApi.selectedSnap())
   let showSsr = $derived(isSsr && !emblaApi)
@@ -39,21 +39,21 @@
   }
 
   function onSelect(emblaApi: EmblaCarouselType): void {
-    prevBtnEnabled = emblaApi.canScrollToPrev()
-    nextBtnEnabled = emblaApi.canScrollToNext()
+    prevBtnEnabled = emblaApi.canGoToPrev()
+    nextBtnEnabled = emblaApi.canGoToNext()
     selectedIndex = emblaApi.selectedSnap()
   }
 
   function scrollPrev(): void {
-    emblaApi?.scrollToPrev()
+    emblaApi?.goToPrev()
   }
 
   function scrollNext(): void {
-    emblaApi?.scrollToNext()
+    emblaApi?.goToNext()
   }
 
   function scrollTo(index: number): void {
-    emblaApi?.scrollToSnap(index)
+    emblaApi?.goTo(index)
   }
 
   setTimeout(

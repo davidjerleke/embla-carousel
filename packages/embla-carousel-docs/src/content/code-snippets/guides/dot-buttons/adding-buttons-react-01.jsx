@@ -5,7 +5,7 @@ export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
   const [scrollSnaps, setScrollSnaps] = useState([])
 
-  const scrollToSnap = (index) => emblaApi?.scrollToSnap(index)
+  const goTo = (index) => emblaApi?.goTo(index)
   const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export function EmblaCarousel() {
           <button
             className="embla__dot"
             key={index}
-            onClick={() => scrollToSnap(index)}
+            onClick={() => goTo(index)}
           >
             {/* Button content */}
           </button>

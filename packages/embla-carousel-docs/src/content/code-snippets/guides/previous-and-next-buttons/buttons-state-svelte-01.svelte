@@ -6,12 +6,12 @@
   let nextButtonDisabled = true
   let options = { loop: false }
 
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
+  const goToPrev = () => emblaApi?.goToPrev()
+  const goToNext = () => emblaApi?.goToNext()
 
   const toggleButtonsDisabled = (emblaApi) => {
-    prevButtonDisabled = !emblaApi.canScrollToPrev()
-    nextButtonDisabled = !emblaApi.canScrollToNext()
+    prevButtonDisabled = !emblaApi.canGoToPrev()
+    nextButtonDisabled = !emblaApi.canGoToNext()
   }
 
   const onInit = (event) => {
@@ -36,18 +36,10 @@
     </div>
   </div>
 
-  <button
-    class="embla__prev"
-    on:click={scrollToPrev}
-    disabled={prevButtonDisabled}
-  >
+  <button class="embla__prev" on:click={goToPrev} disabled={prevButtonDisabled}>
     Scroll to prev
   </button>
-  <button
-    class="embla__next"
-    on:click={scrollToNext}
-    disabled={nextButtonDisabled}
-  >
+  <button class="embla__next" on:click={goToNext} disabled={nextButtonDisabled}>
     Scroll to next
   </button>
 </div>

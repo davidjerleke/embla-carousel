@@ -6,17 +6,17 @@ export const usePrevNextButtons = (emblaApi) => {
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollToPrev()
+    emblaApi.goToPrev()
   }, [emblaApi])
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollToNext()
+    emblaApi.goToNext()
   }, [emblaApi])
 
   const onSelect = useCallback((emblaApi) => {
-    setPrevBtnDisabled(!emblaApi.canScrollToPrev())
-    setNextBtnDisabled(!emblaApi.canScrollToNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {

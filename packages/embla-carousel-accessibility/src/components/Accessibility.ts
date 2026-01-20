@@ -292,8 +292,8 @@ function Accessibility(
   }
 
   function updatePrevAndNextButtons(): void {
-    const isPrevDisabled = !emblaApi.canScrollToPrev()
-    const isNextDisabled = !emblaApi.canScrollToNext()
+    const isPrevDisabled = !emblaApi.canGoToPrev()
+    const isNextDisabled = !emblaApi.canGoToNext()
 
     prevButtonAttributes.toggle('aria-disabled', isPrevDisabled)
     nextButtonAttributes.toggle('aria-disabled', isNextDisabled)

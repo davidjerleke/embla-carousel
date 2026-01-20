@@ -5,8 +5,8 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
 
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
+  const goToPrev = () => emblaApi?.goToPrev()
+  const goToNext = () => emblaApi?.goToNext()
 
   useEffect(() => {
     if (!emblaApi) return
@@ -23,10 +23,10 @@ export function EmblaCarousel() {
         </div>
       </div>
 
-      <button className="embla__prev" onClick={scrollToPrev}>
+      <button className="embla__prev" onClick={goToPrev}>
         Scroll to prev
       </button>
-      <button className="embla__next" onClick={scrollToNext}>
+      <button className="embla__next" onClick={goToNext}>
         Scroll to next
       </button>
     </div>

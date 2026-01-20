@@ -24,7 +24,7 @@ export const usePrevNextButtons = (
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollToPrev()
+    emblaApi.goToPrev()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
@@ -35,7 +35,7 @@ export const usePrevNextButtons = (
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollToNext()
+    emblaApi.goToNext()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
@@ -45,8 +45,8 @@ export const usePrevNextButtons = (
   ])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollToPrev())
-    setNextBtnDisabled(!emblaApi.canScrollToNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {

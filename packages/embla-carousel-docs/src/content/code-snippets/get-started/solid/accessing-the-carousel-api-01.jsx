@@ -3,8 +3,8 @@ import useEmblaCarousel from 'embla-carousel-solid'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: false }))
 
-  const scrollToPrev = () => emblaApi()?.scrollToPrev()
-  const scrollToNext = () => emblaApi()?.scrollToNext()
+  const goToPrev = () => emblaApi()?.goToPrev()
+  const goToNext = () => emblaApi()?.goToNext()
 
   return (
     <div class="embla">
@@ -16,10 +16,10 @@ export function EmblaCarousel() {
         </div>
       </div>
 
-      <button class="embla__prev" onClick={scrollToPrev}>
+      <button class="embla__prev" onClick={goToPrev}>
         Scroll to prev
       </button>
-      <button class="embla__next" onClick={scrollToNext}>
+      <button class="embla__next" onClick={goToNext}>
         Scroll to next
       </button>
     </div>

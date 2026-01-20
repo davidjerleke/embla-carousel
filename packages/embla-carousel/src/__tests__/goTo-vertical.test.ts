@@ -1,8 +1,8 @@
 import EmblaCarousel from '../components/EmblaCarousel'
 import { mockTestElements } from './mocks'
-import { FIXTURE_SCROLL_TO_SNAP_Y } from './fixtures/scrollToSnap-vertical.fixture'
+import { FIXTURE_SCROLL_TO_SNAP_Y } from './fixtures/goTo-vertical.fixture'
 
-describe('➡️  ScrollToSnap - Vertical', () => {
+describe('➡️  goTo - Vertical', () => {
   describe('Starts scrolling to correct snap when INSTANT parameter is FALSE and slidesToScroll is:', () => {
     test('Default (1)', (done) => {
       const emblaApi = EmblaCarousel(
@@ -20,7 +20,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex)
+        emblaApi.goTo(snapIndex)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -48,7 +48,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex)
+        emblaApi.goTo(snapIndex)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -75,7 +75,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex, true)
+        emblaApi.goTo(snapIndex, true)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]
@@ -102,7 +102,7 @@ describe('➡️  ScrollToSnap - Vertical', () => {
       let snapIndex = firstIndex
 
       while (snapIndex !== lastIndex) {
-        emblaApi.scrollToSnap(snapIndex, true)
+        emblaApi.goTo(snapIndex, true)
         expect(emblaApi.selectedSnap()).toBe(snapIndex)
         expect(emblaApi.internalEngine().target.get()).toBe(
           scrollSnaps[snapIndex]

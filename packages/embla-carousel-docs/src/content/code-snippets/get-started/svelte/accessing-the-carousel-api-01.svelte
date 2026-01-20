@@ -4,8 +4,8 @@
   let emblaApi
   let options = { loop: false }
 
-  const scrollToPrev = () => emblaApi?.scrollToPrev()
-  const scrollToNext = () => emblaApi?.scrollToNext()
+  const goToPrev = () => emblaApi?.goToPrev()
+  const goToNext = () => emblaApi?.goToNext()
 
   const onInit = (event) => {
     emblaApi = event.detail
@@ -25,6 +25,6 @@
     </div>
   </div>
 
-  <button class="embla__prev" on:click={scrollToPrev}>Scroll to prev</button>
-  <button class="embla__next" on:click={scrollToNext}>Scroll to next</button>
+  <button class="embla__prev" on:click={goToPrev}>Scroll to prev</button>
+  <button class="embla__next" on:click={goToNext}>Scroll to next</button>
 </div>

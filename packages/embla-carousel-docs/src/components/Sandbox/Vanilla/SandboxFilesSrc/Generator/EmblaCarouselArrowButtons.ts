@@ -6,13 +6,13 @@ const addTogglePrevNextButtonsActive = (
   nextBtn: HTMLElement
 ): void => {
   const togglePrevNextButtonsState = (): void => {
-    if (emblaApi.canScrollToPrev()) {
+    if (emblaApi.canGoToPrev()) {
       prevBtn.classList.remove('embla__button--disabled')
     } else {
       prevBtn.classList.add('embla__button--disabled')
     }
 
-    if (emblaApi.canScrollToNext()) {
+    if (emblaApi.canGoToNext()) {
       nextBtn.classList.remove('embla__button--disabled')
     } else {
       nextBtn.classList.add('embla__button--disabled')
@@ -35,13 +35,13 @@ export const addPrevNextButtonClickHandlers = (
   /*__NAV_AUTOPLAY_REPLACE_END__*/
 ): void => {
   const scrollPrev = (): void => {
-    emblaApi.scrollToPrev()
+    emblaApi.goToPrev()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
   }
   const scrollNext = (): void => {
-    emblaApi.scrollToNext()
+    emblaApi.goToNext()
     /*__NAV_AUTOPLAY_REPLACE_START__*/
     if (onButtonClick) onButtonClick(emblaApi)
     /*__NAV_AUTOPLAY_REPLACE_END__*/
