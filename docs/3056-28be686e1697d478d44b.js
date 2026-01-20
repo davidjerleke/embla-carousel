@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[3056],{13056:function(s,e,o){o.r(e),o.d(e,{EXAMPLE:function(){return i}});var t=o(78312),u=o(3402),l=o(51664),n=o(30440),a=o(97736);const c={loop:!1},r={id:"embla-carousel-dot-buttons",slides:(0,t.F)(5),options:c,styles:(0,a.k2)("70%","2rem",c,(0,l.i)(a.EW,a.kk,a.vj,a.MD,a.Pz))},d=(0,u.v)(r,"Guides/DotButtons"),i={Carousel:n.default,config:r,sandboxes:d}}}]);
+//# sourceMappingURL=3056-28be686e1697d478d44b.js.map

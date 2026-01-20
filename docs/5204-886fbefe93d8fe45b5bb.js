@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[5204],{65204:function(e,s,i){i.r(s),i.d(s,{EXAMPLE:function(){return d}});var a=i(78312),c=i(3402),l=i(51664),n=i(82303),o=i(97736);const t={},u={id:"embla-carousel-slide-sizes-interactive",slides:(0,a.F)(8),options:t,styles:(0,o.k2)("70%","0",t,(0,l.i)(o.EW,o.kk,o.vj,o.DA,o.pJ))},r=(0,c.v)(u,"Guides/SlideSizesInteractive"),d={Carousel:n.default,config:u,sandboxes:r}}}]);
+//# sourceMappingURL=5204-886fbefe93d8fe45b5bb.js.map

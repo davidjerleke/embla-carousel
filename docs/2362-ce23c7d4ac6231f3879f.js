@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[2362],{32362:function(e,s,r){r.r(s),r.d(s,{EXAMPLE:function(){return t}});var o=r(78312),a=r(3402),c=r(51664),l=r(82498),n=r(97736);const u={dragFree:!0},d={id:"embla-carousel-progress",slides:(0,o.F)(5),options:u,styles:(0,n.k2)("65%","1rem",u,(0,c.i)(n.F6,n.EW,n.kk,n.fB))},i=(0,a.v)(d,"Predefined/Progress"),t={Carousel:l.default,config:d,sandboxes:i}}}]);
+//# sourceMappingURL=2362-ce23c7d4ac6231f3879f.js.map

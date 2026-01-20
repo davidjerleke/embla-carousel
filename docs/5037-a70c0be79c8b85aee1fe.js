@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[5037],{55037:function(e,n,o){o.r(n),n.default="export const addRadioFormHandler = (formNode, radioNodes, onChange) => {\n    if (!formNode || !radioNodes.length)\n        return;\n    \n    radioNodes.forEach((radioNode) => {\n        radioNode.addEventListener('change', (event) => {\n            const value = event.target.value;\n            return onChange(value);\n        });\n    });\n};\n"}}]);
+//# sourceMappingURL=5037-a70c0be79c8b85aee1fe.js.map

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[4255],{34255:function(n,s,e){e.r(s),e.d(s,{EXAMPLE:function(){return d}});var l=e(78312),o=e(3402),a=e(51664),c=e(70111),i=e(97736);const t={align:"center",containScroll:"trimSnaps"},r={id:"embla-carousel-alignments-contain-scroll",slides:(0,l.F)(8),options:t,styles:(0,i.k2)("70%","2rem",t,(0,a.i)(i.EW,i.kk,i.vj,i.Pz,i.Tq,i.DA))},u=(0,o.v)(r,"Guides/AlignmentsContainScroll"),d={Carousel:c.default,config:r,sandboxes:u}}}]);
+//# sourceMappingURL=4255-927950507a5dd15954c2.js.map

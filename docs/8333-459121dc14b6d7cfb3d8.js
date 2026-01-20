@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[8333],{8333:function(s,r,e){e.r(r),r.default="\nexport const setupProgressBar = (emblaApi, progressNode) => {\n    const applyProgress = () => {\n        const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()));\n        progressNode.style.transform = `translate3d(${progress * 100}%,0px,0px)`;\n    };\n    \n    return applyProgress;\n};\n"}}]);
+//# sourceMappingURL=8333-459121dc14b6d7cfb3d8.js.map

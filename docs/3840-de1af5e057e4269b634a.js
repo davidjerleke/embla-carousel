@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[3840],{73840:function(e,s,i){i.r(s),i.d(s,{EXAMPLE:function(){return d}});var l=i(78312),o=i(3402),c=i(51664),n=i(97797),r=i(97736);const u={slidesToScroll:1},a={id:"embla-carousel-grouping-slides-interactive",slides:(0,l.F)(10),options:u,styles:(0,r.k2)("40%","1rem",u,(0,c.i)(r.EW,r.kk,r.vj,r.Pz,r.DA,r.ZS))},t=(0,o.v)(a,"Guides/GroupingSlidesInteractive"),d={Carousel:n.default,config:a,sandboxes:t}}}]);
+//# sourceMappingURL=3840-de1af5e057e4269b634a.js.map

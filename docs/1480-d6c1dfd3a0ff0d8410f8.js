@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[1480],{11480:function(e,s,a){a.r(s),a.d(s,{EXAMPLE:function(){return d}});var c=a(78312),i=a(3402),l=a(51664),n=a(64032),o=a(97736);const t={},u={id:"embla-carousel-slide-gaps-interactive",slides:(0,c.F)(8),options:t,styles:(0,o.k2)("70%","10px",t,(0,l.i)(o.EW,o.kk,o.vj,o.DA,o.pJ))},r=(0,i.v)(u,"Guides/SlideGapsInteractive"),d={Carousel:n.default,config:u,sandboxes:r}}}]);
+//# sourceMappingURL=1480-d6c1dfd3a0ff0d8410f8.js.map

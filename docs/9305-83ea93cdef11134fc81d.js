@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[9305],{99305:function(e,s,o){o.r(s),o.d(s,{EXAMPLE:function(){return d}});var t=o(78312),l=o(3402),r=o(51664),c=o(24909),i=o(97736);const n={direction:"rtl"},a={id:"embla-carousel-right-to-left",slides:(0,t.F)(5),options:n,styles:(0,i.k2)("100%","1rem",n,(0,r.i)(i.F6,i.EW,i.kk,i.MD))},u=(0,l.v)(a,"Predefined/RightToLeft"),d={Carousel:c.default,config:a,sandboxes:u}}}]);
+//# sourceMappingURL=9305-83ea93cdef11134fc81d.js.map

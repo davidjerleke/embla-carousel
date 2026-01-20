@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[3875],{23875:function(e,s,o){o.r(s),o.d(s,{EXAMPLE:function(){return i}});var l=o(78312),c=o(3402),u=o(51664),a=o(41854),r=o(97736);const n={loop:!0},t={id:"embla-carousel-auto-scroll",slides:(0,l.F)(8),options:n,styles:(0,r.k2)("45%","1rem",n,(0,u.i)(r.F6,r.EW,r.kk,r.Te))},d=(0,c.v)(t,"Predefined/AutoScroll"),i={Carousel:a.default,config:t,sandboxes:d}}}]);
+//# sourceMappingURL=3875-5ff9472d9fa947759e0a.js.map

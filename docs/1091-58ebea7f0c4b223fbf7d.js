@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[1091],{41091:function(e,s,o){o.r(s),o.d(s,{EXAMPLE:function(){return d}});var a=o(78312),c=o(3402),l=o(51664),n=o(94084),u=o(97736);const i={loop:!0},r={id:"embla-carousel-opacity",slides:(0,a.F)(5),options:i,styles:(0,u.k2)("70%","1rem",i,(0,l.i)(u.$E,u.EW,u.kk,u.MD))},t=(0,c.v)(r,"Predefined/Opacity"),d={Carousel:n.default,config:r,sandboxes:t}}}]);
+//# sourceMappingURL=1091-58ebea7f0c4b223fbf7d.js.map

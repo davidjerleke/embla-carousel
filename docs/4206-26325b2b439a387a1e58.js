@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[4206],{34206:function(e,s,n){n.r(s),n.d(s,{EXAMPLE:function(){return d}});var a=n(78312),l=n(3402),t=n(51664),c=n(72092),i=n(97736);const o={align:"center",loop:!0},r={id:"embla-carousel-alignments-interactive",slides:(0,a.F)(8),options:o,styles:(0,i.k2)("70%","2rem",o,(0,t.i)(i.EW,i.kk,i.vj,i.Pz,i.Tq,i.DA))},u=(0,l.v)(r,"Guides/AlignmentsInteractive"),d={Carousel:c.default,config:r,sandboxes:u}}}]);
+//# sourceMappingURL=4206-26325b2b439a387a1e58.js.map

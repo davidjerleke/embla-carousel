@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[829],{50829:function(s,e,o){o.r(e),o.d(e,{EXAMPLE:function(){return r}});var a=o(78312),i=o(3402),l=o(51664),n=o(29240),u=o(97736);const c={loop:!0},t={id:"embla-carousel-minimal-dom-manipulation",slides:(0,a.F)(5),options:c,styles:(0,u.k2)("70%","1rem",c,(0,l.i)(u.F6,u.EW,u.kk,u.MD))},m=(0,i.v)(t,"Guides/MinimalDomManipulation"),r={Carousel:n.default,config:t,sandboxes:m}}}]);
+//# sourceMappingURL=829-ab188e9adc48d751f150.js.map

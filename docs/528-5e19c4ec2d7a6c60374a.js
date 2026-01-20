@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkembla_carousel_docs=self.webpackChunkembla_carousel_docs||[]).push([[528],{50528:function(s,e,o){o.r(e),o.d(e,{EXAMPLE:function(){return d}});var u=o(78312),n=o(3402),t=o(51664),a=o(53048),l=o(97736);const c={loop:!1},r={id:"embla-carousel-previous-and-next-buttons",slides:(0,u.F)(8),options:c,styles:(0,l.k2)("70%","2rem",c,(0,t.i)(l.EW,l.kk,l.vj,l.DA,l.Pz))},i=(0,n.v)(r,"Guides/PreviousAndNextButtons"),d={Carousel:a.default,config:r,sandboxes:i}}}]);
+//# sourceMappingURL=528-5e19c4ec2d7a6c60374a.js.map
