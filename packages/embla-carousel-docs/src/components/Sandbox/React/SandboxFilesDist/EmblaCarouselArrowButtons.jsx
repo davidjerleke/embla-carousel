@@ -1,31 +1,29 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-export const usePrevNextButtons = (emblaApi, onButtonClick) => {
+export const usePrevNextButtons = (emblaApi) => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollPrev()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+    emblaApi.goToPrev()
+  }, [emblaApi])
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollNext()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+    emblaApi.goToNext()
+  }, [emblaApi])
 
   const onSelect = useCallback((emblaApi) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev())
-    setNextBtnDisabled(!emblaApi.canScrollNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {
     if (!emblaApi) return
 
     onSelect(emblaApi)
-    emblaApi.on('reInit', onSelect).on('select', onSelect)
+    emblaApi.on('reinit', onSelect).on('select', onSelect)
   }, [emblaApi, onSelect])
 
   return {
@@ -37,11 +35,13 @@ export const usePrevNextButtons = (emblaApi, onButtonClick) => {
 }
 
 export const PrevButton = (props) => {
-  const { children, ...restProps } = props
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className={'embla__button embla__button--prev'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >
@@ -57,11 +57,13 @@ export const PrevButton = (props) => {
 }
 
 export const NextButton = (props) => {
-  const { children, ...restProps } = props
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--next"
+      className={'embla__button embla__button--next'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >

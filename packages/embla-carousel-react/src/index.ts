@@ -1,5 +1,5 @@
 export {
   UseEmblaCarouselType,
-  EmblaViewportRefType
+  EmblaRootNodeRefType
 } from './components/useEmblaCarousel'
 export { default } from './components/useEmblaCarousel'

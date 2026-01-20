@@ -1,37 +1,59 @@
 import { AxisType } from './Axis'
-import { roundToTwoDecimals } from './utils'
+import {
+  roundToTwoDecimals,
+  NumberStoreInputType,
+  mapStoreToNumber
+} from './utils'
 
 export type TranslateType = {
-  clear: () => void
-  to: (target: number) => void
+  set: (translate: string) => void
+  get: (input: NumberStoreInputType) => string
+  to: (input: NumberStoreInputType) => void
+  setIsScrolling: (active: boolean) => void
   toggleActive: (active: boolean) => void
+  clear: () => void
 }
 
 export function Translate(
   axis: AxisType,
-  container: HTMLElement
+  node: HTMLElement,
+  unit: 'px' | '%' = 'px'
 ): TranslateType {
-  const translate = axis.scroll === 'x' ? x : y
-  const containerStyle = container.style
-  let previousTarget: number | null = null
+  const getTranslate = axis.scroll === 'x' ? x : y
+
+  let lastTranslate: string | null = null
+  let isScrolling = false
   let disabled = false
 
-  function x(n: number): string {
-    return `translate3d(${n}px,0px,0px)`
+  function set(translate: string): void {
+    if (lastTranslate === translate) return
+    lastTranslate = translate
+    node.style.transform = translate
   }
 
-  function y(n: number): string {
-    return `translate3d(0px,${n}px,0px)`
+  function x(input: number): string {
+    return `translate3d(${input}${unit},0px,0px)`
   }
 
-  function to(target: number): void {
+  function y(input: number): string {
+    return `translate3d(0px,${input}${unit},0px)`
+  }
+
+  function setIsScrolling(active: boolean): void {
     if (disabled) return
+    if (isScrolling === active) return
 
-    const newTarget = roundToTwoDecimals(axis.direction(target))
-    if (newTarget === previousTarget) return
+    isScrolling = active
+    const transform = active ? getTranslate(0) : ''
+    set(transform)
+  }
 
-    containerStyle.transform = translate(newTarget)
-    previousTarget = newTarget
+  function to(input: number): void {
+    if (disabled) return
+    if (!isScrolling) setIsScrolling(true)
+
+    const newTarget = roundToTwoDecimals(axis.direction(input))
+    set(getTranslate(newTarget))
   }
 
   function toggleActive(active: boolean): void {
@@ -39,15 +61,17 @@ export function Translate(
   }
 
   function clear(): void {
-    if (disabled) return
-    containerStyle.transform = ''
-    if (!container.getAttribute('style')) container.removeAttribute('style')
+    set('')
+    if (!node.getAttribute('style')) node.removeAttribute('style')
   }
 
   const self: TranslateType = {
+    set,
     clear,
-    to,
-    toggleActive
+    to: mapStoreToNumber(to),
+    get: mapStoreToNumber(getTranslate),
+    toggleActive,
+    setIsScrolling
   }
   return self
 }

@@ -1,0 +1,107 @@
+import React, { useState } from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
+import useEmblaCarousel from 'embla-carousel-react'
+import {
+  NextButton,
+  PrevButton,
+  usePrevNextButtons
+} from '../../EmblaCarouselArrowButtons'
+import RadioForm from '../../EmblaCarouselRadioForm'
+import {
+  SelectedSnapDisplay,
+  useSelectedSnapDisplay
+} from '../../EmblaCarouselSelectedSnapDisplay'
+import { sandboxImages } from 'components/Sandbox/sandboxImages'
+
+const ALIGNMENTS = ['start', 'center', 'end']
+const CONTAIN_SCROLL = ['trimSnaps', 'false']
+
+type PropType = {
+  slides: number[]
+  options?: EmblaOptionsType
+}
+
+const EmblaCarousel = (props: PropType) => {
+  const { slides, options } = props
+  const [dynamicOptions, setDynamicOptions] = useState<EmblaOptionsType>({
+    ...options
+  })
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...options,
+    ...dynamicOptions
+  })
+
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
+
+  const { selectedSnap, snapCount } = useSelectedSnapDisplay(emblaApi)
+
+  return (
+    <div className="embla">
+      <RadioForm
+        property="align"
+        values={ALIGNMENTS}
+        selected={dynamicOptions.align?.toString()}
+        onChange={(value) => {
+          setDynamicOptions((currentOptions) => ({
+            ...currentOptions,
+            align: value as EmblaOptionsType['align']
+          }))
+        }}
+      />
+
+      <RadioForm
+        property="containScroll"
+        values={CONTAIN_SCROLL}
+        selected={dynamicOptions.containScroll?.toString()}
+        onChange={(value) => {
+          setDynamicOptions((currentOptions) => ({
+            ...currentOptions,
+            containScroll:
+              value === 'false'
+                ? false
+                : (value as EmblaOptionsType['containScroll'])
+          }))
+        }}
+      />
+
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          {slides.map((index) => (
+            <div className="embla__slide" key={index}>
+              <img
+                className="embla__slide__img"
+                src={sandboxImages(index)}
+                alt="Your alt text"
+              />
+            </div>
+          ))}
+        </div>
+
+        <span
+          className={'embla__align-indicator'.concat(
+            ` embla__align-indicator--${dynamicOptions.align}`
+          )}
+        />
+      </div>
+
+      <div className="embla__controls">
+        <div className="embla__buttons">
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+        </div>
+
+        <SelectedSnapDisplay
+          selectedSnap={selectedSnap}
+          snapCount={snapCount}
+        />
+      </div>
+    </div>
+  )
+}
+
+export default EmblaCarousel

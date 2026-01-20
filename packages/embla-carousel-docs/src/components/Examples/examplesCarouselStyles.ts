@@ -3,14 +3,16 @@ import { LAYERS } from 'consts/layers'
 import { COLORS } from 'consts/themes'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_RADIUSES, BORDER_SIZES } from 'consts/border'
-import { MEDIA } from 'consts/breakpoints'
 import { FONT_SIZES, FONT_WEIGHTS } from 'consts/fontSizes'
 import { EmblaOptionsType } from 'embla-carousel'
 import { createSquareSizeStyles } from 'utils/createSquareSizeStyles'
 import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
 import { TAP_HIGHLIGHT_STYLES } from 'consts/tapHighlight'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from 'consts/gradients'
+import { visuallyHiddenStyles } from 'utils/visuallyHiddenStyles'
 
-const CAROUSEL_MAX_WIDTH = '48rem'
+export const CAROUSEL_MAX_WIDTH = '48rem'
+
 export const CAROUSEL_DEFAULT_HEIGHT = '19rem'
 export const CAROUSEL_SLIDES_SPACING = '1rem'
 
@@ -19,16 +21,32 @@ export const CAROUSEL_THUMB_SLIDES_SPACING = '0.8rem'
 
 export const CAROUSEL_IOS_PICKER_HEIGHT = '22.2rem'
 
-export const CAROUSEL_NAV_BUTTON_SIZE = SPACINGS.SIX
-export const CAROUSEL_CONTROLS_SPACING = SPACINGS.THREE
+export const CAROUSEL_NAV_BUTTON_SIZE = '3.6rem'
+export const CAROUSEL_CONTROLS_SPACING = '1.8rem'
+
+export const CAROUSEL_RADIO_SIZE = '2.5rem'
+export const CAROUSEL_RADIO_CHECK_SIZE = '1.2rem'
+
+export const CAROUSEL_SCROLLBAR_HEIGHT = '1.6rem'
+export const CAROUSEL_SCROLLBAR_TRACK_HEIGHT = '0.6rem'
+export const CAROUSEL_SCROLLBAR_SPACING = CAROUSEL_CONTROLS_SPACING
+
+export const GROUP_INDICATOR_SIZE = '0.6rem'
+export const GROUP_INDICATOR_COLOR = COLORS.BRAND_PRIMARY
 
 export const CAROUSEL_SLIDE_RADIUS_STYLES = css`
   border-radius: ${BORDER_RADIUSES.SOFT};
 `
 
-export const CAROUSEL_BORDER_SHADOW_STYLES = css`
-  box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE}
-    ${COLORS.DETAIL_MEDIUM_CONTRAST};
+export const CAROUSEL_BORDER_STYLES = css`
+  border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+`
+
+export const CAROUSEL_BASE_IMAGE_STYLES = css`
+  display: block;
+  height: var(--slide-height);
+  width: 100%;
+  object-fit: cover;
 `
 
 export const CAROUSEL_BUTTON_BASE_STYLES = css`
@@ -45,48 +63,279 @@ export const CAROUSEL_BUTTON_BASE_STYLES = css`
   margin: 0;
 `
 
-export const BASE_STYLES = css`
-  .embla {
-    max-width: ${CAROUSEL_MAX_WIDTH};
-    margin: auto;
-    
-    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
-    --slide-spacing: __replace_axis_spacing_amount__;
-    --slide-size: __replace_slide_size__;
-  }
-  
-  .embla__viewport {
-    overflow: hidden;
+export const BASE_BUTTON_STYLES = css`
+  ${TAP_HIGHLIGHT_STYLES};
+  ${CAROUSEL_BUTTON_BASE_STYLES};
+  ${CAROUSEL_BORDER_STYLES};
+  ${CAROUSEL_SLIDE_RADIUS_STYLES};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${COLORS.TEXT_BODY};
+  font-weight: ${FONT_WEIGHTS.BOLD};
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
+  padding: 0 ${SPACINGS.FOUR};
+  min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+`
+
+const TEXT_INPUT_STYLES = css`
+  .embla__text-input {
+    ${TAP_HIGHLIGHT_STYLES};
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    color: ${COLORS.TEXT_BODY};
+    background-color: ${COLORS.BACKGROUND_CODE};
+    border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
+    padding: ${SPACINGS.ONE} ${SPACINGS.ONE};
+    font-size: ${FONT_SIZES.BODY};
+    min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+    text-align: center;
   }
 
-  .embla__container {
-    display: flex;
-    touch-action: __replace-axis-touch_action__;
-    margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
-    __replace_axis_height__
-    __replace_axis_flex__
+  .embla__text-input {
+    -moz-appearance: textfield;
   }
 
-  .embla__slide {
-    transform: translate3d(0, 0, 0);
-    flex: 0 0 var(--slide-size);
-    min-__replace-axis-size__: 0;
-    padding-__replace_axis_spacing__: var(--slide-spacing);
+  .embla__text-input::-webkit-inner-spin-button,
+  .embla__text-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 `
 
-export const SLIDES_PER_VIEW_STYLES = css`
+export const TEXT_INPUT_FORM_STYLES = css`
+  ${TEXT_INPUT_STYLES};
+
+  .embla__text-form {
+    display: flex;
+    justify-content: space-between;
+    gap: ${SPACINGS.TWO};
+    margin-bottom: ${CAROUSEL_CONTROLS_SPACING};
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+  }
+
+  .embla__text-form__label {
+    display: flex;
+    align-items: center;
+    gap: ${SPACINGS.ONE};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+  }
+
+  .embla__text-form__submit {
+    ${BASE_BUTTON_STYLES};
+    padding: 0 ${SPACINGS.THREE};
+  }
+`
+
+const RADIO_INPUT_STYLES = css`
+  .embla__radio-form {
+    min-height: ${CAROUSEL_NAV_BUTTON_SIZE};
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+  }
+
+  .embla__radio-wrapper {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .embla__radio-input__wrapper {
+    flex: 0 0 ${CAROUSEL_RADIO_SIZE};
+    position: relative;
+    min-width: 0;
+    margin-right: ${SPACINGS.ONE};
+  }
+
+  .embla__radio-input__line-height {
+    color: ${COLORS.BACKGROUND_SITE};
+    width: ${CAROUSEL_RADIO_SIZE};
+    display: inline-block;
+    line-height: inherit;
+  }
+
+  .embla__radio-form__label {
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+    gap: ${SPACINGS.ONE};
+  }
+
+  .embla__radio-wrapper input {
+    ${TAP_HIGHLIGHT_STYLES};
+    ${createSquareSizeStyles(CAROUSEL_RADIO_SIZE)};
+    ${TAP_HIGHLIGHT_STYLES};
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+    cursor: pointer;
+    border-radius: ${BORDER_RADIUSES.CIRCLE};
+
+    &:before,
+    &:after {
+      border-radius: ${BORDER_RADIUSES.CIRCLE};
+      display: block;
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:before {
+      ${createSquareSizeStyles('2rem')};
+      background-color: ${COLORS.BACKGROUND_CODE};
+    }
+
+    &:after {
+      ${createSquareSizeStyles(CAROUSEL_RADIO_CHECK_SIZE)};
+    }
+
+    &:checked {
+      &:after {
+        ${BRAND_GRADIENT_BACKGROUND_STYLES};
+      }
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+    }
+
+    &[disabled]:checked {
+      &:after {
+        background-image: none;
+        background-color: ${COLORS.DETAIL_HIGH_CONTRAST};
+      }
+    }
+  }
+`
+
+export const RADIO_INPUT_FORM_STYLES = css`
+  ${RADIO_INPUT_STYLES};
+
+  .embla__radio-form {
+    display: flex;
+    gap: ${SPACINGS.TWO};
+    margin-bottom: ${CAROUSEL_CONTROLS_SPACING};
+  }
+
+  .embla__text-form__label {
+    display: flex;
+    align-items: center;
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
+    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
+    gap: ${SPACINGS.ONE};
+  }
+`
+
+export const ALIGNMENT_INDICATOR_STYLES = css`
+  .embla__viewport {
+    position: relative;
+  }
+
+  .embla__align-indicator {
+    position: absolute;
+    pointer-events: none;
+    top: 10%;
+    bottom: 10%;
+    width: 0.8rem;
+    opacity: 0.8;
+    border-radius: ${BORDER_RADIUSES.CARD};
+    ${BRAND_GRADIENT_BACKGROUND_STYLES};
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.BACKGROUND_SITE};
+
+    &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      border-radius: ${BORDER_RADIUSES.CARD};
+      border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.TEXT_BODY};
+      top: -${BORDER_SIZES.ACCENT_VERTICAL};
+      bottom: -${BORDER_SIZES.ACCENT_VERTICAL};
+      left: -${BORDER_SIZES.ACCENT_VERTICAL};
+      right: -${BORDER_SIZES.ACCENT_VERTICAL};
+    }
+  }
+
+  .embla__align-indicator--start {
+    left: ${BORDER_SIZES.OUTLINE};
+  }
+
+  .embla__align-indicator--center {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .embla__align-indicator--end {
+    right: ${BORDER_SIZES.OUTLINE};
+  }
+`
+
+export const GROUP_INDICATOR_STYLES = css`
+  .embla__slide {
+    position: relative;
+  }
+
+  .embla__group__indicator {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+
+  .embla__group__indicator--start {
+    left: var(--slide-spacing);
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-left: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--end {
+    left: 0;
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-right: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--center {
+    left: 0;
+    right: 0;
+    border-top: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+    border-bottom: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla__group__indicator--single {
+    left: var(--slide-spacing);
+    right: 0px;
+    border: ${GROUP_INDICATOR_SIZE} solid ${GROUP_INDICATOR_COLOR};
+  }
+
+  .embla--group-indicator-hidden .embla__group__indicator {
+    display: none;
+  }
+`
+
+export const BASE_STYLES = css`
   .embla {
-    max-width: 70rem;
+    max-width: ${CAROUSEL_MAX_WIDTH};
     margin: auto;
 
     --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
     --slide-spacing: 1rem;
     --slide-size: 100%;
-    --slide-spacing-sm: 1.6rem;
-    --slide-size-sm: 50%;
-    --slide-spacing-lg: 2rem;
-    --slide-size-lg: calc(100% / 3);
   }
 
   .embla__viewport {
@@ -94,97 +343,71 @@ export const SLIDES_PER_VIEW_STYLES = css`
   }
 
   .embla__container {
-    backface-visibility: hidden;
     display: flex;
-    touch-action: __replace-axis-touch_action__;
-    margin-__replace_axis_spacing__: calc(var(--slide-spacing) * -1);
-    __replace_axis_height__
-    __replace_axis_flex__
+    touch-action: pan-y pinch-zoom;
+    margin-left: calc(var(--slide-spacing) * -1);
   }
-
-  ${MEDIA.MIN_SM} {
-    .embla__container {
-      margin-__replace_axis_spacing__: calc(var(--slide-spacing-sm) * -1);
-    }
-  }
-  ${MEDIA.MIN_LG} {
-    .embla__container {
-      margin-__replace_axis_spacing__: calc(var(--slide-spacing-lg) * -1);
-    }
-  }
-
 
   .embla__slide {
-    min-__replace-axis-size__: 0;
     flex: 0 0 var(--slide-size);
-    padding-__replace_axis_spacing__: var(--slide-spacing);
+    min-width: 0;
+    padding-left: var(--slide-spacing);
+  }
+`
+
+export const BASE_STYLES_VERTICAL = css`
+  .embla {
+    max-width: ${CAROUSEL_MAX_WIDTH};
+    margin: auto;
+
+    --slide-height: ${CAROUSEL_DEFAULT_HEIGHT};
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
   }
 
-  ${MEDIA.MIN_SM} {
-    .embla__slide {
-      flex: 0 0 var(--slide-size-sm);
-      padding-__replace_axis_spacing__: var(--slide-spacing-sm);
-    }
+  .embla__viewport {
+    overflow: hidden;
   }
-  ${MEDIA.MIN_LG} {
-    .embla__slide {
-      flex: 0 0 var(--slide-size-lg);
-      padding-__replace_axis_spacing__: var(--slide-spacing-lg);
-    }
+
+  .embla__container {
+    display: flex;
+    touch-action: pan-x pinch-zoom;
+    margin-top: calc(var(--slide-spacing) * -1);
+    height: calc(var(--slide-spacing) + var(--slide-height));
+    flex-direction: column;
+  }
+
+  .embla__slide {
+    flex: 0 0 var(--slide-size);
+    min-height: 0;
+    padding-top: var(--slide-spacing);
   }
 `
 
 export const SLIDE_NUMBER_STYLES = css`
   .embla__slide__number {
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
     font-size: ${FONT_SIZES.CUSTOM(() => 4)};
     font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
     display: flex;
     align-items: center;
     justify-content: center;
-    height: __replace_slide_height__;
+    height: var(--slide-height);
     user-select: none;
   }
 `
 
 export const IMAGE_STYLES = css`
   .embla__slide__img {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    display: block;
-    height: __replace_slide_height__;
-    width: 100%;
-    object-fit: cover;
+    ${CAROUSEL_BASE_IMAGE_STYLES};
   }
 `
 
-export const VARIABLE_WIDTH_STYLES = css`
-  .embla__slide:nth-child(1) {
-    flex: 0 0 60%;
-  }
-  .embla__slide:nth-child(2) {
-    flex: 0 0 40%;
-  }
-  .embla__slide:nth-child(3) {
-    flex: 0 0 30%;
-  }
-  .embla__slide:nth-child(4) {
-    flex: 0 0 90%;
-  }
-  .embla__slide:nth-child(5) {
-    flex: 0 0 35%;
-  }
-  .embla__slide:nth-child(6) {
-    flex: 0 0 55%;
-  }
-  .embla__slide:nth-child(7) {
-    flex: 0 0 85%;
-  }
-  .embla__slide:nth-child(8) {
-    flex: 0 0 50%;
-  }
-  .embla__slide:nth-child(9) {
-    flex: 0 0 35%;
+export const IMAGE_ROUNDED_STYLES = css`
+  .embla__slide__img {
+    ${CAROUSEL_BASE_IMAGE_STYLES};
+    ${CAROUSEL_SLIDE_RADIUS_STYLES};
   }
 `
 
@@ -208,7 +431,7 @@ export const ARROWS_STYLES = css`
 
   .embla__button {
     ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    ${CAROUSEL_BORDER_STYLES};
     ${createSquareSizeStyles(CAROUSEL_NAV_BUTTON_SIZE)}
     z-index: ${LAYERS.STEP};
     border-radius: ${BORDER_RADIUSES.CIRCLE};
@@ -216,9 +439,10 @@ export const ARROWS_STYLES = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: rotate(0deg);
   }
 
-  .embla__button:disabled {
+  .embla__button--disabled {
     color: ${COLORS.DETAIL_HIGH_CONTRAST};
   }
 
@@ -243,19 +467,36 @@ export const DOTS_STYLES = css`
     align-items: center;
     justify-content: center;
     border-radius: ${BORDER_RADIUSES.CIRCLE};
+    position: relative;
   }
 
+  .embla__dot:before,
   .embla__dot:after {
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
     ${createSquareSizeStyles('1.4rem')}
     border-radius: ${BORDER_RADIUSES.CIRCLE};
+    position: absolute;
     display: flex;
     align-items: center;
     content: '';
   }
 
+  .embla__dot:before {
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.DETAIL_MEDIUM_CONTRAST};
+  }
+
+  .embla__dot:after {
+    border: ${BORDER_SIZES.OUTLINE} solid ${COLORS.TEXT_BODY};
+    opacity: 0;
+  }
+
   .embla__dot--selected:after {
-    box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE} ${COLORS.TEXT_BODY};
+    opacity: 1;
+  }
+`
+
+export const ACCESSIBILITY_STYLES = css`
+  .embla__live-region {
+    ${visuallyHiddenStyles};
   }
 `
 
@@ -270,108 +511,17 @@ export const SNAP_DISPLAY_STYLES = css`
 
 export const PLAY_BUTTON_STYLES = css`
   .embla__play {
-    ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    ${BASE_BUTTON_STYLES};
+    min-width: ${SPACINGS.FIFTEEN};
     justify-self: flex-end;
-    color: ${COLORS.TEXT_BODY};
-    font-weight: ${FONT_WEIGHTS.BOLD};
-    font-size: ${FONT_SIZES.COMPLEMENTARY};
-    padding: 0 ${SPACINGS.FOUR};
-    min-width: ${SPACINGS.FOURTEEN};
-  }
-`
-
-export const THUMBS_STYLES = css`
-  .embla-thumbs {
-    --thumbs-slide-spacing: ${CAROUSEL_THUMB_SLIDES_SPACING};
-    --thumbs-slide-height: ${CAROUSEL_THUMB_SLIDES_HEIGHT};
-    margin-top: var(--thumbs-slide-spacing);
-  }
-
-  .embla-thumbs__viewport {
-    overflow: hidden;
-  }
-
-  .embla-thumbs__container {
-    display: flex;
-    flex-direction: row;
-    margin-left: calc(var(--thumbs-slide-spacing) * -1);
-  }
-
-  .embla-thumbs__slide {
-    flex: 0 0 22%;
-    min-__replace-axis-size__: 0;
-    padding-left: var(--thumbs-slide-spacing);
-  }
-
-  ${MEDIA.MIN_XS} {
-    .embla-thumbs__slide {
-      flex: 0 0 15%;
-    }
-  }
-
-  .embla-thumbs__slide__number {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    ${CAROUSEL_BUTTON_BASE_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
-    font-size: ${FONT_SIZES.H4};
-    font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
-    color: ${COLORS.DETAIL_HIGH_CONTRAST};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--thumbs-slide-height);
-    width: 100%;
-  }
-
-  .embla-thumbs__slide--selected .embla-thumbs__slide__number {
-    color: ${COLORS.TEXT_BODY};
-  }
-`
-
-export const AUTOPLAY_STYLES = css`
-  .embla__controls {
-    grid-template-columns: auto 1fr auto;
-  }
-
-  .embla__progress {
-    justify-self: center;
-    transition: opacity 0.3s ease-in-out;
-    width: 8rem;
-  }
-
-  .embla__progress--hidden {
-    opacity: 0;
-  }
-
-  .embla__progress__bar {
-    animation-name: autoplay-progress;
-    animation-timing-function: linear;
-    animation-iteration-count: 1;
-  }
-
-  .embla__progress--hidden .embla__progress__bar {
-    animation-play-state: paused;
-  }
-
-  @keyframes autoplay-progress {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(100%, 0, 0);
-    }
   }
 `
 
 export const PROGRESS_STYLES = css`
   .embla__progress {
     ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    ${CAROUSEL_BORDER_SHADOW_STYLES};
+    box-shadow: inset 0 0 0 ${BORDER_SIZES.OUTLINE}
+      ${COLORS.DETAIL_MEDIUM_CONTRAST};
     background-color: ${COLORS.BACKGROUND_SITE};
     position: relative;
     height: 0.6rem;
@@ -389,170 +539,6 @@ export const PROGRESS_STYLES = css`
     top: 0;
     bottom: 0;
     left: -100%;
-  }
-`
-
-export const PARALLAX_STYLES = css`
-  .embla__parallax {
-    ${CAROUSEL_SLIDE_RADIUS_STYLES};
-    height: 100%;
-    overflow: hidden;
-  }
-
-  .embla__parallax__layer {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .embla__parallax__img {
-    max-width: none;
-    flex: 0 0 calc(115% + (var(--slide-spacing) * 2));
-    object-fit: cover;
-  }
-`
-
-const SCALE_STYLES = css`
-  .embla__slide__number {
-    backface-visibility: hidden;
-  }
-`
-
-const LAZY_LOAD_STYLES = css`
-  .embla__lazy-load {
-    position: relative;
-    height: 100%;
-  }
-
-  .embla__lazy-load__spinner {
-    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      ${COLORS.TEXT_HIGH_CONTRAST};
-    font-size: 1rem;
-    display: inline-flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    text-indent: -9999em;
-    animation: loading 1.1s infinite linear;
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla__lazy-load__spinner:after {
-    border-radius: inherit;
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla__lazy-load__img {
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .embla__lazy-load--has-loaded .embla__lazy-load__img {
-    opacity: 1;
-  }
-
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`
-
-export const AUTO_HEIGHT_STYLES = css`
-  .embla__container {
-    align-items: flex-start;
-  }
-
-  .embla__slide:nth-child(1) > .embla__slide__number {
-    height: ${CAROUSEL_DEFAULT_HEIGHT};
-  }
-  .embla__slide:nth-child(2) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} + 4rem);
-  }
-  .embla__slide:nth-child(3) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} - 2rem);
-  }
-  .embla__slide:nth-child(4) > .embla__slide__number {
-    height: calc(${CAROUSEL_DEFAULT_HEIGHT} + 2rem);
-  }
-  .embla__slide:nth-child(5) > .embla__slide__number {
-    height: ${CAROUSEL_DEFAULT_HEIGHT};
-  }
-`
-
-const CLASS_NAMES_STYLES = css`
-  .embla__slide {
-    transition: opacity 0.2s ease-in-out;
-  }
-
-  .embla__slide:not(.is-snapped) {
-    opacity: 0.16;
-  }
-`
-
-const FADE_STYLES = css`
-  .embla__slide__img {
-    user-select: none;
-  }
-`
-
-export const INFINITE_SCROLL_STYLES = css`
-  .embla-infinite-scroll {
-    position: relative;
-    flex: 0 0 15rem;
-    min-__replace-axis-size__: 0;
-    height: var(--slide-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .embla-infinite-scroll__spinner {
-    display: none;
-    border: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      rgba(${COLORS.TEXT_HIGH_CONTRAST_RGB_VALUE}, 0.2);
-    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid
-      ${COLORS.TEXT_HIGH_CONTRAST};
-    font-size: 1rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    text-indent: -9999em;
-    animation: loading 1.1s infinite linear;
-    border-radius: ${BORDER_RADIUSES.CIRCLE};
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla-infinite-scroll__spinner:after {
-    border-radius: inherit;
-    ${createSquareSizeStyles('5rem')}
-  }
-
-  .embla-infinite-scroll--loading-more > .embla-infinite-scroll__spinner {
-    display: inline-flex;
-  }
-
-  @keyframes loading {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 `
 
@@ -667,294 +653,49 @@ export const IOS_PICKER_STYLES = css`
   }
 `
 
-export const examplesCarouselDefaultStyles = (
+const SLIDE_SIZE_REGEX = /--slide-size:\s*100%;/gi
+const SPACING_SIZE_REGEX = /--slide-spacing:\s*1rem;/gi
+const SLIDE_HEIGHT_REGEX = /height\s*:\s*var\(\s*--slide-height\s*\)\s*;?/
+const BUTTON_TRANSFORM_VALUE_REGEX = /transform\s*:\s*rotate\(0deg\)\s*;?/
+
+const SLIDE_NUMBER_HEIGHT_REGEX =
+  /\.embla__slide__number\s*\{[\s\S]*?\bheight\s*:\s*var\(\s*--slide-height\s*\)\s*;?[\s\S]*?\}/
+
+const BUTTON_TRANSFORM_REGEX =
+  /\.embla__button\s*\{[\s\S]*?\btransform\s*:\s*rotate\(0deg\)\s*;?[\s\S]*?\}/
+
+export const examplesCarouselStyles = (
   slideSize: string = '100%',
   spacingSize: string = CAROUSEL_SLIDES_SPACING,
-  axis: EmblaOptionsType['axis'] = 'x',
+  options: EmblaOptionsType = {},
   customStyles: string = '',
-  baseStyles: string = styledComponentsStylesToString(BASE_STYLES)
+  baseStyles: string = ''
 ): string => {
-  const horizontal = axis === 'x'
-  const flexDirection = horizontal ? '' : 'flex-direction: column;'
-  const spacingDirection = horizontal ? 'left' : 'top'
-  const panDirection = `pan-${horizontal ? 'y' : 'x'} pinch-zoom`
-  const sizeDimention = horizontal ? 'width' : 'height'
-  const slideHeight = horizontal ? 'var(--slide-height)' : '100%'
-  const containerHeight = horizontal
-    ? ''
-    : 'height: calc(var(--slide-spacing) + var(--slide-height));'
+  const isHorizontal = options.axis !== 'y'
+  const baseFallback = isHorizontal ? BASE_STYLES : BASE_STYLES_VERTICAL
+  const isRightToLeft = options.direction === 'rtl'
+  const rootStyles = baseStyles || styledComponentsStylesToString(baseFallback)
+  const allStyles = rootStyles + customStyles
 
-  const mergedStyles = baseStyles + customStyles
+  return allStyles
+    .replace(SLIDE_SIZE_REGEX, `--slide-size: ${slideSize};`)
+    .replace(SPACING_SIZE_REGEX, `--slide-spacing: ${spacingSize};`)
+    .replace(SLIDE_NUMBER_HEIGHT_REGEX, (match) => {
+      const slideHeight = isHorizontal ? 'var(--slide-height)' : '100%'
+      const value = `height: ${slideHeight};`
+      return match.replace(SLIDE_HEIGHT_REGEX, value)
+    })
+    .replace(BUTTON_TRANSFORM_REGEX, (match) => {
+      let buttonDirection = ''
 
-  return mergedStyles
-    .replace(/__replace_axis_flex__/gi, flexDirection)
-    .replace(/__replace-axis-size__/gi, sizeDimention)
-    .replace(/__replace-axis-touch_action__/gi, panDirection)
-    .replace(/__replace_axis_spacing__/gi, spacingDirection)
-    .replace(/__replace_axis_spacing_amount__/gi, spacingSize)
-    .replace(/__replace_axis_height__/gi, containerHeight)
-    .replace(/__replace_slide_height__/gi, slideHeight)
-    .replace(/__replace_slide_size__/gi, slideSize)
-}
+      if (isHorizontal) {
+        buttonDirection = isRightToLeft ? 'rotate(-180deg)' : 'rotate(0deg)'
+      }
+      if (!isHorizontal) {
+        buttonDirection = isRightToLeft ? 'rotate(90deg)' : 'rotate(90deg)'
+      }
 
-export const examplesCarouselDragFreeStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselVariableWidthStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      VARIABLE_WIDTH_STYLES,
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselSlidesPerViewStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES
-    ),
-    styledComponentsStylesToString(SLIDES_PER_VIEW_STYLES)
-  )
-}
-
-export const examplesCarouselThumbsStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(SLIDE_NUMBER_STYLES, THUMBS_STYLES)
-  )
-}
-
-export const examplesCarouselProgressStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      PROGRESS_STYLES
-    )
-  )
-}
-
-export const examplesCarouselParallaxStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      PARALLAX_STYLES
-    )
-  )
-}
-
-export const examplesCarouselScaleStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      SCALE_STYLES
-    )
-  )
-}
-
-export const examplesCarouselOpacityStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES
-    )
-  )
-}
-
-export const examplesCarouselAutoplayStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      PLAY_BUTTON_STYLES,
-      PROGRESS_STYLES,
-      AUTOPLAY_STYLES
-    )
-  )
-}
-
-export const examplesCarouselAutoHeightStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      AUTO_HEIGHT_STYLES
-    )
-  )
-}
-
-export const examplesCarouselClassNamesStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      CLASS_NAMES_STYLES
-    )
-  )
-}
-
-export const examplesCarouselFadeStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      FADE_STYLES
-    )
-  )
-}
-
-export const examplesCarouselLazyLoadStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      IMAGE_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      DOTS_STYLES,
-      LAZY_LOAD_STYLES
-    )
-  )
-}
-
-export const examplesCarouselInfiniteScrollStyles = (
-  slideSize?: string,
-  spacingSize?: string,
-  axis?: EmblaOptionsType['axis']
-): string => {
-  return examplesCarouselDefaultStyles(
-    slideSize,
-    spacingSize,
-    axis,
-    styledComponentsStylesToString(
-      SLIDE_NUMBER_STYLES,
-      CONTROLS_STYLES,
-      ARROWS_STYLES,
-      SNAP_DISPLAY_STYLES,
-      INFINITE_SCROLL_STYLES
-    )
-  )
-}
-
-export const examplesCarouselIosPickerStyles = (): string => {
-  return styledComponentsStylesToString(IOS_PICKER_STYLES)
+      const value = buttonDirection ? `transform: ${buttonDirection};` : ''
+      return match.replace(BUTTON_TRANSFORM_VALUE_REGEX, value)
+    })
 }

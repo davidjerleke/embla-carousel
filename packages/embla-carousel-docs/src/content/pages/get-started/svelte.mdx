@@ -2,12 +2,23 @@
 title: Svelte
 description: Learn how to setup Embla Carousel using Svelte.
 order: 3
-date: 2021-02-21
+date: 2025-10-03
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-started/svelte/the-component-structure-01.svelte'
+import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/svelte/styling-the-carousel-01.svelte'
+import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/svelte/accessing-the-carousel-api-01.svelte'
+import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-01.svelte'
+import svelteInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/installation-npm-01.sh'
+import svelteInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/svelte/installation-yarn-01.sh'
+import svelteInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/installation-pnpm-01.sh'
+import svelteAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-npm-01.sh'
+import svelteAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-yarn-01.sh'
+import svelteAddingPlugins_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/svelte/adding-plugins-pnpm-01.sh'
 
 # Svelte
 
@@ -17,18 +28,13 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-svelte --save
-```
-
+    <PrismHighlight language="shell" code={svelteInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={svelteInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-svelte
-```
-
+    <PrismHighlight language="shell" code={svelteInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -36,113 +42,49 @@ yarn add embla-carousel-svelte
 
 ## The component structure
 
-Embla Carousel provides the handy `emblaCarouselSvelte` action for seamless integration with Svelte. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following structure to your carousel:
 
-```html
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-</script>
-
-<div class="embla" use:emblaCarouselSvelte>
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
-  </div>
-</div>
-```
+<PrismHighlight language="svelte" code={theComponentStructure_01} />
 
 ## Styling the carousel
 
-The element with the classname `embla` is needed to cover the scroll overflow. Its child element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
-```html
-<style>
-  .embla {
-    overflow: hidden;
-  }
-  .embla__container {
-    display: flex;
-  }
-  .embla__slide {
-    flex: 0 0 100%;
-    min-width: 0;
-  }
-</style>
-```
+<PrismHighlight language="svelte" code={stylingTheCarousel_01} />
 
 ## Accessing the carousel API
 
-The `emblaCarouselSvelte` action takes the Embla Carousel [options](/api/options/) as part of its parameter. Additionally, you can access the [API](/api/) by using the `emblaInit` event to store the carousel instance in a variable:
+Use the `useEmblaCarousel` Svelte action and pass your options as the first argument. You can access the [API](/api/) by capturing the Embla API from the carousel's `on:emblainit` event, and use it to control the carousel or respond to user actions, as shown below:
 
-```html highlight={5,7-10,15-16}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
+<PrismHighlight
+  language="svelte"
+  code={accessingTheCarouselApi_01}
+  highlight="11"
+/>
 
-  let emblaApi
-  let options = { loop: false }
-
-  function onInit(event) {
-    emblaApi = event.detail
-    console.log(emblaApi.slideNodes()) // Access API
-  }
-</script>
-
-<div
-  class="embla"
-  use:emblaCarouselSvelte="{{ options }}"
-  onemblaInit="{onInit}"
->
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
-  </div>
-</div>
-```
 <Admonition type="note">
-  **Note:** Starting with Svelte 5, the `on:` event handlers have been deprecated. However, `on:emblaInit` will remain for backward compatibility.
+  **Note:** Starting with Svelte 5, the `on:` event handlers have been
+  deprecated. However, `on:emblainit` will remain for backward compatibility.
 </Admonition>
 
 ## Adding plugins
 
-Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/plugins/autoplay/) plugin:
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-autoplay --save
-```
-
+    <PrismHighlight language="shell" code={svelteAddingPlugins_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={svelteAddingPlugins_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-autoplay
-```
-
+    <PrismHighlight language="shell" code={svelteAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 
-The `emblaCarouselSvelte` action parameter accepts [plugins](/plugins/). Note that plugins need to be passed in an **array** like so:
+You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` Svelte action. Here's how to extend the carousel from the previous example with Autoplay:
 
-```html highlight={3,6,9}
-<script>
-  import emblaCarouselSvelte from 'embla-carousel-svelte'
-  import Autoplay from 'embla-carousel-autoplay'
-
-  let options = { loop: false }
-  let plugins = [Autoplay()]
-</script>
-
-<div class="embla" use:emblaCarouselSvelte="{{ options, plugins }}">
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
-  </div>
-</div>
-```
+<PrismHighlight language="svelte" code={addingPlugins_01} highlight="3,6,13" />
 
 Congratulations! You just created your first Embla Carousel component.

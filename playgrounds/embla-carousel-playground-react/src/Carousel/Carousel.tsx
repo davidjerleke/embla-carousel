@@ -1,42 +1,51 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
 
 type PropType = {
   slides: number[]
+  isSsr: boolean
   options?: EmblaOptionsType
 }
 
-export const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+export const EmblaCarousel = (props: PropType) => {
+  const { slides, options, isSsr } = props
+  const [refAttached, setRefAttached] = useState(false)
+  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(options)
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(
+    emblaServerApi.canGoToPrev()
+  )
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(
+    emblaServerApi.canGoToNext()
+  )
+  const [selectedIndex, setSelectedIndex] = useState(
+    emblaServerApi.selectedSnap()
+  )
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+  const showSsr = isSsr && !emblaApi
 
   const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
+    () => emblaApi && emblaApi.goToPrev(),
     [emblaApi]
   )
   const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
+    () => emblaApi && emblaApi.goToNext(),
     [emblaApi]
   )
   const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    (index: number) => emblaApi && emblaApi.goTo(index),
     [emblaApi]
   )
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
+    setScrollSnaps(emblaApi.snapList())
   }, [])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
+    setSelectedIndex(emblaApi.selectedSnap())
+    setPrevBtnEnabled(emblaApi.canGoToPrev())
+    setNextBtnEnabled(emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {
@@ -45,12 +54,35 @@ export const EmblaCarousel: React.FC<PropType> = (props) => {
     onInit(emblaApi)
     onSelect(emblaApi)
 
-    emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect)
+    emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
+
+  useEffect(() => {
+    setTimeout(
+      () => {
+        setRefAttached(true)
+      },
+      isSsr ? 2000 : 0
+    )
+  }, [isSsr])
+
   return (
     <>
+      {showSsr && (
+        <style id="embla-ssr-styles">
+          {emblaServerApi.ssrStyles('.embla__container', '.embla__slide')}
+        </style>
+      )}
+
+      <div className="playground__ssr-text">
+        <strong>SSR:</strong> <span>{showSsr.toString()}</span>
+      </div>
+
       <div className="embla">
-        <div className="embla__viewport" ref={emblaRef}>
+        <div
+          className="embla__viewport"
+          ref={refAttached ? emblaRef : undefined}
+        >
           <div className="embla__container">
             {slides.map((index) => (
               <div className="embla__slide" key={index}>

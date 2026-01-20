@@ -18,13 +18,13 @@ jobs:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install 🔧
-        run: yarn install
+      - name: Install dependencies 🔧
+        run: yarn install --frozen-lockfile
 
       - name: Build 🏗️
         run: yarn build
 
       - name: NPM PKG Publish 🎉
-        run: yarn workspaces foreach -t --exclude '{embla-carousel-monorepo,embla-carousel-docs,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid}' npm publish
+        run: yarn workspaces foreach -t --exclude '{embla-carousel-monorepo,embla-carousel-docs,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte}' npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

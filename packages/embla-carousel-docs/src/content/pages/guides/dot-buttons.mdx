@@ -1,0 +1,199 @@
+---
+title: Dot Buttons
+description: This guide explains how to add and customize dot navigation buttons in Embla Carousel.
+order: 80
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import buttonPlacement_html_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-vanilla-01.html'
+import buttonPlacement_module_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-vanilla-01.js'
+import buttonPlacement_react_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-react-01.jsx'
+import buttonPlacement_vue_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-vue-01.vue'
+import buttonPlacement_solid_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-solid-01.jsx'
+import buttonPlacement_svelte_01 from '!!raw-loader!content/code-snippets/guides/previous-and-next-buttons/button-placement-svelte-01.svelte'
+import addingButtons_html_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-vanilla-01.html'
+import addingButtons_module_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-vanilla-01.js'
+import addingButtons_react_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-react-01.jsx'
+import addingButtons_vue_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-vue-01.vue'
+import addingButtons_solid_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-solid-01.jsx'
+import addingButtons_svelte_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/adding-buttons-svelte-01.svelte'
+import buttonsState_css_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-css-01.css'
+import buttonsState_module_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-vanilla-01.js'
+import buttonsState_react_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-react-01.jsx'
+import buttonsState_vue_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-vue-01.vue'
+import buttonsState_solid_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-solid-01.jsx'
+import buttonsState_svelte_01 from '!!raw-loader!content/code-snippets/guides/dot-buttons/buttons-state-svelte-01.svelte'
+
+# Dot Buttons
+
+This guide shows you how to **dot buttons** to control carousel navigation in Embla Carousel.
+
+---
+
+## Prerequisites
+
+- [How Embla Carousel Works](/guides/how-embla-carousel-works)
+- [Required Setup](/guides/required-setup)
+- [Grouping Slides](/guides/grouping-slides)
+
+## Button placement
+
+If your carousel is [`draggable`](/api/options/#draggable), the **root node** — the element passed to the `EmblaCarousel` initializer (e.g., `.embla__viewport`) — responds to pointer events. To avoid **unintended drag interactions** when users click them, **place your navigation buttons outside the root element**, like this:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight language="js" code={buttonPlacement_module_01} />
+    <PrismHighlight
+      language="html"
+      code={buttonPlacement_html_01}
+      highlight="2,8"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={buttonPlacement_react_01}
+      highlight="9,15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={buttonPlacement_vue_01}
+      highlight="9,15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={buttonPlacement_solid_01}
+      highlight="10,16"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={buttonPlacement_svelte_01}
+      highlight="8,14"
+    />
+  </TabsItem>
+</Tabs>
+
+## Adding buttons
+
+Embla Carousel exposes the total number of **snap points** — one for each group of slides — through the [`snapList`](/api/methods/#snaplist) method. You can use this to **generate a dot button for each snap** dynamically.
+
+Each button should be connected to Embla's [`goTo`](/api/methods/#goTo) method, which scrolls the carousel to a specific snap index. When users click a dot, the carousel will smoothly move to the corresponding slide group, providing an intuitive navigation experience.
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={addingButtons_module_01}
+      highlight="8,12,19,28-29"
+    />
+    <PrismHighlight
+      language="html"
+      code={addingButtons_html_01}
+      highlight="10,13-15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={addingButtons_react_01}
+      highlight="6,8-9,14-15,29-37"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={addingButtons_vue_01}
+      highlight="6,8-9,16-17,34-41"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={addingButtons_solid_01}
+      highlight="8,10-11,17-18,33-39"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={addingButtons_svelte_01}
+      highlight="6,8-9,14-15,33-37"
+    />
+  </TabsItem>
+</Tabs>
+
+## Buttons state
+
+To improve the user experience, let's **add visual feedback** to show which dot button corresponds to the currently selected snap.
+
+You can achieve this by toggling each button's state between **selected** and **not selected**, and keeping them in sync whenever the carousel updates. Update the buttons whenever:
+
+- The [`select`](/api/events/#select) event fires — when the active scroll snap changes.
+- The [`reinit`](/api/events/#reinit) event fires — when the carousel reinitializes.
+
+<ExamplesLazy
+  loader={() => import('components/Examples/Guides/DotButtons/DotButtons')}
+  wrapper={EXAMPLES_WRAPPERS.ONE_FORM_ROW}
+/>
+
+<PrismHighlight language="css" code={buttonsState_css_01} />
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={buttonsState_module_01}
+      highlight="25-28,34,39"
+    />
+    <PrismHighlight language="html" code={addingButtons_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={buttonsState_react_01}
+      highlight="7,11,17,20-21,38"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={buttonsState_vue_01}
+      highlight="7,11-12,20,23-24,44"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={buttonsState_solid_01}
+      highlight="9,13,20,23-24,43"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={buttonsState_svelte_01}
+      highlight="7,11,17,20-21,42"
+    />
+  </TabsItem>
+</Tabs>
+
+## Notes
+
+- **Button placement:** Place the previous/next buttons **outside** the Embla root element (the one passed to the initializer, e.g., `.embla__viewport`) to avoid accidental drag interactions when users click them.
+- **Loop behavior:** When the carousel has `loop` enabled, [`goTo`](/api/methods/#goTo) will automatically choose the **shortest path** to the target snap, scrolling forward or backward as needed.
+- **No-op behavior:** Calling [`goTo`](/api/methods/#goTo) when the carousel is already at the given snap has **no effect**. This is expected and ensures navigation remains predictable and consistent.

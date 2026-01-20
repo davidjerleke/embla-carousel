@@ -1,46 +1,23 @@
-import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
-import { isBoolean } from './utils'
-
-type SlidesHandlerCallbackType = (
-  emblaApi: EmblaCarouselType,
-  mutations: MutationRecord[]
-) => boolean | void
-
-export type SlidesHandlerOptionType = boolean | SlidesHandlerCallbackType
+import { WindowType } from './utils'
 
 export type SlidesHandlerType = {
-  init: (emblaApi: EmblaCarouselType) => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
 }
 
 export function SlidesHandler(
+  active: boolean,
   container: HTMLElement,
-  eventHandler: EventHandlerType,
-  watchSlides: SlidesHandlerOptionType
+  eventHandler: EventHandlerType
 ): SlidesHandlerType {
   let mutationObserver: MutationObserver
   let destroyed = false
 
-  function init(emblaApi: EmblaCarouselType): void {
-    if (!watchSlides) return
+  function init(ownerWindow: WindowType): void {
+    if (!active) return
 
-    function defaultCallback(mutations: MutationRecord[]): void {
-      for (const mutation of mutations) {
-        if (mutation.type === 'childList') {
-          emblaApi.reInit()
-          eventHandler.emit('slidesChanged')
-          break
-        }
-      }
-    }
-
-    mutationObserver = new MutationObserver((mutations) => {
-      if (destroyed) return
-      if (isBoolean(watchSlides) || watchSlides(emblaApi, mutations)) {
-        defaultCallback(mutations)
-      }
-    })
+    mutationObserver = new ownerWindow.MutationObserver(onSlidesChange)
 
     mutationObserver.observe(container, { childList: true })
   }
@@ -48,6 +25,21 @@ export function SlidesHandler(
   function destroy(): void {
     if (mutationObserver) mutationObserver.disconnect()
     destroyed = true
+  }
+
+  function onSlidesChange(mutations: MutationRecord[]): void {
+    const event = eventHandler.createEvent('slideschanged', mutations)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
+    for (const mutation of mutations) {
+      if (destroyed) return
+
+      if (mutation.type === 'childList') {
+        event.api.reInit()
+        break
+      }
+    }
   }
 
   const self: SlidesHandlerType = {

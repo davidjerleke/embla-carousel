@@ -14,34 +14,31 @@ type UsePrevNextButtonsType = {
 }
 
 export const usePrevNextButtons = (
-  emblaApi: EmblaCarouselType | undefined,
-  onButtonClick?: (emblaApi: EmblaCarouselType) => void
+  emblaApi: EmblaCarouselType | undefined
 ): UsePrevNextButtonsType => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
 
   const onPrevButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollPrev()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+    emblaApi.goToPrev()
+  }, [emblaApi])
 
   const onNextButtonClick = useCallback(() => {
     if (!emblaApi) return
-    emblaApi.scrollNext()
-    if (onButtonClick) onButtonClick(emblaApi)
-  }, [emblaApi, onButtonClick])
+    emblaApi.goToNext()
+  }, [emblaApi])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setPrevBtnDisabled(!emblaApi.canScrollPrev())
-    setNextBtnDisabled(!emblaApi.canScrollNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {
     if (!emblaApi) return
 
     onSelect(emblaApi)
-    emblaApi.on('reInit', onSelect).on('select', onSelect)
+    emblaApi.on('reinit', onSelect).on('select', onSelect)
   }, [emblaApi, onSelect])
 
   return {
@@ -54,12 +51,14 @@ export const usePrevNextButtons = (
 
 type PropType = ComponentPropsWithRef<'button'>
 
-export const PrevButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+export const PrevButton = (props: PropType) => {
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className={'embla__button embla__button--prev'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >
@@ -74,12 +73,14 @@ export const PrevButton: React.FC<PropType> = (props) => {
   )
 }
 
-export const NextButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props
+export const NextButton = (props: PropType) => {
+  const { children, disabled, ...restProps } = props
 
   return (
     <button
-      className="embla__button embla__button--next"
+      className={'embla__button embla__button--next'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       type="button"
       {...restProps}
     >

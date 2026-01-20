@@ -1,14 +1,14 @@
-export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
+export const addDotButtonAndClickHandlers = (emblaApi, dotsNode) => {
   let dotNodes = []
 
   const addDotBtnsWithClickHandlers = () => {
     dotsNode.innerHTML = emblaApi
-      .scrollSnapList()
+      .snapList()
       .map(() => '<button class="embla__dot" type="button"></button>')
       .join('')
 
     const scrollTo = (index) => {
-      emblaApi.scrollTo(index)
+      emblaApi.scrollToSnap(index)
     }
 
     dotNodes = Array.from(dotsNode.querySelectorAll('.embla__dot'))
@@ -17,21 +17,18 @@ export const addDotBtnsAndClickHandlers = (emblaApi, dotsNode) => {
     })
   }
 
-  const toggleDotBtnsActive = () => {
-    const previous = emblaApi.previousScrollSnap()
-    const selected = emblaApi.selectedScrollSnap()
+  const toggleDotButtonsActive = () => {
+    const previous = emblaApi.previousSnap()
+    const selected = emblaApi.selectedSnap()
     dotNodes[previous].classList.remove('embla__dot--selected')
     dotNodes[selected].classList.add('embla__dot--selected')
   }
 
-  emblaApi
-    .on('init', addDotBtnsWithClickHandlers)
-    .on('reInit', addDotBtnsWithClickHandlers)
-    .on('init', toggleDotBtnsActive)
-    .on('reInit', toggleDotBtnsActive)
-    .on('select', toggleDotBtnsActive)
+  addDotBtnsWithClickHandlers()
+  toggleDotButtonsActive()
 
-  return () => {
-    dotsNode.innerHTML = ''
-  }
+  emblaApi
+    .on('reinit', addDotBtnsWithClickHandlers)
+    .on('reinit', toggleDotButtonsActive)
+    .on('select', toggleDotButtonsActive)
 }

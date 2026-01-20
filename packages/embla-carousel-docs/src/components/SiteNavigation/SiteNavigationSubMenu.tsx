@@ -9,7 +9,7 @@ import { BRAND_GRADIENT_TEXT_STYLES } from 'consts/gradients'
 import { FONT_WEIGHTS } from 'consts/fontSizes'
 import { RouteType } from 'consts/routes'
 import { ButtonBare } from 'components/Button/ButtonBare'
-import { InactiveText, LinkNavigation } from 'components/Link/LinkNavigation'
+import { LinkNavigation } from 'components/Link/LinkNavigation'
 import { useRouteActive } from 'hooks/useRoutes'
 import { Icon } from 'components/Icon/Icon'
 
@@ -99,10 +99,6 @@ const Link = styled(LinkNavigation)`
   margin: 0 0;
   text-align: left;
   padding: ${ITEM_SPACING} 0;
-
-  > ${InactiveText} {
-    color: ${COLORS.TEXT_LOW_CONTRAST};
-  }
 `
 
 type PropType = {
@@ -147,7 +143,7 @@ export const SiteNavigationSubMenu = (props: PropType) => {
       <Menu $isOpen={isOpen}>
         <li>
           <Link slug={route.slug} isActive={isActive}>
-            Overview
+            Intro
           </Link>
         </li>
         {children.map((child) => (

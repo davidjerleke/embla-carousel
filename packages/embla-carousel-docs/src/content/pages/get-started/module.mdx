@@ -2,31 +2,39 @@
 title: Module
 description: Learn how to setup Embla Carousel using vanilla JavaScript.
 order: 0
-date: 2021-02-21
+date: 2025-10-03
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import theHtmlStructure_01 from '!!raw-loader!content/code-snippets/get-started/module/the-html-structure-01.html'
+import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/module/styling-the-carousel-01.css'
+import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/module/accessing-the-carousel-api-01.js'
+import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/module/adding-plugins-01.js'
+import moduleInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/module/installation-npm-01.sh'
+import moduleInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/module/installation-yarn-01.sh'
+import moduleInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/module/installation-pnpm-01.sh'
+import moduleAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/module/adding-plugins-npm-01.sh'
+import moduleAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/module/adding-plugins-yarn-01.sh'
+import moduleAddingPlugins_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/module/adding-plugins-pnpm-01.sh'
 
 # Module
 
-Start by installing the **npm package** and save it to your dependencies:
+Start by installing the Embla Carousel **npm package** and add it to your dependencies.
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={moduleInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
 
-```shell
-npm install embla-carousel --save
-```
+    <PrismHighlight language="shell" code={moduleInstallation_pnpm_01} />
 
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel
-```
-
+    <PrismHighlight language="shell" code={moduleInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -34,80 +42,42 @@ yarn add embla-carousel
 
 ## The HTML structure
 
-A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following **HTML** structure to your carousel:
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following **HTML** structure to your carousel:
 
-```html
-<div class="embla">
-  <div class="embla__container">
-    <div class="embla__slide">Slide 1</div>
-    <div class="embla__slide">Slide 2</div>
-    <div class="embla__slide">Slide 3</div>
-  </div>
-</div>
-```
+<PrismHighlight language="html" code={theHtmlStructure_01} />
 
 ## Styling the carousel
 
-The wrapping element with the classname `embla` is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
-```css
-.embla {
-  overflow: hidden;
-}
-.embla__container {
-  display: flex;
-}
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-```
+<PrismHighlight language="css" code={stylingTheCarousel_01} />
 
 ## Accessing the carousel API
 
-Grab the element with the classname `embla` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** the **carousel** and give you **access** to the Embla Carousel [API](/api/).
+Select the element with the classname `embla__viewport` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** your carousel and provide full **access** to the Embla Carousel [API](/api/).
 
-```js highlight={7}
-import EmblaCarousel from 'embla-carousel'
-
-const emblaNode = document.querySelector('.embla')
-const options = { loop: false }
-const emblaApi = EmblaCarousel(emblaNode, options)
-
-console.log(emblaApi.slideNodes()) // Access API
-```
+<PrismHighlight language="js" code={accessingTheCarouselApi_01} highlight="8" />
 
 ## Adding plugins
 
-Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/plugins/autoplay/) plugin:
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={moduleAddingPlugins_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
 
-```shell
-npm install embla-carousel-autoplay --save
-```
+    <PrismHighlight language="shell" code={moduleAddingPlugins_pnpm_01} />
 
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-autoplay
-```
-
+    <PrismHighlight language="shell" code={moduleAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 
-Embla Carousel accepts an optional **plugin array** as the third argument. Here's a basic example of how to make use of it:
+You can pass an **optional plugin array** as the third argument when initializing Embla Carousel. Here's how to extend the carousel from the previous example with Autoplay:
 
-```js highlight={6-7}
-import EmblaCarousel from 'embla-carousel'
-import Autoplay from 'embla-carousel-autoplay'
-
-const emblaNode = document.querySelector('.embla')
-const options = { loop: false }
-const plugins = [Autoplay()]
-const emblaApi = EmblaCarousel(emblaNode, options, plugins)
-```
+<PrismHighlight language="js" code={addingPlugins_01} highlight="2,9,14" />
 
 Congratulations! You just created your first Embla Carousel.

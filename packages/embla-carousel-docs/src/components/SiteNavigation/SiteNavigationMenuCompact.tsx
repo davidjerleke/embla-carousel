@@ -17,6 +17,7 @@ import { FooterLinks } from 'components/Footer/FooterLinks'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsListScrollArea, TabsListWrapper } from 'components/Tabs/TabsList'
+import { VersionBadge } from 'components/VersionBadge/VersionBadge'
 import { TabsButtonWrapper } from 'components/Tabs/TabsButton'
 import { TabsPanelWrapper } from 'components/Tabs/TabsPanel'
 import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
@@ -165,6 +166,12 @@ const MiscLinks = styled(FooterLinks)`
   justify-content: center;
 `
 
+const VersionBadgeWrapper = styled.div`
+  display: flex;
+  padding-top: ${SPACINGS.THREE};
+  justify-content: center;
+`
+
 export const SiteNavigationMenuCompact = () => {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const theme = useAppSelector(selectTheme)
@@ -201,6 +208,12 @@ export const SiteNavigationMenuCompact = () => {
 
               <li>
                 <MiscLinks />
+              </li>
+
+              <li>
+                <VersionBadgeWrapper>
+                  <VersionBadge />
+                </VersionBadgeWrapper>
               </li>
             </ul>
           </ScrollArea>

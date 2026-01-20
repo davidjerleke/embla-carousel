@@ -19,13 +19,16 @@ const getOpacity = (isVisible: boolean, showLoader: boolean): number => {
 const WRAPPER_SIZE = '6rem'
 const LOADER_SIZE = '4rem'
 
-const LoadSpinnerSuspenseWrapper = styled.div<{ $opacity: number }>`
+const LoadSpinnerSuspenseWrapper = styled.div<{
+  $opacity: number
+  $isPortal: boolean
+}>`
   background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.9);
   border-radius: ${BORDER_RADIUSES.CIRCLE};
   z-index: ${LAYERS.MODAL_LOADING};
   ${createSquareSizeStyles(WRAPPER_SIZE)};
   top: calc(${HEADER_HEIGHT} + ${PAGE_FRAME_SPACING});
-  position: fixed;
+  position: ${({ $isPortal }) => ($isPortal ? 'fixed' : 'absolute')};
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -39,13 +42,16 @@ const LoadSpinnerSuspenseWrapper = styled.div<{ $opacity: number }>`
 
 type PropType = {
   isVisible: boolean
+  usePortal?: boolean
 }
 
 export const LoadSpinnerSuspense = (props: PropType) => {
-  const { isVisible } = props
+  const { isVisible, usePortal } = props
   const [showLoader, setShowLoader] = useState(false)
   const [opacity, setOpacity] = useState(0)
   const loaderRef = useRef<HTMLDivElement>(null)
+  const isPortal = usePortal ?? true
+  const Wrapper = isPortal ? ModalPortal : React.Fragment
 
   const onLoaderTransitionEnd = useCallback(() => {
     if (!opacity) setShowLoader(false)
@@ -65,10 +71,14 @@ export const LoadSpinnerSuspense = (props: PropType) => {
   if (!isVisible && !showLoader) return null
 
   return (
-    <ModalPortal>
-      <LoadSpinnerSuspenseWrapper $opacity={opacity} ref={loaderRef}>
+    <Wrapper>
+      <LoadSpinnerSuspenseWrapper
+        $opacity={opacity}
+        $isPortal={isPortal}
+        ref={loaderRef}
+      >
         <LoadSpinner size={LOADER_SIZE} color={COLORS.TEXT_BODY} />
       </LoadSpinnerSuspenseWrapper>
-    </ModalPortal>
+    </Wrapper>
   )
 }

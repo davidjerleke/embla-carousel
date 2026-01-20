@@ -1,0 +1,177 @@
+---
+title: Alignments
+description: This guide shows you how to control and customize carousel alignment in Embla Carousel.
+order: 50
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import settingAlignment_module_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-vanilla-01.js'
+import settingAlignment_html_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-vanilla-01.html'
+import settingAlignment_react_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-react-01.jsx'
+import settingAlignment_vue_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-vue-01.vue'
+import settingAlignment_solid_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-solid-01.jsx'
+import settingAlignment_svelte_01 from '!!raw-loader!content/code-snippets/guides/alignments/setting-alignment-svelte-01.svelte'
+import breakpoints_module_01 from '!!raw-loader!content/code-snippets/guides/alignments/breakpoints-vanilla-01.js'
+import breakpoints_react_01 from '!!raw-loader!content/code-snippets/guides/alignments/breakpoints-react-01.jsx'
+import breakpoints_vue_01 from '!!raw-loader!content/code-snippets/guides/alignments/breakpoints-vue-01.vue'
+import breakpoints_solid_01 from '!!raw-loader!content/code-snippets/guides/alignments/breakpoints-solid-01.jsx'
+import breakpoints_svelte_01 from '!!raw-loader!content/code-snippets/guides/alignments/breakpoints-svelte-01.svelte'
+
+# Alignments
+
+This guide explains how to control and customize **carousel alignment** in Embla Carousel.
+
+---
+
+## Prerequisites
+
+Before continuing with this guide, make sure you've completed the following:
+
+- [How Embla Carousel Works](/guides/how-embla-carousel-works)
+- [Required Setup](/guides/required-setup)
+- [Slide Sizes](/guides/slide-sizes)
+- [Slide Gaps](/guides/slide-gaps)
+
+## Understanding alignment
+
+Embla measures each slide's **actual layout position and size** — the values the browser computes after rendering. It then applies the selected [`align`](/api/options/#align) option (`start`, `center`, or `end`) to calculate where each **snap point** should land within the carousel.
+
+The `align` option only affects carousels where slides are **less than 100% of the viewport width**, since full-width slides already occupy the entire scroll area.
+
+## Setting alignment
+
+You can **configure the alignment** using the [`align`](/api/options/#align) option when initializing Embla:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/Alignments/AlignmentsInteractive')
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={settingAlignment_module_01}
+      highlight="5"
+    />
+    <PrismHighlight language="html" code={settingAlignment_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={settingAlignment_react_01}
+      highlight="5"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={settingAlignment_vue_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={settingAlignment_solid_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={settingAlignment_svelte_01}
+      highlight="4"
+    />
+  </TabsItem>
+</Tabs>
+
+The [`align`](/api/options/#align) option defines how slides align **relative to the viewport**:
+
+- **`start`** — Aligns the slide's **start edge** (left in LTR, right in RTL, top for vertical).
+- **`center`** _(default)_ — Aligns the slide's **center** with the viewport center.
+- **`end`** — Aligns the slide's **end edge** (right in LTR, left in RTL, bottom for vertical).
+
+<Admonition type="warning">
+  **Warning:** Do **not** use CSS layout properties (like `justify-content`,
+  `align-items`) or CSS transforms on the **carousel container** to change
+  alignment along the scroll axis. Those rules change the position of slides in
+  ways that change the computed offsets Embla measures, which breaks snapping
+  and can produce unexpected scroll behavior.
+</Admonition>
+
+## Breakpoints
+
+You can make carousel alignment **responsive** by defining different [`align`](/api/options/#align) values for specific viewport sizes using the [`breakpoints`](/api/options/#breakpoints) option.
+Embla automatically re-evaluates slide positions when breakpoints change, ensuring that scroll snaps stay accurate as layouts adapt.
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={breakpoints_module_01}
+      highlight="7-9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={breakpoints_react_01}
+      highlight="7-9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={breakpoints_vue_01}
+      highlight="6-8"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={breakpoints_solid_01}
+      highlight="6-8"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={breakpoints_svelte_01}
+      highlight="6-8"
+    />
+  </TabsItem>
+</Tabs>
+
+## Contain scroll
+
+For non-looping carousels, Embla adjusts the alignment to prevent **empty space** from appearing at the start or end of the scroll area.
+This can make the first and last slides appear slightly off-alignment — but once you scroll, the slides in between align as expected.
+
+This behavior is controlled by the [`containScroll`](/api/options/#containscroll) option, which is **enabled by default**.
+If you prefer to keep a **consistent alignment** at all times (even if that means extra space at the edges), set `containScroll: false`.
+
+Try it out below:
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Guides/Alignments/AlignmentsContainScroll')
+  }
+  wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
+/>
+
+The [`containScroll`](/api/options/#containscroll) option controls how Embla handles **empty space at the start and end of the scroll area**:
+
+- **`trimSnaps`** _(default)_ — Prevents empty space at the beginning and end by adjusting alignment when necessary.
+- **`keepSnaps`** — Similar to `trimSnaps`, but ensures that **each slide is a separate snap point**, even when trimming space.
+- **`false`** — Disables this behavior entirely, allowing **empty space at the edges** to maintain consistent alignment — just like looping carousels align.

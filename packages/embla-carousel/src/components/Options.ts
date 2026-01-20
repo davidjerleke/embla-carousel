@@ -2,11 +2,10 @@ import { AlignmentOptionType } from './Alignment'
 import { AxisDirectionOptionType, AxisOptionType } from './Axis'
 import { SlidesToScrollOptionType } from './SlidesToScroll'
 import { ScrollContainOptionType } from './ScrollContain'
-import { DragHandlerOptionType } from './DragHandler'
-import { ResizeHandlerOptionType } from './ResizeHandler'
-import { SlidesHandlerOptionType } from './SlidesHandler'
-import { SlidesInViewOptionsType } from './SlidesInView'
-import { FocusHandlerOptionType } from './SlideFocus'
+import {
+  SlidesInViewMarginOptionsType,
+  SlidesInViewThresholdOptionsType
+} from './SlidesInView'
 
 export type LooseOptionsType = {
   [key: string]: unknown
@@ -29,15 +28,17 @@ export type OptionsType = CreateOptionsType<{
   slidesToScroll: SlidesToScrollOptionType
   dragFree: boolean
   dragThreshold: number
-  inViewThreshold: SlidesInViewOptionsType
+  inViewThreshold: SlidesInViewThresholdOptionsType
+  inViewMargin: SlidesInViewMarginOptionsType
   loop: boolean
   skipSnaps: boolean
   duration: number
-  startIndex: number
-  watchDrag: DragHandlerOptionType
-  watchResize: ResizeHandlerOptionType
-  watchSlides: SlidesHandlerOptionType
-  watchFocus: FocusHandlerOptionType
+  startSnap: number
+  draggable: boolean
+  resize: boolean
+  focus: boolean
+  slideChanges: boolean
+  ssr: number[]
 }>
 
 export const defaultOptions: OptionsType = {
@@ -49,18 +50,20 @@ export const defaultOptions: OptionsType = {
   direction: 'ltr',
   slidesToScroll: 1,
   inViewThreshold: 0,
+  inViewMargin: '0px',
   breakpoints: {},
   dragFree: false,
   dragThreshold: 10,
   loop: false,
   skipSnaps: false,
   duration: 25,
-  startIndex: 0,
+  startSnap: 0,
   active: true,
-  watchDrag: true,
-  watchResize: true,
-  watchSlides: true,
-  watchFocus: true
+  draggable: true,
+  resize: true,
+  focus: true,
+  slideChanges: true,
+  ssr: []
 }
 
 export type EmblaOptionsType = Partial<OptionsType>

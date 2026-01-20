@@ -1,0 +1,71 @@
+---
+title: How Embla Carousel Works
+description: Learn how Embla Carousel applies minimal DOM manipulation to create smooth, performant scrolling.
+order: 10
+date: 2025-09-29
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import minimalDomManipulation_01 from '!!raw-loader!content/code-snippets/guides/how-embla-carousel-works/minimal-dom-manipulation-01.html'
+import minimalDomManipulation_02 from '!!raw-loader!content/code-snippets/guides/how-embla-carousel-works/minimal-dom-manipulation-02.html'
+import notes_01 from '!!raw-loader!content/code-snippets/guides/how-embla-carousel-works/notes-01.html'
+import notes_02 from '!!raw-loader!content/code-snippets/guides/how-embla-carousel-works/notes-02.html'
+
+# How Embla Carousel Works
+
+Embla Carousel uses **minimal DOM manipulation** to deliver smooth, high-performance scrolling.
+
+---
+
+## Minimal DOM manipulation
+
+Embla changes the DOM in only two ways:
+
+- **Carousel container** - applies `translate3d` to create the scroll effect.
+- **Carousel slides** - applies `translate3d` to adjust slide positions (for looping) and improve scroll performance.
+
+You can see this in action by inspecting the following example in your browser's developer tools:
+
+<ExamplesLazy
+  loader={() =>
+    import(
+      'components/Examples/Guides/HowEmblaCarouselWorks/MinimalDomManipulation'
+    )
+  }
+/>
+
+The container receives an inline `transform`:
+
+<PrismHighlight language="html" code={minimalDomManipulation_01} />
+
+And slides may also receive inline `transform` styles:
+
+<PrismHighlight language="html" code={minimalDomManipulation_02} />
+
+That's it — nothing else is added to the DOM. **Embla does not encapsulate or wrap any elements**, so you retain full control over your markup, structure, and styling. This behavior applies to the core library as well as the official framework wrappers. Plugins, however, **may modify the DOM further**, so check individual [plugin pages](/plugins) for details.
+
+## Notes
+
+Before adding custom styles, remember how **Embla manipulates the DOM** — applying styles incorrectly can break its functionality.
+
+<Admonition type="warning">
+  **Warning:** Do **not** apply custom **`transform`** or **`transition`**
+  styles directly to the **carousel container** or **slides**. Embla applies
+  transforms via inline styles and animates them using a spring-based system
+  with `requestAnimationFrame`; adding your own will conflict and **break the
+  carousel's behavior**.
+</Admonition>
+
+Instead, apply transforms/transitions to a **wrapper element** around the carousel:
+
+<PrismHighlight language="html" code={notes_01} />
+
+When applying transforms/transitions to slides, create an **inner element** within each slide:
+
+<PrismHighlight language="html" code={notes_02} />
+
+This approach keeps Embla's animations intact while giving you full flexibility to style and animate around them.

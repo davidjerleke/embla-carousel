@@ -1,74 +1,65 @@
-import { EmblaCarouselType } from './EmblaCarousel'
+import { AxisType } from './Axis'
 import { EventHandlerType } from './EventHandler'
 import { EventStoreType } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollToType } from './ScrollTo'
-import { SlideRegistryType } from './SlideRegistry'
-import { isBoolean, isNumber } from './utils'
-
-type FocusHandlerCallbackType = (
-  emblaApi: EmblaCarouselType,
-  evt: FocusEvent
-) => boolean | void
-
-export type FocusHandlerOptionType = boolean | FocusHandlerCallbackType
+import { ScrollSnapListType } from './ScrollSnapList'
+import { isNumber, WindowType } from './utils'
 
 export type SlideFocusType = {
-  init: (emblaApi: EmblaCarouselType) => void
+  init: (ownerWindow: WindowType) => void
 }
 
 export function SlideFocus(
+  axis: AxisType,
+  active: boolean,
   root: HTMLElement,
   slides: HTMLElement[],
-  slideRegistry: SlideRegistryType['slideRegistry'],
+  scrollSnapList: ScrollSnapListType,
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   eventStore: EventStoreType,
-  eventHandler: EventHandlerType,
-  watchFocus: FocusHandlerOptionType
+  eventHandler: EventHandlerType
 ): SlideFocusType {
   const focusListenerOptions = { passive: true, capture: true }
   let lastTabPressTime = 0
 
-  function init(emblaApi: EmblaCarouselType): void {
-    if (!watchFocus) return
+  function init(ownerWindow: WindowType): void {
+    if (!active) return
 
-    function defaultCallback(index: number): void {
-      const nowTime = new Date().getTime()
-      const diffTime = nowTime - lastTabPressTime
-
-      if (diffTime > 10) return
-
-      eventHandler.emit('slideFocusStart')
-      root.scrollLeft = 0
-
-      const group = slideRegistry.findIndex((group) => group.includes(index))
-
-      if (!isNumber(group)) return
-
-      scrollBody.useDuration(0)
-      scrollTo.index(group, 0)
-
-      eventHandler.emit('slideFocus')
-    }
-
-    eventStore.add(document, 'keydown', registerTabPress, false)
+    eventStore.add(ownerWindow.document, 'keydown', onKeyDown, false)
 
     slides.forEach((slide, slideIndex) => {
       eventStore.add(
         slide,
         'focus',
-        (evt: FocusEvent) => {
-          if (isBoolean(watchFocus) || watchFocus(emblaApi, evt)) {
-            defaultCallback(slideIndex)
-          }
-        },
+        (evt: FocusEvent) => onFocus(evt, slideIndex),
         focusListenerOptions
       )
     })
   }
 
-  function registerTabPress(event: KeyboardEvent): void {
+  function onFocus(evt: FocusEvent, slideIndex: number): void {
+    const nowTime = new Date().getTime()
+    const diffTime = nowTime - lastTabPressTime
+
+    if (diffTime > 10) return
+
+    const event = eventHandler.createEvent('slidefocus', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
+    root[axis.nativeScroll] = 0
+
+    const snapIndex = scrollSnapList.snapBySlide[slideIndex]
+
+    if (!isNumber(snapIndex)) return
+
+    scrollBody.useDuration(0)
+    scrollTo.index(snapIndex, 0)
+  }
+
+  function onKeyDown(event: KeyboardEvent): void {
     if (event.code === 'Tab') lastTabPressTime = new Date().getTime()
   }
 

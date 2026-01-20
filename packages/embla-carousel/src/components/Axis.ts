@@ -1,4 +1,5 @@
-import { NodeRectType } from './NodeRects'
+import { NodeRectType } from './NodeHandler'
+import { NumberStoreInputType, mapStoreToNumber } from './utils'
 
 export type AxisOptionType = 'x' | 'y'
 export type AxisDirectionOptionType = 'ltr' | 'rtl'
@@ -9,8 +10,9 @@ export type AxisType = {
   cross: AxisOptionType
   startEdge: AxisEdgeType
   endEdge: AxisEdgeType
-  measureSize: (nodeRect: NodeRectType) => number
-  direction: (n: number) => number
+  nativeScroll: 'scrollLeft' | 'scrollTop'
+  getSize: (nodeRect: NodeRectType) => number
+  direction: (input: NumberStoreInputType) => number
 }
 
 export function Axis(
@@ -24,8 +26,9 @@ export function Axis(
   const sign = !isVertical && isRightToLeft ? -1 : 1
   const startEdge = getStartEdge()
   const endEdge = getEndEdge()
+  const nativeScroll = isVertical ? 'scrollTop' : 'scrollLeft'
 
-  function measureSize(nodeRect: NodeRectType): number {
+  function getSize(nodeRect: NodeRectType): number {
     const { height, width } = nodeRect
     return isVertical ? height : width
   }
@@ -40,8 +43,8 @@ export function Axis(
     return isRightToLeft ? 'left' : 'right'
   }
 
-  function direction(n: number): number {
-    return n * sign
+  function direction(input: number): number {
+    return input * sign
   }
 
   const self: AxisType = {
@@ -49,8 +52,9 @@ export function Axis(
     cross,
     startEdge,
     endEdge,
-    measureSize,
-    direction
+    nativeScroll,
+    getSize,
+    direction: mapStoreToNumber(direction)
   }
   return self
 }

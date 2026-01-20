@@ -2,12 +2,23 @@
 title: React
 description: Learn how to setup Embla Carousel using React.
 order: 1
-date: 2021-02-21
+date: 2025-10-03
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import theComponentStructure_01 from '!!raw-loader!content/code-snippets/get-started/react/the-component-structure-01.jsx'
+import stylingTheCarousel_01 from '!!raw-loader!content/code-snippets/get-started/module/styling-the-carousel-01.css'
+import accessingTheCarouselApi_01 from '!!raw-loader!content/code-snippets/get-started/react/accessing-the-carousel-api-01.jsx'
+import addingPlugins_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-01.jsx'
+import reactInstallation_npm_01 from '!!raw-loader!content/code-snippets/get-started/react/installation-npm-01.sh'
+import reactInstallation_yarn_01 from '!!raw-loader!content/code-snippets/get-started/react/installation-yarn-01.sh'
+import reactInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/react/installation-pnpm-01.sh'
+import reactAddingPlugins_npm_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-npm-01.sh'
+import reactAddingPlugins_yarn_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-yarn-01.sh'
+import reactAddingPlugins_pnpm_01 from '!!raw-loader!content/code-snippets/get-started/react/adding-plugins-pnpm-01.sh'
 
 # React
 
@@ -17,18 +28,13 @@ Start by installing the Embla Carousel **npm package** and add it to your depend
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-react --save
-```
-
+    <PrismHighlight language="shell" code={reactInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={reactInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-react
-```
-
+    <PrismHighlight language="shell" code={reactInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -36,114 +42,44 @@ yarn add embla-carousel-react
 
 ## The component structure
 
-Embla Carousel provides the handy `useEmblaCarousel` hook for seamless integration with React. A minimal setup requires an **overflow wrapper** and a **scroll container**. Start by adding the following structure to your carousel:
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following structure to your carousel:
 
-```jsx
-import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel()
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        <div className="embla__slide">Slide 1</div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div>
-      </div>
-    </div>
-  )
-}
-```
+<PrismHighlight language="jsx" code={theComponentStructure_01} />
 
 ## Styling the carousel
 
-The hook gives us a **ref** to attach to our wrapping element with the classname `embla`, which is needed to cover the scroll overflow. The element with the `container` classname is the scroll body that scrolls the slides. Continue by adding the following **CSS** to these elements:
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
 
-```css
-.embla {
-  overflow: hidden;
-}
-.embla__container {
-  display: flex;
-}
-.embla__slide {
-  flex: 0 0 100%;
-  min-width: 0;
-}
-```
+<PrismHighlight language="css" code={stylingTheCarousel_01} />
 
 ## Accessing the carousel API
 
-The `useEmblaCarousel` hook takes the Embla Carousel [options](/api/options/) as the first argument. Additionally, you can access the [API](/api/) with a `useEffect` like demonstrated below:
+Use the `useEmblaCarousel` hook and pass your options as the first argument. You can access the [API](/api/) directly from the hook, and use it to control the carousel or respond to user actions, as shown below:
 
-```jsx highlight={5,7-11}
-import React, { useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-
-export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
-
-  useEffect(() => {
-    if (emblaApi) {
-      console.log(emblaApi.slideNodes()) // Access API
-    }
-  }, [emblaApi])
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        <div className="embla__slide">Slide 1</div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div>
-      </div>
-    </div>
-  )
-}
-```
+<PrismHighlight
+  language="jsx"
+  code={accessingTheCarouselApi_01}
+  highlight="5"
+/>
 
 ## Adding plugins
 
-Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/plugins/autoplay/) plugin:
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-```shell
-npm install embla-carousel-autoplay --save
-```
-
+    <PrismHighlight language="shell" code={reactAddingPlugins_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={reactAddingPlugins_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-```shell
-yarn add embla-carousel-autoplay
-```
-
+    <PrismHighlight language="shell" code={reactAddingPlugins_yarn_01} />
   </TabsItem>
 </Tabs>
 
-The `useEmblaCarousel` hook accepts [plugins](/plugins/) as the second argument. Note that plugins need to be passed in an **array** like so:
+You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` hook. Here's how to extend the carousel from the previous example with Autoplay:
 
-```jsx highlight={3,6}
-import React, { useEffect } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
-
-export function EmblaCarousel() {
-  const [emblaRef] = useEmblaCarousel({ loop: false }, [Autoplay()])
-
-  return (
-    <div className="embla" ref={emblaRef}>
-      <div className="embla__container">
-        <div className="embla__slide">Slide 1</div>
-        <div className="embla__slide">Slide 2</div>
-        <div className="embla__slide">Slide 3</div>
-      </div>
-    </div>
-  )
-}
-```
+<PrismHighlight language="jsx" code={addingPlugins_01} highlight="3,6,13" />
 
 Congratulations! You just created your first Embla Carousel component.

@@ -8,6 +8,7 @@ import { COLORS } from 'consts/themes'
 import { BORDER_SIZES } from 'consts/border'
 import { PropType as ButtonPropType } from 'components/Button/ButtonBare'
 import { LAYERS } from 'consts/layers'
+import { FONT_SIZES } from 'consts/fontSizes'
 import {
   ActiveText as TabsButtonActiveText,
   InactiveText as TabsButtonInactiveText
@@ -15,6 +16,7 @@ import {
 
 export const TabsButtonWrapper = styled(ButtonBare)<{ $selected: boolean }>`
   padding: ${SPACINGS.TWO} ${SPACINGS.TWO};
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
   position: relative;
   display: inline-flex;
   align-items: center;

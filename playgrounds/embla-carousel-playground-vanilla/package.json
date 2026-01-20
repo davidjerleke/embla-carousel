@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "echo \"Info: no tests specified\" && exit 0"
   },
@@ -12,7 +13,7 @@
     "embla-carousel": "8.6.0"
   },
   "devDependencies": {
-    "typescript": "^4.6.4",
-    "vite": "^3.2.11"
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5"
   }
 }

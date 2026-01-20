@@ -2,89 +2,99 @@ import { Engine, EngineType } from './Engine'
 import { EventStore } from './EventStore'
 import { EventHandler, EventHandlerType } from './EventHandler'
 import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
+import { NodeHandler, NodeHandlerType } from './NodeHandler'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
+import { SsrHandler, SsrHandlerType } from './SsrHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
-import { isString, WindowType } from './utils'
+import { ScrollToDirectionType } from './ScrollTo'
 
 export type EmblaCarouselType = {
-  canScrollNext: () => boolean
-  canScrollPrev: () => boolean
-  containerNode: () => HTMLElement
-  internalEngine: () => EngineType
-  destroy: () => void
-  off: EventHandlerType['off']
-  on: EventHandlerType['on']
-  emit: EventHandlerType['emit']
-  plugins: () => EmblaPluginsType
-  previousScrollSnap: () => number
-  reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
+  canGoToNext: () => boolean
+  canGoToPrev: () => boolean
+  goToNext: (instant?: boolean) => void
+  goToPrev: (instant?: boolean) => void
+  goTo: (
+    index: number,
+    instant?: boolean,
+    direction?: ScrollToDirectionType
+  ) => void
+  previousSnap: () => number
+  selectedSnap: () => number
   rootNode: () => HTMLElement
-  scrollNext: (jump?: boolean) => void
-  scrollPrev: (jump?: boolean) => void
-  scrollProgress: () => number
-  scrollSnapList: () => number[]
-  scrollTo: (index: number, jump?: boolean) => void
-  selectedScrollSnap: () => number
+  containerNode: () => HTMLElement
   slideNodes: () => HTMLElement[]
+  snapIndex: (offset: number) => number
+  snapList: () => number[]
+  createEvent: EventHandlerType['createEvent']
+  destroy: () => void
+  on: EventHandlerType['on']
+  off: EventHandlerType['off']
+  internalEngine: () => EngineType
+  cloneEngine: (userOptions?: EmblaOptionsType) => EngineType
+  plugins: () => EmblaPluginsType
+  reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
+  ssrStyles: (container: string, slides?: string) => string
+  scrollProgress: () => number
   slidesInView: () => number[]
-  slidesNotInView: () => number[]
 }
 
 function EmblaCarousel(
-  root: HTMLElement,
-  userOptions?: EmblaOptionsType,
-  userPlugins?: EmblaPluginType[]
+  userRoot?: HTMLElement | null,
+  userOptions?: EmblaOptionsType | null,
+  userPlugins?: EmblaPluginType[] | null
 ): EmblaCarouselType {
-  const ownerDocument = root.ownerDocument
-  const ownerWindow = <WindowType>ownerDocument.defaultView
-  const optionsHandler = OptionsHandler(ownerWindow)
+  const isSsr = !userRoot
+  const optionsHandler = OptionsHandler()
   const pluginsHandler = PluginsHandler(optionsHandler)
   const mediaHandlers = EventStore()
   const eventHandler = EventHandler()
   const { mergeOptions, optionsAtMedia, optionsMediaQueries } = optionsHandler
-  const { on, off, emit } = eventHandler
+  const { on, off, createEvent } = eventHandler
   const reInit = reActivate
 
   let destroyed = false
   let engine: EngineType
+  let nodeHandler: NodeHandlerType
+  let ssrHandler: SsrHandlerType
   let optionsBase = mergeOptions(defaultOptions, EmblaCarousel.globalOptions)
   let options = mergeOptions(optionsBase)
   let pluginList: EmblaPluginType[] = []
   let pluginApis: EmblaPluginsType = {}
-
+  let root: HTMLElement
   let container: HTMLElement
   let slides: HTMLElement[]
 
-  function storeElements(): void {
-    const { container: userContainer, slides: userSlides } = options
-
-    const customContainer = isString(userContainer)
-      ? root.querySelector(userContainer)
-      : userContainer
-    container = <HTMLElement>(customContainer || root.children[0])
-
-    const customSlides = isString(userSlides)
-      ? container.querySelectorAll(userSlides)
-      : userSlides
-    slides = <HTMLElement[]>[].slice.call(customSlides || container.children)
+  function cloneEngine(userOptions?: EmblaOptionsType): EngineType {
+    const engineOptions = mergeOptions(options, userOptions)
+    return createEngine(engineOptions, container, slides, true)
   }
 
-  function createEngine(options: OptionsType): EngineType {
+  function createEngine(
+    options: OptionsType,
+    container: HTMLElement,
+    slides: HTMLElement[],
+    useCachedRects?: boolean
+  ): EngineType {
+    const ssrOptions = isSsr ? { direction: 'ltr' } : {}
+    const engineOptions = mergeOptions(options, ssrOptions)
+    const rects = nodeHandler.getRects(container, slides, useCachedRects)
     const engine = Engine(
       root,
       container,
       slides,
-      ownerDocument,
-      ownerWindow,
-      options,
-      eventHandler
+      engineOptions,
+      nodeHandler,
+      eventHandler,
+      rects,
+      isSsr
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
-      const optionsWithoutLoop = Object.assign({}, options, { loop: false })
-      return createEngine(optionsWithoutLoop)
+      const optionsWithNoLoop = mergeOptions(options, { loop: false })
+      return createEngine(optionsWithNoLoop, container, slides, true)
     }
+
     return engine
   }
 
@@ -94,13 +104,28 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
+    nodeHandler = NodeHandler(<HTMLElement>userRoot)
+    const { ownerWindow } = nodeHandler
+
+    optionsHandler.init(ownerWindow)
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
     pluginList = withPlugins || pluginList
 
-    storeElements()
+    const nodes = nodeHandler.getNodes(options)
+    root = nodes.root
+    container = nodes.container
+    slides = nodes.slides
+    engine = createEngine(options, container, slides)
 
-    engine = createEngine(options)
+    ssrHandler = SsrHandler(
+      container,
+      engine.axis,
+      nodeHandler,
+      optionsBase,
+      mergeOptions,
+      createEngine
+    )
 
     optionsMediaQueries([
       optionsBase,
@@ -109,16 +134,22 @@ function EmblaCarousel(
 
     if (!options.active) return
 
-    engine.translate.to(engine.location.get())
-    engine.animation.init()
-    engine.slidesInView.init()
-    engine.slideFocus.init(self)
-    engine.eventHandler.init(self)
-    engine.resizeHandler.init(self)
-    engine.slidesHandler.init(self)
+    if (!isSsr && ownerWindow) {
+      engine.translate.to(engine.location)
+      engine.scrollOptimizer.optimize(true)
+      if (engine.options.loop) engine.slideLooper.loop()
 
-    if (engine.options.loop) engine.slideLooper.loop()
-    if (container.offsetParent && slides.length) engine.dragHandler.init(self)
+      engine.animation.init(ownerWindow)
+      engine.resizeHandler.init(ownerWindow)
+      engine.slidesInView.init(ownerWindow)
+      engine.slidesHandler.init(ownerWindow)
+      engine.slideFocus.init(ownerWindow)
+      engine.eventHandler.init(self)
+
+      if (container.offsetParent && slides.length) {
+        engine.dragHandler.init(ownerWindow)
+      }
+    }
 
     pluginApis = pluginsHandler.init(self, pluginList)
   }
@@ -127,84 +158,96 @@ function EmblaCarousel(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[]
   ): void {
-    const startIndex = selectedScrollSnap()
+    const event = eventHandler.createEvent('reinit', null)
+    const startSnap = selectedSnap()
     deActivate()
-    activate(mergeOptions({ startIndex }, withOptions), withPlugins)
-    eventHandler.emit('reInit')
+    activate(mergeOptions({ startSnap }, withOptions), withPlugins)
+    event.emit()
   }
 
   function deActivate(): void {
     engine.dragHandler.destroy()
-    engine.eventStore.clear()
-    engine.translate.clear()
-    engine.slideLooper.clear()
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
     engine.slidesInView.destroy()
     engine.animation.destroy()
     pluginsHandler.destroy()
+    engine.eventStore.clear()
     mediaHandlers.clear()
+    engine.translate.clear()
+    engine.slideTranslates.forEach((translate) => translate.clear())
   }
 
   function destroy(): void {
     if (destroyed) return
+    if (isSsr) return
+
+    const event = eventHandler.createEvent('destroy', null)
+
     destroyed = true
     mediaHandlers.clear()
     deActivate()
-    eventHandler.emit('destroy')
+    event.emit()
     eventHandler.clear()
   }
 
-  function scrollTo(index: number, jump?: boolean, direction?: number): void {
-    if (!options.active || destroyed) return
+  function goTo(
+    index: number,
+    instant?: boolean,
+    direction?: ScrollToDirectionType
+  ): void {
+    if (destroyed) return
+    if (isSsr) return
+    if (!options.active) return
+
     engine.scrollBody
       .useBaseFriction()
-      .useDuration(jump === true ? 0 : options.duration)
-    engine.scrollTo.index(index, direction || 0)
+      .useDuration(instant === true ? 0 : options.duration)
+    engine.scrollTo.index(index, direction)
   }
 
-  function scrollNext(jump?: boolean): void {
-    const next = engine.index.add(1).get()
-    scrollTo(next, jump, -1)
+  function goToNext(instant?: boolean): void {
+    goTo(snapIndex(1), instant, -1)
   }
 
-  function scrollPrev(jump?: boolean): void {
-    const prev = engine.index.add(-1).get()
-    scrollTo(prev, jump, 1)
+  function goToPrev(instant?: boolean): void {
+    goTo(snapIndex(-1), instant, 1)
   }
 
-  function canScrollNext(): boolean {
-    const next = engine.index.add(1).get()
-    return next !== selectedScrollSnap()
+  function canGoToNext(): boolean {
+    return snapIndex(1) !== selectedSnap()
   }
 
-  function canScrollPrev(): boolean {
-    const prev = engine.index.add(-1).get()
-    return prev !== selectedScrollSnap()
+  function canGoToPrev(): boolean {
+    return snapIndex(-1) !== selectedSnap()
   }
 
-  function scrollSnapList(): number[] {
-    return engine.scrollSnapList
+  function ssrStyles(container: string, slides?: string): string {
+    return isSsr ? ssrHandler.getStyles(container, slides) : ''
   }
 
   function scrollProgress(): number {
-    return engine.scrollProgress.get(engine.offsetLocation.get())
+    return engine.scrollProgress.get(engine.offsetLocation)
   }
 
-  function selectedScrollSnap(): number {
-    return engine.index.get()
+  function snapIndex(offset: number): number {
+    return engine.indexCurrent.add(offset).get()
   }
 
-  function previousScrollSnap(): number {
+  function snapList(): number[] {
+    return engine.scrollSnapList.progressBySnap
+  }
+
+  function selectedSnap(): number {
+    return snapIndex(0)
+  }
+
+  function previousSnap(): number {
     return engine.indexPrevious.get()
   }
 
   function slidesInView(): number[] {
     return engine.slidesInView.get()
-  }
-
-  function slidesNotInView(): number[] {
-    return engine.slidesInView.get(false)
   }
 
   function plugins(): EmblaPluginsType {
@@ -228,31 +271,32 @@ function EmblaCarousel(
   }
 
   const self: EmblaCarouselType = {
-    canScrollNext,
-    canScrollPrev,
+    canGoToNext,
+    canGoToPrev,
+    cloneEngine,
     containerNode,
+    createEvent,
     internalEngine,
     destroy,
-    off,
     on,
-    emit,
+    off,
     plugins,
-    previousScrollSnap,
+    previousSnap,
     reInit,
     rootNode,
-    scrollNext,
-    scrollPrev,
+    goToNext,
+    goToPrev,
     scrollProgress,
-    scrollSnapList,
-    scrollTo,
-    selectedScrollSnap,
+    goTo,
+    selectedSnap,
     slideNodes,
     slidesInView,
-    slidesNotInView
+    snapIndex,
+    snapList,
+    ssrStyles
   }
 
-  activate(userOptions, userPlugins)
-  setTimeout(() => eventHandler.emit('init'), 0)
+  activate(userOptions || {}, userPlugins || [])
   return self
 }
 

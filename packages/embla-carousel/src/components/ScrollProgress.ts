@@ -1,19 +1,20 @@
 import { LimitType } from './Limit'
+import { NumberStoreInputType, mapStoreToNumber } from './utils'
 
 export type ScrollProgressType = {
-  get: (n: number) => number
+  get: (input: NumberStoreInputType) => number
 }
 
 export function ScrollProgress(limit: LimitType): ScrollProgressType {
   const { max, length } = limit
 
-  function get(n: number): number {
-    const currentLocation = n - max
+  function get(input: number): number {
+    const currentLocation = input - max
     return length ? currentLocation / -length : 0
   }
 
   const self: ScrollProgressType = {
-    get
+    get: mapStoreToNumber(get)
   }
   return self
 }

@@ -6,6 +6,7 @@ import { MEDIA } from 'consts/breakpoints'
 import { LAYERS } from 'consts/layers'
 import { HEADER_HEIGHT } from 'consts/header'
 import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
 import { PAGE_FRAME_SPACING } from 'components/Page/PageFrame'
 import { TableOfContentsMenu } from './TableOfContentsMenu'
 import {
@@ -18,6 +19,7 @@ const TableOfContentsWrapper = styled.nav`
     position: fixed;
     z-index: ${LAYERS.NAVIGATION};
     top: ${HEADER_HEIGHT};
+    font-size: ${FONT_SIZES.COMPLEMENTARY};
     bottom: 0;
     width: inherit;
     max-width: inherit;

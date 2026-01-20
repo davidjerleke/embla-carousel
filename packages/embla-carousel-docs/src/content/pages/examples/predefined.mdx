@@ -5,35 +5,8 @@ order: 0
 date: 2022-11-13
 ---
 
-{/* Basic */}
-import { Default } from 'components/Examples/Basic/Default'
-import { Loop } from 'components/Examples/Basic/Loop'
-import { RightToLeft } from 'components/Examples/Basic/RightToLeft'
-import { SlidesToScroll } from 'components/Examples/Basic/SlidesToScroll'
-import { DragFree } from 'components/Examples/Basic/DragFree'
-import { Align } from 'components/Examples/Basic/Align'
-import { VariableWidths } from 'components/Examples/Basic/VariableWidths'
-import { YAxis } from 'components/Examples/Basic/YAxis'
-import { SlidesPerView } from 'components/Examples/Basic/SlidesPerView'
-import { Thumbs } from 'components/Examples/Basic/Thumbs'
-
-{/* Plugins */}
-import { Autoplay } from 'components/Examples/Plugins/Autoplay'
-import { AutoScroll } from 'components/Examples/Plugins/AutoScroll'
-import { AutoHeight } from 'components/Examples/Plugins/AutoHeight'
-import { Fade } from 'components/Examples/Plugins/Fade'
-import { ClassNames } from 'components/Examples/Plugins/ClassNames'
-
-{/* Tween */}
-import { Parallax } from 'components/Examples/Tween/Parallax'
-import { Scale } from 'components/Examples/Tween/Scale'
-import { Opacity } from 'components/Examples/Tween/Opacity'
-
-{/* Miscellaneous */}
-import { Progress } from 'components/Examples/Miscellaneous/Progress'
-import { LazyLoad } from 'components/Examples/Miscellaneous/LazyLoad'
-import { InfiniteScroll } from 'components/Examples/Miscellaneous/InfiniteScroll'
-import { IosPicker } from 'components/Examples/Miscellaneous/IosPicker'
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
 
 # Predefined Examples
 
@@ -47,67 +20,104 @@ Basic carousel setups that require minimal effort to get started with.
 
 ### Default
 
-<Default />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/Default')}
+/>
 
 ### Loop
 
-<Loop />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/Loop')}
+/>
 
 ### Right To Left
 
-<RightToLeft />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/RightToLeft')}
+/>
 
 ### Slides To Scroll
 
-<SlidesToScroll />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/SlidesToScroll')}
+/>
 
 ### Drag Free
 
-<DragFree />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/DragFree')}
+/>
 
 ### Align
 
-<Align />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/Align')}
+/>
 
 ### Variable Widths
 
-<VariableWidths />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/VariableWidths')}
+/>
 
 ### Y-axis
 
-<YAxis />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/YAxis')}
+/>
 
 ### Slides Per View
 
-<SlidesPerView />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/SlidesPerView')}
+/>
 
 ### Thumbnails
 
-<Thumbs />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Basic/Thumbs')}
+  wrapper={EXAMPLES_WRAPPERS.THUMBS}
+/>
 
 ## Plugin Examples
 
 Extend your carousels with [plugins](/plugins/) and easily add features.
 
+### Accessibility
+
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Accessibility')}
+/>
+
 ### Autoplay
 
-<Autoplay />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Autoplay')}
+/>
 
 ### Auto Scroll
 
-<AutoScroll />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/AutoScroll')}
+/>
 
 ### Auto Height
 
-<AutoHeight />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/AutoHeight')}
+/>
 
 ### Fade
 
-<Fade />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Fade')}
+/>
 
 ### Class Names
 
-<ClassNames />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/ClassNames')}
+/>
 
 ## Tween Examples
 
@@ -115,15 +125,21 @@ Tween styles on your slides as the carousel scrolls.
 
 ### Parallax
 
-<Parallax />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Tween/Parallax')}
+/>
 
 ### Scale
 
-<Scale />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Tween/Scale')}
+/>
 
 ### Opacity
 
-<Opacity />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Tween/Opacity')}
+/>
 
 ## Miscellaneous Examples
 
@@ -131,20 +147,47 @@ Add features using the [API](/api/) and the internal engine.
 
 ### Progress
 
-<Progress />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Miscellaneous/Progress')}
+/>
 
 ### Lazy Load
 
-<LazyLoad />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Miscellaneous/LazyLoad')}
+/>
+
+### Scroll Bar
+
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Predefined/Miscellaneous/ScrollBar')
+  }
+  wrapper={EXAMPLES_WRAPPERS.SCROLL_BAR}
+/>
 
 ### Infinite Scroll
 
-<InfiniteScroll />
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Predefined/Miscellaneous/InfiniteScroll')
+  }
+/>
 
 ### IOS Style Picker Default
 
-<IosPicker loop={false} />
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Predefined/Miscellaneous/IosPicker')
+  }
+  wrapper={EXAMPLES_WRAPPERS.IOS_PICKER}
+/>
 
 ### IOS Style Picker Loop
 
-<IosPicker loop={true} />
+<ExamplesLazy
+  loader={() =>
+    import('components/Examples/Predefined/Miscellaneous/IosPickerLoop')
+  }
+  wrapper={EXAMPLES_WRAPPERS.IOS_PICKER}
+/>

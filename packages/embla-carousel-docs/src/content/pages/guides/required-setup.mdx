@@ -1,0 +1,105 @@
+---
+title: Required Setup
+description: The minimal HTML and CSS structure you need to initialize and use Embla Carousel.
+order: 20
+date: 2025-09-29
+---
+
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import stylingTheCarousel_module from '!!raw-loader!content/code-snippets/get-started/module/styling-the-carousel-01.css'
+import stylingTheCarousel_vue from '!!raw-loader!content/code-snippets/get-started/vue/styling-the-carousel-01.vue'
+import stylingTheCarousel_svelte from '!!raw-loader!content/code-snippets/get-started/svelte/styling-the-carousel-01.svelte'
+import markupAndScript_module from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-vanilla-01.js'
+import markupAndScript_html from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-vanilla-01.html'
+import markupAndScript_react from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-react-01.jsx'
+import markupAndScript_vue from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-vue-01.vue'
+import markupAndScript_solid from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-solid-01.jsx'
+import markupAndScript_svelte from '!!raw-loader!content/code-snippets/guides/required-setup/markup-and-script-svelte-01.svelte'
+
+# Required Setup
+
+Embla Carousel works by controlling a **scrollable container** within a **viewport** element. To get started, you'll need a minimal HTML and CSS setup.
+
+---
+
+## Prerequisites
+
+Before continuing with this guide, make sure you've completed the following:
+
+- [How Embla Carousel Works](/guides/how-embla-carousel-works)
+
+## Core structure
+
+Your markup must follow this pattern:
+
+- An **overflow wrapper** (`embla__viewport` below) that hides overflowing content.
+- A **scroll container** (`embla__container`) that holds and scrolls the slides.
+- One or more **slides** (`embla__slide`). Embla also supports an empty state with no slides.
+
+## Base CSS
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight language="css" code={stylingTheCarousel_module} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight language="css" code={stylingTheCarousel_module} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={stylingTheCarousel_vue}
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight language="css" code={stylingTheCarousel_module} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight language="svelte" code={stylingTheCarousel_svelte} />
+  </TabsItem>
+</Tabs>
+
+## Markup and script
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight language="js" code={markupAndScript_module} />
+    <PrismHighlight language="html" code={markupAndScript_html} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight language="jsx" code={markupAndScript_react} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={markupAndScript_vue}
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight language="jsx" code={markupAndScript_solid} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight language="svelte" code={markupAndScript_svelte} />
+  </TabsItem>
+</Tabs>
+
+## Notes
+
+- **Class names** are just examples — use any naming scheme you prefer, as long as the **HTML structure** and **CSS rules** stay the same.
+- You can use other semantic elements instead of `<div>` (e.g. `<section>`, `<article>`).
+- The example uses **flexbox** for horizontal slides, but **CSS Grid** or other layout methods also work.
+- `flex: 0 0 100%` makes each slide take up the full carousel width. Adjust this for multi-slide layouts or custom designs.
+- The outer `.embla` wrapper shown in the examples is **optional**. You can use it as a convenient container for navigation controls or styling, but Embla only requires the **viewport → container → slides** hierarchy.
+
+<Admonition type="warning">
+
+**Important**: The `overflow: hidden` on the viewport element is **mandatory**.
+Without it, slides will overflow outside the viewport and Embla cannot guarantee
+correct scrolling behavior.
+
+</Admonition>

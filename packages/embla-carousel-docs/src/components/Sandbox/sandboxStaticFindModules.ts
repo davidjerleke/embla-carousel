@@ -10,7 +10,7 @@ export const sandboxStaticFindLocalModules = (
   )
 }
 
-const IMPORT_SHARED_MODULE_REGEX = /from\s'..\/EmblaCarousel(.*)'/g
+const IMPORT_SHARED_MODULE_REGEX = /from\s'..(.*)\/EmblaCarousel(.*)'/g
 const MODULE_SHARED_NAME_REGEX = /.+?(?=EmblaCarousel)/
 
 export const sandboxStaticFindSharedModules = (

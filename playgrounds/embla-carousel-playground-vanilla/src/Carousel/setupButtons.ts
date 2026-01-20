@@ -1,48 +1,31 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
-const addTogglePrevNextBtnsActive = (
+export const togglePrevNextBtnsState = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
-): (() => void) => {
-  const togglePrevNextBtnsState = (): void => {
-    if (emblaApi.canScrollPrev()) prevBtn.removeAttribute('disabled')
-    else prevBtn.setAttribute('disabled', 'disabled')
+): void => {
+  if (emblaApi.canGoToPrev()) prevBtn.removeAttribute('disabled')
+  else prevBtn.setAttribute('disabled', 'disabled')
 
-    if (emblaApi.canScrollNext()) nextBtn.removeAttribute('disabled')
-    else nextBtn.setAttribute('disabled', 'disabled')
-  }
-
-  emblaApi
-    .on('select', togglePrevNextBtnsState)
-    .on('init', togglePrevNextBtnsState)
-    .on('reInit', togglePrevNextBtnsState)
-
-  return (): void => {
-    prevBtn.removeAttribute('disabled')
-    nextBtn.removeAttribute('disabled')
-  }
+  if (emblaApi.canGoToNext()) nextBtn.removeAttribute('disabled')
+  else nextBtn.setAttribute('disabled', 'disabled')
 }
 
 export const addPrevNextBtnsClickHandlers = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
-): (() => void) => {
-  const scrollPrev = () => emblaApi.scrollPrev()
-  const scrollNext = () => emblaApi.scrollNext()
+): void => {
+  const scrollPrev = () => emblaApi.goToPrev()
+  const scrollNext = () => emblaApi.goToNext()
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)
 
-  const removeTogglePrevNextBtnsActive = addTogglePrevNextBtnsActive(
-    emblaApi,
-    prevBtn,
-    nextBtn
-  )
+  const toggleButtonsState = (): void =>
+    togglePrevNextBtnsState(emblaApi, prevBtn, nextBtn)
 
-  return (): void => {
-    removeTogglePrevNextBtnsActive()
-    prevBtn.removeEventListener('click', scrollPrev, false)
-    nextBtn.removeEventListener('click', scrollNext, false)
-  }
+  toggleButtonsState()
+
+  emblaApi.on('select', toggleButtonsState).on('reinit', toggleButtonsState)
 }

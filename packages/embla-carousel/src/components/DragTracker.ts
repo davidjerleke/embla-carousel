@@ -5,20 +5,23 @@ type PointerCoordType = keyof Touch | keyof MouseEvent
 export type PointerEventType = TouchEvent | MouseEvent
 
 export type DragTrackerType = {
+  init: (ownerWindow: WindowType) => void
   pointerDown: (evt: PointerEventType) => number
   pointerMove: (evt: PointerEventType) => number
   pointerUp: (evt: PointerEventType) => number
   readPoint: (evt: PointerEventType, evtAxis?: AxisOptionType) => number
 }
 
-export function DragTracker(
-  axis: AxisType,
-  ownerWindow: WindowType
-): DragTrackerType {
+export function DragTracker(axis: AxisType): DragTrackerType {
   const logInterval = 170
 
+  let windowInstance: WindowType
   let startEvent: PointerEventType
   let lastEvent: PointerEventType
+
+  function init(ownerWindow: WindowType): void {
+    windowInstance = ownerWindow
+  }
 
   function readTime(evt: PointerEventType): number {
     return evt.timeStamp
@@ -27,7 +30,7 @@ export function DragTracker(
   function readPoint(evt: PointerEventType, evtAxis?: AxisOptionType): number {
     const property = evtAxis || axis.scroll
     const coord: PointerCoordType = `client${property === 'x' ? 'X' : 'Y'}`
-    return (isMouseEvent(evt, ownerWindow) ? evt : evt.touches[0])[coord]
+    return (isMouseEvent(evt, windowInstance) ? evt : evt.touches[0])[coord]
   }
 
   function pointerDown(evt: PointerEventType): number {
@@ -57,6 +60,7 @@ export function DragTracker(
   }
 
   const self: DragTrackerType = {
+    init,
     pointerDown,
     pointerMove,
     pointerUp,

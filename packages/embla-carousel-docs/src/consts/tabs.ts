@@ -45,6 +45,10 @@ export const TABS_PACKAGE_MANAGER: TabsGroupType = {
       LABEL: 'npm',
       VALUE: 'npm'
     },
+    PNPM: {
+      LABEL: 'pnpm',
+      VALUE: 'pnpm'
+    },
     YARN: {
       LABEL: 'yarn',
       VALUE: 'yarn'
@@ -74,10 +78,6 @@ export const TABS_LIBRARY: TabsGroupType = {
     SOLID: {
       LABEL: 'Solid',
       VALUE: 'solid'
-    },
-    ANGULAR: {
-      LABEL: 'Angular',
-      VALUE: 'angular'
     }
   }
 }

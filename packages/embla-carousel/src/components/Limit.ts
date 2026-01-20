@@ -1,50 +1,50 @@
-import { mathAbs } from './utils'
+import { mathAbs, NumberStoreInputType, mapStoreToNumber } from './utils'
 
 export type LimitType = {
   min: number
   max: number
   length: number
-  constrain: (n: number) => number
-  reachedAny: (n: number) => boolean
-  reachedMax: (n: number) => boolean
-  reachedMin: (n: number) => boolean
-  removeOffset: (n: number) => number
+  clamp: (input: NumberStoreInputType) => number
+  pastAnyBound: (input: NumberStoreInputType) => boolean
+  pastMaxBound: (input: NumberStoreInputType) => boolean
+  pastMinBound: (input: NumberStoreInputType) => boolean
+  removeOffset: (input: NumberStoreInputType) => number
 }
 
 export function Limit(min: number = 0, max: number = 0): LimitType {
   const length = mathAbs(min - max)
 
-  function reachedMin(n: number): boolean {
-    return n < min
+  function pastMinBound(input: number): boolean {
+    return input < min
   }
 
-  function reachedMax(n: number): boolean {
-    return n > max
+  function pastMaxBound(input: number): boolean {
+    return input > max
   }
 
-  function reachedAny(n: number): boolean {
-    return reachedMin(n) || reachedMax(n)
+  function pastAnyBound(input: number): boolean {
+    return pastMinBound(input) || pastMaxBound(input)
   }
 
-  function constrain(n: number): number {
-    if (!reachedAny(n)) return n
-    return reachedMin(n) ? min : max
+  function clamp(input: number): number {
+    if (!pastAnyBound(input)) return input
+    return pastMinBound(input) ? min : max
   }
 
-  function removeOffset(n: number): number {
-    if (!length) return n
-    return n - length * Math.ceil((n - max) / length)
+  function removeOffset(input: number): number {
+    if (!length) return input
+    return input - length * Math.ceil((input - max) / length)
   }
 
   const self: LimitType = {
     length,
     max,
     min,
-    constrain,
-    reachedAny,
-    reachedMax,
-    reachedMin,
-    removeOffset
+    clamp: mapStoreToNumber(clamp),
+    pastAnyBound: mapStoreToNumber(pastAnyBound),
+    pastMaxBound: mapStoreToNumber(pastMaxBound),
+    pastMinBound: mapStoreToNumber(pastMinBound),
+    removeOffset: mapStoreToNumber(removeOffset)
   }
   return self
 }

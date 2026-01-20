@@ -19,15 +19,12 @@ export function PluginsHandler(
     emblaApi: EmblaCarouselType,
     plugins: EmblaPluginType[]
   ): EmblaPluginsType {
-    activePlugins = plugins.filter(
-      ({ options }) => optionsHandler.optionsAtMedia(options).active !== false
-    )
-    activePlugins.forEach((plugin) => plugin.init(emblaApi, optionsHandler))
+    activePlugins = plugins
 
-    return plugins.reduce(
-      (map, plugin) => Object.assign(map, { [plugin.name]: plugin }),
-      {}
-    )
+    return plugins.reduce((pluginList, plugin) => {
+      plugin.init(emblaApi, optionsHandler)
+      return { ...pluginList, [plugin.name]: plugin }
+    }, {})
   }
 
   function destroy(): void {

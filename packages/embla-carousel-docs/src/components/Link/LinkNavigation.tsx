@@ -14,7 +14,7 @@ const LinkNavigationWrapper = styled(LinkBare)`
 `
 
 export const InactiveText = styled.span<{ $isActive: boolean }>`
-  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
+  color: ${COLORS.TEXT_LOW_CONTRAST};
   opacity: ${({ $isActive }) => ($isActive ? 0 : 1)};
   transform: translateY(-50%);
   position: absolute;

@@ -4,9 +4,11 @@ import { useAppSelector } from 'hooks/useRedux'
 import { selectHierarchalRoutes } from 'components/Routes/routesReducer'
 import { ThemeToggle } from 'components/Theme/ThemeToggle'
 import { LinkNavigation } from 'components/Link/LinkNavigation'
+import { VersionBadge } from 'components/VersionBadge/VersionBadge'
 import { COLORS } from 'consts/themes'
 import { MEDIA } from 'consts/breakpoints'
 import { SPACINGS } from 'consts/spacings'
+import { FONT_SIZES } from 'consts/fontSizes'
 import { Search } from 'components/Search/Search'
 import { createGapStyles } from 'utils/createGapStyles'
 
@@ -16,6 +18,7 @@ const HeaderActionsWrapper = styled.ul`
   display: flex;
   align-items: center;
   line-height: 1.65;
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
 
   ${MEDIA.DESKTOP} {
     ${createGapStyles(ITEM_SPACING_DESKTOP, '', 'li')}
@@ -58,9 +61,15 @@ export const HeaderActions = () => {
           </HeaderActionsWrapper>
         </nav>
       </Item>
+
+      <Item $hiddenAtCompact>
+        <VersionBadge />
+      </Item>
+
       <Item>
         <Search />
       </Item>
+
       <Item $hiddenAtCompact>
         <ThemeToggle />
       </Item>

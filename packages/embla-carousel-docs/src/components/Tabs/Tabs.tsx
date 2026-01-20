@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { useAppDispatch, useAppSelector } from 'hooks/useRedux'
 import { setIsKeyNavigating } from 'components/KeyEvents/keyEventsReducer'
-import { useIsomorphicLayoutEffect } from 'utils/useIsomorphicLayoutEffect'
+import { useIsomorphicLayoutEffect } from 'hooks/useIsomorphicLayoutEffect'
 import {
   selectTabSelections,
   setTabSelection

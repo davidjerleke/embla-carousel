@@ -2,13 +2,13 @@ import React, { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { SPACINGS } from 'consts/spacings'
 import { BORDER_SIZES } from 'consts/border'
-import { TableOfContentsItemType } from './TableOfContentsContext'
+import { TableOfContentsItemType } from 'consts/tableOfContents'
 import { InactiveText, LinkNavigation } from 'components/Link/LinkNavigation'
 import { COLORS } from 'consts/themes'
 
 const Link = styled(LinkNavigation)<{ $level: number }>`
-  padding-top: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
-  padding-bottom: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.4)};
+  padding-top: ${SPACINGS.ONE};
+  padding-bottom: ${SPACINGS.ONE};
   outline-offset: -${BORDER_SIZES.OUTLINE};
 
   ${({ $level }) =>

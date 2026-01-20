@@ -10,8 +10,14 @@
     <main class="playground" id="sandboxes">
       <h1 class="playground__h1">Playground - Vanilla</h1>
 
+      <style id="embla-ssr-styles"></style>
+
+      <div class="playground__ssr-text">
+        <strong>SSR:</strong> <span id="ssr-text">-</span>
+      </div>
+
       <!-- Embla -->
-      <div class="embla">
+      <div class="embla" dir="ltr">
         <div class="embla__viewport">
           <div class="embla__container"></div>
         </div>
@@ -47,6 +53,8 @@
           <!-- Dots -->
           <div class="embla__dots"></div>
         </div>
+
+        <div class="embla__live-region"></div>
       </div>
     </main>
 

@@ -4,7 +4,7 @@ import {
   CreatePluginType,
   OptionsHandlerType,
   EmblaCarouselType,
-  EmblaEventType
+  EmblaEventModelType
 } from 'embla-carousel'
 
 declare module 'embla-carousel' {
@@ -20,20 +20,26 @@ export type ClassNamesOptionsType = ClassNamesType['options']
 function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   let options: OptionsType
   let emblaApi: EmblaCarouselType
+  let isSsr = false
+  let destroyed = false
+
   let root: HTMLElement
   let slides: HTMLElement[]
   let snappedIndexes: number[] = []
   let inViewIndexes: number[] = []
 
-  const selectedEvents: EmblaEventType[] = ['select']
-  const draggingEvents: EmblaEventType[] = ['pointerDown', 'pointerUp']
-  const inViewEvents: EmblaEventType[] = ['slidesInView']
   const classNames: ClassNamesListType = {
     snapped: [],
     inView: [],
     draggable: [],
-    dragging: [],
+    pointerDown: [],
     loop: []
+  }
+
+  function pluginIsActive(): boolean {
+    if (isSsr) return false
+    if (destroyed) return false
+    return options.active
   }
 
   function init(
@@ -45,50 +51,60 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
     const { mergeOptions, optionsAtMedia } = optionsHandler
     const optionsBase = mergeOptions(defaultOptions, ClassNames.globalOptions)
     const allOptions = mergeOptions(optionsBase, userOptions)
+
+    destroyed = false
     options = optionsAtMedia(allOptions)
+    isSsr = emblaApi.internalEngine().isSsr
+
+    if (!pluginIsActive()) return
 
     root = emblaApi.rootNode()
     slides = emblaApi.slideNodes()
 
-    const { watchDrag, loop } = emblaApi.internalEngine().options
-    const isDraggable = !!watchDrag
+    const coreOptions = emblaApi.internalEngine().options
 
-    if (options.loop && loop) {
+    if (options.loop && coreOptions.loop) {
       classNames.loop = normalizeClassNames(options.loop)
       addClass(root, classNames.loop)
     }
 
-    if (options.draggable && isDraggable) {
+    if (options.draggable && coreOptions.draggable) {
       classNames.draggable = normalizeClassNames(options.draggable)
       addClass(root, classNames.draggable)
     }
 
-    if (options.dragging) {
-      classNames.dragging = normalizeClassNames(options.dragging)
-      draggingEvents.forEach((evt) => emblaApi.on(evt, toggleDraggingClass))
+    if (options.pointerDown) {
+      classNames.pointerDown = normalizeClassNames(options.pointerDown)
+      emblaApi
+        .on('pointerdown', togglePointerDownClass)
+        .on('pointerup', togglePointerDownClass)
     }
 
     if (options.snapped) {
       classNames.snapped = normalizeClassNames(options.snapped)
-      selectedEvents.forEach((evt) => emblaApi.on(evt, toggleSnappedClasses))
+      emblaApi.on('select', toggleSnappedClasses)
       toggleSnappedClasses()
     }
 
     if (options.inView) {
       classNames.inView = normalizeClassNames(options.inView)
-      inViewEvents.forEach((evt) => emblaApi.on(evt, toggleInViewClasses))
+      emblaApi.on('slidesinview', toggleInViewClasses)
       toggleInViewClasses()
     }
   }
 
   function destroy(): void {
-    draggingEvents.forEach((evt) => emblaApi.off(evt, toggleDraggingClass))
-    selectedEvents.forEach((evt) => emblaApi.off(evt, toggleSnappedClasses))
-    inViewEvents.forEach((evt) => emblaApi.off(evt, toggleInViewClasses))
+    if (!pluginIsActive()) return
+
+    emblaApi
+      .off('pointerdown', togglePointerDownClass)
+      .off('pointerup', togglePointerDownClass)
+      .off('select', toggleSnappedClasses)
+      .off('slidesinview', toggleInViewClasses)
 
     removeClass(root, classNames.loop)
     removeClass(root, classNames.draggable)
-    removeClass(root, classNames.dragging)
+    removeClass(root, classNames.pointerDown)
     toggleSlideClasses([], snappedIndexes, classNames.snapped)
     toggleSlideClasses([], inViewIndexes, classNames.inView)
 
@@ -96,14 +112,16 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
       const key = <keyof ClassNamesListType>classNameKey
       classNames[key] = []
     })
+
+    destroyed = true
   }
 
-  function toggleDraggingClass(
+  function togglePointerDownClass(
     _: EmblaCarouselType,
-    evt: EmblaEventType
+    event: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'>
   ): void {
-    const toggleClass = evt === 'pointerDown' ? addClass : removeClass
-    toggleClass(root, classNames.dragging)
+    const toggleClass = event.type === 'pointerdown' ? addClass : removeClass
+    toggleClass(root, classNames.pointerDown)
   }
 
   function toggleSlideClasses(
@@ -121,8 +139,8 @@ function ClassNames(userOptions: ClassNamesOptionsType = {}): ClassNamesType {
   }
 
   function toggleSnappedClasses(): void {
-    const { slideRegistry } = emblaApi.internalEngine()
-    const newSnappedIndexes = slideRegistry[emblaApi.selectedScrollSnap()]
+    const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
+    const newSnappedIndexes = slidesBySnap[emblaApi.selectedSnap()]
 
     snappedIndexes = toggleSlideClasses(
       newSnappedIndexes,

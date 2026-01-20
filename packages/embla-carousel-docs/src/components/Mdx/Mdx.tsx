@@ -10,11 +10,7 @@ import { Blockquote } from './Components/Blockquote'
 import { RepositoryLink } from 'components/Mdx/Components/RepositoryLink'
 import { PageChildLinks } from 'components/Mdx/Components/PageChildLinks'
 import { Admonition } from 'components/Mdx/Components/Admonition'
-import {
-  BrandAlternativeText,
-  BrandPrimaryText,
-  BrandSecondaryText
-} from 'components/Mdx/Components/ColoredText'
+import { ApiMetaData } from './Components/ApiMetaData'
 
 type PropType = PropsWithChildren<{}>
 
@@ -31,9 +27,7 @@ export const Mdx = (props: PropType) => {
           h1: H1,
           RepositoryLink,
           PageChildLinks,
-          BrandPrimaryText,
-          BrandSecondaryText,
-          BrandAlternativeText,
+          ApiMetaData,
           Admonition,
           hr: Hr,
           blockquote: Blockquote

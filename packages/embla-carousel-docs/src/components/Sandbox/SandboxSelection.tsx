@@ -28,13 +28,13 @@ export const SELECT_CODESANDBOX_DIALOG_ID = 'select-codesandbox-dialog'
 const CLOSE_KEYS = ['Escape', 'Esc']
 
 const SandboxSelectionWrapper = styled.div`
-  margin-top: -${SPACINGS.THREE};
+  margin-top: -${SPACINGS.TWO};
 `
 
 const SandboxSelectionOpenModalButton = styled(ButtonBare)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
   font-size: ${FONT_SIZES.COMPLEMENTARY};
-  margin-bottom: ${SPACINGS.ONE};
+  margin-bottom: -${SPACINGS.TWO};
   padding: ${SPACINGS.TWO} 0 ${SPACINGS.TWO} 0;
   border-radius: ${BORDER_RADIUSES.BOX};
   align-items: center;

@@ -1,0 +1,23 @@
+{
+  "name": "embla-carousel-playground-vue",
+  "private": true,
+  "version": "8.6.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "echo \"Info: no tests specified\" && exit 0"
+  },
+  "dependencies": {
+    "embla-carousel-vue": "8.6.0",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.5",
+    "vue-tsc": "^2.2.0"
+  }
+}

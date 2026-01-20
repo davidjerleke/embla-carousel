@@ -1,40 +1,51 @@
-import { Component, For, createEffect, createSignal } from 'solid-js'
+import { Component, For, Show, createEffect, createSignal } from 'solid-js'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
-import createEmblaCarousel from 'embla-carousel-solid'
+import useEmblaCarousel from 'embla-carousel-solid'
 import { DotButton, NextButton, PrevButton } from './Buttons'
 
 type PropType = {
   slides: number[]
+  isSsr: boolean
   options?: EmblaOptionsType
 }
 
 export const EmblaCarousel: Component<PropType> = (props) => {
-  const [emblaRef, emblaApi] = createEmblaCarousel(() => props.options)
-  const [prevBtnEnabled, setPrevBtnEnabled] = createSignal(false)
-  const [nextBtnEnabled, setNextBtnEnabled] = createSignal(false)
-  const [selectedIndex, setSelectedIndex] = createSignal(0)
+  const [refAttached, setRefAttached] = createSignal(false)
+  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(
+    () => props.options
+  )
+  const [prevBtnEnabled, setPrevBtnEnabled] = createSignal(
+    emblaServerApi.canGoToPrev()
+  )
+  const [nextBtnEnabled, setNextBtnEnabled] = createSignal(
+    emblaServerApi.canGoToNext()
+  )
+  const [selectedIndex, setSelectedIndex] = createSignal(
+    emblaServerApi.selectedSnap()
+  )
   const [scrollSnaps, setScrollSnaps] = createSignal<number[]>([])
+  const [showSsr, setShowSsr] = createSignal(props.isSsr && !emblaApi())
 
   function scrollPrev(): void {
-    emblaApi()?.scrollPrev()
+    emblaApi()?.goToPrev()
   }
 
   function scrollNext(): void {
-    emblaApi()?.scrollNext()
+    emblaApi()?.goToNext()
   }
 
   function scrollTo(index: number): void {
-    emblaApi()?.scrollTo(index)
+    emblaApi()?.goTo(index)
   }
 
   function onInit(emblaApi: EmblaCarouselType): void {
-    setScrollSnaps(emblaApi.scrollSnapList())
+    setScrollSnaps(emblaApi.snapList())
   }
 
   function onSelect(emblaApi: EmblaCarouselType): void {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-    setPrevBtnEnabled(emblaApi.canScrollPrev())
-    setNextBtnEnabled(emblaApi.canScrollNext())
+    setSelectedIndex(emblaApi.selectedSnap())
+    setPrevBtnEnabled(emblaApi.canGoToPrev())
+    setNextBtnEnabled(emblaApi.canGoToNext())
   }
 
   createEffect(() => {
@@ -43,23 +54,57 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
     onInit(api)
     onSelect(api)
-    api.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect)
+    api.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
   })
+
+  setTimeout(
+    () => {
+      setRefAttached(true)
+      setShowSsr(false)
+    },
+    props.isSsr ? 2000 : 0
+  )
 
   return (
     <>
+      {showSsr() && (
+        <style id="embla-ssr-styles">
+          {emblaServerApi.ssrStyles('.embla__container', '.embla__slide')}
+        </style>
+      )}
+
+      <div class="playground__ssr-text">
+        <strong>SSR:</strong> <span>{showSsr().toString()}</span>
+      </div>
+
       <div class="embla">
-        <div class="embla__viewport" ref={emblaRef}>
-          <div class="embla__container">
-            <For each={props.slides}>
-              {(slide) => (
-                <div class="embla__slide">
-                  <div class="embla__slide__number">{slide + 1}</div>
-                </div>
-              )}
-            </For>
+        <Show when={!refAttached()}>
+          <div class="embla__viewport">
+            <div class="embla__container">
+              <For each={props.slides}>
+                {(slide) => (
+                  <div class="embla__slide">
+                    <div class="embla__slide__number">{slide + 1}</div>
+                  </div>
+                )}
+              </For>
+            </div>
           </div>
-        </div>
+        </Show>
+
+        <Show when={refAttached()}>
+          <div class="embla__viewport" ref={emblaRef}>
+            <div class="embla__container">
+              <For each={props.slides}>
+                {(slide) => (
+                  <div class="embla__slide">
+                    <div class="embla__slide__number">{slide + 1}</div>
+                  </div>
+                )}
+              </For>
+            </div>
+          </div>
+        </Show>
 
         <div class="embla__controls">
           <div class="embla__buttons">

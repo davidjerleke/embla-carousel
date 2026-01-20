@@ -1,10 +1,10 @@
 export type PercentOfViewType = {
-  measure: (n: number) => number
+  measure: (input: number) => number
 }
 
 export function PercentOfView(viewSize: number): PercentOfViewType {
-  function measure(n: number): number {
-    return viewSize * (n / 100)
+  function measure(input: number): number {
+    return viewSize * (input / 100)
   }
 
   const self: PercentOfViewType = {

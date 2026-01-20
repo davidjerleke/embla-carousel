@@ -1,0 +1,176 @@
+---
+title: Server-Side Rendering
+description: This guide explains how to configure Embla Carousel for server-side rendering (SSR) environments.
+order: 90
+date: 2025-10-03
+---
+
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { EXAMPLES_WRAPPERS } from 'consts/examples'
+import { Tabs } from 'components/Tabs/Tabs'
+import { TabsItem } from 'components/Tabs/TabsItem'
+import { TABS_LIBRARY } from 'consts/tabs'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import settingUpSsr_css_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-css-01.css'
+import settingUpSsr_module_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-vanilla-01.js'
+import settingUpSsr_module_02 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-vanilla-02.js'
+import settingUpSsr_react_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-react-01.jsx'
+import settingUpSsr_vue_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-vue-01.vue'
+import settingUpSsr_solid_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-solid-01.jsx'
+import settingUpSsr_svelte_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/setting-up-ssr-svelte-01.svelte'
+import breakpoints_css_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-css-01.css'
+import breakpoints_module_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-vanilla-01.js'
+import breakpoints_module_02 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-vanilla-02.js'
+import breakpoints_react_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-react-01.jsx'
+import breakpoints_vue_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-vue-01.vue'
+import breakpoints_solid_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-solid-01.jsx'
+import breakpoints_svelte_01 from '!!raw-loader!content/code-snippets/guides/server-side-rendering/breakpoints-svelte-01.svelte'
+
+# Server-Side Rendering
+
+This guide explains how to configure Embla Carousel for **server-side rendering (SSR)** environments and when to use SSR-specific settings.
+
+---
+
+## Prerequisites
+
+Before continuing with this guide, make sure you've completed the following:
+
+- [How Embla Carousel Works](/guides/how-embla-carousel-works)
+- [Required Setup](/guides/required-setup)
+- [Slide Sizes](/guides/slide-sizes)
+- [Slide Gaps](/guides/slide-gaps)
+
+## Understanding SSR
+
+Embla Carousel is **environment-agnostic**, meaning it works in both client-side and server-side contexts. In many cases, you can render the carousel markup on the server **without any SSR-specific configuration**, and everything will work as expected.
+
+However, there are scenarios where you may want to **prevent layout shifts** caused by Embla's initialization when the browser dimensions become available. In such cases, Embla provides optional SSR tools so the carousel renders with stable positioning immediately.
+
+You should enable SSR support if **any** of these are true:
+
+- [`loop`](/api/options#loop) is `true`.
+- [`containScroll`](/api/options#containscroll) is `false`.
+- [`startSnap`](/api/options/#startsnap) is set to anything other than `0`.
+
+## Setting Up SSR
+
+Start by ensuring your carousel's CSS uses **percentage-based slide widths**. Here's an example where each slide takes up **50% of the viewport width**:
+
+<PrismHighlight language="css" code={settingUpSsr_css_01} highlight="11" />
+
+Next, enable **SSR support** by configuring the [`ssr`](/api/options/#ssr) option and applying server-generated styles using the [`ssrStyles`](/api/methods/#ssrstyles) method.
+
+You'll specify slide widths as **percentages (%)**, exactly matching your CSS:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={settingUpSsr_module_01}
+      highlight="7,11-13"
+    />
+    <PrismHighlight language="js" code={settingUpSsr_module_02} highlight="8" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={settingUpSsr_react_01}
+      highlight="8,15-17"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={settingUpSsr_vue_01}
+      highlight="14,26"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={settingUpSsr_solid_01}
+      highlight="7,15-17"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={settingUpSsr_svelte_01}
+      highlight="9,28-30"
+    />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="warning">
+  **Warning:** Your CSS widths (such as `flex: 0 0 50%`) must exactly match the
+  values in the `ssr` array. Any mismatch will result in incorrect snapping and
+  layout shifts during hydration.
+</Admonition>
+
+Since the server has **no access to runtime measurements**, you must explicitly define the slide sizes. This introduces a few key requirements:
+
+- Slides must use **percentage-based widths**.
+- Slide spacing must use the [padding method](/guides/slide-gaps) (`margin` and `gap` are not supported during SSR).
+- CSS widths must **exactly match** the values in [`ssr`](/api/options/#ssr).
+- Each carousel must have a **unique selector** to avoid SSR styles affecting others on the page.
+
+<Admonition type="note">
+  **Note:** SSR also fully supports **vertical carousels**, as long as the CSS
+  is configured so that slides stack vertically (e.g. `flex-direction: column`)
+  and the percentage sizes apply to height instead of width. The same SSR rules
+  apply — the CSS values must match the values provided in the `ssr` array.
+</Admonition>
+
+## Breakpoints
+
+Embla also supports SSR configurations that change with **CSS breakpoints**. Start by defining your CSS with different slide widths per viewport size:
+
+<PrismHighlight language="css" code={breakpoints_css_01} highlight="15-19" />
+
+Then provide matching [`ssr`](/api/options/#ssr) values for each breakpoint using the [`breakpoints`](/api/options/#breakpoints) option. You can define unique slide sizes and settings for each breakpoint, and Embla will apply them correctly on the server.
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={breakpoints_module_01}
+      highlight="8-12"
+    />
+    <PrismHighlight
+      language="js"
+      code={breakpoints_module_02}
+      highlight="9-13"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={breakpoints_react_01}
+      highlight="9-13"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      asLanguage="vue"
+      code={breakpoints_vue_01}
+      highlight="15-19"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={breakpoints_solid_01}
+      highlight="8-12"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={breakpoints_svelte_01}
+      highlight="10-14"
+    />
+  </TabsItem>
+</Tabs>

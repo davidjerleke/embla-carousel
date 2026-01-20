@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import EmblaCarousel from './Autoplay/EmblaCarousel'
+import EmblaCarousel from './Predefined/Autoplay/EmblaCarousel'
 import Header from './Header'
 import Footer from './Footer'
 import '../css/base.css'

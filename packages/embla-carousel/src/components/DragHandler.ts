@@ -1,4 +1,3 @@
-import { EmblaCarouselType } from './EmblaCarousel'
 import { AnimationsType } from './Animations'
 import { CounterType } from './Counter'
 import { DragTrackerType, PointerEventType } from './DragTracker'
@@ -8,85 +7,79 @@ import { EventStore } from './EventStore'
 import { ScrollBodyType } from './ScrollBody'
 import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
-import { Vector1DType } from './Vector1d'
+import { NumberStoreType } from './NumberStore'
 import { PercentOfViewType } from './PercentOfView'
 import { Limit } from './Limit'
 import {
   deltaAbs,
   factorAbs,
-  isBoolean,
   isMouseEvent,
   mathAbs,
   mathSign,
   WindowType
 } from './utils'
 
-type DragHandlerCallbackType = (
-  emblaApi: EmblaCarouselType,
-  evt: PointerEventType
-) => boolean | void
-
-export type DragHandlerOptionType = boolean | DragHandlerCallbackType
-
 export type DragHandlerType = {
-  init: (emblaApi: EmblaCarouselType) => void
+  init: (ownerWindow: WindowType) => void
   destroy: () => void
   pointerDown: () => boolean
 }
 
 export function DragHandler(
+  active: boolean,
   axis: AxisType,
   rootNode: HTMLElement,
-  ownerDocument: Document,
-  ownerWindow: WindowType,
-  target: Vector1DType,
+  target: NumberStoreType,
   dragTracker: DragTrackerType,
-  location: Vector1DType,
+  location: NumberStoreType,
   animation: AnimationsType,
   scrollTo: ScrollToType,
   scrollBody: ScrollBodyType,
   scrollTarget: ScrollTargetType,
-  index: CounterType,
+  indexCurrent: CounterType,
   eventHandler: EventHandlerType,
   percentOfView: PercentOfViewType,
   dragFree: boolean,
   dragThreshold: number,
   skipSnaps: boolean,
-  baseFriction: number,
-  watchDrag: DragHandlerOptionType
+  baseFriction: number
 ): DragHandlerType {
   const { cross: crossAxis, direction } = axis
   const focusNodes = ['INPUT', 'SELECT', 'TEXTAREA']
   const nonPassiveEvent = { passive: false }
   const initEvents = EventStore()
-  const dragEvents = EventStore()
-  const goToNextThreshold = Limit(50, 225).constrain(percentOfView.measure(20))
+  const mouseEvents = EventStore()
+  const goToNextThreshold = Limit(50, 225).clamp(percentOfView.measure(20))
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
-  const baseSpeed = dragFree ? 43 : 25
+  const baseDuration = dragFree ? 43 : 25
 
+  let documentInstance: Document
+  let windowInstance: WindowType
   let isMoving = false
   let startScroll = 0
   let startCross = 0
+  let runTouchEvents = false
   let pointerIsDown = false
   let preventScroll = false
   let preventClick = false
   let isMouse = false
 
-  function init(emblaApi: EmblaCarouselType): void {
-    if (!watchDrag) return
+  function init(ownerWindow: WindowType): void {
+    if (!active) return
 
-    function downIfAllowed(evt: PointerEventType): void {
-      if (isBoolean(watchDrag) || watchDrag(emblaApi, evt)) down(evt)
-    }
+    documentInstance = ownerWindow.document
+    windowInstance = ownerWindow
+
+    dragTracker.init(ownerWindow)
 
     const node = rootNode
     initEvents
       .add(node, 'dragstart', (evt) => evt.preventDefault(), nonPassiveEvent)
-      .add(node, 'touchmove', () => undefined, nonPassiveEvent)
-      .add(node, 'touchend', () => undefined)
-      .add(node, 'touchstart', downIfAllowed)
-      .add(node, 'mousedown', downIfAllowed)
+      .add(node, 'touchmove', (e) => runTouchEvents && move(e), nonPassiveEvent)
+      .add(node, 'touchend', (e) => runTouchEvents && up(e))
+      .add(node, 'touchstart', down)
+      .add(node, 'mousedown', down)
       .add(node, 'touchcancel', up)
       .add(node, 'contextmenu', up)
       .add(node, 'click', click, true)
@@ -94,14 +87,14 @@ export function DragHandler(
 
   function destroy(): void {
     initEvents.clear()
-    dragEvents.clear()
+    mouseEvents.clear()
+    runTouchEvents = false
   }
 
-  function addDragEvents(): void {
-    const node = isMouse ? ownerDocument : rootNode
-    dragEvents
-      .add(node, 'touchmove', move, nonPassiveEvent)
-      .add(node, 'touchend', up)
+  function addMouseEvents(): void {
+    const node = isMouse ? documentInstance : rootNode
+
+    mouseEvents
       .add(node, 'mousemove', move, nonPassiveEvent)
       .add(node, 'mouseup', up)
   }
@@ -117,38 +110,58 @@ export function DragHandler(
     return boost[type]
   }
 
-  function allowedForce(force: number, targetChanged: boolean): number {
-    const next = index.add(mathSign(force) * -1)
-    const baseForce = scrollTarget.byDistance(force, !dragFree).distance
+  function indexChanged(): boolean {
+    const currentLocation = scrollTarget.byDistance(0, false)
+    return currentLocation.index !== indexCurrent.get()
+  }
 
-    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce
-    if (skipSnaps && targetChanged) return baseForce * 0.5
+  function baseForce(force: number): number {
+    return scrollTarget.byDistance(force, !dragFree).distance
+  }
+
+  function allowedForce(force: number): number {
+    const next = indexCurrent.add(mathSign(force) * -1)
+
+    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce(force)
+    if (skipSnaps && indexChanged()) return baseForce(force) * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
   }
 
   function down(evt: PointerEventType): void {
-    const isMouseEvt = isMouseEvent(evt, ownerWindow)
+    const event = eventHandler.createEvent('pointerdown', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return
+
+    const isMouseEvt = isMouseEvent(evt, windowInstance)
+    const isNotLeftButton = isMouseEvt && evt.button !== 0
+
     isMouse = isMouseEvt
     preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
     isMoving = deltaAbs(target.get(), location.get()) >= 2
 
-    if (isMouseEvt && evt.button !== 0) return
+    if (isNotLeftButton) return
     if (isFocusNode(evt.target as Element)) return
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
     scrollBody.useFriction(0).useDuration(0)
     target.set(location)
-    addDragEvents()
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)
-    eventHandler.emit('pointerDown')
+
+    addMouseEvents()
+    runTouchEvents = true
   }
 
   function move(evt: PointerEventType): void {
-    const isTouchEvt = !isMouseEvent(evt, ownerWindow)
-    if (isTouchEvt && evt.touches.length >= 2) return up(evt)
+    const event = eventHandler.createEvent('pointermove', evt)
+    const preventDefault = !event.emit()
+    if (preventDefault) return up(evt)
+
+    const isTouchEvt = !isMouseEvent(evt, windowInstance)
+    const isPinching = isTouchEvt && evt.touches.length >= 2
+    if (isPinching) return up(evt)
 
     const lastScroll = dragTracker.readPoint(evt)
     const lastCross = dragTracker.readPoint(evt, crossAxis)
@@ -171,21 +184,23 @@ export function DragHandler(
   }
 
   function up(evt: PointerEventType): void {
-    const currentLocation = scrollTarget.byDistance(0, false)
-    const targetChanged = currentLocation.index !== index.get()
+    const event = eventHandler.createEvent('pointerup', evt)
+
     const rawForce = dragTracker.pointerUp(evt) * forceBoost()
-    const force = allowedForce(direction(rawForce), targetChanged)
+    const force = allowedForce(direction(rawForce))
     const forceFactor = factorAbs(rawForce, force)
-    const speed = baseSpeed - 10 * forceFactor
+    const duration = baseDuration - 10 * forceFactor
     const friction = baseFriction + forceFactor / 50
 
     preventScroll = false
     pointerIsDown = false
-    dragEvents.clear()
-    scrollBody.useDuration(speed).useFriction(friction)
-    scrollTo.distance(force, !dragFree)
+    runTouchEvents = false
     isMouse = false
-    eventHandler.emit('pointerUp')
+    mouseEvents.clear()
+
+    scrollBody.useDuration(duration).useFriction(friction)
+    scrollTo.distance(force, !dragFree)
+    event.emit()
   }
 
   function click(evt: MouseEvent): void {

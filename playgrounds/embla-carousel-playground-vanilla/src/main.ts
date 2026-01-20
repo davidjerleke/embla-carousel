@@ -13,23 +13,36 @@ import {
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
-  examplesCarouselDefaultStyles
+  examplesCarouselStyles
 } from 'components/Examples/examplesCarouselStyles'
 import { createSlides } from './Carousel/setupSlides'
-import { addPrevNextBtnsClickHandlers } from './Carousel/setupButtons'
 import {
-  addDotBtnsClickHandlers,
-  createDotBtns,
-  toggleDotBtnsActive
-} from './Carousel/setupDots'
+  addPrevNextBtnsClickHandlers,
+  togglePrevNextBtnsState
+} from './Carousel/setupButtons'
+import { createDotBtns } from './Carousel/setupDots'
 import './main.css'
+
+const SSR_ACTIVE = true
+const SLIDE_SIZE = 50
+const SLIDE_COUNT = 4
+
+const OPTIONS: EmblaOptionsType = {
+  loop: true,
+  direction: 'ltr',
+  startSnap: 0,
+  axis: 'x',
+  ssr: Array.from(Array(SLIDE_COUNT).keys()).map(() => SLIDE_SIZE)
+}
+const PLUGINS: EmblaPluginType[] = []
 
 const injectBaseStyles = (): void => {
   const styleElement = document.createElement('style')
-  const carouselStyles = examplesCarouselDefaultStyles(
-    '70%',
+  styleElement.id = 'embla-base-styles'
+  const carouselStyles = examplesCarouselStyles(
+    `${SLIDE_SIZE}%`,
     '1rem',
-    'x',
+    OPTIONS,
     styledComponentsStylesToString(
       CONTROLS_STYLES,
       SLIDE_NUMBER_STYLES,
@@ -53,10 +66,6 @@ const injectBaseStyles = (): void => {
 
 injectBaseStyles()
 
-const SLIDE_COUNT = 6
-const OPTIONS: EmblaOptionsType = {}
-const PLUGINS: EmblaPluginType[] = []
-
 const emblaNodes = <HTMLElement[]>(
   Array.from(document.querySelectorAll('.embla'))
 )
@@ -66,28 +75,41 @@ emblaNodes.forEach((emblaNode) => {
   const containerNode = <HTMLElement>(
     emblaNode.querySelector('.embla__container')
   )
-  const prevBtnNode = <HTMLElement>(
+  const prevButtonNode = <HTMLElement>(
     emblaNode.querySelector('.embla__button--prev')
   )
-  const nextBtnNode = <HTMLElement>(
+  const nextButtonNode = <HTMLElement>(
     emblaNode.querySelector('.embla__button--next')
   )
-  const dotsNode = <HTMLElement>(
-    emblaNode.parentElement.querySelector('.embla__dots')
-  )
 
+  const dotsNode = <HTMLElement>emblaNode.querySelector('.embla__dots')
+  const ssrTextNode = <HTMLElement>document.getElementById('ssr-text')
+  const ssrStyleNode = <HTMLElement>document.getElementById('embla-ssr-styles')
+  const ssrApi = EmblaCarousel(null, OPTIONS, PLUGINS)
+
+  ssrTextNode.innerHTML = `${SSR_ACTIVE}`
   createSlides(containerNode, SLIDE_COUNT)
 
-  const emblaApi = EmblaCarousel(viewPortNode, OPTIONS, PLUGINS)
-  const dotNodes = createDotBtns(emblaApi, dotsNode)
-  const toggleDotButtonsActive = toggleDotBtnsActive(emblaApi, dotNodes)
-  addPrevNextBtnsClickHandlers(emblaApi, prevBtnNode, nextBtnNode)
-  addDotBtnsClickHandlers(emblaApi, dotNodes)
+  if (SSR_ACTIVE) {
+    ssrStyleNode.innerHTML = ssrApi.ssrStyles('.embla__container')
+    togglePrevNextBtnsState(ssrApi, prevButtonNode, nextButtonNode)
+  }
 
-  emblaApi
-    .on('init', toggleDotButtonsActive)
-    .on('select', toggleDotButtonsActive)
+  setTimeout(
+    () => {
+      const emblaApi = EmblaCarousel(viewPortNode, OPTIONS, PLUGINS)
 
-  //@ts-ignore
-  window.embla = emblaApi
+      if (SSR_ACTIVE) {
+        ssrStyleNode.parentElement?.removeChild(ssrStyleNode)
+        ssrTextNode.innerHTML = 'false'
+      }
+
+      createDotBtns(emblaApi, dotsNode)
+      addPrevNextBtnsClickHandlers(emblaApi, prevButtonNode, nextButtonNode)
+
+      //@ts-ignore
+      window.embla = emblaApi
+    },
+    SSR_ACTIVE ? 2000 : 0
+  )
 })

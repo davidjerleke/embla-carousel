@@ -1,14 +1,19 @@
 ---
 title: Fade
-description: Learn how to use the Fade plugin for Embla Carousel
-order: 4
+description: Learn how to use the Fade plugin to add smooth crossfade transitions between slides in Embla Carousel.
+order: 60
 date: 2024-05-15
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
-import { Fade } from 'components/Examples/Plugins/Fade'
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import fadeInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-cdn-01.html'
+import fadeInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-npm-01.sh'
+import fadeInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-yarn-01.sh'
+import fadeInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/plugins/fade/installation-pnpm-01.sh'
 
 # Fade
 
@@ -16,13 +21,15 @@ import { Fade } from 'components/Examples/Plugins/Fade'
   View plugin on GitHub
 </RepositoryLink>
 
-This plugin is used to replace the Embla Carousel scroll functionality with **fade transitions**.
+This plugin replaces Embla Carousel's default scrolling behavior with **smooth fade transitions** between slides.
 
 ---
 
 ## Example
 
-<Fade />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/Fade')}
+/>
 
 ## Installation
 
@@ -30,31 +37,22 @@ Start by installing the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
-
-    ```html
-    <script src="https://unpkg.com/embla-carousel-fade/embla-carousel-fade.umd.js"></script>
-    ```
-
+    <PrismHighlight language="html" code={fadeInstallation_cdn_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-fade --save
-    ```
-
+    <PrismHighlight language="shell" code={fadeInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={fadeInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-fade
-    ```
-
+    <PrismHighlight language="shell" code={fadeInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
 <Admonition type="note">
   When the Fade plugin is enabled, the
-  [inViewThreshold](/api/options#inviewthreshold) option no longer has any
+  [`inViewThreshold`](/api/options#inviewthreshold) option no longer has any
   effect. This is because the Fade plugin stacks any slides with an **opacity
   higher** than `0` on top of each other, eliminating the concept of scrolling
   and gradual appearance of slides.
@@ -66,12 +64,14 @@ If your slides are less than 100% of the viewport width, it's recommended to set
 
 <br />
 
-```ts
-const options = {
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`const options = {
   align: 'center',
   containScroll: false
-}
-```
+}`}
+/>
 
 <br />
 <br />
@@ -80,10 +80,78 @@ However, `align: center` is default so you can omit setting the align option and
 
 <br />
 
-```ts
-const options = {
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`const options = {
   containScroll: false
-}
-```
+}`}
+/>
 
 </Admonition>
+
+## Options
+
+Below follows an exhaustive **list of all** `Fade` **options** and their default values.
+
+---
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/fade/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'FadeOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+  active: true,
+  '(min-width: 768px)': { active: false }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Fade` **methods** with their respective parameters and return values.
+
+---
+
+### ssrStyles
+
+<ApiMetaData
+  firstRow={['Parameters', '(container: string, slides?: string)']}
+  secondRow={['Returns', 'string']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.ssrStyles('.embla__container', '.embla__slide') + emblaApi.plugins().fade?.ssrStyles('.embla__container', '.embla__slide')`}
+/>
+
+Generate CSS for **server-side rendering (SSR)**. This helper outputs minimal styles for the specified container and slide selectors, ensuring a **stable, non-shifting layout** when rendered on the server. When called on a client-initialized instance, it returns an empty string. Wrap the output in a `<style>` tag.
+
+<Admonition type="note">
+  **Note:** Make sure to choose a unique selector for your container to avoid
+  affecting other Embla Carousels on the same page.
+</Admonition>
+
+---

@@ -1,14 +1,19 @@
 ---
 title: Auto Height
-description: Learn how to use the Auto Height plugin for Embla Carousel
-order: 2
-date: 2022-01-14
+description: Learn how to use the Auto Height plugin to make Embla Carousel adjust its height dynamically.
+order: 40
+date: 2025-11-02
 ---
 
 import { Tabs } from 'components/Tabs/Tabs'
 import { TabsItem } from 'components/Tabs/TabsItem'
 import { TABS_PACKAGE_MANAGER } from 'consts/tabs'
-import { AutoHeight } from 'components/Examples/Plugins/AutoHeight'
+import { ExamplesLazy } from 'components/Examples/ExamplesLazy'
+import { PrismHighlight } from 'components/Mdx/Components/PrismHighlight'
+import autoHeightInstallation_cdn_01 from '!!raw-loader!content/code-snippets/plugins/auto-height/installation-cdn-01.html'
+import autoHeightInstallation_npm_01 from '!!raw-loader!content/code-snippets/plugins/auto-height/installation-npm-01.sh'
+import autoHeightInstallation_yarn_01 from '!!raw-loader!content/code-snippets/plugins/auto-height/installation-yarn-01.sh'
+import autoHeightInstallation_pnpm_01 from '!!raw-loader!content/code-snippets/plugins/auto-height/installation-pnpm-01.sh'
 
 # Auto Height
 
@@ -16,13 +21,15 @@ import { AutoHeight } from 'components/Examples/Plugins/AutoHeight'
   View plugin on GitHub
 </RepositoryLink>
 
-This plugin is used to extend Embla Carousel with **auto height** functionality. It changes the height of the carousel container to fit the height of the highest slide in view.
+This plugin extends Embla Carousel with **auto height** functionality, automatically adjusting the carousel container’s height to match the tallest slide currently in view.
 
 ---
 
 ## Example
 
-<AutoHeight />
+<ExamplesLazy
+  loader={() => import('components/Examples/Predefined/Plugins/AutoHeight')}
+/>
 
 ## Installation
 
@@ -30,25 +37,16 @@ First you need to install the **npm package** and save it to your dependencies:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
-
-    ```html
-    <script src="https://unpkg.com/embla-carousel-auto-height/embla-carousel-auto-height.umd.js"></script>
-    ```
-
+    <PrismHighlight language="html" code={autoHeightInstallation_cdn_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
-
-    ```shell
-    npm install embla-carousel-auto-height --save
-    ```
-
+    <PrismHighlight language="shell" code={autoHeightInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={autoHeightInstallation_pnpm_01} />
   </TabsItem>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
-
-    ```shell
-    yarn add embla-carousel-auto-height
-    ```
-
+    <PrismHighlight language="shell" code={autoHeightInstallation_yarn_01} />
   </TabsItem>
 </Tabs>
 
@@ -58,25 +56,82 @@ You can make use of CSS transitions to **transition height** changes. But beware
 
 <br />
 
-```css
-.embla__container {
+<PrismHighlight
+  language="css"
+  hideLabel
+  code={`.embla__container {
   transition: height 0.2s;
-}
-```
+}`}
+/>
 
 </Admonition>
 
 <Admonition type="warning">
 
-If you've been following along with any of the guides in the [get started](/get-started/) section, you want to make sure that each **slide height** is **determined** by the **content** it holds. Add the following to your CSS to achieve this:
+You want to make sure that each **slide height** is **determined** by the **content** it holds. Add the following to your CSS to achieve this:
 
 <br />
 
-```css highlight={3}
-.embla__container {
+<PrismHighlight
+  language="css"
+  hideLabel
+  highlight="3"
+  code={`.embla__container {
   display: flex;
   align-items: flex-start; /* Add this */
-}
-```
+}`}
+/>
 
 </Admonition>
+
+## Options
+
+Below follows an exhaustive **list of all** `Auto Height` **options** and their default values.
+
+---
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/auto-height/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'AutoHeightOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+  active: false,
+  '(min-width: 768px)': { active: true }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### heightEvent
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'select']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ heightEvent: 'select' | 'slidesinview' }`}
+/>
+
+By default, the carousel container's height is adjusted based on the slides in the **selected scroll snap**. Set this option to `'slidesinview'` to adjust the height dynamically according to **all slides currently in view**.
+
+---
