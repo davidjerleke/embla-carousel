@@ -75,7 +75,7 @@
 
 <div>
   <strong>
-    <h2>✨ Sponsors ✨</h2>
+    <h2>✨ Sponsors</h2>
   </strong>
 
   <p>
@@ -128,7 +128,7 @@
 
 <div>
   <strong>
-    <h2>Contributors</h2>
+    <h2>🧑‍💻 Contributors</h2>
   </strong>
 
   <p>
@@ -239,18 +239,18 @@
 
 <div>
   <strong>
-    <h2>Community</h2>
+    <h2>🌍 Community</h2>
   </strong>
 
   <ul>
     <li>
-      💬 **Discussions**: Ask questions, share ideas, and start conversations <a href="https://github.com/davidjerleke/embla-carousel/discussions">here</a>.
+      <strong>Discussions</strong>: Ask questions, share ideas, and start conversations <a href="https://github.com/davidjerleke/embla-carousel/discussions">here</a>.
     </li>
     <li>
-      🐞 **Issues**: Report bugs or request features <a href="https://github.com/davidjerleke/embla-carousel/issues">here</a>.
+      <strong>Issues</strong>: Report bugs or request features <a href="https://github.com/davidjerleke/embla-carousel/issues">here</a>.
     </li>
     <li>
-      🤝 **Contributing**: See <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for how to get involved.
+      <strong>Contributing</strong>: See <a href="https://github.com/davidjerleke/embla-carousel/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a> for how to get involved.
     </li>
   </ul>
 </div>
@@ -259,7 +259,7 @@
 
 <div>
   <strong>
-    <h2>Special Thanks</h2>
+    <h2>🙏 Special Thanks</h2>
   </strong>
 
   <ul>
@@ -289,7 +289,7 @@
 
 <br>
 
-<h2>Open Source</h2>
+<h2>🌱 Open Source</h2>
 
 <p>
   Embla is <a href="https://github.com/davidjerleke/embla-carousel/blob/master/LICENSE">MIT licensed</a> 💖.<br><br>
@@ -309,13 +309,11 @@
   <a href="https://www.browserstack.com">
     <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
   </a>
-</p>
-<p>
+  &nbsp;
   <a href="https://codesandbox.io/">
-    <img src="https://www.embla-carousel.com/codesandbox-logo" width="45" height="45" />
+    <img src="https://www.embla-carousel.com/codesandbox-logo.svg" width="45" height="45" />
   </a>
-</p>
-<p>
+  &nbsp;
   <a href="https://www.algolia.com/">
     <img src="https://www.embla-carousel.com/algolia-logo.svg" width="120" height="30" />
   </a>
