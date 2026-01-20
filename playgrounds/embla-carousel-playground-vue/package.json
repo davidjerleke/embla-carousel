@@ -1,7 +1,7 @@
 {
   "name": "embla-carousel-playground-vue",
   "private": true,
-  "version": "8.6.0",
+  "version": "9.0.0-rc01",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "test": "echo \"Info: no tests specified\" && exit 0"
   },
   "dependencies": {
-    "embla-carousel-vue": "8.6.0",
+    "embla-carousel-vue": "9.0.0-rc01",
     "vue": "^3.5.13"
   },
   "devDependencies": {

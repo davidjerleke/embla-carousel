@@ -1,7 +1,7 @@
 {
   "name": "embla-carousel-playground-solid",
   "private": true,
-  "version": "8.6.0",
+  "version": "9.0.0-rc01",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "test": "echo \"Info: no tests specified\" && exit 0"
   },
   "dependencies": {
-    "embla-carousel-solid": "8.6.0",
+    "embla-carousel-solid": "9.0.0-rc01",
     "solid-js": "^1.9.3"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 {
   "name": "embla-carousel-playground-svelte",
   "private": true,
-  "version": "8.6.0",
+  "version": "9.0.0-rc01",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,7 +11,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
   "dependencies": {
-    "embla-carousel-svelte": "8.6.0"
+    "embla-carousel-svelte": "9.0.0-rc01"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
