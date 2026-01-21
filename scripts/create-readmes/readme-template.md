@@ -172,16 +172,16 @@
 </p>
 
 <p>
-  Thanks <a href="https://www.browserstack.com">BrowserStack</a>, <a href="https://www.algolia.com/">Algolia</a> and <a href="https://codesandbox.io/">CodeSandbox</a>, for your open source collaborations.
+  Thanks <a href="https://www.browserstack.com">BrowserStack</a>, <a href="https://codesandbox.io/">CodeSandbox</a> and <a href="https://www.algolia.com/">Algolia</a>, for supporting open source tools that help improve projects like Embla Carousel.
 </p>
 
 <p>
   <a href="https://www.browserstack.com">
-    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="45" height="45" />
+    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="30" height="30" />
   </a>
   &nbsp;
   <a href="https://codesandbox.io/">
-    <img src="https://www.embla-carousel.com/codesandbox-logo.svg" width="45" height="45" />
+    <img src="https://www.embla-carousel.com/codesandbox-logo.svg" width="204" height="30" />
   </a>
   &nbsp;
   <a href="https://www.algolia.com/">
