@@ -91,8 +91,7 @@ function EmblaCarousel(
     )
 
     if (options.loop && !engine.slideLooper.canLoop()) {
-      const optionsWithNoLoop = mergeOptions(options, { loop: false })
-      return createEngine(optionsWithNoLoop, container, slides, true)
+      return cloneEngine({ loop: false })
     }
 
     return engine
