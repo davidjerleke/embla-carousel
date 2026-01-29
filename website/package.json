@@ -1,0 +1,40 @@
+{
+  "name": "embla-carousel-website",
+  "version": "9.0.0-rc01",
+  "author": "David Jerleke",
+  "description": "A lightweight carousel library with fluid motion and great swipe precision",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidjerleke/embla-carousel"
+  },
+  "bugs": {
+    "url": "https://github.com/davidjerleke/embla-carousel/issues"
+  },
+  "homepage": "https://www.embla-carousel.com",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@next/mdx": "^16.1.6",
+    "@types/mdx": "^2.0.13",
+    "next": "16.1.6",
+    "next-mdx-remote": "^5.0.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "typescript": "^5"
+  }
+}

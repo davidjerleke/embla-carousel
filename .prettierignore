@@ -13,7 +13,9 @@ packages/embla-carousel*/esm/components
 
 public
 static
-docs
+/docs
+.next
+next-env.d.ts
 
 # yarn
 .yarn/*
