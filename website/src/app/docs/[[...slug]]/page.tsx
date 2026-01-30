@@ -1,24 +1,22 @@
 import {
-  docPageStaticParams,
-  getVersionedRoutes,
-  resolveDocPage
-} from '@/utils/doc-page'
+  type DocsPageStaticParamsType,
+  docsPageStaticParams,
+  resolveDocsPage
+} from '@/utils/docs-page'
 
-type Props = {
+type PropType = {
   params: Promise<{
     slug?: string[]
   }>
 }
 
-export async function generateStaticParams() {
-  return docPageStaticParams()
+export async function generateStaticParams(): DocsPageStaticParamsType {
+  return docsPageStaticParams()
 }
 
-export default async function DocPage({ params }: Props) {
+export default async function DocPage({ params }: PropType) {
   const { slug } = await params
-  console.log(await params)
-  const content = await resolveDocPage(slug)
-  // console.log(await getVersionedRoutes(slug))
+  const content = await resolveDocsPage(slug)
 
   return <article>{content}</article>
 }

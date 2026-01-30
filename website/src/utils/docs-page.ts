@@ -1,29 +1,17 @@
-import { JSXElementConstructor, ReactElement } from 'react'
 import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
+import { MdxCompiledContentType } from '@/consts/mdx'
+import { LATEST_VERSION, VERSION_REGEX } from '@/consts/version'
+import {
+  getContentFolderPath,
+  getVersionedPageFolderPath
+} from '@/utils/content-path'
 
-// TODO: Remove all local node_module folders for all packages
-// TODO: Run yarn install
-// TODO: Test yarn workspace embla-carousel-website dev
-
-const VERSION_REGEX = /^v\d+$/
-const CONTENT_FOLDER_NAME = 'content'
-const PAGES_FOLDER_NAME = 'pages'
-const LATEST_VERSION = 'v9' // TODO: Get latest version from package.json
-
-export async function getVersionedRoutes(slugOrEmpty?: string[]) {
-  const slug = slugOrEmpty || []
-  const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
-  const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
-
-  // TODO: Build flat tree of routes for the version
-}
-
-export async function resolveDocPage(
+export async function resolveDocsPage(
   slugOrEmpty?: string[]
-): Promise<ReactElement<unknown, string | JSXElementConstructor<any>>> {
+): Promise<MdxCompiledContentType> {
   const slug = slugOrEmpty || []
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const slugIsLatestVersion = slug[0] === LATEST_VERSION
@@ -34,16 +22,7 @@ export async function resolveDocPage(
 
   const slugWithVersion = slugIncludesVersion ? slug : [LATEST_VERSION, ...slug]
   const version = slugWithVersion[0]
-
-  const basePath = path.join(
-    process.cwd(),
-    'src',
-    CONTENT_FOLDER_NAME,
-    version,
-    PAGES_FOLDER_NAME
-  )
-
-  console.log(basePath, 'basePath')
+  const basePath = getVersionedPageFolderPath(version)
 
   let filePath = ''
 
@@ -74,31 +53,29 @@ export async function resolveDocPage(
   return content
 }
 
-export async function docPageStaticParams() {
+export type DocsPageStaticParamsType = Promise<{ slug: string[] }[]>
+
+export async function docsPageStaticParams(): DocsPageStaticParamsType {
+  const contentFolderPath = getContentFolderPath()
   const versions = fs
-    .readdirSync(path.join(process.cwd(), 'src', CONTENT_FOLDER_NAME))
+    .readdirSync(contentFolderPath)
     .filter((version) => version.match(VERSION_REGEX))
 
   return versions.flatMap((version) => {
-    const pagesDir = path.join(
-      process.cwd(),
-      'src',
-      CONTENT_FOLDER_NAME,
-      version,
-      PAGES_FOLDER_NAME
-    )
+    const pagesDir = getVersionedPageFolderPath(version)
+
     const walk = (version: string, dir?: string): string[][] => {
       const directory = dir || pagesDir
 
       return fs.readdirSync(directory).flatMap((file) => {
-        const fullPath = path.join(directory, file)
+        const filePath = path.join(directory, file)
 
-        if (fs.statSync(fullPath).isDirectory()) {
-          return walk(version, fullPath)
+        if (fs.statSync(filePath).isDirectory()) {
+          return walk(version, filePath)
         }
 
         if (file.endsWith('.mdx')) {
-          const slug = fullPath
+          const slug = filePath
             .replace(pagesDir, '')
             .replace('.mdx', '')
             .split('/')
@@ -111,8 +88,6 @@ export async function docPageStaticParams() {
       })
     }
 
-    return walk(version).map((slug) => {
-      return { version, slug }
-    })
+    return walk(version).map((slug) => ({ slug: slug || [] }))
   })
 }

@@ -1,14 +1,7 @@
-import fs from 'fs'
-import path from 'path'
-import { compileMDX } from 'next-mdx-remote/rsc'
+import { resolveHomePage } from '@/utils/home-page'
 
 export default async function HomePage() {
-  const source = fs.readFileSync(
-    path.join(process.cwd(), 'src', 'content', 'shared', 'pages', 'home.mdx'),
-    'utf8'
-  )
-
-  const { content } = await compileMDX({ source })
+  const content = await resolveHomePage()
 
   return <article>{content}</article>
 }
