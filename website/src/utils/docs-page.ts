@@ -4,10 +4,7 @@ import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
 import { MdxCompiledContentType } from '@/consts/mdx'
 import { LATEST_VERSION, VERSION_REGEX } from '@/consts/version'
-import {
-  getContentFolderPath,
-  getVersionedPageFolderPath
-} from '@/utils/content-path'
+import { getVersionedPageFolderPath } from '@/utils/content-path'
 
 export async function resolveDocsPage(
   slugOrEmpty?: string[]
@@ -51,43 +48,4 @@ export async function resolveDocsPage(
   const source = fs.readFileSync(filePath, 'utf8')
   const { content } = await compileMDX({ source })
   return content
-}
-
-export type DocsPageStaticParamsType = Promise<{ slug: string[] }[]>
-
-export async function docsPageStaticParams(): DocsPageStaticParamsType {
-  const contentFolderPath = getContentFolderPath()
-  const versions = fs
-    .readdirSync(contentFolderPath)
-    .filter((version) => version.match(VERSION_REGEX))
-
-  return versions.flatMap((version) => {
-    const pagesDir = getVersionedPageFolderPath(version)
-
-    const walk = (version: string, dir?: string): string[][] => {
-      const directory = dir || pagesDir
-
-      return fs.readdirSync(directory).flatMap((file) => {
-        const filePath = path.join(directory, file)
-
-        if (fs.statSync(filePath).isDirectory()) {
-          return walk(version, filePath)
-        }
-
-        if (file.endsWith('.mdx')) {
-          const slug = filePath
-            .replace(pagesDir, '')
-            .replace('.mdx', '')
-            .split('/')
-            .filter(Boolean)
-
-          return [slug]
-        }
-
-        return []
-      })
-    }
-
-    return walk(version).map((slug) => ({ slug: slug || [] }))
-  })
 }
