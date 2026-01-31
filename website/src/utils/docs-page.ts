@@ -2,9 +2,12 @@ import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { MdxCompiledContentType } from '@/consts/mdx'
 import { LATEST_VERSION, VERSION_REGEX } from '@/consts/version'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
+import {
+  MDX_DEFAULT_COMPILE_OPTIONS,
+  MdxCompiledContentType
+} from '@/consts/mdx'
 
 export async function resolveDocsPage(
   slugOrEmpty?: string[]
@@ -46,6 +49,9 @@ export async function resolveDocsPage(
   }
 
   const source = fs.readFileSync(filePath, 'utf8')
-  const { content } = await compileMDX({ source })
+  const { content } = await compileMDX({
+    source,
+    options: { ...MDX_DEFAULT_COMPILE_OPTIONS }
+  })
   return content
 }

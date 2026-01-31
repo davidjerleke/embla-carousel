@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { DocsPageParamsType } from '@/consts/docs-page'
+import { getDocsPageRoutes } from '@/utils/docs-routes'
 
 type PropType = DocsPageParamsType & {
   children: ReactNode
@@ -7,9 +8,10 @@ type PropType = DocsPageParamsType & {
 
 export default async function DocsLayout(props: PropType) {
   const { children, params } = props
-  console.log(await params, 'layout params')
+  const { slug } = await params
+  const routes = await getDocsPageRoutes(slug)
 
-  // TODO: Fetch sidebar routes based on version in params.slug, in docs-routes.ts
+  console.log(routes, 'layout routes')
 
   return <div>{children}</div>
 }
