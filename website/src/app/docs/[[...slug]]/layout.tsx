@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { DocsPageParamsType } from '@/consts/docs-page'
+import { DocsPageParamsType } from '@/utils/docs-page'
 import { getDocsPageRoutes } from '@/utils/docs-routes'
 
 type PropType = DocsPageParamsType & {

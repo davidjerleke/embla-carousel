@@ -1,9 +1,8 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
-import { LATEST_VERSION, VERSION_REGEX } from '@/consts/version'
-import { MdxFrontmatterType } from '@/consts/mdx'
+import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
+import { filePathToMdxFrontmatter } from '@/utils/mdx'
 
 // TODO: Move RouteType to consts/routes.ts
 // TODO: Add hierarchal routes
@@ -13,9 +12,10 @@ type RouteType = {
   description: string
   level: number
   children: RouteType[]
-  // TODO: Add order here, maybe based on file name prefix like 01-filename.mdx
+  order: number
 }
 
+/* UTILS */
 export async function getDocsPageRoutes(
   slugOrEmpty?: string[]
 ): Promise<RouteType[]> {
@@ -26,7 +26,7 @@ export async function getDocsPageRoutes(
   const pagesDir = getVersionedPageFolderPath(version)
   const flatRoutes: RouteType[] = []
 
-  const walk = (dir: string) => {
+  const walk = (dir: string): void => {
     fs.readdirSync(dir).flatMap((file) => {
       const filePath = path.join(dir, file)
       const isDirectory = fs.statSync(filePath).isDirectory()
@@ -38,20 +38,18 @@ export async function getDocsPageRoutes(
         return
       }
 
-      const { data } = matter(fs.readFileSync(filePath, 'utf8'))
-      const frontmatter = data as MdxFrontmatterType
+      const frontmatter = filePathToMdxFrontmatter(filePath)
       const slugPath = filePath
         .replace(pagesDir, '')
         .replace('.mdx', '')
         .replace(/\/index$/, '')
       const slug = isLatestVersion
         ? slugPath
-        : path.join(`/${version}`, slugPath)
+        : path.join(`${version}`, slugPath)
 
       flatRoutes.push({
-        slug,
-        title: frontmatter.title || '',
-        description: frontmatter.description || '',
+        ...frontmatter,
+        slug: path.join('/docs', slug),
         level: slugPath.split('/').filter(Boolean).length,
         children: []
       })
