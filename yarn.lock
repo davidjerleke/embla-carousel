@@ -4328,7 +4328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reduxjs/toolkit@npm:^2.2.5":
+"@reduxjs/toolkit@npm:^2.11.2, @reduxjs/toolkit@npm:^2.2.5":
   version: 2.11.2
   resolution: "@reduxjs/toolkit@npm:2.11.2"
   dependencies:
@@ -10087,6 +10087,7 @@ __metadata:
     "@mdx-js/loader": ^3.1.1
     "@mdx-js/react": ^3.1.1
     "@next/mdx": ^16.1.6
+    "@reduxjs/toolkit": ^2.11.2
     "@types/mdx": ^2.0.13
     "@types/node": ^20
     "@types/react": ^19
@@ -10098,6 +10099,7 @@ __metadata:
     next-mdx-remote: ^5.0.0
     react: 19.2.3
     react-dom: 19.2.3
+    react-redux: ^9.2.0
     styled-components: ^6.3.8
     typescript: ^5
   languageName: unknown
@@ -19909,7 +19911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:^9.1.2":
+"react-redux@npm:^9.1.2, react-redux@npm:^9.2.0":
   version: 9.2.0
   resolution: "react-redux@npm:9.2.0"
   dependencies:

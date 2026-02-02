@@ -1,0 +1,15 @@
+import { configureStore } from '@reduxjs/toolkit'
+import { themeName, themeReducer } from '@/components/Theme/theme-reducer'
+
+/* CONSTS */
+export type AppStoreType = typeof store
+export type AppDispatchType = typeof store.dispatch
+export type AppStoreGetStateType = typeof store.getState
+export type AppStateType = ReturnType<AppStoreGetStateType>
+
+/* UTILS */
+export const store = configureStore({
+  reducer: {
+    [themeName]: themeReducer
+  }
+})
