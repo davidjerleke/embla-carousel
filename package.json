@@ -85,6 +85,9 @@
     "dotenv": "^17.2.1"
   },
   "dependenciesMeta": {
+    "@parcel/watcher": {
+      "built": true
+    },
     "core-js": {
       "built": true
     },
