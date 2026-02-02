@@ -5,12 +5,12 @@ import { notFound } from 'next/navigation'
 import { filePathToMdxContent, type MdxCompiledContentType } from '@/utils/mdx'
 
 /* UTILS */
-export async function getHomePageFilePath(): Promise<string> {
-  return path.join(getSharedPageFolderPath(), 'home.mdx')
+export async function getNotFoundPageFilePath(): Promise<string> {
+  return path.join(getSharedPageFolderPath(), 'not-found.mdx')
 }
 
-export async function getHomePageContent(): Promise<MdxCompiledContentType> {
-  const filePath = await getHomePageFilePath()
+export async function getNotFoundPageContent(): Promise<MdxCompiledContentType> {
+  const filePath = await getNotFoundPageFilePath()
   const doesFileExist = !!filePath && fs.existsSync(filePath)
 
   if (!doesFileExist) {

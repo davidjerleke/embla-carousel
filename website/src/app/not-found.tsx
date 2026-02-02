@@ -1,9 +1,12 @@
 import { Metadata } from 'next'
-import { getHomePageContent, getHomePageFilePath } from '@/utils/home-page'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import {
+  getNotFoundPageContent,
+  getNotFoundPageFilePath
+} from '@/utils/not-found-page'
 
 export async function generateMetadata(): Promise<Metadata> {
-  const filePath = await getHomePageFilePath()
+  const filePath = await getNotFoundPageFilePath()
   const frontmatter = filePathToMdxFrontmatter(filePath)
 
   return {
@@ -12,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function HomePage() {
-  const content = await getHomePageContent()
+export default async function NotFoundPage() {
+  const content = await getNotFoundPageContent()
 
   return <article>{content}</article>
 }

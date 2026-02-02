@@ -11,7 +11,7 @@ export function getContentFolderPath(): string {
   return path.join(process.cwd(), ROOT_FOLDER_NAME, CONTENT_FOLDER_NAME)
 }
 
-export function getHomePageFolderPath(): string {
+export function getSharedPageFolderPath(): string {
   return getVersionedPageFolderPath(SHARED_FOLDER_NAME)
 }
 
