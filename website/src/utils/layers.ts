@@ -1,0 +1,8 @@
+/* CONSTS */
+export const LAYERS = {
+  MODAL_LOADING: 50,
+  SEARCH: 30,
+  HEADER: 20,
+  NAVIGATION: 10,
+  STEP: 1
+}

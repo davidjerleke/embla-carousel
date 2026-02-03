@@ -1,6 +1,7 @@
 import Script from 'next/script'
 import { LOCALSTORAGE_KEYS } from '@/utils/local-storage'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
+import { ALGOLIA_SEARCH_CONFIG } from '@/utils/algolia-search'
 import {
   THEME_COLORS,
   THEME_KEYS,
@@ -8,8 +9,18 @@ import {
   THEME_PREFIX,
   THEME_STYLES
 } from '@/utils/theme'
+// import logoLightThemeDefaultUrl from '@/assets/images/embla-logo-light-theme.svg'
+// import logoDarkThemeDefaultUrl from '@/assets/images/embla-logo-dark-theme.svg'
+// import logoLightThemeBlurUrl from '@/assets/images/embla-logo-light-theme-blur.svg'
+// import logoDarkThemeBlurUrl from '@/assets/images/embla-logo-dark-theme-blur.svg'
 
-// TODO: Add all content from gatsby-ssr.tsx to this Head component
+// TODO: Move to preload with NextJS Image?
+// const imagesToPreload: StaticImageData[] = [
+//   logoLightThemeDefaultUrl,
+//   logoDarkThemeDefaultUrl,
+//   logoLightThemeBlurUrl,
+//   logoDarkThemeBlurUrl
+// ]
 
 export function Head() {
   return (
@@ -79,6 +90,28 @@ export function Head() {
         `
         }}
       />
+      {/* <style
+        id="font-face"
+        key="font-face"
+        dangerouslySetInnerHTML={{
+          __html: styledComponentsStylesToString(FONT_FACE_STYLES)
+        }}
+      /> */}
+      <link
+        key="algolia-preconnect"
+        rel="preconnect"
+        href={`https://${ALGOLIA_SEARCH_CONFIG.APP_ID}-dsn.algolia.net`}
+        crossOrigin="anonymous"
+      />
+      {/* {imagesToPreload.map((image) => (
+        <link
+          rel="preload"
+          as="image"
+          type="image/svg+xml"
+          href={image.src}
+          key={image.src}
+        />
+      ))} */}
     </>
   )
 }
