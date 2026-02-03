@@ -3,7 +3,11 @@ import { COLORS } from '@/utils/theme'
 import { BORDER_SIZES } from '@/utils/border'
 
 /* CONSTS */
-export const KEY_NAVIGATING_STYLES = css<{ $isKeyNavigating: boolean }>`
+export type KeyNavigatingPropType = {
+  $isKeyNavigating: boolean
+}
+
+export const KEY_NAVIGATING_STYLES = css<KeyNavigatingPropType>`
   &:focus {
     outline: ${({ $isKeyNavigating }) =>
       $isKeyNavigating

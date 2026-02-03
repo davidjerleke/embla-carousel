@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { themeName, themeReducer } from '@/components/Theme/theme-reducer'
+import { modalName, modalReducer } from '@/components/Modal/modal-reducer'
 import {
   keyEventsName,
   keyEventsReducer
@@ -15,6 +16,7 @@ export type AppStateType = ReturnType<AppStoreGetStateType>
 export const store = configureStore({
   reducer: {
     [themeName]: themeReducer,
-    [keyEventsName]: keyEventsReducer
+    [keyEventsName]: keyEventsReducer,
+    [modalName]: modalReducer
   }
 })

@@ -1,0 +1,102 @@
+'use client'
+
+import React, { useCallback } from 'react'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
+// import { setRoutesLoading } from 'components/Routes/routesReducer'
+// import { useLocation } from '@reach/router'
+import styled, { css } from 'styled-components'
+import Link from 'next/link'
+import { TAP_HIGHLIGHT_STYLES } from '@/utils/tap-highlight'
+import { KEY_NAVIGATING_STYLES } from '@/utils/key-events'
+import { setModalClosed } from '@/components/Modal/modal-reducer'
+import { MODALS } from '@/utils/modal'
+
+const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
+
+export const linkBareStyles = css<{ $isKeyNavigating: boolean }>`
+  ${KEY_NAVIGATING_STYLES};
+  ${TAP_HIGHLIGHT_STYLES};
+  text-decoration: none;
+  touch-action: manipulation;
+`
+
+const InternalLink = styled(Link)<{ $isKeyNavigating: boolean }>`
+  ${linkBareStyles};
+`
+
+const ExternalLink = styled.a<{ $isKeyNavigating: boolean }>`
+  ${linkBareStyles};
+`
+
+export type PropType = React.ComponentProps<typeof Link>
+
+export function LinkBare(props: PropType) {
+  const { href, id, tabIndex, children, onClick, ...restProps } = props
+  const to = typeof href === 'string' ? href : href?.pathname || ''
+  // const linkElement = useRef<HTMLAnchorElement | null>(null)
+  const isInternal = INTERNAL_LINK_REGEX.test(to)
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
+  // const { pathname } = useLocation()
+  const dispatch = useAppDispatch()
+
+  const closeNavigation = useCallback(() => {
+    dispatch(setModalClosed(MODALS.SITE_NAVIGATION))
+  }, [dispatch])
+
+  // const onClickInternalLink = useCallback(
+  //   (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+  //     if (onClick) onClick(event)
+
+  //     if (!linkElement.current) {
+  //       linkElement.current = document.createElement('a')
+  //     }
+
+  //     linkElement.current.href = to
+  //     const targetIsCurrentUrl = pathname === linkElement.current.pathname
+  //     const isNewTabClick = event.metaKey || event.ctrlKey
+
+  //     if (!targetIsCurrentUrl && !isNewTabClick) {
+  //       dispatch(setRoutesLoading(true))
+  //       return
+  //     }
+
+  //     if (linkElement.current.hash) {
+  //       setTimeout(() => closeNavigation(), 0)
+  //     } else {
+  //       closeNavigation()
+  //     }
+  //   },
+  //   [pathname, to, closeNavigation, dispatch, onClick]
+  // )
+
+  if (isInternal) {
+    return (
+      <InternalLink
+        href={to}
+        id={id}
+        tabIndex={tabIndex}
+        // onClick={onClickInternalLink}
+        $isKeyNavigating={isKeyNavigating}
+        {...restProps}
+      >
+        {children}
+      </InternalLink>
+    )
+  }
+
+  return (
+    <ExternalLink
+      href={to}
+      id={id}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      $isKeyNavigating={isKeyNavigating}
+      target="_blank"
+      rel="noreferrer"
+      {...restProps}
+    >
+      {children}
+    </ExternalLink>
+  )
+}

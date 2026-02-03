@@ -3,17 +3,9 @@ import path from 'path'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import { RouteType } from '@/utils/routes'
 
-// TODO: Move RouteType to consts/routes.ts
 // TODO: Add hierarchal routes
-type RouteType = {
-  slug: string
-  title: string
-  description: string
-  level: number
-  children: RouteType[]
-  order: number
-}
 
 /* UTILS */
 export async function getDocsPageRoutes(

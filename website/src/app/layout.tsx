@@ -7,6 +7,7 @@ import { Head } from '@/components/Head/Head'
 import { NoScript } from '@/components/NoScript/NoScript'
 import { GlobalStyles } from '@/components/GlobalStyles/GlobalStyles'
 import { KeyEventsInit } from '@/components/KeyEvents/KeyEventsInit'
+import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToContent'
 
 const Body = styled.body`
   margin: 0;
@@ -40,9 +41,12 @@ export default function RootLayout(props: PropType) {
         </head>
 
         <html lang="en" className={interRoman.className}>
-          <NoScript />
+          <Body>
+            <NoScript />
+            <KeyEventsSkipToContent />
 
-          <Body>{children}</Body>
+            {children}
+          </Body>
         </html>
       </ReduxProvider>
     </StyledComponentsRegistry>
