@@ -5,6 +5,8 @@ import { ReduxProvider } from '@/components/Redux/ReduxProvider'
 import { ThemeInit } from '@/components/Theme/ThemeInit'
 import { Head } from '@/components/Head/Head'
 import { NoScript } from '@/components/NoScript/NoScript'
+import { GlobalStyles } from '@/components/GlobalStyles/GlobalStyles'
+import { KeyEventsInit } from '@/components/KeyEvents/KeyEventsInit'
 
 const Body = styled.body`
   margin: 0;
@@ -29,7 +31,9 @@ export default function RootLayout(props: PropType) {
   return (
     <StyledComponentsRegistry>
       <ReduxProvider>
+        <GlobalStyles />
         <ThemeInit />
+        <KeyEventsInit />
 
         <head>
           <Head />
