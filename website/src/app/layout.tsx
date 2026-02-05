@@ -8,6 +8,7 @@ import { GlobalStyles } from '@/components/GlobalStyles/GlobalStyles'
 import { KeyEventsInit } from '@/components/KeyEvents/KeyEventsInit'
 import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToContent'
 import { Header } from '@/components/Header/Header'
+import { Footer } from '@/components/Footer/Footer'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -39,6 +40,7 @@ export default function RootLayout(props: PropType) {
             <NoScript />
             <KeyEventsSkipToContent />
             <Header />
+            <Footer />
 
             {children}
           </body>

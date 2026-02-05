@@ -107,9 +107,7 @@ export function mapChildrenToTabs(children: React.ReactNode): TabsItemType[] {
   }, [] as TabsItemType[])
 }
 
-export function isTabsItemProps(
-  props: TabsItemPropType | PropsWithChildren<{}>
-): props is TabsItemPropType {
+export function isTabsItemProps(props: any): props is TabsItemPropType {
   return 'tab' in props
 }
 

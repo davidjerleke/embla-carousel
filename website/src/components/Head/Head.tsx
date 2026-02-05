@@ -1,4 +1,3 @@
-import Script from 'next/script'
 import { LOCALSTORAGE_KEYS } from '@/utils/local-storage'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
 import { ALGOLIA_SEARCH_CONFIG } from '@/utils/algolia-search'
@@ -32,27 +31,11 @@ export function Head() {
           __html: styledComponentsStylesToString(THEME_STYLES)
         }}
       />
-      <meta
-        key="theme-color"
-        name="theme-color"
-        content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
-      />
-      <meta
-        key="theme-color-light"
-        name="theme-color"
-        media="(prefers-color-scheme: light)"
-        content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
-      />
-      <meta
-        key="theme-color-dark"
-        name="theme-color"
-        media="(prefers-color-scheme: dark)"
-        content={THEME_COLORS[THEME_KEYS.DARK].BACKGROUND_SITE}
-      />
-      <Script
+      <script
         id="theme-script"
         key="theme-script"
-        strategy="beforeInteractive"
+        async={false}
+        defer={false}
         dangerouslySetInnerHTML={{
           __html: `
           (function() {            
@@ -83,20 +66,32 @@ export function Head() {
                       
             document.documentElement.classList.remove('${THEME_PREFIX}' + oppositeKey);
             document.documentElement.classList.add('${THEME_PREFIX}' + themeKey);
-            document.querySelector("${THEME_META_SELECTOR}").setAttribute('content', themeColors[themeKey]);
+
+            const themeColorElement = document.querySelector("${THEME_META_SELECTOR}");
+            if (themeColorElement) themeColorElement.setAttribute('content', themeColors[themeKey]);
             
             window.__THEME__ = themeKey;
           })();
         `
         }}
       />
-      {/* <style
-        id="font-face"
-        key="font-face"
-        dangerouslySetInnerHTML={{
-          __html: styledComponentsStylesToString(FONT_FACE_STYLES)
-        }}
-      /> */}
+      <meta
+        key="theme-color"
+        name="theme-color"
+        content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
+      />
+      <meta
+        key="theme-color-light"
+        name="theme-color"
+        media="(prefers-color-scheme: light)"
+        content={THEME_COLORS[THEME_KEYS.LIGHT].BACKGROUND_SITE}
+      />
+      <meta
+        key="theme-color-dark"
+        name="theme-color"
+        media="(prefers-color-scheme: dark)"
+        content={THEME_COLORS[THEME_KEYS.DARK].BACKGROUND_SITE}
+      />
       <link
         key="algolia-preconnect"
         rel="preconnect"

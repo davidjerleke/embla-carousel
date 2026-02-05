@@ -112,8 +112,6 @@ export function SiteLogo(props: PropType) {
   // const { title } = useSiteMetadata()
   const title = 'Embla Carousel'
 
-  console.log(LOGO_IMAGES, 'LOGO_IMAGES')
-
   const [hasLoaded, setHasLoaded] = useState(false)
   const appearance = props.appearance || 'default'
   const lightSvg = LOGO_SVGS[appearance].light

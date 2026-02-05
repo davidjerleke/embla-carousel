@@ -27,7 +27,6 @@ import emblaLightBlur from '@/assets/icons/embla-logo-light-theme-blur.svg'
 import emblaDarkBlur from '@/assets/icons/embla-logo-dark-theme-blur.svg'
 
 function styledSvg(svg: typeof moon) {
-  console.log(svg, 'svg')
   return styled(svg)<{
     $css?: RuleSet
   }>`

@@ -1,5 +1,6 @@
 import { RuleSet } from 'styled-components'
 
+/* UTILS */
 export function styledComponentsStylesToString(
   ...stylesList: RuleSet[]
 ): string {

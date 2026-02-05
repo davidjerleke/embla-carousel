@@ -513,7 +513,7 @@ const inputStyles = css<KeyNavigatingPropType>`
   }
 `
 
-const toggleButtonStyles = css`
+const toggleButtonStyles = css<KeyNavigatingPropType>`
   .DocSearch-Button {
     ${searchButtonStyles};
 
