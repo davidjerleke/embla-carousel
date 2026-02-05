@@ -3,14 +3,13 @@ import path from 'path'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
-import { RouteType } from '@/utils/routes'
-
-// TODO: Add hierarchal routes
+import { RoutesContextType } from '@/components/Routes/RoutesContext'
+import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
 
 /* UTILS */
 export async function getDocsPageRoutes(
   slugOrEmpty?: string[]
-): Promise<RouteType[]> {
+): Promise<RoutesContextType> {
   const slug = slugOrEmpty || []
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
@@ -49,5 +48,9 @@ export async function getDocsPageRoutes(
   }
 
   walk(pagesDir)
-  return flatRoutes
+
+  return {
+    hierarchicalRoutes: createHierarchicalRoutes(flatRoutes),
+    flatRoutes
+  }
 }
