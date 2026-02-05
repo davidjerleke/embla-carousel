@@ -5,6 +5,17 @@ const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   compiler: {
     styledComponents: true
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        condition: {
+          all: [{ path: /src\/assets\/icons\// }]
+        },
+        loaders: ['@svgr/webpack'],
+        as: '*.js'
+      }
+    }
   }
 }
 

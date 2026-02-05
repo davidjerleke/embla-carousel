@@ -1,6 +1,8 @@
+'use client'
+
 import { useMemo } from 'react'
 // import { useAppSelector } from '@/hooks/redux'
-import { useLocation } from '@reach/router'
+import { usePathname } from 'next/navigation'
 // import { selectFlatRoutes } from 'components/Routes/routesReducer'
 import {
   type RouteType,
@@ -8,6 +10,7 @@ import {
   isRouteActive,
   isRoutePartiallyActive
 } from '@/utils/routes'
+import { useRoutesContext } from '@/components/Routes/RoutesContext'
 
 type UseRouteActiveType = {
   isActive: boolean
@@ -15,7 +18,7 @@ type UseRouteActiveType = {
 }
 
 export function useRouteActive(slug: RouteType['slug']): UseRouteActiveType {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const routeState = useMemo(
     () => ({
       isActive: isRouteActive(slug, pathname),
@@ -29,16 +32,17 @@ export function useRouteActive(slug: RouteType['slug']): UseRouteActiveType {
 
 // TODO: Clean up
 
-// export const useRouteBreadcrumbs = (id: string): RouteType[] => {
-//   const flatRoutes = useAppSelector(selectFlatRoutes)
-//   const currentRoute = flatRoutes.find((route) => route.id === id)
-
-//   return flatRoutes
-//     .filter((route) =>
-//       isRoutePartiallyActive(route.slug, currentRoute?.slug || '')
-//     )
-//     .sort((a, b) => a.level - b.level)
-// }
+export const useRouteBreadcrumbs = (id: string): RouteType[] => {
+  const { flatRoutes } = useRoutesContext()
+  return flatRoutes
+  // const flatRoutes = useAppSelector(selectFlatRoutes)
+  // const currentRoute = flatRoutes.find((route) => route.id === id)
+  // return flatRoutes
+  //   .filter((route) =>
+  //     isRoutePartiallyActive(route.slug, currentRoute?.slug || '')
+  //   )
+  //   .sort((a, b) => a.level - b.level)
+}
 
 // export const useRouteCurrent = (): RouteType => {
 //   const flatRoutes = useAppSelector(selectFlatRoutes)

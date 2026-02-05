@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { themeName, themeReducer } from '@/components/Theme/theme-reducer'
 import { modalName, modalReducer } from '@/components/Modal/modal-reducer'
+import { routesName, routesReducer } from '@/components/Routes/routes-reducer'
+import { tabsName, tabsReducer } from '@/components/Tabs/tabs-reducer'
 import {
   keyEventsName,
   keyEventsReducer
@@ -17,6 +19,8 @@ export const store = configureStore({
   reducer: {
     [themeName]: themeReducer,
     [keyEventsName]: keyEventsReducer,
-    [modalName]: modalReducer
+    [modalName]: modalReducer,
+    [routesName]: routesReducer,
+    [tabsName]: tabsReducer
   }
 })

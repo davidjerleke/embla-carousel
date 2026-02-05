@@ -2,7 +2,7 @@ import { RuleSet, css } from 'styled-components'
 
 /* CONSTS */
 type ButtonSizesType = {
-  [key: string]: RuleSet<object>
+  [key: string]: RuleSet
 }
 
 export const BUTTON_SIZES: ButtonSizesType = {

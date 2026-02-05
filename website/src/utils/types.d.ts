@@ -1,7 +1,12 @@
-declare module '*.svg?component' {
-  import * as React from 'react'
-  const Component: React.FC<React.SVGProps<SVGSVGElement>>
-  export default Component
+declare module '@/assets/images/*.svg' {
+  const content: import('next/image').StaticImageData
+  export default content
+}
+
+declare module '@/assets/icons/*.svg' {
+  import { ReactElement, SVGProps } from 'react'
+  const content: (props: SVGProps<SVGElement>) => ReactElement
+  export default content
 }
 
 declare module '@/assets/fonts/*.woff2' {

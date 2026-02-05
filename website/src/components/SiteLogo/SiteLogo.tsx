@@ -72,12 +72,12 @@ type LogoImagesType = {
 
 const LOGO_IMAGES: LogoImagesType = {
   default: {
-    [THEME_KEYS.LIGHT]: logoLightThemeDefaultUrl,
-    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl
+    [THEME_KEYS.LIGHT]: logoLightThemeDefaultUrl.src,
+    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl.src
   },
   blur: {
-    [THEME_KEYS.LIGHT]: logoLightThemeBlurUrl,
-    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl
+    [THEME_KEYS.LIGHT]: logoLightThemeBlurUrl.src,
+    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl.src
   }
 }
 
@@ -111,6 +111,8 @@ export function SiteLogo(props: PropType) {
   // TODO: FIX
   // const { title } = useSiteMetadata()
   const title = 'Embla Carousel'
+
+  console.log(LOGO_IMAGES, 'LOGO_IMAGES')
 
   const [hasLoaded, setHasLoaded] = useState(false)
   const appearance = props.appearance || 'default'

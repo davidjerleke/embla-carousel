@@ -3,14 +3,18 @@ import styled, { css } from 'styled-components'
 import { COLORS } from '@/utils/theme'
 import { BORDER_SIZES } from '@/utils/border'
 import { TAP_HIGHLIGHT_STYLES } from '@/utils/tap-highlight'
-import { KEY_NAVIGATING_STYLES } from '@/utils/key-events'
 import { useAppSelector } from '@/hooks/redux'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
+import {
+  KEY_NAVIGATING_STYLES,
+  type KeyNavigatingPropType
+} from '@/utils/key-events'
 
-export const buttonBareStyles = css<{
-  $isKeyNavigating: boolean
-  $isButton?: boolean
-}>`
+export const buttonBareStyles = css<
+  KeyNavigatingPropType & {
+    $isButton?: boolean
+  }
+>`
   ${KEY_NAVIGATING_STYLES};
   ${TAP_HIGHLIGHT_STYLES};
   color: ${COLORS.TEXT_BODY};
@@ -35,10 +39,11 @@ export const buttonBareStyles = css<{
     `}
 `
 
-const ButtonBareWrapper = styled.button<{
-  $isKeyNavigating: boolean
-  $isButton?: boolean
-}>`
+const ButtonBareWrapper = styled.button<
+  KeyNavigatingPropType & {
+    $isButton?: boolean
+  }
+>`
   ${buttonBareStyles};
   position: relative;
 `

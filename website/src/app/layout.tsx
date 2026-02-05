@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import localFont from 'next/font/local'
 import StyledComponentsRegistry from '@/components/StyledComponents/StyledComponentsRegistry'
 import { ReduxProvider } from '@/components/Redux/ReduxProvider'
@@ -8,12 +7,7 @@ import { NoScript } from '@/components/NoScript/NoScript'
 import { GlobalStyles } from '@/components/GlobalStyles/GlobalStyles'
 import { KeyEventsInit } from '@/components/KeyEvents/KeyEventsInit'
 import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToContent'
-
-const Body = styled.body`
-  margin: 0;
-  background-color: black;
-  color: white;
-`
+import { Header } from '@/components/Header/Header'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -41,12 +35,13 @@ export default function RootLayout(props: PropType) {
         </head>
 
         <html lang="en" className={interRoman.className}>
-          <Body>
+          <body>
             <NoScript />
             <KeyEventsSkipToContent />
+            <Header />
 
             {children}
-          </Body>
+          </body>
         </html>
       </ReduxProvider>
     </StyledComponentsRegistry>
