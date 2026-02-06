@@ -1,6 +1,10 @@
 import { LightThemeSvg, DarkThemeSvg } from '@/components/Theme/ThemeToggle'
-import { THEME_KEYS, THEME_PREFIX } from '@/utils/theme'
 import { css } from 'styled-components'
+import {
+  THEME_CLASSNAME_DARK,
+  THEME_CLASSNAME_LIGHT,
+  THEME_KEYS
+} from '@/utils/theme'
 import {
   LogoLightIcon,
   LogoDarkIcon,
@@ -9,14 +13,14 @@ import {
 } from '@/components/SiteLogo/SiteLogo'
 
 export const THEME_STYLES = css`
-  .${THEME_PREFIX}${THEME_KEYS.LIGHT} {
+  .${THEME_CLASSNAME_LIGHT} {
     color-scheme: ${THEME_KEYS.LIGHT};
 
     ${LogoDarkIcon}, ${LogoDarkImage}, ${LightThemeSvg} {
       display: none;
     }
   }
-  .${THEME_PREFIX}${THEME_KEYS.DARK} {
+  .${THEME_CLASSNAME_DARK} {
     color-scheme: ${THEME_KEYS.DARK};
 
     ${LogoLightIcon}, ${LogoLightImage}, ${DarkThemeSvg} {

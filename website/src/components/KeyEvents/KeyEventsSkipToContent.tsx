@@ -50,7 +50,6 @@ export function KeyEventsSkipToContent() {
     <KeyEventsSkipToContentWrapper
       href={`#${MAIN_CONTENT_ID}`}
       onClick={onClick}
-      id="hehehe"
       $isKeyNavigating
     >
       Skip to content

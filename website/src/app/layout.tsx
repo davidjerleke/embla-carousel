@@ -9,6 +9,7 @@ import { KeyEventsInit } from '@/components/KeyEvents/KeyEventsInit'
 import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToContent'
 import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer/Footer'
+import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -21,8 +22,9 @@ type PropType = {
   children: React.ReactNode
 }
 
-export default function RootLayout(props: PropType) {
+export default async function RootLayout(props: PropType) {
   const { children } = props
+  const htmlClassNames = [interRoman.className, THEME_CLASSNAME_LIGHT].join(' ')
 
   return (
     <StyledComponentsRegistry>
@@ -35,14 +37,15 @@ export default function RootLayout(props: PropType) {
           <Head />
         </head>
 
-        <html lang="en" className={interRoman.className}>
+        <html lang="en" className={htmlClassNames}>
           <body>
             <NoScript />
             <KeyEventsSkipToContent />
             <Header />
-            <Footer />
 
             {children}
+
+            <Footer />
           </body>
         </html>
       </ReduxProvider>

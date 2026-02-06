@@ -20,7 +20,13 @@ import { MODALS } from '@/utils/modal'
 import { MEDIA } from '@/utils/breakpoints'
 import { LAYERS } from '@/utils/layers'
 import { SPACINGS } from '@/utils/spacings'
-import { THEME_KEYS, THEME_PREFIX, COLORS } from '@/utils/theme'
+import {
+  THEME_KEYS,
+  THEME_PREFIX,
+  COLORS,
+  THEME_CLASSNAME_LIGHT,
+  THEME_CLASSNAME_DARK
+} from '@/utils/theme'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
 import {
@@ -446,7 +452,7 @@ const footerStyles = css<KeyNavigatingPropType>`
     width: 2rem;
   }
 
-  .${THEME_PREFIX}${THEME_KEYS.LIGHT} {
+  .${THEME_CLASSNAME_LIGHT} {
     .DocSearch-Commands-Key {
       background: linear-gradient(
         -225deg,
@@ -460,7 +466,7 @@ const footerStyles = css<KeyNavigatingPropType>`
         }, 0.4);
     }
   }
-  .${THEME_PREFIX}${THEME_KEYS.DARK} {
+  .${THEME_CLASSNAME_DARK} {
     .DocSearch-Commands-Key {
       background: linear-gradient(
         -225deg,

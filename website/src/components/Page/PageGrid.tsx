@@ -7,6 +7,7 @@ import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
 // import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 import { LAYERS } from '@/utils/layers'
+import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 // import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
 // import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 
@@ -86,13 +87,13 @@ const TableOfContentsWrapper = styled.div<{ $isStartPage: boolean }>`
 `
 
 type PropType = PropsWithChildren<{
-  // layout: PageLayoutType
+  layout: PageLayoutType
 }>
 
 export function PageGrid(props: PropType) {
-  const { children /* layout */ } = props
+  const { children, layout } = props
   // const routesIsLoading = useAppSelector(selectRoutesLoading)
-  const isStartPage = false //layout === PAGE_LAYOUTS.HOME
+  const isStartPage = layout === PAGE_LAYOUTS.HOME
   const frameSize = isStartPage ? 'MD' : undefined
 
   return (
