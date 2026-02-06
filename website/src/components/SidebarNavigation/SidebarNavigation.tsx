@@ -3,7 +3,7 @@
 import { PropsWithChildren, lazy, useCallback, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import FocusTrap from 'focus-trap-react'
+import { FocusTrap } from 'focus-trap-react'
 import { useEventListener } from '@/hooks/use-event-listener'
 import { useBreakpoints } from '@/hooks/use-breakpoints'
 import { MEDIA } from '@/utils/breakpoints'
@@ -12,25 +12,25 @@ import { MODALS } from '@/utils/modal'
 import { SPACINGS } from '@/utils/spacings'
 import { HEADER_HEIGHT, HEADER_ID } from '@/utils/header'
 import { isBrowser } from '@/utils/is-browser'
-import { SiteNavigationMenuDesktop } from '@/components/SiteNavigation/SiteNavigationMenuDesktop'
+import { SidebarNavigationMenuDesktop } from '@/components/SidebarNavigation/SidebarNavigationMenuDesktop'
 import { LoadSpinnerWithSuspense } from '@/components/LoadSpinner/LoadSpinnerWithSuspense'
 import {
   selectIsModalOpen,
   setModalClosed
 } from '@/components/Modal/modal-reducer'
 
-const SiteNavigationMenuCompactLazy = lazy(async () => {
+const SidebarNavigationMenuCompactLazy = lazy(async () => {
   const module = await import(
-    '@/components/SiteNavigation/SiteNavigationMenuCompact'
+    '@/components/SidebarNavigation/SidebarNavigationMenuCompact'
   )
-  return { default: module.SiteNavigationMenuCompact }
+  return { default: module.SidebarNavigationMenuCompact }
 })
 
-export const NAVIGATION_ID = 'main-navigation-menu'
+export const NAVIGATION_ID = 'sidebar-navigation-menu'
 const CLOSE_KEYS = ['Escape', 'Esc']
-const MENU_ID = 'main-menu'
+const MENU_ID = 'sidebar-menu'
 
-const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
+const SidebarNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
 
   ${MEDIA.COMPACT} {
@@ -59,13 +59,13 @@ const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
 
 export type PropType = PropsWithChildren<{}>
 
-export function SiteNavigation(props: PropType) {
+export function SidebarNavigation(props: PropType) {
   const { isCompact } = useBreakpoints()
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
   const dispatch = useAppDispatch()
 
   const closeNavigation = useCallback(() => {
-    dispatch(setModalClosed(MODALS.SITE_NAVIGATION))
+    dispatch(setModalClosed(MODALS.SIDEBAR_NAVIGATION))
   }, [dispatch])
 
   const getFocusTrapElements = useCallback((): HTMLElement[] => {
@@ -86,31 +86,28 @@ export function SiteNavigation(props: PropType) {
 
   useEffect(() => {
     if (!isCompact) closeNavigation()
-
-    return () => {
-      closeNavigation()
-    }
+    return closeNavigation
   }, [isCompact, closeNavigation])
 
   return (
     <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
-      <SiteNavigationWrapper
+      <SidebarNavigationWrapper
         id={MENU_ID}
         role="dialog"
         aria-modal="true"
         aria-labelledby={NAVIGATION_ID}
-        aria-label="Main Navigation Menu"
+        aria-label="Sidebar Navigation Menu"
         $isOpen={isOpen}
         {...props}
       >
-        <SiteNavigationMenuDesktop />
+        <SidebarNavigationMenuDesktop />
 
         {isOpen && (
           <LoadSpinnerWithSuspense>
-            <SiteNavigationMenuCompactLazy />
+            <SidebarNavigationMenuCompactLazy />
           </LoadSpinnerWithSuspense>
         )}
-      </SiteNavigationWrapper>
+      </SidebarNavigationWrapper>
     </FocusTrap>
   )
 }

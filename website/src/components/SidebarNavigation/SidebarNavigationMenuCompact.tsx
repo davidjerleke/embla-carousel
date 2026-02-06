@@ -22,7 +22,7 @@ import { TabsListScrollArea, TabsListWrapper } from '@/components/Tabs/TabsList'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
 import { TabsButtonWrapper } from '@/components/Tabs/TabsButton'
 import { TabsPanelWrapper } from '@/components/Tabs/TabsPanel'
-import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
+import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
 import { selectIsModalOpen } from '@/components/Modal/modal-reducer'
 import { MODALS } from '@/utils/modal'
 import {
@@ -38,7 +38,7 @@ import {
 
 const MAX_WIDTH_COMPACT = '36rem'
 
-const SiteNavigationMenuCompactWrapper = styled.div`
+const SidebarNavigationMenuCompactWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
   position: relative;
   height: 100%;
@@ -174,10 +174,10 @@ const VersionBadgeWrapper = styled.div`
   justify-content: center;
 `
 
-export function SiteNavigationMenuCompact() {
+export function SidebarNavigationMenuCompact() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const theme = useAppSelector(selectTheme)
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
   const isOpenRef = useRef(isOpen)
   // const tableOfContents = useAppSelector(selectTableOfContents)
   const [showTableOfContents, setShowTableOfContents] = useState(true)
@@ -193,12 +193,12 @@ export function SiteNavigationMenuCompact() {
   // }, [isOpen, tableOfContents])
 
   return (
-    <SiteNavigationMenuCompactWrapper>
+    <SidebarNavigationMenuCompactWrapper>
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
         <TabsItem tab={TABS_SITE_NAVIGATION.TABS.MAIN_MENU}>
           <ScrollArea>
             <ul>
-              <SiteNavigationSubMenus />
+              <SidebarNavigationSubMenus />
 
               <li>
                 <ThemeToggleButton>
@@ -228,6 +228,6 @@ export function SiteNavigationMenuCompact() {
           <ScrollArea>{/* <TableOfContents /> */}</ScrollArea>
         </TabsItem>
       </MenuTabs>
-    </SiteNavigationMenuCompactWrapper>
+    </SidebarNavigationMenuCompactWrapper>
   )
 }

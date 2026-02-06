@@ -1,14 +1,18 @@
+'use client'
+
 import { PropsWithChildren } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppSelector } from '@/hooks/redux'
-// import { selectRoutesLoading } from '@/components/Routes/routesReducer'
+import { selectRoutesLoading } from '@/components/Routes/routes-reducer'
 import { PageFrame, PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
 import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
-// import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 import { LAYERS } from '@/utils/layers'
 import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
-// import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
+import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
+import { SidebarNavigation } from '@/components/SidebarNavigation/SidebarNavigation'
+import { arrayHasItems } from '@/utils/array'
+// import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 // import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 
 // TODO: Fix table of contents
@@ -57,7 +61,7 @@ const Main = styled.main<{ $isStartPage: boolean }>`
     `};
 `
 
-const SiteNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
+const SidebarNavigationWrapper = styled.div<{ $isStartPage: boolean }>`
   ${sidebarStyles};
 
   ${MEDIA.DESKTOP} {
@@ -92,21 +96,25 @@ type PropType = PropsWithChildren<{
 
 export function PageGrid(props: PropType) {
   const { children, layout } = props
-  // const routesIsLoading = useAppSelector(selectRoutesLoading)
+  const routesIsLoading = useAppSelector(selectRoutesLoading)
   const isStartPage = layout === PAGE_LAYOUTS.HOME
   const frameSize = isStartPage ? 'MD' : undefined
+  const sidebarRoutes = useSidebarNavigationContext()
+  const showSidebar = arrayHasItems(sidebarRoutes.flatRoutes)
 
   return (
     <PageGridWrapper size={frameSize}>
-      <SiteNavigationWrapper $isStartPage={isStartPage}>
-        {/* <SiteNavigation /> */}
-      </SiteNavigationWrapper>
+      {showSidebar && (
+        <SidebarNavigationWrapper $isStartPage={isStartPage}>
+          <SidebarNavigation />
+        </SidebarNavigationWrapper>
+      )}
 
       <Main
         role="main"
         aria-live="polite"
         $isStartPage={isStartPage}
-        aria-busy={/* TODO: routesIsLoading */ false}
+        aria-busy={routesIsLoading}
       >
         {children}
       </Main>

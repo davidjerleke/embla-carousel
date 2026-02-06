@@ -9,14 +9,14 @@ import { FONT_SIZES } from '@/utils/font-sizes'
 import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { LAYERS } from '@/utils/layers'
 import type { KeyNavigatingPropType } from '@/utils/key-events'
-import { SiteNavigationSubMenus } from './SiteNavigationSubMenus'
+import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
   SCROLL_BAR_SHADOW_SIZE
 } from '@/utils/scrollbars'
 
-const SiteNavigationMenuDesktopWrapper = styled.div<KeyNavigatingPropType>`
+const SidebarNavigationMenuDesktopWrapper = styled.div<KeyNavigatingPropType>`
   background-color: ${COLORS.BACKGROUND_SITE};
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   position: relative;
@@ -59,17 +59,17 @@ const MiscLinks = styled(FooterLinks)`
   flex-direction: column;
 `
 
-export function SiteNavigationMenuDesktop() {
+export function SidebarNavigationMenuDesktop() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
-    <SiteNavigationMenuDesktopWrapper $isKeyNavigating={isKeyNavigating}>
+    <SidebarNavigationMenuDesktopWrapper $isKeyNavigating={isKeyNavigating}>
       <ScrollArea>
-        <SiteNavigationSubMenus isDesktopMenu />
+        <SidebarNavigationSubMenus isDesktopMenu />
         <li>
           <MiscLinks />
         </li>
       </ScrollArea>
-    </SiteNavigationMenuDesktopWrapper>
+    </SidebarNavigationMenuDesktopWrapper>
   )
 }

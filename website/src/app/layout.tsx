@@ -10,6 +10,7 @@ import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToCo
 import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer/Footer'
 import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
+import { RoutesLoading } from '@/components/Routes/RoutesLoading'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -42,6 +43,7 @@ export default async function RootLayout(props: PropType) {
             <NoScript />
             <KeyEventsSkipToContent />
             <Header />
+            <RoutesLoading />
 
             {children}
 

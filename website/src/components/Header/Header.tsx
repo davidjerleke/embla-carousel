@@ -2,7 +2,7 @@
 
 import styled, { css } from 'styled-components'
 import { PageFrame } from '@/components/Page/PageFrame'
-import { SiteNavigationToggle } from '@/components/SiteNavigation/SiteNavigationToggle'
+import { SidebarNavigationToggle } from '@/components/SidebarNavigation/SidebarNavigationToggle'
 import { MEDIA } from '@/utils/breakpoints'
 import { LAYERS } from '@/utils/layers'
 import { COLORS } from '@/utils/theme'
@@ -47,7 +47,7 @@ export function Header() {
     <HeaderWrapper id={HEADER_ID}>
       <Fixed>
         <Content>
-          <SiteNavigationToggle />
+          <SidebarNavigationToggle />
           <HeaderLogo />
           <HeaderActions />
         </Content>

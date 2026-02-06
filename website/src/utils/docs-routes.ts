@@ -3,13 +3,13 @@ import path from 'path'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
-import { RoutesContextType } from '@/components/Routes/RoutesContext'
+import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
 
 /* UTILS */
 export async function getDocsPageRoutes(
   slugOrEmpty?: string[]
-): Promise<RoutesContextType> {
+): Promise<SidebarNavigationContextType> {
   const slug = slugOrEmpty || []
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const version = slugIncludesVersion ? slug[0] : LATEST_VERSION

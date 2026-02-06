@@ -10425,6 +10425,7 @@ __metadata:
     "@types/react-dom": ^19
     eslint: ^9
     eslint-config-next: 16.1.6
+    focus-trap-react: 12.0.0
     gray-matter: ^4.0.3
     next: 16.1.6
     next-mdx-remote: ^5.0.0
@@ -12310,6 +12311,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"focus-trap-react@npm:12.0.0":
+  version: 12.0.0
+  resolution: "focus-trap-react@npm:12.0.0"
+  dependencies:
+    focus-trap: ^8.0.0
+    tabbable: ^6.4.0
+  peerDependencies:
+    "@types/react": ^18.0.0 || ^19.0.0
+    "@types/react-dom": ^18.0.0 || ^19.0.0
+    react: ^18.0.0 || ^19.0.0
+    react-dom: ^18.0.0 || ^19.0.0
+  checksum: 763049fa4d39852728cb076af9781d133e34ed5ff490d2b79b6c2b5643ee19e24ca69b9fde46b012250ede6942a7a070b52a4620230c0434c182b9e8bb693036
+  languageName: node
+  linkType: hard
+
 "focus-trap-react@npm:^8.10.0":
   version: 8.11.3
   resolution: "focus-trap-react@npm:8.11.3"
@@ -12329,6 +12345,15 @@ __metadata:
   dependencies:
     tabbable: ^5.3.3
   checksum: 0b4cebcc11010bd9397731092bd59a981e838c710c6497374ba70571875a14ab27c0db7d60f36005ec01bdabc3b9cfeda11d30ddf5b8874596dcc95e18913b3b
+  languageName: node
+  linkType: hard
+
+"focus-trap@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "focus-trap@npm:8.0.0"
+  dependencies:
+    tabbable: ^6.4.0
+  checksum: be96fb5de58b56cae8192d16251eb24d6502f3b09d933d7858afb9f0dc57a185ac69d887bf3872c6186e6c6bf718d08b8967ad356a010d838826dbc5c17d6fa1
   languageName: node
   linkType: hard
 
@@ -22811,6 +22836,13 @@ __metadata:
   version: 5.3.3
   resolution: "tabbable@npm:5.3.3"
   checksum: 1aa56e1bb617cc10616c407f4e756f0607f3e2d30f9803664d70b85db037ca27e75918ed1c71443f3dc902e21dc9f991ce4b52d63a538c9b69b3218d3babcd70
+  languageName: node
+  linkType: hard
+
+"tabbable@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "tabbable@npm:6.4.0"
+  checksum: 7084cba269ebbc7dcdeed5aca7f90c0a0fb59a295dd1e83703ab89cca5e6c53b78d02020e3d1065481984cd64bba7dd1ea3c0a48e92fdba83d586e6e86d62a74
   languageName: node
   linkType: hard
 

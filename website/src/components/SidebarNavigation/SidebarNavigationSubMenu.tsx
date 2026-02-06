@@ -22,7 +22,7 @@ function createMenuId(title: string = '', isDesktopMenu: boolean): string {
 const ITEM_SPACING = SPACINGS.ONE
 const TOGGLE_SVG_SIZE = SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)
 
-const SiteNavigationSubMenuWrapper = styled.div`
+const SidebarNavigationSubMenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 1.65;
@@ -106,7 +106,7 @@ type PropType = {
   isDesktopMenu: boolean
 }
 
-export function SiteNavigationSubMenu(props: PropType) {
+export function SidebarNavigationSubMenu(props: PropType) {
   const { route, isDesktopMenu } = props
   const { title, children } = route
   const { isPartiallyActive, isActive } = useRouteActive(route.slug)
@@ -129,7 +129,7 @@ export function SiteNavigationSubMenu(props: PropType) {
   }, [setIsOpen, isPartiallyActive])
 
   return (
-    <SiteNavigationSubMenuWrapper aria-labelledby={id}>
+    <SidebarNavigationSubMenuWrapper aria-labelledby={id}>
       <Toggle
         id={id}
         onClick={toggleOpen}
@@ -152,6 +152,6 @@ export function SiteNavigationSubMenu(props: PropType) {
           </li>
         ))}
       </Menu>
-    </SiteNavigationSubMenuWrapper>
+    </SidebarNavigationSubMenuWrapper>
   )
 }

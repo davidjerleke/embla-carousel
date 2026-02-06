@@ -3,7 +3,7 @@
 import { useCallback, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { NAVIGATION_ID } from './SiteNavigation'
+import { NAVIGATION_ID } from './SidebarNavigation'
 import { COLORS } from '@/utils/theme'
 import { MEDIA } from '@/utils/breakpoints'
 import { BORDER_RADIUSES } from '@/utils/border'
@@ -20,7 +20,7 @@ import {
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '2.35rem'
 
-const SiteNavigationToggleWrapper = styled(ButtonBare)`
+const SidebarNavigationToggleWrapper = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;
@@ -73,43 +73,43 @@ const Burger = styled.div<{ $isOpen: boolean }>`
   }
 `
 
-export function SiteNavigationToggle() {
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SITE_NAVIGATION))
+export function SidebarNavigationToggle() {
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
   const toggleAction = isOpen ? 'Hide' : 'Show'
   const toggleElement = useRef<HTMLButtonElement>(null)
   const dispatch = useAppDispatch()
 
   const onClick = useCallback(() => {
     const toggleModal = isOpen ? setModalClosed : setModalOpen
-    dispatch(toggleModal(MODALS.SITE_NAVIGATION))
+    dispatch(toggleModal(MODALS.SIDEBAR_NAVIGATION))
   }, [dispatch, isOpen])
 
-  const loadSiteNavigationMenu = useCallback(async () => {
+  const loadSidebarNavigationMenu = useCallback(async () => {
     const module = await import(
-      '@/components/SiteNavigation/SiteNavigationMenuCompact'
+      '@/components/SidebarNavigation/SidebarNavigationMenuCompact'
     )
-    return { default: module.SiteNavigationMenuCompact }
+    return { default: module.SidebarNavigationMenuCompact }
   }, [])
 
-  useEventListener('mouseenter', loadSiteNavigationMenu, toggleElement, {
+  useEventListener('mouseenter', loadSidebarNavigationMenu, toggleElement, {
     passive: true
   })
-  useEventListener('touchstart', loadSiteNavigationMenu, toggleElement, {
+  useEventListener('touchstart', loadSidebarNavigationMenu, toggleElement, {
     passive: true
   })
 
   return (
-    <SiteNavigationToggleWrapper
+    <SidebarNavigationToggleWrapper
       id={NAVIGATION_ID}
       onClick={onClick}
       aria-expanded={isOpen}
-      aria-label={`${toggleAction} Main Navigation Menu`}
+      aria-label={`${toggleAction} Sidebar Navigation Menu`}
       ref={toggleElement}
       type="button"
     >
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />
       </Burger>
-    </SiteNavigationToggleWrapper>
+    </SidebarNavigationToggleWrapper>
   )
 }

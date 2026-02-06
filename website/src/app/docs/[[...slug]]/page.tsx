@@ -5,6 +5,9 @@ import {
   getDocsPageContent,
   getDocsPageFilePath
 } from '@/utils/docs-page'
+import { PageGrid } from '@/components/Page/PageGrid'
+import { PAGE_LAYOUTS } from '@/utils/page'
+import { useRoutesContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
 
 type PropType = DocsPageParamsType
 
@@ -27,5 +30,5 @@ export default async function DocsPage(props: PropType) {
   const { slug } = await params
   const content = await getDocsPageContent(slug)
 
-  return <article>{content}</article>
+  return <PageGrid layout={PAGE_LAYOUTS.DOCS}>{content}</PageGrid>
 }
