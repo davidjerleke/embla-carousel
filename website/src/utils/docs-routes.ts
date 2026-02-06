@@ -3,13 +3,16 @@ import path from 'path'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
-import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
-import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
+import {
+  createHierarchicalRoutes,
+  FlatAndHierarchicalRoutesType,
+  RouteType
+} from '@/utils/routes'
 
 /* UTILS */
-export async function getDocsPageRoutes(
+export async function getDocsRoutes(
   slugOrEmpty?: string[]
-): Promise<SidebarNavigationContextType> {
+): Promise<FlatAndHierarchicalRoutesType> {
   const slug = slugOrEmpty || []
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
@@ -41,7 +44,7 @@ export async function getDocsPageRoutes(
       flatRoutes.push({
         ...frontmatter,
         slug: path.join('/docs', slug),
-        level: slugPath.split('/').filter(Boolean).length,
+        level: slugPath.split('/').filter(Boolean).length + 1,
         children: []
       })
     })
@@ -50,7 +53,7 @@ export async function getDocsPageRoutes(
   walk(pagesDir)
 
   return {
-    hierarchicalRoutes: createHierarchicalRoutes(flatRoutes),
+    hierarchicalRoutes: createHierarchicalRoutes(flatRoutes, 2),
     flatRoutes
   }
 }

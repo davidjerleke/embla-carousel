@@ -11,6 +11,8 @@ import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer/Footer'
 import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
 import { RoutesLoading } from '@/components/Routes/RoutesLoading'
+import { getRootRoutes } from '@/utils/root-routes'
+import { SiteNavigationProvider } from '@/components/SiteNavigation/SiteNavigationContext'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -26,31 +28,34 @@ type PropType = {
 export default async function RootLayout(props: PropType) {
   const { children } = props
   const htmlClassNames = [interRoman.className, THEME_CLASSNAME_LIGHT].join(' ')
+  const routes = await getRootRoutes()
 
   return (
     <StyledComponentsRegistry>
-      <ReduxProvider>
-        <GlobalStyles />
-        <ThemeInit />
-        <KeyEventsInit />
+      <SiteNavigationProvider routes={routes}>
+        <ReduxProvider>
+          <GlobalStyles />
 
-        <head>
-          <Head />
-        </head>
+          <html lang="en" className={htmlClassNames}>
+            <head>
+              <Head />
+            </head>
 
-        <html lang="en" className={htmlClassNames}>
-          <body>
-            <NoScript />
-            <KeyEventsSkipToContent />
-            <Header />
-            <RoutesLoading />
+            <body>
+              <ThemeInit />
+              <KeyEventsInit />
+              <NoScript />
+              <KeyEventsSkipToContent />
+              <Header />
+              <RoutesLoading />
 
-            {children}
+              {children}
 
-            <Footer />
-          </body>
-        </html>
-      </ReduxProvider>
+              <Footer />
+            </body>
+          </html>
+        </ReduxProvider>
+      </SiteNavigationProvider>
     </StyledComponentsRegistry>
   )
 }

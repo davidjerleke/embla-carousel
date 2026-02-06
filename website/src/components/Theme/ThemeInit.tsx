@@ -30,7 +30,8 @@ export function ThemeInit() {
     document.documentElement.classList.add(`${THEME_PREFIX}${theme}`)
 
     if (themeMetaNode) {
-      const nextBackgroundColor = THEME_COLORS[theme].BACKGROUND_SITE
+      const nextTheme = THEME_COLORS[theme] || THEME_COLORS[THEME_KEYS.LIGHT]
+      const nextBackgroundColor = nextTheme.BACKGROUND_SITE
       themeMetaNode.setAttribute('content', nextBackgroundColor)
     }
   }, [theme])

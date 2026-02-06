@@ -12,6 +12,11 @@ export type RouteType = {
   children: RouteType[]
 }
 
+export type FlatAndHierarchicalRoutesType = {
+  flatRoutes: RouteType[]
+  hierarchicalRoutes: RouteType[]
+}
+
 /* UTILS */
 export function addRouteChildren(
   parentWithoutChildren: RouteType,
@@ -41,7 +46,11 @@ export function isRoutePartiallyActive(
   return locationPathname.substring(0, slug.length) === slug
 }
 
-export function createHierarchicalRoutes(routes: RouteType[]): RouteType[] {
-  const topLevelRoutes = routes.filter(({ level }) => level === 1)
-  return topLevelRoutes.map((route) => addRouteChildren({ ...route }, routes))
+export function createHierarchicalRoutes(
+  routes: RouteType[],
+  baseLevel?: number
+): RouteType[] {
+  const startLevel = baseLevel ?? 1
+  const baseLevelRoutes = routes.filter(({ level }) => level === startLevel)
+  return baseLevelRoutes.map((route) => addRouteChildren({ ...route }, routes))
 }

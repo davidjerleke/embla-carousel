@@ -1,6 +1,4 @@
 import styled, { css } from 'styled-components'
-// import { useAppSelector } from 'hooks/useRedux'
-// import { selectHierarchalRoutes } from 'components/Routes/routesReducer'
 import { ThemeToggle } from '@/components/Theme/ThemeToggle'
 import { LinkNavigation } from '@/components/Link/LinkNavigation'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
@@ -10,6 +8,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { Search } from '@/components/Search/Search'
 import { createGapStyles } from '@/utils/create-gap-styles'
+import { useSiteNavigationContext } from '../SiteNavigation/SiteNavigationContext'
 
 const ITEM_SPACING_DESKTOP = SPACINGS.CUSTOM(() => 2.8)
 
@@ -45,19 +44,18 @@ const Link = styled(LinkNavigation)`
 `
 
 export function HeaderActions() {
-  // TODO: Replace with header routes, not docs routes
-  // const hierarchicalRoutes = useAppSelector(selectHierarchalRoutes)
+  const { flatRoutes } = useSiteNavigationContext()
 
   return (
     <HeaderActionsWrapper>
       <Item $hiddenAtCompact>
         <nav aria-label="Quick Navigation Menu">
           <HeaderActionsWrapper>
-            {/* {hierarchicalRoutes.map((route) => (
-              <Item key={route.id}>
+            {flatRoutes.map((route) => (
+              <Item key={route.slug}>
                 <Link slug={route.slug}>{route.title}</Link>
               </Item>
-            ))} */}
+            ))}
           </HeaderActionsWrapper>
         </nav>
       </Item>

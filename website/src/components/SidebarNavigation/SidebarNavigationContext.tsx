@@ -1,21 +1,16 @@
 'use client'
 
 import React, { createContext, useContext } from 'react'
-import { RouteType } from '@/utils/routes'
+import { FlatAndHierarchicalRoutesType } from '@/utils/routes'
 
-export type SidebarNavigationContextType = {
-  hierarchicalRoutes: RouteType[]
-  flatRoutes: RouteType[]
-}
-
-const SidebarNavigationContext = createContext<SidebarNavigationContextType>({
+const SidebarNavigationContext = createContext<FlatAndHierarchicalRoutesType>({
   hierarchicalRoutes: [],
   flatRoutes: []
 })
 
 type PropType = {
   children: React.ReactNode
-  routes: SidebarNavigationContextType
+  routes: FlatAndHierarchicalRoutesType
 }
 
 export function SidebarNavigationProvider(props: PropType) {
@@ -28,6 +23,6 @@ export function SidebarNavigationProvider(props: PropType) {
   )
 }
 
-export function useSidebarNavigationContext(): SidebarNavigationContextType {
+export function useSidebarNavigationContext(): FlatAndHierarchicalRoutesType {
   return useContext(SidebarNavigationContext)
 }

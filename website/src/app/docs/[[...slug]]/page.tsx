@@ -1,13 +1,12 @@
 import { Metadata } from 'next'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import { PageGrid } from '@/components/Page/PageGrid'
+import { PAGE_LAYOUTS } from '@/utils/page'
 import {
   type DocsPageParamsType,
   getDocsPageContent,
   getDocsPageFilePath
 } from '@/utils/docs-page'
-import { PageGrid } from '@/components/Page/PageGrid'
-import { PAGE_LAYOUTS } from '@/utils/page'
-import { useRoutesContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
 
 type PropType = DocsPageParamsType
 

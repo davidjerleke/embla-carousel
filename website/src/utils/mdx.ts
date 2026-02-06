@@ -21,6 +21,14 @@ export type MdxRouteFrontmatterType = {
 export function filePathToMdxFrontmatter(
   filePath: string
 ): MdxRouteFrontmatterType {
+  if (!fs.existsSync(filePath)) {
+    return {
+      title: '',
+      description: '',
+      order: 0
+    }
+  }
+
   const { data } = matter(fs.readFileSync(filePath, 'utf8'))
   const frontmatter: MdxRouteFrontmatterType = {
     title: data.title || '',

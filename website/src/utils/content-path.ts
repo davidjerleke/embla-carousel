@@ -1,10 +1,10 @@
 import path from 'path'
 
 /* CONSTS */
-export const ROOT_FOLDER_NAME = 'src'
-export const CONTENT_FOLDER_NAME = 'content'
-export const PAGES_FOLDER_NAME = 'pages'
-export const SHARED_FOLDER_NAME = 'shared'
+const ROOT_FOLDER_NAME = 'src'
+const CONTENT_FOLDER_NAME = 'content'
+const PAGES_FOLDER_NAME = 'pages'
+const SHARED_FOLDER_NAME = 'shared'
 
 /* UTILS */
 export function getContentFolderPath(): string {
