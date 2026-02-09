@@ -6,7 +6,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { FONT_WEIGHTS } from '@/utils/font-sizes'
 import { IconWithText, IconWithTextText } from '@/components/Icon/IconWithText'
 import { createGapStyles } from '@/utils/create-gap-styles'
-import { RouteType } from '@/utils/routes'
+import { DocsPagePaginationType } from '@/utils/docs-pagination'
 
 const ITEM_SPACING = SPACINGS.FOUR
 
@@ -43,10 +43,7 @@ const ItemTitle = styled.div`
   }
 `
 
-type PropType = {
-  next: RouteType
-  previous: RouteType
-}
+type PropType = DocsPagePaginationType
 
 export function PagePagination(props: PropType) {
   const { next, previous } = props

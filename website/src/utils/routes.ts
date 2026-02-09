@@ -54,3 +54,27 @@ export function createHierarchicalRoutes(
   const baseLevelRoutes = routes.filter(({ level }) => level === startLevel)
   return baseLevelRoutes.map((route) => addRouteChildren({ ...route }, routes))
 }
+
+function addAdjacentRouteChildren(
+  parent: RouteType,
+  pages: RouteType[]
+): RouteType[] {
+  return pages
+    .filter((page) => new RegExp(`^${parent.slug}`).test(page.slug))
+    .filter((page) => page.level - 1 === parent.level)
+    .reduce(
+      (acc, page) => [...acc, ...addAdjacentRouteChildren(page, pages)],
+      [parent]
+    )
+}
+
+export function createRoutesWithAdjacentChildren(
+  pages: RouteType[]
+): RouteType[] {
+  return pages
+    .filter((page) => page.level === 1)
+    .reduce(
+      (acc, page) => [...acc, ...addAdjacentRouteChildren(page, pages)],
+      <RouteType[]>[]
+    )
+}

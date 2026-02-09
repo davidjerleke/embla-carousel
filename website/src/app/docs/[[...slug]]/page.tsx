@@ -3,6 +3,8 @@ import { filePathToMdxFrontmatter } from '@/utils/mdx'
 import { PageBreadcrumbs } from '@/components/Page/PageBreadcrumbs'
 import { PageGrid } from '@/components/Page/PageGrid'
 import { MAIN_CONTENT_ID, PAGE_LAYOUTS } from '@/utils/page'
+import { getDocsPagePagination } from '@/utils/docs-pagination'
+import { PagePagination } from '@/components/Page/PagePagination'
 import {
   type DocsPageParamsType,
   getDocsPageContent,
@@ -29,11 +31,16 @@ export default async function DocsPage(props: PropType) {
   const { params } = props
   const { slug } = await params
   const content = await getDocsPageContent(slug)
+  const pagination = await getDocsPagePagination(slug)
 
   return (
     <PageGrid layout={PAGE_LAYOUTS.DOCS}>
       <PageBreadcrumbs />
+
       <article id={MAIN_CONTENT_ID}>{content}</article>
+
+      {/* <PageEditThisPage pageUrl={filePath} /> */}
+      <PagePagination {...pagination} />
     </PageGrid>
   )
 }
