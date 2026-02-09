@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
-// import { useSiteMetadata } from 'hooks/useSiteMetadata'
 import { MEDIA } from '@/utils/breakpoints'
 import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
@@ -8,6 +7,7 @@ import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_SIZES } from '@/utils/border'
 import { LinkBare } from '@/components/Link/LinkBare'
 import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
+import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
 import {
   LogoDarkIcon,
   LogoDarkImage,
@@ -55,9 +55,7 @@ const HeaderLogoText = styled.span`
 `
 
 export function HeaderLogo() {
-  // TODO: Use dynamic value
-  // const { title } = useSiteMetadata()
-  const title = 'Embla Carousel'
+  const { title } = useGlobalDataContext()
   const { homeRoute } = useSiteNavigationContext()
 
   return (

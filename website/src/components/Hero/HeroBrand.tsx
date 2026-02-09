@@ -6,7 +6,7 @@ import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { SiteLogo } from '@/components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
-// import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { MAIN_CONTENT_ID } from '@/utils/page'
 import {
@@ -118,11 +118,7 @@ const CtaWrapper = styled.ul`
 `
 
 export function HeroBrand() {
-  // const { title, description } = useSiteMetadata()
-  // TODO: Make dynamic
-  const title = 'Embla Carousel'
-  const description =
-    'A lightweight carousel library with fluid motion and great swipe precision'
+  const { title, description } = useGlobalDataContext()
 
   return (
     <HeroBrandWrapper>

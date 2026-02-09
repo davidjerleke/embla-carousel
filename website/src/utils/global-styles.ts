@@ -1,5 +1,66 @@
+import { COLORS } from '@/utils/theme'
+import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { css } from 'styled-components'
-import { FONT_WEIGHTS } from '@/utils/font-sizes'
+import { LightThemeSvg, DarkThemeSvg } from '@/components/Theme/ThemeToggle'
+import {
+  THEME_CLASSNAME_DARK,
+  THEME_CLASSNAME_LIGHT,
+  THEME_KEYS
+} from '@/utils/theme'
+import {
+  LogoLightIcon,
+  LogoDarkIcon,
+  LogoLightImage,
+  LogoDarkImage
+} from '@/components/SiteLogo/SiteLogo'
+
+/* CONSTS */
+const BASE_FONT_STYLES = '62.5%'
+
+export const BASE_STYLES = css`
+  html {
+    background-color: ${COLORS.BACKGROUND_SITE};
+    font-size: ${BASE_FONT_STYLES};
+  }
+  body {
+    background-color: ${COLORS.BACKGROUND_SITE};
+    color: ${COLORS.TEXT_HIGH_CONTRAST};
+    font-size: ${FONT_SIZES.BODY};
+    line-height: 1.65;
+  }
+`
+
+export const FONT_STYLES = css`
+  html {
+    font-family: 'system-ui', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol';
+    letter-spacing: -0.02rem;
+  }
+
+  html {
+    font-family: 'Inter var', 'system-ui', -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+`
+
+export const THEME_STYLES = css`
+  .${THEME_CLASSNAME_LIGHT} {
+    color-scheme: ${THEME_KEYS.LIGHT};
+
+    ${LogoDarkIcon}, ${LogoDarkImage}, ${LightThemeSvg} {
+      display: none;
+    }
+  }
+  .${THEME_CLASSNAME_DARK} {
+    color-scheme: ${THEME_KEYS.DARK};
+
+    ${LogoLightIcon}, ${LogoLightImage}, ${DarkThemeSvg} {
+      display: none;
+    }
+  }
+`
 
 export const RESET_STYLES = css`
   html {
