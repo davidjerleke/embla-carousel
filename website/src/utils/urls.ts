@@ -3,6 +3,7 @@ import packageJson from '@/../package.json'
 /* CONSTS */
 const GITHUB_ROOT = packageJson.repository.url.replace(/^(git\+)/, '')
 
+// TODO: Replace all embla-carousel and davidjerleke with dynamic values from package.json
 export const URLS = {
   GITHUB_ROOT,
   GITHUB_DISCUSSIONS: `${GITHUB_ROOT}/discussions`,

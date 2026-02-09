@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
-import { PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
 import { MEDIA } from '@/utils/breakpoints'
+import { PAGE_FRAME_SPACING } from '@/utils/page'
 
 export const pageFrameCollapseStyles = css`
   ${MEDIA.MAX_XS} {

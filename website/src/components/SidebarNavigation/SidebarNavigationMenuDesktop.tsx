@@ -4,12 +4,12 @@ import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
 import { COLORS } from '@/utils/theme'
 import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
-import { PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { LAYERS } from '@/utils/layers'
 import type { KeyNavigatingPropType } from '@/utils/key-events'
 import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
+import { PAGE_FRAME_SPACING } from '@/utils/page'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,

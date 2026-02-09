@@ -11,8 +11,7 @@ import { KEY_NAVIGATING_STYLES } from '@/utils/key-events'
 import { setModalClosed } from '@/components/Modal/modal-reducer'
 import { MODALS } from '@/utils/modal'
 import { setRoutesLoading } from '@/components/Routes/routes-reducer'
-
-const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
+import { isInternalLink } from '@/utils/link'
 
 export const linkBareStyles = css<{ $isKeyNavigating: boolean }>`
   ${KEY_NAVIGATING_STYLES};
@@ -35,7 +34,6 @@ export function LinkBare(props: PropType) {
   const { href, id, tabIndex, children, onClick, ...restProps } = props
   const to = typeof href === 'string' ? href : href?.pathname || ''
   const linkElement = useRef<HTMLAnchorElement | null>(null)
-  const isInternal = INTERNAL_LINK_REGEX.test(to)
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const pathname = usePathname()
   const dispatch = useAppDispatch()
@@ -70,7 +68,7 @@ export function LinkBare(props: PropType) {
     [pathname, to, closeNavigation, dispatch, onClick]
   )
 
-  if (isInternal) {
+  if (isInternalLink(to)) {
     return (
       <InternalLink
         href={to}

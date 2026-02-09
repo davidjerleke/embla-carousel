@@ -11,6 +11,7 @@ import {
   isRoutePartiallyActive
 } from '@/utils/routes'
 import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
+import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
 
 type UseRouteActiveType = {
   isActive: boolean
@@ -30,17 +31,18 @@ export function useRouteActive(slug: RouteType['slug']): UseRouteActiveType {
   return routeState
 }
 
-// TODO: Pass routes to this function instead of using context
-export const useRouteBreadcrumbs = (id: string): RouteType[] => {
-  const { flatRoutes } = useSidebarNavigationContext()
-  return flatRoutes
-  // const flatRoutes = useAppSelector(selectFlatRoutes)
-  // const currentRoute = flatRoutes.find((route) => route.id === id)
-  // return flatRoutes
-  //   .filter((route) =>
-  //     isRoutePartiallyActive(route.slug, currentRoute?.slug || '')
-  //   )
-  //   .sort((a, b) => a.level - b.level)
+export const useRouteBreadcrumbs = (): RouteType[] => {
+  const pathname = usePathname()
+  const rootRoutes = useSiteNavigationContext()
+  const sidebarRoutes = useSidebarNavigationContext()
+  const routes = [rootRoutes.homeRoute, ...sidebarRoutes.flatRoutes]
+  const activeRoute = routes.find((route) => route.slug === pathname)
+
+  return routes
+    .filter((route) =>
+      isRoutePartiallyActive(route.slug, activeRoute?.slug || '')
+    )
+    .sort((a, b) => a.level - b.level)
 }
 
 // TODO: Clean up

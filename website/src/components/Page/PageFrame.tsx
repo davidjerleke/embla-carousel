@@ -1,16 +1,10 @@
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { SPACINGS } from '@/utils/spacings'
-
-type FrameSizesType = keyof typeof PAGE_FRAME_SIZES
-
-const PAGE_FRAME_SIZES = {
-  DEFAULT: '144rem',
-  MD: '110rem',
-  SM: '68rem'
-}
-
-export const PAGE_FRAME_SPACING = SPACINGS.FOUR
+import {
+  FrameSizesType,
+  PAGE_FRAME_SIZES,
+  PAGE_FRAME_SPACING
+} from '@/utils/page'
 
 const PageFrameWrapper = styled.div<{ $size: string }>`
   margin-left: auto;

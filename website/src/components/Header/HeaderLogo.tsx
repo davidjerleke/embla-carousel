@@ -7,6 +7,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_SIZES } from '@/utils/border'
 import { LinkBare } from '@/components/Link/LinkBare'
+import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
 import {
   LogoDarkIcon,
   LogoDarkImage,
@@ -57,9 +58,13 @@ export function HeaderLogo() {
   // TODO: Use dynamic value
   // const { title } = useSiteMetadata()
   const title = 'Embla Carousel'
+  const { homeRoute } = useSiteNavigationContext()
 
   return (
-    <HeaderLogoWrapper aria-label="Permalink to home page" href="/">
+    <HeaderLogoWrapper
+      aria-label="Permalink to home page"
+      href={homeRoute.slug}
+    >
       <HeaderLogoImage />
       <HeaderLogoText>{title}</HeaderLogoText>
     </HeaderLogoWrapper>

@@ -9,6 +9,8 @@ import { FONT_SIZES } from '@/utils/font-sizes'
 import { Search } from '@/components/Search/Search'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { useSiteNavigationContext } from '../SiteNavigation/SiteNavigationContext'
+import { Icon } from '@/components/Icon/Icon'
+import { isInternalLink } from '@/utils/link'
 
 const ITEM_SPACING_DESKTOP = SPACINGS.CUSTOM(() => 2.8)
 
@@ -43,6 +45,12 @@ const Link = styled(LinkNavigation)`
   padding: ${SPACINGS.ONE} 0;
 `
 
+const ExternalLinkIcon = styled(Icon)`
+  position: absolute;
+  top: 0.2rem;
+  left: calc(100% + 0.2rem);
+`
+
 export function HeaderActions() {
   const { flatRoutes } = useSiteNavigationContext()
 
@@ -51,11 +59,23 @@ export function HeaderActions() {
       <Item $hiddenAtCompact>
         <nav aria-label="Quick Navigation Menu">
           <HeaderActionsWrapper>
-            {flatRoutes.map((route) => (
-              <Item key={route.slug}>
-                <Link slug={route.slug}>{route.title}</Link>
-              </Item>
-            ))}
+            {flatRoutes.map((route) => {
+              return (
+                <Item key={route.slug}>
+                  <Link slug={route.slug}>
+                    {route.title}
+
+                    {!isInternalLink(route.slug) && (
+                      <ExternalLinkIcon
+                        svg="externalLink"
+                        size="0.8rem"
+                        color={COLORS.DETAIL_HIGH_CONTRAST}
+                      />
+                    )}
+                  </Link>
+                </Item>
+              )
+            })}
           </HeaderActionsWrapper>
         </nav>
       </Item>

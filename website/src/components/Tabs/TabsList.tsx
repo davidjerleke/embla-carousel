@@ -6,13 +6,13 @@ import { BORDER_SIZES } from '@/utils/border'
 import { SPACINGS } from '@/utils/spacings'
 import { COLORS } from '@/utils/theme'
 import { LAYERS } from '@/utils/layers'
-import { PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
+import { PAGE_FRAME_SPACING } from '@/utils/page'
+import { KeyNavigatingPropType } from '@/utils/key-events'
 import {
   SCROLLBAR_SIZE,
   createScrollBarShadowStyles,
   createScrollBarStyles
 } from '@/utils/scrollbars'
-import { KeyNavigatingPropType } from '@/utils/key-events'
 
 export const TabsListWrapper = styled.div`
   display: flex;

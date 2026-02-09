@@ -30,6 +30,8 @@ export default async function RootLayout(props: PropType) {
   const htmlClassNames = [interRoman.className, THEME_CLASSNAME_LIGHT].join(' ')
   const routes = await getRootRoutes()
 
+  console.log(routes, 'routes in layout')
+
   return (
     <StyledComponentsRegistry>
       <SiteNavigationProvider routes={routes}>

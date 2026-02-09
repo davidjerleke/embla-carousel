@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { PageFrame, PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
+import { PageFrame } from '@/components/Page/PageFrame'
+import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
 import { FooterLinks } from './FooterLinks'
 import { SPACINGS } from '@/utils/spacings'

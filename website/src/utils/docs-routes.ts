@@ -3,16 +3,13 @@ import path from 'path'
 import { getVersionedPageFolderPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
-import {
-  createHierarchicalRoutes,
-  FlatAndHierarchicalRoutesType,
-  RouteType
-} from '@/utils/routes'
+import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
+import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 
 /* UTILS */
 export async function getDocsRoutes(
   slugOrEmpty?: string[]
-): Promise<FlatAndHierarchicalRoutesType> {
+): Promise<SidebarNavigationContextType> {
   const slug = slugOrEmpty || []
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
@@ -37,14 +34,17 @@ export async function getDocsRoutes(
         .replace(pagesDir, '')
         .replace('.mdx', '')
         .replace(/\/index$/, '')
-      const slug = isLatestVersion
+      const slugWithVersion = isLatestVersion
         ? slugPath
         : path.join(`${version}`, slugPath)
+      const slug = path.join('/docs', slugWithVersion)
+      const removeVersionLevel = isLatestVersion ? 0 : 1
+      const level = slug.split('/').filter(Boolean).length - removeVersionLevel
 
       flatRoutes.push({
         ...frontmatter,
-        slug: path.join('/docs', slug),
-        level: slugPath.split('/').filter(Boolean).length + 1,
+        slug,
+        level,
         children: []
       })
     })

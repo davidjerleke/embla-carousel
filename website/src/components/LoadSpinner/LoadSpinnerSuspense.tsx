@@ -6,9 +6,9 @@ import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { LAYERS } from '@/utils/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
 import { useEventListener } from '@/hooks/use-event-listener'
-import { PAGE_FRAME_SPACING } from '@/components/Page/PageFrame'
 import { HEADER_HEIGHT } from '@/utils/header'
 import { ModalPortal } from '@/components/Modal/ModalPortal'
+import { PAGE_FRAME_SPACING } from '@/utils/page'
 
 const getOpacity = (isVisible: boolean, showLoader: boolean): number => {
   if (!isVisible) return 0

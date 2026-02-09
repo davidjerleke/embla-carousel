@@ -1,16 +1,28 @@
 'use client'
 
 import React, { createContext, useContext } from 'react'
-import { FlatAndHierarchicalRoutesType } from '@/utils/routes'
+import { RouteType } from '@/utils/routes'
 
-const SiteNavigationContext = createContext<FlatAndHierarchicalRoutesType>({
-  hierarchicalRoutes: [],
-  flatRoutes: []
+export type SiteNavigationContextType = {
+  flatRoutes: RouteType[]
+  homeRoute: RouteType
+}
+
+const SiteNavigationContext = createContext<SiteNavigationContextType>({
+  flatRoutes: [],
+  homeRoute: {
+    title: '',
+    description: '',
+    level: 0,
+    order: 0,
+    children: [],
+    slug: '/'
+  }
 })
 
 type PropType = {
   children: React.ReactNode
-  routes: FlatAndHierarchicalRoutesType
+  routes: SiteNavigationContextType
 }
 
 export function SiteNavigationProvider(props: PropType) {
@@ -23,6 +35,6 @@ export function SiteNavigationProvider(props: PropType) {
   )
 }
 
-export function useSiteNavigationContext(): FlatAndHierarchicalRoutesType {
+export function useSiteNavigationContext(): SiteNavigationContextType {
   return useContext(SiteNavigationContext)
 }

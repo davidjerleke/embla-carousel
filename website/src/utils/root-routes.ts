@@ -1,21 +1,36 @@
-import fs from 'fs'
 import path from 'path'
-import { getVersionedPageFolderPath } from '@/utils/content-path'
+import {
+  getSharedPageFolderPath,
+  getVersionedPageFolderPath
+} from '@/utils/content-path'
 import { LATEST_VERSION } from '@/utils/version'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
-import { FlatAndHierarchicalRoutesType, RouteType } from '@/utils/routes'
-import { URLS } from './urls'
+import { URLS } from '@/utils/urls'
+import { RouteType } from '@/utils/routes'
+import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
 
 /* UTILS */
-export async function getRootRoutes(): Promise<FlatAndHierarchicalRoutesType> {
-  const pagesDir = getVersionedPageFolderPath(LATEST_VERSION)
-  const flatRoutes: RouteType[] = []
+export async function getRootRoutes(): Promise<SiteNavigationContextType> {
+  const sharedDir = getSharedPageFolderPath()
+  const versionedDir = getVersionedPageFolderPath(LATEST_VERSION)
 
-  const docsRootFilePath = path.join(pagesDir, 'index.mdx')
+  const homeRootFilePath = path.join(sharedDir, 'home.mdx')
+  const homeRootFrontmatter = filePathToMdxFrontmatter(homeRootFilePath)
+
+  const docsRootFilePath = path.join(versionedDir, 'index.mdx')
   const docsRootFrontmatter = filePathToMdxFrontmatter(docsRootFilePath)
+
+  const homeRoute: RouteType = {
+    ...homeRootFrontmatter,
+    level: 0,
+    order: 0,
+    children: [],
+    slug: '/'
+  }
+
   const docsRoute: RouteType = {
     ...docsRootFrontmatter,
-    level: 0,
+    level: 1,
     order: 0,
     children: [],
     slug: '/docs'
@@ -24,7 +39,7 @@ export async function getRootRoutes(): Promise<FlatAndHierarchicalRoutesType> {
   const gitHubRoute: RouteType = {
     title: 'GitHub',
     description: '',
-    level: 0,
+    level: 1,
     order: 1,
     children: [],
     slug: URLS.GITHUB_ROOT
@@ -33,18 +48,14 @@ export async function getRootRoutes(): Promise<FlatAndHierarchicalRoutesType> {
   const sponsorRoute: RouteType = {
     title: 'Sponsor',
     description: '',
-    level: 0,
+    level: 1,
     order: 2,
     children: [],
     slug: URLS.GITHUB_SPONSORS_PAGE
   }
 
-  flatRoutes.push(docsRoute)
-  flatRoutes.push(gitHubRoute)
-  flatRoutes.push(sponsorRoute)
-
   return {
-    hierarchicalRoutes: [],
-    flatRoutes
+    homeRoute,
+    flatRoutes: [docsRoute, gitHubRoute, sponsorRoute]
   }
 }

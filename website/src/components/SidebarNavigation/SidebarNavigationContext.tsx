@@ -3,14 +3,16 @@
 import React, { createContext, useContext } from 'react'
 import { FlatAndHierarchicalRoutesType } from '@/utils/routes'
 
-const SidebarNavigationContext = createContext<FlatAndHierarchicalRoutesType>({
+export type SidebarNavigationContextType = FlatAndHierarchicalRoutesType
+
+const SidebarNavigationContext = createContext<SidebarNavigationContextType>({
   hierarchicalRoutes: [],
   flatRoutes: []
 })
 
 type PropType = {
   children: React.ReactNode
-  routes: FlatAndHierarchicalRoutesType
+  routes: SidebarNavigationContextType
 }
 
 export function SidebarNavigationProvider(props: PropType) {
@@ -23,6 +25,6 @@ export function SidebarNavigationProvider(props: PropType) {
   )
 }
 
-export function useSidebarNavigationContext(): FlatAndHierarchicalRoutesType {
+export function useSidebarNavigationContext(): SidebarNavigationContextType {
   return useContext(SidebarNavigationContext)
 }
