@@ -12,7 +12,7 @@ import { MEDIA } from '@/utils/breakpoints'
 import { HEADER_HEIGHT } from '@/utils/header'
 import { LAYERS } from '@/utils/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
-import { TABS_SITE_NAVIGATION } from '@/utils/tabs'
+import { TABS_SIDEBAR_NAVIGATION } from '@/utils/tabs'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 // import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 import { FooterLinks } from '@/components/Footer/FooterLinks'
@@ -195,22 +195,10 @@ export function SidebarNavigationMenuCompact() {
   return (
     <SidebarNavigationMenuCompactWrapper>
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
-        <TabsItem tab={TABS_SITE_NAVIGATION.TABS.MAIN_MENU}>
+        <TabsItem tab={TABS_SIDEBAR_NAVIGATION.TABS.MAIN_MENU}>
           <ScrollArea>
             <ul>
               <SidebarNavigationSubMenus />
-
-              <li>
-                <ThemeToggleButton>
-                  <ThemeToggleText>
-                    Activate {oppositeTheme} theme
-                  </ThemeToggleText>
-                </ThemeToggleButton>
-              </li>
-
-              <li>
-                <MiscLinks />
-              </li>
 
               <li>
                 <VersionBadgeWrapper>
@@ -222,7 +210,7 @@ export function SidebarNavigationMenuCompact() {
         </TabsItem>
 
         <TabsItem
-          tab={TABS_SITE_NAVIGATION.TABS.ON_THIS_PAGE}
+          tab={TABS_SIDEBAR_NAVIGATION.TABS.ON_THIS_PAGE}
           disabled={!showTableOfContents}
         >
           <ScrollArea>{/* <TableOfContents /> */}</ScrollArea>

@@ -22,12 +22,16 @@ export function Search() {
   const isSearchOpenRef = useRef(isSearchOpen)
 
   const toggleSearch = useCallback(() => {
-    const toggleModal = isSearchOpenRef.current ? setModalClosed : setModalOpen
-    dispatch(toggleModal(MODALS.SITE_SEARCH))
+    if (isSearchOpenRef.current) {
+      dispatch(setModalClosed())
+      return
+    }
+
+    dispatch(setModalOpen(MODALS.SITE_SEARCH))
   }, [dispatch])
 
   const closeSearch = useCallback(() => {
-    dispatch(setModalClosed(MODALS.SITE_SEARCH))
+    dispatch(setModalClosed())
   }, [dispatch])
 
   useEffect(() => {

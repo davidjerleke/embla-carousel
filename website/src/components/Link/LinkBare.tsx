@@ -9,7 +9,6 @@ import Link from 'next/link'
 import { TAP_HIGHLIGHT_STYLES } from '@/utils/tap-highlight'
 import { KEY_NAVIGATING_STYLES } from '@/utils/key-events'
 import { setModalClosed } from '@/components/Modal/modal-reducer'
-import { MODALS } from '@/utils/modal'
 import { setRoutesLoading } from '@/components/Routes/routes-reducer'
 import { isInternalLink } from '@/utils/link'
 
@@ -39,7 +38,7 @@ export function LinkBare(props: PropType) {
   const dispatch = useAppDispatch()
 
   const closeNavigation = useCallback(() => {
-    dispatch(setModalClosed(MODALS.SIDEBAR_NAVIGATION))
+    dispatch(setModalClosed())
   }, [dispatch])
 
   const onClickInternalLink = useCallback(

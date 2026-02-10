@@ -15,6 +15,7 @@ import { getRootRoutes } from '@/utils/root-routes'
 import { SiteNavigationProvider } from '@/components/SiteNavigation/SiteNavigationContext'
 import { GlobalDataProvider } from '@/components/Global/GlobalDataContext'
 import { getGlobalData } from '@/utils/global-data'
+import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -54,6 +55,7 @@ export default async function RootLayout(props: PropType) {
                 <KeyEventsSkipToContent />
                 <Header />
                 <RoutesLoading />
+                <SiteNavigation />
 
                 {children}
 

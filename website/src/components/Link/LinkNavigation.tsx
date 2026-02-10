@@ -6,6 +6,8 @@ import { LinkBare } from '@/components/Link/LinkBare'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
 import { FONT_WEIGHTS } from '@/utils/font-sizes'
 import { COLORS } from '@/utils/theme'
+import { Icon } from '@/components/Icon/Icon'
+import { isInternalLink } from '@/utils/link'
 
 const LinkNavigationWrapper = styled(LinkBare)`
   position: relative;
@@ -29,6 +31,12 @@ export const ActiveText = styled.span<{ $isActive: boolean }>`
   ${BRAND_GRADIENT_TEXT_STYLES};
 `
 
+const ExternalLinkIcon = styled(Icon)`
+  position: absolute;
+  top: 0.2rem;
+  left: calc(100% + 0.2rem);
+`
+
 type PropType = PropsWithChildren<{
   slug: RouteType['slug']
   isActive?: boolean
@@ -41,7 +49,19 @@ export function LinkNavigation(props: PropType) {
 
   return (
     <LinkNavigationWrapper href={slug} {...restProps}>
-      <InactiveText $isActive={active}>{children}</InactiveText>
+      <InactiveText $isActive={active}>
+        <>
+          {children}
+
+          {!isInternalLink(slug) && (
+            <ExternalLinkIcon
+              svg="externalLink"
+              size="0.8rem"
+              color={COLORS.DETAIL_HIGH_CONTRAST}
+            />
+          )}
+        </>
+      </InactiveText>
       <ActiveText $isActive={active} aria-hidden="true">
         {children}
       </ActiveText>

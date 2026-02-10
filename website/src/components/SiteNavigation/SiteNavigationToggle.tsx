@@ -3,17 +3,16 @@
 import { useCallback, useRef } from 'react'
 import styled, { css } from 'styled-components'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import {
-  SIDEBAR_NAVIGATION_ID,
-  SIDEBAR_NAVIGATION_ID_PRETTY
-} from '@/components/SidebarNavigation/SidebarNavigation'
 import { COLORS } from '@/utils/theme'
 import { BORDER_RADIUSES } from '@/utils/border'
 import { MODALS } from '@/utils/modal'
 import { ButtonBare } from '@/components/Button/ButtonBare'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { useEventListener } from '@/hooks/use-event-listener'
-import { Icon } from '@/components/Icon/Icon'
+import {
+  MAIN_NAVIGATION_ID,
+  MAIN_NAVIGATION_ID_PRETTY
+} from '@/components/SiteNavigation/SiteNavigation'
 import {
   selectIsModalOpen,
   setModalClosed,
@@ -23,7 +22,7 @@ import {
 const BUTTON_SIZE = '4rem'
 const BURGER_SIZE = '1.8rem'
 
-const SidebarNavigationToggleWrapper = styled(ButtonBare)`
+const MainNavigationToggleWrapper = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +60,6 @@ const Burger = styled.div<{ $isOpen: boolean }>`
     }
 
     ${({ $isOpen }) => css`
-      display: ${!$isOpen && 'none'};
       background-color: ${$isOpen && 'transparent'};
       &:before {
         transform: ${$isOpen && 'rotate(-45deg) translateY(0)'};
@@ -73,16 +71,8 @@ const Burger = styled.div<{ $isOpen: boolean }>`
   }
 `
 
-const CodeIcon = styled(Icon)<{ $isOpen: boolean }>`
-  display: flex;
-
-  ${({ $isOpen }) => css`
-    display: ${$isOpen && 'none'};
-  `}};
-`
-
-export function SidebarNavigationToggle() {
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
+export function SiteNavigationToggle() {
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.MAIN_NAVIGATION))
   const toggleAction = isOpen ? 'Hide' : 'Show'
   const toggleElement = useRef<HTMLButtonElement>(null)
   const dispatch = useAppDispatch()
@@ -93,37 +83,35 @@ export function SidebarNavigationToggle() {
       return
     }
 
-    dispatch(setModalOpen(MODALS.SIDEBAR_NAVIGATION))
+    dispatch(setModalOpen(MODALS.MAIN_NAVIGATION))
   }, [dispatch, isOpen])
 
-  const loadSidebarNavigationMenu = useCallback(async () => {
+  const loadMainNavigationMenu = useCallback(async () => {
     const module = await import(
-      '@/components/SidebarNavigation/SidebarNavigationMenuCompact'
+      '@/components/SiteNavigation/SiteNavigationMenuCompact'
     )
-    return { default: module.SidebarNavigationMenuCompact }
+    return { default: module.SiteNavigationMenuCompact }
   }, [])
 
-  useEventListener('mouseenter', loadSidebarNavigationMenu, toggleElement, {
+  useEventListener('mouseenter', loadMainNavigationMenu, toggleElement, {
     passive: true
   })
-  useEventListener('touchstart', loadSidebarNavigationMenu, toggleElement, {
+  useEventListener('touchstart', loadMainNavigationMenu, toggleElement, {
     passive: true
   })
 
   return (
-    <SidebarNavigationToggleWrapper
-      id={SIDEBAR_NAVIGATION_ID}
+    <MainNavigationToggleWrapper
+      id={MAIN_NAVIGATION_ID}
       onClick={onClick}
       aria-expanded={isOpen}
-      aria-label={`${toggleAction} ${SIDEBAR_NAVIGATION_ID_PRETTY}`}
+      aria-label={`${toggleAction} ${MAIN_NAVIGATION_ID_PRETTY}`}
       ref={toggleElement}
       type="button"
     >
-      <CodeIcon $isOpen={isOpen} svg="htmlTags" size="2.6rem" />
-
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />
       </Burger>
-    </SidebarNavigationToggleWrapper>
+    </MainNavigationToggleWrapper>
   )
 }

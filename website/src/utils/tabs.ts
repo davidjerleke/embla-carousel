@@ -22,12 +22,12 @@ export type TabsItemType = PropsWithChildren<{
   disabled?: boolean
 }>
 
-export const TABS_SITE_NAVIGATION: TabsGroupType = {
+export const TABS_SIDEBAR_NAVIGATION: TabsGroupType = {
   GROUP_ID: '',
   TABS: {
     MAIN_MENU: {
-      LABEL: 'Main menu',
-      VALUE: 'main-menu'
+      LABEL: 'Docs menu',
+      VALUE: 'docs-menu'
     },
     ON_THIS_PAGE: {
       LABEL: 'On this page',

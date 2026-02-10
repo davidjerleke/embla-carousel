@@ -12,7 +12,6 @@ import { MODAL_CLOSE_KEYS, MODALS } from '@/utils/modal'
 import { SPACINGS } from '@/utils/spacings'
 import { HEADER_HEIGHT, HEADER_ID } from '@/utils/header'
 import { isBrowser } from '@/utils/is-browser'
-import { SidebarNavigationMenuDesktop } from '@/components/SidebarNavigation/SidebarNavigationMenuDesktop'
 import { LoadSpinnerWithSuspense } from '@/components/LoadSpinner/LoadSpinnerWithSuspense'
 import { kebabCaseToPascalCase } from '@/utils/string-casing'
 import {
@@ -20,21 +19,21 @@ import {
   setModalClosed
 } from '@/components/Modal/modal-reducer'
 
-const SidebarNavigationMenuCompactLazy = lazy(async () => {
+const SiteNavigationMenuCompactLazy = lazy(async () => {
   const module = await import(
-    '@/components/SidebarNavigation/SidebarNavigationMenuCompact'
+    '@/components/SiteNavigation/SiteNavigationMenuCompact'
   )
-  return { default: module.SidebarNavigationMenuCompact }
+  return { default: module.SiteNavigationMenuCompact }
 })
 
-export const SIDEBAR_NAVIGATION_ID = 'sidebar-navigation-menu'
-export const SIDEBAR_NAVIGATION_ID_PRETTY = kebabCaseToPascalCase(
-  SIDEBAR_NAVIGATION_ID,
+export const MAIN_NAVIGATION_ID = 'main-navigation-menu'
+export const MAIN_NAVIGATION_ID_PRETTY = kebabCaseToPascalCase(
+  MAIN_NAVIGATION_ID,
   ' '
 )
-const MENU_ID = 'sidebar-menu'
+const MENU_ID = 'main-menu'
 
-const SidebarNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
+const SiteNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
   position: fixed;
 
   ${MEDIA.COMPACT} {
@@ -63,9 +62,9 @@ const SidebarNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
 
 export type PropType = PropsWithChildren<{}>
 
-export function SidebarNavigation(props: PropType) {
+export function SiteNavigation(props: PropType) {
   const { isCompact } = useBreakpoints()
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.MAIN_NAVIGATION))
   const dispatch = useAppDispatch()
 
   const closeNavigation = useCallback(() => {
@@ -95,23 +94,21 @@ export function SidebarNavigation(props: PropType) {
 
   return (
     <FocusTrap active={isOpen} containerElements={getFocusTrapElements()}>
-      <SidebarNavigationWrapper
+      <SiteNavigationWrapper
         id={MENU_ID}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={SIDEBAR_NAVIGATION_ID}
-        aria-label={SIDEBAR_NAVIGATION_ID_PRETTY}
+        aria-labelledby={MAIN_NAVIGATION_ID}
+        aria-label={MAIN_NAVIGATION_ID_PRETTY}
         $isOpen={isOpen}
         {...props}
       >
-        <SidebarNavigationMenuDesktop />
-
         {isOpen && (
           <LoadSpinnerWithSuspense>
-            <SidebarNavigationMenuCompactLazy />
+            <SiteNavigationMenuCompactLazy />
           </LoadSpinnerWithSuspense>
         )}
-      </SidebarNavigationWrapper>
+      </SiteNavigationWrapper>
     </FocusTrap>
   )
 }

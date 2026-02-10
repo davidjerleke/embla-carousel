@@ -3,6 +3,11 @@ import { useAppSelector } from '@/hooks/redux'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
 import { useEventListener } from '@/hooks/use-event-listener'
 import {
+  MODAL_CLOSE_KEYS,
+  MODAL_SEARCH_TOGGLE_KEYS_1,
+  MODAL_SEARCH_TOGGLE_KEYS_2
+} from '@/utils/modal'
+import {
   SearchButton,
   SearchButtonIcon
 } from '@/components/Search/SearchButton'
@@ -21,10 +26,6 @@ export const areKeysPressed = (
   return keysToCheck.every((key) => keysPressed.includes(key))
 }
 
-const CLOSE_KEYS = ['Escape', 'Esc']
-const TOGGLE_KEYS_1 = ['Control', 'k']
-const TOGGLE_KEYS_2 = ['Meta', 'k']
-
 type PropType = {
   toggleSearch: () => void
   closeSearch: () => void
@@ -35,9 +36,15 @@ export function SearchAlgoliaToggle(props: PropType) {
   const [keysPressed, setKeysPressed] = useState<string[]>([])
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
   const toggleElement = useRef<HTMLButtonElement>(null)
-  const areCloseKeysPressed = isAnyKeyPressed(keysPressed, CLOSE_KEYS)
-  const areToggleKeysPressed1 = areKeysPressed(keysPressed, TOGGLE_KEYS_1)
-  const areToggleKeysPressed2 = areKeysPressed(keysPressed, TOGGLE_KEYS_2)
+  const areCloseKeysPressed = isAnyKeyPressed(keysPressed, MODAL_CLOSE_KEYS)
+  const areToggleKeysPressed1 = areKeysPressed(
+    keysPressed,
+    MODAL_SEARCH_TOGGLE_KEYS_1
+  )
+  const areToggleKeysPressed2 = areKeysPressed(
+    keysPressed,
+    MODAL_SEARCH_TOGGLE_KEYS_2
+  )
 
   const onKeyDown = useCallback(({ key }: KeyboardEvent) => {
     setKeysPressed((keysPressed) => {

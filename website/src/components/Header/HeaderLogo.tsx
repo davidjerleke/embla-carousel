@@ -18,7 +18,7 @@ import {
 
 const HeaderLogoWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
-  font-size: ${FONT_SIZES.H4};
+  font-size: ${FONT_SIZES.BODY};
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -31,22 +31,28 @@ const HeaderLogoWrapper = styled(LinkBare)`
 `
 
 const HeaderLogoImage = styled(SiteLogo)`
-  ${createSquareSizeStyles('4rem')};
+  ${createSquareSizeStyles('3.6rem')};
   border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   border-radius: 50%;
   margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   display: flex;
 
-  ${MEDIA.MIN_XXS} {
-    ${createSquareSizeStyles('4.4rem')};
-  }
-
   > ${LogoLightImage},
     > ${LogoDarkImage},
     > ${LogoLightIcon},
     > ${LogoDarkIcon} {
-    ${createSquareSizeStyles('100%')};
-    padding: ${SPACINGS.ONE};
+    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
+  }
+
+  ${MEDIA.MIN_XXS} {
+    ${createSquareSizeStyles('4.4rem')};
+
+    > ${LogoLightImage},
+      > ${LogoDarkImage},
+      > ${LogoLightIcon},
+      > ${LogoDarkIcon} {
+      ${createSquareSizeStyles('100%')};
+    }
   }
 `
 

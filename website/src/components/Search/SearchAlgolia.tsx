@@ -21,8 +21,6 @@ import { MEDIA } from '@/utils/breakpoints'
 import { LAYERS } from '@/utils/layers'
 import { SPACINGS } from '@/utils/spacings'
 import {
-  THEME_KEYS,
-  THEME_PREFIX,
   COLORS,
   THEME_CLASSNAME_LIGHT,
   THEME_CLASSNAME_DARK
@@ -638,7 +636,7 @@ export function SearchAlgolia() {
   }, [dispatch])
 
   const closeSearch = useCallback(() => {
-    dispatch(setModalClosed(MODALS.SITE_SEARCH))
+    dispatch(setModalClosed())
   }, [dispatch])
 
   useEffect(() => {

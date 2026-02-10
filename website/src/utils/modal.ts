@@ -1,22 +1,19 @@
 import { isBrowser } from './is-browser'
 
 /* CONSTS */
-export type ModalsType =
-  | ModalListType['SIDEBAR_NAVIGATION']
-  | ModalListType['SITE_SEARCH']
-  | ReturnType<ModalListType['EDIT_CODE']>
+export type ModalsType = (typeof MODALS)[keyof typeof MODALS]
 
-type ModalListType = {
-  SIDEBAR_NAVIGATION: 'sidebar-navigation'
-  SITE_SEARCH: 'site-search'
-  EDIT_CODE: (id: string) => `edit-code-${string}`
-}
-
-export const MODALS: ModalListType = {
+export const MODALS = {
+  MAIN_NAVIGATION: 'main-navigation',
   SIDEBAR_NAVIGATION: 'sidebar-navigation',
   SITE_SEARCH: 'site-search',
   EDIT_CODE: (id: string) => `edit-code-${id}`
-}
+} as const
+
+export const MODAL_CLOSE_KEYS = ['Escape', 'Esc']
+
+export const MODAL_SEARCH_TOGGLE_KEYS_1 = ['Control', 'k']
+export const MODAL_SEARCH_TOGGLE_KEYS_2 = ['Meta', 'k']
 
 const PORTAL_ELEMENT_ID = 'portal-root'
 

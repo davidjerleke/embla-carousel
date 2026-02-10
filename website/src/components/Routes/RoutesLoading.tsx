@@ -106,7 +106,7 @@ export function RoutesLoading() {
 
   useEffect(() => {
     if (pathname !== lastPathname.current && isOpen) {
-      dispatch(setModalClosed(MODALS.SIDEBAR_NAVIGATION))
+      dispatch(setModalClosed())
     }
     lastPathname.current = pathname
     dispatch(setRoutesLoading(false))
