@@ -3,7 +3,6 @@ import { LinkBare } from '@/components/Link/LinkBare'
 import { COLORS } from '@/utils/theme'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { SPACINGS } from '@/utils/spacings'
-import { URLS } from '@/utils/urls'
 import { IconWithText } from '@/components/Icon/IconWithText'
 
 const PageEditThisPageWrapper = styled(LinkBare)`
@@ -18,15 +17,14 @@ const PageEditThisPageWrapper = styled(LinkBare)`
 `
 
 type PropType = {
-  pageUrl: string
+  filePath: string
 }
 
 export function PageEditThisPage(props: PropType) {
-  const { pageUrl } = props
-  const url = `${URLS.GITHUB_DOCUMENTATION}/${pageUrl}`
+  const { filePath } = props
 
   return (
-    <PageEditThisPageWrapper href={url}>
+    <PageEditThisPageWrapper href={filePath}>
       <IconWithText iconSvg="pen" iconSize="1.5rem">
         Edit this page on GitHub
       </IconWithText>

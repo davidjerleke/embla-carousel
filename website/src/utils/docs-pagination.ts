@@ -1,5 +1,5 @@
 import path from 'path'
-import { getDocsRoutes } from '@/utils/docs-routes'
+import { getDocsRoutes, prefixSlugWithDocs } from '@/utils/docs-routes'
 import { createRoutesWithAdjacentChildren, RouteType } from '@/utils/routes'
 
 /* CONSTS */
@@ -13,7 +13,7 @@ export async function getDocsPagePagination(
   slugOrEmpty?: string[]
 ): Promise<DocsPagePaginationType> {
   const slug = slugOrEmpty || []
-  const slugString = path.join('/docs', slug.join('/'))
+  const slugString = prefixSlugWithDocs(path.join(...slug))
   const { flatRoutes } = await getDocsRoutes(slugOrEmpty)
   const routes = createRoutesWithAdjacentChildren(flatRoutes)
   const index = routes.findIndex((route) => route.slug === slugString)

@@ -5,6 +5,8 @@ import { PageGrid } from '@/components/Page/PageGrid'
 import { MAIN_CONTENT_ID, PAGE_LAYOUTS } from '@/utils/page'
 import { getDocsPagePagination } from '@/utils/docs-pagination'
 import { PagePagination } from '@/components/Page/PagePagination'
+import { getDocsPageEditThisPagePath } from '@/utils/docs-edit-this-page'
+import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
 import {
   type DocsPageParamsType,
   getDocsPageContent,
@@ -32,6 +34,7 @@ export default async function DocsPage(props: PropType) {
   const { slug } = await params
   const content = await getDocsPageContent(slug)
   const pagination = await getDocsPagePagination(slug)
+  const editThisPagePath = await getDocsPageEditThisPagePath(slug)
 
   return (
     <PageGrid layout={PAGE_LAYOUTS.DOCS}>
@@ -39,7 +42,7 @@ export default async function DocsPage(props: PropType) {
 
       <article id={MAIN_CONTENT_ID}>{content}</article>
 
-      {/* <PageEditThisPage pageUrl={filePath} /> */}
+      <PageEditThisPage filePath={editThisPagePath} />
       <PagePagination {...pagination} />
     </PageGrid>
   )

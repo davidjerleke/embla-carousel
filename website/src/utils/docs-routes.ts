@@ -7,6 +7,11 @@ import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
 import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 
 /* UTILS */
+export function prefixSlugWithDocs(slugOrEmpty: string): string {
+  const slug = slugOrEmpty || ''
+  return path.join('/docs', slug)
+}
+
 export async function getDocsRoutes(
   slugOrEmpty?: string[]
 ): Promise<SidebarNavigationContextType> {
@@ -36,8 +41,8 @@ export async function getDocsRoutes(
         .replace(/\/index$/, '')
       const slugWithVersion = isLatestVersion
         ? slugPath
-        : path.join(`${version}`, slugPath)
-      const slug = path.join('/docs', slugWithVersion)
+        : path.join(version, slugPath)
+      const slug = prefixSlugWithDocs(slugWithVersion)
       const removeVersionLevel = isLatestVersion ? 0 : 1
       const level = slug.split('/').filter(Boolean).length - removeVersionLevel
 
