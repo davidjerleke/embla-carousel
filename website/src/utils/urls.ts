@@ -1,16 +1,20 @@
-import packageJson from '@/../package.json'
+import packageJson from '../../../packages/embla-carousel/package.json'
 
 /* CONSTS */
-const GITHUB_ROOT = packageJson.repository.url.replace(/^(git\+)/, '')
+const GIT_PREFIX_REGEX = /^(git\+)/ // Matches git+ from git+https://github.com/davidjerleke/embla-carousel
+const GITHUB_ROOT_REGEX = 'https://github.com/'
 
-// TODO: Replace all embla-carousel and davidjerleke with dynamic values from package.json
+const GITHUB_ROOT = packageJson.repository.url.replace(GIT_PREFIX_REGEX, '')
+const [AUTHOR, REPOSITORY] = GITHUB_ROOT.replace(GITHUB_ROOT_REGEX, '').split(
+  '/'
+)
+
 export const URLS = {
   GITHUB_ROOT,
   GITHUB_DISCUSSIONS: `${GITHUB_ROOT}/discussions`,
   GITHUB_DOCUMENTATION: `${GITHUB_ROOT}/blob/master`,
-  GITHUB_DOCUMENTATION_RAW: `https://raw.githubusercontent.com/davidjerleke/embla-carousel/master/packages/embla-carousel-docs`,
-  GITHUB_SPONSORS_PAGE: 'https://github.com/sponsors/davidjerleke',
+  GITHUB_SPONSORS_PAGE: `https://github.com/sponsors/${AUTHOR}`,
   ALGOLIA_DOCSEARCH: `https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js`,
-  NPM_PACKAGE: `https://www.npmjs.com/package/embla-carousel`,
+  NPM_PACKAGE: `https://www.npmjs.com/package/${REPOSITORY}`,
   CODESANDBOX_DEFINE: `https://codesandbox.io/api/v1/sandboxes/define`
 }
