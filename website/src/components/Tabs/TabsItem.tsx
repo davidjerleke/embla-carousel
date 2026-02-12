@@ -1,5 +1,5 @@
-import { TabsGroupItemType } from '@/utils/tabs'
 import React, { PropsWithChildren } from 'react'
+import { TabsGroupItemType } from '@/utils/tabs'
 
 export type PropType = PropsWithChildren<{
   tab: TabsGroupItemType

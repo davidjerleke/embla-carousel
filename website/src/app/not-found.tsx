@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { MdxStyles } from '@/components/Mdx/Styles'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
 import { PageFrame } from '@/components/Page/PageFrame'
 import { styled } from 'styled-components'
@@ -30,5 +31,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function NotFoundPage() {
   const content = await getNotFoundPageContent()
 
-  return <PageNotFoundWrapper size="SM">{content}</PageNotFoundWrapper>
+  return (
+    <PageNotFoundWrapper size="SM">
+      {content && (
+        <article>
+          <MdxStyles>{content}</MdxStyles>
+        </article>
+      )}
+    </PageNotFoundWrapper>
+  )
 }

@@ -1,12 +1,10 @@
 'use client'
 
 import { useMemo } from 'react'
-// import { useAppSelector } from '@/hooks/redux'
 import { usePathname } from 'next/navigation'
-// import { selectFlatRoutes } from 'components/Routes/routesReducer'
 import {
   type RouteType,
-  //   addRouteChildren,
+  addRouteChildren,
   isRouteActive,
   isRoutePartiallyActive
 } from '@/utils/routes'
@@ -31,7 +29,7 @@ export function useRouteActive(slug: RouteType['slug']): UseRouteActiveType {
   return routeState
 }
 
-export const useRouteBreadcrumbs = (): RouteType[] => {
+export function useRouteBreadcrumbs(): RouteType[] {
   const pathname = usePathname()
   const rootRoutes = useSiteNavigationContext()
   const sidebarRoutes = useSidebarNavigationContext()
@@ -45,15 +43,15 @@ export const useRouteBreadcrumbs = (): RouteType[] => {
     .sort((a, b) => a.level - b.level)
 }
 
-// TODO: Clean up
-// export const useRouteCurrent = (): RouteType => {
-//   const flatRoutes = useAppSelector(selectFlatRoutes)
-//   const { pathname } = useLocation()
-//   return flatRoutes.filter((route) => isRouteActive(route.slug, pathname))[0]
-// }
+export function useRouteCurrent(flatRoutes: RouteType[]): RouteType {
+  const pathname = usePathname()
+  return flatRoutes.filter((route) => isRouteActive(route.slug, pathname))[0]
+}
 
-// export const useRouteChildren = (route: RouteType): RouteType[] => {
-//   const flatRoutes = useAppSelector(selectFlatRoutes)
-//   const routeWithChildren = addRouteChildren(route, flatRoutes)
-//   return routeWithChildren?.children || []
-// }
+export function useRouteChildren(
+  flatRoutes: RouteType[],
+  route: RouteType
+): RouteType[] {
+  const routeWithChildren = addRouteChildren(route, flatRoutes)
+  return routeWithChildren?.children || []
+}

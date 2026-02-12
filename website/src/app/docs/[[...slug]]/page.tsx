@@ -7,6 +7,7 @@ import { getDocsPagePagination } from '@/utils/docs-pagination'
 import { PagePagination } from '@/components/Page/PagePagination'
 import { getDocsPageEditThisPagePath } from '@/utils/docs-edit-this-page'
 import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
+import { MdxStyles } from '@/components/Mdx/Styles'
 import {
   type DocsPageParamsType,
   getDocsPageContent,
@@ -40,7 +41,11 @@ export default async function DocsPage(props: PropType) {
     <PageGrid layout={PAGE_LAYOUTS.DOCS}>
       <PageBreadcrumbs />
 
-      <article id={MAIN_CONTENT_ID}>{content}</article>
+      {content && (
+        <article id={MAIN_CONTENT_ID}>
+          <MdxStyles>{content}</MdxStyles>
+        </article>
+      )}
 
       <PageEditThisPage filePath={editThisPagePath} />
       <PagePagination {...pagination} />

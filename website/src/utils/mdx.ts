@@ -1,13 +1,19 @@
+import { useMDXComponents } from '@/mdx-components'
 import fs from 'fs'
 import matter from 'gray-matter'
-import { compileMDX, type CompileMDXResult } from 'next-mdx-remote/rsc'
+import {
+  compileMDX,
+  MDXRemoteProps,
+  type CompileMDXResult
+} from 'next-mdx-remote/rsc'
 
 /* CONSTS */
-export const MDX_DEFAULT_COMPILE_OPTIONS = {
+const MDX_FRONTMATTER_REGEX = /^---[\s\S]*?---/
+const MDX_DEFAULT_COMPILE_OPTIONS: MDXRemoteProps['options'] = {
   parseFrontmatter: true
 }
 
-export type MdxCompiledContentType = CompileMDXResult['content']
+export type MdxCompiledContentType = CompileMDXResult['content'] | null
 
 export type MdxFrontmatterType = Partial<MdxRouteFrontmatterType>
 
@@ -43,9 +49,14 @@ export async function filePathToMdxContent(
   filePath: string
 ): Promise<MdxCompiledContentType> {
   const source = fs.readFileSync(filePath, 'utf8')
+  const hasBody = source.replace(MDX_FRONTMATTER_REGEX, '').trim()
+
+  if (!hasBody) return null
+
   const { content } = await compileMDX({
     source,
-    options: { ...MDX_DEFAULT_COMPILE_OPTIONS }
+    options: { ...MDX_DEFAULT_COMPILE_OPTIONS },
+    components: useMDXComponents()
   })
 
   return content

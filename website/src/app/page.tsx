@@ -4,6 +4,7 @@ import { filePathToMdxFrontmatter } from '@/utils/mdx'
 import { Hero } from '@/components/Hero/Hero'
 import { PAGE_LAYOUTS } from '@/utils/page'
 import { PageGrid } from '@/components/Page/PageGrid'
+import { MdxStyles } from '@/components/Mdx/Styles'
 
 export async function generateMetadata(): Promise<Metadata> {
   const filePath = await getHomePageFilePath()
@@ -21,7 +22,12 @@ export default async function HomePage() {
   return (
     <PageGrid layout={PAGE_LAYOUTS.HOME}>
       <Hero />
-      {content}
+
+      {content && (
+        <article>
+          <MdxStyles>{content}</MdxStyles>
+        </article>
+      )}
     </PageGrid>
   )
 }
