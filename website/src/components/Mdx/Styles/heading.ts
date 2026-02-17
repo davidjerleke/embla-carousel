@@ -20,6 +20,7 @@ export const headingStyles = css`
     scroll-margin-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
     color: ${COLORS.TEXT_HIGH_CONTRAST};
     font-weight: ${FONT_WEIGHTS.BOLD};
+    position: relative;
   }
 
   h1,
@@ -55,6 +56,7 @@ export const headingStyles = css`
   h5,
   h6 {
     > .anchor {
+      transform: translateX(-100%);
       position: absolute;
       top: 0;
       left: 0;

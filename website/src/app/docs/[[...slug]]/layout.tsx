@@ -12,8 +12,6 @@ export default async function DocsLayout(props: PropType) {
   const { slug } = await params
   const routes = await getDocsRoutes(slug)
 
-  console.log(routes, 'docs routes')
-
   return (
     <SidebarNavigationProvider routes={routes}>
       {children}

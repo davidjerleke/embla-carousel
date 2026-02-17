@@ -34,8 +34,6 @@ export default async function RootLayout(props: PropType) {
   const globalData = getGlobalData()
   const routes = await getRootRoutes()
 
-  console.log(routes, 'root routes')
-
   return (
     <StyledComponentsRegistry>
       <GlobalDataProvider data={globalData}>

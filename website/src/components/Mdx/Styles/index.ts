@@ -10,7 +10,7 @@ import {
   AdmonitionWrapper,
   AdmonitionContent
 } from '@/components/Mdx/Components/Admonition'
-import { headingStyles } from './heading'
+import { headingStyles } from '@/components/Mdx/Styles/heading'
 import { listStyles } from '@/components/Mdx/Styles/list'
 import { codeStyles } from '@/components/Mdx/Styles/code'
 
