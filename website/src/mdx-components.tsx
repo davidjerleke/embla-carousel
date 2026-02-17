@@ -9,18 +9,20 @@ import { ApiMetaData } from '@/components/Mdx/Components/ApiMetaData'
 import { Admonition } from '@/components/Mdx/Components/Admonition'
 import { Hr } from '@/components/Mdx/Components/Hr'
 import { Blockquote } from '@/components/Mdx/Components/Blockquote'
+import { PrismHighlight } from '@/components/Prism/PrismHighlight'
 
 const components: MDXComponents = {
   a: Link,
   pre: Pre,
   code: Code,
   h1: H1,
+  hr: Hr,
+  blockquote: Blockquote,
   RepositoryLink,
   PageChildLinks,
   ApiMetaData,
-  Admonition,
-  hr: Hr,
-  blockquote: Blockquote
+  PrismHighlight,
+  Admonition
 }
 
 export function useMDXComponents(): MDXComponents {
