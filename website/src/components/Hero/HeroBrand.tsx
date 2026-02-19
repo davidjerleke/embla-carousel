@@ -8,7 +8,7 @@ import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
 import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
 import { createGapStyles } from '@/utils/create-gap-styles'
-import { MAIN_CONTENT_ID } from '@/utils/page'
+import { PageMainContent } from '@/components/Page/PageMainContent'
 import {
   LinkButtonPrimaryFilled,
   LinkButtonPrimaryOutlined
@@ -103,7 +103,7 @@ const H2 = styled.h2`
   }
 `
 
-const CtaWrapper = styled.ul`
+const CtaWrapper = styled(PageMainContent)`
   ${createGapStyles(SPACINGS.TWO, SPACINGS.TWO)};
   display: flex;
   flex-wrap: wrap;
@@ -130,7 +130,8 @@ export function HeroBrand() {
           ))}
         </H1>
         <H2>{description}</H2>
-        <CtaWrapper id={MAIN_CONTENT_ID}>
+
+        <CtaWrapper as="ul">
           <li>
             <LinkButtonPrimaryFilled href="/examples/predefined/">
               Examples

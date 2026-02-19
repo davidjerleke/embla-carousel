@@ -17,7 +17,7 @@ export const headingStyles = css`
   h4,
   h5,
   h6 {
-    scroll-margin-top: calc(${HEADER_HEIGHT} + ${SPACINGS.TWO});
+    scroll-margin-top: calc(${HEADER_HEIGHT} + ${SPACINGS.FOUR});
     color: ${COLORS.TEXT_HIGH_CONTRAST};
     font-weight: ${FONT_WEIGHTS.BOLD};
     position: relative;

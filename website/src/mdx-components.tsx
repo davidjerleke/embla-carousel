@@ -10,6 +10,8 @@ import { Admonition } from '@/components/Mdx/Components/Admonition'
 import { Hr } from '@/components/Mdx/Components/Hr'
 import { Blockquote } from '@/components/Mdx/Components/Blockquote'
 import { PrismHighlight } from '@/components/Prism/PrismHighlight'
+import { Tabs } from '@/components/Tabs/Tabs'
+import { TabsItem } from '@/components/Tabs/TabsItem'
 
 const components: MDXComponents = {
   a: Link,
@@ -22,7 +24,9 @@ const components: MDXComponents = {
   PageChildLinks,
   ApiMetaData,
   PrismHighlight,
-  Admonition
+  Admonition,
+  Tabs,
+  TabsItem
 }
 
 export function useMDXComponents(): MDXComponents {

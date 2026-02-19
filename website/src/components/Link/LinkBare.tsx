@@ -11,6 +11,7 @@ import { KEY_NAVIGATING_STYLES } from '@/utils/key-events'
 import { setModalClosed } from '@/components/Modal/modal-reducer'
 import { setRoutesLoading } from '@/components/Routes/routes-reducer'
 import { isInternalLink } from '@/utils/link'
+import { scrollToHash } from '@/utils/scroll-to-hash'
 
 export const linkBareStyles = css<{ $isKeyNavigating: boolean }>`
   ${KEY_NAVIGATING_STYLES};
@@ -60,6 +61,7 @@ export function LinkBare(props: PropType) {
 
       if (linkElement.current.hash) {
         setTimeout(() => closeNavigation(), 0)
+        scrollToHash(linkElement.current.hash)
       } else {
         closeNavigation()
       }

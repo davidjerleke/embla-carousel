@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { LinkBare } from '@/components/Link/LinkBare'
 import { COLORS } from '@/utils/theme'

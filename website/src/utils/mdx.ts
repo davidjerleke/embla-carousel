@@ -13,7 +13,7 @@ import {
 } from 'next-mdx-remote/rsc'
 
 /* CONSTS */
-const MDX_FRONTMATTER_REGEX = /^---[\s\S]*?---/
+export const MDX_FRONTMATTER_REGEX = /^---[\s\S]*?---/
 
 const REHYPE_AUTOLINK_HEADINGS_OPTIONS: RehypeAutolinkHeadingsOptionsType = {
   behavior: 'prepend',

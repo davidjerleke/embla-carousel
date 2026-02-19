@@ -2,10 +2,11 @@ import { Metadata } from 'next'
 import { filePathToMdxFrontmatter } from '@/utils/mdx'
 import { PageBreadcrumbs } from '@/components/Page/PageBreadcrumbs'
 import { PageGrid } from '@/components/Page/PageGrid'
-import { MAIN_CONTENT_ID, PAGE_LAYOUTS } from '@/utils/page'
+import { PAGE_LAYOUTS } from '@/utils/page'
 import { getDocsPagePagination } from '@/utils/docs-pagination'
 import { PagePagination } from '@/components/Page/PagePagination'
 import { getDocsPageEditThisPagePath } from '@/utils/docs-edit-this-page'
+import { PageMainContent } from '@/components/Page/PageMainContent'
 import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
 import { MdxStyles } from '@/components/Mdx/Styles'
 import {
@@ -42,9 +43,9 @@ export default async function DocsPage(props: PropType) {
       <PageBreadcrumbs />
 
       {content && (
-        <article id={MAIN_CONTENT_ID}>
+        <PageMainContent as="article">
           <MdxStyles>{content}</MdxStyles>
-        </article>
+        </PageMainContent>
       )}
 
       <PageEditThisPage filePath={editThisPagePath} />

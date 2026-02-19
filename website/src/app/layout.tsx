@@ -16,6 +16,7 @@ import { SiteNavigationProvider } from '@/components/SiteNavigation/SiteNavigati
 import { GlobalDataProvider } from '@/components/Global/GlobalDataContext'
 import { getGlobalData } from '@/utils/global-data'
 import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
+import { ScrollToHashInit } from '@/components/ScrollToHash/ScrollToHashInit'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -49,8 +50,9 @@ export default async function RootLayout(props: PropType) {
               <body>
                 <ThemeInit />
                 <KeyEventsInit />
-                <NoScript />
+                <ScrollToHashInit />
                 <KeyEventsSkipToContent />
+                <NoScript />
                 <Header />
                 <RoutesLoading />
                 <SiteNavigation />

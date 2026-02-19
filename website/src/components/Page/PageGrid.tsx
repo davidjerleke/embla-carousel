@@ -12,10 +12,7 @@ import { PAGE_FRAME_SPACING, PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import { SidebarNavigation } from '@/components/SidebarNavigation/SidebarNavigation'
 import { arrayHasItems } from '@/utils/array'
-// import { PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
-// import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
-
-// TODO: Fix table of contents
+import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 
 export const SIDEBAR_LG_UP_WIDTH = '28rem'
 export const SIDEBAR_LG_DOWN_WIDTH = '21rem'
@@ -120,7 +117,7 @@ export function PageGrid(props: PropType) {
       </Main>
 
       <TableOfContentsWrapper $isStartPage={isStartPage}>
-        {/* <TableOfContents /> */}
+        <TableOfContents />
       </TableOfContentsWrapper>
     </PageGridWrapper>
   )

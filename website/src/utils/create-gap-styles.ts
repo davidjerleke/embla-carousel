@@ -1,11 +1,7 @@
-import React, { JSX } from 'react'
+import { JSX } from 'react'
 import { css, type RuleSet, IStyledComponent } from 'styled-components'
 
-// TODO: Fix types
-
-export function createGapStyles<
-  T extends keyof JSX.IntrinsicElements | React.ComponentType<any>
->(
+export function createGapStyles(
   gapX?: string | null,
   gapY?: string | null,
   gapItem:

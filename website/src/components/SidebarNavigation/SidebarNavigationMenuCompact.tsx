@@ -1,12 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useAppSelector } from '@/hooks/redux'
-import { selectTheme } from '@/components/Theme/theme-reducer'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
-// import { selectTableOfContents } from 'components/TableOfContents/tableOfContentsReducer'
-import { COLORS, THEME_KEYS } from '@/utils/theme'
+import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
 import { MEDIA } from '@/utils/breakpoints'
 import { HEADER_HEIGHT } from '@/utils/header'
@@ -14,17 +11,15 @@ import { LAYERS } from '@/utils/layers'
 import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
 import { TABS_SIDEBAR_NAVIGATION } from '@/utils/tabs'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
-// import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { TabsItem } from '@/components/Tabs/TabsItem'
 import { Tabs } from '@/components/Tabs/Tabs'
+import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 import { TabsListScrollArea, TabsListWrapper } from '@/components/Tabs/TabsList'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
 import { TabsButtonWrapper } from '@/components/Tabs/TabsButton'
 import { TabsPanelWrapper } from '@/components/Tabs/TabsPanel'
 import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
-import { selectIsModalOpen } from '@/components/Modal/modal-reducer'
-import { MODALS } from '@/utils/modal'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
@@ -140,6 +135,7 @@ const ScrollArea = styled.div`
   margin-right: auto;
 `
 
+// TODO: Remove?
 const ThemeToggleButton = styled(ThemeToggle)`
   background-color: ${COLORS.BACKGROUND_CODE};
   width: 100%;
@@ -159,10 +155,12 @@ const ThemeToggleButton = styled(ThemeToggle)`
   }
 `
 
+// TODO: Remove?
 const ThemeToggleText = styled.span`
   color: ${COLORS.TEXT_MEDIUM_CONTRAST};
 `
 
+// TODO: Remove?
 const MiscLinks = styled(FooterLinks)`
   padding-top: ${SPACINGS.THREE};
   justify-content: center;
@@ -176,21 +174,13 @@ const VersionBadgeWrapper = styled.div`
 
 export function SidebarNavigationMenuCompact() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
-  const theme = useAppSelector(selectTheme)
-  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
-  const isOpenRef = useRef(isOpen)
-  // const tableOfContents = useAppSelector(selectTableOfContents)
-  const [showTableOfContents, setShowTableOfContents] = useState(true)
-  const isLightTheme = theme === THEME_KEYS.LIGHT
-  const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
-  // useEffect(() => {
-  //   if (isOpen !== isOpenRef.current) {
-  //     const show = !!tableOfContents.items?.length
-  //     setShowTableOfContents(show)
-  //     isOpenRef.current = isOpen
-  //   }
-  // }, [isOpen, tableOfContents])
+  // TODO: Remove?
+
+  // const theme = useAppSelector(selectTheme)
+  // const [showTableOfContents, setShowTableOfContents] = useState(true)
+  // const isLightTheme = theme === THEME_KEYS.LIGHT
+  // const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
     <SidebarNavigationMenuCompactWrapper>
@@ -209,11 +199,10 @@ export function SidebarNavigationMenuCompact() {
           </ScrollArea>
         </TabsItem>
 
-        <TabsItem
-          tab={TABS_SIDEBAR_NAVIGATION.TABS.ON_THIS_PAGE}
-          disabled={!showTableOfContents}
-        >
-          <ScrollArea>{/* <TableOfContents /> */}</ScrollArea>
+        <TabsItem tab={TABS_SIDEBAR_NAVIGATION.TABS.ON_THIS_PAGE}>
+          <ScrollArea>
+            <TableOfContents />
+          </ScrollArea>
         </TabsItem>
       </MenuTabs>
     </SidebarNavigationMenuCompactWrapper>
