@@ -1,14 +1,22 @@
 import { isBrowser } from './is-browser'
 
 /* CONSTS */
-export type ModalsType = (typeof MODALS)[keyof typeof MODALS]
+type EditCodeModalIdType = `${typeof EDIT_CODE_MODAL_ID_PREFIX}${string}`
+
+export type ModalsType =
+  | (typeof MODALS)[keyof typeof MODALS]
+  | EditCodeModalIdType
 
 export const MODALS = {
   MAIN_NAVIGATION: 'main-navigation',
   SIDEBAR_NAVIGATION: 'sidebar-navigation',
   SITE_SEARCH: 'site-search',
-  EDIT_CODE: (id: string) => `edit-code-${id}`
+  EDIT_CODE: (id: string): EditCodeModalIdType => {
+    return `${EDIT_CODE_MODAL_ID_PREFIX}${id}`
+  }
 } as const
+
+const EDIT_CODE_MODAL_ID_PREFIX = 'edit-code-'
 
 export const MODAL_CLOSE_KEYS = ['Escape', 'Esc']
 

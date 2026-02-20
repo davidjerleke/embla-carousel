@@ -25,6 +25,14 @@
     "@next/mdx": "^16.1.6",
     "@reduxjs/toolkit": "^2.11.2",
     "@types/mdx": "^2.0.13",
+    "embla-carousel": "9.0.0-rc01",
+    "embla-carousel-accessibility": "9.0.0-rc01",
+    "embla-carousel-auto-height": "9.0.0-rc01",
+    "embla-carousel-auto-scroll": "9.0.0-rc01",
+    "embla-carousel-autoplay": "9.0.0-rc01",
+    "embla-carousel-class-names": "9.0.0-rc01",
+    "embla-carousel-fade": "9.0.0-rc01",
+    "embla-carousel-react": "9.0.0-rc01",
     "focus-trap-react": "12.0.0",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
@@ -47,6 +55,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "type-fest": "^3.2.0",
     "typescript": "^5"
   }
 }

@@ -10424,6 +10424,14 @@ __metadata:
     "@types/prismjs": ^1.26.5
     "@types/react": ^19
     "@types/react-dom": ^19
+    embla-carousel: 9.0.0-rc01
+    embla-carousel-accessibility: 9.0.0-rc01
+    embla-carousel-auto-height: 9.0.0-rc01
+    embla-carousel-auto-scroll: 9.0.0-rc01
+    embla-carousel-autoplay: 9.0.0-rc01
+    embla-carousel-class-names: 9.0.0-rc01
+    embla-carousel-fade: 9.0.0-rc01
+    embla-carousel-react: 9.0.0-rc01
     eslint: ^9
     eslint-config-next: 16.1.6
     focus-trap-react: 12.0.0
@@ -10439,6 +10447,7 @@ __metadata:
     rehype-autolink-headings: ^7.1.0
     rehype-slug: ^6.0.0
     styled-components: ^6.3.8
+    type-fest: ^3.2.0
     typescript: ^5
   languageName: unknown
   linkType: soft

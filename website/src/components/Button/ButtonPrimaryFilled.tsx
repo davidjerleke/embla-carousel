@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components'
 import { ButtonBare } from './ButtonBare'
 import { COLORS } from '@/utils/theme'
-// import { SPACINGS } from '@/utils/spacings'
+import { SPACINGS } from '@/utils/spacings'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from '@/utils/gradients'
 import { FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BUTTON_SIZES } from '@/utils/buttons'
-// import { createButtonWithLoading } from './createButtonWithLoading'
+import { createButtonWithLoading } from '@/components/Button/CreateButtonWithLoading'
 
 export const buttonPrimaryFilledStyles = css`
   ${BUTTON_SIZES.MD}
@@ -26,8 +26,8 @@ export const ButtonPrimaryFilled = styled(ButtonBare)`
   }
 `
 
-// export const ButtonPrimaryFilledWithLoading = createButtonWithLoading(
-//   ButtonPrimaryFilled,
-//   SPACINGS.FOUR,
-//   COLORS.TEXT_BODY
-// )
+export const ButtonPrimaryFilledWithLoading = createButtonWithLoading(
+  ButtonPrimaryFilled,
+  SPACINGS.FOUR,
+  COLORS.TEXT_BODY
+)

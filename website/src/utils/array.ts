@@ -8,3 +8,7 @@ export function arrayHasItems<Type>(
   const count = itemCount ?? 0
   return array.length > count
 }
+
+export function arrayFromNumber(number: number): number[] {
+  return Array.from(Array(number).keys())
+}

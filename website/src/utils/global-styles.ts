@@ -15,7 +15,7 @@ import {
 } from '@/components/SiteLogo/SiteLogo'
 
 /* CONSTS */
-const BASE_FONT_STYLES = '62.5%'
+export const BASE_FONT_STYLES = '62.5%'
 
 export const BASE_STYLES = css`
   html {
