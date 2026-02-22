@@ -1,27 +1,21 @@
-import path from 'path'
-import {
-  getSharedPageFolderPath,
-  getVersionedPageFolderPath
-} from '@/utils/content-path'
-import { LATEST_VERSION } from '@/utils/version'
-import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import { getMetadataFromMdxContent } from '@/utils/mdx'
 import { URLS } from '@/utils/urls'
 import { RouteType } from '@/utils/routes'
 import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
+import { getHomePageContent } from '@/utils/home-page'
+import { getDocsPageContent } from './docs-page'
 
 /* UTILS */
 export async function getRootRoutes(): Promise<SiteNavigationContextType> {
-  const sharedDir = getSharedPageFolderPath()
-  const versionedDir = getVersionedPageFolderPath(LATEST_VERSION)
+  const homeModule = await getHomePageContent()
+  const homeMetadata = getMetadataFromMdxContent(homeModule)
 
-  const homeRootFilePath = path.join(sharedDir, 'home.mdx')
-  const homeRootFrontmatter = filePathToMdxFrontmatter(homeRootFilePath)
-
-  const docsRootFilePath = path.join(versionedDir, 'index.mdx')
-  const docsRootFrontmatter = filePathToMdxFrontmatter(docsRootFilePath)
+  const docsModule = await getDocsPageContent()
+  const docsMetadata = getMetadataFromMdxContent(docsModule)
 
   const homeRoute: RouteType = {
-    ...homeRootFrontmatter,
+    title: homeMetadata.title,
+    description: homeMetadata.description,
     level: 0,
     order: 0,
     children: [],
@@ -29,7 +23,8 @@ export async function getRootRoutes(): Promise<SiteNavigationContextType> {
   }
 
   const docsRoute: RouteType = {
-    ...docsRootFrontmatter,
+    title: docsMetadata.title,
+    description: docsMetadata.description,
     level: 1,
     order: 0,
     children: [],

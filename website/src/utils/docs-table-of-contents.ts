@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { getDocsPageFilePath } from '@/utils/docs-page'
+import { getDocsPageFileStaticPath } from '@/utils/docs-page'
 import {
   filePathToTableOfContents,
   TableOfContentsType
@@ -9,7 +9,7 @@ import {
 export async function getDocsTableOfContents(
   slugOrEmpty?: string[]
 ): Promise<TableOfContentsType> {
-  const filePath = await getDocsPageFilePath(slugOrEmpty)
+  const filePath = await getDocsPageFileStaticPath(slugOrEmpty)
   const doesFileExist = !!filePath && fs.existsSync(filePath)
 
   if (!doesFileExist) {

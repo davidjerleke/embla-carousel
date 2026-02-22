@@ -2,8 +2,12 @@ import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
-import { getVersionedPageFolderPath } from '@/utils/content-path'
-import { filePathToMdxContent, type MdxCompiledContentType } from '@/utils/mdx'
+import { MdxContentType } from '@/utils/mdx'
+import {
+  CONTENT_FOLDER_NAME,
+  getVersionedPageFolderStaticPath,
+  PAGES_FOLDER_NAME
+} from '@/utils/content-path'
 
 /* CONSTS */
 export type DocsPageParamsType = {
@@ -13,7 +17,7 @@ export type DocsPageParamsType = {
 }
 
 /* UTILS */
-export async function getDocsPageFilePath(
+export async function getDocsPageFileStaticPath(
   slugOrEmpty?: string[]
 ): Promise<string> {
   const slug = slugOrEmpty || []
@@ -26,7 +30,7 @@ export async function getDocsPageFilePath(
 
   const slugWithVersion = slugIncludesVersion ? slug : [LATEST_VERSION, ...slug]
   const version = slugWithVersion[0]
-  const basePath = getVersionedPageFolderPath(version)
+  const basePath = getVersionedPageFolderStaticPath(version)
 
   let filePath = ''
 
@@ -53,13 +57,33 @@ export async function getDocsPageFilePath(
 
 export async function getDocsPageContent(
   slugOrEmpty?: string[]
-): Promise<MdxCompiledContentType> {
-  const filePath = await getDocsPageFilePath(slugOrEmpty)
-  const doesFileExist = !!filePath && fs.existsSync(filePath)
+): Promise<MdxContentType> {
+  const slug = slugOrEmpty || []
+  const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
+  const slugWithVersion = slugIncludesVersion ? slug : [LATEST_VERSION, ...slug]
+  const version = slugWithVersion[0]
+  const fileToFind = slugWithVersion.slice(1).join('/')
 
-  if (!doesFileExist) {
-    notFound()
+  try {
+    if (fileToFind) {
+      const module: MdxContentType = await import(
+        `@/${CONTENT_FOLDER_NAME}/${version}/${PAGES_FOLDER_NAME}/${fileToFind}/index.mdx`
+      )
+      return module
+    }
+
+    const module: MdxContentType = await import(
+      `@/${CONTENT_FOLDER_NAME}/${version}/${PAGES_FOLDER_NAME}/index.mdx`
+    )
+    return module
+  } catch (error) {
+    try {
+      const module: MdxContentType = await import(
+        `@/${CONTENT_FOLDER_NAME}/${version}/${PAGES_FOLDER_NAME}/${fileToFind}.mdx`
+      )
+      return module
+    } catch (error) {
+      notFound()
+    }
   }
-
-  return filePathToMdxContent(filePath)
 }

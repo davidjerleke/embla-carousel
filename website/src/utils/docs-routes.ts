@@ -1,10 +1,11 @@
 import fs from 'fs'
 import path from 'path'
-import { getVersionedPageFolderPath } from '@/utils/content-path'
+import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
-import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import { getMetadataFromMdxContent } from '@/utils/mdx'
 import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
 import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
+import { getDocsPageContent } from '@/utils/docs-page'
 
 /* UTILS */
 export function prefixSlugWithDocs(slugOrEmpty: string): string {
@@ -19,43 +20,55 @@ export async function getDocsRoutes(
   const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
   const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
   const isLatestVersion = version === LATEST_VERSION
-  const pagesDir = getVersionedPageFolderPath(version)
+  const pagesDir = getVersionedPageFolderStaticPath(version)
   const flatRoutes: RouteType[] = []
 
-  const walk = (dir: string): void => {
-    fs.readdirSync(dir).flatMap((file) => {
+  const walk = async (dir: string): Promise<void> => {
+    const files = fs.readdirSync(dir)
+
+    for (const file of files) {
       const filePath = path.join(dir, file)
       const isDirectory = fs.statSync(filePath).isDirectory()
 
       if (isDirectory) {
-        return walk(filePath)
-      }
-      if (!file.endsWith('.mdx')) {
-        return
+        await walk(filePath)
+        continue
       }
 
-      const frontmatter = filePathToMdxFrontmatter(filePath)
-      const slugPath = filePath
+      if (!file.endsWith('.mdx')) continue
+
+      const relativePath = filePath
         .replace(pagesDir, '')
-        .replace('.mdx', '')
-        .replace(/\/index$/, '')
+        .replace(/(index)?\.mdx$/, '')
+
+      const modulePath = relativePath.split('/').filter(Boolean)
+      const modulePathWithVersion = isLatestVersion
+        ? modulePath
+        : [version, ...modulePath]
+      const module = await getDocsPageContent(modulePathWithVersion)
+
+      const slugWithoutTrailingSlash = relativePath.replace(/\/$/, '')
       const slugWithVersion = isLatestVersion
-        ? slugPath
-        : path.join(version, slugPath)
+        ? slugWithoutTrailingSlash
+        : path.join(version, slugWithoutTrailingSlash)
+
+      const metadata = getMetadataFromMdxContent(module)
       const slug = prefixSlugWithDocs(slugWithVersion)
       const removeVersionLevel = isLatestVersion ? 0 : 1
       const level = slug.split('/').filter(Boolean).length - removeVersionLevel
 
       flatRoutes.push({
-        ...frontmatter,
+        title: metadata.title,
+        description: metadata.description,
+        order: metadata.order,
         slug,
         level,
         children: []
       })
-    })
+    }
   }
 
-  walk(pagesDir)
+  await walk(pagesDir)
 
   return {
     hierarchicalRoutes: createHierarchicalRoutes(flatRoutes, 2),

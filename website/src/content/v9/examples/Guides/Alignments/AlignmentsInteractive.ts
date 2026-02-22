@@ -3,7 +3,7 @@ import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
-import { ExamplesSetupType } from '@/content/v9/examples/examles-utils'
+import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
 import CarouselAlignmentsInteractive from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/AlignmentsInteractive/EmblaCarousel'
 import {
   ALIGNMENT_INDICATOR_STYLES,

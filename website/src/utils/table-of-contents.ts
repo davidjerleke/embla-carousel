@@ -2,9 +2,7 @@ import fs from 'fs'
 import { visit } from 'unist-util-visit'
 import { compile } from '@mdx-js/mdx'
 import rehypeSlug from 'rehype-slug'
-import type { Plugin } from 'unified'
 import type { Root, Element } from 'hast'
-import { MDX_FRONTMATTER_REGEX } from '@/utils/mdx'
 
 /* CONSTS */
 const HEADING_TAG_REGEX = /^h[2-6]$/
@@ -26,7 +24,7 @@ function getNodeId(node: Element): string | undefined {
   return undefined
 }
 
-function getTableOfContentsPlugin(): ReturnType<Plugin<[], Root>> {
+function getTableOfContentsPlugin(): (tree: Root, file: any) => void {
   return (tree, file) => {
     const headings: TableOfContentsHeading[] = []
 
@@ -60,15 +58,11 @@ export async function filePathToTableOfContents(
   filePath: string
 ): Promise<TableOfContentsType> {
   const source = fs.readFileSync(filePath, 'utf8')
-  const body = source.replace(MDX_FRONTMATTER_REGEX, '')
-  const hasBody = body.trim()
-
-  if (!hasBody) return []
-
-  const file = await compile(body, {
+  const file = await compile(source, {
     rehypePlugins: [rehypeSlug, getTableOfContentsPlugin],
     outputFormat: 'function-body'
   })
   const headings = <TableOfContentsHeading[]>file.data.headings
+
   return headings
 }

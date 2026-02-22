@@ -250,7 +250,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.16.0, @babel/code-frame@npm:^7.18.6, @babel/code-frame@npm:^7.22.13, @babel/code-frame@npm:^7.23.5, @babel/code-frame@npm:^7.28.6, @babel/code-frame@npm:^7.8.3":
+"@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.16.0, @babel/code-frame@npm:^7.18.6, @babel/code-frame@npm:^7.22.13, @babel/code-frame@npm:^7.28.6, @babel/code-frame@npm:^7.8.3":
   version: 7.28.6
   resolution: "@babel/code-frame@npm:7.28.6"
   dependencies:
@@ -3438,7 +3438,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/mdx@npm:^3.0.0, @mdx-js/mdx@npm:^3.0.1":
+"@mdx-js/mdx@npm:^3.0.0":
   version: 3.1.1
   resolution: "@mdx-js/mdx@npm:3.1.1"
   dependencies:
@@ -3483,7 +3483,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/react@npm:^3.0.1, @mdx-js/react@npm:^3.1.1":
+"@mdx-js/react@npm:^3.1.1":
   version: 3.1.1
   resolution: "@mdx-js/react@npm:3.1.1"
   dependencies:
@@ -10436,9 +10436,9 @@ __metadata:
     eslint-config-next: 16.1.6
     focus-trap-react: 12.0.0
     gray-matter: ^4.0.3
+    hast: ^1.0.0
     hastscript: ^9.0.1
     next: 16.1.6
-    next-mdx-remote: ^5.0.0
     prism-react-renderer: ^1.3.5
     prismjs: 1.30.0
     react: 19.2.3
@@ -10449,6 +10449,7 @@ __metadata:
     styled-components: ^6.3.8
     type-fest: ^3.2.0
     typescript: ^5
+    unist-util-visit: ^5.1.0
   languageName: unknown
   linkType: soft
 
@@ -13977,6 +13978,13 @@ __metadata:
   dependencies:
     "@types/hast": ^3.0.0
   checksum: 41d93ccce218ba935dc3c12acdf586193c35069489c8c8f50c2aa824c00dec94a3c78b03d1db40fa75381942a189161922e4b7bca700b3a2cc779634c351a1e4
+  languageName: node
+  linkType: hard
+
+"hast@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "hast@npm:1.0.0"
+  checksum: 3891e00e634172029d92fd49cc3b62ad99b1e6e8833ea626ca5ffe1c5c631a9a52c439e296c7e2984ddcf23b04c8dd1f57fda251996081ccb3dca9ec38cff730
   languageName: node
   linkType: hard
 
@@ -18254,22 +18262,6 @@ __metadata:
   version: 2.6.2
   resolution: "neo-async@npm:2.6.2"
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
-  languageName: node
-  linkType: hard
-
-"next-mdx-remote@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "next-mdx-remote@npm:5.0.0"
-  dependencies:
-    "@babel/code-frame": ^7.23.5
-    "@mdx-js/mdx": ^3.0.1
-    "@mdx-js/react": ^3.0.1
-    unist-util-remove: ^3.1.0
-    vfile: ^6.0.1
-    vfile-matter: ^5.0.0
-  peerDependencies:
-    react: ">=16"
-  checksum: 7e8dd7279459953bacca7a0c03db8612bd001f03e39530c8dd437a1acb2befab24e4a8ae959031af7036d0a69e2e8a9bbfe674ec6beb26bf365fd272dd95ec37
   languageName: node
   linkType: hard
 
@@ -23939,17 +23931,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-remove@npm:^3.1.0":
-  version: 3.1.1
-  resolution: "unist-util-remove@npm:3.1.1"
-  dependencies:
-    "@types/unist": ^2.0.0
-    unist-util-is: ^5.0.0
-    unist-util-visit-parents: ^5.0.0
-  checksum: ed7c762941e6a9b6db230e9417697c8eb7d36093240b6f6d4ec265c4237d33e332a96a18307c8fb322a1842e3feb2a7564b032b5535fa0634eb1e075a6e344cb
-  languageName: node
-  linkType: hard
-
 "unist-util-stringify-position@npm:^3.0.0":
   version: 3.0.3
   resolution: "unist-util-stringify-position@npm:3.0.3"
@@ -23978,7 +23959,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-visit-parents@npm:^5.0.0, unist-util-visit-parents@npm:^5.1.1":
+"unist-util-visit-parents@npm:^5.1.1":
   version: 5.1.3
   resolution: "unist-util-visit-parents@npm:5.1.3"
   dependencies:
@@ -24020,7 +24001,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-visit@npm:^5.0.0":
+"unist-util-visit@npm:^5.0.0, unist-util-visit@npm:^5.1.0":
   version: 5.1.0
   resolution: "unist-util-visit@npm:5.1.0"
   dependencies:
@@ -24376,16 +24357,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile-matter@npm:^5.0.0":
-  version: 5.0.1
-  resolution: "vfile-matter@npm:5.0.1"
-  dependencies:
-    vfile: ^6.0.0
-    yaml: ^2.0.0
-  checksum: 4510e885d6313f2cc7b7074fbfb8d76b18fd72e4cf5d4946cda133c810b4722983282b36507c50af337142752d39abbecca3e51c55f66edea8811708d7c2bb8c
-  languageName: node
-  linkType: hard
-
 "vfile-message@npm:^3.0.0":
   version: 3.1.4
   resolution: "vfile-message@npm:3.1.4"
@@ -24418,7 +24389,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vfile@npm:^6.0.0, vfile@npm:^6.0.1":
+"vfile@npm:^6.0.0":
   version: 6.0.3
   resolution: "vfile@npm:6.0.3"
   dependencies:

@@ -1,21 +1,22 @@
-import fs from 'fs'
-import path from 'path'
-import { getSharedPageFolderPath } from '@/utils/content-path'
 import { notFound } from 'next/navigation'
-import { filePathToMdxContent, type MdxCompiledContentType } from '@/utils/mdx'
+import { type MdxContentType } from '@/utils/mdx'
+import {
+  CONTENT_FOLDER_NAME,
+  PAGES_FOLDER_NAME,
+  SHARED_FOLDER_NAME
+} from '@/utils/content-path'
+
+/* CONSTS */
+export const HOME_PAGE_FILE_NAME = 'home.mdx'
 
 /* UTILS */
-export async function getHomePageFilePath(): Promise<string> {
-  return path.join(getSharedPageFolderPath(), 'home.mdx')
-}
-
-export async function getHomePageContent(): Promise<MdxCompiledContentType> {
-  const filePath = await getHomePageFilePath()
-  const doesFileExist = !!filePath && fs.existsSync(filePath)
-
-  if (!doesFileExist) {
+export async function getHomePageContent(): Promise<MdxContentType> {
+  try {
+    const module: MdxContentType = await import(
+      `@/${CONTENT_FOLDER_NAME}/${SHARED_FOLDER_NAME}/${PAGES_FOLDER_NAME}/${HOME_PAGE_FILE_NAME}`
+    )
+    return module
+  } catch (error) {
     notFound()
   }
-
-  return filePathToMdxContent(filePath)
 }

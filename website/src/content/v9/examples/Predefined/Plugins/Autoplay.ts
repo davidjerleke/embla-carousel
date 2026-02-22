@@ -3,7 +3,7 @@ import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
-import { ExamplesSetupType } from '@/content/v9/examples/examles-utils'
+import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
 import CarouselAutoplay from '@/content/v9/sandboxes/React/SandboxFilesSrc/Predefined/Autoplay/EmblaCarousel'
 import { css } from 'styled-components'
 import {

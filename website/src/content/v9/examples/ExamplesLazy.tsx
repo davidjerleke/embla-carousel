@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useInView } from 'react-intersection-observer'
 import { LoadSpinnerSuspense } from '@/components/LoadSpinner/LoadSpinnerSuspense'
-// import { SandboxSelection } from 'components/Sandbox/SandboxSelection'
+import { SandboxSelection } from '@/components/Sandbox/SandboxSelection'
 import {
   EXAMPLES_WRAPPER_STYLES,
   EXAMPLES_WRAPPERS,
@@ -10,7 +10,7 @@ import {
   EXAMPLES_INTERSECTION_OPTIONS,
   ExamplesWrapperType,
   ExamplesSetupType
-} from 'consts/examples'
+} from '@/content/v9/examples/examples-utils'
 
 const EMPTY_EXAMPLE: ExamplesSetupType = {
   config: { id: '', slides: [], options: {}, styles: '' },

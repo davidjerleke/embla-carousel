@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { filePathToMdxFrontmatter } from '@/utils/mdx'
+import { getMetadataFromMdxContent } from '@/utils/mdx'
 import { PageBreadcrumbs } from '@/components/Page/PageBreadcrumbs'
 import { PageGrid } from '@/components/Page/PageGrid'
 import { PAGE_LAYOUTS } from '@/utils/page'
@@ -9,11 +9,7 @@ import { getDocsPageEditThisPagePath } from '@/utils/docs-edit-this-page'
 import { PageMainContent } from '@/components/Page/PageMainContent'
 import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
 import { MdxStyles } from '@/components/Mdx/Styles'
-import {
-  type DocsPageParamsType,
-  getDocsPageContent,
-  getDocsPageFilePath
-} from '@/utils/docs-page'
+import { type DocsPageParamsType, getDocsPageContent } from '@/utils/docs-page'
 
 type PropType = DocsPageParamsType
 
@@ -22,29 +18,26 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { params } = props
   const { slug } = await params
-  const filePath = await getDocsPageFilePath(slug)
-  const frontmatter = filePathToMdxFrontmatter(filePath)
-
-  return {
-    title: frontmatter.title,
-    description: frontmatter.description
-  }
+  const module = await getDocsPageContent(slug)
+  return getMetadataFromMdxContent(module)
 }
 
 export default async function DocsPage(props: PropType) {
   const { params } = props
   const { slug } = await params
-  const content = await getDocsPageContent(slug)
   const pagination = await getDocsPagePagination(slug)
   const editThisPagePath = await getDocsPageEditThisPagePath(slug)
+  const { default: Page } = await getDocsPageContent(slug)
 
   return (
     <PageGrid layout={PAGE_LAYOUTS.DOCS}>
       <PageBreadcrumbs />
 
-      {content && (
+      {Page && (
         <PageMainContent as="article">
-          <MdxStyles>{content}</MdxStyles>
+          <MdxStyles>
+            <Page />
+          </MdxStyles>
         </PageMainContent>
       )}
 

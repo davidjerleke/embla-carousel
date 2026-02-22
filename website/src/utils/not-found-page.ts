@@ -1,21 +1,22 @@
-import fs from 'fs'
-import path from 'path'
-import { getSharedPageFolderPath } from '@/utils/content-path'
 import { notFound } from 'next/navigation'
-import { filePathToMdxContent, type MdxCompiledContentType } from '@/utils/mdx'
+import { type MdxContentType } from '@/utils/mdx'
+import {
+  CONTENT_FOLDER_NAME,
+  PAGES_FOLDER_NAME,
+  SHARED_FOLDER_NAME
+} from '@/utils/content-path'
+
+/* CONSTS */
+export const NOT_FOUND_PAGE_FILE_NAME = 'not-found.mdx'
 
 /* UTILS */
-export async function getNotFoundPageFilePath(): Promise<string> {
-  return path.join(getSharedPageFolderPath(), 'not-found.mdx')
-}
-
-export async function getNotFoundPageContent(): Promise<MdxCompiledContentType> {
-  const filePath = await getNotFoundPageFilePath()
-  const doesFileExist = !!filePath && fs.existsSync(filePath)
-
-  if (!doesFileExist) {
+export async function getNotFoundPageContent(): Promise<MdxContentType> {
+  try {
+    const module: MdxContentType = await import(
+      `@/${CONTENT_FOLDER_NAME}/${SHARED_FOLDER_NAME}/${PAGES_FOLDER_NAME}/${NOT_FOUND_PAGE_FILE_NAME}`
+    )
+    return module
+  } catch (error) {
     notFound()
   }
-
-  return filePathToMdxContent(filePath)
 }
