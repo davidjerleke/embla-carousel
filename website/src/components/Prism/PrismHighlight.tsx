@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PrismSyntaxFrame } from './PrismSyntaxFrame'
+import { PrismSyntaxFrame } from '@/components/Prism/PrismSyntaxFrame'
 import Highlight, { Prism, defaultProps, Language } from 'prism-react-renderer'
 import { capitalizeFirstLetter } from '@/utils/string-casing'
 import { addPrismSvelteSupport } from '@/utils/prism-svelte-support'

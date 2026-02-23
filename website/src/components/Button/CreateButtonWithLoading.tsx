@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components'
-import { ButtonBare, PropType as ButtonBarePropType } from './ButtonBare'
+import {
+  ButtonBare,
+  PropType as ButtonBarePropType
+} from '@/components/Button/ButtonBare'
 import {
   LoadSpinner,
   PropType as LoadSpinnerPropType

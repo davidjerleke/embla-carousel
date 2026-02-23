@@ -8,7 +8,7 @@ import { FONT_WEIGHTS } from '@/utils/font-sizes'
 import { InactiveText, LinkNavigation } from '@/components/Link/LinkNavigation'
 import { createScrollBarStyles } from '@/utils/scrollbars'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
-import { useTableOfContentsContext } from './TableOfContentsContext'
+import { useTableOfContentsContext } from '@/components/TableOfContents/TableOfContentsContext'
 import { arrayHasItems } from '@/utils/array'
 
 const TableOfContentsMenuWrapper = styled.div`

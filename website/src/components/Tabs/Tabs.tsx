@@ -16,9 +16,9 @@ import {
 } from '@/components/Tabs/tabs-reducer'
 import uniqueId from 'lodash/uniqueId'
 import styled from 'styled-components'
-import { TabsPanel } from './TabsPanel'
-import { TabsButton } from './TabsButton'
-import { TabsList } from './TabsList'
+import { TabsPanel } from '@/components/Tabs/TabsPanel'
+import { TabsButton } from '@/components/Tabs/TabsButton'
+import { TabsList } from '@/components/Tabs/TabsList'
 import {
   getDefaultTab,
   mapChildrenToTabs,

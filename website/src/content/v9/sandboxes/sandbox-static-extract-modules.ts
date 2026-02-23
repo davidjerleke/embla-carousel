@@ -6,7 +6,7 @@ import {
 import {
   sandboxStaticFindLocalModules,
   sandboxStaticFindSharedModules
-} from './sandbox-static-find-modules'
+} from '@/content/v9/sandboxes/sandbox-static-find-modules'
 
 type ModuleScriptType = {
   script: SandboxModuleType

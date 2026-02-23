@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { IconType } from '@/assets/icons'
-import { Icon } from './Icon'
+import { Icon } from '@/components/Icon/Icon'
 import { SPACINGS } from '@/utils/spacings'
 
 const IconWithTextWrapper = styled.span<{ $spacing: string }>`

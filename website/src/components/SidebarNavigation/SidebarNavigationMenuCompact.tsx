@@ -19,7 +19,7 @@ import { TabsListScrollArea, TabsListWrapper } from '@/components/Tabs/TabsList'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
 import { TabsButtonWrapper } from '@/components/Tabs/TabsButton'
 import { TabsPanelWrapper } from '@/components/Tabs/TabsPanel'
-import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
+import { SidebarNavigationSubMenus } from '@/components/SidebarNavigation/SidebarNavigationSubMenus'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,

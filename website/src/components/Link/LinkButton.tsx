@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { buttonPrimaryFilledStyles } from '@/components/Button/ButtonPrimaryFilled'
 import { buttonPrimaryOutlinedStyles } from '@/components/Button/ButtonPrimaryOutlined'
 import { ButtonBareText } from '@/components/Button/ButtonBare'
-import { LinkBare, PropType } from './LinkBare'
+import { LinkBare, PropType } from '@/components/Link/LinkBare'
 
 const LinkButtonPrimaryFilledWrapper = styled(LinkBare)`
   ${buttonPrimaryFilledStyles};

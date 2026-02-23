@@ -1,4 +1,4 @@
-import { isBrowser } from './is-browser'
+import { isBrowser } from '@/utils/is-browser'
 
 /* CONSTS */
 type EditCodeModalIdType = `${typeof EDIT_CODE_MODAL_ID_PREFIX}${string}`

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { ButtonBare, ButtonBareText } from './ButtonBare'
+import { ButtonBare, ButtonBareText } from '@/components/Button/ButtonBare'
 import { COLORS } from '@/utils/theme'
 import { FONT_WEIGHTS } from '@/utils/font-sizes'
 import { LAYERS } from '@/utils/layers'

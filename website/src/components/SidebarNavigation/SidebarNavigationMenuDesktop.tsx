@@ -8,7 +8,7 @@ import { FONT_SIZES } from '@/utils/font-sizes'
 import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { LAYERS } from '@/utils/layers'
 import type { KeyNavigatingPropType } from '@/utils/key-events'
-import { SidebarNavigationSubMenus } from './SidebarNavigationSubMenus'
+import { SidebarNavigationSubMenus } from '@/components/SidebarNavigation/SidebarNavigationSubMenus'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import {
   createScrollBarShadowStyles,

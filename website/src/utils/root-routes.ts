@@ -3,7 +3,7 @@ import { URLS } from '@/utils/urls'
 import { RouteType } from '@/utils/routes'
 import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
 import { getHomePageContent } from '@/utils/home-page'
-import { getDocsPageContent } from './docs-page'
+import { getDocsPageContent } from '@/utils/docs-page'
 
 /* UTILS */
 export async function getRootRoutes(): Promise<SiteNavigationContextType> {

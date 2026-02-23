@@ -1,8 +1,8 @@
 'use client'
 
 import styled from 'styled-components'
-import { HeroBrand } from './HeroBrand'
-import { HeroUsps } from './HeroUsps'
+import { HeroBrand } from '@/components/Hero/HeroBrand'
+import { HeroUsps } from '@/components/Hero/HeroUsps'
 
 const HeroWrapper = styled.div``
 

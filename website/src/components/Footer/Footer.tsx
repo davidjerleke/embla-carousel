@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { PageFrame } from '@/components/Page/PageFrame'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
-import { FooterLinks } from './FooterLinks'
+import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { SPACINGS } from '@/utils/spacings'
 
 const FooterWrapper = styled.footer`

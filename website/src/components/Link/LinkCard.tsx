@@ -3,7 +3,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { COLORS } from '@/utils/theme'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { IconWithText } from '@/components/Icon/IconWithText'
-import { LinkBare, PropType } from './LinkBare'
+import { LinkBare, PropType } from '@/components/Link/LinkBare'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
 import { CARD_STYLES } from '@/utils/card'
 

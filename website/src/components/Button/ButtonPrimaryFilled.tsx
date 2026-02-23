@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { ButtonBare } from './ButtonBare'
+import { ButtonBare } from '@/components/Button/ButtonBare'
 import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from '@/utils/gradients'
