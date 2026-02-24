@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useInView } from 'react-intersection-observer'
@@ -35,7 +37,7 @@ const Wrapper = styled.div<{
 
 type PropType = {
   loader: () => Promise<ExamplesModuleType>
-  wrapper: ExamplesWrapperType
+  wrapper?: ExamplesWrapperType
 }
 
 export const ExamplesLazy = (props: PropType) => {
