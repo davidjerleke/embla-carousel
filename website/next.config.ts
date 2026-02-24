@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
         condition: {
           all: [{ path: /src\/assets\/icons\// }]
         },
-        loaders: ['@svgr/webpack'],
+        loaders: [
+          {
+            loader: '@svgr/webpack',
+            options: { svgo: false }
+          }
+        ],
         as: '*.js'
       },
       '*': {
