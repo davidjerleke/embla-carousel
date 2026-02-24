@@ -68,7 +68,10 @@ export function PrismHighlight(props: PropType) {
                     return !(isTokenLast && isLineSingle && isLineEmpty)
                   })
                   .map((line, index) => {
-                    const lineProps = getLineProps({ line, key: index })
+                    const { key, ...lineProps } = getLineProps({
+                      line,
+                      key: index
+                    })
                     const lineNumber = index + 1
 
                     if (highlightedLines.includes(lineNumber)) {
@@ -76,10 +79,14 @@ export function PrismHighlight(props: PropType) {
                     }
 
                     return (
-                      <span key={index} {...lineProps}>
-                        {line.map((token, key) => (
-                          <span key={key} {...getTokenProps({ token, key })} />
-                        ))}
+                      <span key={key} {...lineProps}>
+                        {line.map((token, tokenIndex) => {
+                          const { key, ...rest } = getTokenProps({
+                            token,
+                            key: tokenIndex
+                          })
+                          return <span key={key} {...rest} />
+                        })}
                       </span>
                     )
                   })}
