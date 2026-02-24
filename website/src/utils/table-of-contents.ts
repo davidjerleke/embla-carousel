@@ -60,7 +60,8 @@ export async function filePathToTableOfContents(
   const source = fs.readFileSync(filePath, 'utf8')
   const file = await compile(source, {
     rehypePlugins: [rehypeSlug, getTableOfContentsPlugin],
-    outputFormat: 'function-body'
+    outputFormat: 'function-body',
+    useDynamicImport: true
   })
   const headings = <TableOfContentsHeading[]>file.data.headings
 

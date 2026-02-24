@@ -8,7 +8,7 @@ import {
 
 export async function createSandboxReactIndexHtml(id: string): Promise<string> {
   const indexHTML = await import(
-    '!!raw-loader!components/Sandbox/React/SandboxFilesDist/index.html'
+    '@/content/v9/sandboxes/React/SandboxFilesDist/index.html'
   )
   const theme = THEME_PREFIX + getThemeFromDocument()
   const title = kebabCaseToPascalCase(id, ' ')

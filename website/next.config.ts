@@ -15,6 +15,13 @@ const nextConfig: NextConfig = {
         },
         loaders: ['@svgr/webpack'],
         as: '*.js'
+      },
+      '*': {
+        condition: {
+          all: [{ path: /SandboxFilesDist|code-snippets/ }]
+        },
+        loaders: ['raw-loader'],
+        as: '*.js'
       }
     }
   }

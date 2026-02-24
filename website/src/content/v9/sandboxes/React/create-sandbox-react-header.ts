@@ -10,7 +10,7 @@ export async function createSandboxReactHeader(
   id: string
 ): Promise<string> {
   const header: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Header.${reactScriptExtension}`
+    `@/content/v9/sandboxes/React/SandboxFilesDist/Header.${reactScriptExtension}`
   )
   const formattedTitle = kebabCaseToPascalCase(id, ' ')
   return header.default.replace(SANDBOX_REGEX_TITLE, formattedTitle)

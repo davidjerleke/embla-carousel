@@ -26,14 +26,14 @@ export async function sandboxStaticExtractVanillaModules(
   const localModulesPromises: Promise<SandboxModuleType>[] = localModules.map(
     (module) => {
       return import(
-        `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/${path}/${module}.${vanillaScriptExtension}`
+        `@/content/v9/sandboxes/Vanilla/SandboxFilesDist/${path}/${module}.${vanillaScriptExtension}`
       )
     }
   )
   const sharedModulesPromises: Promise<SandboxModuleType>[] = sharedModules.map(
     (module) => {
       return import(
-        `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/${module}.${vanillaScriptExtension}`
+        `@/content/v9/sandboxes/Vanilla/SandboxFilesDist/${module}.${vanillaScriptExtension}`
       )
     }
   )
@@ -61,14 +61,14 @@ export async function sandboxStaticExtractReactModules(
   const localModulesPromises: Promise<SandboxModuleType>[] = localModules.map(
     (module) => {
       return import(
-        `!!raw-loader!components/Sandbox/React/SandboxFilesDist/${path}/${module}.${reactScriptExtension}`
+        `@/content/v9/sandboxes/React/SandboxFilesDist/${path}/${module}.${reactScriptExtension}`
       )
     }
   )
   const sharedModulesPromises: Promise<SandboxModuleType>[] = sharedModules.map(
     (module) => {
       return import(
-        `!!raw-loader!components/Sandbox/React/SandboxFilesDist/${module}.${reactScriptExtension}`
+        `@/content/v9/sandboxes/React/SandboxFilesDist/${module}.${reactScriptExtension}`
       )
     }
   )

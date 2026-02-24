@@ -17,7 +17,7 @@ export async function createSandboxReactDefaultEntry(
 ): Promise<string> {
   const slideCount = slides.length.toString()
   const entry: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/React/SandboxFilesDist/CarouselDefaultEntry.${reactScriptExtension}`
+    `@/content/v9/sandboxes/React/SandboxFilesDist/CarouselDefaultEntry.${reactScriptExtension}`
   )
   return entry.default
     .replace(CAROUSEL_IMPORT_REGEX, CAROUSEL_IMPORT_REPLACE)
@@ -30,7 +30,7 @@ export async function createSandboxReactIosPickerEntry(
   options: EmblaOptionsType
 ): Promise<string> {
   const entry: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/React/SandboxFilesDist/CarouselIosPickerEntry.${reactScriptExtension}`
+    `@/content/v9/sandboxes/React/SandboxFilesDist/CarouselIosPickerEntry.${reactScriptExtension}`
   )
   return entry.default
     .replace(CAROUSEL_IMPORT_REGEX, CAROUSEL_IMPORT_REPLACE)

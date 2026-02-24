@@ -9,7 +9,7 @@ export async function createSandboxReactFooter(
   reactScriptExtension: SandboxReactExtensionType
 ): Promise<string> {
   const footer: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/React/SandboxFilesDist/Footer.${reactScriptExtension}`
+    `@/content/v9/sandboxes/React/SandboxFilesDist/Footer.${reactScriptExtension}`
   )
   return footer.default.replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
 }

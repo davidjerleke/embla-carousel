@@ -34,10 +34,10 @@ async function sandboxVanilla(
       slides: SandboxStaticSettingsType['slides']
     }>
   } = await import(
-    `components/Sandbox/React/SandboxFilesSrc/${path}/EmblaCarousel`
+    `@/content/v9/sandboxes/React/SandboxFilesSrc/${path}/EmblaCarousel`
   )
   const carouselScript: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/Vanilla/SandboxFilesDist/${path}/EmblaCarousel.${vanillaScriptExtension}`
+    `@/content/v9/sandboxes/Vanilla/SandboxFilesDist/${path}/EmblaCarousel.${vanillaScriptExtension}`
   )
   const moduleScripts: SandboxModuleScriptType[] =
     await sandboxStaticExtractVanillaModules(
@@ -84,7 +84,7 @@ async function sandboxReact(
     language
   )
   const carouselScript: SandboxModuleType = await import(
-    `!!raw-loader!components/Sandbox/React/SandboxFilesDist/${path}/EmblaCarousel.${reactScriptExtension}`
+    `@/content/v9/sandboxes/React/SandboxFilesDist/${path}/EmblaCarousel.${reactScriptExtension}`
   )
   const moduleScripts: SandboxModuleScriptType[] =
     await sandboxStaticExtractReactModules(

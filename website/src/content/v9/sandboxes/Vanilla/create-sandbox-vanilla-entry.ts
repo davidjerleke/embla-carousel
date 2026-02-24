@@ -19,7 +19,7 @@ export async function createSandboxVanillaEntry(
   carouselHtml: string
 ): Promise<string> {
   const indexHTML = await import(
-    '!!raw-loader!@/content/v9/Sandbox/Vanilla/SandboxFilesDist/index.html'
+    '@/content/v9/sandboxes/Vanilla/SandboxFilesDist/index.html'
   )
   const theme = THEME_PREFIX + getThemeFromDocument()
   const title = kebabCaseToPascalCase(id, ' ')
