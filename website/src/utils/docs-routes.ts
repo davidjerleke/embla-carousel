@@ -3,7 +3,11 @@ import path from 'path'
 import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
-import { createHierarchicalRoutes, RouteType } from '@/utils/routes'
+import {
+  createHierarchicalRoutes,
+  RouteType,
+  sortRoutesByOrder
+} from '@/utils/routes'
 import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import { getDocsPageContent } from '@/utils/docs-page'
 
@@ -69,6 +73,7 @@ export async function getDocsRoutes(
   }
 
   await walk(pagesDir)
+  flatRoutes.sort(sortRoutesByOrder)
 
   return {
     hierarchicalRoutes: createHierarchicalRoutes(flatRoutes, 2),

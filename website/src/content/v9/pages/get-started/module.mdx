@@ -1,0 +1,80 @@
+export const metadata = {
+  title: 'Module',
+  description: 'Learn how to setup Embla Carousel using vanilla JavaScript.',
+  order: 0
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import theHtmlStructure_01 from '@/content/v9/code-snippets/get-started/module/the-html-structure-01.html'
+import stylingTheCarousel_01 from '@/content/v9/code-snippets/get-started/module/styling-the-carousel-01.less'
+import accessingTheCarouselApi_01 from '@/content/v9/code-snippets/get-started/module/accessing-the-carousel-api-01.js'
+import addingPlugins_01 from '@/content/v9/code-snippets/get-started/module/adding-plugins-01.js'
+import moduleInstallation_npm_01 from '@/content/v9/code-snippets/get-started/module/installation-npm-01.sh'
+import moduleInstallation_yarn_01 from '@/content/v9/code-snippets/get-started/module/installation-yarn-01.sh'
+import moduleInstallation_pnpm_01 from '@/content/v9/code-snippets/get-started/module/installation-pnpm-01.sh'
+import moduleAddingPlugins_npm_01 from '@/content/v9/code-snippets/get-started/module/adding-plugins-npm-01.sh'
+import moduleAddingPlugins_yarn_01 from '@/content/v9/code-snippets/get-started/module/adding-plugins-yarn-01.sh'
+import moduleAddingPlugins_pnpm_01 from '@/content/v9/code-snippets/get-started/module/adding-plugins-pnpm-01.sh'
+
+# Module
+
+Start by installing the Embla Carousel **npm package** and add it to your dependencies.
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={moduleInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+
+    <PrismHighlight language="shell" code={moduleInstallation_pnpm_01} />
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={moduleInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+---
+
+## The HTML structure
+
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following **HTML** structure to your carousel:
+
+<PrismHighlight language="html" code={theHtmlStructure_01} />
+
+## Styling the carousel
+
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
+
+<PrismHighlight language="css" code={stylingTheCarousel_01} />
+
+## Accessing the carousel API
+
+Select the element with the classname `embla__viewport` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** your carousel and provide full **access** to the Embla Carousel [API](/api/).
+
+<PrismHighlight language="js" code={accessingTheCarouselApi_01} highlight="8" />
+
+## Adding plugins
+
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/plugins/autoplay/) plugin:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={moduleAddingPlugins_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+
+    <PrismHighlight language="shell" code={moduleAddingPlugins_pnpm_01} />
+
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={moduleAddingPlugins_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+You can pass an **optional plugin array** as the third argument when initializing Embla Carousel. Here's how to extend the carousel from the previous example with Autoplay:
+
+<PrismHighlight language="js" code={addingPlugins_01} highlight="2,9,14" />
+
+Congratulations! You just created your first Embla Carousel.

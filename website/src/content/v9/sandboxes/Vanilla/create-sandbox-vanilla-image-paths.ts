@@ -1,4 +1,4 @@
-const IMG_SRC_WITH_HASH_REGEX = /\/static\/slide-\d{1,}-.+?\.jpg/g
+const IMG_SRC_WITH_HASH_REGEX = /\/_next\/static\/media\/slide-\d{1,}.+?\.jpg/g
 const IMG_SLIDE_WITH_NUMBER_REGEX = /slide-\d{1,}/
 const IMG_NUMBER_REGEX = /slide-/
 

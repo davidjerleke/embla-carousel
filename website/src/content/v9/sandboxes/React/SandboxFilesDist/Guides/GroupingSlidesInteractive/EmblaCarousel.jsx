@@ -11,7 +11,7 @@ import {
   useSelectedSnapDisplay
 } from '../../EmblaCarouselSelectedSnapDisplay'
 import { useGroupIndicator } from '../../EmblaCarouselGroupIndicator'
-import { sandboxImages } from 'components/Sandbox/sandboxImages'
+import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
 
 const SHOW_SLIDE_GROUPS = ['yes', 'no']
 const SLIDES_TO_SCROLL = ['1', '2']

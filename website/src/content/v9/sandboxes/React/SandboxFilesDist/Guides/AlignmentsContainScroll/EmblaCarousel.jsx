@@ -10,7 +10,7 @@ import {
   SelectedSnapDisplay,
   useSelectedSnapDisplay
 } from '../../EmblaCarouselSelectedSnapDisplay'
-import { sandboxImages } from 'components/Sandbox/sandboxImages'
+import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
 
 const ALIGNMENTS = ['start', 'center', 'end']
 const CONTAIN_SCROLL = ['trimSnaps', 'false']

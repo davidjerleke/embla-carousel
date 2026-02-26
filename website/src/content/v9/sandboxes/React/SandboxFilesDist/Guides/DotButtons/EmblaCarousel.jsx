@@ -7,7 +7,7 @@ import {
 } from '../../EmblaCarouselArrowButtons'
 import RadioForm from '../../EmblaCarouselRadioForm'
 import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
-import { sandboxImages } from 'components/Sandbox/sandboxImages'
+import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
 
 const LOOP = ['true', 'false']
 

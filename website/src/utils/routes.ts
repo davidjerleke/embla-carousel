@@ -28,6 +28,7 @@ export function addRouteChildren(
   parent.children = routes
     .filter(({ slug }) => isRoutePartiallyActive(parent.slug, slug))
     .filter(({ level }) => level - 1 === parent.level)
+    .sort(sortRoutesByOrder)
   parent.children.forEach((child) => addRouteChildren(child, routes))
   return parent
 }
@@ -53,6 +54,10 @@ export function createHierarchicalRoutes(
   const startLevel = baseLevel ?? 1
   const baseLevelRoutes = routes.filter(({ level }) => level === startLevel)
   return baseLevelRoutes.map((route) => addRouteChildren({ ...route }, routes))
+}
+
+export function sortRoutesByOrder(a: RouteType, b: RouteType): number {
+  return a.order - b.order
 }
 
 function addAdjacentRouteChildren(

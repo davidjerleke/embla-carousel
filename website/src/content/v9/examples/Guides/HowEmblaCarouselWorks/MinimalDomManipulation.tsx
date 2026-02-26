@@ -1,33 +1,33 @@
+'use client'
+
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
 import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
-import CarouselPreviousAndNextButtons from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/PreviousAndNextButtons/EmblaCarousel'
+import { ExamplesLazy } from '@/content/v9/examples/ExamplesLazy'
+import CarouselMinimalDomManipulation from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/MinimalDomManipulation/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
-  IMAGE_STYLES,
-  SNAP_DISPLAY_STYLES,
-  RADIO_INPUT_FORM_STYLES,
+  DOTS_STYLES,
+  SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
 } from '@/content/v9/examples/examples-carousel-styles'
 
-const ID = 'embla-carousel-previous-and-next-buttons'
-const SLIDES = arrayFromNumber(8)
-const OPTIONS: EmblaOptionsType = { loop: false }
-
+const ID = 'embla-carousel-minimal-dom-manipulation'
+const SLIDES = arrayFromNumber(5)
+const OPTIONS: EmblaOptionsType = { loop: true }
 const STYLES = examplesCarouselStyles(
   '70%',
-  '2rem',
+  '1rem',
   OPTIONS,
   styledComponentsStylesToString(
+    SLIDE_NUMBER_STYLES,
     CONTROLS_STYLES,
     ARROWS_STYLES,
-    IMAGE_STYLES,
-    SNAP_DISPLAY_STYLES,
-    RADIO_INPUT_FORM_STYLES
+    DOTS_STYLES
   )
 )
 const CONFIG: SandboxStaticSettingsType = {
@@ -38,11 +38,23 @@ const CONFIG: SandboxStaticSettingsType = {
 }
 const SANDBOXES = sandboxStaticSandboxes(
   CONFIG,
-  'Guides/PreviousAndNextButtons'
+  'Guides/MinimalDomManipulation'
 )
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselPreviousAndNextButtons as ExamplesSetupType['Carousel'],
+  Carousel: CarouselMinimalDomManipulation as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
+}
+
+export function ExampleMinimalDomManipulation() {
+  return (
+    <ExamplesLazy
+      loader={() => {
+        return import(
+          '@/content/v9/examples/Guides/HowEmblaCarouselWorks/MinimalDomManipulation'
+        )
+      }}
+    />
+  )
 }

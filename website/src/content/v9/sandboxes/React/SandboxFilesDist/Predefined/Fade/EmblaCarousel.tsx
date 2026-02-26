@@ -8,7 +8,7 @@ import {
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
-import { sandboxImages } from 'components/Sandbox/sandboxImages'
+import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
 
 type PropType = {
   slides: number[]

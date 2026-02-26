@@ -11,7 +11,7 @@ import {
   SelectedSnapDisplay,
   useSelectedSnapDisplay
 } from '../../EmblaCarouselSelectedSnapDisplay'
-import { sandboxImages } from 'components/Sandbox/sandboxImages'
+import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
 
 type PropType = {
   slides: number[]
