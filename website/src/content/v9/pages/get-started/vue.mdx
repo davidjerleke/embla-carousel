@@ -1,0 +1,100 @@
+export const metadata = {
+  title: 'Vue',
+  description: 'Learn how to setup Embla Carousel using Vue.',
+  order: 30
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import theComponentStructure_01 from '@/content/v9/code-snippets/get-started/vue/the-component-structure-01.vue'
+import stylingTheCarousel_01 from '@/content/v9/code-snippets/get-started/vue/styling-the-carousel-01.vue'
+import accessingTheCarouselApi_01 from '@/content/v9/code-snippets/get-started/vue/accessing-the-carousel-api-01.vue'
+import addingPlugins_01 from '@/content/v9/code-snippets/get-started/vue/adding-plugins-01.vue'
+import vueInstallation_npm_01 from '@/content/v9/code-snippets/get-started/vue/installation-npm-01.sh'
+import vueInstallation_yarn_01 from '@/content/v9/code-snippets/get-started/vue/installation-yarn-01.sh'
+import vueInstallation_pnpm_01 from '@/content/v9/code-snippets/get-started/vue/installation-pnpm-01.sh'
+import vueAddingPlugins_npm_01 from '@/content/v9/code-snippets/get-started/vue/adding-plugins-npm-01.sh'
+import vueAddingPlugins_yarn_01 from '@/content/v9/code-snippets/get-started/vue/adding-plugins-yarn-01.sh'
+import vueAddingPlugins_pnpm_01 from '@/content/v9/code-snippets/get-started/vue/adding-plugins-pnpm-01.sh'
+
+# Vue
+
+Embla Carousel provides a wrapper for [Vue](https://vuejs.org/) that ensures seamless integration of the carousel into your Vue project and automatic cleanup on component unmount.
+
+Start by installing the Embla Carousel **npm package** and add it to your dependencies.
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={vueInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={vueInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={vueInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  **Note:** `embla-carousel-vue` only supports `Vue 3` and up. However, you can
+  use the [core package](/docs/get-started/module/) that `embla-carousel-vue` is
+  using under the hood, and re-create the behaviour of `embla-carousel-vue`.
+  Here's an [example](https://github.com/meirroth/embla-carousel-vue2) of how
+  you can use Embla Carousel with `Vue 2` Options API.
+</Admonition>
+
+---
+
+## The component structure
+
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following structure to your carousel:
+
+<PrismHighlight
+  language="html"
+  asLanguage="vue"
+  code={theComponentStructure_01}
+/>
+
+## Styling the carousel
+
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
+
+<PrismHighlight language="html" asLanguage="vue" code={stylingTheCarousel_01} />
+
+## Accessing the carousel API
+
+Use the `useEmblaCarousel` composable and pass your options as the first argument. You can access the [API](/docs/api/) directly from the composable, and use it to control the carousel or respond to user actions, as shown below:
+
+<PrismHighlight
+  language="html"
+  asLanguage="vue"
+  code={accessingTheCarouselApi_01}
+  highlight="4"
+/>
+
+## Adding plugins
+
+Start by installing the plugin you want to use. In this example, we're going to install the [Autoplay](/docs/plugins/autoplay/) plugin:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={vueAddingPlugins_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={vueAddingPlugins_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={vueAddingPlugins_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` composable. Here's how to extend the carousel from the previous example with Autoplay:
+
+<PrismHighlight
+  language="html"
+  asLanguage="vue"
+  code={addingPlugins_01}
+  highlight="4,6,15"
+/>
+
+Congratulations! You just created your first Embla Carousel component.
