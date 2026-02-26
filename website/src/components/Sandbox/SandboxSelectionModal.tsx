@@ -9,7 +9,6 @@ import { MEDIA } from '@/utils/breakpoints'
 import { Icon } from '@/components/Icon/Icon'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { SandboxSelectionForm } from '@/components/Sandbox/SandboxSelectionForm'
-import { ModalPortal } from '@/components/Modal/ModalPortal'
 import { BORDER_RADIUSES } from '@/utils/border'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 
@@ -88,33 +87,32 @@ type PropType = {
 }
 
 export function SandboxSelectionModal(props: PropType) {
-  const { sandboxes, closeModal } = props
+  const { closeModal } = props
+  const sandboxes = props.sandboxes || []
 
   return (
-    <ModalPortal>
-      <FocusTrap active={true}>
-        <div>
-          <Overlay onClick={closeModal} />
+    <FocusTrap>
+      <div>
+        <Overlay onClick={closeModal} />
 
-          <SandboxSelectionModalWrapper
-            role="dialog"
-            aria-modal="true"
-            aria-label="Select CodeSandbox Dialog"
-            aria-labelledby={SELECT_CODESANDBOX_DIALOG_ID}
+        <SandboxSelectionModalWrapper
+          role="dialog"
+          aria-modal="true"
+          aria-label="Select CodeSandbox Dialog"
+          aria-labelledby={SELECT_CODESANDBOX_DIALOG_ID}
+        >
+          <CloseButton
+            aria-label="Hide Select CodeSandbox Dialog"
+            onClick={closeModal}
           >
-            <CloseButton
-              aria-label="Hide Select CodeSandbox Dialog"
-              onClick={closeModal}
-            >
-              <Icon svg="cross" size={ICON_SIZE} />
-            </CloseButton>
+            <Icon svg="cross" size={ICON_SIZE} />
+          </CloseButton>
 
-            <ScrollArea>
-              <SandboxSelectionForm sandboxes={sandboxes || []} />
-            </ScrollArea>
-          </SandboxSelectionModalWrapper>
-        </div>
-      </FocusTrap>
-    </ModalPortal>
+          <ScrollArea>
+            <SandboxSelectionForm sandboxes={sandboxes} />
+          </ScrollArea>
+        </SandboxSelectionModalWrapper>
+      </div>
+    </FocusTrap>
   )
 }
