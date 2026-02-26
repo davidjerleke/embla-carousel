@@ -13,6 +13,7 @@ import {
 import { headingStyles } from '@/components/Mdx/Styles/heading'
 import { listStyles } from '@/components/Mdx/Styles/list'
 import { codeStyles } from '@/components/Mdx/Styles/code'
+import { ApiMetaDataWrapper } from '@/components/Mdx/Components/ApiMetaData'
 
 export const MdxStyles = styled.div`
   ${codeStyles};
@@ -46,7 +47,10 @@ export const MdxStyles = styled.div`
     blockquote code,
     kbd,
     samp,
-    .${PRISM_HIGHLIGHT_CLASS_NAME}, ${TabsWrapper}, ${AdmonitionWrapper} {
+    .${PRISM_HIGHLIGHT_CLASS_NAME},
+      ${TabsWrapper},
+      ${AdmonitionWrapper},
+      ${ApiMetaDataWrapper} {
       margin-bottom: ${SPACINGS.FOUR};
     }
   }

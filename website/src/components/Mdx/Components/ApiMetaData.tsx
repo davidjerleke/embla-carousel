@@ -7,6 +7,8 @@ import { createScrollBarStyles, SCROLLBAR_SIZE } from '@/utils/scrollbars'
 import { MEDIA } from '@/utils/breakpoints'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 
+export const ApiMetaDataWrapper = styled.div``
+
 const Row = styled.div`
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   display: flex;
@@ -54,7 +56,7 @@ export const ApiMetaData = (props: PropType) => {
   const [secondKey, secondValue] = secondRow
 
   return (
-    <p>
+    <ApiMetaDataWrapper>
       <Row>
         <Key>{firstKey}:</Key>
         <Scrollable>
@@ -79,6 +81,6 @@ export const ApiMetaData = (props: PropType) => {
           </ColoredCode>
         </Scrollable>
       </Row>
-    </p>
+    </ApiMetaDataWrapper>
   )
 }
