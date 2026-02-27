@@ -1,5 +1,3 @@
-'use client'
-
 import { css } from 'styled-components'
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from '@/utils/array'
@@ -7,18 +5,20 @@ import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
 import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
-import { ExamplesLazy } from '@/content/v9/examples/ExamplesLazy'
-import CarouselSlideSizesVariableWidth from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/SlideSizesVariableWidths/EmblaCarousel'
+import CarouselGroupingSlidesVariableWidths from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/GroupingSlidesVariableWidths/EmblaCarousel'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
+  GROUP_INDICATOR_STYLES,
   IMAGE_STYLES,
+  RADIO_INPUT_FORM_STYLES,
+  SNAP_DISPLAY_STYLES,
   examplesCarouselStyles
 } from '@/content/v9/examples/examples-carousel-styles'
 
 const VARIABLE_WIDTH_STYLES = css`
   .embla__slide:nth-child(1) {
-    flex: 0 0 60%;
+    flex: 0 0 55%;
   }
   .embla__slide:nth-child(2) {
     flex: 0 0 40%;
@@ -27,25 +27,46 @@ const VARIABLE_WIDTH_STYLES = css`
     flex: 0 0 80%;
   }
   .embla__slide:nth-child(4) {
-    flex: 0 0 25%;
+    flex: 0 0 60%;
   }
   .embla__slide:nth-child(5) {
-    flex: 0 0 70%;
+    flex: 0 0 30%;
+  }
+  .embla__slide:nth-child(6) {
+    flex: 0 0 25%;
+  }
+  .embla__slide:nth-child(7) {
+    flex: 0 0 35%;
+  }
+  .embla__slide:nth-child(8) {
+    flex: 0 0 30%;
+  }
+  .embla__slide:nth-child(9) {
+    flex: 0 0 90%;
+  }
+  .embla__slide:nth-child(10) {
+    flex: 0 0 50%;
+  }
+  .embla__slide:nth-child(11) {
+    flex: 0 0 35%;
   }
 `
 
-const ID = 'embla-carousel-slide-sizes-variable-widths'
-const SLIDES = arrayFromNumber(5)
-const OPTIONS: EmblaOptionsType = {}
+const ID = 'embla-carousel-grouping-slides-variable-widths'
+const SLIDES = arrayFromNumber(11)
+const OPTIONS: EmblaOptionsType = { slidesToScroll: 1 }
 
 const STYLES = examplesCarouselStyles(
-  '70%',
-  '0',
+  '40%',
+  '1rem',
   OPTIONS,
   styledComponentsStylesToString(
     CONTROLS_STYLES,
     ARROWS_STYLES,
     IMAGE_STYLES,
+    RADIO_INPUT_FORM_STYLES,
+    SNAP_DISPLAY_STYLES,
+    GROUP_INDICATOR_STYLES,
     VARIABLE_WIDTH_STYLES
   )
 )
@@ -57,23 +78,12 @@ const CONFIG: SandboxStaticSettingsType = {
 }
 const SANDBOXES = sandboxStaticSandboxes(
   CONFIG,
-  'Guides/SlideSizesVariableWidths'
+  'Guides/GroupingSlidesVariableWidths'
 )
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselSlideSizesVariableWidth as ExamplesSetupType['Carousel'],
+  Carousel:
+    CarouselGroupingSlidesVariableWidths as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
-}
-
-export function ExampleSlideSizesVariableWidths() {
-  return (
-    <ExamplesLazy
-      loader={() => {
-        return import(
-          '@/content/v9/examples/Guides/SlideSizes/SlideSizesVariableWidths'
-        )
-      }}
-    />
-  )
 }

@@ -1,28 +1,26 @@
-'use client'
-
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
+import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
+import CarouselAlignmentsContainScroll from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/AlignmentsContainScroll/EmblaCarousel'
 import {
-  EXAMPLES_WRAPPERS,
-  ExamplesSetupType
-} from '@/content/v9/examples/examples-utils'
-import { ExamplesLazy } from '@/content/v9/examples/ExamplesLazy'
-import CarouselPreviousAndNextButtons from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/PreviousAndNextButtons/EmblaCarousel'
-import {
+  ALIGNMENT_INDICATOR_STYLES,
   ARROWS_STYLES,
   CONTROLS_STYLES,
   IMAGE_STYLES,
-  SNAP_DISPLAY_STYLES,
   RADIO_INPUT_FORM_STYLES,
+  SNAP_DISPLAY_STYLES,
   examplesCarouselStyles
 } from '@/content/v9/examples/examples-carousel-styles'
 
-const ID = 'embla-carousel-previous-and-next-buttons'
+const ID = 'embla-carousel-alignments-contain-scroll'
 const SLIDES = arrayFromNumber(8)
-const OPTIONS: EmblaOptionsType = { loop: false }
+const OPTIONS: EmblaOptionsType = {
+  align: 'center',
+  containScroll: 'trimSnaps'
+}
 
 const STYLES = examplesCarouselStyles(
   '70%',
@@ -32,8 +30,9 @@ const STYLES = examplesCarouselStyles(
     CONTROLS_STYLES,
     ARROWS_STYLES,
     IMAGE_STYLES,
-    SNAP_DISPLAY_STYLES,
-    RADIO_INPUT_FORM_STYLES
+    RADIO_INPUT_FORM_STYLES,
+    ALIGNMENT_INDICATOR_STYLES,
+    SNAP_DISPLAY_STYLES
   )
 )
 const CONFIG: SandboxStaticSettingsType = {
@@ -44,24 +43,11 @@ const CONFIG: SandboxStaticSettingsType = {
 }
 const SANDBOXES = sandboxStaticSandboxes(
   CONFIG,
-  'Guides/PreviousAndNextButtons'
+  'Guides/AlignmentsContainScroll'
 )
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselPreviousAndNextButtons as ExamplesSetupType['Carousel'],
+  Carousel: CarouselAlignmentsContainScroll as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
-}
-
-export function ExamplePreviousAndNextButtons() {
-  return (
-    <ExamplesLazy
-      wrapper={EXAMPLES_WRAPPERS.ONE_FORM_ROW}
-      loader={() => {
-        return import(
-          '@/content/v9/examples/Guides/PreviousAndNextButtons/PreviousAndNextButtons'
-        )
-      }}
-    />
-  )
 }

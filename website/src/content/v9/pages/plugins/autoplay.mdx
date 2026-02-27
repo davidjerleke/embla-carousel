@@ -1,0 +1,384 @@
+export const metadata = {
+  title: 'Autoplay',
+  description: `Learn how to add automatic slide transitions with the Autoplay plugin for Embla Carousel.`,
+  order: 20
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import autoplayInstallation_cdn_01 from '@/content/v9/code-snippets/plugins/autoplay/installation-cdn-01.html'
+import autoplayInstallation_npm_01 from '@/content/v9/code-snippets/plugins/autoplay/installation-npm-01.sh'
+import autoplayInstallation_yarn_01 from '@/content/v9/code-snippets/plugins/autoplay/installation-yarn-01.sh'
+import autoplayInstallation_pnpm_01 from '@/content/v9/code-snippets/plugins/autoplay/installation-pnpm-01.sh'
+
+import { ExampleAutoplay } from '@/content/v9/examples/Predefined/Plugins/AutoplayLazy'
+
+# Autoplay
+
+<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-autoplay">
+  View plugin on GitHub
+</RepositoryLink>
+
+This plugin is used to extend Embla Carousel with **autoplay** functionality.
+
+---
+
+## Example
+
+<ExampleAutoplay />
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={autoplayInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={autoplayInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={autoplayInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={autoplayInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  **Note:** You need to call the `play()` method to start autoplay:
+  <br />
+
+<PrismHighlight
+  language="js"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.play()`}
+/>
+
+</Admonition>
+
+## Options
+
+Below follows an exhaustive **list of all** `Autoplay` **options** and their default values.
+
+---
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/autoplay/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'AutoplayOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+    delay: 4000,
+    '(min-width: 768px)': { delay: 2000 }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### delay
+
+<ApiMetaData
+  firstRow={[
+    'Type',
+    'number | (snapList: number[], emblaApi: EmblaCarouselType) => number[]'
+  ]}
+  secondRow={['Default', '4000']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ delay: 4000 | (snapList) => snapList.map((_, index) => index * 1000) }`}
+/>
+
+Choose a delay between transitions in milliseconds. If you pass a number, the same delay will be **applied to all transitions**. If you pass a function, you can return an array of numbers based on the `snapList` parameter and set **different delays for each scroll snap**.
+
+---
+
+### instant
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight language="ts" hideLabel code={`{ instant: true | false }`} />
+
+When set to true `true`, autoplay will do instant slide transitions (no animation) when advancing.
+
+---
+
+### defaultInteraction
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ defaultInteraction: true | false }`}
+/>
+
+When set to `true`, autoplay follows Embla Carousel's **default interaction behavior** — it stops when the user interacts with the carousel (for example, on focus or pointer down).
+Set this to `false` if you want to **handle interactions manually** using the [`autoplay:interaction`](/plugins/autoplay/#autoplayinteraction) event.
+
+---
+
+### stopOnLastSnap
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ stopOnLastSnap: true | false }`}
+/>
+
+If this parameter is enabled, autoplay will stop when it reaches the last scroll snap.
+
+---
+
+### rootNode
+
+<ApiMetaData
+  firstRow={['Type', '(emblaRoot: HTMLElement) => HTMLElement | null']}
+  secondRow={['Default', 'null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ rootNode: null | (emblaRoot) => emblaRoot.parentElement }`}
+/>
+
+The **node** that should **respond** to `mouseenter` and `mouseleave` events. If this is omitted, the node that wraps the Embla Carousel will be used as default.
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Autoplay` **methods** with their respective parameters and return values.
+
+---
+
+### play
+
+<ApiMetaData
+  firstRow={['Parameters', '(instant?: boolean)']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.play(true | false)`}
+/>
+
+Start autoplay. Set the **instant** parameter to `true` when you want autoplay to do instant slide transitions when advancing. Please note that providing a value to this method vill override the [`instant`](/plugins/autoplay/#instant) option.
+
+---
+
+### stop
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.stop()`}
+/>
+
+Stops autoplay and clears the timer.
+
+---
+
+### reset
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.reset()`}
+/>
+
+Resets the timer and starts over. This will only take effect if autoplay is already active. If autoplay is stopped, this method won't do anything.
+
+---
+
+### pause
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.pause()`}
+/>
+
+Pauses autoplay by storing the time left to the next automatic scroll. Use the `play` method to resume autoplay from where it was paused.
+
+---
+
+### isPlaying
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'boolean']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.isPlaying()`}
+/>
+
+Returns a boolean indicating whether autoplay is currently **active**.
+When playing, the autoplay timer is running and will advance the carousel to the next snap after the set delay, continuing to do so until stopped.
+
+---
+
+### timeUntilNext
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'number | null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoplay?.timeUntilNext()`}
+/>
+
+If the autoplay timer is active, this will return a number representing the time left until the autoplay scrolls to the next snap. If the timer is not active, this will return `null`. Use this together with the [`autoplay:timerset`](/plugins/autoplay/#autoplaytimerset) and [`autoplay:timerstopped`](/plugins/autoplay/#autoplaytimerstopped) events to create a custom progress bar for autoplay.
+
+---
+
+## Events
+
+Below follows an exhaustive **list of all** `Autoplay` **events** together with information about how they work.
+
+---
+
+### autoplay:play
+
+<ApiMetaData firstRow={['Detail', 'null']} secondRow={['Cancellable', 'no']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:play', (emblaApi) => {})`}
+/>
+
+Fires when autoplay starts playing. When this event is triggered, the **autoplay timer is active**, and autoplay will select the next scroll snap and start scrolling to it when the [`delay`](/plugins/autoplay/#delay) has passed.
+
+---
+
+### autoplay:stop
+
+<ApiMetaData firstRow={['Detail', 'null']} secondRow={['Cancellable', 'no']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:stop', (emblaApi) => {})`}
+/>
+
+Fires when autoplay stops playing. When this event is triggered, the **autoplay timer is not active anymore**.
+
+---
+
+### autoplay:select
+
+<ApiMetaData
+  firstRow={['Detail', '{ targetSnap: number, sourceSnap: number }']}
+  secondRow={['Cancellable', 'no']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:select', (emblaApi, event) => {
+    const { targetSnap, sourceSnap } = event.detail
+})`}
+/>
+
+Fires directly after autoplay selects the next scroll snap target and just before it starts scrolling to it.
+
+---
+
+### autoplay:timerset
+
+<ApiMetaData
+  firstRow={['Detail', '{ startTime: number }']}
+  secondRow={['Cancellable', 'no']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:timerset', (emblaApi, event) => {
+    const { startTime } = event.detail
+})`}
+/>
+
+Fires when the autoplay timer is set. As soon as the timer is set, countdown to autoplay to the next scroll snap will begin.
+
+---
+
+### autoplay:timerstopped
+
+<ApiMetaData
+  firstRow={['Detail', '{ stopTime: number }']}
+  secondRow={['Cancellable', 'no']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:timerstopped', (emblaApi, event) => {
+    const { stopTime } = event.detail
+})`}
+/>
+
+Fires when the autoplay timer is stopped.
+
+---
+
+### autoplay:interaction
+
+<ApiMetaData
+  firstRow={[
+    'Detail',
+    `{ interaction: 'pointerdown' | 'pointerup' | 'mouseenter' | 'mouseleave' | 'slidefocus' | 'slidefocusout', originalEvent: EmblaEventModelType<'pointerdown'> | EmblaEventModelType<'pointerup'> | EmblaEventModelType<'slidefocus'> | MouseEvent | FocusEvent, isMouseOver: boolean, isPointerDown: boolean }`
+  ]}
+  secondRow={['Cancellable', 'no']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoplay:interaction', (emblaApi, event) => {
+    const { interaction, originalEvent, isMouseOver, isPointerDown } = event.detail
+})`}
+/>
+
+The event fires on different user interactions with the carousel. Use this event to customize how autoplay should respond to user interactions. The `isMouseOver` and `isPointerDown` properties indicate the current state of the mouse and pointer interactions.
+
+<Admonition type="note">
+  **Note:** The [`defaultInteraction`](/plugins/autoplay/#defaultinteraction)
+  option has to be set to `false` for this event to fire.
+</Admonition>
+
+---

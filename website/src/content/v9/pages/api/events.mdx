@@ -335,7 +335,7 @@ Runs when the carousel has been destroyed using the [`destroy`](/docs/api/method
   language="ts"
   hideLabel
   code={`emblaApi.on('select', (emblaApi, event) => {
-  const { targetSnap, sourceSnap } = event.detail
+    const { targetSnap, sourceSnap } = event.detail
 })`}
 />
 
@@ -353,7 +353,7 @@ Runs when the selected scroll snap changes. The select event is triggered by dra
   language="ts"
   hideLabel
   code={`emblaApi.on('scroll', (emblaApi, event) => {
-  const { isDragging } = event.detail
+    const { isDragging } = event.detail
 })`}
 />
 
@@ -384,7 +384,7 @@ Runs when the carousel has settled after scroll has been triggered. Please note 
   language="ts"
   hideLabel
   code={`emblaApi.on('resize', (emblaApi, event) => {
-  const entries = event.detail
+    const entries = event.detail
 })`}
 />
 
@@ -405,7 +405,7 @@ Runs when the carousel container or the slide sizes change. It's using [ResizeOb
   language="ts"
   hideLabel
   code={`emblaApi.on('slidesinview', (emblaApi, event) => {
-  const { slidesInView, slidesLeftView, slidesEnterView } = event.detail
+    const { slidesInView, slidesLeftView, slidesEnterView } = event.detail
 })`}
 />
 
@@ -423,7 +423,7 @@ Runs when any slide has **entered** or **exited** the viewport. `slidesInView` c
   language="ts"
   hideLabel
   code={`emblaApi.on('slideschanged', (emblaApi, event) => {
-  const mutationRecords = event.detail
+    const mutationRecords = event.detail
 })`}
 />
 
@@ -441,7 +441,7 @@ Runs when slides are added to, or removed from the carousel [container](/docs/ap
   language="ts"
   hideLabel
   code={`emblaApi.on('slidefocus', (emblaApi, event) => {
-  const focusEvent = event.detail
+    const focusEvent = event.detail
 })`}
 />
 
@@ -459,7 +459,7 @@ Runs when a slide receives focus. For example, when a focusable element like a b
   language="ts"
   hideLabel
   code={`emblaApi.on('pointerdown', (emblaApi, event) => {
-  const pointerEvent = event.detail
+    const pointerEvent = event.detail
 })`}
 />
 
@@ -477,7 +477,7 @@ Runs when the user has a pointer down on the carousel. It's triggered by a `touc
   language="ts"
   hideLabel
   code={`emblaApi.on('pointermove', (emblaApi, event) => {
-  const pointerEvent = event.detail
+    const pointerEvent = event.detail
 })`}
 />
 
@@ -495,7 +495,7 @@ Runs when the user is moving the pointer on the carousel. It's triggered by a `t
   language="ts"
   hideLabel
   code={`emblaApi.on('pointerup', (emblaApi, event) => {
-  const pointerEvent = event.detail
+    const pointerEvent = event.detail
 })`}
 />
 
@@ -513,8 +513,10 @@ Runs when the user has released the pointer from the carousel. It's triggered by
   language="ts"
   hideLabel
   code={`emblaApi.on('scrolloptimize', (emblaApi, event) => {
-  const { slidesInView, slidesLeftView } = event.detail
+    const { slidesInView, slidesLeftView } = event.detail
 })`}
 />
 
 Runs when the carousel applies or removes **GPU acceleration** to slides to **optimize scrolling performance**. This event is triggered with an in view offset to ensure smooth scrolling performance when slides are entering or leaving the viewport.
+
+---

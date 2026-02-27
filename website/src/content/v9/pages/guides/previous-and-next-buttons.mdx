@@ -25,7 +25,7 @@ import buttonsState_vue_01 from '@/content/v9/code-snippets/guides/previous-and-
 import buttonsState_solid_01 from '@/content/v9/code-snippets/guides/previous-and-next-buttons/buttons-state-solid-01.jsx'
 import buttonsState_svelte_01 from '@/content/v9/code-snippets/guides/previous-and-next-buttons/buttons-state-svelte-01.svelte'
 
-import { ExamplePreviousAndNextButtons } from '@/content/v9/examples/Guides/PreviousAndNextButtons/PreviousAndNextButtons'
+import { ExamplePreviousAndNextButtons } from '@/content/v9/examples/Guides/PreviousAndNextButtons/PreviousAndNextButtonsLazy'
 
 # Prev & Next Buttons
 
@@ -192,3 +192,5 @@ We'll handle this by toggling each button's state between **enabled** and **disa
 - **Button placement:** Place the prev/next buttons **outside** the Embla root element (the one passed to the initializer, e.g. `.embla__viewport`) to prevent accidental drag interactions.
 - **Looping carousels:** In **looping** carousels with enough slides to wrap around, the prev/next methods always trigger scrolling — buttons are never disabled.
 - **No-op behavior:** On **non-looping** carousels, calling [`goToPrev`](/docs/api/methods/#goToPrev) or [`goToNext`](/docs/api/methods/#goToNext) when already at the first or last slide has no effect. This is normal and ensures consistent, predictable behavior.
+
+---

@@ -1,16 +1,10 @@
-'use client'
-
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
-import {
-  EXAMPLES_WRAPPERS,
-  ExamplesSetupType
-} from '@/content/v9/examples/examples-utils'
-import { ExamplesLazy } from '@/content/v9/examples/ExamplesLazy'
-import CarouselAlignmentsContainScroll from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/AlignmentsContainScroll/EmblaCarousel'
+import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
+import CarouselAlignmentsInteractive from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/AlignmentsInteractive/EmblaCarousel'
 import {
   ALIGNMENT_INDICATOR_STYLES,
   ARROWS_STYLES,
@@ -21,12 +15,9 @@ import {
   examplesCarouselStyles
 } from '@/content/v9/examples/examples-carousel-styles'
 
-const ID = 'embla-carousel-alignments-contain-scroll'
+const ID = 'embla-carousel-alignments-interactive'
 const SLIDES = arrayFromNumber(8)
-const OPTIONS: EmblaOptionsType = {
-  align: 'center',
-  containScroll: 'trimSnaps'
-}
+const OPTIONS: EmblaOptionsType = { align: 'center', loop: true }
 
 const STYLES = examplesCarouselStyles(
   '70%',
@@ -47,26 +38,10 @@ const CONFIG: SandboxStaticSettingsType = {
   options: OPTIONS,
   styles: STYLES
 }
-const SANDBOXES = sandboxStaticSandboxes(
-  CONFIG,
-  'Guides/AlignmentsContainScroll'
-)
+const SANDBOXES = sandboxStaticSandboxes(CONFIG, 'Guides/AlignmentsInteractive')
 
 export const EXAMPLE: ExamplesSetupType = {
-  Carousel: CarouselAlignmentsContainScroll as ExamplesSetupType['Carousel'],
+  Carousel: CarouselAlignmentsInteractive as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
-}
-
-export function ExampleAlignmentsContainScroll() {
-  return (
-    <ExamplesLazy
-      wrapper={EXAMPLES_WRAPPERS.TWO_FORM_ROWS}
-      loader={() => {
-        return import(
-          '@/content/v9/examples/Guides/Alignments/AlignmentsContainScroll'
-        )
-      }}
-    />
-  )
 }

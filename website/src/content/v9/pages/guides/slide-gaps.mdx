@@ -19,8 +19,8 @@ import inViewConfiguration_vue_01 from '@/content/v9/code-snippets/guides/slide-
 import inViewConfiguration_solid_01 from '@/content/v9/code-snippets/guides/slide-gaps/in-view-configuration-solid-01.jsx'
 import inViewConfiguration_svelte_01 from '@/content/v9/code-snippets/guides/slide-gaps/in-view-configuration-svelte-01.svelte'
 
-import { ExampleSlideGapsInteractive } from '@/content/v9/examples/Guides/SlideGaps/SlideGapsInteractive'
-import { ExampleSlideGapsCssGap } from '@/content/v9/examples/Guides/SlideGaps/SlideGapsCssGap'
+import { ExampleSlideGapsInteractive } from '@/content/v9/examples/Guides/SlideGaps/SlideGapsInteractiveLazy'
+import { ExampleSlideGapsCssGap } from '@/content/v9/examples/Guides/SlideGaps/SlideGapsCssGapLazy'
 
 # Slide Gaps
 
@@ -167,3 +167,5 @@ A simple workaround is to add a **margin** to the last slide that matches the **
 - **Gap** will not apply between the first and last slide in **loop: true** unless additional **margin** is added.
 
 While both **gap** and **margin** can work, **padding on slides combined with a negative margin on the container** remains the most **robust, predictable, and maintenance-friendly approach**, which supports **looped**, **responsive**, and **SSR-enabled** carousels without the need for additional modifications.
+
+---

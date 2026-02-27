@@ -1,15 +1,9 @@
-'use client'
-
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from '@/utils/array'
 import { SandboxStaticSettingsType } from '@/content/v9/sandboxes/sandbox-utils'
 import { sandboxStaticSandboxes } from '@/content/v9/sandboxes/sandbox-static'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
-import {
-  EXAMPLES_WRAPPERS,
-  ExamplesSetupType
-} from '@/content/v9/examples/examples-utils'
-import { ExamplesLazy } from '@/content/v9/examples/ExamplesLazy'
+import { ExamplesSetupType } from '@/content/v9/examples/examples-utils'
 import CarouselSlideSizesInteractive from '@/content/v9/sandboxes/React/SandboxFilesSrc/Guides/SlideSizesInteractive/EmblaCarousel'
 import {
   ARROWS_STYLES,
@@ -48,17 +42,4 @@ export const EXAMPLE: ExamplesSetupType = {
   Carousel: CarouselSlideSizesInteractive as ExamplesSetupType['Carousel'],
   config: CONFIG,
   sandboxes: SANDBOXES
-}
-
-export function ExampleSlideSizesInteractive() {
-  return (
-    <ExamplesLazy
-      wrapper={EXAMPLES_WRAPPERS.ONE_FORM_ROW}
-      loader={() => {
-        return import(
-          '@/content/v9/examples/Guides/SlideSizes/SlideSizesInteractive'
-        )
-      }}
-    />
-  )
 }

@@ -25,7 +25,7 @@ import buttonsState_vue_01 from '@/content/v9/code-snippets/guides/dot-buttons/b
 import buttonsState_solid_01 from '@/content/v9/code-snippets/guides/dot-buttons/buttons-state-solid-01.jsx'
 import buttonsState_svelte_01 from '@/content/v9/code-snippets/guides/dot-buttons/buttons-state-svelte-01.svelte'
 
-import { ExampleDotButtons } from '@/content/v9/examples/Guides/DotButtons/DotButtons'
+import { ExampleDotButtons } from '@/content/v9/examples/Guides/DotButtons/DotButtonsLazy'
 
 # Dot Buttons
 
@@ -191,3 +191,5 @@ You can achieve this by toggling each button's state between **selected** and **
 - **Button placement:** Place the previous/next buttons **outside** the Embla root element (the one passed to the initializer, e.g., `.embla__viewport`) to avoid accidental drag interactions when users click them.
 - **Loop behavior:** When the carousel has `loop` enabled, [`goTo`](/docs/api/methods/#goTo) will automatically choose the **shortest path** to the target snap, scrolling forward or backward as needed.
 - **No-op behavior:** Calling [`goTo`](/docs/api/methods/#goTo) when the carousel is already at the given snap has **no effect**. This is expected and ensures navigation remains predictable and consistent.
+
+---
