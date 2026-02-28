@@ -23,4 +23,6 @@ export interface EmblaPluginsType {
   [key: string]: CreatePluginType<LoosePluginType, {}> | undefined
 }
 
-export type EmblaPluginType = EmblaPluginsType[keyof EmblaPluginsType]
+export type EmblaPluginType = NonNullable<
+  EmblaPluginsType[keyof EmblaPluginsType]
+>
