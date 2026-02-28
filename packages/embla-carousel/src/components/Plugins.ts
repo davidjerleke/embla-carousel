@@ -20,7 +20,7 @@ export type CreatePluginType<
 }
 
 export interface EmblaPluginsType {
-  [key: string]: CreatePluginType<LoosePluginType, {}>
+  [key: string]: CreatePluginType<LoosePluginType, {}> | undefined
 }
 
 export type EmblaPluginType = EmblaPluginsType[keyof EmblaPluginsType]

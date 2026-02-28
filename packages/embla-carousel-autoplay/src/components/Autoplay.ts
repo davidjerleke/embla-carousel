@@ -27,7 +27,7 @@ type AutoplayInteractionType = {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoplay: AutoplayType
+    autoplay: AutoplayType | undefined
   }
 
   interface EmblaEventListType {
