@@ -108,11 +108,12 @@ type PropType = PropsWithChildren<{
 }>
 
 export function SiteLogo(props: PropType) {
+  const { appearance, ...restProps } = props
   const { title } = useGlobalDataContext()
   const [hasLoaded, setHasLoaded] = useState(false)
-  const appearance = props.appearance || 'default'
-  const lightSvg = LOGO_SVGS[appearance].light
-  const darkSvg = LOGO_SVGS[appearance].dark
+  const appearanceOrDefault = appearance || 'default'
+  const lightSvg = LOGO_SVGS[appearanceOrDefault].light
+  const darkSvg = LOGO_SVGS[appearanceOrDefault].dark
   const svgOpacity = hasLoaded ? '0' : '1'
   const imageLightRef = useRef<HTMLImageElement>(null)
   const imageDarkRef = useRef<HTMLImageElement>(null)
@@ -127,19 +128,19 @@ export function SiteLogo(props: PropType) {
   }, [])
 
   return (
-    <SiteLogoWrapper {...props}>
+    <SiteLogoWrapper {...restProps}>
       <LogoLightIcon svg={lightSvg} fill={undefined} $opacity={svgOpacity} />
       <LogoDarkIcon svg={darkSvg} fill={undefined} $opacity={svgOpacity} />
 
       <LogoLightImage
         ref={imageLightRef}
-        src={LOGO_IMAGES[appearance].light}
+        src={LOGO_IMAGES[appearanceOrDefault].light}
         alt={alt}
         onLoad={() => setHasLoaded(true)}
       />
       <LogoDarkImage
         ref={imageDarkRef}
-        src={LOGO_IMAGES[appearance].dark}
+        src={LOGO_IMAGES[appearanceOrDefault].dark}
         alt={alt}
         onLoad={() => setHasLoaded(true)}
       />
