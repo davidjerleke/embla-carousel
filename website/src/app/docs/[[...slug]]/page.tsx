@@ -10,6 +10,8 @@ import { PageJsonLd } from '@/components/Page/PageJsonLd'
 import { PageMainContent } from '@/components/Page/PageMainContent'
 import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
 import { MdxStyles } from '@/components/Mdx/Styles'
+import { GLOBAL_DATA } from '@/utils/global-data'
+import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
 import {
   type DocsPageParamsType,
   getDocsPageContent,
@@ -24,7 +26,13 @@ export async function generateMetadata(
   const { params } = props
   const { slug } = await params
   const module = await getDocsPageContent(slug)
-  return getMetadataFromMdxContent(module)
+  const canonical = prefixSlugWithDocs(joinSlugs('', ...(slug || [])))
+
+  return {
+    ...getMetadataFromMdxContent(module),
+    metadataBase: GLOBAL_DATA.HOME_PAGE,
+    alternates: { canonical }
+  }
 }
 
 export default async function DocsPage(props: PropType) {

@@ -6,10 +6,16 @@ import { PAGE_LAYOUTS } from '@/utils/page'
 import { PageGrid } from '@/components/Page/PageGrid'
 import { PageJsonLd } from '@/components/Page/PageJsonLd'
 import { MdxStyles } from '@/components/Mdx/Styles'
+import { GLOBAL_DATA } from '@/utils/global-data'
 
 export async function generateMetadata(): Promise<Metadata> {
   const module = await getHomePageContent()
-  return getMetadataFromMdxContent(module)
+
+  return {
+    ...getMetadataFromMdxContent(module),
+    metadataBase: GLOBAL_DATA.HOME_PAGE,
+    alternates: { canonical: '/' }
+  }
 }
 
 export default async function HomePage() {

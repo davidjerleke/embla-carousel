@@ -1,9 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
-import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
+import { LATEST_VERSION } from '@/utils/version'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
-import { pathToSlug, prefixSlugWithDocs } from '@/utils/slug'
+import {
+  getSlugWithVersion,
+  pathToSlug,
+  prefixSlugWithDocs
+} from '@/utils/slug'
 import { getDocsPageContent } from '@/utils/docs-page'
 import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import {
@@ -17,8 +21,8 @@ export async function getDocsRoutes(
   slugOrEmpty?: string[]
 ): Promise<SidebarNavigationContextType> {
   const slug = slugOrEmpty || []
-  const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
-  const version = slugIncludesVersion ? slug[0] : LATEST_VERSION
+  const slugWithVersion = getSlugWithVersion(slug)
+  const version = slugWithVersion[0]
   const isLatestVersion = version === LATEST_VERSION
   const pagesDir = getVersionedPageFolderStaticPath(version)
   const flatRoutes: RouteType[] = []
@@ -49,12 +53,12 @@ export async function getDocsRoutes(
       const module = await getDocsPageContent(modulePathWithVersion)
 
       const slugWithoutTrailingSlash = slugPath.replace(/\/$/, '')
-      const slugWithVersion = isLatestVersion
+      const versionedSlugWhenNotLatest = isLatestVersion
         ? slugWithoutTrailingSlash
         : version + slugWithoutTrailingSlash
 
       const metadata = getMetadataFromMdxContent(module)
-      const slug = prefixSlugWithDocs(slugWithVersion)
+      const slug = prefixSlugWithDocs(versionedSlugWhenNotLatest)
       const removeVersionLevel = isLatestVersion ? 0 : 1
       const level = slug.split('/').filter(Boolean).length - removeVersionLevel
 

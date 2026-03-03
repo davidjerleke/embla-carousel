@@ -1,10 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
-import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
+import { LATEST_VERSION } from '@/utils/version'
 import { getMetadataFromMdxContent, MdxContentType } from '@/utils/mdx'
 import { GLOBAL_DATA } from '@/utils/global-data'
-import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
+import { getSlugWithVersion, joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
 import {
   CONTENT_FOLDER_NAME,
   getVersionedPageFolderStaticPath,
@@ -23,14 +23,13 @@ export async function getDocsPageFileStaticPath(
   slugOrEmpty?: string[]
 ): Promise<string> {
   const slug = slugOrEmpty || []
-  const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
+  const slugWithVersion = getSlugWithVersion(slug)
   const slugIsLatestVersion = slug[0] === LATEST_VERSION
 
   if (slugIsLatestVersion) {
     return ''
   }
 
-  const slugWithVersion = slugIncludesVersion ? slug : [LATEST_VERSION, ...slug]
   const version = slugWithVersion[0]
   const basePath = getVersionedPageFolderStaticPath(version)
 
@@ -61,8 +60,7 @@ export async function getDocsPageContent(
   slugOrEmpty?: string[]
 ): Promise<MdxContentType> {
   const slug = slugOrEmpty || []
-  const slugIncludesVersion = slug[0]?.match(VERSION_REGEX)
-  const slugWithVersion = slugIncludesVersion ? slug : [LATEST_VERSION, ...slug]
+  const slugWithVersion = getSlugWithVersion(slug)
   const version = slugWithVersion[0]
   const fileToFind = slugWithVersion.slice(1).join('/')
 
