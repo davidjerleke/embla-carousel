@@ -4,7 +4,7 @@ import { RouteType } from '@/utils/routes'
 import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
 import { getHomePageContent } from '@/utils/home-page'
 import { getDocsPageContent } from '@/utils/docs-page'
-import { prefixSlugWithDocs } from '@/utils/docs-routes'
+import { prefixSlugWithDocs } from '@/utils/slug'
 
 /* UTILS */
 export async function getRootRoutes(): Promise<SiteNavigationContextType> {

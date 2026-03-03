@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { getMetadataFromMdxContent, MdxContentType } from '@/utils/mdx'
 import { GLOBAL_DATA } from '@/utils/global-data'
-import { prefixSlugWithDocs } from '@/utils/docs-routes'
+import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
 import {
   CONTENT_FOLDER_NAME,
   getVersionedPageFolderStaticPath,
@@ -98,13 +98,13 @@ export async function getDocsPageJsonLd(
     GLOBAL_DATA
   const module = await getDocsPageContent(slug)
   const metadata = getMetadataFromMdxContent(module)
-  const pageSlug = prefixSlugWithDocs(slug.join('/'))
-  const pageUrl = `${HOME_PAGE}${pageSlug}`
+  const pageSlug = prefixSlugWithDocs(joinSlugs('', ...slug))
+  const pageUrl = joinSlugs(HOME_PAGE, pageSlug)
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'TechArticle',
-    '@id': `${pageUrl}/#article`,
+    '@id': joinSlugs(pageUrl, '#article'),
     headline: metadata.title,
     description: metadata.description,
     url: pageUrl,

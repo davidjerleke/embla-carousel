@@ -1,7 +1,7 @@
 import path from 'path'
 import { getDocsPageFileStaticPath } from '@/utils/docs-page'
 import { GLOBAL_DATA } from '@/utils/global-data'
-import { pathToSlug } from '@/utils/path-to-slug'
+import { joinSlugs, pathToSlug } from '@/utils/slug'
 
 /* CONSTS */
 export type DocsPagePaginationType = string
@@ -20,5 +20,5 @@ export async function getDocsPageEditThisPagePath(
   const relativePath = relativeFilePath[0]
   const relativeSlug = pathToSlug(relativePath)
 
-  return `${GLOBAL_DATA.URLS.GITHUB_ROOT}/${relativeSlug}`
+  return joinSlugs(GLOBAL_DATA.URLS.GITHUB_DOCUMENTATION, relativeSlug)
 }

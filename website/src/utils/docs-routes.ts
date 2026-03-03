@@ -3,7 +3,7 @@ import path from 'path'
 import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
-import { pathToSlug } from '@/utils/path-to-slug'
+import { pathToSlug, prefixSlugWithDocs } from '@/utils/slug'
 import { getDocsPageContent } from '@/utils/docs-page'
 import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import {
@@ -13,15 +13,6 @@ import {
 } from '@/utils/routes'
 
 /* UTILS */
-export function prefixSlugWithDocs(slugOrEmpty: string): string {
-  const slug = slugOrEmpty || ''
-  if (slug.startsWith('/docs')) return slug
-  if (!slug) return '/docs'
-
-  const separator = slug.startsWith('/') ? '' : '/'
-  return `/docs${separator}${slug}`
-}
-
 export async function getDocsRoutes(
   slugOrEmpty?: string[]
 ): Promise<SidebarNavigationContextType> {

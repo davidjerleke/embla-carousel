@@ -1,6 +1,6 @@
-import { getDocsRoutes, prefixSlugWithDocs } from '@/utils/docs-routes'
+import { getDocsRoutes } from '@/utils/docs-routes'
 import { createRoutesWithAdjacentChildren, RouteType } from '@/utils/routes'
-import { pathToSlug } from '@/utils/path-to-slug'
+import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
 
 /* CONSTS */
 export type DocsPagePaginationType = {
@@ -13,16 +13,12 @@ export async function getDocsPagePagination(
   slugOrEmpty?: string[]
 ): Promise<DocsPagePaginationType> {
   const slug = slugOrEmpty || []
-  const slugString = prefixSlugWithDocs(slug.join('/'))
-  const slugPath = pathToSlug(slugString)
+  const slugPath = prefixSlugWithDocs(joinSlugs('', ...slug))
   const { flatRoutes } = await getDocsRoutes(slugOrEmpty)
   const routes = createRoutesWithAdjacentChildren(flatRoutes)
   const index = routes.findIndex((route) => route.slug === slugPath)
   const next = routes[index + 1] || null
   const previous = routes[index - 1] || null
 
-  return {
-    next,
-    previous
-  }
+  return { next, previous }
 }

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { type MdxContentType } from '@/utils/mdx'
 import { GLOBAL_DATA } from '@/utils/global-data'
+import { joinSlugs } from '@/utils/slug'
 import {
   CONTENT_FOLDER_NAME,
   PAGES_FOLDER_NAME,
@@ -29,7 +30,7 @@ export async function getHomePageJsonLd(): Promise<string> {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
-    '@id': `${HOME_PAGE}/#software`,
+    '@id': joinSlugs(HOME_PAGE, '#software'),
     name: TITLE,
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Web',
