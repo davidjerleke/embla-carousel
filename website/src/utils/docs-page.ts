@@ -2,7 +2,9 @@ import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
-import { MdxContentType } from '@/utils/mdx'
+import { getMetadataFromMdxContent, MdxContentType } from '@/utils/mdx'
+import { GLOBAL_DATA } from '@/utils/global-data'
+import { prefixSlugWithDocs } from '@/utils/docs-routes'
 import {
   CONTENT_FOLDER_NAME,
   getVersionedPageFolderStaticPath,
@@ -37,9 +39,9 @@ export async function getDocsPageFileStaticPath(
   if (slugWithVersion.length === 1) {
     filePath = path.join(basePath, 'index.mdx')
   } else {
-    const fileToFind = slugWithVersion.slice(1).join('/')
+    const fileToFind = slugWithVersion.slice(1).join(path.sep)
     const mdxFile = path.join(basePath, `${fileToFind}.mdx`)
-    const indexFile = path.join(basePath, `${fileToFind}/index.mdx`)
+    const indexFile = path.join(basePath, fileToFind, 'index.mdx')
 
     const doesMdxFileExist = fs.existsSync(mdxFile)
     const doesIndexFileExist = !doesMdxFileExist && fs.existsSync(indexFile)
@@ -86,4 +88,46 @@ export async function getDocsPageContent(
       notFound()
     }
   }
+}
+
+export async function getDocsPageJsonLd(
+  slugOrEmpty?: string[]
+): Promise<string> {
+  const slug = slugOrEmpty || []
+  const { TITLE, HOME_PAGE, URLS, AUTHOR, SHARE_IMAGE, MASKABLE_ICON } =
+    GLOBAL_DATA
+  const module = await getDocsPageContent(slug)
+  const metadata = getMetadataFromMdxContent(module)
+  const pageSlug = prefixSlugWithDocs(slug.join('/'))
+  const pageUrl = `${HOME_PAGE}${pageSlug}`
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    '@id': `${pageUrl}/#article`,
+    headline: metadata.title,
+    description: metadata.description,
+    url: pageUrl,
+    codeRepository: URLS.GITHUB_ROOT,
+    image: SHARE_IMAGE,
+    logo: MASKABLE_ICON,
+    author: {
+      '@type': 'Person',
+      name: AUTHOR
+    },
+    publisher: {
+      '@type': 'Person',
+      name: AUTHOR
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': pageUrl
+    },
+    about: {
+      '@type': 'SoftwareApplication',
+      name: TITLE
+    }
+  }
+
+  return JSON.stringify(jsonLd)
 }

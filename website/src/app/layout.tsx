@@ -13,8 +13,6 @@ import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
 import { RoutesLoading } from '@/components/Routes/RoutesLoading'
 import { getRootRoutes } from '@/utils/root-routes'
 import { SiteNavigationProvider } from '@/components/SiteNavigation/SiteNavigationContext'
-import { GlobalDataProvider } from '@/components/Global/GlobalDataContext'
-import { getGlobalData } from '@/utils/global-data'
 import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
 import { ScrollToHashInit } from '@/components/ScrollToHash/ScrollToHashInit'
 
@@ -32,39 +30,36 @@ type PropType = {
 export default async function RootLayout(props: PropType) {
   const { children } = props
   const htmlClassNames = [interRoman.className, THEME_CLASSNAME_LIGHT].join(' ')
-  const globalData = getGlobalData()
   const routes = await getRootRoutes()
 
   return (
     <StyledComponentsRegistry>
-      <GlobalDataProvider data={globalData}>
-        <SiteNavigationProvider routes={routes}>
-          <ReduxProvider>
-            <GlobalStyles />
+      <SiteNavigationProvider routes={routes}>
+        <ReduxProvider>
+          <GlobalStyles />
 
-            <html lang="en" className={htmlClassNames}>
-              <head>
-                <Head />
-              </head>
+          <html lang="en" className={htmlClassNames}>
+            <head>
+              <Head />
+            </head>
 
-              <body>
-                <ThemeInit />
-                <KeyEventsInit />
-                <ScrollToHashInit />
-                <KeyEventsSkipToContent />
-                <NoScript />
-                <Header />
-                <RoutesLoading />
-                <SiteNavigation />
+            <body>
+              <ThemeInit />
+              <KeyEventsInit />
+              <ScrollToHashInit />
+              <KeyEventsSkipToContent />
+              <NoScript />
+              <Header />
+              <RoutesLoading />
+              <SiteNavigation />
 
-                {children}
+              {children}
 
-                <Footer />
-              </body>
-            </html>
-          </ReduxProvider>
-        </SiteNavigationProvider>
-      </GlobalDataProvider>
+              <Footer />
+            </body>
+          </html>
+        </ReduxProvider>
+      </SiteNavigationProvider>
     </StyledComponentsRegistry>
   )
 }

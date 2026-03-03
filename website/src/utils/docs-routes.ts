@@ -3,18 +3,23 @@ import path from 'path'
 import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
 import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
+import { pathToSlug } from '@/utils/path-to-slug'
+import { getDocsPageContent } from '@/utils/docs-page'
+import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import {
   createHierarchicalRoutes,
   RouteType,
   sortRoutesByOrder
 } from '@/utils/routes'
-import { SidebarNavigationContextType } from '@/components/SidebarNavigation/SidebarNavigationContext'
-import { getDocsPageContent } from '@/utils/docs-page'
 
 /* UTILS */
 export function prefixSlugWithDocs(slugOrEmpty: string): string {
   const slug = slugOrEmpty || ''
-  return path.join('/docs', slug)
+  if (slug.startsWith('/docs')) return slug
+  if (!slug) return '/docs'
+
+  const separator = slug.startsWith('/') ? '' : '/'
+  return `/docs${separator}${slug}`
 }
 
 export async function getDocsRoutes(
@@ -45,16 +50,17 @@ export async function getDocsRoutes(
         .replace(pagesDir, '')
         .replace(/(index)?\.mdx$/, '')
 
-      const modulePath = relativePath.split('/').filter(Boolean)
+      const slugPath = pathToSlug(relativePath)
+      const modulePath = slugPath.split('/').filter(Boolean)
       const modulePathWithVersion = isLatestVersion
         ? modulePath
         : [version, ...modulePath]
       const module = await getDocsPageContent(modulePathWithVersion)
 
-      const slugWithoutTrailingSlash = relativePath.replace(/\/$/, '')
+      const slugWithoutTrailingSlash = slugPath.replace(/\/$/, '')
       const slugWithVersion = isLatestVersion
         ? slugWithoutTrailingSlash
-        : path.join(version, slugWithoutTrailingSlash)
+        : version + slugWithoutTrailingSlash
 
       const metadata = getMetadataFromMdxContent(module)
       const slug = prefixSlugWithDocs(slugWithVersion)

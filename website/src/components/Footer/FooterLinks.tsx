@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { LinkBare } from '@/components/Link/LinkBare'
 import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
-import { URLS } from '@/utils/urls'
 import { IconWithText } from '@/components/Icon/IconWithText'
 import { BORDER_SIZES } from '@/utils/border'
 import { createGapStyles } from '@/utils/create-gap-styles'
+import { GLOBAL_DATA } from '@/utils/global-data'
 
 const LINK_SPACING = SPACINGS.FIVE
 const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
@@ -32,6 +32,7 @@ type PropType = {
 
 export function FooterLinks(props: PropType) {
   const { ...restProps } = props
+  const { URLS } = GLOBAL_DATA
 
   return (
     <FooterLinksWrapper {...restProps}>

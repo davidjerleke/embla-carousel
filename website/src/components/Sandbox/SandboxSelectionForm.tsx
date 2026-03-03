@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { SPACINGS } from '@/utils/spacings'
-import { URLS } from '@/utils/urls'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { ButtonPrimaryFilledWithLoading } from '@/components/Button/ButtonPrimaryFilled'
 import { createGapStyles } from '@/utils/create-gap-styles'
@@ -12,6 +11,7 @@ import {
 } from '@/content/v9/sandboxes/sandbox-utils'
 import { snakeCaseToKebabCase } from '@/utils/string-casing'
 import { SandboxSelectionInput } from '@/components/Sandbox/SandboxSelectionInput'
+import { GLOBAL_DATA } from '@/utils/global-data'
 
 const INPUT_RADIO_GROUP_NAME = 'choose-sandbox'
 
@@ -51,6 +51,7 @@ const SandboxSelection = styled.li`
 
 export function SandboxSelectionForm(props: PropType) {
   const { sandboxes = [] } = props
+  const { URLS } = GLOBAL_DATA
   const [sandboxKey, setSandboxKey] = useState<SandboxLabelKeyType | ''>('')
   const [sandbox, setSandbox] = useState('')
   const isLoading = !!(sandboxKey && !sandbox)

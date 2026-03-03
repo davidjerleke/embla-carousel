@@ -1,4 +1,4 @@
-import { URLS } from '@/utils/urls'
+import { GLOBAL_DATA } from '@/utils/global-data'
 import {
   SandboxModuleType,
   SandboxReactExtensionType,
@@ -11,5 +11,8 @@ export async function createSandboxReactFooter(
   const footer: SandboxModuleType = await import(
     `@/content/v9/sandboxes/React/SandboxFilesDist/Footer.${reactScriptExtension}`
   )
-  return footer.default.replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
+  return footer.default.replace(
+    SANDBOX_REGEX_REPOSITORY_URL,
+    GLOBAL_DATA.URLS.GITHUB_ROOT
+  )
 }

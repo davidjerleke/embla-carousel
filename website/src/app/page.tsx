@@ -1,9 +1,10 @@
 import { Metadata } from 'next'
-import { getHomePageContent } from '@/utils/home-page'
+import { getHomePageContent, getHomePageJsonLd } from '@/utils/home-page'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
 import { Hero } from '@/components/Hero/Hero'
 import { PAGE_LAYOUTS } from '@/utils/page'
 import { PageGrid } from '@/components/Page/PageGrid'
+import { PageJsonLd } from '@/components/Page/PageJsonLd'
 import { MdxStyles } from '@/components/Mdx/Styles'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,16 +14,21 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const { default: Page } = await getHomePageContent()
+  const jsonLd = await getHomePageJsonLd()
 
   return (
-    <PageGrid layout={PAGE_LAYOUTS.HOME}>
-      <Hero />
+    <>
+      <PageJsonLd jsonLd={jsonLd} />
 
-      {Page && (
-        <article>
-          <MdxStyles>{<Page />}</MdxStyles>
-        </article>
-      )}
-    </PageGrid>
+      <PageGrid layout={PAGE_LAYOUTS.HOME}>
+        <Hero />
+
+        {Page && (
+          <article>
+            <MdxStyles>{<Page />}</MdxStyles>
+          </article>
+        )}
+      </PageGrid>
+    </>
   )
 }

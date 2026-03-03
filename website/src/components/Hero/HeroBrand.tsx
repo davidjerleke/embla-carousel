@@ -6,9 +6,9 @@ import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { SiteLogo } from '@/components/SiteLogo/SiteLogo'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
-import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { PageMainContent } from '@/components/Page/PageMainContent'
+import { GLOBAL_DATA } from '@/utils/global-data'
 import {
   LinkButtonPrimaryFilled,
   LinkButtonPrimaryOutlined
@@ -118,18 +118,18 @@ const CtaWrapper = styled(PageMainContent)`
 `
 
 export function HeroBrand() {
-  const { title, description } = useGlobalDataContext()
+  const { TITLE, DESCRIPTION } = GLOBAL_DATA
 
   return (
     <HeroBrandWrapper>
       <HeroLogo appearance="blur" />
       <Content>
         <H1>
-          {title.split(' ').map((word, index) => (
+          {TITLE.split(' ').map((word, index) => (
             <span key={`${word}-${index}`}>{word}</span>
           ))}
         </H1>
-        <H2>{description}</H2>
+        <H2>{DESCRIPTION}</H2>
 
         <CtaWrapper as="ul">
           <li>

@@ -6,7 +6,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { BORDER_RADIUSES } from '@/utils/border'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { COLORS } from '@/utils/theme'
-import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
+import { GLOBAL_DATA } from '@/utils/global-data'
 
 const VersionBadgeWrapper = styled.div`
   ${CARD_STYLES};
@@ -26,11 +26,11 @@ type PropType = {}
 
 export function VersionBadge(props: PropType) {
   const { ...restProps } = props
-  const { latestVersion } = useGlobalDataContext()
+  const { LATEST_VERSION } = GLOBAL_DATA
 
   return (
     <VersionBadgeWrapper {...restProps}>
-      <VersionBadgeKey>Version:</VersionBadgeKey> {latestVersion}
+      <VersionBadgeKey>Version:</VersionBadgeKey> {LATEST_VERSION}
     </VersionBadgeWrapper>
   )
 }

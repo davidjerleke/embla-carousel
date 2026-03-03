@@ -6,7 +6,7 @@ import logoLightThemeDefaultUrl from '@/assets/images/embla-logo-light-theme.svg
 import logoDarkThemeDefaultUrl from '@/assets/images/embla-logo-dark-theme.svg'
 import logoLightThemeBlurUrl from '@/assets/images/embla-logo-light-theme-blur.svg'
 import logoDarkThemeBlurUrl from '@/assets/images/embla-logo-dark-theme-blur.svg'
-import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
+import { GLOBAL_DATA } from '@/utils/global-data'
 import { THEME_KEYS } from '@/utils/theme'
 import { LAYERS } from '@/utils/layers'
 import { Icon } from '@/components/Icon/Icon'
@@ -109,7 +109,7 @@ type PropType = PropsWithChildren<{
 
 export function SiteLogo(props: PropType) {
   const { appearance, ...restProps } = props
-  const { title } = useGlobalDataContext()
+  const { TITLE } = GLOBAL_DATA
   const [hasLoaded, setHasLoaded] = useState(false)
   const appearanceOrDefault = appearance || 'default'
   const lightSvg = LOGO_SVGS[appearanceOrDefault].light
@@ -117,7 +117,7 @@ export function SiteLogo(props: PropType) {
   const svgOpacity = hasLoaded ? '0' : '1'
   const imageLightRef = useRef<HTMLImageElement>(null)
   const imageDarkRef = useRef<HTMLImageElement>(null)
-  const alt = `An illustrated atom like body which is the logotype of ${title}`
+  const alt = `An illustrated atom like body which is the logotype of ${TITLE}`
 
   useEffect(() => {
     const imageLight = imageLightRef.current

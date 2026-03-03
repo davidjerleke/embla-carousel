@@ -12,7 +12,7 @@ import {
   examplesOneFormRow
 } from '@/content/v9/examples/examples-carousel-wrapper-styles'
 
-const ROOT_MARGIN_VERTICAL = 190
+const ROOT_MARGIN_VERTICAL = 0
 
 export const EXAMPLES_INTERSECTION_OPTIONS: IntersectionOptions = {
   rootMargin: `${ROOT_MARGIN_VERTICAL}px 0px ${ROOT_MARGIN_VERTICAL}px 0px`

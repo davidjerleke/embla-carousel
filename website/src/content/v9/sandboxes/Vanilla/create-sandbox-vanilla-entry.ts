@@ -1,5 +1,5 @@
 import { THEME_PREFIX } from '@/utils/theme'
-import { URLS } from '@/utils/urls'
+import { GLOBAL_DATA } from '@/utils/global-data'
 import { SANDBOX_VANILLA_FOLDERS } from '@/content/v9/sandboxes/Vanilla/sandbox-vanilla-folders'
 import { getThemeFromDocument } from '@/utils/get-theme-from-document'
 import { kebabCaseToPascalCase } from '@/utils/string-casing'
@@ -28,6 +28,6 @@ export async function createSandboxVanillaEntry(
     .replace(SANDBOX_REGEX_THEME, theme)
     .replace(SANDBOX_REGEX_TITLE, title)
     .replace(SANDBOX_SCRIPT_SRC_REGEX, scriptSrc)
-    .replace(SANDBOX_REGEX_REPOSITORY_URL, URLS.GITHUB_ROOT)
+    .replace(SANDBOX_REGEX_REPOSITORY_URL, GLOBAL_DATA.URLS.GITHUB_ROOT)
     .replace(SANDBOX_CODE_REGEX, carouselHtml)
 }

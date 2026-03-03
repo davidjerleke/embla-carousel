@@ -1,18 +1,48 @@
 import packageJson from '../../../packages/embla-carousel/package.json'
-import { GlobalDataContextType } from '@/components/Global/GlobalDataContext'
 import { capitalizeFirstLetter } from '@/utils/string-casing'
 
-/* UTILS */
-export function getGlobalData(): GlobalDataContextType {
-  const title = packageJson.name
-    .split('-')
-    .map((part) => capitalizeFirstLetter(part))
-    .join(' ')
+/* CONSTS */
+const GIT_PREFIX_REGEX = /^(git\+)/ // Matches git+ from git+https://github.com/davidjerleke/embla-carousel
+const GITHUB_ROOT_REGEX = 'https://github.com/'
 
-  return {
-    title,
-    description: packageJson.description,
-    author: packageJson.author,
-    latestVersion: packageJson.version
-  }
+const GITHUB_ROOT = packageJson.repository.url.replace(GIT_PREFIX_REGEX, '')
+const [AUTHOR, REPOSITORY] = GITHUB_ROOT.replace(GITHUB_ROOT_REGEX, '').split(
+  '/'
+)
+
+const URLS = {
+  GITHUB_ROOT,
+  GITHUB_DISCUSSIONS: `${GITHUB_ROOT}/discussions`,
+  GITHUB_DOCUMENTATION: `${GITHUB_ROOT}/blob/master`,
+  GITHUB_SPONSORS_PAGE: `https://github.com/sponsors/${AUTHOR}`,
+  ALGOLIA_DOCSEARCH: `https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js`,
+  NPM_PACKAGE: `https://www.npmjs.com/package/${REPOSITORY}`,
+  CODESANDBOX_DEFINE: `https://codesandbox.io/api/v1/sandboxes/define`
+}
+
+type GlobalDataType = {
+  TITLE: string
+  DESCRIPTION: string
+  AUTHOR: string
+  LATEST_VERSION: string
+  HOME_PAGE: string
+  SHARE_IMAGE: string
+  MASKABLE_ICON: string
+  URLS: typeof URLS
+}
+
+const title = packageJson.name
+  .split('-')
+  .map((part) => capitalizeFirstLetter(part))
+  .join(' ')
+
+export const GLOBAL_DATA: GlobalDataType = {
+  TITLE: title,
+  DESCRIPTION: packageJson.description,
+  AUTHOR: packageJson.author,
+  LATEST_VERSION: packageJson.version,
+  HOME_PAGE: packageJson.homepage,
+  SHARE_IMAGE: `${packageJson.homepage}/share-image.png`,
+  MASKABLE_ICON: `${packageJson.homepage}/maskable.png`,
+  URLS
 }

@@ -7,7 +7,7 @@ import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_SIZES } from '@/utils/border'
 import { LinkBare } from '@/components/Link/LinkBare'
 import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
-import { useGlobalDataContext } from '@/components/Global/GlobalDataContext'
+import { GLOBAL_DATA } from '@/utils/global-data'
 import {
   LogoDarkIcon,
   LogoDarkImage,
@@ -61,7 +61,7 @@ const HeaderLogoText = styled.span`
 `
 
 export function HeaderLogo() {
-  const { title } = useGlobalDataContext()
+  const { TITLE } = GLOBAL_DATA
   const { homeRoute } = useSiteNavigationContext()
 
   return (
@@ -70,7 +70,7 @@ export function HeaderLogo() {
       href={homeRoute.slug}
     >
       <HeaderLogoImage />
-      <HeaderLogoText>{title}</HeaderLogoText>
+      <HeaderLogoText>{TITLE}</HeaderLogoText>
     </HeaderLogoWrapper>
   )
 }
