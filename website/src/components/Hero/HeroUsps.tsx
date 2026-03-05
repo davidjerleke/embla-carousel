@@ -55,7 +55,7 @@ export function HeroUsps() {
   return (
     <HeroUspsWrapper>
       <Usp>
-        <LinkCard href="/api/">
+        <LinkCard href="/docs/api/">
           <div>
             <UspHeader>Highly Extensible</UspHeader>
             <UspText>
@@ -65,7 +65,7 @@ export function HeroUsps() {
         </LinkCard>
       </Usp>
       <Usp>
-        <LinkCard href="/plugins/">
+        <LinkCard href="/docs/plugins/">
           <div>
             <UspHeader>Plugin System</UspHeader>
             <UspText>
@@ -75,10 +75,10 @@ export function HeroUsps() {
         </LinkCard>
       </Usp>
       <Usp>
-        <LinkCard href="/examples/generator/">
+        <LinkCard href="/docs/guides/server-side-rendering">
           <div>
-            <UspHeader>Carousel generator</UspHeader>
-            <UspText>Create your own customized carousel in no time.</UspText>
+            <UspHeader>Server-Side Rendering</UspHeader>
+            <UspText>Works seamlessly with SSR frameworks.</UspText>
           </div>
         </LinkCard>
       </Usp>

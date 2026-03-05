@@ -1,8 +1,13 @@
 import path from 'path'
 import { arrayHasItems } from '@/utils/array'
-import { LATEST_VERSION, VERSION_REGEX } from '@/utils/version'
+import {
+  DOCS_LATEST_VERSION,
+  DOCS_VERSIONS,
+  VersionType
+} from '@/utils/global-data'
 
 /* CONSTS */
+const SLUG_VERSION_REGEX = /^v\d+$/
 const LEADING_OR_TRAILING_SLASH_REGEX = /^\/|\/$/g
 
 /* UTILS */
@@ -30,6 +35,17 @@ export function prefixSlugWithDocs(slugOrEmpty: string): string {
 
 export function getSlugWithVersion(slugOrEmpty?: string[]): string[] {
   const slug = slugOrEmpty || []
-  const slugStartsWithVersion = !!slug[0]?.match(VERSION_REGEX)
-  return slugStartsWithVersion ? slug : [LATEST_VERSION, ...slug]
+  const slugStartsWithVersion = !!slug[0]?.match(SLUG_VERSION_REGEX)
+  const latestVersionSlug = `v${DOCS_LATEST_VERSION.MAJOR}`
+  return slugStartsWithVersion ? slug : [latestVersionSlug, ...slug]
+}
+
+export function getVersionFromPathname(pathnameOrEmpty: string): VersionType {
+  const pathname = pathnameOrEmpty || ''
+  const regex = new RegExp(`${prefixSlugWithDocs('')}\/v\\d+/?`)
+
+  const match = pathname.match(regex)?.[0] || ''
+  const slugNoTrailingSlash = match.replace(/\/$/, '')
+  const version = DOCS_VERSIONS.find(({ SLUG }) => SLUG === slugNoTrailingSlash)
+  return version || DOCS_LATEST_VERSION
 }

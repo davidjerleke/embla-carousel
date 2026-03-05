@@ -29,9 +29,6 @@
     <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
     </strong>
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
-    </strong>
   </p>
 </div>
 

@@ -8,7 +8,7 @@ import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { PageMainContent } from '@/components/Page/PageMainContent'
-import { GLOBAL_DATA } from '@/utils/global-data'
+import { GLOBAL_DATA, DOCS_LATEST_VERSION } from '@/utils/global-data'
 import {
   LinkButtonPrimaryFilled,
   LinkButtonPrimaryOutlined
@@ -138,8 +138,8 @@ export function HeroBrand() {
             </LinkButtonPrimaryFilled>
           </li>
           <li>
-            <LinkButtonPrimaryOutlined href="/examples/generator/">
-              Generator
+            <LinkButtonPrimaryOutlined href={DOCS_LATEST_VERSION.SLUG}>
+              Get started
             </LinkButtonPrimaryOutlined>
           </li>
         </CtaWrapper>

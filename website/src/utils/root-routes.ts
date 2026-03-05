@@ -1,10 +1,9 @@
 import { getMetadataFromMdxContent } from '@/utils/mdx'
-import { GLOBAL_DATA } from '@/utils/global-data'
+import { GLOBAL_DATA, DOCS_LATEST_VERSION } from '@/utils/global-data'
 import { RouteType } from '@/utils/routes'
 import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
 import { getHomePageContent } from '@/utils/home-page'
 import { getDocsPageContent } from '@/utils/docs-page'
-import { prefixSlugWithDocs } from '@/utils/slug'
 
 /* UTILS */
 export async function getRootRoutes(): Promise<SiteNavigationContextType> {
@@ -31,7 +30,7 @@ export async function getRootRoutes(): Promise<SiteNavigationContextType> {
     level: 1,
     order: 0,
     children: [],
-    slug: prefixSlugWithDocs('')
+    slug: DOCS_LATEST_VERSION.SLUG
   }
 
   const gitHubRoute: RouteType = {

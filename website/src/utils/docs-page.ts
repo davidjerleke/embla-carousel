@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { notFound } from 'next/navigation'
-import { LATEST_VERSION } from '@/utils/version'
+import { DOCS_LATEST_VERSION } from '@/utils/global-data'
 import { getMetadataFromMdxContent, MdxContentType } from '@/utils/mdx'
 import { GLOBAL_DATA } from '@/utils/global-data'
 import { getSlugWithVersion, joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
@@ -24,7 +24,7 @@ export async function getDocsPageFileStaticPath(
 ): Promise<string> {
   const slug = slugOrEmpty || []
   const slugWithVersion = getSlugWithVersion(slug)
-  const slugIsLatestVersion = slug[0] === LATEST_VERSION
+  const slugIsLatestVersion = slug[0] === `v${DOCS_LATEST_VERSION.MAJOR}`
 
   if (slugIsLatestVersion) {
     return ''

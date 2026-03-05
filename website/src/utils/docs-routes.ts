@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { getVersionedPageFolderStaticPath } from '@/utils/content-path'
-import { LATEST_VERSION } from '@/utils/version'
+import { DOCS_LATEST_VERSION } from '@/utils/global-data'
 import { getMetadataFromMdxContent } from '@/utils/mdx'
 import {
   getSlugWithVersion,
@@ -23,7 +23,7 @@ export async function getDocsRoutes(
   const slug = slugOrEmpty || []
   const slugWithVersion = getSlugWithVersion(slug)
   const version = slugWithVersion[0]
-  const isLatestVersion = version === LATEST_VERSION
+  const isLatestVersion = version === `v${DOCS_LATEST_VERSION.MAJOR}`
   const pagesDir = getVersionedPageFolderStaticPath(version)
   const flatRoutes: RouteType[] = []
 
