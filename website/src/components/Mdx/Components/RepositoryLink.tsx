@@ -2,11 +2,14 @@
 
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { LinkBare, PropType as LinkPropType } from '@/components/Link/LinkBare'
+import { LinkBare } from '@/components/Link/LinkBare'
 import { IconWithText } from '@/components/Icon/IconWithText'
 import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
 import { FONT_SIZES } from '@/utils/font-sizes'
+import { joinSlugs } from '@/utils/slug'
+import { isExternalLink } from '@/utils/link'
+import { GLOBAL_DATA } from '@/utils/global-data'
 
 const RepositoryLinkWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_LOW_CONTRAST};
@@ -18,16 +21,19 @@ const RepositoryLinkWrapper = styled(LinkBare)`
 `
 
 type PropType = PropsWithChildren<{
-  href: LinkPropType['href']
+  href: string
 }>
 
 export function RepositoryLink(props: PropType) {
   const { href, children, ...restProps } = props
+  const linkHref = isExternalLink(href)
+    ? href
+    : joinSlugs(GLOBAL_DATA.URLS.GITHUB_PACKAGES, href)
 
   return (
-    <RepositoryLinkWrapper href={href} {...restProps}>
+    <RepositoryLinkWrapper href={linkHref} {...restProps}>
       <IconWithText iconSvg="github" iconSize="1.5rem">
-        {children}
+        View plugin on GitHub
       </IconWithText>
     </RepositoryLinkWrapper>
   )

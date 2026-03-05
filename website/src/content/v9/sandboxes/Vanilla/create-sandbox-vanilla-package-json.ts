@@ -1,4 +1,4 @@
-import docsPackageJson from '@/../package.json'
+import docsPackageJson from '@root/package.json'
 import { kebabCaseToPascalCase } from '@/utils/string-casing'
 import {
   sandboxLanguageUtils,

@@ -1,4 +1,4 @@
-import docsPackageJson from '@/../package.json'
+import docsPackageJson from '@root/package.json'
 import { SANDBOX_REACT_FOLDERS } from '@/content/v9/sandboxes/React/sandbox-react-folders'
 import { kebabCaseToPascalCase } from '@/utils/string-casing'
 import {

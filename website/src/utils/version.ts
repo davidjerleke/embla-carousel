@@ -1,4 +1,4 @@
-import packageJson from '@/../package.json'
+import packageJson from '@root/package.json'
 
 /* CONSTS */
 export const LATEST_VERSION = `v${packageJson.version.split('.')[0]}`

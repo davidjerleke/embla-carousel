@@ -1,4 +1,4 @@
-import docsPackageJson from '@/../package.json'
+import docsPackageJson from '@root/package.json'
 import { EmblaOptionsType } from 'embla-carousel'
 import { loadPrettier } from '@/utils/load-prettier'
 import { SPACINGS } from '@/utils/spacings'

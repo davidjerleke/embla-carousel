@@ -1,4 +1,4 @@
-import packageJson from '../../../packages/embla-carousel/package.json'
+import packageJson from '@packages/embla-carousel/package.json'
 import { capitalizeFirstLetter } from '@/utils/string-casing'
 import { joinSlugs } from '@/utils/slug'
 
@@ -14,6 +14,7 @@ const [AUTHOR, REPOSITORY] = GITHUB_ROOT.replace(GITHUB_ROOT_REGEX, '').split(
 const URLS = {
   GITHUB_ROOT,
   GITHUB_DOCUMENTATION: joinSlugs(GITHUB_ROOT, 'blob', 'master'),
+  GITHUB_PACKAGES: joinSlugs(GITHUB_ROOT, 'tree', 'master', 'packages'),
   GITHUB_SPONSORS_PAGE: joinSlugs('https://github.com/sponsors', AUTHOR),
   ALGOLIA_DOCSEARCH: `https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js`,
   NPM_PACKAGE: joinSlugs('https://www.npmjs.com/package', REPOSITORY),

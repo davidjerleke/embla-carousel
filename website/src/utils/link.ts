@@ -1,7 +1,11 @@
 /* CONSTS */
-const INTERNAL_LINK_REGEX = /^\/(?!\/)|^#/
+const EXTERNAL_LINK_REGEX = /^https?:\/\/|^\/\//
 
 /* UTILS */
 export function isInternalLink(href: string): boolean {
-  return INTERNAL_LINK_REGEX.test(href)
+  return !isExternalLink(href)
+}
+
+export function isExternalLink(href: string): boolean {
+  return EXTERNAL_LINK_REGEX.test(href)
 }

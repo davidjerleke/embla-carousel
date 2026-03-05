@@ -11,13 +11,12 @@ import classNamesInstallation_npm_01 from '@/content/v9/code-snippets/plugins/cl
 import classNamesInstallation_yarn_01 from '@/content/v9/code-snippets/plugins/class-names/installation-yarn-01.sh'
 import classNamesInstallation_pnpm_01 from '@/content/v9/code-snippets/plugins/class-names/installation-pnpm-01.sh'
 
+import packageJson from '@packages/embla-carousel-class-names/package.json'
 import { ExampleClassNames } from '@/content/v9/examples/Predefined/Plugins/ClassNamesLazy'
 
 # Class Names
 
-<RepositoryLink to="https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-class-names">
-  View plugin on GitHub
-</RepositoryLink>
+<RepositoryLink href={packageJson.name} />
 
 The Class Names plugin is a utility for Embla Carousel that automatically adds and removes CSS class names based on the carousel's state, making it easy to style active, in-view, or selected slides.
 
