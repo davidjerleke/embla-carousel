@@ -4,8 +4,12 @@
   const prevButtonNode = wrapperNode.querySelector('.embla__prev')
   const nextButtonNode = wrapperNode.querySelector('.embla__next')
 
-  const emblaApi = EmblaCarousel(viewportNode, { loop: false })
+  const emblaApi = EmblaCarousel(viewportNode, { loop: false }, [
+    EmblaCarouselAutoplay()
+  ])
 
-  prevButtonNode.addEventListener('click', () => emblaApi.goToPrev(), false)
-  nextButtonNode.addEventListener('click', () => emblaApi.goToNext(), false)
+  prevButtonNode.addEventListener('click', () => emblaApi.scrollPrev(), false)
+  nextButtonNode.addEventListener('click', () => emblaApi.scrollNext(), false)
+
+  emblaApi.plugins().autoplay?.play()
 </script>

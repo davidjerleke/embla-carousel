@@ -1,0 +1,1 @@
+pnpm add embla-carousel-vue
