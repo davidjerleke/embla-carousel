@@ -16,7 +16,7 @@ const createDotButtonHtml = (emblaApi, dotsNode) => {
 
 const addDotButtonClickHandlers = (emblaApi, dotNodes) => {
   dotNodes.forEach((dotNode, index) => {
-    dotNode.addEventListener('click', () => emblaApi.scrollToSnap(index), false)
+    dotNode.addEventListener('click', () => emblaApi.goTo(index), false)
   })
 }
 

@@ -6,12 +6,12 @@ const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 const prevButtonDisabled = ref(true)
 const nextButtonDisabled = ref(true)
 
-const goToPrev = () => emblaApi.value?.goToPrev()
-const goToNext = () => emblaApi.value?.goToNext()
+const scrollPrev = () => emblaApi.value?.scrollPrev()
+const scrollNext = () => emblaApi.value?.scrollNext()
 
 const toggleButtonsDisabled = (emblaApi) => {
-  prevButtonDisabled.value = !emblaApi.canGoToPrev()
-  nextButtonDisabled.value = !emblaApi.canGoToNext()
+  prevButtonDisabled.value = !emblaApi.canScrollPrev()
+  nextButtonDisabled.value = !emblaApi.canScrollNext()
 }
 
 watch(
@@ -20,7 +20,7 @@ watch(
     if (!api) return
 
     toggleButtonsDisabled(api)
-    api.on('reinit', toggleButtonsDisabled)
+    api.on('reInit', toggleButtonsDisabled)
     api.on('select', toggleButtonsDisabled)
   },
   { immediate: true }
@@ -39,14 +39,14 @@ watch(
 
     <button
       class="embla__prev"
-      @click="goToPrev"
+      @click="scrollPrev"
       :disabled="prevButtonDisabled"
     >
       Scroll to prev
     </button>
     <button
       class="embla__next"
-      @click="goToNext"
+      @click="scrollNext"
       :disabled="nextButtonDisabled"
     >
       Scroll to next

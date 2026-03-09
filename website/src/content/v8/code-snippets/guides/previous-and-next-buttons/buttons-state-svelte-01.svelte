@@ -6,19 +6,19 @@
   let nextButtonDisabled = true
   let options = { loop: false }
 
-  const goToPrev = () => emblaApi?.goToPrev()
-  const goToNext = () => emblaApi?.goToNext()
+  const scrollPrev = () => emblaApi?.scrollPrev()
+  const scrollNext = () => emblaApi?.scrollNext()
 
   const toggleButtonsDisabled = (emblaApi) => {
-    prevButtonDisabled = !emblaApi.canGoToPrev()
-    nextButtonDisabled = !emblaApi.canGoToNext()
+    prevButtonDisabled = !emblaApi.canScrollPrev()
+    nextButtonDisabled = !emblaApi.canScrollNext()
   }
 
   const onInit = (event) => {
     emblaApi = event.detail
 
     toggleButtonsDisabled(emblaApi)
-    emblaApi.on('reinit', toggleButtonsDisabled)
+    emblaApi.on('reInit', toggleButtonsDisabled)
     emblaApi.on('select', toggleButtonsDisabled)
   }
 </script>
@@ -26,7 +26,7 @@
 <div class="embla">
   <div
     class="embla__viewport"
-    on:emblainit={onInit}
+    on:emblaInit={onInit}
     use:useEmblaCarousel={{ options }}
   >
     <div class="embla__container">
@@ -36,10 +36,18 @@
     </div>
   </div>
 
-  <button class="embla__prev" on:click={goToPrev} disabled={prevButtonDisabled}>
+  <button
+    class="embla__prev"
+    on:click={scrollPrev}
+    disabled={prevButtonDisabled}
+  >
     Scroll to prev
   </button>
-  <button class="embla__next" on:click={goToNext} disabled={nextButtonDisabled}>
+  <button
+    class="embla__next"
+    on:click={scrollNext}
+    disabled={nextButtonDisabled}
+  >
     Scroll to next
   </button>
 </div>

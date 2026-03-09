@@ -9,21 +9,21 @@ let dotNodes = []
 
 const createDotButtonHtml = (emblaApi, dotsNode) => {
   const dotTemplate = document.getElementById('embla-dot-template')
-  const snapList = emblaApi.snapList()
+  const snapList = emblaApi.scrollSnapList()
   dotsNode.innerHTML = snapList.reduce((acc) => acc + dotTemplate.innerHTML, '')
   return Array.from(dotsNode.querySelectorAll('.embla__dot'))
 }
 
 const addDotButtonClickHandlers = (emblaApi, dotNodes) => {
   dotNodes.forEach((dotNode, index) => {
-    dotNode.addEventListener('click', () => emblaApi.scrollToSnap(index), false)
+    dotNode.addEventListener('click', () => emblaApi.scrollTo(index), false)
   })
 }
 
 const toggleDotButtonsActive = (emblaApi, dotNodes) => {
   if (!dotNodes.length) return
-  const previous = emblaApi.previousSnap()
-  const selected = emblaApi.selectedSnap()
+  const previous = emblaApi.previousScrollSnap()
+  const selected = emblaApi.selectedScrollSnap()
   dotNodes[previous].classList.remove('embla__dot--selected')
   dotNodes[selected].classList.add('embla__dot--selected')
 }
@@ -35,5 +35,5 @@ const createAndSetupDotButtons = (emblaApi, dotsNode) => {
 }
 
 createAndSetupDotButtons(emblaApi, dotsNode)
-emblaApi.on('reinit', () => createAndSetupDotButtons(emblaApi, dotsNode))
+emblaApi.on('reInit', () => createAndSetupDotButtons(emblaApi, dotsNode))
 emblaApi.on('select', (emblaApi) => toggleDotButtonsActive(emblaApi, dotNodes))

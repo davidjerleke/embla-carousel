@@ -6,9 +6,10 @@
   let scrollSnaps = []
   let selectedSnap = 0
 
-  const goTo = (index) => emblaApi?.goTo(index)
-  const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())
-  const setActiveSnap = (emblaApi) => (selectedSnap = emblaApi.selectedSnap())
+  const scrollTo = (index) => emblaApi?.scrollTo(index)
+  const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.scrollSnapList())
+  const setActiveSnap = (emblaApi) =>
+    (selectedSnap = emblaApi.selectedScrollSnap())
 
   const onInit = (event) => {
     emblaApi = event.detail
@@ -16,8 +17,8 @@
     setupSnaps(emblaApi)
     setActiveSnap(emblaApi)
 
-    emblaApi.on('reinit', setupSnaps)
-    emblaApi.on('reinit', setActiveSnap)
+    emblaApi.on('reInit', setupSnaps)
+    emblaApi.on('reInit', setActiveSnap)
     emblaApi.on('select', setActiveSnap)
   }
 </script>
@@ -25,7 +26,7 @@
 <div class="embla">
   <div
     class="embla__viewport"
-    on:emblainit={onInit}
+    on:emblaInit={onInit}
     use:useEmblaCarousel={{ options }}
   >
     <div class="embla__container">
@@ -40,7 +41,7 @@
       <button
         class="embla__dot"
         class:embla__dot--selected={index === selectedSnap}
-        on:click={() => goTo(index)}
+        on:click={() => scrollTo(index)}
       >
         <!-- Button content -->
       </button>

@@ -6,10 +6,10 @@ const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
 const scrollSnaps = ref([])
 const selectedSnap = ref(0)
 
-const goTo = (index) => emblaApi.value?.goTo(index)
-const setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.snapList())
+const scrollTo = (index) => emblaApi.value?.scrollTo(index)
+const setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.scrollSnapList())
 const setActiveSnap = (emblaApi) =>
-  (selectedSnap.value = emblaApi.selectedSnap())
+  (selectedSnap.value = emblaApi.selectedScrollSnap())
 
 watch(
   emblaApi,
@@ -19,8 +19,8 @@ watch(
     setupSnaps(api)
     setActiveSnap(api)
 
-    api.on('reinit', setupSnaps)
-    api.on('reinit', setActiveSnap)
+    api.on('reInit', setupSnaps)
+    api.on('reInit', setActiveSnap)
     api.on('select', setActiveSnap)
   },
   { immediate: true }
@@ -45,7 +45,7 @@ watch(
         ]"
         :key="index"
         v-for="(_, index) in scrollSnaps"
-        @click="goTo(index)"
+        @click="scrollTo(index)"
       >
         <!-- Button content -->
       </button>

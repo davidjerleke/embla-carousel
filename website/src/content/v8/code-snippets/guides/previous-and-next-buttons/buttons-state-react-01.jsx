@@ -6,19 +6,19 @@ export function EmblaCarousel() {
   const [prevButtonDisabled, setPrevButtonDisabled] = useState(true)
   const [nextButtonDisabled, setNextButtonDisabled] = useState(true)
 
-  const goToPrev = () => emblaApi?.goToPrev()
-  const goToNext = () => emblaApi?.goToNext()
+  const scrollPrev = () => emblaApi?.scrollPrev()
+  const scrollNext = () => emblaApi?.scrollNext()
 
   const toggleButtonsDisabled = (emblaApi) => {
-    setPrevButtonDisabled(!emblaApi.canGoToPrev())
-    setNextButtonDisabled(!emblaApi.canGoToNext())
+    setPrevButtonDisabled(!emblaApi.canScrollPrev())
+    setNextButtonDisabled(!emblaApi.canScrollNext())
   }
 
   useEffect(() => {
     if (!emblaApi) return
 
     toggleButtonsDisabled(emblaApi)
-    emblaApi.on('reinit', toggleButtonsDisabled)
+    emblaApi.on('reInit', toggleButtonsDisabled)
     emblaApi.on('select', toggleButtonsDisabled)
   }, [emblaApi])
 
@@ -34,14 +34,14 @@ export function EmblaCarousel() {
 
       <button
         className="embla__prev"
-        onClick={goToPrev}
+        onClick={scrollPrev}
         disabled={prevButtonDisabled}
       >
         Scroll to prev
       </button>
       <button
         className="embla__next"
-        onClick={goToNext}
+        onClick={scrollNext}
         disabled={nextButtonDisabled}
       >
         Scroll to next
