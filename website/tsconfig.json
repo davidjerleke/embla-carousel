@@ -22,7 +22,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@packages/*": ["../packages/*"],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@vendor/*": ["./vendor/*"]
     }
   },
   "include": [
