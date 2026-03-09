@@ -10,14 +10,15 @@ export const useGroupIndicator = (
 
   const createGroupIndicatorClassNames = useCallback(
     (emblaApi: EmblaCarouselType) => {
-      const { scrollSnapList } = emblaApi.internalEngine()
-      const { slidesBySnap, snapBySlide } = scrollSnapList
+      const { slideRegistry } = emblaApi.internalEngine()
 
       const groupIndicatorClassNames = emblaApi
         .slideNodes()
         .map((_, slideIndex) => {
-          const snapIndex = snapBySlide[slideIndex]
-          const slidesInGroup = slidesBySnap[snapIndex]
+          const snapIndex = slideRegistry.findIndex((group) =>
+            group.includes(slideIndex)
+          )
+          const slidesInGroup = slideRegistry[snapIndex]
           if (!slidesInGroup) return ''
 
           const firstIndex = slidesInGroup[0]
