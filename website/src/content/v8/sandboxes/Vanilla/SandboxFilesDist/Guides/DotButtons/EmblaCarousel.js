@@ -1,0 +1,33 @@
+import EmblaCarousel from 'embla-carousel'
+import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
+import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
+import { addRadioFormHandler } from '../../EmblaCarouselRadioForm'
+import '../css/base.css'
+import '../css/sandbox.css'
+import '../css/embla.css'
+
+const OPTIONS = {}
+let dynamicOptions = { ...OPTIONS }
+
+const emblaNode = document.querySelector('.embla')
+const viewportNode = emblaNode.querySelector('.embla__viewport')
+const prevBtn = emblaNode.querySelector('.embla__button--prev')
+const nextBtn = emblaNode.querySelector('.embla__button--next')
+const dotsNode = document.querySelector('.embla__dots')
+
+const loopFormNode = emblaNode.querySelector('.embla__radio-form--loop')
+const loopRadioNodes = Array.from(
+  loopFormNode.querySelectorAll('input[type="radio"]')
+)
+
+const emblaApi = EmblaCarousel(viewportNode, OPTIONS)
+
+addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
+addDotButtonAndClickHandlers(emblaApi, dotsNode)
+addRadioFormHandler(loopFormNode, loopRadioNodes, (value) => {
+  dynamicOptions = {
+    ...dynamicOptions,
+    loop: value === 'true'
+  }
+  emblaApi.reInit(dynamicOptions)
+})
