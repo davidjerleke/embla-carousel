@@ -1,2 +1,5 @@
-export { ClassNamesType, ClassNamesOptionsType } from './components/ClassNames.js';
-export { default } from './components/ClassNames.js';
+export {
+  ClassNamesType,
+  ClassNamesOptionsType
+} from './components/ClassNames.js'
+export { default } from './components/ClassNames.js'

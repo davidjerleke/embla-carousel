@@ -1,2 +1,2 @@
-export { FadeType, FadeOptionsType } from './components/Fade';
-export { default } from './components/Fade';
+export { FadeType, FadeOptionsType } from './components/Fade'
+export { default } from './components/Fade'
