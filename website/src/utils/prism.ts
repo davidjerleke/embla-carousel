@@ -63,3 +63,8 @@ export function removeUnwantedStrings(code: string): string {
     }, code)
     .trim()
 }
+
+export function stringifyAsJs(codeOrEmpty: string): string {
+  const code = codeOrEmpty || ''
+  return JSON.stringify(code, null, 2).replace(/"(\w+)":/g, '$1:')
+}

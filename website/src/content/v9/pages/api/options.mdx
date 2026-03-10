@@ -5,8 +5,9 @@ export const metadata = {
 }
 
 import { TABS_LIBRARY } from '@/utils/tabs'
+import { stringifyAsJs } from '@/utils/prism'
+import { defaultOptions } from '@packages/embla-carousel/src/components/Options'
 
-import defaultOptions_module_01 from '@/content/v9/code-snippets/api/options/default-options-vanilla-01.js'
 import constructorOptions_module_01 from '@/content/v9/code-snippets/api/options/constructor-options-vanilla-01.js'
 import constructorOptions_html_01 from '@/content/v9/code-snippets/api/options/constructor-options-vanilla-01.html'
 import constructorOptions_react_01 from '@/content/v9/code-snippets/api/options/constructor-options-react-01.jsx'
@@ -43,7 +44,11 @@ Options can be set via the [`constructor`](#constructor-options) or as [`global 
 
 Here's a list of all available options and their **default** values:
 
-<PrismHighlight language="js" hideLabel code={defaultOptions_module_01} />
+<PrismHighlight
+  language="js"
+  hideLabel
+  code={`const defaultOptions = ${stringifyAsJs(defaultOptions)}`}
+/>
 
 ### Constructor options
 
