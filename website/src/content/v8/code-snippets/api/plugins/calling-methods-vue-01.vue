@@ -1,12 +1,21 @@
-<script setup lang="ts">
-// @ts-nocheck
-import { ref } from 'vue'
-import { EmblaPluginType } from 'embla-carousel'
+<script setup>
+import { watch } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import Autoplay from 'embla-carousel-autoplay'
 
-const plugins = ref<EmblaPluginType[]>([Autoplay()])
-const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, plugins)
+const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+  Autoplay({ playOnInit: false })
+])
+
+watch(
+  emblaApi,
+  (api) => {
+    if (!api) return
+
+    api.plugins().autoplay?.play()
+  },
+  { immediate: true }
+)
 </script>
 
 <template>

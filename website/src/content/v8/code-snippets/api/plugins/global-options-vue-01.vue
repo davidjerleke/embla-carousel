@@ -1,20 +1,10 @@
 <script setup>
-import { watch } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
 import Autoplay from 'embla-carousel-autoplay'
 
 Autoplay.globalOptions = { delay: 4000 }
 
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
-
-watch(
-  emblaApi,
-  (api) => {
-    if (!api) return
-    api.plugins().autoplay?.play()
-  },
-  { immediate: true }
-)
 </script>
 
 <template>

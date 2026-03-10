@@ -7,7 +7,6 @@
 
   const onInit = (event) => {
     emblaApi = event.detail
-    emblaApi.plugins().autoplay?.play()
   }
 </script>
 

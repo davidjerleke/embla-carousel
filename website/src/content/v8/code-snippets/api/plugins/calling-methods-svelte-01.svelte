@@ -3,16 +3,11 @@
   import Autoplay from 'embla-carousel-autoplay'
 
   let options = { loop: true }
-  let plugins = [Autoplay()]
-
-  const logPluginEvent = (emblaApi, eventName) => {
-    console.log(`Autoplay just triggered ${eventName}!`)
-  }
+  let plugins = [Autoplay({ playOnInit: false })]
 
   const onInit = (event) => {
     emblaApi = event.detail
-
-    emblaApi.on('autoplay:stop', logPluginEvent)
+    emblaApi.plugins().autoplay?.play()
   }
 </script>
 

@@ -6,9 +6,8 @@ const viewportNode = wrapperNode.querySelector('.embla__viewport')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: true }, [Autoplay()])
 
-const logAutoplayStart = (emblaApi, event) => {
-  console.log(`${event.type} fired`)
+const logPluginEvent = (emblaApi, eventName) => {
+  console.log(`Autoplay just triggered ${eventName}!`)
 }
 
-emblaApi.on('autoplay:play', logAutoplayStart)
-emblaApi.plugins().autoplay?.play()
+emblaApi.on('autoplay:stop', logPluginEvent)

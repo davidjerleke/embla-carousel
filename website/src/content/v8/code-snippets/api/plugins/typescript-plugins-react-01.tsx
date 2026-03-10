@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { EmblaPluginType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
@@ -7,11 +7,6 @@ import Autoplay from 'embla-carousel-autoplay'
 export function EmblaCarousel() {
   const [plugins, setPlugins] = useState<EmblaPluginType[]>([Autoplay()])
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, plugins)
-
-  useEffect(() => {
-    if (!emblaApi) return
-    emblaApi.plugins().autoplay?.play()
-  }, [emblaApi])
 
   return (
     <div className="embla">

@@ -8,16 +8,15 @@ export function EmblaCarousel() {
     () => [Autoplay()]
   )
 
-  const logAutoplayStart = (emblaApi, event) => {
-    console.log(`${event.type} fired`)
+  const logPluginEvent = (emblaApi, eventName) => {
+    console.log(`Autoplay just triggered ${eventName}!`)
   }
 
   createEffect(
     on(emblaApi, (api) => {
       if (!api) return
 
-      api.on('autoplay:play', logAutoplayStart)
-      api.plugins().autoplay?.play()
+      api.on('autoplay:stop', logPluginEvent)
     })
   )
 

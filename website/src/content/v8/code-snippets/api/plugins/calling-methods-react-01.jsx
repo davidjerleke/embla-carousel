@@ -3,16 +3,14 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 
 export function EmblaCarousel() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay()])
-
-  const logPluginEvent = (emblaApi, eventName) => {
-    console.log(`Autoplay just triggered ${eventName}!`)
-  }
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Autoplay({ playOnInit: false })
+  ])
 
   useEffect(() => {
     if (!emblaApi) return
 
-    emblaApi.on('autoplay:stop', logPluginEvent)
+    emblaApi.plugins().autoplay?.play()
   }, [emblaApi])
 
   return (

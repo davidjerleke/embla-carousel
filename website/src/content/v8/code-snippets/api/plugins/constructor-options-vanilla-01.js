@@ -7,5 +7,3 @@ const viewportNode = wrapperNode.querySelector('.embla__viewport')
 const emblaApi = EmblaCarousel(viewportNode, { loop: true }, [
   Autoplay({ delay: 4000 })
 ])
-
-emblaApi.plugins().autoplay?.play()

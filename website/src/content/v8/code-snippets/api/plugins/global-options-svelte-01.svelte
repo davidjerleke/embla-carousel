@@ -9,14 +9,13 @@
 
   const onInit = (event) => {
     emblaApi = event.detail
-    emblaApi.plugins().autoplay?.play()
   }
 </script>
 
 <div class="embla">
   <div
     class="embla__viewport"
-    on:emblainit={onInit}
+    on:emblaInit={onInit}
     use:useEmblaCarousel={{ options, plugins }}
   >
     <div class="embla__container">
