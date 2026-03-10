@@ -7,6 +7,8 @@ import {
   SlidesInViewThresholdOptionsType
 } from './SlidesInView'
 
+export type DragFreeOptionType = boolean | 'snap'
+
 export type LooseOptionsType = {
   [key: string]: unknown
 }
@@ -26,7 +28,7 @@ export type OptionsType = CreateOptionsType<{
   containScroll: ScrollContainOptionType
   direction: AxisDirectionOptionType
   slidesToScroll: SlidesToScrollOptionType
-  dragFree: boolean
+  dragFree: DragFreeOptionType
   dragThreshold: number
   inViewThreshold: SlidesInViewThresholdOptionsType
   inViewMargin: SlidesInViewMarginOptionsType
