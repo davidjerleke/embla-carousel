@@ -372,10 +372,12 @@ Choose content direction between `ltr` and `rtl`.
 
 ### dragFree
 
-<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
-<PrismHighlight language="ts" hideLabel code={`{ dragFree: true | false }`} />
+<ApiMetaData firstRow={['Type', "boolean | 'snap'"]} secondRow={['Default', 'false']} />
+<PrismHighlight language="ts" hideLabel code={`{ dragFree: true | false | 'snap' }`} />
 
-Enables momentum scrolling. The duration of the continued scrolling is proportional to how vigorous the drag gesture is.
+Enables momentum scrolling. When set to `true`, the carousel scrolls freely with momentum proportional to how vigorous the drag gesture is and settles at any position.
+
+When set to `'snap'`, it behaves the same during the drag, but snaps to the snap point closest to the final destination.
 
 ---
 
@@ -491,7 +493,7 @@ Embla automatically watches the container and slides for size changes and runs [
 <ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
 <PrismHighlight language="ts" hideLabel code={`{ skipSnaps: true | false }`} />
 
-Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [`dragFree`](/api/options/#dragfree) option is set to `true`.
+Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that this option will be ignored if the [`dragFree`](/api/options/#dragfree) option is set to `true` or `'snap'`.
 
 ---
 

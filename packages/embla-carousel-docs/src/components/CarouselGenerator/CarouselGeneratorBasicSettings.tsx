@@ -34,11 +34,6 @@ const INPUT_LOOP: SandboxGeneratorCheckboxType<'loop'> = {
   LABEL: 'Loop'
 }
 
-const INPUT_DRAG_FREE: SandboxGeneratorCheckboxType<'dragFree'> = {
-  ...createSandboxGeneratorInputId(SANDBOX_GENERATOR_FORM_FIELDS.DRAG_FREE),
-  LABEL: 'Drag free'
-}
-
 export const CarouselGeneratorBasicSettings = () => {
   const { formData, onCheckboxChange, onRadioChange } = useCarouselGenerator()
 
@@ -87,17 +82,6 @@ export const CarouselGeneratorBasicSettings = () => {
           onChange={onCheckboxChange}
         >
           {INPUT_LOOP.LABEL}
-        </InputCheckboxDefault>
-      </CarouselGeneratorFormItem>
-
-      <CarouselGeneratorFormItem>
-        <InputCheckboxDefault
-          name={INPUT_DRAG_FREE.FIELD_NAME}
-          id={INPUT_DRAG_FREE.ID}
-          checked={formData[INPUT_DRAG_FREE.FIELD_NAME]}
-          onChange={onCheckboxChange}
-        >
-          {INPUT_DRAG_FREE.LABEL}
         </InputCheckboxDefault>
       </CarouselGeneratorFormItem>
     </>
