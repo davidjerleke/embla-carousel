@@ -141,7 +141,7 @@ Setting **global options** applies them to **all carousels**, overriding Embla's
 
 It's possible to **update the options** passed to the Embla Carousel constructor **after initialization** using the [`reInit`](/docs/api/methods/#reinit) method.
 
-In the [React](/docs/get-started/react/), [Vue](/docs/get-started/vue/), [Solid](/docs/get-started/solid/), and [Svelte](/docs/get-started/svelte/) wrappers, you can provide **reactive options**, and the carousel will automatically reinitialize whenever they change.
+In the [React](/docs/get-started/react), [Vue](/docs/get-started/vue), [Solid](/docs/get-started/solid), and [Svelte](/docs/get-started/svelte) wrappers, you can provide **reactive options**, and the carousel will automatically reinitialize whenever they change.
 Here are some examples:
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
@@ -425,7 +425,7 @@ Set scroll duration when triggered by any of the API methods. Higher numbers ena
 <ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
 <PrismHighlight language="ts" hideLabel code={`{ focus: true | false }`} />
 
-Embla automatically watches the slides for focus events. The default callback fires the [`slidefocus`](/docs/api/events/#slidefocus/) event and scrolls to the focused element. Set this to `false` to disable this behaviour.
+Embla automatically watches the slides for focus events. The default callback fires the [`slidefocus`](/docs/api/events/#slidefocus) event and scrolls to the focused element. Set this to `false` to disable this behaviour.
 
 ---
 
@@ -484,7 +484,7 @@ Enables **infinite looping**. Embla will apply `translateX` or `translateY` to t
 <ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
 <PrismHighlight language="ts" hideLabel code={`{ resize: true | false }`} />
 
-Embla automatically watches the container and slides for size changes and runs [`reinit`](/docs/api/methods/#reinit/) when any size has changed. Set this to `false` to disable this behaviour.
+Embla automatically watches the container and slides for size changes and runs [`reInit`](/docs/api/methods/#reinit) when any size has changed. Set this to `false` to disable this behaviour.
 
 ---
 
@@ -506,7 +506,7 @@ Allow the carousel to skip scroll snaps if it's dragged vigorously. Note that th
   code={`{ slideChanges: true | false }`}
 />
 
-Embla automatically watches the container for **added** and/or **removed** slides and runs [`reinit`](/docs/api/methods/#reinit/) if needed. Set this to `false` to disable this behaviour.
+Embla automatically watches the container for **added** and/or **removed** slides and runs [`reinit`](/docs/api/methods/#reinit) if needed. Set this to `false` to disable this behaviour.
 
 ---
 

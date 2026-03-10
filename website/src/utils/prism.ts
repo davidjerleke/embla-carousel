@@ -64,7 +64,14 @@ export function removeUnwantedStrings(code: string): string {
     .trim()
 }
 
-export function stringifyAsJs(codeOrEmpty: string): string {
+export function stringifyAsJs(
+  codeOrEmpty: string | Record<string, unknown>
+): string {
+  const JS_IFY_REGEX = /"(\w+)":/g
+  const QUOTES_TO_SINGLE_QUOTES_REGEX = /"([^"]*)"/g
+
   const code = codeOrEmpty || ''
-  return JSON.stringify(code, null, 2).replace(/"(\w+)":/g, '$1:')
+  return JSON.stringify(code, null, 2)
+    .replace(JS_IFY_REGEX, '$1:')
+    .replace(QUOTES_TO_SINGLE_QUOTES_REGEX, "'$1'")
 }
