@@ -1,24 +1,21 @@
 // @ts-nocheck
 import React, { useEffect } from 'react'
-import { EmblaCarouselType, EmblaEventModelType } from 'embla-carousel'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-  const logSelectEvent = (
+  const logEmblaEvent = (
     emblaApi: EmblaCarouselType,
-    event: EmblaEventModelType<'select'>
+    eventName: EmblaEventType
   ): void => {
-    const { sourceSnap, targetSnap } = event.detail
-
-    console.log('Previous snap index: ', sourceSnap)
-    console.log('Current snap index: ', targetSnap)
+    console.log(`Embla just triggered ${eventName}!`)
   }
 
   useEffect(() => {
     if (!emblaApi) return
-    emblaApi.on('select', logSelectEvent)
+    emblaApi.on('select', logEmblaEvent)
   }, [emblaApi])
 
   return (

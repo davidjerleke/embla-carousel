@@ -4,14 +4,14 @@
   let emblaApi
   let options = { loop: true }
 
-  const logSlidesInViewOnce = (emblaApi, event) => {
-    console.log(`${event.type}: ${event.detail.slidesInView}`)
-    emblaApi.off('slidesinview', logSlidesInViewOnce)
+  const logSlidesInViewOnce = (emblaApi) => {
+    console.log(emblaApi.slidesInView())
+    emblaApi.off('slidesInView', logSlidesInViewOnce)
   }
 
   const onInit = (event) => {
     emblaApi = event.detail
-    emblaApi.on('slidesinview', logSlidesInViewOnce)
+    emblaApi.on('slidesInView', logSlidesInViewOnce)
   }
 </script>
 

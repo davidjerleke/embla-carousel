@@ -1,8 +1,8 @@
 <script lang="ts">
-// @ts-nocheck
+  // @ts-nocheck
   import {
     EmblaCarouselType,
-    EmblaEventModelType,
+    EmblaEventType,
     EmblaOptionsType
   } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
@@ -10,26 +10,23 @@
   let emblaApi: EmblaCarouselType
   let options: EmblaOptionsType = { loop: true }
 
-  const logSelectEvent = (
+  const logEmblaEvent = (
     emblaApi: EmblaCarouselType,
-    event: EmblaEventModelType<'select'>
+    eventName: EmblaEventType
   ): void => {
-    const { sourceSnap, targetSnap } = event.detail
-
-    console.log('Previous snap index: ', sourceSnap)
-    console.log('Current snap index: ', targetSnap)
+    console.log(`Embla just triggered ${eventName}!`)
   }
 
   const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
     emblaApi = event.detail
-    emblaApi.on('select', logSelectEvent)
+    emblaApi.on('select', logEmblaEvent)
   }
 </script>
 
 <div class="embla">
   <div
     class="embla__viewport"
-    on:emblainit={onInit}
+    on:emblaInit={onInit}
     use:useEmblaCarousel={{ options }}
   >
     <div class="embla__container">

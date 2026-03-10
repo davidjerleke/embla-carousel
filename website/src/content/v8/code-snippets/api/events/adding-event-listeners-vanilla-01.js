@@ -5,8 +5,8 @@ const viewportNode = wrapperNode.querySelector('.embla__viewport')
 
 const emblaApi = EmblaCarousel(viewportNode, { loop: true })
 
-const logSlidesInView = (emblaApi, event) => {
-  console.log(`${event.type}: ${event.detail.slidesInView}`)
+const logSlidesInView = (emblaApi) => {
+  console.log(emblaApi.slidesInView())
 }
 
-emblaApi.on('slidesinview', logSlidesInView)
+emblaApi.on('slidesInView', logSlidesInView)

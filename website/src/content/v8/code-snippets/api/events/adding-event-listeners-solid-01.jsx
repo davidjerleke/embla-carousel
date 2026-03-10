@@ -4,14 +4,14 @@ import useEmblaCarousel from 'embla-carousel-solid'
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }))
 
-  const logSlidesInView = (emblaApi, event) => {
-    console.log(`${event.type}: ${event.detail.slidesInView}`)
+  const logSlidesInView = (emblaApi) => {
+    console.log(emblaApi.slidesInView())
   }
 
   createEffect(
     on(emblaApi, (api) => {
       if (!api) return
-      api.on('slidesinview', logSlidesInView)
+      api.on('slidesInView', logSlidesInView)
     })
   )
 

@@ -4,20 +4,20 @@
   let emblaApi
   let options = { loop: true }
 
-  const logSlidesInView = (emblaApi, event) => {
-    console.log(`${event.type}: ${event.detail.slidesInView}`)
+  const logSlidesInView = (emblaApi) => {
+    console.log(emblaApi.slidesInView())
   }
 
   const onInit = (event) => {
     emblaApi = event.detail
-    emblaApi.on('slidesinview', logSlidesInView)
+    emblaApi.on('slidesInView', logSlidesInView)
   }
 </script>
 
 <div class="embla">
   <div
     class="embla__viewport"
-    on:emblainit={onInit}
+    on:emblaInit={onInit}
     use:useEmblaCarousel={{ options }}
   >
     <div class="embla__container">

@@ -1,26 +1,23 @@
 <script setup lang="ts">
 // @ts-nocheck
 import { watch } from 'vue'
-import { EmblaCarouselType, EmblaEventModelType } from 'embla-carousel'
+import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-vue'
 
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
-const logSelectEvent = (
+const logEmblaEvent = (
   emblaApi: EmblaCarouselType,
-  event: EmblaEventModelType<'select'>
+  eventName: EmblaEventType
 ): void => {
-  const { sourceSnap, targetSnap } = event.detail
-
-  console.log('Previous snap index: ', sourceSnap)
-  console.log('Current snap index: ', targetSnap)
+  console.log(`Embla just triggered ${eventName}!`)
 }
 
 watch(
   emblaApi,
   (api) => {
     if (!api) return
-    api.on('select', logSelectEvent)
+    api.on('select', logEmblaEvent)
   },
   { immediate: true }
 )
