@@ -417,7 +417,7 @@ Set scroll duration when triggered by any of the API methods. Higher numbers ena
 />
 <PrismHighlight language="ts" hideLabel code={`{ inViewThreshold: 0 }`} />
 
-This is the Intersection Observer [threshold](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer) option that will be applied to all slides.
+This is the Intersection Observer [`threshold`](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#creating_an_intersection_observer) option that will be applied to all slides.
 
 ---
 
@@ -537,7 +537,7 @@ Enables for scrolling the carousel with mouse and touch interactions. Set this t
   code={`{ watchFocus: true | false | (emblaApi, event) => boolean | void }`}
 />
 
-Embla automatically watches the [`slides`](#slides) for focus events. The default callback fires the [slideFocus](/docs/v8/api/events/#slidefocus) event and [scrollTo](/docs/v8/api/methods/#scrollto) to the focused element. Set this to `false` to disable this behaviour or pass a custom callback to add your own focus logic.
+Embla automatically watches the [`slides`](#slides) for focus events. The default callback fires the [`slideFocus`](/docs/v8/api/events/#slidefocus) event and [`scrollTo`](/docs/v8/api/methods/#scrollto) to the focused element. Set this to `false` to disable this behaviour or pass a custom callback to add your own focus logic.
 
 <Admonition type="note">
   **Note:** When passing a custom callback it will run **before** the default
@@ -560,7 +560,7 @@ Embla automatically watches the [`slides`](#slides) for focus events. The defaul
   code={`{ watchResize: true | false | (emblaApi, entries) => boolean | void }`}
 />
 
-Embla automatically watches the [container](/docs/v8/api/methods/#containernode) and [slides](/docs/v8/api/methods/#slidenodes) for size changes and runs [reInit](/docs/v8/api/methods/#reinit) when any size has changed. Set this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.
+Embla automatically watches the [`container`](/docs/v8/api/methods/#containernode) and [`slides`](/docs/v8/api/methods/#slidenodes) for size changes and runs [`reInit`](/docs/v8/api/methods/#reinit) when any size has changed. Set this to `false` to disable this behaviour or pass a custom callback to add your own resize logic.
 
 <Admonition type="note">
   **Note:** When passing a custom callback it will run **before** the default
@@ -583,7 +583,7 @@ Embla automatically watches the [container](/docs/v8/api/methods/#containernode)
   code={`{ watchSlides: true | false | (emblaApi, mutations) => boolean | void }`}
 />
 
-Embla automatically watches the [container](/docs/v8/api/methods/#containernode) for **added** and/or **removed** slides and runs [reInit](/docs/v8/api/methods/#reinit) if needed. Set this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.
+Embla automatically watches the [`container`](/docs/v8/api/methods/#containernode) for **added** and/or **removed** slides and runs [`reInit`](/docs/v8/api/methods/#reinit) if needed. Set this to `false` to disable this behaviour or pass a custom callback to add your own slides changed logic.
 
 <Admonition type="note">
   **Note:** When passing a custom callback it will run **before** the default
