@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { EmblaEventCallbackType } from 'embla-carousel'
 
 const logPointerDown: EmblaEventCallbackType<'pointerdown'> = (

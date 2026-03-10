@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** @jsxImportSource solid-js */
 import { createEffect, on } from 'solid-js'
 import { EmblaCarouselType } from 'embla-carousel'
@@ -7,7 +8,7 @@ export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }))
 
   const logSelectedSnap = (emblaApi: EmblaCarouselType) => {
-    console.log(emblaApi.selectedSnap())
+    console.log(emblaApi.selectedScrollSnap())
   }
 
   createEffect(

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** @jsxImportSource solid-js */
 import { createEffect, createSignal, on } from 'solid-js'
 import { EmblaPluginType } from 'embla-carousel'

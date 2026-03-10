@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** @jsxImportSource solid-js */
 import { createEffect, on } from 'solid-js'
 import { EmblaCarouselType, EmblaEventModelType } from 'embla-carousel'

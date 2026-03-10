@@ -1,3 +1,4 @@
+// @ts-nocheck
 import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
 
 const wrapperNode = <HTMLElement>document.querySelector('.embla')

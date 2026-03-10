@@ -53,7 +53,7 @@ export function parseCodeBlockProps(string: string): PrismCodeBlockPropsType {
 }
 
 export function removeUnwantedStrings(code: string): string {
-  const unwantedStrings = ['/** @jsxImportSource solid-js */']
+  const unwantedStrings = ['/** @jsxImportSource solid-js */', '// @ts-nocheck']
 
   return unwantedStrings
     .reduce((acc, string) => {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import EmblaCarousel, { EmblaPluginType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
 

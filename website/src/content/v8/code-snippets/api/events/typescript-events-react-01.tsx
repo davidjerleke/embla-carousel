@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect } from 'react'
 import { EmblaCarouselType, EmblaEventModelType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'

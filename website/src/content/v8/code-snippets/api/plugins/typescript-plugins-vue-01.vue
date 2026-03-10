@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { watch, ref } from 'vue'
 import { EmblaPluginType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-vue'

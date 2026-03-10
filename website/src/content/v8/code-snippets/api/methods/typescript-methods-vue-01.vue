@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-nocheck
 import { watch } from 'vue'
 import { EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-vue'
@@ -6,7 +7,7 @@ import useEmblaCarousel from 'embla-carousel-vue'
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
 const logSelectedSnap = (emblaApi: EmblaCarouselType) => {
-  console.log(emblaApi.selectedSnap())
+  console.log(emblaApi.selectedScrollSnap())
 }
 
 watch(

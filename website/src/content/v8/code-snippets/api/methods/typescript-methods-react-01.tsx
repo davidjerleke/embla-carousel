@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect } from 'react'
 import { EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -6,7 +7,7 @@ export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
 
   const logSelectedSnap = (emblaApi: EmblaCarouselType) => {
-    console.log(emblaApi.selectedSnap())
+    console.log(emblaApi.selectedScrollSnap())
   }
 
   useEffect(() => {

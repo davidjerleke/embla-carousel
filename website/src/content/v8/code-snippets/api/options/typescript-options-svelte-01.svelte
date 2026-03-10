@@ -1,4 +1,5 @@
 <script lang="ts">
+// @ts-nocheck
   import { EmblaOptionsType } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
 

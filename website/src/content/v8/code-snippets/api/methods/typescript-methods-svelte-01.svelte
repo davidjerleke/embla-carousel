@@ -1,4 +1,5 @@
 <script lang="ts">
+  // @ts-nocheck
   import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
   import useEmblaCarousel from 'embla-carousel-svelte'
 
@@ -6,7 +7,7 @@
   let options: EmblaOptionsType = { loop: true }
 
   const logSelectedSnap = (emblaApi: EmblaCarouselType): void => {
-    console.log(emblaApi.selectedSnap())
+    console.log(emblaApi.selectedScrollSnap())
   }
 
   const onInit = (event: CustomEvent<EmblaCarouselType>): void => {
