@@ -19,7 +19,7 @@ import svelteAddingPlugins_pnpm_01 from '@/content/v9/code-snippets/get-started/
 
 # Svelte
 
-Embla Carousel provides a wrapper for [Svelte](https://svelte.dev/) that ensures seamless integration of the carousel into your Svelte project and automatic cleanup on component unmount.
+Embla Carousel provides a wrapper for [Svelte](https://svelte.dev) that ensures seamless integration of the carousel into your Svelte project and automatic cleanup on component unmount.
 
 Start by installing the Embla Carousel **npm package** and add it to your dependencies.
 
@@ -51,7 +51,7 @@ The element with the classname `embla__viewport` acts as an overflow wrapper, en
 
 ## Accessing the carousel API
 
-Use the `useEmblaCarousel` Svelte action and pass your options as the first argument. You can access the [API](/docs/api/) by capturing the Embla API from the carousel's `on:emblainit` event, and use it to control the carousel or respond to user actions, as shown below:
+Use the `useEmblaCarousel` Svelte action and pass your options as the first argument. You can access the [API](/docs/api) by capturing the Embla API from the carousel's `on:emblainit` event, and use it to control the carousel or respond to user actions, as shown below:
 
 <PrismHighlight
   language="svelte"
@@ -66,7 +66,7 @@ Use the `useEmblaCarousel` Svelte action and pass your options as the first argu
 
 ## Adding plugins
 
-Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/docs/plugins/autoplay/) plugin:
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/docs/plugins/autoplay) plugin:
 
 <Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
   <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>

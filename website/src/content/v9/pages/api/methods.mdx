@@ -431,7 +431,7 @@ Exposes most of Embla's internal functionality. This is primarily intended for p
   code={`emblaApi.reInit({ loop: false }, [Autoplay()])`}
 />
 
-Hard reset the carousel after it has been initialized. This method allows for changing [options](/docs/api/options/) and [plugins](/docs/api/plugins/) after initializing a carousel.
+Hard reset the carousel after it has been initialized. This method allows for changing [options](/docs/api/options) and [plugins](/docs/api/plugins) after initializing a carousel.
 
 <Admonition type="note">
   **Note:** Passed options will be **merged** with current options, but passed
@@ -479,7 +479,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
   code={`emblaApi.on('select', (emblaApi, event) => {})`}
 />
 
-**Subscribe** to an Embla [`event`](/docs/api/events/) with a **callback**. Added event listeners will persist even if [`reinit`](#reinit) is called, either until the carousel is destroyed or the event is removed with the [`off`](#off) method.
+**Subscribe** to an Embla [`event`](/docs/api/events) with a **callback**. Added event listeners will persist even if [`reinit`](#reinit) is called, either until the carousel is destroyed or the event is removed with the [`off`](#off) method.
 
 ---
 
@@ -498,7 +498,7 @@ Destroy the carousel instance permanently. This is a one way operation and is in
   code={`emblaApi.off('select', (emblaApi, event) => {})`}
 />
 
-**Unsubscribe** from an Embla [`event`](/docs/api/events/). Make sure to pass the **same callback reference** when the callback was added with the [`on`](#on) method.
+**Unsubscribe** from an Embla [`event`](/docs/api/events). Make sure to pass the **same callback reference** when the callback was added with the [`on`](#on) method.
 
 ---
 
