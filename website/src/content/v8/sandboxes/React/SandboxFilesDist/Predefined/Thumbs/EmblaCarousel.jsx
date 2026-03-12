@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
 
 const EmblaCarousel = (props) => {
@@ -14,22 +14,22 @@ const EmblaCarousel = (props) => {
   const onThumbClick = useCallback(
     (index) => {
       if (!emblaMainApi || !emblaThumbsApi) return
-      emblaMainApi.goTo(index)
+      emblaMainApi.scrollTo(index)
     },
     [emblaMainApi, emblaThumbsApi]
   )
 
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
-    setSelectedIndex(emblaMainApi.selectedSnap())
-    emblaThumbsApi.goTo(emblaMainApi.selectedSnap())
+    setSelectedIndex(emblaMainApi.selectedScrollSnap())
+    emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
   }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
 
   useEffect(() => {
     if (!emblaMainApi) return
     onSelect()
 
-    emblaMainApi.on('select', onSelect).on('reinit', onSelect)
+    emblaMainApi.on('select', onSelect).on('reInit', onSelect)
   }, [emblaMainApi, onSelect])
 
   return (

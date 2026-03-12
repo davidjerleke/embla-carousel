@@ -7,12 +7,7 @@ import { copySandboxesFromSrcToDist } from './copy-from-src-to-dist'
 import { cleanExistingSandboxDist } from './clean-existing'
 import { collectSandboxDistPaths } from './collect-dist-paths'
 
-const SANDBOX_FILES_CONTENT_PATH = path.join(
-  process.cwd(),
-  'website',
-  'src',
-  'content'
-)
+const SANDBOX_FILES_CONTENT_PATH = path.join(process.cwd(), 'src', 'content')
 const SANDBOX_FILES_DIST_FOLDER_NAME = 'SandboxFilesDist'
 const SANDBOX_FILES_SRC_FOLDER_NAME = 'SandboxFilesSrc'
 
@@ -40,7 +35,7 @@ function main(): void {
   pathsToSandboxFiles.forEach((pathToSandboxFile) => {
     try {
       readFiles(
-        `${pathToSandboxFile}/`,
+        `${pathToSandboxFile}${path.sep}`,
         (filename, fileContent) => {
           if (EXTENSION_REGEX.DECLARATION.test(filename)) {
             return

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import EmblaCarousel from './Predefined/IosPicker/EmblaCarousel'
-import { EmblaOptionsType } from 'embla-carousel'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
 import Header from './Header'
 import Footer from './Footer'
 import '../css/base.css'

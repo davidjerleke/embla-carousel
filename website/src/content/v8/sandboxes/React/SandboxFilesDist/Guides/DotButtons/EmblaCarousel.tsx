@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
@@ -8,7 +8,7 @@ import {
 } from '../../EmblaCarouselArrowButtons'
 import RadioForm from '../../EmblaCarouselRadioForm'
 import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
-import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
+import { sandboxImages } from '@/content/v8/sandboxes/sandbox-images'
 
 const LOOP = ['true', 'false']
 

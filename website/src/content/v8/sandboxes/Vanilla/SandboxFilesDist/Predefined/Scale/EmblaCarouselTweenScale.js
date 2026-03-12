@@ -12,18 +12,18 @@ const setTweenNodes = (emblaApi) => {
 }
 
 const setTweenFactor = (emblaApi) => {
-  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
+  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
 }
 
-const tweenScale = (emblaApi, event) => {
+const tweenScale = (emblaApi, eventName) => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
   const slidesInView = emblaApi.slidesInView()
-  const isScrollEvent = event?.type === 'scroll'
+  const isScrollEvent = eventName === 'scroll'
 
-  emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
+  emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
+    const slidesInSnap = engine.slideRegistry[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -52,16 +52,15 @@ const tweenScale = (emblaApi, event) => {
     })
   })
 }
-
 export const setupTweenScale = (emblaApi) => {
   setTweenNodes(emblaApi)
   setTweenFactor(emblaApi)
   tweenScale(emblaApi)
 
   emblaApi
-    .on('reinit', setTweenNodes)
-    .on('reinit', setTweenFactor)
-    .on('reinit', tweenScale)
+    .on('reInit', setTweenNodes)
+    .on('reInit', setTweenFactor)
+    .on('reInit', tweenScale)
     .on('scroll', tweenScale)
-    .on('slidefocus', tweenScale)
+    .on('slideFocus', tweenScale)
 }

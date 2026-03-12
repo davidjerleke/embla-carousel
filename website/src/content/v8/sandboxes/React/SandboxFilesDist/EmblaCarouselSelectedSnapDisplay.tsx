@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 type UseSelectedSnapDisplayType = {
   selectedSnap: number
@@ -13,8 +13,8 @@ export const useSelectedSnapDisplay = (
   const [snapCount, setSnapCount] = useState(0)
 
   const updateScrollSnapState = useCallback((emblaApi: EmblaCarouselType) => {
-    setSnapCount(emblaApi.snapList().length)
-    setSelectedSnap(emblaApi.selectedSnap())
+    setSnapCount(emblaApi.scrollSnapList().length)
+    setSelectedSnap(emblaApi.selectedScrollSnap())
   }, [])
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const useSelectedSnapDisplay = (
 
     updateScrollSnapState(emblaApi)
     emblaApi.on('select', updateScrollSnapState)
-    emblaApi.on('reinit', updateScrollSnapState)
+    emblaApi.on('reInit', updateScrollSnapState)
   }, [emblaApi, updateScrollSnapState])
 
   return {

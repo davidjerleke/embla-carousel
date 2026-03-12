@@ -22,5 +22,3 @@ const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [AutoScroll()])
 addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 addPlayButtonListeners(emblaApi, playBtn)
 addNavButtonListeners(emblaApi, prevBtn, nextBtn)
-
-emblaApi.plugins().autoScroll?.play()

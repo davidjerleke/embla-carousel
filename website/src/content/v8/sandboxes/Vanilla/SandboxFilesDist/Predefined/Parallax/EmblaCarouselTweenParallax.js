@@ -9,18 +9,18 @@ const setTweenNodes = (emblaApi) => {
 }
 
 const setTweenFactor = (emblaApi) => {
-  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
+  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
 }
 
-const tweenParallax = (emblaApi, event) => {
+const tweenParallax = (emblaApi, eventName) => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
   const slidesInView = emblaApi.slidesInView()
-  const isScrollEvent = event?.type === 'scroll'
+  const isScrollEvent = eventName === 'scroll'
 
-  emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
+  emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
+    const slidesInSnap = engine.slideRegistry[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -55,9 +55,9 @@ export const setupTweenParallax = (emblaApi) => {
   tweenParallax(emblaApi)
 
   emblaApi
-    .on('reinit', setTweenNodes)
-    .on('reinit', setTweenFactor)
-    .on('reinit', tweenParallax)
+    .on('reInit', setTweenNodes)
+    .on('reInit', setTweenFactor)
+    .on('reInit', tweenParallax)
     .on('scroll', tweenParallax)
-    .on('slidefocus', tweenParallax)
+    .on('slideFocus', tweenParallax)
 }

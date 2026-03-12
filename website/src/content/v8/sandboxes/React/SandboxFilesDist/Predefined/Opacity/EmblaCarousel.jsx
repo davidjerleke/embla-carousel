@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
-import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
+import { sandboxImages } from '@/content/v8/sandboxes/sandbox-images'
 
 const TWEEN_FACTOR_BASE = 0.84
 
@@ -29,18 +29,18 @@ const EmblaCarousel = (props) => {
   } = usePrevNextButtons(emblaApi)
 
   const setTweenFactor = useCallback((emblaApi) => {
-    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.snapList().length
+    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
   }, [])
 
-  const tweenOpacity = useCallback((emblaApi, event) => {
+  const tweenOpacity = useCallback((emblaApi, eventName) => {
     const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
     const slidesInView = emblaApi.slidesInView()
-    const isScrollEvent = event?.type === 'scroll'
+    const isScrollEvent = eventName === 'scroll'
 
-    emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
+    emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
       let diffToTarget = scrollSnap - scrollProgress
-      const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
+      const slidesInSnap = engine.slideRegistry[snapIndex]
 
       slidesInSnap.forEach((slideIndex) => {
         if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -74,12 +74,11 @@ const EmblaCarousel = (props) => {
 
     setTweenFactor(emblaApi)
     tweenOpacity(emblaApi)
-
     emblaApi
-      .on('reinit', setTweenFactor)
-      .on('reinit', tweenOpacity)
+      .on('reInit', setTweenFactor)
+      .on('reInit', tweenOpacity)
       .on('scroll', tweenOpacity)
-      .on('slidefocus', tweenOpacity)
+      .on('slideFocus', tweenOpacity)
   }, [emblaApi, tweenOpacity])
 
   return (

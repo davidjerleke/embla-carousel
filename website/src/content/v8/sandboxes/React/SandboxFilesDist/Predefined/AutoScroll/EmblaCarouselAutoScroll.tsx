@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 type UseAutoScrollType = {
   autoScrollIsPlaying: boolean
@@ -39,9 +39,9 @@ export const useAutoScroll = (
 
     setAutoScrollIsPlaying(autoScroll.isPlaying())
     emblaApi
-      .on('autoscroll:play', () => setAutoScrollIsPlaying(true))
-      .on('autoscroll:stop', () => setAutoScrollIsPlaying(false))
-      .on('reinit', () => setAutoScrollIsPlaying(autoScroll.isPlaying()))
+      .on('autoScroll:play', () => setAutoScrollIsPlaying(true))
+      .on('autoScroll:stop', () => setAutoScrollIsPlaying(false))
+      .on('reInit', () => setAutoScrollIsPlaying(autoScroll.isPlaying()))
   }, [emblaApi])
 
   return {

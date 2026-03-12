@@ -1,6 +1,6 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,

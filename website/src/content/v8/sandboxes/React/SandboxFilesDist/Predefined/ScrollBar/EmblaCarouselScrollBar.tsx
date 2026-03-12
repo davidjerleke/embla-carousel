@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 type UseScrollBarType = {
   value: number
@@ -19,7 +19,7 @@ export const useScrollBar = (
 
       animation.stop()
 
-      const currentProgress = scrollProgress.get(target)
+      const currentProgress = scrollProgress.get(target.get())
       const allowedProgress = Math.min(Math.max(progress, 0), 1)
       const progressToTarget = allowedProgress - currentProgress
       const distance = progressToTarget * limit.length * -1

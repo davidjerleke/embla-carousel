@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
+import Autoplay from '@vendor/embla-carousel-v8/embla-carousel-autoplay'
 import { useAutoplay } from './EmblaCarouselAutoplay'
 import { useAutoplayProgress } from './EmblaCarouselAutoplayProgress'
 import {
@@ -13,7 +13,7 @@ const EmblaCarousel = (props) => {
   const { slides, options } = props
   const progressNode = useRef(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    Autoplay({ delay: 3000 })
+    Autoplay({ delay: 3000, playOnInit: false })
   ])
 
   const {

@@ -34,7 +34,7 @@ export const setupInfiniteScroll = (emblaApi, loadMoreCallback) => {
   const deactivateBounds = () => {
     if (slideCount === emblaApi.slideNodes().length - 1) return
     const engine = emblaApi.internalEngine()
-    const boundsActive = engine.limit.pastMaxBound(engine.target)
+    const boundsActive = engine.limit.reachedMax(engine.target.get())
     engine.scrollBounds.toggleActive(boundsActive)
   }
 
@@ -58,9 +58,9 @@ export const setupInfiniteScroll = (emblaApi, loadMoreCallback) => {
       Object.assign(newEngine[engineModule], oldEngine[engineModule])
     )
 
-    newEngine.translate.to(oldEngine.location)
+    newEngine.translate.to(oldEngine.location.get())
     const { index } = newEngine.scrollTarget.byDistance(0, false)
-    newEngine.indexCurrent.set(index)
+    newEngine.index.set(index)
     newEngine.animation.start()
 
     if (!hasMoreToLoad) removeInfiniteScroll()
@@ -98,13 +98,13 @@ export const setupInfiniteScroll = (emblaApi, loadMoreCallback) => {
   }
 
   const addInfiniteScroll = () => {
-    emblaApi.on('pointerup', reloadEngine)
+    emblaApi.on('pointerUp', reloadEngine)
     emblaApi.on('scroll', onScroll)
     slideCount = emblaApi.slideNodes().length - 1
   }
 
   const removeInfiniteScroll = () => {
-    emblaApi.off('pointerup', reloadEngine)
+    emblaApi.off('pointerUp', reloadEngine)
     emblaApi.off('scroll', onScroll)
   }
 

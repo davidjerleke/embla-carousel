@@ -24,9 +24,9 @@ export const addPlayButtonListeners = (
 
   playBtn.addEventListener('click', onPlayBtnClick)
   emblaApi
-    .on('autoscroll:play', togglePlayBtnState)
-    .on('autoscroll:stop', togglePlayBtnState)
-    .on('reinit', togglePlayBtnState)
+    .on('autoScroll:play', togglePlayBtnState)
+    .on('autoScroll:stop', togglePlayBtnState)
+    .on('reInit', togglePlayBtnState)
 }
 
 export const addNavButtonListeners = (

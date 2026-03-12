@@ -19,10 +19,10 @@ const prevBtn = <HTMLElement>emblaNode.querySelector('.embla__button--prev')
 const nextBtn = <HTMLElement>emblaNode.querySelector('.embla__button--next')
 const playBtn = <HTMLElement>document.querySelector('.embla__play')
 
-const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [AutoScroll()])
+const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
+  AutoScroll({ playOnInit: false })
+])
 
 addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 addPlayButtonListeners(emblaApi, playBtn)
 addNavButtonListeners(emblaApi, prevBtn, nextBtn)
-
-emblaApi.plugins().autoScroll?.play()

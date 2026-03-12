@@ -1,14 +1,14 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
-import ClassNames from 'embla-carousel-class-names'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
+import ClassNames from '@vendor/embla-carousel-v8/embla-carousel-class-names'
 import {
   NextButton,
   PrevButton,
   usePrevNextButtons
 } from '../../EmblaCarouselArrowButtons'
 import { DotButton, useDotButton } from '../../EmblaCarouselDotButton'
-import { sandboxImages } from '@/content/v9/sandboxes/sandbox-images'
+import { sandboxImages } from '@/content/v8/sandboxes/sandbox-images'
 
 type PropType = {
   slides: number[]

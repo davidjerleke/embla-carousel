@@ -7,17 +7,17 @@ export const useDotButton = (emblaApi) => {
   const onDotButtonClick = useCallback(
     (index) => {
       if (!emblaApi) return
-      emblaApi.goTo(index)
+      emblaApi.scrollTo(index)
     },
     [emblaApi]
   )
 
   const onInit = useCallback((emblaApi) => {
-    setScrollSnaps(emblaApi.snapList())
+    setScrollSnaps(emblaApi.scrollSnapList())
   }, [])
 
   const onSelect = useCallback((emblaApi) => {
-    setSelectedIndex(emblaApi.selectedSnap())
+    setSelectedIndex(emblaApi.selectedScrollSnap())
   }, [])
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const useDotButton = (emblaApi) => {
     onInit(emblaApi)
     onSelect(emblaApi)
 
-    emblaApi.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
+    emblaApi.on('reInit', onInit).on('reInit', onSelect).on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
 
   return {

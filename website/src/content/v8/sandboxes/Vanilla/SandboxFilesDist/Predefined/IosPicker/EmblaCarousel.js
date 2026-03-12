@@ -15,6 +15,6 @@ const iosPickers = iosPickerNodes.map((iosPickerNode) =>
     containScroll: false,
     loop: OPTIONS.loop,
     axis: 'y',
-    slideChanges: false
+    watchSlides: false
   })
 )

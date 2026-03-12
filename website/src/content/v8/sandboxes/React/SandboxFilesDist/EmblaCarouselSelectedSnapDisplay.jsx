@@ -5,8 +5,8 @@ export const useSelectedSnapDisplay = (emblaApi) => {
   const [snapCount, setSnapCount] = useState(0)
 
   const updateScrollSnapState = useCallback((emblaApi) => {
-    setSnapCount(emblaApi.snapList().length)
-    setSelectedSnap(emblaApi.selectedSnap())
+    setSnapCount(emblaApi.scrollSnapList().length)
+    setSelectedSnap(emblaApi.selectedScrollSnap())
   }, [])
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export const useSelectedSnapDisplay = (emblaApi) => {
 
     updateScrollSnapState(emblaApi)
     emblaApi.on('select', updateScrollSnapState)
-    emblaApi.on('reinit', updateScrollSnapState)
+    emblaApi.on('reInit', updateScrollSnapState)
   }, [emblaApi, updateScrollSnapState])
 
   return {

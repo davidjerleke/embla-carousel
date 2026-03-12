@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 type UseGroupIndicatorType = string[]
 
@@ -8,16 +8,17 @@ export const useGroupIndicator = (
 ): UseGroupIndicatorType => {
   const [classNames, setClassNames] = useState<string[]>([])
 
-  const createGroupIndicatorClassNames = useCallback(
+  const getGroupIndicatorClassNames = useCallback(
     (emblaApi: EmblaCarouselType) => {
-      const { scrollSnapList } = emblaApi.internalEngine()
-      const { slidesBySnap, snapBySlide } = scrollSnapList
+      const { slideRegistry } = emblaApi.internalEngine()
 
       const groupIndicatorClassNames = emblaApi
         .slideNodes()
         .map((_, slideIndex) => {
-          const snapIndex = snapBySlide[slideIndex]
-          const slidesInGroup = slidesBySnap[snapIndex]
+          const snapIndex = slideRegistry.findIndex((group) =>
+            group.includes(slideIndex)
+          )
+          const slidesInGroup = slideRegistry[snapIndex]
           if (!slidesInGroup) return ''
 
           const firstIndex = slidesInGroup[0]
@@ -42,9 +43,9 @@ export const useGroupIndicator = (
 
   useEffect(() => {
     if (!emblaApi) return
-    createGroupIndicatorClassNames(emblaApi)
+    getGroupIndicatorClassNames(emblaApi)
 
-    emblaApi.on('reinit', createGroupIndicatorClassNames)
+    emblaApi.on('reInit', getGroupIndicatorClassNames)
   }, [emblaApi])
 
   return classNames

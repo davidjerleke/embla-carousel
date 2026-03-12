@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+import {
+  EmblaCarouselType,
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import { LazyLoadImage } from './EmblaCarouselLazyLoadImage'
 import {
   NextButton,
@@ -14,7 +17,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel = (props: PropType) => {
+const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRed, emblaApi] = useEmblaCarousel(options)
   const [slidesInView, setSlidesInView] = useState<number[]>([])
@@ -32,7 +35,7 @@ const EmblaCarousel = (props: PropType) => {
   const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('slidesinview', updateSlidesInView)
+        emblaApi.off('slidesInView', updateSlidesInView)
       }
       const inView = emblaApi
         .slidesInView()
@@ -45,8 +48,8 @@ const EmblaCarousel = (props: PropType) => {
     if (!emblaApi) return
 
     updateSlidesInView(emblaApi)
-    emblaApi.on('slidesinview', updateSlidesInView)
-    emblaApi.on('reinit', updateSlidesInView)
+    emblaApi.on('slidesInView', updateSlidesInView)
+    emblaApi.on('reInit', updateSlidesInView)
   }, [emblaApi, updateSlidesInView])
 
   return (

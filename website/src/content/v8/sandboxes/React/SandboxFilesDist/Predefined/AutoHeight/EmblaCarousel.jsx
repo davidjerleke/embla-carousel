@@ -1,6 +1,6 @@
 import React from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
-import AutoHeight from 'embla-carousel-auto-height'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
+import AutoHeight from '@vendor/embla-carousel-v8/embla-carousel-auto-height'
 import {
   NextButton,
   PrevButton,

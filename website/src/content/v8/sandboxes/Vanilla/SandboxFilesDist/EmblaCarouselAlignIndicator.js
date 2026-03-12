@@ -1,7 +1,7 @@
 export const addAlignIndicatorHandler = (emblaApi, alignIndicatorNode) => {
   let currentAlign = 'center'
 
-  emblaApi.on('reinit', () => {
+  emblaApi.on('reInit', () => {
     const nextAlign = emblaApi.internalEngine().options.align || 'center'
 
     const currentAlignClass = `embla__align-indicator--${currentAlign}`

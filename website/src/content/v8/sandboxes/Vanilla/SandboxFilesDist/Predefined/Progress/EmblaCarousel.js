@@ -20,6 +20,6 @@ addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 applyProgress()
 
 emblaApi
-  .on('reinit', applyProgress)
+  .on('reInit', applyProgress)
   .on('scroll', applyProgress)
-  .on('slidefocus', applyProgress)
+  .on('slideFocus', applyProgress)

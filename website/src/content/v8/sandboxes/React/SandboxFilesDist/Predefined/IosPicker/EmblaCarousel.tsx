@@ -1,5 +1,5 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
 import { IosPickerItem } from './EmblaCarouselIosPickerItem'
 
 type PropType = {

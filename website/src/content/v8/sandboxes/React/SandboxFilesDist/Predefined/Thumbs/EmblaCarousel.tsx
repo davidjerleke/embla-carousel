@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import { Thumb } from './EmblaCarouselThumbsButton'
 
 type PropType = {
@@ -20,22 +20,22 @@ const EmblaCarousel = (props: PropType) => {
   const onThumbClick = useCallback(
     (index: number) => {
       if (!emblaMainApi || !emblaThumbsApi) return
-      emblaMainApi.goTo(index)
+      emblaMainApi.scrollTo(index)
     },
     [emblaMainApi, emblaThumbsApi]
   )
 
   const onSelect = useCallback(() => {
     if (!emblaMainApi || !emblaThumbsApi) return
-    setSelectedIndex(emblaMainApi.selectedSnap())
-    emblaThumbsApi.goTo(emblaMainApi.selectedSnap())
+    setSelectedIndex(emblaMainApi.selectedScrollSnap())
+    emblaThumbsApi.scrollTo(emblaMainApi.selectedScrollSnap())
   }, [emblaMainApi, emblaThumbsApi, setSelectedIndex])
 
   useEffect(() => {
     if (!emblaMainApi) return
     onSelect()
 
-    emblaMainApi.on('select', onSelect).on('reinit', onSelect)
+    emblaMainApi.on('select', onSelect).on('reInit', onSelect)
   }, [emblaMainApi, onSelect])
 
   return (

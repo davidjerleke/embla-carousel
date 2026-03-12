@@ -27,5 +27,3 @@ addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 addPlayButtonListeners(emblaApi, playBtn)
 addNavButtonListeners(emblaApi, prevBtn, nextBtn)
 addAutoplayProgressListeners(emblaApi, progressNode)
-
-emblaApi.plugins().autoplay?.play()

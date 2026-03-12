@@ -1,7 +1,7 @@
 import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
-import AutoScroll from 'embla-carousel-auto-scroll'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
+import AutoScroll from '@vendor/embla-carousel-v8/embla-carousel-auto-scroll'
 import { useAutoScroll } from './EmblaCarouselAutoScroll'
 import {
   NextButton,
@@ -16,7 +16,9 @@ type PropType = {
 
 const EmblaCarousel = (props: PropType) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [AutoScroll()])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    AutoScroll({ playOnInit: false })
+  ])
 
   const {
     prevBtnDisabled,

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import { LazyLoadImage } from './EmblaCarouselLazyLoadImage'
 import {
   NextButton,
@@ -26,7 +26,7 @@ const EmblaCarousel = (props) => {
   const updateSlidesInView = useCallback((emblaApi) => {
     setSlidesInView((slidesInView) => {
       if (slidesInView.length === emblaApi.slideNodes().length) {
-        emblaApi.off('slidesinview', updateSlidesInView)
+        emblaApi.off('slidesInView', updateSlidesInView)
       }
       const inView = emblaApi
         .slidesInView()
@@ -39,8 +39,8 @@ const EmblaCarousel = (props) => {
     if (!emblaApi) return
 
     updateSlidesInView(emblaApi)
-    emblaApi.on('slidesinview', updateSlidesInView)
-    emblaApi.on('reinit', updateSlidesInView)
+    emblaApi.on('slidesInView', updateSlidesInView)
+    emblaApi.on('reInit', updateSlidesInView)
   }, [emblaApi, updateSlidesInView])
 
   return (

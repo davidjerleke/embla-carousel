@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 type UseAutoplayProgressType = {
   showAutoplayProgress: boolean
 }
 
-export const useAutoplayProgress = <ProgressElement extends HTMLElement>(
+export const useAutoplayProgress = <ProgressElement extends HTMLElement | null>(
   emblaApi: EmblaCarouselType | undefined,
   progressNode: React.RefObject<ProgressElement>
 ): UseAutoplayProgressType => {

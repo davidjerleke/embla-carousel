@@ -5,7 +5,7 @@ type UseAutoplayProgressType = {
   showAutoplayProgress: boolean
 }
 
-export const useAutoplayProgress = <ProgressElement extends HTMLElement>(
+export const useAutoplayProgress = <ProgressElement extends HTMLElement | null>(
   emblaApi: EmblaCarouselType | undefined,
   progressNode: React.RefObject<ProgressElement>
 ): UseAutoplayProgressType => {

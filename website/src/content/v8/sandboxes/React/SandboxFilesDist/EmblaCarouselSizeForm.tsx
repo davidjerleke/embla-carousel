@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 const getClampedSlideGap = (size: number, min: number, max: number): number => {
   return Math.min(Math.max(size, min), max)

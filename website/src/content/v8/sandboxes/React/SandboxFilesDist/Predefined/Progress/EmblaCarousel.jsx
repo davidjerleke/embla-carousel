@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
@@ -28,9 +28,9 @@ const EmblaCarousel = (props) => {
 
     onScroll(emblaApi)
     emblaApi
-      .on('reinit', onScroll)
+      .on('reInit', onScroll)
       .on('scroll', onScroll)
-      .on('slidefocus', onScroll)
+      .on('slideFocus', onScroll)
   }, [emblaApi, onScroll])
 
   return (

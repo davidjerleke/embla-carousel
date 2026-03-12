@@ -3,15 +3,16 @@ import { useCallback, useEffect, useState } from 'react'
 export const useGroupIndicator = (emblaApi) => {
   const [classNames, setClassNames] = useState([])
 
-  const createGroupIndicatorClassNames = useCallback((emblaApi) => {
-    const { scrollSnapList } = emblaApi.internalEngine()
-    const { slidesBySnap, snapBySlide } = scrollSnapList
+  const getGroupIndicatorClassNames = useCallback((emblaApi) => {
+    const { slideRegistry } = emblaApi.internalEngine()
 
     const groupIndicatorClassNames = emblaApi
       .slideNodes()
       .map((_, slideIndex) => {
-        const snapIndex = snapBySlide[slideIndex]
-        const slidesInGroup = slidesBySnap[snapIndex]
+        const snapIndex = slideRegistry.findIndex((group) =>
+          group.includes(slideIndex)
+        )
+        const slidesInGroup = slideRegistry[snapIndex]
         if (!slidesInGroup) return ''
 
         const firstIndex = slidesInGroup[0]
@@ -34,9 +35,9 @@ export const useGroupIndicator = (emblaApi) => {
 
   useEffect(() => {
     if (!emblaApi) return
-    createGroupIndicatorClassNames(emblaApi)
+    getGroupIndicatorClassNames(emblaApi)
 
-    emblaApi.on('reinit', createGroupIndicatorClassNames)
+    emblaApi.on('reInit', getGroupIndicatorClassNames)
   }, [emblaApi])
 
   return classNames

@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 
 const CIRCLE_DEGREES = 360
 const WHEEL_ITEM_SIZE = 32
@@ -18,7 +18,7 @@ const isInView = (wheelLocation, slidePosition) =>
 const setSlideStyles = (emblaApi, index, loop, slideCount, totalRadius) => {
   const slideNode = emblaApi.slideNodes()[index]
   const wheelLocation = emblaApi.scrollProgress() * totalRadius
-  const positionDefault = emblaApi.snapList()[index] * totalRadius
+  const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
 
@@ -61,7 +61,7 @@ export const IosPickerItem = (props) => {
     axis: 'y',
     dragFree: true,
     containScroll: false,
-    slideChanges: false
+    watchSlides: false
   })
   const rootNodeRef = useRef(null)
   const totalRadius = slideCount * WHEEL_ITEM_RADIUS
@@ -70,11 +70,10 @@ export const IosPickerItem = (props) => {
 
   const inactivateEmblaTransform = useCallback((emblaApi) => {
     if (!emblaApi) return
-
-    const { translate, slideTranslates } = emblaApi.internalEngine()
-    const translates = [translate, ...slideTranslates]
-
-    translates.forEach((translate) => {
+    const { translate, slideLooper } = emblaApi.internalEngine()
+    translate.clear()
+    translate.toggleActive(false)
+    slideLooper.loopPoints.forEach(({ translate }) => {
       translate.clear()
       translate.toggleActive(false)
     })
@@ -95,17 +94,17 @@ export const IosPickerItem = (props) => {
   useEffect(() => {
     if (!emblaApi) return
 
-    emblaApi.on('pointerup', (emblaApi) => {
+    emblaApi.on('pointerUp', (emblaApi) => {
       const { scrollTo, target, location } = emblaApi.internalEngine()
-      const displacement = target.minus(location)
-      const factor = Math.abs(displacement) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
-      const distance = displacement * factor
+      const diffToTarget = target.get() - location.get()
+      const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
+      const distance = diffToTarget * factor
       scrollTo.distance(distance, true)
     })
 
     emblaApi.on('scroll', rotateWheel)
 
-    emblaApi.on('reinit', (emblaApi) => {
+    emblaApi.on('reInit', (emblaApi) => {
       inactivateEmblaTransform(emblaApi)
       rotateWheel(emblaApi)
     })

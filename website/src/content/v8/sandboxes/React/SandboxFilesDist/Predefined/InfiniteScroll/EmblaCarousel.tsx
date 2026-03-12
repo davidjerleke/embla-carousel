@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { EngineType } from 'embla-carousel/components/Engine'
+import { EngineType } from '@vendor/embla-carousel-v8/embla-carousel/components/Engine'
 import {
   EmblaCarouselType,
-  EmblaEventCallbackType,
   EmblaOptionsType
-} from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+} from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
@@ -28,7 +27,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel = (props: PropType) => {
+const EmblaCarousel: React.FC<PropType> = (props) => {
   const { options, slides: propSlides } = props
   const scrollListenerRef = useRef<() => void>(() => undefined)
   const listenForScrollRef = useRef(true)
@@ -36,17 +35,10 @@ const EmblaCarousel = (props: PropType) => {
   const [slides, setSlides] = useState(propSlides)
   const [hasMoreToLoad, setHasMoreToLoad] = useState(true)
   const [loadingMore, setLoadingMore] = useState(false)
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
 
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
-
-  const onSlideChanges: EmblaEventCallbackType<'slideschanged'> = useCallback(
-    (emblaApi: EmblaCarouselType) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    ...options,
+    watchSlides: (emblaApi) => {
       const reloadEmbla = (): void => {
         const oldEngine = emblaApi.internalEngine()
 
@@ -63,9 +55,9 @@ const EmblaCarousel = (props: PropType) => {
           Object.assign(newEngine[engineModule], oldEngine[engineModule])
         })
 
-        newEngine.translate.to(oldEngine.location)
+        newEngine.translate.to(oldEngine.location.get())
         const { index } = newEngine.scrollTarget.byDistance(0, false)
-        newEngine.indexCurrent.set(index)
+        newEngine.index.set(index)
         newEngine.animation.start()
 
         setLoadingMore(false)
@@ -73,24 +65,28 @@ const EmblaCarousel = (props: PropType) => {
       }
 
       const reloadAfterPointerUp = (): void => {
-        emblaApi.off('pointerup', reloadAfterPointerUp)
+        emblaApi.off('pointerUp', reloadAfterPointerUp)
         reloadEmbla()
       }
 
       const engine = emblaApi.internalEngine()
 
       if (hasMoreToLoadRef.current && engine.dragHandler.pointerDown()) {
-        const boundsActive = engine.limit.pastMaxBound(engine.target)
+        const boundsActive = engine.limit.reachedMax(engine.target.get())
         engine.scrollBounds.toggleActive(boundsActive)
-        emblaApi.on('pointerup', reloadAfterPointerUp)
+        emblaApi.on('pointerUp', reloadAfterPointerUp)
       } else {
         reloadEmbla()
       }
+    }
+  })
 
-      return false
-    },
-    []
-  )
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
 
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     if (!listenForScrollRef.current) return
@@ -135,8 +131,7 @@ const EmblaCarousel = (props: PropType) => {
     const onResize = () => emblaApi.reInit()
     window.addEventListener('resize', onResize)
     emblaApi.on('destroy', () => window.removeEventListener('resize', onResize))
-    emblaApi.on('slideschanged', onSlideChanges)
-  }, [emblaApi, addScrollListener, onSlideChanges])
+  }, [emblaApi, addScrollListener])
 
   useEffect(() => {
     hasMoreToLoadRef.current = hasMoreToLoad

@@ -23,4 +23,4 @@ addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 addDotButtonAndClickHandlers(emblaApi, dotsNode)
 loadImagesInView(emblaApi)
 
-emblaApi.on('reinit', loadImagesInView).on('slidesinview', loadImagesInView)
+emblaApi.on('reInit', loadImagesInView).on('slidesInView', loadImagesInView)

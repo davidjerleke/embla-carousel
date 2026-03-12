@@ -26,7 +26,7 @@ const rotateSlide = (
 ): void => {
   const slideNode = emblaApi.slideNodes()[index]
   const wheelLocation = emblaApi.scrollProgress() * totalRadius
-  const positionDefault = emblaApi.snapList()[index] * totalRadius
+  const positionDefault = emblaApi.scrollSnapList()[index] * totalRadius
   const positionLoopStart = positionDefault + totalRadius
   const positionLoopEnd = positionDefault - totalRadius
 
@@ -84,10 +84,10 @@ const rotateWheel = (
 }
 
 const inactivateEmblaTransform = (emblaApi: EmblaCarouselType): void => {
-  const { translate, slideTranslates } = emblaApi.internalEngine()
-  const translates = [translate, ...slideTranslates]
-
-  translates.forEach((translate) => {
+  const { translate, slideLooper } = emblaApi.internalEngine()
+  translate.clear()
+  translate.toggleActive(false)
+  slideLooper.loopPoints.forEach(({ translate }) => {
     translate.clear()
     translate.toggleActive(false)
   })
@@ -111,17 +111,17 @@ export const setupIosPicker = (
     rotateSlidesFunc()
   }
 
-  emblaApi.on('pointerup', () => {
+  emblaApi.on('pointerUp', () => {
     const { scrollTo, target, location } = emblaApi.internalEngine()
-    const displacement = target.minus(location)
-    const factor = Math.abs(displacement) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
-    const distance = displacement * factor
+    const diffToTarget = target.get() - location.get()
+    const factor = Math.abs(diffToTarget) < WHEEL_ITEM_SIZE / 2.5 ? 10 : 0.1
+    const distance = diffToTarget * factor
     scrollTo.distance(distance, true)
   })
 
   emblaApi.on('scroll', rotate)
 
-  emblaApi.on('reinit', () => {
+  emblaApi.on('reInit', () => {
     inactivateEmblaTransform(emblaApi)
     rotate()
   })

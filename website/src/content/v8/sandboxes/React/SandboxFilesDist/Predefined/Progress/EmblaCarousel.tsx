@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
-import useEmblaCarousel from 'embla-carousel-react'
+import {
+  EmblaCarouselType,
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
@@ -12,7 +15,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel = (props: PropType) => {
+const EmblaCarousel: React.FC<PropType> = (props) => {
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -34,9 +37,9 @@ const EmblaCarousel = (props: PropType) => {
 
     onScroll(emblaApi)
     emblaApi
-      .on('reinit', onScroll)
+      .on('reInit', onScroll)
       .on('scroll', onScroll)
-      .on('slidefocus', onScroll)
+      .on('slideFocus', onScroll)
   }, [emblaApi, onScroll])
 
   return (

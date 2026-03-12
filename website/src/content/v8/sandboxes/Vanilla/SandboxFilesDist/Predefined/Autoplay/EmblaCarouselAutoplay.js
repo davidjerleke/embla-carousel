@@ -19,7 +19,7 @@ export const addPlayButtonListeners = (emblaApi, playBtn) => {
   emblaApi
     .on('autoplay:play', togglePlayBtnState)
     .on('autoplay:stop', togglePlayBtnState)
-    .on('reinit', togglePlayBtnState)
+    .on('reInit', togglePlayBtnState)
 }
 
 export const addNavButtonListeners = (emblaApi, ...navButtons) => {

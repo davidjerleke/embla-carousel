@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react'
-import useEmblaCarousel from 'embla-carousel-react'
+import useEmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel-react'
 import {
   NextButton,
   PrevButton,
@@ -35,18 +35,18 @@ const EmblaCarousel = (props) => {
   }, [])
 
   const setTweenFactor = useCallback((emblaApi) => {
-    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.snapList().length
+    tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
   }, [])
 
-  const tweenScale = useCallback((emblaApi, event) => {
+  const tweenScale = useCallback((emblaApi, eventName) => {
     const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
     const slidesInView = emblaApi.slidesInView()
-    const isScrollEvent = event?.type === 'scroll'
+    const isScrollEvent = eventName === 'scroll'
 
-    emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
+    emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
       let diffToTarget = scrollSnap - scrollProgress
-      const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
+      const slidesInSnap = engine.slideRegistry[snapIndex]
 
       slidesInSnap.forEach((slideIndex) => {
         if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -84,11 +84,11 @@ const EmblaCarousel = (props) => {
     tweenScale(emblaApi)
 
     emblaApi
-      .on('reinit', setTweenNodes)
-      .on('reinit', setTweenFactor)
-      .on('reinit', tweenScale)
+      .on('reInit', setTweenNodes)
+      .on('reInit', setTweenFactor)
+      .on('reInit', tweenScale)
       .on('scroll', tweenScale)
-      .on('slidefocus', tweenScale)
+      .on('slideFocus', tweenScale)
   }, [emblaApi, tweenScale])
 
   return (
