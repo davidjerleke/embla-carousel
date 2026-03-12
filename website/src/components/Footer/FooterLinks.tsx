@@ -6,9 +6,11 @@ import { IconWithText } from '@/components/Icon/IconWithText'
 import { BORDER_SIZES } from '@/utils/border'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { GLOBAL_DATA } from '@/utils/global-data'
+import { FONT_SIZES } from '@/utils/font-sizes'
 
 const LINK_SPACING = SPACINGS.FIVE
-const ICON_SPACING = SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)
+const ICON_SPACING = SPACINGS.ONE
+const ICON_SIZE = '1.4rem'
 
 const FooterLinksWrapper = styled.ul`
   ${createGapStyles(LINK_SPACING, '', 'li')};
@@ -18,6 +20,7 @@ const FooterLinksWrapper = styled.ul`
 `
 
 const Link = styled(LinkBare)`
+  font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-right: -${BORDER_SIZES.OUTLINE};
   padding: ${SPACINGS.ONE} ${BORDER_SIZES.OUTLINE};
   outline-offset: -${BORDER_SIZES.OUTLINE};
@@ -38,21 +41,33 @@ export function FooterLinks(props: PropType) {
     <FooterLinksWrapper {...restProps}>
       <li>
         <Link href={URLS.NPM_PACKAGE}>
-          <IconWithText iconSvg="npm" spacing={ICON_SPACING}>
+          <IconWithText
+            iconSvg="npm"
+            spacing={ICON_SPACING}
+            iconSize={ICON_SIZE}
+          >
             Npm
           </IconWithText>
         </Link>
       </li>
       <li>
         <Link href={URLS.GITHUB_ROOT}>
-          <IconWithText iconSvg="github" spacing={ICON_SPACING}>
+          <IconWithText
+            iconSvg="github"
+            spacing={ICON_SPACING}
+            iconSize={ICON_SIZE}
+          >
             GitHub
           </IconWithText>
         </Link>
       </li>
       <li>
         <Link href={URLS.GITHUB_SPONSORS_PAGE}>
-          <IconWithText iconSvg="heartOutlined" spacing={ICON_SPACING}>
+          <IconWithText
+            iconSvg="heartOutlined"
+            spacing={ICON_SPACING}
+            iconSize={ICON_SIZE}
+          >
             Sponsor
           </IconWithText>
         </Link>
