@@ -1,4 +1,4 @@
-import { arrayFromNumber } from 'utils/arrayFromNumber'
+import { arrayFromNumber } from 'utils/array'
 
 export const createSlides = (
   containerNode: HTMLElement,
