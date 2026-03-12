@@ -1,5 +1,5 @@
-import { EmblaCarouselType } from 'embla-carousel/components/EmblaCarousel'
-import { EmblaOptionsType } from 'embla-carousel/components/Options'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel/components/EmblaCarousel'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel/components/Options'
 
 export const addAlignIndicatorHandler = (
   emblaApi: EmblaCarouselType,

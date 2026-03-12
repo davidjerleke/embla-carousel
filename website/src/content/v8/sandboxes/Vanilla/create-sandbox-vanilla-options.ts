@@ -1,4 +1,4 @@
-import { EmblaOptionsType } from 'embla-carousel'
+import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
 import {
   SANDBOX_REGEX_OPTIONS,
   sandboxInjectOptions

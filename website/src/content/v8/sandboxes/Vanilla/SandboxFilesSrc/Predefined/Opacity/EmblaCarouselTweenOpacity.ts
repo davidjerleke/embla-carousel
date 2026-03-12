@@ -1,8 +1,7 @@
 import {
   EmblaCarouselType,
-  EmblaEventListType,
-  EmblaEventModelType
-} from 'embla-carousel'
+  EmblaEventType
+} from '@vendor/embla-carousel-v8/embla-carousel'
 
 const TWEEN_FACTOR_BASE = 0.84
 let tweenFactor = 0
@@ -11,21 +10,21 @@ const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max)
 
 const setTweenFactor = (emblaApi: EmblaCarouselType): void => {
-  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.snapList().length
+  tweenFactor = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length
 }
 
-const tweenOpacity = <EventType extends keyof EmblaEventListType>(
+const tweenOpacity = (
   emblaApi: EmblaCarouselType,
-  event?: EmblaEventModelType<EventType>
+  eventName?: EmblaEventType
 ): void => {
   const engine = emblaApi.internalEngine()
   const scrollProgress = emblaApi.scrollProgress()
   const slidesInView = emblaApi.slidesInView()
-  const isScrollEvent = event?.type === 'scroll'
+  const isScrollEvent = eventName === 'scroll'
 
-  emblaApi.snapList().forEach((scrollSnap, snapIndex) => {
+  emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
     let diffToTarget = scrollSnap - scrollProgress
-    const slidesInSnap = engine.scrollSnapList.slidesBySnap[snapIndex]
+    const slidesInSnap = engine.slideRegistry[snapIndex]
 
     slidesInSnap.forEach((slideIndex) => {
       if (isScrollEvent && !slidesInView.includes(slideIndex)) return
@@ -59,8 +58,8 @@ export const setupTweenOpacity = (emblaApi: EmblaCarouselType): void => {
   tweenOpacity(emblaApi)
 
   emblaApi
-    .on('reinit', setTweenFactor)
-    .on('reinit', tweenOpacity)
+    .on('reInit', setTweenFactor)
+    .on('reInit', tweenOpacity)
     .on('scroll', tweenOpacity)
-    .on('slidefocus', tweenOpacity)
+    .on('slideFocus', tweenOpacity)
 }

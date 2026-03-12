@@ -2,7 +2,7 @@ import {
   EmblaCarouselType,
   EmblaEventListType,
   EmblaEventModelType
-} from 'embla-carousel'
+} from '@vendor/embla-carousel-v8/embla-carousel'
 
 export const setupLazyLoadImage = <EventType extends keyof EmblaEventListType>(
   emblaApi: EmblaCarouselType

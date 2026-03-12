@@ -2,7 +2,7 @@ import {
   EmblaCarouselType,
   EmblaEventListType,
   EmblaEventModelType
-} from 'embla-carousel'
+} from '@vendor/embla-carousel-v8/embla-carousel'
 
 const TWEEN_FACTOR_BASE = 0.84
 let tweenFactor = 0

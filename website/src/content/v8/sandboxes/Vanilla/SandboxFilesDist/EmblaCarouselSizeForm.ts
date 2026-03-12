@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel/components/EmblaCarousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel/components/EmblaCarousel'
 
 const getClampedSlideSize = (
   size: number,

@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 export const setupProgressBar = (
   emblaApi: EmblaCarouselType,

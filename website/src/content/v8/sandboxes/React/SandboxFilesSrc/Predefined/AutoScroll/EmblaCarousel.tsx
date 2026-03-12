@@ -16,7 +16,9 @@ type PropType = {
 
 const EmblaCarousel = (props: PropType) => {
   const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options, [AutoScroll()])
+  const [emblaRef, emblaApi] = useEmblaCarousel(options, [
+    AutoScroll({ playOnInit: false })
+  ])
 
   const {
     prevBtnDisabled,

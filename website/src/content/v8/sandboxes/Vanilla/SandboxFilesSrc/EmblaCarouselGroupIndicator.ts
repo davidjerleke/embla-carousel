@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel/components/EmblaCarousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel/components/EmblaCarousel'
 
 export const addGroupIndicatorHandler = (
   emblaApi: EmblaCarouselType
@@ -21,12 +21,13 @@ export const addGroupIndicatorHandler = (
   }
 
   const getGroupIndicatorClassNames = (): string[] => {
-    const { scrollSnapList } = emblaApi.internalEngine()
-    const { slidesBySnap, snapBySlide } = scrollSnapList
+    const { slideRegistry } = emblaApi.internalEngine()
 
     return emblaApi.slideNodes().map((_, slideIndex) => {
-      const snapIndex = snapBySlide[slideIndex]
-      const slidesInGroup = slidesBySnap[snapIndex]
+      const snapIndex = slideRegistry.findIndex((group) =>
+        group.includes(slideIndex)
+      )
+      const slidesInGroup = slideRegistry[snapIndex]
       if (!slidesInGroup) return ''
 
       const firstIndex = slidesInGroup[0]
@@ -60,7 +61,7 @@ export const addGroupIndicatorHandler = (
     })
   }
 
-  emblaApi.on('reinit', () => updateGroupIndicator())
+  emblaApi.on('reInit', () => updateGroupIndicator())
   updateGroupIndicator()
 
   return updateGroupIndicator

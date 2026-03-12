@@ -1,5 +1,7 @@
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
-import Autoplay from 'embla-carousel-autoplay'
+import EmblaCarousel, {
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
+import Autoplay from '@vendor/embla-carousel-v8/embla-carousel-autoplay'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import {
   addPlayButtonListeners,
@@ -20,12 +22,10 @@ const playBtn = <HTMLElement>document.querySelector('.embla__play')
 const progressNode = <HTMLElement>document.querySelector('.embla__progress')
 
 const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [
-  Autoplay({ delay: 3000 })
+  Autoplay({ delay: 3000, playOnInit: false })
 ])
 
 addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 addPlayButtonListeners(emblaApi, playBtn)
 addNavButtonListeners(emblaApi, prevBtn, nextBtn)
 addAutoplayProgressListeners(emblaApi, progressNode)
-
-emblaApi.plugins().autoplay?.play()

@@ -1,5 +1,5 @@
-import EmblaCarousel from 'embla-carousel'
-import ClassNames from 'embla-carousel-class-names'
+import EmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel'
+import ClassNames from '@vendor/embla-carousel-v8/embla-carousel-class-names'
 import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import '../css/base.css'

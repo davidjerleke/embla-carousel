@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 const addTogglePrevNextButtonsActive = (
   emblaApi: EmblaCarouselType,
@@ -6,13 +6,13 @@ const addTogglePrevNextButtonsActive = (
   nextBtn: HTMLElement
 ): void => {
   const togglePrevNextButtonsState = (): void => {
-    if (emblaApi.canGoToPrev()) {
+    if (emblaApi.canScrollPrev()) {
       prevBtn.classList.remove('embla__button--disabled')
     } else {
       prevBtn.classList.add('embla__button--disabled')
     }
 
-    if (emblaApi.canGoToNext()) {
+    if (emblaApi.canScrollNext()) {
       nextBtn.classList.remove('embla__button--disabled')
     } else {
       nextBtn.classList.add('embla__button--disabled')
@@ -23,7 +23,7 @@ const addTogglePrevNextButtonsActive = (
 
   emblaApi
     .on('select', togglePrevNextButtonsState)
-    .on('reinit', togglePrevNextButtonsState)
+    .on('reInit', togglePrevNextButtonsState)
 }
 
 export const addPrevNextButtonClickHandlers = (
@@ -32,10 +32,10 @@ export const addPrevNextButtonClickHandlers = (
   nextBtn: HTMLElement
 ): void => {
   const scrollPrev = (): void => {
-    emblaApi.goToPrev()
+    emblaApi.scrollPrev()
   }
   const scrollNext = (): void => {
-    emblaApi.goToNext()
+    emblaApi.scrollNext()
   }
   prevBtn.addEventListener('click', scrollPrev, false)
   nextBtn.addEventListener('click', scrollNext, false)

@@ -1,5 +1,5 @@
-import EmblaCarousel from 'embla-carousel'
-import AutoHeight from 'embla-carousel-auto-height'
+import EmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel'
+import AutoHeight from '@vendor/embla-carousel-v8/embla-carousel-auto-height'
 import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import '../css/base.css'

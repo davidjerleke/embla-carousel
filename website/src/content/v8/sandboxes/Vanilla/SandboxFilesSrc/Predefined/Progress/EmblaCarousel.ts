@@ -1,4 +1,6 @@
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+import EmblaCarousel, {
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
 import { setupProgressBar } from './EmblaCarouselProgressBar'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import '../css/base.css'
@@ -22,6 +24,6 @@ addPrevNextButtonClickHandlers(emblaApi, prevBtn, nextBtn)
 applyProgress()
 
 emblaApi
-  .on('reinit', applyProgress)
+  .on('reInit', applyProgress)
   .on('scroll', applyProgress)
-  .on('slidefocus', applyProgress)
+  .on('slideFocus', applyProgress)

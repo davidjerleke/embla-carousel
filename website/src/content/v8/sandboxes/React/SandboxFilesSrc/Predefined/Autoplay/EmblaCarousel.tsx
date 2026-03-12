@@ -19,7 +19,7 @@ const EmblaCarousel = (props: PropType) => {
   const { slides, options } = props
   const progressNode = useRef<HTMLDivElement>(null)
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
-    Autoplay({ delay: 3000 })
+    Autoplay({ delay: 3000, playOnInit: false })
   ])
 
   const {

@@ -1,4 +1,4 @@
-import EmblaCarousel from 'embla-carousel'
+import EmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel'
 
 const CIRCLE_DEGREES = 360
 const WHEEL_ITEM_SIZE = 30

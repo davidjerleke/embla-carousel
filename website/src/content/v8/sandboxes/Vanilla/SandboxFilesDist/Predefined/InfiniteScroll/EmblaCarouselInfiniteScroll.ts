@@ -1,5 +1,5 @@
-import { EmblaCarouselType } from 'embla-carousel'
-import { EngineType } from 'embla-carousel/components/Engine'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
+import { EngineType } from '@vendor/embla-carousel-v8/embla-carousel/components/Engine'
 
 export const mockApiCall = (
   minWait: number,

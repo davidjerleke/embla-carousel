@@ -1,4 +1,4 @@
-import EmblaCarousel from 'embla-carousel'
+import EmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel'
 import { setupLazyLoadImage } from './EmblaCarouselLazyLoad'
 import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'

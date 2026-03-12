@@ -1,5 +1,5 @@
-import EmblaCarousel from 'embla-carousel'
-import AutoScroll from 'embla-carousel-auto-scroll'
+import EmblaCarousel from '@vendor/embla-carousel-v8/embla-carousel'
+import AutoScroll from '@vendor/embla-carousel-v8/embla-carousel-auto-scroll'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import {
   addPlayButtonListeners,

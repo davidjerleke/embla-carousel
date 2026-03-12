@@ -1,5 +1,7 @@
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
-import Fade from 'embla-carousel-fade'
+import EmblaCarousel, {
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
+import Fade from '@vendor/embla-carousel-v8/embla-carousel-fade'
 import { addDotButtonAndClickHandlers } from '../../EmblaCarouselDotButton'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import '../css/base.css'

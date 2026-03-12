@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 export const addThumbButtonClickHandlers = (
   emblaApiMain: EmblaCarouselType,
@@ -7,7 +7,7 @@ export const addThumbButtonClickHandlers = (
   const slidesThumbs = emblaApiThumb.slideNodes()
 
   const scrollToIndex = slidesThumbs.map(
-    (_, index) => (): void => emblaApiMain.goTo(index)
+    (_, index) => (): void => emblaApiMain.scrollTo(index)
   )
 
   slidesThumbs.forEach((slideNode, index) => {
@@ -22,9 +22,9 @@ export const addToggleThumbButtonsActive = (
   const slidesThumbs = emblaApiThumb.slideNodes()
 
   const toggleThumbBtnsState = (): void => {
-    emblaApiThumb.goTo(emblaApiMain.selectedSnap())
-    const previous = emblaApiMain.previousSnap()
-    const selected = emblaApiMain.selectedSnap()
+    emblaApiThumb.scrollTo(emblaApiMain.selectedScrollSnap())
+    const previous = emblaApiMain.previousScrollSnap()
+    const selected = emblaApiMain.selectedScrollSnap()
     slidesThumbs[previous].classList.remove('embla-thumbs__slide--selected')
     slidesThumbs[selected].classList.add('embla-thumbs__slide--selected')
   }

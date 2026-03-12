@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel'
+import { EmblaCarouselType } from '@vendor/embla-carousel-v8/embla-carousel'
 
 export const addPlayButtonListeners = (
   emblaApi: EmblaCarouselType,
@@ -24,7 +24,7 @@ export const addPlayButtonListeners = (
   emblaApi
     .on('autoplay:play', togglePlayBtnState)
     .on('autoplay:stop', togglePlayBtnState)
-    .on('reinit', togglePlayBtnState)
+    .on('reInit', togglePlayBtnState)
 }
 
 export const addNavButtonListeners = (

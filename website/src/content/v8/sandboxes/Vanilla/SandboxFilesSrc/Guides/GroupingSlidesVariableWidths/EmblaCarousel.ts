@@ -1,4 +1,6 @@
-import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel'
+import EmblaCarousel, {
+  EmblaOptionsType
+} from '@vendor/embla-carousel-v8/embla-carousel'
 import { addPrevNextButtonClickHandlers } from '../../EmblaCarouselArrowButtons'
 import { updateSelectedSnapDisplay } from '../../EmblaCarouselSelectedSnapDisplay'
 import { addRadioFormHandler } from '../../EmblaCarouselRadioForm'

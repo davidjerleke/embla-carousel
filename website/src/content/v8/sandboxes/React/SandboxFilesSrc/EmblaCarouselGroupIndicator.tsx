@@ -8,7 +8,7 @@ export const useGroupIndicator = (
 ): UseGroupIndicatorType => {
   const [classNames, setClassNames] = useState<string[]>([])
 
-  const createGroupIndicatorClassNames = useCallback(
+  const getGroupIndicatorClassNames = useCallback(
     (emblaApi: EmblaCarouselType) => {
       const { slideRegistry } = emblaApi.internalEngine()
 
@@ -43,9 +43,9 @@ export const useGroupIndicator = (
 
   useEffect(() => {
     if (!emblaApi) return
-    createGroupIndicatorClassNames(emblaApi)
+    getGroupIndicatorClassNames(emblaApi)
 
-    emblaApi.on('reInit', createGroupIndicatorClassNames)
+    emblaApi.on('reInit', getGroupIndicatorClassNames)
   }, [emblaApi])
 
   return classNames
