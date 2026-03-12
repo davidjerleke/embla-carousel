@@ -68,7 +68,7 @@ Below follows an exhaustive **list of all** `Autoplay` **options** and their def
 <ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
 <PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
 
-Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](/plugins/autoplay/#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](#breakpoints) option to toggle the plugin active/inactive depending on media queries.
 
 ---
 
@@ -134,7 +134,7 @@ When set to true `true`, autoplay will do instant slide transitions (no animatio
 />
 
 When set to `true`, autoplay follows Embla Carousel's **default interaction behavior** — it stops when the user interacts with the carousel (for example, on focus or pointer down).
-Set this to `false` if you want to **handle interactions manually** using the [`autoplay:interaction`](/plugins/autoplay/#autoplayinteraction) event.
+Set this to `false` if you want to **handle interactions manually** using the [`autoplay:interaction`](#autoplayinteraction) event.
 
 ---
 
@@ -185,7 +185,7 @@ Below follows an exhaustive **list of all** `Autoplay` **methods** with their re
   code={`emblaApi.plugins().autoplay?.play(true | false)`}
 />
 
-Start autoplay. Set the **instant** parameter to `true` when you want autoplay to do instant slide transitions when advancing. Please note that providing a value to this method vill override the [`instant`](/plugins/autoplay/#instant) option.
+Start autoplay. Set the **instant** parameter to `true` when you want autoplay to do instant slide transitions when advancing. Please note that providing a value to this method vill override the [`instant`](#instant) option.
 
 ---
 
@@ -266,7 +266,7 @@ When playing, the autoplay timer is running and will advance the carousel to the
   code={`emblaApi.plugins().autoplay?.timeUntilNext()`}
 />
 
-If the autoplay timer is active, this will return a number representing the time left until the autoplay scrolls to the next snap. If the timer is not active, this will return `null`. Use this together with the [`autoplay:timerset`](/plugins/autoplay/#autoplaytimerset) and [`autoplay:timerstopped`](/plugins/autoplay/#autoplaytimerstopped) events to create a custom progress bar for autoplay.
+If the autoplay timer is active, this will return a number representing the time left until the autoplay scrolls to the next snap. If the timer is not active, this will return `null`. Use this together with the [`autoplay:timerset`](#autoplaytimerset) and [`autoplay:timerstopped`](#autoplaytimerstopped) events to create a custom progress bar for autoplay.
 
 ---
 
@@ -285,7 +285,7 @@ Below follows an exhaustive **list of all** `Autoplay` **events** together with 
   code={`emblaApi.on('autoplay:play', (emblaApi) => {})`}
 />
 
-Fires when autoplay starts playing. When this event is triggered, the **autoplay timer is active**, and autoplay will select the next scroll snap and start scrolling to it when the [`delay`](/plugins/autoplay/#delay) has passed.
+Fires when autoplay starts playing. When this event is triggered, the **autoplay timer is active**, and autoplay will select the next scroll snap and start scrolling to it when the [`delay`](#delay) has passed.
 
 ---
 
@@ -376,8 +376,8 @@ Fires when the autoplay timer is stopped.
 The event fires on different user interactions with the carousel. Use this event to customize how autoplay should respond to user interactions. The `isMouseOver` and `isPointerDown` properties indicate the current state of the mouse and pointer interactions.
 
 <Admonition type="note">
-  **Note:** The [`defaultInteraction`](/plugins/autoplay/#defaultinteraction)
-  option has to be set to `false` for this event to fire.
+  **Note:** The [`defaultInteraction`](#defaultinteraction) option has to be set
+  to `false` for this event to fire.
 </Admonition>
 
 ---
