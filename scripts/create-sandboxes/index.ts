@@ -3,6 +3,18 @@ import path from 'path'
 import { tsCompile } from './ts-compile'
 import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
 import { readFiles } from '../utils/readFiles'
+import { copySandboxesFromSrcToDist } from './copy-from-src-to-dist'
+import { cleanExistingSandboxDist } from './clean-existing'
+import { collectSandboxDistPaths } from './collect-dist-paths'
+
+const SANDBOX_FILES_CONTENT_PATH = path.join(
+  process.cwd(),
+  'website',
+  'src',
+  'content'
+)
+const SANDBOX_FILES_DIST_FOLDER_NAME = 'SandboxFilesDist'
+const SANDBOX_FILES_SRC_FOLDER_NAME = 'SandboxFilesSrc'
 
 const EXTENSION_REGEX = {
   DECLARATION: /\.d\.ts$/,
@@ -10,13 +22,22 @@ const EXTENSION_REGEX = {
   TS: /\.ts$/
 }
 
-const PATHS_TO_SANDBOX_FILES: string[] = [
-  path.join(process.cwd(), 'src/components/Sandbox/Vanilla/SandboxFilesDist'),
-  path.join(process.cwd(), 'src/components/Sandbox/React/SandboxFilesDist')
-]
-
 function main(): void {
-  PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
+  cleanExistingSandboxDist(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
+  copySandboxesFromSrcToDist(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_SRC_FOLDER_NAME,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
+  const pathsToSandboxFiles = collectSandboxDistPaths(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
+
+  pathsToSandboxFiles.forEach((pathToSandboxFile) => {
     try {
       readFiles(
         `${pathToSandboxFile}/`,
