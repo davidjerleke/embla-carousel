@@ -17,7 +17,8 @@ import {
   SandboxStaticSettingsType,
   SandboxModuleScriptType,
   createSandboxFunctionsWithLabels,
-  sandboxLanguageUtils
+  sandboxLanguageUtils,
+  flattenEmblaCarouselImportPath
 } from '@/content/v8/sandboxes/sandbox-utils'
 
 async function sandboxVanilla(
@@ -50,10 +51,7 @@ async function sandboxVanilla(
     ...settings,
     language,
     plugins: sandboxStaticExtractPlugins(carouselScript.default),
-    carouselScript: carouselScript.default.replace(
-      /from\s'..(.*)\/EmblaCarousel/g,
-      "from './EmblaCarousel"
-    ),
+    carouselScript: flattenEmblaCarouselImportPath(carouselScript.default),
     carouselHtml: ReactDOMServer.renderToStaticMarkup(
       <carouselComponent.default
         options={settings.options}
@@ -98,10 +96,7 @@ async function sandboxReact(
     slides: settings.slides,
     language,
     plugins: sandboxStaticExtractPlugins(carouselScript.default),
-    carouselScript: carouselScript.default.replace(
-      /from\s'..(.*)\/EmblaCarousel/g,
-      "from './EmblaCarousel"
-    ),
+    carouselScript: flattenEmblaCarouselImportPath(carouselScript.default),
     sandboxOverrides: {
       ...moduleScripts.reduce((allScripts, moduleScript) => {
         return {

@@ -1,7 +1,7 @@
-import docsPackageJson from '@root/package.json'
 import { EmblaOptionsType } from '@vendor/embla-carousel-v8/embla-carousel'
 import { loadPrettier } from '@/utils/load-prettier'
 import { SPACINGS } from '@/utils/spacings'
+import { DOCS_VERSIONS } from '@/utils/global-data'
 import {
   PackageJson as BasePackageJsonType,
   TsConfigJson as TsConfigType
@@ -114,6 +114,8 @@ export const SANDBOX_REGEX_THEME = /__replace_sandbox_theme__/g
 
 export const SANDBOX_REGEX_OPTIONS = /const\sOPTIONS(.*)/
 
+export const SANDBOX_VENDOR_IMPORT_REGEX = /@vendor\/embla-carousel-v\d+\//g
+
 type SandboxLanguageUtilsType = {
   isJavaScript: boolean
   isTypeScript: boolean
@@ -137,7 +139,13 @@ export async function sandboxLanguageUtils(
     isTypeScript,
     vanillaScriptExtension,
     reactScriptExtension,
-    formatScript
+    formatScript: (jsOrTs: string): string => {
+      const scriptWithoutVendorImports = jsOrTs.replace(
+        SANDBOX_VENDOR_IMPORT_REGEX,
+        ''
+      )
+      return formatScript(scriptWithoutVendorImports)
+    }
   }
 }
 
@@ -171,7 +179,7 @@ export function addSandboxPlugins(
       ...pluginsArray.reduce(
         (allPlugins, pluginName) => ({
           ...allPlugins,
-          [pluginName]: docsPackageJson.dependencies[pluginName]
+          [pluginName]: getSandboxVersion()
         }),
         {}
       )
@@ -183,4 +191,15 @@ export function sandboxInjectOptions(
   options: EmblaOptionsType
 ): (match: string) => string {
   return (match: string) => match.replace('{}', JSON.stringify(options))
+}
+
+export function flattenEmblaCarouselImportPath(scriptOrEmpty: string): string {
+  const script = scriptOrEmpty || ''
+  const IMPORT_PATH_REGEX = /from\s'..(.*)\/EmblaCarousel/g
+  return script.replace(IMPORT_PATH_REGEX, "from './EmblaCarousel")
+}
+
+export function getSandboxVersion(): string {
+  const version = DOCS_VERSIONS.find((VERSION) => VERSION.MAJOR === 8)?.NAME
+  return version || ''
 }

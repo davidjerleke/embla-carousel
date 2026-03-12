@@ -5,7 +5,8 @@ import {
   sandboxLanguageUtils,
   SandboxLanguageType,
   SandboxPluginsType,
-  PackageJsonType
+  PackageJsonType,
+  getSandboxVersion
 } from '@/content/v8/sandboxes/sandbox-utils'
 
 export async function createSandboxReactPackageJson(
@@ -13,7 +14,8 @@ export async function createSandboxReactPackageJson(
   id: string,
   plugins?: SandboxPluginsType
 ): Promise<PackageJsonType> {
-  const { dependencies, devDependencies } = docsPackageJson
+  const version = getSandboxVersion()
+  const { devDependencies } = docsPackageJson
   const { isJavaScript, reactScriptExtension } = await sandboxLanguageUtils(
     language
   )
@@ -30,18 +32,18 @@ export async function createSandboxReactPackageJson(
       eject: 'react-scripts eject'
     },
     dependencies: {
-      react: dependencies.react,
-      'react-dom': dependencies['react-dom'],
+      react: '18.3.1',
+      'react-dom': '18.3.1',
       'react-scripts': '4.0.0',
-      'embla-carousel-react': dependencies['embla-carousel-react'],
-      'embla-carousel': dependencies['embla-carousel'],
+      'embla-carousel-react': version,
+      'embla-carousel': version,
       ...(plugins && plugins)
     },
     devDependencies: isJavaScript
       ? { '@babel/runtime': '7.13.8' }
       : {
-          '@types/react': devDependencies['@types/react'],
-          '@types/react-dom': devDependencies['@types/react-dom'],
+          '@types/react': '18.3.18',
+          '@types/react-dom': '18.3.5',
           typescript: devDependencies.typescript
         },
     browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all']

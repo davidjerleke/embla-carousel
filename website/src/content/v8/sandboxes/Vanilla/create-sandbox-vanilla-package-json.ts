@@ -4,7 +4,8 @@ import {
   sandboxLanguageUtils,
   PackageJsonType,
   SandboxLanguageType,
-  SandboxPluginsType
+  SandboxPluginsType,
+  getSandboxVersion
 } from '@/content/v8/sandboxes/sandbox-utils'
 
 export async function createSandboxVanillaPackageJson(
@@ -12,8 +13,9 @@ export async function createSandboxVanillaPackageJson(
   id: string,
   plugins?: SandboxPluginsType
 ): Promise<PackageJsonType> {
+  const version = getSandboxVersion()
   const { isJavaScript } = await sandboxLanguageUtils(language)
-  const { dependencies, devDependencies } = docsPackageJson
+  const { devDependencies } = docsPackageJson
 
   return {
     name: id,
@@ -26,7 +28,7 @@ export async function createSandboxVanillaPackageJson(
     },
     dependencies: {
       'parcel-bundler': '^1.6.1',
-      'embla-carousel': dependencies['embla-carousel-react'],
+      'embla-carousel': version,
       ...(plugins && plugins)
     },
     devDependencies: isJavaScript

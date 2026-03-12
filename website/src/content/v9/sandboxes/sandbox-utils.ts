@@ -184,3 +184,9 @@ export function sandboxInjectOptions(
 ): (match: string) => string {
   return (match: string) => match.replace('{}', JSON.stringify(options))
 }
+
+export function flattenEmblaCarouselImportPath(scriptOrEmpty: string): string {
+  const script = scriptOrEmpty || ''
+  const IMPORT_PATH_REGEX = /from\s'..(.*)\/EmblaCarousel/g
+  return script.replace(IMPORT_PATH_REGEX, "from './EmblaCarousel")
+}
