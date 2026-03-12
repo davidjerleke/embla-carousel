@@ -5,11 +5,10 @@ import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
 import { LinkCard } from '@/components/Link/LinkCard'
 import { createGapStyles } from '@/utils/create-gap-styles'
-
-const USP_ITEM_SPACING = SPACINGS.CUSTOM(() => 1.4)
+import { CARD_SPACING } from '@/utils/card'
 
 const HeroUspsWrapper = styled.ul`
-  ${createGapStyles(USP_ITEM_SPACING, USP_ITEM_SPACING, 'li')};
+  ${createGapStyles(CARD_SPACING, CARD_SPACING, 'li')};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

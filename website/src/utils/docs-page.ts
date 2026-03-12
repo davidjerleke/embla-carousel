@@ -18,6 +18,8 @@ export type DocsPageParamsType = {
   }>
 }
 
+export type DocsPageStaticParamsType = Awaited<DocsPageParamsType['params']>[]
+
 /* UTILS */
 export async function getDocsPageFileStaticPath(
   slugOrEmpty?: string[]

@@ -4,6 +4,8 @@ import { MetadataRoute } from 'next'
 import { GLOBAL_DATA } from '@/utils/global-data'
 import { THEME_COLORS, THEME_KEYS } from '@/utils/theme'
 
+export const dynamic = 'force-static'
+
 const FAVICON_REGEX = /^favicon-(\d+x\d+)\.png$/
 const THEME_COLOR = rgbToHex(THEME_COLORS[THEME_KEYS.DARK].BRAND_PRIMARY)
 const BACKGROUND_COLOR = rgbToHex(THEME_COLORS[THEME_KEYS.DARK].BACKGROUND_SITE)

@@ -1,20 +1,19 @@
 'use client'
 
+import styled from 'styled-components'
 import { useRouteChildren, useRouteCurrent } from '@/hooks/routes'
 import { LinkCard } from '@/components/Link/LinkCard'
 import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
-import styled from 'styled-components'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { COLORS } from '@/utils/theme'
 import { createGapStyles } from '@/utils/create-gap-styles'
 import { arrayHasItems } from '@/utils/array'
 import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
-
-const USP_ITEM_SPACING = SPACINGS.CUSTOM(() => 1.4)
+import { CARD_SPACING } from '@/utils/card'
 
 const PageChildLinksWrapper = styled.ul`
-  ${createGapStyles(USP_ITEM_SPACING, USP_ITEM_SPACING, 'li')};
+  ${createGapStyles(CARD_SPACING, CARD_SPACING, 'li')};
   display: flex;
   flex-wrap: wrap;
 `

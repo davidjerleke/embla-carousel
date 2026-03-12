@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel/components/EmblaCarousel'
+import { EmblaCarouselType } from 'embla-carousel'
 
 export const addGroupIndicatorHandler = (
   emblaApi: EmblaCarouselType

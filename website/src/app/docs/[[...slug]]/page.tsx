@@ -14,11 +14,28 @@ import { GLOBAL_DATA } from '@/utils/global-data'
 import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
 import {
   type DocsPageParamsType,
+  DocsPageStaticParamsType,
   getDocsPageContent,
   getDocsPageJsonLd
 } from '@/utils/docs-page'
 
-type PropType = DocsPageParamsType
+import { DOCS_VERSIONS } from '@/utils/global-data'
+import { getDocsRoutes } from '@/utils/docs-routes'
+
+export async function generateStaticParams(): Promise<DocsPageStaticParamsType> {
+  const params: DocsPageStaticParamsType = []
+
+  for (const version of DOCS_VERSIONS) {
+    const { flatRoutes } = await getDocsRoutes([`v${version.MAJOR}`])
+
+    flatRoutes.forEach((route) => {
+      const slug = route.slug.replace('/docs', '').split('/').filter(Boolean)
+      params.push({ slug })
+    })
+  }
+
+  return params
+}
 
 export async function generateMetadata(
   props: DocsPageParamsType
@@ -34,6 +51,8 @@ export async function generateMetadata(
     alternates: { canonical }
   }
 }
+
+type PropType = DocsPageParamsType
 
 export default async function DocsPage(props: PropType) {
   const { params } = props

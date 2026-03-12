@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { EngineType } from 'embla-carousel/components/Engine'
+import { EngineType } from 'embla-carousel'
 import {
   EmblaCarouselType,
   EmblaEventCallbackType,

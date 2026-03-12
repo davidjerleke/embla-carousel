@@ -133,7 +133,7 @@ export function HeroBrand() {
 
         <CtaWrapper as="ul">
           <li>
-            <LinkButtonPrimaryFilled href="/examples/predefined/">
+            <LinkButtonPrimaryFilled href="/docs/examples/predefined/">
               Examples
             </LinkButtonPrimaryFilled>
           </li>
