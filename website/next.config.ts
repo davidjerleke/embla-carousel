@@ -3,6 +3,8 @@ import createMDX from '@next/mdx'
 import { REHYPE_AUTOLINK_HEADINGS_OPTIONS } from '@/utils/mdx'
 
 const nextConfig: NextConfig = {
+  output: 'export',
+  distDir: '../docs',
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   compiler: {
     styledComponents: true

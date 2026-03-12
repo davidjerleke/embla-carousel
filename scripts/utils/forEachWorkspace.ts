@@ -4,7 +4,7 @@ import packageJson from '../../package.json'
 const WORKSPACES = packageJson?.workspaces || []
 export const WORKSPACE_FILTERS = {
   PACKAGES: /packages\//,
-  DOCS: /packages\/embla-carousel-docs/
+  DOCS: /website/
 }
 
 export function forEachWorkspace(

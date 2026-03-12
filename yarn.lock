@@ -10448,6 +10448,7 @@ __metadata:
     react-redux: ^9.2.0
     rehype-autolink-headings: ^7.1.0
     rehype-slug: ^6.0.0
+    shx: ^0.3.4
     styled-components: ^6.3.8
     type-fest: ^3.2.0
     typescript: ^5

@@ -44,9 +44,9 @@ The playground for testing embla-carousel packages in a simulated setup.
 
 #### Docs
 
-The gatsby app deployed to https://embla-carousel.com, See [documentation](#Documentation).
+The NextJs app deployed to https://embla-carousel.com, See [documentation](#Documentation).
 
-- [embla-carousel-docs](https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-docs)
+- [website](https://github.com/davidjerleke/embla-carousel/tree/master/website)
 
 ### Testing
 
@@ -77,7 +77,7 @@ For any new features it's important to follow this checklist:
 
 ## Documentation
 
-The documentation website is generated using [gatsby](https://github.com/gatsbyjs/gatsby). All the content of the docs lives inside [`/packages/embla-carousel-docs`](https://github.com/davidjerleke/embla-carousel/tree/master/packages/embla-carousel-docs).
+The documentation website is generated using [NextJs](https://nextjs.org). All the content of the docs lives inside [`website`](https://github.com/davidjerleke/embla-carousel/tree/master/website).
 
 > [!IMPORTANT]  
 > Make sure your node version is equal to the one in [.nvmrc](https://github.com/davidjerleke/embla-carousel/blob/master/.nvmrc). You can use [`nvm`](https://github.com/nvm-sh/nvm) to easily install different node versions and switch between them with ease.
