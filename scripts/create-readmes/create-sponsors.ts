@@ -17,7 +17,7 @@ type SponsorsResponseType = {
   createdAt: string
 }[]
 
-const fetchSponsors = async (owner: string): Promise<SponsorsResponseType> => {
+async function fetchSponsors(owner: string): Promise<SponsorsResponseType> {
   if (!process.env.GITHUB_TOKEN) {
     console.log(
       CONSOLE_FONT_COLORS.WARNING,
@@ -100,10 +100,10 @@ const fetchSponsors = async (owner: string): Promise<SponsorsResponseType> => {
   return sponsors
 }
 
-const createSponsor = (
+function createSponsor(
   allSponsors: string,
   sponsor: SponsorsResponseType[number]
-): string => {
+): string {
   const { isActive } = sponsor
   const { url, avatarUrl, login } = sponsor.sponsorEntity
   if (!url) return allSponsors
@@ -118,9 +118,9 @@ const createSponsor = (
   return allSponsors + sponsorMarkup.trim()
 }
 
-export const createSponsors = async (
+export async function createSponsors(
   owner: string
-): Promise<SponsorMarkupByGroupType> => {
+): Promise<SponsorMarkupByGroupType> {
   const sponsors = await fetchSponsors(owner)
   const sponsorsOrEmptyArray = sponsors || []
 

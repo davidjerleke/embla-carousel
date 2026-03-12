@@ -10,13 +10,13 @@ const CONTRIBUTORS_REGEX = /__REPLACE_CONTRIBUTORS__/g
 const SPONSORS_CURRENT_REGEX = /__REPLACE_CURRENT_SPONSORS__/g
 const SPONSORS_PAST_REGEX = /__REPLACE_PAST_SPONSORS__/g
 
-export const createReadme = (
+export function createReadme(
   template: string,
   workspacePath: string,
   contributors: string,
   currentSponsors: string,
   pastSponsors: string
-): void => {
+): void {
   const packageJsonPath = path.join(workspacePath, 'package.json')
   const readmePath = path.join(workspacePath, 'README.md')
   const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')
