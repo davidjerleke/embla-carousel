@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css } from 'styled-components'
 import {
   ButtonBare,
@@ -40,7 +41,7 @@ export function createButtonWithLoading(
   ButtonComponent: typeof ButtonBare,
   size?: LoadSpinnerPropType['size'],
   color?: LoadSpinnerPropType['color']
-): (props: PropType) => JSX.Element {
+): (props: PropType) => React.ReactElement {
   const displayName = `${ButtonComponent.displayName}WithLoading`
 
   const Button = styled(ButtonComponent)<{ $isLoading: boolean }>`

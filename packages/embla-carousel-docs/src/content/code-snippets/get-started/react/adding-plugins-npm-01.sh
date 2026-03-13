@@ -1,1 +1,0 @@
-npm install embla-carousel-autoplay --save

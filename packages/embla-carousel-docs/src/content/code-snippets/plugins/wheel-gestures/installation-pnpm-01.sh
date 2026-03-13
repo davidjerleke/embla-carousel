@@ -1,1 +1,0 @@
-pnpm add embla-carousel-wheel-gestures

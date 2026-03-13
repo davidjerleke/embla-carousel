@@ -124,7 +124,7 @@ export type PropType = ComponentPropsWithRef<'input'>
 
 export function createRadioOrCheckboxDefault(
   type: 'radio' | 'checkbox'
-): (props: PropType) => JSX.Element {
+): (props: PropType) => React.ReactElement {
   const InputComponent = type === 'radio' ? InputRadio : InputCheckbox
   const displayName = kebabCaseToPascalCase(`input-${type}-default`)
 

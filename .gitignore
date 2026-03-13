@@ -7,9 +7,6 @@ packages/embla-carousel*/components
 packages/embla-carousel*/esm
 packages/embla-carousel*/cjs
 
-# Remove when migration to Next.js is complete
-packages/embla-carousel-docs/public
-
 
 # yarn
 .yarn/*

@@ -93,7 +93,7 @@ const Input = styled.input<{ $isKeyNavigating: boolean }>`
 
 export function createRadioOrCheckboxCard(
   type: 'radio' | 'checkbox'
-): (props: PropType) => JSX.Element {
+): (props: PropType) => React.ReactElement {
   const displayName = kebabCaseToPascalCase(`input-${type}-card`)
 
   const InputSelectionComponent = (props: PropType) => {
