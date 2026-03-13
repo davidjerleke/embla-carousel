@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer: React.FC = () => (
+const Footer = () => (
   <footer className="footer">
     <a className="footer__link" href="__replace_sandbox_repository_url__">
       <svg

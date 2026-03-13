@@ -27,7 +27,7 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const EmblaCarousel = (props: PropType) => {
   const { options, slides: propSlides } = props
   const scrollListenerRef = useRef<() => void>(() => undefined)
   const listenForScrollRef = useRef(true)

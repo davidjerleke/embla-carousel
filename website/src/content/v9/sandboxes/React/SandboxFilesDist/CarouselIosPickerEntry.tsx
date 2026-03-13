@@ -10,7 +10,7 @@ import '../css/embla.css'
 
 const OPTIONS: EmblaOptionsType = {}
 
-const App: React.FC = () => (
+const App = () => (
   <main className="sandbox">
     <Header />
     <section className="sandbox__carousel">

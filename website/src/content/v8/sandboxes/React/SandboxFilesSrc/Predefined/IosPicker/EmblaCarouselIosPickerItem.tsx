@@ -71,7 +71,7 @@ type PropType = {
   perspective: 'left' | 'right'
 }
 
-export const IosPickerItem: React.FC<PropType> = (props) => {
+export const IosPickerItem = (props: PropType) => {
   const { slideCount, perspective, label, loop = false } = props
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop,

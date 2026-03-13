@@ -12,7 +12,7 @@ const OPTIONS: EmblaOptionsType = {}
 const SLIDE_COUNT = 5
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
-const App: React.FC = () => (
+const App = () => (
   <>
     <Header />
     <EmblaCarousel slides={SLIDES} options={OPTIONS} />
