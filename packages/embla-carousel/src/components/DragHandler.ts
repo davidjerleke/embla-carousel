@@ -9,6 +9,7 @@ import { ScrollTargetType } from './ScrollTarget'
 import { ScrollToType } from './ScrollTo'
 import { NumberStoreType } from './NumberStore'
 import { PercentOfViewType } from './PercentOfView'
+import { DragFreeOptionType } from './Options'
 import { Limit } from './Limit'
 import {
   deltaAbs,
@@ -39,7 +40,7 @@ export function DragHandler(
   indexCurrent: CounterType,
   eventHandler: EventHandlerType,
   percentOfView: PercentOfViewType,
-  dragFree: boolean,
+  dragFree: DragFreeOptionType,
   dragThreshold: number,
   skipSnaps: boolean,
   baseFriction: number
@@ -52,7 +53,9 @@ export function DragHandler(
   const goToNextThreshold = Limit(50, 225).clamp(percentOfView.measure(20))
   const snapForceBoost = { mouse: 300, touch: 400 }
   const freeForceBoost = { mouse: 500, touch: 600 }
-  const baseDuration = dragFree ? 43 : 25
+  const dragFreeEnabled = dragFree === true || dragFree === 'snap'
+  const snapOnSettle = dragFree === 'snap'
+  const baseDuration = dragFreeEnabled ? 43 : 25
 
   let documentInstance: Document
   let windowInstance: WindowType
@@ -105,7 +108,7 @@ export function DragHandler(
   }
 
   function forceBoost(): number {
-    const boost = dragFree ? freeForceBoost : snapForceBoost
+    const boost = dragFreeEnabled ? freeForceBoost : snapForceBoost
     const type = isMouse ? 'mouse' : 'touch'
     return boost[type]
   }
@@ -116,13 +119,15 @@ export function DragHandler(
   }
 
   function baseForce(force: number): number {
-    return scrollTarget.byDistance(force, !dragFree).distance
+    return scrollTarget.byDistance(force, !dragFreeEnabled || snapOnSettle)
+      .distance
   }
 
   function allowedForce(force: number): number {
     const next = indexCurrent.add(mathSign(force) * -1)
 
-    if (dragFree || mathAbs(force) < goToNextThreshold) return baseForce(force)
+    if (dragFreeEnabled || mathAbs(force) < goToNextThreshold)
+      return baseForce(force)
     if (skipSnaps && indexChanged()) return baseForce(force) * 0.5
 
     return scrollTarget.byIndex(next.get(), 0).distance
@@ -137,7 +142,7 @@ export function DragHandler(
     const isNotLeftButton = isMouseEvt && evt.button !== 0
 
     isMouse = isMouseEvt
-    preventClick = dragFree && isMouseEvt && !evt.buttons && isMoving
+    preventClick = dragFreeEnabled && isMouseEvt && !evt.buttons && isMoving
     isMoving = deltaAbs(target.get(), location.get()) >= 2
 
     if (isNotLeftButton) return
@@ -199,7 +204,7 @@ export function DragHandler(
     mouseEvents.clear()
 
     scrollBody.useDuration(duration).useFriction(friction)
-    scrollTo.distance(force, !dragFree)
+    scrollTo.distance(force, !dragFreeEnabled || snapOnSettle)
     event.emit()
   }
 
