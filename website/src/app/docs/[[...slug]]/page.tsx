@@ -10,17 +10,18 @@ import { PageJsonLd } from '@/components/Page/PageJsonLd'
 import { PageMainContent } from '@/components/Page/PageMainContent'
 import { PageEditThisPage } from '@/components/Page/PageEditThisPage'
 import { MdxStyles } from '@/components/Mdx/Styles'
-import { GLOBAL_DATA } from '@/utils/global-data'
+import { DOCS_LATEST_VERSION, GLOBAL_DATA } from '@/utils/global-data'
 import { joinSlugs, prefixSlugWithDocs } from '@/utils/slug'
+import { DOCS_VERSIONS } from '@/utils/global-data'
+import { getDocsRoutes } from '@/utils/docs-routes'
+import { Admonition } from '@/components/Mdx/Components/Admonition'
+import { LinkContent } from '@/components/Link/LinkContent'
 import {
   type DocsPageParamsType,
   DocsPageStaticParamsType,
   getDocsPageContent,
   getDocsPageJsonLd
 } from '@/utils/docs-page'
-
-import { DOCS_VERSIONS } from '@/utils/global-data'
-import { getDocsRoutes } from '@/utils/docs-routes'
 
 export async function generateStaticParams(): Promise<DocsPageStaticParamsType> {
   const params: DocsPageStaticParamsType = []
@@ -62,6 +63,10 @@ export default async function DocsPage(props: PropType) {
   const { default: Page } = await getDocsPageContent(slug)
   const jsonLd = await getDocsPageJsonLd(slug)
 
+  // TODO: Temporary warning. Remove when v9 is stable.
+  const isLatestVersion = !slug?.[0].match(/^v\d+$/)
+  const latestStableVersion = DOCS_VERSIONS[1]
+
   return (
     <>
       <PageJsonLd jsonLd={jsonLd} />
@@ -72,6 +77,19 @@ export default async function DocsPage(props: PropType) {
         {Page && (
           <PageMainContent as="article">
             <MdxStyles>
+              {isLatestVersion && (
+                <Admonition type="warning">
+                  This documentation is for{' '}
+                  <strong>v{DOCS_LATEST_VERSION.NAME}</strong>. If you're
+                  looking for the <strong>latest stable</strong> release, see
+                  the{' '}
+                  <LinkContent href={latestStableVersion.SLUG}>
+                    v{latestStableVersion.MAJOR} documentation
+                  </LinkContent>
+                  .
+                </Admonition>
+              )}
+
               <Page />
             </MdxStyles>
           </PageMainContent>
