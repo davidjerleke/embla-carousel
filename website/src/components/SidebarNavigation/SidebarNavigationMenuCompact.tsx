@@ -8,10 +8,9 @@ import { SPACINGS } from '@/utils/spacings'
 import { MEDIA } from '@/utils/breakpoints'
 import { HEADER_HEIGHT } from '@/utils/header'
 import { LAYERS } from '@/utils/layers'
-import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
+import { BORDER_SIZES } from '@/utils/border'
 import { TABS_SIDEBAR_NAVIGATION } from '@/utils/tabs'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
-import { FooterLinks } from '@/components/Footer/FooterLinks'
 import { TabsItem } from '@/components/Tabs/TabsItem'
 import { Tabs } from '@/components/Tabs/Tabs'
 import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
@@ -25,11 +24,6 @@ import {
   createScrollBarStyles,
   SCROLL_BAR_SHADOW_SIZE
 } from '@/utils/scrollbars'
-import {
-  ThemeToggle,
-  LightThemeSvg,
-  DarkThemeSvg
-} from '@/components/Theme/ThemeToggle'
 
 const MAX_WIDTH_COMPACT = '36rem'
 
@@ -135,37 +129,6 @@ const ScrollArea = styled.div`
   margin-right: auto;
 `
 
-// TODO: Remove?
-const ThemeToggleButton = styled(ThemeToggle)`
-  background-color: ${COLORS.BACKGROUND_CODE};
-  width: 100%;
-  justify-content: space-between;
-  padding: 1.8rem 2rem;
-  margin-top: ${SPACINGS.FOUR};
-  height: auto;
-  margin-right: 0;
-  margin-left: 0;
-  border-radius: ${BORDER_RADIUSES.BOX};
-  overflow: hidden;
-
-  ${LightThemeSvg}, ${DarkThemeSvg} {
-    left: auto;
-    right: 2rem;
-    transform: translateY(-50%);
-  }
-`
-
-// TODO: Remove?
-const ThemeToggleText = styled.span`
-  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
-`
-
-// TODO: Remove?
-const MiscLinks = styled(FooterLinks)`
-  padding-top: ${SPACINGS.THREE};
-  justify-content: center;
-`
-
 const VersionBadgeWrapper = styled.div`
   display: flex;
   padding-top: ${SPACINGS.THREE};
@@ -174,13 +137,6 @@ const VersionBadgeWrapper = styled.div`
 
 export function SidebarNavigationMenuCompact() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
-
-  // TODO: Remove?
-
-  // const theme = useAppSelector(selectTheme)
-  // const [showTableOfContents, setShowTableOfContents] = useState(true)
-  // const isLightTheme = theme === THEME_KEYS.LIGHT
-  // const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
     <SidebarNavigationMenuCompactWrapper>

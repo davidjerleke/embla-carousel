@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image'
 import { LOCALSTORAGE_KEYS } from '@/utils/local-storage'
 import { styledComponentsStylesToString } from '@/utils/styled-components'
 import { ALGOLIA_SEARCH_CONFIG } from '@/utils/algolia-search'
@@ -8,18 +9,17 @@ import {
   THEME_PREFIX,
   THEME_STYLES
 } from '@/utils/theme'
-// import logoLightThemeDefaultUrl from '@/assets/images/embla-logo-light-theme.svg'
-// import logoDarkThemeDefaultUrl from '@/assets/images/embla-logo-dark-theme.svg'
-// import logoLightThemeBlurUrl from '@/assets/images/embla-logo-light-theme-blur.svg'
-// import logoDarkThemeBlurUrl from '@/assets/images/embla-logo-dark-theme-blur.svg'
+import logoLightThemeDefaultUrl from '@/assets/images/embla-logo-light-theme.svg'
+import logoDarkThemeDefaultUrl from '@/assets/images/embla-logo-dark-theme.svg'
+import logoLightThemeBlurUrl from '@/assets/images/embla-logo-light-theme-blur.svg'
+import logoDarkThemeBlurUrl from '@/assets/images/embla-logo-dark-theme-blur.svg'
 
-// TODO: Move to preload with NextJS Image?
-// const imagesToPreload: StaticImageData[] = [
-//   logoLightThemeDefaultUrl,
-//   logoDarkThemeDefaultUrl,
-//   logoLightThemeBlurUrl,
-//   logoDarkThemeBlurUrl
-// ]
+const imagesToPreload: StaticImageData[] = [
+  logoLightThemeDefaultUrl,
+  logoDarkThemeDefaultUrl,
+  logoLightThemeBlurUrl,
+  logoDarkThemeBlurUrl
+]
 
 export function Head() {
   return (
@@ -98,7 +98,7 @@ export function Head() {
         href={`https://${ALGOLIA_SEARCH_CONFIG.APP_ID}-dsn.algolia.net`}
         crossOrigin="anonymous"
       />
-      {/* {imagesToPreload.map((image) => (
+      {imagesToPreload.map((image) => (
         <link
           rel="preload"
           as="image"
@@ -106,7 +106,7 @@ export function Head() {
           href={image.src}
           key={image.src}
         />
-      ))} */}
+      ))}
     </>
   )
 }
