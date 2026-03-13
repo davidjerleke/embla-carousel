@@ -33,6 +33,7 @@ export type OptionsType = CreateOptionsType<{
   loop: boolean
   skipSnaps: boolean
   duration: number
+  offset: number
   startSnap: number
   draggable: boolean
   resize: boolean
@@ -57,6 +58,7 @@ export const defaultOptions: OptionsType = {
   loop: false,
   skipSnaps: false,
   duration: 25,
+  offset: 0,
   startSnap: 0,
   active: true,
   draggable: true,
