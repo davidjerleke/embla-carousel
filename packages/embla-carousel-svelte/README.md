@@ -29,9 +29,6 @@
     <strong>
       <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
     </strong>
-    <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/generator/">Generator</a>&nbsp;</code>
-    </strong>
   </p>
 </div>
 
@@ -86,6 +83,8 @@
     <img src="https://avatars.githubusercontent.com/u/130389858?v=4" title="syntaxfm" width="100" height="100" style="max-width: 100%" />
   </a><a href="https://github.com/Nalci">
     <img src="https://avatars.githubusercontent.com/u/95542245?u=571321b2743c4a54877add003288a7ffb2025751&v=4" title="Nalci" width="100" height="100" style="max-width: 100%" />
+  </a><a href="https://github.com/KaufmannDigital">
+    <img src="https://avatars.githubusercontent.com/u/25249966?v=4" title="KaufmannDigital" width="100" height="100" style="max-width: 100%" />
   </a>
   </p>
   <p>Thanks to all our <strong>past sponsors</strong> for helping <strong>Embla Carousel</strong> get to where it is today.</p>

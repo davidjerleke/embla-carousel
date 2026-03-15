@@ -1,0 +1,401 @@
+1:"$Sreact.fragment"
+2:I[707095,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"PageGrid"]
+3:I[922275,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"PageBreadcrumbs"]
+4:I[192770,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"MdxStyles"]
+5:I[294801,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"Admonition"]
+6:I[615632,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"LinkBare"]
+7:I[507434,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"Link"]
+1e:I[233127,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"Tabs"]
+1f:I[371728,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"TabsItem"]
+20:I[828787,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"PrismHighlight"]
+25:I[994521,["/_next/static/chunks/7f9b432d298c9aca.js","/_next/static/chunks/a7fcc0b2ddb6c4cb.js","/_next/static/chunks/cfbacffc70570a73.js","/_next/static/chunks/075ec858b7f61902.js","/_next/static/chunks/932a0bc73f4c35f8.js","/_next/static/chunks/9b4321866d918b9b.js","/_next/static/chunks/87ca85aa7f70c632.js"],"ExampleDotButtons"]
+2c:I[897367,["/_next/static/chunks/d96012bcfc98706a.js","/_next/static/chunks/73e3194f06db260e.js"],"OutletBoundary"]
+2d:"$Sreact.suspense"
+0:{"buildId":"wuHWNmEsS4I6VjkF6C-xd","rsc":["$","$1","c",{"children":[[["$","script",null,{"type":"application/ld+json","id":"json-ld","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"TechArticle\",\"@id\":\"https://www.embla-carousel.com/docs/guides/dot-buttons/#article\",\"headline\":\"Dot Buttons\",\"description\":\"This guide explains how to add and customize dot navigation buttons in Embla Carousel.\",\"url\":\"https://www.embla-carousel.com/docs/guides/dot-buttons\",\"codeRepository\":\"https://github.com/davidjerleke/embla-carousel\",\"image\":\"https://www.embla-carousel.com/share-image.png\",\"logo\":\"https://www.embla-carousel.com/maskable.png\",\"author\":{\"@type\":\"Person\",\"name\":\"David Jerleke\"},\"publisher\":{\"@type\":\"Person\",\"name\":\"David Jerleke\"},\"mainEntityOfPage\":{\"@type\":\"WebPage\",\"@id\":\"https://www.embla-carousel.com/docs/guides/dot-buttons\"},\"about\":{\"@type\":\"SoftwareApplication\",\"name\":\"Embla Carousel\"}}"}}],["$","$L2",null,{"layout":"Docs","children":[["$","$L3",null,{}],[["$","style",null,{"precedence":"styled-components","href":"sc-PageMainContent-sc-ddfdd52f-0-kPzTTp","children":".kPzTTp{scroll-margin-top:calc(6rem + 2.4rem);}/*!sc*/\n"}],["$","article",null,{"children":["$","$L4",null,{"children":[["$","$L5",null,{"type":"warning","children":["This documentation is for"," ",["$","strong",null,{"children":["v","9.0.0-rc01"]}],". If you're looking for the ",["$","strong",null,{"children":"latest stable"}]," release, see the"," ",[["$","style",null,{"precedence":"styled-components","href":"sc-LinkContent__LinkContentWrapper-sc-aecb113e-0-bfPNMj","children":".bfPNMj{color:var(--brand-primary);background-image:linear-gradient(\n    45deg,\n    var(--brand-primary),\n    var(--brand-secondary)\n  );background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;font-weight:500;}/*!sc*/\n"}],["$","$L6",null,{"href":"/docs/v8","children":["v",8," documentation"],"className":"LinkContent__LinkContentWrapper-sc-aecb113e-0 bfPNMj"}]],"."]}],[["$","h1",null,{"children":[[["$","style",null,{"precedence":"styled-components","href":"sc-H1__Text-sc-46607dbb-0-eHKolX","children":".eHKolX{display:block;width:100%;}/*!sc*/\n"}],["$","span",null,{"children":"Dot Buttons","className":"H1__Text-sc-46607dbb-0 eHKolX"}]],[["$","style",null,{"precedence":"styled-components","href":"sc-H1__DecorationWrapper-sc-46607dbb-1-btMSXL","children":".btMSXL{display:block;font-size:0;}/*!sc*/\n"}],["$","span",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-H1__Decoration-sc-46607dbb-2-liZDaX","children":".liZDaX{background-image:linear-gradient(\n    45deg,\n    var(--brand-primary),\n    var(--brand-secondary)\n  );margin-top:2.4rem;height:0.3rem;width:5rem;max-width:100%;display:inline-flex;}/*!sc*/\n"}],["$","span",null,{"className":"H1__Decoration-sc-46607dbb-2 liZDaX"}]],"className":"H1__DecorationWrapper-sc-46607dbb-1 btMSXL"}]]]}],"\n",["$","p",null,{"children":["This guide shows you how to add ",["$","strong",null,{"children":"dot buttons"}]," to control carousel navigation in Embla Carousel."]}],"\n",[["$","style",null,{"precedence":"styled-components","href":"sc-sc-1f10bde1-0-bZOKzo","children":".bZOKzo{border-top:0;border-right:0;border-left:0;border-bottom:0.1rem solid var(--detail-medium-contrast);margin-top:4.8rem;margin-bottom:4.8rem;width:5rem;background-color:var(--detail-medium-contrast);}/*!sc*/\n"}],["$","hr",null,{"className":"sc-1f10bde1-0 bZOKzo"}]],"\n",["$","h2",null,{"id":"prerequisites","children":[["$","$L7",null,{"className":"anchor","href":"#prerequisites","children":["$","span",null,{"children":["$","svg",null,{"width":"16","height":"16","viewBox":"0 0 16 16","aria-hidden":"true","children":["$","path",null,{"fill":"currentColor","d":"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"}]}]}]}],"Prerequisites"]}],"\n","$L8","\n","$L9","\n","$La","\n","$Lb","\n","$Lc","\n","$Ld","\n","$Le","\n","$Lf","\n","$L10","\n","$L11","\n","$L12","\n","$L13","\n","$L14","\n","$L15","\n","$L16","\n","$L17","\n","$L18","\n","$L19"]]}],"id":"main-content","className":"PageMainContent-sc-ddfdd52f-0 kPzTTp"}]],"$L1a","$L1b"]}]],["$L1c"],"$L1d"]}],"loading":null,"isPartial":false}
+8:["$","ul",null,{"children":["\n",["$","li",null,{"children":["$","$L7",null,{"href":"/docs/guides/how-embla-carousel-works","children":"How Embla Carousel Works"}]}],"\n",["$","li",null,{"children":["$","$L7",null,{"href":"/docs/guides/required-setup","children":"Required Setup"}]}],"\n",["$","li",null,{"children":["$","$L7",null,{"href":"/docs/guides/grouping-slides","children":"Grouping Slides"}]}],"\n"]}]
+9:["$","h2",null,{"id":"button-placement","children":[["$","$L7",null,{"className":"anchor","href":"#button-placement","children":["$","span",null,{"children":["$","svg",null,{"width":"16","height":"16","viewBox":"0 0 16 16","aria-hidden":"true","children":["$","path",null,{"fill":"currentColor","d":"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"}]}]}]}],"Button placement"]}]
+a:["$","p",null,{"children":["If your carousel is ",["$","$L7",null,{"href":"/docs/api/options/#draggable","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"draggable"}]}]}],", the ",["$","strong",null,{"children":"root node"}]," — the element passed to the ",["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"EmblaCarousel"}]}]," initializer (e.g., ",["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":".embla__viewport"}]}],") — responds to pointer events. To avoid ",["$","strong",null,{"children":"unintended drag interactions"}]," when users click them, ",["$","strong",null,{"children":"place your navigation buttons outside the root element"}],", like this:"]}]
+b:["$","$L1e",null,{"groupId":"library","children":[["$","$L1f",null,{"tab":{"LABEL":"Vanilla","VALUE":"vanilla"},"children":[["$","$L20",null,{"language":"js","code":"import EmblaCarousel from 'embla-carousel'\n\nconst wrapperNode = document.querySelector('.embla')\nconst viewportNode = wrapperNode.querySelector('.embla__viewport')\nconst emblaApi = EmblaCarousel(viewportNode, { loop: false })\n"}],["$","$L20",null,{"language":"html","code":"<div class=\"embla\">\n  <div class=\"embla__viewport\">\n    <div class=\"embla__container\">\n      <div class=\"embla__slide\">Slide 1</div>\n      <div class=\"embla__slide\">Slide 2</div>\n      <div class=\"embla__slide\">Slide 3</div>\n    </div>\n  </div>\n\n  <!-- Place your navigation buttons here -->\n</div>\n","highlight":"2,8"}]]}],["$","$L1f",null,{"tab":{"LABEL":"React","VALUE":"react"},"children":["$","$L20",null,{"language":"jsx","code":"import React from 'react'\nimport useEmblaCarousel from 'embla-carousel-react'\n\nexport function EmblaCarousel() {\n  const [emblaRef] = useEmblaCarousel({ loop: false })\n\n  return (\n    <div className=\"embla\">\n      <div className=\"embla__viewport\" ref={emblaRef}>\n        <div className=\"embla__container\">\n          <div className=\"embla__slide\">Slide 1</div>\n          <div className=\"embla__slide\">Slide 2</div>\n          <div className=\"embla__slide\">Slide 3</div>\n        </div>\n      </div>\n\n      {/* Place your navigation buttons here */}\n    </div>\n  )\n}\n","highlight":"9,15"}]}],["$","$L1f",null,{"tab":{"LABEL":"Vue","VALUE":"vue"},"children":["$","$L20",null,{"language":"html","asLanguage":"vue","code":"<script setup>\nimport useEmblaCarousel from 'embla-carousel-vue'\n\nconst [emblaRef] = useEmblaCarousel({ loop: false })\n</script>\n\n<template>\n  <div class=\"embla\">\n    <div class=\"embla__viewport\" ref=\"emblaRef\">\n      <div class=\"embla__container\">\n        <div class=\"embla__slide\">Slide 1</div>\n        <div class=\"embla__slide\">Slide 2</div>\n        <div class=\"embla__slide\">Slide 3</div>\n      </div>\n    </div>\n\n    <!-- Place your navigation buttons here -->\n  </div>\n</template>\n","highlight":"9,15"}]}],["$","$L1f",null,{"tab":{"LABEL":"Solid","VALUE":"solid"},"children":["$","$L20",null,{"language":"jsx","code":"import useEmblaCarousel from 'embla-carousel-solid'\n\nexport function EmblaCarousel() {\n  const [emblaRef] = useEmblaCarousel(() => ({\n    loop: false\n  }))\n\n  return (\n    <div class=\"embla\">\n      <div class=\"embla__viewport\" ref={emblaRef}>\n        <div class=\"embla__container\">\n          <div class=\"embla__slide\">Slide 1</div>\n          <div class=\"embla__slide\">Slide 2</div>\n          <div class=\"embla__slide\">Slide 3</div>\n        </div>\n      </div>\n\n      {/* Place your navigation buttons here */}\n    </div>\n  )\n}\n","highlight":"10,16"}]}],["$","$L1f",null,{"tab":{"LABEL":"Svelte","VALUE":"svelte"},"children":["$","$L20",null,{"language":"svelte","code":"<script>\n  import useEmblaCarousel from 'embla-carousel-svelte'\n\n  let options = { loop: false }\n</script>\n\n<div class=\"embla\">\n  <div class=\"embla__viewport\" use:useEmblaCarousel={{ options }}>\n    <div class=\"embla__container\">\n      <div class=\"embla__slide\">Slide 1</div>\n      <div class=\"embla__slide\">Slide 2</div>\n      <div class=\"embla__slide\">Slide 3</div>\n    </div>\n  </div>\n\n  <!-- Place your navigation buttons here -->\n</div>\n","highlight":"8,14"}]}]]}]
+c:["$","h2",null,{"id":"adding-buttons","children":[["$","$L7",null,{"className":"anchor","href":"#adding-buttons","children":["$","span",null,{"children":["$","svg",null,{"width":"16","height":"16","viewBox":"0 0 16 16","aria-hidden":"true","children":["$","path",null,{"fill":"currentColor","d":"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"}]}]}]}],"Adding buttons"]}]
+d:["$","p",null,{"children":["Embla Carousel exposes the total number of ",["$","strong",null,{"children":"snap points"}]," — one for each group of slides — through the ",["$","$L7",null,{"href":"/docs/api/methods/#snaplist","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"snapList"}]}]}]," method. You can use this to ",["$","strong",null,{"children":"generate a dot button for each snap"}]," dynamically."]}]
+e:["$","p",null,{"children":["Each button should be connected to Embla's ",["$","$L7",null,{"href":"/docs/api/methods/#goTo","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"goTo"}]}]}]," method, which scrolls the carousel to a specific snap index. When users click a dot, the carousel will smoothly move to the corresponding slide group, providing an intuitive navigation experience."]}]
+21:T434,import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const dotsNode = wrapperNode.querySelector('.embla__dots')
+const emblaApi = EmblaCarousel(viewportNode, { loop: false })
+
+let dotNodes = []
+
+const createDotButtonHtml = (emblaApi, dotsNode) => {
+  const dotTemplate = document.getElementById('embla-dot-template')
+  const snapList = emblaApi.snapList()
+  dotsNode.innerHTML = snapList.reduce((acc) => acc + dotTemplate.innerHTML, '')
+  return Array.from(dotsNode.querySelectorAll('.embla__dot'))
+}
+
+const addDotButtonClickHandlers = (emblaApi, dotNodes) => {
+  dotNodes.forEach((dotNode, index) => {
+    dotNode.addEventListener('click', () => emblaApi.goTo(index), false)
+  })
+}
+
+const createAndSetupDotButtons = (emblaApi, dotsNode) => {
+  dotNodes = createDotButtonHtml(emblaApi, dotsNode)
+  addDotButtonClickHandlers(emblaApi, dotNodes)
+}
+
+createAndSetupDotButtons(emblaApi, dotsNode)
+emblaApi.on('reinit', () => createAndSetupDotButtons(emblaApi, dotsNode))
+22:T470,import React, { useState, useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+  const [scrollSnaps, setScrollSnaps] = useState([])
+
+  const goTo = (index) => emblaApi?.goTo(index)
+  const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    setupSnaps(emblaApi)
+    emblaApi.on('reinit', setupSnaps)
+  }, [emblaApi])
+
+  return (
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          <div className="embla__slide">Slide 1</div>
+          <div className="embla__slide">Slide 2</div>
+          <div className="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      <div className="embla__dots">
+        {scrollSnaps.map((_, index) => (
+          <button
+            className="embla__dot"
+            key={index}
+            onClick={() => goTo(index)}
+          >
+            {/* Button content */}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+f:["$","$L1e",null,{"groupId":"library","children":[["$","$L1f",null,{"tab":"$b:props:children:0:props:tab","children":[["$","$L20",null,{"language":"js","code":"$21","highlight":"8,12,19,28-29"}],["$","$L20",null,{"language":"html","code":"<div class=\"embla\">\n  <div class=\"embla__viewport\">\n    <div class=\"embla__container\">\n      <div class=\"embla__slide\">Slide 1</div>\n      <div class=\"embla__slide\">Slide 2</div>\n      <div class=\"embla__slide\">Slide 3</div>\n    </div>\n  </div>\n\n  <div class=\"embla__dots\"></div>\n\n  <script type=\"text/template\" id=\"embla-dot-template\">\n    <button class=\"embla__dot\">\n      <!-- Button content -->\n    </button>\n  </script>\n</div>\n","highlight":"10,13-15"}]]}],["$","$L1f",null,{"tab":"$b:props:children:1:props:tab","children":["$","$L20",null,{"language":"jsx","code":"$22","highlight":"6,8-9,14-15,29-37"}]}],["$","$L1f",null,{"tab":"$b:props:children:2:props:tab","children":["$","$L20",null,{"language":"html","asLanguage":"vue","code":"<script setup>\nimport { ref, watch } from 'vue'\nimport useEmblaCarousel from 'embla-carousel-vue'\n\nconst [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })\nconst scrollSnaps = ref([])\n\nconst goTo = (index) => emblaApi.value?.goTo(index)\nconst setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.snapList())\n\nwatch(\n  emblaApi,\n  (api) => {\n    if (!api) return\n\n    setupSnaps(api)\n    api.on('reinit', setupSnaps)\n  },\n  { immediate: true }\n)\n</script>\n\n<template>\n  <div class=\"embla\">\n    <div class=\"embla__viewport\" ref=\"emblaRef\">\n      <div class=\"embla__container\">\n        <div class=\"embla__slide\">Slide 1</div>\n        <div class=\"embla__slide\">Slide 2</div>\n        <div class=\"embla__slide\">Slide 3</div>\n      </div>\n    </div>\n\n    <div class=\"embla__dots\">\n      <button\n        class=\"embla__dot\"\n        :key=\"index\"\n        v-for=\"(_, index) in scrollSnaps\"\n        @click=\"goTo(index)\"\n      >\n        <!-- Button content -->\n      </button>\n    </div>\n  </div>\n</template>\n","highlight":"6,8-9,16-17,34-41"}]}],"$L23","$L24"]}]
+10:["$","h2",null,{"id":"buttons-state","children":[["$","$L7",null,{"className":"anchor","href":"#buttons-state","children":["$","span",null,{"children":["$","svg",null,{"width":"16","height":"16","viewBox":"0 0 16 16","aria-hidden":"true","children":["$","path",null,{"fill":"currentColor","d":"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"}]}]}]}],"Buttons state"]}]
+11:["$","p",null,{"children":["To improve the user experience, let's ",["$","strong",null,{"children":"add visual feedback"}]," to show which dot button corresponds to the currently selected snap."]}]
+12:["$","p",null,{"children":["You can achieve this by toggling each button's state between ",["$","strong",null,{"children":"selected"}]," and ",["$","strong",null,{"children":"not selected"}],", and keeping them in sync whenever the carousel updates. Update the buttons whenever:"]}]
+13:["$","ul",null,{"children":["\n",["$","li",null,{"children":["The ",["$","$L7",null,{"href":"/docs/api/events/#select","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"select"}]}]}]," event fires — when the active scroll snap changes."]}],"\n",["$","li",null,{"children":["The ",["$","$L7",null,{"href":"/docs/api/events/#reinit","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"reinit"}]}]}]," event fires — when the carousel reinitializes."]}],"\n"]}]
+14:["$","$L25",null,{}]
+15:["$","$L20",null,{"language":"css","code":".embla__dot {\n  opacity: 0.5;\n}\n\n.embla__dot--selected {\n  opacity: 1;\n}\n"}]
+26:T5db,import EmblaCarousel from 'embla-carousel'
+
+const wrapperNode = document.querySelector('.embla')
+const viewportNode = wrapperNode.querySelector('.embla__viewport')
+const dotsNode = wrapperNode.querySelector('.embla__dots')
+const emblaApi = EmblaCarousel(viewportNode, { loop: false })
+
+let dotNodes = []
+
+const createDotButtonHtml = (emblaApi, dotsNode) => {
+  const dotTemplate = document.getElementById('embla-dot-template')
+  const snapList = emblaApi.snapList()
+  dotsNode.innerHTML = snapList.reduce((acc) => acc + dotTemplate.innerHTML, '')
+  return Array.from(dotsNode.querySelectorAll('.embla__dot'))
+}
+
+const addDotButtonClickHandlers = (emblaApi, dotNodes) => {
+  dotNodes.forEach((dotNode, index) => {
+    dotNode.addEventListener('click', () => emblaApi.goTo(index), false)
+  })
+}
+
+const toggleDotButtonsActive = (emblaApi, dotNodes) => {
+  if (!dotNodes.length) return
+  const previous = emblaApi.previousSnap()
+  const selected = emblaApi.selectedSnap()
+  dotNodes[previous].classList.remove('embla__dot--selected')
+  dotNodes[selected].classList.add('embla__dot--selected')
+}
+
+const createAndSetupDotButtons = (emblaApi, dotsNode) => {
+  dotNodes = createDotButtonHtml(emblaApi, dotsNode)
+  addDotButtonClickHandlers(emblaApi, dotNodes)
+  toggleDotButtonsActive(emblaApi, dotNodes)
+}
+
+createAndSetupDotButtons(emblaApi, dotsNode)
+emblaApi.on('reinit', () => createAndSetupDotButtons(emblaApi, dotsNode))
+emblaApi.on('select', (emblaApi) => toggleDotButtonsActive(emblaApi, dotNodes))
+27:T5c0,import React, { useState, useEffect } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+  const [scrollSnaps, setScrollSnaps] = useState([])
+  const [selectedSnap, setSelectedSnap] = useState(0)
+
+  const goTo = (index) => emblaApi?.goTo(index)
+  const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
+  const setActiveSnap = (emblaApi) => setSelectedSnap(emblaApi.selectedSnap())
+
+  useEffect(() => {
+    if (!emblaApi) return
+
+    setupSnaps(emblaApi)
+    setActiveSnap(emblaApi)
+
+    emblaApi.on('reinit', setupSnaps)
+    emblaApi.on('reinit', setActiveSnap)
+    emblaApi.on('select', setActiveSnap)
+  }, [emblaApi])
+
+  return (
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaRef}>
+        <div className="embla__container">
+          <div className="embla__slide">Slide 1</div>
+          <div className="embla__slide">Slide 2</div>
+          <div className="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      <div className="embla__dots">
+        {scrollSnaps.map((_, index) => (
+          <button
+            className={'embla__dot'.concat(
+              index === selectedSnap ? ' embla__dot--selected' : ''
+            )}
+            key={index}
+            onClick={() => goTo(index)}
+          >
+            {/* Button content */}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
+16:["$","$L1e",null,{"groupId":"library","children":[["$","$L1f",null,{"tab":"$b:props:children:0:props:tab","children":[["$","$L20",null,{"language":"js","code":"$26","highlight":"25-28,34,39"}],["$","$L20",null,{"language":"html","code":"<div class=\"embla\">\n  <div class=\"embla__viewport\">\n    <div class=\"embla__container\">\n      <div class=\"embla__slide\">Slide 1</div>\n      <div class=\"embla__slide\">Slide 2</div>\n      <div class=\"embla__slide\">Slide 3</div>\n    </div>\n  </div>\n\n  <div class=\"embla__dots\"></div>\n\n  <script type=\"text/template\" id=\"embla-dot-template\">\n    <button class=\"embla__dot\">\n      <!-- Button content -->\n    </button>\n  </script>\n</div>\n"}]]}],["$","$L1f",null,{"tab":"$b:props:children:1:props:tab","children":["$","$L20",null,{"language":"jsx","code":"$27","highlight":"7,11,17,20-21,38"}]}],"$L28","$L29","$L2a"]}]
+17:["$","h2",null,{"id":"notes","children":[["$","$L7",null,{"className":"anchor","href":"#notes","children":["$","span",null,{"children":["$","svg",null,{"width":"16","height":"16","viewBox":"0 0 16 16","aria-hidden":"true","children":["$","path",null,{"fill":"currentColor","d":"M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"}]}]}]}],"Notes"]}]
+18:["$","ul",null,{"children":["\n",["$","li",null,{"children":[["$","strong",null,{"children":"Button placement:"}]," Place the previous/next buttons ",["$","strong",null,{"children":"outside"}]," the Embla root element (the one passed to the initializer, e.g., ",["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":".embla__viewport"}]}],") to avoid accidental drag interactions when users click them."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"Loop behavior:"}]," When the carousel has ",["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"loop"}]}]," enabled, ",["$","$L7",null,{"href":"/docs/api/methods/#goTo","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"goTo"}]}]}]," will automatically choose the ",["$","strong",null,{"children":"shortest path"}]," to the target snap, scrolling forward or backward as needed."]}],"\n",["$","li",null,{"children":[["$","strong",null,{"children":"No-op behavior:"}]," Calling ",["$","$L7",null,{"href":"/docs/api/methods/#goTo","children":["$","code",null,{"className":"code-highlight","children":["$","span",null,{"children":"goTo"}]}]}]," when the carousel is already at the given snap has ",["$","strong",null,{"children":"no effect"}],". This is expected and ensures navigation remains predictable and consistent."]}],"\n"]}]
+19:[["$","style",null,{"precedence":"styled-components","href":"sc-sc-1f10bde1-0-bZOKzo","children":".bZOKzo{border-top:0;border-right:0;border-left:0;border-bottom:0.1rem solid var(--detail-medium-contrast);margin-top:4.8rem;margin-bottom:4.8rem;width:5rem;background-color:var(--detail-medium-contrast);}/*!sc*/\n"}],["$","hr",null,{"className":"sc-1f10bde1-0 bZOKzo"}]]
+1a:[["$","style",null,{"precedence":"styled-components","href":"sc-PageEditThisPage__PageEditThisPageWrapper-sc-57555ee1-0-hCRscc","children":".hCRscc{display:inline-flex;align-items:center;text-decoration:none;font-size:1.4rem;padding-top:0.6rem;padding-bottom:0.6rem;margin-top:4.8rem;color:var(--text-low-contrast);}/*!sc*/\n"}],["$","$L6",null,{"href":"https://github.com/davidjerleke/embla-carousel/blob/master/website/src/content/v9/pages/guides/dot-buttons.mdx","children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextWrapper-sc-14b7e1d1-0-gMWsQS","children":".gMWsQS{display:flex;align-items:flex-start;text-align:left;}/*!sc*/\n.gMWsQS >:first-child{margin-right:0.6rem;}/*!sc*/\n"}],["$","span",null,{"children":[[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWrapper-sc-14b7e1d1-1-iGbVrN","children":".PkJHh{position:relative;width:1.4rem;}/*!sc*/\n.PkJHh:before{width:1.4rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.iGbVrN{position:relative;width:1.5rem;}/*!sc*/\n.iGbVrN:before{width:1.5rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.gvOgXx{position:relative;width:1.8rem;}/*!sc*/\n.gvOgXx:before{width:1.8rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n"}],["$","span",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextIcon-sc-14b7e1d1-2-herYcw","children":".herYcw{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}/*!sc*/\n"}],[["$","style",null,{"precedence":"styled-components","href":"sc-icons-sc-3513c9df-0-izxxUI","children":".kUOgJU{color:currentColor;width:1.4rem;height:1.4rem;}/*!sc*/\n.izxxUI{color:currentColor;width:1.5rem;height:1.5rem;}/*!sc*/\n.cgCXIY{color:currentColor;width:1.8rem;height:1.8rem;}/*!sc*/\n"}],["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","fill":"currentColor","aria-hidden":"true","focusable":"false","className":"icons-sc-3513c9df-0 izxxUI IconWithText__IconWithTextIcon-sc-14b7e1d1-2 herYcw","children":["$","path",null,{"d":"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z","fill":"currentColor"}]}]]],"className":"IconWithText__IconWrapper-sc-14b7e1d1-1 iGbVrN"}]],["$","span",null,{"children":"Edit this page on GitHub","className":"IconWithText__IconWithTextText-sc-14b7e1d1-3 iYFKPM"}],false],"className":"IconWithText__IconWithTextWrapper-sc-14b7e1d1-0 gMWsQS"}]],"className":"PageEditThisPage__PageEditThisPageWrapper-sc-57555ee1-0 hCRscc"}]]
+1b:[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__PagePaginationWrapper-sc-7d63d4dc-0-dhwvIa","children":".dhwvIa{margin-left:-2.4rem;display:flex;justify-content:space-between;margin-top:4.8rem;}/*!sc*/\n.dhwvIa >div{padding-left:2.4rem;}/*!sc*/\n"}],["$","nav",null,{"aria-label":"Pagination Navigation","children":[[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__Item-sc-7d63d4dc-1-ilmwRj","children":".ilmwRj >a{color:var(--brand-primary);}/*!sc*/\n.ilmwRj:nth-child(2)>a{text-align:right;color:var(--brand-secondary);}/*!sc*/\n"}],["$","div",null,{"children":["$","$L6",null,{"href":"/docs/guides/previous-and-next-buttons","children":[[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__ItemLabel-sc-7d63d4dc-2-cqdJuJ","children":".cqdJuJ{color:var(--text-low-contrast);padding-bottom:0.6rem;}/*!sc*/\n"}],["$","div",null,{"children":"Previous","className":"PagePagination__ItemLabel-sc-7d63d4dc-2 cqdJuJ"}]],[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__ItemTitle-sc-7d63d4dc-3-gdFSbM","children":".gdFSbM{display:inline-flex;align-items:center;font-weight:500;}/*!sc*/\n.gdFSbM .IconWithText__IconWithTextText-sc-14b7e1d1-3{color:var(--brand-primary);background-image:linear-gradient(\n    45deg,\n    var(--brand-primary),\n    var(--brand-secondary)\n  );background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}/*!sc*/\n"}],["$","div",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextWrapper-sc-14b7e1d1-0-gMWsQS","children":".gMWsQS{display:flex;align-items:flex-start;text-align:left;}/*!sc*/\n.gMWsQS >:first-child{margin-right:0.6rem;}/*!sc*/\n"}],["$","span",null,{"children":[[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWrapper-sc-14b7e1d1-1-gvOgXx","children":".PkJHh{position:relative;width:1.4rem;}/*!sc*/\n.PkJHh:before{width:1.4rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.iGbVrN{position:relative;width:1.5rem;}/*!sc*/\n.iGbVrN:before{width:1.5rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.gvOgXx{position:relative;width:1.8rem;}/*!sc*/\n.gvOgXx:before{width:1.8rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n"}],["$","span",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextIcon-sc-14b7e1d1-2-herYcw","children":".herYcw{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}/*!sc*/\n"}],[["$","style",null,{"precedence":"styled-components","href":"sc-icons-sc-3513c9df-0-cgCXIY","children":".kUOgJU{color:currentColor;width:1.4rem;height:1.4rem;}/*!sc*/\n.izxxUI{color:currentColor;width:1.5rem;height:1.5rem;}/*!sc*/\n.cgCXIY{color:currentColor;width:1.8rem;height:1.8rem;}/*!sc*/\n"}],["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","fill":"currentColor","aria-hidden":"true","focusable":"false","className":"icons-sc-3513c9df-0 cgCXIY IconWithText__IconWithTextIcon-sc-14b7e1d1-2 herYcw","children":["$","path",null,{"d":"M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z","fill":"currentColor"}]}]]],"className":"IconWithText__IconWrapper-sc-14b7e1d1-1 gvOgXx"}]],["$","span",null,{"children":"Prev & Next Buttons","className":"IconWithText__IconWithTextText-sc-14b7e1d1-3 iYFKPM"}],false],"className":"IconWithText__IconWithTextWrapper-sc-14b7e1d1-0 gMWsQS"}]],"className":"PagePagination__ItemTitle-sc-7d63d4dc-3 gdFSbM"}]]]}],"className":"PagePagination__Item-sc-7d63d4dc-1 ilmwRj"}]],[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__Item-sc-7d63d4dc-1-ilmwRj","children":".ilmwRj >a{color:var(--brand-primary);}/*!sc*/\n.ilmwRj:nth-child(2)>a{text-align:right;color:var(--brand-secondary);}/*!sc*/\n"}],"$L2b"]],"className":"PagePagination__PagePaginationWrapper-sc-7d63d4dc-0 dhwvIa"}]]
+1c:["$","script","script-0",{"src":"/_next/static/chunks/87ca85aa7f70c632.js","async":true}]
+1d:["$","$L2c",null,{"children":["$","$2d",null,{"name":"Next.MetadataOutlet","children":"$@2e"}]}]
+2f:T46b,import { createSignal, createEffect, on, For } from 'solid-js'
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel(() => ({
+    loop: false
+  }))
+  const [scrollSnaps, setScrollSnaps] = createSignal([])
+
+  const goTo = (index) => emblaApi()?.goTo(index)
+  const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
+
+  createEffect(
+    on(emblaApi, (api) => {
+      if (!api) return
+
+      setupSnaps(api)
+      api.on('reinit', setupSnaps)
+    })
+  )
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      <div class="embla__dots">
+        <For each={scrollSnaps()}>
+          {(_, index) => (
+            <button class="embla__dot" onClick={() => goTo(index())}>
+              {/* Button content */}
+            </button>
+          )}
+        </For>
+      </div>
+    </div>
+  )
+}
+23:["$","$L1f",null,{"tab":"$b:props:children:3:props:tab","children":["$","$L20",null,{"language":"jsx","code":"$2f","highlight":"8,10-11,17-18,33-39"}]}]
+24:["$","$L1f",null,{"tab":"$b:props:children:4:props:tab","children":["$","$L20",null,{"language":"svelte","code":"<script>\n  import useEmblaCarousel from 'embla-carousel-svelte'\n\n  let emblaApi\n  let options = { loop: false }\n  let scrollSnaps = []\n\n  const goTo = (index) => emblaApi?.goTo(index)\n  const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())\n\n  const onInit = (event) => {\n    emblaApi = event.detail\n\n    setupSnaps(emblaApi)\n    emblaApi.on('reinit', setupSnaps)\n  }\n</script>\n\n<div class=\"embla\">\n  <div\n    class=\"embla__viewport\"\n    on:emblainit={onInit}\n    use:useEmblaCarousel={{ options }}\n  >\n    <div class=\"embla__container\">\n      <div class=\"embla__slide\">Slide 1</div>\n      <div class=\"embla__slide\">Slide 2</div>\n      <div class=\"embla__slide\">Slide 3</div>\n    </div>\n  </div>\n\n  <div class=\"embla__dots\">\n    {#each scrollSnaps as _, index}\n      <button class=\"embla__dot\" on:click={() => goTo(index)}>\n        <!-- Button content -->\n      </button>\n    {/each}\n  </div>\n</div>\n","highlight":"6,8-9,14-15,33-37"}]}]
+30:T517,<script setup>
+import { ref, watch } from 'vue'
+import useEmblaCarousel from 'embla-carousel-vue'
+
+const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false })
+const scrollSnaps = ref([])
+const selectedSnap = ref(0)
+
+const goTo = (index) => emblaApi.value?.goTo(index)
+const setupSnaps = (emblaApi) => (scrollSnaps.value = emblaApi.snapList())
+const setActiveSnap = (emblaApi) =>
+  (selectedSnap.value = emblaApi.selectedSnap())
+
+watch(
+  emblaApi,
+  (api) => {
+    if (!api) return
+
+    setupSnaps(api)
+    setActiveSnap(api)
+
+    api.on('reinit', setupSnaps)
+    api.on('reinit', setActiveSnap)
+    api.on('select', setActiveSnap)
+  },
+  { immediate: true }
+)
+</script>
+
+<template>
+  <div class="embla">
+    <div class="embla__viewport" ref="emblaRef">
+      <div class="embla__container">
+        <div class="embla__slide">Slide 1</div>
+        <div class="embla__slide">Slide 2</div>
+        <div class="embla__slide">Slide 3</div>
+      </div>
+    </div>
+
+    <div class="embla__dots">
+      <button
+        :class="[
+          'embla__dot',
+          index === selectedSnap ? 'embla__dot--selected' : ''
+        ]"
+        :key="index"
+        v-for="(_, index) in scrollSnaps"
+        @click="goTo(index)"
+      >
+        <!-- Button content -->
+      </button>
+    </div>
+  </div>
+</template>
+28:["$","$L1f",null,{"tab":"$b:props:children:2:props:tab","children":["$","$L20",null,{"language":"html","asLanguage":"vue","code":"$30","highlight":"7,11-12,20,23-24,44"}]}]
+31:T5e7,import { createSignal, createEffect, on, For } from 'solid-js'
+import useEmblaCarousel from 'embla-carousel-solid'
+
+export function EmblaCarousel() {
+  const [emblaRef, emblaApi] = useEmblaCarousel(() => ({
+    loop: false
+  }))
+  const [scrollSnaps, setScrollSnaps] = createSignal([])
+  const [selectedSnap, setSelectedSnap] = createSignal(0)
+
+  const goTo = (index) => emblaApi()?.goTo(index)
+  const setupSnaps = (emblaApi) => setScrollSnaps(emblaApi.snapList())
+  const setActiveSnap = (emblaApi) => setSelectedSnap(emblaApi.selectedSnap())
+
+  createEffect(
+    on(emblaApi, (api) => {
+      if (!api) return
+
+      setupSnaps(api)
+      setActiveSnap(api)
+
+      api.on('reinit', setupSnaps)
+      api.on('reinit', setActiveSnap)
+      api.on('select', setActiveSnap)
+    })
+  )
+
+  return (
+    <div class="embla">
+      <div class="embla__viewport" ref={emblaRef}>
+        <div class="embla__container">
+          <div class="embla__slide">Slide 1</div>
+          <div class="embla__slide">Slide 2</div>
+          <div class="embla__slide">Slide 3</div>
+        </div>
+      </div>
+
+      <div class="embla__dots">
+        <For each={scrollSnaps()}>
+          {(_, index) => (
+            <button
+              class={'embla__dot'.concat(
+                index() === selectedSnap() ? ' embla__dot--selected' : ''
+              )}
+              onClick={() => goTo(index())}
+            >
+              {/* Button content */}
+            </button>
+          )}
+        </For>
+      </div>
+    </div>
+  )
+}
+29:["$","$L1f",null,{"tab":"$b:props:children:3:props:tab","children":["$","$L20",null,{"language":"jsx","code":"$31","highlight":"9,13,20,23-24,43"}]}]
+32:T4ba,<script>
+  import useEmblaCarousel from 'embla-carousel-svelte'
+
+  let emblaApi
+  let options = { loop: false }
+  let scrollSnaps = []
+  let selectedSnap = 0
+
+  const goTo = (index) => emblaApi?.goTo(index)
+  const setupSnaps = (emblaApi) => (scrollSnaps = emblaApi.snapList())
+  const setActiveSnap = (emblaApi) => (selectedSnap = emblaApi.selectedSnap())
+
+  const onInit = (event) => {
+    emblaApi = event.detail
+
+    setupSnaps(emblaApi)
+    setActiveSnap(emblaApi)
+
+    emblaApi.on('reinit', setupSnaps)
+    emblaApi.on('reinit', setActiveSnap)
+    emblaApi.on('select', setActiveSnap)
+  }
+</script>
+
+<div class="embla">
+  <div
+    class="embla__viewport"
+    on:emblainit={onInit}
+    use:useEmblaCarousel={{ options }}
+  >
+    <div class="embla__container">
+      <div class="embla__slide">Slide 1</div>
+      <div class="embla__slide">Slide 2</div>
+      <div class="embla__slide">Slide 3</div>
+    </div>
+  </div>
+
+  <div class="embla__dots">
+    {#each scrollSnaps as _, index}
+      <button
+        class="embla__dot"
+        class:embla__dot--selected={index === selectedSnap}
+        on:click={() => goTo(index)}
+      >
+        <!-- Button content -->
+      </button>
+    {/each}
+  </div>
+</div>
+2a:["$","$L1f",null,{"tab":"$b:props:children:4:props:tab","children":["$","$L20",null,{"language":"svelte","code":"$32","highlight":"7,11,17,20-21,42"}]}]
+2b:["$","div",null,{"children":["$","$L6",null,{"href":"/docs/guides/server-side-rendering","children":[[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__ItemLabel-sc-7d63d4dc-2-cqdJuJ","children":".cqdJuJ{color:var(--text-low-contrast);padding-bottom:0.6rem;}/*!sc*/\n"}],["$","div",null,{"children":"Next","className":"PagePagination__ItemLabel-sc-7d63d4dc-2 cqdJuJ"}]],[["$","style",null,{"precedence":"styled-components","href":"sc-PagePagination__ItemTitle-sc-7d63d4dc-3-gdFSbM","children":".gdFSbM{display:inline-flex;align-items:center;font-weight:500;}/*!sc*/\n.gdFSbM .IconWithText__IconWithTextText-sc-14b7e1d1-3{color:var(--brand-primary);background-image:linear-gradient(\n    45deg,\n    var(--brand-primary),\n    var(--brand-secondary)\n  );background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;}/*!sc*/\n"}],["$","div",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextWrapper-sc-14b7e1d1-0-gMWsQS","children":".gMWsQS{display:flex;align-items:flex-start;text-align:left;}/*!sc*/\n.gMWsQS >:first-child{margin-right:0.6rem;}/*!sc*/\n"}],["$","span",null,{"children":[false,["$","span",null,{"children":"Server-Side Rendering","className":"IconWithText__IconWithTextText-sc-14b7e1d1-3 iYFKPM"}],[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWrapper-sc-14b7e1d1-1-gvOgXx","children":".PkJHh{position:relative;width:1.4rem;}/*!sc*/\n.PkJHh:before{width:1.4rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.iGbVrN{position:relative;width:1.5rem;}/*!sc*/\n.iGbVrN:before{width:1.5rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n.gvOgXx{position:relative;width:1.8rem;}/*!sc*/\n.gvOgXx:before{width:1.8rem;content:'-';display:inline-block;line-height:inherit;opacity:0;}/*!sc*/\n"}],["$","span",null,{"children":[["$","style",null,{"precedence":"styled-components","href":"sc-IconWithText__IconWithTextIcon-sc-14b7e1d1-2-herYcw","children":".herYcw{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}/*!sc*/\n"}],[["$","style",null,{"precedence":"styled-components","href":"sc-icons-sc-3513c9df-0-cgCXIY","children":".kUOgJU{color:currentColor;width:1.4rem;height:1.4rem;}/*!sc*/\n.izxxUI{color:currentColor;width:1.5rem;height:1.5rem;}/*!sc*/\n.cgCXIY{color:currentColor;width:1.8rem;height:1.8rem;}/*!sc*/\n"}],["$","svg",null,{"xmlns":"http://www.w3.org/2000/svg","viewBox":"0 0 24 24","fill":"currentColor","aria-hidden":"true","focusable":"false","className":"icons-sc-3513c9df-0 cgCXIY IconWithText__IconWithTextIcon-sc-14b7e1d1-2 herYcw","children":["$","path",null,{"d":"m12 4-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z","fill":"currentColor"}]}]]],"className":"IconWithText__IconWrapper-sc-14b7e1d1-1 gvOgXx"}]]],"className":"IconWithText__IconWithTextWrapper-sc-14b7e1d1-0 gMWsQS"}]],"className":"PagePagination__ItemTitle-sc-7d63d4dc-3 gdFSbM"}]]]}],"className":"PagePagination__Item-sc-7d63d4dc-1 ilmwRj"}]
+2e:null
