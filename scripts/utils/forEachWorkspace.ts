@@ -1,17 +1,16 @@
 import path from 'path'
 import packageJson from '../../package.json'
-import { PackageJson as PackageJsonType } from 'type-fest'
 
-const WORKSPACES: PackageJsonType['workspaces'] = packageJson?.workspaces || []
+const WORKSPACES = packageJson?.workspaces || []
 export const WORKSPACE_FILTERS = {
   PACKAGES: /packages\//,
-  DOCS: /packages\/embla-carousel-docs/
+  DOCS: /website/
 }
 
-export const forEachWorkspace = (
+export function forEachWorkspace(
   callback: (workspacePath: string) => void,
   include?: (workspace: string) => boolean
-): void => {
+): void {
   WORKSPACES.forEach((workspace) => {
     if (include && !include(workspace)) return
 

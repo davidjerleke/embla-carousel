@@ -1,0 +1,132 @@
+export const metadata = {
+  title: 'Auto Height',
+  description: `Learn how to use the Auto Height plugin to make Embla Carousel adjust its height dynamically.`,
+  order: 40
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import autoHeightInstallation_cdn_01 from '@/content/v9/code-snippets/plugins/auto-height/installation-cdn-01.html'
+import autoHeightInstallation_npm_01 from '@/content/v9/code-snippets/plugins/auto-height/installation-npm-01.sh'
+import autoHeightInstallation_yarn_01 from '@/content/v9/code-snippets/plugins/auto-height/installation-yarn-01.sh'
+import autoHeightInstallation_pnpm_01 from '@/content/v9/code-snippets/plugins/auto-height/installation-pnpm-01.sh'
+
+import packageJson from '@packages/embla-carousel-auto-height/package.json'
+import { ExampleAutoHeight } from '@/content/v9/examples/Predefined/Plugins/AutoHeightLazy'
+
+# Auto Height
+
+<RepositoryLink href={packageJson.name} />
+
+This plugin extends Embla Carousel with **auto height** functionality, automatically adjusting the carousel container's height to match the tallest slide currently in view.
+
+---
+
+## Example
+
+<ExampleAutoHeight />
+
+## Installation
+
+First you need to install the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={autoHeightInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={autoHeightInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={autoHeightInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={autoHeightInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="note">
+
+You can make use of CSS transitions to **transition height** changes. But beware: Transitioning height triggers reflow and may cause a performance hit.
+
+<br />
+
+<PrismHighlight
+  language="css"
+  hideLabel
+  code={`.embla__container {
+    transition: height 0.2s;
+}`}
+/>
+
+</Admonition>
+
+<Admonition type="warning">
+
+You want to make sure that each **slide height** is **determined** by the **content** it holds. Add the following to your CSS to achieve this:
+
+<br />
+
+<PrismHighlight
+  language="css"
+  hideLabel
+  highlight="3"
+  code={`.embla__container {
+    display: flex;
+    align-items: flex-start; /* Add this */
+}`}
+/>
+
+</Admonition>
+
+## Options
+
+Below follows an exhaustive **list of all** `Auto Height` **options** and their default values.
+
+---
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'AutoHeightOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+    active: false,
+    '(min-width: 768px)': { active: true }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### heightEvent
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'select']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ heightEvent: 'select' | 'slidesinview' }`}
+/>
+
+By default, the carousel container's height is adjusted based on the slides in the **selected scroll snap**. Set this option to `'slidesinview'` to adjust the height dynamically according to **all slides currently in view**.
+
+---

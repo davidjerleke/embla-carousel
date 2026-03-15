@@ -1,10 +1,11 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # production
 packages/embla-carousel*/index.d.ts
 packages/embla-carousel*/embla-carousel*
 packages/embla-carousel*/components
 packages/embla-carousel*/esm
 packages/embla-carousel*/cjs
-public
 
 
 # yarn
@@ -14,15 +15,16 @@ public
 !.yarn/sdks
 !.yarn/versions
 
-# logs
+# debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # dependencies
 node_modules
-.pnp
-.pnp.js
+/.pnp
+.pnp.*
 
 # testing
 coverage
@@ -30,6 +32,20 @@ coverage
 # misc
 .cache
 .DS_Store
+*.pem
 
-# dotenv
+# env files (can opt-in for committing if needed)
 .env*
+
+# next.js
+/website/.next/
+
+# production
+/website/build
+
+# vercel
+/website/.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

@@ -1,0 +1,133 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
+import { usePathname } from 'next/navigation'
+import { useAppDispatch, useAppSelector } from '@/hooks/redux'
+import { BRAND_GRADIENT_BACKGROUND_STYLES } from '@/utils/gradients'
+import { LAYERS } from '@/utils/layers'
+import { MEDIA } from '@/utils/breakpoints'
+import { useCallback } from 'react'
+import { useEventListener } from '@/hooks/use-event-listener'
+import { ROUTES_LOADING_BAR_HEIGHT } from '@/utils/routes'
+import { HEADER_HEIGHT } from '@/utils/header'
+import { MODALS } from '@/utils/modal'
+import {
+  selectIsModalOpen,
+  setModalClosed
+} from '@/components/Modal/modal-reducer'
+import {
+  selectRoutesLoading,
+  setRoutesLoading
+} from '@/components/Routes/routes-reducer'
+
+const ANIMATION_NAME = 'routes-loading-progress'
+
+const RoutesLoadingWrapper = styled.div`
+  z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
+  top: ${HEADER_HEIGHT};
+  height: ${ROUTES_LOADING_BAR_HEIGHT};
+  left: 0;
+  right: 0;
+  position: fixed;
+  pointer-events: none;
+  overflow: hidden;
+
+  ${MEDIA.DESKTOP} {
+    top: 0;
+  }
+`
+
+const ProgressBar = styled.div<{ $loading: boolean; $animating: boolean }>`
+  ${BRAND_GRADIENT_BACKGROUND_STYLES};
+  z-index: ${LAYERS.STEP};
+  height: ${ROUTES_LOADING_BAR_HEIGHT};
+  width: 100%;
+  opacity: 1;
+  animation-duration: ${({ $loading }) => ($loading ? '15s' : '1s')};
+  animation-name: ${({ $animating }) => ($animating ? ANIMATION_NAME : 'none')};
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  transition: opacity 0.6s;
+  pointer-events: none;
+
+  @keyframes ${ANIMATION_NAME} {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+`
+
+export function RoutesLoading() {
+  const isRoutesLoading = useAppSelector(selectRoutesLoading)
+  const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
+  const [animating, setAnimating] = useState(true)
+  const pathname = usePathname()
+  const lastPathname = useRef(pathname)
+  const progressElement = useRef<HTMLDivElement>(null)
+  const animationRaf = useRef(0)
+  const animationTimeout = useRef(0)
+  const dispatch = useAppDispatch()
+
+  const onAnimationEnd = useCallback(() => setAnimating(false), [])
+  useEventListener('animationend', onAnimationEnd, progressElement)
+
+  useEffect(() => {
+    if (!isRoutesLoading) return
+
+    const progress = progressElement.current
+    if (!progress) return
+    setAnimating(true)
+
+    progress.style.animationName = 'none'
+    progress.style.opacity = '0'
+
+    animationRaf.current = window.requestAnimationFrame(() => {
+      animationTimeout.current = window.setTimeout(() => {
+        progress.style.animationName = ''
+        progress.style.opacity = '1'
+      }, 0)
+    })
+  }, [isRoutesLoading])
+
+  useEffect(() => {
+    if (isRoutesLoading) return
+
+    const raf = animationRaf.current
+    const timeout = animationTimeout.current
+    if (raf) cancelAnimationFrame(raf)
+    if (timeout) clearTimeout(timeout)
+
+    if (progressElement.current) progressElement.current.style.opacity = '0'
+  }, [isRoutesLoading])
+
+  useEffect(() => {
+    if (pathname !== lastPathname.current && isOpen) {
+      dispatch(setModalClosed())
+    }
+    lastPathname.current = pathname
+    dispatch(setRoutesLoading(false))
+  }, [pathname, isOpen, dispatch])
+
+  useEffect(() => {
+    return () => {
+      const raf = animationRaf.current
+      const timeout = animationTimeout.current
+      if (raf) cancelAnimationFrame(raf)
+      if (timeout) clearTimeout(timeout)
+    }
+  }, [])
+
+  return (
+    <RoutesLoadingWrapper>
+      <ProgressBar
+        ref={progressElement}
+        $loading={isRoutesLoading}
+        $animating={animating}
+      />
+    </RoutesLoadingWrapper>
+  )
+}

@@ -1,0 +1,63 @@
+export const metadata = {
+  title: 'CDN',
+  description: 'Learn how to setup Embla Carousel using a CDN.',
+  order: 60
+}
+
+import theHtmlStructure_01 from '@/content/v8/code-snippets/get-started/module/the-html-structure-01.html'
+import stylingTheCarousel_01 from '@/content/v8/code-snippets/get-started/module/styling-the-carousel-01.less'
+import accessingTheCarouselApi_01 from '@/content/v8/code-snippets/get-started/cdn/accessing-the-carousel-api-01.html'
+import addingPlugins_01 from '@/content/v8/code-snippets/get-started/cdn/adding-plugins-01.html'
+import addingPlugins_02 from '@/content/v8/code-snippets/get-started/cdn/adding-plugins-02.html'
+import cdnInstallation_cdn_01 from '@/content/v8/code-snippets/get-started/cdn/installation-cdn-01.html'
+
+# CDN
+
+Start by including the Embla Carousel script from a CDN with a `script` tag:
+
+<PrismHighlight language="html" code={cdnInstallation_cdn_01} />
+
+---
+
+## The HTML structure
+
+A recommended setup uses an **overflow wrapper** and a **scroll container**, though the outer wrapper is optional. The element with the class name `embla__viewport` serves as both the root and the overflow wrapper. To avoid drag conflicts, place navigation buttons outside the viewport. Start by adding the following **HTML** structure to your carousel:
+
+<PrismHighlight language="html" code={theHtmlStructure_01} />
+
+## Styling the carousel
+
+The element with the classname `embla__viewport` acts as an overflow wrapper, ensuring that any scroll overflow is hidden. The element with the classname `embla__container` is the scrollable area that holds and moves the slides. Add the following **CSS** to style these elements:
+
+<PrismHighlight language="css" code={stylingTheCarousel_01} />
+
+## Accessing the carousel API
+
+Select the element with the classname `embla__viewport` and pass it as the first argument to the `EmblaCarousel` constructor. This will **initialize** your carousel and provide full **access** to the Embla Carousel [API](/docs/v8/api).
+
+<PrismHighlight
+  language="html"
+  code={accessingTheCarouselApi_01}
+  highlight="7"
+/>
+
+## Adding plugins
+
+Plugins let you **extend your carousel** with additional features beyond the built-in core functionality. To get started, install the plugin you want to use. In this example, we'll add the [Autoplay](/docs/v8/plugins/autoplay) plugin:
+
+<PrismHighlight language="html" code={addingPlugins_01} highlight="2" />
+
+<Admonition type="note">
+  **Note:** Plugins loaded from a CDN will be **prefixed** with `EmblaCarousel`.
+  For example, the full plugin name becomes
+  `EmblaCarousel<PluginNameInPascalCase>`, and the Autoplay plugin specifically is
+  `EmblaCarouselAutoplay`.
+</Admonition>
+
+You can pass an **optional plugin array** as the third argument when initializing Embla Carousel. Here's how to extend the carousel from the previous example with Autoplay:
+
+<PrismHighlight language="html" code={addingPlugins_02} highlight="8,14" />
+
+Congratulations! You just created your first Embla Carousel.
+
+---

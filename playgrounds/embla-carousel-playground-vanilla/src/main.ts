@@ -2,19 +2,19 @@ import EmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType
 } from 'embla-carousel'
-import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
-import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
-import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
-import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
-import { THEME_STYLES } from 'consts/themes'
+import { styledComponentsStylesToString } from 'utils/styled-components'
+import { SANDBOX_CSS } from 'content/v9/sandboxes/sandbox-styles'
+import { RESET_STYLES } from 'utils/global-styles'
+import { BASE_STYLES } from 'utils/global-styles'
+import { FONT_STYLES } from 'utils/global-styles'
+import { THEME_STYLES } from 'utils/theme'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
-} from 'components/Examples/examplesCarouselStyles'
+} from 'content/v9/examples/examples-carousel-styles'
 import { createSlides } from './Carousel/setupSlides'
 import {
   addPrevNextBtnsClickHandlers,

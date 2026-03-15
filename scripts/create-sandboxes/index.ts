@@ -3,6 +3,13 @@ import path from 'path'
 import { tsCompile } from './ts-compile'
 import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
 import { readFiles } from '../utils/readFiles'
+import { copySandboxesFromSrcToDist } from './copy-from-src-to-dist'
+import { cleanExistingSandboxDist } from './clean-existing'
+import { collectSandboxDistPaths } from './collect-dist-paths'
+
+const SANDBOX_FILES_CONTENT_PATH = path.join(process.cwd(), 'src', 'content')
+const SANDBOX_FILES_DIST_FOLDER_NAME = 'SandboxFilesDist'
+const SANDBOX_FILES_SRC_FOLDER_NAME = 'SandboxFilesSrc'
 
 const EXTENSION_REGEX = {
   DECLARATION: /\.d\.ts$/,
@@ -10,48 +17,61 @@ const EXTENSION_REGEX = {
   TS: /\.ts$/
 }
 
-const PATHS_TO_SANDBOX_FILES: string[] = [
-  path.join(process.cwd(), 'src/components/Sandbox/Vanilla/SandboxFilesDist'),
-  path.join(process.cwd(), 'src/components/Sandbox/React/SandboxFilesDist')
-]
+function main(): void {
+  cleanExistingSandboxDist(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
+  copySandboxesFromSrcToDist(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_SRC_FOLDER_NAME,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
+  const pathsToSandboxFiles = collectSandboxDistPaths(
+    SANDBOX_FILES_CONTENT_PATH,
+    SANDBOX_FILES_DIST_FOLDER_NAME
+  )
 
-PATHS_TO_SANDBOX_FILES.forEach((pathToSandboxFile) => {
-  try {
-    readFiles(
-      `${pathToSandboxFile}/`,
-      (filename, fileContent) => {
-        if (EXTENSION_REGEX.DECLARATION.test(filename)) {
-          return
+  pathsToSandboxFiles.forEach((pathToSandboxFile) => {
+    try {
+      readFiles(
+        `${pathToSandboxFile}${path.sep}`,
+        (filename, fileContent) => {
+          if (EXTENSION_REGEX.DECLARATION.test(filename)) {
+            return
+          }
+
+          if (EXTENSION_REGEX.TS.test(filename)) {
+            const jsFilename = filename.replace(EXTENSION_REGEX.TS, '.js')
+            const jsContent = tsCompile(fileContent)
+
+            fs.writeFile(jsFilename, jsContent, (error) => {
+              if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
+            })
+          }
+
+          if (EXTENSION_REGEX.TSX.test(filename)) {
+            const jsFilename = filename.replace(EXTENSION_REGEX.TSX, '.jsx')
+            const jsContent = tsCompile(fileContent, { jsx: 1 })
+
+            fs.writeFile(jsFilename, jsContent, (error) => {
+              if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
+            })
+          }
+        },
+        (error) => {
+          throw error
         }
+      )
 
-        if (EXTENSION_REGEX.TS.test(filename)) {
-          const jsFilename = filename.replace(EXTENSION_REGEX.TS, '.js')
-          const jsContent = tsCompile(fileContent)
+      console.log(
+        CONSOLE_FONT_COLORS.SUCCESS,
+        `SUCCESS: Sandboxes compiled succesfully: ${pathToSandboxFile}.`
+      )
+    } catch (error) {
+      console.log(CONSOLE_FONT_COLORS.ERROR, error)
+    }
+  })
+}
 
-          fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
-          })
-        }
-
-        if (EXTENSION_REGEX.TSX.test(filename)) {
-          const jsFilename = filename.replace(EXTENSION_REGEX.TSX, '.jsx')
-          const jsContent = tsCompile(fileContent, { jsx: 1 })
-
-          fs.writeFile(jsFilename, jsContent, (error) => {
-            if (error) console.log(CONSOLE_FONT_COLORS.ERROR, error)
-          })
-        }
-      },
-      (error) => {
-        throw error
-      }
-    )
-
-    console.log(
-      CONSOLE_FONT_COLORS.SUCCESS,
-      `SUCCESS: Sandboxes compiled succesfully: ${pathToSandboxFile}.`
-    )
-  } catch (error) {
-    console.log(CONSOLE_FONT_COLORS.ERROR, error)
-  }
-})
+main()

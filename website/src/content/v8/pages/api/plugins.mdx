@@ -1,0 +1,366 @@
+export const metadata = {
+  title: 'Plugins',
+  description: `Learn how to add plugins to Embla Carousel to extend its functionality.`,
+  order: 40
+}
+
+import { TABS_LIBRARY, TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import pluginsInstallation_cdn_01 from '@/content/v8/code-snippets/api/plugins/installation-cdn-01.html'
+import pluginsInstallation_npm_01 from '@/content/v8/code-snippets/api/plugins/installation-npm-01.sh'
+import pluginsInstallation_yarn_01 from '@/content/v8/code-snippets/api/plugins/installation-yarn-01.sh'
+import pluginsInstallation_pnpm_01 from '@/content/v8/code-snippets/api/plugins/installation-pnpm-01.sh'
+import addingPlugin_html_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-vanilla-01.html'
+import addingPlugin_module_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-vanilla-01.js'
+import addingPlugin_react_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-react-01.jsx'
+import addingPlugin_vue_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-vue-01.vue'
+import addingPlugin_solid_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-solid-01.jsx'
+import addingPlugin_svelte_01 from '@/content/v8/code-snippets/api/plugins/adding-plugin-svelte-01.svelte'
+import callingMethods_module_01 from '@/content/v8/code-snippets/api/plugins/calling-methods-vanilla-01.js'
+import callingMethods_react_01 from '@/content/v8/code-snippets/api/plugins/calling-methods-react-01.jsx'
+import callingMethods_vue_01 from '@/content/v8/code-snippets/api/plugins/calling-methods-vue-01.vue'
+import callingMethods_solid_01 from '@/content/v8/code-snippets/api/plugins/calling-methods-solid-01.jsx'
+import callingMethods_svelte_01 from '@/content/v8/code-snippets/api/plugins/calling-methods-svelte-01.svelte'
+import constructorOptions_module_01 from '@/content/v8/code-snippets/api/plugins/constructor-options-vanilla-01.js'
+import constructorOptions_react_01 from '@/content/v8/code-snippets/api/plugins/constructor-options-react-01.jsx'
+import constructorOptions_vue_01 from '@/content/v8/code-snippets/api/plugins/constructor-options-vue-01.vue'
+import constructorOptions_solid_01 from '@/content/v8/code-snippets/api/plugins/constructor-options-solid-01.jsx'
+import constructorOptions_svelte_01 from '@/content/v8/code-snippets/api/plugins/constructor-options-svelte-01.svelte'
+import globalOptions_module_01 from '@/content/v8/code-snippets/api/plugins/global-options-vanilla-01.js'
+import globalOptions_react_01 from '@/content/v8/code-snippets/api/plugins/global-options-react-01.jsx'
+import globalOptions_vue_01 from '@/content/v8/code-snippets/api/plugins/global-options-vue-01.vue'
+import globalOptions_solid_01 from '@/content/v8/code-snippets/api/plugins/global-options-solid-01.jsx'
+import globalOptions_svelte_01 from '@/content/v8/code-snippets/api/plugins/global-options-svelte-01.svelte'
+import addingPluginEventListeners_module_01 from '@/content/v8/code-snippets/api/plugins/adding-event-listeners-vanilla-01.js'
+import addingPluginEventListeners_react_01 from '@/content/v8/code-snippets/api/plugins/adding-event-listeners-react-01.jsx'
+import addingPluginEventListeners_vue_01 from '@/content/v8/code-snippets/api/plugins/adding-event-listeners-vue-01.vue'
+import addingPluginEventListeners_solid_01 from '@/content/v8/code-snippets/api/plugins/adding-event-listeners-solid-01.jsx'
+import addingPluginEventListeners_svelte_01 from '@/content/v8/code-snippets/api/plugins/adding-event-listeners-svelte-01.svelte'
+import typeScriptPlugins_module_01 from '@/content/v8/code-snippets/api/plugins/typescript-plugins-vanilla-01.ts'
+import typeScriptPlugins_react_01 from '@/content/v8/code-snippets/api/plugins/typescript-plugins-react-01.tsx'
+import typeScriptPlugins_vue_01 from '@/content/v8/code-snippets/api/plugins/typescript-plugins-vue-01.vue'
+import typeScriptPlugins_solid_01 from '@/content/v8/code-snippets/api/plugins/typescript-plugins-solid-01.tsx'
+import typeScriptPlugins_svelte_01 from '@/content/v8/code-snippets/api/plugins/typescript-plugins-svelte-01.svelte'
+
+# Plugins
+
+You can **extend Embla Carousel** with additional features by using **plugins**. A complete list of official plugins is available [here](/docs/v8/plugins).
+
+---
+
+## Installation
+
+All **official plugins** are published as separate **NPM packages**. Each package name starts with the `embla-carousel` prefix, followed by the plugin's unique name.
+For example, to install the `Autoplay` plugin:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={pluginsInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={pluginsInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={pluginsInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={pluginsInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+## Usage
+
+The Embla Carousel **constructor** accepts an **array of plugins**. Each plugin can provide its own [`options`](#constructor-options), [`methods`](#calling-methods), and [`events`](#adding-event-listeners).
+
+### Adding a plugin
+
+The constructor's plugin array is the standard way to add plugins to Embla Carousel. In the example below, the [`Autoplay`](/docs/v8/plugins/autoplay) plugin is added to the carousel:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight language="js" code={addingPlugin_module_01} highlight="7" />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight language="jsx" code={addingPlugin_react_01} highlight="6" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight language="html" code={addingPlugin_vue_01} highlight="5" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight language="jsx" code={addingPlugin_solid_01} highlight="7" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={addingPlugin_svelte_01}
+      highlight="6,18"
+    />
+  </TabsItem>
+</Tabs>
+
+<Admonition>
+  Note that you can **update the plugins** passed to the Embla Carousel
+  constructor **after initialization** using the
+  [`reInit`](/docs/v8/api/methods/#reinit) method.
+</Admonition>
+
+### Constructor options
+
+Plugins can accept their own specific **options** as the first argument to the plugin constructor. This allows you to configure the plugin to suit your needs:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={constructorOptions_module_01}
+      highlight="8"
+    />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={constructorOptions_react_01}
+      highlight="7"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={constructorOptions_vue_01}
+      highlight="6"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={constructorOptions_solid_01}
+      highlight="7"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={constructorOptions_svelte_01}
+      highlight="6,18"
+    />
+  </TabsItem>
+</Tabs>
+
+### Global options
+
+All [official plugins](/docs/v8/plugins) allow you to set **global options** that apply to every carousel instance. This lets you override the default plugin settings with your own preferences:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={globalOptions_module_01}
+      highlight="4"
+    />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={globalOptions_react_01}
+      highlight="5"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight language="html" code={globalOptions_vue_01} highlight="5" />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={globalOptions_solid_01}
+      highlight="4"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={globalOptions_svelte_01}
+      highlight="5"
+    />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="warning">
+  Make sure to assign global options **before** initializing any carousel and
+  **only once**. Reassigning global options may cause unexpected behavior and
+  lead to confusing code.
+</Admonition>
+
+### Calling methods
+
+Some plugins also provide their own **API methods**. You can access these plugin methods using the [`plugins`](/docs/v8/api/methods/#plugins) method, as shown in the example below:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={callingMethods_module_01}
+      highlight="11"
+    />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={callingMethods_react_01}
+      highlight="13"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={callingMethods_vue_01}
+      highlight="15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={callingMethods_solid_01}
+      highlight="15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={callingMethods_svelte_01}
+      highlight="10"
+    />
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblainit` will remain for backward
+      compatibility.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+### Adding event listeners
+
+Some plugins emit their own **events**, structured as `<plugin-name>:eventname`. Adding and removing plugin event listeners works the same way as with native Embla events.
+
+The example below shows how to add an event listener to the Autoplay plugin:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={addingPluginEventListeners_module_01}
+      highlight="13"
+    />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={addingPluginEventListeners_react_01}
+      highlight="15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={addingPluginEventListeners_vue_01}
+      highlight="17"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={addingPluginEventListeners_solid_01}
+      highlight="19"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={addingPluginEventListeners_svelte_01}
+      highlight="15"
+    />
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblainit` will remain for backward
+      compatibility.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+### TypeScript
+
+The `EmblaPluginType` is exported from the **core `embla-carousel` package** and can be used as shown below:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      asLanguage="ts"
+      code={typeScriptPlugins_module_01}
+      highlight="7"
+    />
+    <PrismHighlight language="html" code={addingPlugin_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptPlugins_react_01}
+      highlight="7"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={typeScriptPlugins_vue_01}
+      highlight="7"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a
+      dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptPlugins_solid_01}
+      highlight="7"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-solid` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={typeScriptPlugins_svelte_01}
+      highlight="12"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-svelte` has `embla-carousel`
+      as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+---

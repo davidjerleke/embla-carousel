@@ -6,10 +6,10 @@ const EXCLUDE_CONTRIBUTORS = ['dependabot[bot]', 'dependabot-preview[bot]']
 export type ContributorsResponseType =
   Endpoints['GET /repos/{owner}/{repo}/contributors']['response']['data']
 
-const fetchContributors = async (
+async function fetchContributors(
   owner: string,
   repo: string
-): Promise<ContributorsResponseType> => {
+): Promise<ContributorsResponseType> {
   if (!process.env.GITHUB_TOKEN) {
     console.log(
       CONSOLE_FONT_COLORS.WARNING,
@@ -30,10 +30,10 @@ const fetchContributors = async (
   return contributors
 }
 
-const createContributor = (
+function createContributor(
   allContributors: string,
   contributor: ContributorsResponseType[number]
-): string => {
+): string {
   const { id, login } = contributor
   if (!id || !login) return allContributors
   if (EXCLUDE_CONTRIBUTORS.includes(login)) return allContributors
@@ -47,10 +47,10 @@ const createContributor = (
   return allContributors + contributorMarkup.trim()
 }
 
-export const createContributors = async (
+export async function createContributors(
   owner: string,
   repo: string
-): Promise<string> => {
+): Promise<string> {
   const contributors = await fetchContributors(owner, repo)
   const contributorsOrEmptyArray = contributors || []
 

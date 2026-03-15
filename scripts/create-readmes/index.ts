@@ -18,7 +18,7 @@ const REPO_PATH_REGEX = new RegExp(escapeRegExp('git+https://github.com/'))
 const REPO_PATH = packageJson.repository.url.replace(REPO_PATH_REGEX, '')
 const [REPO_OWNER, REPO_NAME] = REPO_PATH.split('/')
 
-async function main() {
+async function main(): Promise<void> {
   try {
     const { templatePath } = parseNodeParameters()
 

@@ -1,10 +1,10 @@
 import fs from 'fs'
 
-export const readFiles = (
+export function readFiles(
   dirname: string,
   onFileContent: (filename: string, content: string) => void,
   onError: (error: NodeJS.ErrnoException | null) => void
-): void => {
+): void {
   fs.readdirSync(dirname, { withFileTypes: true }).forEach((entry) => {
     if (entry.isDirectory()) {
       return readFiles(dirname + entry.name + '/', onFileContent, onError)

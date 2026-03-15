@@ -1,0 +1,22 @@
+const defaultOptions = {
+  align: 'center',
+  axis: 'x',
+  container: null,
+  slides: null,
+  containScroll: 'trimSnaps',
+  direction: 'ltr',
+  slidesToScroll: 1,
+  inViewThreshold: 0,
+  breakpoints: {},
+  dragFree: false,
+  dragThreshold: 10,
+  loop: false,
+  skipSnaps: false,
+  duration: 25,
+  startIndex: 0,
+  active: true,
+  watchDrag: true,
+  watchResize: true,
+  watchSlides: true,
+  watchFocus: true
+}

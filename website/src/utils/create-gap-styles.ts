@@ -1,0 +1,30 @@
+import { JSX } from 'react'
+import { css, type RuleSet, IStyledComponent } from 'styled-components'
+
+export function createGapStyles(
+  gapX?: string | null,
+  gapY?: string | null,
+  gapItem:
+    | '*'
+    | keyof JSX.IntrinsicElements
+    | IStyledComponent<'web', any> = '*'
+): RuleSet {
+  return css`
+    ${gapX &&
+    css`
+      margin-left: -${gapX};
+      > ${gapItem} {
+        padding-left: ${gapX};
+      }
+    `}
+
+    ${gapY &&
+    css`
+      margin-bottom: -${gapY};
+
+      > ${gapItem} {
+        padding-bottom: ${gapY};
+      }
+    `}
+  `
+}

@@ -1,4 +1,4 @@
-export const parseNodeParameters = (): { [key: string]: string } => {
+export function parseNodeParameters(): { [key: string]: string } {
   return process.argv
     .slice(2)
     .filter((arg) => /^--/.test(arg))

@@ -1,0 +1,58 @@
+'use client'
+
+import { useState, useEffect, useCallback, MouseEvent } from 'react'
+import styled from 'styled-components'
+import { LinkButtonPrimaryOutlined } from '@/components/Link/LinkButton'
+import { LAYERS } from '@/utils/layers'
+import { MAIN_CONTENT_ID } from '@/utils/page'
+import {
+  KEY_NAVIGATING_STYLES,
+  KeyNavigatingPropType
+} from '@/utils/key-events'
+
+const KeyEventsSkipToContentWrapper = styled(
+  LinkButtonPrimaryOutlined
+)<KeyNavigatingPropType>`
+  z-index: ${LAYERS.SEARCH + 1};
+  top: 1rem;
+  left: 1rem;
+  position: absolute;
+  transform: translateX(-1000rem);
+
+  &:focus,
+  &:active {
+    ${KEY_NAVIGATING_STYLES};
+    position: fixed;
+    transform: translateX(0);
+  }
+`
+
+export function KeyEventsSkipToContent() {
+  const [contentElement, setContentElement] = useState<HTMLElement | null>(null)
+
+  const onClick = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      event.currentTarget.blur()
+      event.preventDefault()
+      contentElement?.scrollIntoView()
+      contentElement?.focus()
+    },
+    [contentElement]
+  )
+
+  useEffect(() => {
+    setContentElement(document.getElementById(MAIN_CONTENT_ID))
+  }, [setContentElement])
+
+  if (!contentElement) return null
+
+  return (
+    <KeyEventsSkipToContentWrapper
+      href={`#${MAIN_CONTENT_ID}`}
+      onClick={onClick}
+      $isKeyNavigating
+    >
+      Skip to content
+    </KeyEventsSkipToContentWrapper>
+  )
+}

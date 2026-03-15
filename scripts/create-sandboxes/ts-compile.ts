@@ -4,9 +4,9 @@ import {
   preserveEmptyLinesStart
 } from './preserve-empty-lines'
 
-const createTsConfig = (
+function createTsConfig(
   overrides?: ts.TranspileOptions['compilerOptions']
-): ts.TranspileOptions => {
+): ts.TranspileOptions {
   return {
     compilerOptions: {
       target: 99,
@@ -30,10 +30,10 @@ const createTsConfig = (
   }
 }
 
-export const tsCompile = (
+export function tsCompile(
   content: string,
   tsConfigOverrides?: ts.TranspileOptions['compilerOptions']
-): string => {
+): string {
   const tsConfig = createTsConfig(tsConfigOverrides)
   const typeScriptContent = preserveEmptyLinesStart(content)
   const javaScriptContent = ts.transpileModule(typeScriptContent, tsConfig)
