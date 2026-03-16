@@ -25,12 +25,14 @@ export type VersionType = {
   NAME: string
   MAJOR: number
   SLUG: string
+  SUFFIX?: string
 }
 
 export const DOCS_LATEST_VERSION: VersionType = {
   NAME: packageJson.version,
   MAJOR: Number(packageJson.version.split('.')[0]),
-  SLUG: prefixSlugWithDocs('')
+  SLUG: prefixSlugWithDocs(''),
+  SUFFIX: 'latest'
 }
 
 export const DOCS_VERSIONS: VersionType[] = [
@@ -38,7 +40,8 @@ export const DOCS_VERSIONS: VersionType[] = [
   {
     NAME: '8.6.0',
     MAJOR: 8,
-    SLUG: prefixSlugWithDocs('v8')
+    SLUG: prefixSlugWithDocs('v8'),
+    SUFFIX: 'stable'
   }
 ]
 
