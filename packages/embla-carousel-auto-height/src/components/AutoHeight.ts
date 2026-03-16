@@ -9,7 +9,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoHeight: AutoHeightType
+    autoHeight: AutoHeightType | undefined
   }
 }
 
