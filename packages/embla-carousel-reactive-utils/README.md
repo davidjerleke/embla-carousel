@@ -24,10 +24,10 @@
 
   <p align="center">
     <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/examples/predefined/">Examples</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/docs/examples/predefined">Examples</a>&nbsp;</code>
     </strong>
     <strong>
-      <code>&nbsp;<a href="https://www.embla-carousel.com/get-started/#choose-installation-type">Installation</a>&nbsp;</code>
+      <code>&nbsp;<a href="https://www.embla-carousel.com/docs/get-started#choose-installation-type">Installation</a>&nbsp;</code>
     </strong>
   </p>
 </div>
@@ -36,22 +36,22 @@
 
 <div align="center">
   <p align="center">
-    <a href="https://www.embla-carousel.com/get-started/module/">
+    <a href="https://www.embla-carousel.com/docs/get-started/module">
       <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://www.embla-carousel.com/get-started/module/">
+    <a href="https://www.embla-carousel.com/docs/get-started/module">
       <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://www.embla-carousel.com/get-started/react/">
+    <a href="https://www.embla-carousel.com/docs/get-started/react">
       <img src="https://www.embla-carousel.com/react-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://www.embla-carousel.com/get-started/vue/">
+    <a href="https://www.embla-carousel.com/docs/get-started/vue">
       <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://www.embla-carousel.com/get-started/svelte/">
+    <a href="https://www.embla-carousel.com/docs/get-started/svelte">
       <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
     </a>
-    <a href="https://www.embla-carousel.com/get-started/solid/">
+    <a href="https://www.embla-carousel.com/docs/get-started/solid">
       <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
     </a>
     <a href="https://github.com/donaldxdonald/embla-carousel-angular">
@@ -150,6 +150,8 @@
     <img src="https://avatars2.githubusercontent.com/u/91487491?s=120&v=4" title="hamidrezahanafi" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/negezor">
     <img src="https://avatars2.githubusercontent.com/u/9392723?s=120&v=4" title="negezor" width="50" height="50" style="max-width: 100%" />
+  </a><a href="https://github.com/tetarchus">
+    <img src="https://avatars2.githubusercontent.com/u/8436118?s=120&v=4" title="tetarchus" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/th-km">
     <img src="https://avatars2.githubusercontent.com/u/35410212?s=120&v=4" title="th-km" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/openscript">
@@ -266,10 +268,10 @@
       <a href="https://github.com/syntaxfm">syntaxfm</a> - First long-term sponsor with continued support.
     </li>
     <li>
-      <a href="https://github.com/gunnarx2">gunnarx2</a> - React wrapper <a href="https://www.embla-carousel.com/get-started/react/">useEmblaCarousel</a>.
+      <a href="https://github.com/gunnarx2">gunnarx2</a> - React wrapper <a href="https://www.embla-carousel.com/docs/get-started/react">useEmblaCarousel</a>.
     </li>
     <li>
-      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/get-started/solid/">useEmblaCarousel</a>.
+      <a href="https://github.com/LiamMartens">LiamMartens</a> - Solid wrapper <a href="https://www.embla-carousel.com/docs/get-started/solid">useEmblaCarousel</a>.
     </li>
     <li>
       <a href="https://github.com/donaldxdonald">donaldxdonald</a>, <a href="https://github.com/zip-fa">zip-fa</a>, <a href="https://github.com/JeanMeche">JeanMeche</a> - Angular wrapper <a href="https://github.com/donaldxdonald/embla-carousel-angular?tab=readme-ov-file#installation">EmblaCarouselDirective</a>.
