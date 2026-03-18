@@ -3,7 +3,7 @@ export const addPlayButtonListeners = (emblaApi, playBtn) => {
     const autoplay = emblaApi?.plugins()?.autoplay
     if (!autoplay) return
 
-    const buttonText = autoplay.isPlaying() ? 'Start' : 'Stop'
+    const buttonText = autoplay.isPlaying() ? 'Stop' : 'Start'
     playBtn.innerHTML = buttonText
   }
 
