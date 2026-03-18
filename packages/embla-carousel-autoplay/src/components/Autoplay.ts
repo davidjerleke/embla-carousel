@@ -170,24 +170,24 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     if (!autoplayRunning) {
+      autoplayRunning = true
       const event = emblaApi.createEvent('autoplay:play', null)
       event.emit()
     }
 
     setTimer()
-    autoplayRunning = true
   }
 
   function stopAutoplay(): void {
     if (!pluginIsActive()) return
 
     if (autoplayRunning) {
+      autoplayRunning = false
       const event = emblaApi.createEvent('autoplay:stop', null)
       event.emit()
     }
 
     clearTimer()
-    autoplayRunning = false
   }
 
   function onVisibilityChange(): void {
