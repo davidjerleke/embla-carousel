@@ -1,12 +1,12 @@
 import { getMetadataFromMdxContent } from '@/utils/mdx'
 import { GLOBAL_DATA, DOCS_LATEST_VERSION } from '@/utils/global-data'
 import { RouteType } from '@/utils/routes'
-import { SiteNavigationContextType } from '@/components/SiteNavigation/SiteNavigationContext'
 import { getHomePageContent } from '@/utils/home-page'
 import { getDocsPageContent } from '@/utils/docs-page'
+import { HeaderNavigationContextType } from '@/components/Header/HeaderNavigationContext'
 
 /* UTILS */
-export async function getRootRoutes(): Promise<SiteNavigationContextType> {
+export async function getRootRoutes(): Promise<HeaderNavigationContextType> {
   const { URLS } = GLOBAL_DATA
 
   const homeModule = await getHomePageContent()

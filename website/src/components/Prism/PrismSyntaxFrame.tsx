@@ -15,7 +15,7 @@ import { COLORS } from '@/utils/theme'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { LAYERS } from '@/utils/layers'
 import { SPACINGS } from '@/utils/spacings'
-import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
+import { BORDER_RADIUSES } from '@/utils/border'
 import { MEDIA } from '@/utils/breakpoints'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { copyToClipboard } from '@/utils/copy-to-clipboard'
@@ -40,11 +40,6 @@ const PrismSyntaxFrameWrapper = styled.div<KeyNavigatingPropType>`
 
   ${MEDIA.MIN_XS} {
     border-radius: ${PRISM_FRAME_RADIUS};
-    border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
-  }
-  ${MEDIA.MAX_XS} {
-    border-top: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
-    border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   }
 
   &:before,

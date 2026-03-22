@@ -8,10 +8,7 @@ import { SPACINGS } from '@/utils/spacings'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { Search } from '@/components/Search/Search'
 import { createGapStyles } from '@/utils/create-gap-styles'
-import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
-import { SiteNavigationToggle } from '@/components/SiteNavigation/SiteNavigationToggle'
-import { SidebarNavigationToggle } from '@/components/SidebarNavigation/SidebarNavigationToggle'
-import { usePathname } from 'next/navigation'
+import { useHeaderNavigationContext } from '@/components/Header/HeaderNavigationContext'
 
 const ITEM_SPACING_DESKTOP = SPACINGS.CUSTOM(() => 2.8)
 const ITEM_SPACING_COMPACT = SPACINGS.TWO
@@ -32,7 +29,6 @@ const HeaderActionsWrapper = styled.ul`
 
 const Item = styled.li<{
   $hiddenAtCompact?: boolean
-  $hiddenAtDesktop?: boolean
 }>`
   display: flex;
   align-items: center;
@@ -41,14 +37,6 @@ const Item = styled.li<{
     $hiddenAtCompact &&
     css`
       ${MEDIA.COMPACT} {
-        display: none;
-      }
-    `};
-
-  ${({ $hiddenAtDesktop }) =>
-    $hiddenAtDesktop &&
-    css`
-      ${MEDIA.DESKTOP} {
         display: none;
       }
     `};
@@ -62,9 +50,7 @@ const Link = styled(LinkNavigation)`
 `
 
 export function HeaderActions() {
-  const { flatRoutes } = useSiteNavigationContext()
-  const pathName = usePathname()
-  const isNotStartPage = pathName !== '/'
+  const { flatRoutes } = useHeaderNavigationContext()
 
   return (
     <HeaderActionsWrapper>
@@ -84,18 +70,8 @@ export function HeaderActions() {
         <VersionBadge />
       </Item>
 
-      {isNotStartPage && (
-        <Item $hiddenAtDesktop>
-          <SidebarNavigationToggle />
-        </Item>
-      )}
-
       <Item>
         <Search />
-      </Item>
-
-      <Item $hiddenAtDesktop>
-        <SiteNavigationToggle />
       </Item>
 
       <Item $hiddenAtCompact>

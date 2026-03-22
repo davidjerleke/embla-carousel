@@ -6,8 +6,8 @@ import { SPACINGS } from '@/utils/spacings'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_SIZES } from '@/utils/border'
 import { LinkBare } from '@/components/Link/LinkBare'
-import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
 import { GLOBAL_DATA } from '@/utils/global-data'
+import { useHeaderNavigationContext } from '@/components/Header/HeaderNavigationContext'
 import {
   LogoDarkIcon,
   LogoDarkImage,
@@ -18,7 +18,7 @@ import {
 
 const HeaderLogoWrapper = styled(LinkBare)`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
-  font-size: ${FONT_SIZES.BODY};
+  font-size: ${FONT_SIZES.H4};
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -31,28 +31,22 @@ const HeaderLogoWrapper = styled(LinkBare)`
 `
 
 const HeaderLogoImage = styled(SiteLogo)`
-  ${createSquareSizeStyles('3.6rem')};
+  ${createSquareSizeStyles('4rem')};
   border: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   border-radius: 50%;
-  margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+  margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE)};
   display: flex;
+
+  ${MEDIA.MIN_XXS} {
+    ${createSquareSizeStyles('4.4rem')};
+  }
 
   > ${LogoLightImage},
     > ${LogoDarkImage},
     > ${LogoLightIcon},
     > ${LogoDarkIcon} {
-    padding: ${SPACINGS.CUSTOM(({ ONE }) => ONE - 0.2)};
-  }
-
-  ${MEDIA.MIN_XXS} {
-    ${createSquareSizeStyles('4.4rem')};
-
-    > ${LogoLightImage},
-      > ${LogoDarkImage},
-      > ${LogoLightIcon},
-      > ${LogoDarkIcon} {
-      ${createSquareSizeStyles('100%')};
-    }
+    ${createSquareSizeStyles('100%')};
+    padding: ${SPACINGS.ONE};
   }
 `
 
@@ -62,7 +56,7 @@ const HeaderLogoText = styled.span`
 
 export function HeaderLogo() {
   const { TITLE } = GLOBAL_DATA
-  const { homeRoute } = useSiteNavigationContext()
+  const { homeRoute } = useHeaderNavigationContext()
 
   return (
     <HeaderLogoWrapper

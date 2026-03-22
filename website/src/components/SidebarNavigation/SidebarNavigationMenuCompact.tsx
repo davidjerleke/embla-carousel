@@ -2,13 +2,14 @@
 
 import styled from 'styled-components'
 import { useAppSelector } from '@/hooks/redux'
+import { selectTheme } from '@/components/Theme/theme-reducer'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
-import { COLORS } from '@/utils/theme'
+import { COLORS, THEME_KEYS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
 import { MEDIA } from '@/utils/breakpoints'
 import { HEADER_HEIGHT } from '@/utils/header'
 import { LAYERS } from '@/utils/layers'
-import { BORDER_SIZES } from '@/utils/border'
+import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
 import { TABS_SIDEBAR_NAVIGATION } from '@/utils/tabs'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { TabsItem } from '@/components/Tabs/TabsItem'
@@ -24,8 +25,15 @@ import {
   createScrollBarStyles,
   SCROLL_BAR_SHADOW_SIZE
 } from '@/utils/scrollbars'
+import {
+  ThemeToggle,
+  LightThemeSvg,
+  DarkThemeSvg
+} from '@/components/Theme/ThemeToggle'
 
 const MAX_WIDTH_COMPACT = '36rem'
+const VERSION_BADGE_SPACING = SPACINGS.THREE
+const VERSION_BADGE_HEIGHT = '2.7rem'
 
 const SidebarNavigationMenuCompactWrapper = styled.div`
   background-color: ${COLORS.BACKGROUND_SITE};
@@ -81,7 +89,7 @@ const MenuTabs = styled(Tabs)<{
 
   ${TabsPanelWrapper} {
     position: relative;
-    height: 100%;
+    height: calc(100% - ${VERSION_BADGE_SPACING} * 2 - ${VERSION_BADGE_HEIGHT});
     outline-offset: -${BORDER_SIZES.OUTLINE};
     overflow: hidden;
 
@@ -97,11 +105,13 @@ const MenuTabs = styled(Tabs)<{
     &:before {
       ${createScrollBarShadowStyles('top')};
       top: -${SCROLL_BAR_SHADOW_SIZE};
+      z-index: ${LAYERS.STEP};
     }
 
     &:after {
       ${createScrollBarShadowStyles('bottom')};
       bottom: -${SCROLL_BAR_SHADOW_SIZE};
+      z-index: ${LAYERS.STEP};
     }
 
     &:focus {
@@ -118,7 +128,6 @@ const MenuTabs = styled(Tabs)<{
 
 const ScrollArea = styled.div`
   ${createScrollBarStyles('y')};
-  padding-top: ${SPACINGS.TWO};
   padding-bottom: ${SPACINGS.FOUR};
   max-width: ${MAX_WIDTH_COMPACT};
   overflow: auto;
@@ -129,29 +138,80 @@ const ScrollArea = styled.div`
   margin-right: auto;
 `
 
+const MenuItemList = styled.ul`
+  > li:first-child {
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: ${BORDER_SIZES.DETAIL};
+      background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
+      z-index: ${LAYERS.STEP};
+    }
+  }
+`
+
 const VersionBadgeWrapper = styled.div`
   display: flex;
   padding-top: ${SPACINGS.THREE};
+  padding-bottom: ${SPACINGS.THREE};
   justify-content: center;
+`
+
+const ThemeToggleButton = styled(ThemeToggle)`
+  background-color: ${COLORS.BACKGROUND_CODE};
+  width: 100%;
+  justify-content: space-between;
+  padding: 1.8rem 2rem;
+  margin-top: ${SPACINGS.FOUR};
+  height: auto;
+  margin-right: 0;
+  margin-left: 0;
+  border-radius: ${BORDER_RADIUSES.CARD};
+  overflow: hidden;
+
+  ${LightThemeSvg}, ${DarkThemeSvg} {
+    left: auto;
+    right: 2rem;
+    transform: translateY(-50%);
+  }
+`
+
+const ThemeToggleText = styled.span`
+  color: ${COLORS.TEXT_MEDIUM_CONTRAST};
 `
 
 export function SidebarNavigationMenuCompact() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
+  const theme = useAppSelector(selectTheme)
+  const isLightTheme = theme === THEME_KEYS.LIGHT
+  const oppositeTheme = isLightTheme ? THEME_KEYS.DARK : THEME_KEYS.LIGHT
 
   return (
     <SidebarNavigationMenuCompactWrapper>
+      <VersionBadgeWrapper>
+        <VersionBadge />
+      </VersionBadgeWrapper>
+
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
         <TabsItem tab={TABS_SIDEBAR_NAVIGATION.TABS.MAIN_MENU}>
           <ScrollArea>
-            <ul>
+            <MenuItemList>
               <SidebarNavigationSubMenus />
 
               <li>
-                <VersionBadgeWrapper>
-                  <VersionBadge />
-                </VersionBadgeWrapper>
+                <ThemeToggleButton>
+                  <ThemeToggleText>
+                    Activate {oppositeTheme} theme
+                  </ThemeToggleText>
+                </ThemeToggleButton>
               </li>
-            </ul>
+            </MenuItemList>
           </ScrollArea>
         </TabsItem>
 

@@ -140,12 +140,14 @@ export function SidebarNavigationSubMenu(props: PropType) {
         <ToggleSvg $isOpen={isOpen} svg="chevronRight" size={TOGGLE_SVG_SIZE} />
         <span className={algoliaClass}>{title}</span>
       </Toggle>
+
       <Menu $isOpen={isOpen}>
         <li>
           <Link slug={route.slug} isActive={isActive}>
             Intro
           </Link>
         </li>
+
         {children.map((child) => (
           <li key={child.slug}>
             <Link slug={child.slug}>{child.title}</Link>

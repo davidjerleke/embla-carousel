@@ -5,7 +5,6 @@ import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { Icon } from '@/components/Icon/Icon'
 import { SPACINGS } from '@/utils/spacings'
 import { COLORS } from '@/utils/theme'
-import { MEDIA } from '@/utils/breakpoints'
 
 export const searchButtonStyles = css<KeyNavigatingPropType>`
   ${createSquareSizeStyles('4rem')};
@@ -27,10 +26,6 @@ export const searchButtonIconStyles = css`
   color: ${COLORS.TEXT_HIGH_CONTRAST};
   stroke-width: 0.2rem;
   display: flex;
-
-  ${MEDIA.COMPACT} {
-    ${createSquareSizeStyles('1.8rem')};
-  }
 `
 
 export const SearchButtonIcon = styled(Icon)`

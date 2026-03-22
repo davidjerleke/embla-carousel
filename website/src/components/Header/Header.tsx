@@ -9,6 +9,7 @@ import { HEADER_HEIGHT, HEADER_ID } from '@/utils/header'
 import { BORDER_SIZES } from '@/utils/border'
 import { HeaderActions } from '@/components/Header/HeaderActions'
 import { HeaderLogo } from '@/components/Header/HeaderLogo'
+import { SidebarNavigationToggle } from '@/components/SidebarNavigation/SidebarNavigationToggle'
 
 const HEIGHT = css`
   height: ${HEADER_HEIGHT};
@@ -41,11 +42,18 @@ const Content = styled(PageFrame)`
   justify-content: space-between;
 `
 
+const NavigationToggle = styled(SidebarNavigationToggle)`
+  ${MEDIA.DESKTOP} {
+    display: none;
+  }
+`
+
 export function Header() {
   return (
     <HeaderWrapper id={HEADER_ID}>
       <Fixed>
         <Content>
+          <NavigationToggle />
           <HeaderLogo />
           <HeaderActions />
         </Content>

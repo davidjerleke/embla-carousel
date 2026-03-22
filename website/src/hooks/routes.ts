@@ -9,7 +9,7 @@ import {
   isRoutePartiallyActive
 } from '@/utils/routes'
 import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
-import { useSiteNavigationContext } from '@/components/SiteNavigation/SiteNavigationContext'
+import { useHeaderNavigationContext } from '@/components/Header/HeaderNavigationContext'
 
 type UseRouteActiveType = {
   isActive: boolean
@@ -31,9 +31,9 @@ export function useRouteActive(slug: RouteType['slug']): UseRouteActiveType {
 
 export function useRouteBreadcrumbs(): RouteType[] {
   const pathname = usePathname()
-  const rootRoutes = useSiteNavigationContext()
+  const headerRoutes = useHeaderNavigationContext()
   const sidebarRoutes = useSidebarNavigationContext()
-  const routes = [rootRoutes.homeRoute, ...sidebarRoutes.flatRoutes]
+  const routes = [headerRoutes.homeRoute, ...sidebarRoutes.flatRoutes]
   const activeRoute = routes.find((route) => route.slug === pathname)
 
   return routes

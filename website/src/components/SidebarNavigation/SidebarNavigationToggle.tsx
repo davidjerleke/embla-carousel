@@ -13,7 +13,6 @@ import { MODALS } from '@/utils/modal'
 import { ButtonBare } from '@/components/Button/ButtonBare'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
 import { useEventListener } from '@/hooks/use-event-listener'
-import { Icon } from '@/components/Icon/Icon'
 import {
   selectIsModalOpen,
   setModalClosed,
@@ -21,9 +20,9 @@ import {
 } from '@/components/Modal/modal-reducer'
 
 const BUTTON_SIZE = '4rem'
-const BURGER_SIZE = '1.8rem'
+const BURGER_SIZE = '2.35rem'
 
-const SidebarNavigationToggleWrapper = styled(ButtonBare)`
+const MainNavigationToggleWrapper = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};
   display: flex;
   flex-wrap: wrap;
@@ -54,14 +53,13 @@ const Burger = styled.div<{ $isOpen: boolean }>`
       width: 100%;
     }
     &:before {
-      transform: translateY(0.6rem);
+      transform: translateY(0.8rem);
     }
     &:after {
-      transform: translateY(-0.6rem);
+      transform: translateY(-0.8rem);
     }
 
     ${({ $isOpen }) => css`
-      display: ${!$isOpen && 'none'};
       background-color: ${$isOpen && 'transparent'};
       &:before {
         transform: ${$isOpen && 'rotate(-45deg) translateY(0)'};
@@ -73,15 +71,9 @@ const Burger = styled.div<{ $isOpen: boolean }>`
   }
 `
 
-const CodeIcon = styled(Icon)<{ $isOpen: boolean }>`
-  display: flex;
+type PropType = {}
 
-  ${({ $isOpen }) => css`
-    display: ${$isOpen && 'none'};
-  `}};
-`
-
-export function SidebarNavigationToggle() {
+export function SidebarNavigationToggle(props: PropType) {
   const isOpen = useAppSelector(selectIsModalOpen(MODALS.SIDEBAR_NAVIGATION))
   const toggleAction = isOpen ? 'Hide' : 'Show'
   const toggleElement = useRef<HTMLButtonElement>(null)
@@ -111,19 +103,18 @@ export function SidebarNavigationToggle() {
   })
 
   return (
-    <SidebarNavigationToggleWrapper
+    <MainNavigationToggleWrapper
       id={SIDEBAR_NAVIGATION_ID}
       onClick={onClick}
       aria-expanded={isOpen}
       aria-label={`${toggleAction} ${SIDEBAR_NAVIGATION_ID_PRETTY}`}
       ref={toggleElement}
       type="button"
+      {...props}
     >
-      <CodeIcon $isOpen={isOpen} svg="htmlTags" size="2.6rem" />
-
       <Burger $isOpen={isOpen} aria-hidden="true">
         <span />
       </Burger>
-    </SidebarNavigationToggleWrapper>
+    </MainNavigationToggleWrapper>
   )
 }

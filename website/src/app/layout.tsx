@@ -12,9 +12,10 @@ import { Footer } from '@/components/Footer/Footer'
 import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
 import { RoutesLoading } from '@/components/Routes/RoutesLoading'
 import { getRootRoutes } from '@/utils/root-routes'
-import { SiteNavigationProvider } from '@/components/SiteNavigation/SiteNavigationContext'
-import { SiteNavigation } from '@/components/SiteNavigation/SiteNavigation'
 import { ScrollToHashInit } from '@/components/ScrollToHash/ScrollToHashInit'
+import { getDocsRoutes } from '@/utils/docs-routes'
+import { SidebarNavigationProvider } from '@/components/SidebarNavigation/SidebarNavigationContext'
+import { HeaderNavigationProvider } from '@/components/Header/HeaderNavigationContext'
 
 const interRoman = localFont({
   src: '../assets/fonts/Inter-roman.var.woff2',
@@ -30,36 +31,38 @@ type PropType = {
 export default async function RootLayout(props: PropType) {
   const { children } = props
   const htmlClassNames = [interRoman.className, THEME_CLASSNAME_LIGHT].join(' ')
-  const routes = await getRootRoutes()
+  const headerRoutes = await getRootRoutes()
+  const docsRoutes = await getDocsRoutes([])
 
   return (
     <StyledComponentsRegistry>
-      <SiteNavigationProvider routes={routes}>
-        <ReduxProvider>
-          <GlobalStyles />
+      <HeaderNavigationProvider routes={headerRoutes}>
+        <SidebarNavigationProvider routes={docsRoutes}>
+          <ReduxProvider>
+            <GlobalStyles />
 
-          <html lang="en" className={htmlClassNames}>
-            <head>
-              <Head />
-            </head>
+            <html lang="en" className={htmlClassNames}>
+              <head>
+                <Head />
+              </head>
 
-            <body>
-              <ThemeInit />
-              <KeyEventsInit />
-              <ScrollToHashInit />
-              <KeyEventsSkipToContent />
-              <NoScript />
-              <Header />
-              <RoutesLoading />
-              <SiteNavigation />
+              <body>
+                <ThemeInit />
+                <KeyEventsInit />
+                <ScrollToHashInit />
+                <KeyEventsSkipToContent />
+                <NoScript />
+                <Header />
+                <RoutesLoading />
 
-              {children}
+                {children}
 
-              <Footer />
-            </body>
-          </html>
-        </ReduxProvider>
-      </SiteNavigationProvider>
+                <Footer />
+              </body>
+            </html>
+          </ReduxProvider>
+        </SidebarNavigationProvider>
+      </HeaderNavigationProvider>
     </StyledComponentsRegistry>
   )
 }
