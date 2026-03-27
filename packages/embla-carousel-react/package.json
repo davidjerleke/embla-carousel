@@ -47,17 +47,18 @@
   "devDependencies": {
     "@types/jest": "^29.5.6",
     "@types/react": "^18.0.8",
-    "@typescript-eslint/eslint-plugin": "^6.9.0",
-    "@typescript-eslint/parser": "^6.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "2.8.8",
     "rollup": "^4.59.0",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^8.0.0"
   },
   "dependencies": {
     "embla-carousel": "9.0.0-rc01",
