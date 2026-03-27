@@ -2110,7 +2110,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.39.4":
+"@eslint/js@npm:9.39.4, @eslint/js@npm:^9.0.0":
   version: 9.39.4
   resolution: "@eslint/js@npm:9.39.4"
   checksum: 5b1cd1e6c13bc119c92911e6cef7cf886d942c9e047db0c923bbdd539ed6b9820d986b4559be1f2e24836de7fbad95bbfe268b2bf3d1fef76de37bdc8fae19d8
@@ -6789,18 +6789,12 @@ __metadata:
   resolution: "embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6811,18 +6805,12 @@ __metadata:
   resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6833,18 +6821,12 @@ __metadata:
   resolution: "embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6855,18 +6837,12 @@ __metadata:
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6877,18 +6853,12 @@ __metadata:
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6899,18 +6869,12 @@ __metadata:
   resolution: "embla-carousel-fade@workspace:packages/embla-carousel-fade"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -6921,6 +6885,7 @@ __metadata:
   resolution: "embla-carousel-monorepo@workspace:."
   dependencies:
     "@babel/core": 7.23.2
+    "@eslint/js": ^9.0.0
     "@octokit/graphql": ^9.0.1
     "@octokit/rest": ^22.0.0
     "@octokit/types": ^11.1.0
@@ -6929,11 +6894,17 @@ __metadata:
     "@rollup/plugin-terser": ^0.4.4
     "@rollup/plugin-typescript": ^11.1.5
     "@types/dotenv": ^8.2.3
+    "@typescript-eslint/eslint-plugin": ^8.0.0
+    "@typescript-eslint/parser": ^8.0.0
     dotenv: ^17.2.1
+    eslint: ^9.26.0
+    eslint-config-prettier: ^9.0.0
+    eslint-plugin-prettier: ^5.0.0
     npm-run-all: ^4.1.5
     prettier: 2.8.8
     rollup: ^4.59.0
     typescript: ^5.2.2
+    typescript-eslint: ^8.0.0
   dependenciesMeta:
     esbuild:
       built: true
@@ -7017,20 +6988,14 @@ __metadata:
   dependencies:
     "@types/jest": ^29.5.6
     "@types/react": ^18.0.8
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
     embla-carousel: 9.0.0-rc01
     embla-carousel-reactive-utils: 9.0.0-rc01
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.1 || ^18.0.0 || ^19.0.0 || ^19.0.0-rc
   languageName: unknown
@@ -7041,18 +7006,12 @@ __metadata:
   resolution: "embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     embla-carousel: 9.0.0-rc01
   languageName: unknown
@@ -7063,13 +7022,8 @@ __metadata:
   resolution: "embla-carousel-solid@workspace:packages/embla-carousel-solid"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
     embla-carousel: 9.0.0-rc01
     embla-carousel-reactive-utils: 9.0.0-rc01
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7077,7 +7031,6 @@ __metadata:
     solid-js: 1.9.4
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     solid-js: ^1.0.0
   languageName: unknown
@@ -7088,13 +7041,8 @@ __metadata:
   resolution: "embla-carousel-svelte@workspace:packages/embla-carousel-svelte"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
     embla-carousel: 9.0.0-rc01
     embla-carousel-reactive-utils: 9.0.0-rc01
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7102,7 +7050,6 @@ __metadata:
     svelte: ^5.53.5
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   peerDependencies:
     svelte: ^3.49.0 || ^4.0.0 || ^5.0.0
   languageName: unknown
@@ -7113,20 +7060,14 @@ __metadata:
   resolution: "embla-carousel-vue@workspace:packages/embla-carousel-vue"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
     embla-carousel: 9.0.0-rc01
     embla-carousel-reactive-utils: 9.0.0-rc01
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
     vue: ^3.2.37
   peerDependencies:
     vue: ^3.2.37
@@ -7193,18 +7134,12 @@ __metadata:
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:
     "@types/jest": ^29.5.6
-    "@typescript-eslint/eslint-plugin": ^8.0.0
-    "@typescript-eslint/parser": ^8.0.0
-    eslint: ^9.26.0
-    eslint-config-prettier: ^9.0.0
-    eslint-plugin-prettier: ^5.0.0
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
     ts-jest: ^29.1.1
     typescript: ^5.2.2
-    typescript-eslint: ^8.0.0
   languageName: unknown
   linkType: soft
 
