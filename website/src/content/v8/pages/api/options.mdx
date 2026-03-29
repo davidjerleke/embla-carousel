@@ -307,6 +307,8 @@ Choose scroll axis between `x` and `y`. Remember to stack your slides horizontal
 
 An object with options that will be applied for a given breakpoint by overriding the options at the root level.
 
+To honor [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion) user settings, a breakpoint media query entry can be added to disable animations: `'(prefers-reduced-motion: reduce)': { duration: 0 }`.
+
 <Admonition type="note">
   **Note:** If multiple queries match, they will be merged. And when breakpoint
   options clash, the last one in the list has precedence.
