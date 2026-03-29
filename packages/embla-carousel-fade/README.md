@@ -104,7 +104,7 @@
   </a><a href="https://github.com/simjinseok">
     <img src="https://avatars.githubusercontent.com/u/42757954?u=d9478303eefe4f1c44eabc9220e613e73fc9c6c9&v=4" title="simjinseok" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/yklmk">
-    <img src="https://avatars.githubusercontent.com/u/70700647?u=55e10038f06ae190b321f435c18228da15e83d0e&v=4" title="yklmk" width="50" height="50" style="max-width: 100%" />
+    <img src="https://avatars.githubusercontent.com/u/70700647?v=4" title="yklmk" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/dmorgorg">
     <img src="https://avatars.githubusercontent.com/u/9942570?v=4" title="dmorgorg" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/dylancetin">
@@ -216,8 +216,8 @@
     <img src="https://avatars2.githubusercontent.com/u/74908398?s=120&v=4" title="ishaqibrahimbot" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/S1r-Lanzelot">
     <img src="https://avatars2.githubusercontent.com/u/4487160?s=120&v=4" title="S1r-Lanzelot" width="50" height="50" style="max-width: 100%" />
-  </a><a href="https://github.com/LiamMartens">
-    <img src="https://avatars2.githubusercontent.com/u/5265324?s=120&v=4" title="LiamMartens" width="50" height="50" style="max-width: 100%" />
+  </a><a href="https://github.com/LiahMartens">
+    <img src="https://avatars2.githubusercontent.com/u/5265324?s=120&v=4" title="LiahMartens" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/LucasMariniFalbo">
     <img src="https://avatars2.githubusercontent.com/u/9245477?s=120&v=4" title="LucasMariniFalbo" width="50" height="50" style="max-width: 100%" />
   </a><a href="https://github.com/junlarsen">
