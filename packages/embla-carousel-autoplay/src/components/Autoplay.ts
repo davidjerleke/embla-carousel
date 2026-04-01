@@ -250,6 +250,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
 
   function reset(): void {
     if (autoplayRunning) startAutoplay()
+    pauseDelay = null
   }
 
   function pause(): void {
