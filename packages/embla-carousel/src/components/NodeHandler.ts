@@ -64,12 +64,13 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
 
     const containerStyle = root ? container.style : { transform: '' }
     const previousTransform = containerStyle.transform
-    containerStyle.transform = 'none'
+    const needsReset = previousTransform && previousTransform !== 'none'
+    if (needsReset) containerStyle.transform = 'none'
 
     const containerRect = getRect(container)
     const slideRects = slides.map(getRect)
 
-    containerStyle.transform = previousTransform
+    if (needsReset) containerStyle.transform = previousTransform
     rects = { containerRect, slideRects }
     return rects
   }
