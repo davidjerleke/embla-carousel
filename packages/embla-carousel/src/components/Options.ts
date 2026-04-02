@@ -38,6 +38,7 @@ export type OptionsType = CreateOptionsType<{
   resize: boolean
   focus: boolean
   slideChanges: boolean
+  asyncInit: boolean
   ssr: number[]
 }>
 
@@ -63,6 +64,7 @@ export const defaultOptions: OptionsType = {
   resize: true,
   focus: true,
   slideChanges: true,
+  asyncInit: false,
   ssr: []
 }
 

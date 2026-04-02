@@ -8,6 +8,7 @@ import { PluginsHandler } from './PluginsHandler'
 import { SsrHandler, SsrHandlerType } from './SsrHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 import { ScrollToDirectionType } from './ScrollTo'
+import { WindowType } from './utils'
 
 export type EmblaCarouselType = {
   canGoToNext: () => boolean
@@ -97,6 +98,25 @@ function EmblaCarousel(
     return engine
   }
 
+  function initializeEngine(ownerWindow: WindowType): void {
+    engine.resizeHandler.init(ownerWindow)
+    const containerVisible = container.offsetParent
+
+    engine.translate.to(engine.location)
+    engine.scrollOptimizer.optimize(true)
+    if (engine.options.loop) engine.slideLooper.loop()
+
+    engine.animation.init(ownerWindow)
+    engine.slidesInView.init(ownerWindow)
+    engine.slidesHandler.init(ownerWindow)
+    engine.slideFocus.init(ownerWindow)
+    engine.eventHandler.init(self)
+
+    if (containerVisible && slides.length) {
+      engine.dragHandler.init(ownerWindow)
+    }
+  }
+
   function activate(
     withOptions?: EmblaOptionsType,
     withPlugins?: EmblaPluginType[]
@@ -134,20 +154,25 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
-      engine.translate.to(engine.location)
-      engine.scrollOptimizer.optimize(true)
-      if (engine.options.loop) engine.slideLooper.loop()
-
-      engine.animation.init(ownerWindow)
-      engine.resizeHandler.init(ownerWindow)
-      engine.slidesInView.init(ownerWindow)
-      engine.slidesHandler.init(ownerWindow)
-      engine.slideFocus.init(ownerWindow)
-      engine.eventHandler.init(self)
-
-      if (container.offsetParent && slides.length) {
-        engine.dragHandler.init(ownerWindow)
+      if (options.asyncInit) {
+        const cleanup = nodeHandler.getRectsAsync(
+          container,
+          slides,
+          ownerWindow,
+          () => {
+            engine = createEngine(options, container, slides, true)
+            initializeEngine(ownerWindow)
+            pluginApis = pluginsHandler.init(self, pluginList)
+          }
+        )
+        mediaHandlers.add(
+          <EventTarget><unknown>{ addEventListener: () => {}, removeEventListener: cleanup },
+          'change',
+          () => {}
+        )
+        return
       }
+      initializeEngine(ownerWindow)
     }
 
     pluginApis = pluginsHandler.init(self, pluginList)
