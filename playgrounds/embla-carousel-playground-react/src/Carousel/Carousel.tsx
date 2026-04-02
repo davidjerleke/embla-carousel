@@ -2,26 +2,25 @@ import { useState, useEffect, useCallback } from 'react'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import { DotButton, PrevButton, NextButton } from './Buttons'
+import Ssr from 'embla-carousel-ssr'
 
 type PropType = {
   slides: number[]
+  slideSize: number
   isSsr: boolean
   options?: EmblaOptionsType
 }
 
 export const EmblaCarousel = (props: PropType) => {
-  const { slides, options, isSsr } = props
+  const { slides, options, slideSize, isSsr } = props
+  const contentDirection = options?.direction || 'ltr'
   const [refAttached, setRefAttached] = useState(false)
-  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(options)
-  const [prevBtnEnabled, setPrevBtnEnabled] = useState(
-    emblaServerApi.canGoToPrev()
-  )
-  const [nextBtnEnabled, setNextBtnEnabled] = useState(
-    emblaServerApi.canGoToNext()
-  )
-  const [selectedIndex, setSelectedIndex] = useState(
-    emblaServerApi.selectedSnap()
-  )
+  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(options, [
+    Ssr({ slideSizes: slides.map(() => slideSize) })
+  ])
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
+  const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const showSsr = isSsr && !emblaApi
 
@@ -44,8 +43,8 @@ export const EmblaCarousel = (props: PropType) => {
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     setSelectedIndex(emblaApi.selectedSnap())
-    setPrevBtnEnabled(emblaApi.canGoToPrev())
-    setNextBtnEnabled(emblaApi.canGoToNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }, [])
 
   useEffect(() => {
@@ -70,7 +69,9 @@ export const EmblaCarousel = (props: PropType) => {
     <>
       {showSsr && (
         <style id="embla-ssr-styles">
-          {emblaServerApi.ssrStyles('.embla__container', '.embla__slide')}
+          {emblaServerApi
+            .plugins()
+            .ssr?.getStyles('.embla__container', '.embla__slide')}
         </style>
       )}
 
@@ -78,7 +79,7 @@ export const EmblaCarousel = (props: PropType) => {
         <strong>SSR:</strong> <span>{showSsr.toString()}</span>
       </div>
 
-      <div className="embla">
+      <div className="embla" dir={contentDirection}>
         <div
           className="embla__viewport"
           ref={refAttached ? emblaRef : undefined}
@@ -94,8 +95,8 @@ export const EmblaCarousel = (props: PropType) => {
 
         <div className="embla__controls">
           <div className="embla__buttons">
-            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-            <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
+            <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
+            <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
           </div>
 
           <div className="embla__dots">

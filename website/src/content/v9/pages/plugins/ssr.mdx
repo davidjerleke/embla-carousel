@@ -1,0 +1,129 @@
+export const metadata = {
+  title: 'Ssr',
+  description: `Learn how to use the SSR plugin to configure Embla Carousel for server-side rendering environments, preventing layout shifts on hydration.`,
+  order: 80
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import ssrInstallation_cdn_01 from '@/content/v9/code-snippets/plugins/ssr/installation-cdn-01.html'
+import ssrInstallation_npm_01 from '@/content/v9/code-snippets/plugins/ssr/installation-npm-01.sh'
+import ssrInstallation_yarn_01 from '@/content/v9/code-snippets/plugins/ssr/installation-yarn-01.sh'
+import ssrInstallation_pnpm_01 from '@/content/v9/code-snippets/plugins/ssr/installation-pnpm-01.sh'
+
+import packageJson from '@packages/embla-carousel-ssr/package.json'
+
+# SSR
+
+<RepositoryLink href={packageJson.name} />
+
+The SSR plugin enables **server-side rendering** support for Embla Carousel by generating stable CSS transforms before the browser dimensions are available, preventing layout shifts on hydration.
+
+---
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={ssrInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={ssrInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={ssrInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={ssrInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+<Admonition type="note">
+  **Note:** Refer to the [Server-Side
+  Rendering](/docs/guides/server-side-rendering) guide for a complete
+  walkthrough of when and how to use this plugin.
+</Admonition>
+
+## Options
+
+Below follows an exhaustive **list of all** `Ssr` **options** and their default values.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'SsrOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+    slideSizes: [50, 50, 50],
+    breakpoints: {
+      '(min-width: 768px)': { slideSizes: [70, 70, 70] }
+    }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level. Use this when your slide sizes change at CSS breakpoints.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### slideSizes
+
+<ApiMetaData firstRow={['Type', 'number[]']} secondRow={['Default', '[]']} />
+<PrismHighlight language="ts" hideLabel code={`{ slideSizes: [50, 50, 50] }`} />
+
+An array of slide sizes expressed as **percentages of the carousel viewport**. Each number corresponds to a slide and must exactly match the CSS width (or height for vertical carousels) applied to that slide.
+
+<Admonition type="warning">
+  **Warning:** The values in `slideSizes` must exactly match your CSS widths.
+  Any mismatch will cause incorrect snapping and layout shifts during hydration.
+</Admonition>
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Ssr` **methods** with their respective parameters and return values.
+
+---
+
+### getStyles
+
+<ApiMetaData
+  firstRow={[
+    'Parameters',
+    '(containerSelector: string, slidesSelector?: string)'
+  ]}
+  secondRow={['Returns', 'string']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().ssr?.getStyles('#carousel', '.embla__slide')`}
+/>
+
+Generates a **CSS string** containing the `transform` styles needed to position the carousel container and any looping slides at the correct starting position on the server.
+
+The `containerSelector` must be a **unique CSS selector** that targets only the container element of the carousel this plugin instance belongs to. This prevents SSR styles from affecting other carousels on the same page.
+
+The optional `slidesSelector` parameter defaults to `> *`, selecting all direct children of the container. Provide a more specific selector when your slide elements are not direct children or when you need to scope styles further.
+
+Inject the returned string into a `<style>` tag in your server-rendered HTML before the client-side carousel initialises:
+
+<PrismHighlight
+  language="js"
+  hideLabel
+  code={`const styles = emblaApi.plugins().ssr?.getStyles('#my-carousel', '.embla__slide')
+// => "#my-carousel { transform: translate3d(-50%,0px,0px); }"`}
+/>

@@ -2,9 +2,11 @@ import { Component, For, Show, createEffect, createSignal } from 'solid-js'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-solid'
 import { DotButton, NextButton, PrevButton } from './Buttons'
+import Ssr from 'embla-carousel-ssr'
 
 type PropType = {
   slides: number[]
+  slideSize: number
   isSsr: boolean
   options?: EmblaOptionsType
 }
@@ -12,17 +14,12 @@ type PropType = {
 export const EmblaCarousel: Component<PropType> = (props) => {
   const [refAttached, setRefAttached] = createSignal(false)
   const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(
-    () => props.options
+    () => props.options,
+    () => [Ssr({ slideSizes: props.slides.map(() => props.slideSize) })]
   )
-  const [prevBtnEnabled, setPrevBtnEnabled] = createSignal(
-    emblaServerApi.canGoToPrev()
-  )
-  const [nextBtnEnabled, setNextBtnEnabled] = createSignal(
-    emblaServerApi.canGoToNext()
-  )
-  const [selectedIndex, setSelectedIndex] = createSignal(
-    emblaServerApi.selectedSnap()
-  )
+  const [prevBtnDisabled, setPrevBtnDisabled] = createSignal(true)
+  const [nextBtnDisabled, setNextBtnDisabled] = createSignal(true)
+  const [selectedIndex, setSelectedIndex] = createSignal(0)
   const [scrollSnaps, setScrollSnaps] = createSignal<number[]>([])
   const [showSsr, setShowSsr] = createSignal(props.isSsr && !emblaApi())
 
@@ -44,8 +41,8 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
   function onSelect(emblaApi: EmblaCarouselType): void {
     setSelectedIndex(emblaApi.selectedSnap())
-    setPrevBtnEnabled(emblaApi.canGoToPrev())
-    setNextBtnEnabled(emblaApi.canGoToNext())
+    setPrevBtnDisabled(!emblaApi.canGoToPrev())
+    setNextBtnDisabled(!emblaApi.canGoToNext())
   }
 
   createEffect(() => {
@@ -69,7 +66,9 @@ export const EmblaCarousel: Component<PropType> = (props) => {
     <>
       {showSsr() && (
         <style id="embla-ssr-styles">
-          {emblaServerApi.ssrStyles('.embla__container', '.embla__slide')}
+          {emblaServerApi
+            .plugins()
+            .ssr?.getStyles('.embla__container', '.embla__slide')}
         </style>
       )}
 
@@ -108,8 +107,8 @@ export const EmblaCarousel: Component<PropType> = (props) => {
 
         <div class="embla__controls">
           <div class="embla__buttons">
-            <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled()} />
-            <NextButton onClick={scrollNext} enabled={nextBtnEnabled()} />
+            <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled()} />
+            <NextButton onClick={scrollNext} disabled={nextBtnDisabled()} />
           </div>
 
           <div class="embla__dots">

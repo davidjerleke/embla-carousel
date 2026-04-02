@@ -5,9 +5,9 @@ import { defaultOptions, EmblaOptionsType, OptionsType } from './Options'
 import { NodeHandler, NodeHandlerType } from './NodeHandler'
 import { OptionsHandler } from './OptionsHandler'
 import { PluginsHandler } from './PluginsHandler'
-import { SsrHandler, SsrHandlerType } from './SsrHandler'
 import { EmblaPluginsType, EmblaPluginType } from './Plugins'
 import { ScrollToDirectionType } from './ScrollTo'
+import { getSsrHandler } from './utils'
 
 export type EmblaCarouselType = {
   canGoToNext: () => boolean
@@ -34,7 +34,6 @@ export type EmblaCarouselType = {
   cloneEngine: (userOptions?: EmblaOptionsType) => EngineType
   plugins: () => EmblaPluginsType
   reInit: (options?: EmblaOptionsType, plugins?: EmblaPluginType[]) => void
-  ssrStyles: (container: string, slides?: string) => string
   scrollProgress: () => number
   slidesInView: () => number[]
 }
@@ -56,7 +55,6 @@ function EmblaCarousel(
   let destroyed = false
   let engine: EngineType
   let nodeHandler: NodeHandlerType
-  let ssrHandler: SsrHandlerType
   let optionsBase = mergeOptions(defaultOptions, EmblaCarousel.globalOptions)
   let options = mergeOptions(optionsBase)
   let pluginList: EmblaPluginType[] = []
@@ -76,14 +74,12 @@ function EmblaCarousel(
     slides: HTMLElement[],
     useCachedRects?: boolean
   ): EngineType {
-    const ssrOptions = isSsr ? { direction: 'ltr' } : {}
-    const engineOptions = mergeOptions(options, ssrOptions)
     const rects = nodeHandler.getRects(container, slides, useCachedRects)
     const engine = Engine(
       root,
       container,
       slides,
-      engineOptions,
+      options,
       nodeHandler,
       eventHandler,
       rects,
@@ -103,7 +99,7 @@ function EmblaCarousel(
   ): void {
     if (destroyed) return
 
-    nodeHandler = NodeHandler(<HTMLElement>userRoot)
+    nodeHandler = NodeHandler(userRoot)
     const { ownerWindow } = nodeHandler
 
     optionsHandler.init(ownerWindow)
@@ -111,20 +107,20 @@ function EmblaCarousel(
     options = optionsAtMedia(optionsBase)
     pluginList = withPlugins || pluginList
 
-    const nodes = nodeHandler.getNodes(options)
+    let engineOptions = options
+    let nodes = nodeHandler.getNodes(options)
+    const ssrHandler = getSsrHandler(pluginList)
+
+    if (isSsr && ssrHandler) {
+      ssrHandler.setup(createEngine, mergeOptions, optionsBase)
+      engineOptions = mergeOptions(engineOptions, { direction: 'ltr' })
+      nodes = ssrHandler.getNodes()
+    }
+
     root = nodes.root
     container = nodes.container
     slides = nodes.slides
-    engine = createEngine(options, container, slides)
-
-    ssrHandler = SsrHandler(
-      container,
-      engine.axis,
-      nodeHandler,
-      optionsBase,
-      mergeOptions,
-      createEngine
-    )
+    engine = createEngine(engineOptions, container, slides)
 
     optionsMediaQueries([
       optionsBase,
@@ -221,10 +217,6 @@ function EmblaCarousel(
     return snapIndex(-1) !== selectedSnap()
   }
 
-  function ssrStyles(container: string, slides?: string): string {
-    return isSsr ? ssrHandler.getStyles(container, slides) : ''
-  }
-
   function scrollProgress(): number {
     return engine.scrollProgress.get(engine.offsetLocation)
   }
@@ -291,8 +283,7 @@ function EmblaCarousel(
     slideNodes,
     slidesInView,
     snapIndex,
-    snapList,
-    ssrStyles
+    snapList
   }
 
   activate(userOptions || {}, userPlugins || [])

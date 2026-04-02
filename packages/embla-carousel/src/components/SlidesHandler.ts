@@ -18,7 +18,6 @@ export function SlidesHandler(
     if (!active) return
 
     mutationObserver = new ownerWindow.MutationObserver(onSlidesChange)
-
     mutationObserver.observe(container, { childList: true })
   }
 

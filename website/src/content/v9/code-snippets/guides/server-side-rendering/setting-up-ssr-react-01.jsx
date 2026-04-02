@@ -1,19 +1,22 @@
 import React, { useId } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
+import Ssr from 'embla-carousel-ssr'
 
 export function EmblaCarousel(props) {
   const carouselId = useId()
-  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel({
-    loop: true,
-    ssr: props.slides.map(() => 50) // Each slide is 50% of the viewport width
-  })
+  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(
+    { loop: true },
+    [Ssr({ slideSizes: props.slides.map(() => 50) })] // Each slide is 50% of the viewport width
+  )
   const renderSsrStyles = !emblaApi
 
   return (
     <>
       {renderSsrStyles && (
         <style>
-          {emblaServerApi.ssrStyles(`#${carouselId}`, '.embla__slide')}
+          {emblaServerApi
+            .plugins()
+            .ssr?.getStyles(`#${carouselId}`, '.embla__slide')}
         </style>
       )}
 

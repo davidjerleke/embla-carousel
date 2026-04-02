@@ -5,24 +5,27 @@ import useEmblaCarousel from 'embla-carousel-vue'
 import PrevButton from './PrevButton.vue'
 import NextButton from './NextButton.vue'
 import DotButton from './DotButton.vue'
+import Ssr from 'embla-carousel-ssr'
 
 const props = defineProps<{
   options: EmblaOptionsType
   slides: number[]
+  slideSize: number
   isSsr: boolean
 }>()
 
-const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(props.options)
+const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(props.options, [
+  Ssr({ slideSizes: props.slides.map(() => props.slideSize) })
+])
 const refAttached = ref(false)
-const prevBtnEnabled = ref(emblaServerApi.canGoToPrev())
-const nextBtnEnabled = ref(emblaServerApi.canGoToNext())
-const selectedIndex = ref(emblaServerApi.selectedSnap())
+const prevBtnDisabled = ref(true)
+const nextBtnDisabled = ref(true)
+const selectedIndex = ref(0)
 const scrollSnaps = ref<number[]>([])
 const showSsr = computed(() => props.isSsr && !emblaApi.value)
-const ssrStyles = `<style>${emblaServerApi.ssrStyles(
-  '.embla__container',
-  '.embla__slide'
-)}</style>`
+const ssrStyles = `<style>${emblaServerApi
+  .plugins()
+  .ssr?.getStyles('.embla__container', '.embla__slide')}</style>`
 
 function scrollPrev(): void {
   return emblaApi.value?.goToPrev()
@@ -42,8 +45,8 @@ function onInit(emblaApi: EmblaCarouselType): void {
 
 function onSelect(emblaApi: EmblaCarouselType): void {
   selectedIndex.value = emblaApi.selectedSnap()
-  prevBtnEnabled.value = emblaApi.canGoToPrev()
-  nextBtnEnabled.value = emblaApi.canGoToNext()
+  prevBtnDisabled.value = !emblaApi.canGoToPrev()
+  nextBtnDisabled.value = !emblaApi.canGoToNext()
 }
 
 watch(
@@ -99,8 +102,8 @@ onMounted(() => {
 
     <div class="embla__controls">
       <div class="embla__buttons">
-        <PrevButton @click="scrollPrev" :enabled="prevBtnEnabled" />
-        <NextButton @click="scrollNext" :enabled="nextBtnEnabled" />
+        <PrevButton @click="scrollPrev" :disabled="prevBtnDisabled" />
+        <NextButton @click="scrollNext" :disabled="nextBtnDisabled" />
       </div>
 
       <div class="embla__dots">

@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import useEmblaCarousel from 'embla-carousel-vue'
+import Ssr from 'embla-carousel-ssr'
 
 const props = defineProps({
   carouselId: String,
@@ -10,14 +11,17 @@ const props = defineProps({
   }
 })
 
-const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel({
-  ssr: props.slides.map(() => 50) // Each slide is 50% of the viewport width
-})
+const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(
+  { loop: true },
+  [Ssr({ slideSizes: props.slides.map(() => 50) })] // Each slide is 50% of the viewport width
+)
 const renderSsrStyles = computed(() => !emblaApi.value)
 
 const ssrStyles = `
   <style>
-    ${emblaServerApi.ssrStyles(`#${props.carouselId}`, '.embla__slide')}
+    ${emblaServerApi
+      .plugins()
+      .ssr?.getStyles(`#${props.carouselId}`, '.embla__slide')}
   </style>
 `
 </script>

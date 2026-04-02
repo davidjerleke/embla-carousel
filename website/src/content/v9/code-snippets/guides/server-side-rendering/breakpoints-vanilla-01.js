@@ -1,20 +1,24 @@
 // SERVER
 import EmblaCarousel from 'embla-carousel'
+import Ssr from 'embla-carousel-ssr'
 
 export function getEmblaCarouselSsr(slides, carouselId) {
-  const emblaServerApi = EmblaCarousel(null, {
-    loop: true,
-    ssr: slides.map(() => 50), // Each slide is 50% of the viewport width
-    breakpoints: {
-      '(min-width: 768px)': {
-        ssr: slides.map(() => 70) // Each slide is 70% of the viewport width
+  const emblaServerApi = EmblaCarousel(null, { loop: true }, [
+    Ssr({
+      slideSizes: slides.map(() => 50), // Each slide is 50% of the viewport width
+      breakpoints: {
+        '(min-width: 768px)': {
+          slideSizes: slides.map(() => 70) // Each slide is 70% of the viewport width
+        }
       }
-    }
-  })
+    })
+  ])
 
   return `
     <style>
-      ${emblaServerApi.ssrStyles(`#${carouselId}`, '.embla__slide')}
+      ${emblaServerApi
+        .plugins()
+        .ssr?.getStyles(`#${carouselId}`, '.embla__slide')}
     </style>
 
     <div class="embla">

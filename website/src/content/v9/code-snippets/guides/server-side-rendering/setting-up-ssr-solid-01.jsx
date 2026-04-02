@@ -1,11 +1,12 @@
 import { For } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
+import Ssr from 'embla-carousel-ssr'
 
 export function EmblaCarousel(props) {
-  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(() => ({
-    loop: true,
-    ssr: props.slides.map(() => 50) // Each slide is 50% of the viewport width
-  }))
+  const [emblaRef, emblaApi, emblaServerApi] = useEmblaCarousel(
+    () => ({ loop: true }),
+    () => [Ssr({ slideSizes: props.slides.map(() => 50) })] // Each slide is 50% of the viewport width
+  )
 
   const renderSsrStyles = () => !emblaApi()
 
@@ -13,7 +14,9 @@ export function EmblaCarousel(props) {
     <>
       {renderSsrStyles() && (
         <style>
-          {emblaServerApi.ssrStyles(`#${props.carouselId}`, '.embla__slide')}
+          {emblaServerApi
+            .plugins()
+            .ssr?.getStyles(`#${props.carouselId}`, '.embla__slide')}
         </style>
       )}
 

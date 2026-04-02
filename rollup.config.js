@@ -25,12 +25,13 @@ const CONFIG_EXTERNAL_MODULES = {
 
 const CONFIG_BABEL = {
   extensions: ['.js', '.jsx', '.ts', '.tsx'],
-  exclude: 'node_modules/**',
+  exclude: ['node_modules/**'],
   babelHelpers: 'bundled'
 }
 
 const CONFIG_TYPESCRIPT = {
-  tsconfig: path.join(__dirname, 'tsconfig.json')
+  tsconfig: path.join(__dirname, 'tsconfig.json'),
+  exclude: ['**/__tests__/**']
 }
 
 function CONFIG_EXTERNAL_MODULE_SUPPRESS(warning, next) {
@@ -67,6 +68,11 @@ function createBuildPath(packageJson, format) {
   const fileName = `${packageJson.name}.${format}.js`
   if (format === 'umd') return path.join(FOLDERS.OUT, fileName)
   return path.join(FOLDERS.OUT, format, fileName)
+}
+
+function formatPackageJson(packageJson, newLineAtEnd) {
+  const newLine = newLineAtEnd ? '\n' : ''
+  return JSON.stringify(packageJson, null, 2) + newLine
 }
 
 function createNodeNextSupportForPackage() {
@@ -156,17 +162,17 @@ function createNodeNextSupportForPackage() {
 
   fs.writeFileSync(
     path.join(outFolder, 'package.json'),
-    JSON.stringify(packageJsonMain, null, '\t')
+    formatPackageJson(packageJsonMain, true)
   )
 
   fs.writeFileSync(
     path.join(esmFolder, 'package.json'),
-    JSON.stringify(packageJsonEsm, null, '\t')
+    formatPackageJson(packageJsonEsm)
   )
 
   fs.writeFileSync(
     path.join(cjsFolder, 'package.json'),
-    JSON.stringify(packageJsonCjs, null, '\t')
+    formatPackageJson(packageJsonCjs)
   )
 
   const esmTypesFilePath = path.join(esmFolder, 'index.d.ts')
