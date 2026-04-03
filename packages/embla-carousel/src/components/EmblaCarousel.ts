@@ -183,7 +183,7 @@ function EmblaCarousel(
     withPlugins?: EmblaPluginType[]
   ): void {
     const event = eventHandler.createEvent('reinit', null)
-    const startSnap = selectedSnap()
+    const startSnap = engine ? selectedSnap() : 0
     deActivate()
     activate(mergeOptions({ startSnap }, withOptions), withPlugins)
     event.emit()
