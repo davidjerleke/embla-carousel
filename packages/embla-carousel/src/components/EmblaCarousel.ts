@@ -190,6 +190,7 @@ function EmblaCarousel(
   }
 
   function deActivate(): void {
+    if (!engine) return
     engine.dragHandler.destroy()
     engine.resizeHandler.destroy()
     engine.slidesHandler.destroy()
