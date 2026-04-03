@@ -67,6 +67,7 @@ function EmblaCarousel(
   let slides: HTMLElement[]
 
   function cloneEngine(userOptions?: EmblaOptionsType): EngineType {
+    if (!engine) return engine
     const engineOptions = mergeOptions(options, userOptions)
     return createEngine(engineOptions, container, slides, true)
   }
@@ -135,6 +136,40 @@ function EmblaCarousel(
     root = nodes.root
     container = nodes.container
     slides = nodes.slides
+
+    if (!isSsr && ownerWindow && options.active && options.asyncInit) {
+      optionsMediaQueries([
+        optionsBase,
+        ...pluginList.map(({ options }) => options)
+      ]).forEach((query) => mediaHandlers.add(query, 'change', reActivate))
+
+      const cleanup = nodeHandler.getRectsAsync(
+        container,
+        slides,
+        ownerWindow,
+        () => {
+          engine = createEngine(options, container, slides, true)
+          ssrHandler = SsrHandler(
+            container,
+            engine.axis,
+            nodeHandler,
+            optionsBase,
+            mergeOptions,
+            createEngine
+          )
+          initializeEngine(ownerWindow)
+          pluginApis = pluginsHandler.init(self, pluginList)
+          eventHandler.createEvent('reinit', null).emit()
+        }
+      )
+      mediaHandlers.add(
+        <EventTarget><unknown>{ addEventListener: () => {}, removeEventListener: cleanup },
+        'change',
+        () => {}
+      )
+      return
+    }
+
     engine = createEngine(options, container, slides)
 
     ssrHandler = SsrHandler(
@@ -154,24 +189,6 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
-      if (options.asyncInit) {
-        const cleanup = nodeHandler.getRectsAsync(
-          container,
-          slides,
-          ownerWindow,
-          () => {
-            engine = createEngine(options, container, slides, true)
-            initializeEngine(ownerWindow)
-            pluginApis = pluginsHandler.init(self, pluginList)
-          }
-        )
-        mediaHandlers.add(
-          <EventTarget><unknown>{ addEventListener: () => {}, removeEventListener: cleanup },
-          'change',
-          () => {}
-        )
-        return
-      }
       initializeEngine(ownerWindow)
     }
 
