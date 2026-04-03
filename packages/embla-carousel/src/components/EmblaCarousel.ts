@@ -221,7 +221,7 @@ function EmblaCarousel(
     instant?: boolean,
     direction?: ScrollToDirectionType
   ): void {
-    if (destroyed) return
+    if (destroyed || !engine) return
     if (isSsr) return
     if (!options.active) return
 
@@ -240,10 +240,12 @@ function EmblaCarousel(
   }
 
   function canGoToNext(): boolean {
+    if (!engine) return false
     return snapIndex(1) !== selectedSnap()
   }
 
   function canGoToPrev(): boolean {
+    if (!engine) return false
     return snapIndex(-1) !== selectedSnap()
   }
 
@@ -252,14 +254,17 @@ function EmblaCarousel(
   }
 
   function scrollProgress(): number {
+    if (!engine) return 0
     return engine.scrollProgress.get(engine.offsetLocation)
   }
 
   function snapIndex(offset: number): number {
+    if (!engine) return 0
     return engine.indexCurrent.add(offset).get()
   }
 
   function snapList(): number[] {
+    if (!engine) return []
     return engine.scrollSnapList.progressBySnap
   }
 
@@ -268,10 +273,12 @@ function EmblaCarousel(
   }
 
   function previousSnap(): number {
+    if (!engine) return 0
     return engine.indexPrevious.get()
   }
 
   function slidesInView(): number[] {
+    if (!engine) return []
     return engine.slidesInView.get()
   }
 
