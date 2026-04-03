@@ -31,6 +31,12 @@ export type NodeHandlerType = {
     slides: HTMLElement[],
     fromCache?: boolean
   ) => NodeRectsType
+  getRectsAsync: (
+    container: HTMLElement,
+    slides: HTMLElement[],
+    ownerWindow: WindowType,
+    callback: (rects: NodeRectsType) => void
+  ) => () => void
 }
 
 export function NodeHandler(root: HTMLElement): NodeHandlerType {
@@ -118,12 +124,57 @@ export function NodeHandler(root: HTMLElement): NodeHandlerType {
     return root ? getBrowserNodes(options) : getSsrNodes(options)
   }
 
+  function getRectsAsync(
+    container: HTMLElement,
+    slides: HTMLElement[],
+    ownerWindow: WindowType,
+    callback: (rects: NodeRectsType) => void
+  ): () => void {
+    const allNodes = [container, ...slides]
+    const rectMap = new Map<HTMLElement, NodeRectType>()
+    let settled = false
+
+    const observer = new ownerWindow.ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const node = entry.target as HTMLElement
+        const { inlineSize: width, blockSize: height } =
+          entry.borderBoxSize[0]
+        rectMap.set(node, {
+          top: node.offsetTop,
+          left: node.offsetLeft,
+          right: node.offsetLeft + width,
+          bottom: node.offsetTop + height,
+          width,
+          height
+        })
+      }
+
+      if (rectMap.size === allNodes.length && !settled) {
+        settled = true
+        observer.disconnect()
+        rects = {
+          containerRect: rectMap.get(container)!,
+          slideRects: slides.map((s) => rectMap.get(s)!)
+        }
+        callback(rects)
+      }
+    })
+
+    allNodes.forEach((node) => observer.observe(node))
+
+    return () => {
+      settled = true
+      observer.disconnect()
+    }
+  }
+
   const self: NodeHandlerType = {
     ownerDocument,
     ownerWindow,
     getNodes,
     getRect,
-    getRects
+    getRects,
+    getRectsAsync
   }
   return self
 }
