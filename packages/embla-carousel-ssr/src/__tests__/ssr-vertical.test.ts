@@ -1,4 +1,5 @@
-import EmblaCarousel from '../components/EmblaCarousel'
+import EmblaCarousel from 'embla-carousel'
+import Ssr from '../components/Ssr'
 
 const CONTAINER_SELECTOR = '.embla__container'
 const SLIDE_SELECTOR = '.embla__slide'
@@ -7,21 +8,27 @@ const createSlideSizes = (count: number, size: number): number[] => {
   return Array.from(Array(count).keys()).map(() => size)
 }
 
-const removeWhitespace = (styles: string): string => {
+const removeWhitespace = (styles?: string): string => {
+  if (!styles) return ''
   return styles.replace(/\s/g, '')
 }
 
 describe('➡️  SSR - Vertical', () => {
   describe(`When the slide selector parameter:`, () => {
     test('Is omitted, it selectes all immediate children', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -37,15 +44,18 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('Is provided, it uses the provided selector', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const ssrStyles = removeWhitespace(
-        emblaApi.ssrStyles(CONTAINER_SELECTOR, SLIDE_SELECTOR)
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR, SLIDE_SELECTOR)
       )
 
       expect(ssrStyles).toBe(
@@ -64,15 +74,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When CONTAINSCROLL:TRIMSNAPS:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -93,15 +108,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -122,15 +142,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -151,15 +176,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 3', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -180,15 +210,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 4', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 4,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 4,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -209,15 +244,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 5', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 5,
-        containScroll: 'trimSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 5,
+          containScroll: 'trimSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -240,15 +280,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When CONTAINSCROLL:KEEPSNAPS:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -271,15 +316,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -302,15 +352,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -333,15 +388,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 3', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -364,15 +424,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 4', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 4,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 4,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -395,15 +460,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 5', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 5,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 5,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -426,15 +496,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 6', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 6,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 6,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -457,15 +532,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 7', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 7,
-        containScroll: 'keepSnaps',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 7,
+          containScroll: 'keepSnaps',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -490,15 +570,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When CONTAINSCROLL:FALSE:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        containScroll: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          containScroll: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -512,15 +597,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        containScroll: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          containScroll: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -534,15 +624,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        containScroll: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          containScroll: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -556,15 +651,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 3', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        containScroll: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          containScroll: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -580,15 +680,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When SLIDESTOSCROLL:AUTO:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        slidesToScroll: 'auto',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          slidesToScroll: 'auto',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -606,15 +711,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        slidesToScroll: 'auto',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          slidesToScroll: 'auto',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -632,15 +742,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        slidesToScroll: 'auto',
-        axis: 'y',
-        ssr: createSlideSizes(8, 30)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          slidesToScroll: 'auto',
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(8, 30) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -660,15 +775,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When LOOP:TRUE:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -686,15 +806,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -708,15 +833,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -730,15 +860,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 3', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        loop: true,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          loop: true,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -758,15 +893,20 @@ describe('➡️  SSR - Vertical', () => {
 
   describe('When LOOP:FALSE:', () => {
     test('SSR styles are correct at startSnap 0', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 0,
-        loop: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 0,
+          loop: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -780,15 +920,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 1', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 1,
-        loop: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 1,
+          loop: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -802,15 +947,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 2', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 2,
-        loop: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 2,
+          loop: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`
@@ -824,15 +974,20 @@ describe('➡️  SSR - Vertical', () => {
     })
 
     test('SSR styles are correct at startSnap 3', () => {
-      const emblaApi = EmblaCarousel(null, {
-        startSnap: 3,
-        loop: false,
-        axis: 'y',
-        ssr: createSlideSizes(4, 50)
-      })
+      const emblaApi = EmblaCarousel(
+        null,
+        {
+          startSnap: 3,
+          loop: false,
+          axis: 'y'
+        },
+        [Ssr({ slideSizes: createSlideSizes(4, 50) })]
+      )
 
       const { scrollSnapList } = emblaApi.internalEngine()
-      const ssrStyles = removeWhitespace(emblaApi.ssrStyles(CONTAINER_SELECTOR))
+      const ssrStyles = removeWhitespace(
+        emblaApi.plugins().ssr?.getStyles(CONTAINER_SELECTOR)
+      )
 
       expect(ssrStyles).toBe(
         removeWhitespace(`

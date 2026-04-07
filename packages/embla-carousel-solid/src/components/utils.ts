@@ -1,6 +1,5 @@
 import { Accessor } from 'solid-js'
-import { EmblaOptionsType } from 'embla-carousel/components/Options'
-import { EmblaPluginType } from 'embla-carousel/components/Plugins'
+import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel'
 
 export function optionsOrFallback(
   options?: Accessor<EmblaOptionsType | undefined> | undefined

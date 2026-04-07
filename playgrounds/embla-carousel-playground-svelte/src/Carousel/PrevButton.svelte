@@ -1,15 +1,16 @@
 <script lang="ts">
-  const { enabled, onClick } = $props<{
-    enabled: boolean
+  const { disabled, onClick } = $props<{
+    disabled: boolean
     onClick: () => void
   }>()
 </script>
 
 <button
-  class="embla__button embla__button--prev"
+  class="embla__button embla__button--prev {disabled
+    ? 'embla__button--disabled'
+    : ''}"
   type="button"
   onclick={onClick}
-  disabled={!enabled}
   aria-label="Go to slide"
 >
   <svg

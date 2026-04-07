@@ -4,7 +4,12 @@ export const metadata = {
   order: 90
 }
 
-import { TABS_LIBRARY } from '@/utils/tabs'
+import { TABS_LIBRARY, TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import ssrInstallation_cdn_01 from '@/content/v9/code-snippets/plugins/ssr/installation-cdn-01.html'
+import ssrInstallation_npm_01 from '@/content/v9/code-snippets/plugins/ssr/installation-npm-01.sh'
+import ssrInstallation_yarn_01 from '@/content/v9/code-snippets/plugins/ssr/installation-yarn-01.sh'
+import ssrInstallation_pnpm_01 from '@/content/v9/code-snippets/plugins/ssr/installation-pnpm-01.sh'
 
 import settingUpSsr_css_01 from '@/content/v9/code-snippets/guides/server-side-rendering/setting-up-ssr-css-01.less'
 import settingUpSsr_module_01 from '@/content/v9/code-snippets/guides/server-side-rendering/setting-up-ssr-vanilla-01.js'
@@ -50,11 +55,28 @@ You should enable SSR support if **any** of these are true:
 
 ## Setting Up SSR
 
-Start by ensuring your carousel's CSS uses **percentage-based slide widths**. Here's an example where each slide takes up **50% of the viewport width**:
+Start by installing the **SSR plugin** package:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={ssrInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={ssrInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={ssrInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={ssrInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+Next, ensure your carousel's CSS uses **percentage-based slide widths**. Here's an example where each slide takes up **50% of the viewport width**:
 
 <PrismHighlight language="css" code={settingUpSsr_css_01} highlight="11" />
 
-Next, enable **SSR support** by configuring the [`ssr`](/docs/api/options/#ssr) option and applying server-generated styles using the [`ssrStyles`](/docs/api/methods/#ssrstyles) method.
+Then, enable **SSR support** by adding the [`Ssr`](/docs/plugins/ssr) plugin and generating server-side styles using the [`getStyles`](/docs/plugins/ssr/#getstyles) method.
 
 You'll specify slide widths as **percentages (%)**, exactly matching your CSS:
 
@@ -63,15 +85,15 @@ You'll specify slide widths as **percentages (%)**, exactly matching your CSS:
     <PrismHighlight
       language="js"
       code={settingUpSsr_module_01}
-      highlight="7,11-13"
+      highlight="3,6-10,14"
     />
-    <PrismHighlight language="js" code={settingUpSsr_module_02} highlight="8" />
+    <PrismHighlight language="js" code={settingUpSsr_module_02} />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
     <PrismHighlight
       language="jsx"
       code={settingUpSsr_react_01}
-      highlight="8,15-17"
+      highlight="3,7-10,17"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
@@ -79,43 +101,44 @@ You'll specify slide widths as **percentages (%)**, exactly matching your CSS:
       language="html"
       asLanguage="vue"
       code={settingUpSsr_vue_01}
-      highlight="14,26"
+      highlight="4,14-17,22"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
     <PrismHighlight
       language="jsx"
       code={settingUpSsr_solid_01}
-      highlight="7,15-17"
+      highlight="3,6-9,17"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
     <PrismHighlight
       language="svelte"
       code={settingUpSsr_svelte_01}
-      highlight="9,28-30"
+      highlight="3,9,12,17"
     />
   </TabsItem>
 </Tabs>
 
 <Admonition type="warning">
   **Warning:** Your CSS widths (such as `flex: 0 0 50%`) must exactly match the
-  values in the `ssr` array. Any mismatch will result in incorrect snapping and
-  layout shifts during hydration.
+  values in the [`slideSizes`](/docs/plugins/ssr/#slidesizes) array. Any
+  mismatch will result in incorrect snapping and layout shifts during hydration.
 </Admonition>
 
 Since the server has **no access to runtime measurements**, you must explicitly define the slide sizes. This introduces a few key requirements:
 
 - Slides must use **percentage-based widths**.
 - Slide spacing must use the [padding method](/docs/guides/slide-gaps) (`margin` and `gap` are not supported during SSR).
-- CSS widths must **exactly match** the values in [`ssr`](/docs/api/options/#ssr).
+- CSS widths must **exactly match** the values in [`slideSizes`](/docs/plugins/ssr/#slidesizes).
 - Each carousel must have a **unique selector** to avoid SSR styles affecting others on the page.
 
 <Admonition type="note">
   **Note:** SSR also fully supports **vertical carousels**, as long as the CSS
   is configured so that slides stack vertically (e.g. `flex-direction: column`)
   and the percentage sizes apply to height instead of width. The same SSR rules
-  apply — the CSS values must match the values provided in the `ssr` array.
+  apply — the CSS values must match the values provided in the
+  [`slideSizes`](/docs/plugins/ssr/#slidesizes) array.
 </Admonition>
 
 ## Breakpoints
@@ -124,26 +147,22 @@ Embla also supports SSR configurations that change with **CSS breakpoints**. Sta
 
 <PrismHighlight language="css" code={breakpoints_css_01} highlight="15-19" />
 
-Then provide matching [`ssr`](/docs/api/options/#ssr) values for each breakpoint using the [`breakpoints`](/docs/api/options/#breakpoints) option. You can define unique slide sizes and settings for each breakpoint, and Embla will apply them correctly on the server.
+Then provide matching [`slideSizes`](/docs/plugins/ssr/#slidesizes) values for each breakpoint using the [`breakpoints`](/docs/plugins/ssr/#breakpoints) option. You can define unique slide sizes and settings for each breakpoint, and Embla will apply them correctly on the server.
 
 <Tabs groupId={TABS_LIBRARY.GROUP_ID}>
   <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
     <PrismHighlight
       language="js"
       code={breakpoints_module_01}
-      highlight="8-12"
+      highlight="9-16"
     />
-    <PrismHighlight
-      language="js"
-      code={breakpoints_module_02}
-      highlight="9-13"
-    />
+    <PrismHighlight language="js" code={breakpoints_module_02} />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
     <PrismHighlight
       language="jsx"
       code={breakpoints_react_01}
-      highlight="9-13"
+      highlight="9-16"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
@@ -151,21 +170,21 @@ Then provide matching [`ssr`](/docs/api/options/#ssr) values for each breakpoint
       language="html"
       asLanguage="vue"
       code={breakpoints_vue_01}
-      highlight="15-19"
+      highlight="16-23"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
     <PrismHighlight
       language="jsx"
       code={breakpoints_solid_01}
-      highlight="8-12"
+      highlight="8-15"
     />
   </TabsItem>
   <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
     <PrismHighlight
       language="svelte"
       code={breakpoints_svelte_01}
-      highlight="10-14"
+      highlight="9-16"
     />
   </TabsItem>
 </Tabs>

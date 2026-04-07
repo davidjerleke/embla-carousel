@@ -25,8 +25,7 @@
     loop: true,
     direction: 'ltr',
     startSnap: 3,
-    axis: 'x',
-    ssr: SLIDES.map(() => SLIDE_SIZE)
+    axis: 'x'
   }
 
   const injectBaseStyles = (): void => {
@@ -61,5 +60,10 @@
 
 <main class="playground">
   <h1 class="playground__h1">Playground - Svelte</h1>
-  <Carousel options={OPTIONS} slides={SLIDES} isSsr={SSR_ACTIVE} />
+  <Carousel
+    options={OPTIONS}
+    slides={SLIDES}
+    slideSize={SLIDE_SIZE}
+    isSsr={SSR_ACTIVE}
+  />
 </main>

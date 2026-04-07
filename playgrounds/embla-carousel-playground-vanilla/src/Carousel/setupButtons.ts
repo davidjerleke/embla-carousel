@@ -1,15 +1,17 @@
 import { EmblaCarouselType } from 'embla-carousel'
 
+const BUTTON_DISABLED_CLASS = 'embla__button--disabled'
+
 export const togglePrevNextBtnsState = (
   emblaApi: EmblaCarouselType,
   prevBtn: HTMLElement,
   nextBtn: HTMLElement
 ): void => {
-  if (emblaApi.canGoToPrev()) prevBtn.removeAttribute('disabled')
-  else prevBtn.setAttribute('disabled', 'disabled')
+  if (emblaApi.canGoToPrev()) prevBtn.classList.remove(BUTTON_DISABLED_CLASS)
+  else prevBtn.classList.add(BUTTON_DISABLED_CLASS)
 
-  if (emblaApi.canGoToNext()) nextBtn.removeAttribute('disabled')
-  else nextBtn.setAttribute('disabled', 'disabled')
+  if (emblaApi.canGoToNext()) nextBtn.classList.remove(BUTTON_DISABLED_CLASS)
+  else nextBtn.classList.add(BUTTON_DISABLED_CLASS)
 }
 
 export const addPrevNextBtnsClickHandlers = (

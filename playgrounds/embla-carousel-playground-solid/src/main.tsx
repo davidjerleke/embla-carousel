@@ -26,8 +26,7 @@ const OPTIONS: EmblaOptionsType = {
   loop: true,
   direction: 'ltr',
   startSnap: 3,
-  axis: 'x',
-  ssr: SLIDES.map(() => SLIDE_SIZE)
+  axis: 'x'
 }
 
 const injectBaseStyles = (): void => {
@@ -63,7 +62,12 @@ const App: Component = () => {
   return (
     <main class="playground">
       <h1 class="playground__h1">Playground - Solid</h1>
-      <Carousel options={OPTIONS} slides={SLIDES} isSsr={SSR_ACTIVE} />
+      <Carousel
+        options={OPTIONS}
+        slides={SLIDES}
+        isSsr={SSR_ACTIVE}
+        slideSize={SLIDE_SIZE}
+      />
     </main>
   )
 }

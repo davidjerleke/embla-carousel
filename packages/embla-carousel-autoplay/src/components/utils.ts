@@ -1,4 +1,4 @@
-import { EmblaCarouselType } from 'embla-carousel/components/EmblaCarousel'
+import { EmblaCarouselType } from 'embla-carousel'
 import { DelayOptionType, RootNodeType } from './Options'
 
 export function normalizeDelay(

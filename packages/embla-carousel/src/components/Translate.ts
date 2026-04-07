@@ -14,11 +14,7 @@ export type TranslateType = {
   clear: () => void
 }
 
-export function Translate(
-  axis: AxisType,
-  node: HTMLElement,
-  unit: 'px' | '%' = 'px'
-): TranslateType {
+export function Translate(axis: AxisType, node: HTMLElement): TranslateType {
   const getTranslate = axis.scroll === 'x' ? x : y
 
   let lastTranslate: string | null = null
@@ -32,11 +28,11 @@ export function Translate(
   }
 
   function x(input: number): string {
-    return `translate3d(${input}${unit},0px,0px)`
+    return `translate3d(${input}px,0px,0px)`
   }
 
   function y(input: number): string {
-    return `translate3d(0px,${input}${unit},0px)`
+    return `translate3d(0px,${input}px,0px)`
   }
 
   function setIsScrolling(active: boolean): void {
