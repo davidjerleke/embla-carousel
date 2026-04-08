@@ -349,6 +349,7 @@ export const BASE_STYLES = css`
   }
 
   .embla__slide {
+    transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-width: 0;
     padding-left: var(--slide-spacing);
@@ -378,6 +379,7 @@ export const BASE_STYLES_VERTICAL = css`
   }
 
   .embla__slide {
+    transform: translate3d(0, 0, 0);
     flex: 0 0 var(--slide-size);
     min-height: 0;
     padding-top: var(--slide-spacing);
