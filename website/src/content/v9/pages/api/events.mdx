@@ -502,21 +502,3 @@ Runs when the user is moving the pointer on the carousel. It's triggered by a `t
 Runs when the user has released the pointer from the carousel. It's triggered by a `touchend` or a `mouseup` event.
 
 ---
-
-### scrolloptimize
-
-<ApiMetaData
-  firstRow={['Detail', '{ slidesInView: number[], slidesLeftView: number[] }']}
-  secondRow={['Cancellable', 'yes']}
-/>
-<PrismHighlight
-  language="ts"
-  hideLabel
-  code={`emblaApi.on('scrolloptimize', (emblaApi, event) => {
-    const { slidesInView, slidesLeftView } = event.detail
-})`}
-/>
-
-Runs when the carousel applies or removes **GPU acceleration** to slides to **optimize scrolling performance**. This event is triggered with an in view offset to ensure smooth scrolling performance when slides are entering or leaving the viewport.
-
----

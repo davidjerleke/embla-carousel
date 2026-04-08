@@ -131,7 +131,6 @@ function EmblaCarousel(
 
     if (!isSsr && ownerWindow) {
       engine.translate.to(engine.location)
-      engine.scrollOptimizer.optimize(true)
       if (engine.options.loop) engine.slideLooper.loop()
 
       engine.animation.init(ownerWindow)
