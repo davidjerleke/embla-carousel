@@ -6784,7 +6784,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel-accessibility@9.0.0-rc01, embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility":
+"embla-carousel-accessibility@9.0.0-rc02, embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility":
   version: 0.0.0-use.local
   resolution: "embla-carousel-accessibility@workspace:packages/embla-carousel-accessibility"
   dependencies:
@@ -6796,11 +6796,11 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-auto-height@9.0.0-rc01, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
+"embla-carousel-auto-height@9.0.0-rc02, embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height":
   version: 0.0.0-use.local
   resolution: "embla-carousel-auto-height@workspace:packages/embla-carousel-auto-height"
   dependencies:
@@ -6812,11 +6812,11 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-auto-scroll@9.0.0-rc01, embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll":
+"embla-carousel-auto-scroll@9.0.0-rc02, embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll":
   version: 0.0.0-use.local
   resolution: "embla-carousel-auto-scroll@workspace:packages/embla-carousel-auto-scroll"
   dependencies:
@@ -6828,11 +6828,11 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-autoplay@9.0.0-rc01, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
+"embla-carousel-autoplay@9.0.0-rc02, embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay":
   version: 0.0.0-use.local
   resolution: "embla-carousel-autoplay@workspace:packages/embla-carousel-autoplay"
   dependencies:
@@ -6844,11 +6844,11 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-class-names@9.0.0-rc01, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
+"embla-carousel-class-names@9.0.0-rc02, embla-carousel-class-names@workspace:packages/embla-carousel-class-names":
   version: 0.0.0-use.local
   resolution: "embla-carousel-class-names@workspace:packages/embla-carousel-class-names"
   dependencies:
@@ -6860,11 +6860,11 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-fade@9.0.0-rc01, embla-carousel-fade@workspace:packages/embla-carousel-fade":
+"embla-carousel-fade@9.0.0-rc02, embla-carousel-fade@workspace:packages/embla-carousel-fade":
   version: 0.0.0-use.local
   resolution: "embla-carousel-fade@workspace:packages/embla-carousel-fade"
   dependencies:
@@ -6876,7 +6876,7 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
@@ -6922,7 +6922,7 @@ __metadata:
     "@types/react": ^18.3.18
     "@types/react-dom": ^18.3.5
     "@vitejs/plugin-react": ^4.3.4
-    embla-carousel-react: 9.0.0-rc01
+    embla-carousel-react: 9.0.0-rc02
     globals: ^15.14.0
     react: ^18.3.1
     react-dom: ^18.3.1
@@ -6936,7 +6936,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "embla-carousel-playground-solid@workspace:playgrounds/embla-carousel-playground-solid"
   dependencies:
-    embla-carousel-solid: 9.0.0-rc01
+    embla-carousel-solid: 9.0.0-rc02
     solid-js: 1.9.4
     typescript: ~5.6.2
     vite: 6.4.1
@@ -6950,7 +6950,7 @@ __metadata:
   dependencies:
     "@sveltejs/vite-plugin-svelte": ^5.0.3
     "@tsconfig/svelte": ^5.0.4
-    embla-carousel-svelte: 9.0.0-rc01
+    embla-carousel-svelte: 9.0.0-rc02
     svelte: ^5.53.5
     svelte-check: ^4.1.1
     typescript: ~5.6.2
@@ -6962,7 +6962,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "embla-carousel-playground-vanilla@workspace:playgrounds/embla-carousel-playground-vanilla"
   dependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
     typescript: ~5.6.2
     vite: 6.4.1
   languageName: unknown
@@ -6974,7 +6974,7 @@ __metadata:
   dependencies:
     "@vitejs/plugin-vue": ^5.2.1
     "@vue/tsconfig": ^0.7.0
-    embla-carousel-vue: 9.0.0-rc01
+    embla-carousel-vue: 9.0.0-rc02
     typescript: ~5.6.2
     vite: 6.4.1
     vue: ^3.5.13
@@ -6982,14 +6982,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-react@9.0.0-rc01, embla-carousel-react@workspace:packages/embla-carousel-react":
+"embla-carousel-react@9.0.0-rc02, embla-carousel-react@workspace:packages/embla-carousel-react":
   version: 0.0.0-use.local
   resolution: "embla-carousel-react@workspace:packages/embla-carousel-react"
   dependencies:
     "@types/jest": ^29.5.6
     "@types/react": ^18.0.8
-    embla-carousel: 9.0.0-rc01
-    embla-carousel-reactive-utils: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
+    embla-carousel-reactive-utils: 9.0.0-rc02
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7001,7 +7001,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-reactive-utils@9.0.0-rc01, embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils":
+"embla-carousel-reactive-utils@9.0.0-rc02, embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils":
   version: 0.0.0-use.local
   resolution: "embla-carousel-reactive-utils@workspace:packages/embla-carousel-reactive-utils"
   dependencies:
@@ -7013,17 +7013,17 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-solid@9.0.0-rc01, embla-carousel-solid@workspace:packages/embla-carousel-solid":
+"embla-carousel-solid@9.0.0-rc02, embla-carousel-solid@workspace:packages/embla-carousel-solid":
   version: 0.0.0-use.local
   resolution: "embla-carousel-solid@workspace:packages/embla-carousel-solid"
   dependencies:
     "@types/jest": ^29.5.6
-    embla-carousel: 9.0.0-rc01
-    embla-carousel-reactive-utils: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
+    embla-carousel-reactive-utils: 9.0.0-rc02
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7048,17 +7048,17 @@ __metadata:
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    embla-carousel: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
   languageName: unknown
   linkType: soft
 
-"embla-carousel-svelte@9.0.0-rc01, embla-carousel-svelte@workspace:packages/embla-carousel-svelte":
+"embla-carousel-svelte@9.0.0-rc02, embla-carousel-svelte@workspace:packages/embla-carousel-svelte":
   version: 0.0.0-use.local
   resolution: "embla-carousel-svelte@workspace:packages/embla-carousel-svelte"
   dependencies:
     "@types/jest": ^29.5.6
-    embla-carousel: 9.0.0-rc01
-    embla-carousel-reactive-utils: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
+    embla-carousel-reactive-utils: 9.0.0-rc02
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7071,13 +7071,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel-vue@9.0.0-rc01, embla-carousel-vue@workspace:packages/embla-carousel-vue":
+"embla-carousel-vue@9.0.0-rc02, embla-carousel-vue@workspace:packages/embla-carousel-vue":
   version: 0.0.0-use.local
   resolution: "embla-carousel-vue@workspace:packages/embla-carousel-vue"
   dependencies:
     "@types/jest": ^29.5.6
-    embla-carousel: 9.0.0-rc01
-    embla-carousel-reactive-utils: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
+    embla-carousel-reactive-utils: 9.0.0-rc02
     jest: ^29.5.0
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
@@ -7109,14 +7109,14 @@ __metadata:
     "@types/react": ^19
     "@types/react-dom": ^19
     codesandbox: ^2.2.3
-    embla-carousel: 9.0.0-rc01
-    embla-carousel-accessibility: 9.0.0-rc01
-    embla-carousel-auto-height: 9.0.0-rc01
-    embla-carousel-auto-scroll: 9.0.0-rc01
-    embla-carousel-autoplay: 9.0.0-rc01
-    embla-carousel-class-names: 9.0.0-rc01
-    embla-carousel-fade: 9.0.0-rc01
-    embla-carousel-react: 9.0.0-rc01
+    embla-carousel: 9.0.0-rc02
+    embla-carousel-accessibility: 9.0.0-rc02
+    embla-carousel-auto-height: 9.0.0-rc02
+    embla-carousel-auto-scroll: 9.0.0-rc02
+    embla-carousel-autoplay: 9.0.0-rc02
+    embla-carousel-class-names: 9.0.0-rc02
+    embla-carousel-fade: 9.0.0-rc02
+    embla-carousel-react: 9.0.0-rc02
     eslint: ^9
     eslint-config-next: 16.1.6
     focus-trap-react: 12.0.0
@@ -7145,7 +7145,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"embla-carousel@9.0.0-rc01, embla-carousel@workspace:packages/embla-carousel":
+"embla-carousel@9.0.0-rc02, embla-carousel@workspace:packages/embla-carousel":
   version: 0.0.0-use.local
   resolution: "embla-carousel@workspace:packages/embla-carousel"
   dependencies:

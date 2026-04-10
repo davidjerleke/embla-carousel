@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-fade",
-  "version": "9.0.0-rc01",
+  "version": "9.0.0-rc02",
   "author": "David Jerleke",
   "description": "A fade plugin for Embla Carousel",
   "repository": {
@@ -54,7 +54,7 @@
     "typescript": "^5.2.2"
   },
   "peerDependencies": {
-    "embla-carousel": "9.0.0-rc01"
+    "embla-carousel": "9.0.0-rc02"
   },
   "exports": {
     "./package.json": "./package.json",
