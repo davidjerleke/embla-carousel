@@ -13,22 +13,32 @@ export const BREAKPOINTS = {
 export const BREAKPOINT_COMPACT = BREAKPOINTS.MD
 
 export const MEDIA = {
-  COMPACT: mediaQuery(BREAKPOINT_COMPACT, 'max'),
-  DESKTOP: mediaQuery(BREAKPOINT_COMPACT, 'min'),
-  MIN_XXS: mediaQuery(BREAKPOINTS.XXS, 'min'),
-  MIN_XS: mediaQuery(BREAKPOINTS.XS, 'min'),
-  MIN_SM: mediaQuery(BREAKPOINTS.SM, 'min'),
-  MIN_MD: mediaQuery(BREAKPOINTS.MD, 'min'),
-  MIN_LG: mediaQuery(BREAKPOINTS.LG, 'min'),
-  MAX_XXS: mediaQuery(BREAKPOINTS.XXS, 'max'),
-  MAX_XS: mediaQuery(BREAKPOINTS.XS, 'max'),
-  MAX_SM: mediaQuery(BREAKPOINTS.SM, 'max'),
-  MAX_MD: mediaQuery(BREAKPOINTS.MD, 'max'),
-  MAX_LG: mediaQuery(BREAKPOINTS.LG, 'max')
+  NO_HOVER: '@media (hover: none), (hover: on-demand)',
+  HOVER: '@media (hover: hover)',
+
+  COMPACT: getMediaQuery(BREAKPOINT_COMPACT, 'max'),
+  DESKTOP: getMediaQuery(BREAKPOINT_COMPACT, 'min'),
+
+  MIN_XXS: getMediaQuery(BREAKPOINTS.XXS, 'min'),
+  MIN_XS: getMediaQuery(BREAKPOINTS.XS, 'min'),
+  MIN_SM: getMediaQuery(BREAKPOINTS.SM, 'min'),
+  MIN_MD: getMediaQuery(BREAKPOINTS.MD, 'min'),
+  MIN_LG: getMediaQuery(BREAKPOINTS.LG, 'min'),
+
+  MAX_XXS: getMediaQuery(BREAKPOINTS.XXS, 'max'),
+  MAX_XS: getMediaQuery(BREAKPOINTS.XS, 'max'),
+  MAX_SM: getMediaQuery(BREAKPOINTS.SM, 'max'),
+  MAX_MD: getMediaQuery(BREAKPOINTS.MD, 'max'),
+  MAX_LG: getMediaQuery(BREAKPOINTS.LG, 'max'),
+
+  WHEN: (query: string): string => {
+    const string = query.replace(/@media\s/g, '')
+    return `@media ${string}`
+  }
 }
 
 /* UTILS */
-function mediaQuery(
+function getMediaQuery(
   value: number,
   minOrMax: 'min' | 'max' = 'min',
   widthOrHeight: 'width' | 'height' = 'width'

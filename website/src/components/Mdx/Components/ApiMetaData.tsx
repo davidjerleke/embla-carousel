@@ -3,9 +3,10 @@ import { COLORS } from '@/utils/theme'
 import { FONT_SIZES } from '@/utils/font-sizes'
 import { CODE_HIGHLIGHT_CLASS_NAME } from '@/components/Mdx/Components/Code'
 import { SPACINGS } from '@/utils/spacings'
-import { createScrollBarStyles, SCROLLBAR_SIZE } from '@/utils/scrollbars'
+import { createScrollBarStyles } from '@/utils/scrollbars'
 import { MEDIA } from '@/utils/breakpoints'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
+import { TRUNCATE_STYLES } from '@/utils/truncate-styles'
 
 export const ApiMetaDataWrapper = styled.div``
 
@@ -16,7 +17,9 @@ const Row = styled.div`
   column-gap: ${SPACINGS.ONE};
 
   ${MEDIA.COMPACT} {
-    margin-right: -${PAGE_FRAME_SPACING};
+    ${MEDIA.NO_HOVER} {
+      margin-right: -${PAGE_FRAME_SPACING};
+    }
   }
 `
 
@@ -27,15 +30,19 @@ const Key = styled.span`
 const Scrollable = styled.span`
   display: flex;
   flex: 0 1 auto;
-  overflow-x: scroll;
-  ${createScrollBarStyles('x')};
   column-gap: ${SPACINGS.ONE};
-  margin-bottom: -${SCROLLBAR_SIZE};
   padding: 0;
 
-  @media (hover: none), (hover: on-demand) {
-    visibility: visible;
-    margin-bottom: 0;
+  ${MEDIA.COMPACT} {
+    ${MEDIA.NO_HOVER} {
+      overflow-x: scroll;
+      margin-bottom: 0;
+      ${createScrollBarStyles('x')};
+    }
+  }
+
+  ${MEDIA.WHEN(`${MEDIA.HOVER}, ${MEDIA.DESKTOP}`)} {
+    overflow: hidden;
   }
 `
 
@@ -43,6 +50,11 @@ const ColoredCode = styled.code<{ $color: string }>`
   color: ${({ $color }) => $color};
   font-size: 1.3rem !important;
   flex: 0 0 auto;
+
+  ${MEDIA.WHEN(`${MEDIA.HOVER}, ${MEDIA.DESKTOP}`)} {
+    ${TRUNCATE_STYLES};
+    flex: 0 1 auto;
+  }
 `
 
 type PropType = {
@@ -50,7 +62,7 @@ type PropType = {
   secondRow: [string, string]
 }
 
-export const ApiMetaData = (props: PropType) => {
+export function ApiMetaData(props: PropType) {
   const { firstRow, secondRow } = props
   const [firstKey, firstValue] = firstRow
   const [secondKey, secondValue] = secondRow

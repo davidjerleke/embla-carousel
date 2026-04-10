@@ -3,6 +3,7 @@ import { BORDER_RADIUSES } from '@/utils/border'
 import { COLORS } from '@/utils/theme'
 import { SPACINGS } from '@/utils/spacings'
 import { KeyNavigatingPropType } from '@/utils/key-events'
+import { MEDIA } from '@/utils/breakpoints'
 
 /* CONSTS */
 export const SCROLLBAR_SIZE = SPACINGS.ONE
@@ -28,26 +29,32 @@ export function createScrollBarStyles(axis: ScrollBarAxisType): RuleSet {
 
   return css`
     ::-webkit-scrollbar-thumb {
-      background-color: transparent;
+      background-color: ${COLORS.BACKGROUND_SITE};
       border-radius: ${BORDER_RADIUSES.BOX};
     }
     ::-webkit-scrollbar-track {
-      background-color: transparent;
+      background-color: ${COLORS.BACKGROUND_SITE};
     }
     ::-webkit-scrollbar {
       ${sizeProperty}: ${SCROLLBAR_SIZE};
     }
 
+    scrollbar-color: ${COLORS.BACKGROUND_SITE} ${COLORS.BACKGROUND_SITE};
+    scrollbar-width: thin;
+
     &:hover {
       ::-webkit-scrollbar-thumb {
         background-color: ${COLORS.DETAIL_MEDIUM_CONTRAST};
       }
+
+      scrollbar-color: ${COLORS.DETAIL_MEDIUM_CONTRAST}
+        ${COLORS.BACKGROUND_SITE};
     }
 
-    @media (hover: none), (hover: on-demand) {
+    ${MEDIA.NO_HOVER} {
       &:hover {
         ::-webkit-scrollbar-thumb {
-          background-color: transparent;
+          background-color: ${COLORS.BACKGROUND_SITE};
         }
       }
 

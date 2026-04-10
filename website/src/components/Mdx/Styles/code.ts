@@ -10,6 +10,7 @@ import { PRISM_FRAME_RADIUS } from '@/components/Prism/PrismSyntaxFrame'
 import { AdmonitionWrapper } from '@/components/Mdx/Components/Admonition'
 import { SCROLLBAR_SIZE, createScrollBarStyles } from '@/utils/scrollbars'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
+import { MEDIA } from '@/utils/breakpoints'
 import {
   PRISM_HIGHLIGHT_CLASS_NAME,
   PRISM_HIGHLIGHT_CODE_LANGUAGE_CLASS_NAME,
@@ -141,7 +142,7 @@ export const codeStyles = css`
     padding-top: ${PAGE_FRAME_SPACING};
     padding-bottom: calc(${PAGE_FRAME_SPACING} - ${SCROLLBAR_SIZE});
 
-    @media (hover: none), (hover: on-demand) {
+    ${MEDIA.NO_HOVER} {
       padding-bottom: ${PAGE_FRAME_SPACING};
     }
   }
@@ -162,7 +163,7 @@ export const codeStyles = css`
     white-space: pre;
     overflow-x: scroll;
 
-    @media (hover: none), (hover: on-demand) {
+    ${MEDIA.NO_HOVER} {
       overflow-x: auto;
     }
   }

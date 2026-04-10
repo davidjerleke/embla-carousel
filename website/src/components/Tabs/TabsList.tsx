@@ -8,6 +8,7 @@ import { COLORS } from '@/utils/theme'
 import { LAYERS } from '@/utils/layers'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { KeyNavigatingPropType } from '@/utils/key-events'
+import { MEDIA } from '@/utils/breakpoints'
 import {
   SCROLLBAR_SIZE,
   createScrollBarShadowStyles,
@@ -30,7 +31,7 @@ export const TabsListWrapper = styled.div`
     bottom: calc(${SCROLLBAR_SIZE} - ${BORDER_SIZES.DETAIL});
     z-index: ${LAYERS.STEP};
 
-    @media (hover: none), (hover: on-demand) {
+    ${MEDIA.NO_HOVER} {
       bottom: ${SCROLLBAR_SIZE};
     }
   }
@@ -43,7 +44,7 @@ export const TabsListScrollArea = styled.div<KeyNavigatingPropType>`
   width: 100%;
   overflow-x: scroll;
 
-  @media (hover: none), (hover: on-demand) {
+  ${MEDIA.NO_HOVER} {
     overflow-x: auto;
     padding-bottom: ${SCROLLBAR_SIZE};
   }

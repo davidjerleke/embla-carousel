@@ -98,7 +98,7 @@ const CopyCodeButton = styled(ButtonBare)`
     }
   }
 
-  @media (hover: none), (hover: on-demand) {
+  ${MEDIA.NO_HOVER} {
     &:hover {
       color: ${COLORS.TEXT_LOW_CONTRAST};
       &:before {

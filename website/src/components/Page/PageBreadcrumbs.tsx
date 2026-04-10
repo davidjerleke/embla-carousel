@@ -14,6 +14,8 @@ import { KeyNavigatingPropType } from '@/utils/key-events'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
 import { useAppSelector } from '@/hooks/redux'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
+import { MEDIA } from '@/utils/breakpoints'
+import { TRUNCATE_STYLES } from '@/utils/truncate-styles'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
@@ -21,49 +23,58 @@ import {
 } from '@/utils/scrollbars'
 
 const PageBreadcrumbsWrapper = styled.nav<KeyNavigatingPropType>`
-  width: calc(100% + ${PAGE_FRAME_SPACING} * 2);
-  margin-left: -${PAGE_FRAME_SPACING};
-  margin-right: -${PAGE_FRAME_SPACING};
   font-size: ${FONT_SIZES.COMPLEMENTARY};
   margin-bottom: ${SPACINGS.THREE};
   position: relative;
   overflow: hidden;
 
-  &:before,
-  &:after {
-    position: absolute;
-    z-index: ${LAYERS.STEP};
-    top: -${PAGE_FRAME_SPACING};
-    bottom: -${PAGE_FRAME_SPACING};
-    content: '';
-  }
+  ${MEDIA.NO_HOVER} {
+    ${MEDIA.COMPACT} {
+      width: calc(100% + ${PAGE_FRAME_SPACING} * 2);
+      margin-left: -${PAGE_FRAME_SPACING};
+      margin-right: -${PAGE_FRAME_SPACING};
 
-  &:before {
-    ${createScrollBarShadowStyles('left')};
-    left: -${SCROLL_BAR_SHADOW_SIZE};
-  }
+      &:before,
+      &:after {
+        position: absolute;
+        z-index: ${LAYERS.STEP};
+        top: -${PAGE_FRAME_SPACING};
+        bottom: -${PAGE_FRAME_SPACING};
+        content: '';
+      }
 
-  &:after {
-    ${createScrollBarShadowStyles('right')};
-    right: -${SCROLL_BAR_SHADOW_SIZE};
+      &:before {
+        ${createScrollBarShadowStyles('left')};
+        left: -${SCROLL_BAR_SHADOW_SIZE};
+      }
+
+      &:after {
+        ${createScrollBarShadowStyles('right')};
+        right: -${SCROLL_BAR_SHADOW_SIZE};
+      }
+    }
   }
 `
 
 const ScrollArea = styled.div`
-  ${createScrollBarStyles('x')};
-  overflow-x: scroll;
   display: flex;
   align-items: center;
 
-  padding-left: ${PAGE_FRAME_SPACING};
-  padding-right: ${PAGE_FRAME_SPACING};
+  ${MEDIA.NO_HOVER} {
+    ${MEDIA.COMPACT} {
+      ${createScrollBarStyles('x')};
+      padding-left: ${PAGE_FRAME_SPACING};
+      padding-right: ${PAGE_FRAME_SPACING};
+      overflow-x: scroll;
+    }
+  }
 `
 
 const itemStyles = css`
-  flex: 0 0 auto;
   min-width: 0;
   color: ${COLORS.TEXT_LOW_CONTRAST};
   padding: ${SPACINGS.ONE} 0;
+  flex: 0 0 auto;
 `
 
 const Link = styled(LinkBare)`
@@ -73,6 +84,11 @@ const Link = styled(LinkBare)`
 const ActiveTitle = styled.span`
   ${itemStyles};
   color: ${COLORS.TEXT_BODY};
+
+  ${MEDIA.WHEN(`${MEDIA.HOVER}, ${MEDIA.DESKTOP}`)} {
+    ${TRUNCATE_STYLES};
+    flex: 0 1 auto;
+  }
 `
 
 const Separator = styled(Icon)`

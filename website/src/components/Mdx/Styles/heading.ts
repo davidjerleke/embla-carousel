@@ -93,7 +93,7 @@ export const headingStyles = css`
         color: ${COLORS.TEXT_LOW_CONTRAST};
         visibility: hidden;
 
-        @media (hover: none), (hover: on-demand) {
+        ${MEDIA.NO_HOVER} {
           visibility: visible;
         }
       }
