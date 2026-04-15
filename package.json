@@ -58,7 +58,7 @@
     "start:svelte": "npm-run-all --parallel watch:package-vanilla watch:package-svelte watch:playground-svelte",
     "build": "npm-run-all build:packages format",
     "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte,embla-carousel-website}\" run build",
-    "build:package-readmes": "npx ts-node --project scripts/tsconfig.node.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
+    "build:package-readmes": "npx ts-node --project scripts/tsconfig.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
     "build:docs": "yarn workspace embla-carousel-website run predeploy",
     "version:patch": "yarn workspaces foreach version patch && yarn version:push",
     "version:minor": "yarn workspaces foreach version minor && yarn version:push",
@@ -83,6 +83,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
     "rollup": "^4.59.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "typescript-eslint": "^8.0.0"
   },

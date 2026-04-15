@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { kebabCaseToPascalCase } from '../utils/kebabCaseToPascalCase'
-import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { kebabCaseToPascalCase } from '../utils/kebab-case-to-pascal-case'
+import { CONSOLE_FONT_COLORS } from '../utils/console-font-colors'
 
 const PACKAGE_NAME_PASCAL_REGEX = /__REPLACE_PACKAGE_PASCAL_NAME__/g
 const PACKAGE_NAME_REGEX = /__REPLACE_PACKAGE_NAME__/g

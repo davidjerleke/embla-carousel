@@ -1,4 +1,4 @@
-import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { CONSOLE_FONT_COLORS } from '../utils/console-font-colors'
 
 type SponsorMarkupByGroupType = {
   pastSponsorsMarkup: string

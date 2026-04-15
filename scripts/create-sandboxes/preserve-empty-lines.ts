@@ -1,4 +1,4 @@
-import { escapeRegExp } from '../utils/escapeRegExp'
+import { escapeRegExp } from '../utils/escape-reg-exp'
 
 const EMPTY_LINE_REGEX = /^\s*\n/gm
 const PRESERVE_EMPTY_LINE_COMMENT = `/* The TypeScript compiler won't clear this empty line! */`

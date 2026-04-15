@@ -18,7 +18,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "predeploy:sandboxfiles-build": "npx ts-node --project ../scripts/tsconfig.node.json ../scripts/create-sandboxes/index.ts",
+    "predeploy:sandboxfiles-build": "npx ts-node --project ../scripts/tsconfig.json ../scripts/create-sandboxes/index.ts",
     "predeploy:format": "yarn workspace embla-carousel-monorepo run format",
     "predeploy:clean": "shx rm -rf ../docs",
     "predeploy": "npm-run-all predeploy:clean predeploy:sandboxfiles-build predeploy:format build"

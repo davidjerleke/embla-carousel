@@ -3,10 +3,13 @@ import path from 'path'
 import { config } from 'dotenv'
 import packageJson from '../../package.json'
 import { createReadme } from './create-readme'
-import { parseNodeParameters } from '../utils/parseNodeParameters'
-import { escapeRegExp } from '../utils/escapeRegExp'
-import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
-import { WORKSPACE_FILTERS, forEachWorkspace } from '../utils/forEachWorkspace'
+import { parseNodeParameters } from '../utils/parse-node-parameters'
+import { escapeRegExp } from '../utils/escape-reg-exp'
+import { CONSOLE_FONT_COLORS } from '../utils/console-font-colors'
+import {
+  WORKSPACE_FILTERS,
+  forEachWorkspace
+} from '../utils/for-each-workspace'
 import { createContributors } from './create-contributors'
 import { createSponsors } from './create-sponsors'
 
