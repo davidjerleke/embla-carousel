@@ -14,11 +14,11 @@ import { HEADER_HEIGHT } from '@/utils/header'
 
 const TableOfContentsMenuWrapper = styled.div`
   ${createScrollBarStyles('y')};
-  max-height: calc(100dvh - ${HEADER_HEIGHT});
-  overflow: auto;
   position: relative;
 
   ${MEDIA.DESKTOP} {
+    overflow: auto;
+    max-height: calc(100dvh - ${HEADER_HEIGHT});
     padding-top: ${PAGE_FRAME_SPACING};
     padding-bottom: ${PAGE_FRAME_SPACING};
   }
