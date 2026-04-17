@@ -1,10 +1,10 @@
 (globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,617199,e=>{"use strict";var t=e.i(843476),i=e.i(271645);let o=(0,i.createContext)([]);function a(e){let{tableOfContents:i,children:a}=e;return(0,t.jsx)(o.Provider,{value:i,children:a})}function n(){return(0,i.useContext)(o)}e.s(["TableOfContentsProvider",()=>a,"useTableOfContentsContext",()=>n])},145360,e=>{"use strict";var t=e.i(843476),i=e.i(997053),o=e.i(109950),a=e.i(850056),n=e.i(271645),r=e.i(350437),l=e.i(801770),d=e.i(506390),s=e.i(671249),c=e.i(925866),S=e.i(764268),E=e.i(654938),p=e.i(728191),A=e.i(617199),g=e.i(202623),T=e.i(784613);let f=i.default.div.withConfig({displayName:"TableOfContentsMenu__TableOfContentsMenuWrapper",componentId:"sc-eca85ec3-0"})`
   ${(0,E.createScrollBarStyles)("y")};
-  max-height: calc(100dvh - ${T.HEADER_HEIGHT});
-  overflow: auto;
   position: relative;
 
   ${d.MEDIA.DESKTOP} {
+    overflow: auto;
+    max-height: calc(100dvh - ${T.HEADER_HEIGHT});
     padding-top: ${p.PAGE_FRAME_SPACING};
     padding-bottom: ${p.PAGE_FRAME_SPACING};
   }
