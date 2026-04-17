@@ -10,6 +10,7 @@ import { BORDER_SIZES } from '@/utils/border'
 import { HeaderActions } from '@/components/Header/HeaderActions'
 import { HeaderLogo } from '@/components/Header/HeaderLogo'
 import { SidebarNavigationToggle } from '@/components/SidebarNavigation/SidebarNavigationToggle'
+import { HeaderGradient } from '@/components/Header/HeaderGradient'
 
 const HEIGHT = css`
   height: ${HEADER_HEIGHT};
@@ -17,15 +18,11 @@ const HEIGHT = css`
 
 const HeaderWrapper = styled.header`
   ${HEIGHT};
-`
-
-const Fixed = styled.div`
-  ${HEIGHT};
   z-index: ${LAYERS.HEADER};
-  background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.8);
+  background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.85);
   border-bottom: ${BORDER_SIZES.DETAIL} solid ${COLORS.DETAIL_LOW_CONTRAST};
   backdrop-filter: saturate(180%) blur(5px);
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -51,13 +48,13 @@ const NavigationToggle = styled(SidebarNavigationToggle)`
 export function Header() {
   return (
     <HeaderWrapper id={HEADER_ID}>
-      <Fixed>
-        <Content>
-          <NavigationToggle />
-          <HeaderLogo />
-          <HeaderActions />
-        </Content>
-      </Fixed>
+      <Content>
+        <NavigationToggle />
+        <HeaderLogo />
+        <HeaderActions />
+      </Content>
+
+      <HeaderGradient />
     </HeaderWrapper>
   )
 }

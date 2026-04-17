@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { BRAND_GRADIENT_BACKGROUND_STYLES } from '@/utils/gradients'
 import { LAYERS } from '@/utils/layers'
-import { MEDIA } from '@/utils/breakpoints'
 import { useCallback } from 'react'
 import { useEventListener } from '@/hooks/use-event-listener'
 import { ROUTES_LOADING_BAR_HEIGHT } from '@/utils/routes'
@@ -32,10 +31,6 @@ const RoutesLoadingWrapper = styled.div`
   position: fixed;
   pointer-events: none;
   overflow: hidden;
-
-  ${MEDIA.DESKTOP} {
-    top: 0;
-  }
 `
 
 const ProgressBar = styled.div<{ $loading: boolean; $animating: boolean }>`
