@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { SPACINGS } from '@/utils/spacings'
 import { COLORS } from '@/utils/theme'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
-import { IconWithText } from '@/components/Icon/IconWithText'
+import { IconWithText, IconWithTextText } from '@/components/Icon/IconWithText'
 import { LinkBare, PropType } from '@/components/Link/LinkBare'
 import { BRAND_GRADIENT_TEXT_STYLES } from '@/utils/gradients'
 import { CARD_STYLES } from '@/utils/card'
@@ -17,7 +17,7 @@ const LinkCardWrapper = styled(LinkBare)`
 `
 
 const ReadMoreText = styled.div`
-  span {
+  ${IconWithTextText} {
     ${BRAND_GRADIENT_TEXT_STYLES};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
     font-weight: ${FONT_WEIGHTS.MEDIUM};

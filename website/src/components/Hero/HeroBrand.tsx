@@ -22,6 +22,7 @@ const HeroBrandWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: ${SPACINGS.FOUR};
 
   ${MEDIA.MIN_SM} {
     padding-top: ${SPACINGS.SIX};
