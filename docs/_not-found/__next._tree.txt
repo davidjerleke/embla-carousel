@@ -3,4 +3,4 @@
 :HL["/_next/static/media/embla-logo-dark-theme.0852edfa.svg","image",{"type":"image/svg+xml"}]
 :HL["/_next/static/media/embla-logo-light-theme-blur.8763fbde.svg","image",{"type":"image/svg+xml"}]
 :HL["/_next/static/media/embla-logo-dark-theme-blur.de427c93.svg","image",{"type":"image/svg+xml"}]
-0:{"buildId":"MQQst3-Q0wHXcyn6IdSZ5","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"/_not-found","paramType":null,"paramKey":"/_not-found","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"d9_6Ae1VE1Bvwms5jWNFa","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"/_not-found","paramType":null,"paramKey":"/_not-found","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
