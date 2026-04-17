@@ -25,7 +25,8 @@ const LoadSpinnerSuspenseWrapper = styled.div<{
 }>`
   background-color: rgba(${COLORS.BACKGROUND_SITE_RGB_VALUE}, 0.9);
   border-radius: ${BORDER_RADIUSES.CIRCLE};
-  z-index: ${LAYERS.MODAL_LOADING};
+  z-index: ${({ $isPortal }) =>
+    $isPortal ? LAYERS.MODAL_LOADING : LAYERS.STEP};
   ${createSquareSizeStyles(WRAPPER_SIZE)};
   top: calc(${HEADER_HEIGHT} + ${PAGE_FRAME_SPACING});
   position: ${({ $isPortal }) => ($isPortal ? 'fixed' : 'absolute')};

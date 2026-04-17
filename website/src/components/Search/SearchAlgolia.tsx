@@ -47,7 +47,7 @@ const INPUT_BORDER_SIZE = '0.2rem'
 const SVG_STROKE_WIDTH = '0.14rem'
 const INPUT_HEIGHT = SPACINGS.NINE
 const BUTTON_WIDTH = SPACINGS.EIGHT
-const DESKTOP_END_SPACING = SPACINGS.TEN
+const DESKTOP_END_SPACING = SPACINGS.TWELVE
 const EDGE_SPACING = SPACINGS.TWO
 
 const modalStyles = css`
@@ -86,13 +86,13 @@ const modalStyles = css`
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100dvh;
 
     ${MEDIA.DESKTOP} {
       border-radius: ${BORDER_RADIUSES.SOFT};
       max-width: ${MODAL_MAX_WIDTH};
       margin: ${DESKTOP_END_SPACING} auto;
-      height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
+      height: calc(100dvh - ${DESKTOP_END_SPACING} * 2);
     }
   }
 `

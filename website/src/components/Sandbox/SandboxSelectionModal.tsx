@@ -14,7 +14,7 @@ import { PAGE_FRAME_SPACING } from '@/utils/page'
 
 export const SELECT_CODESANDBOX_DIALOG_ID = 'select-codesandbox-dialog'
 const MODAL_MAX_WIDTH = '36rem'
-const DESKTOP_END_SPACING = SPACINGS.TEN
+const DESKTOP_END_SPACING = SPACINGS.TWELVE
 const BUTTON_SIZE = '4rem'
 const ICON_SIZE = '1.8rem'
 
@@ -31,13 +31,13 @@ const SandboxSelectionModalWrapper = styled.div`
   display: flex;
   margin: 0 auto;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   max-width: ${MODAL_MAX_WIDTH};
 
   ${MEDIA.DESKTOP} {
     box-shadow: 0 0 0 0.1rem ${COLORS.DETAIL_LOW_CONTRAST};
     top: ${DESKTOP_END_SPACING};
-    max-height: calc(100vh - ${DESKTOP_END_SPACING} * 2);
+    max-height: calc(100dvh - ${DESKTOP_END_SPACING} * 2);
     height: auto;
     border-radius: ${BORDER_RADIUSES.SOFT};
   }

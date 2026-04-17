@@ -7,7 +7,6 @@ import { selectRoutesLoading } from '@/components/Routes/routes-reducer'
 import { PageFrame } from '@/components/Page/PageFrame'
 import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
-import { LAYERS } from '@/utils/layers'
 import { PAGE_FRAME_SPACING, PAGE_LAYOUTS, PageLayoutType } from '@/utils/page'
 import { useSidebarNavigationContext } from '@/components/SidebarNavigation/SidebarNavigationContext'
 import { SidebarNavigation } from '@/components/SidebarNavigation/SidebarNavigation'
@@ -43,8 +42,6 @@ const Main = styled.main<{ $isStartPage: boolean }>`
   flex: 1;
   min-width: 0;
   max-width: 100%;
-  position: relative;
-  z-index: ${LAYERS.STEP};
   padding-top: ${PAGE_FRAME_SPACING};
 
   ${({ $isStartPage }) =>

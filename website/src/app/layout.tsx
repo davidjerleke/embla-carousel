@@ -49,8 +49,8 @@ export default async function RootLayout(props: PropType) {
                 <ThemeInit />
                 <KeyEventsInit />
                 <ScrollToHashInit />
-                <KeyEventsSkipToContent />
                 <NoScript />
+                <KeyEventsSkipToContent />
                 <Header />
 
                 {children}
