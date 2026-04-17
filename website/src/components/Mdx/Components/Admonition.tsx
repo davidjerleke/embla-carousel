@@ -44,13 +44,12 @@ export const AdmonitionWrapper = styled.div<{
   $color: string
 }>`
   display: flex;
-  padding: ${SPACINGS.TWO};
-  border-top-right-radius: ${BORDER_RADIUSES.BOX};
-  border-bottom-right-radius: ${BORDER_RADIUSES.BOX};
+  padding: ${SPACINGS.THREE};
+  border-radius: ${BORDER_RADIUSES.CARD};
   position: relative;
 
   ${({ $admonition, $opacity }) => css`
-    border-left: ${BORDER_SIZES.ACCENT_VERTICAL} solid ${$admonition.color};
+    border: ${BORDER_SIZES.DETAIL} solid ${$admonition.color};
     background-color: rgba(${$admonition.colorRgbValue}, ${$opacity});
   `};
 
@@ -60,7 +59,6 @@ export const AdmonitionWrapper = styled.div<{
 `
 
 export const AdmonitionContent = styled.div`
-  padding-left: ${SPACINGS.TWO};
   flex: 1;
   min-width: 0;
 `
@@ -73,7 +71,7 @@ export function Admonition(props: PropType) {
   const { children, type = 'note' } = props
   const admonition = admonitions[type]
   const theme = useAppSelector(selectTheme)
-  const opacity = theme === THEME_KEYS.LIGHT ? 0.07 : 0.1
+  const opacity = theme === THEME_KEYS.LIGHT ? 0.05 : 0.07
 
   return (
     <AdmonitionWrapper
@@ -81,13 +79,15 @@ export function Admonition(props: PropType) {
       $opacity={opacity}
       $color={admonition.color}
     >
-      <IconWithText
-        iconSvg={admonition.icon}
-        iconSize={SPACINGS.THREE}
-        spacing={SPACINGS.TWO}
-      >
-        {children}
-      </IconWithText>
+      <AdmonitionContent>
+        <IconWithText
+          iconSvg={admonition.icon}
+          iconSize={SPACINGS.THREE}
+          spacing={SPACINGS.TWO}
+        >
+          {children}
+        </IconWithText>
+      </AdmonitionContent>
     </AdmonitionWrapper>
   )
 }

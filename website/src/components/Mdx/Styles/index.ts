@@ -7,13 +7,14 @@ import { PRISM_HIGHLIGHT_CLASS_NAME } from '@/utils/prism'
 import { TabsWrapper } from '@/components/Tabs/Tabs'
 import { TabsPanelWrapper } from '@/components/Tabs/TabsPanel'
 import {
-  AdmonitionWrapper,
-  AdmonitionContent
+  AdmonitionContent,
+  AdmonitionWrapper
 } from '@/components/Mdx/Components/Admonition'
 import { headingStyles } from '@/components/Mdx/Styles/heading'
 import { listStyles } from '@/components/Mdx/Styles/list'
 import { codeStyles } from '@/components/Mdx/Styles/code'
 import { ApiMetaDataWrapper } from '@/components/Mdx/Components/ApiMetaData'
+import { IconWithTextText } from '@/components/Icon/IconWithText'
 
 export const MdxStyles = styled.div`
   ${codeStyles};
@@ -21,7 +22,6 @@ export const MdxStyles = styled.div`
   color: ${COLORS.TEXT_BODY};
 
   ${TabsPanelWrapper} >,
-  ${AdmonitionContent} >,
   > {
     ${listStyles};
     ${headingStyles};
@@ -55,14 +55,18 @@ export const MdxStyles = styled.div`
     }
   }
 
+  ${AdmonitionContent} ${IconWithTextText} > * {
+    margin-bottom: ${SPACINGS.THREE};
+  }
+
   ${TabsPanelWrapper} > *:first-child,
-  ${AdmonitionContent} > *:first-child,
+  ${AdmonitionContent}  ${IconWithTextText} > *:first-child,
   > *:first-child {
     margin-top: 0;
   }
 
   ${TabsPanelWrapper} > *:last-child, 
-  ${AdmonitionContent} > *:last-child, 
+  ${AdmonitionContent} ${IconWithTextText} > *:last-child, 
   > *:last-child {
     margin-bottom: 0;
   }

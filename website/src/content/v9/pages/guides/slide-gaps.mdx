@@ -145,8 +145,6 @@ Embla reads the **computed slide dimensions**, so scroll snaps are based on thes
 <Admonition type="warning">
   **Warning:** Unlike padding, changes in `margin` or `gap` **do not affect a slide's computed size**, so Embla's `ResizeObserver` **won't detect them automatically**. If you update the gap or margin dynamically (e.g., via media queries or JavaScript), you must manually call:
 
-<br />
-
 <PrismHighlight language="js" code={gapOrMargin_02} />
 
 </Admonition>

@@ -4,7 +4,7 @@ import { IconType } from '@/assets/icons'
 import { Icon } from '@/components/Icon/Icon'
 import { SPACINGS } from '@/utils/spacings'
 
-const IconWithTextWrapper = styled.span<{ $spacing: string }>`
+const IconWithTextWrapper = styled.div<{ $spacing: string }>`
   display: flex;
   align-items: flex-start;
   text-align: left;
@@ -34,7 +34,7 @@ export const IconWithTextIcon = styled(Icon)`
   transform: translate(-50%, -50%);
 `
 
-export const IconWithTextText = styled.span``
+export const IconWithTextText = styled.div``
 
 type PropType = PropsWithChildren<{
   iconSvg: IconType
