@@ -1450,7 +1450,7 @@
   flex-direction: column;
   justify-content: space-between;
 `,u=i.default.div.withConfig({displayName:"LinkCard__ReadMoreText",componentId:"sc-3a19ae4a-1"})`
-  span {
+  ${r.IconWithTextText} {
     ${l.BRAND_GRADIENT_TEXT_STYLES};
     font-size: ${n.FONT_SIZES.COMPLEMENTARY};
     font-weight: ${n.FONT_WEIGHTS.MEDIUM};

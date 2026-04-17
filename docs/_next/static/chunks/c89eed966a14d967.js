@@ -574,6 +574,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: ${a.SPACINGS.FOUR};
 
   ${o.MEDIA.MIN_SM} {
     padding-top: ${a.SPACINGS.SIX};
