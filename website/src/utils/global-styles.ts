@@ -13,6 +13,7 @@ import {
   LogoLightImage,
   LogoDarkImage
 } from '@/components/SiteLogo/SiteLogo'
+import { GradientDropShadow } from '@/components/Header/HeaderGradient'
 
 /* CONSTS */
 export const BASE_FONT_STYLES = '62.5%'
@@ -52,12 +53,20 @@ export const THEME_STYLES = css`
     ${LogoDarkIcon}, ${LogoDarkImage}, ${LightThemeSvg} {
       display: none;
     }
+
+    ${GradientDropShadow} {
+      opacity: 0.05;
+    }
   }
   .${THEME_CLASSNAME_DARK} {
     color-scheme: ${THEME_KEYS.DARK};
 
     ${LogoLightIcon}, ${LogoLightImage}, ${DarkThemeSvg} {
       display: none;
+    }
+
+    ${GradientDropShadow} {
+      opacity: 0.1;
     }
   }
 `

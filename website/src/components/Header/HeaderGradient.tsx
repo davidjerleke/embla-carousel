@@ -23,14 +23,13 @@ const GradientLine = styled.span`
   );
 `
 
-const GradientDropShadow = styled.div`
+export const GradientDropShadow = styled.div`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 55px;
   background: linear-gradient(to bottom, ${COLORS.BRAND_PRIMARY}, transparent);
-  opacity: 0.1;
   pointer-events: none;
   z-index: ${LAYERS.NAVIGATION + LAYERS.STEP};
 `

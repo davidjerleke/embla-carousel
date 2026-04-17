@@ -28,7 +28,7 @@ const RoutesLoadingWrapper = styled.div`
   height: ${ROUTES_LOADING_BAR_HEIGHT};
   left: 0;
   right: 0;
-  position: fixed;
+  position: absolute;
   pointer-events: none;
   overflow: hidden;
 `

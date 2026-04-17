@@ -35,9 +35,10 @@ export const SIDEBAR_NAVIGATION_ID_PRETTY = kebabCaseToPascalCase(
 const MENU_ID = 'sidebar-menu'
 
 const SidebarNavigationWrapper = styled.nav<{ $isOpen: boolean }>`
-  position: fixed;
+  position: sticky;
 
   ${MEDIA.COMPACT} {
+    position: fixed;
     z-index: ${LAYERS.NAVIGATION};
     top: 0;
     right: 0;

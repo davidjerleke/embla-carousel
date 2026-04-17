@@ -7,8 +7,8 @@ import { selectTheme, toggleTheme } from '@/components/Theme/theme-reducer'
 import { THEME_KEYS, COLORS } from '@/utils/theme'
 import { Icon } from '@/components/Icon/Icon'
 
-const BUTTON_SIZE = '4rem'
-const ICON_SIZE = '2.5rem'
+const BUTTON_SIZE = '3rem'
+const ICON_SIZE = '2rem'
 
 const ThemeToggleWrapper = styled(ButtonBare)`
   ${createSquareSizeStyles(BUTTON_SIZE)};

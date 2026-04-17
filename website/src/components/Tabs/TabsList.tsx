@@ -28,7 +28,7 @@ export const TabsListWrapper = styled.div`
     background-color: ${COLORS.DETAIL_LOW_CONTRAST};
     width: 100%;
     display: block;
-    bottom: calc(${SCROLLBAR_SIZE} - ${BORDER_SIZES.DETAIL});
+    bottom: 0;
     z-index: ${LAYERS.STEP};
 
     ${MEDIA.NO_HOVER} {

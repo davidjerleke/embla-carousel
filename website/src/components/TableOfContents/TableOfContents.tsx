@@ -15,7 +15,7 @@ import {
 
 const TableOfContentsWrapper = styled.nav`
   ${MEDIA.DESKTOP} {
-    position: fixed;
+    position: sticky;
     z-index: ${LAYERS.NAVIGATION};
     top: ${HEADER_HEIGHT};
     font-size: ${FONT_SIZES.COMPLEMENTARY};
@@ -32,8 +32,6 @@ const TableOfContentsWrapper = styled.nav`
 const MenuWrapper = styled.div<{
   $isKeyNavigating: boolean
 }>`
-  height: 100%;
-
   ${MEDIA.DESKTOP} {
     &:before,
     &:after {

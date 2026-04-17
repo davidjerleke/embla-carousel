@@ -49,3 +49,15 @@ export function getVersionFromPathname(pathnameOrEmpty: string): VersionType {
   const version = DOCS_VERSIONS.find(({ SLUG }) => SLUG === slugNoTrailingSlash)
   return version || DOCS_LATEST_VERSION
 }
+
+export function getIsDocsStartPage(pathnameOrEmpty: string): boolean {
+  const endsWithDocsRegex = /docs$/
+  const endsWithVersionRegex = /v\d+$/
+  const pathname = pathnameOrEmpty || ''
+  const lastSegment = pathname.split('/').filter(Boolean).pop() || ''
+
+  return (
+    endsWithDocsRegex.test(lastSegment) ||
+    endsWithVersionRegex.test(lastSegment)
+  )
+}

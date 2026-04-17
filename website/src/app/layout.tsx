@@ -10,7 +10,6 @@ import { KeyEventsSkipToContent } from '@/components/KeyEvents/KeyEventsSkipToCo
 import { Header } from '@/components/Header/Header'
 import { Footer } from '@/components/Footer/Footer'
 import { THEME_CLASSNAME_LIGHT } from '@/utils/theme'
-import { RoutesLoading } from '@/components/Routes/RoutesLoading'
 import { getRootRoutes } from '@/utils/root-routes'
 import { ScrollToHashInit } from '@/components/ScrollToHash/ScrollToHashInit'
 import { getDocsRoutes } from '@/utils/docs-routes'
@@ -53,7 +52,6 @@ export default async function RootLayout(props: PropType) {
                 <KeyEventsSkipToContent />
                 <NoScript />
                 <Header />
-                <RoutesLoading />
 
                 {children}
 

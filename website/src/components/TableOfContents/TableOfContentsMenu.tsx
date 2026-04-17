@@ -10,12 +10,13 @@ import { createScrollBarStyles } from '@/utils/scrollbars'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
 import { useTableOfContentsContext } from '@/components/TableOfContents/TableOfContentsContext'
 import { arrayHasItems } from '@/utils/array'
+import { HEADER_HEIGHT } from '@/utils/header'
 
 const TableOfContentsMenuWrapper = styled.div`
   ${createScrollBarStyles('y')};
+  max-height: calc(100dvh - ${HEADER_HEIGHT});
   overflow: auto;
   position: relative;
-  max-height: 100%;
 
   ${MEDIA.DESKTOP} {
     padding-top: ${PAGE_FRAME_SPACING};
@@ -28,7 +29,6 @@ const Heading = styled.div`
   padding-top: ${SPACINGS.ONE};
   padding-bottom: ${SPACINGS.ONE};
   font-weight: ${FONT_WEIGHTS.SEMI_BOLD};
-  text-transform: uppercase;
 
   ${MEDIA.COMPACT} {
     padding-top: ${SPACINGS.TWO};

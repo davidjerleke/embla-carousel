@@ -31,7 +31,6 @@ export const headingStyles = css`
 
   h1 {
     font-size: ${FONT_SIZES.H1};
-    font-weight: ${FONT_WEIGHTS.EXTRA_BOLD};
     line-height: 1.25;
   }
 

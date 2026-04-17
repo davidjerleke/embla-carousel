@@ -23,7 +23,7 @@ const HeaderLogoWrapper = styled(LinkBare)`
   align-items: center;
   text-decoration: none;
   line-height: 1;
-  font-weight: ${FONT_WEIGHTS.BLACK};
+  font-weight: ${FONT_WEIGHTS.EXTRA_BOLD};
 
   ${MEDIA.MIN_XXS} {
     font-size: ${FONT_SIZES.CUSTOM(({ H4 }) => H4 + 0.2)};

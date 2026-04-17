@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { ALGOLIA_CLASSNAMES } from '@/utils/algolia-search'
 import { COLORS } from '@/utils/theme'
@@ -44,7 +44,6 @@ const Toggle = styled(ButtonBare)<{ $isActive: boolean }>`
   align-items: center;
   text-align: left;
   width: 100%;
-  text-transform: uppercase;
 
   ${({ $isActive }) => css`
     > span {
@@ -104,29 +103,23 @@ const Link = styled(LinkNavigation)`
 type PropType = {
   route: RouteType
   isDesktopMenu: boolean
+  isActiveOverride: boolean
 }
 
 export function SidebarNavigationSubMenu(props: PropType) {
-  const { route, isDesktopMenu } = props
+  const { route, isDesktopMenu, isActiveOverride } = props
   const { title, children } = route
   const { isPartiallyActive, isActive } = useRouteActive(route.slug)
-  const [isOpen, setIsOpen] = useState(isPartiallyActive)
+  const [isOpen, setIsOpen] = useState(isPartiallyActive || isActiveOverride)
   const toggleAction = isOpen ? 'Hide' : 'Show'
   const applyAlgoliaClass = isPartiallyActive && isDesktopMenu
   const algoliaClass = applyAlgoliaClass ? ALGOLIA_CLASSNAMES.LVL_0 : undefined
   const id = createMenuId(title, isDesktopMenu)
 
-  const toggleOpen = useCallback(
-    (event: React.MouseEvent) => {
-      event.preventDefault()
-      setIsOpen((open) => !open)
-    },
-    [setIsOpen]
-  )
-
-  useEffect(() => {
-    setIsOpen(isPartiallyActive)
-  }, [setIsOpen, isPartiallyActive])
+  const toggleOpen = useCallback((event: React.MouseEvent) => {
+    event.preventDefault()
+    setIsOpen((open) => !open)
+  }, [])
 
   return (
     <SidebarNavigationSubMenuWrapper aria-labelledby={id}>

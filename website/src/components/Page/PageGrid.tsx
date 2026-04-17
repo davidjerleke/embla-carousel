@@ -14,11 +14,11 @@ import { SidebarNavigation } from '@/components/SidebarNavigation/SidebarNavigat
 import { arrayHasItems } from '@/utils/array'
 import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 
-export const SIDEBAR_LG_UP_WIDTH = '28rem'
-export const SIDEBAR_LG_DOWN_WIDTH = '21rem'
-export const MAIN_CONTENT_SPACING = SPACINGS.SEVEN
+const SIDEBAR_LG_UP_WIDTH = '28rem'
+const SIDEBAR_LG_DOWN_WIDTH = '21rem'
+const MAIN_CONTENT_SPACING = SPACINGS.SEVEN
 
-export const sidebarStyles = css`
+const sidebarStyles = css`
   min-width: 0;
   flex: 0 0 auto;
 
@@ -37,8 +37,6 @@ const PageGridWrapper = styled(PageFrame)`
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding-top: ${PAGE_FRAME_SPACING};
-  padding-bottom: ${PAGE_FRAME_SPACING};
 `
 
 const Main = styled.main<{ $isStartPage: boolean }>`
@@ -47,6 +45,7 @@ const Main = styled.main<{ $isStartPage: boolean }>`
   max-width: 100%;
   position: relative;
   z-index: ${LAYERS.STEP};
+  padding-top: ${PAGE_FRAME_SPACING};
 
   ${({ $isStartPage }) =>
     !$isStartPage &&

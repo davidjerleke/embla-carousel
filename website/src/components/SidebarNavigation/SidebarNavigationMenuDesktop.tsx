@@ -10,6 +10,7 @@ import { LAYERS } from '@/utils/layers'
 import type { KeyNavigatingPropType } from '@/utils/key-events'
 import { SidebarNavigationSubMenus } from '@/components/SidebarNavigation/SidebarNavigationSubMenus'
 import { PAGE_FRAME_SPACING } from '@/utils/page'
+import { HEADER_HEIGHT } from '@/utils/header'
 import {
   createScrollBarShadowStyles,
   createScrollBarStyles,
@@ -50,8 +51,8 @@ const ScrollArea = styled.ul`
   ${createScrollBarStyles('y')};
   padding-top: ${PAGE_FRAME_SPACING};
   padding-bottom: ${PAGE_FRAME_SPACING};
+  max-height: calc(100dvh - ${HEADER_HEIGHT});
   overflow: auto;
-  max-height: 100%;
 `
 
 const MiscLinks = styled(FooterLinks)`
