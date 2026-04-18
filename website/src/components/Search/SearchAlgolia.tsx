@@ -2,11 +2,13 @@ import { useCallback, useEffect, useRef } from 'react'
 import { createGlobalStyle, css } from 'styled-components'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
 import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
-import { DocSearch } from '@docsearch/react'
+import { DocSearch, DocSearchHit } from '@docsearch/react'
 import { buttonBareStyles } from '@/components/Button/ButtonBare'
 import { linkContentStyles } from '@/components/Link/LinkContent'
 import { createPlaceholderStyles } from '@/utils/create-placeholder-styles'
 import { createSquareSizeStyles } from '@/utils/create-square-size-styles'
+import { usePathname } from 'next/navigation'
+import { getVersionFromPathname } from '@/utils/slug'
 import {
   BRAND_GRADIENT_BACKGROUND_STYLES,
   BRAND_GRADIENT_TEXT_STYLES
@@ -27,6 +29,7 @@ import {
 } from '@/utils/theme'
 import { FONT_SIZES, FONT_WEIGHTS } from '@/utils/font-sizes'
 import { BORDER_RADIUSES, BORDER_SIZES } from '@/utils/border'
+import { TRUNCATE_STYLES } from '@/utils/truncate-styles'
 import {
   KEY_NAVIGATING_STYLES,
   KeyNavigatingPropType
@@ -86,6 +89,7 @@ const modalStyles = css`
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     height: 100dvh;
 
     ${MEDIA.DESKTOP} {
@@ -104,6 +108,7 @@ const headerStyles = css`
   }
 
   .DocSearch-Form {
+    display: flex;
     padding: ${INPUT_BORDER_SIZE};
     position: relative;
     width: 100%;
@@ -125,10 +130,10 @@ const contentStyles = css<KeyNavigatingPropType>`
   }
 
   .DocSearch-Screen-Icon {
-    color: ${COLORS.DETAIL_HIGH_CONTRAST};
     padding-bottom: ${EDGE_SPACING};
 
     > svg {
+      stroke: ${COLORS.DETAIL_HIGH_CONTRAST};
       ${createSquareSizeStyles('4rem')}
     }
   }
@@ -327,14 +332,12 @@ const contentStyles = css<KeyNavigatingPropType>`
     justify-content: center;
     line-height: 1.2em;
     margin: 0 ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
-    overflow-x: hidden;
     position: relative;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     width: 80%;
   }
 
   .DocSearch-Hit-title {
+    ${TRUNCATE_STYLES};
     font-size: ${FONT_SIZES.CUSTOM(
       ({ COMPLEMENTARY }) => COMPLEMENTARY + 0.04
     )};
@@ -400,12 +403,16 @@ const footerStyles = css<KeyNavigatingPropType>`
   .DocSearch-Logo svg {
     color: #5468ff;
     margin-left: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
+    width: 7.7rem;
+    height: 1.9rem;
   }
 
   .DocSearch-Label {
     color: ${COLORS.TEXT_LOW_CONTRAST};
     font-size: ${FONT_SIZES.DETAIL};
     line-height: 1.9rem;
+    display: flex;
+    align-items: center;
   }
 
   .DocSearch-Commands {
@@ -426,7 +433,7 @@ const footerStyles = css<KeyNavigatingPropType>`
   }
 
   .DocSearch-Commands li:not(:last-of-type) {
-    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};;
+    margin-right: ${SPACINGS.CUSTOM(({ ONE }) => ONE + 0.2)};
   }
 
   .DocSearch-Commands-Key {
@@ -437,17 +444,26 @@ const footerStyles = css<KeyNavigatingPropType>`
       ${COLORS.DETAIL_MEDIUM_CONTRAST} 0%,
       ${COLORS.DETAIL_HIGH_CONTRAST} 100%
     );
-    box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST};,
+    box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST},
       inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-      0 0.1rem 0.2rem 0.1rem rgba(${
-        COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE
-      }, 0.4);
+      0 0.1rem 0.2rem 0.1rem rgba(${COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE}, 0.4);
     display: flex;
     height: 1.8rem;
     justify-content: center;
     margin-right: 0.4em;
     padding-bottom: 0.1rem;
     width: 2rem;
+
+    > svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  .DocSearch-Escape-Key {
+    font-size: 1rem;
+    text-transform: lowercase;
+    font-weight: ${FONT_WEIGHTS.MEDIUM};
   }
 
   .${THEME_CLASSNAME_LIGHT} {
@@ -459,9 +475,8 @@ const footerStyles = css<KeyNavigatingPropType>`
       );
       box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_HIGH_CONTRAST},
         inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-        0 0.1rem 0.2rem 0.1rem rgba(${
-          COLORS.DETAIL_LOW_CONTRAST_RGB_VALUE
-        }, 0.4);
+        0 0.1rem 0.2rem 0.1rem
+          rgba(${COLORS.DETAIL_LOW_CONTRAST_RGB_VALUE}, 0.4);
     }
   }
   .${THEME_CLASSNAME_DARK} {
@@ -471,11 +486,10 @@ const footerStyles = css<KeyNavigatingPropType>`
         ${COLORS.DETAIL_MEDIUM_CONTRAST} 0%,
         ${COLORS.DETAIL_HIGH_CONTRAST} 100%
       );
-      box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST};,
+      box-shadow: inset 0 -0.2rem 0 0 ${COLORS.DETAIL_LOW_CONTRAST},
         inset 0 0 0.1rem 0.1rem ${COLORS.DETAIL_MEDIUM_CONTRAST},
-        0 0.1rem 0.2rem 0.1rem rgba(${
-          COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE
-        }, 0.4);
+        0 0.1rem 0.2rem 0.1rem
+          rgba(${COLORS.DETAIL_HIGH_CONTRAST_RGB_VALUE}, 0.4);
     }
   }
 `
@@ -579,13 +593,29 @@ const resetButtonStyles = css<KeyNavigatingPropType>`
 `
 
 const cancelButtonStyles = css<KeyNavigatingPropType>`
-  .DocSearch-Cancel {
+  .DocSearch-Close {
     ${buttonBareStyles};
     color: ${COLORS.TEXT_BODY};
     height: ${INPUT_HEIGHT};
     display: flex;
     align-items: center;
-    margin-left: ${SPACINGS.CUSTOM(({ TWO }) => TWO - 0.2)};
+    position: absolute;
+    right: ${INPUT_BORDER_SIZE};
+    width: ${BUTTON_WIDTH};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+
+    > svg {
+      ${createSquareSizeStyles('2.35rem')};
+    }
+  }
+`
+
+const clearButtonStyles = css<KeyNavigatingPropType>`
+  .DocSearch-Clear {
+    display: none;
   }
 `
 
@@ -619,6 +649,7 @@ const SearchStyles = createGlobalStyle<{ $isKeyNavigating: boolean }>`
   ${toggleButtonStyles};
   ${magnifyerButtonStyles};
   ${resetButtonStyles};
+  ${clearButtonStyles};
   ${cancelButtonStyles};
   ${loadingIndicatorStyles};
 `
@@ -629,6 +660,8 @@ export function SearchAlgolia() {
   const isSearchInitiallyOpenRef = useRef(isSearchOpen)
   const closeSearchRef = useRef<() => void>(null)
   const toggleElement = useRef<HTMLButtonElement | null>(null)
+  const pathname = usePathname()
+  const currentVersion = getVersionFromPathname(pathname)
   const dispatch = useAppDispatch()
 
   const openSearch = useCallback(() => {
@@ -638,6 +671,16 @@ export function SearchAlgolia() {
   const closeSearch = useCallback(() => {
     dispatch(setModalClosed())
   }, [dispatch])
+
+  const filterHitsForCurrentVersion = useCallback(
+    (searchHits: DocSearchHit[]) => {
+      return searchHits.filter((searchHit) => {
+        const searchVersion = getVersionFromPathname(searchHit.url)
+        return searchVersion.MAJOR === currentVersion.MAJOR
+      })
+    },
+    [currentVersion]
+  )
 
   useEffect(() => {
     if (!isBrowser || toggleElement.current) return
@@ -698,8 +741,9 @@ export function SearchAlgolia() {
       <SearchStyles $isKeyNavigating={isKeyNavigating} />
       <DocSearch
         appId={ALGOLIA_SEARCH_CONFIG.APP_ID}
-        indexName={ALGOLIA_SEARCH_CONFIG.INDEX_NAME}
+        indices={[ALGOLIA_SEARCH_CONFIG.INDEX_NAME]}
         apiKey={ALGOLIA_SEARCH_CONFIG.API_KEY}
+        transformItems={filterHitsForCurrentVersion}
       />
     </>
   )

@@ -24,7 +24,7 @@
     "predeploy": "npm-run-all predeploy:clean predeploy:sandboxfiles-build predeploy:format build"
   },
   "dependencies": {
-    "@docsearch/react": "^3.0.0",
+    "@docsearch/react": "^4.6.2",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/mdx": "^2.2.1",
     "@mdx-js/react": "^3.1.1",
