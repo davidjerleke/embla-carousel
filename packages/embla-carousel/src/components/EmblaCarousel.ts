@@ -130,17 +130,19 @@ function EmblaCarousel(
     if (!options.active) return
 
     if (!isSsr && ownerWindow) {
+      engine.resizeHandler.init(ownerWindow)
+      const containerVisible = container.offsetParent
+
       engine.translate.to(engine.location)
       if (engine.options.loop) engine.slideLooper.loop()
 
       engine.animation.init(ownerWindow)
-      engine.resizeHandler.init(ownerWindow)
       engine.slidesInView.init(ownerWindow)
       engine.slidesHandler.init(ownerWindow)
       engine.slideFocus.init(ownerWindow)
       engine.eventHandler.init(self)
 
-      if (container.offsetParent && slides.length) {
+      if (containerVisible && slides.length) {
         engine.dragHandler.init(ownerWindow)
       }
     }
