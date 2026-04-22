@@ -1,7 +1,7 @@
 <br />
 <div align="center">
   <p align="center">
-    <a href="https://www.embla-carousel.com/"><img width="110" height="110" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
+    <a href="https://www.embla-carousel.com/"><img width="110" src="https://www.embla-carousel.com/embla-logo.svg" alt="Embla Carousel">
     </a>
   </p>
 
@@ -37,25 +37,25 @@
 <div align="center">
   <p align="center">
     <a href="https://www.embla-carousel.com/docs/get-started/module">
-      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/javascript-logo.svg" width="40" />
     </a>
     <a href="https://www.embla-carousel.com/docs/get-started/module">
-      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/typescript-logo.svg" width="40" />
     </a>
     <a href="https://www.embla-carousel.com/docs/get-started/react">
-      <img src="https://www.embla-carousel.com/react-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/react-logo.svg" width="40" />
     </a>
     <a href="https://www.embla-carousel.com/docs/get-started/vue">
-      <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/vue-logo.svg" width="40" />
     </a>
     <a href="https://www.embla-carousel.com/docs/get-started/svelte">
-      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/svelte-logo.svg" width="40" />
     </a>
     <a href="https://www.embla-carousel.com/docs/get-started/solid">
-      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/solid-logo.svg" width="40" />
     </a>
     <a href="https://github.com/donaldxdonald/embla-carousel-angular">
-      <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" height="40" />
+      <img src="https://www.embla-carousel.com/angular-logo.svg" width="40" />
     </a>
   </p>
 </div>
@@ -173,15 +173,15 @@
 </p>
 
 <p>
-  <a href="https://www.browserstack.com">
-    <img src="https://www.embla-carousel.com/browserstack-logo.svg" width="30" height="30" />
-  </a>
-  &nbsp;
   <a href="https://codesandbox.io/">
-    <img src="https://www.embla-carousel.com/codesandbox-logo.svg" width="204" height="30" />
+    <img src="https://www.embla-carousel.com/codesandbox-logo.svg" height="30" />
   </a>
   &nbsp;
   <a href="https://www.algolia.com/">
-    <img src="https://www.embla-carousel.com/algolia-logo.svg" width="120" height="30" />
+    <img src="https://www.embla-carousel.com/algolia-logo.svg" height="30" />
+  </a>
+  &nbsp;
+  <a href="https://www.browserstack.com">
+    <img src="https://www.embla-carousel.com/browserstack-logo.svg" height="30" />
   </a>
 </p>

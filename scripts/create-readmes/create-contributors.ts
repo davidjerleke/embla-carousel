@@ -40,7 +40,7 @@ function createContributor(
 
   const contributorMarkup = `
   <a href="https://github.com/${login}">
-    <img src="https://avatars2.githubusercontent.com/u/${id}?s=120&v=4" title="${login}" width="50" height="50" style="max-width: 100%" />
+    <img src="https://avatars2.githubusercontent.com/u/${id}?s=120&v=4" title="${login}" width="50" style="max-width: 100%" />
   </a>
   `
 

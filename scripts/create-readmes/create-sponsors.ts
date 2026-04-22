@@ -111,7 +111,7 @@ function createSponsor(
   const imageSize = isActive ? 100 : 50
   const sponsorMarkup = `
   <a href="${url}">
-    <img src="${avatarUrl}" title="${login}" width="${imageSize}" height="${imageSize}" style="max-width: 100%" />
+    <img src="${avatarUrl}" title="${login}" width="${imageSize}" style="max-width: 100%" />
   </a>
   `
 
