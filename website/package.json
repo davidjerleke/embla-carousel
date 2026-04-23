@@ -44,7 +44,7 @@
     "gray-matter": "^4.0.3",
     "hast": "^1.0.0",
     "hastscript": "^9.0.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "next": "16.1.7",
     "prism-react-renderer": "^1.3.5",
     "prismjs": "1.30.0",
