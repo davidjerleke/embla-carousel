@@ -16,7 +16,7 @@ import { TabsItem } from '@/components/Tabs/TabsItem'
 import { Tabs } from '@/components/Tabs/Tabs'
 import { TableOfContents } from '@/components/TableOfContents/TableOfContents'
 import { TabsListScrollArea, TabsListWrapper } from '@/components/Tabs/TabsList'
-import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
+import { VersionSelector } from '@/components/VersionSelector/VersionSelector'
 import { TabsButtonWrapper } from '@/components/Tabs/TabsButton'
 import { TabsPanelWrapper } from '@/components/Tabs/TabsPanel'
 import { SidebarNavigationSubMenus } from '@/components/SidebarNavigation/SidebarNavigationSubMenus'
@@ -156,7 +156,7 @@ const MenuItemList = styled.ul`
   }
 `
 
-const VersionBadgeWrapper = styled.div`
+const VersionSelectorWrapper = styled.div`
   display: flex;
   padding-top: ${SPACINGS.THREE};
   padding-bottom: ${SPACINGS.THREE};
@@ -194,9 +194,9 @@ export function SidebarNavigationMenuCompact() {
 
   return (
     <SidebarNavigationMenuCompactWrapper>
-      <VersionBadgeWrapper>
-        <VersionBadge />
-      </VersionBadgeWrapper>
+      <VersionSelectorWrapper>
+        <VersionSelector />
+      </VersionSelectorWrapper>
 
       <MenuTabs $isKeyNavigating={isKeyNavigating}>
         <TabsItem tab={TABS_SIDEBAR_NAVIGATION.TABS.MAIN_MENU}>

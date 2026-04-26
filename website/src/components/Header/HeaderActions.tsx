@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { ThemeToggle } from '@/components/Theme/ThemeToggle'
 import { LinkNavigation } from '@/components/Link/LinkNavigation'
-import { VersionBadge } from '@/components/VersionBadge/VersionBadge'
+import { VersionSelector } from '@/components/VersionSelector/VersionSelector'
 import { COLORS } from '@/utils/theme'
 import { MEDIA } from '@/utils/breakpoints'
 import { SPACINGS } from '@/utils/spacings'
@@ -67,7 +67,7 @@ export function HeaderActions() {
       </Item>
 
       <Item $hiddenAtCompact>
-        <VersionBadge />
+        <VersionSelector />
       </Item>
 
       <Item>

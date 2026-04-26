@@ -54,7 +54,7 @@ async function fetchSponsors(owner: string): Promise<SponsorsResponseType> {
           sponsorshipsAsMaintainer(
             first: 100,
             after: $cursor,
-            includePrivate: true,
+            includePrivate: false,
             orderBy: {field: CREATED_AT, direction: ASC},
             activeOnly: false
           ) {

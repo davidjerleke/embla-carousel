@@ -87,6 +87,8 @@
     <img src="https://avatars.githubusercontent.com/u/25249966?v=4" title="KaufmannDigital" width="100" style="max-width: 100%" />
   </a><a href="https://github.com/m0xAy">
     <img src="https://avatars.githubusercontent.com/u/126299768?v=4" title="m0xAy" width="100" style="max-width: 100%" />
+  </a><a href="https://github.com/lenafaure">
+    <img src="https://avatars.githubusercontent.com/u/7765656?u=108be6daf419844c0605fc806f0c2f65f60cac71&v=4" title="lenafaure" width="100" style="max-width: 100%" />
   </a>
   </p>
   <p>Thanks to all our <strong>past sponsors</strong> for helping <strong>Embla Carousel</strong> get to where it is today.</p>
@@ -115,12 +117,6 @@
     <img src="https://avatars.githubusercontent.com/u/111876003?v=4" title="NiuDaLang" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/openscript">
     <img src="https://avatars.githubusercontent.com/u/1105080?u=ebda165c92f1f174a7aef1c0defd8a0955b83b01&v=4" title="openscript" width="50" style="max-width: 100%" />
-  </a><a href="https://github.com/SergkeiM">
-    <img src="https://avatars.githubusercontent.com/u/3294939?u=37fb9b3a36f4d5aa1c7f4f0fe3e820e1d7a0c48d&v=4" title="SergkeiM" width="50" style="max-width: 100%" />
-  </a><a href="https://github.com/Xamsix">
-    <img src="https://avatars.githubusercontent.com/u/18436841?v=4" title="Xamsix" width="50" style="max-width: 100%" />
-  </a><a href="https://github.com/mtm9ewy">
-    <img src="https://avatars.githubusercontent.com/u/25093444?v=4" title="mtm9ewy" width="50" style="max-width: 100%" />
   </a>
   </p>
 </div>
@@ -162,6 +158,8 @@
     <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/wopian">
     <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" style="max-width: 100%" />
+  </a><a href="https://github.com/SaizFerri">
+    <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/ranno-lauri">
     <img src="https://avatars2.githubusercontent.com/u/87007115?s=120&v=4" title="ranno-lauri" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/ruijdacd">
@@ -200,8 +198,6 @@
     <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/yangfancn">
     <img src="https://avatars2.githubusercontent.com/u/42950770?s=120&v=4" title="yangfancn" width="50" style="max-width: 100%" />
-  </a><a href="https://github.com/SaizFerri">
-    <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/lesha1201">
     <img src="https://avatars2.githubusercontent.com/u/10157660?s=120&v=4" title="lesha1201" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/allen-garvey">
@@ -210,6 +206,8 @@
     <img src="https://avatars2.githubusercontent.com/u/96714293?s=120&v=4" title="Ammar-1999" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/sedlukha">
     <img src="https://avatars2.githubusercontent.com/u/14075940?s=120&v=4" title="sedlukha" width="50" style="max-width: 100%" />
+  </a><a href="https://github.com/modulareverything">
+    <img src="https://avatars2.githubusercontent.com/u/8567692?s=120&v=4" title="modulareverything" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/cundd">
     <img src="https://avatars2.githubusercontent.com/u/743122?s=120&v=4" title="cundd" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/dsd">

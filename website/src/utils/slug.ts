@@ -50,6 +50,19 @@ export function getVersionFromPathname(pathnameOrEmpty: string): VersionType {
   return version || DOCS_LATEST_VERSION
 }
 
+export function getPathnameForVersion(
+  pathnameOrEmpty: string,
+  major: number
+): string {
+  const pathname = pathnameOrEmpty || ''
+  const versionPrefix = major === DOCS_LATEST_VERSION.MAJOR ? '' : `v${major}`
+  const versionAndSubpath = joinSlugs(
+    versionPrefix,
+    ...getDocsSubPath(pathname)
+  )
+  return prefixSlugWithDocs(versionAndSubpath)
+}
+
 export function getIsDocsStartPage(pathnameOrEmpty: string): boolean {
   const endsWithDocsRegex = /docs$/
   const endsWithVersionRegex = /v\d+$/
@@ -60,4 +73,17 @@ export function getIsDocsStartPage(pathnameOrEmpty: string): boolean {
     endsWithDocsRegex.test(lastSegment) ||
     endsWithVersionRegex.test(lastSegment)
   )
+}
+
+const DOCS_WITH_VERSION_REGEX = /^\/docs(?:\/v\d+)?/
+
+export function getDocsSubPath(pathnameOrEmpty: string): string[] {
+  const pathname = pathnameOrEmpty || ''
+
+  if (!pathname.startsWith('/docs')) return []
+
+  return pathname
+    .replace(DOCS_WITH_VERSION_REGEX, '')
+    .split('/')
+    .filter(Boolean)
 }
