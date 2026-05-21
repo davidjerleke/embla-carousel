@@ -5,8 +5,8 @@ import Autoplay from 'embla-carousel-autoplay'
 
 const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false }, [Autoplay()])
 
-const goToPrev = () => emblaApi.value?.goToPrev()
-const goToNext = () => emblaApi.value?.goToNext()
+const goToPrev = () => emblaApi.value?.scrollPrev()
+const goToNext = () => emblaApi.value?.scrollNext()
 
 watch(
   emblaApi,
