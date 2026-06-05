@@ -3492,11 +3492,11 @@ __metadata:
   linkType: hard
 
 "@sveltejs/acorn-typescript@npm:^1.0.5":
-  version: 1.0.8
-  resolution: "@sveltejs/acorn-typescript@npm:1.0.8"
+  version: 1.0.10
+  resolution: "@sveltejs/acorn-typescript@npm:1.0.10"
   peerDependencies:
     acorn: ^8.9.0
-  checksum: 352904be88abdad23aa21cee6cc09f50aecf135a0bcd51e0a09e2b4e774fd6a6444acaf326d33a108d6e8454ec8e76e1a02412011a2375c17253fecb06334c0a
+  checksum: 1ed741961cfd5dafe7da88aa41142465fed1cd55b646cf328645884c3a470bb56ba94d60aa2549a479d1c829b01e6dee35708a83cd878d3b1de516e2a51865ac
   languageName: node
   linkType: hard
 
@@ -4301,13 +4301,6 @@ __metadata:
   version: 8.57.2
   resolution: "@typescript-eslint/types@npm:8.57.2"
   checksum: c39d15f22b1c61c3419b21efcc764feacde3ae4f9c52676f4cc986aef89c9ebf81292695cffc1b90e991318e3c634fff4dfa6e23afdeeda059cae534d740e807
-  languageName: node
-  linkType: hard
-
-"@typescript-eslint/types@npm:^8.2.0":
-  version: 8.57.0
-  resolution: "@typescript-eslint/types@npm:8.57.0"
-  checksum: b89150688472378585beb64796a6b600d7b0997341fb2a7d6af409de2b3308386d40fd8ff58fe31ca9e8ec8a690c2fbf5e9b9bcbba3ed40b158145a8bb0eca85
   languageName: node
   linkType: hard
 
@@ -6447,7 +6440,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"devalue@npm:^5.6.4":
+"devalue@npm:^5.8.1":
   version: 5.8.1
   resolution: "devalue@npm:5.8.1"
   checksum: 344fdf2e90f19319ead25078984e008e15db9bdad8f073c38d08b09c4a8127968c33e1307699e8f0525f29ab00b3e57b54ba7d4b22efcd346092a93b0b1d61d5
@@ -6781,7 +6774,7 @@ __metadata:
     "@sveltejs/vite-plugin-svelte": ^5.0.3
     "@tsconfig/svelte": ^5.0.4
     embla-carousel-svelte: 9.0.0-rc02
-    svelte: ^5.53.5
+    svelte: ^5.55.7
     svelte-check: ^4.1.1
     typescript: ~5.6.2
     vite: 6.4.2
@@ -6893,7 +6886,7 @@ __metadata:
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.59.0
-    svelte: ^5.53.5
+    svelte: ^5.55.7
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
@@ -7773,13 +7766,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esrap@npm:^2.2.2":
-  version: 2.2.4
-  resolution: "esrap@npm:2.2.4"
+"esrap@npm:^2.2.4":
+  version: 2.2.11
+  resolution: "esrap@npm:2.2.11"
   dependencies:
     "@jridgewell/sourcemap-codec": ^1.4.15
+  peerDependencies:
     "@typescript-eslint/types": ^8.2.0
-  checksum: 3f3f81db188d0e40976ea7202be83772d0a38faa44fb374b506d5d89e5909445b297d866ac174165dc5c258ef0a6001fe66b98b67820369587f695f7d94865ba
+  peerDependenciesMeta:
+    "@typescript-eslint/types":
+      optional: true
+  checksum: 79d2d125d21c750deda55a34ba851d1b99952009719a930c09bd262505440f46f34c6ae40c5b346f6f807423b9a0e9142c79d977cafdcc9df4930b7b8e0b067b
   languageName: node
   linkType: hard
 
@@ -15002,9 +14999,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte@npm:^5.53.5":
-  version: 5.53.12
-  resolution: "svelte@npm:5.53.12"
+"svelte@npm:^5.55.7":
+  version: 5.55.7
+  resolution: "svelte@npm:5.55.7"
   dependencies:
     "@jridgewell/remapping": ^2.3.4
     "@jridgewell/sourcemap-codec": ^1.5.0
@@ -15015,14 +15012,14 @@ __metadata:
     aria-query: 5.3.1
     axobject-query: ^4.1.0
     clsx: ^2.1.1
-    devalue: ^5.6.4
+    devalue: ^5.8.1
     esm-env: ^1.2.1
-    esrap: ^2.2.2
+    esrap: ^2.2.4
     is-reference: ^3.0.3
     locate-character: ^3.0.0
     magic-string: ^0.30.11
     zimmerframe: ^1.1.2
-  checksum: 51d4ea92eac6e509b32b4b9195b7774ee4618dfec1c38397e007b9c3f7c191478477117e6ca848ddae3ae07a80927c887758219e37bcdd9998a9aaa006a06fc4
+  checksum: 1cde7c0c9be3c8ada9d275ea6eb42231db1450a281d278d150d957fad10c05384ecee941558c2cf3e75b59a3e9c368c47e0f59e2e7871e49d4314101a31949ec
   languageName: node
   linkType: hard
 
