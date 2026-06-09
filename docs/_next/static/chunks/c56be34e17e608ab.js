@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,782359,e=>{"use strict";e.s(["default",0,"import React from 'react'\n\nconst Header = () => (\n  <header>\n    <h1 className=\"header\">__replace_sandbox_title__</h1>\n  </header>\n)\n\nexport default Header\n"])}]);

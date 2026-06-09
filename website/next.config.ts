@@ -1,0 +1,47 @@
+import type { NextConfig } from 'next'
+import createMDX from '@next/mdx'
+import { REHYPE_AUTOLINK_HEADINGS_OPTIONS } from '@/utils/mdx'
+
+const nextConfig: NextConfig = {
+  output: 'export',
+  distDir: process.env.NODE_ENV === 'development' ? '.next' : '../docs',
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  compiler: {
+    styledComponents: true
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        condition: {
+          all: [{ path: /src\/assets\/icons\// }]
+        },
+        loaders: [
+          {
+            loader: '@svgr/webpack',
+            options: { svgo: false }
+          }
+        ],
+        as: '*.js'
+      },
+      '*': {
+        condition: {
+          all: [{ path: /SandboxFilesDist|code-snippets/ }]
+        },
+        loaders: ['raw-loader'],
+        as: '*.js'
+      }
+    }
+  }
+}
+
+const withMDX = createMDX({
+  extension: /\.(md|mdx)$/,
+  options: {
+    rehypePlugins: [
+      'rehype-slug',
+      ['rehype-autolink-headings', { ...REHYPE_AUTOLINK_HEADINGS_OPTIONS }]
+    ]
+  }
+})
+
+export default withMDX(nextConfig)

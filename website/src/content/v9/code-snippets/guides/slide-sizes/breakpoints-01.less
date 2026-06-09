@@ -1,0 +1,15 @@
+.embla {
+  --slide-size: 100%;
+  --slide-size-md-up: 50%;
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 var(--slide-size-md-up);
+  }
+}

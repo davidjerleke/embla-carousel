@@ -16,18 +16,19 @@ export const DotButton = (props: DotButtonPropType) => {
 }
 
 type PrevNextButtonPropType = {
-  enabled: boolean
+  disabled: boolean
   onClick: () => void
 }
 
 export const PrevButton = (props: PrevNextButtonPropType) => {
-  const { enabled, onClick } = props
+  const { disabled, onClick } = props
 
   return (
     <button
-      className="embla__button embla__button--prev"
+      className={'embla__button embla__button--prev'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       onClick={onClick}
-      disabled={!enabled}
     >
       <svg
         className="embla__button__svg"
@@ -41,13 +42,14 @@ export const PrevButton = (props: PrevNextButtonPropType) => {
 }
 
 export const NextButton = (props: PrevNextButtonPropType) => {
-  const { enabled, onClick } = props
+  const { disabled, onClick } = props
 
   return (
     <button
-      className="embla__button embla__button--next"
+      className={'embla__button embla__button--next'.concat(
+        disabled ? ' embla__button--disabled' : ''
+      )}
       onClick={onClick}
-      disabled={!enabled}
     >
       <svg
         className="embla__button__svg"

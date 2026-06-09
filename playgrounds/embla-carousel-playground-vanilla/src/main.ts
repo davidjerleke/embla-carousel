@@ -2,26 +2,28 @@ import EmblaCarousel, {
   EmblaOptionsType,
   EmblaPluginType
 } from 'embla-carousel'
-import { styledComponentsStylesToString } from 'utils/styledComponentStylesToString'
-import { SANDBOX_CSS } from 'components/Sandbox/sandboxStyles'
-import { RESET_STYLES } from 'components/Layout/GlobalStyles/reset'
-import { BASE_STYLES } from 'components/Layout/GlobalStyles/base'
-import { FONT_STYLES } from 'components/Layout/GlobalStyles/font'
-import { THEME_STYLES } from 'consts/themes'
+import { styledComponentsStylesToString } from 'utils/styled-components'
+import { arrayFromNumber } from 'utils/array'
+import { SANDBOX_CSS } from 'content/v9/sandboxes/sandbox-styles'
+import { RESET_STYLES } from 'utils/global-styles'
+import { BASE_STYLES } from 'utils/global-styles'
+import { FONT_STYLES } from 'utils/global-styles'
+import { THEME_STYLES } from 'utils/theme'
 import {
   ARROWS_STYLES,
   CONTROLS_STYLES,
   DOTS_STYLES,
   SLIDE_NUMBER_STYLES,
   examplesCarouselStyles
-} from 'components/Examples/examplesCarouselStyles'
-import { createSlides } from './Carousel/setupSlides'
+} from 'content/v9/examples/examples-carousel-styles'
 import {
   addPrevNextBtnsClickHandlers,
   togglePrevNextBtnsState
 } from './Carousel/setupButtons'
+import { createSlides } from './Carousel/setupSlides'
 import { createDotBtns } from './Carousel/setupDots'
 import './main.css'
+import Ssr from 'embla-carousel-ssr'
 
 const SSR_ACTIVE = true
 const SLIDE_SIZE = 50
@@ -30,11 +32,12 @@ const SLIDE_COUNT = 4
 const OPTIONS: EmblaOptionsType = {
   loop: true,
   direction: 'ltr',
-  startSnap: 0,
-  axis: 'x',
-  ssr: Array.from(Array(SLIDE_COUNT).keys()).map(() => SLIDE_SIZE)
+  startSnap: 3,
+  axis: 'x'
 }
-const PLUGINS: EmblaPluginType[] = []
+const PLUGINS: EmblaPluginType[] = [
+  Ssr({ slideSizes: arrayFromNumber(SLIDE_COUNT).map(() => SLIDE_SIZE) })
+]
 
 const injectBaseStyles = (): void => {
   const styleElement = document.createElement('style')
@@ -91,7 +94,10 @@ emblaNodes.forEach((emblaNode) => {
   createSlides(containerNode, SLIDE_COUNT)
 
   if (SSR_ACTIVE) {
-    ssrStyleNode.innerHTML = ssrApi.ssrStyles('.embla__container')
+    ssrStyleNode.innerHTML =
+      ssrApi.plugins().ssr?.getStyles('.embla__container', '.embla__slide') ||
+      ''
+
     togglePrevNextBtnsState(ssrApi, prevButtonNode, nextButtonNode)
   }
 

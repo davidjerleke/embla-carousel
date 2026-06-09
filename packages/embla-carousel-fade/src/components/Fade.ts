@@ -9,7 +9,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    fade: FadeType
+    fade: FadeType | undefined
   }
 }
 

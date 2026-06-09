@@ -4,27 +4,31 @@
   import DotButton from './DotButton.svelte'
   import PrevButton from './PrevButton.svelte'
   import NextButton from './NextButton.svelte'
+  import Ssr from 'embla-carousel-ssr'
 
-  const { options, slides, isSsr } = $props<{
+  const { options, slides, slideSize, isSsr } = $props<{
     options?: EmblaOptionsType
     slides: number[]
+    slideSize: number
     isSsr: boolean
   }>()
 
-  const emblaServerApi = useEmblaCarousel({ options })
+  const emblaServerApi = useEmblaCarousel({
+    options,
+    plugins: [Ssr({ slideSizes: slides.map(() => slideSize) })]
+  })
   let emblaApi: EmblaCarouselType | null = $state(null)
 
   let actionAttached = $state(false)
-  let prevBtnEnabled = $state(emblaServerApi.canGoToPrev())
-  let nextBtnEnabled = $state(emblaServerApi.canGoToNext())
+  let prevBtnDisabled = $state(true)
+  let nextBtnDisabled = $state(true)
   let scrollSnaps = $state<number[]>([])
-  let selectedIndex = $state(emblaServerApi.selectedSnap())
+  let selectedIndex = $state(0)
   let showSsr = $derived(isSsr && !emblaApi)
 
-  const ssrStyles = `<style>${emblaServerApi.ssrStyles(
-    '.embla__container',
-    '.embla__slide'
-  )}</style>`
+  const ssrStyles = `<style>${emblaServerApi
+    .plugins()
+    .ssr?.getStyles('.embla__container', '.embla__slide')}</style>`
 
   function onInit(emblaApi: EmblaCarouselType): void {
     scrollSnaps = emblaApi.snapList()
@@ -39,8 +43,8 @@
   }
 
   function onSelect(emblaApi: EmblaCarouselType): void {
-    prevBtnEnabled = emblaApi.canGoToPrev()
-    nextBtnEnabled = emblaApi.canGoToNext()
+    prevBtnDisabled = !emblaApi.canGoToPrev()
+    nextBtnDisabled = !emblaApi.canGoToNext()
     selectedIndex = emblaApi.selectedSnap()
   }
 
@@ -103,8 +107,8 @@
 
   <div class="embla__controls">
     <div class="embla__buttons">
-      <PrevButton enabled={prevBtnEnabled} onClick={scrollPrev} />
-      <NextButton enabled={nextBtnEnabled} onClick={scrollNext} />
+      <PrevButton disabled={prevBtnDisabled} onClick={scrollPrev} />
+      <NextButton disabled={nextBtnDisabled} onClick={scrollNext} />
     </div>
 
     <div class="embla__dots">

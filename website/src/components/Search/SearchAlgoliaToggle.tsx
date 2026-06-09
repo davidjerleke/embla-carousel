@@ -1,0 +1,98 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useAppSelector } from '@/hooks/redux'
+import { selectKeyNavigating } from '@/components/KeyEvents/key-events-reducer'
+import { useEventListener } from '@/hooks/use-event-listener'
+import {
+  MODAL_CLOSE_KEYS,
+  MODAL_SEARCH_TOGGLE_KEYS_1,
+  MODAL_SEARCH_TOGGLE_KEYS_2
+} from '@/utils/modal'
+import {
+  SearchButton,
+  SearchButtonIcon
+} from '@/components/Search/SearchButton'
+
+export const isAnyKeyPressed = (
+  keysPressed: string[],
+  keysToCheck: string[]
+): boolean => {
+  return keysToCheck.some((key) => keysPressed.includes(key))
+}
+
+export const areKeysPressed = (
+  keysPressed: string[],
+  keysToCheck: string[]
+): boolean => {
+  return keysToCheck.every((key) => keysPressed.includes(key))
+}
+
+type PropType = {
+  toggleSearch: () => void
+  closeSearch: () => void
+}
+
+export function SearchAlgoliaToggle(props: PropType) {
+  const { toggleSearch, closeSearch } = props
+  const [keysPressed, setKeysPressed] = useState<string[]>([])
+  const isKeyNavigating = useAppSelector(selectKeyNavigating)
+  const toggleElement = useRef<HTMLButtonElement>(null)
+  const areCloseKeysPressed = isAnyKeyPressed(keysPressed, MODAL_CLOSE_KEYS)
+  const areToggleKeysPressed1 = areKeysPressed(
+    keysPressed,
+    MODAL_SEARCH_TOGGLE_KEYS_1
+  )
+  const areToggleKeysPressed2 = areKeysPressed(
+    keysPressed,
+    MODAL_SEARCH_TOGGLE_KEYS_2
+  )
+
+  const onKeyDown = useCallback(({ key }: KeyboardEvent) => {
+    setKeysPressed((keysPressed) => {
+      if (keysPressed.includes(key)) return keysPressed
+      return [...keysPressed, key]
+    })
+  }, [])
+
+  const onKeyUp = useCallback(({ key }: KeyboardEvent) => {
+    if (key === 'Meta') setKeysPressed([])
+    setKeysPressed((keysPressed) => keysPressed.filter((k) => k !== key))
+  }, [])
+
+  useEventListener('keydown', onKeyDown)
+  useEventListener('keyup', onKeyUp)
+
+  useEffect(() => {
+    if (areCloseKeysPressed) return closeSearch()
+    if (areToggleKeysPressed1 || areToggleKeysPressed2) return toggleSearch()
+  }, [
+    toggleSearch,
+    closeSearch,
+    areCloseKeysPressed,
+    areToggleKeysPressed1,
+    areToggleKeysPressed2
+  ])
+
+  const loadSearchAlgolia = useCallback(async () => {
+    const module = await import('@/components/Search/SearchAlgolia')
+    return { default: module.SearchAlgolia }
+  }, [])
+
+  useEventListener('mouseenter', loadSearchAlgolia, toggleElement, {
+    passive: true
+  })
+  useEventListener('touchstart', loadSearchAlgolia, toggleElement, {
+    passive: true
+  })
+
+  return (
+    <SearchButton
+      ref={toggleElement}
+      $isKeyNavigating={isKeyNavigating}
+      onClick={toggleSearch}
+      aria-label="Search"
+      type="button"
+    >
+      <SearchButtonIcon svg="search" />
+    </SearchButton>
+  )
+}

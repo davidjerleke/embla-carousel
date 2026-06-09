@@ -1,5 +1,5 @@
 type EventNameType = keyof DocumentEventMap | keyof WindowEventMap
-type EventHandlerType = (evt: any) => void
+type EventHandlerType = (evt: any) => void // eslint-disable-line @typescript-eslint/no-explicit-any
 type EventOptionsType = boolean | AddEventListenerOptions | undefined
 type EventRemoverType = () => void
 

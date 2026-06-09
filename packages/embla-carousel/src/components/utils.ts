@@ -1,5 +1,7 @@
 import { PointerEventType } from './DragTracker'
 import { NumberStoreType } from './NumberStore'
+import { CreatePluginType, EmblaPluginType } from './Plugins'
+import { EmblaSsrHandlerType, EmblaSsrType } from './SsrHandler'
 
 export type WindowType = Window & typeof globalThis
 
@@ -11,6 +13,13 @@ export function mapStoreToNumber<ReturnType>(
   return (input: NumberStoreInputType): ReturnType => {
     return callback(isNumber(input) ? input : input.get())
   }
+}
+
+export function getSsrHandler(
+  pluginList: EmblaPluginType[]
+): EmblaSsrType | undefined {
+  const ssrPlugin = pluginList.find(({ name }) => name === 'ssr')
+  return <CreatePluginType<EmblaSsrHandlerType, {}>>ssrPlugin
 }
 
 export function isNumber(subject: unknown): subject is number {

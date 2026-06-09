@@ -25,9 +25,17 @@ function useEmblaCarousel(
   const storedOptions = useRef(options)
   const storedPlugins = useRef(plugins)
 
-  const serverApi = useRef(EmblaCarousel(null, options, plugins))
+  const serverApi = useRef<EmblaCarouselType | null>(null)
   const [clientApi, setClientApi] = useState<EmblaCarouselType>()
   const [rootNode, setRootNode] = useState<HTMLElement>()
+
+  if (serverApi.current === null) {
+    serverApi.current = EmblaCarousel(
+      null,
+      storedOptions.current,
+      storedPlugins.current
+    )
+  }
 
   const reInit = useCallback(() => {
     if (!clientApi) return

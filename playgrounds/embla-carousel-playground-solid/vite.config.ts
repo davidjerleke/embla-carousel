@@ -7,26 +7,15 @@ export default defineConfig({
   plugins: [solid()],
   resolve: {
     alias: {
-      consts: path.resolve(
-        __dirname,
-        '../../packages/embla-carousel-docs/src/consts'
-      ),
-      utils: path.resolve(
-        __dirname,
-        '../../packages/embla-carousel-docs/src/utils'
-      ),
-      hooks: path.resolve(
-        __dirname,
-        '../../packages/embla-carousel-docs/src/hooks'
-      ),
-      components: path.resolve(
-        __dirname,
-        '../../packages/embla-carousel-docs/src/components'
-      ),
-      assets: path.resolve(
-        __dirname,
-        '../../packages/embla-carousel-docs/src/assets'
-      )
+      '@': path.resolve(__dirname, '../../website/src'),
+      '@packages': path.resolve(__dirname, '../../packages'),
+      '@root/*': path.resolve(__dirname, '../../'),
+      '@vendor/*': path.resolve(__dirname, '../../website/vendor'),
+      utils: path.resolve(__dirname, '../../website/src/utils'),
+      hooks: path.resolve(__dirname, '../../website/src/hooks'),
+      components: path.resolve(__dirname, '../../website/src/components'),
+      assets: path.resolve(__dirname, '../../website/src/assets'),
+      content: path.resolve(__dirname, '../../website/src/content')
     }
   }
 })

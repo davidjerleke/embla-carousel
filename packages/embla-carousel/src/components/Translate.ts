@@ -6,54 +6,33 @@ import {
 } from './utils'
 
 export type TranslateType = {
-  set: (translate: string) => void
-  get: (input: NumberStoreInputType) => string
   to: (input: NumberStoreInputType) => void
-  setIsScrolling: (active: boolean) => void
   toggleActive: (active: boolean) => void
   clear: () => void
 }
 
-export function Translate(
-  axis: AxisType,
-  node: HTMLElement,
-  unit: 'px' | '%' = 'px'
-): TranslateType {
+export function Translate(axis: AxisType, node: HTMLElement): TranslateType {
   const getTranslate = axis.scroll === 'x' ? x : y
+  const nodeStyle = node.style
 
-  let lastTranslate: string | null = null
-  let isScrolling = false
+  let previousTarget: number | null
   let disabled = false
 
-  function set(translate: string): void {
-    if (lastTranslate === translate) return
-    lastTranslate = translate
-    node.style.transform = translate
-  }
-
   function x(input: number): string {
-    return `translate3d(${input}${unit},0px,0px)`
+    return `translate3d(${input}px,0px,0px)`
   }
 
   function y(input: number): string {
-    return `translate3d(0px,${input}${unit},0px)`
-  }
-
-  function setIsScrolling(active: boolean): void {
-    if (disabled) return
-    if (isScrolling === active) return
-
-    isScrolling = active
-    const transform = active ? getTranslate(0) : ''
-    set(transform)
+    return `translate3d(0px,${input}px,0px)`
   }
 
   function to(input: number): void {
     if (disabled) return
-    if (!isScrolling) setIsScrolling(true)
 
     const newTarget = roundToTwoDecimals(axis.direction(input))
-    set(getTranslate(newTarget))
+    if (newTarget === previousTarget) return
+    nodeStyle.transform = getTranslate(newTarget)
+    previousTarget = newTarget
   }
 
   function toggleActive(active: boolean): void {
@@ -61,17 +40,14 @@ export function Translate(
   }
 
   function clear(): void {
-    set('')
+    nodeStyle.transform = ''
     if (!node.getAttribute('style')) node.removeAttribute('style')
   }
 
   const self: TranslateType = {
-    set,
     clear,
     to: mapStoreToNumber(to),
-    get: mapStoreToNumber(getTranslate),
-    toggleActive,
-    setIsScrolling
+    toggleActive
   }
   return self
 }

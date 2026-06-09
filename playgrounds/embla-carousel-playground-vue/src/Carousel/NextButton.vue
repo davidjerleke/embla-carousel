@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  enabled: boolean
+  disabled: boolean
   onClick: () => void
 }>()
 </script>
@@ -8,8 +8,8 @@ defineProps<{
 <template>
   <button
     class="embla__button embla__button--next"
+    :class="{ 'embla__button--disabled': disabled }"
     @click="onClick"
-    :disabled="!enabled"
   >
     <svg
       class="embla__button__svg"

@@ -1,0 +1,278 @@
+export const metadata = {
+  title: 'Auto Scroll',
+  description: `Learn how to add continuous scrolling functionality with the Auto Scroll plugin for Embla Carousel.`,
+  order: 30
+}
+
+import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
+
+import autoScrollInstallation_cdn_01 from '@/content/v8/code-snippets/plugins/auto-scroll/installation-cdn-01.html'
+import autoScrollInstallation_npm_01 from '@/content/v8/code-snippets/plugins/auto-scroll/installation-npm-01.sh'
+import autoScrollInstallation_yarn_01 from '@/content/v8/code-snippets/plugins/auto-scroll/installation-yarn-01.sh'
+import autoScrollInstallation_pnpm_01 from '@/content/v8/code-snippets/plugins/auto-scroll/installation-pnpm-01.sh'
+
+import packageJson from '@packages/embla-carousel-auto-scroll/package.json'
+import { ExampleAutoScroll } from '@/content/v8/examples/Predefined/Plugins/AutoScrollLazy'
+
+# Auto Scroll
+
+<RepositoryLink href={packageJson.name} />
+
+The Auto Scroll plugin extends Embla Carousel with smooth, continuous scrolling functionality.
+
+---
+
+## Example
+
+<ExampleAutoScroll />
+
+## Installation
+
+Start by installing the **npm package** and save it to your dependencies:
+
+<Tabs groupId={TABS_PACKAGE_MANAGER.GROUP_ID}>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.CDN}>
+    <PrismHighlight language="html" code={autoScrollInstallation_cdn_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.NPM}>
+    <PrismHighlight language="shell" code={autoScrollInstallation_npm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.PNPM}>
+    <PrismHighlight language="shell" code={autoScrollInstallation_pnpm_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_PACKAGE_MANAGER.TABS.YARN}>
+    <PrismHighlight language="shell" code={autoScrollInstallation_yarn_01} />
+  </TabsItem>
+</Tabs>
+
+## Options
+
+Below follows an exhaustive **list of all** `Auto Scroll` **options** and their default values.
+
+### active
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ active: false | true }`} />
+
+Setting this to `false` will not activate or deactivate the plugin. Useful when used together with the [`breakpoints`](#breakpoints) option to toggle the plugin active/inactive depending on media queries.
+
+---
+
+### breakpoints
+
+<ApiMetaData
+  firstRow={['Type', 'AutoScrollOptionsType']}
+  secondRow={['Default', '{}']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ 
+    speed: 1,
+    '(min-width: 768px)': { speed: 2 }
+}`}
+/>
+
+An object with options that will be applied for a given breakpoint by overriding the options at the root level.
+
+<Admonition type="note">
+  **Note:** If multiple queries match, they will be merged. And when breakpoint
+  options clash, the last one in the list has precedence.
+</Admonition>
+
+---
+
+### speed
+
+<ApiMetaData firstRow={['Type', 'number']} secondRow={['Default', '2']} />
+<PrismHighlight language="ts" hideLabel code={`{ speed: 2 }`} />
+
+Number of pixels auto scroll should advance per frame.
+
+---
+
+### startDelay
+
+<ApiMetaData firstRow={['Type', 'number']} secondRow={['Default', '1000']} />
+<PrismHighlight language="ts" hideLabel code={`{ startDelay: 1000 }`} />
+
+Number of milliseconds auto scroll should **wait before it starts**. This also applies when user interactions end and [`stopOnInteraction`](#stoponinteraction) is `false`.
+
+---
+
+### direction
+
+<ApiMetaData firstRow={['Type', 'string']} secondRow={['Default', 'forward']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ direction: 'forward' | 'backward' }`}
+/>
+
+This option is used to set the auto scroll direction. Set it to `backward` if you want it to scroll in the opposite direction.
+
+---
+
+### playOnInit
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight language="ts" hideLabel code={`{ playOnInit: true | false }`} />
+
+If set to `false`, you'll have to start auto scroll yourself by calling the [`play`](#play) method.
+
+---
+
+### stopOnInteraction
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ stopOnInteraction: true | false }`}
+/>
+
+If set to `false`, auto scroll will not be disabled after drag interactions, and it will restart every time after an interaction.
+
+---
+
+### stopOnMouseEnter
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'false']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ stopOnMouseEnter: true | false }`}
+/>
+
+When enabled, auto scroll will stop when a mouse pointer enters the Embla Carousel container. If [`stopOnInteraction`](#stoponinteraction) is also `false`, auto scroll will resume when the mouse leaves the carousel container.
+
+---
+
+### stopOnFocusIn
+
+<ApiMetaData firstRow={['Type', 'boolean']} secondRow={['Default', 'true']} />
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ stopOnFocusIn: true | false }`}
+/>
+
+When enabled, auto scroll will stop when a focusable element inside the carousel recieves focus. If [`stopOnInteraction`](#stoponinteraction) is `false`, auto scroll will resume when the user leaves focus.
+
+---
+
+### rootNode
+
+<ApiMetaData
+  firstRow={['Type', '(emblaRoot: HTMLElement) => HTMLElement | null']}
+  secondRow={['Default', 'null']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`{ rootNode: null | (emblaRoot) => emblaRoot.parentElement }`}
+/>
+
+The **node** that should **respond** to user **interactions** like [`stopOnMouseEnter`](#stoponmouseenter) and [`stopOnInteraction`](#stoponinteraction). If this is omitted, the node that wraps the Embla Carousel will be used as default.
+
+---
+
+## Methods
+
+Below follows an exhaustive **list of all** `Auto Scroll` **methods** with their respective parameters and return values.
+
+---
+
+### play
+
+<ApiMetaData
+  firstRow={['Parameters', '(startDelayOverride?: number)']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoScroll?.play(1000)`}
+/>
+
+Start auto scroll. Pass a **startDelayOverride** if you want to change the [`startDelay`](#startdelay) option after the plugin has been initialized.
+
+---
+
+### stop
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoScroll?.stop()`}
+/>
+
+Stops auto scroll.
+
+---
+
+### reset
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'void']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoScroll?.reset()`}
+/>
+
+Stops auto scroll, and starts the timer again using [`startDelay`](#startdelay) when the carousel has settled. This will only take effect if auto scroll is playing. If auto scroll is stopped, this method won't trigger anything.
+
+---
+
+### isPlaying
+
+<ApiMetaData
+  firstRow={['Parameters', 'none']}
+  secondRow={['Returns', 'boolean']}
+/>
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.plugins().autoScroll?.isPlaying()`}
+/>
+
+Returns a boolean whether the carousel is auto scrolling or not.
+
+---
+
+## Events
+
+Below follows an exhaustive **list of all** `Auto Scroll` **events** together with information about how they work.
+
+---
+
+### autoScroll:play
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoScroll:play', (emblaApi) => {})`}
+/>
+
+Fires when auto scroll starts playing.
+
+---
+
+### autoScroll:stop
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('autoScroll:stop', (emblaApi) => {})`}
+/>
+
+Fires when auto scroll stops scrolling.
+
+---

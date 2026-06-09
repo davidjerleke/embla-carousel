@@ -1,9 +1,0 @@
-{
-  "compilerOptions": {
-    "target": "es6",
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "node16",
-    "module": "node16"
-  }
-}

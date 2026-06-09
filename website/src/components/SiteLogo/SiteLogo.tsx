@@ -1,0 +1,149 @@
+'use client'
+
+import { PropsWithChildren, useEffect, useRef, useState } from 'react'
+import styled, { css } from 'styled-components'
+import logoLightThemeDefaultUrl from '@/assets/images/embla-logo-light-theme.svg'
+import logoDarkThemeDefaultUrl from '@/assets/images/embla-logo-dark-theme.svg'
+import logoLightThemeBlurUrl from '@/assets/images/embla-logo-light-theme-blur.svg'
+import logoDarkThemeBlurUrl from '@/assets/images/embla-logo-dark-theme-blur.svg'
+import { GLOBAL_DATA } from '@/utils/global-data'
+import { THEME_KEYS } from '@/utils/theme'
+import { LAYERS } from '@/utils/layers'
+import { Icon } from '@/components/Icon/Icon'
+
+const SiteLogoWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+    width: 100%;
+  }
+`
+
+const imageStyles = css`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  z-index: ${LAYERS.STEP};
+`
+
+const imageIconStyles = css<{ $opacity: string }>`
+  opacity: ${({ $opacity }) => $opacity};
+  transition: opacity 1s;
+`
+
+export const LogoLightImage = styled.img`
+  ${imageStyles};
+`
+
+export const LogoDarkImage = styled.img`
+  ${imageStyles};
+`
+
+export const LogoLightIcon = styled(Icon)<{ $opacity: string }>`
+  ${imageStyles};
+  ${imageIconStyles};
+`
+
+export const LogoDarkIcon = styled(Icon)<{ $opacity: string }>`
+  ${imageStyles};
+  ${imageIconStyles};
+`
+
+type LogoImagesType = {
+  default: {
+    light: string
+    dark: string
+  }
+  blur: {
+    light: string
+    dark: string
+  }
+}
+
+const LOGO_IMAGES: LogoImagesType = {
+  default: {
+    [THEME_KEYS.LIGHT]: logoLightThemeDefaultUrl.src,
+    [THEME_KEYS.DARK]: logoDarkThemeDefaultUrl.src
+  },
+  blur: {
+    [THEME_KEYS.LIGHT]: logoLightThemeBlurUrl.src,
+    [THEME_KEYS.DARK]: logoDarkThemeBlurUrl.src
+  }
+}
+
+type LogoSvgsType = {
+  default: {
+    light: 'emblaLightDefault'
+    dark: 'emblaDarkDefault'
+  }
+  blur: {
+    light: 'emblaLightBlur'
+    dark: 'emblaDarkBlur'
+  }
+}
+
+const LOGO_SVGS: LogoSvgsType = {
+  default: {
+    [THEME_KEYS.LIGHT]: 'emblaLightDefault',
+    [THEME_KEYS.DARK]: 'emblaDarkDefault'
+  },
+  blur: {
+    [THEME_KEYS.LIGHT]: 'emblaLightBlur',
+    [THEME_KEYS.DARK]: 'emblaDarkBlur'
+  }
+}
+
+type PropType = PropsWithChildren<{
+  appearance?: keyof typeof LOGO_IMAGES
+}>
+
+export function SiteLogo(props: PropType) {
+  const { appearance, ...restProps } = props
+  const { TITLE } = GLOBAL_DATA
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const appearanceOrDefault = appearance || 'default'
+  const lightSvg = LOGO_SVGS[appearanceOrDefault].light
+  const darkSvg = LOGO_SVGS[appearanceOrDefault].dark
+  const svgOpacity = hasLoaded ? '0' : '1'
+  const imageLightRef = useRef<HTMLImageElement>(null)
+  const imageDarkRef = useRef<HTMLImageElement>(null)
+  const alt = `An illustrated atom like body which is the logotype of ${TITLE}`
+
+  useEffect(() => {
+    const imageLight = imageLightRef.current
+    const imageDark = imageDarkRef.current
+    const imagesHaveLoaded = imageLight?.complete && imageDark?.complete
+
+    if (imagesHaveLoaded) setHasLoaded(true)
+  }, [])
+
+  return (
+    <SiteLogoWrapper {...restProps}>
+      <LogoLightIcon svg={lightSvg} fill={undefined} $opacity={svgOpacity} />
+      <LogoDarkIcon svg={darkSvg} fill={undefined} $opacity={svgOpacity} />
+
+      <LogoLightImage
+        ref={imageLightRef}
+        src={LOGO_IMAGES[appearanceOrDefault].light}
+        alt={alt}
+        onLoad={() => setHasLoaded(true)}
+      />
+      <LogoDarkImage
+        ref={imageDarkRef}
+        src={LOGO_IMAGES[appearanceOrDefault].dark}
+        alt={alt}
+        onLoad={() => setHasLoaded(true)}
+      />
+    </SiteLogoWrapper>
+  )
+}

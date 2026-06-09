@@ -25,11 +25,11 @@
 
     /* Paths */
     "paths": {
-      "utils/*": ["../../packages/embla-carousel-docs/src/utils/*"],
-      "consts/*": ["../../packages/embla-carousel-docs/src/consts/*"],
-      "hooks/*": ["../../packages/embla-carousel-docs/src/hooks/*"],
-      "components/*": ["../../packages/embla-carousel-docs/src/components/*"],
-      "assets/*": ["../../packages/embla-carousel-docs/src/assets/*"]
+      "utils/*": ["../../website/src/utils/*"],
+      "hooks/*": ["../../website/src/hooks/*"],
+      "components/*": ["../../website/src/components/*"],
+      "assets/*": ["../../website/src/assets/*"],
+      "content/*": ["../../website/src/content/*"]
     }
   },
   "include": ["src"]

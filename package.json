@@ -1,6 +1,6 @@
 {
   "name": "embla-carousel-monorepo",
-  "version": "9.0.0-rc01",
+  "version": "9.0.0-rc02",
   "private": true,
   "author": "David Jerleke",
   "description": "A lightweight carousel library with fluid motion and great swipe precision",
@@ -19,19 +19,20 @@
     "packages/embla-carousel-solid",
     "packages/embla-carousel-vue",
     "packages/embla-carousel-svelte",
-    "packages/embla-carousel-docs",
     "packages/embla-carousel-autoplay",
     "packages/embla-carousel-auto-scroll",
     "packages/embla-carousel-auto-height",
     "packages/embla-carousel-class-names",
     "packages/embla-carousel-fade",
+    "packages/embla-carousel-ssr",
     "packages/embla-carousel-accessibility",
     "packages/embla-carousel-reactive-utils",
     "playgrounds/embla-carousel-playground-vanilla",
     "playgrounds/embla-carousel-playground-react",
     "playgrounds/embla-carousel-playground-solid",
     "playgrounds/embla-carousel-playground-vue",
-    "playgrounds/embla-carousel-playground-svelte"
+    "playgrounds/embla-carousel-playground-svelte",
+    "website"
   ],
   "scripts": {
     "eslint:report": "yarn workspaces foreach -v --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte}\" run eslint:report",
@@ -49,16 +50,16 @@
     "watch:playground-solid": "yarn workspace embla-carousel-playground-solid run dev",
     "watch:playground-vue": "yarn workspace embla-carousel-playground-vue run dev",
     "watch:playground-svelte": "yarn workspace embla-carousel-playground-svelte run dev",
-    "start": "yarn workspace embla-carousel-docs run start",
+    "start": "yarn workspace embla-carousel-website run dev",
     "start:vanilla": "npm-run-all --parallel watch:package-vanilla watch:playground-vanilla",
     "start:react": "npm-run-all --parallel watch:package-vanilla watch:package-react watch:playground-react",
     "start:solid": "npm-run-all --parallel watch:package-vanilla watch:package-solid watch:playground-solid",
     "start:vue": "npm-run-all --parallel watch:package-vanilla watch:package-vue watch:playground-vue",
     "start:svelte": "npm-run-all --parallel watch:package-vanilla watch:package-svelte watch:playground-svelte",
     "build": "npm-run-all build:packages format",
-    "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte}\" run build",
-    "build:package-readmes": "npx ts-node --project scripts/tsconfig.node.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
-    "build:docs": "yarn workspace embla-carousel-docs run predeploy",
+    "build:packages": "yarn workspaces foreach -vt --exclude \"{embla-carousel-monorepo,embla-carousel-playground-vanilla,embla-carousel-playground-react,embla-carousel-playground-solid,embla-carousel-playground-vue,embla-carousel-playground-svelte,embla-carousel-website}\" run build",
+    "build:package-readmes": "npx ts-node --project scripts/tsconfig.json scripts/create-readmes/index.ts --templatePath=scripts/create-readmes/readme-template.md",
+    "build:docs": "yarn workspace embla-carousel-website run predeploy",
     "version:patch": "yarn workspaces foreach version patch && yarn version:push",
     "version:minor": "yarn workspaces foreach version minor && yarn version:push",
     "version:major": "yarn workspaces foreach version major && yarn version:push",
@@ -67,16 +68,24 @@
   },
   "devDependencies": {
     "@babel/core": "7.23.2",
+    "@eslint/js": "^9.0.0",
     "@octokit/types": "^11.1.0",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/dotenv": "^8.2.3",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "2.8.8",
-    "rollup": "^4.22.4",
-    "typescript": "^5.2.2"
+    "rollup": "^4.61.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^8.0.0"
   },
   "dependencies": {
     "@octokit/graphql": "^9.0.1",
@@ -84,34 +93,13 @@
     "dotenv": "^17.2.1"
   },
   "dependenciesMeta": {
-    "core-js": {
-      "built": true
-    },
-    "core-js-pure": {
-      "built": true
-    },
-    "es5-ext": {
-      "built": true
-    },
     "esbuild": {
       "built": true
     },
-    "gatsby": {
-      "built": true
-    },
-    "gatsby-cli": {
-      "built": true
-    },
-    "gatsby-telemetry": {
-      "built": true
-    },
-    "lmdb": {
-      "built": true
-    },
-    "msgpackr-extract": {
-      "built": true
-    },
     "sharp": {
+      "built": true
+    },
+    "unrs-resolver": {
       "built": true
     }
   },

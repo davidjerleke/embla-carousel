@@ -1,0 +1,361 @@
+export const metadata = {
+  title: 'Events',
+  description: `Learn how to use Embla Carousel events to respond to user interactions and carousel state changes.`,
+  order: 30
+}
+
+import { TABS_LIBRARY } from '@/utils/tabs'
+
+import addingEventListeners_html_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-vanilla-01.html'
+import addingEventListeners_module_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-vanilla-01.js'
+import addingEventListeners_react_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-react-01.jsx'
+import addingEventListeners_vue_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-vue-01.vue'
+import addingEventListeners_solid_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-solid-01.jsx'
+import addingEventListeners_svelte_01 from '@/content/v8/code-snippets/api/events/adding-event-listeners-svelte-01.svelte'
+import removingEventListeners_module_01 from '@/content/v8/code-snippets/api/events/removing-event-listeners-vanilla-01.js'
+import removingEventListeners_react_01 from '@/content/v8/code-snippets/api/events/removing-event-listeners-react-01.jsx'
+import removingEventListeners_vue_01 from '@/content/v8/code-snippets/api/events/removing-event-listeners-vue-01.vue'
+import removingEventListeners_solid_01 from '@/content/v8/code-snippets/api/events/removing-event-listeners-solid-01.jsx'
+import removingEventListeners_svelte_01 from '@/content/v8/code-snippets/api/events/removing-event-listeners-svelte-01.svelte'
+import typeScriptEvents_module_01 from '@/content/v8/code-snippets/api/events/typescript-events-vanilla-01.ts'
+import typeScriptEvents_react_01 from '@/content/v8/code-snippets/api/events/typescript-events-react-01.tsx'
+import typeScriptEvents_vue_01 from '@/content/v8/code-snippets/api/events/typescript-events-vue-01.vue'
+import typeScriptEvents_solid_01 from '@/content/v8/code-snippets/api/events/typescript-events-solid-01.tsx'
+import typeScriptEvents_svelte_01 from '@/content/v8/code-snippets/api/events/typescript-events-svelte-01.svelte'
+
+# Events
+
+Embla Carousel provides a set of **events** you can listen to for reacting to **carousel updates and user interactions**.
+
+---
+
+## Usage
+
+Events are available only on an **initialized carousel instance**. They fire throughout the carousel's lifecycle, and any added listeners remain active even after a hard reset with the [`reInit`](/docs/api/methods/#reinit) method.
+
+### Adding event listeners
+
+After initializing the carousel, you can **subscribe** to events. The following example shows how to listen for the [`slidesInView`](#slidesinview) event:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={addingEventListeners_module_01}
+      highlight="12"
+    />
+    <PrismHighlight language="html" code={addingEventListeners_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={addingEventListeners_react_01}
+      highlight="13"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={addingEventListeners_vue_01}
+      highlight="15"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={addingEventListeners_solid_01}
+      highlight="14"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={addingEventListeners_svelte_01}
+      highlight="13"
+    />
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblainit` will remain for backward
+      compatibility.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+### Removing event listeners
+
+To remove an event listener, call the [`off`](/docs/v8/api/methods/#off) method and pass the **same callback reference** that was originally used with [`on`](/docs/v8/api/methods/#on).
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      code={removingEventListeners_module_01}
+      highlight="10"
+    />
+    <PrismHighlight language="html" code={addingEventListeners_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="jsx"
+      code={removingEventListeners_react_01}
+      highlight="9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={removingEventListeners_vue_01}
+      highlight="9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="jsx"
+      code={removingEventListeners_solid_01}
+      highlight="9"
+    />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={removingEventListeners_svelte_01}
+      highlight="9"
+    />
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblainit` will remain for backward
+      compatibility.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+### TypeScript
+
+The EmblaEventType is obtained directly from the core package embla-carousel and used like so:
+
+<Tabs groupId={TABS_LIBRARY.GROUP_ID}>
+  <TabsItem tab={TABS_LIBRARY.TABS.VANILLA}>
+    <PrismHighlight
+      language="js"
+      asLanguage="ts"
+      code={typeScriptEvents_module_01}
+      highlight="3,13"
+    />
+    <PrismHighlight language="html" code={addingEventListeners_html_01} />
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.REACT}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptEvents_react_01}
+      highlight="2,10"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-react` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.VUE}>
+    <PrismHighlight
+      language="html"
+      code={typeScriptEvents_vue_01}
+      highlight="3,10"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-vue` has `embla-carousel` as a
+      dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SOLID}>
+    <PrismHighlight
+      language="tsx"
+      code={typeScriptEvents_solid_01}
+      highlight="2,10"
+    />
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-solid` has `embla-carousel` as
+      a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+  <TabsItem tab={TABS_LIBRARY.TABS.SVELTE}>
+    <PrismHighlight
+      language="svelte"
+      code={typeScriptEvents_svelte_01}
+      highlight="4,14"
+    />
+    <Admonition type="note">
+      **Note:** Starting with Svelte 5, the `on:` event handlers have been
+      deprecated. However, `on:emblainit` will remain for backward
+      compatibility.
+    </Admonition>
+    <Admonition type="warning">
+      If you're using `pnpm`, you need to install `embla-carousel` as a
+      **devDependency** when importing types from it like demonstrated above.
+      <br />
+      This is because even though `embla-carousel-svelte` has `embla-carousel`
+      as a dependency, `pnpm` makes nested dependencies inaccessible by design.
+    </Admonition>
+  </TabsItem>
+</Tabs>
+
+## Reference
+
+Below follows an exhaustive **list of all** Embla Carousel **events** together with information about how they work.
+
+---
+
+### init
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('init', (emblaApi) => {})`}
+/>
+
+Runs when the carousel mounts for the first time. This only fires once which means that it won't fire when the carousel is re-initialized using the [`reInit`](/docs/v8/api/methods/#reinit) method.
+
+---
+
+### reInit
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('reInit', (emblaApi) => {})`}
+/>
+
+Runs when the [`reInit`](/docs/v8/api/methods/#reinit) method is called. When the window is resized, Embla Carousel automatically calls the [`reInit`](/docs/v8/api/methods/#reinit) method which will also fire this event.
+
+---
+
+### destroy
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('destroy', (emblaApi) => {})`}
+/>
+
+Runs when the carousel has been destroyed using the [`destroy`](/docs/v8/api/methods/#destroy) method. This only fires once and will be the last event the carousel fires.
+
+---
+
+### select
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('select', (emblaApi) => {})`}
+/>
+
+/>
+
+Runs when the selected scroll snap changes. The select event is triggered by drag interactions or the [`scrollNext`](/docs/v8/api/methods/#scrollnext), [`scrollPrev`](/docs/v8/api/methods/#scrollprev) or [`scrollTo`](/docs/v8/api/methods/#scrollto) methods.
+
+---
+
+### scroll
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('scroll', (emblaApi) => {})`}
+/>
+
+Runs when the carousel is scrolling. It might be a good idea to throttle this if you're doing expensive stuff in your callback function.
+
+---
+
+### settle
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('settle', (emblaApi) => {})`}
+/>
+
+Runs when the carousel has settled after scroll has been triggered. Please note that this can take longer than you think when [`dragFree`](/docs/v8/api/options/#dragfree) is enabled or when using slow [`transitions`](/docs/v8/api/options/#duration).
+
+---
+
+### resize
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('resize', (emblaApi) => {})`}
+/>
+
+Runs when the carousel container or the slide sizes change. It's using [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) under the hood.
+
+---
+
+### slidesInView
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('slidesInView', (emblaApi) => {})`}
+/>
+
+/>
+
+Runs when any slide has **entered** or **exited** the viewport. This event is intended to be used together with the [`slidesInView`](/docs/v8/api/methods/#slidesinview) and/or [`slidesNotInView`](/docs/v8/api/methods/#slidesnotinview) methods.
+
+---
+
+### slidesChanged
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('slidesChanged', (emblaApi) => {})`}
+/>
+
+Runs when slides are added to, or removed from the carousel [`container`](/docs/v8/api/options/#container). It's using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood.
+
+---
+
+### slideFocus
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('slideFocus', (emblaApi) => {})`}
+/>
+
+Runs when a slide receives focus. For example, when a focusable element like a button, link or input receives focus inside a slide.
+
+---
+
+### pointerDown
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('pointerDown', (emblaApi) => {})`}
+/>
+
+Runs when the user has a pointer down on the carousel. It's triggered by a `touchstart` or a `mousedown` event.
+
+---
+
+### pointerUp
+
+<PrismHighlight
+  language="ts"
+  hideLabel
+  code={`emblaApi.on('pointerUp', (emblaApi) => {})`}
+/>
+
+Runs when the user has released the pointer from the carousel. It's triggered by a `touchend` or a `mouseup` event.
+
+---

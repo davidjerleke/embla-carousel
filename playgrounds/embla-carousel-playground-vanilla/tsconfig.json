@@ -22,11 +22,13 @@
 
     /* Paths */
     "paths": {
-      "utils/*": ["../../packages/embla-carousel-docs/src/utils/*"],
-      "consts/*": ["../../packages/embla-carousel-docs/src/consts/*"],
-      "hooks/*": ["../../packages/embla-carousel-docs/src/hooks/*"],
-      "components/*": ["../../packages/embla-carousel-docs/src/components/*"],
-      "assets/*": ["../../packages/embla-carousel-docs/src/assets/*"]
+      "@/*": ["../../website/src/*"],
+      "@packages/*": ["../../packages/*"],
+      "utils/*": ["../../website/src/utils/*"],
+      "content/*": ["../../website/src/content/*"],
+      "hooks/*": ["../../website/src/hooks/*"],
+      "components/*": ["../../website/src/components/*"],
+      "assets/*": ["../../website/src/assets/*"]
     }
   },
   "include": ["src"]

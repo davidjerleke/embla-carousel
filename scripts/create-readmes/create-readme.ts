@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import { kebabCaseToPascalCase } from '../utils/kebabCaseToPascalCase'
-import { CONSOLE_FONT_COLORS } from '../utils/consoleFontColors'
+import { kebabCaseToPascalCase } from '../utils/kebab-case-to-pascal-case'
+import { CONSOLE_FONT_COLORS } from '../utils/console-font-colors'
 
 const PACKAGE_NAME_PASCAL_REGEX = /__REPLACE_PACKAGE_PASCAL_NAME__/g
 const PACKAGE_NAME_REGEX = /__REPLACE_PACKAGE_NAME__/g
@@ -10,13 +10,13 @@ const CONTRIBUTORS_REGEX = /__REPLACE_CONTRIBUTORS__/g
 const SPONSORS_CURRENT_REGEX = /__REPLACE_CURRENT_SPONSORS__/g
 const SPONSORS_PAST_REGEX = /__REPLACE_PAST_SPONSORS__/g
 
-export const createReadme = (
+export function createReadme(
   template: string,
   workspacePath: string,
   contributors: string,
   currentSponsors: string,
   pastSponsors: string
-): void => {
+): void {
   const packageJsonPath = path.join(workspacePath, 'package.json')
   const readmePath = path.join(workspacePath, 'README.md')
   const workspacePackageJson = fs.readFileSync(packageJsonPath, 'utf-8')

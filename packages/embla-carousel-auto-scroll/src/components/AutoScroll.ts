@@ -29,7 +29,7 @@ type AutoScrollInteractionType = {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    autoScroll: AutoScrollType
+    autoScroll: AutoScrollType | undefined
   }
 
   interface EmblaEventListType {

@@ -32,7 +32,6 @@ import { Translate, TranslateType } from './Translate'
 import { arrayKeys, arrayLast, arrayLastIndex } from './utils'
 import { NumberStore, NumberStoreType } from './NumberStore'
 import { NodeHandlerType } from './NodeHandler'
-import { ScrollOptimizer, ScrollOptimizerType } from './ScrollOptimizer'
 
 export type EngineType = {
   isSsr: boolean
@@ -67,7 +66,6 @@ export type EngineType = {
   scrollTarget: ScrollTargetType
   scrollSnaps: number[]
   slideIndexes: number[]
-  scrollOptimizer: ScrollOptimizerType
   slideSizes: number[]
   slideFocus: SlideFocusType
   scrollSnapList: ScrollSnapListType
@@ -204,20 +202,6 @@ export function Engine(
     offsetLocation,
     slideTranslates
   )
-  const scrollOptimizer = ScrollOptimizer(
-    viewSize,
-    contentSize,
-    slideSizesWithGaps,
-    snaps,
-    loop,
-    indexCurrent,
-    scrollSnapList,
-    offsetLocation,
-    target,
-    slideTranslates,
-    slideLooper,
-    eventHandler
-  )
   const scrollTarget = ScrollTarget(
     loop,
     scrollSnaps,
@@ -327,7 +311,6 @@ export function Engine(
     slidesToScroll,
     slideTranslates,
     scrollSnapList,
-    scrollOptimizer,
     translate,
     target
   }

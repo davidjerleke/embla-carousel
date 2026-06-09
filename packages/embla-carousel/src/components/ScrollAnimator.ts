@@ -34,7 +34,6 @@ export function ScrollAnimator(): ScrollAnimatorType {
       animation,
       eventHandler,
       scrollBounds,
-      scrollOptimizer,
       options: { loop }
     } = engine
 
@@ -50,7 +49,6 @@ export function ScrollAnimator(): ScrollAnimatorType {
     const isSettled = isIdleAndCanSettle && !isPointerDown
 
     if (isSettled) {
-      scrollOptimizer.optimize(isSettled)
       animation.stop()
     }
 
@@ -65,7 +63,6 @@ export function ScrollAnimator(): ScrollAnimatorType {
     }
 
     translate.to(offsetLocation)
-    scrollOptimizer.optimize()
 
     if (isSettled) {
       const event = eventHandler.createEvent('settle', null)

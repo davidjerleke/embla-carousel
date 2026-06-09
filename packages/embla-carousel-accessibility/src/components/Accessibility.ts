@@ -15,7 +15,7 @@ import {
 
 declare module 'embla-carousel' {
   interface EmblaPluginsType {
-    accessibility: AccessibilityType
+    accessibility: AccessibilityType | undefined
   }
 }
 
