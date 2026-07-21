@@ -67,7 +67,7 @@
     "version:push": "yarn install && yarn build && yarn build:package-readmes && yarn format && yarn version:create && git add -A && git push && git push --tags"
   },
   "devDependencies": {
-    "@babel/core": "7.29.6",
+    "@babel/core": "7.29.7",
     "@eslint/js": "^9.0.0",
     "@octokit/types": "^11.1.0",
     "@rollup/plugin-babel": "^6.0.4",
