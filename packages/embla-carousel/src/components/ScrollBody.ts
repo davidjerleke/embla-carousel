@@ -8,9 +8,9 @@ export type ScrollBodyType = {
   seek: () => ScrollBodyType
   settled: () => boolean
   useBaseFriction: () => ScrollBodyType
-  useBaseDuration: () => ScrollBodyType
   useFriction: (input: number) => ScrollBodyType
   useDuration: (input: number) => ScrollBodyType
+  useVelocity: (input: number) => ScrollBodyType
 }
 
 export function ScrollBody(
@@ -72,12 +72,9 @@ export function ScrollBody(
     return scrollVelocity
   }
 
-  function useBaseDuration(): ScrollBodyType {
-    return useDuration(baseDuration)
-  }
-
-  function useBaseFriction(): ScrollBodyType {
-    return useFriction(baseFriction)
+  function useVelocity(input: number): ScrollBodyType {
+    scrollVelocity = input
+    return self
   }
 
   function useDuration(input: number): ScrollBodyType {
@@ -90,6 +87,10 @@ export function ScrollBody(
     return self
   }
 
+  function useBaseFriction(): ScrollBodyType {
+    return useFriction(baseFriction)
+  }
+
   const self: ScrollBodyType = {
     direction,
     duration,
@@ -97,9 +98,9 @@ export function ScrollBody(
     seek,
     settled,
     useBaseFriction,
-    useBaseDuration,
     useFriction,
-    useDuration
+    useDuration,
+    useVelocity
   }
   return self
 }

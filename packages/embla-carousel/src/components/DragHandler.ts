@@ -145,7 +145,7 @@ export function DragHandler(
 
     pointerIsDown = true
     dragTracker.pointerDown(evt)
-    scrollBody.useFriction(0).useDuration(0)
+    scrollBody.useFriction(0).useDuration(0).useVelocity(0)
     target.set(location)
     startScroll = dragTracker.readPoint(evt)
     startCross = dragTracker.readPoint(evt, crossAxis)

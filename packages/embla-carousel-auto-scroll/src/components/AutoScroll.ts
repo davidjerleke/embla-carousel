@@ -239,7 +239,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
       settled: () => hasSettled,
       seek,
       useBaseFriction: noop,
-      useBaseDuration: noop,
+      useVelocity: noop,
       useFriction: noop,
       useDuration: noop
     }
