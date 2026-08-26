@@ -9,6 +9,10 @@ export {
   mockTestElements
 } from './testElements.mock'
 export {
+  runPendingAnimationFrames,
+  resetAnimationFrames
+} from './requestAnimationFrame.mock'
+export {
   setMatchingMediaQuery,
   resetMatchingMediaQuery
 } from './matchMedia.mock'
