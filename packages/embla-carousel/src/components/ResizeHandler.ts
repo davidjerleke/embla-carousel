@@ -1,4 +1,5 @@
 import { AxisType } from './Axis'
+import { EmblaCarouselType } from './EmblaCarousel'
 import { EventHandlerType } from './EventHandler'
 import { NodeHandlerType } from './NodeHandler'
 import { mathAbs, WindowType } from './utils'
@@ -21,6 +22,9 @@ export function ResizeHandler(
   let containerSize: number
   let slideSizes: number[] = []
   let destroyed = false
+  let resizeWindow: WindowType
+  let reInitAnimationFrame: number | null = null
+  let reInitScheduled = false
 
   function readSize(node: HTMLElement): number {
     return axis.getSize(nodeHandler.getRect(node))
@@ -29,6 +33,7 @@ export function ResizeHandler(
   function init(ownerWindow: WindowType): void {
     if (!active) return
 
+    resizeWindow = ownerWindow
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
 
@@ -41,6 +46,26 @@ export function ResizeHandler(
   function destroy(): void {
     destroyed = true
     if (resizeObserver) resizeObserver.disconnect()
+    if (reInitAnimationFrame !== null) {
+      resizeWindow.cancelAnimationFrame(reInitAnimationFrame)
+      reInitAnimationFrame = null
+    }
+    reInitScheduled = false
+  }
+
+  function scheduleReInit(api: EmblaCarouselType): void {
+    // Defer reInit() instead of calling it synchronously from inside the
+    // ResizeObserver callback, which browsers can report as a ResizeObserver
+    // loop. Multiple resize batches arriving before the frame fires collapse
+    // into a single reInit() call.
+    if (reInitScheduled) return
+    reInitScheduled = true
+
+    reInitAnimationFrame = resizeWindow.requestAnimationFrame(() => {
+      reInitScheduled = false
+      reInitAnimationFrame = null
+      if (!destroyed) api.reInit()
+    })
   }
 
   function onResize(entries: ResizeObserverEntry[]): void {
@@ -59,7 +84,7 @@ export function ResizeHandler(
       const diffSize = mathAbs(newSize - lastSize)
 
       if (diffSize >= 0.5) {
-        event.api.reInit()
+        scheduleReInit(event.api)
         break
       }
     }
