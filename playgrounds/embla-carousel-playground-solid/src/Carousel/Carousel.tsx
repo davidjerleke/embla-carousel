@@ -1,4 +1,11 @@
-import { Component, For, Show, createEffect, createSignal } from 'solid-js'
+import {
+  Component,
+  For,
+  Show,
+  createEffect,
+  createSignal,
+  untrack
+} from 'solid-js'
 import { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-solid'
 import { DotButton, NextButton, PrevButton } from './Buttons'
@@ -21,7 +28,9 @@ export const EmblaCarousel: Component<PropType> = (props) => {
   const [nextBtnDisabled, setNextBtnDisabled] = createSignal(true)
   const [selectedIndex, setSelectedIndex] = createSignal(0)
   const [scrollSnaps, setScrollSnaps] = createSignal<number[]>([])
-  const [showSsr, setShowSsr] = createSignal(props.isSsr && !emblaApi())
+  const [showSsr, setShowSsr] = createSignal(
+    untrack(() => props.isSsr && !emblaApi())
+  )
 
   function scrollPrev(): void {
     emblaApi()?.goToPrev()
@@ -45,21 +54,23 @@ export const EmblaCarousel: Component<PropType> = (props) => {
     setNextBtnDisabled(!emblaApi.canGoToNext())
   }
 
-  createEffect(() => {
-    const api = emblaApi()
-    if (!api) return
+  createEffect(
+    () => emblaApi(),
+    (api) => {
+      if (!api) return
 
-    onInit(api)
-    onSelect(api)
-    api.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
-  })
+      onInit(api)
+      onSelect(api)
+      api.on('reinit', onInit).on('reinit', onSelect).on('select', onSelect)
+    }
+  )
 
   setTimeout(
     () => {
       setRefAttached(true)
       setShowSsr(false)
     },
-    props.isSsr ? 2000 : 0
+    untrack(() => props.isSsr) ? 2000 : 0
   )
 
   return (

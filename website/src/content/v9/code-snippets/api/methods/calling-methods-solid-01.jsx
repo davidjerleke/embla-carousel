@@ -1,14 +1,15 @@
-import { createEffect, on } from 'solid-js'
+import { createEffect } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }))
 
   createEffect(
-    on(emblaApi, (api) => {
+    () => emblaApi(),
+    (api) => {
       if (!api) return
       console.log(api.slideNodes())
-    })
+    }
   )
 
   return (
