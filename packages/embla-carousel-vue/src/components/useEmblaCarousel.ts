@@ -1,4 +1,11 @@
-import { Ref, MaybeRef, isRef, watch, onBeforeUnmount, shallowRef } from 'vue'
+import {
+  ShallowRef,
+  MaybeRef,
+  isRef,
+  watch,
+  onBeforeUnmount,
+  shallowRef
+} from 'vue'
 import { areOptionsEqual, arePluginsEqual } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
@@ -7,8 +14,8 @@ import EmblaCarousel, {
 } from 'embla-carousel'
 
 export type UseEmblaCarouselType = [
-  Ref<HTMLElement | undefined>,
-  Ref<EmblaCarouselType | undefined>,
+  ShallowRef<HTMLElement | undefined>,
+  ShallowRef<EmblaCarouselType | undefined>,
   EmblaCarouselType
 ]
 
