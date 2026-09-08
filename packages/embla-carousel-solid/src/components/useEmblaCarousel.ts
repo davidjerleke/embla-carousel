@@ -1,10 +1,4 @@
-import {
-  Accessor,
-  Setter,
-  createEffect,
-  createSignal,
-  onCleanup
-} from 'solid-js'
+import { Accessor, Setter, createEffect, createSignal } from 'solid-js'
 import EmblaCarousel, {
   EmblaCarouselType,
   type EmblaOptionsType,
@@ -37,34 +31,38 @@ function useEmblaCarousel(
     if (api) api.reInit(storedOptions, storedPlugins)
   }
 
-  createEffect(() => {
-    if (rootNode()) {
+  createEffect(
+    () => rootNode(),
+    (node) => {
+      if (!node) {
+        setClientApi(undefined)
+        return
+      }
+
       EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-      const newEmblaApi = EmblaCarousel(
-        rootNode(),
-        storedOptions,
-        storedPlugins
-      )
+      const newEmblaApi = EmblaCarousel(node, storedOptions, storedPlugins)
       setClientApi(newEmblaApi)
-      onCleanup(() => newEmblaApi.destroy())
-    } else {
-      setClientApi(undefined)
+      return () => newEmblaApi.destroy()
     }
-  })
+  )
 
-  createEffect(() => {
-    const newOptions = optionsOrFallback(options)
-    if (areOptionsEqual(storedOptions, newOptions)) return
-    storedOptions = newOptions
-    reInit()
-  })
+  createEffect(
+    () => optionsOrFallback(options),
+    (newOptions) => {
+      if (areOptionsEqual(storedOptions, newOptions)) return
+      storedOptions = newOptions
+      reInit()
+    }
+  )
 
-  createEffect(() => {
-    const newPlugins = pluginsOrFallback(plugins)
-    if (arePluginsEqual(storedPlugins, newPlugins)) return
-    storedPlugins = newPlugins
-    reInit()
-  })
+  createEffect(
+    () => pluginsOrFallback(plugins),
+    (newPlugins) => {
+      if (arePluginsEqual(storedPlugins, newPlugins)) return
+      storedPlugins = newPlugins
+      reInit()
+    }
+  )
 
   return [setRootNode, clientApi, serverApi]
 }
