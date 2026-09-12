@@ -50,7 +50,7 @@
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "2.8.8",
     "rollup": "^4.61.1",
-    "solid-js": "1.9.4",
+    "solid-js": "next",
     "ts-jest": "^29.1.1",
     "typescript": "^5.2.2"
   },
@@ -59,7 +59,7 @@
     "embla-carousel-reactive-utils": "9.0.0-rc03"
   },
   "peerDependencies": {
-    "solid-js": "^1.0.0"
+    "solid-js": "^2.0.0-rc.0"
   },
   "exports": {
     "./package.json": "./package.json",

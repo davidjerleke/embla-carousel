@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import { createEffect, createSignal, on } from 'solid-js'
+import { createEffect, createSignal } from 'solid-js'
 import { EmblaPluginType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-solid'
 import Autoplay from 'embla-carousel-autoplay'
@@ -9,10 +9,11 @@ export function EmblaCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel(() => ({ loop: true }), plugins)
 
   createEffect(
-    on(emblaApi, (api) => {
+    () => emblaApi(),
+    (api) => {
       if (!api) return
       api.plugins().autoplay?.play()
-    })
+    }
   )
 
   return (

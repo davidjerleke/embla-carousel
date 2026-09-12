@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import solid from 'vite-plugin-solid'
+import solid from '@solidjs/vite-plugin'
 import path from 'path'
 
 // https://vitejs.dev/config/

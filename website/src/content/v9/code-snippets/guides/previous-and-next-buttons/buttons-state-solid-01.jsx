@@ -1,4 +1,4 @@
-import { createSignal, createEffect, on } from 'solid-js'
+import { createSignal, createEffect } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
@@ -15,13 +15,14 @@ export function EmblaCarousel() {
   }
 
   createEffect(
-    on(emblaApi, (api) => {
+    () => emblaApi(),
+    (api) => {
       if (!api) return
 
       toggleButtonsDisabled(api)
       api.on('reinit', toggleButtonsDisabled)
       api.on('select', toggleButtonsDisabled)
-    })
+    }
   )
 
   return (

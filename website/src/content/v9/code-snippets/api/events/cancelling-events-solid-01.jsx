@@ -1,4 +1,4 @@
-import { createEffect, on } from 'solid-js'
+import { createEffect } from 'solid-js'
 import useEmblaCarousel from 'embla-carousel-solid'
 
 export function EmblaCarousel() {
@@ -6,13 +6,14 @@ export function EmblaCarousel() {
   let allowPointerDownEvent = false
 
   createEffect(
-    on(emblaApi, (api) => {
+    () => emblaApi(),
+    (api) => {
       if (!api) return
 
       api.on('pointerdown', () => {
         return allowPointerDownEvent
       })
-    })
+    }
   )
 
   return (

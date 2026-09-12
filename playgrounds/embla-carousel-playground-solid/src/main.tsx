@@ -1,5 +1,5 @@
 import { Component } from 'solid-js'
-import { render } from 'solid-js/web'
+import { render } from '@solidjs/web'
 import { EmblaOptionsType } from 'embla-carousel'
 import { arrayFromNumber } from 'utils/array'
 import { styledComponentsStylesToString } from 'utils/styled-components'

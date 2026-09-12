@@ -36,6 +36,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@ampproject/remapping@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "@ampproject/remapping@npm:2.3.0"
+  dependencies:
+    "@jridgewell/gen-mapping": ^0.3.5
+    "@jridgewell/trace-mapping": ^0.3.24
+  checksum: d3ad7b89d973df059c4e8e6d7c972cbeb1bb2f18f002a3bd04ae0707da214cb06cc06929b65aa2313b9347463df2914772298bae8b1d7973f246bb3f2ab3e8f0
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.12.13, @babel/code-frame@npm:^7.28.6":
   version: 7.28.6
   resolution: "@babel/code-frame@npm:7.28.6"
@@ -95,7 +105,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.23.6, @babel/generator@npm:^7.28.6, @babel/generator@npm:^7.7.2":
+"@babel/generator@npm:^7.28.6, @babel/generator@npm:^7.7.2":
   version: 7.28.6
   resolution: "@babel/generator@npm:7.28.6"
   dependencies:
@@ -234,7 +244,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-imports@npm:^7.18.6, @babel/helper-module-imports@npm:^7.22.15, @babel/helper-module-imports@npm:^7.28.6":
+"@babel/helper-module-imports@npm:^7.18.6, @babel/helper-module-imports@npm:^7.28.6":
   version: 7.28.6
   resolution: "@babel/helper-module-imports@npm:7.28.6"
   dependencies:
@@ -1576,7 +1586,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/types@npm:^7.0.0, @babel/types@npm:^7.18.6, @babel/types@npm:^7.20.7, @babel/types@npm:^7.23.6, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.5, @babel/types@npm:^7.28.6, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4":
+"@babel/types@npm:^7.0.0, @babel/types@npm:^7.18.6, @babel/types@npm:^7.20.7, @babel/types@npm:^7.27.1, @babel/types@npm:^7.27.3, @babel/types@npm:^7.28.2, @babel/types@npm:^7.28.5, @babel/types@npm:^7.28.6, @babel/types@npm:^7.3.3, @babel/types@npm:^7.4.4":
   version: 7.28.6
   resolution: "@babel/types@npm:7.28.6"
   dependencies:
@@ -1672,6 +1682,105 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@dom-expressions/babel-plugin-jsx@npm:0.50.0-next.44":
+  version: 0.50.0-next.44
+  resolution: "@dom-expressions/babel-plugin-jsx@npm:0.50.0-next.44"
+  dependencies:
+    "@babel/helper-module-imports": 7.18.6
+    "@babel/plugin-syntax-jsx": ^7.18.6
+    "@babel/types": ^7.20.7
+    html-entities: 2.3.3
+    parse5: ^7.1.2
+    validate-html-nesting: ^1.2.1
+  peerDependencies:
+    "@babel/core": ^7.20.12
+  checksum: 575b93fd2c864e248de968b4c6ca29e1b6ca61113d9f8fd1c7766d6ee1c957b66cec9aa074d919a98acda967899251b9b60ab91d61122ace9b109351f2ab377f
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-darwin-arm64@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-darwin-arm64@npm:0.50.0-next.40"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-darwin-x64@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-darwin-x64@npm:0.50.0-next.40"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-linux-arm64-gnu@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-linux-arm64-gnu@npm:0.50.0-next.40"
+  conditions: os=linux & cpu=arm64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-linux-x64-gnu@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-linux-x64-gnu@npm:0.50.0-next.40"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-wasm32-wasi@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-wasm32-wasi@npm:0.50.0-next.40"
+  dependencies:
+    "@emnapi/core": 1.11.2
+    "@emnapi/runtime": 1.11.2
+    "@napi-rs/wasm-runtime": ^1.1.6
+  checksum: 9c14208ecd887cc1af2766fba944bfa5fe3d432f579e2a160799bae70585989cea41b9e4bfd9e4b70bf287be18a043c5e3ebae4ba67aa9f26c513f6ef14c09ac
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler-win32-x64-msvc@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler-win32-x64-msvc@npm:0.50.0-next.40"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@dom-expressions/compiler@npm:0.50.0-next.40":
+  version: 0.50.0-next.40
+  resolution: "@dom-expressions/compiler@npm:0.50.0-next.40"
+  dependencies:
+    "@dom-expressions/compiler-darwin-arm64": 0.50.0-next.40
+    "@dom-expressions/compiler-darwin-x64": 0.50.0-next.40
+    "@dom-expressions/compiler-linux-arm64-gnu": 0.50.0-next.40
+    "@dom-expressions/compiler-linux-x64-gnu": 0.50.0-next.40
+    "@dom-expressions/compiler-wasm32-wasi": 0.50.0-next.40
+    "@dom-expressions/compiler-win32-x64-msvc": 0.50.0-next.40
+  dependenciesMeta:
+    "@dom-expressions/compiler-darwin-arm64":
+      optional: true
+    "@dom-expressions/compiler-darwin-x64":
+      optional: true
+    "@dom-expressions/compiler-linux-arm64-gnu":
+      optional: true
+    "@dom-expressions/compiler-linux-x64-gnu":
+      optional: true
+    "@dom-expressions/compiler-wasm32-wasi":
+      optional: true
+    "@dom-expressions/compiler-win32-x64-msvc":
+      optional: true
+  checksum: abd655f94779eab5334b99d8496fc28005d3b52d706823bf8adae11b667e3165d270b45e375b819e4ccf1ddc1d58d73d892edafb799555a09815b19a075ac046
+  languageName: node
+  linkType: hard
+
+"@emnapi/core@npm:1.11.2":
+  version: 1.11.2
+  resolution: "@emnapi/core@npm:1.11.2"
+  dependencies:
+    "@emnapi/wasi-threads": 1.2.2
+    tslib: ^2.4.0
+  checksum: 714cd078cb4f13629c4375632975780e5053a1fd0fce7bcb763af53981ffed46e01e74a8af8be863a26c7084eed57429422db0f67e484a7863a9a9dcabf81c69
+  languageName: node
+  linkType: hard
+
 "@emnapi/core@npm:^1.4.3":
   version: 1.8.1
   resolution: "@emnapi/core@npm:1.8.1"
@@ -1679,6 +1788,15 @@ __metadata:
     "@emnapi/wasi-threads": 1.1.0
     tslib: ^2.4.0
   checksum: 2a2fb36f4e2f90e25f419f8979435160313664bbb833d852d9de4487ff47f05fd36bf2cd77c3555f704ec2b67ce3a949ed5542598664c775cdd5ef35ae1c85a4
+  languageName: node
+  linkType: hard
+
+"@emnapi/runtime@npm:1.11.2":
+  version: 1.11.2
+  resolution: "@emnapi/runtime@npm:1.11.2"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: dc88233176be74958b1609620e0e90c9ce6fc1aba4648c56fb89f6b242e0b192e0f3422c4f65861f94479cb5052247a12b99e9ecae3eeb0209024b356a5d3336
   languageName: node
   linkType: hard
 
@@ -1697,6 +1815,15 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: 6cffe35f3e407ae26236092991786db5968b4265e6e55f4664bf6f2ce0508e2a02a44ce6ebb16f2acd2f6589efb293f4f9d09cc9fbf80c00fc1a203accc94196
+  languageName: node
+  linkType: hard
+
+"@emnapi/wasi-threads@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@emnapi/wasi-threads@npm:1.2.2"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 6cb1a1ddd1902c2bb8ec09090afa0e950f21b2801a38903d33b29ec8223c03e7862e820dc2807842e8dea0575421641fabbde4fd4fabecf8d176d443794e5f72
   languageName: node
   linkType: hard
 
@@ -2721,6 +2848,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@napi-rs/wasm-runtime@npm:^1.1.6":
+  version: 1.2.3
+  resolution: "@napi-rs/wasm-runtime@npm:1.2.3"
+  dependencies:
+    "@tybys/wasm-util": ^0.10.3
+  peerDependencies:
+    "@emnapi/core": ^1.7.1 || ^2.0.0-alpha.4
+    "@emnapi/runtime": ^1.7.1 || ^2.0.0-alpha.4
+  checksum: db23cc9870780fa61399613503ea093b51c66e3164075fd473caefd73112d25096f147715861f5dc70ba268424a65593d7992e263fa69df9b53b4934144f93b8
+  languageName: node
+  linkType: hard
+
 "@next/env@npm:16.2.7":
   version: 16.2.7
   resolution: "@next/env@npm:16.2.7"
@@ -3345,6 +3484,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solidjs/signals@npm:^2.0.0-rc.3":
+  version: 2.0.0-rc.3
+  resolution: "@solidjs/signals@npm:2.0.0-rc.3"
+  checksum: aebc36bce731716dce4184744d1d7c50374b0956c202b3368f7899a37ef7711a736a2667334955ea678ce770e8690bb901544124976ccb2f19752326e6bd4eee
+  languageName: node
+  linkType: hard
+
+"@solidjs/vite-plugin@npm:next":
+  version: 3.0.0-next.28
+  resolution: "@solidjs/vite-plugin@npm:3.0.0-next.28"
+  dependencies:
+    "@ampproject/remapping": ^2.3.0
+    "@babel/core": ^7.23.3
+    "@dom-expressions/compiler": 0.50.0-next.40
+    "@types/babel__core": ^7.20.4
+    babel-preset-solid: ^2.0.0-rc.0
+    merge-anything: ^5.1.7
+    vitefu: ^1.0.4
+  peerDependencies:
+    "@solidjs/web": ^2.0.0-rc.0
+    "@testing-library/jest-dom": ^5.16.6 || ^5.17.0 || ^6.*
+    solid-js: ^2.0.0-rc.0
+    vite: ^6.0.0 || ^7.0.0 || ^8.0.0
+  peerDependenciesMeta:
+    "@testing-library/jest-dom":
+      optional: true
+  checksum: e236edb8567a0b0dddc71c5f82b42c13b85a7a9422e29d17fcb4e28274a11eb6e1546fdf5d9c58857aa8210c4be60ae6f8745b96b8718aea0a41b2c8133e4358
+  languageName: node
+  linkType: hard
+
+"@solidjs/web@npm:next":
+  version: 2.0.0-rc.3
+  resolution: "@solidjs/web@npm:2.0.0-rc.3"
+  dependencies:
+    seroval: ~1.5.4
+    seroval-plugins: ~1.5.4
+  peerDependencies:
+    solid-js: ^2.0.0-rc.3
+  checksum: a8196467928a55ea5205787cf4b591af6a782436fc149c0afa1de682b0f5206ef86b886718a563ed747f559abad8f935919cf657cd29e57637319595220919b3
+  languageName: node
+  linkType: hard
+
 "@standard-schema/spec@npm:^1.0.0":
   version: 1.1.0
   resolution: "@standard-schema/spec@npm:1.1.0"
@@ -3611,6 +3792,15 @@ __metadata:
   dependencies:
     tslib: ^2.4.0
   checksum: b8b281ffa9cd01cb6d45a4dddca2e28fd0cb6ad67cf091ba4a73ac87c0d6bd6ce188c332c489e87c20b0750b0b6fe3b99e30e1cd2227ec16da692f51c778944e
+  languageName: node
+  linkType: hard
+
+"@tybys/wasm-util@npm:^0.10.3":
+  version: 0.10.3
+  resolution: "@tybys/wasm-util@npm:0.10.3"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 865f76e01c5834550e634690fa85b21a89cac90d9ef65354e9f7b022582d85f394bf4b8b7710c987dac2b66bb3de37f1d79e28605c3e09b3384ae09a864b5ab6
   languageName: node
   linkType: hard
 
@@ -5083,21 +5273,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-jsx-dom-expressions@npm:^0.40.3":
-  version: 0.40.3
-  resolution: "babel-plugin-jsx-dom-expressions@npm:0.40.3"
-  dependencies:
-    "@babel/helper-module-imports": 7.18.6
-    "@babel/plugin-syntax-jsx": ^7.18.6
-    "@babel/types": ^7.20.7
-    html-entities: 2.3.3
-    parse5: ^7.1.2
-  peerDependencies:
-    "@babel/core": ^7.20.12
-  checksum: 60813843cb0aea97ae2de1d16dcce7a4cce4bdb054551a5d047448d4f57d83c1118f3ab8d2954f9a7d82b17c65cd73d0f1dbf57aa4768baa462402c14f7b0bf7
-  languageName: node
-  linkType: hard
-
 "babel-plugin-polyfill-corejs2@npm:^0.4.14":
   version: 0.4.15
   resolution: "babel-plugin-polyfill-corejs2@npm:0.4.15"
@@ -5171,18 +5346,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-solid@npm:^1.8.4":
-  version: 1.9.10
-  resolution: "babel-preset-solid@npm:1.9.10"
+"babel-preset-solid@npm:^2.0.0-rc.0":
+  version: 2.0.0-rc.2
+  resolution: "babel-preset-solid@npm:2.0.0-rc.2"
   dependencies:
-    babel-plugin-jsx-dom-expressions: ^0.40.3
+    "@dom-expressions/babel-plugin-jsx": 0.50.0-next.44
   peerDependencies:
     "@babel/core": ^7.0.0
-    solid-js: ^1.9.10
+    solid-js: ^2.0.0-rc.2
   peerDependenciesMeta:
     solid-js:
       optional: true
-  checksum: 7a749fb7febbc9226ccce4483ffea82a73bffe20933f0066046c5c121a8fb62bb5dbeff5e4de21c7329cc292a974f92623960271fdcd07e2085c9a9e946a1431
+  checksum: bf748a1bdb961b98b09b61661ff3f20a307a1a9300f4e70a5d85064e27be18dce94db6a324eb713299cd9243f6d452f363885fb776b11cc423909ddd5f7d87ef
   languageName: node
   linkType: hard
 
@@ -6634,11 +6809,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "embla-carousel-playground-solid@workspace:playgrounds/embla-carousel-playground-solid"
   dependencies:
+    "@solidjs/vite-plugin": next
+    "@solidjs/web": next
     embla-carousel-solid: 9.0.0-rc03
-    solid-js: 1.9.4
+    solid-js: next
     typescript: ~5.6.2
     vite: 6.4.3
-    vite-plugin-solid: ^2.11.0
   languageName: unknown
   linkType: soft
 
@@ -6726,11 +6902,11 @@ __metadata:
     jest-environment-jsdom: ^29.5.0
     prettier: 2.8.8
     rollup: ^4.61.1
-    solid-js: 1.9.4
+    solid-js: next
     ts-jest: ^29.1.1
     typescript: ^5.2.2
   peerDependencies:
-    solid-js: ^1.0.0
+    solid-js: ^2.0.0-rc.0
   languageName: unknown
   linkType: soft
 
@@ -13909,19 +14085,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"seroval-plugins@npm:^1.1.0":
-  version: 1.5.0
-  resolution: "seroval-plugins@npm:1.5.0"
+"seroval-plugins@npm:~1.5.4":
+  version: 1.5.6
+  resolution: "seroval-plugins@npm:1.5.6"
   peerDependencies:
     seroval: ^1.0
-  checksum: e9184196aa46ff9841839d704239ce319bf5b5f8fcce7da2631b87bcdcf4b378ebcc14b224ba9d41a56a98690529a7775874ed78cba32c7a96ed0a8cb3448984
+  checksum: eac09e97d81718a7f76b8f5e832261c889f513c64423212fb7b3da3293a488e42c80f5679a67939b7a55fcfd990cc96853ab71bbd721e9b9b94243674eb64241
   languageName: node
   linkType: hard
 
-"seroval@npm:^1.1.0":
-  version: 1.5.0
-  resolution: "seroval@npm:1.5.0"
-  checksum: 1f9f0febeb2008767f3a7b0023f016b0a77cb5351df6b91ee7572762a04243d3df84f9e247993f97f33dce6c5ae10c863a052d1a042a7f7c87a79d5d404b95fb
+"seroval@npm:~1.5.4":
+  version: 1.5.6
+  resolution: "seroval@npm:1.5.6"
+  checksum: fd4e97ccd719e55ea1788ac46ceba011ac387ef9a2d0bfd237d77c519e5e912264d3dc02659f0bf9cb928ae79aba9236fdf5f16223a843098642f635fadc4728
   languageName: node
   linkType: hard
 
@@ -14267,27 +14443,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"solid-js@npm:1.9.4":
-  version: 1.9.4
-  resolution: "solid-js@npm:1.9.4"
+"solid-js@npm:next":
+  version: 2.0.0-rc.3
+  resolution: "solid-js@npm:2.0.0-rc.3"
   dependencies:
+    "@solidjs/signals": ^2.0.0-rc.3
     csstype: ^3.1.0
-    seroval: ^1.1.0
-    seroval-plugins: ^1.1.0
-  checksum: fa0b5da80455aba2e3a6aa45c7490cb90d2211453151ddd6a87e8995390acaf5e86e84d5a7071c461f7f1f158250adaab454e643cf3505fcdf3acdcad1ed88c1
-  languageName: node
-  linkType: hard
-
-"solid-refresh@npm:^0.6.3":
-  version: 0.6.3
-  resolution: "solid-refresh@npm:0.6.3"
-  dependencies:
-    "@babel/generator": ^7.23.6
-    "@babel/helper-module-imports": ^7.22.15
-    "@babel/types": ^7.23.6
-  peerDependencies:
-    solid-js: ^1.3
-  checksum: a83dac3b4bff076126602458178a17f3ce973482628586372c1168021e9c0f8d5b63403d602d4b86abd9e04ea97c01d0a6614abbcddaaf836df28eeb1c8a5bc1
+    seroval: ~1.5.4
+    seroval-plugins: ~1.5.4
+  checksum: d442e51394fa5ea709669f221a667252d795b6c7ef8f2097a4e68a6cd453e160d14608a02e3bd36cf9f7a95da8d6c705ce908bcc2258f6fae792dfccc6358ff6
   languageName: node
   linkType: hard
 
@@ -15805,6 +15969,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"validate-html-nesting@npm:^1.2.1":
+  version: 1.2.4
+  resolution: "validate-html-nesting@npm:1.2.4"
+  checksum: bd14c822038e348af8598ea2a6ec48e3bb13bc93e2b38aa53ce3c4791b35c2dbac04bee1b11bf5c18cdd0a96de9c4c307d7f1de3c347c4599b05e6fce1afecb1
+  languageName: node
+  linkType: hard
+
 "validate-npm-package-license@npm:^3.0.1":
   version: 3.0.4
   resolution: "validate-npm-package-license@npm:3.0.4"
@@ -15863,27 +16034,6 @@ __metadata:
     "@types/unist": ^3.0.0
     vfile-message: ^4.0.0
   checksum: 152b6729be1af70df723efb65c1a1170fd483d41086557da3651eea69a1dd1f0c22ea4344834d56d30734b9185bcab63e22edc81d3f0e9bed8aa4660d61080af
-  languageName: node
-  linkType: hard
-
-"vite-plugin-solid@npm:^2.11.0":
-  version: 2.11.10
-  resolution: "vite-plugin-solid@npm:2.11.10"
-  dependencies:
-    "@babel/core": ^7.23.3
-    "@types/babel__core": ^7.20.4
-    babel-preset-solid: ^1.8.4
-    merge-anything: ^5.1.7
-    solid-refresh: ^0.6.3
-    vitefu: ^1.0.4
-  peerDependencies:
-    "@testing-library/jest-dom": ^5.16.6 || ^5.17.0 || ^6.*
-    solid-js: ^1.7.2
-    vite: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
-  peerDependenciesMeta:
-    "@testing-library/jest-dom":
-      optional: true
-  checksum: a22152e6a1d86b45f303942fab653dee7a3e6dbbfa5946c9ac8d1f8d7811569d9c82486914fd95b637ecb1900acd0533f2270f518e36c0a408715639bfd11ae1
   languageName: node
   linkType: hard
 
