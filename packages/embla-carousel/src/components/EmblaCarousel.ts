@@ -196,6 +196,7 @@ function EmblaCarousel(
 
     engine.scrollBody
       .useBaseFriction()
+      .useVelocity(0)
       .useDuration(instant === true ? 0 : options.duration)
     engine.scrollTo.index(index, direction)
   }
