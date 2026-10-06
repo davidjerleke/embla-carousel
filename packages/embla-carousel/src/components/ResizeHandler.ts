@@ -18,9 +18,11 @@ export function ResizeHandler(
 ): ResizeHandlerType {
   const observeNodes = [container, ...slides]
   let resizeObserver: ResizeObserver
+  let windowInstance: WindowType
   let containerSize: number
   let slideSizes: number[] = []
   let destroyed = false
+  let frameId = 0
 
   function readSize(node: HTMLElement): number {
     return axis.getSize(nodeHandler.getRect(node))
@@ -29,18 +31,30 @@ export function ResizeHandler(
   function init(ownerWindow: WindowType): void {
     if (!active) return
 
+    windowInstance = ownerWindow
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
-
     resizeObserver = new ownerWindow.ResizeObserver(onResize)
-    ownerWindow.requestAnimationFrame(() => {
+
+    scheduleFrame(() => {
       observeNodes.forEach((node) => resizeObserver.observe(node))
     })
   }
 
   function destroy(): void {
     destroyed = true
+    if (frameId) windowInstance.cancelAnimationFrame(frameId)
+    frameId = 0
     if (resizeObserver) resizeObserver.disconnect()
+  }
+
+  function scheduleFrame(callback: () => void): void {
+    if (!frameId) {
+      frameId = windowInstance.requestAnimationFrame(() => {
+        frameId = 0
+        if (!destroyed) callback()
+      })
+    }
   }
 
   function onResize(entries: ResizeObserverEntry[]): void {
@@ -59,7 +73,7 @@ export function ResizeHandler(
       const diffSize = mathAbs(newSize - lastSize)
 
       if (diffSize >= 0.5) {
-        event.api.reInit()
+        scheduleFrame(() => event.api.reInit())
         break
       }
     }
