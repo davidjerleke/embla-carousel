@@ -49,7 +49,7 @@ export function PagePagination(props: PropType) {
   const { next, previous } = props
 
   return (
-    <PagePaginationWrapper aria-label="Pagination Navigation">
+    <PagePaginationWrapper aria-label="Pagination navigation">
       <Item>
         {previous && (
           <LinkBare href={previous.slug}>

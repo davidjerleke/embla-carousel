@@ -40,6 +40,7 @@ const ExternalLinkIcon = styled(Icon)`
 type PropType = PropsWithChildren<{
   slug: RouteType['slug']
   isActive?: boolean
+  onClick?: () => void
 }>
 
 export function LinkNavigation(props: PropType) {

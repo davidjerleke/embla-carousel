@@ -58,7 +58,7 @@ export function TableOfContents() {
   const isKeyNavigating = useAppSelector(selectKeyNavigating)
 
   return (
-    <TableOfContentsWrapper aria-label="table of contents">
+    <TableOfContentsWrapper aria-label="Table of contents">
       <MenuWrapper $isKeyNavigating={isKeyNavigating}>
         <TableOfContentsMenu />
       </MenuWrapper>
