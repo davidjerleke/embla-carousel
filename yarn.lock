@@ -6316,9 +6316,9 @@ __metadata:
   linkType: hard
 
 "devalue@npm:^5.8.1":
-  version: 5.8.1
-  resolution: "devalue@npm:5.8.1"
-  checksum: 344fdf2e90f19319ead25078984e008e15db9bdad8f073c38d08b09c4a8127968c33e1307699e8f0525f29ab00b3e57b54ba7d4b22efcd346092a93b0b1d61d5
+  version: 5.9.4
+  resolution: "devalue@npm:5.9.4"
+  checksum: 03d461fb71e8c8f262514777af2b832e47baa7b6555bb792c19a9208556019084f4b6175a73cfde15cf1f240e1d71e5f0cccc56c276ebcbcc1cf91a73327e22b
   languageName: node
   linkType: hard
 
