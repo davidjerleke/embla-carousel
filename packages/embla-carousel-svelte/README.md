@@ -160,10 +160,12 @@
     <img src="https://avatars2.githubusercontent.com/u/25958801?s=120&v=4" title="nwidynski" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/wopian">
     <img src="https://avatars2.githubusercontent.com/u/3440094?s=120&v=4" title="wopian" width="50" style="max-width: 100%" />
-  </a><a href="https://github.com/SaizFerri">
-    <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" style="max-width: 100%" />
+  </a><a href="https://github.com/DamianGlowala">
+    <img src="https://avatars2.githubusercontent.com/u/48835293?s=120&v=4" title="DamianGlowala" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/ranno-lauri">
     <img src="https://avatars2.githubusercontent.com/u/87007115?s=120&v=4" title="ranno-lauri" width="50" style="max-width: 100%" />
+  </a><a href="https://github.com/raphyabak">
+    <img src="https://avatars2.githubusercontent.com/u/58911706?s=120&v=4" title="raphyabak" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/ruijdacd">
     <img src="https://avatars2.githubusercontent.com/u/9107610?s=120&v=4" title="ruijdacd" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/rojadesign">
@@ -200,6 +202,8 @@
     <img src="https://avatars2.githubusercontent.com/u/9334305?s=120&v=4" title="silllli" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/yangfancn">
     <img src="https://avatars2.githubusercontent.com/u/42950770?s=120&v=4" title="yangfancn" width="50" style="max-width: 100%" />
+  </a><a href="https://github.com/SaizFerri">
+    <img src="https://avatars2.githubusercontent.com/u/19834971?s=120&v=4" title="SaizFerri" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/lesha1201">
     <img src="https://avatars2.githubusercontent.com/u/10157660?s=120&v=4" title="lesha1201" width="50" style="max-width: 100%" />
   </a><a href="https://github.com/allen-garvey">
