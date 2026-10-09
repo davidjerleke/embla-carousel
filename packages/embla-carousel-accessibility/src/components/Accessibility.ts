@@ -152,7 +152,7 @@ function Accessibility(
       options
 
     if (dotsObserver) dotsObserver.disconnect()
-    rootAttributes.connect(emblaApi.rootNode())
+    rootAttributes.connect(rootNode)
     rootAttributes.set('role', carouselRole)
     rootAttributes.set('aria-label', carouselAriaLabel)
     rootAttributes.set('aria-roledescription', carouselAriaRoleDescription)
