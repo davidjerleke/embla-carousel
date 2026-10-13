@@ -45,10 +45,17 @@ function Ssr(userOptions: SsrOptionsType = {}): SsrType {
     return options.slideSizes || []
   }
 
-  function getTransform(axis: CoreOptionsType['axis'], input: number): string {
+  function getTransform(
+    axis: CoreOptionsType['axis'],
+    input: number,
+    offset: number = 0
+  ): string {
+    const value = offset
+      ? `calc(${input}% ${offset < 0 ? '-' : '+'} ${Math.abs(offset)}px)`
+      : `${input}%`
     return axis === 'x'
-      ? `translate3d(${input}%,0px,0px)`
-      : `translate3d(0px,${input}%,0px)`
+      ? `translate3d(${value},0px,0px)`
+      : `translate3d(0px,${value},0px)`
   }
 
   function createSsrNode(
@@ -89,7 +96,7 @@ function Ssr(userOptions: SsrOptionsType = {}): SsrType {
   ): string {
     const slideSizes = options.slideSizes || []
     const { slides, container } = getNodes(options)
-    const ssrOptions = mergeOptions(options, { direction: 'ltr' })
+    const ssrOptions = mergeOptions(options, { direction: 'ltr', offset: 0 })
     const directionHandler = createEngine(options, container, slides)
     const { axis } = directionHandler
     const { location, slideLooper, contentSize } = createEngine(
@@ -99,8 +106,13 @@ function Ssr(userOptions: SsrOptionsType = {}): SsrType {
     )
 
     const loopPoints = options.loop ? slideLooper.loopPoints : []
+    const containerOffset = axis.direction(options.offset || 0)
     const containerLocation = axis.direction(location)
-    const containerSsr = getTransform(axis.scroll, containerLocation)
+    const containerSsr = getTransform(
+      axis.scroll,
+      containerLocation,
+      containerOffset
+    )
     const baseStyles = `${containerSelector}{transform:${containerSsr};}`
 
     const loopStyles = loopPoints.reduce((styles, loopPoint) => {

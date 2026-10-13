@@ -101,7 +101,8 @@ export function Engine(
     draggable,
     resize,
     slideChanges,
-    focus
+    focus,
+    offset
   } = options
 
   // Measurements
@@ -137,7 +138,8 @@ export function Engine(
     alignment,
     containerRect,
     slideRects,
-    slidesToScroll
+    slidesToScroll,
+    offset
   )
   const contentSize = -arrayLast(snaps) + arrayLast(slideSizesWithGaps)
   const { snapsContained, scrollContainLimit } = ScrollContain(

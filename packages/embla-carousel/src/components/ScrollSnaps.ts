@@ -14,7 +14,8 @@ export function ScrollSnaps(
   alignment: AlignmentType,
   containerRect: NodeRectType,
   slideRects: NodeRectType[],
-  slidesToScroll: SlidesToScrollType
+  slidesToScroll: SlidesToScrollType,
+  offset: number
 ): ScrollSnapsType {
   const { startEdge, endEdge } = axis
   const { groupSlides } = slidesToScroll
@@ -37,7 +38,7 @@ export function ScrollSnaps(
   function measureAligned(): number[] {
     return groupSlides(snaps)
       .map((g) => g[0])
-      .map((snap, index) => snap + alignments[index])
+      .map((snap, index) => snap + alignments[index] + offset)
   }
 
   const self: ScrollSnapsType = {
