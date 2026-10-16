@@ -11,6 +11,7 @@ export type ScrollBodyType = {
   useBaseDuration: () => ScrollBodyType
   useFriction: (input: number) => ScrollBodyType
   useDuration: (input: number) => ScrollBodyType
+  useVelocity: (input: number) => ScrollBodyType
 }
 
 export function ScrollBody(
@@ -90,6 +91,11 @@ export function ScrollBody(
     return self
   }
 
+  function useVelocity(input: number): ScrollBodyType {
+    scrollVelocity = input
+    return self
+  }
+
   const self: ScrollBodyType = {
     direction,
     duration,
@@ -99,7 +105,8 @@ export function ScrollBody(
     useBaseFriction,
     useBaseDuration,
     useFriction,
-    useDuration
+    useDuration,
+    useVelocity
   }
   return self
 }

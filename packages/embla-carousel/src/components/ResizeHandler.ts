@@ -22,16 +22,16 @@ export function ResizeHandler(
   let containerSize: number
   let slideSizes: number[] = []
   let destroyed = false
-  let frameId = 0
+  let ownerWindow: WindowType
 
   function readSize(node: HTMLElement): number {
     return axis.getSize(nodeHandler.getRect(node))
   }
 
-  function init(ownerWindow: WindowType): void {
+  function init(emblaOwnerWindow: WindowType): void {
     if (!active) return
 
-    windowInstance = ownerWindow
+    ownerWindow = emblaOwnerWindow
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
     resizeObserver = new ownerWindow.ResizeObserver(onResize)
@@ -73,7 +73,9 @@ export function ResizeHandler(
       const diffSize = mathAbs(newSize - lastSize)
 
       if (diffSize >= 0.5) {
-        scheduleFrame(() => event.api.reInit())
+        ownerWindow.requestAnimationFrame(() => {
+          if (!destroyed) event.api.reInit()
+        })
         break
       }
     }

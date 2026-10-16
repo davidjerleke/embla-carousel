@@ -126,12 +126,14 @@ function Accessibility(
     setupSlides()
 
     emblaApi.on('select', onSelect)
+    emblaApi.on('slidesinview', onSlidesInView)
   }
 
   function destroy(): void {
     if (!pluginIsActive()) return
 
     emblaApi.off('select', onSelect)
+    emblaApi.off('slidesinview', onSlidesInView)
 
     rootAttributes.removeAll()
     prevButtonAttributes.removeAll()
@@ -161,18 +163,14 @@ function Accessibility(
   function onSlideFocusIn(slideIndex: number): () => void {
     return () => {
       lastFocusedSlide = slideIndex
-      const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
-      const snapIndex = snapBySlide[lastFocusedSlide]
-      updateSlides([snapIndex])
+      updateSlides()
     }
   }
 
   function onSlideFocusOut(): void {
     if (lastFocusedSlide === null || lastFocusedSlide < 0) return
-    const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
-    const snapIndex = snapBySlide[lastFocusedSlide]
-    updateSlides([snapIndex])
     lastFocusedSlide = null
+    updateSlides()
   }
 
   function setupSlides(): void {
@@ -309,26 +307,39 @@ function Accessibility(
     })
   }
 
+  function onSlidesInView(): void {
+    updateSlides()
+  }
+
   function updateSlides(snaps: number[] = allSnaps): void {
     const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
+    const inViewSet = new Set(emblaApi.slidesInView())
 
+    // Collect the slide indices that are touched by the requested snaps.
+    // When called with allSnaps (the default) this covers every slide.
+    const slideIndicesToUpdate = new Set<number>()
     snaps.forEach((snapIndex) => {
-      const slidesInSnap = slidesBySnap[snapIndex]
-      const isActive = snapIndex === emblaApi.selectedSnap()
+      slidesBySnap[snapIndex]?.forEach((slideIndex) =>
+        slideIndicesToUpdate.add(slideIndex)
+      )
+    })
 
-      slidesInSnap.forEach((slideIndex) => {
-        const slideNode = emblaApi.slideNodes()[slideIndex]
-        const hasFocusedElement = slideNode.contains(document.activeElement)
-        const slideAttributes = slidesAttributes[slideIndex]
-        const slideFocusNodes = focusNodesBySlide[slideIndex]
+    slideIndicesToUpdate.forEach((slideIndex) => {
+      const slideNode = emblaApi.slideNodes()[slideIndex]
+      const hasFocusedElement = slideNode.contains(document.activeElement)
+      const slideAttributes = slidesAttributes[slideIndex]
+      const slideFocusNodes = focusNodesBySlide[slideIndex]
 
-        slideAttributes.toggle('aria-hidden', !isActive && !hasFocusedElement)
+      // A slide is "accessible" when it is physically visible in the viewport
+      // or currently holds keyboard focus – regardless of snap-group ownership.
+      const isVisible = inViewSet.has(slideIndex) || hasFocusedElement
 
-        slideFocusNodes.forEach((slideFocusNode) => {
-          const { focusAttributes, prevTabIndex } = slideFocusNode
-          const tabindex = !isActive ? '-1' : prevTabIndex
-          focusAttributes.toggle('tabindex', tabindex)
-        })
+      slideAttributes.toggle('aria-hidden', !isVisible)
+
+      slideFocusNodes.forEach((slideFocusNode) => {
+        const { focusAttributes, prevTabIndex } = slideFocusNode
+        const tabindex = !isVisible ? '-1' : prevTabIndex
+        focusAttributes.toggle('tabindex', tabindex)
       })
     })
   }
