@@ -105,7 +105,7 @@ export function PageBreadcrumbs() {
 
   return (
     <PageBreadcrumbsWrapper
-      aria-label="Breadcrumb Navigation"
+      aria-label="Breadcrumb navigation"
       $isKeyNavigating={isKeyNavigating}
     >
       <ScrollArea>

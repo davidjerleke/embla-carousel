@@ -4,4 +4,4 @@
 :HL["/_next/static/media/embla-logo-dark-theme.1l083fb5uzv7v.svg","image",{"type":"image/svg+xml"}]
 :HL["/_next/static/media/embla-logo-light-theme-blur.0qq9-ohp0sqf3.svg","image",{"type":"image/svg+xml"}]
 :HL["/_next/static/media/embla-logo-dark-theme-blur.3dhycfell8pys.svg","image",{"type":"image/svg+xml"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"docs","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"oc","key":"guides/alignments","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"eHpUEJXAOfFgdx3XeZupl"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"docs","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"oc","key":"guides/alignments","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"rg2paMCneCvnmc14pdOP0"}

@@ -78,13 +78,17 @@ export default async function DocsPage(props: PropType) {
           <PageMainContent as="article">
             <MdxStyles>
               {isLatestVersion && (
-                <Admonition type="warning">
+                <Admonition type="note">
                   This documentation is for{' '}
-                  <strong>v{DOCS_LATEST_VERSION.NAME}</strong>. If you're
-                  looking for the <strong>latest stable</strong> release, see
-                  the{' '}
+                  <strong>v{DOCS_LATEST_VERSION.NAME}</strong>. While{' '}
+                  <strong>v{DOCS_LATEST_VERSION.MAJOR}</strong> is currently in
+                  RC, it can be considered stable as several known bugs from
+                  previous versions have been fixed.
+                  <br />
+                  <br />
+                  If you still prefer to use the latest stable release, see the{' '}
                   <LinkContent href={latestStableVersion.SLUG}>
-                    v{latestStableVersion.MAJOR} documentation
+                    v{latestStableVersion.MAJOR} documentation{' '}
                   </LinkContent>
                   .
                 </Admonition>

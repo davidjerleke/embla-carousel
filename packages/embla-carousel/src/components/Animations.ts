@@ -24,7 +24,7 @@ export function Animations(
   let windowInstance: WindowType
   let lastTimeStamp: number | null = null
   let accumulatedTime = 0
-  let animationId = 0
+  let frameId = 0
 
   function init(ownerWindow: WindowType): void {
     const ownerDocument = ownerWindow.document
@@ -41,7 +41,7 @@ export function Animations(
   }
 
   function animate(timeStamp: DOMHighResTimeStamp): void {
-    if (!animationId) return
+    if (!frameId) return
     if (!lastTimeStamp) {
       lastTimeStamp = timeStamp
       update()
@@ -60,22 +60,22 @@ export function Animations(
     const alpha = accumulatedTime / fixedTimeStep
     render(alpha)
 
-    if (animationId) {
-      animationId = windowInstance.requestAnimationFrame(animate)
+    if (frameId) {
+      frameId = windowInstance.requestAnimationFrame(animate)
     }
   }
 
   function start(): void {
-    if (animationId) return
-    animationId = windowInstance.requestAnimationFrame(animate)
+    if (frameId) return
+    frameId = windowInstance.requestAnimationFrame(animate)
   }
 
   function stop(): void {
-    if (!animationId) return
-    windowInstance.cancelAnimationFrame(animationId)
+    if (!frameId) return
+    windowInstance.cancelAnimationFrame(frameId)
     lastTimeStamp = null
     accumulatedTime = 0
-    animationId = 0
+    frameId = 0
   }
 
   function reset(): void {

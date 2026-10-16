@@ -18,6 +18,7 @@ export function ResizeHandler(
 ): ResizeHandlerType {
   const observeNodes = [container, ...slides]
   let resizeObserver: ResizeObserver
+  let windowInstance: WindowType
   let containerSize: number
   let slideSizes: number[] = []
   let destroyed = false
@@ -33,16 +34,27 @@ export function ResizeHandler(
     ownerWindow = emblaOwnerWindow
     containerSize = readSize(container)
     slideSizes = slides.map(readSize)
-
     resizeObserver = new ownerWindow.ResizeObserver(onResize)
-    ownerWindow.requestAnimationFrame(() => {
+
+    scheduleFrame(() => {
       observeNodes.forEach((node) => resizeObserver.observe(node))
     })
   }
 
   function destroy(): void {
     destroyed = true
+    if (frameId) windowInstance.cancelAnimationFrame(frameId)
+    frameId = 0
     if (resizeObserver) resizeObserver.disconnect()
+  }
+
+  function scheduleFrame(callback: () => void): void {
+    if (!frameId) {
+      frameId = windowInstance.requestAnimationFrame(() => {
+        frameId = 0
+        if (!destroyed) callback()
+      })
+    }
   }
 
   function onResize(entries: ResizeObserverEntry[]): void {
