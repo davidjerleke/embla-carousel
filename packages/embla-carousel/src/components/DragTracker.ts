@@ -43,8 +43,8 @@ export function DragTracker(axis: AxisType): DragTrackerType {
     const diff = readPoint(evt) - readPoint(lastEvent)
     const expired = readTime(evt) - readTime(startEvent) > logInterval
 
+    if (expired) startEvent = lastEvent
     lastEvent = evt
-    if (expired) startEvent = evt
     return diff
   }
 
