@@ -68,4 +68,14 @@ describe('➡️  Breakpoints', () => {
       expectedScrollSnaps[engine.options.startSnap]
     )
   })
+
+  test('Preserves the selected snap on reInit when a breakpoint defines startSnap', () => {
+    setMatchingMediaQuery(MEDIA_QUERY_EXTRA_LARGE)
+    emblaApi.reInit()
+    emblaApi.goTo(3)
+
+    emblaApi.reInit()
+
+    expect(emblaApi.selectedSnap()).toBe(3)
+  })
 })
