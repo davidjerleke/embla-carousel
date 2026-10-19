@@ -105,6 +105,14 @@ function EmblaCarousel(
     optionsHandler.init(ownerWindow)
     optionsBase = mergeOptions(optionsBase, withOptions)
     options = optionsAtMedia(optionsBase)
+    if (engine) {
+      // The carousel has already been activated, so this is a
+      // re-activation and the current snap is preserved (see
+      // reActivate). A startSnap defined in a breakpoint must not
+      // override it - it only applies on the first activation.
+      options = mergeOptions(options, { startSnap: optionsBase.startSnap })
+    }
+
     pluginList = withPlugins || pluginList
 
     let engineOptions = options
