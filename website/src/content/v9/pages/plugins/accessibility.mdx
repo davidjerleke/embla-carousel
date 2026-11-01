@@ -425,7 +425,7 @@ Programmatically updates the content of the live region. By default, this is han
 
 ---
 
-### updateSlides
+### updateTabbableSlides
 
 <ApiMetaData
   firstRow={['Parameters', '(snaps?: number[])']}
@@ -434,10 +434,16 @@ Programmatically updates the content of the live region. By default, this is han
 <PrismHighlight
   language="ts"
   hideLabel
-  code={`emblaApi.plugins().accessibility?.updateSlides([0, 1, 2])`}
+  code={`emblaApi.plugins().accessibility?.updateTabbableSlides([0, 1, 2])`}
 />
 
-Programmatically updates the ARIA attributes and labels for all slides. Optionally, you can provide an array of snap indices to update slides that belong to these snaps only. By default, this is handled automatically on mount, when the selected snap changes, on focus in and out.
+Programmatically updates the `tabindex` of focusable elements inside the slides, so that only elements in slides that belong to the selected snap are reachable with the keyboard. Optionally, you can provide an array of snap indices to update slides that belong to these snaps only. By default, this is handled automatically on mount and when the selected snap changes.
+
+<Admonition type="note">
+  **Note:** The `aria-hidden` attribute of each slide is managed automatically
+  and is not affected by this method. Slides outside the viewport are hidden
+  from assistive technologies, unless they contain the focused element.
+</Admonition>
 
 ---
 

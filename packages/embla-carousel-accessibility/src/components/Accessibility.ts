@@ -32,7 +32,7 @@ export type AccessibilityType = CreatePluginType<
     setupDotButtons: (dotsWrapper: ChildNodeSubjectType) => void
     setupLiveRegion: (liveRegion: ChildNodeSubjectType) => void
     setUpdateLiveRegion: (enable: boolean) => void
-    updateSlides: (snaps?: number[]) => void
+    updateTabbableSlides: (snaps?: number[]) => void
     updateDotButtons: (snaps?: number[]) => void
     updatePrevAndNextButtons: () => void
     updateLiveRegion: () => void
@@ -72,11 +72,12 @@ function Accessibility(
   let destroyed = false
   let rootNode: HTMLElement
   let liveRegionNode: Element | null = null
+  let slidesObserver: IntersectionObserver | null = null
   let dotsObserver: MutationObserver | null = null
   let allSnaps: number[] = []
   let isUpdatingLiveRegion = false
-  let lastFocusedSlide: null | number = null
   let focusNodesBySlide: FocusNodesBySlideType[] = []
+  let slidesInViewState: boolean[] = []
 
   let rootAttributes: AttributeHandlerType
   let prevButtonAttributes: AttributeHandlerType
@@ -120,6 +121,7 @@ function Accessibility(
     rootNode = getAccessibilityRootNode(emblaApi, options.rootNode)
     allSnaps = emblaApi.snapList().map((_, index) => index)
     focusNodesBySlide = emblaApi.slideNodes().map(() => [])
+    slidesInViewState = emblaApi.slideNodes().map(() => true)
     isUpdatingLiveRegion = options.announceChanges
 
     setupCarousel()
@@ -133,6 +135,9 @@ function Accessibility(
 
     emblaApi.off('select', onSelect)
 
+    if (dotsObserver) dotsObserver.disconnect()
+    if (slidesObserver) slidesObserver.disconnect()
+
     rootAttributes.removeAll()
     prevButtonAttributes.removeAll()
     nextButtonAttributes.removeAll()
@@ -143,6 +148,8 @@ function Accessibility(
       const { focusAttributes, prevTabIndex } = slideFocusNode
       focusAttributes.toggle('tabindex', prevTabIndex)
     })
+
+    destroyed = true
   }
 
   function setupCarousel(): void {
@@ -151,35 +158,19 @@ function Accessibility(
     const { carouselRole, carouselAriaLabel, carouselAriaRoleDescription } =
       options
 
-    if (dotsObserver) dotsObserver.disconnect()
     rootAttributes.connect(rootNode)
     rootAttributes.set('role', carouselRole)
     rootAttributes.set('aria-label', carouselAriaLabel)
     rootAttributes.set('aria-roledescription', carouselAriaRoleDescription)
   }
 
-  function onSlideFocusIn(slideIndex: number): () => void {
-    return () => {
-      lastFocusedSlide = slideIndex
-      const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
-      const snapIndex = snapBySlide[lastFocusedSlide]
-      updateSlides([snapIndex])
-    }
-  }
-
-  function onSlideFocusOut(): void {
-    if (lastFocusedSlide === null || lastFocusedSlide < 0) return
-    const { snapBySlide } = emblaApi.internalEngine().scrollSnapList
-    const snapIndex = snapBySlide[lastFocusedSlide]
-    updateSlides([snapIndex])
-    lastFocusedSlide = null
-  }
-
   function setupSlides(): void {
     if (!pluginIsActive()) return
 
-    const { scrollSnapList, eventStore } = emblaApi.internalEngine()
+    const { scrollSnapList, nodeHandler, eventStore } =
+      emblaApi.internalEngine()
     const { slideRole, slideAriaRoleDescription, slideAriaLabel } = options
+    const { ownerWindow } = nodeHandler
     const focusOptions = { capture: true }
 
     emblaApi.slideNodes().forEach((slideNode, slideIndex) => {
@@ -193,11 +184,19 @@ function Accessibility(
       slideAttributes.set('aria-roledescription', slideAriaRoleDescription)
       slideAttributes.set('aria-label', label)
 
-      eventStore.add(slideNode, 'focusout', onSlideFocusOut, focusOptions)
       eventStore.add(
         slideNode,
         'focusin',
-        onSlideFocusIn(slideIndex),
+        () => updateSlideAriaHidden(slideIndex, true),
+        focusOptions
+      )
+      eventStore.add(
+        slideNode,
+        'focusout',
+        (evt: FocusEvent) => {
+          const hasFocusedElement = slideNode.contains(<Node>evt.relatedTarget)
+          updateSlideAriaHidden(slideIndex, hasFocusedElement)
+        },
         focusOptions
       )
 
@@ -207,13 +206,23 @@ function Accessibility(
       }))
     })
 
-    updateSlides()
+    updateTabbableSlides()
+
+    if (!ownerWindow) return
+
+    slidesObserver = new ownerWindow.IntersectionObserver(onIntersection, {
+      root: emblaApi.containerNode().parentElement
+    })
+    emblaApi.slideNodes().forEach((slide) => {
+      if (slidesObserver) slidesObserver.observe(slide)
+    })
   }
 
   function setupDotButtons(dotsWrapper: ChildNodeSubjectType): void {
     if (!pluginIsActive()) return
 
     const { dotButtonAriaLabel } = options
+    const { ownerWindow } = emblaApi.internalEngine().nodeHandler
 
     const wrapper = getChildNode(rootNode, dotsWrapper)
     const dotNodes = getChildNodes(wrapper, wrapper?.children)
@@ -227,13 +236,16 @@ function Accessibility(
       dotAttributes.set('aria-label', label)
     })
 
-    if (wrapper) {
-      if (dotsObserver) dotsObserver.disconnect()
-      dotsObserver = new MutationObserver(() => setupDotButtons(dotsWrapper))
-      dotsObserver.observe(wrapper, { childList: true })
-    }
-
     updateDotButtons()
+
+    if (!wrapper) return
+    if (!ownerWindow) return
+
+    if (dotsObserver) dotsObserver.disconnect()
+    dotsObserver = new ownerWindow.MutationObserver(() =>
+      setupDotButtons(dotsWrapper)
+    )
+    dotsObserver.observe(wrapper, { childList: true })
   }
 
   function setupPrevAndNextButtons(
@@ -269,7 +281,7 @@ function Accessibility(
     const snapsToUpdate = [selectedSnap]
     if (selectedSnap !== previousSnap) snapsToUpdate.push(previousSnap)
 
-    updateSlides(snapsToUpdate)
+    updateTabbableSlides(snapsToUpdate)
     updateDotButtons(snapsToUpdate)
     updatePrevAndNextButtons()
     updateLiveRegion()
@@ -309,7 +321,31 @@ function Accessibility(
     })
   }
 
-  function updateSlides(snaps: number[] = allSnaps): void {
+  function onIntersection(entries: IntersectionObserverEntry[]): void {
+    const { ownerDocument } = emblaApi.internalEngine().nodeHandler
+    const activeElement = ownerDocument ? ownerDocument.activeElement : null
+
+    entries.forEach((entry) => {
+      const slideNode = <HTMLElement>entry.target
+      const slideIndex = emblaApi.slideNodes().indexOf(slideNode)
+      const hasFocusedElement = slideNode.contains(activeElement)
+
+      slidesInViewState[slideIndex] = entry.isIntersecting
+      updateSlideAriaHidden(slideIndex, hasFocusedElement)
+    })
+  }
+
+  function updateSlideAriaHidden(
+    slideIndex: number,
+    hasFocusedElement: boolean
+  ): void {
+    const isHidden = !slidesInViewState[slideIndex]
+    const slideAttributes = slidesAttributes[slideIndex]
+
+    slideAttributes.toggle('aria-hidden', isHidden && !hasFocusedElement)
+  }
+
+  function updateTabbableSlides(snaps: number[] = allSnaps): void {
     const { slidesBySnap } = emblaApi.internalEngine().scrollSnapList
 
     snaps.forEach((snapIndex) => {
@@ -317,12 +353,7 @@ function Accessibility(
       const isActive = snapIndex === emblaApi.selectedSnap()
 
       slidesInSnap.forEach((slideIndex) => {
-        const slideNode = emblaApi.slideNodes()[slideIndex]
-        const hasFocusedElement = slideNode.contains(document.activeElement)
-        const slideAttributes = slidesAttributes[slideIndex]
         const slideFocusNodes = focusNodesBySlide[slideIndex]
-
-        slideAttributes.toggle('aria-hidden', !isActive && !hasFocusedElement)
 
         slideFocusNodes.forEach((slideFocusNode) => {
           const { focusAttributes, prevTabIndex } = slideFocusNode
@@ -367,7 +398,7 @@ function Accessibility(
     setupDotButtons,
     setupLiveRegion,
     setUpdateLiveRegion,
-    updateSlides,
+    updateTabbableSlides,
     updateDotButtons,
     updatePrevAndNextButtons,
     updateLiveRegion
