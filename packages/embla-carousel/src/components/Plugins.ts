@@ -1,4 +1,8 @@
-import { CreateOptionsType, LooseOptionsType } from './Options'
+import {
+  CreateOptionsType,
+  LooseOptionsType,
+  OptionalOptionsType
+} from './Options'
 import { EmblaCarouselType } from './EmblaCarousel'
 import { OptionsHandlerType } from './OptionsHandler'
 
@@ -11,7 +15,7 @@ export type CreatePluginType<
   TypeB extends LooseOptionsType
 > = TypeA & {
   name: string
-  options: Partial<CreateOptionsType<TypeB>>
+  options: OptionalOptionsType<CreateOptionsType<TypeB>>
   init: (
     emblaApi: EmblaCarouselType,
     OptionsHandler: OptionsHandlerType

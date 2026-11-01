@@ -12,7 +12,11 @@ export type EmblaCarouselConfigType = {
   plugins: EmblaPluginType[]
 }
 
-export type EmblaCarouselConfigParameterType = Partial<EmblaCarouselConfigType>
+export type EmblaCarouselConfigParameterType = {
+  [Key in keyof EmblaCarouselConfigType]?:
+    | EmblaCarouselConfigType[Key]
+    | undefined
+}
 
 type EmblaCarouselAttributesType = {
   'on:emblainit'?: (evt: CustomEvent<EmblaCarouselType>) => void

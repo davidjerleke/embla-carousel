@@ -1,8 +1,12 @@
 import { NodeHandlerType } from './NodeHandler'
-import { LooseOptionsType, CreateOptionsType } from './Options'
+import {
+  LooseOptionsType,
+  CreateOptionsType,
+  OptionalOptionsType
+} from './Options'
 import { objectKeys, objectsMergeDeep, WindowType } from './utils'
 
-type OptionsType = Partial<CreateOptionsType<LooseOptionsType>>
+type OptionsType = OptionalOptionsType<CreateOptionsType<LooseOptionsType>>
 
 export type OptionsHandlerType = {
   init: (ownerWindow: NodeHandlerType['ownerWindow']) => void

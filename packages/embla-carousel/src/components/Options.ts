@@ -13,10 +13,18 @@ export type LooseOptionsType = {
   [key: string]: unknown
 }
 
+// Explicit `| undefined` so `{ loop: undefined }` passes with `exactOptionalPropertyTypes`
+export type OptionalOptionsType<Type> = {
+  [Key in keyof Type]?: Type[Key] | undefined
+}
+
 export type CreateOptionsType<Type extends LooseOptionsType> = Type & {
   active: boolean
   breakpoints: {
-    [key: string]: Omit<Partial<CreateOptionsType<Type>>, 'breakpoints'>
+    [key: string]: Omit<
+      OptionalOptionsType<CreateOptionsType<Type>>,
+      'breakpoints'
+    >
   }
 }
 
@@ -66,4 +74,4 @@ export const defaultOptions: OptionsType = {
   slideChanges: true
 }
 
-export type EmblaOptionsType = Partial<OptionsType>
+export type EmblaOptionsType = OptionalOptionsType<OptionsType>
