@@ -18,7 +18,7 @@ export { EmblaPluginType } from './components/Plugins'
 export { default } from './components/EmblaCarousel'
 
 export { CreatePluginType, EmblaPluginsType } from './components/Plugins'
-export { CreateOptionsType } from './components/Options'
+export { CreateOptionsType, PartialType } from './components/Options'
 export { OptionsHandlerType } from './components/OptionsHandler'
 export { EngineType } from './components/Engine'
 export { ScrollBodyType } from './components/ScrollBody'
