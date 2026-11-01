@@ -93,6 +93,7 @@ export function objectsMergeDeep(
     objectKeys(currentObject).forEach((key) => {
       const valueA = mergedObjects[key]
       const valueB = currentObject[key]
+      if (valueB === undefined) return
       const areObjects = isObject(valueA) && isObject(valueB)
 
       mergedObjects[key] = areObjects

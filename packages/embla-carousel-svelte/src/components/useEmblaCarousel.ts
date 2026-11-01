@@ -3,7 +3,8 @@ import { areOptionsEqual, arePluginsEqual } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
-  EmblaPluginType
+  EmblaPluginType,
+  PartialType
 } from 'embla-carousel'
 import { getConfigOrFallback, isHtmlElement } from './utils'
 
@@ -12,7 +13,8 @@ export type EmblaCarouselConfigType = {
   plugins: EmblaPluginType[]
 }
 
-export type EmblaCarouselConfigParameterType = Partial<EmblaCarouselConfigType>
+export type EmblaCarouselConfigParameterType =
+  PartialType<EmblaCarouselConfigType>
 
 type EmblaCarouselAttributesType = {
   'on:emblainit'?: (evt: CustomEvent<EmblaCarouselType>) => void
