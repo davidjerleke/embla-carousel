@@ -9,6 +9,7 @@ import { TABS_PACKAGE_MANAGER } from '@/utils/tabs'
 import theComponentStructure_01 from '@/content/v9/code-snippets/get-started/svelte/the-component-structure-01.svelte'
 import stylingTheCarousel_01 from '@/content/v9/code-snippets/get-started/svelte/styling-the-carousel-01.svelte'
 import accessingTheCarouselApi_01 from '@/content/v9/code-snippets/get-started/svelte/accessing-the-carousel-api-01.svelte'
+import usingAttachments_01 from '@/content/v9/code-snippets/get-started/svelte/using-attachments-01.svelte'
 import addingPlugins_01 from '@/content/v9/code-snippets/get-started/svelte/adding-plugins-01.svelte'
 import svelteInstallation_npm_01 from '@/content/v9/code-snippets/get-started/svelte/installation-npm-01.sh'
 import svelteInstallation_yarn_01 from '@/content/v9/code-snippets/get-started/svelte/installation-yarn-01.sh'
@@ -83,6 +84,27 @@ Plugins let you **extend your carousel** with additional features beyond the bui
 You can pass an **optional plugin array** as the second argument to the `useEmblaCarousel` Svelte action. Here's how to extend the carousel from the previous example with Autoplay:
 
 <PrismHighlight language="svelte" code={addingPlugins_01} highlight="3,6,13" />
+
+## Svelte 5 attachments
+
+[Svelte attachments](https://svelte.dev/docs/svelte/@attach) are available in **Svelte 5.29 and newer**. Import `createEmblaCarousel` from the separate `embla-carousel-svelte/attachment` entry point. The default `embla-carousel-svelte` export remains the `useEmblaCarousel` action, including its `emblainit` event and server API overload.
+
+| Svelte version | `embla-carousel-svelte` action | `embla-carousel-svelte/attachment` |
+| --- | --- | --- |
+| 3.49+ (3.x) | Supported | Unavailable |
+| 4.x | Supported | Unavailable |
+| 5.0–5.28 | Supported | Unavailable |
+| 5.29+ (5.x) | Supported | Supported |
+
+The package peer dependency covers all supported action versions. **Only the `/attachment` subpath requires Svelte 5.29+**; its runtime and declarations are isolated so older consumers can continue importing the action.
+
+<PrismHighlight language="svelte" code={usingAttachments_01} />
+
+Create the attachment once and pass a **getter** returning `{ options, plugins, onApiChange }`. Reactive values read by the getter, including nested `$state` option and plugin-option mutations, update the existing carousel with `reInit`. Equivalent options do not cause a reinitialization. Plugin replacement or reordering also reinitializes the carousel; keep plugin instances stable unless you intend to replace them.
+
+`onApiChange` receives the API after initialization and `undefined` after cleanup. Use a stable callback to set reactive API state or subscribe to carousel events. If the callback changes, the previous callback receives `undefined` and the new callback receives the existing API. Callback reads are untracked, so reading the API state inside the callback does not restart the carousel. The attachment uses this callback rather than dispatching `emblainit`.
+
+Removing the element or attachment destroys the carousel and releases the callback. Remounting creates a new carousel. Attachments and callbacks do not run during server rendering; they initialize after mounting or hydration. `createEmblaCarousel.globalOptions` sets defaults for attachments, independently of `useEmblaCarousel.globalOptions` for actions. Set global defaults before mounting.
 
 Congratulations! You just created your first Embla Carousel component.
 

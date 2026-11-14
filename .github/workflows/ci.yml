@@ -29,3 +29,6 @@ jobs:
 
       - name: Test 🚨
         run: yarn test
+
+      - name: Check packed Svelte compatibility
+        run: yarn workspace embla-carousel-svelte test:compatibility

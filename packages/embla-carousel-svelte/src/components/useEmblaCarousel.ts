@@ -1,11 +1,11 @@
 import { ActionReturn } from 'svelte/action'
-import { areOptionsEqual, arePluginsEqual } from 'embla-carousel-reactive-utils'
 import EmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
   EmblaPluginType
 } from 'embla-carousel'
 import { getConfigOrFallback, isHtmlElement } from './utils'
+import { createCarousel } from './createCarousel'
 
 export type EmblaCarouselConfigType = {
   options: EmblaOptionsType
@@ -48,41 +48,17 @@ function useEmblaCarousel(
 
   const emblaNode = parameter1
   const emblaConfig = parameter2
-  let storedConfig = getConfigOrFallback(emblaConfig)
-
-  EmblaCarousel.globalOptions = useEmblaCarousel.globalOptions
-  const clientApi = EmblaCarousel(
+  const carousel = createCarousel(
     emblaNode,
-    storedConfig.options,
-    storedConfig.plugins
+    emblaConfig,
+    useEmblaCarousel.globalOptions
   )
 
-  emblaNode.dispatchEvent(new CustomEvent('emblainit', { detail: clientApi }))
+  emblaNode.dispatchEvent(
+    new CustomEvent('emblainit', { detail: carousel.api })
+  )
 
-  return {
-    destroy: () => {
-      if (clientApi) clientApi.destroy()
-    },
-    update: (newEmblaConfig) => {
-      const newConfig = getConfigOrFallback(newEmblaConfig)
-
-      const optionsChanged = !areOptionsEqual(
-        storedConfig.options,
-        newConfig.options
-      )
-      const pluginsChanged = !arePluginsEqual(
-        storedConfig.plugins,
-        newConfig.plugins
-      )
-
-      if (!optionsChanged && !pluginsChanged) return
-      storedConfig = newConfig
-
-      if (clientApi) {
-        clientApi.reInit(storedConfig.options, storedConfig.plugins)
-      }
-    }
-  }
+  return { destroy: carousel.destroy, update: carousel.update }
 }
 
 declare namespace useEmblaCarousel {

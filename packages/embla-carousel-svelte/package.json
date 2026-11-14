@@ -39,10 +39,11 @@
     "cjs/**/*"
   ],
   "scripts": {
-    "test": "echo \"Info: no tests specified\" && exit 0",
+    "test": "jest --runInBand",
     "build": "rollup --bundleConfigAsCjs -c",
     "start": "rollup --bundleConfigAsCjs -c --watch --environment BUILD:development",
-    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\""
+    "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\"",
+    "test:compatibility": "node tests/compatibility.mjs"
   },
   "devDependencies": {
     "@types/jest": "^29.5.6",
@@ -71,6 +72,16 @@
       "require": {
         "types": "./cjs/index.d.ts",
         "default": "./cjs/embla-carousel-svelte.cjs.js"
+      }
+    },
+    "./attachment": {
+      "import": {
+        "types": "./esm/attachment/attachment.d.ts",
+        "default": "./esm/embla-carousel-svelte-attachment.esm.js"
+      },
+      "require": {
+        "types": "./cjs/attachment/attachment.d.ts",
+        "default": "./cjs/embla-carousel-svelte-attachment.cjs.js"
       }
     }
   }
