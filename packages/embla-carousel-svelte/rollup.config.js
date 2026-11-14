@@ -1,4 +1,6 @@
 import packageJson from './package.json'
+import path from 'path'
+import { compileModule } from 'svelte/compiler'
 import {
   FOLDERS,
   CONFIG_BABEL,
@@ -25,6 +27,37 @@ const CONFIG_GLOBALS_UMD = {
 }
 
 export default [
+  {
+    input: 'src/attachment.ts',
+    output: [FOLDERS.CJS, FOLDERS.ESM].map((format) => ({
+      file: `${format}/${packageJson.name}-attachment.${format}.js`,
+      format,
+      sourcemap: true
+    })),
+    external: [
+      ...Object.keys(CONFIG_GLOBALS_MODULE),
+      'svelte/attachments',
+      'svelte/internal/client'
+    ],
+    plugins: [
+      typescript({
+        ...CONFIG_TYPESCRIPT,
+        tsconfig: path.join(__dirname, 'tsconfig.attachment.json')
+      }),
+      {
+        name: 'svelte-attachment',
+        transform(code, id) {
+          if (!id.endsWith('.svelte.ts')) return
+          const result = compileModule(code, {
+            filename: id,
+            generate: 'client'
+          })
+          return { code: result.js.code, map: result.js.map }
+        }
+      },
+      babel(CONFIG_BABEL)
+    ]
+  },
   {
     input: 'src/index.ts',
     output: [

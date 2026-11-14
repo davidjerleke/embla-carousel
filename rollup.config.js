@@ -46,8 +46,10 @@ function kebabToPascalCase(string = '') {
 }
 
 function addImportExtensions(content, extension = 'js') {
-  return content.replace(/from\s'.\/(.*)';/g, (match) =>
-    match.replace(/';/g, `.${extension}';`)
+  return content.replace(/from\s'(\.{1,2}\/[^']+)';/g, (match, specifier) =>
+    specifier.endsWith(`.${extension}`)
+      ? match
+      : match.replace(/';$/, `.${extension}';`)
   )
 }
 
@@ -125,6 +127,7 @@ function createNodeNextSupportForPackage() {
     module: `./${FOLDERS.ESM}/${packageJson.name}.${FOLDERS.ESM}.js`,
     types: 'index.d.ts',
     exports: {
+      ...packageJson.exports,
       './package.json': './package.json',
       '.': {
         import: {
@@ -181,9 +184,10 @@ function createNodeNextSupportForPackage() {
 
   fs.writeFileSync(esmTypesFilePath, esmTypesFileWithImportExtensions)
 
-  readFiles(path.join(esmFolder, 'components/'), (filename, fileContent) => {
+  readFiles(esmFolder + '/', (filename, fileContent) => {
+    if (!filename.endsWith('.d.ts')) return
     const fileContentWithImportExtensions = addImportExtensions(fileContent)
-    fs.writeFile(filename, fileContentWithImportExtensions, (error) => {})
+    fs.writeFileSync(filename, fileContentWithImportExtensions)
   })
 }
 
