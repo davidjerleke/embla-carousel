@@ -74,6 +74,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   function pluginIsActive(): boolean {
     if (isSsr) return false
     if (destroyed) return false
+    if (emblaApi.snapList().length <= 1) return false
     return options.active
   }
 
@@ -92,7 +93,6 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     isSsr = emblaApi.internalEngine().isSsr
 
     if (!pluginIsActive()) return
-    if (emblaApi.snapList().length <= 1) return
 
     instant = options.instant
     delay = normalizeDelay(emblaApi, options.delay)
