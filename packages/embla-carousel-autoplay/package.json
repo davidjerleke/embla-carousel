@@ -39,7 +39,7 @@
     "cjs/**/*"
   ],
   "scripts": {
-    "test": "echo \"Info: no tests specified\" && exit 0",
+    "test": "jest",
     "build": "rollup --bundleConfigAsCjs -c",
     "start": "rollup --bundleConfigAsCjs -c --watch --environment BUILD:development",
     "eslint:report": "eslint \"src/**/*.{js,tsx,ts}\""
