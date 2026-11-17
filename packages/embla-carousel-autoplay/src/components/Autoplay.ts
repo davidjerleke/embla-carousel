@@ -65,6 +65,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   let timerStartTime: null | number = null
   let timerId = 0
   let autoplayRunning = false
+  // Event callbacks can replace the playback operation before it resumes.
+  let autoplayId = 0
   let playOnDocumentVisible = false
   let instant = false
   let isMouseOver = false
@@ -81,6 +83,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     emblaApiInstance: EmblaCarouselType,
     optionsHandler: OptionsHandlerType
   ): void {
+    autoplayId += 1
     emblaApi = emblaApiInstance
 
     const { mergeOptions, optionsAtMedia } = optionsHandler
@@ -131,9 +134,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       .off('pointerup', onInteraction)
       .off('slidefocus', onInteraction)
 
-    stopAutoplay()
     destroyed = true
-    autoplayRunning = false
+    stopAutoplay()
   }
 
   function setTimer(): void {
@@ -168,6 +170,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       playOnDocumentVisible = true
       return
     }
+    const id = ++autoplayId
 
     if (!autoplayRunning) {
       autoplayRunning = true
@@ -175,11 +178,12 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       event.emit()
     }
 
+    if (id !== autoplayId) return
     setTimer()
   }
 
   function stopAutoplay(): void {
-    if (!pluginIsActive()) return
+    const id = ++autoplayId
 
     if (autoplayRunning) {
       autoplayRunning = false
@@ -187,6 +191,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
       event.emit()
     }
 
+    if (id !== autoplayId) return
     clearTimer()
   }
 
@@ -249,8 +254,8 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function reset(): void {
-    if (autoplayRunning) startAutoplay()
     pauseDelay = null
+    if (autoplayRunning) startAutoplay()
   }
 
   function pause(): void {
@@ -264,6 +269,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
   }
 
   function next(): void {
+    const id = autoplayId
     const { indexCurrent } = emblaApi.internalEngine()
     const nextIndex = indexCurrent.clone().add(1).get()
     const lastIndex = emblaApi.snapList().length - 1
@@ -281,6 +287,7 @@ function Autoplay(userOptions: AutoplayOptionsType = {}): AutoplayType {
     }
 
     event.emit()
+    if (id !== autoplayId) return
     pauseDelay = null
 
     if (kill) return stopAutoplay()
