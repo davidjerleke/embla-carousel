@@ -70,6 +70,7 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
   function pluginIsActive(): boolean {
     if (isSsr) return false
     if (destroyed) return false
+    if (emblaApi.snapList().length <= 1) return false
     return options.active
   }
 
@@ -88,7 +89,6 @@ function AutoScroll(userOptions: AutoScrollOptionsType = {}): AutoScrollType {
     isSsr = emblaApi.internalEngine().isSsr
 
     if (!pluginIsActive()) return
-    if (emblaApi.snapList().length <= 1) return
 
     speed = options.speed
     startDelay = options.startDelay
