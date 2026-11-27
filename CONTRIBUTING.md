@@ -60,7 +60,7 @@ We use `rollup` to build the packages into `umd`, `esm`, and `cjs`. A configurat
 
 All bug reports require a reduced test case. Providing a test case is the best way to get any issue addressed. It helps us all to understand the problem. Without this, your issue **may be closed**. Please follow this checklist:
 
-- **`Test case:`** Create one by forking one of the CodeSandboxes on the [examples page](https://www.embla-carousel.com/examples/). If applicable, choose the most relevant one.
+- **`Test case:`** Create one by forking one of the CodeSandboxes on the [examples page](https://www.embla-carousel.com/docs/examples). If applicable, choose the most relevant one.
 - **`Test case exceptions:`** In rare cases a CodeSandbox might not be possible to provide. If this is the case, make sure to provide an alternative source like a GitHub repository or similar.
 - **`Demonstrate:`** Make sure the test case clearly demonstrates the issue.
 - **`Do not:`** Provide a link to a production site. That's not a test case.
